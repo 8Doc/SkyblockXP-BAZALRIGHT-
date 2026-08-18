@@ -7,7 +7,13 @@
  * by esbuild. The domain logic is the *same source* the Next app uses, so both front ends
  * necessarily agree.
  *
- *   node scripts/build-html.mjs [--key YOUR_KEY]
+ * No key is baked in by default — the page has its own "Get an API key" link and an input,
+ * so each person supplies their own and it never leaves their browser (stored in localStorage
+ * only). Pass --key only for a private, self-hosted build where baking one in is a deliberate
+ * choice; --from-env opts back into the old behaviour of reading .env.local for that same case.
+ * Never commit a build made with either flag.
+ *
+ *   node scripts/build-html.mjs [--key YOUR_KEY | --from-env]
  */
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { dirname, join } from "node:path";
@@ -18,7 +24,7 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const OUT = join(ROOT, "dist", "skyblock-xp-planner.html");
 
 const keyFlag = process.argv.indexOf("--key");
-const apiKey = keyFlag > -1 ? process.argv[keyFlag + 1] : (await readEnvKey()) ?? "";
+const apiKey = keyFlag > -1 ? process.argv[keyFlag + 1] : process.argv.includes("--from-env") ? (await readEnvKey()) ?? "" : "";
 
 async function readEnvKey() {
   try {

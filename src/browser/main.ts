@@ -688,6 +688,7 @@ function renderControls(): void {
         </select>
       </label>
       <label>Hypixel API key
+        <a class="get-key" href="https://developer.hypixel.net/dashboard" target="_blank" rel="noopener noreferrer">Get an API key ↗</a>
         <input id="apikey" value="${escapeHtml(state.apiKey)}" placeholder="paste your key" autocomplete="off">
       </label>
       <button type="submit" class="primary" ${state.status.kind === "busy" ? "disabled" : ""}>

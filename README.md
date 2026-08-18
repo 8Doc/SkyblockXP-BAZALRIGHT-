@@ -190,9 +190,14 @@ Rebuild it after changing anything:
 npm run build:html
 ```
 
-The API key is baked into the file from `.env.local` and can be edited in the UI (it's stored
-in `localStorage` after that). **Keep the file to yourself — the key is inside it.** Build
-without one using `node scripts/build-html.mjs --key ""` and paste a key at runtime instead.
+No API key is baked in by default. The page has a **Get an API key** link right above the key
+field, pointing at the [Hypixel developer dashboard](https://developer.hypixel.net/dashboard);
+paste the key you get there into the field and it's remembered in `localStorage` from then on —
+it never leaves the browser and is never sent anywhere but Hypixel.
+
+For a private, self-hosted build where baking a key in is a deliberate choice, `--key YOUR_KEY`
+or `--from-env` (reads `.env.local`) will do it — **never commit a build made with either flag**,
+since the key would be sitting in plain text inside the HTML.
 
 ### 2. The Next.js app (keeps the key server-side)
 

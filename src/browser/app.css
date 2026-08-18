@@ -42,6 +42,17 @@ header .sub { margin-bottom: 20px; max-width: 70ch; }
 .row:last-of-type { margin-bottom: 0; }
 .row > label { flex: 1 1 180px; display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
 .row > label > input, .row > label > select { margin-top: 4px; }
+.get-key {
+  display: block;
+  margin-top: 3px;
+  font-size: 11px;
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--aqua);
+  text-decoration: none;
+  width: fit-content;
+}
+.get-key:hover { text-decoration: underline; }
 .inline { display: flex; gap: 4px; margin-top: 4px; }
 .inline > input { flex: 1; }
 
