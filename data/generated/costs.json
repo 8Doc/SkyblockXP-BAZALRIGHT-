@@ -1,71 +1,75 @@
 {
- "generatedAt": "2026-08-18T20:05:30.024Z",
+ "generatedAt": "2026-08-18T23:01:33.353Z",
  "minions": {
   "ACACIA": {
    "1": [
     {
+     "id": "LOG",
+     "qty": 1
+    },
+    {
      "id": "LOG_2",
-     "qty": 3600
+     "qty": 80
     }
    ],
    "2": [
     {
      "id": "LOG_2",
-     "qty": 3600
+     "qty": 160
     }
    ],
    "3": [
     {
      "id": "LOG_2",
-     "qty": 3840
+     "qty": 320
     }
    ],
    "4": [
     {
      "id": "LOG_2",
-     "qty": 3840
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "LOG_2",
-     "qty": 4114
+     "id": "ENCHANTED_ACACIA_LOG",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "LOG_2",
-     "qty": 4114
+     "id": "ENCHANTED_ACACIA_LOG",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "id": "LOG_2",
-     "qty": 4547
+     "id": "ENCHANTED_ACACIA_LOG",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "id": "LOG_2",
-     "qty": 4547
+     "id": "ENCHANTED_ACACIA_LOG",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "id": "LOG_2",
-     "qty": 5236
+     "id": "ENCHANTED_ACACIA_LOG",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "id": "LOG_2",
-     "qty": 5236
+     "id": "ENCHANTED_ACACIA_LOG",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "id": "LOG_2",
-     "qty": 6400
+     "id": "ENCHANTED_ACACIA_LOG",
+     "qty": 512
     }
    ]
   },
@@ -73,141 +77,143 @@
    "1": [
     {
      "id": "LOG:2",
-     "qty": 3600
+     "qty": 80
+    },
+    {
+     "id": "LOG",
+     "qty": 1
     }
    ],
    "2": [
     {
      "id": "LOG:2",
-     "qty": 3600
+     "qty": 160
     }
    ],
    "3": [
     {
      "id": "LOG:2",
-     "qty": 3840
+     "qty": 320
     }
    ],
    "4": [
     {
      "id": "LOG:2",
-     "qty": 3840
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "LOG:2",
-     "qty": 4114
+     "id": "ENCHANTED_BIRCH_LOG",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "LOG:2",
-     "qty": 4114
+     "id": "ENCHANTED_BIRCH_LOG",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "id": "LOG:2",
-     "qty": 4547
+     "id": "ENCHANTED_BIRCH_LOG",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "id": "LOG:2",
-     "qty": 4547
+     "id": "ENCHANTED_BIRCH_LOG",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "id": "LOG:2",
-     "qty": 5236
+     "id": "ENCHANTED_BIRCH_LOG",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "id": "LOG:2",
-     "qty": 5236
+     "id": "ENCHANTED_BIRCH_LOG",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "id": "LOG:2",
-     "qty": 6400
+     "id": "ENCHANTED_BIRCH_LOG",
+     "qty": 512
     }
    ]
   },
   "BLAZE": {
    "1": [
     {
+     "id": "LOG",
+     "qty": 1
+    },
+    {
      "id": "BLAZE_ROD",
-     "qty": 1309
+     "qty": 80
     }
    ],
    "2": [
     {
      "id": "BLAZE_ROD",
-     "qty": 1309
+     "qty": 160
     }
    ],
    "3": [
     {
      "id": "BLAZE_ROD",
-     "qty": 1394
+     "qty": 320
     }
    ],
    "4": [
     {
      "id": "BLAZE_ROD",
-     "qty": 1394
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "BLAZE_ROD",
-     "qty": 1516
+     "id": "ENCHANTED_BLAZE_POWDER",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "BLAZE_ROD",
-     "qty": 1516
+     "id": "ENCHANTED_BLAZE_POWDER",
+     "qty": 24
     }
    ],
    "7": [
     {
-     "id": "BLAZE_ROD",
-     "qty": 1728
+     "id": "ENCHANTED_BLAZE_POWDER",
+     "qty": 64
     }
    ],
    "8": [
     {
-     "id": "BLAZE_ROD",
-     "qty": 1728
+     "id": "ENCHANTED_BLAZE_POWDER",
+     "qty": 128
     }
    ],
    "9": [
     {
-     "id": "BLAZE_ROD",
-     "qty": 2057
+     "id": "ENCHANTED_BLAZE_POWDER",
+     "qty": 256
     }
    ],
    "10": [
     {
-     "id": "BLAZE_ROD",
-     "qty": 2057
+     "id": "ENCHANTED_BLAZE_POWDER",
+     "qty": 512
     }
    ],
    "11": [
     {
-     "id": "BLAZE_ROD",
-     "qty": 2618
-    }
-   ],
-   "12": [
-    {
-     "id": "BLAZE_ROD",
-     "qty": 2880
+     "id": "ENCHANTED_BLAZE_ROD",
+     "qty": 8
     }
    ]
   },
@@ -215,73 +221,71 @@
    "1": [
     {
      "id": "CACTUS",
-     "qty": 4800
+     "qty": 128
+    },
+    {
+     "id": "LOG",
+     "qty": 1
     }
    ],
    "2": [
     {
      "id": "CACTUS",
-     "qty": 4800
+     "qty": 256
     }
    ],
    "3": [
     {
      "id": "CACTUS",
-     "qty": 5184
+     "qty": 512
     }
    ],
    "4": [
     {
-     "id": "CACTUS",
-     "qty": 5184
+     "id": "ENCHANTED_CACTUS_GREEN",
+     "qty": 8
     }
    ],
    "5": [
     {
-     "id": "CACTUS",
-     "qty": 5635
+     "id": "ENCHANTED_CACTUS_GREEN",
+     "qty": 24
     }
    ],
    "6": [
     {
-     "id": "CACTUS",
-     "qty": 5635
+     "id": "ENCHANTED_CACTUS_GREEN",
+     "qty": 64
     }
    ],
    "7": [
     {
-     "id": "CACTUS",
-     "qty": 6171
+     "id": "ENCHANTED_CACTUS_GREEN",
+     "qty": 128
     }
    ],
    "8": [
     {
-     "id": "CACTUS",
-     "qty": 6171
+     "id": "ENCHANTED_CACTUS_GREEN",
+     "qty": 256
     }
    ],
    "9": [
     {
-     "id": "CACTUS",
-     "qty": 7200
+     "id": "ENCHANTED_CACTUS_GREEN",
+     "qty": 512
     }
    ],
    "10": [
     {
-     "id": "CACTUS",
-     "qty": 7200
+     "id": "ENCHANTED_CACTUS",
+     "qty": 8
     }
    ],
    "11": [
     {
-     "id": "CACTUS",
-     "qty": 8640
-    }
-   ],
-   "12": [
-    {
-     "id": "CACTUS",
-     "qty": 10800
+     "id": "ENCHANTED_CACTUS",
+     "qty": 16
     }
    ]
   },
@@ -289,73 +293,71 @@
    "1": [
     {
      "id": "CARROT_ITEM",
-     "qty": 6480
+     "qty": 128
+    },
+    {
+     "id": "LOG",
+     "qty": 1
     }
    ],
    "2": [
     {
      "id": "CARROT_ITEM",
-     "qty": 6480
+     "qty": 256
     }
    ],
    "3": [
     {
      "id": "CARROT_ITEM",
-     "qty": 7200
+     "qty": 512
     }
    ],
    "4": [
     {
-     "id": "CARROT_ITEM",
-     "qty": 7200
+     "id": "ENCHANTED_CARROT",
+     "qty": 8
     }
    ],
    "5": [
     {
-     "id": "CARROT_ITEM",
-     "qty": 8100
+     "id": "ENCHANTED_CARROT",
+     "qty": 24
     }
    ],
    "6": [
     {
-     "id": "CARROT_ITEM",
-     "qty": 8100
+     "id": "ENCHANTED_CARROT",
+     "qty": 64
     }
    ],
    "7": [
     {
-     "id": "CARROT_ITEM",
-     "qty": 9257
+     "id": "ENCHANTED_CARROT",
+     "qty": 128
     }
    ],
    "8": [
     {
-     "id": "CARROT_ITEM",
-     "qty": 9257
+     "id": "ENCHANTED_CARROT",
+     "qty": 256
     }
    ],
    "9": [
     {
-     "id": "CARROT_ITEM",
-     "qty": 10800
+     "id": "ENCHANTED_CARROT",
+     "qty": 512
     }
    ],
    "10": [
     {
-     "id": "CARROT_ITEM",
-     "qty": 10800
+     "id": "ENCHANTED_GOLDEN_CARROT",
+     "qty": 8
     }
    ],
    "11": [
     {
-     "id": "CARROT_ITEM",
-     "qty": 12960
-    }
-   ],
-   "12": [
-    {
-     "id": "CARROT_ITEM",
-     "qty": 16200
+     "id": "ENCHANTED_GOLDEN_CARROT",
+     "qty": 16
     }
    ]
   },
@@ -363,111 +365,71 @@
    "1": [
     {
      "id": "SPIDER_EYE",
-     "qty": 1662
+     "qty": 80
     },
     {
-     "id": "STRING",
-     "qty": 831
+     "id": "LOG",
+     "qty": 1
     }
    ],
    "2": [
     {
      "id": "SPIDER_EYE",
-     "qty": 1662
-    },
-    {
-     "id": "STRING",
-     "qty": 831
+     "qty": 160
     }
    ],
    "3": [
     {
      "id": "SPIDER_EYE",
-     "qty": 1800
-    },
-    {
-     "id": "STRING",
-     "qty": 900
+     "qty": 320
     }
    ],
    "4": [
     {
      "id": "SPIDER_EYE",
-     "qty": 1800
-    },
-    {
-     "id": "STRING",
-     "qty": 900
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "SPIDER_EYE",
-     "qty": 1964
-    },
-    {
-     "id": "STRING",
-     "qty": 982
+     "id": "ENCHANTED_SPIDER_EYE",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "SPIDER_EYE",
-     "qty": 1964
-    },
-    {
-     "id": "STRING",
-     "qty": 982
+     "id": "ENCHANTED_SPIDER_EYE",
+     "qty": 24
     }
    ],
    "7": [
     {
-     "id": "SPIDER_EYE",
-     "qty": 2160
-    },
-    {
-     "id": "STRING",
-     "qty": 1080
+     "id": "ENCHANTED_SPIDER_EYE",
+     "qty": 64
     }
    ],
    "8": [
     {
-     "id": "SPIDER_EYE",
-     "qty": 2160
-    },
-    {
-     "id": "STRING",
-     "qty": 1080
+     "id": "ENCHANTED_SPIDER_EYE",
+     "qty": 128
     }
    ],
    "9": [
     {
-     "id": "SPIDER_EYE",
-     "qty": 2541
-    },
-    {
-     "id": "STRING",
-     "qty": 1271
+     "id": "ENCHANTED_SPIDER_EYE",
+     "qty": 256
     }
    ],
    "10": [
     {
-     "id": "SPIDER_EYE",
-     "qty": 2541
-    },
-    {
-     "id": "STRING",
-     "qty": 1271
+     "id": "ENCHANTED_SPIDER_EYE",
+     "qty": 512
     }
    ],
    "11": [
     {
-     "id": "SPIDER_EYE",
-     "qty": 3323
-    },
-    {
-     "id": "STRING",
-     "qty": 1662
+     "id": "ENCHANTED_FERMENTED_SPIDER_EYE",
+     "qty": 16
     }
    ]
   },
@@ -475,121 +437,71 @@
    "1": [
     {
      "id": "RAW_CHICKEN",
-     "qty": 1662
+     "qty": 64
     },
     {
-     "id": "FEATHER",
-     "qty": 1662
+     "id": "LOG",
+     "qty": 1
     }
    ],
    "2": [
     {
      "id": "RAW_CHICKEN",
-     "qty": 1662
-    },
-    {
-     "id": "FEATHER",
-     "qty": 1662
+     "qty": 128
     }
    ],
    "3": [
     {
      "id": "RAW_CHICKEN",
-     "qty": 1800
-    },
-    {
-     "id": "FEATHER",
-     "qty": 1800
+     "qty": 256
     }
    ],
    "4": [
     {
      "id": "RAW_CHICKEN",
-     "qty": 1800
-    },
-    {
-     "id": "FEATHER",
-     "qty": 1800
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "RAW_CHICKEN",
-     "qty": 1964
-    },
-    {
-     "id": "FEATHER",
-     "qty": 1964
+     "id": "ENCHANTED_RAW_CHICKEN",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "RAW_CHICKEN",
-     "qty": 1964
-    },
-    {
-     "id": "FEATHER",
-     "qty": 1964
+     "id": "ENCHANTED_RAW_CHICKEN",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "id": "RAW_CHICKEN",
-     "qty": 2160
-    },
-    {
-     "id": "FEATHER",
-     "qty": 2160
+     "id": "ENCHANTED_RAW_CHICKEN",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "id": "RAW_CHICKEN",
-     "qty": 2160
-    },
-    {
-     "id": "FEATHER",
-     "qty": 2160
+     "id": "ENCHANTED_RAW_CHICKEN",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "id": "RAW_CHICKEN",
-     "qty": 2400
-    },
-    {
-     "id": "FEATHER",
-     "qty": 2400
+     "id": "ENCHANTED_RAW_CHICKEN",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "id": "RAW_CHICKEN",
-     "qty": 2400
-    },
-    {
-     "id": "FEATHER",
-     "qty": 2400
+     "id": "ENCHANTED_RAW_CHICKEN",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "id": "RAW_CHICKEN",
-     "qty": 2880
-    },
-    {
-     "id": "FEATHER",
-     "qty": 2880
-    }
-   ],
-   "12": [
-    {
-     "id": "RAW_CHICKEN",
-     "qty": 3600
-    },
-    {
-     "id": "FEATHER",
-     "qty": 3600
+     "id": "ENCHANTED_RAW_CHICKEN",
+     "qty": 512
     }
    ]
   },
@@ -597,73 +509,77 @@
    "1": [
     {
      "id": "CLAY_BALL",
-     "qty": 5400
+     "qty": 80
+    },
+    {
+     "id": "LOG",
+     "qty": 1
     }
    ],
    "2": [
     {
      "id": "CLAY_BALL",
-     "qty": 5400
+     "qty": 160
     }
    ],
    "3": [
     {
      "id": "CLAY_BALL",
-     "qty": 5760
+     "qty": 320
     }
    ],
    "4": [
     {
      "id": "CLAY_BALL",
-     "qty": 5760
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "CLAY_BALL",
-     "qty": 6284
+     "id": "ENCHANTED_CLAY_BALL",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "CLAY_BALL",
-     "qty": 6284
+     "id": "ENCHANTED_CLAY_BALL",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "id": "CLAY_BALL",
-     "qty": 7200
+     "id": "ENCHANTED_CLAY_BALL",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "id": "CLAY_BALL",
-     "qty": 7200
+     "id": "ENCHANTED_CLAY_BALL",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "id": "CLAY_BALL",
-     "qty": 8640
+     "id": "ENCHANTED_CLAY_BALL",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "id": "CLAY_BALL",
-     "qty": 8640
+     "id": "ENCHANTED_CLAY_BALL",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "id": "CLAY_BALL",
-     "qty": 10800
+     "id": "ENCHANTED_CLAY_BALL",
+     "qty": 512
     }
    ],
    "12": [
     {
-     "id": "CLAY_BALL",
-     "qty": 12343
+     "id": "GENERATOR_UPGRADE_STONE_CLAY_12",
+     "qty": 1
     }
    ]
   },
@@ -671,147 +587,143 @@
    "1": [
     {
      "id": "COAL",
-     "qty": 2880
+     "qty": 80
+    },
+    {
+     "id": "LOG",
+     "qty": 1
     }
    ],
    "2": [
     {
      "id": "COAL",
-     "qty": 2880
+     "qty": 160
     }
    ],
    "3": [
     {
      "id": "COAL",
-     "qty": 3323
+     "qty": 320
     }
    ],
    "4": [
     {
      "id": "COAL",
-     "qty": 3323
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "COAL",
-     "qty": 3600
+     "id": "ENCHANTED_COAL",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "COAL",
-     "qty": 3600
+     "id": "ENCHANTED_COAL",
+     "qty": 24
     }
    ],
    "7": [
     {
-     "id": "COAL",
-     "qty": 4320
+     "id": "ENCHANTED_COAL",
+     "qty": 64
     }
    ],
    "8": [
     {
-     "id": "COAL",
-     "qty": 4320
+     "id": "ENCHANTED_COAL",
+     "qty": 128
     }
    ],
    "9": [
     {
-     "id": "COAL",
-     "qty": 4800
+     "id": "ENCHANTED_COAL",
+     "qty": 256
     }
    ],
    "10": [
     {
-     "id": "COAL",
-     "qty": 4800
+     "id": "ENCHANTED_COAL",
+     "qty": 512
     }
    ],
    "11": [
     {
-     "id": "COAL",
-     "qty": 6171
-    }
-   ],
-   "12": [
-    {
-     "id": "COAL",
-     "qty": 7200
+     "id": "ENCHANTED_COAL_BLOCK",
+     "qty": 8
     }
    ]
   },
   "COBBLESTONE": {
    "1": [
     {
+     "id": "LOG",
+     "qty": 1
+    },
+    {
      "id": "COBBLESTONE",
-     "qty": 3086
+     "qty": 80
     }
    ],
    "2": [
     {
      "id": "COBBLESTONE",
-     "qty": 3086
+     "qty": 160
     }
    ],
    "3": [
     {
      "id": "COBBLESTONE",
-     "qty": 3600
+     "qty": 320
     }
    ],
    "4": [
     {
      "id": "COBBLESTONE",
-     "qty": 3600
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "COBBLESTONE",
-     "qty": 4320
+     "id": "ENCHANTED_COBBLESTONE",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "COBBLESTONE",
-     "qty": 4320
+     "id": "ENCHANTED_COBBLESTONE",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "id": "COBBLESTONE",
-     "qty": 4800
+     "id": "ENCHANTED_COBBLESTONE",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "id": "COBBLESTONE",
-     "qty": 4800
+     "id": "ENCHANTED_COBBLESTONE",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "id": "COBBLESTONE",
-     "qty": 5400
+     "id": "ENCHANTED_COBBLESTONE",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "id": "COBBLESTONE",
-     "qty": 5400
+     "id": "ENCHANTED_COBBLESTONE",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "id": "COBBLESTONE",
-     "qty": 6171
-    }
-   ],
-   "12": [
-    {
-     "id": "COBBLESTONE",
-     "qty": 7200
+     "id": "ENCHANTED_COBBLESTONE",
+     "qty": 512
     }
    ]
   },
@@ -819,73 +731,71 @@
    "1": [
     {
      "id": "INK_SACK:3",
-     "qty": 4800
+     "qty": 80
+    },
+    {
+     "id": "LOG",
+     "qty": 1
     }
    ],
    "2": [
     {
      "id": "INK_SACK:3",
-     "qty": 4800
+     "qty": 160
     }
    ],
    "3": [
     {
      "id": "INK_SACK:3",
-     "qty": 5184
+     "qty": 320
     }
    ],
    "4": [
     {
      "id": "INK_SACK:3",
-     "qty": 5184
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "INK_SACK:3",
-     "qty": 5635
+     "id": "ENCHANTED_COCOA",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "INK_SACK:3",
-     "qty": 5635
+     "id": "ENCHANTED_COCOA",
+     "qty": 24
     }
    ],
    "7": [
     {
-     "id": "INK_SACK:3",
-     "qty": 6171
+     "id": "ENCHANTED_COCOA",
+     "qty": 64
     }
    ],
    "8": [
     {
-     "id": "INK_SACK:3",
-     "qty": 6171
+     "id": "ENCHANTED_COCOA",
+     "qty": 128
     }
    ],
    "9": [
     {
-     "id": "INK_SACK:3",
-     "qty": 7200
+     "id": "ENCHANTED_COCOA",
+     "qty": 256
     }
    ],
    "10": [
     {
-     "id": "INK_SACK:3",
-     "qty": 7200
+     "id": "ENCHANTED_COCOA",
+     "qty": 512
     }
    ],
    "11": [
     {
-     "id": "INK_SACK:3",
-     "qty": 8640
-    }
-   ],
-   "12": [
-    {
-     "id": "INK_SACK:3",
-     "qty": 10800
+     "id": "ENCHANTED_COOKIE",
+     "qty": 8
     }
    ]
   },
@@ -893,189 +803,143 @@
    "1": [
     {
      "id": "RAW_BEEF",
-     "qty": 1662
+     "qty": 64
     },
     {
-     "id": "LEATHER",
-     "qty": 1662
+     "id": "LOG",
+     "qty": 1
     }
    ],
    "2": [
     {
      "id": "RAW_BEEF",
-     "qty": 1662
-    },
-    {
-     "id": "LEATHER",
-     "qty": 1662
+     "qty": 128
     }
    ],
    "3": [
     {
      "id": "RAW_BEEF",
-     "qty": 1800
-    },
-    {
-     "id": "LEATHER",
-     "qty": 1800
+     "qty": 256
     }
    ],
    "4": [
     {
      "id": "RAW_BEEF",
-     "qty": 1800
-    },
-    {
-     "id": "LEATHER",
-     "qty": 1800
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "RAW_BEEF",
-     "qty": 1964
-    },
-    {
-     "id": "LEATHER",
-     "qty": 1964
+     "id": "ENCHANTED_RAW_BEEF",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "RAW_BEEF",
-     "qty": 1964
-    },
-    {
-     "id": "LEATHER",
-     "qty": 1964
+     "id": "ENCHANTED_RAW_BEEF",
+     "qty": 24
     }
    ],
    "7": [
     {
-     "id": "RAW_BEEF",
-     "qty": 2160
-    },
-    {
-     "id": "LEATHER",
-     "qty": 2160
+     "id": "ENCHANTED_RAW_BEEF",
+     "qty": 64
     }
    ],
    "8": [
     {
-     "id": "RAW_BEEF",
-     "qty": 2160
-    },
-    {
-     "id": "LEATHER",
-     "qty": 2160
+     "id": "ENCHANTED_RAW_BEEF",
+     "qty": 128
     }
    ],
    "9": [
     {
-     "id": "RAW_BEEF",
-     "qty": 2541
-    },
-    {
-     "id": "LEATHER",
-     "qty": 2541
+     "id": "ENCHANTED_RAW_BEEF",
+     "qty": 256
     }
    ],
    "10": [
     {
-     "id": "RAW_BEEF",
-     "qty": 2541
-    },
-    {
-     "id": "LEATHER",
-     "qty": 2541
+     "id": "ENCHANTED_RAW_BEEF",
+     "qty": 512
     }
    ],
    "11": [
     {
-     "id": "RAW_BEEF",
-     "qty": 3323
-    },
-    {
-     "id": "LEATHER",
-     "qty": 3323
-    }
-   ],
-   "12": [
-    {
-     "id": "RAW_BEEF",
-     "qty": 4320
-    },
-    {
-     "id": "LEATHER",
-     "qty": 4320
+     "id": "ENCHANTED_LEATHER",
+     "qty": 512
     }
    ]
   },
   "CREEPER": {
    "1": [
     {
+     "id": "LOG",
+     "qty": 1
+    },
+    {
      "id": "SULPHUR",
-     "qty": 1600
+     "qty": 80
     }
    ],
    "2": [
     {
      "id": "SULPHUR",
-     "qty": 1600
+     "qty": 160
     }
    ],
    "3": [
     {
      "id": "SULPHUR",
-     "qty": 1728
+     "qty": 320
     }
    ],
    "4": [
     {
      "id": "SULPHUR",
-     "qty": 1728
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "SULPHUR",
-     "qty": 1878
+     "id": "ENCHANTED_GUNPOWDER",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "SULPHUR",
-     "qty": 1878
+     "id": "ENCHANTED_GUNPOWDER",
+     "qty": 24
     }
    ],
    "7": [
     {
-     "id": "SULPHUR",
-     "qty": 2057
+     "id": "ENCHANTED_GUNPOWDER",
+     "qty": 64
     }
    ],
    "8": [
     {
-     "id": "SULPHUR",
-     "qty": 2057
+     "id": "ENCHANTED_GUNPOWDER",
+     "qty": 128
     }
    ],
    "9": [
     {
-     "id": "SULPHUR",
-     "qty": 2400
+     "id": "ENCHANTED_GUNPOWDER",
+     "qty": 256
     }
    ],
    "10": [
     {
-     "id": "SULPHUR",
-     "qty": 2400
+     "id": "ENCHANTED_GUNPOWDER",
+     "qty": 512
     }
    ],
    "11": [
     {
-     "id": "SULPHUR",
-     "qty": 3086
+     "id": "ENCHANTED_FIREWORK_ROCKET",
+     "qty": 16
     }
    ]
   },
@@ -1083,141 +947,143 @@
    "1": [
     {
      "id": "LOG_2:1",
-     "qty": 3600
+     "qty": 80
+    },
+    {
+     "id": "LOG",
+     "qty": 1
     }
    ],
    "2": [
     {
      "id": "LOG_2:1",
-     "qty": 3600
+     "qty": 160
     }
    ],
    "3": [
     {
      "id": "LOG_2:1",
-     "qty": 3840
+     "qty": 320
     }
    ],
    "4": [
     {
      "id": "LOG_2:1",
-     "qty": 3840
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "LOG_2:1",
-     "qty": 4114
+     "id": "ENCHANTED_DARK_OAK_LOG",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "LOG_2:1",
-     "qty": 4114
+     "id": "ENCHANTED_DARK_OAK_LOG",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "id": "LOG_2:1",
-     "qty": 4547
+     "id": "ENCHANTED_DARK_OAK_LOG",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "id": "LOG_2:1",
-     "qty": 4547
+     "id": "ENCHANTED_DARK_OAK_LOG",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "id": "LOG_2:1",
-     "qty": 5236
+     "id": "ENCHANTED_DARK_OAK_LOG",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "id": "LOG_2:1",
-     "qty": 5236
+     "id": "ENCHANTED_DARK_OAK_LOG",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "id": "LOG_2:1",
-     "qty": 6400
+     "id": "ENCHANTED_DARK_OAK_LOG",
+     "qty": 512
     }
    ]
   },
   "DIAMOND": {
    "1": [
     {
+     "id": "LOG",
+     "qty": 1
+    },
+    {
      "id": "DIAMOND",
-     "qty": 1490
+     "qty": 80
     }
    ],
    "2": [
     {
      "id": "DIAMOND",
-     "qty": 1490
+     "qty": 160
     }
    ],
    "3": [
     {
      "id": "DIAMOND",
-     "qty": 1600
+     "qty": 320
     }
    ],
    "4": [
     {
      "id": "DIAMOND",
-     "qty": 1600
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "DIAMOND",
-     "qty": 1728
+     "id": "ENCHANTED_DIAMOND",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "DIAMOND",
-     "qty": 1728
+     "id": "ENCHANTED_DIAMOND",
+     "qty": 24
     }
    ],
    "7": [
     {
-     "id": "DIAMOND",
-     "qty": 1964
+     "id": "ENCHANTED_DIAMOND",
+     "qty": 64
     }
    ],
    "8": [
     {
-     "id": "DIAMOND",
-     "qty": 1964
+     "id": "ENCHANTED_DIAMOND",
+     "qty": 128
     }
    ],
    "9": [
     {
-     "id": "DIAMOND",
-     "qty": 2274
+     "id": "ENCHANTED_DIAMOND",
+     "qty": 256
     }
    ],
    "10": [
     {
-     "id": "DIAMOND",
-     "qty": 2274
+     "id": "ENCHANTED_DIAMOND",
+     "qty": 512
     }
    ],
    "11": [
     {
-     "id": "DIAMOND",
-     "qty": 2880
-    }
-   ],
-   "12": [
-    {
-     "id": "DIAMOND",
-     "qty": 3600
+     "id": "ENCHANTED_DIAMOND_BLOCK",
+     "qty": 8
     }
    ]
   },
@@ -1225,73 +1091,71 @@
    "1": [
     {
      "id": "EMERALD",
-     "qty": 1543
+     "qty": 80
+    },
+    {
+     "id": "LOG",
+     "qty": 1
     }
    ],
    "2": [
     {
      "id": "EMERALD",
-     "qty": 1543
+     "qty": 160
     }
    ],
    "3": [
     {
      "id": "EMERALD",
-     "qty": 1662
+     "qty": 320
     }
    ],
    "4": [
     {
      "id": "EMERALD",
-     "qty": 1662
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "EMERALD",
-     "qty": 1800
+     "id": "ENCHANTED_EMERALD",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "EMERALD",
-     "qty": 1800
+     "id": "ENCHANTED_EMERALD",
+     "qty": 24
     }
    ],
    "7": [
     {
-     "id": "EMERALD",
-     "qty": 2057
+     "id": "ENCHANTED_EMERALD",
+     "qty": 64
     }
    ],
    "8": [
     {
-     "id": "EMERALD",
-     "qty": 2057
+     "id": "ENCHANTED_EMERALD",
+     "qty": 128
     }
    ],
    "9": [
     {
-     "id": "EMERALD",
-     "qty": 2400
+     "id": "ENCHANTED_EMERALD",
+     "qty": 256
     }
    ],
    "10": [
     {
-     "id": "EMERALD",
-     "qty": 2400
+     "id": "ENCHANTED_EMERALD",
+     "qty": 512
     }
    ],
    "11": [
     {
-     "id": "EMERALD",
-     "qty": 3086
-    }
-   ],
-   "12": [
-    {
-     "id": "EMERALD",
-     "qty": 3600
+     "id": "ENCHANTED_EMERALD_BLOCK",
+     "qty": 8
     }
    ]
   },
@@ -1299,67 +1163,71 @@
    "1": [
     {
      "id": "ENDER_STONE",
-     "qty": 1662
+     "qty": 80
+    },
+    {
+     "id": "LOG",
+     "qty": 1
     }
    ],
    "2": [
     {
      "id": "ENDER_STONE",
-     "qty": 1662
+     "qty": 160
     }
    ],
    "3": [
     {
      "id": "ENDER_STONE",
-     "qty": 1800
+     "qty": 320
     }
    ],
    "4": [
     {
      "id": "ENDER_STONE",
-     "qty": 1800
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "ENDER_STONE",
-     "qty": 1964
+     "id": "ENCHANTED_ENDSTONE",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "ENDER_STONE",
-     "qty": 1964
+     "id": "ENCHANTED_ENDSTONE",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "id": "ENDER_STONE",
-     "qty": 2274
+     "id": "ENCHANTED_ENDSTONE",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "id": "ENDER_STONE",
-     "qty": 2274
+     "id": "ENCHANTED_ENDSTONE",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "id": "ENDER_STONE",
-     "qty": 2700
+     "id": "ENCHANTED_ENDSTONE",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "id": "ENDER_STONE",
-     "qty": 2700
+     "id": "ENCHANTED_ENDSTONE",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "id": "ENDER_STONE",
-     "qty": 3323
+     "id": "ENCHANTED_ENDSTONE",
+     "qty": 512
     }
    ]
   },
@@ -1367,67 +1235,71 @@
    "1": [
     {
      "id": "ENDER_PEARL",
-     "qty": 1350
+     "qty": 64
+    },
+    {
+     "id": "LOG",
+     "qty": 1
     }
    ],
    "2": [
     {
      "id": "ENDER_PEARL",
-     "qty": 1350
+     "qty": 128
     }
    ],
    "3": [
     {
-     "id": "ENDER_PEARL",
-     "qty": 1440
+     "id": "ENCHANTED_ENDER_PEARL",
+     "qty": 8
     }
    ],
    "4": [
     {
-     "id": "ENDER_PEARL",
-     "qty": 1440
+     "id": "ENCHANTED_ENDER_PEARL",
+     "qty": 24
     }
    ],
    "5": [
     {
-     "id": "ENDER_PEARL",
-     "qty": 1543
+     "id": "ENCHANTED_ENDER_PEARL",
+     "qty": 48
     }
    ],
    "6": [
     {
-     "id": "ENDER_PEARL",
-     "qty": 1543
+     "id": "ENCHANTED_ENDER_PEARL",
+     "qty": 96
     }
    ],
    "7": [
     {
-     "id": "ENDER_PEARL",
-     "qty": 1728
+     "id": "ENCHANTED_EYE_OF_ENDER",
+     "qty": 8
     }
    ],
    "8": [
     {
-     "id": "ENDER_PEARL",
-     "qty": 1728
+     "id": "ENCHANTED_EYE_OF_ENDER",
+     "qty": 24
     }
    ],
    "9": [
     {
-     "id": "ENDER_PEARL",
-     "qty": 1964
+     "id": "ENCHANTED_EYE_OF_ENDER",
+     "qty": 48
     }
    ],
    "10": [
     {
-     "id": "ENDER_PEARL",
-     "qty": 1964
+     "id": "ENCHANTED_EYE_OF_ENDER",
+     "qty": 96
     }
    ],
    "11": [
     {
-     "id": "ENDER_PEARL",
-     "qty": 2400
+     "id": "ENCHANTED_EYE_OF_ENDER",
+     "qty": 192
     }
    ]
   },
@@ -1435,361 +1307,149 @@
    "1": [
     {
      "id": "RAW_FISH",
-     "qty": 576
+     "qty": 64
     },
     {
-     "id": "RAW_FISH:1",
-     "qty": 288
+     "id": "LOG",
+     "qty": 1
     },
     {
-     "id": "RAW_FISH:3",
-     "qty": 138
-    },
-    {
-     "id": "RAW_FISH:2",
-     "qty": 46
-    },
-    {
-     "id": "PRISMARINE_CRYSTALS",
-     "qty": 35
-    },
-    {
-     "id": "PRISMARINE_SHARD",
-     "qty": 35
-    },
-    {
-     "id": "SPONGE",
-     "qty": 35
+     "id": "STRING",
+     "qty": 2
     }
    ],
    "2": [
     {
      "id": "RAW_FISH",
-     "qty": 576
-    },
-    {
-     "id": "RAW_FISH:1",
-     "qty": 288
-    },
-    {
-     "id": "RAW_FISH:3",
-     "qty": 138
-    },
-    {
-     "id": "RAW_FISH:2",
-     "qty": 46
-    },
-    {
-     "id": "PRISMARINE_CRYSTALS",
-     "qty": 35
-    },
-    {
-     "id": "PRISMARINE_SHARD",
-     "qty": 35
-    },
-    {
-     "id": "SPONGE",
-     "qty": 35
+     "qty": 128
     }
    ],
    "3": [
     {
      "id": "RAW_FISH",
-     "qty": 645
-    },
-    {
-     "id": "RAW_FISH:1",
-     "qty": 322
-    },
-    {
-     "id": "RAW_FISH:3",
-     "qty": 155
-    },
-    {
-     "id": "RAW_FISH:2",
-     "qty": 52
-    },
-    {
-     "id": "PRISMARINE_CRYSTALS",
-     "qty": 39
-    },
-    {
-     "id": "PRISMARINE_SHARD",
-     "qty": 39
-    },
-    {
-     "id": "SPONGE",
-     "qty": 39
+     "qty": 256
     }
    ],
    "4": [
     {
      "id": "RAW_FISH",
-     "qty": 645
-    },
-    {
-     "id": "RAW_FISH:1",
-     "qty": 322
-    },
-    {
-     "id": "RAW_FISH:3",
-     "qty": 155
-    },
-    {
-     "id": "RAW_FISH:2",
-     "qty": 52
-    },
-    {
-     "id": "PRISMARINE_CRYSTALS",
-     "qty": 39
-    },
-    {
-     "id": "PRISMARINE_SHARD",
-     "qty": 39
-    },
-    {
-     "id": "SPONGE",
-     "qty": 39
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "RAW_FISH",
-     "qty": 732
-    },
-    {
-     "id": "RAW_FISH:1",
-     "qty": 366
-    },
-    {
-     "id": "RAW_FISH:3",
-     "qty": 176
-    },
-    {
-     "id": "RAW_FISH:2",
-     "qty": 59
-    },
-    {
-     "id": "PRISMARINE_CRYSTALS",
-     "qty": 44
-    },
-    {
-     "id": "PRISMARINE_SHARD",
-     "qty": 44
-    },
-    {
-     "id": "SPONGE",
-     "qty": 44
+     "id": "ENCHANTED_RAW_FISH",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "RAW_FISH",
-     "qty": 732
-    },
-    {
-     "id": "RAW_FISH:1",
-     "qty": 366
-    },
-    {
-     "id": "RAW_FISH:3",
-     "qty": 176
-    },
-    {
-     "id": "RAW_FISH:2",
-     "qty": 59
-    },
-    {
-     "id": "PRISMARINE_CRYSTALS",
-     "qty": 44
-    },
-    {
-     "id": "PRISMARINE_SHARD",
-     "qty": 44
-    },
-    {
-     "id": "SPONGE",
-     "qty": 44
+     "id": "ENCHANTED_RAW_FISH",
+     "qty": 24
     }
    ],
    "7": [
     {
-     "id": "RAW_FISH",
-     "qty": 847
-    },
-    {
-     "id": "RAW_FISH:1",
-     "qty": 424
-    },
-    {
-     "id": "RAW_FISH:3",
-     "qty": 203
-    },
-    {
-     "id": "RAW_FISH:2",
-     "qty": 68
-    },
-    {
-     "id": "PRISMARINE_CRYSTALS",
-     "qty": 51
-    },
-    {
-     "id": "PRISMARINE_SHARD",
-     "qty": 51
-    },
-    {
-     "id": "SPONGE",
-     "qty": 51
+     "id": "ENCHANTED_RAW_FISH",
+     "qty": 64
     }
    ],
    "8": [
     {
-     "id": "RAW_FISH",
-     "qty": 847
-    },
-    {
-     "id": "RAW_FISH:1",
-     "qty": 424
-    },
-    {
-     "id": "RAW_FISH:3",
-     "qty": 203
-    },
-    {
-     "id": "RAW_FISH:2",
-     "qty": 68
-    },
-    {
-     "id": "PRISMARINE_CRYSTALS",
-     "qty": 51
-    },
-    {
-     "id": "PRISMARINE_SHARD",
-     "qty": 51
-    },
-    {
-     "id": "SPONGE",
-     "qty": 51
+     "id": "ENCHANTED_RAW_FISH",
+     "qty": 128
     }
    ],
    "9": [
     {
-     "id": "RAW_FISH",
-     "qty": 1005
-    },
-    {
-     "id": "RAW_FISH:1",
-     "qty": 502
-    },
-    {
-     "id": "RAW_FISH:3",
-     "qty": 241
-    },
-    {
-     "id": "RAW_FISH:2",
-     "qty": 80
-    },
-    {
-     "id": "PRISMARINE_CRYSTALS",
-     "qty": 60
-    },
-    {
-     "id": "PRISMARINE_SHARD",
-     "qty": 60
-    },
-    {
-     "id": "SPONGE",
-     "qty": 60
+     "id": "ENCHANTED_RAW_FISH",
+     "qty": 256
     }
    ],
    "10": [
     {
-     "id": "RAW_FISH",
-     "qty": 1005
-    },
-    {
-     "id": "RAW_FISH:1",
-     "qty": 502
-    },
-    {
-     "id": "RAW_FISH:3",
-     "qty": 241
-    },
-    {
-     "id": "RAW_FISH:2",
-     "qty": 80
-    },
-    {
-     "id": "PRISMARINE_CRYSTALS",
-     "qty": 60
-    },
-    {
-     "id": "PRISMARINE_SHARD",
-     "qty": 60
-    },
-    {
-     "id": "SPONGE",
-     "qty": 60
+     "id": "ENCHANTED_RAW_FISH",
+     "qty": 512
     }
    ],
    "11": [
     {
-     "id": "RAW_FISH",
-     "qty": 1234
-    },
-    {
-     "id": "RAW_FISH:1",
-     "qty": 617
-    },
-    {
-     "id": "RAW_FISH:3",
-     "qty": 296
-    },
-    {
-     "id": "RAW_FISH:2",
-     "qty": 99
-    },
-    {
-     "id": "PRISMARINE_CRYSTALS",
-     "qty": 74
-    },
-    {
-     "id": "PRISMARINE_SHARD",
-     "qty": 74
-    },
-    {
-     "id": "SPONGE",
-     "qty": 74
+     "id": "ENCHANTED_COOKED_FISH",
+     "qty": 8
     }
    ],
    "12": [
     {
-     "id": "RAW_FISH",
-     "qty": 1440
-    },
+     "id": "GENERATOR_UPGRADE_STONE_FISHING_12",
+     "qty": 1
+    }
+   ]
+  },
+  "FLOWER": {
+   "2": [
     {
-     "id": "RAW_FISH:1",
-     "qty": 720
-    },
+     "id": "YELLOW_FLOWER",
+     "qty": 160
+    }
+   ],
+   "3": [
     {
-     "id": "RAW_FISH:3",
-     "qty": 346
-    },
+     "id": "YELLOW_FLOWER",
+     "qty": 320
+    }
+   ],
+   "4": [
     {
-     "id": "RAW_FISH:2",
-     "qty": 115
-    },
+     "id": "YELLOW_FLOWER",
+     "qty": 512
+    }
+   ],
+   "5": [
     {
-     "id": "PRISMARINE_CRYSTALS",
-     "qty": 86
-    },
+     "id": "ENCHANTED_DANDELION",
+     "qty": 8
+    }
+   ],
+   "6": [
     {
-     "id": "PRISMARINE_SHARD",
-     "qty": 86
-    },
+     "id": "ENCHANTED_DANDELION",
+     "qty": 24
+    }
+   ],
+   "7": [
     {
-     "id": "SPONGE",
-     "qty": 86
+     "id": "ENCHANTED_DANDELION",
+     "qty": 64
+    }
+   ],
+   "8": [
+    {
+     "id": "ENCHANTED_DANDELION",
+     "qty": 128
+    }
+   ],
+   "9": [
+    {
+     "id": "ENCHANTED_DANDELION",
+     "qty": 256
+    }
+   ],
+   "10": [
+    {
+     "id": "ENCHANTED_DANDELION",
+     "qty": 512
+    }
+   ],
+   "11": [
+    {
+     "id": "ENCHANTED_POPPY",
+     "qty": 8
+    }
+   ],
+   "12": [
+    {
+     "id": "ENCHANTED_POPPY",
+     "qty": 16
     }
    ]
   },
@@ -1797,721 +1457,736 @@
    "1": [
     {
      "id": "GHAST_TEAR",
-     "qty": 864
+     "qty": 64
+    },
+    {
+     "id": "LOG",
+     "qty": 1
     }
    ],
    "2": [
     {
      "id": "GHAST_TEAR",
-     "qty": 864
+     "qty": 128
     }
    ],
    "3": [
     {
      "id": "GHAST_TEAR",
-     "qty": 919
+     "qty": 256
     }
    ],
    "4": [
     {
      "id": "GHAST_TEAR",
-     "qty": 919
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "GHAST_TEAR",
-     "qty": 982
+     "id": "ENCHANTED_GHAST_TEAR",
+     "qty": 256
     }
    ],
    "6": [
     {
-     "id": "GHAST_TEAR",
-     "qty": 982
+     "id": "ENCHANTED_GHAST_TEAR",
+     "qty": 512
     }
    ],
    "7": [
     {
-     "id": "GHAST_TEAR",
-     "qty": 1054
+     "id": "SILVER_FANG",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "id": "GHAST_TEAR",
-     "qty": 1054
+     "id": "SILVER_FANG",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "id": "GHAST_TEAR",
-     "qty": 1137
+     "id": "SILVER_FANG",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "id": "GHAST_TEAR",
-     "qty": 1137
+     "id": "SILVER_FANG",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "id": "GHAST_TEAR",
-     "qty": 1350
-    }
-   ],
-   "12": [
-    {
-     "id": "GHAST_TEAR",
-     "qty": 1440
+     "id": "SILVER_FANG",
+     "qty": 512
     }
    ]
   },
   "GLOWSTONE": {
    "1": [
     {
+     "id": "LOG",
+     "qty": 1
+    },
+    {
      "id": "GLOWSTONE_DUST",
-     "qty": 5184
+     "qty": 128
     }
    ],
    "2": [
     {
      "id": "GLOWSTONE_DUST",
-     "qty": 5184
+     "qty": 256
     }
    ],
    "3": [
     {
      "id": "GLOWSTONE_DUST",
-     "qty": 5635
+     "qty": 512
     }
    ],
    "4": [
     {
-     "id": "GLOWSTONE_DUST",
-     "qty": 5635
+     "id": "ENCHANTED_GLOWSTONE_DUST",
+     "qty": 8
     }
    ],
    "5": [
     {
-     "id": "GLOWSTONE_DUST",
-     "qty": 6171
+     "id": "ENCHANTED_GLOWSTONE_DUST",
+     "qty": 24
     }
    ],
    "6": [
     {
-     "id": "GLOWSTONE_DUST",
-     "qty": 6171
+     "id": "ENCHANTED_GLOWSTONE_DUST",
+     "qty": 64
     }
    ],
    "7": [
     {
-     "id": "GLOWSTONE_DUST",
-     "qty": 6821
+     "id": "ENCHANTED_GLOWSTONE_DUST",
+     "qty": 128
     }
    ],
    "8": [
     {
-     "id": "GLOWSTONE_DUST",
-     "qty": 6821
+     "id": "ENCHANTED_GLOWSTONE_DUST",
+     "qty": 256
     }
    ],
    "9": [
     {
-     "id": "GLOWSTONE_DUST",
-     "qty": 8100
+     "id": "ENCHANTED_GLOWSTONE_DUST",
+     "qty": 512
     }
    ],
    "10": [
     {
-     "id": "GLOWSTONE_DUST",
-     "qty": 8100
+     "id": "ENCHANTED_GLOWSTONE",
+     "qty": 8
     }
    ],
    "11": [
     {
-     "id": "GLOWSTONE_DUST",
-     "qty": 9969
-    }
-   ],
-   "12": [
-    {
-     "id": "GLOWSTONE_DUST",
-     "qty": 11782
+     "id": "ENCHANTED_GLOWSTONE",
+     "qty": 16
     }
    ]
   },
   "GOLD": {
    "1": [
     {
+     "id": "LOG",
+     "qty": 1
+    },
+    {
      "id": "GOLD_INGOT",
-     "qty": 1964
+     "qty": 80
     }
    ],
    "2": [
     {
      "id": "GOLD_INGOT",
-     "qty": 1964
+     "qty": 160
     }
    ],
    "3": [
     {
      "id": "GOLD_INGOT",
-     "qty": 2160
+     "qty": 320
     }
    ],
    "4": [
     {
      "id": "GOLD_INGOT",
-     "qty": 2160
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "GOLD_INGOT",
-     "qty": 2400
+     "id": "ENCHANTED_GOLD",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "GOLD_INGOT",
-     "qty": 2400
+     "id": "ENCHANTED_GOLD",
+     "qty": 24
     }
    ],
    "7": [
     {
-     "id": "GOLD_INGOT",
-     "qty": 2700
+     "id": "ENCHANTED_GOLD",
+     "qty": 64
     }
    ],
    "8": [
     {
-     "id": "GOLD_INGOT",
-     "qty": 2700
+     "id": "ENCHANTED_GOLD",
+     "qty": 128
     }
    ],
    "9": [
     {
-     "id": "GOLD_INGOT",
-     "qty": 3086
+     "id": "ENCHANTED_GOLD",
+     "qty": 256
     }
    ],
    "10": [
     {
-     "id": "GOLD_INGOT",
-     "qty": 3086
+     "id": "ENCHANTED_GOLD",
+     "qty": 512
     }
    ],
    "11": [
     {
-     "id": "GOLD_INGOT",
-     "qty": 3927
-    }
-   ],
-   "12": [
-    {
-     "id": "GOLD_INGOT",
-     "qty": 4800
+     "id": "ENCHANTED_GOLD_BLOCK",
+     "qty": 8
     }
    ]
   },
   "GRAVEL": {
    "1": [
     {
-     "id": "FLINT",
-     "qty": 1662
+     "id": "LOG",
+     "qty": 1
+    },
+    {
+     "id": "GRAVEL",
+     "qty": 80
     }
    ],
    "2": [
     {
-     "id": "FLINT",
-     "qty": 1662
+     "id": "GRAVEL",
+     "qty": 160
     }
    ],
    "3": [
     {
-     "id": "FLINT",
-     "qty": 1800
+     "id": "GRAVEL",
+     "qty": 320
     }
    ],
    "4": [
     {
-     "id": "FLINT",
-     "qty": 1800
+     "id": "GRAVEL",
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "FLINT",
-     "qty": 1964
+     "id": "ENCHANTED_FLINT",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "FLINT",
-     "qty": 1964
+     "id": "ENCHANTED_FLINT",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "id": "FLINT",
-     "qty": 2274
+     "id": "ENCHANTED_FLINT",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "id": "FLINT",
-     "qty": 2274
+     "id": "ENCHANTED_FLINT",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "id": "FLINT",
-     "qty": 2700
+     "id": "ENCHANTED_FLINT",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "id": "FLINT",
-     "qty": 2700
+     "id": "ENCHANTED_FLINT",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "id": "FLINT",
-     "qty": 3323
+     "id": "ENCHANTED_FLINT",
+     "qty": 512
     }
    ]
   },
   "HARD_STONE": {
    "1": [
     {
+     "id": "LOG",
+     "qty": 1
+    },
+    {
      "id": "HARD_STONE",
-     "qty": 6171
+     "qty": 256
     }
    ],
    "2": [
     {
      "id": "HARD_STONE",
-     "qty": 6171
+     "qty": 512
     }
    ],
    "3": [
     {
-     "id": "HARD_STONE",
-     "qty": 7200
+     "id": "ENCHANTED_HARD_STONE",
+     "qty": 8
     }
    ],
    "4": [
     {
-     "id": "HARD_STONE",
-     "qty": 7200
+     "id": "ENCHANTED_HARD_STONE",
+     "qty": 16
     }
    ],
    "5": [
     {
-     "id": "HARD_STONE",
-     "qty": 8640
+     "id": "ENCHANTED_HARD_STONE",
+     "qty": 32
     }
    ],
    "6": [
     {
-     "id": "HARD_STONE",
-     "qty": 8640
+     "id": "ENCHANTED_HARD_STONE",
+     "qty": 64
     }
    ],
    "7": [
     {
-     "id": "HARD_STONE",
-     "qty": 9600
+     "id": "ENCHANTED_HARD_STONE",
+     "qty": 128
     }
    ],
    "8": [
     {
-     "id": "HARD_STONE",
-     "qty": 9600
+     "id": "ENCHANTED_HARD_STONE",
+     "qty": 256
     }
    ],
    "9": [
     {
-     "id": "HARD_STONE",
-     "qty": 10800
+     "id": "ENCHANTED_HARD_STONE",
+     "qty": 512
     }
    ],
    "10": [
     {
-     "id": "HARD_STONE",
-     "qty": 10800
+     "id": "CONCENTRATED_STONE",
+     "qty": 4
     }
    ],
    "11": [
     {
-     "id": "HARD_STONE",
-     "qty": 12343
-    }
-   ],
-   "12": [
-    {
-     "id": "HARD_STONE",
-     "qty": 14400
+     "id": "CONCENTRATED_STONE",
+     "qty": 8
     }
    ]
   },
   "ICE": {
    "1": [
     {
+     "id": "LOG",
+     "qty": 1
+    },
+    {
      "id": "ICE",
-     "qty": 3086
+     "qty": 80
     }
    ],
    "2": [
     {
      "id": "ICE",
-     "qty": 3086
+     "qty": 160
     }
    ],
    "3": [
     {
      "id": "ICE",
-     "qty": 3600
+     "qty": 320
     }
    ],
    "4": [
     {
      "id": "ICE",
-     "qty": 3600
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "ICE",
-     "qty": 4320
+     "id": "PACKED_ICE",
+     "qty": 128
     }
    ],
    "6": [
     {
-     "id": "ICE",
-     "qty": 4320
+     "id": "PACKED_ICE",
+     "qty": 256
     }
    ],
    "7": [
     {
-     "id": "ICE",
-     "qty": 4800
+     "id": "PACKED_ICE",
+     "qty": 512
     }
    ],
    "8": [
     {
-     "id": "ICE",
-     "qty": 4800
+     "id": "ENCHANTED_ICE",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "id": "ICE",
-     "qty": 5400
+     "id": "ENCHANTED_ICE",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "id": "ICE",
-     "qty": 5400
+     "id": "ENCHANTED_ICE",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "id": "ICE",
-     "qty": 6171
-    }
-   ],
-   "12": [
-    {
-     "id": "ICE",
-     "qty": 7200
+     "id": "ENCHANTED_ICE",
+     "qty": 512
     }
    ]
   },
   "INFERNO": {
-   "1": [
-    {
-     "id": "CRUDE_GABAGOOL",
-     "qty": 43
-    }
-   ],
+   "1": {
+    "items": [
+     {
+      "id": "DERELICT_ASHE",
+      "qty": 80
+     }
+    ],
+    "requires": [
+     "minion_BLAZE_1"
+    ]
+   },
    "2": [
     {
-     "id": "CRUDE_GABAGOOL",
-     "qty": 44
+     "id": "DERELICT_ASHE",
+     "qty": 320
     }
    ],
    "3": [
     {
-     "id": "CRUDE_GABAGOOL",
-     "qty": 45
+     "id": "MOLTEN_POWDER",
+     "qty": 8
     }
    ],
    "4": [
     {
-     "id": "CRUDE_GABAGOOL",
-     "qty": 47
+     "id": "MOLTEN_POWDER",
+     "qty": 16
     }
    ],
    "5": [
     {
-     "id": "CRUDE_GABAGOOL",
-     "qty": 49
+     "id": "MOLTEN_POWDER",
+     "qty": 32
     }
    ],
    "6": [
     {
-     "id": "CRUDE_GABAGOOL",
-     "qty": 51
+     "id": "MOLTEN_POWDER",
+     "qty": 64
     }
    ],
    "7": [
     {
-     "id": "CRUDE_GABAGOOL",
-     "qty": 52
+     "id": "MOLTEN_POWDER",
+     "qty": 128
     }
    ],
    "8": [
     {
-     "id": "CRUDE_GABAGOOL",
-     "qty": 55
+     "id": "MOLTEN_POWDER",
+     "qty": 256
     }
    ],
    "9": [
     {
-     "id": "CRUDE_GABAGOOL",
-     "qty": 57
+     "id": "MOLTEN_POWDER",
+     "qty": 256
+    },
+    {
+     "id": "INFERNO_VERTEX",
+     "qty": 16
     }
    ],
    "10": [
     {
-     "id": "CRUDE_GABAGOOL",
-     "qty": 59
+     "id": "INFERNO_VERTEX",
+     "qty": 48
+    },
+    {
+     "id": "MOLTEN_POWDER",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "id": "CRUDE_GABAGOOL",
-     "qty": 62
+     "id": "MOLTEN_POWDER",
+     "qty": 256
+    },
+    {
+     "id": "INFERNO_VERTEX",
+     "qty": 48
+    },
+    {
+     "id": "INFERNO_APEX",
+     "qty": 1
     }
    ]
   },
   "IRON": {
    "1": [
     {
+     "id": "LOG",
+     "qty": 1
+    },
+    {
      "id": "IRON_INGOT",
-     "qty": 2541
+     "qty": 80
     }
    ],
    "2": [
     {
      "id": "IRON_INGOT",
-     "qty": 2541
+     "qty": 160
     }
    ],
    "3": [
     {
      "id": "IRON_INGOT",
-     "qty": 2880
+     "qty": 320
     }
    ],
    "4": [
     {
      "id": "IRON_INGOT",
-     "qty": 2880
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "IRON_INGOT",
-     "qty": 3086
+     "id": "ENCHANTED_IRON",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "IRON_INGOT",
-     "qty": 3086
+     "id": "ENCHANTED_IRON",
+     "qty": 24
     }
    ],
    "7": [
     {
-     "id": "IRON_INGOT",
-     "qty": 3600
+     "id": "ENCHANTED_IRON",
+     "qty": 64
     }
    ],
    "8": [
     {
-     "id": "IRON_INGOT",
-     "qty": 3600
+     "id": "ENCHANTED_IRON",
+     "qty": 128
     }
    ],
    "9": [
     {
-     "id": "IRON_INGOT",
-     "qty": 4320
+     "id": "ENCHANTED_IRON",
+     "qty": 256
     }
    ],
    "10": [
     {
-     "id": "IRON_INGOT",
-     "qty": 4320
+     "id": "ENCHANTED_IRON",
+     "qty": 512
     }
    ],
    "11": [
     {
-     "id": "IRON_INGOT",
-     "qty": 5400
-    }
-   ],
-   "12": [
-    {
-     "id": "IRON_INGOT",
-     "qty": 6171
+     "id": "ENCHANTED_IRON_BLOCK",
+     "qty": 8
     }
    ]
   },
   "JUNGLE": {
    "1": [
     {
+     "id": "LOG",
+     "qty": 1
+    },
+    {
      "id": "LOG:3",
-     "qty": 3600
+     "qty": 80
     }
    ],
    "2": [
     {
      "id": "LOG:3",
-     "qty": 3600
+     "qty": 160
     }
    ],
    "3": [
     {
      "id": "LOG:3",
-     "qty": 3840
+     "qty": 320
     }
    ],
    "4": [
     {
      "id": "LOG:3",
-     "qty": 3840
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "LOG:3",
-     "qty": 4114
+     "id": "ENCHANTED_JUNGLE_LOG",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "LOG:3",
-     "qty": 4114
+     "id": "ENCHANTED_JUNGLE_LOG",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "id": "LOG:3",
-     "qty": 4547
+     "id": "ENCHANTED_JUNGLE_LOG",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "id": "LOG:3",
-     "qty": 4547
+     "id": "ENCHANTED_JUNGLE_LOG",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "id": "LOG:3",
-     "qty": 5236
+     "id": "ENCHANTED_JUNGLE_LOG",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "id": "LOG:3",
-     "qty": 5236
+     "id": "ENCHANTED_JUNGLE_LOG",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "id": "LOG:3",
-     "qty": 6400
+     "id": "ENCHANTED_JUNGLE_LOG",
+     "qty": 512
     }
    ]
   },
   "LAPIS": {
    "1": [
     {
+     "id": "LOG",
+     "qty": 1
+    },
+    {
      "id": "INK_SACK:4",
-     "qty": 8938
+     "qty": 256
     }
    ],
    "2": [
     {
      "id": "INK_SACK:4",
-     "qty": 8938
+     "qty": 512
     }
    ],
    "3": [
     {
-     "id": "INK_SACK:4",
-     "qty": 9600
+     "id": "ENCHANTED_LAPIS_LAZULI",
+     "qty": 8
     }
    ],
    "4": [
     {
-     "id": "INK_SACK:4",
-     "qty": 9600
+     "id": "ENCHANTED_LAPIS_LAZULI",
+     "qty": 24
     }
    ],
    "5": [
     {
-     "id": "INK_SACK:4",
-     "qty": 10368
+     "id": "ENCHANTED_LAPIS_LAZULI",
+     "qty": 64
     }
    ],
    "6": [
     {
-     "id": "INK_SACK:4",
-     "qty": 10368
+     "id": "ENCHANTED_LAPIS_LAZULI",
+     "qty": 128
     }
    ],
    "7": [
     {
-     "id": "INK_SACK:4",
-     "qty": 11270
+     "id": "ENCHANTED_LAPIS_LAZULI",
+     "qty": 256
     }
    ],
    "8": [
     {
-     "id": "INK_SACK:4",
-     "qty": 11270
+     "id": "ENCHANTED_LAPIS_LAZULI",
+     "qty": 512
     }
    ],
    "9": [
     {
-     "id": "INK_SACK:4",
-     "qty": 12343
+     "id": "ENCHANTED_LAPIS_LAZULI_BLOCK",
+     "qty": 8
     }
    ],
    "10": [
     {
-     "id": "INK_SACK:4",
-     "qty": 12343
+     "id": "ENCHANTED_LAPIS_LAZULI_BLOCK",
+     "qty": 16
     }
    ],
    "11": [
     {
-     "id": "INK_SACK:4",
-     "qty": 14400
-    }
-   ],
-   "12": [
-    {
-     "id": "INK_SACK:4",
-     "qty": 16200
+     "id": "ENCHANTED_LAPIS_LAZULI_BLOCK",
+     "qty": 32
     }
    ]
   },
@@ -2519,73 +2194,71 @@
    "1": [
     {
      "id": "MAGMA_CREAM",
-     "qty": 2430
+     "qty": 80
+    },
+    {
+     "id": "LOG",
+     "qty": 1
     }
    ],
    "2": [
     {
      "id": "MAGMA_CREAM",
-     "qty": 2430
+     "qty": 160
     }
    ],
    "3": [
     {
      "id": "MAGMA_CREAM",
-     "qty": 2592
+     "qty": 320
     }
    ],
    "4": [
     {
      "id": "MAGMA_CREAM",
-     "qty": 2592
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "MAGMA_CREAM",
-     "qty": 2777
+     "id": "ENCHANTED_MAGMA_CREAM",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "MAGMA_CREAM",
-     "qty": 2777
+     "id": "ENCHANTED_MAGMA_CREAM",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "id": "MAGMA_CREAM",
-     "qty": 3110
+     "id": "ENCHANTED_MAGMA_CREAM",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "id": "MAGMA_CREAM",
-     "qty": 3110
+     "id": "ENCHANTED_MAGMA_CREAM",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "id": "MAGMA_CREAM",
-     "qty": 3535
+     "id": "ENCHANTED_MAGMA_CREAM",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "id": "MAGMA_CREAM",
-     "qty": 3535
+     "id": "ENCHANTED_MAGMA_CREAM",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "id": "MAGMA_CREAM",
-     "qty": 4320
-    }
-   ],
-   "12": [
-    {
-     "id": "MAGMA_CREAM",
-     "qty": 4860
+     "id": "ENCHANTED_MAGMA_CREAM",
+     "qty": 512
     }
    ]
   },
@@ -2593,343 +2266,293 @@
    "1": [
     {
      "id": "MELON",
-     "qty": 9000
+     "qty": 256
+    },
+    {
+     "id": "LOG",
+     "qty": 1
     }
    ],
    "2": [
     {
      "id": "MELON",
-     "qty": 9000
+     "qty": 512
     }
    ],
    "3": [
     {
-     "id": "MELON",
-     "qty": 9600
+     "id": "MELON_BLOCK",
+     "qty": 128
     }
    ],
    "4": [
     {
-     "id": "MELON",
-     "qty": 9600
+     "id": "MELON_BLOCK",
+     "qty": 256
     }
    ],
    "5": [
     {
-     "id": "MELON",
-     "qty": 10286
+     "id": "MELON_BLOCK",
+     "qty": 512
     }
    ],
    "6": [
     {
-     "id": "MELON",
-     "qty": 10286
+     "id": "ENCHANTED_MELON",
+     "qty": 64
     }
    ],
    "7": [
     {
-     "id": "MELON",
-     "qty": 11676
+     "id": "ENCHANTED_MELON",
+     "qty": 128
     }
    ],
    "8": [
     {
-     "id": "MELON",
-     "qty": 11676
+     "id": "ENCHANTED_MELON",
+     "qty": 256
     }
    ],
    "9": [
     {
-     "id": "MELON",
-     "qty": 13500
+     "id": "ENCHANTED_MELON",
+     "qty": 512
     }
    ],
    "10": [
     {
-     "id": "MELON",
-     "qty": 13500
+     "id": "ENCHANTED_MELON_BLOCK",
+     "qty": 8
     }
    ],
    "11": [
     {
-     "id": "MELON",
-     "qty": 16615
-    }
-   ],
-   "12": [
-    {
-     "id": "MELON",
-     "qty": 21600
+     "id": "ENCHANTED_MELON_BLOCK",
+     "qty": 16
     }
    ]
   },
   "MITHRIL": {
    "1": [
     {
+     "id": "LOG",
+     "qty": 1
+    },
+    {
      "id": "MITHRIL_ORE",
-     "qty": 1080
+     "qty": 80
     }
    ],
    "2": [
     {
      "id": "MITHRIL_ORE",
-     "qty": 1080
+     "qty": 160
     }
    ],
    "3": [
     {
      "id": "MITHRIL_ORE",
-     "qty": 1152
+     "qty": 320
     }
    ],
    "4": [
     {
      "id": "MITHRIL_ORE",
-     "qty": 1152
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "MITHRIL_ORE",
-     "qty": 1234
+     "id": "ENCHANTED_MITHRIL",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "MITHRIL_ORE",
-     "qty": 1234
+     "id": "ENCHANTED_MITHRIL",
+     "qty": 24
     }
    ],
    "7": [
     {
-     "id": "MITHRIL_ORE",
-     "qty": 1329
+     "id": "ENCHANTED_MITHRIL",
+     "qty": 64
     }
    ],
    "8": [
     {
-     "id": "MITHRIL_ORE",
-     "qty": 1329
+     "id": "ENCHANTED_MITHRIL",
+     "qty": 128
     }
    ],
    "9": [
     {
-     "id": "MITHRIL_ORE",
-     "qty": 1440
+     "id": "ENCHANTED_MITHRIL",
+     "qty": 256
     }
    ],
    "10": [
     {
-     "id": "MITHRIL_ORE",
-     "qty": 1440
+     "id": "ENCHANTED_MITHRIL",
+     "qty": 512
     }
    ],
    "11": [
     {
-     "id": "MITHRIL_ORE",
-     "qty": 1571
-    }
-   ],
-   "12": [
-    {
-     "id": "MITHRIL_ORE",
-     "qty": 1728
+     "id": "REFINED_MITHRIL",
+     "qty": 8
     }
    ]
   },
   "MUSHROOM": {
    "1": [
     {
-     "id": "BROWN_MUSHROOM",
-     "qty": 720
+     "id": "LOG",
+     "qty": 1
     },
     {
      "id": "RED_MUSHROOM",
-     "qty": 720
+     "qty": 80
     }
    ],
    "2": [
     {
-     "id": "BROWN_MUSHROOM",
-     "qty": 720
-    },
-    {
      "id": "RED_MUSHROOM",
-     "qty": 720
+     "qty": 160
     }
    ],
    "3": [
     {
-     "id": "BROWN_MUSHROOM",
-     "qty": 771
-    },
-    {
      "id": "RED_MUSHROOM",
-     "qty": 771
+     "qty": 320
     }
    ],
    "4": [
     {
-     "id": "BROWN_MUSHROOM",
-     "qty": 771
-    },
-    {
      "id": "RED_MUSHROOM",
-     "qty": 771
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "BROWN_MUSHROOM",
-     "qty": 831
-    },
-    {
-     "id": "RED_MUSHROOM",
-     "qty": 831
+     "id": "ENCHANTED_RED_MUSHROOM",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "BROWN_MUSHROOM",
-     "qty": 831
-    },
-    {
-     "id": "RED_MUSHROOM",
-     "qty": 831
+     "id": "ENCHANTED_RED_MUSHROOM",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "id": "BROWN_MUSHROOM",
-     "qty": 939
-    },
-    {
-     "id": "RED_MUSHROOM",
-     "qty": 939
+     "id": "ENCHANTED_RED_MUSHROOM",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "id": "BROWN_MUSHROOM",
-     "qty": 939
-    },
-    {
-     "id": "RED_MUSHROOM",
-     "qty": 939
+     "id": "ENCHANTED_RED_MUSHROOM",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "id": "BROWN_MUSHROOM",
-     "qty": 1080
-    },
-    {
-     "id": "RED_MUSHROOM",
-     "qty": 1080
+     "id": "ENCHANTED_RED_MUSHROOM",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "id": "BROWN_MUSHROOM",
-     "qty": 1080
-    },
-    {
-     "id": "RED_MUSHROOM",
-     "qty": 1080
+     "id": "ENCHANTED_RED_MUSHROOM",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "id": "BROWN_MUSHROOM",
-     "qty": 1350
-    },
-    {
-     "id": "RED_MUSHROOM",
-     "qty": 1350
+     "id": "ENCHANTED_RED_MUSHROOM",
+     "qty": 512
     }
    ],
    "12": [
     {
-     "id": "BROWN_MUSHROOM",
-     "qty": 1800
-    },
-    {
-     "id": "RED_MUSHROOM",
-     "qty": 1800
+     "id": "ENCHANTED_BROWN_MUSHROOM",
+     "qty": 512
     }
    ]
   },
   "MYCELIUM": {
    "1": [
     {
+     "id": "LOG",
+     "qty": 1
+    },
+    {
      "id": "MYCEL",
-     "qty": 1662
+     "qty": 80
     }
    ],
    "2": [
     {
      "id": "MYCEL",
-     "qty": 1728
+     "qty": 256
     }
    ],
    "3": [
     {
      "id": "MYCEL",
-     "qty": 1800
+     "qty": 512
     }
    ],
    "4": [
     {
-     "id": "MYCEL",
-     "qty": 1878
+     "id": "ENCHANTED_MYCELIUM",
+     "qty": 16
     }
    ],
    "5": [
     {
-     "id": "MYCEL",
-     "qty": 1964
+     "id": "ENCHANTED_MYCELIUM",
+     "qty": 32
     }
    ],
    "6": [
     {
-     "id": "MYCEL",
-     "qty": 2057
+     "id": "ENCHANTED_MYCELIUM",
+     "qty": 64
     }
    ],
    "7": [
     {
-     "id": "MYCEL",
-     "qty": 2160
+     "id": "ENCHANTED_MYCELIUM",
+     "qty": 128
     }
    ],
    "8": [
     {
-     "id": "MYCEL",
-     "qty": 2274
+     "id": "ENCHANTED_MYCELIUM",
+     "qty": 256
     }
    ],
    "9": [
     {
-     "id": "MYCEL",
-     "qty": 2400
+     "id": "ENCHANTED_MYCELIUM",
+     "qty": 512
     }
    ],
    "10": [
     {
-     "id": "MYCEL",
-     "qty": 2700
+     "id": "ENCHANTED_MYCELIUM_CUBE",
+     "qty": 8
     }
    ],
    "11": [
     {
-     "id": "MYCEL",
-     "qty": 3323
-    }
-   ],
-   "12": [
-    {
-     "id": "MYCEL",
-     "qty": 3927
+     "id": "ENCHANTED_MYCELIUM_CUBE",
+     "qty": 16
     }
    ]
   },
@@ -2937,73 +2560,71 @@
    "1": [
     {
      "id": "NETHER_STALK",
-     "qty": 2160
+     "qty": 80
+    },
+    {
+     "id": "LOG",
+     "qty": 1
     }
    ],
    "2": [
     {
      "id": "NETHER_STALK",
-     "qty": 2160
+     "qty": 160
     }
    ],
    "3": [
     {
      "id": "NETHER_STALK",
-     "qty": 2298
+     "qty": 320
     }
    ],
    "4": [
     {
      "id": "NETHER_STALK",
-     "qty": 2298
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "NETHER_STALK",
-     "qty": 2455
+     "id": "ENCHANTED_NETHER_STALK",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "NETHER_STALK",
-     "qty": 2455
+     "id": "ENCHANTED_NETHER_STALK",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "id": "NETHER_STALK",
-     "qty": 2634
+     "id": "ENCHANTED_NETHER_STALK",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "id": "NETHER_STALK",
-     "qty": 2634
+     "id": "ENCHANTED_NETHER_STALK",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "id": "NETHER_STALK",
-     "qty": 2842
+     "id": "ENCHANTED_NETHER_STALK",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "id": "NETHER_STALK",
-     "qty": 2842
+     "id": "ENCHANTED_NETHER_STALK",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "id": "NETHER_STALK",
-     "qty": 3375
-    }
-   ],
-   "12": [
-    {
-     "id": "NETHER_STALK",
-     "qty": 4000
+     "id": "ENCHANTED_NETHER_STALK",
+     "qty": 512
     }
    ]
   },
@@ -3011,141 +2632,143 @@
    "1": [
     {
      "id": "LOG",
-     "qty": 3600
+     "qty": 80
+    },
+    {
+     "id": "LOG",
+     "qty": 1
     }
    ],
    "2": [
     {
      "id": "LOG",
-     "qty": 3600
+     "qty": 160
     }
    ],
    "3": [
     {
      "id": "LOG",
-     "qty": 3840
+     "qty": 320
     }
    ],
    "4": [
     {
      "id": "LOG",
-     "qty": 3840
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "LOG",
-     "qty": 4114
+     "id": "ENCHANTED_OAK_LOG",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "LOG",
-     "qty": 4114
+     "id": "ENCHANTED_OAK_LOG",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "id": "LOG",
-     "qty": 4547
+     "id": "ENCHANTED_OAK_LOG",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "id": "LOG",
-     "qty": 4547
+     "id": "ENCHANTED_OAK_LOG",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "id": "LOG",
-     "qty": 5236
+     "id": "ENCHANTED_OAK_LOG",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "id": "LOG",
-     "qty": 5236
+     "id": "ENCHANTED_OAK_LOG",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "id": "LOG",
-     "qty": 6400
+     "id": "ENCHANTED_OAK_LOG",
+     "qty": 512
     }
    ]
   },
   "OBSIDIAN": {
    "1": [
     {
+     "id": "LOG",
+     "qty": 1
+    },
+    {
      "id": "OBSIDIAN",
-     "qty": 960
+     "qty": 80
     }
    ],
    "2": [
     {
      "id": "OBSIDIAN",
-     "qty": 960
+     "qty": 160
     }
    ],
    "3": [
     {
      "id": "OBSIDIAN",
-     "qty": 1029
+     "qty": 320
     }
    ],
    "4": [
     {
      "id": "OBSIDIAN",
-     "qty": 1029
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "OBSIDIAN",
-     "qty": 1108
+     "id": "ENCHANTED_OBSIDIAN",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "OBSIDIAN",
-     "qty": 1108
+     "id": "ENCHANTED_OBSIDIAN",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "id": "OBSIDIAN",
-     "qty": 1234
+     "id": "ENCHANTED_OBSIDIAN",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "id": "OBSIDIAN",
-     "qty": 1234
+     "id": "ENCHANTED_OBSIDIAN",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "id": "OBSIDIAN",
-     "qty": 1440
+     "id": "ENCHANTED_OBSIDIAN",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "id": "OBSIDIAN",
-     "qty": 1440
+     "id": "ENCHANTED_OBSIDIAN",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "id": "OBSIDIAN",
-     "qty": 1800
-    }
-   ],
-   "12": [
-    {
-     "id": "OBSIDIAN",
-     "qty": 2057
+     "id": "ENCHANTED_OBSIDIAN",
+     "qty": 512
     }
    ]
   },
@@ -3153,73 +2776,71 @@
    "1": [
     {
      "id": "PORK",
-     "qty": 1662
+     "qty": 64
+    },
+    {
+     "id": "LOG",
+     "qty": 1
     }
    ],
    "2": [
     {
      "id": "PORK",
-     "qty": 1662
+     "qty": 128
     }
    ],
    "3": [
     {
      "id": "PORK",
-     "qty": 1800
+     "qty": 256
     }
    ],
    "4": [
     {
      "id": "PORK",
-     "qty": 1800
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "PORK",
-     "qty": 1964
+     "id": "ENCHANTED_PORK",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "PORK",
-     "qty": 1964
+     "id": "ENCHANTED_PORK",
+     "qty": 24
     }
    ],
    "7": [
     {
-     "id": "PORK",
-     "qty": 2160
+     "id": "ENCHANTED_PORK",
+     "qty": 64
     }
    ],
    "8": [
     {
-     "id": "PORK",
-     "qty": 2160
+     "id": "ENCHANTED_PORK",
+     "qty": 128
     }
    ],
    "9": [
     {
-     "id": "PORK",
-     "qty": 2541
+     "id": "ENCHANTED_PORK",
+     "qty": 256
     }
    ],
    "10": [
     {
-     "id": "PORK",
-     "qty": 2541
+     "id": "ENCHANTED_PORK",
+     "qty": 512
     }
    ],
    "11": [
     {
-     "id": "PORK",
-     "qty": 3323
-    }
-   ],
-   "12": [
-    {
-     "id": "PORK",
-     "qty": 4320
+     "id": "ENCHANTED_GRILLED_PORK",
+     "qty": 8
     }
    ]
   },
@@ -3227,73 +2848,71 @@
    "1": [
     {
      "id": "POTATO_ITEM",
-     "qty": 6480
+     "qty": 128
+    },
+    {
+     "id": "LOG",
+     "qty": 1
     }
    ],
    "2": [
     {
      "id": "POTATO_ITEM",
-     "qty": 6480
+     "qty": 256
     }
    ],
    "3": [
     {
      "id": "POTATO_ITEM",
-     "qty": 7200
+     "qty": 512
     }
    ],
    "4": [
     {
-     "id": "POTATO_ITEM",
-     "qty": 7200
+     "id": "ENCHANTED_POTATO",
+     "qty": 8
     }
    ],
    "5": [
     {
-     "id": "POTATO_ITEM",
-     "qty": 8100
+     "id": "ENCHANTED_POTATO",
+     "qty": 24
     }
    ],
    "6": [
     {
-     "id": "POTATO_ITEM",
-     "qty": 8100
+     "id": "ENCHANTED_POTATO",
+     "qty": 64
     }
    ],
    "7": [
     {
-     "id": "POTATO_ITEM",
-     "qty": 9257
+     "id": "ENCHANTED_POTATO",
+     "qty": 128
     }
    ],
    "8": [
     {
-     "id": "POTATO_ITEM",
-     "qty": 9257
+     "id": "ENCHANTED_POTATO",
+     "qty": 256
     }
    ],
    "9": [
     {
-     "id": "POTATO_ITEM",
-     "qty": 10800
+     "id": "ENCHANTED_POTATO",
+     "qty": 512
     }
    ],
    "10": [
     {
-     "id": "POTATO_ITEM",
-     "qty": 10800
+     "id": "ENCHANTED_BAKED_POTATO",
+     "qty": 8
     }
    ],
    "11": [
     {
-     "id": "POTATO_ITEM",
-     "qty": 12960
-    }
-   ],
-   "12": [
-    {
-     "id": "POTATO_ITEM",
-     "qty": 16200
+     "id": "ENCHANTED_BAKED_POTATO",
+     "qty": 16
     }
    ]
   },
@@ -3301,317 +2920,215 @@
    "1": [
     {
      "id": "PUMPKIN",
-     "qty": 1350
+     "qty": 80
+    },
+    {
+     "id": "LOG",
+     "qty": 1
     }
    ],
    "2": [
     {
      "id": "PUMPKIN",
-     "qty": 1350
+     "qty": 160
     }
    ],
    "3": [
     {
      "id": "PUMPKIN",
-     "qty": 1440
+     "qty": 320
     }
    ],
    "4": [
     {
      "id": "PUMPKIN",
-     "qty": 1440
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "PUMPKIN",
-     "qty": 1600
+     "id": "ENCHANTED_PUMPKIN",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "PUMPKIN",
-     "qty": 1600
+     "id": "ENCHANTED_PUMPKIN",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "id": "PUMPKIN",
-     "qty": 1800
+     "id": "ENCHANTED_PUMPKIN",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "id": "PUMPKIN",
-     "qty": 1800
+     "id": "ENCHANTED_PUMPKIN",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "id": "PUMPKIN",
-     "qty": 2160
+     "id": "ENCHANTED_PUMPKIN",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "id": "PUMPKIN",
-     "qty": 2160
+     "id": "ENCHANTED_PUMPKIN",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "id": "PUMPKIN",
-     "qty": 2700
-    }
-   ],
-   "12": [
-    {
-     "id": "PUMPKIN",
-     "qty": 3600
+     "id": "ENCHANTED_PUMPKIN",
+     "qty": 512
     }
    ]
   },
   "QUARTZ": {
    "1": [
     {
+     "id": "LOG",
+     "qty": 1
+    },
+    {
      "id": "QUARTZ",
-     "qty": 1920
+     "qty": 80
     }
    ],
    "2": [
     {
      "id": "QUARTZ",
-     "qty": 1920
+     "qty": 160
     }
    ],
    "3": [
     {
      "id": "QUARTZ",
-     "qty": 2057
+     "qty": 320
     }
    ],
    "4": [
     {
      "id": "QUARTZ",
-     "qty": 2057
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "QUARTZ",
-     "qty": 2274
+     "id": "ENCHANTED_QUARTZ",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "QUARTZ",
-     "qty": 2274
+     "id": "ENCHANTED_QUARTZ",
+     "qty": 24
     }
    ],
    "7": [
     {
-     "id": "QUARTZ",
-     "qty": 2541
+     "id": "ENCHANTED_QUARTZ",
+     "qty": 64
     }
    ],
    "8": [
     {
-     "id": "QUARTZ",
-     "qty": 2541
+     "id": "ENCHANTED_QUARTZ",
+     "qty": 128
     }
    ],
    "9": [
     {
-     "id": "QUARTZ",
-     "qty": 2979
+     "id": "ENCHANTED_QUARTZ",
+     "qty": 256
     }
    ],
    "10": [
     {
-     "id": "QUARTZ",
-     "qty": 2979
+     "id": "ENCHANTED_QUARTZ",
+     "qty": 512
     }
    ],
    "11": [
     {
-     "id": "QUARTZ",
-     "qty": 3757
-    }
-   ],
-   "12": [
-    {
-     "id": "QUARTZ",
-     "qty": 4320
+     "id": "ENCHANTED_QUARTZ_BLOCK",
+     "qty": 8
     }
    ]
   },
   "RABBIT": {
    "1": [
     {
+     "id": "LOG",
+     "qty": 1
+    },
+    {
      "id": "RABBIT",
-     "qty": 1662
-    },
-    {
-     "id": "RABBIT_FOOT",
-     "qty": 582
-    },
-    {
-     "id": "RABBIT_HIDE",
-     "qty": 582
+     "qty": 64
     }
    ],
    "2": [
     {
      "id": "RABBIT",
-     "qty": 1662
-    },
-    {
-     "id": "RABBIT_FOOT",
-     "qty": 582
-    },
-    {
-     "id": "RABBIT_HIDE",
-     "qty": 582
+     "qty": 128
     }
    ],
    "3": [
     {
      "id": "RABBIT",
-     "qty": 1800
-    },
-    {
-     "id": "RABBIT_FOOT",
-     "qty": 630
-    },
-    {
-     "id": "RABBIT_HIDE",
-     "qty": 630
+     "qty": 256
     }
    ],
    "4": [
     {
      "id": "RABBIT",
-     "qty": 1800
-    },
-    {
-     "id": "RABBIT_FOOT",
-     "qty": 630
-    },
-    {
-     "id": "RABBIT_HIDE",
-     "qty": 630
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "RABBIT",
-     "qty": 1964
-    },
-    {
-     "id": "RABBIT_FOOT",
-     "qty": 687
-    },
-    {
-     "id": "RABBIT_HIDE",
-     "qty": 687
+     "id": "ENCHANTED_RABBIT",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "RABBIT",
-     "qty": 1964
-    },
-    {
-     "id": "RABBIT_FOOT",
-     "qty": 687
-    },
-    {
-     "id": "RABBIT_HIDE",
-     "qty": 687
+     "id": "ENCHANTED_RABBIT",
+     "qty": 24
     }
    ],
    "7": [
     {
-     "id": "RABBIT",
-     "qty": 2160
-    },
-    {
-     "id": "RABBIT_FOOT",
-     "qty": 756
-    },
-    {
-     "id": "RABBIT_HIDE",
-     "qty": 756
+     "id": "ENCHANTED_RABBIT",
+     "qty": 64
     }
    ],
    "8": [
     {
-     "id": "RABBIT",
-     "qty": 2160
-    },
-    {
-     "id": "RABBIT_FOOT",
-     "qty": 756
-    },
-    {
-     "id": "RABBIT_HIDE",
-     "qty": 756
+     "id": "ENCHANTED_RABBIT",
+     "qty": 128
     }
    ],
    "9": [
     {
-     "id": "RABBIT",
-     "qty": 2541
-    },
-    {
-     "id": "RABBIT_FOOT",
-     "qty": 889
-    },
-    {
-     "id": "RABBIT_HIDE",
-     "qty": 889
+     "id": "ENCHANTED_RABBIT",
+     "qty": 256
     }
    ],
    "10": [
     {
-     "id": "RABBIT",
-     "qty": 2541
-    },
-    {
-     "id": "RABBIT_FOOT",
-     "qty": 889
-    },
-    {
-     "id": "RABBIT_HIDE",
-     "qty": 889
+     "id": "ENCHANTED_RABBIT",
+     "qty": 512
     }
    ],
    "11": [
     {
-     "id": "RABBIT",
-     "qty": 3323
-    },
-    {
-     "id": "RABBIT_FOOT",
-     "qty": 1163
-    },
-    {
-     "id": "RABBIT_HIDE",
-     "qty": 1163
-    }
-   ],
-   "12": [
-    {
-     "id": "RABBIT",
-     "qty": 4320
-    },
-    {
-     "id": "RABBIT_FOOT",
-     "qty": 1512
-    },
-    {
-     "id": "RABBIT_HIDE",
-     "qty": 1512
+     "id": "ENCHANTED_COOKED_RABBIT",
+     "qty": 8
     }
    ]
   },
@@ -3619,337 +3136,327 @@
    "1": [
     {
      "id": "SAND:1",
-     "qty": 1662
+     "qty": 80
+    },
+    {
+     "id": "LOG",
+     "qty": 1
     }
    ],
    "2": [
     {
      "id": "SAND:1",
-     "qty": 1728
+     "qty": 256
     }
    ],
    "3": [
     {
      "id": "SAND:1",
-     "qty": 1800
+     "qty": 512
     }
    ],
    "4": [
     {
-     "id": "SAND:1",
-     "qty": 1878
+     "id": "ENCHANTED_RED_SAND",
+     "qty": 16
     }
    ],
    "5": [
     {
-     "id": "SAND:1",
-     "qty": 1964
+     "id": "ENCHANTED_RED_SAND",
+     "qty": 32
     }
    ],
    "6": [
     {
-     "id": "SAND:1",
-     "qty": 2057
+     "id": "ENCHANTED_RED_SAND",
+     "qty": 64
     }
    ],
    "7": [
     {
-     "id": "SAND:1",
-     "qty": 2160
+     "id": "ENCHANTED_RED_SAND",
+     "qty": 128
     }
    ],
    "8": [
     {
-     "id": "SAND:1",
-     "qty": 2274
+     "id": "ENCHANTED_RED_SAND",
+     "qty": 256
     }
    ],
    "9": [
     {
-     "id": "SAND:1",
-     "qty": 2400
+     "id": "ENCHANTED_RED_SAND",
+     "qty": 512
     }
    ],
    "10": [
     {
-     "id": "SAND:1",
-     "qty": 2700
+     "id": "ENCHANTED_RED_SAND_CUBE",
+     "qty": 8
     }
    ],
    "11": [
     {
-     "id": "SAND:1",
-     "qty": 3323
-    }
-   ],
-   "12": [
-    {
-     "id": "SAND:1",
-     "qty": 3927
+     "id": "ENCHANTED_RED_SAND_CUBE",
+     "qty": 16
     }
    ]
   },
   "REDSTONE": {
    "1": [
     {
+     "id": "LOG",
+     "qty": 1
+    },
+    {
      "id": "REDSTONE",
-     "qty": 6703
+     "qty": 128
     }
    ],
    "2": [
     {
      "id": "REDSTONE",
-     "qty": 6703
+     "qty": 256
     }
    ],
    "3": [
     {
      "id": "REDSTONE",
-     "qty": 7200
+     "qty": 512
     }
    ],
    "4": [
     {
-     "id": "REDSTONE",
-     "qty": 7200
+     "id": "ENCHANTED_REDSTONE",
+     "qty": 8
     }
    ],
    "5": [
     {
-     "id": "REDSTONE",
-     "qty": 7776
+     "id": "ENCHANTED_REDSTONE",
+     "qty": 24
     }
    ],
    "6": [
     {
-     "id": "REDSTONE",
-     "qty": 7776
+     "id": "ENCHANTED_REDSTONE",
+     "qty": 64
     }
    ],
    "7": [
     {
-     "id": "REDSTONE",
-     "qty": 8452
+     "id": "ENCHANTED_REDSTONE",
+     "qty": 128
     }
    ],
    "8": [
     {
-     "id": "REDSTONE",
-     "qty": 8452
+     "id": "ENCHANTED_REDSTONE",
+     "qty": 256
     }
    ],
    "9": [
     {
-     "id": "REDSTONE",
-     "qty": 9257
+     "id": "ENCHANTED_REDSTONE",
+     "qty": 512
     }
    ],
    "10": [
     {
-     "id": "REDSTONE",
-     "qty": 9257
+     "id": "ENCHANTED_REDSTONE_BLOCK",
+     "qty": 8
     }
    ],
    "11": [
     {
-     "id": "REDSTONE",
-     "qty": 10800
-    }
-   ],
-   "12": [
-    {
-     "id": "REDSTONE",
-     "qty": 12150
+     "id": "ENCHANTED_REDSTONE_BLOCK",
+     "qty": 16
     }
    ]
   },
   "REVENANT": {
-   "1": [
-    {
-     "id": "ROTTEN_FLESH",
-     "qty": 4469
-    },
-    {
-     "id": "DIAMOND",
-     "qty": 298
-    }
-   ],
-   "2": [
-    {
-     "id": "ROTTEN_FLESH",
-     "qty": 4469
-    },
-    {
-     "id": "DIAMOND",
-     "qty": 298
-    }
-   ],
-   "3": [
-    {
-     "id": "ROTTEN_FLESH",
-     "qty": 4985
-    },
-    {
-     "id": "DIAMOND",
-     "qty": 332
-    }
-   ],
-   "4": [
-    {
-     "id": "ROTTEN_FLESH",
-     "qty": 4985
-    },
-    {
-     "id": "DIAMOND",
-     "qty": 332
-    }
-   ],
-   "5": [
-    {
-     "id": "ROTTEN_FLESH",
-     "qty": 5635
-    },
-    {
-     "id": "DIAMOND",
-     "qty": 376
-    }
-   ],
-   "6": [
-    {
-     "id": "ROTTEN_FLESH",
-     "qty": 5635
-    },
-    {
-     "id": "DIAMOND",
-     "qty": 376
-    }
-   ],
-   "7": [
-    {
-     "id": "ROTTEN_FLESH",
-     "qty": 6821
-    },
-    {
-     "id": "DIAMOND",
-     "qty": 455
-    }
-   ],
-   "8": [
-    {
-     "id": "ROTTEN_FLESH",
-     "qty": 6821
-    },
-    {
-     "id": "DIAMOND",
-     "qty": 455
-    }
-   ],
-   "9": [
-    {
-     "id": "ROTTEN_FLESH",
-     "qty": 8938
-    },
-    {
-     "id": "DIAMOND",
-     "qty": 596
-    }
-   ],
-   "10": [
-    {
-     "id": "ROTTEN_FLESH",
-     "qty": 8938
-    },
-    {
-     "id": "DIAMOND",
-     "qty": 596
-    }
-   ],
-   "11": [
-    {
-     "id": "ROTTEN_FLESH",
-     "qty": 12960
-    },
-    {
-     "id": "DIAMOND",
-     "qty": 864
-    }
-   ],
-   "12": [
-    {
-     "id": "ROTTEN_FLESH",
-     "qty": 16200
-    },
-    {
-     "id": "DIAMOND",
-     "qty": 1080
-    }
-   ]
+   "2": {
+    "items": [
+     {
+      "id": "REVENANT_FLESH",
+      "qty": 140
+     }
+    ],
+    "requires": [
+     "minion_ZOMBIE_1"
+    ]
+   },
+   "3": {
+    "items": [
+     {
+      "id": "REVENANT_FLESH",
+      "qty": 280
+     }
+    ],
+    "requires": [
+     "minion_ZOMBIE_2"
+    ]
+   },
+   "4": {
+    "items": [
+     {
+      "id": "REVENANT_FLESH",
+      "qty": 448
+     }
+    ],
+    "requires": [
+     "minion_ZOMBIE_3"
+    ]
+   },
+   "5": {
+    "items": [
+     {
+      "id": "REVENANT_VISCERA",
+      "qty": 7
+     }
+    ],
+    "requires": [
+     "minion_ZOMBIE_4"
+    ]
+   },
+   "6": {
+    "items": [
+     {
+      "id": "REVENANT_VISCERA",
+      "qty": 14
+     }
+    ],
+    "requires": [
+     "minion_ZOMBIE_5"
+    ]
+   },
+   "7": {
+    "items": [
+     {
+      "id": "REVENANT_VISCERA",
+      "qty": 28
+     }
+    ],
+    "requires": [
+     "minion_ZOMBIE_6"
+    ]
+   },
+   "8": {
+    "items": [
+     {
+      "id": "REVENANT_VISCERA",
+      "qty": 56
+     }
+    ],
+    "requires": [
+     "minion_ZOMBIE_7"
+    ]
+   },
+   "9": {
+    "items": [
+     {
+      "id": "REVENANT_VISCERA",
+      "qty": 112
+     }
+    ],
+    "requires": [
+     "minion_ZOMBIE_8"
+    ]
+   },
+   "10": {
+    "items": [
+     {
+      "id": "REVENANT_VISCERA",
+      "qty": 224
+     }
+    ],
+    "requires": [
+     "minion_ZOMBIE_9"
+    ]
+   },
+   "11": {
+    "items": [
+     {
+      "id": "REVENANT_VISCERA",
+      "qty": 448
+     }
+    ],
+    "requires": [
+     "minion_ZOMBIE_10"
+    ]
+   }
   },
   "SAND": {
    "1": [
     {
+     "id": "LOG",
+     "qty": 1
+    },
+    {
      "id": "SAND",
-     "qty": 1662
+     "qty": 80
     }
    ],
    "2": [
     {
      "id": "SAND",
-     "qty": 1662
+     "qty": 160
     }
    ],
    "3": [
     {
      "id": "SAND",
-     "qty": 1800
+     "qty": 320
     }
    ],
    "4": [
     {
      "id": "SAND",
-     "qty": 1800
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "SAND",
-     "qty": 1964
+     "id": "ENCHANTED_SAND",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "SAND",
-     "qty": 1964
+     "id": "ENCHANTED_SAND",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "id": "SAND",
-     "qty": 2274
+     "id": "ENCHANTED_SAND",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "id": "SAND",
-     "qty": 2274
+     "id": "ENCHANTED_SAND",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "id": "SAND",
-     "qty": 2700
+     "id": "ENCHANTED_SAND",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "id": "SAND",
-     "qty": 2700
+     "id": "ENCHANTED_SAND",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "id": "SAND",
-     "qty": 3323
+     "id": "ENCHANTED_SAND",
+     "qty": 512
     }
    ]
   },
@@ -3957,189 +3464,143 @@
    "1": [
     {
      "id": "MUTTON",
-     "qty": 1800
+     "qty": 64
     },
     {
-     "id": "WOOL",
-     "qty": 1800
+     "id": "LOG",
+     "qty": 1
     }
    ],
    "2": [
     {
      "id": "MUTTON",
-     "qty": 1800
-    },
-    {
-     "id": "WOOL",
-     "qty": 1800
+     "qty": 128
     }
    ],
    "3": [
     {
      "id": "MUTTON",
-     "qty": 1964
-    },
-    {
-     "id": "WOOL",
-     "qty": 1964
+     "qty": 256
     }
    ],
    "4": [
     {
      "id": "MUTTON",
-     "qty": 1964
-    },
-    {
-     "id": "WOOL",
-     "qty": 1964
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "MUTTON",
-     "qty": 2160
-    },
-    {
-     "id": "WOOL",
-     "qty": 2160
+     "id": "ENCHANTED_MUTTON",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "MUTTON",
-     "qty": 2160
-    },
-    {
-     "id": "WOOL",
-     "qty": 2160
+     "id": "ENCHANTED_MUTTON",
+     "qty": 24
     }
    ],
    "7": [
     {
-     "id": "MUTTON",
-     "qty": 2400
-    },
-    {
-     "id": "WOOL",
-     "qty": 2400
+     "id": "ENCHANTED_MUTTON",
+     "qty": 64
     }
    ],
    "8": [
     {
-     "id": "MUTTON",
-     "qty": 2400
-    },
-    {
-     "id": "WOOL",
-     "qty": 2400
+     "id": "ENCHANTED_MUTTON",
+     "qty": 128
     }
    ],
    "9": [
     {
-     "id": "MUTTON",
-     "qty": 2700
-    },
-    {
-     "id": "WOOL",
-     "qty": 2700
+     "id": "ENCHANTED_MUTTON",
+     "qty": 256
     }
    ],
    "10": [
     {
-     "id": "MUTTON",
-     "qty": 2700
-    },
-    {
-     "id": "WOOL",
-     "qty": 2700
+     "id": "ENCHANTED_MUTTON",
+     "qty": 512
     }
    ],
    "11": [
     {
-     "id": "MUTTON",
-     "qty": 3600
-    },
-    {
-     "id": "WOOL",
-     "qty": 3600
-    }
-   ],
-   "12": [
-    {
-     "id": "MUTTON",
-     "qty": 4800
-    },
-    {
-     "id": "WOOL",
-     "qty": 4800
+     "id": "ENCHANTED_COOKED_MUTTON",
+     "qty": 8
     }
    ]
   },
   "SKELETON": {
    "1": [
     {
+     "id": "LOG",
+     "qty": 1
+    },
+    {
      "id": "BONE",
-     "qty": 1662
+     "qty": 80
     }
    ],
    "2": [
     {
      "id": "BONE",
-     "qty": 1662
+     "qty": 160
     }
    ],
    "3": [
     {
      "id": "BONE",
-     "qty": 1800
+     "qty": 320
     }
    ],
    "4": [
     {
      "id": "BONE",
-     "qty": 1800
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "BONE",
-     "qty": 1964
+     "id": "ENCHANTED_BONE",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "BONE",
-     "qty": 1964
+     "id": "ENCHANTED_BONE",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "id": "BONE",
-     "qty": 2160
+     "id": "ENCHANTED_BONE",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "id": "BONE",
-     "qty": 2160
+     "id": "ENCHANTED_BONE",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "id": "BONE",
-     "qty": 2541
+     "id": "ENCHANTED_BONE",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "id": "BONE",
-     "qty": 2541
+     "id": "ENCHANTED_BONE",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "id": "BONE",
-     "qty": 3323
+     "id": "ENCHANTED_BONE",
+     "qty": 512
     }
    ]
   },
@@ -4147,141 +3608,133 @@
    "1": [
     {
      "id": "SLIME_BALL",
-     "qty": 2991
+     "qty": 80
+    },
+    {
+     "id": "LOG",
+     "qty": 1
     }
    ],
    "2": [
     {
      "id": "SLIME_BALL",
-     "qty": 2991
+     "qty": 160
     }
    ],
    "3": [
     {
      "id": "SLIME_BALL",
-     "qty": 3240
+     "qty": 320
     }
    ],
    "4": [
     {
      "id": "SLIME_BALL",
-     "qty": 3240
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "SLIME_BALL",
-     "qty": 3535
+     "id": "ENCHANTED_SLIME_BALL",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "SLIME_BALL",
-     "qty": 3535
+     "id": "ENCHANTED_SLIME_BALL",
+     "qty": 24
     }
    ],
    "7": [
     {
-     "id": "SLIME_BALL",
-     "qty": 4093
+     "id": "ENCHANTED_SLIME_BALL",
+     "qty": 64
     }
    ],
    "8": [
     {
-     "id": "SLIME_BALL",
-     "qty": 4093
+     "id": "ENCHANTED_SLIME_BALL",
+     "qty": 128
     }
    ],
    "9": [
     {
-     "id": "SLIME_BALL",
-     "qty": 4860
+     "id": "ENCHANTED_SLIME_BALL",
+     "qty": 256
     }
    ],
    "10": [
     {
-     "id": "SLIME_BALL",
-     "qty": 4860
+     "id": "ENCHANTED_SLIME_BALL",
+     "qty": 512
     }
    ],
    "11": [
     {
-     "id": "SLIME_BALL",
-     "qty": 6480
+     "id": "ENCHANTED_SLIME_BLOCK",
+     "qty": 8
     }
    ]
   },
   "SNOW": {
-   "1": [
-    {
-     "id": "SNOW_BALL",
-     "qty": 13292
-    }
-   ],
    "2": [
     {
-     "id": "SNOW_BALL",
-     "qty": 13292
+     "id": "SNOW_BLOCK",
+     "qty": 32
     }
    ],
    "3": [
     {
-     "id": "SNOW_BALL",
-     "qty": 14400
+     "id": "SNOW_BLOCK",
+     "qty": 64
     }
    ],
    "4": [
     {
-     "id": "SNOW_BALL",
-     "qty": 14400
+     "id": "SNOW_BLOCK",
+     "qty": 128
     }
    ],
    "5": [
     {
-     "id": "SNOW_BALL",
-     "qty": 15709
+     "id": "SNOW_BLOCK",
+     "qty": 256
     }
    ],
    "6": [
     {
-     "id": "SNOW_BALL",
-     "qty": 15709
+     "id": "SNOW_BLOCK",
+     "qty": 512
     }
    ],
    "7": [
     {
-     "id": "SNOW_BALL",
-     "qty": 18189
+     "id": "ENCHANTED_SNOW_BLOCK",
+     "qty": 8
     }
    ],
    "8": [
     {
-     "id": "SNOW_BALL",
-     "qty": 18189
+     "id": "ENCHANTED_SNOW_BLOCK",
+     "qty": 16
     }
    ],
    "9": [
     {
-     "id": "SNOW_BALL",
-     "qty": 21600
+     "id": "ENCHANTED_SNOW_BLOCK",
+     "qty": 32
     }
    ],
    "10": [
     {
-     "id": "SNOW_BALL",
-     "qty": 21600
+     "id": "ENCHANTED_SNOW_BLOCK",
+     "qty": 64
     }
    ],
    "11": [
     {
-     "id": "SNOW_BALL",
-     "qty": 26585
-    }
-   ],
-   "12": [
-    {
-     "id": "SNOW_BALL",
-     "qty": 29793
+     "id": "ENCHANTED_SNOW_BLOCK",
+     "qty": 128
     }
    ]
   },
@@ -4289,253 +3742,215 @@
    "1": [
     {
      "id": "STRING",
-     "qty": 1662
+     "qty": 80
     },
     {
-     "id": "SPIDER_EYE",
-     "qty": 831
+     "id": "LOG",
+     "qty": 1
     }
    ],
    "2": [
     {
      "id": "STRING",
-     "qty": 1662
-    },
-    {
-     "id": "SPIDER_EYE",
-     "qty": 831
+     "qty": 160
     }
    ],
    "3": [
     {
      "id": "STRING",
-     "qty": 1800
-    },
-    {
-     "id": "SPIDER_EYE",
-     "qty": 900
+     "qty": 320
     }
    ],
    "4": [
     {
      "id": "STRING",
-     "qty": 1800
-    },
-    {
-     "id": "SPIDER_EYE",
-     "qty": 900
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "STRING",
-     "qty": 1964
-    },
-    {
-     "id": "SPIDER_EYE",
-     "qty": 982
+     "id": "ENCHANTED_STRING",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "STRING",
-     "qty": 1964
-    },
-    {
-     "id": "SPIDER_EYE",
-     "qty": 982
+     "id": "ENCHANTED_STRING",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "id": "STRING",
-     "qty": 2160
-    },
-    {
-     "id": "SPIDER_EYE",
-     "qty": 1080
+     "id": "ENCHANTED_STRING",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "id": "STRING",
-     "qty": 2160
-    },
-    {
-     "id": "SPIDER_EYE",
-     "qty": 1080
+     "id": "ENCHANTED_STRING",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "id": "STRING",
-     "qty": 2541
-    },
-    {
-     "id": "SPIDER_EYE",
-     "qty": 1271
+     "id": "ENCHANTED_STRING",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "id": "STRING",
-     "qty": 2541
-    },
-    {
-     "id": "SPIDER_EYE",
-     "qty": 1271
+     "id": "ENCHANTED_STRING",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "id": "STRING",
-     "qty": 3323
-    },
-    {
-     "id": "SPIDER_EYE",
-     "qty": 1662
+     "id": "ENCHANTED_STRING",
+     "qty": 512
     }
    ]
   },
   "SPRUCE": {
    "1": [
     {
+     "id": "LOG",
+     "qty": 1
+    },
+    {
      "id": "LOG:1",
-     "qty": 3600
+     "qty": 80
     }
    ],
    "2": [
     {
      "id": "LOG:1",
-     "qty": 3600
+     "qty": 160
     }
    ],
    "3": [
     {
      "id": "LOG:1",
-     "qty": 3840
+     "qty": 320
     }
    ],
    "4": [
     {
      "id": "LOG:1",
-     "qty": 3840
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "LOG:1",
-     "qty": 4114
+     "id": "ENCHANTED_SPRUCE_LOG",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "LOG:1",
-     "qty": 4114
+     "id": "ENCHANTED_SPRUCE_LOG",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "id": "LOG:1",
-     "qty": 4547
+     "id": "ENCHANTED_SPRUCE_LOG",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "id": "LOG:1",
-     "qty": 4547
+     "id": "ENCHANTED_SPRUCE_LOG",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "id": "LOG:1",
-     "qty": 5236
+     "id": "ENCHANTED_SPRUCE_LOG",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "id": "LOG:1",
-     "qty": 5236
+     "id": "ENCHANTED_SPRUCE_LOG",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "id": "LOG:1",
-     "qty": 6400
+     "id": "ENCHANTED_SPRUCE_LOG",
+     "qty": 512
     }
    ]
   },
   "SUGAR_CANE": {
    "1": [
     {
+     "id": "LOG",
+     "qty": 1
+    },
+    {
      "id": "SUGAR_CANE",
-     "qty": 5891
+     "qty": 128
     }
    ],
    "2": [
     {
      "id": "SUGAR_CANE",
-     "qty": 5891
+     "qty": 256
     }
    ],
    "3": [
     {
      "id": "SUGAR_CANE",
-     "qty": 6480
+     "qty": 512
     }
    ],
    "4": [
     {
-     "id": "SUGAR_CANE",
-     "qty": 6480
+     "id": "ENCHANTED_SUGAR",
+     "qty": 8
     }
    ],
    "5": [
     {
-     "id": "SUGAR_CANE",
-     "qty": 7200
+     "id": "ENCHANTED_SUGAR",
+     "qty": 24
     }
    ],
    "6": [
     {
-     "id": "SUGAR_CANE",
-     "qty": 7200
+     "id": "ENCHANTED_SUGAR",
+     "qty": 64
     }
    ],
    "7": [
     {
-     "id": "SUGAR_CANE",
-     "qty": 8100
+     "id": "ENCHANTED_SUGAR",
+     "qty": 128
     }
    ],
    "8": [
     {
-     "id": "SUGAR_CANE",
-     "qty": 8100
+     "id": "ENCHANTED_SUGAR",
+     "qty": 256
     }
    ],
    "9": [
     {
-     "id": "SUGAR_CANE",
-     "qty": 8938
+     "id": "ENCHANTED_SUGAR",
+     "qty": 512
     }
    ],
    "10": [
     {
-     "id": "SUGAR_CANE",
-     "qty": 8938
+     "id": "ENCHANTED_SUGAR_CANE",
+     "qty": 8
     }
    ],
    "11": [
     {
-     "id": "SUGAR_CANE",
-     "qty": 10800
-    }
-   ],
-   "12": [
-    {
-     "id": "SUGAR_CANE",
-     "qty": 14400
+     "id": "ENCHANTED_SUGAR_CANE",
+     "qty": 16
     }
    ]
   },
@@ -4543,769 +3958,522 @@
    "1": [
     {
      "id": "DOUBLE_PLANT",
-     "qty": 5400
+     "qty": 128
     },
     {
-     "id": "MOONFLOWER",
-     "qty": 5400
+     "id": "LOG",
+     "qty": 1
     }
    ],
    "2": [
     {
      "id": "DOUBLE_PLANT",
-     "qty": 5635
-    },
-    {
-     "id": "MOONFLOWER",
-     "qty": 5635
+     "qty": 256
     }
    ],
    "3": [
     {
      "id": "DOUBLE_PLANT",
-     "qty": 5891
-    },
-    {
-     "id": "MOONFLOWER",
-     "qty": 5891
+     "qty": 512
     }
    ],
    "4": [
     {
-     "id": "DOUBLE_PLANT",
-     "qty": 6171
-    },
-    {
-     "id": "MOONFLOWER",
-     "qty": 6171
+     "id": "ENCHANTED_SUNFLOWER",
+     "qty": 8
     }
    ],
    "5": [
     {
-     "id": "DOUBLE_PLANT",
-     "qty": 6480
-    },
-    {
-     "id": "MOONFLOWER",
-     "qty": 6480
+     "id": "ENCHANTED_SUNFLOWER",
+     "qty": 24
     }
    ],
    "6": [
     {
-     "id": "DOUBLE_PLANT",
-     "qty": 6821
-    },
-    {
-     "id": "MOONFLOWER",
-     "qty": 6821
+     "id": "ENCHANTED_SUNFLOWER",
+     "qty": 64
     }
    ],
    "7": [
     {
-     "id": "DOUBLE_PLANT",
-     "qty": 7200
-    },
-    {
-     "id": "MOONFLOWER",
-     "qty": 7200
+     "id": "ENCHANTED_SUNFLOWER",
+     "qty": 128
     }
    ],
    "8": [
     {
-     "id": "DOUBLE_PLANT",
-     "qty": 7624
-    },
-    {
-     "id": "MOONFLOWER",
-     "qty": 7624
+     "id": "ENCHANTED_SUNFLOWER",
+     "qty": 256
     }
    ],
    "9": [
     {
-     "id": "DOUBLE_PLANT",
-     "qty": 8100
-    },
-    {
-     "id": "MOONFLOWER",
-     "qty": 8100
+     "id": "ENCHANTED_SUNFLOWER",
+     "qty": 512
     }
    ],
    "10": [
     {
-     "id": "DOUBLE_PLANT",
-     "qty": 8640
-    },
-    {
-     "id": "MOONFLOWER",
-     "qty": 8640
+     "id": "COMPACTED_SUNFLOWER",
+     "qty": 8
     }
    ],
    "11": [
     {
-     "id": "DOUBLE_PLANT",
-     "qty": 9257
-    },
-    {
-     "id": "MOONFLOWER",
-     "qty": 9257
+     "id": "COMPACTED_SUNFLOWER",
+     "qty": 16
     }
    ]
   },
   "TARANTULA": {
    "1": [
     {
-     "id": "STRING",
-     "qty": 4707
+     "id": "ENCHANTED_FERMENTED_SPIDER_EYE",
+     "qty": 1
     },
     {
-     "id": "SPIDER_EYE",
-     "qty": 1490
-    },
-    {
-     "id": "IRON_INGOT",
-     "qty": 298
+     "id": "TARANTULA_WEB",
+     "qty": 80
     }
    ],
-   "2": [
-    {
-     "id": "STRING",
-     "qty": 4707
-    },
-    {
-     "id": "SPIDER_EYE",
-     "qty": 1490
-    },
-    {
-     "id": "IRON_INGOT",
-     "qty": 298
-    }
-   ],
-   "3": [
-    {
-     "id": "STRING",
-     "qty": 5250
-    },
-    {
-     "id": "SPIDER_EYE",
-     "qty": 1662
-    },
-    {
-     "id": "IRON_INGOT",
-     "qty": 332
-    }
-   ],
-   "4": [
-    {
-     "id": "STRING",
-     "qty": 5250
-    },
-    {
-     "id": "SPIDER_EYE",
-     "qty": 1662
-    },
-    {
-     "id": "IRON_INGOT",
-     "qty": 332
-    }
-   ],
-   "5": [
-    {
-     "id": "STRING",
-     "qty": 5935
-    },
-    {
-     "id": "SPIDER_EYE",
-     "qty": 1878
-    },
-    {
-     "id": "IRON_INGOT",
-     "qty": 376
-    }
-   ],
-   "6": [
-    {
-     "id": "STRING",
-     "qty": 5935
-    },
-    {
-     "id": "SPIDER_EYE",
-     "qty": 1878
-    },
-    {
-     "id": "IRON_INGOT",
-     "qty": 376
-    }
-   ],
-   "7": [
-    {
-     "id": "STRING",
-     "qty": 7185
-    },
-    {
-     "id": "SPIDER_EYE",
-     "qty": 2274
-    },
-    {
-     "id": "IRON_INGOT",
-     "qty": 455
-    }
-   ],
-   "8": [
-    {
-     "id": "STRING",
-     "qty": 7185
-    },
-    {
-     "id": "SPIDER_EYE",
-     "qty": 2274
-    },
-    {
-     "id": "IRON_INGOT",
-     "qty": 455
-    }
-   ],
-   "9": [
-    {
-     "id": "STRING",
-     "qty": 9415
-    },
-    {
-     "id": "SPIDER_EYE",
-     "qty": 2979
-    },
-    {
-     "id": "IRON_INGOT",
-     "qty": 596
-    }
-   ],
-   "10": [
-    {
-     "id": "STRING",
-     "qty": 9415
-    },
-    {
-     "id": "SPIDER_EYE",
-     "qty": 2979
-    },
-    {
-     "id": "IRON_INGOT",
-     "qty": 596
-    }
-   ],
-   "11": [
-    {
-     "id": "STRING",
-     "qty": 13651
-    },
-    {
-     "id": "SPIDER_EYE",
-     "qty": 4320
-    },
-    {
-     "id": "IRON_INGOT",
-     "qty": 864
-    }
-   ]
+   "2": {
+    "items": [
+     {
+      "id": "TARANTULA_WEB",
+      "qty": 140
+     }
+    ],
+    "requires": [
+     "minion_SPIDER_1"
+    ]
+   },
+   "3": {
+    "items": [
+     {
+      "id": "TARANTULA_WEB",
+      "qty": 280
+     }
+    ],
+    "requires": [
+     "minion_SPIDER_2"
+    ]
+   },
+   "4": {
+    "items": [
+     {
+      "id": "TARANTULA_WEB",
+      "qty": 448
+     }
+    ],
+    "requires": [
+     "minion_SPIDER_3"
+    ]
+   },
+   "5": {
+    "items": [
+     {
+      "id": "TARANTULA_SILK",
+      "qty": 7
+     }
+    ],
+    "requires": [
+     "minion_SPIDER_4"
+    ]
+   },
+   "6": {
+    "items": [
+     {
+      "id": "TARANTULA_SILK",
+      "qty": 14
+     }
+    ],
+    "requires": [
+     "minion_SPIDER_5"
+    ]
+   },
+   "7": {
+    "items": [
+     {
+      "id": "TARANTULA_SILK",
+      "qty": 28
+     }
+    ],
+    "requires": [
+     "minion_SPIDER_6"
+    ]
+   },
+   "8": {
+    "items": [
+     {
+      "id": "TARANTULA_SILK",
+      "qty": 56
+     }
+    ],
+    "requires": [
+     "minion_SPIDER_7"
+    ]
+   },
+   "9": {
+    "items": [
+     {
+      "id": "TARANTULA_SILK",
+      "qty": 112
+     }
+    ],
+    "requires": [
+     "minion_SPIDER_8"
+    ]
+   },
+   "10": {
+    "items": [
+     {
+      "id": "TARANTULA_SILK",
+      "qty": 224
+     }
+    ],
+    "requires": [
+     "minion_SPIDER_9"
+    ]
+   },
+   "11": {
+    "items": [
+     {
+      "id": "TARANTULA_SILK",
+      "qty": 448
+     }
+    ],
+    "requires": [
+     "minion_SPIDER_10"
+    ]
+   }
   },
   "VAMPIRE": {
-   "1": [
-    {
-     "id": "HEMOVIBE",
-     "qty": 227
-    }
-   ],
    "2": [
     {
      "id": "HEMOVIBE",
-     "qty": 227
+     "qty": 160
     }
    ],
    "3": [
     {
      "id": "HEMOVIBE",
-     "qty": 247
+     "qty": 320
     }
    ],
    "4": [
     {
      "id": "HEMOVIBE",
-     "qty": 247
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "HEMOVIBE",
-     "qty": 270
+     "id": "HEMOGLASS",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "HEMOVIBE",
-     "qty": 270
+     "id": "HEMOGLASS",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "id": "HEMOVIBE",
-     "qty": 309
+     "id": "HEMOGLASS",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "id": "HEMOVIBE",
-     "qty": 309
+     "id": "HEMOGLASS",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "id": "HEMOVIBE",
-     "qty": 369
+     "id": "HEMOGLASS",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "id": "HEMOVIBE",
-     "qty": 369
+     "id": "HEMOGLASS",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "id": "HEMOVIBE",
-     "qty": 455
+     "id": "HEMOGLASS",
+     "qty": 512
     }
    ]
   },
   "VOIDLING": {
-   "1": [
-    {
-     "id": "QUARTZ",
-     "qty": 384
-    },
-    {
-     "id": "ENCHANTED_ENDER_PEARL",
-     "qty": 6
-    }
-   ],
-   "2": [
-    {
-     "id": "QUARTZ",
-     "qty": 384
-    },
-    {
-     "id": "ENCHANTED_ENDER_PEARL",
-     "qty": 6
-    }
-   ],
-   "3": [
-    {
-     "id": "QUARTZ",
-     "qty": 411
-    },
-    {
-     "id": "ENCHANTED_ENDER_PEARL",
-     "qty": 6
-    }
-   ],
-   "4": [
-    {
-     "id": "QUARTZ",
-     "qty": 411
-    },
-    {
-     "id": "ENCHANTED_ENDER_PEARL",
-     "qty": 6
-    }
-   ],
-   "5": [
-    {
-     "id": "QUARTZ",
-     "qty": 443
-    },
-    {
-     "id": "ENCHANTED_ENDER_PEARL",
-     "qty": 7
-    }
-   ],
-   "6": [
-    {
-     "id": "QUARTZ",
-     "qty": 443
-    },
-    {
-     "id": "ENCHANTED_ENDER_PEARL",
-     "qty": 7
-    }
-   ],
-   "7": [
-    {
-     "id": "QUARTZ",
-     "qty": 494
-    },
-    {
-     "id": "ENCHANTED_ENDER_PEARL",
-     "qty": 8
-    }
-   ],
-   "8": [
-    {
-     "id": "QUARTZ",
-     "qty": 494
-    },
-    {
-     "id": "ENCHANTED_ENDER_PEARL",
-     "qty": 8
-    }
-   ],
-   "9": [
-    {
-     "id": "QUARTZ",
-     "qty": 576
-    },
-    {
-     "id": "ENCHANTED_ENDER_PEARL",
-     "qty": 9
-    }
-   ],
-   "10": [
-    {
-     "id": "QUARTZ",
-     "qty": 576
-    },
-    {
-     "id": "ENCHANTED_ENDER_PEARL",
-     "qty": 9
-    }
-   ],
-   "11": [
-    {
-     "id": "QUARTZ",
-     "qty": 720
-    },
-    {
-     "id": "ENCHANTED_ENDER_PEARL",
-     "qty": 1
-    }
-   ]
+   "1": {
+    "items": [
+     {
+      "id": "NULL_SPHERE",
+      "qty": 80
+     }
+    ],
+    "requires": [
+     "minion_ENDERMAN_1"
+    ]
+   },
+   "2": {
+    "items": [
+     {
+      "id": "NULL_SPHERE",
+      "qty": 140
+     }
+    ],
+    "requires": [
+     "minion_OBSIDIAN_1"
+    ]
+   },
+   "3": {
+    "items": [
+     {
+      "id": "NULL_SPHERE",
+      "qty": 280
+     }
+    ],
+    "requires": [
+     "minion_ENDERMAN_2"
+    ]
+   },
+   "4": {
+    "items": [
+     {
+      "id": "NULL_SPHERE",
+      "qty": 448
+     }
+    ],
+    "requires": [
+     "minion_OBSIDIAN_3"
+    ]
+   },
+   "5": {
+    "items": [
+     {
+      "id": "NULL_OVOID",
+      "qty": 7
+     }
+    ],
+    "requires": [
+     "minion_ENDERMAN_4"
+    ]
+   },
+   "6": {
+    "items": [
+     {
+      "id": "NULL_OVOID",
+      "qty": 14
+     }
+    ],
+    "requires": [
+     "minion_OBSIDIAN_5"
+    ]
+   },
+   "7": {
+    "items": [
+     {
+      "id": "NULL_OVOID",
+      "qty": 28
+     }
+    ],
+    "requires": [
+     "minion_ENDERMAN_6"
+    ]
+   },
+   "8": {
+    "items": [
+     {
+      "id": "NULL_OVOID",
+      "qty": 56
+     }
+    ],
+    "requires": [
+     "minion_OBSIDIAN_7"
+    ]
+   },
+   "9": {
+    "items": [
+     {
+      "id": "NULL_OVOID",
+      "qty": 112
+     }
+    ],
+    "requires": [
+     "minion_ENDERMAN_8"
+    ]
+   },
+   "10": {
+    "items": [
+     {
+      "id": "NULL_OVOID",
+      "qty": 224
+     }
+    ],
+    "requires": [
+     "minion_OBSIDIAN_9"
+    ]
+   },
+   "11": {
+    "items": [
+     {
+      "id": "NULL_OVOID",
+      "qty": 448
+     }
+    ],
+    "requires": [
+     "minion_ENDERMAN_10"
+    ]
+   }
   },
   "WHEAT": {
    "1": [
     {
      "id": "WHEAT",
-     "qty": 2880
+     "qty": 80
     },
     {
-     "id": "SEEDS",
-     "qty": 4320
+     "id": "LOG",
+     "qty": 1
     }
    ],
    "2": [
     {
      "id": "WHEAT",
-     "qty": 2880
-    },
-    {
-     "id": "SEEDS",
-     "qty": 4320
+     "qty": 160
     }
    ],
    "3": [
     {
      "id": "WHEAT",
-     "qty": 3323
-    },
-    {
-     "id": "SEEDS",
-     "qty": 4985
+     "qty": 320
     }
    ],
    "4": [
     {
      "id": "WHEAT",
-     "qty": 3323
-    },
-    {
-     "id": "SEEDS",
-     "qty": 4985
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "WHEAT",
-     "qty": 3927
-    },
-    {
-     "id": "SEEDS",
-     "qty": 5891
+     "id": "ENCHANTED_WHEAT",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "WHEAT",
-     "qty": 3927
-    },
-    {
-     "id": "SEEDS",
-     "qty": 5891
+     "id": "ENCHANTED_WHEAT",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "id": "WHEAT",
-     "qty": 4320
-    },
-    {
-     "id": "SEEDS",
-     "qty": 6480
+     "id": "ENCHANTED_WHEAT",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "id": "WHEAT",
-     "qty": 4320
-    },
-    {
-     "id": "SEEDS",
-     "qty": 6480
+     "id": "ENCHANTED_WHEAT",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "id": "WHEAT",
-     "qty": 4800
-    },
-    {
-     "id": "SEEDS",
-     "qty": 7200
+     "id": "ENCHANTED_WHEAT",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "id": "WHEAT",
-     "qty": 4800
-    },
-    {
-     "id": "SEEDS",
-     "qty": 7200
+     "id": "ENCHANTED_WHEAT",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "id": "WHEAT",
-     "qty": 5400
-    },
-    {
-     "id": "SEEDS",
-     "qty": 8100
-    }
-   ],
-   "12": [
-    {
-     "id": "WHEAT",
-     "qty": 6171
-    },
-    {
-     "id": "SEEDS",
-     "qty": 9257
+     "id": "ENCHANTED_WHEAT",
+     "qty": 512
     }
    ]
   },
   "ZOMBIE": {
    "1": [
     {
+     "id": "LOG",
+     "qty": 1
+    },
+    {
      "id": "ROTTEN_FLESH",
-     "qty": 1662
-    },
-    {
-     "id": "POISONOUS_POTATO",
-     "qty": 83
-    },
-    {
-     "id": "POTATO_ITEM",
-     "qty": 17
-    },
-    {
-     "id": "CARROT_ITEM",
-     "qty": 17
+     "qty": 80
     }
    ],
    "2": [
     {
      "id": "ROTTEN_FLESH",
-     "qty": 1662
-    },
-    {
-     "id": "POISONOUS_POTATO",
-     "qty": 83
-    },
-    {
-     "id": "POTATO_ITEM",
-     "qty": 17
-    },
-    {
-     "id": "CARROT_ITEM",
-     "qty": 17
+     "qty": 160
     }
    ],
    "3": [
     {
      "id": "ROTTEN_FLESH",
-     "qty": 1800
-    },
-    {
-     "id": "POISONOUS_POTATO",
-     "qty": 90
-    },
-    {
-     "id": "POTATO_ITEM",
-     "qty": 18
-    },
-    {
-     "id": "CARROT_ITEM",
-     "qty": 18
+     "qty": 320
     }
    ],
    "4": [
     {
      "id": "ROTTEN_FLESH",
-     "qty": 1800
-    },
-    {
-     "id": "POISONOUS_POTATO",
-     "qty": 90
-    },
-    {
-     "id": "POTATO_ITEM",
-     "qty": 18
-    },
-    {
-     "id": "CARROT_ITEM",
-     "qty": 18
+     "qty": 512
     }
    ],
    "5": [
     {
-     "id": "ROTTEN_FLESH",
-     "qty": 1964
-    },
-    {
-     "id": "POISONOUS_POTATO",
-     "qty": 98
-    },
-    {
-     "id": "POTATO_ITEM",
-     "qty": 20
-    },
-    {
-     "id": "CARROT_ITEM",
-     "qty": 20
+     "id": "ENCHANTED_ROTTEN_FLESH",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "id": "ROTTEN_FLESH",
-     "qty": 1964
-    },
-    {
-     "id": "POISONOUS_POTATO",
-     "qty": 98
-    },
-    {
-     "id": "POTATO_ITEM",
-     "qty": 20
-    },
-    {
-     "id": "CARROT_ITEM",
-     "qty": 20
+     "id": "ENCHANTED_ROTTEN_FLESH",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "id": "ROTTEN_FLESH",
-     "qty": 2160
-    },
-    {
-     "id": "POISONOUS_POTATO",
-     "qty": 108
-    },
-    {
-     "id": "POTATO_ITEM",
-     "qty": 22
-    },
-    {
-     "id": "CARROT_ITEM",
-     "qty": 22
+     "id": "ENCHANTED_ROTTEN_FLESH",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "id": "ROTTEN_FLESH",
-     "qty": 2160
-    },
-    {
-     "id": "POISONOUS_POTATO",
-     "qty": 108
-    },
-    {
-     "id": "POTATO_ITEM",
-     "qty": 22
-    },
-    {
-     "id": "CARROT_ITEM",
-     "qty": 22
+     "id": "ENCHANTED_ROTTEN_FLESH",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "id": "ROTTEN_FLESH",
-     "qty": 2541
-    },
-    {
-     "id": "POISONOUS_POTATO",
-     "qty": 127
-    },
-    {
-     "id": "POTATO_ITEM",
-     "qty": 25
-    },
-    {
-     "id": "CARROT_ITEM",
-     "qty": 25
+     "id": "ENCHANTED_ROTTEN_FLESH",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "id": "ROTTEN_FLESH",
-     "qty": 2541
-    },
-    {
-     "id": "POISONOUS_POTATO",
-     "qty": 127
-    },
-    {
-     "id": "POTATO_ITEM",
-     "qty": 25
-    },
-    {
-     "id": "CARROT_ITEM",
-     "qty": 25
+     "id": "ENCHANTED_ROTTEN_FLESH",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "id": "ROTTEN_FLESH",
-     "qty": 3323
-    },
-    {
-     "id": "POISONOUS_POTATO",
-     "qty": 166
-    },
-    {
-     "id": "POTATO_ITEM",
-     "qty": 33
-    },
-    {
-     "id": "CARROT_ITEM",
-     "qty": 33
+     "id": "ENCHANTED_ROTTEN_FLESH",
+     "qty": 512
     }
    ]
   }
@@ -5691,8 +4859,8 @@
   "BANK_UPGRADE_PALATIAL": 215438620
  },
  "coverage": {
-  "minionTiersPriced": 687,
-  "minionTiersUnpriceable": 12,
+  "minionTiersPriced": 660,
+  "minionTiersUnpriceable": 2,
   "essencePerksMatched": 33,
   "essencePerksUnmatched": 27,
   "bankUpgrades": 6

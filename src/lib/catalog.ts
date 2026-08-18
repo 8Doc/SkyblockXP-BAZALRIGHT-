@@ -171,17 +171,23 @@ export function buildCatalog(
       // Tier XII is applied with an upgrade stone; every tier below it is a craft, and the
       // recipe comes from the wiki with its ingredients resolved to bazaar products.
       const recipe = data.costs.minions[minion.generator]?.[String(tier.tier)];
+      // A recipe is either a plain ingredient list or ingredients plus other minion tiers —
+      // Revenant is crafted from a Zombie minion, and those become real prerequisites so the
+      // bundle prices the whole dependency rather than treating it as unbuyable.
+      const ingredients = Array.isArray(recipe) ? recipe : recipe?.items;
+      const alsoRequires = Array.isArray(recipe) ? [] : (recipe?.requires ?? []);
+
       tasks.push({
         id,
         category: "minions",
         name: tier.name,
         xp: tier.xp,
-        requires: previous ? [previous] : [],
+        requires: [...(previous ? [previous] : []), ...alsoRequires],
         cost:
           tier.tier === 12
             ? { kind: "bazaar", items: [{ id: stone, qty: 1 }] }
-            : recipe
-              ? { kind: "bazaar", items: recipe }
+            : ingredients
+              ? { kind: "bazaar", items: ingredients }
               : { kind: "unknown", note: "Recipe needs something the bazaar doesn't trade" },
         repeatable: false,
       });

@@ -89,18 +89,28 @@ async function minions(families) {
     process.stdout.write(`\r  minions ${done}/${families.length} — ${family.page.padEnd(28).slice(0, 28)}`);
     if (!html) continue;
 
-    const rows = tableRows(html);
-    const header = rows.findIndex((r) => r[0] === "Tier" && r.some((c) => /Upgrade Cost/i.test(c)));
-    if (header < 0) continue;
+    // Parse table by table, not the page as one row stream. A minion page carries several
+    // tables that also start rows with a roman numeral — collection tiers further down, for
+    // one — and reading past the end of the upgrade table lets those rows overwrite the real
+    // recipe with whatever numbers they happen to contain.
+    const tables = [...html.matchAll(/<table[^>]*>([\s\S]*?)<\/table>/g)].map((m) => m[1]);
 
     const tiers = {};
-    for (const row of rows.slice(header + 1)) {
-      const tier = ROMAN[row[0]];
-      if (!tier) continue;
-      // Column 2 holds the materials for this tier specifically (column 3+ are cumulative).
-      const items = materials(row[2]);
-      if (items.length) tiers[tier] = items;
+    for (const table of tables) {
+      const rows = tableRows(table);
+      const header = rows.findIndex((r) => r[0] === "Tier" && r.some((c) => /Upgrade Cost/i.test(c)));
+      if (header < 0) continue;
+
+      for (const row of rows.slice(header + 1)) {
+        const tier = ROMAN[row[0]];
+        if (!tier || tiers[tier]) continue;
+        // Column 2 holds the materials for this tier specifically (column 3+ are cumulative).
+        const items = materials(row[2]);
+        if (items.length) tiers[tier] = items;
+      }
+      break; // the first table with that header is the upgrade table
     }
+
     if (Object.keys(tiers).length) recipes[family.generator] = tiers;
     await sleep(120); // be a polite scraper
   }

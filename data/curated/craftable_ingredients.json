@@ -1,0 +1,13 @@
+{
+  "note": "Minion recipes call for a few vanilla items that don't trade on the bazaar. Each maps to the bazaar-traded materials you'd craft it from, so one un-tradeable ingredient doesn't make a whole minion chain unpriceable. Quantities are the crafting cost rounded up in the player's favour (a wooden tool is 3-4 planks plus sticks; one log yields 4 planks).",
+  "source": "Vanilla Minecraft crafting recipes",
+  "verified": true,
+  "substitutions": {
+    "Wooden Pickaxe": [{ "id": "LOG", "qty": 1 }],
+    "Wooden Sword": [{ "id": "LOG", "qty": 1 }],
+    "Wooden Axe": [{ "id": "LOG", "qty": 1 }],
+    "Wooden Shovel": [{ "id": "LOG", "qty": 1 }],
+    "Wooden Hoe": [{ "id": "LOG", "qty": 1 }],
+    "Fishing Rod": [{ "id": "LOG", "qty": 1 }, { "id": "STRING", "qty": 2 }]
+  }
+}

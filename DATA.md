@@ -317,12 +317,43 @@ built to be joined, so every one is counted rather than assumed.
 
 | Category | Priced from | Coverage |
 |---|---|---|
-| Minions | Wiki crafting recipes → bazaar ingredient prices | **687 of 699 tiers.** The 12 misses are the Flower Minion, whose ingredients (Allium, Oxeye Daisy…) aren't bazaar-traded |
+| Minions | Wiki crafting recipes → **live** bazaar ingredient prices | **660 of 662 tiers.** The 2 misses need a Crystallized Heart and a Bat Person Helmet, neither of which trades |
 | Pets | Auction house, lowest BIN per pet per rarity | ~90% of remaining pet XP |
 | Museum | Auction house, lowest BIN per donation item | ~56% of remaining museum XP |
 | Essence | Wiki perk tables → live bazaar essence price | **205 of 436 tasks.** Only 33 of 60 wiki perk names match Hypixel's internal ids |
 | Bank | Wiki upgrade costs (Gold 5.08M → Palatial 215M) | all 6 |
 | Fast travel | Auction house scroll prices | 10 of 24 — the other 14 unlock by walking there |
+
+### Minion recipes: two bugs worth recording
+
+**The scraper read past the end of the table.** It found the header row of the upgrade table and
+then walked every remaining row *on the page*. Minion pages carry several tables whose rows also
+start with a roman numeral, so those later rows silently overwrote the real recipe — Cobblestone
+tier I came out as "3,086x Cobblestone" instead of "1x Wooden Pickaxe, 80x Cobblestone", and
+every minion was wrong by a factor of ten or more. Parsing is now scoped to the table the header
+belongs to.
+
+**Fixing that exposed a cascade.** Tier I of most minions needs a wooden tool, which doesn't
+trade on the bazaar, and one unpriceable ingredient correctly makes the whole prerequisite chain
+unpriceable — so the correct recipes initially priced *fewer* tiers than the broken ones. Two
+additions fix it properly:
+
+- `data/curated/craftable_ingredients.json` maps the handful of vanilla items minion recipes
+  need (wooden pickaxe/sword/axe/shovel/hoe, fishing rod) to the bazaar-traded materials you'd
+  craft them from — one `LOG` yields four planks, which covers any of them.
+- A minion that needs *another minion* (Revenant needs a Zombie minion, Inferno needs a Blaze
+  minion) now becomes a real **prerequisite** rather than an ingredient, so the bundle prices the
+  whole dependency chain instead of giving up on it.
+
+Together: 660 of 662 tiers priced, up from 575.
+
+### On the wiki's own price column
+
+The wiki publishes a "Bazaar Upgrade Cost" per tier and **it is not used** — only the recipe
+(ingredient and quantity) comes from the wiki, and the price is multiplied in from the live
+bazaar at query time. The wiki's figures are stale, which is exactly why: it lists Cobblestone
+tier II at 320 coins, where the same 160 cobblestone costs 752 at today's live price of 4.70
+each. The recipe is stable; the price is not, so only the stable half is cached.
 
 ### The scrapers
 

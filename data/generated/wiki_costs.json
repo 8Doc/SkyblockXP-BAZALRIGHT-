@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-08-18T20:04:49.552Z",
+ "generatedAt": "2026-08-18T22:58:10.159Z",
  "source": "https://hypixel-skyblock.fandom.com/api.php",
  "bankUpgrades": {
   "GOLD": 5077194,
@@ -13,68 +13,72 @@
   "ACACIA": {
    "1": [
     {
+     "name": "Wooden Axe",
+     "qty": 1
+    },
+    {
      "name": "Acacia Log",
-     "qty": 3600
+     "qty": 80
     }
    ],
    "2": [
     {
      "name": "Acacia Log",
-     "qty": 3600
+     "qty": 160
     }
    ],
    "3": [
     {
      "name": "Acacia Log",
-     "qty": 3840
+     "qty": 320
     }
    ],
    "4": [
     {
      "name": "Acacia Log",
-     "qty": 3840
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Acacia Log",
-     "qty": 4114
+     "name": "Enchanted Acacia Log",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Acacia Log",
-     "qty": 4114
+     "name": "Enchanted Acacia Log",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "name": "Acacia Log",
-     "qty": 4547
+     "name": "Enchanted Acacia Log",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "name": "Acacia Log",
-     "qty": 4547
+     "name": "Enchanted Acacia Log",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "name": "Acacia Log",
-     "qty": 5236
+     "name": "Enchanted Acacia Log",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "name": "Acacia Log",
-     "qty": 5236
+     "name": "Enchanted Acacia Log",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "name": "Acacia Log",
-     "qty": 6400
+     "name": "Enchanted Acacia Log",
+     "qty": 512
     }
    ]
   },
@@ -82,141 +86,143 @@
    "1": [
     {
      "name": "Birch Log",
-     "qty": 3600
+     "qty": 80
+    },
+    {
+     "name": "Wooden Axe",
+     "qty": 1
     }
    ],
    "2": [
     {
      "name": "Birch Log",
-     "qty": 3600
+     "qty": 160
     }
    ],
    "3": [
     {
      "name": "Birch Log",
-     "qty": 3840
+     "qty": 320
     }
    ],
    "4": [
     {
      "name": "Birch Log",
-     "qty": 3840
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Birch Log",
-     "qty": 4114
+     "name": "Enchanted Birch Log",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Birch Log",
-     "qty": 4114
+     "name": "Enchanted Birch Log",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "name": "Birch Log",
-     "qty": 4547
+     "name": "Enchanted Birch Log",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "name": "Birch Log",
-     "qty": 4547
+     "name": "Enchanted Birch Log",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "name": "Birch Log",
-     "qty": 5236
+     "name": "Enchanted Birch Log",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "name": "Birch Log",
-     "qty": 5236
+     "name": "Enchanted Birch Log",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "name": "Birch Log",
-     "qty": 6400
+     "name": "Enchanted Birch Log",
+     "qty": 512
     }
    ]
   },
   "BLAZE": {
    "1": [
     {
+     "name": "Wooden Sword",
+     "qty": 1
+    },
+    {
      "name": "Blaze Rod",
-     "qty": 1309
+     "qty": 80
     }
    ],
    "2": [
     {
      "name": "Blaze Rod",
-     "qty": 1309
+     "qty": 160
     }
    ],
    "3": [
     {
      "name": "Blaze Rod",
-     "qty": 1394
+     "qty": 320
     }
    ],
    "4": [
     {
      "name": "Blaze Rod",
-     "qty": 1394
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Blaze Rod",
-     "qty": 1516
+     "name": "Enchanted Blaze Powder",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Blaze Rod",
-     "qty": 1516
+     "name": "Enchanted Blaze Powder",
+     "qty": 24
     }
    ],
    "7": [
     {
-     "name": "Blaze Rod",
-     "qty": 1728
+     "name": "Enchanted Blaze Powder",
+     "qty": 64
     }
    ],
    "8": [
     {
-     "name": "Blaze Rod",
-     "qty": 1728
+     "name": "Enchanted Blaze Powder",
+     "qty": 128
     }
    ],
    "9": [
     {
-     "name": "Blaze Rod",
-     "qty": 2057
+     "name": "Enchanted Blaze Powder",
+     "qty": 256
     }
    ],
    "10": [
     {
-     "name": "Blaze Rod",
-     "qty": 2057
+     "name": "Enchanted Blaze Powder",
+     "qty": 512
     }
    ],
    "11": [
     {
-     "name": "Blaze Rod",
-     "qty": 2618
-    }
-   ],
-   "12": [
-    {
-     "name": "Blaze Rod",
-     "qty": 2880
+     "name": "Enchanted Blaze Rod",
+     "qty": 8
     }
    ]
   },
@@ -224,73 +230,71 @@
    "1": [
     {
      "name": "Cactus",
-     "qty": 4800
+     "qty": 128
+    },
+    {
+     "name": "Wooden Hoe",
+     "qty": 1
     }
    ],
    "2": [
     {
      "name": "Cactus",
-     "qty": 4800
+     "qty": 256
     }
    ],
    "3": [
     {
      "name": "Cactus",
-     "qty": 5184
+     "qty": 512
     }
    ],
    "4": [
     {
-     "name": "Cactus",
-     "qty": 5184
+     "name": "Enchanted Cactus Green",
+     "qty": 8
     }
    ],
    "5": [
     {
-     "name": "Cactus",
-     "qty": 5635
+     "name": "Enchanted Cactus Green",
+     "qty": 24
     }
    ],
    "6": [
     {
-     "name": "Cactus",
-     "qty": 5635
+     "name": "Enchanted Cactus Green",
+     "qty": 64
     }
    ],
    "7": [
     {
-     "name": "Cactus",
-     "qty": 6171
+     "name": "Enchanted Cactus Green",
+     "qty": 128
     }
    ],
    "8": [
     {
-     "name": "Cactus",
-     "qty": 6171
+     "name": "Enchanted Cactus Green",
+     "qty": 256
     }
    ],
    "9": [
     {
-     "name": "Cactus",
-     "qty": 7200
+     "name": "Enchanted Cactus Green",
+     "qty": 512
     }
    ],
    "10": [
     {
-     "name": "Cactus",
-     "qty": 7200
+     "name": "Enchanted Cactus",
+     "qty": 8
     }
    ],
    "11": [
     {
-     "name": "Cactus",
-     "qty": 8640
-    }
-   ],
-   "12": [
-    {
-     "name": "Cactus",
-     "qty": 10800
+     "name": "Enchanted Cactus",
+     "qty": 16
     }
    ]
   },
@@ -298,73 +302,71 @@
    "1": [
     {
      "name": "Carrot",
-     "qty": 6480
+     "qty": 128
+    },
+    {
+     "name": "Wooden Hoe",
+     "qty": 1
     }
    ],
    "2": [
     {
      "name": "Carrot",
-     "qty": 6480
+     "qty": 256
     }
    ],
    "3": [
     {
      "name": "Carrot",
-     "qty": 7200
+     "qty": 512
     }
    ],
    "4": [
     {
-     "name": "Carrot",
-     "qty": 7200
+     "name": "Enchanted Carrot",
+     "qty": 8
     }
    ],
    "5": [
     {
-     "name": "Carrot",
-     "qty": 8100
+     "name": "Enchanted Carrot",
+     "qty": 24
     }
    ],
    "6": [
     {
-     "name": "Carrot",
-     "qty": 8100
+     "name": "Enchanted Carrot",
+     "qty": 64
     }
    ],
    "7": [
     {
-     "name": "Carrot",
-     "qty": 9257
+     "name": "Enchanted Carrot",
+     "qty": 128
     }
    ],
    "8": [
     {
-     "name": "Carrot",
-     "qty": 9257
+     "name": "Enchanted Carrot",
+     "qty": 256
     }
    ],
    "9": [
     {
-     "name": "Carrot",
-     "qty": 10800
+     "name": "Enchanted Carrot",
+     "qty": 512
     }
    ],
    "10": [
     {
-     "name": "Carrot",
-     "qty": 10800
+     "name": "Enchanted Golden Carrot",
+     "qty": 8
     }
    ],
    "11": [
     {
-     "name": "Carrot",
-     "qty": 12960
-    }
-   ],
-   "12": [
-    {
-     "name": "Carrot",
-     "qty": 16200
+     "name": "Enchanted Golden Carrot",
+     "qty": 16
     }
    ]
   },
@@ -372,111 +374,71 @@
    "1": [
     {
      "name": "Spider Eye",
-     "qty": 1662
+     "qty": 80
     },
     {
-     "name": "String",
-     "qty": 831
+     "name": "Wooden Sword",
+     "qty": 1
     }
    ],
    "2": [
     {
      "name": "Spider Eye",
-     "qty": 1662
-    },
-    {
-     "name": "String",
-     "qty": 831
+     "qty": 160
     }
    ],
    "3": [
     {
      "name": "Spider Eye",
-     "qty": 1800
-    },
-    {
-     "name": "String",
-     "qty": 900
+     "qty": 320
     }
    ],
    "4": [
     {
      "name": "Spider Eye",
-     "qty": 1800
-    },
-    {
-     "name": "String",
-     "qty": 900
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Spider Eye",
-     "qty": 1964
-    },
-    {
-     "name": "String",
-     "qty": 982
+     "name": "Enchanted Spider Eye",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Spider Eye",
-     "qty": 1964
-    },
-    {
-     "name": "String",
-     "qty": 982
+     "name": "Enchanted Spider Eye",
+     "qty": 24
     }
    ],
    "7": [
     {
-     "name": "Spider Eye",
-     "qty": 2160
-    },
-    {
-     "name": "String",
-     "qty": 1080
+     "name": "Enchanted Spider Eye",
+     "qty": 64
     }
    ],
    "8": [
     {
-     "name": "Spider Eye",
-     "qty": 2160
-    },
-    {
-     "name": "String",
-     "qty": 1080
+     "name": "Enchanted Spider Eye",
+     "qty": 128
     }
    ],
    "9": [
     {
-     "name": "Spider Eye",
-     "qty": 2541
-    },
-    {
-     "name": "String",
-     "qty": 1271
+     "name": "Enchanted Spider Eye",
+     "qty": 256
     }
    ],
    "10": [
     {
-     "name": "Spider Eye",
-     "qty": 2541
-    },
-    {
-     "name": "String",
-     "qty": 1271
+     "name": "Enchanted Spider Eye",
+     "qty": 512
     }
    ],
    "11": [
     {
-     "name": "Spider Eye",
-     "qty": 3323
-    },
-    {
-     "name": "String",
-     "qty": 1662
+     "name": "Enchanted Fermented Spider Eye",
+     "qty": 16
     }
    ]
   },
@@ -484,121 +446,71 @@
    "1": [
     {
      "name": "Raw Chicken",
-     "qty": 1662
+     "qty": 64
     },
     {
-     "name": "Feather",
-     "qty": 1662
+     "name": "Wooden Sword",
+     "qty": 1
     }
    ],
    "2": [
     {
      "name": "Raw Chicken",
-     "qty": 1662
-    },
-    {
-     "name": "Feather",
-     "qty": 1662
+     "qty": 128
     }
    ],
    "3": [
     {
      "name": "Raw Chicken",
-     "qty": 1800
-    },
-    {
-     "name": "Feather",
-     "qty": 1800
+     "qty": 256
     }
    ],
    "4": [
     {
      "name": "Raw Chicken",
-     "qty": 1800
-    },
-    {
-     "name": "Feather",
-     "qty": 1800
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Raw Chicken",
-     "qty": 1964
-    },
-    {
-     "name": "Feather",
-     "qty": 1964
+     "name": "Enchanted Raw Chicken",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Raw Chicken",
-     "qty": 1964
-    },
-    {
-     "name": "Feather",
-     "qty": 1964
+     "name": "Enchanted Raw Chicken",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "name": "Raw Chicken",
-     "qty": 2160
-    },
-    {
-     "name": "Feather",
-     "qty": 2160
+     "name": "Enchanted Raw Chicken",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "name": "Raw Chicken",
-     "qty": 2160
-    },
-    {
-     "name": "Feather",
-     "qty": 2160
+     "name": "Enchanted Raw Chicken",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "name": "Raw Chicken",
-     "qty": 2400
-    },
-    {
-     "name": "Feather",
-     "qty": 2400
+     "name": "Enchanted Raw Chicken",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "name": "Raw Chicken",
-     "qty": 2400
-    },
-    {
-     "name": "Feather",
-     "qty": 2400
+     "name": "Enchanted Raw Chicken",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "name": "Raw Chicken",
-     "qty": 2880
-    },
-    {
-     "name": "Feather",
-     "qty": 2880
-    }
-   ],
-   "12": [
-    {
-     "name": "Raw Chicken",
-     "qty": 3600
-    },
-    {
-     "name": "Feather",
-     "qty": 3600
+     "name": "Enchanted Raw Chicken",
+     "qty": 512
     }
    ]
   },
@@ -606,73 +518,77 @@
    "1": [
     {
      "name": "Clay Ball",
-     "qty": 5400
+     "qty": 80
+    },
+    {
+     "name": "Wooden Shovel",
+     "qty": 1
     }
    ],
    "2": [
     {
      "name": "Clay Ball",
-     "qty": 5400
+     "qty": 160
     }
    ],
    "3": [
     {
      "name": "Clay Ball",
-     "qty": 5760
+     "qty": 320
     }
    ],
    "4": [
     {
      "name": "Clay Ball",
-     "qty": 5760
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Clay Ball",
-     "qty": 6284
+     "name": "Enchanted Clay Ball",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Clay Ball",
-     "qty": 6284
+     "name": "Enchanted Clay Ball",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "name": "Clay Ball",
-     "qty": 7200
+     "name": "Enchanted Clay Ball",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "name": "Clay Ball",
-     "qty": 7200
+     "name": "Enchanted Clay Ball",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "name": "Clay Ball",
-     "qty": 8640
+     "name": "Enchanted Clay Ball",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "name": "Clay Ball",
-     "qty": 8640
+     "name": "Enchanted Clay Ball",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "name": "Clay Ball",
-     "qty": 10800
+     "name": "Enchanted Clay Ball",
+     "qty": 512
     }
    ],
    "12": [
     {
-     "name": "Clay Ball",
-     "qty": 12343
+     "name": "Clay Minion XII Upgrade Stone",
+     "qty": 1
     }
    ]
   },
@@ -680,147 +596,143 @@
    "1": [
     {
      "name": "Coal",
-     "qty": 2880
+     "qty": 80
+    },
+    {
+     "name": "Wooden Pickaxe",
+     "qty": 1
     }
    ],
    "2": [
     {
      "name": "Coal",
-     "qty": 2880
+     "qty": 160
     }
    ],
    "3": [
     {
      "name": "Coal",
-     "qty": 3323
+     "qty": 320
     }
    ],
    "4": [
     {
      "name": "Coal",
-     "qty": 3323
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Coal",
-     "qty": 3600
+     "name": "Enchanted Coal",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Coal",
-     "qty": 3600
+     "name": "Enchanted Coal",
+     "qty": 24
     }
    ],
    "7": [
     {
-     "name": "Coal",
-     "qty": 4320
+     "name": "Enchanted Coal",
+     "qty": 64
     }
    ],
    "8": [
     {
-     "name": "Coal",
-     "qty": 4320
+     "name": "Enchanted Coal",
+     "qty": 128
     }
    ],
    "9": [
     {
-     "name": "Coal",
-     "qty": 4800
+     "name": "Enchanted Coal",
+     "qty": 256
     }
    ],
    "10": [
     {
-     "name": "Coal",
-     "qty": 4800
+     "name": "Enchanted Coal",
+     "qty": 512
     }
    ],
    "11": [
     {
-     "name": "Coal",
-     "qty": 6171
-    }
-   ],
-   "12": [
-    {
-     "name": "Coal",
-     "qty": 7200
+     "name": "Enchanted Coal Block",
+     "qty": 8
     }
    ]
   },
   "COBBLESTONE": {
    "1": [
     {
+     "name": "Wooden Pickaxe",
+     "qty": 1
+    },
+    {
      "name": "Cobblestone",
-     "qty": 3086
+     "qty": 80
     }
    ],
    "2": [
     {
      "name": "Cobblestone",
-     "qty": 3086
+     "qty": 160
     }
    ],
    "3": [
     {
      "name": "Cobblestone",
-     "qty": 3600
+     "qty": 320
     }
    ],
    "4": [
     {
      "name": "Cobblestone",
-     "qty": 3600
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Cobblestone",
-     "qty": 4320
+     "name": "Enchanted Cobblestone",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Cobblestone",
-     "qty": 4320
+     "name": "Enchanted Cobblestone",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "name": "Cobblestone",
-     "qty": 4800
+     "name": "Enchanted Cobblestone",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "name": "Cobblestone",
-     "qty": 4800
+     "name": "Enchanted Cobblestone",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "name": "Cobblestone",
-     "qty": 5400
+     "name": "Enchanted Cobblestone",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "name": "Cobblestone",
-     "qty": 5400
+     "name": "Enchanted Cobblestone",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "name": "Cobblestone",
-     "qty": 6171
-    }
-   ],
-   "12": [
-    {
-     "name": "Cobblestone",
-     "qty": 7200
+     "name": "Enchanted Cobblestone",
+     "qty": 512
     }
    ]
   },
@@ -828,73 +740,71 @@
    "1": [
     {
      "name": "Cocoa Beans",
-     "qty": 4800
+     "qty": 80
+    },
+    {
+     "name": "Wooden Hoe",
+     "qty": 1
     }
    ],
    "2": [
     {
      "name": "Cocoa Beans",
-     "qty": 4800
+     "qty": 160
     }
    ],
    "3": [
     {
      "name": "Cocoa Beans",
-     "qty": 5184
+     "qty": 320
     }
    ],
    "4": [
     {
      "name": "Cocoa Beans",
-     "qty": 5184
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Cocoa Beans",
-     "qty": 5635
+     "name": "Enchanted Cocoa Beans",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Cocoa Beans",
-     "qty": 5635
+     "name": "Enchanted Cocoa Beans",
+     "qty": 24
     }
    ],
    "7": [
     {
-     "name": "Cocoa Beans",
-     "qty": 6171
+     "name": "Enchanted Cocoa Beans",
+     "qty": 64
     }
    ],
    "8": [
     {
-     "name": "Cocoa Beans",
-     "qty": 6171
+     "name": "Enchanted Cocoa Beans",
+     "qty": 128
     }
    ],
    "9": [
     {
-     "name": "Cocoa Beans",
-     "qty": 7200
+     "name": "Enchanted Cocoa Beans",
+     "qty": 256
     }
    ],
    "10": [
     {
-     "name": "Cocoa Beans",
-     "qty": 7200
+     "name": "Enchanted Cocoa Beans",
+     "qty": 512
     }
    ],
    "11": [
     {
-     "name": "Cocoa Beans",
-     "qty": 8640
-    }
-   ],
-   "12": [
-    {
-     "name": "Cocoa Beans",
-     "qty": 10800
+     "name": "Enchanted Cookie",
+     "qty": 8
     }
    ]
   },
@@ -902,189 +812,143 @@
    "1": [
     {
      "name": "Raw Beef",
-     "qty": 1662
+     "qty": 64
     },
     {
-     "name": "Leather",
-     "qty": 1662
+     "name": "Wooden Sword",
+     "qty": 1
     }
    ],
    "2": [
     {
      "name": "Raw Beef",
-     "qty": 1662
-    },
-    {
-     "name": "Leather",
-     "qty": 1662
+     "qty": 128
     }
    ],
    "3": [
     {
      "name": "Raw Beef",
-     "qty": 1800
-    },
-    {
-     "name": "Leather",
-     "qty": 1800
+     "qty": 256
     }
    ],
    "4": [
     {
      "name": "Raw Beef",
-     "qty": 1800
-    },
-    {
-     "name": "Leather",
-     "qty": 1800
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Raw Beef",
-     "qty": 1964
-    },
-    {
-     "name": "Leather",
-     "qty": 1964
+     "name": "Enchanted Raw Beef",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Raw Beef",
-     "qty": 1964
-    },
-    {
-     "name": "Leather",
-     "qty": 1964
+     "name": "Enchanted Raw Beef",
+     "qty": 24
     }
    ],
    "7": [
     {
-     "name": "Raw Beef",
-     "qty": 2160
-    },
-    {
-     "name": "Leather",
-     "qty": 2160
+     "name": "Enchanted Raw Beef",
+     "qty": 64
     }
    ],
    "8": [
     {
-     "name": "Raw Beef",
-     "qty": 2160
-    },
-    {
-     "name": "Leather",
-     "qty": 2160
+     "name": "Enchanted Raw Beef",
+     "qty": 128
     }
    ],
    "9": [
     {
-     "name": "Raw Beef",
-     "qty": 2541
-    },
-    {
-     "name": "Leather",
-     "qty": 2541
+     "name": "Enchanted Raw Beef",
+     "qty": 256
     }
    ],
    "10": [
     {
-     "name": "Raw Beef",
-     "qty": 2541
-    },
-    {
-     "name": "Leather",
-     "qty": 2541
+     "name": "Enchanted Raw Beef",
+     "qty": 512
     }
    ],
    "11": [
     {
-     "name": "Raw Beef",
-     "qty": 3323
-    },
-    {
-     "name": "Leather",
-     "qty": 3323
-    }
-   ],
-   "12": [
-    {
-     "name": "Raw Beef",
-     "qty": 4320
-    },
-    {
-     "name": "Leather",
-     "qty": 4320
+     "name": "Enchanted Leather",
+     "qty": 512
     }
    ]
   },
   "CREEPER": {
    "1": [
     {
+     "name": "Wooden Sword",
+     "qty": 1
+    },
+    {
      "name": "Gunpowder",
-     "qty": 1600
+     "qty": 80
     }
    ],
    "2": [
     {
      "name": "Gunpowder",
-     "qty": 1600
+     "qty": 160
     }
    ],
    "3": [
     {
      "name": "Gunpowder",
-     "qty": 1728
+     "qty": 320
     }
    ],
    "4": [
     {
      "name": "Gunpowder",
-     "qty": 1728
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Gunpowder",
-     "qty": 1878
+     "name": "Enchanted Gunpowder",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Gunpowder",
-     "qty": 1878
+     "name": "Enchanted Gunpowder",
+     "qty": 24
     }
    ],
    "7": [
     {
-     "name": "Gunpowder",
-     "qty": 2057
+     "name": "Enchanted Gunpowder",
+     "qty": 64
     }
    ],
    "8": [
     {
-     "name": "Gunpowder",
-     "qty": 2057
+     "name": "Enchanted Gunpowder",
+     "qty": 128
     }
    ],
    "9": [
     {
-     "name": "Gunpowder",
-     "qty": 2400
+     "name": "Enchanted Gunpowder",
+     "qty": 256
     }
    ],
    "10": [
     {
-     "name": "Gunpowder",
-     "qty": 2400
+     "name": "Enchanted Gunpowder",
+     "qty": 512
     }
    ],
    "11": [
     {
-     "name": "Gunpowder",
-     "qty": 3086
+     "name": "Enchanted Firework Rocket",
+     "qty": 16
     }
    ]
   },
@@ -1092,141 +956,143 @@
    "1": [
     {
      "name": "Dark Oak Log",
-     "qty": 3600
+     "qty": 80
+    },
+    {
+     "name": "Wooden Axe",
+     "qty": 1
     }
    ],
    "2": [
     {
      "name": "Dark Oak Log",
-     "qty": 3600
+     "qty": 160
     }
    ],
    "3": [
     {
      "name": "Dark Oak Log",
-     "qty": 3840
+     "qty": 320
     }
    ],
    "4": [
     {
      "name": "Dark Oak Log",
-     "qty": 3840
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Dark Oak Log",
-     "qty": 4114
+     "name": "Enchanted Dark Oak Log",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Dark Oak Log",
-     "qty": 4114
+     "name": "Enchanted Dark Oak Log",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "name": "Dark Oak Log",
-     "qty": 4547
+     "name": "Enchanted Dark Oak Log",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "name": "Dark Oak Log",
-     "qty": 4547
+     "name": "Enchanted Dark Oak Log",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "name": "Dark Oak Log",
-     "qty": 5236
+     "name": "Enchanted Dark Oak Log",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "name": "Dark Oak Log",
-     "qty": 5236
+     "name": "Enchanted Dark Oak Log",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "name": "Dark Oak Log",
-     "qty": 6400
+     "name": "Enchanted Dark Oak Log",
+     "qty": 512
     }
    ]
   },
   "DIAMOND": {
    "1": [
     {
+     "name": "Wooden Pickaxe",
+     "qty": 1
+    },
+    {
      "name": "Diamond",
-     "qty": 1490
+     "qty": 80
     }
    ],
    "2": [
     {
      "name": "Diamond",
-     "qty": 1490
+     "qty": 160
     }
    ],
    "3": [
     {
      "name": "Diamond",
-     "qty": 1600
+     "qty": 320
     }
    ],
    "4": [
     {
      "name": "Diamond",
-     "qty": 1600
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Diamond",
-     "qty": 1728
+     "name": "Enchanted Diamond",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Diamond",
-     "qty": 1728
+     "name": "Enchanted Diamond",
+     "qty": 24
     }
    ],
    "7": [
     {
-     "name": "Diamond",
-     "qty": 1964
+     "name": "Enchanted Diamond",
+     "qty": 64
     }
    ],
    "8": [
     {
-     "name": "Diamond",
-     "qty": 1964
+     "name": "Enchanted Diamond",
+     "qty": 128
     }
    ],
    "9": [
     {
-     "name": "Diamond",
-     "qty": 2274
+     "name": "Enchanted Diamond",
+     "qty": 256
     }
    ],
    "10": [
     {
-     "name": "Diamond",
-     "qty": 2274
+     "name": "Enchanted Diamond",
+     "qty": 512
     }
    ],
    "11": [
     {
-     "name": "Diamond",
-     "qty": 2880
-    }
-   ],
-   "12": [
-    {
-     "name": "Diamond",
-     "qty": 3600
+     "name": "Enchanted Diamond Block",
+     "qty": 8
     }
    ]
   },
@@ -1234,73 +1100,71 @@
    "1": [
     {
      "name": "Emerald",
-     "qty": 1543
+     "qty": 80
+    },
+    {
+     "name": "Wooden Pickaxe",
+     "qty": 1
     }
    ],
    "2": [
     {
      "name": "Emerald",
-     "qty": 1543
+     "qty": 160
     }
    ],
    "3": [
     {
      "name": "Emerald",
-     "qty": 1662
+     "qty": 320
     }
    ],
    "4": [
     {
      "name": "Emerald",
-     "qty": 1662
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Emerald",
-     "qty": 1800
+     "name": "Enchanted Emerald",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Emerald",
-     "qty": 1800
+     "name": "Enchanted Emerald",
+     "qty": 24
     }
    ],
    "7": [
     {
-     "name": "Emerald",
-     "qty": 2057
+     "name": "Enchanted Emerald",
+     "qty": 64
     }
    ],
    "8": [
     {
-     "name": "Emerald",
-     "qty": 2057
+     "name": "Enchanted Emerald",
+     "qty": 128
     }
    ],
    "9": [
     {
-     "name": "Emerald",
-     "qty": 2400
+     "name": "Enchanted Emerald",
+     "qty": 256
     }
    ],
    "10": [
     {
-     "name": "Emerald",
-     "qty": 2400
+     "name": "Enchanted Emerald",
+     "qty": 512
     }
    ],
    "11": [
     {
-     "name": "Emerald",
-     "qty": 3086
-    }
-   ],
-   "12": [
-    {
-     "name": "Emerald",
-     "qty": 3600
+     "name": "Enchanted Emerald Block",
+     "qty": 8
     }
    ]
   },
@@ -1308,67 +1172,71 @@
    "1": [
     {
      "name": "End Stone",
-     "qty": 1662
+     "qty": 80
+    },
+    {
+     "name": "Wooden Pickaxe",
+     "qty": 1
     }
    ],
    "2": [
     {
      "name": "End Stone",
-     "qty": 1662
+     "qty": 160
     }
    ],
    "3": [
     {
      "name": "End Stone",
-     "qty": 1800
+     "qty": 320
     }
    ],
    "4": [
     {
      "name": "End Stone",
-     "qty": 1800
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "End Stone",
-     "qty": 1964
+     "name": "Enchanted End Stone",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "End Stone",
-     "qty": 1964
+     "name": "Enchanted End Stone",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "name": "End Stone",
-     "qty": 2274
+     "name": "Enchanted End Stone",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "name": "End Stone",
-     "qty": 2274
+     "name": "Enchanted End Stone",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "name": "End Stone",
-     "qty": 2700
+     "name": "Enchanted End Stone",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "name": "End Stone",
-     "qty": 2700
+     "name": "Enchanted End Stone",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "name": "End Stone",
-     "qty": 3323
+     "name": "Enchanted End Stone",
+     "qty": 512
     }
    ]
   },
@@ -1376,67 +1244,71 @@
    "1": [
     {
      "name": "Ender Pearl",
-     "qty": 1350
+     "qty": 64
+    },
+    {
+     "name": "Wooden Sword",
+     "qty": 1
     }
    ],
    "2": [
     {
      "name": "Ender Pearl",
-     "qty": 1350
+     "qty": 128
     }
    ],
    "3": [
     {
-     "name": "Ender Pearl",
-     "qty": 1440
+     "name": "Enchanted Ender Pearl",
+     "qty": 8
     }
    ],
    "4": [
     {
-     "name": "Ender Pearl",
-     "qty": 1440
+     "name": "Enchanted Ender Pearl",
+     "qty": 24
     }
    ],
    "5": [
     {
-     "name": "Ender Pearl",
-     "qty": 1543
+     "name": "Enchanted Ender Pearl",
+     "qty": 48
     }
    ],
    "6": [
     {
-     "name": "Ender Pearl",
-     "qty": 1543
+     "name": "Enchanted Ender Pearl",
+     "qty": 96
     }
    ],
    "7": [
     {
-     "name": "Ender Pearl",
-     "qty": 1728
+     "name": "Enchanted Eye of Ender",
+     "qty": 8
     }
    ],
    "8": [
     {
-     "name": "Ender Pearl",
-     "qty": 1728
+     "name": "Enchanted Eye of Ender",
+     "qty": 24
     }
    ],
    "9": [
     {
-     "name": "Ender Pearl",
-     "qty": 1964
+     "name": "Enchanted Eye of Ender",
+     "qty": 48
     }
    ],
    "10": [
     {
-     "name": "Ender Pearl",
-     "qty": 1964
+     "name": "Enchanted Eye of Ender",
+     "qty": 96
     }
    ],
    "11": [
     {
-     "name": "Ender Pearl",
-     "qty": 2400
+     "name": "Enchanted Eye of Ender",
+     "qty": 192
     }
    ]
   },
@@ -1444,1011 +1316,145 @@
    "1": [
     {
      "name": "Raw Cod",
-     "qty": 576
+     "qty": 64
     },
     {
-     "name": "Raw Salmon",
-     "qty": 288
-    },
-    {
-     "name": "Pufferfish",
-     "qty": 138
-    },
-    {
-     "name": "Tropical Fish",
-     "qty": 46
-    },
-    {
-     "name": "Prismarine Crystals",
-     "qty": 35
-    },
-    {
-     "name": "Prismarine Shard",
-     "qty": 35
-    },
-    {
-     "name": "Sponge",
-     "qty": 35
+     "name": "Fishing Rod",
+     "qty": 1
     }
    ],
    "2": [
     {
      "name": "Raw Cod",
-     "qty": 576
-    },
-    {
-     "name": "Raw Salmon",
-     "qty": 288
-    },
-    {
-     "name": "Pufferfish",
-     "qty": 138
-    },
-    {
-     "name": "Tropical Fish",
-     "qty": 46
-    },
-    {
-     "name": "Prismarine Crystals",
-     "qty": 35
-    },
-    {
-     "name": "Prismarine Shard",
-     "qty": 35
-    },
-    {
-     "name": "Sponge",
-     "qty": 35
+     "qty": 128
     }
    ],
    "3": [
     {
      "name": "Raw Cod",
-     "qty": 645
-    },
-    {
-     "name": "Raw Salmon",
-     "qty": 322
-    },
-    {
-     "name": "Pufferfish",
-     "qty": 155
-    },
-    {
-     "name": "Tropical Fish",
-     "qty": 52
-    },
-    {
-     "name": "Prismarine Crystals",
-     "qty": 39
-    },
-    {
-     "name": "Prismarine Shard",
-     "qty": 39
-    },
-    {
-     "name": "Sponge",
-     "qty": 39
+     "qty": 256
     }
    ],
    "4": [
     {
      "name": "Raw Cod",
-     "qty": 645
-    },
-    {
-     "name": "Raw Salmon",
-     "qty": 322
-    },
-    {
-     "name": "Pufferfish",
-     "qty": 155
-    },
-    {
-     "name": "Tropical Fish",
-     "qty": 52
-    },
-    {
-     "name": "Prismarine Crystals",
-     "qty": 39
-    },
-    {
-     "name": "Prismarine Shard",
-     "qty": 39
-    },
-    {
-     "name": "Sponge",
-     "qty": 39
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Raw Cod",
-     "qty": 732
-    },
-    {
-     "name": "Raw Salmon",
-     "qty": 366
-    },
-    {
-     "name": "Pufferfish",
-     "qty": 176
-    },
-    {
-     "name": "Tropical Fish",
-     "qty": 59
-    },
-    {
-     "name": "Prismarine Crystals",
-     "qty": 44
-    },
-    {
-     "name": "Prismarine Shard",
-     "qty": 44
-    },
-    {
-     "name": "Sponge",
-     "qty": 44
+     "name": "Enchanted Raw Cod",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Raw Cod",
-     "qty": 732
-    },
-    {
-     "name": "Raw Salmon",
-     "qty": 366
-    },
-    {
-     "name": "Pufferfish",
-     "qty": 176
-    },
-    {
-     "name": "Tropical Fish",
-     "qty": 59
-    },
-    {
-     "name": "Prismarine Crystals",
-     "qty": 44
-    },
-    {
-     "name": "Prismarine Shard",
-     "qty": 44
-    },
-    {
-     "name": "Sponge",
-     "qty": 44
+     "name": "Enchanted Raw Cod",
+     "qty": 24
     }
    ],
    "7": [
     {
-     "name": "Raw Cod",
-     "qty": 847
-    },
-    {
-     "name": "Raw Salmon",
-     "qty": 424
-    },
-    {
-     "name": "Pufferfish",
-     "qty": 203
-    },
-    {
-     "name": "Tropical Fish",
-     "qty": 68
-    },
-    {
-     "name": "Prismarine Crystals",
-     "qty": 51
-    },
-    {
-     "name": "Prismarine Shard",
-     "qty": 51
-    },
-    {
-     "name": "Sponge",
-     "qty": 51
+     "name": "Enchanted Raw Cod",
+     "qty": 64
     }
    ],
    "8": [
     {
-     "name": "Raw Cod",
-     "qty": 847
-    },
-    {
-     "name": "Raw Salmon",
-     "qty": 424
-    },
-    {
-     "name": "Pufferfish",
-     "qty": 203
-    },
-    {
-     "name": "Tropical Fish",
-     "qty": 68
-    },
-    {
-     "name": "Prismarine Crystals",
-     "qty": 51
-    },
-    {
-     "name": "Prismarine Shard",
-     "qty": 51
-    },
-    {
-     "name": "Sponge",
-     "qty": 51
+     "name": "Enchanted Raw Cod",
+     "qty": 128
     }
    ],
    "9": [
     {
-     "name": "Raw Cod",
-     "qty": 1005
-    },
-    {
-     "name": "Raw Salmon",
-     "qty": 502
-    },
-    {
-     "name": "Pufferfish",
-     "qty": 241
-    },
-    {
-     "name": "Tropical Fish",
-     "qty": 80
-    },
-    {
-     "name": "Prismarine Crystals",
-     "qty": 60
-    },
-    {
-     "name": "Prismarine Shard",
-     "qty": 60
-    },
-    {
-     "name": "Sponge",
-     "qty": 60
+     "name": "Enchanted Raw Cod",
+     "qty": 256
     }
    ],
    "10": [
     {
-     "name": "Raw Cod",
-     "qty": 1005
-    },
-    {
-     "name": "Raw Salmon",
-     "qty": 502
-    },
-    {
-     "name": "Pufferfish",
-     "qty": 241
-    },
-    {
-     "name": "Tropical Fish",
-     "qty": 80
-    },
-    {
-     "name": "Prismarine Crystals",
-     "qty": 60
-    },
-    {
-     "name": "Prismarine Shard",
-     "qty": 60
-    },
-    {
-     "name": "Sponge",
-     "qty": 60
+     "name": "Enchanted Raw Cod",
+     "qty": 512
     }
    ],
    "11": [
     {
-     "name": "Raw Cod",
-     "qty": 1234
-    },
-    {
-     "name": "Raw Salmon",
-     "qty": 617
-    },
-    {
-     "name": "Pufferfish",
-     "qty": 296
-    },
-    {
-     "name": "Tropical Fish",
-     "qty": 99
-    },
-    {
-     "name": "Prismarine Crystals",
-     "qty": 74
-    },
-    {
-     "name": "Prismarine Shard",
-     "qty": 74
-    },
-    {
-     "name": "Sponge",
-     "qty": 74
+     "name": "Enchanted Cooked Cod",
+     "qty": 8
     }
    ],
    "12": [
     {
-     "name": "Raw Cod",
-     "qty": 1440
-    },
-    {
-     "name": "Raw Salmon",
-     "qty": 720
-    },
-    {
-     "name": "Pufferfish",
-     "qty": 346
-    },
-    {
-     "name": "Tropical Fish",
-     "qty": 115
-    },
-    {
-     "name": "Prismarine Crystals",
-     "qty": 86
-    },
-    {
-     "name": "Prismarine Shard",
-     "qty": 86
-    },
-    {
-     "name": "Sponge",
-     "qty": 86
+     "name": "Fishing Minion XII Upgrade Stone",
+     "qty": 1
     }
    ]
   },
   "FLOWER": {
-   "1": [
-    {
-     "name": "Dandelion",
-     "qty": 504
-    },
-    {
-     "name": "Poppy",
-     "qty": 216
-    },
-    {
-     "name": "Allium",
-     "qty": 60
-    },
-    {
-     "name": "Azure Bluet",
-     "qty": 60
-    },
-    {
-     "name": "Blue Orchid",
-     "qty": 60
-    },
-    {
-     "name": "Oxeye Daisy",
-     "qty": 60
-    },
-    {
-     "name": "Red Tulip",
-     "qty": 60
-    },
-    {
-     "name": "Orange Tulip",
-     "qty": 60
-    },
-    {
-     "name": "White Tulip",
-     "qty": 60
-    },
-    {
-     "name": "Pink Tulip",
-     "qty": 60
-    },
-    {
-     "name": "Lilac",
-     "qty": 60
-    },
-    {
-     "name": "Peony",
-     "qty": 60
-    },
-    {
-     "name": "Rose Bush",
-     "qty": 60
-    }
-   ],
    "2": [
     {
      "name": "Dandelion",
-     "qty": 521
-    },
-    {
-     "name": "Poppy",
-     "qty": 223
-    },
-    {
-     "name": "Allium",
-     "qty": 62
-    },
-    {
-     "name": "Azure Bluet",
-     "qty": 62
-    },
-    {
-     "name": "Blue Orchid",
-     "qty": 62
-    },
-    {
-     "name": "Oxeye Daisy",
-     "qty": 62
-    },
-    {
-     "name": "Red Tulip",
-     "qty": 62
-    },
-    {
-     "name": "Orange Tulip",
-     "qty": 62
-    },
-    {
-     "name": "White Tulip",
-     "qty": 62
-    },
-    {
-     "name": "Pink Tulip",
-     "qty": 62
-    },
-    {
-     "name": "Lilac",
-     "qty": 62
-    },
-    {
-     "name": "Peony",
-     "qty": 62
-    },
-    {
-     "name": "Rose Bush",
-     "qty": 62
+     "qty": 160
     }
    ],
    "3": [
     {
      "name": "Dandelion",
-     "qty": 540
-    },
-    {
-     "name": "Poppy",
-     "qty": 231
-    },
-    {
-     "name": "Allium",
-     "qty": 64
-    },
-    {
-     "name": "Azure Bluet",
-     "qty": 64
-    },
-    {
-     "name": "Blue Orchid",
-     "qty": 64
-    },
-    {
-     "name": "Oxeye Daisy",
-     "qty": 64
-    },
-    {
-     "name": "Red Tulip",
-     "qty": 64
-    },
-    {
-     "name": "Orange Tulip",
-     "qty": 64
-    },
-    {
-     "name": "White Tulip",
-     "qty": 64
-    },
-    {
-     "name": "Pink Tulip",
-     "qty": 64
-    },
-    {
-     "name": "Lilac",
-     "qty": 64
-    },
-    {
-     "name": "Peony",
-     "qty": 64
-    },
-    {
-     "name": "Rose Bush",
-     "qty": 64
+     "qty": 320
     }
    ],
    "4": [
     {
      "name": "Dandelion",
-     "qty": 560
-    },
-    {
-     "name": "Poppy",
-     "qty": 240
-    },
-    {
-     "name": "Allium",
-     "qty": 67
-    },
-    {
-     "name": "Azure Bluet",
-     "qty": 67
-    },
-    {
-     "name": "Blue Orchid",
-     "qty": 67
-    },
-    {
-     "name": "Oxeye Daisy",
-     "qty": 67
-    },
-    {
-     "name": "Red Tulip",
-     "qty": 67
-    },
-    {
-     "name": "Orange Tulip",
-     "qty": 67
-    },
-    {
-     "name": "White Tulip",
-     "qty": 67
-    },
-    {
-     "name": "Pink Tulip",
-     "qty": 67
-    },
-    {
-     "name": "Lilac",
-     "qty": 67
-    },
-    {
-     "name": "Peony",
-     "qty": 67
-    },
-    {
-     "name": "Rose Bush",
-     "qty": 67
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Dandelion",
-     "qty": 582
-    },
-    {
-     "name": "Poppy",
-     "qty": 249
-    },
-    {
-     "name": "Allium",
-     "qty": 69
-    },
-    {
-     "name": "Azure Bluet",
-     "qty": 69
-    },
-    {
-     "name": "Blue Orchid",
-     "qty": 69
-    },
-    {
-     "name": "Oxeye Daisy",
-     "qty": 69
-    },
-    {
-     "name": "Red Tulip",
-     "qty": 69
-    },
-    {
-     "name": "Orange Tulip",
-     "qty": 69
-    },
-    {
-     "name": "White Tulip",
-     "qty": 69
-    },
-    {
-     "name": "Pink Tulip",
-     "qty": 69
-    },
-    {
-     "name": "Lilac",
-     "qty": 69
-    },
-    {
-     "name": "Peony",
-     "qty": 69
-    },
-    {
-     "name": "Rose Bush",
-     "qty": 69
+     "name": "Enchanted Dandelion",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Dandelion",
-     "qty": 605
-    },
-    {
-     "name": "Poppy",
-     "qty": 259
-    },
-    {
-     "name": "Allium",
-     "qty": 72
-    },
-    {
-     "name": "Azure Bluet",
-     "qty": 72
-    },
-    {
-     "name": "Blue Orchid",
-     "qty": 72
-    },
-    {
-     "name": "Oxeye Daisy",
-     "qty": 72
-    },
-    {
-     "name": "Red Tulip",
-     "qty": 72
-    },
-    {
-     "name": "Orange Tulip",
-     "qty": 72
-    },
-    {
-     "name": "White Tulip",
-     "qty": 72
-    },
-    {
-     "name": "Pink Tulip",
-     "qty": 72
-    },
-    {
-     "name": "Lilac",
-     "qty": 72
-    },
-    {
-     "name": "Peony",
-     "qty": 72
-    },
-    {
-     "name": "Rose Bush",
-     "qty": 72
+     "name": "Enchanted Dandelion",
+     "qty": 24
     }
    ],
    "7": [
     {
-     "name": "Dandelion",
-     "qty": 630
-    },
-    {
-     "name": "Poppy",
-     "qty": 270
-    },
-    {
-     "name": "Allium",
-     "qty": 75
-    },
-    {
-     "name": "Azure Bluet",
-     "qty": 75
-    },
-    {
-     "name": "Blue Orchid",
-     "qty": 75
-    },
-    {
-     "name": "Oxeye Daisy",
-     "qty": 75
-    },
-    {
-     "name": "Red Tulip",
-     "qty": 75
-    },
-    {
-     "name": "Orange Tulip",
-     "qty": 75
-    },
-    {
-     "name": "White Tulip",
-     "qty": 75
-    },
-    {
-     "name": "Pink Tulip",
-     "qty": 75
-    },
-    {
-     "name": "Lilac",
-     "qty": 75
-    },
-    {
-     "name": "Peony",
-     "qty": 75
-    },
-    {
-     "name": "Rose Bush",
-     "qty": 75
+     "name": "Enchanted Dandelion",
+     "qty": 64
     }
    ],
    "8": [
     {
-     "name": "Dandelion",
-     "qty": 657
-    },
-    {
-     "name": "Poppy",
-     "qty": 282
-    },
-    {
-     "name": "Allium",
-     "qty": 78
-    },
-    {
-     "name": "Azure Bluet",
-     "qty": 78
-    },
-    {
-     "name": "Blue Orchid",
-     "qty": 78
-    },
-    {
-     "name": "Oxeye Daisy",
-     "qty": 78
-    },
-    {
-     "name": "Red Tulip",
-     "qty": 78
-    },
-    {
-     "name": "Orange Tulip",
-     "qty": 78
-    },
-    {
-     "name": "White Tulip",
-     "qty": 78
-    },
-    {
-     "name": "Pink Tulip",
-     "qty": 78
-    },
-    {
-     "name": "Lilac",
-     "qty": 78
-    },
-    {
-     "name": "Peony",
-     "qty": 78
-    },
-    {
-     "name": "Rose Bush",
-     "qty": 78
+     "name": "Enchanted Dandelion",
+     "qty": 128
     }
    ],
    "9": [
     {
-     "name": "Dandelion",
-     "qty": 687
-    },
-    {
-     "name": "Poppy",
-     "qty": 295
-    },
-    {
-     "name": "Allium",
-     "qty": 82
-    },
-    {
-     "name": "Azure Bluet",
-     "qty": 82
-    },
-    {
-     "name": "Blue Orchid",
-     "qty": 82
-    },
-    {
-     "name": "Oxeye Daisy",
-     "qty": 82
-    },
-    {
-     "name": "Red Tulip",
-     "qty": 82
-    },
-    {
-     "name": "Orange Tulip",
-     "qty": 82
-    },
-    {
-     "name": "White Tulip",
-     "qty": 82
-    },
-    {
-     "name": "Pink Tulip",
-     "qty": 82
-    },
-    {
-     "name": "Lilac",
-     "qty": 82
-    },
-    {
-     "name": "Peony",
-     "qty": 82
-    },
-    {
-     "name": "Rose Bush",
-     "qty": 82
+     "name": "Enchanted Dandelion",
+     "qty": 256
     }
    ],
    "10": [
     {
-     "name": "Dandelion",
-     "qty": 756
-    },
-    {
-     "name": "Poppy",
-     "qty": 324
-    },
-    {
-     "name": "Allium",
-     "qty": 90
-    },
-    {
-     "name": "Azure Bluet",
-     "qty": 90
-    },
-    {
-     "name": "Blue Orchid",
-     "qty": 90
-    },
-    {
-     "name": "Oxeye Daisy",
-     "qty": 90
-    },
-    {
-     "name": "Red Tulip",
-     "qty": 90
-    },
-    {
-     "name": "Orange Tulip",
-     "qty": 90
-    },
-    {
-     "name": "White Tulip",
-     "qty": 90
-    },
-    {
-     "name": "Pink Tulip",
-     "qty": 90
-    },
-    {
-     "name": "Lilac",
-     "qty": 90
-    },
-    {
-     "name": "Peony",
-     "qty": 90
-    },
-    {
-     "name": "Rose Bush",
-     "qty": 90
+     "name": "Enchanted Dandelion",
+     "qty": 512
     }
    ],
    "11": [
     {
-     "name": "Dandelion",
-     "qty": 840
-    },
-    {
-     "name": "Poppy",
-     "qty": 360
-    },
-    {
-     "name": "Allium",
-     "qty": 100
-    },
-    {
-     "name": "Azure Bluet",
-     "qty": 100
-    },
-    {
-     "name": "Blue Orchid",
-     "qty": 100
-    },
-    {
-     "name": "Oxeye Daisy",
-     "qty": 100
-    },
-    {
-     "name": "Red Tulip",
-     "qty": 100
-    },
-    {
-     "name": "Orange Tulip",
-     "qty": 100
-    },
-    {
-     "name": "White Tulip",
-     "qty": 100
-    },
-    {
-     "name": "Pink Tulip",
-     "qty": 100
-    },
-    {
-     "name": "Lilac",
-     "qty": 100
-    },
-    {
-     "name": "Peony",
-     "qty": 100
-    },
-    {
-     "name": "Rose Bush",
-     "qty": 100
+     "name": "Enchanted Poppy",
+     "qty": 8
     }
    ],
    "12": [
     {
-     "name": "Dandelion",
-     "qty": 1008
-    },
-    {
-     "name": "Poppy",
-     "qty": 432
-    },
-    {
-     "name": "Allium",
-     "qty": 120
-    },
-    {
-     "name": "Azure Bluet",
-     "qty": 120
-    },
-    {
-     "name": "Blue Orchid",
-     "qty": 120
-    },
-    {
-     "name": "Oxeye Daisy",
-     "qty": 120
-    },
-    {
-     "name": "Red Tulip",
-     "qty": 120
-    },
-    {
-     "name": "Orange Tulip",
-     "qty": 120
-    },
-    {
-     "name": "White Tulip",
-     "qty": 120
-    },
-    {
-     "name": "Pink Tulip",
-     "qty": 120
-    },
-    {
-     "name": "Lilac",
-     "qty": 120
-    },
-    {
-     "name": "Peony",
-     "qty": 120
-    },
-    {
-     "name": "Rose Bush",
-     "qty": 120
+     "name": "Enchanted Poppy",
+     "qty": 16
     }
    ]
   },
@@ -2456,721 +1462,735 @@
    "1": [
     {
      "name": "Ghast Tear",
-     "qty": 864
+     "qty": 64
+    },
+    {
+     "name": "Wooden Sword",
+     "qty": 1
     }
    ],
    "2": [
     {
      "name": "Ghast Tear",
-     "qty": 864
+     "qty": 128
     }
    ],
    "3": [
     {
      "name": "Ghast Tear",
-     "qty": 919
+     "qty": 256
     }
    ],
    "4": [
     {
      "name": "Ghast Tear",
-     "qty": 919
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Ghast Tear",
-     "qty": 982
+     "name": "Enchanted Ghast Tear",
+     "qty": 256
     }
    ],
    "6": [
     {
-     "name": "Ghast Tear",
-     "qty": 982
+     "name": "Enchanted Ghast Tear",
+     "qty": 512
     }
    ],
    "7": [
     {
-     "name": "Ghast Tear",
-     "qty": 1054
+     "name": "Silver Fang",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "name": "Ghast Tear",
-     "qty": 1054
+     "name": "Silver Fang",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "name": "Ghast Tear",
-     "qty": 1137
+     "name": "Silver Fang",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "name": "Ghast Tear",
-     "qty": 1137
+     "name": "Silver Fang",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "name": "Ghast Tear",
-     "qty": 1350
-    }
-   ],
-   "12": [
-    {
-     "name": "Ghast Tear",
-     "qty": 1440
+     "name": "Silver Fang",
+     "qty": 512
     }
    ]
   },
   "GLOWSTONE": {
    "1": [
     {
+     "name": "Wooden Pickaxe",
+     "qty": 1
+    },
+    {
      "name": "Glowstone Dust",
-     "qty": 5184
+     "qty": 128
     }
    ],
    "2": [
     {
      "name": "Glowstone Dust",
-     "qty": 5184
+     "qty": 256
     }
    ],
    "3": [
     {
      "name": "Glowstone Dust",
-     "qty": 5635
+     "qty": 512
     }
    ],
    "4": [
     {
-     "name": "Glowstone Dust",
-     "qty": 5635
+     "name": "Enchanted Glowstone Dust",
+     "qty": 8
     }
    ],
    "5": [
     {
-     "name": "Glowstone Dust",
-     "qty": 6171
+     "name": "Enchanted Glowstone Dust",
+     "qty": 24
     }
    ],
    "6": [
     {
-     "name": "Glowstone Dust",
-     "qty": 6171
+     "name": "Enchanted Glowstone Dust",
+     "qty": 64
     }
    ],
    "7": [
     {
-     "name": "Glowstone Dust",
-     "qty": 6821
+     "name": "Enchanted Glowstone Dust",
+     "qty": 128
     }
    ],
    "8": [
     {
-     "name": "Glowstone Dust",
-     "qty": 6821
+     "name": "Enchanted Glowstone Dust",
+     "qty": 256
     }
    ],
    "9": [
     {
-     "name": "Glowstone Dust",
-     "qty": 8100
+     "name": "Enchanted Glowstone Dust",
+     "qty": 512
     }
    ],
    "10": [
     {
-     "name": "Glowstone Dust",
-     "qty": 8100
+     "name": "Enchanted Glowstone",
+     "qty": 8
     }
    ],
    "11": [
     {
-     "name": "Glowstone Dust",
-     "qty": 9969
-    }
-   ],
-   "12": [
-    {
-     "name": "Glowstone Dust",
-     "qty": 11782
+     "name": "Enchanted Glowstone",
+     "qty": 16
     }
    ]
   },
   "GOLD": {
    "1": [
     {
+     "name": "Wooden Pickaxe",
+     "qty": 1
+    },
+    {
      "name": "Gold Ingot",
-     "qty": 1964
+     "qty": 80
     }
    ],
    "2": [
     {
      "name": "Gold Ingot",
-     "qty": 1964
+     "qty": 160
     }
    ],
    "3": [
     {
      "name": "Gold Ingot",
-     "qty": 2160
+     "qty": 320
     }
    ],
    "4": [
     {
      "name": "Gold Ingot",
-     "qty": 2160
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Gold Ingot",
-     "qty": 2400
+     "name": "Enchanted Gold Ingot",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Gold Ingot",
-     "qty": 2400
+     "name": "Enchanted Gold Ingot",
+     "qty": 24
     }
    ],
    "7": [
     {
-     "name": "Gold Ingot",
-     "qty": 2700
+     "name": "Enchanted Gold Ingot",
+     "qty": 64
     }
    ],
    "8": [
     {
-     "name": "Gold Ingot",
-     "qty": 2700
+     "name": "Enchanted Gold Ingot",
+     "qty": 128
     }
    ],
    "9": [
     {
-     "name": "Gold Ingot",
-     "qty": 3086
+     "name": "Enchanted Gold Ingot",
+     "qty": 256
     }
    ],
    "10": [
     {
-     "name": "Gold Ingot",
-     "qty": 3086
+     "name": "Enchanted Gold Ingot",
+     "qty": 512
     }
    ],
    "11": [
     {
-     "name": "Gold Ingot",
-     "qty": 3927
-    }
-   ],
-   "12": [
-    {
-     "name": "Gold Ingot",
-     "qty": 4800
+     "name": "Enchanted Gold Block",
+     "qty": 8
     }
    ]
   },
   "GRAVEL": {
    "1": [
     {
-     "name": "Flint",
-     "qty": 1662
+     "name": "Wooden Shovel",
+     "qty": 1
+    },
+    {
+     "name": "Gravel",
+     "qty": 80
     }
    ],
    "2": [
     {
-     "name": "Flint",
-     "qty": 1662
+     "name": "Gravel",
+     "qty": 160
     }
    ],
    "3": [
     {
-     "name": "Flint",
-     "qty": 1800
+     "name": "Gravel",
+     "qty": 320
     }
    ],
    "4": [
     {
-     "name": "Flint",
-     "qty": 1800
+     "name": "Gravel",
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Flint",
-     "qty": 1964
+     "name": "Enchanted Flint",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Flint",
-     "qty": 1964
+     "name": "Enchanted Flint",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "name": "Flint",
-     "qty": 2274
+     "name": "Enchanted Flint",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "name": "Flint",
-     "qty": 2274
+     "name": "Enchanted Flint",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "name": "Flint",
-     "qty": 2700
+     "name": "Enchanted Flint",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "name": "Flint",
-     "qty": 2700
+     "name": "Enchanted Flint",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "name": "Flint",
-     "qty": 3323
+     "name": "Enchanted Flint",
+     "qty": 512
     }
    ]
   },
   "HARD_STONE": {
    "1": [
     {
+     "name": "Wooden Pickaxe",
+     "qty": 1
+    },
+    {
      "name": "Hard Stone",
-     "qty": 6171
+     "qty": 256
     }
    ],
    "2": [
     {
      "name": "Hard Stone",
-     "qty": 6171
+     "qty": 512
     }
    ],
    "3": [
     {
-     "name": "Hard Stone",
-     "qty": 7200
+     "name": "Enchanted Hard Stone",
+     "qty": 8
     }
    ],
    "4": [
     {
-     "name": "Hard Stone",
-     "qty": 7200
+     "name": "Enchanted Hard Stone",
+     "qty": 16
     }
    ],
    "5": [
     {
-     "name": "Hard Stone",
-     "qty": 8640
+     "name": "Enchanted Hard Stone",
+     "qty": 32
     }
    ],
    "6": [
     {
-     "name": "Hard Stone",
-     "qty": 8640
+     "name": "Enchanted Hard Stone",
+     "qty": 64
     }
    ],
    "7": [
     {
-     "name": "Hard Stone",
-     "qty": 9600
+     "name": "Enchanted Hard Stone",
+     "qty": 128
     }
    ],
    "8": [
     {
-     "name": "Hard Stone",
-     "qty": 9600
+     "name": "Enchanted Hard Stone",
+     "qty": 256
     }
    ],
    "9": [
     {
-     "name": "Hard Stone",
-     "qty": 10800
+     "name": "Enchanted Hard Stone",
+     "qty": 512
     }
    ],
    "10": [
     {
-     "name": "Hard Stone",
-     "qty": 10800
+     "name": "Concentrated Stone",
+     "qty": 4
     }
    ],
    "11": [
     {
-     "name": "Hard Stone",
-     "qty": 12343
-    }
-   ],
-   "12": [
-    {
-     "name": "Hard Stone",
-     "qty": 14400
+     "name": "Concentrated Stone",
+     "qty": 8
     }
    ]
   },
   "ICE": {
    "1": [
     {
+     "name": "Wooden Pickaxe",
+     "qty": 1
+    },
+    {
      "name": "Ice",
-     "qty": 3086
+     "qty": 80
     }
    ],
    "2": [
     {
      "name": "Ice",
-     "qty": 3086
+     "qty": 160
     }
    ],
    "3": [
     {
      "name": "Ice",
-     "qty": 3600
+     "qty": 320
     }
    ],
    "4": [
     {
      "name": "Ice",
-     "qty": 3600
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Ice",
-     "qty": 4320
+     "name": "Packed Ice",
+     "qty": 128
     }
    ],
    "6": [
     {
-     "name": "Ice",
-     "qty": 4320
+     "name": "Packed Ice",
+     "qty": 256
     }
    ],
    "7": [
     {
-     "name": "Ice",
-     "qty": 4800
+     "name": "Packed Ice",
+     "qty": 512
     }
    ],
    "8": [
     {
-     "name": "Ice",
-     "qty": 4800
+     "name": "Enchanted Ice",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "name": "Ice",
-     "qty": 5400
+     "name": "Enchanted Ice",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "name": "Ice",
-     "qty": 5400
+     "name": "Enchanted Ice",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "name": "Ice",
-     "qty": 6171
-    }
-   ],
-   "12": [
-    {
-     "name": "Ice",
-     "qty": 7200
+     "name": "Enchanted Ice",
+     "qty": 512
     }
    ]
   },
   "INFERNO": {
    "1": [
     {
-     "name": "Crude Gabagool",
-     "qty": 43
+     "name": "Derelict Ashe",
+     "qty": 80
+    },
+    {
+     "name": "Blaze Minion I",
+     "qty": 1
     }
    ],
    "2": [
     {
-     "name": "Crude Gabagool",
-     "qty": 44
+     "name": "Derelict Ashe",
+     "qty": 320
     }
    ],
    "3": [
     {
-     "name": "Crude Gabagool",
-     "qty": 45
+     "name": "Molten Powder",
+     "qty": 8
     }
    ],
    "4": [
     {
-     "name": "Crude Gabagool",
-     "qty": 47
+     "name": "Molten Powder",
+     "qty": 16
     }
    ],
    "5": [
     {
-     "name": "Crude Gabagool",
-     "qty": 49
+     "name": "Molten Powder",
+     "qty": 32
     }
    ],
    "6": [
     {
-     "name": "Crude Gabagool",
-     "qty": 51
+     "name": "Molten Powder",
+     "qty": 64
     }
    ],
    "7": [
     {
-     "name": "Crude Gabagool",
-     "qty": 52
+     "name": "Molten Powder",
+     "qty": 128
     }
    ],
    "8": [
     {
-     "name": "Crude Gabagool",
-     "qty": 55
+     "name": "Molten Powder",
+     "qty": 256
     }
    ],
    "9": [
     {
-     "name": "Crude Gabagool",
-     "qty": 57
+     "name": "Molten Powder",
+     "qty": 256
+    },
+    {
+     "name": "Inferno Vertex",
+     "qty": 16
     }
    ],
    "10": [
     {
-     "name": "Crude Gabagool",
-     "qty": 59
+     "name": "Inferno Vertex",
+     "qty": 48
+    },
+    {
+     "name": "Molten Powder",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "name": "Crude Gabagool",
-     "qty": 62
+     "name": "Molten Powder",
+     "qty": 256
+    },
+    {
+     "name": "Inferno Vertex",
+     "qty": 48
+    },
+    {
+     "name": "Inferno Apex",
+     "qty": 1
     }
    ]
   },
   "IRON": {
    "1": [
     {
+     "name": "Wooden Pickaxe",
+     "qty": 1
+    },
+    {
      "name": "Iron Ingot",
-     "qty": 2541
+     "qty": 80
     }
    ],
    "2": [
     {
      "name": "Iron Ingot",
-     "qty": 2541
+     "qty": 160
     }
    ],
    "3": [
     {
      "name": "Iron Ingot",
-     "qty": 2880
+     "qty": 320
     }
    ],
    "4": [
     {
      "name": "Iron Ingot",
-     "qty": 2880
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Iron Ingot",
-     "qty": 3086
+     "name": "Enchanted Iron Ingot",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Iron Ingot",
-     "qty": 3086
+     "name": "Enchanted Iron Ingot",
+     "qty": 24
     }
    ],
    "7": [
     {
-     "name": "Iron Ingot",
-     "qty": 3600
+     "name": "Enchanted Iron Ingot",
+     "qty": 64
     }
    ],
    "8": [
     {
-     "name": "Iron Ingot",
-     "qty": 3600
+     "name": "Enchanted Iron Ingot",
+     "qty": 128
     }
    ],
    "9": [
     {
-     "name": "Iron Ingot",
-     "qty": 4320
+     "name": "Enchanted Iron Ingot",
+     "qty": 256
     }
    ],
    "10": [
     {
-     "name": "Iron Ingot",
-     "qty": 4320
+     "name": "Enchanted Iron Ingot",
+     "qty": 512
     }
    ],
    "11": [
     {
-     "name": "Iron Ingot",
-     "qty": 5400
-    }
-   ],
-   "12": [
-    {
-     "name": "Iron Ingot",
-     "qty": 6171
+     "name": "Enchanted Iron Block",
+     "qty": 8
     }
    ]
   },
   "JUNGLE": {
    "1": [
     {
+     "name": "Wooden Axe",
+     "qty": 1
+    },
+    {
      "name": "Jungle Log",
-     "qty": 3600
+     "qty": 80
     }
    ],
    "2": [
     {
      "name": "Jungle Log",
-     "qty": 3600
+     "qty": 160
     }
    ],
    "3": [
     {
      "name": "Jungle Log",
-     "qty": 3840
+     "qty": 320
     }
    ],
    "4": [
     {
      "name": "Jungle Log",
-     "qty": 3840
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Jungle Log",
-     "qty": 4114
+     "name": "Enchanted Jungle Log",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Jungle Log",
-     "qty": 4114
+     "name": "Enchanted Jungle Log",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "name": "Jungle Log",
-     "qty": 4547
+     "name": "Enchanted Jungle Log",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "name": "Jungle Log",
-     "qty": 4547
+     "name": "Enchanted Jungle Log",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "name": "Jungle Log",
-     "qty": 5236
+     "name": "Enchanted Jungle Log",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "name": "Jungle Log",
-     "qty": 5236
+     "name": "Enchanted Jungle Log",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "name": "Jungle Log",
-     "qty": 6400
+     "name": "Enchanted Jungle Log",
+     "qty": 512
     }
    ]
   },
   "LAPIS": {
    "1": [
     {
+     "name": "Wooden Pickaxe",
+     "qty": 1
+    },
+    {
      "name": "Lapis Lazuli",
-     "qty": 8938
+     "qty": 256
     }
    ],
    "2": [
     {
      "name": "Lapis Lazuli",
-     "qty": 8938
+     "qty": 512
     }
    ],
    "3": [
     {
-     "name": "Lapis Lazuli",
-     "qty": 9600
+     "name": "Enchanted Lapis Lazuli",
+     "qty": 8
     }
    ],
    "4": [
     {
-     "name": "Lapis Lazuli",
-     "qty": 9600
+     "name": "Enchanted Lapis Lazuli",
+     "qty": 24
     }
    ],
    "5": [
     {
-     "name": "Lapis Lazuli",
-     "qty": 10368
+     "name": "Enchanted Lapis Lazuli",
+     "qty": 64
     }
    ],
    "6": [
     {
-     "name": "Lapis Lazuli",
-     "qty": 10368
+     "name": "Enchanted Lapis Lazuli",
+     "qty": 128
     }
    ],
    "7": [
     {
-     "name": "Lapis Lazuli",
-     "qty": 11270
+     "name": "Enchanted Lapis Lazuli",
+     "qty": 256
     }
    ],
    "8": [
     {
-     "name": "Lapis Lazuli",
-     "qty": 11270
+     "name": "Enchanted Lapis Lazuli",
+     "qty": 512
     }
    ],
    "9": [
     {
-     "name": "Lapis Lazuli",
-     "qty": 12343
+     "name": "Enchanted Lapis Lazuli Block",
+     "qty": 8
     }
    ],
    "10": [
     {
-     "name": "Lapis Lazuli",
-     "qty": 12343
+     "name": "Enchanted Lapis Lazuli Block",
+     "qty": 16
     }
    ],
    "11": [
     {
-     "name": "Lapis Lazuli",
-     "qty": 14400
-    }
-   ],
-   "12": [
-    {
-     "name": "Lapis Lazuli",
-     "qty": 16200
+     "name": "Enchanted Lapis Lazuli Block",
+     "qty": 32
     }
    ]
   },
@@ -3178,73 +2198,71 @@
    "1": [
     {
      "name": "Magma Cream",
-     "qty": 2430
+     "qty": 80
+    },
+    {
+     "name": "Wooden Sword",
+     "qty": 1
     }
    ],
    "2": [
     {
      "name": "Magma Cream",
-     "qty": 2430
+     "qty": 160
     }
    ],
    "3": [
     {
      "name": "Magma Cream",
-     "qty": 2592
+     "qty": 320
     }
    ],
    "4": [
     {
      "name": "Magma Cream",
-     "qty": 2592
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Magma Cream",
-     "qty": 2777
+     "name": "Enchanted Magma Cream",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Magma Cream",
-     "qty": 2777
+     "name": "Enchanted Magma Cream",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "name": "Magma Cream",
-     "qty": 3110
+     "name": "Enchanted Magma Cream",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "name": "Magma Cream",
-     "qty": 3110
+     "name": "Enchanted Magma Cream",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "name": "Magma Cream",
-     "qty": 3535
+     "name": "Enchanted Magma Cream",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "name": "Magma Cream",
-     "qty": 3535
+     "name": "Enchanted Magma Cream",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "name": "Magma Cream",
-     "qty": 4320
-    }
-   ],
-   "12": [
-    {
-     "name": "Magma Cream",
-     "qty": 4860
+     "name": "Enchanted Magma Cream",
+     "qty": 512
     }
    ]
   },
@@ -3252,343 +2270,293 @@
    "1": [
     {
      "name": "Melon Slice",
-     "qty": 9000
+     "qty": 256
+    },
+    {
+     "name": "Wooden Hoe",
+     "qty": 1
     }
    ],
    "2": [
     {
      "name": "Melon Slice",
-     "qty": 9000
+     "qty": 512
     }
    ],
    "3": [
     {
-     "name": "Melon Slice",
-     "qty": 9600
+     "name": "Melon",
+     "qty": 128
     }
    ],
    "4": [
     {
-     "name": "Melon Slice",
-     "qty": 9600
+     "name": "Melon",
+     "qty": 256
     }
    ],
    "5": [
     {
-     "name": "Melon Slice",
-     "qty": 10286
+     "name": "Melon",
+     "qty": 512
     }
    ],
    "6": [
     {
-     "name": "Melon Slice",
-     "qty": 10286
+     "name": "Enchanted Melon Slice",
+     "qty": 64
     }
    ],
    "7": [
     {
-     "name": "Melon Slice",
-     "qty": 11676
+     "name": "Enchanted Melon Slice",
+     "qty": 128
     }
    ],
    "8": [
     {
-     "name": "Melon Slice",
-     "qty": 11676
+     "name": "Enchanted Melon Slice",
+     "qty": 256
     }
    ],
    "9": [
     {
-     "name": "Melon Slice",
-     "qty": 13500
+     "name": "Enchanted Melon Slice",
+     "qty": 512
     }
    ],
    "10": [
     {
-     "name": "Melon Slice",
-     "qty": 13500
+     "name": "Enchanted Melon",
+     "qty": 8
     }
    ],
    "11": [
     {
-     "name": "Melon Slice",
-     "qty": 16615
-    }
-   ],
-   "12": [
-    {
-     "name": "Melon Slice",
-     "qty": 21600
+     "name": "Enchanted Melon",
+     "qty": 16
     }
    ]
   },
   "MITHRIL": {
    "1": [
     {
+     "name": "Wooden Pickaxe",
+     "qty": 1
+    },
+    {
      "name": "Mithril",
-     "qty": 1080
+     "qty": 80
     }
    ],
    "2": [
     {
      "name": "Mithril",
-     "qty": 1080
+     "qty": 160
     }
    ],
    "3": [
     {
      "name": "Mithril",
-     "qty": 1152
+     "qty": 320
     }
    ],
    "4": [
     {
      "name": "Mithril",
-     "qty": 1152
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Mithril",
-     "qty": 1234
+     "name": "Enchanted Mithril",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Mithril",
-     "qty": 1234
+     "name": "Enchanted Mithril",
+     "qty": 24
     }
    ],
    "7": [
     {
-     "name": "Mithril",
-     "qty": 1329
+     "name": "Enchanted Mithril",
+     "qty": 64
     }
    ],
    "8": [
     {
-     "name": "Mithril",
-     "qty": 1329
+     "name": "Enchanted Mithril",
+     "qty": 128
     }
    ],
    "9": [
     {
-     "name": "Mithril",
-     "qty": 1440
+     "name": "Enchanted Mithril",
+     "qty": 256
     }
    ],
    "10": [
     {
-     "name": "Mithril",
-     "qty": 1440
+     "name": "Enchanted Mithril",
+     "qty": 512
     }
    ],
    "11": [
     {
-     "name": "Mithril",
-     "qty": 1571
-    }
-   ],
-   "12": [
-    {
-     "name": "Mithril",
-     "qty": 1728
+     "name": "Refined Mithril",
+     "qty": 8
     }
    ]
   },
   "MUSHROOM": {
    "1": [
     {
-     "name": "Brown Mushroom",
-     "qty": 720
+     "name": "Wooden Hoe",
+     "qty": 1
     },
     {
      "name": "Red Mushroom",
-     "qty": 720
+     "qty": 80
     }
    ],
    "2": [
     {
-     "name": "Brown Mushroom",
-     "qty": 720
-    },
-    {
      "name": "Red Mushroom",
-     "qty": 720
+     "qty": 160
     }
    ],
    "3": [
     {
-     "name": "Brown Mushroom",
-     "qty": 771
-    },
-    {
      "name": "Red Mushroom",
-     "qty": 771
+     "qty": 320
     }
    ],
    "4": [
     {
-     "name": "Brown Mushroom",
-     "qty": 771
-    },
-    {
      "name": "Red Mushroom",
-     "qty": 771
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Brown Mushroom",
-     "qty": 831
-    },
-    {
-     "name": "Red Mushroom",
-     "qty": 831
+     "name": "Enchanted Red Mushroom",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Brown Mushroom",
-     "qty": 831
-    },
-    {
-     "name": "Red Mushroom",
-     "qty": 831
+     "name": "Enchanted Red Mushroom",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "name": "Brown Mushroom",
-     "qty": 939
-    },
-    {
-     "name": "Red Mushroom",
-     "qty": 939
+     "name": "Enchanted Red Mushroom",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "name": "Brown Mushroom",
-     "qty": 939
-    },
-    {
-     "name": "Red Mushroom",
-     "qty": 939
+     "name": "Enchanted Red Mushroom",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "name": "Brown Mushroom",
-     "qty": 1080
-    },
-    {
-     "name": "Red Mushroom",
-     "qty": 1080
+     "name": "Enchanted Red Mushroom",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "name": "Brown Mushroom",
-     "qty": 1080
-    },
-    {
-     "name": "Red Mushroom",
-     "qty": 1080
+     "name": "Enchanted Red Mushroom",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "name": "Brown Mushroom",
-     "qty": 1350
-    },
-    {
-     "name": "Red Mushroom",
-     "qty": 1350
+     "name": "Enchanted Red Mushroom",
+     "qty": 512
     }
    ],
    "12": [
     {
-     "name": "Brown Mushroom",
-     "qty": 1800
-    },
-    {
-     "name": "Red Mushroom",
-     "qty": 1800
+     "name": "Enchanted Brown Mushroom",
+     "qty": 512
     }
    ]
   },
   "MYCELIUM": {
    "1": [
     {
+     "name": "Wooden Shovel",
+     "qty": 1
+    },
+    {
      "name": "Mycelium",
-     "qty": 1662
+     "qty": 80
     }
    ],
    "2": [
     {
      "name": "Mycelium",
-     "qty": 1728
+     "qty": 256
     }
    ],
    "3": [
     {
      "name": "Mycelium",
-     "qty": 1800
+     "qty": 512
     }
    ],
    "4": [
     {
-     "name": "Mycelium",
-     "qty": 1878
+     "name": "Enchanted Mycelium",
+     "qty": 16
     }
    ],
    "5": [
     {
-     "name": "Mycelium",
-     "qty": 1964
+     "name": "Enchanted Mycelium",
+     "qty": 32
     }
    ],
    "6": [
     {
-     "name": "Mycelium",
-     "qty": 2057
+     "name": "Enchanted Mycelium",
+     "qty": 64
     }
    ],
    "7": [
     {
-     "name": "Mycelium",
-     "qty": 2160
+     "name": "Enchanted Mycelium",
+     "qty": 128
     }
    ],
    "8": [
     {
-     "name": "Mycelium",
-     "qty": 2274
+     "name": "Enchanted Mycelium",
+     "qty": 256
     }
    ],
    "9": [
     {
-     "name": "Mycelium",
-     "qty": 2400
+     "name": "Enchanted Mycelium",
+     "qty": 512
     }
    ],
    "10": [
     {
-     "name": "Mycelium",
-     "qty": 2700
+     "name": "Enchanted Mycelium Cube",
+     "qty": 8
     }
    ],
    "11": [
     {
-     "name": "Mycelium",
-     "qty": 3323
-    }
-   ],
-   "12": [
-    {
-     "name": "Mycelium",
-     "qty": 3927
+     "name": "Enchanted Mycelium Cube",
+     "qty": 16
     }
    ]
   },
@@ -3596,73 +2564,71 @@
    "1": [
     {
      "name": "Nether Wart",
-     "qty": 2160
+     "qty": 80
+    },
+    {
+     "name": "Wooden Hoe",
+     "qty": 1
     }
    ],
    "2": [
     {
      "name": "Nether Wart",
-     "qty": 2160
+     "qty": 160
     }
    ],
    "3": [
     {
      "name": "Nether Wart",
-     "qty": 2298
+     "qty": 320
     }
    ],
    "4": [
     {
      "name": "Nether Wart",
-     "qty": 2298
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Nether Wart",
-     "qty": 2455
+     "name": "Enchanted Nether Wart",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Nether Wart",
-     "qty": 2455
+     "name": "Enchanted Nether Wart",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "name": "Nether Wart",
-     "qty": 2634
+     "name": "Enchanted Nether Wart",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "name": "Nether Wart",
-     "qty": 2634
+     "name": "Enchanted Nether Wart",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "name": "Nether Wart",
-     "qty": 2842
+     "name": "Enchanted Nether Wart",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "name": "Nether Wart",
-     "qty": 2842
+     "name": "Enchanted Nether Wart",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "name": "Nether Wart",
-     "qty": 3375
-    }
-   ],
-   "12": [
-    {
-     "name": "Nether Wart",
-     "qty": 4000
+     "name": "Enchanted Nether Wart",
+     "qty": 512
     }
    ]
   },
@@ -3670,141 +2636,143 @@
    "1": [
     {
      "name": "Oak Log",
-     "qty": 3600
+     "qty": 80
+    },
+    {
+     "name": "Wooden Axe",
+     "qty": 1
     }
    ],
    "2": [
     {
      "name": "Oak Log",
-     "qty": 3600
+     "qty": 160
     }
    ],
    "3": [
     {
      "name": "Oak Log",
-     "qty": 3840
+     "qty": 320
     }
    ],
    "4": [
     {
      "name": "Oak Log",
-     "qty": 3840
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Oak Log",
-     "qty": 4114
+     "name": "Enchanted Oak Log",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Oak Log",
-     "qty": 4114
+     "name": "Enchanted Oak Log",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "name": "Oak Log",
-     "qty": 4547
+     "name": "Enchanted Oak Log",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "name": "Oak Log",
-     "qty": 4547
+     "name": "Enchanted Oak Log",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "name": "Oak Log",
-     "qty": 5236
+     "name": "Enchanted Oak Log",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "name": "Oak Log",
-     "qty": 5236
+     "name": "Enchanted Oak Log",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "name": "Oak Log",
-     "qty": 6400
+     "name": "Enchanted Oak Log",
+     "qty": 512
     }
    ]
   },
   "OBSIDIAN": {
    "1": [
     {
+     "name": "Wooden Pickaxe",
+     "qty": 1
+    },
+    {
      "name": "Obsidian",
-     "qty": 960
+     "qty": 80
     }
    ],
    "2": [
     {
      "name": "Obsidian",
-     "qty": 960
+     "qty": 160
     }
    ],
    "3": [
     {
      "name": "Obsidian",
-     "qty": 1029
+     "qty": 320
     }
    ],
    "4": [
     {
      "name": "Obsidian",
-     "qty": 1029
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Obsidian",
-     "qty": 1108
+     "name": "Enchanted Obsidian",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Obsidian",
-     "qty": 1108
+     "name": "Enchanted Obsidian",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "name": "Obsidian",
-     "qty": 1234
+     "name": "Enchanted Obsidian",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "name": "Obsidian",
-     "qty": 1234
+     "name": "Enchanted Obsidian",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "name": "Obsidian",
-     "qty": 1440
+     "name": "Enchanted Obsidian",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "name": "Obsidian",
-     "qty": 1440
+     "name": "Enchanted Obsidian",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "name": "Obsidian",
-     "qty": 1800
-    }
-   ],
-   "12": [
-    {
-     "name": "Obsidian",
-     "qty": 2057
+     "name": "Enchanted Obsidian",
+     "qty": 512
     }
    ]
   },
@@ -3812,73 +2780,71 @@
    "1": [
     {
      "name": "Raw Porkchop",
-     "qty": 1662
+     "qty": 64
+    },
+    {
+     "name": "Wooden Sword",
+     "qty": 1
     }
    ],
    "2": [
     {
      "name": "Raw Porkchop",
-     "qty": 1662
+     "qty": 128
     }
    ],
    "3": [
     {
      "name": "Raw Porkchop",
-     "qty": 1800
+     "qty": 256
     }
    ],
    "4": [
     {
      "name": "Raw Porkchop",
-     "qty": 1800
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Raw Porkchop",
-     "qty": 1964
+     "name": "Enchanted Raw Porkchop",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Raw Porkchop",
-     "qty": 1964
+     "name": "Enchanted Raw Porkchop",
+     "qty": 24
     }
    ],
    "7": [
     {
-     "name": "Raw Porkchop",
-     "qty": 2160
+     "name": "Enchanted Raw Porkchop",
+     "qty": 64
     }
    ],
    "8": [
     {
-     "name": "Raw Porkchop",
-     "qty": 2160
+     "name": "Enchanted Raw Porkchop",
+     "qty": 128
     }
    ],
    "9": [
     {
-     "name": "Raw Porkchop",
-     "qty": 2541
+     "name": "Enchanted Raw Porkchop",
+     "qty": 256
     }
    ],
    "10": [
     {
-     "name": "Raw Porkchop",
-     "qty": 2541
+     "name": "Enchanted Raw Porkchop",
+     "qty": 512
     }
    ],
    "11": [
     {
-     "name": "Raw Porkchop",
-     "qty": 3323
-    }
-   ],
-   "12": [
-    {
-     "name": "Raw Porkchop",
-     "qty": 4320
+     "name": "Enchanted Cooked Porkchop",
+     "qty": 8
     }
    ]
   },
@@ -3886,73 +2852,71 @@
    "1": [
     {
      "name": "Potato",
-     "qty": 6480
+     "qty": 128
+    },
+    {
+     "name": "Wooden Hoe",
+     "qty": 1
     }
    ],
    "2": [
     {
      "name": "Potato",
-     "qty": 6480
+     "qty": 256
     }
    ],
    "3": [
     {
      "name": "Potato",
-     "qty": 7200
+     "qty": 512
     }
    ],
    "4": [
     {
-     "name": "Potato",
-     "qty": 7200
+     "name": "Enchanted Potato",
+     "qty": 8
     }
    ],
    "5": [
     {
-     "name": "Potato",
-     "qty": 8100
+     "name": "Enchanted Potato",
+     "qty": 24
     }
    ],
    "6": [
     {
-     "name": "Potato",
-     "qty": 8100
+     "name": "Enchanted Potato",
+     "qty": 64
     }
    ],
    "7": [
     {
-     "name": "Potato",
-     "qty": 9257
+     "name": "Enchanted Potato",
+     "qty": 128
     }
    ],
    "8": [
     {
-     "name": "Potato",
-     "qty": 9257
+     "name": "Enchanted Potato",
+     "qty": 256
     }
    ],
    "9": [
     {
-     "name": "Potato",
-     "qty": 10800
+     "name": "Enchanted Potato",
+     "qty": 512
     }
    ],
    "10": [
     {
-     "name": "Potato",
-     "qty": 10800
+     "name": "Enchanted Baked Potato",
+     "qty": 8
     }
    ],
    "11": [
     {
-     "name": "Potato",
-     "qty": 12960
-    }
-   ],
-   "12": [
-    {
-     "name": "Potato",
-     "qty": 16200
+     "name": "Enchanted Baked Potato",
+     "qty": 16
     }
    ]
   },
@@ -3960,317 +2924,215 @@
    "1": [
     {
      "name": "Pumpkin",
-     "qty": 1350
+     "qty": 80
+    },
+    {
+     "name": "Wooden Hoe",
+     "qty": 1
     }
    ],
    "2": [
     {
      "name": "Pumpkin",
-     "qty": 1350
+     "qty": 160
     }
    ],
    "3": [
     {
      "name": "Pumpkin",
-     "qty": 1440
+     "qty": 320
     }
    ],
    "4": [
     {
      "name": "Pumpkin",
-     "qty": 1440
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Pumpkin",
-     "qty": 1600
+     "name": "Enchanted Pumpkin",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Pumpkin",
-     "qty": 1600
+     "name": "Enchanted Pumpkin",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "name": "Pumpkin",
-     "qty": 1800
+     "name": "Enchanted Pumpkin",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "name": "Pumpkin",
-     "qty": 1800
+     "name": "Enchanted Pumpkin",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "name": "Pumpkin",
-     "qty": 2160
+     "name": "Enchanted Pumpkin",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "name": "Pumpkin",
-     "qty": 2160
+     "name": "Enchanted Pumpkin",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "name": "Pumpkin",
-     "qty": 2700
-    }
-   ],
-   "12": [
-    {
-     "name": "Pumpkin",
-     "qty": 3600
+     "name": "Enchanted Pumpkin",
+     "qty": 512
     }
    ]
   },
   "QUARTZ": {
    "1": [
     {
+     "name": "Wooden Pickaxe",
+     "qty": 1
+    },
+    {
      "name": "Nether Quartz",
-     "qty": 1920
+     "qty": 80
     }
    ],
    "2": [
     {
      "name": "Nether Quartz",
-     "qty": 1920
+     "qty": 160
     }
    ],
    "3": [
     {
      "name": "Nether Quartz",
-     "qty": 2057
+     "qty": 320
     }
    ],
    "4": [
     {
      "name": "Nether Quartz",
-     "qty": 2057
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Nether Quartz",
-     "qty": 2274
+     "name": "Enchanted Nether Quartz",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Nether Quartz",
-     "qty": 2274
+     "name": "Enchanted Nether Quartz",
+     "qty": 24
     }
    ],
    "7": [
     {
-     "name": "Nether Quartz",
-     "qty": 2541
+     "name": "Enchanted Nether Quartz",
+     "qty": 64
     }
    ],
    "8": [
     {
-     "name": "Nether Quartz",
-     "qty": 2541
+     "name": "Enchanted Nether Quartz",
+     "qty": 128
     }
    ],
    "9": [
     {
-     "name": "Nether Quartz",
-     "qty": 2979
+     "name": "Enchanted Nether Quartz",
+     "qty": 256
     }
    ],
    "10": [
     {
-     "name": "Nether Quartz",
-     "qty": 2979
+     "name": "Enchanted Nether Quartz",
+     "qty": 512
     }
    ],
    "11": [
     {
-     "name": "Nether Quartz",
-     "qty": 3757
-    }
-   ],
-   "12": [
-    {
-     "name": "Nether Quartz",
-     "qty": 4320
+     "name": "Enchanted Quartz Block",
+     "qty": 8
     }
    ]
   },
   "RABBIT": {
    "1": [
     {
+     "name": "Wooden Sword",
+     "qty": 1
+    },
+    {
      "name": "Raw Rabbit",
-     "qty": 1662
-    },
-    {
-     "name": "Rabbit's Foot",
-     "qty": 582
-    },
-    {
-     "name": "Rabbit Hide",
-     "qty": 582
+     "qty": 64
     }
    ],
    "2": [
     {
      "name": "Raw Rabbit",
-     "qty": 1662
-    },
-    {
-     "name": "Rabbit's Foot",
-     "qty": 582
-    },
-    {
-     "name": "Rabbit Hide",
-     "qty": 582
+     "qty": 128
     }
    ],
    "3": [
     {
      "name": "Raw Rabbit",
-     "qty": 1800
-    },
-    {
-     "name": "Rabbit's Foot",
-     "qty": 630
-    },
-    {
-     "name": "Rabbit Hide",
-     "qty": 630
+     "qty": 256
     }
    ],
    "4": [
     {
      "name": "Raw Rabbit",
-     "qty": 1800
-    },
-    {
-     "name": "Rabbit's Foot",
-     "qty": 630
-    },
-    {
-     "name": "Rabbit Hide",
-     "qty": 630
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Raw Rabbit",
-     "qty": 1964
-    },
-    {
-     "name": "Rabbit's Foot",
-     "qty": 687
-    },
-    {
-     "name": "Rabbit Hide",
-     "qty": 687
+     "name": "Enchanted Raw Rabbit",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Raw Rabbit",
-     "qty": 1964
-    },
-    {
-     "name": "Rabbit's Foot",
-     "qty": 687
-    },
-    {
-     "name": "Rabbit Hide",
-     "qty": 687
+     "name": "Enchanted Raw Rabbit",
+     "qty": 24
     }
    ],
    "7": [
     {
-     "name": "Raw Rabbit",
-     "qty": 2160
-    },
-    {
-     "name": "Rabbit's Foot",
-     "qty": 756
-    },
-    {
-     "name": "Rabbit Hide",
-     "qty": 756
+     "name": "Enchanted Raw Rabbit",
+     "qty": 64
     }
    ],
    "8": [
     {
-     "name": "Raw Rabbit",
-     "qty": 2160
-    },
-    {
-     "name": "Rabbit's Foot",
-     "qty": 756
-    },
-    {
-     "name": "Rabbit Hide",
-     "qty": 756
+     "name": "Enchanted Raw Rabbit",
+     "qty": 128
     }
    ],
    "9": [
     {
-     "name": "Raw Rabbit",
-     "qty": 2541
-    },
-    {
-     "name": "Rabbit's Foot",
-     "qty": 889
-    },
-    {
-     "name": "Rabbit Hide",
-     "qty": 889
+     "name": "Enchanted Raw Rabbit",
+     "qty": 256
     }
    ],
    "10": [
     {
-     "name": "Raw Rabbit",
-     "qty": 2541
-    },
-    {
-     "name": "Rabbit's Foot",
-     "qty": 889
-    },
-    {
-     "name": "Rabbit Hide",
-     "qty": 889
+     "name": "Enchanted Raw Rabbit",
+     "qty": 512
     }
    ],
    "11": [
     {
-     "name": "Raw Rabbit",
-     "qty": 3323
-    },
-    {
-     "name": "Rabbit's Foot",
-     "qty": 1163
-    },
-    {
-     "name": "Rabbit Hide",
-     "qty": 1163
-    }
-   ],
-   "12": [
-    {
-     "name": "Raw Rabbit",
-     "qty": 4320
-    },
-    {
-     "name": "Rabbit's Foot",
-     "qty": 1512
-    },
-    {
-     "name": "Rabbit Hide",
-     "qty": 1512
+     "name": "Enchanted Cooked Rabbit",
+     "qty": 8
     }
    ]
   },
@@ -4278,337 +3140,327 @@
    "1": [
     {
      "name": "Red Sand",
-     "qty": 1662
+     "qty": 80
+    },
+    {
+     "name": "Wooden Shovel",
+     "qty": 1
     }
    ],
    "2": [
     {
      "name": "Red Sand",
-     "qty": 1728
+     "qty": 256
     }
    ],
    "3": [
     {
      "name": "Red Sand",
-     "qty": 1800
+     "qty": 512
     }
    ],
    "4": [
     {
-     "name": "Red Sand",
-     "qty": 1878
+     "name": "Enchanted Red Sand",
+     "qty": 16
     }
    ],
    "5": [
     {
-     "name": "Red Sand",
-     "qty": 1964
+     "name": "Enchanted Red Sand",
+     "qty": 32
     }
    ],
    "6": [
     {
-     "name": "Red Sand",
-     "qty": 2057
+     "name": "Enchanted Red Sand",
+     "qty": 64
     }
    ],
    "7": [
     {
-     "name": "Red Sand",
-     "qty": 2160
+     "name": "Enchanted Red Sand",
+     "qty": 128
     }
    ],
    "8": [
     {
-     "name": "Red Sand",
-     "qty": 2274
+     "name": "Enchanted Red Sand",
+     "qty": 256
     }
    ],
    "9": [
     {
-     "name": "Red Sand",
-     "qty": 2400
+     "name": "Enchanted Red Sand",
+     "qty": 512
     }
    ],
    "10": [
     {
-     "name": "Red Sand",
-     "qty": 2700
+     "name": "Enchanted Red Sand Cube",
+     "qty": 8
     }
    ],
    "11": [
     {
-     "name": "Red Sand",
-     "qty": 3323
-    }
-   ],
-   "12": [
-    {
-     "name": "Red Sand",
-     "qty": 3927
+     "name": "Enchanted Red Sand Cube",
+     "qty": 16
     }
    ]
   },
   "REDSTONE": {
    "1": [
     {
+     "name": "Wooden Pickaxe",
+     "qty": 1
+    },
+    {
      "name": "Redstone Dust",
-     "qty": 6703
+     "qty": 128
     }
    ],
    "2": [
     {
      "name": "Redstone Dust",
-     "qty": 6703
+     "qty": 256
     }
    ],
    "3": [
     {
      "name": "Redstone Dust",
-     "qty": 7200
+     "qty": 512
     }
    ],
    "4": [
     {
-     "name": "Redstone Dust",
-     "qty": 7200
+     "name": "Enchanted Redstone Dust",
+     "qty": 8
     }
    ],
    "5": [
     {
-     "name": "Redstone Dust",
-     "qty": 7776
+     "name": "Enchanted Redstone Dust",
+     "qty": 24
     }
    ],
    "6": [
     {
-     "name": "Redstone Dust",
-     "qty": 7776
+     "name": "Enchanted Redstone Dust",
+     "qty": 64
     }
    ],
    "7": [
     {
-     "name": "Redstone Dust",
-     "qty": 8452
+     "name": "Enchanted Redstone Dust",
+     "qty": 128
     }
    ],
    "8": [
     {
-     "name": "Redstone Dust",
-     "qty": 8452
+     "name": "Enchanted Redstone Dust",
+     "qty": 256
     }
    ],
    "9": [
     {
-     "name": "Redstone Dust",
-     "qty": 9257
+     "name": "Enchanted Redstone Dust",
+     "qty": 512
     }
    ],
    "10": [
     {
-     "name": "Redstone Dust",
-     "qty": 9257
+     "name": "Enchanted Redstone Block",
+     "qty": 8
     }
    ],
    "11": [
     {
-     "name": "Redstone Dust",
-     "qty": 10800
-    }
-   ],
-   "12": [
-    {
-     "name": "Redstone Dust",
-     "qty": 12150
+     "name": "Enchanted Redstone Block",
+     "qty": 16
     }
    ]
   },
   "REVENANT": {
    "1": [
     {
-     "name": "Rotten Flesh",
-     "qty": 4469
+     "name": "Crystallized Heart",
+     "qty": 1
     },
     {
-     "name": "Diamond",
-     "qty": 298
+     "name": "Revenant Flesh",
+     "qty": 80
     }
    ],
    "2": [
     {
-     "name": "Rotten Flesh",
-     "qty": 4469
+     "name": "Zombie Minion I",
+     "qty": 1
     },
     {
-     "name": "Diamond",
-     "qty": 298
+     "name": "Revenant Flesh",
+     "qty": 140
     }
    ],
    "3": [
     {
-     "name": "Rotten Flesh",
-     "qty": 4985
+     "name": "Zombie Minion II",
+     "qty": 1
     },
     {
-     "name": "Diamond",
-     "qty": 332
+     "name": "Revenant Flesh",
+     "qty": 280
     }
    ],
    "4": [
     {
-     "name": "Rotten Flesh",
-     "qty": 4985
+     "name": "Zombie Minion III",
+     "qty": 1
     },
     {
-     "name": "Diamond",
-     "qty": 332
+     "name": "Revenant Flesh",
+     "qty": 448
     }
    ],
    "5": [
     {
-     "name": "Rotten Flesh",
-     "qty": 5635
+     "name": "Zombie Minion IV",
+     "qty": 1
     },
     {
-     "name": "Diamond",
-     "qty": 376
+     "name": "Revenant Viscera",
+     "qty": 7
     }
    ],
    "6": [
     {
-     "name": "Rotten Flesh",
-     "qty": 5635
+     "name": "Zombie Minion V",
+     "qty": 1
     },
     {
-     "name": "Diamond",
-     "qty": 376
+     "name": "Revenant Viscera",
+     "qty": 14
     }
    ],
    "7": [
     {
-     "name": "Rotten Flesh",
-     "qty": 6821
+     "name": "Zombie Minion VI",
+     "qty": 1
     },
     {
-     "name": "Diamond",
-     "qty": 455
+     "name": "Revenant Viscera",
+     "qty": 28
     }
    ],
    "8": [
     {
-     "name": "Rotten Flesh",
-     "qty": 6821
+     "name": "Zombie Minion VII",
+     "qty": 1
     },
     {
-     "name": "Diamond",
-     "qty": 455
+     "name": "Revenant Viscera",
+     "qty": 56
     }
    ],
    "9": [
     {
-     "name": "Rotten Flesh",
-     "qty": 8938
+     "name": "Zombie Minion VIII",
+     "qty": 1
     },
     {
-     "name": "Diamond",
-     "qty": 596
+     "name": "Revenant Viscera",
+     "qty": 112
     }
    ],
    "10": [
     {
-     "name": "Rotten Flesh",
-     "qty": 8938
+     "name": "Zombie Minion IX",
+     "qty": 1
     },
     {
-     "name": "Diamond",
-     "qty": 596
+     "name": "Revenant Viscera",
+     "qty": 224
     }
    ],
    "11": [
     {
-     "name": "Rotten Flesh",
-     "qty": 12960
+     "name": "Revenant Viscera",
+     "qty": 448
     },
     {
-     "name": "Diamond",
-     "qty": 864
-    }
-   ],
-   "12": [
-    {
-     "name": "Rotten Flesh",
-     "qty": 16200
-    },
-    {
-     "name": "Diamond",
-     "qty": 1080
+     "name": "Zombie Minion X",
+     "qty": 1
     }
    ]
   },
   "SAND": {
    "1": [
     {
+     "name": "Wooden Shovel",
+     "qty": 1
+    },
+    {
      "name": "Sand",
-     "qty": 1662
+     "qty": 80
     }
    ],
    "2": [
     {
      "name": "Sand",
-     "qty": 1662
+     "qty": 160
     }
    ],
    "3": [
     {
      "name": "Sand",
-     "qty": 1800
+     "qty": 320
     }
    ],
    "4": [
     {
      "name": "Sand",
-     "qty": 1800
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Sand",
-     "qty": 1964
+     "name": "Enchanted Sand",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Sand",
-     "qty": 1964
+     "name": "Enchanted Sand",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "name": "Sand",
-     "qty": 2274
+     "name": "Enchanted Sand",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "name": "Sand",
-     "qty": 2274
+     "name": "Enchanted Sand",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "name": "Sand",
-     "qty": 2700
+     "name": "Enchanted Sand",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "name": "Sand",
-     "qty": 2700
+     "name": "Enchanted Sand",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "name": "Sand",
-     "qty": 3323
+     "name": "Enchanted Sand",
+     "qty": 512
     }
    ]
   },
@@ -4616,189 +3468,143 @@
    "1": [
     {
      "name": "Raw Mutton",
-     "qty": 1800
+     "qty": 64
     },
     {
-     "name": "White Wool",
-     "qty": 1800
+     "name": "Wooden Sword",
+     "qty": 1
     }
    ],
    "2": [
     {
      "name": "Raw Mutton",
-     "qty": 1800
-    },
-    {
-     "name": "White Wool",
-     "qty": 1800
+     "qty": 128
     }
    ],
    "3": [
     {
      "name": "Raw Mutton",
-     "qty": 1964
-    },
-    {
-     "name": "White Wool",
-     "qty": 1964
+     "qty": 256
     }
    ],
    "4": [
     {
      "name": "Raw Mutton",
-     "qty": 1964
-    },
-    {
-     "name": "White Wool",
-     "qty": 1964
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Raw Mutton",
-     "qty": 2160
-    },
-    {
-     "name": "White Wool",
-     "qty": 2160
+     "name": "Enchanted Raw Mutton",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Raw Mutton",
-     "qty": 2160
-    },
-    {
-     "name": "White Wool",
-     "qty": 2160
+     "name": "Enchanted Raw Mutton",
+     "qty": 24
     }
    ],
    "7": [
     {
-     "name": "Raw Mutton",
-     "qty": 2400
-    },
-    {
-     "name": "White Wool",
-     "qty": 2400
+     "name": "Enchanted Raw Mutton",
+     "qty": 64
     }
    ],
    "8": [
     {
-     "name": "Raw Mutton",
-     "qty": 2400
-    },
-    {
-     "name": "White Wool",
-     "qty": 2400
+     "name": "Enchanted Raw Mutton",
+     "qty": 128
     }
    ],
    "9": [
     {
-     "name": "Raw Mutton",
-     "qty": 2700
-    },
-    {
-     "name": "White Wool",
-     "qty": 2700
+     "name": "Enchanted Raw Mutton",
+     "qty": 256
     }
    ],
    "10": [
     {
-     "name": "Raw Mutton",
-     "qty": 2700
-    },
-    {
-     "name": "White Wool",
-     "qty": 2700
+     "name": "Enchanted Raw Mutton",
+     "qty": 512
     }
    ],
    "11": [
     {
-     "name": "Raw Mutton",
-     "qty": 3600
-    },
-    {
-     "name": "White Wool",
-     "qty": 3600
-    }
-   ],
-   "12": [
-    {
-     "name": "Raw Mutton",
-     "qty": 4800
-    },
-    {
-     "name": "White Wool",
-     "qty": 4800
+     "name": "Enchanted Cooked Mutton",
+     "qty": 8
     }
    ]
   },
   "SKELETON": {
    "1": [
     {
+     "name": "Wooden Sword",
+     "qty": 1
+    },
+    {
      "name": "Bone",
-     "qty": 1662
+     "qty": 80
     }
    ],
    "2": [
     {
      "name": "Bone",
-     "qty": 1662
+     "qty": 160
     }
    ],
    "3": [
     {
      "name": "Bone",
-     "qty": 1800
+     "qty": 320
     }
    ],
    "4": [
     {
      "name": "Bone",
-     "qty": 1800
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Bone",
-     "qty": 1964
+     "name": "Enchanted Bone",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Bone",
-     "qty": 1964
+     "name": "Enchanted Bone",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "name": "Bone",
-     "qty": 2160
+     "name": "Enchanted Bone",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "name": "Bone",
-     "qty": 2160
+     "name": "Enchanted Bone",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "name": "Bone",
-     "qty": 2541
+     "name": "Enchanted Bone",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "name": "Bone",
-     "qty": 2541
+     "name": "Enchanted Bone",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "name": "Bone",
-     "qty": 3323
+     "name": "Enchanted Bone",
+     "qty": 512
     }
    ]
   },
@@ -4806,141 +3612,133 @@
    "1": [
     {
      "name": "Slimeball",
-     "qty": 2991
+     "qty": 80
+    },
+    {
+     "name": "Wooden Sword",
+     "qty": 1
     }
    ],
    "2": [
     {
      "name": "Slimeball",
-     "qty": 2991
+     "qty": 160
     }
    ],
    "3": [
     {
      "name": "Slimeball",
-     "qty": 3240
+     "qty": 320
     }
    ],
    "4": [
     {
      "name": "Slimeball",
-     "qty": 3240
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Slimeball",
-     "qty": 3535
+     "name": "Enchanted Slimeball",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Slimeball",
-     "qty": 3535
+     "name": "Enchanted Slimeball",
+     "qty": 24
     }
    ],
    "7": [
     {
-     "name": "Slimeball",
-     "qty": 4093
+     "name": "Enchanted Slimeball",
+     "qty": 64
     }
    ],
    "8": [
     {
-     "name": "Slimeball",
-     "qty": 4093
+     "name": "Enchanted Slimeball",
+     "qty": 128
     }
    ],
    "9": [
     {
-     "name": "Slimeball",
-     "qty": 4860
+     "name": "Enchanted Slimeball",
+     "qty": 256
     }
    ],
    "10": [
     {
-     "name": "Slimeball",
-     "qty": 4860
+     "name": "Enchanted Slimeball",
+     "qty": 512
     }
    ],
    "11": [
     {
-     "name": "Slimeball",
-     "qty": 6480
+     "name": "Enchanted Slime Block",
+     "qty": 8
     }
    ]
   },
   "SNOW": {
-   "1": [
-    {
-     "name": "Snowball",
-     "qty": 13292
-    }
-   ],
    "2": [
     {
-     "name": "Snowball",
-     "qty": 13292
+     "name": "Snow Block",
+     "qty": 32
     }
    ],
    "3": [
     {
-     "name": "Snowball",
-     "qty": 14400
+     "name": "Snow Block",
+     "qty": 64
     }
    ],
    "4": [
     {
-     "name": "Snowball",
-     "qty": 14400
+     "name": "Snow Block",
+     "qty": 128
     }
    ],
    "5": [
     {
-     "name": "Snowball",
-     "qty": 15709
+     "name": "Snow Block",
+     "qty": 256
     }
    ],
    "6": [
     {
-     "name": "Snowball",
-     "qty": 15709
+     "name": "Snow Block",
+     "qty": 512
     }
    ],
    "7": [
     {
-     "name": "Snowball",
-     "qty": 18189
+     "name": "Enchanted Snow Block",
+     "qty": 8
     }
    ],
    "8": [
     {
-     "name": "Snowball",
-     "qty": 18189
+     "name": "Enchanted Snow Block",
+     "qty": 16
     }
    ],
    "9": [
     {
-     "name": "Snowball",
-     "qty": 21600
+     "name": "Enchanted Snow Block",
+     "qty": 32
     }
    ],
    "10": [
     {
-     "name": "Snowball",
-     "qty": 21600
+     "name": "Enchanted Snow Block",
+     "qty": 64
     }
    ],
    "11": [
     {
-     "name": "Snowball",
-     "qty": 26585
-    }
-   ],
-   "12": [
-    {
-     "name": "Snowball",
-     "qty": 29793
+     "name": "Enchanted Snow Block",
+     "qty": 128
     }
    ]
   },
@@ -4948,253 +3746,215 @@
    "1": [
     {
      "name": "String",
-     "qty": 1662
+     "qty": 80
     },
     {
-     "name": "Spider Eye",
-     "qty": 831
+     "name": "Wooden Sword",
+     "qty": 1
     }
    ],
    "2": [
     {
      "name": "String",
-     "qty": 1662
-    },
-    {
-     "name": "Spider Eye",
-     "qty": 831
+     "qty": 160
     }
    ],
    "3": [
     {
      "name": "String",
-     "qty": 1800
-    },
-    {
-     "name": "Spider Eye",
-     "qty": 900
+     "qty": 320
     }
    ],
    "4": [
     {
      "name": "String",
-     "qty": 1800
-    },
-    {
-     "name": "Spider Eye",
-     "qty": 900
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "String",
-     "qty": 1964
-    },
-    {
-     "name": "Spider Eye",
-     "qty": 982
+     "name": "Enchanted String",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "String",
-     "qty": 1964
-    },
-    {
-     "name": "Spider Eye",
-     "qty": 982
+     "name": "Enchanted String",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "name": "String",
-     "qty": 2160
-    },
-    {
-     "name": "Spider Eye",
-     "qty": 1080
+     "name": "Enchanted String",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "name": "String",
-     "qty": 2160
-    },
-    {
-     "name": "Spider Eye",
-     "qty": 1080
+     "name": "Enchanted String",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "name": "String",
-     "qty": 2541
-    },
-    {
-     "name": "Spider Eye",
-     "qty": 1271
+     "name": "Enchanted String",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "name": "String",
-     "qty": 2541
-    },
-    {
-     "name": "Spider Eye",
-     "qty": 1271
+     "name": "Enchanted String",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "name": "String",
-     "qty": 3323
-    },
-    {
-     "name": "Spider Eye",
-     "qty": 1662
+     "name": "Enchanted String",
+     "qty": 512
     }
    ]
   },
   "SPRUCE": {
    "1": [
     {
+     "name": "Wooden Axe",
+     "qty": 1
+    },
+    {
      "name": "Spruce Log",
-     "qty": 3600
+     "qty": 80
     }
    ],
    "2": [
     {
      "name": "Spruce Log",
-     "qty": 3600
+     "qty": 160
     }
    ],
    "3": [
     {
      "name": "Spruce Log",
-     "qty": 3840
+     "qty": 320
     }
    ],
    "4": [
     {
      "name": "Spruce Log",
-     "qty": 3840
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Spruce Log",
-     "qty": 4114
+     "name": "Enchanted Spruce Log",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Spruce Log",
-     "qty": 4114
+     "name": "Enchanted Spruce Log",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "name": "Spruce Log",
-     "qty": 4547
+     "name": "Enchanted Spruce Log",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "name": "Spruce Log",
-     "qty": 4547
+     "name": "Enchanted Spruce Log",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "name": "Spruce Log",
-     "qty": 5236
+     "name": "Enchanted Spruce Log",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "name": "Spruce Log",
-     "qty": 5236
+     "name": "Enchanted Spruce Log",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "name": "Spruce Log",
-     "qty": 6400
+     "name": "Enchanted Spruce Log",
+     "qty": 512
     }
    ]
   },
   "SUGAR_CANE": {
    "1": [
     {
+     "name": "Wooden Hoe",
+     "qty": 1
+    },
+    {
      "name": "Sugar Cane",
-     "qty": 5891
+     "qty": 128
     }
    ],
    "2": [
     {
      "name": "Sugar Cane",
-     "qty": 5891
+     "qty": 256
     }
    ],
    "3": [
     {
      "name": "Sugar Cane",
-     "qty": 6480
+     "qty": 512
     }
    ],
    "4": [
     {
-     "name": "Sugar Cane",
-     "qty": 6480
+     "name": "Enchanted Sugar",
+     "qty": 8
     }
    ],
    "5": [
     {
-     "name": "Sugar Cane",
-     "qty": 7200
+     "name": "Enchanted Sugar",
+     "qty": 24
     }
    ],
    "6": [
     {
-     "name": "Sugar Cane",
-     "qty": 7200
+     "name": "Enchanted Sugar",
+     "qty": 64
     }
    ],
    "7": [
     {
-     "name": "Sugar Cane",
-     "qty": 8100
+     "name": "Enchanted Sugar",
+     "qty": 128
     }
    ],
    "8": [
     {
-     "name": "Sugar Cane",
-     "qty": 8100
+     "name": "Enchanted Sugar",
+     "qty": 256
     }
    ],
    "9": [
     {
-     "name": "Sugar Cane",
-     "qty": 8938
+     "name": "Enchanted Sugar",
+     "qty": 512
     }
    ],
    "10": [
     {
-     "name": "Sugar Cane",
-     "qty": 8938
+     "name": "Enchanted Sugar Cane",
+     "qty": 8
     }
    ],
    "11": [
     {
-     "name": "Sugar Cane",
-     "qty": 10800
-    }
-   ],
-   "12": [
-    {
-     "name": "Sugar Cane",
-     "qty": 14400
+     "name": "Enchanted Sugar Cane",
+     "qty": 16
     }
    ]
   },
@@ -5202,447 +3962,367 @@
    "1": [
     {
      "name": "Sunflower",
-     "qty": 5400
+     "qty": 128
     },
     {
-     "name": "Moonflower",
-     "qty": 5400
+     "name": "Wooden Hoe",
+     "qty": 1
     }
    ],
    "2": [
     {
      "name": "Sunflower",
-     "qty": 5635
-    },
-    {
-     "name": "Moonflower",
-     "qty": 5635
+     "qty": 256
     }
    ],
    "3": [
     {
      "name": "Sunflower",
-     "qty": 5891
-    },
-    {
-     "name": "Moonflower",
-     "qty": 5891
+     "qty": 512
     }
    ],
    "4": [
     {
-     "name": "Sunflower",
-     "qty": 6171
-    },
-    {
-     "name": "Moonflower",
-     "qty": 6171
+     "name": "Enchanted Sunflower",
+     "qty": 8
     }
    ],
    "5": [
     {
-     "name": "Sunflower",
-     "qty": 6480
-    },
-    {
-     "name": "Moonflower",
-     "qty": 6480
+     "name": "Enchanted Sunflower",
+     "qty": 24
     }
    ],
    "6": [
     {
-     "name": "Sunflower",
-     "qty": 6821
-    },
-    {
-     "name": "Moonflower",
-     "qty": 6821
+     "name": "Enchanted Sunflower",
+     "qty": 64
     }
    ],
    "7": [
     {
-     "name": "Sunflower",
-     "qty": 7200
-    },
-    {
-     "name": "Moonflower",
-     "qty": 7200
+     "name": "Enchanted Sunflower",
+     "qty": 128
     }
    ],
    "8": [
     {
-     "name": "Sunflower",
-     "qty": 7624
-    },
-    {
-     "name": "Moonflower",
-     "qty": 7624
+     "name": "Enchanted Sunflower",
+     "qty": 256
     }
    ],
    "9": [
     {
-     "name": "Sunflower",
-     "qty": 8100
-    },
-    {
-     "name": "Moonflower",
-     "qty": 8100
+     "name": "Enchanted Sunflower",
+     "qty": 512
     }
    ],
    "10": [
     {
-     "name": "Sunflower",
-     "qty": 8640
-    },
-    {
-     "name": "Moonflower",
-     "qty": 8640
+     "name": "Compacted Sunflower",
+     "qty": 8
     }
    ],
    "11": [
     {
-     "name": "Sunflower",
-     "qty": 9257
-    },
-    {
-     "name": "Moonflower",
-     "qty": 9257
+     "name": "Compacted Sunflower",
+     "qty": 16
     }
    ]
   },
   "TARANTULA": {
    "1": [
     {
-     "name": "String",
-     "qty": 4707
+     "name": "Enchanted Fermented Spider Eye",
+     "qty": 1
     },
     {
-     "name": "Spider Eye",
-     "qty": 1490
-    },
-    {
-     "name": "Iron Ingot",
-     "qty": 298
+     "name": "Tarantula Web",
+     "qty": 80
     }
    ],
    "2": [
     {
-     "name": "String",
-     "qty": 4707
+     "name": "Tarantula Web",
+     "qty": 140
     },
     {
-     "name": "Spider Eye",
-     "qty": 1490
-    },
-    {
-     "name": "Iron Ingot",
-     "qty": 298
+     "name": "Spider Minion I",
+     "qty": 1
     }
    ],
    "3": [
     {
-     "name": "String",
-     "qty": 5250
+     "name": "Tarantula Web",
+     "qty": 280
     },
     {
-     "name": "Spider Eye",
-     "qty": 1662
-    },
-    {
-     "name": "Iron Ingot",
-     "qty": 332
+     "name": "Spider Minion II",
+     "qty": 1
     }
    ],
    "4": [
     {
-     "name": "String",
-     "qty": 5250
+     "name": "Tarantula Web",
+     "qty": 448
     },
     {
-     "name": "Spider Eye",
-     "qty": 1662
-    },
-    {
-     "name": "Iron Ingot",
-     "qty": 332
+     "name": "Spider Minion III",
+     "qty": 1
     }
    ],
    "5": [
     {
-     "name": "String",
-     "qty": 5935
+     "name": "Spider Minion IV",
+     "qty": 1
     },
     {
-     "name": "Spider Eye",
-     "qty": 1878
-    },
-    {
-     "name": "Iron Ingot",
-     "qty": 376
+     "name": "Tarantula Silk",
+     "qty": 7
     }
    ],
    "6": [
     {
-     "name": "String",
-     "qty": 5935
+     "name": "Spider Minion V",
+     "qty": 1
     },
     {
-     "name": "Spider Eye",
-     "qty": 1878
-    },
-    {
-     "name": "Iron Ingot",
-     "qty": 376
+     "name": "Tarantula Silk",
+     "qty": 14
     }
    ],
    "7": [
     {
-     "name": "String",
-     "qty": 7185
+     "name": "Tarantula Silk",
+     "qty": 28
     },
     {
-     "name": "Spider Eye",
-     "qty": 2274
-    },
-    {
-     "name": "Iron Ingot",
-     "qty": 455
+     "name": "Spider Minion VI",
+     "qty": 1
     }
    ],
    "8": [
     {
-     "name": "String",
-     "qty": 7185
+     "name": "Spider Minion VII",
+     "qty": 1
     },
     {
-     "name": "Spider Eye",
-     "qty": 2274
-    },
-    {
-     "name": "Iron Ingot",
-     "qty": 455
+     "name": "Tarantula Silk",
+     "qty": 56
     }
    ],
    "9": [
     {
-     "name": "String",
-     "qty": 9415
+     "name": "Spider Minion VIII",
+     "qty": 1
     },
     {
-     "name": "Spider Eye",
-     "qty": 2979
-    },
-    {
-     "name": "Iron Ingot",
-     "qty": 596
+     "name": "Tarantula Silk",
+     "qty": 112
     }
    ],
    "10": [
     {
-     "name": "String",
-     "qty": 9415
+     "name": "Tarantula Silk",
+     "qty": 224
     },
     {
-     "name": "Spider Eye",
-     "qty": 2979
-    },
-    {
-     "name": "Iron Ingot",
-     "qty": 596
+     "name": "Spider Minion IX",
+     "qty": 1
     }
    ],
    "11": [
     {
-     "name": "String",
-     "qty": 13651
+     "name": "Spider Minion X",
+     "qty": 1
     },
     {
-     "name": "Spider Eye",
-     "qty": 4320
-    },
-    {
-     "name": "Iron Ingot",
-     "qty": 864
+     "name": "Tarantula Silk",
+     "qty": 448
     }
    ]
   },
   "VAMPIRE": {
    "1": [
     {
+     "name": "Bat Person Helmet",
+     "qty": 1
+    },
+    {
      "name": "Hemovibe",
-     "qty": 227
+     "qty": 80
     }
    ],
    "2": [
     {
      "name": "Hemovibe",
-     "qty": 227
+     "qty": 160
     }
    ],
    "3": [
     {
      "name": "Hemovibe",
-     "qty": 247
+     "qty": 320
     }
    ],
    "4": [
     {
      "name": "Hemovibe",
-     "qty": 247
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Hemovibe",
-     "qty": 270
+     "name": "Hemoglass",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Hemovibe",
-     "qty": 270
+     "name": "Hemoglass",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "name": "Hemovibe",
-     "qty": 309
+     "name": "Hemoglass",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "name": "Hemovibe",
-     "qty": 309
+     "name": "Hemoglass",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "name": "Hemovibe",
-     "qty": 369
+     "name": "Hemoglass",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "name": "Hemovibe",
-     "qty": 369
+     "name": "Hemoglass",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "name": "Hemovibe",
-     "qty": 455
+     "name": "Hemoglass",
+     "qty": 512
     }
    ]
   },
   "VOIDLING": {
    "1": [
     {
-     "name": "Nether Quartz",
-     "qty": 384
+     "name": "Enderman Minion I",
+     "qty": 1
     },
     {
-     "name": "Enchanted Ender Pearl",
-     "qty": 6
+     "name": "Null Sphere",
+     "qty": 80
     }
    ],
    "2": [
     {
-     "name": "Nether Quartz",
-     "qty": 384
+     "name": "Obsidian Minion I",
+     "qty": 1
     },
     {
-     "name": "Enchanted Ender Pearl",
-     "qty": 6
+     "name": "Null Sphere",
+     "qty": 140
     }
    ],
    "3": [
     {
-     "name": "Nether Quartz",
-     "qty": 411
+     "name": "Enderman Minion II",
+     "qty": 1
     },
     {
-     "name": "Enchanted Ender Pearl",
-     "qty": 6
+     "name": "Null Sphere",
+     "qty": 280
     }
    ],
    "4": [
     {
-     "name": "Nether Quartz",
-     "qty": 411
+     "name": "Obsidian Minion III",
+     "qty": 1
     },
     {
-     "name": "Enchanted Ender Pearl",
-     "qty": 6
+     "name": "Null Sphere",
+     "qty": 448
     }
    ],
    "5": [
     {
-     "name": "Nether Quartz",
-     "qty": 443
+     "name": "Enderman Minion IV",
+     "qty": 1
     },
     {
-     "name": "Enchanted Ender Pearl",
+     "name": "Null Ovoid",
      "qty": 7
     }
    ],
    "6": [
     {
-     "name": "Nether Quartz",
-     "qty": 443
+     "name": "Obsidian Minion V",
+     "qty": 1
     },
     {
-     "name": "Enchanted Ender Pearl",
-     "qty": 7
+     "name": "Null Ovoid",
+     "qty": 14
     }
    ],
    "7": [
     {
-     "name": "Nether Quartz",
-     "qty": 494
+     "name": "Null Ovoid",
+     "qty": 28
     },
     {
-     "name": "Enchanted Ender Pearl",
-     "qty": 8
+     "name": "Enderman Minion VI",
+     "qty": 1
     }
    ],
    "8": [
     {
-     "name": "Nether Quartz",
-     "qty": 494
+     "name": "Null Ovoid",
+     "qty": 56
     },
     {
-     "name": "Enchanted Ender Pearl",
-     "qty": 8
+     "name": "Obsidian Minion VII",
+     "qty": 1
     }
    ],
    "9": [
     {
-     "name": "Nether Quartz",
-     "qty": 576
+     "name": "Enderman Minion VIII",
+     "qty": 1
     },
     {
-     "name": "Enchanted Ender Pearl",
-     "qty": 9
+     "name": "Null Ovoid",
+     "qty": 112
     }
    ],
    "10": [
     {
-     "name": "Nether Quartz",
-     "qty": 576
+     "name": "Obsidian Minion IX",
+     "qty": 1
     },
     {
-     "name": "Enchanted Ender Pearl",
-     "qty": 9
+     "name": "Null Ovoid",
+     "qty": 224
     }
    ],
    "11": [
     {
-     "name": "Nether Quartz",
-     "qty": 720
+     "name": "Enderman Minion X",
+     "qty": 1
     },
     {
-     "name": "Enchanted Ender Pearl",
-     "qty": 1
+     "name": "Null Ovoid",
+     "qty": 448
     }
    ]
   },
@@ -5650,321 +4330,143 @@
    "1": [
     {
      "name": "Wheat",
-     "qty": 2880
+     "qty": 80
     },
     {
-     "name": "Seeds",
-     "qty": 4320
+     "name": "Wooden Hoe",
+     "qty": 1
     }
    ],
    "2": [
     {
      "name": "Wheat",
-     "qty": 2880
-    },
-    {
-     "name": "Seeds",
-     "qty": 4320
+     "qty": 160
     }
    ],
    "3": [
     {
      "name": "Wheat",
-     "qty": 3323
-    },
-    {
-     "name": "Seeds",
-     "qty": 4985
+     "qty": 320
     }
    ],
    "4": [
     {
      "name": "Wheat",
-     "qty": 3323
-    },
-    {
-     "name": "Seeds",
-     "qty": 4985
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Wheat",
-     "qty": 3927
-    },
-    {
-     "name": "Seeds",
-     "qty": 5891
+     "name": "Enchanted Wheat",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Wheat",
-     "qty": 3927
-    },
-    {
-     "name": "Seeds",
-     "qty": 5891
+     "name": "Enchanted Wheat",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "name": "Wheat",
-     "qty": 4320
-    },
-    {
-     "name": "Seeds",
-     "qty": 6480
+     "name": "Enchanted Wheat",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "name": "Wheat",
-     "qty": 4320
-    },
-    {
-     "name": "Seeds",
-     "qty": 6480
+     "name": "Enchanted Wheat",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "name": "Wheat",
-     "qty": 4800
-    },
-    {
-     "name": "Seeds",
-     "qty": 7200
+     "name": "Enchanted Wheat",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "name": "Wheat",
-     "qty": 4800
-    },
-    {
-     "name": "Seeds",
-     "qty": 7200
+     "name": "Enchanted Wheat",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "name": "Wheat",
-     "qty": 5400
-    },
-    {
-     "name": "Seeds",
-     "qty": 8100
-    }
-   ],
-   "12": [
-    {
-     "name": "Wheat",
-     "qty": 6171
-    },
-    {
-     "name": "Seeds",
-     "qty": 9257
+     "name": "Enchanted Wheat",
+     "qty": 512
     }
    ]
   },
   "ZOMBIE": {
    "1": [
     {
+     "name": "Wooden Sword",
+     "qty": 1
+    },
+    {
      "name": "Rotten Flesh",
-     "qty": 1662
-    },
-    {
-     "name": "Poisonous Potato",
-     "qty": 83
-    },
-    {
-     "name": "Potato",
-     "qty": 17
-    },
-    {
-     "name": "Carrot",
-     "qty": 17
+     "qty": 80
     }
    ],
    "2": [
     {
      "name": "Rotten Flesh",
-     "qty": 1662
-    },
-    {
-     "name": "Poisonous Potato",
-     "qty": 83
-    },
-    {
-     "name": "Potato",
-     "qty": 17
-    },
-    {
-     "name": "Carrot",
-     "qty": 17
+     "qty": 160
     }
    ],
    "3": [
     {
      "name": "Rotten Flesh",
-     "qty": 1800
-    },
-    {
-     "name": "Poisonous Potato",
-     "qty": 90
-    },
-    {
-     "name": "Potato",
-     "qty": 18
-    },
-    {
-     "name": "Carrot",
-     "qty": 18
+     "qty": 320
     }
    ],
    "4": [
     {
      "name": "Rotten Flesh",
-     "qty": 1800
-    },
-    {
-     "name": "Poisonous Potato",
-     "qty": 90
-    },
-    {
-     "name": "Potato",
-     "qty": 18
-    },
-    {
-     "name": "Carrot",
-     "qty": 18
+     "qty": 512
     }
    ],
    "5": [
     {
-     "name": "Rotten Flesh",
-     "qty": 1964
-    },
-    {
-     "name": "Poisonous Potato",
-     "qty": 98
-    },
-    {
-     "name": "Potato",
-     "qty": 20
-    },
-    {
-     "name": "Carrot",
-     "qty": 20
+     "name": "Enchanted Rotten Flesh",
+     "qty": 8
     }
    ],
    "6": [
     {
-     "name": "Rotten Flesh",
-     "qty": 1964
-    },
-    {
-     "name": "Poisonous Potato",
-     "qty": 98
-    },
-    {
-     "name": "Potato",
-     "qty": 20
-    },
-    {
-     "name": "Carrot",
-     "qty": 20
+     "name": "Enchanted Rotten Flesh",
+     "qty": 16
     }
    ],
    "7": [
     {
-     "name": "Rotten Flesh",
-     "qty": 2160
-    },
-    {
-     "name": "Poisonous Potato",
-     "qty": 108
-    },
-    {
-     "name": "Potato",
-     "qty": 22
-    },
-    {
-     "name": "Carrot",
-     "qty": 22
+     "name": "Enchanted Rotten Flesh",
+     "qty": 32
     }
    ],
    "8": [
     {
-     "name": "Rotten Flesh",
-     "qty": 2160
-    },
-    {
-     "name": "Poisonous Potato",
-     "qty": 108
-    },
-    {
-     "name": "Potato",
-     "qty": 22
-    },
-    {
-     "name": "Carrot",
-     "qty": 22
+     "name": "Enchanted Rotten Flesh",
+     "qty": 64
     }
    ],
    "9": [
     {
-     "name": "Rotten Flesh",
-     "qty": 2541
-    },
-    {
-     "name": "Poisonous Potato",
-     "qty": 127
-    },
-    {
-     "name": "Potato",
-     "qty": 25
-    },
-    {
-     "name": "Carrot",
-     "qty": 25
+     "name": "Enchanted Rotten Flesh",
+     "qty": 128
     }
    ],
    "10": [
     {
-     "name": "Rotten Flesh",
-     "qty": 2541
-    },
-    {
-     "name": "Poisonous Potato",
-     "qty": 127
-    },
-    {
-     "name": "Potato",
-     "qty": 25
-    },
-    {
-     "name": "Carrot",
-     "qty": 25
+     "name": "Enchanted Rotten Flesh",
+     "qty": 256
     }
    ],
    "11": [
     {
-     "name": "Rotten Flesh",
-     "qty": 3323
-    },
-    {
-     "name": "Poisonous Potato",
-     "qty": 166
-    },
-    {
-     "name": "Potato",
-     "qty": 33
-    },
-    {
-     "name": "Carrot",
-     "qty": 33
+     "name": "Enchanted Rotten Flesh",
+     "qty": 512
     }
    ]
   }

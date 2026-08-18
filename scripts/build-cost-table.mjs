@@ -24,6 +24,8 @@ const OUT = join(ROOT, "data", "generated", "costs.json");
 const read = async (p) => JSON.parse(await readFile(join(ROOT, p), "utf8"));
 const wiki = await read("data/generated/wiki_costs.json");
 const tasks = await read("data/generated/tasks.json");
+const craftable = await read("data/curated/craftable_ingredients.json");
+const minionFamilies = await read("data/generated/minions.json");
 
 console.log("fetching bazaar + item list…");
 const [items, bazaar] = await Promise.all([
@@ -42,20 +44,55 @@ for (const item of items.items) {
 
 /* ----------------------------------------------------------------- minions */
 
+/** "Zombie Minion V" -> "minion_ZOMBIE_5", so a minion needed by another minion becomes a
+ * prerequisite rather than an unpriceable ingredient. */
+const ROMAN_TO_N = { I: 1, II: 2, III: 3, IV: 4, V: 5, VI: 6, VII: 7, VIII: 8, IX: 9, X: 10, XI: 11, XII: 12 };
+const familyToGenerator = new Map(minionFamilies.minions.map((m) => [m.family, m.generator]));
+
+function asMinionTask(name) {
+  const match = /^(.*Minion) ([IVX]+)$/.exec(name.trim());
+  if (!match) return null;
+  const generator = familyToGenerator.get(match[1]);
+  const tier = ROMAN_TO_N[match[2]];
+  return generator && tier ? `minion_${generator}_${tier}` : null;
+}
+
 const minionCosts = {};
 let matched = 0;
 let missed = 0;
+let prerequisites = 0;
+let substituted = 0;
 const missingNames = new Map();
 
 for (const [generator, tiers] of Object.entries(wiki.minionRecipes)) {
   const out = {};
   for (const [tier, materials] of Object.entries(tiers)) {
     const resolved = [];
+    const requires = [];
     let complete = true;
+
     for (const material of materials) {
+      // A minion that needs another minion is a prerequisite, not an ingredient — the solver
+      // already prices prerequisite chains, so this both fixes the cost and models the real
+      // dependency (Revenant needs a Zombie minion, and so on).
+      const prerequisite = asMinionTask(material.name);
+      if (prerequisite) {
+        requires.push(prerequisite);
+        prerequisites++;
+        continue;
+      }
+
+      // A few vanilla items don't trade but are trivially craftable from things that do.
+      const substitute = craftable.substitutions[material.name];
+      if (substitute) {
+        for (const part of substitute) resolved.push({ id: part.id, qty: part.qty * material.qty });
+        substituted++;
+        continue;
+      }
+
       const id = nameToId.get(material.name.toLowerCase());
-      // Only bazaar-tradeable ingredients can be priced live. A tier containing anything else
-      // (a quest item, a drop) is left out entirely rather than priced as if it were free.
+      // Anything left that the bazaar doesn't trade (a rare drop, a quest item) leaves the tier
+      // unpriced rather than priced as if it were free.
       if (!id || !tradeable.has(id)) {
         complete = false;
         missingNames.set(material.name, (missingNames.get(material.name) ?? 0) + 1);
@@ -63,8 +100,9 @@ for (const [generator, tiers] of Object.entries(wiki.minionRecipes)) {
       }
       resolved.push({ id, qty: material.qty });
     }
-    if (complete && resolved.length) {
-      out[tier] = resolved;
+
+    if (complete && (resolved.length || requires.length)) {
+      out[tier] = requires.length ? { items: resolved, requires } : resolved;
       matched++;
     } else {
       missed++;

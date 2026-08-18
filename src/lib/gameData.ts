@@ -109,7 +109,14 @@ export type TravelScrollsData = {
 /** Costs scraped from the wiki and resolved to bazaar ids — see scripts/build-cost-table.mjs. */
 export type CostsData = {
   generatedAt: string;
-  minions: Record<string, Record<string, { id: string; qty: number }[]>>;
+  /**
+   * generator -> tier -> either a plain ingredient list, or ingredients plus the minion tiers
+   * this one requires (some minions are crafted from other minions).
+   */
+  minions: Record<
+    string,
+    Record<string, { id: string; qty: number }[] | { items: { id: string; qty: number }[]; requires: string[] }>
+  >;
   essence: Record<string, { essence: string; tiers: Record<string, number> }>;
   bank: Record<string, number>;
   coverage: Record<string, number>;
