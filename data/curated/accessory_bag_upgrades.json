@@ -1,0 +1,16 @@
+{
+  "note": "Jacobus sells 99 accessory bag upgrades, each granting +2 slots and +2 SkyBlock XP. Cost per upgrade rises in bands. Slots matter for pricing: once the bag is full, the real cost of the next accessory includes the slot it has to sit in.",
+  "source": "Hypixel Wiki, Jacobus — Upgrade / Extra Slots / Cost per +2 Slots table",
+  "verified": true,
+  "slotsPerUpgrade": 2,
+  "xpPerUpgrade": 2,
+  "maxUpgrades": 99,
+  "costBands": [
+    { "from": 1, "to": 1, "coins": 1500000 },
+    { "from": 2, "to": 5, "coins": 5000000 },
+    { "from": 6, "to": 10, "coins": 8000000 },
+    { "from": 11, "to": 20, "coins": 12000000 },
+    { "from": 21, "to": 99, "coins": 20000000 }
+  ],
+  "cumulativeCheck": "1.5M + 4x5M = 21.5M, +5x8M = 61.5M, +10x12M = 181.5M, +79x20M = 1.76B — matches the wiki's stated cumulative column"
+}

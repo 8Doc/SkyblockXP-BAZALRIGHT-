@@ -288,6 +288,11 @@ export function Planner() {
               models {Math.round((100 * result.progress.modelledEarnedXp) / Math.max(result.progress.xp, 1))}% of your
               earned XP
             </span>
+            {result.bag.capacity > 0 && (
+              <span className="text-muted" title="Accessory bag slots. Once full, each further accessory also costs the slot it sits in.">
+                {num(result.bag.capacity - result.bag.used)} of {num(result.bag.capacity)} bag slots free
+              </span>
+            )}
             {result.bag.reportedMp !== null && (
               <span className="text-muted">
                 {result.bag.computedMp} MP computed

@@ -36,7 +36,7 @@ type State = {
   profiles: SkyblockProfile[];
   profileId: string | null;
   member: ProfileMember | null;
-  bagItems: BagItem[] | null;
+  bagItems: { items: BagItem[] | null; capacity: number };
   bazaar: Record<string, BazaarProduct>;
   bins: BinIndex | null;
   museum: MuseumState | null;
@@ -65,7 +65,7 @@ const state: State = {
   profiles: [],
   profileId: null,
   member: null,
-  bagItems: null,
+  bagItems: { items: null, capacity: 0 },
   bazaar: {},
   bins: null,
   museum: null,
@@ -795,6 +795,13 @@ function renderResults(): void {
       <span class="dim" title="How much of your earned XP this tool can account for.">models ${Math.round(
         (100 * r.progress.modelledEarnedXp) / Math.max(r.progress.xp, 1),
       )}% of your earned XP</span>
+      ${
+        r.bag.capacity > 0
+          ? `<span class="dim" title="Accessory bag slots. Once full, each further accessory also costs the slot it sits in.">${
+              r.bag.capacity - r.bag.used
+            } of ${r.bag.capacity} bag slots free</span>`
+          : ""
+      }
       ${
         r.bag.reportedMp !== null
           ? `<span class="dim">${r.bag.computedMp} MP computed${

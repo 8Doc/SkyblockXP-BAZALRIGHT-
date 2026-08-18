@@ -168,6 +168,37 @@ Per-level XP is read from the scraped rows, not typed: an earlier hand-entered g
 15/25/35/50/70/100/**150/250/500** was wrong at the top end (actually **125/150/150**) and
 inflated slayer by 3,400 XP before the totals check caught it.
 
+## Accessory bag slots
+
+An accessory needs somewhere to sit. The bag holds a fixed number of accessories, and more room
+is bought from Jacobus — so once the bag is full, the true cost of the next accessory is the
+accessory *plus* the slot.
+
+**Capacity is read, not guessed.** The talisman bag decodes to an NBT container, and the length
+of its slot list is the bag's real size. The test profile reads 138 accessories in a 271-slot
+bag, so 133 free.
+
+**Upgrades are their own priced tasks.** Jacobus sells 99 of them, each +2 slots and +2 XP, at
+prices that rise in bands (`data/curated/accessory_bag_upgrades.json`, from his wiki page):
+
+| Upgrades | Cost each |
+|---|---|
+| 1 | 1.5M |
+| 2–5 | 5M |
+| 6–10 | 8M |
+| 11–20 | 12M |
+| 21–99 | 20M |
+
+That is 198 XP for 1,761,500,000 coins all-in — which matches the wiki's own stated cumulative
+of ~1.8B, and is why they rank near-last on value at ~750k coins per XP. They are in the plan
+because they're real, not because they're efficient.
+
+**The slot surcharge is conditional.** When the bag has room, an accessory costs what it costs.
+When it's full, `CostSpec.auction` carries a surcharge of half an upgrade — one upgrade buys two
+slots, so one accessory owes half of one — and that lands on every accessory in the category.
+Computing it rather than always applying it matters: charging a slot to a player with 133 free
+ones would inflate every accessory by 10M for no reason.
+
 ## Ordering the grind
 
 Grind tasks carry no coin price, so the solver can't rank them and the browser used to list them

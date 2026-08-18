@@ -2,6 +2,7 @@ import type { Category, Task } from "./types";
 import type { GardenState, MuseumState, ProfileMember } from "./profile";
 import { petKey } from "./auctions";
 import {
+  bagUpgradeCost,
   effortOf,
   familyOf,
   magicalPowerOf,
@@ -98,7 +99,7 @@ export const UNMODELLED: { category: Category; note: string; totalXp?: number }[
 export function buildCatalog(
   member: ProfileMember,
   data: GameData,
-  bagItems: BagItem[] | null,
+  bag: { items: BagItem[] | null; capacity: number },
   museum: MuseumState | null = null,
   pets: { name: string; rarity: string }[] | null = null,
   garden: GardenState | null = null,
@@ -198,7 +199,24 @@ export function buildCatalog(
 
   /* ------------------------------------------------------- accessory bag */
 
-  const bag = scoreBag(data, bagItems, member.accessory_bag_storage?.highest_magical_power ?? null);
+  const bagState = scoreBag(
+    data,
+    bag.items,
+    member.accessory_bag_storage?.highest_magical_power ?? null,
+    bag.capacity,
+  );
+
+  // Slots are a real constraint on buying accessories: the bag holds what it holds, and more
+  // room is bought from Jacobus at +2 slots a time. Each upgrade is its own task below, but an
+  // accessory bought into a *full* bag genuinely costs the accessory plus the slot it sits in,
+  // so half an upgrade is added to its price. With slots to spare that surcharge is zero, which
+  // is why it's computed rather than always applied.
+  const upgradesPurchased = member.accessory_bag_storage?.bag_upgrades_purchased ?? 0;
+  const freeSlots = Math.max(bagState.capacity - bagState.used, 0);
+  const nextUpgrade = upgradesPurchased + 1;
+  const nextUpgradeCost = nextUpgrade <= data.bagUpgrades.maxUpgrades ? bagUpgradeCost(data, nextUpgrade) : null;
+  const slotSurcharge =
+    freeSlots > 0 || nextUpgradeCost === null ? 0 : Math.round(nextUpgradeCost / data.bagUpgrades.slotsPerUpgrade);
 
   const excluded = new Set(data.magicalPower.excludedItems.ids);
   for (const acc of data.accessories.accessories) {
@@ -207,7 +225,7 @@ export function buildCatalog(
     if (power <= 0) continue;
 
     const family = familyOf(data, acc.name, acc.id);
-    const alreadyHave = bag.familyPower.get(family) ?? 0;
+    const alreadyHave = bagState.familyPower.get(family) ?? 0;
     const gain = power - alreadyHave;
     const id = `accessory_${acc.id}`;
 
@@ -222,13 +240,13 @@ export function buildCatalog(
       groupBase: alreadyHave,
       requires: [],
       cost: acc.tradeable
-        ? { kind: "auction", itemId: acc.id }
+        ? { kind: "auction", itemId: acc.id, surcharge: slotSurcharge || undefined }
         : { kind: "unknown", note: acc.soulbound ? "Soulbound — cannot be bought" : "Not tradeable" },
       repeatable: false,
       note: `${acc.tier.toLowerCase()} · ${power} MP${alreadyHave > 0 ? ` (family already gives ${alreadyHave})` : ""}`,
     });
 
-    if (bag.owned.has(acc.id) || gain <= 0) done.add(id);
+    if (bagState.owned.has(acc.id) || gain <= 0) done.add(id);
   }
 
   /* ------------------------------------------------------ discrete tasks */
@@ -539,6 +557,30 @@ export function buildCatalog(
     }
   }
 
+  /* ------------------------------------------------- accessory bag slots */
+
+  // Jacobus sells 99 upgrades, each +2 slots and +2 XP, at a rising price. They're worth
+  // buying for the XP alone, and they're what makes room for more accessories.
+  {
+    let previousUpgrade: string | null = null;
+    for (let upgrade = 1; upgrade <= data.bagUpgrades.maxUpgrades; upgrade++) {
+      const id = `bag_upgrade_${upgrade}`;
+      const coins = bagUpgradeCost(data, upgrade);
+      tasks.push({
+        id,
+        category: "accessory_bag",
+        name: `Accessory bag upgrade ${upgrade}`,
+        xp: data.bagUpgrades.xpPerUpgrade,
+        requires: previousUpgrade ? [previousUpgrade] : [],
+        cost: coins === null ? { kind: "unknown", note: "No published price" } : { kind: "npc", coins },
+        repeatable: false,
+        note: `+${data.bagUpgrades.slotsPerUpgrade} slots`,
+      });
+      if (upgradesPurchased >= upgrade) done.add(id);
+      previousUpgrade = id;
+    }
+  }
+
   /* --------------------------------------------------------- fairy souls */
 
   // +10 XP per 5 souls, 570 XP total (README table; the API reports the count but not the reward).
@@ -572,7 +614,7 @@ export function buildCatalog(
   return {
     tasks,
     done,
-    bag,
+    bag: bagState,
     currentXp: member.leveling?.experience ?? 0,
     // Pet score is unmodelled as *tasks*, but the profile still tells us exactly how much XP
     // it has already paid out — worth showing rather than discarding.

@@ -37,7 +37,7 @@ export type Report = {
   /** Every remaining grind, cheapest in effort first, across all categories at once. */
   grind: ResolvedTask[];
   unmodelled: { category: Category; note: string; totalXp?: number; earnedXp?: number }[];
-  bag: { computedMp: number; reportedMp: number | null; readable: boolean };
+  bag: { computedMp: number; reportedMp: number | null; readable: boolean; capacity: number; used: number };
 };
 
 const BROWSER_LIMIT = 40;
@@ -124,6 +124,8 @@ export function buildReport(catalog: Catalog, book: PriceBook, options: ReportOp
       computedMp: catalog.bag.computedMp,
       reportedMp: catalog.bag.reportedMp,
       readable: catalog.bag.readable,
+      capacity: catalog.bag.capacity,
+      used: catalog.bag.used,
     },
   };
 }

@@ -144,6 +144,14 @@ export type DifficultyData = {
   completionRate: Record<string, number>;
 };
 
+/** Jacobus's accessory bag upgrades: +2 slots and +2 XP each, in rising cost bands. */
+export type BagUpgradesData = {
+  slotsPerUpgrade: number;
+  xpPerUpgrade: number;
+  maxUpgrades: number;
+  costBands: { from: number; to: number; coins: number }[];
+};
+
 export type GameData = {
   skills: SkillsData;
   collections: CollectionsData;
@@ -159,7 +167,14 @@ export type GameData = {
   petScore: { byRarity: Record<string, number> };
   difficulty: DifficultyData;
   attributeShards: AttributesData;
+  bagUpgrades: BagUpgradesData;
 };
+
+/** What the nth accessory bag upgrade costs. */
+export function bagUpgradeCost(data: GameData, upgrade: number): number | null {
+  const band = data.bagUpgrades.costBands.find((b) => upgrade >= b.from && upgrade <= b.to);
+  return band ? band.coins : null;
+}
 
 /**
  * Turn an observed completion rate into an effort score and a coarse band.
@@ -242,10 +257,18 @@ export type BagState = {
   /** Magical power the API reports. A gap means our model is missing something. */
   reportedMp: number | null;
   readable: boolean;
+  /** Slots the bag container has, and how many hold an accessory. */
+  capacity: number;
+  used: number;
 };
 
 /** Score a bag the way the game does: one accessory per family, best rarity wins. */
-export function scoreBag(data: GameData, items: BagItem[] | null, reportedMp: number | null): BagState {
+export function scoreBag(
+  data: GameData,
+  items: BagItem[] | null,
+  reportedMp: number | null,
+  capacity = 0,
+): BagState {
   const byId = new Map(data.accessories.accessories.map((a) => [a.id, a]));
   const excluded = new Set(data.magicalPower.excludedItems.ids);
 
@@ -265,7 +288,15 @@ export function scoreBag(data: GameData, items: BagItem[] | null, reportedMp: nu
   let computedMp = 0;
   for (const power of familyPower.values()) computedMp += power;
 
-  return { familyPower, owned, computedMp, reportedMp, readable: items !== null };
+  return {
+    familyPower,
+    owned,
+    computedMp,
+    reportedMp,
+    readable: items !== null,
+    capacity,
+    used: items?.length ?? 0,
+  };
 }
 
 /**

@@ -3,7 +3,7 @@ import { gunzipSync } from "node:zlib";
 import { accessoryBins, bazaar, garden, invalidatePrices, museum, profiles, resolveUuid, HypixelError } from "./hypixel";
 import type { ProfileMember, SkyblockProfile } from "./profile";
 import { auctionNameIndex, type BagItem } from "./gameData";
-import { bagItemsFrom, readNbt } from "./nbt";
+import { bagCapacityFrom, bagItemsFrom, readNbt } from "./nbt";
 import { petsFrom } from "./auctions";
 import { buildCatalog } from "./catalog";
 import { buildReport, type Report } from "./report";
@@ -72,7 +72,8 @@ export async function runPlanner(input: PlannerInput): Promise<PlannerResult> {
     packageCount: input.packageCount,
   };
 
-  const catalog = buildCatalog(member, data, readBag(member), museumState, bins ? petsFrom(bins) : null, gardenState);
+  const bag = readBag(member);
+  const catalog = buildCatalog(member, data, bag, museumState, bins ? petsFrom(bins) : null, gardenState);
   const report = buildReport(catalog, book, options);
 
   return {
@@ -99,15 +100,16 @@ export async function runPlanner(input: PlannerInput): Promise<PlannerResult> {
  * Decode the talisman bag. Gzip is the one step that differs between Node and the browser —
  * everything after this is shared with the standalone build.
  */
-function readBag(member: ProfileMember): BagItem[] | null {
+function readBag(member: ProfileMember): { items: BagItem[] | null; capacity: number } {
   const data = member.inventory?.bag_contents?.talisman_bag?.data;
   // No stored bag is a real, readable answer: the player has no accessories bagged.
-  if (!data) return [];
+  if (!data) return { items: [], capacity: 0 };
   try {
-    return bagItemsFrom(readNbt(gunzipSync(Buffer.from(data, "base64"))));
+    const root = readNbt(gunzipSync(Buffer.from(data, "base64")));
+    return { items: bagItemsFrom(root), capacity: bagCapacityFrom(root) };
   } catch {
     // A bag we can't read is a bag we report as unknown, not one we pretend is empty.
-    return null;
+    return { items: null, capacity: 0 };
   }
 }
 

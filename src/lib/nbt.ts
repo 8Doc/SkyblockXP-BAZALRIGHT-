@@ -155,6 +155,11 @@ function asCompound(value: NbtValue | undefined): NbtCompound | null {
     : null;
 }
 
+/** How many slots the container has, empty ones included — the bag's capacity. */
+export function bagCapacityFrom(root: NbtCompound): number {
+  return Array.isArray(root.i) ? root.i.length : 0;
+}
+
 /**
  * Pull the SkyBlock item ids out of a decoded inventory document. Slots are `i`, item metadata
  * lives under `tag.ExtraAttributes`, and `rarity_upgrades` is how a recombobulator shows up.

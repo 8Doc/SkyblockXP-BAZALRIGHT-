@@ -54,6 +54,7 @@ const gameData = {
   petScore: await loadJson("curated/pet_score.json"),
   difficulty: await loadJson("generated/difficulty.json"),
   attributeShards: await loadJson("generated/attributes.json"),
+  bagUpgrades: await loadJson("curated/accessory_bag_upgrades.json"),
 };
 
 const bundle = await build({

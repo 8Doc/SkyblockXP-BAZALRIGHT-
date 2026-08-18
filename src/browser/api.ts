@@ -1,6 +1,6 @@
 import type { BazaarProduct, BinIndex, GardenState, MuseumState, SkyblockProfile } from "../lib/profile";
 import { absorbAuctionPage, createBinIndex, type AuctionRecord } from "../lib/auctions";
-import { bagItemsFrom, readNbt } from "../lib/nbt";
+import { bagCapacityFrom, bagItemsFrom, readNbt } from "../lib/nbt";
 import type { BagItem } from "../lib/gameData";
 
 /**
@@ -238,15 +238,16 @@ function base64ToBytes(base64: string): Uint8Array<ArrayBuffer> {
  * Decode the talisman bag. Gzip is the only step Node and the browser do differently — the
  * browser has DecompressionStream, Node has zlib, and the NBT walk after it is shared.
  */
-export async function readBag(data: string | undefined): Promise<BagItem[] | null> {
+export async function readBag(data: string | undefined): Promise<{ items: BagItem[] | null; capacity: number }> {
   // No stored bag is a real, readable answer: the player has no accessories bagged.
-  if (!data) return [];
+  if (!data) return { items: [], capacity: 0 };
   try {
     const stream = new Blob([base64ToBytes(data)]).stream().pipeThrough(new DecompressionStream("gzip"));
     const bytes = new Uint8Array(await new Response(stream).arrayBuffer());
-    return bagItemsFrom(readNbt(bytes));
+    const root = readNbt(bytes);
+    return { items: bagItemsFrom(root), capacity: bagCapacityFrom(root) };
   } catch {
     // A bag we can't read is a bag we report as unknown, not one we pretend is empty.
-    return null;
+    return { items: null, capacity: 0 };
   }
 }

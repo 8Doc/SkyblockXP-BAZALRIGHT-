@@ -34,11 +34,15 @@ export function priceOf(cost: CostSpec, book: PriceBook): number | null {
     case "auction": {
       const byTier = book.bins?.prices[cost.itemId];
       if (!byTier) return null;
-      if (cost.tier) return byTier[cost.tier] ?? null;
+      const surcharge = cost.surcharge ?? 0;
+      if (cost.tier) {
+        const exact = byTier[cost.tier];
+        return exact === undefined ? null : exact + surcharge;
+      }
       // Cheapest listing of the item at any rarity. If that copy happens to be recombobulated
       // the player gains more magical power than we credited — we under-promise, never over.
       const listed = Object.values(byTier);
-      return listed.length ? Math.min(...listed) : null;
+      return listed.length ? Math.min(...listed) + surcharge : null;
     }
     case "none":
     case "unknown":

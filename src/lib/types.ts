@@ -72,7 +72,12 @@ export type EssenceType =
 
 export type CostSpec =
   | { kind: "bazaar"; items: { id: string; qty: number }[] }
-  | { kind: "auction"; itemId: string; tier?: string }
+  /**
+   * `surcharge` is coins added on top of the listing price — used for the accessory bag slot
+   * an accessory has to occupy once the bag is full. Buying the accessory really does cost the
+   * item plus the room to keep it.
+   */
+  | { kind: "auction"; itemId: string; tier?: string; surcharge?: number }
   | { kind: "npc"; coins: number }
   | { kind: "essence"; type: EssenceType; amount: number }
   | { kind: "none" }

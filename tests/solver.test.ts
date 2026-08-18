@@ -374,3 +374,44 @@ test("a package wall that blocks a good item shows up as bleed", () => {
   assert.equal(plan.packages[0].xp, 5, "only the filler fits in a 500 package");
   assert.ok(plan.packages[0].bleedXp > 0, "the frontier was part-way into the better item");
 });
+
+/* ------------------------------------------------- accessory bag slots */
+
+test("a full accessory bag adds the slot cost to every accessory", () => {
+  const withSlot: Task = {
+    id: "ring",
+    category: "accessory_bag",
+    name: "Ring",
+    xp: 8,
+    requires: [],
+    // 10M surcharge = half a 20M Jacobus upgrade, which grants 2 slots.
+    cost: { kind: "auction", itemId: "RING", surcharge: 10_000_000 },
+    repeatable: false,
+  };
+  const book: PriceBook = {
+    bazaar: {},
+    bins: { prices: { RING: { RARE: 500_000 } }, scannedAt: 0, pages: 1, listings: 1 },
+  };
+
+  const { byId } = resolveTasks([withSlot], new Set(), book);
+  assert.equal(byId.get("ring")!.coins, 10_500_000, "the slot is part of what the accessory costs");
+});
+
+test("with slots to spare there is no surcharge", () => {
+  const noSurcharge: Task = {
+    id: "ring",
+    category: "accessory_bag",
+    name: "Ring",
+    xp: 8,
+    requires: [],
+    cost: { kind: "auction", itemId: "RING" },
+    repeatable: false,
+  };
+  const book: PriceBook = {
+    bazaar: {},
+    bins: { prices: { RING: { RARE: 500_000 } }, scannedAt: 0, pages: 1, listings: 1 },
+  };
+
+  const { byId } = resolveTasks([noSurcharge], new Set(), book);
+  assert.equal(byId.get("ring")!.coins, 500_000);
+});
