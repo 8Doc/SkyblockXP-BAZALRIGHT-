@@ -245,6 +245,46 @@ same biased population narrows the *noise*, not the *skew*.
 
 Anything no sampled player has finished is treated as the hardest thing there is.
 
+## The perk trees, attributes and garden
+
+Four tracks the API half-hides, added by finding where the game actually keeps them.
+
+| Track | XP | Completion source |
+|---|---|---|
+| Heart of the Mountain | 1,175 | `skill_tree.nodes.mining.core_of_the_mountain` |
+| Attribute levels | ~1,720 | `attributes.stacks` against a shard threshold table |
+| Garden composter | 305 | `/skyblock/garden` → `composter_data.upgrades` |
+| Garden plots | 120 | `/skyblock/garden` → `unlocked_plots_ids` |
+| Garden crop upgrades | 117 | `/skyblock/garden` → `crop_upgrade_levels` |
+| Center of the Forest | 250 | `skill_tree.nodes.foraging.center_of_the_forest` |
+
+Two things made this harder than it looks:
+
+**HOTM is not in `mining_core`.** The obvious home — `mining_core.experience`, `mining_core.nodes` —
+is empty on a modern profile; the game moved perk trees to `skill_tree.nodes`, where the HOTM
+tier reads as `core_of_the_mountain`. The forest equivalent sits alongside it under `foraging`.
+
+**The garden is not part of the member object.** It belongs to the whole co-op, so it has its own
+endpoint keyed by profile id (`/skyblock/garden?profile=`). Composter upgrades pay 1/2/3/4 XP in
+bands across 25 tiers, and five upgrades of 25 tiers comes to exactly the wiki's stated 305.
+
+Each per-tier XP table is read from the tasks page at build time rather than transcribed, and
+the totals are checked on the way out: HOTM sums to 1,175 and Center of the Forest to 250,
+matching the wiki's own maxima.
+
+### Two deliberate omissions
+
+**Peak of the Mountain (~1,000 XP) and Heart of the Forest (~545)** have published XP tables and
+are *not* modelled. A recursive search of a maxed profile — every key at every depth — finds no
+field carrying either tier. Modelling them from a missing field would report zero progress for
+every player, overstating what they have left by ~1,545 XP and filling the grind ordering with
+work they may have finished years ago. A wrong number that looks authoritative is worse than an
+acknowledged gap, so they're listed in the UI as unmodelled with that reason.
+
+**Attribute levels cover only attributes the player already holds shards in**, because the
+profile lists no others — roughly 172 of the game's ~182. Someone near the end of that grind
+sees a slightly smaller ceiling than the true ~1,820.
+
 ## What is still missing
 
 | Category | XP | Blocker |

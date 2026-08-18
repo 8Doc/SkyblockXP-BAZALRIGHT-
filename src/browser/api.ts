@@ -1,4 +1,4 @@
-import type { BazaarProduct, BinIndex, MuseumState, SkyblockProfile } from "../lib/profile";
+import type { BazaarProduct, BinIndex, GardenState, MuseumState, SkyblockProfile } from "../lib/profile";
 import { absorbAuctionPage, createBinIndex, type AuctionRecord } from "../lib/auctions";
 import { bagItemsFrom, readNbt } from "../lib/nbt";
 import type { BagItem } from "../lib/gameData";
@@ -141,6 +141,27 @@ export async function fetchMuseum(profileId: string, uuid: string, key: string):
     return { donatedItemIds: new Set(Object.keys(member.items ?? {})), value: member.value ?? 0 };
   } catch {
     // Museum data is opt-in per player; a refusal just means donations stay unmarked.
+    return null;
+  }
+}
+
+/** The garden belongs to the co-op, not to one member, so it has its own endpoint. */
+export async function fetchGarden(profileId: string, key: string): Promise<GardenState | null> {
+  try {
+    const body = await hypixel<{
+      garden?: {
+        unlocked_plots_ids?: string[];
+        crop_upgrade_levels?: Record<string, number>;
+        composter_data?: { upgrades?: Record<string, number> };
+      };
+    }>(`/skyblock/garden?profile=${profileId}`, key);
+    if (!body.garden) return null;
+    return {
+      unlockedPlots: body.garden.unlocked_plots_ids?.length ?? 0,
+      cropUpgrades: body.garden.crop_upgrade_levels ?? {},
+      composterUpgrades: body.garden.composter_data?.upgrades ?? {},
+    };
+  } catch {
     return null;
   }
 }

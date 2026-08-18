@@ -89,6 +89,15 @@ export type CurvesData = {
   generatedAt: string;
   dungeoneering: { levels: { level: number; xpForLevel: number; totalXp: number }[] };
   slayer: { levelXp: number[]; bosses: Record<string, number[]> };
+  /** Cumulative shards per attribute level — the same table for every attribute. */
+  attributes: { cumulativeShards: number[] };
+  /** XP awarded for reaching each tier of the perk-tree tracks. */
+  progressTracks: {
+    heartOfTheMountain: number[];
+    peakOfTheMountain: number[];
+    heartOfTheForest: number[];
+    centerOfTheForest: number[];
+  };
 };
 
 export type TravelScrollsData = {

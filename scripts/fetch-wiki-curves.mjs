@@ -155,6 +155,64 @@ for (const [boss, thresholds] of Object.entries(slayerBosses)) {
   console.log(`  ${boss.padEnd(9)} ${thresholds.length} levels: ${thresholds.join(", ")}`);
 }
 
+/* ------------------------------------------------------------- attributes */
+
+/**
+ * Attribute levels are gated on shards collected, and the thresholds are the same for every
+ * attribute — one "Leveling" table on the Attributes page, ten levels, cumulative.
+ */
+const attributeRows = rowsWithSpans(await renderedHtml("Attributes"))
+  .map((r) => r.filter((c) => c !== ""))
+  .filter((r) => /^\d+$/.test(r[0] ?? "") && r.length === 3);
+
+const attributeLevels = [];
+for (const row of attributeRows) {
+  const level = number(row[0]);
+  const cumulative = number(row[2]);
+  if (level !== attributeLevels.length + 1 || cumulative === null) continue;
+  attributeLevels.push(cumulative);
+}
+out.attributes = {
+  page: "Attributes",
+  note: "Cumulative shards needed for each attribute level. Every attribute uses this same table, and each level is worth +1 SkyBlock XP.",
+  cumulativeShards: attributeLevels,
+};
+console.log(`attributes: ${attributeLevels.length} levels, max ${attributeLevels.at(-1)} shards`);
+
+/* ------------------------------------------------- tiered progress tracks */
+
+/**
+ * Heart of the Mountain, Peak of the Mountain, Heart of the Forest and Center of the Forest are
+ * all "tier N is worth X XP" tracks. The per-tier XP is already on the tasks page, so read it
+ * from there rather than transcribing it — the totals below are checked against the wiki's own
+ * stated maxima on the way out.
+ */
+const taskRowsAll = JSON.parse(await readFile(join(ROOT, "data/generated/wiki_tasks.json"), "utf8")).rows;
+
+function tierTrack(nameMatch) {
+  const tiers = [];
+  for (const row of taskRowsAll) {
+    if (!row.cells.some((c) => nameMatch.test(c))) continue;
+    const tierCell = row.cells.find((c) => /^Tier \d+:$/.test(c));
+    if (!tierCell) continue;
+    const tier = Number(/(\d+)/.exec(tierCell)[1]);
+    tiers[tier - 1] = row.xp[0];
+  }
+  return tiers.filter((x) => x !== undefined);
+}
+
+out.progressTracks = {
+  note: "XP awarded for reaching each tier. Read from the tasks page rather than transcribed.",
+  heartOfTheMountain: tierTrack(/^Heart of the Mountain$/),
+  peakOfTheMountain: tierTrack(/^Peak of the Mountain$/),
+  heartOfTheForest: tierTrack(/^Heart of the Forest$/),
+  centerOfTheForest: tierTrack(/^Center of the Forest$/),
+};
+for (const [name, tiers] of Object.entries(out.progressTracks)) {
+  if (!Array.isArray(tiers)) continue;
+  console.log(`${name}: ${tiers.length} tiers, ${tiers.reduce((a, b) => a + b, 0)} XP total`);
+}
+
 await mkdir(dirname(OUT), { recursive: true });
 await writeFile(OUT, JSON.stringify(out, null, 1) + "\n");
 console.log(`-> ${OUT}`);

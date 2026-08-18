@@ -1,6 +1,6 @@
 import "server-only";
 import { gunzipSync } from "node:zlib";
-import { accessoryBins, bazaar, invalidatePrices, museum, profiles, resolveUuid, HypixelError } from "./hypixel";
+import { accessoryBins, bazaar, garden, invalidatePrices, museum, profiles, resolveUuid, HypixelError } from "./hypixel";
 import type { ProfileMember, SkyblockProfile } from "./profile";
 import { auctionNameIndex, type BagItem } from "./gameData";
 import { bagItemsFrom, readNbt } from "./nbt";
@@ -54,10 +54,11 @@ export async function runPlanner(input: PlannerInput): Promise<PlannerResult> {
   const wantsAuctions = ["accessory_bag", "museum", "pets", "fast_travel"].some((c) =>
     input.categories.includes(c as Category),
   );
-  const [bz, bins, museumState] = await Promise.all([
+  const [bz, bins, museumState, gardenState] = await Promise.all([
     bazaar(),
     wantsAuctions ? accessoryBins(auctionNameIndex(data)).catch(() => null) : Promise.resolve(null),
     museum(profile.profile_id, uuid),
+    garden(profile.profile_id),
   ]);
 
   const book: PriceBook = { bazaar: bz, bins };
@@ -71,7 +72,7 @@ export async function runPlanner(input: PlannerInput): Promise<PlannerResult> {
     packageCount: input.packageCount,
   };
 
-  const catalog = buildCatalog(member, data, readBag(member), museumState, bins ? petsFrom(bins) : null);
+  const catalog = buildCatalog(member, data, readBag(member), museumState, bins ? petsFrom(bins) : null, gardenState);
   const report = buildReport(catalog, book, options);
 
   return {

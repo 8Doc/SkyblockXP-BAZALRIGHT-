@@ -1,5 +1,5 @@
 import type { Category, Task } from "./types";
-import type { MuseumState, ProfileMember } from "./profile";
+import type { GardenState, MuseumState, ProfileMember } from "./profile";
 import { petKey } from "./auctions";
 import {
   effortOf,
@@ -81,7 +81,17 @@ export const UNMODELLED: { category: Category; note: string; totalXp?: number }[
   },
   {
     category: "misc",
-    note: "Attribute levels (~1,820 XP), Heart of the Mountain (~1,175), Garden (~2,000 across levels, plots, visitors and crop milestones) and Foraging's Heart of the Forest (~545) are all progress tracks with their own curves, none published by the API.",
+    note: "Garden is partly covered: plots, crop upgrades and the composter are modelled. Garden level (~140 XP), visitor and offer milestones (~135), crop milestones (~598), greenhouse (~100) and DNA analysis (~90) need threshold tables the wiki doesn't publish in a form worth trusting.",
+    totalXp: 1063,
+  },
+  {
+    category: "misc",
+    note: "Peak of the Mountain (~1,000 XP) and Heart of the Forest (~545) have published XP tables, but a deep search of a maxed profile finds no field carrying their tier. Modelling them would show every player zero progress and overstate what they have left, so they wait for the API to expose a tier.",
+    totalXp: 1545,
+  },
+  {
+    category: "misc",
+    note: "Attribute levels are modelled, but only for attributes the player already holds shards in — the profile lists no others. A player near the end of that grind will see a slightly smaller ceiling than the game's ~1,820 XP.",
   },
 ];
 
@@ -91,6 +101,7 @@ export function buildCatalog(
   bagItems: BagItem[] | null,
   museum: MuseumState | null = null,
   pets: { name: string; rarity: string }[] | null = null,
+  garden: GardenState | null = null,
 ): Catalog {
   const tasks: Task[] = [];
   const done = new Set<string>();
@@ -360,6 +371,150 @@ export function buildCatalog(
       note: `${score} pet score`,
     });
     if (owned >= score) done.add(id);
+  }
+
+  /* --------------------------------------------- perk trees: HOTM and HOTF */
+
+  // Heart of the Mountain, its Peak extension, and the two forest equivalents are all the same
+  // shape: numbered tiers worth escalating XP. The tier a player has reached is a node level in
+  // skill_tree, which is where the game moved this data — mining_core no longer carries it.
+  const treeNode = (category: string, node: string): number => {
+    const value = member.skill_tree?.nodes?.[category]?.[node];
+    return typeof value === "number" ? value : 0;
+  };
+
+  // Only the two tracks whose tier the API actually reports. Peak of the Mountain and Heart of
+  // the Forest have published XP tables, but a full deep search of a maxed profile turns up no
+  // field carrying their tier under any name — so modelling them would mean every player reads
+  // zero, inflating their remaining XP by ~1,545 and polluting the grind ordering with work
+  // they may have already finished. They're declared in UNMODELLED instead.
+  const perkTracks: { id: string; label: string; category: Category; tiers: number[]; current: number }[] = [
+    {
+      id: "hotm",
+      label: "Heart of the Mountain",
+      category: "misc",
+      tiers: data.curves.progressTracks.heartOfTheMountain,
+      current: treeNode("mining", "core_of_the_mountain"),
+    },
+    {
+      id: "center_of_the_forest",
+      label: "Center of the Forest",
+      category: "misc",
+      tiers: data.curves.progressTracks.centerOfTheForest,
+      current: treeNode("foraging", "center_of_the_forest"),
+    },
+  ];
+
+  for (const track of perkTracks) {
+    let previous: string | null = null;
+    track.tiers.forEach((xp, index) => {
+      const tier = index + 1;
+      const id = `${track.id}_${tier}`;
+      tasks.push({
+        id,
+        category: track.category,
+        name: `${track.label} ${tier}`,
+        xp,
+        requires: previous ? [previous] : [],
+        cost: { kind: "none" },
+        repeatable: false,
+      });
+      if (track.current >= tier) done.add(id);
+      previous = id;
+    });
+  }
+
+  /* ---------------------------------------------------------- attributes */
+
+  // Every attribute levels on the same shard thresholds, and every level is worth +1 XP. The
+  // profile only lists attributes the player has shards for, so the universe is capped at the
+  // attributes seen rather than guessed at — a task for an attribute nobody has heard of would
+  // be noise.
+  const shardThresholds = data.curves.attributes.cumulativeShards;
+  for (const [attribute, shards] of Object.entries(member.attributes?.stacks ?? {})) {
+    let previous: string | null = null;
+    shardThresholds.forEach((needed, index) => {
+      const level = index + 1;
+      const id = `attribute_${attribute}_${level}`;
+      tasks.push({
+        id,
+        category: "misc",
+        name: `${titleCase(attribute)} ${level}`,
+        xp: 1,
+        requires: previous ? [previous] : [],
+        cost: { kind: "none" },
+        repeatable: false,
+        note: `${needed} shards`,
+      });
+      if (shards >= needed) done.add(id);
+      previous = id;
+    });
+  }
+
+  /* --------------------------------------------------------------- garden */
+
+  // Only the garden tracks whose completion the API states outright. Garden level, visitor and
+  // crop-milestone counts need threshold tables the wiki doesn't publish in a parseable form,
+  // so they stay out rather than being estimated — see UNMODELLED.
+  if (garden) {
+    const PLOT_XP = 5;
+    const TOTAL_PLOTS = 24;
+    let previousPlot: string | null = null;
+    for (let plot = 1; plot <= TOTAL_PLOTS; plot++) {
+      const id = `garden_plot_${plot}`;
+      tasks.push({
+        id,
+        category: "misc",
+        name: `Garden plot ${plot}`,
+        xp: PLOT_XP,
+        requires: previousPlot ? [previousPlot] : [],
+        cost: { kind: "none" },
+        repeatable: false,
+      });
+      if (garden.unlockedPlots >= plot) done.add(id);
+      previousPlot = id;
+    }
+
+    // 13 crops, 9 upgrade levels each, 1 XP apiece — 117 XP, matching the wiki total.
+    for (const [crop, level] of Object.entries(garden.cropUpgrades)) {
+      let previousUpgrade: string | null = null;
+      for (let tier = 1; tier <= 9; tier++) {
+        const id = `garden_crop_${crop}_${tier}`;
+        tasks.push({
+          id,
+          category: "misc",
+          name: `${titleCase(crop.replace(/[:_]/g, " "))} upgrade ${tier}`,
+          xp: 1,
+          requires: previousUpgrade ? [previousUpgrade] : [],
+          cost: { kind: "none" },
+          repeatable: false,
+        });
+        if (level >= tier) done.add(id);
+        previousUpgrade = id;
+      }
+    }
+
+    // Composter tiers pay 1/2/3/4 XP in bands of 6-7 — five upgrades of 25 tiers is 305 XP,
+    // exactly the wiki's stated maximum.
+    const composterXp = (tier: number) => (tier <= 7 ? 1 : tier <= 13 ? 2 : tier <= 19 ? 3 : 4);
+    for (const upgrade of ["speed", "multi_drop", "fuel_cap", "organic_matter_cap", "cost_reduction"]) {
+      const level = garden.composterUpgrades[upgrade] ?? 0;
+      let previousTier: string | null = null;
+      for (let tier = 1; tier <= 25; tier++) {
+        const id = `garden_composter_${upgrade}_${tier}`;
+        tasks.push({
+          id,
+          category: "misc",
+          name: `Composter ${upgrade.replace(/_/g, " ")} ${tier}`,
+          xp: composterXp(tier),
+          requires: previousTier ? [previousTier] : [],
+          cost: { kind: "none" },
+          repeatable: false,
+        });
+        if (level >= tier) done.add(id);
+        previousTier = id;
+      }
+    }
   }
 
   /* --------------------------------------------------------- fairy souls */

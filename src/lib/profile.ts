@@ -20,12 +20,29 @@ export type ProfileMember = {
   };
   slayer?: { slayer_bosses?: Record<string, { xp?: number } | undefined> };
   pets_data?: { pets?: { type?: string; tier?: string }[] };
+  /** Perk trees. HOTM and the forest equivalents live here, keyed by node name -> level. */
+  skill_tree?: { nodes?: Record<string, Record<string, number | boolean> | undefined> };
+  /** Attribute shard counts, keyed by attribute name. Levels are derived from these. */
+  attributes?: { stacks?: Record<string, number> };
 };
 
 /** What the museum endpoint tells us: which items are already donated. */
 export type MuseumState = {
   donatedItemIds: Set<string>;
   value: number;
+};
+
+/**
+ * The garden lives on its own endpoint rather than inside the profile member, because it
+ * belongs to the whole co-op rather than to one player.
+ */
+export type GardenState = {
+  /** Plot ids the co-op has unlocked. */
+  unlockedPlots: number;
+  /** crop id -> upgrade level. */
+  cropUpgrades: Record<string, number>;
+  /** composter upgrade name -> tier. */
+  composterUpgrades: Record<string, number>;
 };
 
 export type SkyblockProfile = {

@@ -269,9 +269,14 @@ All 16, ~40,000 XP, 4,964 tasks. `DATA.md` has the provenance for each number.
 | Bank | 310 | harvested ids | `completed_tasks` |
 | Rift | 295 | harvested ids | `completed_tasks` |
 
-Still missing, and named in the UI: bestiary (~4,370), attribute levels (~1,820), garden
-(~2,000), Heart of the Mountain (~1,175), Heart of the Forest (~545). The app shows what
-percentage of your earned XP it can account for, so the gap is visible rather than implied.
+Attribute levels (~1,720), Heart of the Mountain (1,175), Center of the Forest (250) and the
+garden's plots, crop upgrades and composter (542) are all modelled — see `DATA.md` for where
+each one hides in the API.
+
+Still missing, and named in the UI: bestiary (~4,370), the rest of the garden (~1,063), and
+Peak of the Mountain plus Heart of the Forest (~1,545 — their XP tables are published but the
+API exposes no tier field, so modelling them would show everyone zero progress). The app shows
+what percentage of your earned XP it can account for, so the gap is visible rather than implied.
 
 ## Where the data comes from
 

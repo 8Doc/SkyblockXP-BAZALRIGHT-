@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-08-18T19:01:23.227Z",
+ "generatedAt": "2026-08-18T22:18:57.989Z",
  "source": "https://hypixel-skyblock.fandom.com/api.php",
  "dungeoneering": {
   "page": "Dungeoneering",
@@ -335,5 +335,64 @@
     2400
    ]
   }
+ },
+ "attributes": {
+  "page": "Attributes",
+  "note": "Cumulative shards needed for each attribute level. Every attribute uses this same table, and each level is worth +1 SkyBlock XP.",
+  "cumulativeShards": [
+   1,
+   4,
+   9,
+   15,
+   22,
+   30,
+   40,
+   54,
+   72,
+   96
+  ]
+ },
+ "progressTracks": {
+  "note": "XP awarded for reaching each tier. Read from the tasks page rather than transcribed.",
+  "heartOfTheMountain": [
+   35,
+   45,
+   60,
+   75,
+   90,
+   110,
+   130,
+   180,
+   210,
+   240
+  ],
+  "peakOfTheMountain": [
+   25,
+   35,
+   50,
+   65,
+   75,
+   100,
+   125,
+   150,
+   175,
+   200
+  ],
+  "heartOfTheForest": [
+   35,
+   45,
+   60,
+   75,
+   90,
+   110,
+   130
+  ],
+  "centerOfTheForest": [
+   25,
+   35,
+   50,
+   65,
+   75
+  ]
  }
 }

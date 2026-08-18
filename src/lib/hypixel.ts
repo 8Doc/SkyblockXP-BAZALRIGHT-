@@ -1,8 +1,8 @@
 import "server-only";
-import type { BazaarProduct, BinIndex, MuseumState, ProfileMember, SkyblockProfile } from "./profile";
+import type { BazaarProduct, BinIndex, GardenState, MuseumState, ProfileMember, SkyblockProfile } from "./profile";
 import { absorbAuctionPage, createBinIndex, type AuctionRecord } from "./auctions";
 
-export type { BazaarProduct, BinIndex, MuseumState, ProfileMember, SkyblockProfile };
+export type { BazaarProduct, BinIndex, GardenState, MuseumState, ProfileMember, SkyblockProfile };
 
 /**
  * Hypixel + Mojang access. Everything goes through one TTL cache with in-flight
@@ -135,6 +135,37 @@ export async function museum(profileId: string, uuid: string): Promise<MuseumSta
       return { donatedItemIds: new Set(Object.keys(member.items ?? {})), value: member.value ?? 0 };
     } catch {
       // Museum data is opt-in per player; a refusal just means we can't mark donations done.
+      return null;
+    }
+  });
+}
+
+/* ------------------------------------------------------------------ garden */
+
+type GardenResponse = {
+  garden?: {
+    unlocked_plots_ids?: string[];
+    crop_upgrade_levels?: Record<string, number>;
+    composter_data?: { upgrades?: Record<string, number> };
+  };
+};
+
+/**
+ * The garden belongs to the whole co-op rather than to one member, so it has its own endpoint
+ * keyed by profile id.
+ */
+export async function garden(profileId: string): Promise<GardenState | null> {
+  return memo(`garden:${profileId}`, TTL.profiles, async () => {
+    try {
+      const body = await get<GardenResponse>(`/skyblock/garden?profile=${profileId}`);
+      if (!body.garden) return null;
+      return {
+        unlockedPlots: body.garden.unlocked_plots_ids?.length ?? 0,
+        cropUpgrades: body.garden.crop_upgrade_levels ?? {},
+        composterUpgrades: body.garden.composter_data?.upgrades ?? {},
+      };
+    } catch {
+      // A profile that has never touched the garden just has no garden data.
       return null;
     }
   });

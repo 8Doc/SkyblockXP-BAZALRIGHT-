@@ -1,12 +1,12 @@
 import { auctionNameIndex, type BagItem, type GameData } from "../lib/gameData";
 import { coins, num, rate } from "../lib/format";
-import type { BinIndex, MuseumState, ProfileMember, SkyblockProfile, BazaarProduct } from "../lib/profile";
+import type { BinIndex, GardenState, MuseumState, ProfileMember, SkyblockProfile, BazaarProduct } from "../lib/profile";
 import { petsFrom } from "../lib/auctions";
 import { buildCatalog, type Catalog } from "../lib/catalog";
 import { buildReport, type Report } from "../lib/report";
 import type { PriceBook } from "../lib/resolve";
 import { CATEGORIES, CATEGORY_LABELS, XP_PER_LEVEL, type Category, type ResolvedTask } from "../lib/types";
-import { ApiError, cacheAge, fetchAccessoryBins, fetchBazaar, fetchMuseum, fetchProfiles, readBag, resolveUuid } from "./api";
+import { ApiError, cacheAge, fetchAccessoryBins, fetchBazaar, fetchGarden, fetchMuseum, fetchProfiles, readBag, resolveUuid } from "./api";
 
 /**
  * The standalone build. Same domain logic as the Next app — it imports the very same solver
@@ -40,6 +40,7 @@ type State = {
   bazaar: Record<string, BazaarProduct>;
   bins: BinIndex | null;
   museum: MuseumState | null;
+  garden: GardenState | null;
   /** Built once per profile — it never depends on the solver knobs. */
   catalog: Catalog | null;
   targetMode: "xp" | "level";
@@ -68,6 +69,7 @@ const state: State = {
   bazaar: {},
   bins: null,
   museum: null,
+  garden: null,
   catalog: null,
   targetMode: "xp",
   target: 500,
@@ -152,6 +154,9 @@ async function loadProfile(): Promise<void> {
   setStatus("busy", "Reading museum donations…");
   state.museum = await fetchMuseum(state.profileId, state.uuid, state.apiKey.trim());
 
+  setStatus("busy", "Reading garden progress…");
+  state.garden = await fetchGarden(state.profileId, state.apiKey.trim());
+
   setStatus("busy", "Fetching bazaar prices…");
   try {
     state.bazaar = await fetchBazaar();
@@ -195,7 +200,14 @@ async function loadAuctions(force = false): Promise<void> {
 
 function rebuildCatalog(): void {
   if (!state.member) return;
-  state.catalog = buildCatalog(state.member, data, state.bagItems, state.museum, state.bins ? petsFrom(state.bins) : null);
+  state.catalog = buildCatalog(
+    state.member,
+    data,
+    state.bagItems,
+    state.museum,
+    state.bins ? petsFrom(state.bins) : null,
+    state.garden,
+  );
 }
 
 /** Re-pull every live feed. The profile is left alone — this is about prices, not progress. */
