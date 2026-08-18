@@ -36,6 +36,7 @@ export function staticData(): GameData {
     costs: load("generated/costs.json"),
     petScore: load("curated/pet_score.json"),
     difficulty: load("generated/difficulty.json"),
+    attributeShards: load("generated/attributes.json"),
   };
   return cached;
 }

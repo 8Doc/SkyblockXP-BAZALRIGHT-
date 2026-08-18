@@ -252,7 +252,7 @@ Four tracks the API half-hides, added by finding where the game actually keeps t
 | Track | XP | Completion source |
 |---|---|---|
 | Heart of the Mountain | 1,175 | `skill_tree.nodes.mining.core_of_the_mountain` |
-| Attribute levels | ~1,720 | `attributes.stacks` against a shard threshold table |
+| Attribute levels | 1,810 | `attributes.stacks` against a shard threshold table |
 | Garden composter | 305 | `/skyblock/garden` → `composter_data.upgrades` |
 | Garden plots | 120 | `/skyblock/garden` → `unlocked_plots_ids` |
 | Garden crop upgrades | 117 | `/skyblock/garden` → `crop_upgrade_levels` |
@@ -281,9 +281,21 @@ every player, overstating what they have left by ~1,545 XP and filling the grind
 work they may have finished years ago. A wrong number that looks authoritative is worse than an
 acknowledged gap, so they're listed in the UI as unmodelled with that reason.
 
-**Attribute levels cover only attributes the player already holds shards in**, because the
-profile lists no others — roughly 172 of the game's ~182. Someone near the end of that grind
-sees a slightly smaller ceiling than the true ~1,820.
+**Attribute levels are complete and priced.** `scripts/fetch-attributes.mjs` scrapes
+`Attributes/List/<rarity>` for all five rarities, giving **181 attributes** — matching the
+game's ~182 — so the ceiling no longer depends on what the player happens to have touched.
+
+Each attribute is fed by one named shard, and those shards trade on the bazaar, so an attribute
+level costs the shards it adds times their live price. The mapping has to be scraped because
+shards are named after the *mob*, not the attribute: "Snow Elemental" is fed by "Blizzard Shard"
+(`SHARD_BLIZZARD`), and only 1 of 172 attribute names matches its own shard id. **175 of 181**
+attributes have a bazaar-traded shard; the remaining six stay unpriced.
+
+That moved attributes off the grind list entirely — on a fresh profile it is now ~1,750 XP of
+*priced* work the solver can rank against minions and accessories.
+
+**These costs are an upper bound.** They assume buying every shard outright at bazaar instant-buy.
+Fusing shards you already hold is cheaper and isn't modelled, so a real player pays less.
 
 ## What is still missing
 

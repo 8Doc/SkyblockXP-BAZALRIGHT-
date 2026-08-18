@@ -91,7 +91,7 @@ export const UNMODELLED: { category: Category; note: string; totalXp?: number }[
   },
   {
     category: "misc",
-    note: "Attribute levels are modelled, but only for attributes the player already holds shards in — the profile lists no others. A player near the end of that grind will see a slightly smaller ceiling than the game's ~1,820 XP.",
+    note: "Attribute levels are priced from the shards that feed them, which assumes buying every shard outright. Fusing shards you already own is cheaper, so those costs are an upper bound. Six attributes have no bazaar-traded shard and stay unpriced.",
   },
 ];
 
@@ -426,27 +426,43 @@ export function buildCatalog(
 
   /* ---------------------------------------------------------- attributes */
 
-  // Every attribute levels on the same shard thresholds, and every level is worth +1 XP. The
-  // profile only lists attributes the player has shards for, so the universe is capped at the
-  // attributes seen rather than guessed at — a task for an attribute nobody has heard of would
-  // be noise.
+  // Every attribute levels on the same shard thresholds, and every level is worth +1 XP.
+  //
+  // The universe comes from the wiki rather than from the player's own stacks: the profile only
+  // lists attributes they already hold shards in, so deriving it from there would cap each
+  // player's ceiling at whatever they happened to have touched.
+  //
+  // These are priced, not grind. Each attribute is fed by a named shard that trades on the
+  // bazaar — under the mob's name, not the attribute's ("Snow Elemental" is fed by
+  // SHARD_BLIZZARD — so a level costs the shards it adds times their live price. That's the
+  // direct-purchase path; fusing shards you already own is cheaper and isn't modelled, so this
+  // is an upper bound on what the level costs.
   const shardThresholds = data.curves.attributes.cumulativeShards;
-  for (const [attribute, shards] of Object.entries(member.attributes?.stacks ?? {})) {
+  const heldShards = member.attributes?.stacks ?? {};
+
+  for (const attribute of data.attributeShards.attributes) {
+    const held = heldShards[attribute.key] ?? 0;
     let previous: string | null = null;
+
     shardThresholds.forEach((needed, index) => {
       const level = index + 1;
-      const id = `attribute_${attribute}_${level}`;
+      const id = `attribute_${attribute.key}_${level}`;
+      // Only the shards this level adds on top of the last one.
+      const increment = needed - (shardThresholds[index - 1] ?? 0);
+
       tasks.push({
         id,
         category: "misc",
-        name: `${titleCase(attribute)} ${level}`,
+        name: `${attribute.name} ${level}`,
         xp: 1,
         requires: previous ? [previous] : [],
-        cost: { kind: "none" },
+        cost: attribute.tradeable
+          ? { kind: "bazaar", items: [{ id: attribute.shardId, qty: increment }] }
+          : { kind: "unknown", note: `${attribute.shardName} doesn't trade on the bazaar` },
         repeatable: false,
-        note: `${needed} shards`,
+        note: `${increment}× ${attribute.shardName}`,
       });
-      if (shards >= needed) done.add(id);
+      if (held >= needed) done.add(id);
       previous = id;
     });
   }

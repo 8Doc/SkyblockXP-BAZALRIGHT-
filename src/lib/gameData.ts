@@ -115,6 +115,21 @@ export type CostsData = {
   coverage: Record<string, number>;
 };
 
+/** Every attribute, the shard that feeds it, and that shard's bazaar id. */
+export type AttributesData = {
+  generatedAt: string;
+  totalAttributes: number;
+  tradeableAttributes: number;
+  attributes: {
+    key: string;
+    name: string;
+    rarity: string;
+    shardName: string;
+    shardId: string;
+    tradeable: boolean;
+  }[];
+};
+
 /** Observed completion rates, from scripts/harvest-difficulty.mjs. */
 export type DifficultyData = {
   generatedAt: string;
@@ -136,6 +151,7 @@ export type GameData = {
   costs: CostsData;
   petScore: { byRarity: Record<string, number> };
   difficulty: DifficultyData;
+  attributeShards: AttributesData;
 };
 
 /**

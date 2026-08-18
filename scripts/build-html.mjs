@@ -53,6 +53,7 @@ const gameData = {
   costs: await loadJson("generated/costs.json"),
   petScore: await loadJson("curated/pet_score.json"),
   difficulty: await loadJson("generated/difficulty.json"),
+  attributeShards: await loadJson("generated/attributes.json"),
 };
 
 const bundle = await build({

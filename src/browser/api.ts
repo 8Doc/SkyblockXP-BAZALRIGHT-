@@ -173,9 +173,13 @@ export async function fetchBazaar(force = false): Promise<Record<string, BazaarP
   if (cached) return cached;
   const body = await hypixel<{ products: Record<string, BazaarProduct> }>("/skyblock/bazaar");
   // Only the prices we actually price against — the full payload is 3.5MB and won't fit.
+  // Keep only what something actually prices against, and only the price fields — the raw
+  // payload is 3.5MB of order books that would blow the localStorage quota. Minion recipes pull
+  // from the whole catalogue, so this can't be a short prefix list any more; dropping
+  // quick_status alone takes it to a few hundred KB.
   const trimmed: Record<string, BazaarProduct> = {};
   for (const [id, product] of Object.entries(body.products)) {
-    if (!id.startsWith("GENERATOR_UPGRADE_STONE_") && !id.startsWith("ESSENCE_")) continue;
+    if (!product.quick_status) continue;
     trimmed[id] = { quick_status: product.quick_status };
   }
   cacheSet("bazaar", trimmed);
