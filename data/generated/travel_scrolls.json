@@ -1,0 +1,206 @@
+{
+ "generatedAt": "2026-08-18T20:07:01.858Z",
+ "source": "https://api.hypixel.net/v2/resources/skyblock",
+ "scrolls": [
+  {
+   "taskId": "FAST_TRAVEL_ARACHNE_SANCTUARY",
+   "itemId": "ARACHNE_SANCTUARY_TRAVEL_SCROLL",
+   "name": "Travel Scroll to Arachne's Sanctuary"
+  },
+  {
+   "taskId": "FAST_TRAVEL_BASE_CAMP",
+   "itemId": "BASE_CAMP_TRAVEL_SCROLL",
+   "name": "Travel Scroll to the Dwarven Base Camp"
+  },
+  {
+   "taskId": "FAST_TRAVEL_BAYOU",
+   "itemId": "BAYOU_TRAVEL_SCROLL",
+   "name": "Travel Scroll to the Bayou"
+  },
+  {
+   "taskId": "FAST_TRAVEL_BLAZE_FARM",
+   "itemId": "BLAZE_FARM_TRAVEL_SCROLL",
+   "name": "Travel Scroll to the Blaze Farm"
+  },
+  {
+   "taskId": "FAST_TRAVEL_CRYSTAL_HOLLOWS",
+   "itemId": "CRYSTAL_HOLLOWS_TRAVEL_SCROLL",
+   "name": "Travel Scroll to the Crystal Hollows"
+  },
+  {
+   "taskId": "FAST_TRAVEL_CRYSTAL_NUCLEUS",
+   "itemId": "CRYSTAL_NUCLEUS_TRAVEL_SCROLL",
+   "name": "Travel Scroll to the Crystal Nucleus"
+  },
+  {
+   "taskId": "FAST_TRAVEL_DANGER_1",
+   "itemId": "DANGER_1_TRAVEL_SCROLL",
+   "name": "Travel Scroll to Spider's Den"
+  },
+  {
+   "taskId": "FAST_TRAVEL_DANGER_2",
+   "itemId": "DANGER_2_TRAVEL_SCROLL",
+   "name": "Travel Scroll to the Crimson Isle"
+  },
+  {
+   "taskId": "FAST_TRAVEL_DANGER_3",
+   "itemId": "DANGER_3_TRAVEL_SCROLL",
+   "name": "Travel Scroll to the End"
+  },
+  {
+   "taskId": "FAST_TRAVEL_DRAGON_NEST",
+   "itemId": "DRAGON_NEST_TRAVEL_SCROLL",
+   "name": "Travel Scroll to Dragon's Nest"
+  },
+  {
+   "taskId": "FAST_TRAVEL_DRAGONTAIL",
+   "itemId": "DRAGONTAIL_TRAVEL_SCROLL",
+   "name": "Travel Scroll to Dragontail"
+  },
+  {
+   "taskId": "FAST_TRAVEL_FARMING_1",
+   "itemId": "FARMING_1_TRAVEL_SCROLL",
+   "name": "Travel Scroll to The Barn"
+  },
+  {
+   "taskId": "FAST_TRAVEL_FARMING_2",
+   "itemId": "FARMING_2_TRAVEL_SCROLL",
+   "name": "Travel Scroll to Mushroom Island"
+  },
+  {
+   "taskId": "FAST_TRAVEL_FORAGING_1",
+   "itemId": "FORAGING_1_TRAVEL_SCROLL",
+   "name": "Travel Scroll to The Park"
+  },
+  {
+   "taskId": "FAST_TRAVEL_FORAGING_2",
+   "itemId": "FORAGING_2_TRAVEL_SCROLL",
+   "name": "Travel Scroll to the Foraging Islands"
+  },
+  {
+   "taskId": "FAST_TRAVEL_FORGE",
+   "itemId": "FORGE_TRAVEL_SCROLL",
+   "name": "Travel Scroll to the Dwarven Forge"
+  },
+  {
+   "taskId": "FAST_TRAVEL_GLOWING_MUSHROOM_CAVE",
+   "itemId": "GLOWING_MUSHROOM_CAVE_TRAVEL_SCROLL",
+   "name": "Travel Scroll to the Glowing Mushroom Cave"
+  },
+  {
+   "taskId": "FAST_TRAVEL_HUB_CASTLE",
+   "itemId": "HUB_CASTLE_TRAVEL_SCROLL",
+   "name": "Travel Scroll to Hub Castle"
+  },
+  {
+   "taskId": "FAST_TRAVEL_HUB_CRYPTS",
+   "itemId": "HUB_CRYPTS_TRAVEL_SCROLL",
+   "name": "Travel Scroll to Hub Crypts"
+  },
+  {
+   "taskId": "FAST_TRAVEL_HUB_DA",
+   "itemId": "HUB_DA_TRAVEL_SCROLL",
+   "name": "Travel Scroll to Dark Auction"
+  },
+  {
+   "taskId": "FAST_TRAVEL_HUB_WIZARD_TOWER",
+   "itemId": "HUB_WIZARD_TOWER_TRAVEL_SCROLL",
+   "name": "Travel Scroll to the Wizard Tower"
+  },
+  {
+   "taskId": "FAST_TRAVEL_LOTUS_ATOLL",
+   "itemId": "LOTUS_ATOLL_TRAVEL_SCROLL",
+   "name": "Travel Scroll to the Lotus Atoll"
+  },
+  {
+   "taskId": "FAST_TRAVEL_MINING_1",
+   "itemId": "MINING_1_TRAVEL_SCROLL",
+   "name": "Travel Scroll to the Gold Mine"
+  },
+  {
+   "taskId": "FAST_TRAVEL_MINING_2",
+   "itemId": "MINING_2_TRAVEL_SCROLL",
+   "name": "Travel Scroll to Deep Caverns"
+  },
+  {
+   "taskId": "FAST_TRAVEL_MINING_3",
+   "itemId": "MINING_3_TRAVEL_SCROLL",
+   "name": "Travel Scroll to Dwarven Mines"
+  },
+  {
+   "taskId": "FAST_TRAVEL_MURKWATER",
+   "itemId": "MURKWATER_TRAVEL_SCROLL",
+   "name": "Travel Scroll to Murkwater Loch"
+  },
+  {
+   "taskId": "FAST_TRAVEL_MUSEUM",
+   "itemId": "MUSEUM_TRAVEL_SCROLL",
+   "name": "Travel Scroll to Museum"
+  },
+  {
+   "taskId": "FAST_TRAVEL_NETHER_FORTRESS_BOSS",
+   "itemId": "NETHER_FORTRESS_BOSS_TRAVEL_SCROLL",
+   "name": "Dusty Travel Scroll to the Kuudra Skull"
+  },
+  {
+   "taskId": "FAST_TRAVEL_PARK_CAVE",
+   "itemId": "PARK_CAVE_TRAVEL_SCROLL",
+   "name": "Travel Scroll to Howling Cave"
+  },
+  {
+   "taskId": "FAST_TRAVEL_PARK_JUNGLE",
+   "itemId": "PARK_JUNGLE_TRAVEL_SCROLL",
+   "name": "Travel Scroll to Jungle Island"
+  },
+  {
+   "taskId": "FAST_TRAVEL_RIFT_WIZARD_TOWER",
+   "itemId": "RIFT_WIZARD_TOWER_TRAVEL_SCROLL",
+   "name": "Travel Scroll to The Rift"
+  },
+  {
+   "taskId": "FAST_TRAVEL_SCARLETON",
+   "itemId": "SCARLETON_TRAVEL_SCROLL",
+   "name": "Travel Scroll to Scarleton"
+  },
+  {
+   "taskId": "FAST_TRAVEL_SMOLDERING_CHAMBERS",
+   "itemId": "SMOLDERING_CHAMBERS_TRAVEL_SCROLL",
+   "name": "Travel Scroll to the Smoldering Tomb"
+  },
+  {
+   "taskId": "FAST_TRAVEL_SPIDERS_DEN_TOP",
+   "itemId": "SPIDERS_DEN_TOP_TRAVEL_SCROLL",
+   "name": "Travel Scroll to Spider's Den Top of Nest"
+  },
+  {
+   "taskId": "FAST_TRAVEL_TORRHUS_CANYON",
+   "itemId": "TORRHUS_CANYON_TRAVEL_SCROLL",
+   "name": "Travel Scroll to Torrhus Canyon"
+  },
+  {
+   "taskId": "FAST_TRAVEL_TORRHUS_SAFARI_ENTRANCE",
+   "itemId": "TORRHUS_SAFARI_ENTRANCE_TRAVEL_SCROLL",
+   "name": "Travel Scroll to Critter Safari Entrance"
+  },
+  {
+   "taskId": "FAST_TRAVEL_TORRHUS_SPRINGS",
+   "itemId": "TORRHUS_SPRINGS_TRAVEL_SCROLL",
+   "name": "Travel Scroll to Torrhus Springs"
+  },
+  {
+   "taskId": "FAST_TRAVEL_TRAPPER_DEN",
+   "itemId": "TRAPPER_DEN_TRAVEL_SCROLL",
+   "name": "Travel Scroll to the Trapper's Den"
+  },
+  {
+   "taskId": "FAST_TRAVEL_VOID_SEPULTURE",
+   "itemId": "VOID_SEPULTURE_TRAVEL_SCROLL",
+   "name": "Travel Scroll to the Void Sepulture"
+  },
+  {
+   "taskId": "FAST_TRAVEL_WASTELAND",
+   "itemId": "WASTELAND_TRAVEL_SCROLL",
+   "name": "Travel Scroll to the Kuudra Passage"
+  }
+ ]
+}

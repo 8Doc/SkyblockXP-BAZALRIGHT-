@@ -1,0 +1,3471 @@
+{
+ "generatedAt": "2026-08-18T20:07:01.858Z",
+ "source": "https://api.hypixel.net/v2/resources/skyblock",
+ "accessories": [
+  {
+   "id": "ABICASE",
+   "name": "Abicase",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "ACCRETION_ARTIFACT",
+   "name": "Accretion Artifact",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "ACCRETION_RING",
+   "name": "Accretion Ring",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "ACCRETION_TALISMAN",
+   "name": "Accretion Talisman",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "AGARIMOO_ARTIFACT",
+   "name": "Agarimoo Artifact",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "AGARIMOO_RING",
+   "name": "Agarimoo Ring",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "AGARIMOO_TALISMAN",
+   "name": "Agarimoo Talisman",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "ANGUISH_ARTIFACT",
+   "name": "Anguish Artifact",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "ANGUISH_RING",
+   "name": "Anguish Ring",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "ANGUISH_TALISMAN",
+   "name": "Anguish Talisman",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "ANITA_ARTIFACT",
+   "name": "Anita's Artifact",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "ANITA_RING",
+   "name": "Anita's Ring",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "ANITA_TALISMAN",
+   "name": "Anita's Talisman",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "APPLICANT_STATEMENT",
+   "name": "Applicant's Statement",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "ARCHAEOLOGIST_COMPASS",
+   "name": "Archaeologist's Compass",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "ARGOFAY_TRINKET",
+   "name": "Argofay Trinket",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "ARTIFACT_OF_COINS",
+   "name": "Artifact of Coins",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "ARTIFACT_OF_CONTROL",
+   "name": "Artifact of Control",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "ARTIFACT_OF_SPACE",
+   "name": "Artifact of Space",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "ARTIFACT_POTION_AFFINITY",
+   "name": "Potion Affinity Artifact",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "ATMOSPHERIC_FILTER",
+   "name": "Atmospheric Filter",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "AUTO_RECOMBOBULATOR",
+   "name": "Auto Recombobulator",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "BAIT_RING",
+   "name": "Bait Ring",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "BAT_ARTIFACT",
+   "name": "Bat Artifact",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "BAT_PERSON_ARTIFACT",
+   "name": "Bat Person Artifact",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "BAT_PERSON_RING",
+   "name": "Bat Person Ring",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "BAT_RING",
+   "name": "Bat Ring",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "BAT_TALISMAN",
+   "name": "Bat Talisman",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "BEASTMASTER_CREST_EPIC",
+   "name": "Beastmaster Crest",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "BEASTMASTER_CREST_LEGENDARY",
+   "name": "Beastmaster Crest",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "BEASTMASTER_CREST_RARE",
+   "name": "Beastmaster Crest",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "BEASTMASTER_CREST_UNCOMMON",
+   "name": "Beastmaster Crest",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "BIG_BRAIN_TALISMAN",
+   "name": "Big Brain Talisman",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": true
+  },
+  {
+   "id": "BINGO_ARTIFACT",
+   "name": "Bingo Artifact",
+   "tier": "RARE",
+   "museum": true,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "BINGO_HEIRLOOM",
+   "name": "Bingo Heirloom",
+   "tier": "LEGENDARY",
+   "museum": true,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "BINGO_RELIC",
+   "name": "Bingo Relic",
+   "tier": "EPIC",
+   "museum": true,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "BINGO_RING",
+   "name": "Bingo Ring",
+   "tier": "UNCOMMON",
+   "museum": true,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "BINGO_TALISMAN",
+   "name": "Bingo Talisman",
+   "tier": "COMMON",
+   "museum": true,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "BIOANALYSIS_ARTIFACT",
+   "name": "Bioanalysis Artifact",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "BIOANALYSIS_RING",
+   "name": "Bioanalysis Ring",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "BIOANALYSIS_TALISMAN",
+   "name": "Bioanalysis Talisman",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "BITS_TALISMAN",
+   "name": "Bits Talisman",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "BLAZE_TALISMAN",
+   "name": "Blaze Talisman",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "BLOOD_DONOR_ARTIFACT",
+   "name": "Blood Donor Artifact",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": true
+  },
+  {
+   "id": "BLOOD_DONOR_RING",
+   "name": "Blood Donor Ring",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": true
+  },
+  {
+   "id": "BLOOD_DONOR_TALISMAN",
+   "name": "Blood Donor Talisman",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": true
+  },
+  {
+   "id": "BLOOD_GOD_SIGIL",
+   "name": "Blood God Sigil",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "BLUE_GIFT_TALISMAN",
+   "name": "Blue Gift Talisman",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "BLUERTOOTH_RING",
+   "name": "Bluertooth Ring",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "BLUETOOTH_RING",
+   "name": "Bluetooth Ring",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": true
+  },
+  {
+   "id": "BOOK_OF_PROGRESSION",
+   "name": "Book of Progression",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "BROKEN_PIGGY_BANK",
+   "name": "Broken Piggy Bank",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "BUCKET_OF_DYE",
+   "name": "Bucket of Dye",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "BURNING_KUUDRA_CORE",
+   "name": "Burning Kuudra Core",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "BURSTSTOPPER_ARTIFACT",
+   "name": "Burststopper Artifact",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "BURSTSTOPPER_TALISMAN",
+   "name": "Burststopper Talisman",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CAMPFIRE_TALISMAN_10",
+   "name": "Campfire Cultist Badge III",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CAMPFIRE_TALISMAN_11",
+   "name": "Campfire Cultist Badge IV",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CAMPFIRE_TALISMAN_12",
+   "name": "Campfire Cultist Badge V",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CAMPFIRE_TALISMAN_13",
+   "name": "Campfire Scion Badge I",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CAMPFIRE_TALISMAN_14",
+   "name": "Campfire Scion Badge II",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CAMPFIRE_TALISMAN_15",
+   "name": "Campfire Scion Badge III",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CAMPFIRE_TALISMAN_16",
+   "name": "Campfire Scion Badge IV",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CAMPFIRE_TALISMAN_17",
+   "name": "Campfire Scion Badge V",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CAMPFIRE_TALISMAN_18",
+   "name": "Campfire Scion Badge VI",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CAMPFIRE_TALISMAN_19",
+   "name": "Campfire Scion Badge VII",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CAMPFIRE_TALISMAN_20",
+   "name": "Campfire Scion Badge VIII",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CAMPFIRE_TALISMAN_21",
+   "name": "Campfire God Badge I",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CAMPFIRE_TALISMAN_22",
+   "name": "Campfire God Badge II",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CAMPFIRE_TALISMAN_23",
+   "name": "Campfire God Badge III",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CAMPFIRE_TALISMAN_24",
+   "name": "Campfire God Badge IV",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CAMPFIRE_TALISMAN_25",
+   "name": "Campfire God Badge V",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CAMPFIRE_TALISMAN_26",
+   "name": "Campfire God Badge VI",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CAMPFIRE_TALISMAN_27",
+   "name": "Campfire God Badge VII",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CAMPFIRE_TALISMAN_28",
+   "name": "Campfire God Badge VIII",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CAMPFIRE_TALISMAN_29",
+   "name": "Campfire God Badge IX",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CAMPFIRE_TALISMAN_4",
+   "name": "Campfire Adept Badge I",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CAMPFIRE_TALISMAN_5",
+   "name": "Campfire Adept Badge II",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CAMPFIRE_TALISMAN_6",
+   "name": "Campfire Adept Badge III",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CAMPFIRE_TALISMAN_7",
+   "name": "Campfire Adept Badge IV",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CAMPFIRE_TALISMAN_8",
+   "name": "Campfire Cultist Badge I",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CAMPFIRE_TALISMAN_9",
+   "name": "Campfire Cultist Badge II",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CANDY_ARTIFACT",
+   "name": "Candy Artifact",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CANDY_RELIC",
+   "name": "Candy Relic",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CANDY_RING",
+   "name": "Candy Ring",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CANDY_TALISMAN",
+   "name": "Candy Talisman",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CARNIVAL_MASK_BAG",
+   "name": "Carnival Mask Bag",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CAT_TALISMAN",
+   "name": "Cat Talisman",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CATACOMBS_EXPERT_RING",
+   "name": "Catacombs Expert Ring",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CENTURY_ARTIFACT",
+   "name": "Artifact of the Century",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CENTURY_RING",
+   "name": "Ring of the Century",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CENTURY_TALISMAN",
+   "name": "Talisman of the Century",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CHEETAH_TALISMAN",
+   "name": "Cheetah Talisman",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CHUMMING_TALISMAN",
+   "name": "Chumming Talisman",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "COMBO_MANIA_TALISMAN",
+   "name": "Combo Mania",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "COPPER_ARTIFACT",
+   "name": "Copper Artifact",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "COPPER_RING",
+   "name": "Copper Ring",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "COPPER_TALISMAN",
+   "name": "Copper Talisman",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CRACKED_PIGGY_BANK",
+   "name": "Cracked Piggy Bank",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CROOKED_ARTIFACT",
+   "name": "Crooked Artifact",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CROPIE_TALISMAN",
+   "name": "Cropie Talisman",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CRUX_TALISMAN_1",
+   "name": "Crux Talisman",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CRUX_TALISMAN_2",
+   "name": "Crux Ring",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CRUX_TALISMAN_3",
+   "name": "Crux Artifact",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CRUX_TALISMAN_4",
+   "name": "Crux Relic",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CRUX_TALISMAN_5",
+   "name": "Crux Heirloom",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CRUX_TALISMAN_6",
+   "name": "Crux Chronomicon",
+   "tier": "MYTHIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "CRUX_TALISMAN_7",
+   "name": "Celestial Starstone",
+   "tier": "SUPREME",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "DAY_CRYSTAL",
+   "name": "Day Crystal",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "DEFECTIVE_MONITOR",
+   "name": "Defective Monitor",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "DEVOUR_RING",
+   "name": "Devour Ring",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "DRACONIC_ARTIFACT",
+   "name": "Draconic Artifact",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "DRACONIC_RING",
+   "name": "Draconic Ring",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "DRACONIC_TALISMAN",
+   "name": "Draconic Talisman",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "DULL_SHARK_TOOTH_NECKLACE",
+   "name": "Dull Shark Tooth Necklace",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "DWARVEN_METAL",
+   "name": "Dwarven Metal Talisman",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "EMERALD_ARTIFACT",
+   "name": "Emerald Artifact",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "EMERALD_RING",
+   "name": "Emerald Ring",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "EMPEROR_ARTIFACT",
+   "name": "Emperor's Artifact",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "EMPEROR_RING",
+   "name": "Emperor's Ring",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "EMPEROR_TALISMAN",
+   "name": "Emperor's Talisman",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "ENDER_ARTIFACT",
+   "name": "Ender Artifact",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "ENDER_RELIC",
+   "name": "Ender Relic",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "ETERNAL_CRYSTAL",
+   "name": "Eternal Crystal",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "ETERNAL_HOOF",
+   "name": "Eternal Hoof",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "EXPERIENCE_ARTIFACT",
+   "name": "Experience Artifact",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "FARMER_ORB",
+   "name": "Farmer Orb",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "FARMING_TALISMAN",
+   "name": "Farming Talisman",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "FEATHER_ARTIFACT",
+   "name": "Feather Artifact",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "FEATHER_RING",
+   "name": "Feather Ring",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "FERMENTO_ARTIFACT",
+   "name": "Fermento Artifact",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "FIERY_KUUDRA_CORE",
+   "name": "Fiery Kuudra Core",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "FISH_AFFINITY_TALISMAN",
+   "name": "Fish Affinity Talisman",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "FRESHLY_BAKED_ARTIFACT",
+   "name": "Freshly Baked Artifact",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "FRESHLY_BAKED_HEIRLOOM",
+   "name": "Freshly Baked Heirloom",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "FRESHLY_BAKED_RELIC",
+   "name": "Freshly Baked Relic",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "FRESHLY_BAKED_RING",
+   "name": "Freshly Baked Ring",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "FRESHLY_BAKED_TALISMAN",
+   "name": "Freshly Baked Talisman",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "FRIED_FROZEN_CHICKEN",
+   "name": "Fried Frozen Chicken",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "FROZEN_CHICKEN",
+   "name": "Frozen Chicken",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "FUTURE_CALORIES",
+   "name": "Future Calories Talisman",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": true
+  },
+  {
+   "id": "GANACHE_CHOCOLATE_SLAB",
+   "name": "Ganache Chocolate Slab",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "GARLIC_FLAVORED_GUMMY_BEAR",
+   "name": "Perma-Jelled Garlic-Flavored Re-Heated Gummy Polar Bear",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "GENERAL_MEDALLION",
+   "name": "General's Medallion",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "GLACIAL_ARTIFACT",
+   "name": "Glacial Artifact",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "GLACIAL_RING",
+   "name": "Glacial Ring",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "GLACIAL_TALISMAN",
+   "name": "Glacial Talisman",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "GLOSSY_MINERAL_TALISMAN",
+   "name": "Glossy Mineral Talisman",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "GOLD_GIFT_TALISMAN",
+   "name": "Gold Gift Talisman",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "GRATITUDE_ARTIFACT",
+   "name": "Gratitude Artifact",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "GRATITUDE_RING",
+   "name": "Gratitude Ring",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "GRATITUDE_TALISMAN",
+   "name": "Gratitude Talisman",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "GRAVITY_TALISMAN",
+   "name": "Gravity Talisman",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "GREAT_SPOOK_ARTIFACT",
+   "name": "Great Spook Artifact",
+   "tier": "RARE",
+   "museum": true,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "GREAT_SPOOK_RING",
+   "name": "Great Spook Ring",
+   "tier": "UNCOMMON",
+   "museum": true,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "GREAT_SPOOK_TALISMAN",
+   "name": "Great Spook Talisman",
+   "tier": "COMMON",
+   "museum": true,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "GREEN_GIFT_TALISMAN",
+   "name": "Green Gift Talisman",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "GRIZZLY_PAW",
+   "name": "Grizzly Paw",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "HARMONIOUS_SURGERY_TOOLKIT",
+   "name": "Harmonious Surgery Toolkit",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "HASTE_ARTIFACT",
+   "name": "Haste Artifact",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "HASTE_RING",
+   "name": "Haste Ring",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "HEALING_RING",
+   "name": "Healing Ring",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "HEGEMONY_ARTIFACT",
+   "name": "Hegemony Artifact",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "HELIANTHUS_RELIC",
+   "name": "Helianthus Relic",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "HOCUS_POCUS_CIPHER",
+   "name": "Hocus-Pocus Cipher",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": true
+  },
+  {
+   "id": "HONED_SHARK_TOOTH_NECKLACE",
+   "name": "Honed Shark Tooth Necklace",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "HONEYCOMB_ARTIFACT",
+   "name": "Honeycomb Artifact",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "HONEYCOMB_RING",
+   "name": "Honeycomb Ring",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "HONEYCOMB_TALISMAN",
+   "name": "Honeycomb Talisman",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "HUNTER_RING",
+   "name": "Hunter Ring",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "HUNTER_TALISMAN",
+   "name": "Hunter Talisman",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "INFERNAL_KUUDRA_CORE",
+   "name": "Infernal Kuudra Core",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "INTIMIDATION_ARTIFACT",
+   "name": "Intimidation Artifact",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "INTIMIDATION_RELIC",
+   "name": "Intimidation Relic",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "INTIMIDATION_RING",
+   "name": "Intimidation Ring",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "IQ_POINT",
+   "name": "IQ Point",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": true
+  },
+  {
+   "id": "JACOBUS_REGISTER",
+   "name": "Jacobus Register",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "JAKE_PLUSHIE",
+   "name": "Jake's Plushie",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "JERRY_TALISMAN_BLUE",
+   "name": "Blue Jerry Talisman",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "JERRY_TALISMAN_GOLDEN",
+   "name": "Golden Jerry Artifact",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "JERRY_TALISMAN_GREEN",
+   "name": "Green Jerry Talisman",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "JERRY_TALISMAN_PURPLE",
+   "name": "Purple Jerry Talisman",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "JUNGLE_AMULET",
+   "name": "Jungle Amulet",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "JUNK_ARTIFACT",
+   "name": "Junk Artifact",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "JUNK_RING",
+   "name": "Junk Ring",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "JUNK_TALISMAN",
+   "name": "Junk Talisman",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "KUUDRA_FOLLOWER_ARTIFACT",
+   "name": "Kuudra Follower Artifact",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "KUUDRA_FOLLOWER_RELIC",
+   "name": "Kuudra Follower Relic",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "KUUDRAS_HEART",
+   "name": "Kuudra's Heart",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "KUUDRAS_KIDNEY",
+   "name": "Kuudra's Kidney",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "KUUDRAS_LUNG",
+   "name": "Kuudra's Lung",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "LARGE_FISH_BOWL",
+   "name": "Large Fish Bowl",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "LAVA_TALISMAN",
+   "name": "Lava Talisman",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "LUCK_TALISMAN",
+   "name": "Luck Talisman",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "LUCKY_HOOF",
+   "name": "Lucky Hoof",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "LUMBERJACK_ARTIFACT",
+   "name": "Lumberjack Artifact",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "LUMBERJACK_RING",
+   "name": "Lumberjack Ring",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "LUMBERJACK_TALISMAN",
+   "name": "Lumberjack Talisman",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "LUSH_ARTIFACT",
+   "name": "Lush Artifact",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "LUSH_RING",
+   "name": "Lush Ring",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "LUSH_TALISMAN",
+   "name": "Lush Talisman",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "LYNX_TALISMAN",
+   "name": "Lynx Talisman",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "MAGIC_8_BALL",
+   "name": "Magic 8 Ball",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "MAGNETIC_TALISMAN",
+   "name": "Magnetic Talisman",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "MASTER_SKULL_TIER_10",
+   "name": "Master Skull - Tier 10",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "MASTER_SKULL_TIER_3",
+   "name": "Master Skull - Tier 3",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "MASTER_SKULL_TIER_4",
+   "name": "Master Skull - Tier 4",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "MASTER_SKULL_TIER_5",
+   "name": "Master Skull - Tier 5",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "MASTER_SKULL_TIER_6",
+   "name": "Master Skull - Tier 6",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "MASTER_SKULL_TIER_7",
+   "name": "Master Skull - Tier 7",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "MASTER_SKULL_TIER_8",
+   "name": "Master Skull - Tier 8",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "MASTER_SKULL_TIER_9",
+   "name": "Master Skull - Tier 9",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "MASTER_THESIS",
+   "name": "Master's Thesis",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "MEDIUM_FISH_BOWL",
+   "name": "Medium Fish Bowl",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "MELODY_HAIR",
+   "name": "Melody's Hair",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "MINERAL_TALISMAN",
+   "name": "Mineral Talisman",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "MINIATURIZED_TUBULATOR",
+   "name": "Miniaturized Tubulator",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": true
+  },
+  {
+   "id": "MOONGLADE_ARTIFACT",
+   "name": "Moonglade Artifact",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "MOONGLADE_RING",
+   "name": "Moonglade Ring",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "MOONGLADE_TALISMAN",
+   "name": "Moonglade Talisman",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "MOONLIGHT_CRYSTAL",
+   "name": "Moonlight Crystal",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "NETHER_ARTIFACT",
+   "name": "Nether Artifact",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "NETHERRACK_LOOKING_SUNSHADE",
+   "name": "Netherrack-Looking Sunshade",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "NEW_YEAR_CAKE_BAG",
+   "name": "New Year Cake Bag",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "NIBBLE_CHOCOLATE_STICK",
+   "name": "Nibble Chocolate Stick",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "NIGHT_CRYSTAL",
+   "name": "Night Crystal",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "ODGERS_BRONZE_TOOTH",
+   "name": "Odger's Bronze Tooth",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "ODGERS_DIAMOND_TOOTH",
+   "name": "Odger's Diamond Tooth",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "ODGERS_GOLD_TOOTH",
+   "name": "Odger's Gold Tooth",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "ODGERS_SILVER_TOOTH",
+   "name": "Odger's Silver Tooth",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "OLD_BOOT",
+   "name": "Old Boot",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "ORGAN_DONOR_ARTIFACT",
+   "name": "Organ Donor Artifact",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "ORGAN_DONOR_RING",
+   "name": "Organ Donor Ring",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "ORGAN_DONOR_TALISMAN",
+   "name": "Organ Donor Talisman",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "PANDORAS_BOX",
+   "name": "Pandora's Box",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "PARTY_HAT_CRAB",
+   "name": "Crab Hat of Celebration",
+   "tier": "SPECIAL",
+   "museum": true,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "PARTY_HAT_CRAB_ANIMATED",
+   "name": "Crab Hat of Celebration - 2022 Edition",
+   "tier": "SPECIAL",
+   "museum": true,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "PARTY_HAT_SLOTH",
+   "name": "Sloth Hat of Celebration",
+   "tier": "SPECIAL",
+   "museum": true,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "PERSONAL_COMPACTOR_4000",
+   "name": "Personal Compactor 4000",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "PERSONAL_COMPACTOR_5000",
+   "name": "Personal Compactor 5000",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "PERSONAL_COMPACTOR_6000",
+   "name": "Personal Compactor 6000",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "PERSONAL_COMPACTOR_7000",
+   "name": "Personal Compactor 7000",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "PERSONAL_DELETOR_4000",
+   "name": "Personal Deletor 4000",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "PERSONAL_DELETOR_5000",
+   "name": "Personal Deletor 5000",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "PERSONAL_DELETOR_6000",
+   "name": "Personal Deletor 6000",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "PERSONAL_DELETOR_7000",
+   "name": "Personal Deletor 7000",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "PESTHUNTER_ARTIFACT",
+   "name": "Pesthunter Artifact",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "PESTHUNTER_BADGE",
+   "name": "Pesthunter Badge",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "PESTHUNTER_RELIC",
+   "name": "Pesthunter Relic",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "PESTHUNTER_RING",
+   "name": "Pesthunter Ring",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "PHD_GRIMOIRE",
+   "name": "PhD's Grimoire",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "PIGGY_BANK",
+   "name": "Piggy Bank",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "PIGS_FOOT",
+   "name": "Pig's Foot",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "POTATO_RING",
+   "name": "Potato Ring",
+   "tier": "UNCOMMON",
+   "museum": true,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "POWER_ARTIFACT",
+   "name": "Artifact of Power",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "POWER_RELIC",
+   "name": "Relic of Power",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "POWER_RING",
+   "name": "Ring of Power",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "PRESSURE_ARTIFACT",
+   "name": "Pressure Artifact",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "PRESSURE_RING",
+   "name": "Pressure Ring",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "PRESSURE_TALISMAN",
+   "name": "Pressure Talisman",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "PRESTIGE_CHOCOLATE_REALM",
+   "name": "Prestige Chocolate Realm",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "PULSE_RING",
+   "name": "Pulse Ring",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "PUNCHCARD_ARTIFACT",
+   "name": "Punchcard Artifact",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "PURPLE_GIFT_TALISMAN",
+   "name": "Purple Gift Talisman",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "RAZOR_SHARP_SHARK_TOOTH_NECKLACE",
+   "name": "Razor-sharp Shark Tooth Necklace",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "REAPER_ORB",
+   "name": "Reaper Orb",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "RED_CLAW_ARTIFACT",
+   "name": "Red Claw Artifact",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "RED_CLAW_RING",
+   "name": "Red Claw Ring",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "RED_CLAW_TALISMAN",
+   "name": "Red Claw Talisman",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "RELIC_OF_COINS",
+   "name": "Relic of Coins",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "RESPIRATION_ARTIFACT",
+   "name": "Respiration Artifact",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": true
+  },
+  {
+   "id": "RESPIRATION_RING",
+   "name": "Respiration Ring",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": true
+  },
+  {
+   "id": "RESPIRATION_TALISMAN",
+   "name": "Respiration Talisman",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": true
+  },
+  {
+   "id": "RICH_CHOCOLATE_CHUNK",
+   "name": "Rich Chocolate Chunk",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "RIFT_PRISM",
+   "name": "Rift Prism",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": true
+  },
+  {
+   "id": "RING_OF_BROKEN_LOVE",
+   "name": "Ring of Broken Love",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "RING_OF_COINS",
+   "name": "Ring of Coins",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "RING_OF_ETERNAL_LOVE",
+   "name": "Ring of Eternal Love",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "RING_OF_SPACE",
+   "name": "Ring of Space",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "RING_POTION_AFFINITY",
+   "name": "Potion Affinity Ring",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "RUNEBLADE_ARTIFACT",
+   "name": "Runeblade Artifact",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "RUNEBLADE_RING",
+   "name": "Runeblade Ring",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "RUNEBLADE_TALISMAN",
+   "name": "Runeblade Talisman",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SAFETY_BADGE",
+   "name": "Safety Badge",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SATELITE",
+   "name": "Satelite",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SCARF_GRIMOIRE",
+   "name": "Scarf's Grimoire",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": true
+  },
+  {
+   "id": "SCARF_STUDIES",
+   "name": "Scarf's Studies",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": true
+  },
+  {
+   "id": "SCARF_THESIS",
+   "name": "Scarf's Thesis",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": true
+  },
+  {
+   "id": "SCAVENGER_ARTIFACT",
+   "name": "Scavenger Artifact",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SCAVENGER_RING",
+   "name": "Scavenger Ring",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SEA_CREATURE_ARTIFACT",
+   "name": "Sea Creature Artifact",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SEA_CREATURE_RING",
+   "name": "Sea Creature Ring",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SEAL_OF_THE_FAMILY",
+   "name": "Seal of the Family",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SEAL_RING",
+   "name": "Seal Ring",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SEAL_TALISMAN",
+   "name": "Seal Talisman",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SHADY_RING",
+   "name": "Shady Ring",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SHARP_SHARK_TOOTH_NECKLACE",
+   "name": "Sharp Shark Tooth Necklace",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SHENS_REGALIA",
+   "name": "Shen's Regalia",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SMALL_FISH_BOWL",
+   "name": "Small Fish Bowl",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SMOOTH_CHOCOLATE_BAR",
+   "name": "Smooth Chocolate Bar",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SOUL_CAMPFIRE_TALISMAN_10",
+   "name": "Soul Campfire Cultist Badge III",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SOUL_CAMPFIRE_TALISMAN_11",
+   "name": "Soul Campfire Cultist Badge IV",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SOUL_CAMPFIRE_TALISMAN_12",
+   "name": "Soul Campfire Cultist Badge V",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SOUL_CAMPFIRE_TALISMAN_13",
+   "name": "Soul Campfire Scion Badge I",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SOUL_CAMPFIRE_TALISMAN_14",
+   "name": "Soul Campfire Scion Badge II",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SOUL_CAMPFIRE_TALISMAN_15",
+   "name": "Soul Campfire Scion Badge III",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SOUL_CAMPFIRE_TALISMAN_16",
+   "name": "Soul Campfire Scion Badge IV",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SOUL_CAMPFIRE_TALISMAN_17",
+   "name": "Soul Campfire Scion Badge V",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SOUL_CAMPFIRE_TALISMAN_18",
+   "name": "Soul Campfire Scion Badge VI",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SOUL_CAMPFIRE_TALISMAN_19",
+   "name": "Soul Campfire Scion Badge VII",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SOUL_CAMPFIRE_TALISMAN_20",
+   "name": "Soul Campfire Scion Badge VIII",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SOUL_CAMPFIRE_TALISMAN_21",
+   "name": "Soul Campfire God Badge I",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SOUL_CAMPFIRE_TALISMAN_22",
+   "name": "Soul Campfire God Badge II",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SOUL_CAMPFIRE_TALISMAN_23",
+   "name": "Soul Campfire God Badge III",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SOUL_CAMPFIRE_TALISMAN_24",
+   "name": "Soul Campfire God Badge IV",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SOUL_CAMPFIRE_TALISMAN_25",
+   "name": "Soul Campfire God Badge V",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SOUL_CAMPFIRE_TALISMAN_26",
+   "name": "Soul Campfire God Badge VI",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SOUL_CAMPFIRE_TALISMAN_27",
+   "name": "Soul Campfire God Badge VII",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SOUL_CAMPFIRE_TALISMAN_28",
+   "name": "Soul Campfire God Badge VIII",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SOUL_CAMPFIRE_TALISMAN_29",
+   "name": "Soul Campfire God Badge IX",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SOUL_CAMPFIRE_TALISMAN_4",
+   "name": "Soul Campfire Adept Badge I",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SOUL_CAMPFIRE_TALISMAN_5",
+   "name": "Soul Campfire Adept Badge II",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SOUL_CAMPFIRE_TALISMAN_6",
+   "name": "Soul Campfire Adept Badge III",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SOUL_CAMPFIRE_TALISMAN_7",
+   "name": "Soul Campfire Adept Badge IV",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SOUL_CAMPFIRE_TALISMAN_8",
+   "name": "Soul Campfire Cultist Badge I",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SOUL_CAMPFIRE_TALISMAN_9",
+   "name": "Soul Campfire Cultist Badge II",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SOULFLOW_BATTERY",
+   "name": "Soulflow Battery",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SOULFLOW_PILE",
+   "name": "Soulflow Pile",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SOULFLOW_SUPERCELL",
+   "name": "Soulflow Supercell",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SPEED_ARTIFACT",
+   "name": "Speed Artifact",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SPEED_RELIC",
+   "name": "Speed Relic",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SPEED_RING",
+   "name": "Speed Ring",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SPIDER_ARTIFACT",
+   "name": "Spider Artifact",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SPIDER_RING",
+   "name": "Spider Ring",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SPIDER_TALISMAN",
+   "name": "Spider Talisman",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SPIKED_ATROCITY",
+   "name": "Spiked Atrocity",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SQUASH_RING",
+   "name": "Squash Ring",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "STUDENT_STUDIES",
+   "name": "Student's Studies",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SUNSHINE_CRYSTAL",
+   "name": "Sunshine Crystal",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SURVIVOR_CUBE",
+   "name": "Survivor Cube",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "TALISMAN_OF_SPACE",
+   "name": "Talisman of Space",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "TARANTULA_RING",
+   "name": "Tarantula Ring",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "TARANTULA_TALISMAN",
+   "name": "Tarantula Talisman",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "TEST_BUCKET_PLEASE_IGNORE",
+   "name": "Test Bucket Please Ignore",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": true
+  },
+  {
+   "id": "TINY_DANCER",
+   "name": "Tiny Dancer",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": true
+  },
+  {
+   "id": "TITANIUM_ARTIFACT",
+   "name": "Titanium Artifact",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "TITANIUM_RELIC",
+   "name": "Titanium Relic",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "TITANIUM_RING",
+   "name": "Titanium Ring",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "TITANIUM_TALISMAN",
+   "name": "Titanium Talisman",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "TORRHUS_ARTIFACT",
+   "name": "Torrhus Artifact",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "TORRHUS_RING",
+   "name": "Torrhus Ring",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "TORRHUS_TALISMAN",
+   "name": "Torrhus Talisman",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "TRAPPER_CREST",
+   "name": "Trapper Crest",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "TREASURE_ARTIFACT",
+   "name": "Treasure Artifact",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "TREASURE_RING",
+   "name": "Treasure Ring",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "TREASURE_TALISMAN",
+   "name": "Treasure Talisman",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "TWO_IQ_POINT",
+   "name": "2 IQ Points",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": true
+  },
+  {
+   "id": "VACCINE_ARTIFACT",
+   "name": "Vaccine Artifact",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "VACCINE_RING",
+   "name": "Vaccine Ring",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "VAMPIRE_DENTIST_RELIC",
+   "name": "Vampire Dentist Relic",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": true
+  },
+  {
+   "id": "VOTER_BADGE",
+   "name": "Voter's Badge",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "VOTER_BADGE_ELITE",
+   "name": "Elite Voter's Badge",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "VOTER_BADGE_SUPREME",
+   "name": "Supreme Voter's Badge",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "VOTER_BADGE_VIP",
+   "name": "VIP Voter's Badge",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "WARDING_TRINKET",
+   "name": "Warding Trinket",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "WEDDING_RING_2",
+   "name": "Mediocre Ring of Love",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "WEDDING_RING_3",
+   "name": "Rubbish Ring of Love",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "WEDDING_RING_4",
+   "name": "Modest Ring of Love",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "WEDDING_RING_5",
+   "name": "Refined Ring of Love",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "WEDDING_RING_6",
+   "name": "Classy Ring of Love",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "WEDDING_RING_7",
+   "name": "Exquisite Ring of Love",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "WEDDING_RING_8",
+   "name": "Invaluable Ring of Love",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "WEDDING_RING_9",
+   "name": "Legendary Ring of Love",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "WHITE_GIFT_TALISMAN",
+   "name": "White Gift Talisman",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "WITCH_ARTIFACT",
+   "name": "Witch's Artifact",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "WITCH_RING",
+   "name": "Witch's Ring",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "WITCH_TALISMAN",
+   "name": "Witch's Talisman",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "WITHER_ARTIFACT",
+   "name": "Wither Artifact",
+   "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "WITHER_RELIC",
+   "name": "Wither Relic",
+   "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "WOLF_PAW",
+   "name": "Wolf Paw",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "WOLF_RING",
+   "name": "Wolf Ring",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "WOLF_TALISMAN",
+   "name": "Wolf Talisman",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "WOOD_TALISMAN",
+   "name": "Wood Affinity Talisman",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "ZOMBIE_ARTIFACT",
+   "name": "Zombie Artifact",
+   "tier": "RARE",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "ZOMBIE_RING",
+   "name": "Zombie Ring",
+   "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  }
+ ]
+}

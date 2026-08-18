@@ -1,0 +1,35 @@
+{
+  "note": "Magical power granted by one accessory, by rarity. Hand-entered: the items resource exposes an accessory's rarity but not its magical power. Everything else in the accessory model is API-derived.",
+  "source": "Hypixel Wiki, Accessory Bag",
+  "verified": false,
+  "byRarity": {
+    "COMMON": 3,
+    "UNCOMMON": 5,
+    "RARE": 8,
+    "EPIC": 12,
+    "LEGENDARY": 16,
+    "MYTHIC": 22,
+    "SPECIAL": 3,
+    "VERY_SPECIAL": 5,
+    "SUPREME": 3
+  },
+  "rarityOrder": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY",
+    "MYTHIC",
+    "SUPREME",
+    "SPECIAL",
+    "VERY_SPECIAL"
+  ],
+  "excludedItems": {
+    "note": "Empty on purpose. Several bag items (party hats, cake bag) are classified ACCESSORY by the items resource, and nothing in the API says whether they grant magical power. Excluding them on a hunch would hide buyable XP; the computed-vs-reported MP readout is the check instead.",
+    "ids": []
+  },
+  "knownGaps": [
+    "highest_magical_power is a high-water mark, not a current reading, so computed MP can sit below it legitimately.",
+    "Hegemony Artifact (doubles its own MP), Abicase (MP scales with contacts) and Rift Prism are special-cased by the game and not by us."
+  ]
+}

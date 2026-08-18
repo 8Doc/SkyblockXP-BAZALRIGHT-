@@ -1,0 +1,4748 @@
+{
+ "generatedAt": "2026-08-18T20:07:01.858Z",
+ "source": "https://api.hypixel.net/v2/resources/skyblock",
+ "totalXp": 3165,
+ "minions": [
+  {
+   "generator": "ACACIA",
+   "family": "Acacia Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "ACACIA_GENERATOR_1",
+     "name": "Acacia Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "ACACIA_GENERATOR_2",
+     "name": "Acacia Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "ACACIA_GENERATOR_3",
+     "name": "Acacia Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "ACACIA_GENERATOR_4",
+     "name": "Acacia Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "ACACIA_GENERATOR_5",
+     "name": "Acacia Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "ACACIA_GENERATOR_6",
+     "name": "Acacia Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "ACACIA_GENERATOR_7",
+     "name": "Acacia Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "ACACIA_GENERATOR_8",
+     "name": "Acacia Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "ACACIA_GENERATOR_9",
+     "name": "Acacia Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "ACACIA_GENERATOR_10",
+     "name": "Acacia Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "ACACIA_GENERATOR_11",
+     "name": "Acacia Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "ACACIA_GENERATOR_12",
+     "name": "Acacia Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "BIRCH",
+   "family": "Birch Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "BIRCH_GENERATOR_1",
+     "name": "Birch Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "BIRCH_GENERATOR_2",
+     "name": "Birch Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "BIRCH_GENERATOR_3",
+     "name": "Birch Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "BIRCH_GENERATOR_4",
+     "name": "Birch Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "BIRCH_GENERATOR_5",
+     "name": "Birch Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "BIRCH_GENERATOR_6",
+     "name": "Birch Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "BIRCH_GENERATOR_7",
+     "name": "Birch Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "BIRCH_GENERATOR_8",
+     "name": "Birch Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "BIRCH_GENERATOR_9",
+     "name": "Birch Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "BIRCH_GENERATOR_10",
+     "name": "Birch Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "BIRCH_GENERATOR_11",
+     "name": "Birch Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "BIRCH_GENERATOR_12",
+     "name": "Birch Minion XIi",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "BLAZE",
+   "family": "Blaze Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "BLAZE_GENERATOR_1",
+     "name": "Blaze Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "BLAZE_GENERATOR_2",
+     "name": "Blaze Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "BLAZE_GENERATOR_3",
+     "name": "Blaze Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "BLAZE_GENERATOR_4",
+     "name": "Blaze Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "BLAZE_GENERATOR_5",
+     "name": "Blaze Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "BLAZE_GENERATOR_6",
+     "name": "Blaze Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "BLAZE_GENERATOR_7",
+     "name": "Blaze Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "BLAZE_GENERATOR_8",
+     "name": "Blaze Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "BLAZE_GENERATOR_9",
+     "name": "Blaze Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "BLAZE_GENERATOR_10",
+     "name": "Blaze Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "BLAZE_GENERATOR_11",
+     "name": "Blaze Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "BLAZE_GENERATOR_12",
+     "name": "Blaze Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "CACTUS",
+   "family": "Cactus Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "CACTUS_GENERATOR_1",
+     "name": "Cactus Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "CACTUS_GENERATOR_2",
+     "name": "Cactus Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "CACTUS_GENERATOR_3",
+     "name": "Cactus Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "CACTUS_GENERATOR_4",
+     "name": "Cactus Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "CACTUS_GENERATOR_5",
+     "name": "Cactus Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "CACTUS_GENERATOR_6",
+     "name": "Cactus Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "CACTUS_GENERATOR_7",
+     "name": "Cactus Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "CACTUS_GENERATOR_8",
+     "name": "Cactus Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "CACTUS_GENERATOR_9",
+     "name": "Cactus Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "CACTUS_GENERATOR_10",
+     "name": "Cactus Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "CACTUS_GENERATOR_11",
+     "name": "Cactus Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "CACTUS_GENERATOR_12",
+     "name": "Cactus Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "CARROT",
+   "family": "Carrot Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "CARROT_GENERATOR_1",
+     "name": "Carrot Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "CARROT_GENERATOR_2",
+     "name": "Carrot Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "CARROT_GENERATOR_3",
+     "name": "Carrot Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "CARROT_GENERATOR_4",
+     "name": "Carrot Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "CARROT_GENERATOR_5",
+     "name": "Carrot Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "CARROT_GENERATOR_6",
+     "name": "Carrot Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "CARROT_GENERATOR_7",
+     "name": "Carrot Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "CARROT_GENERATOR_8",
+     "name": "Carrot Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "CARROT_GENERATOR_9",
+     "name": "Carrot Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "CARROT_GENERATOR_10",
+     "name": "Carrot Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "CARROT_GENERATOR_11",
+     "name": "Carrot Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "CARROT_GENERATOR_12",
+     "name": "Carrot Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "CAVESPIDER",
+   "family": "Cave Spider Minion",
+   "maxTier": 11,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "CAVESPIDER_GENERATOR_1",
+     "name": "Cave Spider Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "CAVESPIDER_GENERATOR_2",
+     "name": "Cave Spider Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "CAVESPIDER_GENERATOR_3",
+     "name": "Cave Spider Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "CAVESPIDER_GENERATOR_4",
+     "name": "Cave Spider Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "CAVESPIDER_GENERATOR_5",
+     "name": "Cave Spider Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "CAVESPIDER_GENERATOR_6",
+     "name": "Cave Spider Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "CAVESPIDER_GENERATOR_7",
+     "name": "Cave Spider Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "CAVESPIDER_GENERATOR_8",
+     "name": "Cave Spider Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "CAVESPIDER_GENERATOR_9",
+     "name": "Cave Spider Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "CAVESPIDER_GENERATOR_10",
+     "name": "Cave Spider Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "CAVESPIDER_GENERATOR_11",
+     "name": "Cave Spider Minion XI",
+     "xp": 12
+    }
+   ]
+  },
+  {
+   "generator": "CHICKEN",
+   "family": "Chicken Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "CHICKEN_GENERATOR_1",
+     "name": "Chicken Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "CHICKEN_GENERATOR_2",
+     "name": "Chicken Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "CHICKEN_GENERATOR_3",
+     "name": "Chicken Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "CHICKEN_GENERATOR_4",
+     "name": "Chicken Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "CHICKEN_GENERATOR_5",
+     "name": "Chicken Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "CHICKEN_GENERATOR_6",
+     "name": "Chicken Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "CHICKEN_GENERATOR_7",
+     "name": "Chicken Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "CHICKEN_GENERATOR_8",
+     "name": "Chicken Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "CHICKEN_GENERATOR_9",
+     "name": "Chicken Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "CHICKEN_GENERATOR_10",
+     "name": "Chicken Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "CHICKEN_GENERATOR_11",
+     "name": "Chicken Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "CHICKEN_GENERATOR_12",
+     "name": "Chicken Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "CLAY",
+   "family": "Clay Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "CLAY_GENERATOR_1",
+     "name": "Clay Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "CLAY_GENERATOR_2",
+     "name": "Clay Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "CLAY_GENERATOR_3",
+     "name": "Clay Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "CLAY_GENERATOR_4",
+     "name": "Clay Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "CLAY_GENERATOR_5",
+     "name": "Clay Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "CLAY_GENERATOR_6",
+     "name": "Clay Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "CLAY_GENERATOR_7",
+     "name": "Clay Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "CLAY_GENERATOR_8",
+     "name": "Clay Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "CLAY_GENERATOR_9",
+     "name": "Clay Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "CLAY_GENERATOR_10",
+     "name": "Clay Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "CLAY_GENERATOR_11",
+     "name": "Clay Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "CLAY_GENERATOR_12",
+     "name": "Clay Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "COAL",
+   "family": "Coal Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "COAL_GENERATOR_1",
+     "name": "Coal Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "COAL_GENERATOR_2",
+     "name": "Coal Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "COAL_GENERATOR_3",
+     "name": "Coal Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "COAL_GENERATOR_4",
+     "name": "Coal Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "COAL_GENERATOR_5",
+     "name": "Coal Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "COAL_GENERATOR_6",
+     "name": "Coal Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "COAL_GENERATOR_7",
+     "name": "Coal Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "COAL_GENERATOR_8",
+     "name": "Coal Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "COAL_GENERATOR_9",
+     "name": "Coal Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "COAL_GENERATOR_10",
+     "name": "Coal Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "COAL_GENERATOR_11",
+     "name": "Coal Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "COAL_GENERATOR_12",
+     "name": "Coal Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "COBBLESTONE",
+   "family": "Cobblestone Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "COBBLESTONE_GENERATOR_1",
+     "name": "Cobblestone Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "COBBLESTONE_GENERATOR_2",
+     "name": "Cobblestone Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "COBBLESTONE_GENERATOR_3",
+     "name": "Cobblestone Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "COBBLESTONE_GENERATOR_4",
+     "name": "Cobblestone Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "COBBLESTONE_GENERATOR_5",
+     "name": "Cobblestone Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "COBBLESTONE_GENERATOR_6",
+     "name": "Cobblestone Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "COBBLESTONE_GENERATOR_7",
+     "name": "Cobblestone Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "COBBLESTONE_GENERATOR_8",
+     "name": "Cobblestone Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "COBBLESTONE_GENERATOR_9",
+     "name": "Cobblestone Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "COBBLESTONE_GENERATOR_10",
+     "name": "Cobblestone Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "COBBLESTONE_GENERATOR_11",
+     "name": "Cobblestone Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "COBBLESTONE_GENERATOR_12",
+     "name": "Cobblestone Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "COCOA",
+   "family": "Cocoa Beans Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "COCOA_GENERATOR_1",
+     "name": "Cocoa Beans Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "COCOA_GENERATOR_2",
+     "name": "Cocoa Beans Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "COCOA_GENERATOR_3",
+     "name": "Cocoa Beans Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "COCOA_GENERATOR_4",
+     "name": "Cocoa Beans Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "COCOA_GENERATOR_5",
+     "name": "Cocoa Beans Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "COCOA_GENERATOR_6",
+     "name": "Cocoa Beans Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "COCOA_GENERATOR_7",
+     "name": "Cocoa Beans Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "COCOA_GENERATOR_8",
+     "name": "Cocoa Beans Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "COCOA_GENERATOR_9",
+     "name": "Cocoa Beans Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "COCOA_GENERATOR_10",
+     "name": "Cocoa Beans Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "COCOA_GENERATOR_11",
+     "name": "Cocoa Beans Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "COCOA_GENERATOR_12",
+     "name": "Cocoa Beans Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "COW",
+   "family": "Cow Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "COW_GENERATOR_1",
+     "name": "Cow Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "COW_GENERATOR_2",
+     "name": "Cow Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "COW_GENERATOR_3",
+     "name": "Cow Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "COW_GENERATOR_4",
+     "name": "Cow Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "COW_GENERATOR_5",
+     "name": "Cow Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "COW_GENERATOR_6",
+     "name": "Cow Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "COW_GENERATOR_7",
+     "name": "Cow Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "COW_GENERATOR_8",
+     "name": "Cow Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "COW_GENERATOR_9",
+     "name": "Cow Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "COW_GENERATOR_10",
+     "name": "Cow Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "COW_GENERATOR_11",
+     "name": "Cow Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "COW_GENERATOR_12",
+     "name": "Cow Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "CREEPER",
+   "family": "Creeper Minion",
+   "maxTier": 11,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "CREEPER_GENERATOR_1",
+     "name": "Creeper Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "CREEPER_GENERATOR_2",
+     "name": "Creeper Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "CREEPER_GENERATOR_3",
+     "name": "Creeper Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "CREEPER_GENERATOR_4",
+     "name": "Creeper Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "CREEPER_GENERATOR_5",
+     "name": "Creeper Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "CREEPER_GENERATOR_6",
+     "name": "Creeper Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "CREEPER_GENERATOR_7",
+     "name": "Creeper Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "CREEPER_GENERATOR_8",
+     "name": "Creeper Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "CREEPER_GENERATOR_9",
+     "name": "Creeper Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "CREEPER_GENERATOR_10",
+     "name": "Creeper Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "CREEPER_GENERATOR_11",
+     "name": "Creeper Minion XI",
+     "xp": 12
+    }
+   ]
+  },
+  {
+   "generator": "DARK_OAK",
+   "family": "Dark Oak Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "DARK_OAK_GENERATOR_1",
+     "name": "Dark Oak Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "DARK_OAK_GENERATOR_2",
+     "name": "Dark Oak Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "DARK_OAK_GENERATOR_3",
+     "name": "Dark Oak Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "DARK_OAK_GENERATOR_4",
+     "name": "Dark Oak Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "DARK_OAK_GENERATOR_5",
+     "name": "Dark Oak Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "DARK_OAK_GENERATOR_6",
+     "name": "Dark Oak Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "DARK_OAK_GENERATOR_7",
+     "name": "Dark Oak Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "DARK_OAK_GENERATOR_8",
+     "name": "Dark Oak Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "DARK_OAK_GENERATOR_9",
+     "name": "Dark Oak Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "DARK_OAK_GENERATOR_10",
+     "name": "Dark Oak Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "DARK_OAK_GENERATOR_11",
+     "name": "Dark Oak Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "DARK_OAK_GENERATOR_12",
+     "name": "Dark Oak Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "DIAMOND",
+   "family": "Diamond Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "DIAMOND_GENERATOR_1",
+     "name": "Diamond Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "DIAMOND_GENERATOR_2",
+     "name": "Diamond Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "DIAMOND_GENERATOR_3",
+     "name": "Diamond Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "DIAMOND_GENERATOR_4",
+     "name": "Diamond Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "DIAMOND_GENERATOR_5",
+     "name": "Diamond Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "DIAMOND_GENERATOR_6",
+     "name": "Diamond Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "DIAMOND_GENERATOR_7",
+     "name": "Diamond Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "DIAMOND_GENERATOR_8",
+     "name": "Diamond Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "DIAMOND_GENERATOR_9",
+     "name": "Diamond Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "DIAMOND_GENERATOR_10",
+     "name": "Diamond Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "DIAMOND_GENERATOR_11",
+     "name": "Diamond Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "DIAMOND_GENERATOR_12",
+     "name": "Diamond Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "EMERALD",
+   "family": "Emerald Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "EMERALD_GENERATOR_1",
+     "name": "Emerald Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "EMERALD_GENERATOR_2",
+     "name": "Emerald Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "EMERALD_GENERATOR_3",
+     "name": "Emerald Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "EMERALD_GENERATOR_4",
+     "name": "Emerald Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "EMERALD_GENERATOR_5",
+     "name": "Emerald Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "EMERALD_GENERATOR_6",
+     "name": "Emerald Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "EMERALD_GENERATOR_7",
+     "name": "Emerald Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "EMERALD_GENERATOR_8",
+     "name": "Emerald Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "EMERALD_GENERATOR_9",
+     "name": "Emerald Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "EMERALD_GENERATOR_10",
+     "name": "Emerald Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "EMERALD_GENERATOR_11",
+     "name": "Emerald Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "EMERALD_GENERATOR_12",
+     "name": "Emerald Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "ENDER_STONE",
+   "family": "End Stone Minion",
+   "maxTier": 11,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "ENDER_STONE_GENERATOR_1",
+     "name": "End Stone Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "ENDER_STONE_GENERATOR_2",
+     "name": "End Stone Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "ENDER_STONE_GENERATOR_3",
+     "name": "End Stone Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "ENDER_STONE_GENERATOR_4",
+     "name": "End Stone Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "ENDER_STONE_GENERATOR_5",
+     "name": "End Stone Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "ENDER_STONE_GENERATOR_6",
+     "name": "End Stone Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "ENDER_STONE_GENERATOR_7",
+     "name": "End Stone Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "ENDER_STONE_GENERATOR_8",
+     "name": "End Stone Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "ENDER_STONE_GENERATOR_9",
+     "name": "End Stone Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "ENDER_STONE_GENERATOR_10",
+     "name": "End Stone Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "ENDER_STONE_GENERATOR_11",
+     "name": "End Stone Minion XI",
+     "xp": 12
+    }
+   ]
+  },
+  {
+   "generator": "ENDERMAN",
+   "family": "Enderman Minion",
+   "maxTier": 11,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "ENDERMAN_GENERATOR_1",
+     "name": "Enderman Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "ENDERMAN_GENERATOR_2",
+     "name": "Enderman Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "ENDERMAN_GENERATOR_3",
+     "name": "Enderman Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "ENDERMAN_GENERATOR_4",
+     "name": "Enderman Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "ENDERMAN_GENERATOR_5",
+     "name": "Enderman Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "ENDERMAN_GENERATOR_6",
+     "name": "Enderman Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "ENDERMAN_GENERATOR_7",
+     "name": "Enderman Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "ENDERMAN_GENERATOR_8",
+     "name": "Enderman Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "ENDERMAN_GENERATOR_9",
+     "name": "Enderman Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "ENDERMAN_GENERATOR_10",
+     "name": "Enderman Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "ENDERMAN_GENERATOR_11",
+     "name": "Enderman Minion XI",
+     "xp": 12
+    }
+   ]
+  },
+  {
+   "generator": "FISHING",
+   "family": "Fishing Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "FISHING_GENERATOR_1",
+     "name": "Fishing Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "FISHING_GENERATOR_2",
+     "name": "Fishing Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "FISHING_GENERATOR_3",
+     "name": "Fishing Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "FISHING_GENERATOR_4",
+     "name": "Fishing Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "FISHING_GENERATOR_5",
+     "name": "Fishing Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "FISHING_GENERATOR_6",
+     "name": "Fishing Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "FISHING_GENERATOR_7",
+     "name": "Fishing Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "FISHING_GENERATOR_8",
+     "name": "Fishing Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "FISHING_GENERATOR_9",
+     "name": "Fishing Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "FISHING_GENERATOR_10",
+     "name": "Fishing Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "FISHING_GENERATOR_11",
+     "name": "Fishing Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "FISHING_GENERATOR_12",
+     "name": "Fishing Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "FLOWER",
+   "family": "Flower Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "FLOWER_GENERATOR_1",
+     "name": "Flower Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "FLOWER_GENERATOR_2",
+     "name": "Flower Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "FLOWER_GENERATOR_3",
+     "name": "Flower Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "FLOWER_GENERATOR_4",
+     "name": "Flower Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "FLOWER_GENERATOR_5",
+     "name": "Flower Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "FLOWER_GENERATOR_6",
+     "name": "Flower Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "FLOWER_GENERATOR_7",
+     "name": "Flower Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "FLOWER_GENERATOR_8",
+     "name": "Flower Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "FLOWER_GENERATOR_9",
+     "name": "Flower Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "FLOWER_GENERATOR_10",
+     "name": "Flower Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "FLOWER_GENERATOR_11",
+     "name": "Flower Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "FLOWER_GENERATOR_12",
+     "name": "Flower Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "GHAST",
+   "family": "Ghast Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "GHAST_GENERATOR_1",
+     "name": "Ghast Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "GHAST_GENERATOR_2",
+     "name": "Ghast Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "GHAST_GENERATOR_3",
+     "name": "Ghast Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "GHAST_GENERATOR_4",
+     "name": "Ghast Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "GHAST_GENERATOR_5",
+     "name": "Ghast Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "GHAST_GENERATOR_6",
+     "name": "Ghast Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "GHAST_GENERATOR_7",
+     "name": "Ghast Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "GHAST_GENERATOR_8",
+     "name": "Ghast Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "GHAST_GENERATOR_9",
+     "name": "Ghast Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "GHAST_GENERATOR_10",
+     "name": "Ghast Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "GHAST_GENERATOR_11",
+     "name": "Ghast Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "GHAST_GENERATOR_12",
+     "name": "Ghast Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "GLOWSTONE",
+   "family": "Glowstone Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "GLOWSTONE_GENERATOR_1",
+     "name": "Glowstone Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "GLOWSTONE_GENERATOR_2",
+     "name": "Glowstone Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "GLOWSTONE_GENERATOR_3",
+     "name": "Glowstone Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "GLOWSTONE_GENERATOR_4",
+     "name": "Glowstone Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "GLOWSTONE_GENERATOR_5",
+     "name": "Glowstone Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "GLOWSTONE_GENERATOR_6",
+     "name": "Glowstone Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "GLOWSTONE_GENERATOR_7",
+     "name": "Glowstone Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "GLOWSTONE_GENERATOR_8",
+     "name": "Glowstone Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "GLOWSTONE_GENERATOR_9",
+     "name": "Glowstone Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "GLOWSTONE_GENERATOR_10",
+     "name": "Glowstone Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "GLOWSTONE_GENERATOR_11",
+     "name": "Glowstone Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "GLOWSTONE_GENERATOR_12",
+     "name": "Glowstone Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "GOLD",
+   "family": "Gold Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "GOLD_GENERATOR_1",
+     "name": "Gold Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "GOLD_GENERATOR_2",
+     "name": "Gold Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "GOLD_GENERATOR_3",
+     "name": "Gold Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "GOLD_GENERATOR_4",
+     "name": "Gold Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "GOLD_GENERATOR_5",
+     "name": "Gold Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "GOLD_GENERATOR_6",
+     "name": "Gold Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "GOLD_GENERATOR_7",
+     "name": "Gold Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "GOLD_GENERATOR_8",
+     "name": "Gold Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "GOLD_GENERATOR_9",
+     "name": "Gold Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "GOLD_GENERATOR_10",
+     "name": "Gold Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "GOLD_GENERATOR_11",
+     "name": "Gold Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "GOLD_GENERATOR_12",
+     "name": "Gold Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "GRAVEL",
+   "family": "Gravel Minion",
+   "maxTier": 11,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "GRAVEL_GENERATOR_1",
+     "name": "Gravel Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "GRAVEL_GENERATOR_2",
+     "name": "Gravel Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "GRAVEL_GENERATOR_3",
+     "name": "Gravel Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "GRAVEL_GENERATOR_4",
+     "name": "Gravel Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "GRAVEL_GENERATOR_5",
+     "name": "Gravel Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "GRAVEL_GENERATOR_6",
+     "name": "Gravel Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "GRAVEL_GENERATOR_7",
+     "name": "Gravel Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "GRAVEL_GENERATOR_8",
+     "name": "Gravel Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "GRAVEL_GENERATOR_9",
+     "name": "Gravel Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "GRAVEL_GENERATOR_10",
+     "name": "Gravel Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "GRAVEL_GENERATOR_11",
+     "name": "Gravel Minion XI",
+     "xp": 12
+    }
+   ]
+  },
+  {
+   "generator": "HARD_STONE",
+   "family": "Hard Stone Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "HARD_STONE_GENERATOR_1",
+     "name": "Hard Stone Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "HARD_STONE_GENERATOR_2",
+     "name": "Hard Stone Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "HARD_STONE_GENERATOR_3",
+     "name": "Hard Stone Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "HARD_STONE_GENERATOR_4",
+     "name": "Hard Stone Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "HARD_STONE_GENERATOR_5",
+     "name": "Hard Stone Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "HARD_STONE_GENERATOR_6",
+     "name": "Hard Stone Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "HARD_STONE_GENERATOR_7",
+     "name": "Hard Stone Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "HARD_STONE_GENERATOR_8",
+     "name": "Hard Stone Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "HARD_STONE_GENERATOR_9",
+     "name": "Hard Stone Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "HARD_STONE_GENERATOR_10",
+     "name": "Hard Stone Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "HARD_STONE_GENERATOR_11",
+     "name": "Hard Stone Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "HARD_STONE_GENERATOR_12",
+     "name": "Hard Stone Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "ICE",
+   "family": "Ice Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "ICE_GENERATOR_1",
+     "name": "Ice Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "ICE_GENERATOR_2",
+     "name": "Ice Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "ICE_GENERATOR_3",
+     "name": "Ice Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "ICE_GENERATOR_4",
+     "name": "Ice Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "ICE_GENERATOR_5",
+     "name": "Ice Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "ICE_GENERATOR_6",
+     "name": "Ice Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "ICE_GENERATOR_7",
+     "name": "Ice Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "ICE_GENERATOR_8",
+     "name": "Ice Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "ICE_GENERATOR_9",
+     "name": "Ice Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "ICE_GENERATOR_10",
+     "name": "Ice Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "ICE_GENERATOR_11",
+     "name": "Ice Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "ICE_GENERATOR_12",
+     "name": "Ice Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "INFERNO",
+   "family": "Inferno Minion",
+   "maxTier": 11,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "INFERNO_GENERATOR_1",
+     "name": "Inferno Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "INFERNO_GENERATOR_2",
+     "name": "Inferno Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "INFERNO_GENERATOR_3",
+     "name": "Inferno Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "INFERNO_GENERATOR_4",
+     "name": "Inferno Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "INFERNO_GENERATOR_5",
+     "name": "Inferno Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "INFERNO_GENERATOR_6",
+     "name": "Inferno Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "INFERNO_GENERATOR_7",
+     "name": "Inferno Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "INFERNO_GENERATOR_8",
+     "name": "Inferno Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "INFERNO_GENERATOR_9",
+     "name": "Inferno Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "INFERNO_GENERATOR_10",
+     "name": "Inferno Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "INFERNO_GENERATOR_11",
+     "name": "Inferno Minion XI",
+     "xp": 12
+    }
+   ]
+  },
+  {
+   "generator": "IRON",
+   "family": "Iron Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "IRON_GENERATOR_1",
+     "name": "Iron Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "IRON_GENERATOR_2",
+     "name": "Iron Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "IRON_GENERATOR_3",
+     "name": "Iron Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "IRON_GENERATOR_4",
+     "name": "Iron Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "IRON_GENERATOR_5",
+     "name": "Iron Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "IRON_GENERATOR_6",
+     "name": "Iron Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "IRON_GENERATOR_7",
+     "name": "Iron Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "IRON_GENERATOR_8",
+     "name": "Iron Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "IRON_GENERATOR_9",
+     "name": "Iron Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "IRON_GENERATOR_10",
+     "name": "Iron Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "IRON_GENERATOR_11",
+     "name": "Iron Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "IRON_GENERATOR_12",
+     "name": "Iron Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "JUNGLE",
+   "family": "Jungle Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "JUNGLE_GENERATOR_1",
+     "name": "Jungle Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "JUNGLE_GENERATOR_2",
+     "name": "Jungle Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "JUNGLE_GENERATOR_3",
+     "name": "Jungle Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "JUNGLE_GENERATOR_4",
+     "name": "Jungle Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "JUNGLE_GENERATOR_5",
+     "name": "Jungle Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "JUNGLE_GENERATOR_6",
+     "name": "Jungle Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "JUNGLE_GENERATOR_7",
+     "name": "Jungle Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "JUNGLE_GENERATOR_8",
+     "name": "Jungle Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "JUNGLE_GENERATOR_9",
+     "name": "Jungle Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "JUNGLE_GENERATOR_10",
+     "name": "Jungle Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "JUNGLE_GENERATOR_11",
+     "name": "Jungle Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "JUNGLE_GENERATOR_12",
+     "name": "Jungle Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "LAPIS",
+   "family": "Lapis Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "LAPIS_GENERATOR_1",
+     "name": "Lapis Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "LAPIS_GENERATOR_2",
+     "name": "Lapis Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "LAPIS_GENERATOR_3",
+     "name": "Lapis Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "LAPIS_GENERATOR_4",
+     "name": "Lapis Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "LAPIS_GENERATOR_5",
+     "name": "Lapis Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "LAPIS_GENERATOR_6",
+     "name": "Lapis Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "LAPIS_GENERATOR_7",
+     "name": "Lapis Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "LAPIS_GENERATOR_8",
+     "name": "Lapis Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "LAPIS_GENERATOR_9",
+     "name": "Lapis Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "LAPIS_GENERATOR_10",
+     "name": "Lapis Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "LAPIS_GENERATOR_11",
+     "name": "Lapis Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "LAPIS_GENERATOR_12",
+     "name": "Lapis Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "LILY_PAD",
+   "family": "Lily Pad Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "LILY_PAD_GENERATOR_1",
+     "name": "Lily Pad Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "LILY_PAD_GENERATOR_2",
+     "name": "Lily Pad Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "LILY_PAD_GENERATOR_3",
+     "name": "Lily Pad Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "LILY_PAD_GENERATOR_4",
+     "name": "Lily Pad Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "LILY_PAD_GENERATOR_5",
+     "name": "Lily Pad Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "LILY_PAD_GENERATOR_6",
+     "name": "Lily Pad Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "LILY_PAD_GENERATOR_7",
+     "name": "Lily Pad Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "LILY_PAD_GENERATOR_8",
+     "name": "Lily Pad Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "LILY_PAD_GENERATOR_9",
+     "name": "Lily Pad Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "LILY_PAD_GENERATOR_10",
+     "name": "Lily Pad Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "LILY_PAD_GENERATOR_11",
+     "name": "Lily Pad Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "LILY_PAD_GENERATOR_12",
+     "name": "Lily Pad Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "MAGMA_CUBE",
+   "family": "Magma Cube Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "MAGMA_CUBE_GENERATOR_1",
+     "name": "Magma Cube Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "MAGMA_CUBE_GENERATOR_2",
+     "name": "Magma Cube Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "MAGMA_CUBE_GENERATOR_3",
+     "name": "Magma Cube Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "MAGMA_CUBE_GENERATOR_4",
+     "name": "Magma Cube Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "MAGMA_CUBE_GENERATOR_5",
+     "name": "Magma Cube Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "MAGMA_CUBE_GENERATOR_6",
+     "name": "Magma Cube Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "MAGMA_CUBE_GENERATOR_7",
+     "name": "Magma Cube Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "MAGMA_CUBE_GENERATOR_8",
+     "name": "Magma Cube Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "MAGMA_CUBE_GENERATOR_9",
+     "name": "Magma Cube Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "MAGMA_CUBE_GENERATOR_10",
+     "name": "Magma Cube Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "MAGMA_CUBE_GENERATOR_11",
+     "name": "Magma Cube Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "MAGMA_CUBE_GENERATOR_12",
+     "name": "Magma Cube Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "MELON",
+   "family": "Melon Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "MELON_GENERATOR_1",
+     "name": "Melon Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "MELON_GENERATOR_2",
+     "name": "Melon Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "MELON_GENERATOR_3",
+     "name": "Melon Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "MELON_GENERATOR_4",
+     "name": "Melon Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "MELON_GENERATOR_5",
+     "name": "Melon Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "MELON_GENERATOR_6",
+     "name": "Melon Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "MELON_GENERATOR_7",
+     "name": "Melon Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "MELON_GENERATOR_8",
+     "name": "Melon Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "MELON_GENERATOR_9",
+     "name": "Melon Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "MELON_GENERATOR_10",
+     "name": "Melon Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "MELON_GENERATOR_11",
+     "name": "Melon Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "MELON_GENERATOR_12",
+     "name": "Melon Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "MITHRIL",
+   "family": "Mithril Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "MITHRIL_GENERATOR_1",
+     "name": "Mithril Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "MITHRIL_GENERATOR_2",
+     "name": "Mithril Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "MITHRIL_GENERATOR_3",
+     "name": "Mithril Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "MITHRIL_GENERATOR_4",
+     "name": "Mithril Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "MITHRIL_GENERATOR_5",
+     "name": "Mithril Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "MITHRIL_GENERATOR_6",
+     "name": "Mithril Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "MITHRIL_GENERATOR_7",
+     "name": "Mithril Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "MITHRIL_GENERATOR_8",
+     "name": "Mithril Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "MITHRIL_GENERATOR_9",
+     "name": "Mithril Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "MITHRIL_GENERATOR_10",
+     "name": "Mithril Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "MITHRIL_GENERATOR_11",
+     "name": "Mithril Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "MITHRIL_GENERATOR_12",
+     "name": "Mithril Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "MUSHROOM",
+   "family": "Mushroom Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "MUSHROOM_GENERATOR_1",
+     "name": "Mushroom Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "MUSHROOM_GENERATOR_2",
+     "name": "Mushroom Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "MUSHROOM_GENERATOR_3",
+     "name": "Mushroom Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "MUSHROOM_GENERATOR_4",
+     "name": "Mushroom Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "MUSHROOM_GENERATOR_5",
+     "name": "Mushroom Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "MUSHROOM_GENERATOR_6",
+     "name": "Mushroom Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "MUSHROOM_GENERATOR_7",
+     "name": "Mushroom Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "MUSHROOM_GENERATOR_8",
+     "name": "Mushroom Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "MUSHROOM_GENERATOR_9",
+     "name": "Mushroom Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "MUSHROOM_GENERATOR_10",
+     "name": "Mushroom Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "MUSHROOM_GENERATOR_11",
+     "name": "Mushroom Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "MUSHROOM_GENERATOR_12",
+     "name": "Mushroom Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "MYCELIUM",
+   "family": "Mycelium Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "MYCELIUM_GENERATOR_1",
+     "name": "Mycelium Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "MYCELIUM_GENERATOR_2",
+     "name": "Mycelium Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "MYCELIUM_GENERATOR_3",
+     "name": "Mycelium Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "MYCELIUM_GENERATOR_4",
+     "name": "Mycelium Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "MYCELIUM_GENERATOR_5",
+     "name": "Mycelium Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "MYCELIUM_GENERATOR_6",
+     "name": "Mycelium Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "MYCELIUM_GENERATOR_7",
+     "name": "Mycelium Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "MYCELIUM_GENERATOR_8",
+     "name": "Mycelium Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "MYCELIUM_GENERATOR_9",
+     "name": "Mycelium Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "MYCELIUM_GENERATOR_10",
+     "name": "Mycelium Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "MYCELIUM_GENERATOR_11",
+     "name": "Mycelium Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "MYCELIUM_GENERATOR_12",
+     "name": "Mycelium Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "NETHER_WARTS",
+   "family": "Nether Wart Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "NETHER_WARTS_GENERATOR_1",
+     "name": "Nether Wart Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "NETHER_WARTS_GENERATOR_2",
+     "name": "Nether Wart Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "NETHER_WARTS_GENERATOR_3",
+     "name": "Nether Wart Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "NETHER_WARTS_GENERATOR_4",
+     "name": "Nether Wart Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "NETHER_WARTS_GENERATOR_5",
+     "name": "Nether Wart Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "NETHER_WARTS_GENERATOR_6",
+     "name": "Nether Wart Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "NETHER_WARTS_GENERATOR_7",
+     "name": "Nether Wart Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "NETHER_WARTS_GENERATOR_8",
+     "name": "Nether Wart Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "NETHER_WARTS_GENERATOR_9",
+     "name": "Nether Wart Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "NETHER_WARTS_GENERATOR_10",
+     "name": "Nether Wart Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "NETHER_WARTS_GENERATOR_11",
+     "name": "Nether Wart Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "NETHER_WARTS_GENERATOR_12",
+     "name": "Nether Wart Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "OAK",
+   "family": "Oak Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "OAK_GENERATOR_1",
+     "name": "Oak Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "OAK_GENERATOR_2",
+     "name": "Oak Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "OAK_GENERATOR_3",
+     "name": "Oak Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "OAK_GENERATOR_4",
+     "name": "Oak Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "OAK_GENERATOR_5",
+     "name": "Oak Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "OAK_GENERATOR_6",
+     "name": "Oak Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "OAK_GENERATOR_7",
+     "name": "Oak Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "OAK_GENERATOR_8",
+     "name": "Oak Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "OAK_GENERATOR_9",
+     "name": "Oak Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "OAK_GENERATOR_10",
+     "name": "Oak Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "OAK_GENERATOR_11",
+     "name": "Oak Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "OAK_GENERATOR_12",
+     "name": "Oak Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "OBSIDIAN",
+   "family": "Obsidian Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "OBSIDIAN_GENERATOR_1",
+     "name": "Obsidian Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "OBSIDIAN_GENERATOR_2",
+     "name": "Obsidian Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "OBSIDIAN_GENERATOR_3",
+     "name": "Obsidian Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "OBSIDIAN_GENERATOR_4",
+     "name": "Obsidian Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "OBSIDIAN_GENERATOR_5",
+     "name": "Obsidian Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "OBSIDIAN_GENERATOR_6",
+     "name": "Obsidian Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "OBSIDIAN_GENERATOR_7",
+     "name": "Obsidian Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "OBSIDIAN_GENERATOR_8",
+     "name": "Obsidian Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "OBSIDIAN_GENERATOR_9",
+     "name": "Obsidian Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "OBSIDIAN_GENERATOR_10",
+     "name": "Obsidian Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "OBSIDIAN_GENERATOR_11",
+     "name": "Obsidian Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "OBSIDIAN_GENERATOR_12",
+     "name": "Obsidian Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "PIG",
+   "family": "Pig Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "PIG_GENERATOR_1",
+     "name": "Pig Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "PIG_GENERATOR_2",
+     "name": "Pig Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "PIG_GENERATOR_3",
+     "name": "Pig Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "PIG_GENERATOR_4",
+     "name": "Pig Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "PIG_GENERATOR_5",
+     "name": "Pig Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "PIG_GENERATOR_6",
+     "name": "Pig Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "PIG_GENERATOR_7",
+     "name": "Pig Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "PIG_GENERATOR_8",
+     "name": "Pig Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "PIG_GENERATOR_9",
+     "name": "Pig Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "PIG_GENERATOR_10",
+     "name": "Pig Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "PIG_GENERATOR_11",
+     "name": "Pig Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "PIG_GENERATOR_12",
+     "name": "Pig Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "POTATO",
+   "family": "Potato Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "POTATO_GENERATOR_1",
+     "name": "Potato Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "POTATO_GENERATOR_2",
+     "name": "Potato Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "POTATO_GENERATOR_3",
+     "name": "Potato Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "POTATO_GENERATOR_4",
+     "name": "Potato Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "POTATO_GENERATOR_5",
+     "name": "Potato Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "POTATO_GENERATOR_6",
+     "name": "Potato Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "POTATO_GENERATOR_7",
+     "name": "Potato Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "POTATO_GENERATOR_8",
+     "name": "Potato Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "POTATO_GENERATOR_9",
+     "name": "Potato Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "POTATO_GENERATOR_10",
+     "name": "Potato Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "POTATO_GENERATOR_11",
+     "name": "Potato Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "POTATO_GENERATOR_12",
+     "name": "Potato Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "PUMPKIN",
+   "family": "Pumpkin Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "PUMPKIN_GENERATOR_1",
+     "name": "Pumpkin Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "PUMPKIN_GENERATOR_2",
+     "name": "Pumpkin Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "PUMPKIN_GENERATOR_3",
+     "name": "Pumpkin Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "PUMPKIN_GENERATOR_4",
+     "name": "Pumpkin Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "PUMPKIN_GENERATOR_5",
+     "name": "Pumpkin Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "PUMPKIN_GENERATOR_6",
+     "name": "Pumpkin Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "PUMPKIN_GENERATOR_7",
+     "name": "Pumpkin Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "PUMPKIN_GENERATOR_8",
+     "name": "Pumpkin Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "PUMPKIN_GENERATOR_9",
+     "name": "Pumpkin Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "PUMPKIN_GENERATOR_10",
+     "name": "Pumpkin Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "PUMPKIN_GENERATOR_11",
+     "name": "Pumpkin Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "PUMPKIN_GENERATOR_12",
+     "name": "Pumpkin Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "QUARTZ",
+   "family": "Quartz Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "QUARTZ_GENERATOR_1",
+     "name": "Quartz Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "QUARTZ_GENERATOR_2",
+     "name": "Quartz Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "QUARTZ_GENERATOR_3",
+     "name": "Quartz Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "QUARTZ_GENERATOR_4",
+     "name": "Quartz Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "QUARTZ_GENERATOR_5",
+     "name": "Quartz Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "QUARTZ_GENERATOR_6",
+     "name": "Quartz Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "QUARTZ_GENERATOR_7",
+     "name": "Quartz Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "QUARTZ_GENERATOR_8",
+     "name": "Quartz Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "QUARTZ_GENERATOR_9",
+     "name": "Quartz Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "QUARTZ_GENERATOR_10",
+     "name": "Quartz Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "QUARTZ_GENERATOR_11",
+     "name": "Quartz Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "QUARTZ_GENERATOR_12",
+     "name": "Quartz Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "RABBIT",
+   "family": "Rabbit Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "RABBIT_GENERATOR_1",
+     "name": "Rabbit Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "RABBIT_GENERATOR_2",
+     "name": "Rabbit Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "RABBIT_GENERATOR_3",
+     "name": "Rabbit Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "RABBIT_GENERATOR_4",
+     "name": "Rabbit Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "RABBIT_GENERATOR_5",
+     "name": "Rabbit Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "RABBIT_GENERATOR_6",
+     "name": "Rabbit Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "RABBIT_GENERATOR_7",
+     "name": "Rabbit Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "RABBIT_GENERATOR_8",
+     "name": "Rabbit Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "RABBIT_GENERATOR_9",
+     "name": "Rabbit Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "RABBIT_GENERATOR_10",
+     "name": "Rabbit Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "RABBIT_GENERATOR_11",
+     "name": "Rabbit Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "RABBIT_GENERATOR_12",
+     "name": "Rabbit Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "RED_SAND",
+   "family": "Red Sand Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "RED_SAND_GENERATOR_1",
+     "name": "Red Sand Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "RED_SAND_GENERATOR_2",
+     "name": "Red Sand Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "RED_SAND_GENERATOR_3",
+     "name": "Red Sand Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "RED_SAND_GENERATOR_4",
+     "name": "Red Sand Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "RED_SAND_GENERATOR_5",
+     "name": "Red Sand Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "RED_SAND_GENERATOR_6",
+     "name": "Red Sand Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "RED_SAND_GENERATOR_7",
+     "name": "Red Sand Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "RED_SAND_GENERATOR_8",
+     "name": "Red Sand Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "RED_SAND_GENERATOR_9",
+     "name": "Red Sand Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "RED_SAND_GENERATOR_10",
+     "name": "Red Sand Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "RED_SAND_GENERATOR_11",
+     "name": "Red Sand Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "RED_SAND_GENERATOR_12",
+     "name": "Red Sand Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "REDSTONE",
+   "family": "Redstone Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "REDSTONE_GENERATOR_1",
+     "name": "Redstone Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "REDSTONE_GENERATOR_2",
+     "name": "Redstone Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "REDSTONE_GENERATOR_3",
+     "name": "Redstone Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "REDSTONE_GENERATOR_4",
+     "name": "Redstone Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "REDSTONE_GENERATOR_5",
+     "name": "Redstone Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "REDSTONE_GENERATOR_6",
+     "name": "Redstone Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "REDSTONE_GENERATOR_7",
+     "name": "Redstone Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "REDSTONE_GENERATOR_8",
+     "name": "Redstone Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "REDSTONE_GENERATOR_9",
+     "name": "Redstone Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "REDSTONE_GENERATOR_10",
+     "name": "Redstone Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "REDSTONE_GENERATOR_11",
+     "name": "Redstone Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "REDSTONE_GENERATOR_12",
+     "name": "Redstone Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "REVENANT",
+   "family": "Revenant Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "REVENANT_GENERATOR_1",
+     "name": "Revenant Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "REVENANT_GENERATOR_2",
+     "name": "Revenant Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "REVENANT_GENERATOR_3",
+     "name": "Revenant Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "REVENANT_GENERATOR_4",
+     "name": "Revenant Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "REVENANT_GENERATOR_5",
+     "name": "Revenant Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "REVENANT_GENERATOR_6",
+     "name": "Revenant Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "REVENANT_GENERATOR_7",
+     "name": "Revenant Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "REVENANT_GENERATOR_8",
+     "name": "Revenant Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "REVENANT_GENERATOR_9",
+     "name": "Revenant Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "REVENANT_GENERATOR_10",
+     "name": "Revenant Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "REVENANT_GENERATOR_11",
+     "name": "Revenant Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "REVENANT_GENERATOR_12",
+     "name": "Revenant Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "SAND",
+   "family": "Sand Minion",
+   "maxTier": 11,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "SAND_GENERATOR_1",
+     "name": "Sand Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "SAND_GENERATOR_2",
+     "name": "Sand Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "SAND_GENERATOR_3",
+     "name": "Sand Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "SAND_GENERATOR_4",
+     "name": "Sand Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "SAND_GENERATOR_5",
+     "name": "Sand Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "SAND_GENERATOR_6",
+     "name": "Sand Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "SAND_GENERATOR_7",
+     "name": "Sand Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "SAND_GENERATOR_8",
+     "name": "Sand Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "SAND_GENERATOR_9",
+     "name": "Sand Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "SAND_GENERATOR_10",
+     "name": "Sand Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "SAND_GENERATOR_11",
+     "name": "Sand Minion XI",
+     "xp": 12
+    }
+   ]
+  },
+  {
+   "generator": "SHEEP",
+   "family": "Sheep Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "SHEEP_GENERATOR_1",
+     "name": "Sheep Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "SHEEP_GENERATOR_2",
+     "name": "Sheep Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "SHEEP_GENERATOR_3",
+     "name": "Sheep Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "SHEEP_GENERATOR_4",
+     "name": "Sheep Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "SHEEP_GENERATOR_5",
+     "name": "Sheep Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "SHEEP_GENERATOR_6",
+     "name": "Sheep Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "SHEEP_GENERATOR_7",
+     "name": "Sheep Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "SHEEP_GENERATOR_8",
+     "name": "Sheep Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "SHEEP_GENERATOR_9",
+     "name": "Sheep Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "SHEEP_GENERATOR_10",
+     "name": "Sheep Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "SHEEP_GENERATOR_11",
+     "name": "Sheep Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "SHEEP_GENERATOR_12",
+     "name": "Sheep Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "SKELETON",
+   "family": "Skeleton Minion",
+   "maxTier": 11,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "SKELETON_GENERATOR_1",
+     "name": "Skeleton Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "SKELETON_GENERATOR_2",
+     "name": "Skeleton Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "SKELETON_GENERATOR_3",
+     "name": "Skeleton Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "SKELETON_GENERATOR_4",
+     "name": "Skeleton Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "SKELETON_GENERATOR_5",
+     "name": "Skeleton Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "SKELETON_GENERATOR_6",
+     "name": "Skeleton Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "SKELETON_GENERATOR_7",
+     "name": "Skeleton Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "SKELETON_GENERATOR_8",
+     "name": "Skeleton Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "SKELETON_GENERATOR_9",
+     "name": "Skeleton Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "SKELETON_GENERATOR_10",
+     "name": "Skeleton Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "SKELETON_GENERATOR_11",
+     "name": "Skeleton Minion XI",
+     "xp": 12
+    }
+   ]
+  },
+  {
+   "generator": "SLIME",
+   "family": "Slime Minion",
+   "maxTier": 11,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "SLIME_GENERATOR_1",
+     "name": "Slime Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "SLIME_GENERATOR_2",
+     "name": "Slime Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "SLIME_GENERATOR_3",
+     "name": "Slime Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "SLIME_GENERATOR_4",
+     "name": "Slime Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "SLIME_GENERATOR_5",
+     "name": "Slime Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "SLIME_GENERATOR_6",
+     "name": "Slime Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "SLIME_GENERATOR_7",
+     "name": "Slime Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "SLIME_GENERATOR_8",
+     "name": "Slime Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "SLIME_GENERATOR_9",
+     "name": "Slime Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "SLIME_GENERATOR_10",
+     "name": "Slime Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "SLIME_GENERATOR_11",
+     "name": "Slime Minion XI",
+     "xp": 12
+    }
+   ]
+  },
+  {
+   "generator": "SNOW",
+   "family": "Snow Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "SNOW_GENERATOR_1",
+     "name": "Snow Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "SNOW_GENERATOR_2",
+     "name": "Snow Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "SNOW_GENERATOR_3",
+     "name": "Snow Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "SNOW_GENERATOR_4",
+     "name": "Snow Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "SNOW_GENERATOR_5",
+     "name": "Snow Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "SNOW_GENERATOR_6",
+     "name": "Snow Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "SNOW_GENERATOR_7",
+     "name": "Snow Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "SNOW_GENERATOR_8",
+     "name": "Snow Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "SNOW_GENERATOR_9",
+     "name": "Snow Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "SNOW_GENERATOR_10",
+     "name": "Snow Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "SNOW_GENERATOR_11",
+     "name": "Snow Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "SNOW_GENERATOR_12",
+     "name": "Snow Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "SPIDER",
+   "family": "Spider Minion",
+   "maxTier": 11,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "SPIDER_GENERATOR_1",
+     "name": "Spider Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "SPIDER_GENERATOR_2",
+     "name": "Spider Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "SPIDER_GENERATOR_3",
+     "name": "Spider Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "SPIDER_GENERATOR_4",
+     "name": "Spider Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "SPIDER_GENERATOR_5",
+     "name": "Spider Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "SPIDER_GENERATOR_6",
+     "name": "Spider Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "SPIDER_GENERATOR_7",
+     "name": "Spider Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "SPIDER_GENERATOR_8",
+     "name": "Spider Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "SPIDER_GENERATOR_9",
+     "name": "Spider Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "SPIDER_GENERATOR_10",
+     "name": "Spider Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "SPIDER_GENERATOR_11",
+     "name": "Spider Minion XI",
+     "xp": 12
+    }
+   ]
+  },
+  {
+   "generator": "SPRUCE",
+   "family": "Spruce Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "SPRUCE_GENERATOR_1",
+     "name": "Spruce Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "SPRUCE_GENERATOR_2",
+     "name": "Spruce Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "SPRUCE_GENERATOR_3",
+     "name": "Spruce Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "SPRUCE_GENERATOR_4",
+     "name": "Spruce Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "SPRUCE_GENERATOR_5",
+     "name": "Spruce Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "SPRUCE_GENERATOR_6",
+     "name": "Spruce Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "SPRUCE_GENERATOR_7",
+     "name": "Spruce Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "SPRUCE_GENERATOR_8",
+     "name": "Spruce Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "SPRUCE_GENERATOR_9",
+     "name": "Spruce Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "SPRUCE_GENERATOR_10",
+     "name": "Spruce Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "SPRUCE_GENERATOR_11",
+     "name": "Spruce Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "SPRUCE_GENERATOR_12",
+     "name": "Spruce Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "SUGAR_CANE",
+   "family": "Sugar Cane Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "SUGAR_CANE_GENERATOR_1",
+     "name": "Sugar Cane Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "SUGAR_CANE_GENERATOR_2",
+     "name": "Sugar Cane Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "SUGAR_CANE_GENERATOR_3",
+     "name": "Sugar Cane Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "SUGAR_CANE_GENERATOR_4",
+     "name": "Sugar Cane Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "SUGAR_CANE_GENERATOR_5",
+     "name": "Sugar Cane Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "SUGAR_CANE_GENERATOR_6",
+     "name": "Sugar Cane Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "SUGAR_CANE_GENERATOR_7",
+     "name": "Sugar Cane Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "SUGAR_CANE_GENERATOR_8",
+     "name": "Sugar Cane Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "SUGAR_CANE_GENERATOR_9",
+     "name": "Sugar Cane Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "SUGAR_CANE_GENERATOR_10",
+     "name": "Sugar Cane Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "SUGAR_CANE_GENERATOR_11",
+     "name": "Sugar Cane Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "SUGAR_CANE_GENERATOR_12",
+     "name": "Sugar Cane Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "SUNFLOWER",
+   "family": "Sunflower Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "SUNFLOWER_GENERATOR_1",
+     "name": "Sunflower Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "SUNFLOWER_GENERATOR_2",
+     "name": "Sunflower Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "SUNFLOWER_GENERATOR_3",
+     "name": "Sunflower Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "SUNFLOWER_GENERATOR_4",
+     "name": "Sunflower Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "SUNFLOWER_GENERATOR_5",
+     "name": "Sunflower Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "SUNFLOWER_GENERATOR_6",
+     "name": "Sunflower Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "SUNFLOWER_GENERATOR_7",
+     "name": "Sunflower Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "SUNFLOWER_GENERATOR_8",
+     "name": "Sunflower Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "SUNFLOWER_GENERATOR_9",
+     "name": "Sunflower Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "SUNFLOWER_GENERATOR_10",
+     "name": "Sunflower Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "SUNFLOWER_GENERATOR_11",
+     "name": "Sunflower Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "SUNFLOWER_GENERATOR_12",
+     "name": "Sunflower Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "TARANTULA",
+   "family": "Tarantula Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "TARANTULA_GENERATOR_1",
+     "name": "Tarantula Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "TARANTULA_GENERATOR_2",
+     "name": "Tarantula Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "TARANTULA_GENERATOR_3",
+     "name": "Tarantula Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "TARANTULA_GENERATOR_4",
+     "name": "Tarantula Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "TARANTULA_GENERATOR_5",
+     "name": "Tarantula Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "TARANTULA_GENERATOR_6",
+     "name": "Tarantula Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "TARANTULA_GENERATOR_7",
+     "name": "Tarantula Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "TARANTULA_GENERATOR_8",
+     "name": "Tarantula Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "TARANTULA_GENERATOR_9",
+     "name": "Tarantula Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "TARANTULA_GENERATOR_10",
+     "name": "Tarantula Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "TARANTULA_GENERATOR_11",
+     "name": "Tarantula Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "TARANTULA_GENERATOR_12",
+     "name": "Tarantula Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "VAMPIRE",
+   "family": "Vampire Minion",
+   "maxTier": 11,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "VAMPIRE_GENERATOR_1",
+     "name": "Vampire Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "VAMPIRE_GENERATOR_2",
+     "name": "Vampire Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "VAMPIRE_GENERATOR_3",
+     "name": "Vampire Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "VAMPIRE_GENERATOR_4",
+     "name": "Vampire Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "VAMPIRE_GENERATOR_5",
+     "name": "Vampire Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "VAMPIRE_GENERATOR_6",
+     "name": "Vampire Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "VAMPIRE_GENERATOR_7",
+     "name": "Vampire Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "VAMPIRE_GENERATOR_8",
+     "name": "Vampire Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "VAMPIRE_GENERATOR_9",
+     "name": "Vampire Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "VAMPIRE_GENERATOR_10",
+     "name": "Vampire Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "VAMPIRE_GENERATOR_11",
+     "name": "Vampire Minion XI",
+     "xp": 12
+    }
+   ]
+  },
+  {
+   "generator": "VOIDLING",
+   "family": "Voidling Minion",
+   "maxTier": 11,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "VOIDLING_GENERATOR_1",
+     "name": "Voidling Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "VOIDLING_GENERATOR_2",
+     "name": "Voidling Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "VOIDLING_GENERATOR_3",
+     "name": "Voidling Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "VOIDLING_GENERATOR_4",
+     "name": "Voidling Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "VOIDLING_GENERATOR_5",
+     "name": "Voidling Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "VOIDLING_GENERATOR_6",
+     "name": "Voidling Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "VOIDLING_GENERATOR_7",
+     "name": "Voidling Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "VOIDLING_GENERATOR_8",
+     "name": "Voidling Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "VOIDLING_GENERATOR_9",
+     "name": "Voidling Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "VOIDLING_GENERATOR_10",
+     "name": "Voidling Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "VOIDLING_GENERATOR_11",
+     "name": "Voidling Minion XI",
+     "xp": 12
+    }
+   ]
+  },
+  {
+   "generator": "WHEAT",
+   "family": "Wheat Minion",
+   "maxTier": 12,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "WHEAT_GENERATOR_1",
+     "name": "Wheat Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "WHEAT_GENERATOR_2",
+     "name": "Wheat Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "WHEAT_GENERATOR_3",
+     "name": "Wheat Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "WHEAT_GENERATOR_4",
+     "name": "Wheat Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "WHEAT_GENERATOR_5",
+     "name": "Wheat Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "WHEAT_GENERATOR_6",
+     "name": "Wheat Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "WHEAT_GENERATOR_7",
+     "name": "Wheat Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "WHEAT_GENERATOR_8",
+     "name": "Wheat Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "WHEAT_GENERATOR_9",
+     "name": "Wheat Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "WHEAT_GENERATOR_10",
+     "name": "Wheat Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "WHEAT_GENERATOR_11",
+     "name": "Wheat Minion XI",
+     "xp": 12
+    },
+    {
+     "tier": 12,
+     "itemId": "WHEAT_GENERATOR_12",
+     "name": "Wheat Minion XII",
+     "xp": 24
+    }
+   ]
+  },
+  {
+   "generator": "ZOMBIE",
+   "family": "Zombie Minion",
+   "maxTier": 11,
+   "tiers": [
+    {
+     "tier": 1,
+     "itemId": "ZOMBIE_GENERATOR_1",
+     "name": "Zombie Minion I",
+     "xp": 1
+    },
+    {
+     "tier": 2,
+     "itemId": "ZOMBIE_GENERATOR_2",
+     "name": "Zombie Minion II",
+     "xp": 1
+    },
+    {
+     "tier": 3,
+     "itemId": "ZOMBIE_GENERATOR_3",
+     "name": "Zombie Minion III",
+     "xp": 1
+    },
+    {
+     "tier": 4,
+     "itemId": "ZOMBIE_GENERATOR_4",
+     "name": "Zombie Minion IV",
+     "xp": 1
+    },
+    {
+     "tier": 5,
+     "itemId": "ZOMBIE_GENERATOR_5",
+     "name": "Zombie Minion V",
+     "xp": 1
+    },
+    {
+     "tier": 6,
+     "itemId": "ZOMBIE_GENERATOR_6",
+     "name": "Zombie Minion VI",
+     "xp": 1
+    },
+    {
+     "tier": 7,
+     "itemId": "ZOMBIE_GENERATOR_7",
+     "name": "Zombie Minion VII",
+     "xp": 2
+    },
+    {
+     "tier": 8,
+     "itemId": "ZOMBIE_GENERATOR_8",
+     "name": "Zombie Minion VIII",
+     "xp": 3
+    },
+    {
+     "tier": 9,
+     "itemId": "ZOMBIE_GENERATOR_9",
+     "name": "Zombie Minion IX",
+     "xp": 4
+    },
+    {
+     "tier": 10,
+     "itemId": "ZOMBIE_GENERATOR_10",
+     "name": "Zombie Minion X",
+     "xp": 6
+    },
+    {
+     "tier": 11,
+     "itemId": "ZOMBIE_GENERATOR_11",
+     "name": "Zombie Minion XI",
+     "xp": 12
+    }
+   ]
+  }
+ ]
+}

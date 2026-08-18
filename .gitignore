@@ -1,0 +1,10 @@
+node_modules
+.next
+out
+.env.local
+*.tsbuildinfo
+next-env.d.ts
+.cache
+
+# Built with the API key from .env.local baked in — never commit this.
+dist/

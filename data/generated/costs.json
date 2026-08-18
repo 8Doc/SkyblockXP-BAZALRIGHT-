@@ -1,0 +1,5700 @@
+{
+ "generatedAt": "2026-08-18T20:05:30.024Z",
+ "minions": {
+  "ACACIA": {
+   "1": [
+    {
+     "id": "LOG_2",
+     "qty": 3600
+    }
+   ],
+   "2": [
+    {
+     "id": "LOG_2",
+     "qty": 3600
+    }
+   ],
+   "3": [
+    {
+     "id": "LOG_2",
+     "qty": 3840
+    }
+   ],
+   "4": [
+    {
+     "id": "LOG_2",
+     "qty": 3840
+    }
+   ],
+   "5": [
+    {
+     "id": "LOG_2",
+     "qty": 4114
+    }
+   ],
+   "6": [
+    {
+     "id": "LOG_2",
+     "qty": 4114
+    }
+   ],
+   "7": [
+    {
+     "id": "LOG_2",
+     "qty": 4547
+    }
+   ],
+   "8": [
+    {
+     "id": "LOG_2",
+     "qty": 4547
+    }
+   ],
+   "9": [
+    {
+     "id": "LOG_2",
+     "qty": 5236
+    }
+   ],
+   "10": [
+    {
+     "id": "LOG_2",
+     "qty": 5236
+    }
+   ],
+   "11": [
+    {
+     "id": "LOG_2",
+     "qty": 6400
+    }
+   ]
+  },
+  "BIRCH": {
+   "1": [
+    {
+     "id": "LOG:2",
+     "qty": 3600
+    }
+   ],
+   "2": [
+    {
+     "id": "LOG:2",
+     "qty": 3600
+    }
+   ],
+   "3": [
+    {
+     "id": "LOG:2",
+     "qty": 3840
+    }
+   ],
+   "4": [
+    {
+     "id": "LOG:2",
+     "qty": 3840
+    }
+   ],
+   "5": [
+    {
+     "id": "LOG:2",
+     "qty": 4114
+    }
+   ],
+   "6": [
+    {
+     "id": "LOG:2",
+     "qty": 4114
+    }
+   ],
+   "7": [
+    {
+     "id": "LOG:2",
+     "qty": 4547
+    }
+   ],
+   "8": [
+    {
+     "id": "LOG:2",
+     "qty": 4547
+    }
+   ],
+   "9": [
+    {
+     "id": "LOG:2",
+     "qty": 5236
+    }
+   ],
+   "10": [
+    {
+     "id": "LOG:2",
+     "qty": 5236
+    }
+   ],
+   "11": [
+    {
+     "id": "LOG:2",
+     "qty": 6400
+    }
+   ]
+  },
+  "BLAZE": {
+   "1": [
+    {
+     "id": "BLAZE_ROD",
+     "qty": 1309
+    }
+   ],
+   "2": [
+    {
+     "id": "BLAZE_ROD",
+     "qty": 1309
+    }
+   ],
+   "3": [
+    {
+     "id": "BLAZE_ROD",
+     "qty": 1394
+    }
+   ],
+   "4": [
+    {
+     "id": "BLAZE_ROD",
+     "qty": 1394
+    }
+   ],
+   "5": [
+    {
+     "id": "BLAZE_ROD",
+     "qty": 1516
+    }
+   ],
+   "6": [
+    {
+     "id": "BLAZE_ROD",
+     "qty": 1516
+    }
+   ],
+   "7": [
+    {
+     "id": "BLAZE_ROD",
+     "qty": 1728
+    }
+   ],
+   "8": [
+    {
+     "id": "BLAZE_ROD",
+     "qty": 1728
+    }
+   ],
+   "9": [
+    {
+     "id": "BLAZE_ROD",
+     "qty": 2057
+    }
+   ],
+   "10": [
+    {
+     "id": "BLAZE_ROD",
+     "qty": 2057
+    }
+   ],
+   "11": [
+    {
+     "id": "BLAZE_ROD",
+     "qty": 2618
+    }
+   ],
+   "12": [
+    {
+     "id": "BLAZE_ROD",
+     "qty": 2880
+    }
+   ]
+  },
+  "CACTUS": {
+   "1": [
+    {
+     "id": "CACTUS",
+     "qty": 4800
+    }
+   ],
+   "2": [
+    {
+     "id": "CACTUS",
+     "qty": 4800
+    }
+   ],
+   "3": [
+    {
+     "id": "CACTUS",
+     "qty": 5184
+    }
+   ],
+   "4": [
+    {
+     "id": "CACTUS",
+     "qty": 5184
+    }
+   ],
+   "5": [
+    {
+     "id": "CACTUS",
+     "qty": 5635
+    }
+   ],
+   "6": [
+    {
+     "id": "CACTUS",
+     "qty": 5635
+    }
+   ],
+   "7": [
+    {
+     "id": "CACTUS",
+     "qty": 6171
+    }
+   ],
+   "8": [
+    {
+     "id": "CACTUS",
+     "qty": 6171
+    }
+   ],
+   "9": [
+    {
+     "id": "CACTUS",
+     "qty": 7200
+    }
+   ],
+   "10": [
+    {
+     "id": "CACTUS",
+     "qty": 7200
+    }
+   ],
+   "11": [
+    {
+     "id": "CACTUS",
+     "qty": 8640
+    }
+   ],
+   "12": [
+    {
+     "id": "CACTUS",
+     "qty": 10800
+    }
+   ]
+  },
+  "CARROT": {
+   "1": [
+    {
+     "id": "CARROT_ITEM",
+     "qty": 6480
+    }
+   ],
+   "2": [
+    {
+     "id": "CARROT_ITEM",
+     "qty": 6480
+    }
+   ],
+   "3": [
+    {
+     "id": "CARROT_ITEM",
+     "qty": 7200
+    }
+   ],
+   "4": [
+    {
+     "id": "CARROT_ITEM",
+     "qty": 7200
+    }
+   ],
+   "5": [
+    {
+     "id": "CARROT_ITEM",
+     "qty": 8100
+    }
+   ],
+   "6": [
+    {
+     "id": "CARROT_ITEM",
+     "qty": 8100
+    }
+   ],
+   "7": [
+    {
+     "id": "CARROT_ITEM",
+     "qty": 9257
+    }
+   ],
+   "8": [
+    {
+     "id": "CARROT_ITEM",
+     "qty": 9257
+    }
+   ],
+   "9": [
+    {
+     "id": "CARROT_ITEM",
+     "qty": 10800
+    }
+   ],
+   "10": [
+    {
+     "id": "CARROT_ITEM",
+     "qty": 10800
+    }
+   ],
+   "11": [
+    {
+     "id": "CARROT_ITEM",
+     "qty": 12960
+    }
+   ],
+   "12": [
+    {
+     "id": "CARROT_ITEM",
+     "qty": 16200
+    }
+   ]
+  },
+  "CAVESPIDER": {
+   "1": [
+    {
+     "id": "SPIDER_EYE",
+     "qty": 1662
+    },
+    {
+     "id": "STRING",
+     "qty": 831
+    }
+   ],
+   "2": [
+    {
+     "id": "SPIDER_EYE",
+     "qty": 1662
+    },
+    {
+     "id": "STRING",
+     "qty": 831
+    }
+   ],
+   "3": [
+    {
+     "id": "SPIDER_EYE",
+     "qty": 1800
+    },
+    {
+     "id": "STRING",
+     "qty": 900
+    }
+   ],
+   "4": [
+    {
+     "id": "SPIDER_EYE",
+     "qty": 1800
+    },
+    {
+     "id": "STRING",
+     "qty": 900
+    }
+   ],
+   "5": [
+    {
+     "id": "SPIDER_EYE",
+     "qty": 1964
+    },
+    {
+     "id": "STRING",
+     "qty": 982
+    }
+   ],
+   "6": [
+    {
+     "id": "SPIDER_EYE",
+     "qty": 1964
+    },
+    {
+     "id": "STRING",
+     "qty": 982
+    }
+   ],
+   "7": [
+    {
+     "id": "SPIDER_EYE",
+     "qty": 2160
+    },
+    {
+     "id": "STRING",
+     "qty": 1080
+    }
+   ],
+   "8": [
+    {
+     "id": "SPIDER_EYE",
+     "qty": 2160
+    },
+    {
+     "id": "STRING",
+     "qty": 1080
+    }
+   ],
+   "9": [
+    {
+     "id": "SPIDER_EYE",
+     "qty": 2541
+    },
+    {
+     "id": "STRING",
+     "qty": 1271
+    }
+   ],
+   "10": [
+    {
+     "id": "SPIDER_EYE",
+     "qty": 2541
+    },
+    {
+     "id": "STRING",
+     "qty": 1271
+    }
+   ],
+   "11": [
+    {
+     "id": "SPIDER_EYE",
+     "qty": 3323
+    },
+    {
+     "id": "STRING",
+     "qty": 1662
+    }
+   ]
+  },
+  "CHICKEN": {
+   "1": [
+    {
+     "id": "RAW_CHICKEN",
+     "qty": 1662
+    },
+    {
+     "id": "FEATHER",
+     "qty": 1662
+    }
+   ],
+   "2": [
+    {
+     "id": "RAW_CHICKEN",
+     "qty": 1662
+    },
+    {
+     "id": "FEATHER",
+     "qty": 1662
+    }
+   ],
+   "3": [
+    {
+     "id": "RAW_CHICKEN",
+     "qty": 1800
+    },
+    {
+     "id": "FEATHER",
+     "qty": 1800
+    }
+   ],
+   "4": [
+    {
+     "id": "RAW_CHICKEN",
+     "qty": 1800
+    },
+    {
+     "id": "FEATHER",
+     "qty": 1800
+    }
+   ],
+   "5": [
+    {
+     "id": "RAW_CHICKEN",
+     "qty": 1964
+    },
+    {
+     "id": "FEATHER",
+     "qty": 1964
+    }
+   ],
+   "6": [
+    {
+     "id": "RAW_CHICKEN",
+     "qty": 1964
+    },
+    {
+     "id": "FEATHER",
+     "qty": 1964
+    }
+   ],
+   "7": [
+    {
+     "id": "RAW_CHICKEN",
+     "qty": 2160
+    },
+    {
+     "id": "FEATHER",
+     "qty": 2160
+    }
+   ],
+   "8": [
+    {
+     "id": "RAW_CHICKEN",
+     "qty": 2160
+    },
+    {
+     "id": "FEATHER",
+     "qty": 2160
+    }
+   ],
+   "9": [
+    {
+     "id": "RAW_CHICKEN",
+     "qty": 2400
+    },
+    {
+     "id": "FEATHER",
+     "qty": 2400
+    }
+   ],
+   "10": [
+    {
+     "id": "RAW_CHICKEN",
+     "qty": 2400
+    },
+    {
+     "id": "FEATHER",
+     "qty": 2400
+    }
+   ],
+   "11": [
+    {
+     "id": "RAW_CHICKEN",
+     "qty": 2880
+    },
+    {
+     "id": "FEATHER",
+     "qty": 2880
+    }
+   ],
+   "12": [
+    {
+     "id": "RAW_CHICKEN",
+     "qty": 3600
+    },
+    {
+     "id": "FEATHER",
+     "qty": 3600
+    }
+   ]
+  },
+  "CLAY": {
+   "1": [
+    {
+     "id": "CLAY_BALL",
+     "qty": 5400
+    }
+   ],
+   "2": [
+    {
+     "id": "CLAY_BALL",
+     "qty": 5400
+    }
+   ],
+   "3": [
+    {
+     "id": "CLAY_BALL",
+     "qty": 5760
+    }
+   ],
+   "4": [
+    {
+     "id": "CLAY_BALL",
+     "qty": 5760
+    }
+   ],
+   "5": [
+    {
+     "id": "CLAY_BALL",
+     "qty": 6284
+    }
+   ],
+   "6": [
+    {
+     "id": "CLAY_BALL",
+     "qty": 6284
+    }
+   ],
+   "7": [
+    {
+     "id": "CLAY_BALL",
+     "qty": 7200
+    }
+   ],
+   "8": [
+    {
+     "id": "CLAY_BALL",
+     "qty": 7200
+    }
+   ],
+   "9": [
+    {
+     "id": "CLAY_BALL",
+     "qty": 8640
+    }
+   ],
+   "10": [
+    {
+     "id": "CLAY_BALL",
+     "qty": 8640
+    }
+   ],
+   "11": [
+    {
+     "id": "CLAY_BALL",
+     "qty": 10800
+    }
+   ],
+   "12": [
+    {
+     "id": "CLAY_BALL",
+     "qty": 12343
+    }
+   ]
+  },
+  "COAL": {
+   "1": [
+    {
+     "id": "COAL",
+     "qty": 2880
+    }
+   ],
+   "2": [
+    {
+     "id": "COAL",
+     "qty": 2880
+    }
+   ],
+   "3": [
+    {
+     "id": "COAL",
+     "qty": 3323
+    }
+   ],
+   "4": [
+    {
+     "id": "COAL",
+     "qty": 3323
+    }
+   ],
+   "5": [
+    {
+     "id": "COAL",
+     "qty": 3600
+    }
+   ],
+   "6": [
+    {
+     "id": "COAL",
+     "qty": 3600
+    }
+   ],
+   "7": [
+    {
+     "id": "COAL",
+     "qty": 4320
+    }
+   ],
+   "8": [
+    {
+     "id": "COAL",
+     "qty": 4320
+    }
+   ],
+   "9": [
+    {
+     "id": "COAL",
+     "qty": 4800
+    }
+   ],
+   "10": [
+    {
+     "id": "COAL",
+     "qty": 4800
+    }
+   ],
+   "11": [
+    {
+     "id": "COAL",
+     "qty": 6171
+    }
+   ],
+   "12": [
+    {
+     "id": "COAL",
+     "qty": 7200
+    }
+   ]
+  },
+  "COBBLESTONE": {
+   "1": [
+    {
+     "id": "COBBLESTONE",
+     "qty": 3086
+    }
+   ],
+   "2": [
+    {
+     "id": "COBBLESTONE",
+     "qty": 3086
+    }
+   ],
+   "3": [
+    {
+     "id": "COBBLESTONE",
+     "qty": 3600
+    }
+   ],
+   "4": [
+    {
+     "id": "COBBLESTONE",
+     "qty": 3600
+    }
+   ],
+   "5": [
+    {
+     "id": "COBBLESTONE",
+     "qty": 4320
+    }
+   ],
+   "6": [
+    {
+     "id": "COBBLESTONE",
+     "qty": 4320
+    }
+   ],
+   "7": [
+    {
+     "id": "COBBLESTONE",
+     "qty": 4800
+    }
+   ],
+   "8": [
+    {
+     "id": "COBBLESTONE",
+     "qty": 4800
+    }
+   ],
+   "9": [
+    {
+     "id": "COBBLESTONE",
+     "qty": 5400
+    }
+   ],
+   "10": [
+    {
+     "id": "COBBLESTONE",
+     "qty": 5400
+    }
+   ],
+   "11": [
+    {
+     "id": "COBBLESTONE",
+     "qty": 6171
+    }
+   ],
+   "12": [
+    {
+     "id": "COBBLESTONE",
+     "qty": 7200
+    }
+   ]
+  },
+  "COCOA": {
+   "1": [
+    {
+     "id": "INK_SACK:3",
+     "qty": 4800
+    }
+   ],
+   "2": [
+    {
+     "id": "INK_SACK:3",
+     "qty": 4800
+    }
+   ],
+   "3": [
+    {
+     "id": "INK_SACK:3",
+     "qty": 5184
+    }
+   ],
+   "4": [
+    {
+     "id": "INK_SACK:3",
+     "qty": 5184
+    }
+   ],
+   "5": [
+    {
+     "id": "INK_SACK:3",
+     "qty": 5635
+    }
+   ],
+   "6": [
+    {
+     "id": "INK_SACK:3",
+     "qty": 5635
+    }
+   ],
+   "7": [
+    {
+     "id": "INK_SACK:3",
+     "qty": 6171
+    }
+   ],
+   "8": [
+    {
+     "id": "INK_SACK:3",
+     "qty": 6171
+    }
+   ],
+   "9": [
+    {
+     "id": "INK_SACK:3",
+     "qty": 7200
+    }
+   ],
+   "10": [
+    {
+     "id": "INK_SACK:3",
+     "qty": 7200
+    }
+   ],
+   "11": [
+    {
+     "id": "INK_SACK:3",
+     "qty": 8640
+    }
+   ],
+   "12": [
+    {
+     "id": "INK_SACK:3",
+     "qty": 10800
+    }
+   ]
+  },
+  "COW": {
+   "1": [
+    {
+     "id": "RAW_BEEF",
+     "qty": 1662
+    },
+    {
+     "id": "LEATHER",
+     "qty": 1662
+    }
+   ],
+   "2": [
+    {
+     "id": "RAW_BEEF",
+     "qty": 1662
+    },
+    {
+     "id": "LEATHER",
+     "qty": 1662
+    }
+   ],
+   "3": [
+    {
+     "id": "RAW_BEEF",
+     "qty": 1800
+    },
+    {
+     "id": "LEATHER",
+     "qty": 1800
+    }
+   ],
+   "4": [
+    {
+     "id": "RAW_BEEF",
+     "qty": 1800
+    },
+    {
+     "id": "LEATHER",
+     "qty": 1800
+    }
+   ],
+   "5": [
+    {
+     "id": "RAW_BEEF",
+     "qty": 1964
+    },
+    {
+     "id": "LEATHER",
+     "qty": 1964
+    }
+   ],
+   "6": [
+    {
+     "id": "RAW_BEEF",
+     "qty": 1964
+    },
+    {
+     "id": "LEATHER",
+     "qty": 1964
+    }
+   ],
+   "7": [
+    {
+     "id": "RAW_BEEF",
+     "qty": 2160
+    },
+    {
+     "id": "LEATHER",
+     "qty": 2160
+    }
+   ],
+   "8": [
+    {
+     "id": "RAW_BEEF",
+     "qty": 2160
+    },
+    {
+     "id": "LEATHER",
+     "qty": 2160
+    }
+   ],
+   "9": [
+    {
+     "id": "RAW_BEEF",
+     "qty": 2541
+    },
+    {
+     "id": "LEATHER",
+     "qty": 2541
+    }
+   ],
+   "10": [
+    {
+     "id": "RAW_BEEF",
+     "qty": 2541
+    },
+    {
+     "id": "LEATHER",
+     "qty": 2541
+    }
+   ],
+   "11": [
+    {
+     "id": "RAW_BEEF",
+     "qty": 3323
+    },
+    {
+     "id": "LEATHER",
+     "qty": 3323
+    }
+   ],
+   "12": [
+    {
+     "id": "RAW_BEEF",
+     "qty": 4320
+    },
+    {
+     "id": "LEATHER",
+     "qty": 4320
+    }
+   ]
+  },
+  "CREEPER": {
+   "1": [
+    {
+     "id": "SULPHUR",
+     "qty": 1600
+    }
+   ],
+   "2": [
+    {
+     "id": "SULPHUR",
+     "qty": 1600
+    }
+   ],
+   "3": [
+    {
+     "id": "SULPHUR",
+     "qty": 1728
+    }
+   ],
+   "4": [
+    {
+     "id": "SULPHUR",
+     "qty": 1728
+    }
+   ],
+   "5": [
+    {
+     "id": "SULPHUR",
+     "qty": 1878
+    }
+   ],
+   "6": [
+    {
+     "id": "SULPHUR",
+     "qty": 1878
+    }
+   ],
+   "7": [
+    {
+     "id": "SULPHUR",
+     "qty": 2057
+    }
+   ],
+   "8": [
+    {
+     "id": "SULPHUR",
+     "qty": 2057
+    }
+   ],
+   "9": [
+    {
+     "id": "SULPHUR",
+     "qty": 2400
+    }
+   ],
+   "10": [
+    {
+     "id": "SULPHUR",
+     "qty": 2400
+    }
+   ],
+   "11": [
+    {
+     "id": "SULPHUR",
+     "qty": 3086
+    }
+   ]
+  },
+  "DARK_OAK": {
+   "1": [
+    {
+     "id": "LOG_2:1",
+     "qty": 3600
+    }
+   ],
+   "2": [
+    {
+     "id": "LOG_2:1",
+     "qty": 3600
+    }
+   ],
+   "3": [
+    {
+     "id": "LOG_2:1",
+     "qty": 3840
+    }
+   ],
+   "4": [
+    {
+     "id": "LOG_2:1",
+     "qty": 3840
+    }
+   ],
+   "5": [
+    {
+     "id": "LOG_2:1",
+     "qty": 4114
+    }
+   ],
+   "6": [
+    {
+     "id": "LOG_2:1",
+     "qty": 4114
+    }
+   ],
+   "7": [
+    {
+     "id": "LOG_2:1",
+     "qty": 4547
+    }
+   ],
+   "8": [
+    {
+     "id": "LOG_2:1",
+     "qty": 4547
+    }
+   ],
+   "9": [
+    {
+     "id": "LOG_2:1",
+     "qty": 5236
+    }
+   ],
+   "10": [
+    {
+     "id": "LOG_2:1",
+     "qty": 5236
+    }
+   ],
+   "11": [
+    {
+     "id": "LOG_2:1",
+     "qty": 6400
+    }
+   ]
+  },
+  "DIAMOND": {
+   "1": [
+    {
+     "id": "DIAMOND",
+     "qty": 1490
+    }
+   ],
+   "2": [
+    {
+     "id": "DIAMOND",
+     "qty": 1490
+    }
+   ],
+   "3": [
+    {
+     "id": "DIAMOND",
+     "qty": 1600
+    }
+   ],
+   "4": [
+    {
+     "id": "DIAMOND",
+     "qty": 1600
+    }
+   ],
+   "5": [
+    {
+     "id": "DIAMOND",
+     "qty": 1728
+    }
+   ],
+   "6": [
+    {
+     "id": "DIAMOND",
+     "qty": 1728
+    }
+   ],
+   "7": [
+    {
+     "id": "DIAMOND",
+     "qty": 1964
+    }
+   ],
+   "8": [
+    {
+     "id": "DIAMOND",
+     "qty": 1964
+    }
+   ],
+   "9": [
+    {
+     "id": "DIAMOND",
+     "qty": 2274
+    }
+   ],
+   "10": [
+    {
+     "id": "DIAMOND",
+     "qty": 2274
+    }
+   ],
+   "11": [
+    {
+     "id": "DIAMOND",
+     "qty": 2880
+    }
+   ],
+   "12": [
+    {
+     "id": "DIAMOND",
+     "qty": 3600
+    }
+   ]
+  },
+  "EMERALD": {
+   "1": [
+    {
+     "id": "EMERALD",
+     "qty": 1543
+    }
+   ],
+   "2": [
+    {
+     "id": "EMERALD",
+     "qty": 1543
+    }
+   ],
+   "3": [
+    {
+     "id": "EMERALD",
+     "qty": 1662
+    }
+   ],
+   "4": [
+    {
+     "id": "EMERALD",
+     "qty": 1662
+    }
+   ],
+   "5": [
+    {
+     "id": "EMERALD",
+     "qty": 1800
+    }
+   ],
+   "6": [
+    {
+     "id": "EMERALD",
+     "qty": 1800
+    }
+   ],
+   "7": [
+    {
+     "id": "EMERALD",
+     "qty": 2057
+    }
+   ],
+   "8": [
+    {
+     "id": "EMERALD",
+     "qty": 2057
+    }
+   ],
+   "9": [
+    {
+     "id": "EMERALD",
+     "qty": 2400
+    }
+   ],
+   "10": [
+    {
+     "id": "EMERALD",
+     "qty": 2400
+    }
+   ],
+   "11": [
+    {
+     "id": "EMERALD",
+     "qty": 3086
+    }
+   ],
+   "12": [
+    {
+     "id": "EMERALD",
+     "qty": 3600
+    }
+   ]
+  },
+  "ENDER_STONE": {
+   "1": [
+    {
+     "id": "ENDER_STONE",
+     "qty": 1662
+    }
+   ],
+   "2": [
+    {
+     "id": "ENDER_STONE",
+     "qty": 1662
+    }
+   ],
+   "3": [
+    {
+     "id": "ENDER_STONE",
+     "qty": 1800
+    }
+   ],
+   "4": [
+    {
+     "id": "ENDER_STONE",
+     "qty": 1800
+    }
+   ],
+   "5": [
+    {
+     "id": "ENDER_STONE",
+     "qty": 1964
+    }
+   ],
+   "6": [
+    {
+     "id": "ENDER_STONE",
+     "qty": 1964
+    }
+   ],
+   "7": [
+    {
+     "id": "ENDER_STONE",
+     "qty": 2274
+    }
+   ],
+   "8": [
+    {
+     "id": "ENDER_STONE",
+     "qty": 2274
+    }
+   ],
+   "9": [
+    {
+     "id": "ENDER_STONE",
+     "qty": 2700
+    }
+   ],
+   "10": [
+    {
+     "id": "ENDER_STONE",
+     "qty": 2700
+    }
+   ],
+   "11": [
+    {
+     "id": "ENDER_STONE",
+     "qty": 3323
+    }
+   ]
+  },
+  "ENDERMAN": {
+   "1": [
+    {
+     "id": "ENDER_PEARL",
+     "qty": 1350
+    }
+   ],
+   "2": [
+    {
+     "id": "ENDER_PEARL",
+     "qty": 1350
+    }
+   ],
+   "3": [
+    {
+     "id": "ENDER_PEARL",
+     "qty": 1440
+    }
+   ],
+   "4": [
+    {
+     "id": "ENDER_PEARL",
+     "qty": 1440
+    }
+   ],
+   "5": [
+    {
+     "id": "ENDER_PEARL",
+     "qty": 1543
+    }
+   ],
+   "6": [
+    {
+     "id": "ENDER_PEARL",
+     "qty": 1543
+    }
+   ],
+   "7": [
+    {
+     "id": "ENDER_PEARL",
+     "qty": 1728
+    }
+   ],
+   "8": [
+    {
+     "id": "ENDER_PEARL",
+     "qty": 1728
+    }
+   ],
+   "9": [
+    {
+     "id": "ENDER_PEARL",
+     "qty": 1964
+    }
+   ],
+   "10": [
+    {
+     "id": "ENDER_PEARL",
+     "qty": 1964
+    }
+   ],
+   "11": [
+    {
+     "id": "ENDER_PEARL",
+     "qty": 2400
+    }
+   ]
+  },
+  "FISHING": {
+   "1": [
+    {
+     "id": "RAW_FISH",
+     "qty": 576
+    },
+    {
+     "id": "RAW_FISH:1",
+     "qty": 288
+    },
+    {
+     "id": "RAW_FISH:3",
+     "qty": 138
+    },
+    {
+     "id": "RAW_FISH:2",
+     "qty": 46
+    },
+    {
+     "id": "PRISMARINE_CRYSTALS",
+     "qty": 35
+    },
+    {
+     "id": "PRISMARINE_SHARD",
+     "qty": 35
+    },
+    {
+     "id": "SPONGE",
+     "qty": 35
+    }
+   ],
+   "2": [
+    {
+     "id": "RAW_FISH",
+     "qty": 576
+    },
+    {
+     "id": "RAW_FISH:1",
+     "qty": 288
+    },
+    {
+     "id": "RAW_FISH:3",
+     "qty": 138
+    },
+    {
+     "id": "RAW_FISH:2",
+     "qty": 46
+    },
+    {
+     "id": "PRISMARINE_CRYSTALS",
+     "qty": 35
+    },
+    {
+     "id": "PRISMARINE_SHARD",
+     "qty": 35
+    },
+    {
+     "id": "SPONGE",
+     "qty": 35
+    }
+   ],
+   "3": [
+    {
+     "id": "RAW_FISH",
+     "qty": 645
+    },
+    {
+     "id": "RAW_FISH:1",
+     "qty": 322
+    },
+    {
+     "id": "RAW_FISH:3",
+     "qty": 155
+    },
+    {
+     "id": "RAW_FISH:2",
+     "qty": 52
+    },
+    {
+     "id": "PRISMARINE_CRYSTALS",
+     "qty": 39
+    },
+    {
+     "id": "PRISMARINE_SHARD",
+     "qty": 39
+    },
+    {
+     "id": "SPONGE",
+     "qty": 39
+    }
+   ],
+   "4": [
+    {
+     "id": "RAW_FISH",
+     "qty": 645
+    },
+    {
+     "id": "RAW_FISH:1",
+     "qty": 322
+    },
+    {
+     "id": "RAW_FISH:3",
+     "qty": 155
+    },
+    {
+     "id": "RAW_FISH:2",
+     "qty": 52
+    },
+    {
+     "id": "PRISMARINE_CRYSTALS",
+     "qty": 39
+    },
+    {
+     "id": "PRISMARINE_SHARD",
+     "qty": 39
+    },
+    {
+     "id": "SPONGE",
+     "qty": 39
+    }
+   ],
+   "5": [
+    {
+     "id": "RAW_FISH",
+     "qty": 732
+    },
+    {
+     "id": "RAW_FISH:1",
+     "qty": 366
+    },
+    {
+     "id": "RAW_FISH:3",
+     "qty": 176
+    },
+    {
+     "id": "RAW_FISH:2",
+     "qty": 59
+    },
+    {
+     "id": "PRISMARINE_CRYSTALS",
+     "qty": 44
+    },
+    {
+     "id": "PRISMARINE_SHARD",
+     "qty": 44
+    },
+    {
+     "id": "SPONGE",
+     "qty": 44
+    }
+   ],
+   "6": [
+    {
+     "id": "RAW_FISH",
+     "qty": 732
+    },
+    {
+     "id": "RAW_FISH:1",
+     "qty": 366
+    },
+    {
+     "id": "RAW_FISH:3",
+     "qty": 176
+    },
+    {
+     "id": "RAW_FISH:2",
+     "qty": 59
+    },
+    {
+     "id": "PRISMARINE_CRYSTALS",
+     "qty": 44
+    },
+    {
+     "id": "PRISMARINE_SHARD",
+     "qty": 44
+    },
+    {
+     "id": "SPONGE",
+     "qty": 44
+    }
+   ],
+   "7": [
+    {
+     "id": "RAW_FISH",
+     "qty": 847
+    },
+    {
+     "id": "RAW_FISH:1",
+     "qty": 424
+    },
+    {
+     "id": "RAW_FISH:3",
+     "qty": 203
+    },
+    {
+     "id": "RAW_FISH:2",
+     "qty": 68
+    },
+    {
+     "id": "PRISMARINE_CRYSTALS",
+     "qty": 51
+    },
+    {
+     "id": "PRISMARINE_SHARD",
+     "qty": 51
+    },
+    {
+     "id": "SPONGE",
+     "qty": 51
+    }
+   ],
+   "8": [
+    {
+     "id": "RAW_FISH",
+     "qty": 847
+    },
+    {
+     "id": "RAW_FISH:1",
+     "qty": 424
+    },
+    {
+     "id": "RAW_FISH:3",
+     "qty": 203
+    },
+    {
+     "id": "RAW_FISH:2",
+     "qty": 68
+    },
+    {
+     "id": "PRISMARINE_CRYSTALS",
+     "qty": 51
+    },
+    {
+     "id": "PRISMARINE_SHARD",
+     "qty": 51
+    },
+    {
+     "id": "SPONGE",
+     "qty": 51
+    }
+   ],
+   "9": [
+    {
+     "id": "RAW_FISH",
+     "qty": 1005
+    },
+    {
+     "id": "RAW_FISH:1",
+     "qty": 502
+    },
+    {
+     "id": "RAW_FISH:3",
+     "qty": 241
+    },
+    {
+     "id": "RAW_FISH:2",
+     "qty": 80
+    },
+    {
+     "id": "PRISMARINE_CRYSTALS",
+     "qty": 60
+    },
+    {
+     "id": "PRISMARINE_SHARD",
+     "qty": 60
+    },
+    {
+     "id": "SPONGE",
+     "qty": 60
+    }
+   ],
+   "10": [
+    {
+     "id": "RAW_FISH",
+     "qty": 1005
+    },
+    {
+     "id": "RAW_FISH:1",
+     "qty": 502
+    },
+    {
+     "id": "RAW_FISH:3",
+     "qty": 241
+    },
+    {
+     "id": "RAW_FISH:2",
+     "qty": 80
+    },
+    {
+     "id": "PRISMARINE_CRYSTALS",
+     "qty": 60
+    },
+    {
+     "id": "PRISMARINE_SHARD",
+     "qty": 60
+    },
+    {
+     "id": "SPONGE",
+     "qty": 60
+    }
+   ],
+   "11": [
+    {
+     "id": "RAW_FISH",
+     "qty": 1234
+    },
+    {
+     "id": "RAW_FISH:1",
+     "qty": 617
+    },
+    {
+     "id": "RAW_FISH:3",
+     "qty": 296
+    },
+    {
+     "id": "RAW_FISH:2",
+     "qty": 99
+    },
+    {
+     "id": "PRISMARINE_CRYSTALS",
+     "qty": 74
+    },
+    {
+     "id": "PRISMARINE_SHARD",
+     "qty": 74
+    },
+    {
+     "id": "SPONGE",
+     "qty": 74
+    }
+   ],
+   "12": [
+    {
+     "id": "RAW_FISH",
+     "qty": 1440
+    },
+    {
+     "id": "RAW_FISH:1",
+     "qty": 720
+    },
+    {
+     "id": "RAW_FISH:3",
+     "qty": 346
+    },
+    {
+     "id": "RAW_FISH:2",
+     "qty": 115
+    },
+    {
+     "id": "PRISMARINE_CRYSTALS",
+     "qty": 86
+    },
+    {
+     "id": "PRISMARINE_SHARD",
+     "qty": 86
+    },
+    {
+     "id": "SPONGE",
+     "qty": 86
+    }
+   ]
+  },
+  "GHAST": {
+   "1": [
+    {
+     "id": "GHAST_TEAR",
+     "qty": 864
+    }
+   ],
+   "2": [
+    {
+     "id": "GHAST_TEAR",
+     "qty": 864
+    }
+   ],
+   "3": [
+    {
+     "id": "GHAST_TEAR",
+     "qty": 919
+    }
+   ],
+   "4": [
+    {
+     "id": "GHAST_TEAR",
+     "qty": 919
+    }
+   ],
+   "5": [
+    {
+     "id": "GHAST_TEAR",
+     "qty": 982
+    }
+   ],
+   "6": [
+    {
+     "id": "GHAST_TEAR",
+     "qty": 982
+    }
+   ],
+   "7": [
+    {
+     "id": "GHAST_TEAR",
+     "qty": 1054
+    }
+   ],
+   "8": [
+    {
+     "id": "GHAST_TEAR",
+     "qty": 1054
+    }
+   ],
+   "9": [
+    {
+     "id": "GHAST_TEAR",
+     "qty": 1137
+    }
+   ],
+   "10": [
+    {
+     "id": "GHAST_TEAR",
+     "qty": 1137
+    }
+   ],
+   "11": [
+    {
+     "id": "GHAST_TEAR",
+     "qty": 1350
+    }
+   ],
+   "12": [
+    {
+     "id": "GHAST_TEAR",
+     "qty": 1440
+    }
+   ]
+  },
+  "GLOWSTONE": {
+   "1": [
+    {
+     "id": "GLOWSTONE_DUST",
+     "qty": 5184
+    }
+   ],
+   "2": [
+    {
+     "id": "GLOWSTONE_DUST",
+     "qty": 5184
+    }
+   ],
+   "3": [
+    {
+     "id": "GLOWSTONE_DUST",
+     "qty": 5635
+    }
+   ],
+   "4": [
+    {
+     "id": "GLOWSTONE_DUST",
+     "qty": 5635
+    }
+   ],
+   "5": [
+    {
+     "id": "GLOWSTONE_DUST",
+     "qty": 6171
+    }
+   ],
+   "6": [
+    {
+     "id": "GLOWSTONE_DUST",
+     "qty": 6171
+    }
+   ],
+   "7": [
+    {
+     "id": "GLOWSTONE_DUST",
+     "qty": 6821
+    }
+   ],
+   "8": [
+    {
+     "id": "GLOWSTONE_DUST",
+     "qty": 6821
+    }
+   ],
+   "9": [
+    {
+     "id": "GLOWSTONE_DUST",
+     "qty": 8100
+    }
+   ],
+   "10": [
+    {
+     "id": "GLOWSTONE_DUST",
+     "qty": 8100
+    }
+   ],
+   "11": [
+    {
+     "id": "GLOWSTONE_DUST",
+     "qty": 9969
+    }
+   ],
+   "12": [
+    {
+     "id": "GLOWSTONE_DUST",
+     "qty": 11782
+    }
+   ]
+  },
+  "GOLD": {
+   "1": [
+    {
+     "id": "GOLD_INGOT",
+     "qty": 1964
+    }
+   ],
+   "2": [
+    {
+     "id": "GOLD_INGOT",
+     "qty": 1964
+    }
+   ],
+   "3": [
+    {
+     "id": "GOLD_INGOT",
+     "qty": 2160
+    }
+   ],
+   "4": [
+    {
+     "id": "GOLD_INGOT",
+     "qty": 2160
+    }
+   ],
+   "5": [
+    {
+     "id": "GOLD_INGOT",
+     "qty": 2400
+    }
+   ],
+   "6": [
+    {
+     "id": "GOLD_INGOT",
+     "qty": 2400
+    }
+   ],
+   "7": [
+    {
+     "id": "GOLD_INGOT",
+     "qty": 2700
+    }
+   ],
+   "8": [
+    {
+     "id": "GOLD_INGOT",
+     "qty": 2700
+    }
+   ],
+   "9": [
+    {
+     "id": "GOLD_INGOT",
+     "qty": 3086
+    }
+   ],
+   "10": [
+    {
+     "id": "GOLD_INGOT",
+     "qty": 3086
+    }
+   ],
+   "11": [
+    {
+     "id": "GOLD_INGOT",
+     "qty": 3927
+    }
+   ],
+   "12": [
+    {
+     "id": "GOLD_INGOT",
+     "qty": 4800
+    }
+   ]
+  },
+  "GRAVEL": {
+   "1": [
+    {
+     "id": "FLINT",
+     "qty": 1662
+    }
+   ],
+   "2": [
+    {
+     "id": "FLINT",
+     "qty": 1662
+    }
+   ],
+   "3": [
+    {
+     "id": "FLINT",
+     "qty": 1800
+    }
+   ],
+   "4": [
+    {
+     "id": "FLINT",
+     "qty": 1800
+    }
+   ],
+   "5": [
+    {
+     "id": "FLINT",
+     "qty": 1964
+    }
+   ],
+   "6": [
+    {
+     "id": "FLINT",
+     "qty": 1964
+    }
+   ],
+   "7": [
+    {
+     "id": "FLINT",
+     "qty": 2274
+    }
+   ],
+   "8": [
+    {
+     "id": "FLINT",
+     "qty": 2274
+    }
+   ],
+   "9": [
+    {
+     "id": "FLINT",
+     "qty": 2700
+    }
+   ],
+   "10": [
+    {
+     "id": "FLINT",
+     "qty": 2700
+    }
+   ],
+   "11": [
+    {
+     "id": "FLINT",
+     "qty": 3323
+    }
+   ]
+  },
+  "HARD_STONE": {
+   "1": [
+    {
+     "id": "HARD_STONE",
+     "qty": 6171
+    }
+   ],
+   "2": [
+    {
+     "id": "HARD_STONE",
+     "qty": 6171
+    }
+   ],
+   "3": [
+    {
+     "id": "HARD_STONE",
+     "qty": 7200
+    }
+   ],
+   "4": [
+    {
+     "id": "HARD_STONE",
+     "qty": 7200
+    }
+   ],
+   "5": [
+    {
+     "id": "HARD_STONE",
+     "qty": 8640
+    }
+   ],
+   "6": [
+    {
+     "id": "HARD_STONE",
+     "qty": 8640
+    }
+   ],
+   "7": [
+    {
+     "id": "HARD_STONE",
+     "qty": 9600
+    }
+   ],
+   "8": [
+    {
+     "id": "HARD_STONE",
+     "qty": 9600
+    }
+   ],
+   "9": [
+    {
+     "id": "HARD_STONE",
+     "qty": 10800
+    }
+   ],
+   "10": [
+    {
+     "id": "HARD_STONE",
+     "qty": 10800
+    }
+   ],
+   "11": [
+    {
+     "id": "HARD_STONE",
+     "qty": 12343
+    }
+   ],
+   "12": [
+    {
+     "id": "HARD_STONE",
+     "qty": 14400
+    }
+   ]
+  },
+  "ICE": {
+   "1": [
+    {
+     "id": "ICE",
+     "qty": 3086
+    }
+   ],
+   "2": [
+    {
+     "id": "ICE",
+     "qty": 3086
+    }
+   ],
+   "3": [
+    {
+     "id": "ICE",
+     "qty": 3600
+    }
+   ],
+   "4": [
+    {
+     "id": "ICE",
+     "qty": 3600
+    }
+   ],
+   "5": [
+    {
+     "id": "ICE",
+     "qty": 4320
+    }
+   ],
+   "6": [
+    {
+     "id": "ICE",
+     "qty": 4320
+    }
+   ],
+   "7": [
+    {
+     "id": "ICE",
+     "qty": 4800
+    }
+   ],
+   "8": [
+    {
+     "id": "ICE",
+     "qty": 4800
+    }
+   ],
+   "9": [
+    {
+     "id": "ICE",
+     "qty": 5400
+    }
+   ],
+   "10": [
+    {
+     "id": "ICE",
+     "qty": 5400
+    }
+   ],
+   "11": [
+    {
+     "id": "ICE",
+     "qty": 6171
+    }
+   ],
+   "12": [
+    {
+     "id": "ICE",
+     "qty": 7200
+    }
+   ]
+  },
+  "INFERNO": {
+   "1": [
+    {
+     "id": "CRUDE_GABAGOOL",
+     "qty": 43
+    }
+   ],
+   "2": [
+    {
+     "id": "CRUDE_GABAGOOL",
+     "qty": 44
+    }
+   ],
+   "3": [
+    {
+     "id": "CRUDE_GABAGOOL",
+     "qty": 45
+    }
+   ],
+   "4": [
+    {
+     "id": "CRUDE_GABAGOOL",
+     "qty": 47
+    }
+   ],
+   "5": [
+    {
+     "id": "CRUDE_GABAGOOL",
+     "qty": 49
+    }
+   ],
+   "6": [
+    {
+     "id": "CRUDE_GABAGOOL",
+     "qty": 51
+    }
+   ],
+   "7": [
+    {
+     "id": "CRUDE_GABAGOOL",
+     "qty": 52
+    }
+   ],
+   "8": [
+    {
+     "id": "CRUDE_GABAGOOL",
+     "qty": 55
+    }
+   ],
+   "9": [
+    {
+     "id": "CRUDE_GABAGOOL",
+     "qty": 57
+    }
+   ],
+   "10": [
+    {
+     "id": "CRUDE_GABAGOOL",
+     "qty": 59
+    }
+   ],
+   "11": [
+    {
+     "id": "CRUDE_GABAGOOL",
+     "qty": 62
+    }
+   ]
+  },
+  "IRON": {
+   "1": [
+    {
+     "id": "IRON_INGOT",
+     "qty": 2541
+    }
+   ],
+   "2": [
+    {
+     "id": "IRON_INGOT",
+     "qty": 2541
+    }
+   ],
+   "3": [
+    {
+     "id": "IRON_INGOT",
+     "qty": 2880
+    }
+   ],
+   "4": [
+    {
+     "id": "IRON_INGOT",
+     "qty": 2880
+    }
+   ],
+   "5": [
+    {
+     "id": "IRON_INGOT",
+     "qty": 3086
+    }
+   ],
+   "6": [
+    {
+     "id": "IRON_INGOT",
+     "qty": 3086
+    }
+   ],
+   "7": [
+    {
+     "id": "IRON_INGOT",
+     "qty": 3600
+    }
+   ],
+   "8": [
+    {
+     "id": "IRON_INGOT",
+     "qty": 3600
+    }
+   ],
+   "9": [
+    {
+     "id": "IRON_INGOT",
+     "qty": 4320
+    }
+   ],
+   "10": [
+    {
+     "id": "IRON_INGOT",
+     "qty": 4320
+    }
+   ],
+   "11": [
+    {
+     "id": "IRON_INGOT",
+     "qty": 5400
+    }
+   ],
+   "12": [
+    {
+     "id": "IRON_INGOT",
+     "qty": 6171
+    }
+   ]
+  },
+  "JUNGLE": {
+   "1": [
+    {
+     "id": "LOG:3",
+     "qty": 3600
+    }
+   ],
+   "2": [
+    {
+     "id": "LOG:3",
+     "qty": 3600
+    }
+   ],
+   "3": [
+    {
+     "id": "LOG:3",
+     "qty": 3840
+    }
+   ],
+   "4": [
+    {
+     "id": "LOG:3",
+     "qty": 3840
+    }
+   ],
+   "5": [
+    {
+     "id": "LOG:3",
+     "qty": 4114
+    }
+   ],
+   "6": [
+    {
+     "id": "LOG:3",
+     "qty": 4114
+    }
+   ],
+   "7": [
+    {
+     "id": "LOG:3",
+     "qty": 4547
+    }
+   ],
+   "8": [
+    {
+     "id": "LOG:3",
+     "qty": 4547
+    }
+   ],
+   "9": [
+    {
+     "id": "LOG:3",
+     "qty": 5236
+    }
+   ],
+   "10": [
+    {
+     "id": "LOG:3",
+     "qty": 5236
+    }
+   ],
+   "11": [
+    {
+     "id": "LOG:3",
+     "qty": 6400
+    }
+   ]
+  },
+  "LAPIS": {
+   "1": [
+    {
+     "id": "INK_SACK:4",
+     "qty": 8938
+    }
+   ],
+   "2": [
+    {
+     "id": "INK_SACK:4",
+     "qty": 8938
+    }
+   ],
+   "3": [
+    {
+     "id": "INK_SACK:4",
+     "qty": 9600
+    }
+   ],
+   "4": [
+    {
+     "id": "INK_SACK:4",
+     "qty": 9600
+    }
+   ],
+   "5": [
+    {
+     "id": "INK_SACK:4",
+     "qty": 10368
+    }
+   ],
+   "6": [
+    {
+     "id": "INK_SACK:4",
+     "qty": 10368
+    }
+   ],
+   "7": [
+    {
+     "id": "INK_SACK:4",
+     "qty": 11270
+    }
+   ],
+   "8": [
+    {
+     "id": "INK_SACK:4",
+     "qty": 11270
+    }
+   ],
+   "9": [
+    {
+     "id": "INK_SACK:4",
+     "qty": 12343
+    }
+   ],
+   "10": [
+    {
+     "id": "INK_SACK:4",
+     "qty": 12343
+    }
+   ],
+   "11": [
+    {
+     "id": "INK_SACK:4",
+     "qty": 14400
+    }
+   ],
+   "12": [
+    {
+     "id": "INK_SACK:4",
+     "qty": 16200
+    }
+   ]
+  },
+  "MAGMA_CUBE": {
+   "1": [
+    {
+     "id": "MAGMA_CREAM",
+     "qty": 2430
+    }
+   ],
+   "2": [
+    {
+     "id": "MAGMA_CREAM",
+     "qty": 2430
+    }
+   ],
+   "3": [
+    {
+     "id": "MAGMA_CREAM",
+     "qty": 2592
+    }
+   ],
+   "4": [
+    {
+     "id": "MAGMA_CREAM",
+     "qty": 2592
+    }
+   ],
+   "5": [
+    {
+     "id": "MAGMA_CREAM",
+     "qty": 2777
+    }
+   ],
+   "6": [
+    {
+     "id": "MAGMA_CREAM",
+     "qty": 2777
+    }
+   ],
+   "7": [
+    {
+     "id": "MAGMA_CREAM",
+     "qty": 3110
+    }
+   ],
+   "8": [
+    {
+     "id": "MAGMA_CREAM",
+     "qty": 3110
+    }
+   ],
+   "9": [
+    {
+     "id": "MAGMA_CREAM",
+     "qty": 3535
+    }
+   ],
+   "10": [
+    {
+     "id": "MAGMA_CREAM",
+     "qty": 3535
+    }
+   ],
+   "11": [
+    {
+     "id": "MAGMA_CREAM",
+     "qty": 4320
+    }
+   ],
+   "12": [
+    {
+     "id": "MAGMA_CREAM",
+     "qty": 4860
+    }
+   ]
+  },
+  "MELON": {
+   "1": [
+    {
+     "id": "MELON",
+     "qty": 9000
+    }
+   ],
+   "2": [
+    {
+     "id": "MELON",
+     "qty": 9000
+    }
+   ],
+   "3": [
+    {
+     "id": "MELON",
+     "qty": 9600
+    }
+   ],
+   "4": [
+    {
+     "id": "MELON",
+     "qty": 9600
+    }
+   ],
+   "5": [
+    {
+     "id": "MELON",
+     "qty": 10286
+    }
+   ],
+   "6": [
+    {
+     "id": "MELON",
+     "qty": 10286
+    }
+   ],
+   "7": [
+    {
+     "id": "MELON",
+     "qty": 11676
+    }
+   ],
+   "8": [
+    {
+     "id": "MELON",
+     "qty": 11676
+    }
+   ],
+   "9": [
+    {
+     "id": "MELON",
+     "qty": 13500
+    }
+   ],
+   "10": [
+    {
+     "id": "MELON",
+     "qty": 13500
+    }
+   ],
+   "11": [
+    {
+     "id": "MELON",
+     "qty": 16615
+    }
+   ],
+   "12": [
+    {
+     "id": "MELON",
+     "qty": 21600
+    }
+   ]
+  },
+  "MITHRIL": {
+   "1": [
+    {
+     "id": "MITHRIL_ORE",
+     "qty": 1080
+    }
+   ],
+   "2": [
+    {
+     "id": "MITHRIL_ORE",
+     "qty": 1080
+    }
+   ],
+   "3": [
+    {
+     "id": "MITHRIL_ORE",
+     "qty": 1152
+    }
+   ],
+   "4": [
+    {
+     "id": "MITHRIL_ORE",
+     "qty": 1152
+    }
+   ],
+   "5": [
+    {
+     "id": "MITHRIL_ORE",
+     "qty": 1234
+    }
+   ],
+   "6": [
+    {
+     "id": "MITHRIL_ORE",
+     "qty": 1234
+    }
+   ],
+   "7": [
+    {
+     "id": "MITHRIL_ORE",
+     "qty": 1329
+    }
+   ],
+   "8": [
+    {
+     "id": "MITHRIL_ORE",
+     "qty": 1329
+    }
+   ],
+   "9": [
+    {
+     "id": "MITHRIL_ORE",
+     "qty": 1440
+    }
+   ],
+   "10": [
+    {
+     "id": "MITHRIL_ORE",
+     "qty": 1440
+    }
+   ],
+   "11": [
+    {
+     "id": "MITHRIL_ORE",
+     "qty": 1571
+    }
+   ],
+   "12": [
+    {
+     "id": "MITHRIL_ORE",
+     "qty": 1728
+    }
+   ]
+  },
+  "MUSHROOM": {
+   "1": [
+    {
+     "id": "BROWN_MUSHROOM",
+     "qty": 720
+    },
+    {
+     "id": "RED_MUSHROOM",
+     "qty": 720
+    }
+   ],
+   "2": [
+    {
+     "id": "BROWN_MUSHROOM",
+     "qty": 720
+    },
+    {
+     "id": "RED_MUSHROOM",
+     "qty": 720
+    }
+   ],
+   "3": [
+    {
+     "id": "BROWN_MUSHROOM",
+     "qty": 771
+    },
+    {
+     "id": "RED_MUSHROOM",
+     "qty": 771
+    }
+   ],
+   "4": [
+    {
+     "id": "BROWN_MUSHROOM",
+     "qty": 771
+    },
+    {
+     "id": "RED_MUSHROOM",
+     "qty": 771
+    }
+   ],
+   "5": [
+    {
+     "id": "BROWN_MUSHROOM",
+     "qty": 831
+    },
+    {
+     "id": "RED_MUSHROOM",
+     "qty": 831
+    }
+   ],
+   "6": [
+    {
+     "id": "BROWN_MUSHROOM",
+     "qty": 831
+    },
+    {
+     "id": "RED_MUSHROOM",
+     "qty": 831
+    }
+   ],
+   "7": [
+    {
+     "id": "BROWN_MUSHROOM",
+     "qty": 939
+    },
+    {
+     "id": "RED_MUSHROOM",
+     "qty": 939
+    }
+   ],
+   "8": [
+    {
+     "id": "BROWN_MUSHROOM",
+     "qty": 939
+    },
+    {
+     "id": "RED_MUSHROOM",
+     "qty": 939
+    }
+   ],
+   "9": [
+    {
+     "id": "BROWN_MUSHROOM",
+     "qty": 1080
+    },
+    {
+     "id": "RED_MUSHROOM",
+     "qty": 1080
+    }
+   ],
+   "10": [
+    {
+     "id": "BROWN_MUSHROOM",
+     "qty": 1080
+    },
+    {
+     "id": "RED_MUSHROOM",
+     "qty": 1080
+    }
+   ],
+   "11": [
+    {
+     "id": "BROWN_MUSHROOM",
+     "qty": 1350
+    },
+    {
+     "id": "RED_MUSHROOM",
+     "qty": 1350
+    }
+   ],
+   "12": [
+    {
+     "id": "BROWN_MUSHROOM",
+     "qty": 1800
+    },
+    {
+     "id": "RED_MUSHROOM",
+     "qty": 1800
+    }
+   ]
+  },
+  "MYCELIUM": {
+   "1": [
+    {
+     "id": "MYCEL",
+     "qty": 1662
+    }
+   ],
+   "2": [
+    {
+     "id": "MYCEL",
+     "qty": 1728
+    }
+   ],
+   "3": [
+    {
+     "id": "MYCEL",
+     "qty": 1800
+    }
+   ],
+   "4": [
+    {
+     "id": "MYCEL",
+     "qty": 1878
+    }
+   ],
+   "5": [
+    {
+     "id": "MYCEL",
+     "qty": 1964
+    }
+   ],
+   "6": [
+    {
+     "id": "MYCEL",
+     "qty": 2057
+    }
+   ],
+   "7": [
+    {
+     "id": "MYCEL",
+     "qty": 2160
+    }
+   ],
+   "8": [
+    {
+     "id": "MYCEL",
+     "qty": 2274
+    }
+   ],
+   "9": [
+    {
+     "id": "MYCEL",
+     "qty": 2400
+    }
+   ],
+   "10": [
+    {
+     "id": "MYCEL",
+     "qty": 2700
+    }
+   ],
+   "11": [
+    {
+     "id": "MYCEL",
+     "qty": 3323
+    }
+   ],
+   "12": [
+    {
+     "id": "MYCEL",
+     "qty": 3927
+    }
+   ]
+  },
+  "NETHER_WARTS": {
+   "1": [
+    {
+     "id": "NETHER_STALK",
+     "qty": 2160
+    }
+   ],
+   "2": [
+    {
+     "id": "NETHER_STALK",
+     "qty": 2160
+    }
+   ],
+   "3": [
+    {
+     "id": "NETHER_STALK",
+     "qty": 2298
+    }
+   ],
+   "4": [
+    {
+     "id": "NETHER_STALK",
+     "qty": 2298
+    }
+   ],
+   "5": [
+    {
+     "id": "NETHER_STALK",
+     "qty": 2455
+    }
+   ],
+   "6": [
+    {
+     "id": "NETHER_STALK",
+     "qty": 2455
+    }
+   ],
+   "7": [
+    {
+     "id": "NETHER_STALK",
+     "qty": 2634
+    }
+   ],
+   "8": [
+    {
+     "id": "NETHER_STALK",
+     "qty": 2634
+    }
+   ],
+   "9": [
+    {
+     "id": "NETHER_STALK",
+     "qty": 2842
+    }
+   ],
+   "10": [
+    {
+     "id": "NETHER_STALK",
+     "qty": 2842
+    }
+   ],
+   "11": [
+    {
+     "id": "NETHER_STALK",
+     "qty": 3375
+    }
+   ],
+   "12": [
+    {
+     "id": "NETHER_STALK",
+     "qty": 4000
+    }
+   ]
+  },
+  "OAK": {
+   "1": [
+    {
+     "id": "LOG",
+     "qty": 3600
+    }
+   ],
+   "2": [
+    {
+     "id": "LOG",
+     "qty": 3600
+    }
+   ],
+   "3": [
+    {
+     "id": "LOG",
+     "qty": 3840
+    }
+   ],
+   "4": [
+    {
+     "id": "LOG",
+     "qty": 3840
+    }
+   ],
+   "5": [
+    {
+     "id": "LOG",
+     "qty": 4114
+    }
+   ],
+   "6": [
+    {
+     "id": "LOG",
+     "qty": 4114
+    }
+   ],
+   "7": [
+    {
+     "id": "LOG",
+     "qty": 4547
+    }
+   ],
+   "8": [
+    {
+     "id": "LOG",
+     "qty": 4547
+    }
+   ],
+   "9": [
+    {
+     "id": "LOG",
+     "qty": 5236
+    }
+   ],
+   "10": [
+    {
+     "id": "LOG",
+     "qty": 5236
+    }
+   ],
+   "11": [
+    {
+     "id": "LOG",
+     "qty": 6400
+    }
+   ]
+  },
+  "OBSIDIAN": {
+   "1": [
+    {
+     "id": "OBSIDIAN",
+     "qty": 960
+    }
+   ],
+   "2": [
+    {
+     "id": "OBSIDIAN",
+     "qty": 960
+    }
+   ],
+   "3": [
+    {
+     "id": "OBSIDIAN",
+     "qty": 1029
+    }
+   ],
+   "4": [
+    {
+     "id": "OBSIDIAN",
+     "qty": 1029
+    }
+   ],
+   "5": [
+    {
+     "id": "OBSIDIAN",
+     "qty": 1108
+    }
+   ],
+   "6": [
+    {
+     "id": "OBSIDIAN",
+     "qty": 1108
+    }
+   ],
+   "7": [
+    {
+     "id": "OBSIDIAN",
+     "qty": 1234
+    }
+   ],
+   "8": [
+    {
+     "id": "OBSIDIAN",
+     "qty": 1234
+    }
+   ],
+   "9": [
+    {
+     "id": "OBSIDIAN",
+     "qty": 1440
+    }
+   ],
+   "10": [
+    {
+     "id": "OBSIDIAN",
+     "qty": 1440
+    }
+   ],
+   "11": [
+    {
+     "id": "OBSIDIAN",
+     "qty": 1800
+    }
+   ],
+   "12": [
+    {
+     "id": "OBSIDIAN",
+     "qty": 2057
+    }
+   ]
+  },
+  "PIG": {
+   "1": [
+    {
+     "id": "PORK",
+     "qty": 1662
+    }
+   ],
+   "2": [
+    {
+     "id": "PORK",
+     "qty": 1662
+    }
+   ],
+   "3": [
+    {
+     "id": "PORK",
+     "qty": 1800
+    }
+   ],
+   "4": [
+    {
+     "id": "PORK",
+     "qty": 1800
+    }
+   ],
+   "5": [
+    {
+     "id": "PORK",
+     "qty": 1964
+    }
+   ],
+   "6": [
+    {
+     "id": "PORK",
+     "qty": 1964
+    }
+   ],
+   "7": [
+    {
+     "id": "PORK",
+     "qty": 2160
+    }
+   ],
+   "8": [
+    {
+     "id": "PORK",
+     "qty": 2160
+    }
+   ],
+   "9": [
+    {
+     "id": "PORK",
+     "qty": 2541
+    }
+   ],
+   "10": [
+    {
+     "id": "PORK",
+     "qty": 2541
+    }
+   ],
+   "11": [
+    {
+     "id": "PORK",
+     "qty": 3323
+    }
+   ],
+   "12": [
+    {
+     "id": "PORK",
+     "qty": 4320
+    }
+   ]
+  },
+  "POTATO": {
+   "1": [
+    {
+     "id": "POTATO_ITEM",
+     "qty": 6480
+    }
+   ],
+   "2": [
+    {
+     "id": "POTATO_ITEM",
+     "qty": 6480
+    }
+   ],
+   "3": [
+    {
+     "id": "POTATO_ITEM",
+     "qty": 7200
+    }
+   ],
+   "4": [
+    {
+     "id": "POTATO_ITEM",
+     "qty": 7200
+    }
+   ],
+   "5": [
+    {
+     "id": "POTATO_ITEM",
+     "qty": 8100
+    }
+   ],
+   "6": [
+    {
+     "id": "POTATO_ITEM",
+     "qty": 8100
+    }
+   ],
+   "7": [
+    {
+     "id": "POTATO_ITEM",
+     "qty": 9257
+    }
+   ],
+   "8": [
+    {
+     "id": "POTATO_ITEM",
+     "qty": 9257
+    }
+   ],
+   "9": [
+    {
+     "id": "POTATO_ITEM",
+     "qty": 10800
+    }
+   ],
+   "10": [
+    {
+     "id": "POTATO_ITEM",
+     "qty": 10800
+    }
+   ],
+   "11": [
+    {
+     "id": "POTATO_ITEM",
+     "qty": 12960
+    }
+   ],
+   "12": [
+    {
+     "id": "POTATO_ITEM",
+     "qty": 16200
+    }
+   ]
+  },
+  "PUMPKIN": {
+   "1": [
+    {
+     "id": "PUMPKIN",
+     "qty": 1350
+    }
+   ],
+   "2": [
+    {
+     "id": "PUMPKIN",
+     "qty": 1350
+    }
+   ],
+   "3": [
+    {
+     "id": "PUMPKIN",
+     "qty": 1440
+    }
+   ],
+   "4": [
+    {
+     "id": "PUMPKIN",
+     "qty": 1440
+    }
+   ],
+   "5": [
+    {
+     "id": "PUMPKIN",
+     "qty": 1600
+    }
+   ],
+   "6": [
+    {
+     "id": "PUMPKIN",
+     "qty": 1600
+    }
+   ],
+   "7": [
+    {
+     "id": "PUMPKIN",
+     "qty": 1800
+    }
+   ],
+   "8": [
+    {
+     "id": "PUMPKIN",
+     "qty": 1800
+    }
+   ],
+   "9": [
+    {
+     "id": "PUMPKIN",
+     "qty": 2160
+    }
+   ],
+   "10": [
+    {
+     "id": "PUMPKIN",
+     "qty": 2160
+    }
+   ],
+   "11": [
+    {
+     "id": "PUMPKIN",
+     "qty": 2700
+    }
+   ],
+   "12": [
+    {
+     "id": "PUMPKIN",
+     "qty": 3600
+    }
+   ]
+  },
+  "QUARTZ": {
+   "1": [
+    {
+     "id": "QUARTZ",
+     "qty": 1920
+    }
+   ],
+   "2": [
+    {
+     "id": "QUARTZ",
+     "qty": 1920
+    }
+   ],
+   "3": [
+    {
+     "id": "QUARTZ",
+     "qty": 2057
+    }
+   ],
+   "4": [
+    {
+     "id": "QUARTZ",
+     "qty": 2057
+    }
+   ],
+   "5": [
+    {
+     "id": "QUARTZ",
+     "qty": 2274
+    }
+   ],
+   "6": [
+    {
+     "id": "QUARTZ",
+     "qty": 2274
+    }
+   ],
+   "7": [
+    {
+     "id": "QUARTZ",
+     "qty": 2541
+    }
+   ],
+   "8": [
+    {
+     "id": "QUARTZ",
+     "qty": 2541
+    }
+   ],
+   "9": [
+    {
+     "id": "QUARTZ",
+     "qty": 2979
+    }
+   ],
+   "10": [
+    {
+     "id": "QUARTZ",
+     "qty": 2979
+    }
+   ],
+   "11": [
+    {
+     "id": "QUARTZ",
+     "qty": 3757
+    }
+   ],
+   "12": [
+    {
+     "id": "QUARTZ",
+     "qty": 4320
+    }
+   ]
+  },
+  "RABBIT": {
+   "1": [
+    {
+     "id": "RABBIT",
+     "qty": 1662
+    },
+    {
+     "id": "RABBIT_FOOT",
+     "qty": 582
+    },
+    {
+     "id": "RABBIT_HIDE",
+     "qty": 582
+    }
+   ],
+   "2": [
+    {
+     "id": "RABBIT",
+     "qty": 1662
+    },
+    {
+     "id": "RABBIT_FOOT",
+     "qty": 582
+    },
+    {
+     "id": "RABBIT_HIDE",
+     "qty": 582
+    }
+   ],
+   "3": [
+    {
+     "id": "RABBIT",
+     "qty": 1800
+    },
+    {
+     "id": "RABBIT_FOOT",
+     "qty": 630
+    },
+    {
+     "id": "RABBIT_HIDE",
+     "qty": 630
+    }
+   ],
+   "4": [
+    {
+     "id": "RABBIT",
+     "qty": 1800
+    },
+    {
+     "id": "RABBIT_FOOT",
+     "qty": 630
+    },
+    {
+     "id": "RABBIT_HIDE",
+     "qty": 630
+    }
+   ],
+   "5": [
+    {
+     "id": "RABBIT",
+     "qty": 1964
+    },
+    {
+     "id": "RABBIT_FOOT",
+     "qty": 687
+    },
+    {
+     "id": "RABBIT_HIDE",
+     "qty": 687
+    }
+   ],
+   "6": [
+    {
+     "id": "RABBIT",
+     "qty": 1964
+    },
+    {
+     "id": "RABBIT_FOOT",
+     "qty": 687
+    },
+    {
+     "id": "RABBIT_HIDE",
+     "qty": 687
+    }
+   ],
+   "7": [
+    {
+     "id": "RABBIT",
+     "qty": 2160
+    },
+    {
+     "id": "RABBIT_FOOT",
+     "qty": 756
+    },
+    {
+     "id": "RABBIT_HIDE",
+     "qty": 756
+    }
+   ],
+   "8": [
+    {
+     "id": "RABBIT",
+     "qty": 2160
+    },
+    {
+     "id": "RABBIT_FOOT",
+     "qty": 756
+    },
+    {
+     "id": "RABBIT_HIDE",
+     "qty": 756
+    }
+   ],
+   "9": [
+    {
+     "id": "RABBIT",
+     "qty": 2541
+    },
+    {
+     "id": "RABBIT_FOOT",
+     "qty": 889
+    },
+    {
+     "id": "RABBIT_HIDE",
+     "qty": 889
+    }
+   ],
+   "10": [
+    {
+     "id": "RABBIT",
+     "qty": 2541
+    },
+    {
+     "id": "RABBIT_FOOT",
+     "qty": 889
+    },
+    {
+     "id": "RABBIT_HIDE",
+     "qty": 889
+    }
+   ],
+   "11": [
+    {
+     "id": "RABBIT",
+     "qty": 3323
+    },
+    {
+     "id": "RABBIT_FOOT",
+     "qty": 1163
+    },
+    {
+     "id": "RABBIT_HIDE",
+     "qty": 1163
+    }
+   ],
+   "12": [
+    {
+     "id": "RABBIT",
+     "qty": 4320
+    },
+    {
+     "id": "RABBIT_FOOT",
+     "qty": 1512
+    },
+    {
+     "id": "RABBIT_HIDE",
+     "qty": 1512
+    }
+   ]
+  },
+  "RED_SAND": {
+   "1": [
+    {
+     "id": "SAND:1",
+     "qty": 1662
+    }
+   ],
+   "2": [
+    {
+     "id": "SAND:1",
+     "qty": 1728
+    }
+   ],
+   "3": [
+    {
+     "id": "SAND:1",
+     "qty": 1800
+    }
+   ],
+   "4": [
+    {
+     "id": "SAND:1",
+     "qty": 1878
+    }
+   ],
+   "5": [
+    {
+     "id": "SAND:1",
+     "qty": 1964
+    }
+   ],
+   "6": [
+    {
+     "id": "SAND:1",
+     "qty": 2057
+    }
+   ],
+   "7": [
+    {
+     "id": "SAND:1",
+     "qty": 2160
+    }
+   ],
+   "8": [
+    {
+     "id": "SAND:1",
+     "qty": 2274
+    }
+   ],
+   "9": [
+    {
+     "id": "SAND:1",
+     "qty": 2400
+    }
+   ],
+   "10": [
+    {
+     "id": "SAND:1",
+     "qty": 2700
+    }
+   ],
+   "11": [
+    {
+     "id": "SAND:1",
+     "qty": 3323
+    }
+   ],
+   "12": [
+    {
+     "id": "SAND:1",
+     "qty": 3927
+    }
+   ]
+  },
+  "REDSTONE": {
+   "1": [
+    {
+     "id": "REDSTONE",
+     "qty": 6703
+    }
+   ],
+   "2": [
+    {
+     "id": "REDSTONE",
+     "qty": 6703
+    }
+   ],
+   "3": [
+    {
+     "id": "REDSTONE",
+     "qty": 7200
+    }
+   ],
+   "4": [
+    {
+     "id": "REDSTONE",
+     "qty": 7200
+    }
+   ],
+   "5": [
+    {
+     "id": "REDSTONE",
+     "qty": 7776
+    }
+   ],
+   "6": [
+    {
+     "id": "REDSTONE",
+     "qty": 7776
+    }
+   ],
+   "7": [
+    {
+     "id": "REDSTONE",
+     "qty": 8452
+    }
+   ],
+   "8": [
+    {
+     "id": "REDSTONE",
+     "qty": 8452
+    }
+   ],
+   "9": [
+    {
+     "id": "REDSTONE",
+     "qty": 9257
+    }
+   ],
+   "10": [
+    {
+     "id": "REDSTONE",
+     "qty": 9257
+    }
+   ],
+   "11": [
+    {
+     "id": "REDSTONE",
+     "qty": 10800
+    }
+   ],
+   "12": [
+    {
+     "id": "REDSTONE",
+     "qty": 12150
+    }
+   ]
+  },
+  "REVENANT": {
+   "1": [
+    {
+     "id": "ROTTEN_FLESH",
+     "qty": 4469
+    },
+    {
+     "id": "DIAMOND",
+     "qty": 298
+    }
+   ],
+   "2": [
+    {
+     "id": "ROTTEN_FLESH",
+     "qty": 4469
+    },
+    {
+     "id": "DIAMOND",
+     "qty": 298
+    }
+   ],
+   "3": [
+    {
+     "id": "ROTTEN_FLESH",
+     "qty": 4985
+    },
+    {
+     "id": "DIAMOND",
+     "qty": 332
+    }
+   ],
+   "4": [
+    {
+     "id": "ROTTEN_FLESH",
+     "qty": 4985
+    },
+    {
+     "id": "DIAMOND",
+     "qty": 332
+    }
+   ],
+   "5": [
+    {
+     "id": "ROTTEN_FLESH",
+     "qty": 5635
+    },
+    {
+     "id": "DIAMOND",
+     "qty": 376
+    }
+   ],
+   "6": [
+    {
+     "id": "ROTTEN_FLESH",
+     "qty": 5635
+    },
+    {
+     "id": "DIAMOND",
+     "qty": 376
+    }
+   ],
+   "7": [
+    {
+     "id": "ROTTEN_FLESH",
+     "qty": 6821
+    },
+    {
+     "id": "DIAMOND",
+     "qty": 455
+    }
+   ],
+   "8": [
+    {
+     "id": "ROTTEN_FLESH",
+     "qty": 6821
+    },
+    {
+     "id": "DIAMOND",
+     "qty": 455
+    }
+   ],
+   "9": [
+    {
+     "id": "ROTTEN_FLESH",
+     "qty": 8938
+    },
+    {
+     "id": "DIAMOND",
+     "qty": 596
+    }
+   ],
+   "10": [
+    {
+     "id": "ROTTEN_FLESH",
+     "qty": 8938
+    },
+    {
+     "id": "DIAMOND",
+     "qty": 596
+    }
+   ],
+   "11": [
+    {
+     "id": "ROTTEN_FLESH",
+     "qty": 12960
+    },
+    {
+     "id": "DIAMOND",
+     "qty": 864
+    }
+   ],
+   "12": [
+    {
+     "id": "ROTTEN_FLESH",
+     "qty": 16200
+    },
+    {
+     "id": "DIAMOND",
+     "qty": 1080
+    }
+   ]
+  },
+  "SAND": {
+   "1": [
+    {
+     "id": "SAND",
+     "qty": 1662
+    }
+   ],
+   "2": [
+    {
+     "id": "SAND",
+     "qty": 1662
+    }
+   ],
+   "3": [
+    {
+     "id": "SAND",
+     "qty": 1800
+    }
+   ],
+   "4": [
+    {
+     "id": "SAND",
+     "qty": 1800
+    }
+   ],
+   "5": [
+    {
+     "id": "SAND",
+     "qty": 1964
+    }
+   ],
+   "6": [
+    {
+     "id": "SAND",
+     "qty": 1964
+    }
+   ],
+   "7": [
+    {
+     "id": "SAND",
+     "qty": 2274
+    }
+   ],
+   "8": [
+    {
+     "id": "SAND",
+     "qty": 2274
+    }
+   ],
+   "9": [
+    {
+     "id": "SAND",
+     "qty": 2700
+    }
+   ],
+   "10": [
+    {
+     "id": "SAND",
+     "qty": 2700
+    }
+   ],
+   "11": [
+    {
+     "id": "SAND",
+     "qty": 3323
+    }
+   ]
+  },
+  "SHEEP": {
+   "1": [
+    {
+     "id": "MUTTON",
+     "qty": 1800
+    },
+    {
+     "id": "WOOL",
+     "qty": 1800
+    }
+   ],
+   "2": [
+    {
+     "id": "MUTTON",
+     "qty": 1800
+    },
+    {
+     "id": "WOOL",
+     "qty": 1800
+    }
+   ],
+   "3": [
+    {
+     "id": "MUTTON",
+     "qty": 1964
+    },
+    {
+     "id": "WOOL",
+     "qty": 1964
+    }
+   ],
+   "4": [
+    {
+     "id": "MUTTON",
+     "qty": 1964
+    },
+    {
+     "id": "WOOL",
+     "qty": 1964
+    }
+   ],
+   "5": [
+    {
+     "id": "MUTTON",
+     "qty": 2160
+    },
+    {
+     "id": "WOOL",
+     "qty": 2160
+    }
+   ],
+   "6": [
+    {
+     "id": "MUTTON",
+     "qty": 2160
+    },
+    {
+     "id": "WOOL",
+     "qty": 2160
+    }
+   ],
+   "7": [
+    {
+     "id": "MUTTON",
+     "qty": 2400
+    },
+    {
+     "id": "WOOL",
+     "qty": 2400
+    }
+   ],
+   "8": [
+    {
+     "id": "MUTTON",
+     "qty": 2400
+    },
+    {
+     "id": "WOOL",
+     "qty": 2400
+    }
+   ],
+   "9": [
+    {
+     "id": "MUTTON",
+     "qty": 2700
+    },
+    {
+     "id": "WOOL",
+     "qty": 2700
+    }
+   ],
+   "10": [
+    {
+     "id": "MUTTON",
+     "qty": 2700
+    },
+    {
+     "id": "WOOL",
+     "qty": 2700
+    }
+   ],
+   "11": [
+    {
+     "id": "MUTTON",
+     "qty": 3600
+    },
+    {
+     "id": "WOOL",
+     "qty": 3600
+    }
+   ],
+   "12": [
+    {
+     "id": "MUTTON",
+     "qty": 4800
+    },
+    {
+     "id": "WOOL",
+     "qty": 4800
+    }
+   ]
+  },
+  "SKELETON": {
+   "1": [
+    {
+     "id": "BONE",
+     "qty": 1662
+    }
+   ],
+   "2": [
+    {
+     "id": "BONE",
+     "qty": 1662
+    }
+   ],
+   "3": [
+    {
+     "id": "BONE",
+     "qty": 1800
+    }
+   ],
+   "4": [
+    {
+     "id": "BONE",
+     "qty": 1800
+    }
+   ],
+   "5": [
+    {
+     "id": "BONE",
+     "qty": 1964
+    }
+   ],
+   "6": [
+    {
+     "id": "BONE",
+     "qty": 1964
+    }
+   ],
+   "7": [
+    {
+     "id": "BONE",
+     "qty": 2160
+    }
+   ],
+   "8": [
+    {
+     "id": "BONE",
+     "qty": 2160
+    }
+   ],
+   "9": [
+    {
+     "id": "BONE",
+     "qty": 2541
+    }
+   ],
+   "10": [
+    {
+     "id": "BONE",
+     "qty": 2541
+    }
+   ],
+   "11": [
+    {
+     "id": "BONE",
+     "qty": 3323
+    }
+   ]
+  },
+  "SLIME": {
+   "1": [
+    {
+     "id": "SLIME_BALL",
+     "qty": 2991
+    }
+   ],
+   "2": [
+    {
+     "id": "SLIME_BALL",
+     "qty": 2991
+    }
+   ],
+   "3": [
+    {
+     "id": "SLIME_BALL",
+     "qty": 3240
+    }
+   ],
+   "4": [
+    {
+     "id": "SLIME_BALL",
+     "qty": 3240
+    }
+   ],
+   "5": [
+    {
+     "id": "SLIME_BALL",
+     "qty": 3535
+    }
+   ],
+   "6": [
+    {
+     "id": "SLIME_BALL",
+     "qty": 3535
+    }
+   ],
+   "7": [
+    {
+     "id": "SLIME_BALL",
+     "qty": 4093
+    }
+   ],
+   "8": [
+    {
+     "id": "SLIME_BALL",
+     "qty": 4093
+    }
+   ],
+   "9": [
+    {
+     "id": "SLIME_BALL",
+     "qty": 4860
+    }
+   ],
+   "10": [
+    {
+     "id": "SLIME_BALL",
+     "qty": 4860
+    }
+   ],
+   "11": [
+    {
+     "id": "SLIME_BALL",
+     "qty": 6480
+    }
+   ]
+  },
+  "SNOW": {
+   "1": [
+    {
+     "id": "SNOW_BALL",
+     "qty": 13292
+    }
+   ],
+   "2": [
+    {
+     "id": "SNOW_BALL",
+     "qty": 13292
+    }
+   ],
+   "3": [
+    {
+     "id": "SNOW_BALL",
+     "qty": 14400
+    }
+   ],
+   "4": [
+    {
+     "id": "SNOW_BALL",
+     "qty": 14400
+    }
+   ],
+   "5": [
+    {
+     "id": "SNOW_BALL",
+     "qty": 15709
+    }
+   ],
+   "6": [
+    {
+     "id": "SNOW_BALL",
+     "qty": 15709
+    }
+   ],
+   "7": [
+    {
+     "id": "SNOW_BALL",
+     "qty": 18189
+    }
+   ],
+   "8": [
+    {
+     "id": "SNOW_BALL",
+     "qty": 18189
+    }
+   ],
+   "9": [
+    {
+     "id": "SNOW_BALL",
+     "qty": 21600
+    }
+   ],
+   "10": [
+    {
+     "id": "SNOW_BALL",
+     "qty": 21600
+    }
+   ],
+   "11": [
+    {
+     "id": "SNOW_BALL",
+     "qty": 26585
+    }
+   ],
+   "12": [
+    {
+     "id": "SNOW_BALL",
+     "qty": 29793
+    }
+   ]
+  },
+  "SPIDER": {
+   "1": [
+    {
+     "id": "STRING",
+     "qty": 1662
+    },
+    {
+     "id": "SPIDER_EYE",
+     "qty": 831
+    }
+   ],
+   "2": [
+    {
+     "id": "STRING",
+     "qty": 1662
+    },
+    {
+     "id": "SPIDER_EYE",
+     "qty": 831
+    }
+   ],
+   "3": [
+    {
+     "id": "STRING",
+     "qty": 1800
+    },
+    {
+     "id": "SPIDER_EYE",
+     "qty": 900
+    }
+   ],
+   "4": [
+    {
+     "id": "STRING",
+     "qty": 1800
+    },
+    {
+     "id": "SPIDER_EYE",
+     "qty": 900
+    }
+   ],
+   "5": [
+    {
+     "id": "STRING",
+     "qty": 1964
+    },
+    {
+     "id": "SPIDER_EYE",
+     "qty": 982
+    }
+   ],
+   "6": [
+    {
+     "id": "STRING",
+     "qty": 1964
+    },
+    {
+     "id": "SPIDER_EYE",
+     "qty": 982
+    }
+   ],
+   "7": [
+    {
+     "id": "STRING",
+     "qty": 2160
+    },
+    {
+     "id": "SPIDER_EYE",
+     "qty": 1080
+    }
+   ],
+   "8": [
+    {
+     "id": "STRING",
+     "qty": 2160
+    },
+    {
+     "id": "SPIDER_EYE",
+     "qty": 1080
+    }
+   ],
+   "9": [
+    {
+     "id": "STRING",
+     "qty": 2541
+    },
+    {
+     "id": "SPIDER_EYE",
+     "qty": 1271
+    }
+   ],
+   "10": [
+    {
+     "id": "STRING",
+     "qty": 2541
+    },
+    {
+     "id": "SPIDER_EYE",
+     "qty": 1271
+    }
+   ],
+   "11": [
+    {
+     "id": "STRING",
+     "qty": 3323
+    },
+    {
+     "id": "SPIDER_EYE",
+     "qty": 1662
+    }
+   ]
+  },
+  "SPRUCE": {
+   "1": [
+    {
+     "id": "LOG:1",
+     "qty": 3600
+    }
+   ],
+   "2": [
+    {
+     "id": "LOG:1",
+     "qty": 3600
+    }
+   ],
+   "3": [
+    {
+     "id": "LOG:1",
+     "qty": 3840
+    }
+   ],
+   "4": [
+    {
+     "id": "LOG:1",
+     "qty": 3840
+    }
+   ],
+   "5": [
+    {
+     "id": "LOG:1",
+     "qty": 4114
+    }
+   ],
+   "6": [
+    {
+     "id": "LOG:1",
+     "qty": 4114
+    }
+   ],
+   "7": [
+    {
+     "id": "LOG:1",
+     "qty": 4547
+    }
+   ],
+   "8": [
+    {
+     "id": "LOG:1",
+     "qty": 4547
+    }
+   ],
+   "9": [
+    {
+     "id": "LOG:1",
+     "qty": 5236
+    }
+   ],
+   "10": [
+    {
+     "id": "LOG:1",
+     "qty": 5236
+    }
+   ],
+   "11": [
+    {
+     "id": "LOG:1",
+     "qty": 6400
+    }
+   ]
+  },
+  "SUGAR_CANE": {
+   "1": [
+    {
+     "id": "SUGAR_CANE",
+     "qty": 5891
+    }
+   ],
+   "2": [
+    {
+     "id": "SUGAR_CANE",
+     "qty": 5891
+    }
+   ],
+   "3": [
+    {
+     "id": "SUGAR_CANE",
+     "qty": 6480
+    }
+   ],
+   "4": [
+    {
+     "id": "SUGAR_CANE",
+     "qty": 6480
+    }
+   ],
+   "5": [
+    {
+     "id": "SUGAR_CANE",
+     "qty": 7200
+    }
+   ],
+   "6": [
+    {
+     "id": "SUGAR_CANE",
+     "qty": 7200
+    }
+   ],
+   "7": [
+    {
+     "id": "SUGAR_CANE",
+     "qty": 8100
+    }
+   ],
+   "8": [
+    {
+     "id": "SUGAR_CANE",
+     "qty": 8100
+    }
+   ],
+   "9": [
+    {
+     "id": "SUGAR_CANE",
+     "qty": 8938
+    }
+   ],
+   "10": [
+    {
+     "id": "SUGAR_CANE",
+     "qty": 8938
+    }
+   ],
+   "11": [
+    {
+     "id": "SUGAR_CANE",
+     "qty": 10800
+    }
+   ],
+   "12": [
+    {
+     "id": "SUGAR_CANE",
+     "qty": 14400
+    }
+   ]
+  },
+  "SUNFLOWER": {
+   "1": [
+    {
+     "id": "DOUBLE_PLANT",
+     "qty": 5400
+    },
+    {
+     "id": "MOONFLOWER",
+     "qty": 5400
+    }
+   ],
+   "2": [
+    {
+     "id": "DOUBLE_PLANT",
+     "qty": 5635
+    },
+    {
+     "id": "MOONFLOWER",
+     "qty": 5635
+    }
+   ],
+   "3": [
+    {
+     "id": "DOUBLE_PLANT",
+     "qty": 5891
+    },
+    {
+     "id": "MOONFLOWER",
+     "qty": 5891
+    }
+   ],
+   "4": [
+    {
+     "id": "DOUBLE_PLANT",
+     "qty": 6171
+    },
+    {
+     "id": "MOONFLOWER",
+     "qty": 6171
+    }
+   ],
+   "5": [
+    {
+     "id": "DOUBLE_PLANT",
+     "qty": 6480
+    },
+    {
+     "id": "MOONFLOWER",
+     "qty": 6480
+    }
+   ],
+   "6": [
+    {
+     "id": "DOUBLE_PLANT",
+     "qty": 6821
+    },
+    {
+     "id": "MOONFLOWER",
+     "qty": 6821
+    }
+   ],
+   "7": [
+    {
+     "id": "DOUBLE_PLANT",
+     "qty": 7200
+    },
+    {
+     "id": "MOONFLOWER",
+     "qty": 7200
+    }
+   ],
+   "8": [
+    {
+     "id": "DOUBLE_PLANT",
+     "qty": 7624
+    },
+    {
+     "id": "MOONFLOWER",
+     "qty": 7624
+    }
+   ],
+   "9": [
+    {
+     "id": "DOUBLE_PLANT",
+     "qty": 8100
+    },
+    {
+     "id": "MOONFLOWER",
+     "qty": 8100
+    }
+   ],
+   "10": [
+    {
+     "id": "DOUBLE_PLANT",
+     "qty": 8640
+    },
+    {
+     "id": "MOONFLOWER",
+     "qty": 8640
+    }
+   ],
+   "11": [
+    {
+     "id": "DOUBLE_PLANT",
+     "qty": 9257
+    },
+    {
+     "id": "MOONFLOWER",
+     "qty": 9257
+    }
+   ]
+  },
+  "TARANTULA": {
+   "1": [
+    {
+     "id": "STRING",
+     "qty": 4707
+    },
+    {
+     "id": "SPIDER_EYE",
+     "qty": 1490
+    },
+    {
+     "id": "IRON_INGOT",
+     "qty": 298
+    }
+   ],
+   "2": [
+    {
+     "id": "STRING",
+     "qty": 4707
+    },
+    {
+     "id": "SPIDER_EYE",
+     "qty": 1490
+    },
+    {
+     "id": "IRON_INGOT",
+     "qty": 298
+    }
+   ],
+   "3": [
+    {
+     "id": "STRING",
+     "qty": 5250
+    },
+    {
+     "id": "SPIDER_EYE",
+     "qty": 1662
+    },
+    {
+     "id": "IRON_INGOT",
+     "qty": 332
+    }
+   ],
+   "4": [
+    {
+     "id": "STRING",
+     "qty": 5250
+    },
+    {
+     "id": "SPIDER_EYE",
+     "qty": 1662
+    },
+    {
+     "id": "IRON_INGOT",
+     "qty": 332
+    }
+   ],
+   "5": [
+    {
+     "id": "STRING",
+     "qty": 5935
+    },
+    {
+     "id": "SPIDER_EYE",
+     "qty": 1878
+    },
+    {
+     "id": "IRON_INGOT",
+     "qty": 376
+    }
+   ],
+   "6": [
+    {
+     "id": "STRING",
+     "qty": 5935
+    },
+    {
+     "id": "SPIDER_EYE",
+     "qty": 1878
+    },
+    {
+     "id": "IRON_INGOT",
+     "qty": 376
+    }
+   ],
+   "7": [
+    {
+     "id": "STRING",
+     "qty": 7185
+    },
+    {
+     "id": "SPIDER_EYE",
+     "qty": 2274
+    },
+    {
+     "id": "IRON_INGOT",
+     "qty": 455
+    }
+   ],
+   "8": [
+    {
+     "id": "STRING",
+     "qty": 7185
+    },
+    {
+     "id": "SPIDER_EYE",
+     "qty": 2274
+    },
+    {
+     "id": "IRON_INGOT",
+     "qty": 455
+    }
+   ],
+   "9": [
+    {
+     "id": "STRING",
+     "qty": 9415
+    },
+    {
+     "id": "SPIDER_EYE",
+     "qty": 2979
+    },
+    {
+     "id": "IRON_INGOT",
+     "qty": 596
+    }
+   ],
+   "10": [
+    {
+     "id": "STRING",
+     "qty": 9415
+    },
+    {
+     "id": "SPIDER_EYE",
+     "qty": 2979
+    },
+    {
+     "id": "IRON_INGOT",
+     "qty": 596
+    }
+   ],
+   "11": [
+    {
+     "id": "STRING",
+     "qty": 13651
+    },
+    {
+     "id": "SPIDER_EYE",
+     "qty": 4320
+    },
+    {
+     "id": "IRON_INGOT",
+     "qty": 864
+    }
+   ]
+  },
+  "VAMPIRE": {
+   "1": [
+    {
+     "id": "HEMOVIBE",
+     "qty": 227
+    }
+   ],
+   "2": [
+    {
+     "id": "HEMOVIBE",
+     "qty": 227
+    }
+   ],
+   "3": [
+    {
+     "id": "HEMOVIBE",
+     "qty": 247
+    }
+   ],
+   "4": [
+    {
+     "id": "HEMOVIBE",
+     "qty": 247
+    }
+   ],
+   "5": [
+    {
+     "id": "HEMOVIBE",
+     "qty": 270
+    }
+   ],
+   "6": [
+    {
+     "id": "HEMOVIBE",
+     "qty": 270
+    }
+   ],
+   "7": [
+    {
+     "id": "HEMOVIBE",
+     "qty": 309
+    }
+   ],
+   "8": [
+    {
+     "id": "HEMOVIBE",
+     "qty": 309
+    }
+   ],
+   "9": [
+    {
+     "id": "HEMOVIBE",
+     "qty": 369
+    }
+   ],
+   "10": [
+    {
+     "id": "HEMOVIBE",
+     "qty": 369
+    }
+   ],
+   "11": [
+    {
+     "id": "HEMOVIBE",
+     "qty": 455
+    }
+   ]
+  },
+  "VOIDLING": {
+   "1": [
+    {
+     "id": "QUARTZ",
+     "qty": 384
+    },
+    {
+     "id": "ENCHANTED_ENDER_PEARL",
+     "qty": 6
+    }
+   ],
+   "2": [
+    {
+     "id": "QUARTZ",
+     "qty": 384
+    },
+    {
+     "id": "ENCHANTED_ENDER_PEARL",
+     "qty": 6
+    }
+   ],
+   "3": [
+    {
+     "id": "QUARTZ",
+     "qty": 411
+    },
+    {
+     "id": "ENCHANTED_ENDER_PEARL",
+     "qty": 6
+    }
+   ],
+   "4": [
+    {
+     "id": "QUARTZ",
+     "qty": 411
+    },
+    {
+     "id": "ENCHANTED_ENDER_PEARL",
+     "qty": 6
+    }
+   ],
+   "5": [
+    {
+     "id": "QUARTZ",
+     "qty": 443
+    },
+    {
+     "id": "ENCHANTED_ENDER_PEARL",
+     "qty": 7
+    }
+   ],
+   "6": [
+    {
+     "id": "QUARTZ",
+     "qty": 443
+    },
+    {
+     "id": "ENCHANTED_ENDER_PEARL",
+     "qty": 7
+    }
+   ],
+   "7": [
+    {
+     "id": "QUARTZ",
+     "qty": 494
+    },
+    {
+     "id": "ENCHANTED_ENDER_PEARL",
+     "qty": 8
+    }
+   ],
+   "8": [
+    {
+     "id": "QUARTZ",
+     "qty": 494
+    },
+    {
+     "id": "ENCHANTED_ENDER_PEARL",
+     "qty": 8
+    }
+   ],
+   "9": [
+    {
+     "id": "QUARTZ",
+     "qty": 576
+    },
+    {
+     "id": "ENCHANTED_ENDER_PEARL",
+     "qty": 9
+    }
+   ],
+   "10": [
+    {
+     "id": "QUARTZ",
+     "qty": 576
+    },
+    {
+     "id": "ENCHANTED_ENDER_PEARL",
+     "qty": 9
+    }
+   ],
+   "11": [
+    {
+     "id": "QUARTZ",
+     "qty": 720
+    },
+    {
+     "id": "ENCHANTED_ENDER_PEARL",
+     "qty": 1
+    }
+   ]
+  },
+  "WHEAT": {
+   "1": [
+    {
+     "id": "WHEAT",
+     "qty": 2880
+    },
+    {
+     "id": "SEEDS",
+     "qty": 4320
+    }
+   ],
+   "2": [
+    {
+     "id": "WHEAT",
+     "qty": 2880
+    },
+    {
+     "id": "SEEDS",
+     "qty": 4320
+    }
+   ],
+   "3": [
+    {
+     "id": "WHEAT",
+     "qty": 3323
+    },
+    {
+     "id": "SEEDS",
+     "qty": 4985
+    }
+   ],
+   "4": [
+    {
+     "id": "WHEAT",
+     "qty": 3323
+    },
+    {
+     "id": "SEEDS",
+     "qty": 4985
+    }
+   ],
+   "5": [
+    {
+     "id": "WHEAT",
+     "qty": 3927
+    },
+    {
+     "id": "SEEDS",
+     "qty": 5891
+    }
+   ],
+   "6": [
+    {
+     "id": "WHEAT",
+     "qty": 3927
+    },
+    {
+     "id": "SEEDS",
+     "qty": 5891
+    }
+   ],
+   "7": [
+    {
+     "id": "WHEAT",
+     "qty": 4320
+    },
+    {
+     "id": "SEEDS",
+     "qty": 6480
+    }
+   ],
+   "8": [
+    {
+     "id": "WHEAT",
+     "qty": 4320
+    },
+    {
+     "id": "SEEDS",
+     "qty": 6480
+    }
+   ],
+   "9": [
+    {
+     "id": "WHEAT",
+     "qty": 4800
+    },
+    {
+     "id": "SEEDS",
+     "qty": 7200
+    }
+   ],
+   "10": [
+    {
+     "id": "WHEAT",
+     "qty": 4800
+    },
+    {
+     "id": "SEEDS",
+     "qty": 7200
+    }
+   ],
+   "11": [
+    {
+     "id": "WHEAT",
+     "qty": 5400
+    },
+    {
+     "id": "SEEDS",
+     "qty": 8100
+    }
+   ],
+   "12": [
+    {
+     "id": "WHEAT",
+     "qty": 6171
+    },
+    {
+     "id": "SEEDS",
+     "qty": 9257
+    }
+   ]
+  },
+  "ZOMBIE": {
+   "1": [
+    {
+     "id": "ROTTEN_FLESH",
+     "qty": 1662
+    },
+    {
+     "id": "POISONOUS_POTATO",
+     "qty": 83
+    },
+    {
+     "id": "POTATO_ITEM",
+     "qty": 17
+    },
+    {
+     "id": "CARROT_ITEM",
+     "qty": 17
+    }
+   ],
+   "2": [
+    {
+     "id": "ROTTEN_FLESH",
+     "qty": 1662
+    },
+    {
+     "id": "POISONOUS_POTATO",
+     "qty": 83
+    },
+    {
+     "id": "POTATO_ITEM",
+     "qty": 17
+    },
+    {
+     "id": "CARROT_ITEM",
+     "qty": 17
+    }
+   ],
+   "3": [
+    {
+     "id": "ROTTEN_FLESH",
+     "qty": 1800
+    },
+    {
+     "id": "POISONOUS_POTATO",
+     "qty": 90
+    },
+    {
+     "id": "POTATO_ITEM",
+     "qty": 18
+    },
+    {
+     "id": "CARROT_ITEM",
+     "qty": 18
+    }
+   ],
+   "4": [
+    {
+     "id": "ROTTEN_FLESH",
+     "qty": 1800
+    },
+    {
+     "id": "POISONOUS_POTATO",
+     "qty": 90
+    },
+    {
+     "id": "POTATO_ITEM",
+     "qty": 18
+    },
+    {
+     "id": "CARROT_ITEM",
+     "qty": 18
+    }
+   ],
+   "5": [
+    {
+     "id": "ROTTEN_FLESH",
+     "qty": 1964
+    },
+    {
+     "id": "POISONOUS_POTATO",
+     "qty": 98
+    },
+    {
+     "id": "POTATO_ITEM",
+     "qty": 20
+    },
+    {
+     "id": "CARROT_ITEM",
+     "qty": 20
+    }
+   ],
+   "6": [
+    {
+     "id": "ROTTEN_FLESH",
+     "qty": 1964
+    },
+    {
+     "id": "POISONOUS_POTATO",
+     "qty": 98
+    },
+    {
+     "id": "POTATO_ITEM",
+     "qty": 20
+    },
+    {
+     "id": "CARROT_ITEM",
+     "qty": 20
+    }
+   ],
+   "7": [
+    {
+     "id": "ROTTEN_FLESH",
+     "qty": 2160
+    },
+    {
+     "id": "POISONOUS_POTATO",
+     "qty": 108
+    },
+    {
+     "id": "POTATO_ITEM",
+     "qty": 22
+    },
+    {
+     "id": "CARROT_ITEM",
+     "qty": 22
+    }
+   ],
+   "8": [
+    {
+     "id": "ROTTEN_FLESH",
+     "qty": 2160
+    },
+    {
+     "id": "POISONOUS_POTATO",
+     "qty": 108
+    },
+    {
+     "id": "POTATO_ITEM",
+     "qty": 22
+    },
+    {
+     "id": "CARROT_ITEM",
+     "qty": 22
+    }
+   ],
+   "9": [
+    {
+     "id": "ROTTEN_FLESH",
+     "qty": 2541
+    },
+    {
+     "id": "POISONOUS_POTATO",
+     "qty": 127
+    },
+    {
+     "id": "POTATO_ITEM",
+     "qty": 25
+    },
+    {
+     "id": "CARROT_ITEM",
+     "qty": 25
+    }
+   ],
+   "10": [
+    {
+     "id": "ROTTEN_FLESH",
+     "qty": 2541
+    },
+    {
+     "id": "POISONOUS_POTATO",
+     "qty": 127
+    },
+    {
+     "id": "POTATO_ITEM",
+     "qty": 25
+    },
+    {
+     "id": "CARROT_ITEM",
+     "qty": 25
+    }
+   ],
+   "11": [
+    {
+     "id": "ROTTEN_FLESH",
+     "qty": 3323
+    },
+    {
+     "id": "POISONOUS_POTATO",
+     "qty": 166
+    },
+    {
+     "id": "POTATO_ITEM",
+     "qty": 33
+    },
+    {
+     "id": "CARROT_ITEM",
+     "qty": 33
+    }
+   ]
+  }
+ },
+ "essence": {
+  "DRAGON|UNBRIDLED_RAGE": {
+   "essence": "ESSENCE_DRAGON",
+   "tiers": {
+    "1": 1000,
+    "2": 1500,
+    "3": 2000,
+    "4": 3000,
+    "5": 5000
+   }
+  },
+  "WITHER|FORBIDDEN_BLESSING": {
+   "essence": "ESSENCE_WITHER",
+   "tiers": {
+    "1": 200,
+    "2": 400,
+    "3": 600,
+    "4": 800,
+    "5": 1000,
+    "6": 1200,
+    "7": 1400,
+    "8": 1600,
+    "9": 1800,
+    "10": 2000
+   }
+  },
+  "DIAMOND|RADIANT_FISHER": {
+   "essence": "ESSENCE_DIAMOND",
+   "tiers": {
+    "1": 200,
+    "2": 400,
+    "3": 600,
+    "4": 800,
+    "5": 1000,
+    "6": 1200,
+    "7": 1400,
+    "8": 1600,
+    "9": 1800,
+    "10": 2000
+   }
+  },
+  "DIAMOND|DIAMOND_IN_THE_ROUGH": {
+   "essence": "ESSENCE_DIAMOND",
+   "tiers": {
+    "1": 1000,
+    "2": 1500,
+    "3": 2000,
+    "4": 3000,
+    "5": 5000
+   }
+  },
+  "DIAMOND|RHINESTONE_INFUSION": {
+   "essence": "ESSENCE_DIAMOND",
+   "tiers": {
+    "1": 100,
+    "2": 200,
+    "3": 300,
+    "4": 400,
+    "5": 500,
+    "6": 600,
+    "7": 700,
+    "8": 800,
+    "9": 900,
+    "10": 1000
+   }
+  },
+  "DIAMOND|UNDER_PRESSURE": {
+   "essence": "ESSENCE_DIAMOND",
+   "tiers": {
+    "1": 125,
+    "2": 250,
+    "3": 500,
+    "4": 1000,
+    "5": 1500
+   }
+  },
+  "DIAMOND|HIGH_ROLLER": {
+   "essence": "ESSENCE_DIAMOND",
+   "tiers": {
+    "1": 5000
+   }
+  },
+  "DIAMOND|RETURN_TO_SENDER": {
+   "essence": "ESSENCE_DIAMOND",
+   "tiers": {
+    "1": 50,
+    "2": 75,
+    "3": 100,
+    "4": 150,
+    "5": 250,
+    "6": 400,
+    "7": 750,
+    "8": 1000,
+    "9": 1750,
+    "10": 2500
+   }
+  },
+  "FOREST|TRAPPED": {
+   "essence": "ESSENCE_FOREST",
+   "tiers": {
+    "1": 100,
+    "2": 200,
+    "3": 300,
+    "4": 400,
+    "5": 500
+   }
+  },
+  "FOREST|AXED": {
+   "essence": "ESSENCE_FOREST",
+   "tiers": {
+    "1": 10000
+   }
+  },
+  "FOREST|EXTREME_PRESSURE": {
+   "essence": "ESSENCE_FOREST",
+   "tiers": {
+    "1": 100,
+    "2": 200,
+    "3": 300,
+    "4": 400,
+    "5": 500,
+    "6": 600,
+    "7": 700,
+    "8": 800,
+    "9": 900,
+    "10": 1000
+   }
+  },
+  "FOREST|LUMBERJACK": {
+   "essence": "ESSENCE_FOREST",
+   "tiers": {
+    "1": 125,
+    "2": 250,
+    "3": 500,
+    "4": 1000,
+    "5": 1500,
+    "6": 2000,
+    "7": 2500,
+    "8": 3000,
+    "9": 3500,
+    "10": 4000
+   }
+  },
+  "FOREST|TASTY": {
+   "essence": "ESSENCE_FOREST",
+   "tiers": {
+    "1": 125,
+    "2": 250,
+    "3": 500,
+    "4": 1000,
+    "5": 1500
+   }
+  },
+  "FOREST|FOREST_TRAINING": {
+   "essence": "ESSENCE_FOREST",
+   "tiers": {
+    "1": 250,
+    "2": 1250,
+    "3": 5000
+   }
+  },
+  "GOLD|HEART_OF_GOLD": {
+   "essence": "ESSENCE_GOLD",
+   "tiers": {
+    "1": 1000,
+    "2": 1500,
+    "3": 2000,
+    "4": 3000,
+    "5": 5000
+   }
+  },
+  "GOLD|DWARVEN_TRAINING": {
+   "essence": "ESSENCE_GOLD",
+   "tiers": {
+    "1": 250,
+    "2": 1250,
+    "3": 5000
+   }
+  },
+  "GOLD|UNBREAKING": {
+   "essence": "ESSENCE_GOLD",
+   "tiers": {
+    "1": 150,
+    "2": 500,
+    "3": 1250,
+    "4": 2000,
+    "5": 3000
+   }
+  },
+  "GOLD|EAGER_MINER": {
+   "essence": "ESSENCE_GOLD",
+   "tiers": {
+    "1": 100,
+    "2": 200,
+    "3": 300,
+    "4": 400,
+    "5": 500,
+    "6": 600,
+    "7": 700,
+    "8": 800,
+    "9": 900,
+    "10": 1000
+   }
+  },
+  "GOLD|MIDAS_LURE": {
+   "essence": "ESSENCE_GOLD",
+   "tiers": {
+    "1": 200,
+    "2": 400,
+    "3": 600,
+    "4": 800,
+    "5": 1000,
+    "6": 1200,
+    "7": 1400,
+    "8": 1600,
+    "9": 1800,
+    "10": 2000
+   }
+  },
+  "SPIDER|EMPOWERED_AGILITY": {
+   "essence": "ESSENCE_SPIDER",
+   "tiers": {
+    "1": 50,
+    "2": 75,
+    "3": 100,
+    "4": 150,
+    "5": 250,
+    "6": 400,
+    "7": 750,
+    "8": 1000,
+    "9": 1750,
+    "10": 2500
+   }
+  },
+  "SPIDER|VERMIN_CONTROL": {
+   "essence": "ESSENCE_SPIDER",
+   "tiers": {
+    "1": 100,
+    "2": 500,
+    "3": 1000,
+    "4": 3000,
+    "5": 5000
+   }
+  },
+  "SPIDER|BANE": {
+   "essence": "ESSENCE_SPIDER",
+   "tiers": {
+    "1": 100,
+    "2": 500,
+    "3": 1000,
+    "4": 3000,
+    "5": 5000
+   }
+  },
+  "SPIDER|SPIDER_TRAINING": {
+   "essence": "ESSENCE_SPIDER",
+   "tiers": {
+    "1": 250,
+    "2": 1250,
+    "3": 5000
+   }
+  },
+  "SPIDER|TOXOPHILITE": {
+   "essence": "ESSENCE_SPIDER",
+   "tiers": {
+    "1": 1000,
+    "2": 1500,
+    "3": 2000,
+    "4": 3000,
+    "5": 5000
+   }
+  },
+  "ICE|COLD_EFFICIENCY": {
+   "essence": "ESSENCE_ICE",
+   "tiers": {
+    "1": 1000,
+    "2": 1500,
+    "3": 2000,
+    "4": 3000,
+    "5": 5000
+   }
+  },
+  "ICE|COOLED_FORGES": {
+   "essence": "ESSENCE_ICE",
+   "tiers": {
+    "1": 100,
+    "2": 1000,
+    "3": 2000,
+    "4": 3000,
+    "5": 5000
+   }
+  },
+  "ICE|FROZEN_SKIN": {
+   "essence": "ESSENCE_ICE",
+   "tiers": {
+    "1": 1000,
+    "2": 1500,
+    "3": 2000,
+    "4": 3000,
+    "5": 5000
+   }
+  },
+  "ICE|SEASON_OF_JOY": {
+   "essence": "ESSENCE_ICE",
+   "tiers": {
+    "1": 200,
+    "2": 400,
+    "3": 800,
+    "4": 1500,
+    "5": 2100,
+    "6": 3000,
+    "7": 3000,
+    "8": 4000,
+    "9": 4000,
+    "10": 4000
+   }
+  },
+  "ICE|DRAKE_PIPER": {
+   "essence": "ESSENCE_ICE",
+   "tiers": {
+    "1": 2000
+   }
+  },
+  "CRIMSON|FUNGUS_FORTUNA": {
+   "essence": "ESSENCE_CRIMSON",
+   "tiers": {
+    "1": 100,
+    "2": 200,
+    "3": 300,
+    "4": 400,
+    "5": 500,
+    "6": 600,
+    "7": 700,
+    "8": 800,
+    "9": 900,
+    "10": 1000
+   }
+  },
+  "CRIMSON|HARENA_FORTUNA": {
+   "essence": "ESSENCE_CRIMSON",
+   "tiers": {
+    "1": 100,
+    "2": 200,
+    "3": 300,
+    "4": 400,
+    "5": 500,
+    "6": 600,
+    "7": 700,
+    "8": 800,
+    "9": 900,
+    "10": 1000
+   }
+  },
+  "CRIMSON|CRIMSON_TRAINING": {
+   "essence": "ESSENCE_CRIMSON",
+   "tiers": {
+    "1": 250,
+    "2": 1250,
+    "3": 5000
+   }
+  },
+  "CRIMSON|WITHER_PIPER": {
+   "essence": "ESSENCE_CRIMSON",
+   "tiers": {
+    "1": 500,
+    "2": 750,
+    "3": 1250,
+    "4": 2000,
+    "5": 3000
+   }
+  }
+ },
+ "bank": {
+  "BANK_UPGRADE_GOLD": 5077194,
+  "BANK_UPGRADE_DELUXE": 10385966,
+  "BANK_UPGRADE_SUPER_DELUXE": 26543862,
+  "BANK_UPGRADE_PREMIER": 53859655,
+  "BANK_UPGRADE_LUXURIOUS": 107719310,
+  "BANK_UPGRADE_PALATIAL": 215438620
+ },
+ "coverage": {
+  "minionTiersPriced": 687,
+  "minionTiersUnpriceable": 12,
+  "essencePerksMatched": 33,
+  "essencePerksUnmatched": 27,
+  "bankUpgrades": 6
+ }
+}

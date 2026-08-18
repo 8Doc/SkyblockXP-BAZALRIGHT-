@@ -1,0 +1,7418 @@
+{
+ "generatedAt": "2026-08-18T18:54:47.331Z",
+ "sources": {
+  "ids": "data/generated/task_ids.json (harvested from live profiles)",
+  "xp": "data/generated/wiki_tasks.json (Hypixel Wiki, SkyBlock Levels/Tasks)"
+ },
+ "playersScanned": 140,
+ "totals": {
+  "tasks": 1056,
+  "xp": 9398,
+  "byCategory": {
+   "abiphone": 840,
+   "bank": 310,
+   "misc": 3180,
+   "dungeons": 540,
+   "essence_shop": 2074,
+   "slayer": 1050,
+   "events": 749,
+   "fast_travel": 360,
+   "rift": 295
+  }
+ },
+ "unmatchedIds": [],
+ "tasks": [
+  {
+   "id": "ABIPHONE_agatha",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 19
+  },
+  {
+   "id": "ABIPHONE_alchemist",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 17
+  },
+  {
+   "id": "ABIPHONE_alda",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 45
+  },
+  {
+   "id": "ABIPHONE_anita",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 19
+  },
+  {
+   "id": "ABIPHONE_aranya",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 13
+  },
+  {
+   "id": "ABIPHONE_archie",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 3
+  },
+  {
+   "id": "ABIPHONE_arrow_forger",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 47
+  },
+  {
+   "id": "ABIPHONE_bartender",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 9
+  },
+  {
+   "id": "ABIPHONE_blacksmith",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 8
+  },
+  {
+   "id": "ABIPHONE_brynmor",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 8
+  },
+  {
+   "id": "ABIPHONE_builder",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 21
+  },
+  {
+   "id": "ABIPHONE_bulvar",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 7
+  },
+  {
+   "id": "ABIPHONE_captain_ahone",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 51
+  },
+  {
+   "id": "ABIPHONE_carrolyn",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 8
+  },
+  {
+   "id": "ABIPHONE_clerk_seraphine",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 24
+  },
+  {
+   "id": "ABIPHONE_community_shop",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 33
+  },
+  {
+   "id": "ABIPHONE_dalir",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 5
+  },
+  {
+   "id": "ABIPHONE_dean",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 54
+  },
+  {
+   "id": "ABIPHONE_drill_fuel_mechanic",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 39
+  },
+  {
+   "id": "ABIPHONE_duncan",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 13
+  },
+  {
+   "id": "ABIPHONE_dusk",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 23
+  },
+  {
+   "id": "ABIPHONE_einary",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 12
+  },
+  {
+   "id": "ABIPHONE_elle",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 52
+  },
+  {
+   "id": "ABIPHONE_fairy",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 19
+  },
+  {
+   "id": "ABIPHONE_feast_baker_scott",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 4
+  },
+  {
+   "id": "ABIPHONE_feast_chef_ted",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 6
+  },
+  {
+   "id": "ABIPHONE_forge_foreman",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 21
+  },
+  {
+   "id": "ABIPHONE_frozen_alex",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 9
+  },
+  {
+   "id": "ABIPHONE_gatekeeper",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 14
+  },
+  {
+   "id": "ABIPHONE_gemma",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 6
+  },
+  {
+   "id": "ABIPHONE_gemstone",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 9
+  },
+  {
+   "id": "ABIPHONE_hoppity",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 18
+  },
+  {
+   "id": "ABIPHONE_igrupan",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 22
+  },
+  {
+   "id": "ABIPHONE_jacob",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 28
+  },
+  {
+   "id": "ABIPHONE_jake_lab",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 14
+  },
+  {
+   "id": "ABIPHONE_junker_joel",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 6
+  },
+  {
+   "id": "ABIPHONE_kaus",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 8
+  },
+  {
+   "id": "ABIPHONE_kiara",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 11
+  },
+  {
+   "id": "ABIPHONE_kuudra_gatekeeper",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 15
+  },
+  {
+   "id": "ABIPHONE_kysha",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 8
+  },
+  {
+   "id": "ABIPHONE_lumber_merchant",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 23
+  },
+  {
+   "id": "ABIPHONE_mad_redstone_engineer",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 20
+  },
+  {
+   "id": "ABIPHONE_malik",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 9
+  },
+  {
+   "id": "ABIPHONE_marigold",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 8
+  },
+  {
+   "id": "ABIPHONE_miria",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 6
+  },
+  {
+   "id": "ABIPHONE_moby",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 9
+  },
+  {
+   "id": "ABIPHONE_odger",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 17
+  },
+  {
+   "id": "ABIPHONE_ophelia",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 6
+  },
+  {
+   "id": "ABIPHONE_oringo",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 13
+  },
+  {
+   "id": "ABIPHONE_pablo",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 12
+  },
+  {
+   "id": "ABIPHONE_pesthunter_phillip",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 14
+  },
+  {
+   "id": "ABIPHONE_pet_collector",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 21
+  },
+  {
+   "id": "ABIPHONE_pet_sitter",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 32
+  },
+  {
+   "id": "ABIPHONE_pet_trainer",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 10
+  },
+  {
+   "id": "ABIPHONE_plumber",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 27
+  },
+  {
+   "id": "ABIPHONE_queen",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 9
+  },
+  {
+   "id": "ABIPHONE_queen_mismyla",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 20
+  },
+  {
+   "id": "ABIPHONE_roddy",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 19
+  },
+  {
+   "id": "ABIPHONE_rollim",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 14
+  },
+  {
+   "id": "ABIPHONE_rosemary",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 9
+  },
+  {
+   "id": "ABIPHONE_shady_bartender",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 11
+  },
+  {
+   "id": "ABIPHONE_shaggy",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 13
+  },
+  {
+   "id": "ABIPHONE_sirih",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 10
+  },
+  {
+   "id": "ABIPHONE_sirius",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 11
+  },
+  {
+   "id": "ABIPHONE_slayer",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 78
+  },
+  {
+   "id": "ABIPHONE_spider_tamer",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 8
+  },
+  {
+   "id": "ABIPHONE_spooky",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 11
+  },
+  {
+   "id": "ABIPHONE_st_jerry",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 13
+  },
+  {
+   "id": "ABIPHONE_suus",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 11
+  },
+  {
+   "id": "ABIPHONE_talbot",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 7
+  },
+  {
+   "id": "ABIPHONE_taylor",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 18
+  },
+  {
+   "id": "ABIPHONE_telekinesis_applier",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 23
+  },
+  {
+   "id": "ABIPHONE_terry",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 6
+  },
+  {
+   "id": "ABIPHONE_thaumaturgist",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 36
+  },
+  {
+   "id": "ABIPHONE_tomioka",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 5
+  },
+  {
+   "id": "ABIPHONE_tony",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 9
+  },
+  {
+   "id": "ABIPHONE_trevor_the_trapper",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 28
+  },
+  {
+   "id": "ABIPHONE_trinity",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 4
+  },
+  {
+   "id": "ABIPHONE_tyzzo",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 10
+  },
+  {
+   "id": "ABIPHONE_vincent",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 11
+  },
+  {
+   "id": "ABIPHONE_vulcan",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 5
+  },
+  {
+   "id": "ABIPHONE_walter",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 12
+  },
+  {
+   "id": "ABIPHONE_wool_weaver",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 24
+  },
+  {
+   "id": "ABIPHONE_zog",
+   "category": "abiphone",
+   "xp": 10,
+   "rule": "abiphone contacts",
+   "players": 15
+  },
+  {
+   "id": "BANK_UPGRADE_DELUXE",
+   "category": "bank",
+   "xp": 25,
+   "rule": "bank upgrades",
+   "players": 63
+  },
+  {
+   "id": "BANK_UPGRADE_GOLD",
+   "category": "bank",
+   "xp": 20,
+   "rule": "bank upgrades",
+   "players": 85
+  },
+  {
+   "id": "BANK_UPGRADE_LUXURIOUS",
+   "category": "bank",
+   "xp": 40,
+   "rule": "bank upgrades",
+   "players": 16
+  },
+  {
+   "id": "BANK_UPGRADE_PALATIAL",
+   "category": "bank",
+   "xp": 50,
+   "rule": "bank upgrades",
+   "players": 9
+  },
+  {
+   "id": "BANK_UPGRADE_PREMIER",
+   "category": "bank",
+   "xp": 35,
+   "rule": "bank upgrades",
+   "players": 34
+  },
+  {
+   "id": "BANK_UPGRADE_SUPER_DELUXE",
+   "category": "bank",
+   "xp": 30,
+   "rule": "bank upgrades",
+   "players": 46
+  },
+  {
+   "id": "BARBARIANS_FRIENDLY",
+   "category": "misc",
+   "xp": 5,
+   "rule": "reputation",
+   "players": 27
+  },
+  {
+   "id": "BARBARIANS_HERO",
+   "category": "misc",
+   "xp": 40,
+   "rule": "reputation",
+   "players": 9
+  },
+  {
+   "id": "BARBARIANS_HONORED",
+   "category": "misc",
+   "xp": 20,
+   "rule": "reputation",
+   "players": 10
+  },
+  {
+   "id": "BARBARIANS_TRUSTED",
+   "category": "misc",
+   "xp": 10,
+   "rule": "reputation",
+   "players": 16
+  },
+  {
+   "id": "CARROLYN_EXPORT_CROP_EXPIRED_PUMPKIN",
+   "category": "misc",
+   "xp": 5,
+   "rule": "carrolyn exports",
+   "players": 9
+  },
+  {
+   "id": "CARROLYN_EXPORT_CROP_EXPORTABLE_CARROTS",
+   "category": "misc",
+   "xp": 5,
+   "rule": "carrolyn exports",
+   "players": 5
+  },
+  {
+   "id": "CARROLYN_EXPORT_CROP_FINE_FLOUR",
+   "category": "misc",
+   "xp": 5,
+   "rule": "carrolyn exports",
+   "players": 13
+  },
+  {
+   "id": "CARROLYN_EXPORT_CROP_HALF_EATEN_MUSHROOM",
+   "category": "misc",
+   "xp": 5,
+   "rule": "carrolyn exports",
+   "players": 10
+  },
+  {
+   "id": "CARROLYN_EXPORT_CROP_POTTED_CACTUS",
+   "category": "misc",
+   "xp": 5,
+   "rule": "carrolyn exports",
+   "players": 2
+  },
+  {
+   "id": "CARROLYN_EXPORT_CROP_PRICKLY_KISS",
+   "category": "misc",
+   "xp": 5,
+   "rule": "carrolyn exports",
+   "players": 5
+  },
+  {
+   "id": "CARROLYN_EXPORT_CROP_SUPREME_CHOCOLATE_BAR",
+   "category": "misc",
+   "xp": 5,
+   "rule": "carrolyn exports",
+   "players": 18
+  },
+  {
+   "id": "CARROLYN_EXPORT_CROP_WARTY",
+   "category": "misc",
+   "xp": 5,
+   "rule": "carrolyn exports",
+   "players": 2
+  },
+  {
+   "id": "COMPLETE_CATACOMBS0",
+   "category": "dungeons",
+   "xp": 20,
+   "rule": "catacombs floors",
+   "players": 124
+  },
+  {
+   "id": "COMPLETE_CATACOMBS1",
+   "category": "dungeons",
+   "xp": 20,
+   "rule": "catacombs floors",
+   "players": 120
+  },
+  {
+   "id": "COMPLETE_CATACOMBS2",
+   "category": "dungeons",
+   "xp": 20,
+   "rule": "catacombs floors",
+   "players": 112
+  },
+  {
+   "id": "COMPLETE_CATACOMBS3",
+   "category": "dungeons",
+   "xp": 20,
+   "rule": "catacombs floors",
+   "players": 110
+  },
+  {
+   "id": "COMPLETE_CATACOMBS4",
+   "category": "dungeons",
+   "xp": 20,
+   "rule": "catacombs floors",
+   "players": 103
+  },
+  {
+   "id": "COMPLETE_CATACOMBS5",
+   "category": "dungeons",
+   "xp": 30,
+   "rule": "catacombs floors",
+   "players": 102
+  },
+  {
+   "id": "COMPLETE_CATACOMBS6",
+   "category": "dungeons",
+   "xp": 30,
+   "rule": "catacombs floors",
+   "players": 95
+  },
+  {
+   "id": "COMPLETE_CATACOMBS7",
+   "category": "dungeons",
+   "xp": 30,
+   "rule": "catacombs floors",
+   "players": 81
+  },
+  {
+   "id": "COMPLETE_MASTER_CATACOMBS1",
+   "category": "dungeons",
+   "xp": 50,
+   "rule": "master mode floors",
+   "players": 63
+  },
+  {
+   "id": "COMPLETE_MASTER_CATACOMBS2",
+   "category": "dungeons",
+   "xp": 50,
+   "rule": "master mode floors",
+   "players": 55
+  },
+  {
+   "id": "COMPLETE_MASTER_CATACOMBS3",
+   "category": "dungeons",
+   "xp": 50,
+   "rule": "master mode floors",
+   "players": 50
+  },
+  {
+   "id": "COMPLETE_MASTER_CATACOMBS4",
+   "category": "dungeons",
+   "xp": 50,
+   "rule": "master mode floors",
+   "players": 39
+  },
+  {
+   "id": "COMPLETE_MASTER_CATACOMBS5",
+   "category": "dungeons",
+   "xp": 50,
+   "rule": "master mode floors",
+   "players": 34
+  },
+  {
+   "id": "COMPLETE_MASTER_CATACOMBS6",
+   "category": "dungeons",
+   "xp": 50,
+   "rule": "master mode floors",
+   "players": 27
+  },
+  {
+   "id": "COMPLETE_MASTER_CATACOMBS7",
+   "category": "dungeons",
+   "xp": 50,
+   "rule": "master mode floors",
+   "players": 23
+  },
+  {
+   "id": "CRIMSON_ESSENCE_CRIMSON_TRAINING_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 21
+  },
+  {
+   "id": "CRIMSON_ESSENCE_CRIMSON_TRAINING_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 16
+  },
+  {
+   "id": "CRIMSON_ESSENCE_CRIMSON_TRAINING_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 16
+  },
+  {
+   "id": "CRIMSON_ESSENCE_FRESH_TOOLS_KUUDRA_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 28
+  },
+  {
+   "id": "CRIMSON_ESSENCE_FRESH_TOOLS_KUUDRA_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 26
+  },
+  {
+   "id": "CRIMSON_ESSENCE_FRESH_TOOLS_KUUDRA_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 22
+  },
+  {
+   "id": "CRIMSON_ESSENCE_FRESH_TOOLS_KUUDRA_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 22
+  },
+  {
+   "id": "CRIMSON_ESSENCE_FRESH_TOOLS_KUUDRA_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 21
+  },
+  {
+   "id": "CRIMSON_ESSENCE_FUNGUS_FORTUNA_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 15
+  },
+  {
+   "id": "CRIMSON_ESSENCE_FUNGUS_FORTUNA_10",
+   "category": "essence_shop",
+   "xp": 10,
+   "rule": "essence shop perks",
+   "players": 13
+  },
+  {
+   "id": "CRIMSON_ESSENCE_FUNGUS_FORTUNA_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 14
+  },
+  {
+   "id": "CRIMSON_ESSENCE_FUNGUS_FORTUNA_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 14
+  },
+  {
+   "id": "CRIMSON_ESSENCE_FUNGUS_FORTUNA_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 14
+  },
+  {
+   "id": "CRIMSON_ESSENCE_FUNGUS_FORTUNA_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 14
+  },
+  {
+   "id": "CRIMSON_ESSENCE_FUNGUS_FORTUNA_6",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 14
+  },
+  {
+   "id": "CRIMSON_ESSENCE_FUNGUS_FORTUNA_7",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 14
+  },
+  {
+   "id": "CRIMSON_ESSENCE_FUNGUS_FORTUNA_8",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 13
+  },
+  {
+   "id": "CRIMSON_ESSENCE_FUNGUS_FORTUNA_9",
+   "category": "essence_shop",
+   "xp": 9,
+   "rule": "essence shop perks",
+   "players": 13
+  },
+  {
+   "id": "CRIMSON_ESSENCE_HARENA_FORTUNA_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 14
+  },
+  {
+   "id": "CRIMSON_ESSENCE_HARENA_FORTUNA_10",
+   "category": "essence_shop",
+   "xp": 10,
+   "rule": "essence shop perks",
+   "players": 13
+  },
+  {
+   "id": "CRIMSON_ESSENCE_HARENA_FORTUNA_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 14
+  },
+  {
+   "id": "CRIMSON_ESSENCE_HARENA_FORTUNA_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 14
+  },
+  {
+   "id": "CRIMSON_ESSENCE_HARENA_FORTUNA_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 14
+  },
+  {
+   "id": "CRIMSON_ESSENCE_HARENA_FORTUNA_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 14
+  },
+  {
+   "id": "CRIMSON_ESSENCE_HARENA_FORTUNA_6",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 14
+  },
+  {
+   "id": "CRIMSON_ESSENCE_HARENA_FORTUNA_7",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 14
+  },
+  {
+   "id": "CRIMSON_ESSENCE_HARENA_FORTUNA_8",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 13
+  },
+  {
+   "id": "CRIMSON_ESSENCE_HARENA_FORTUNA_9",
+   "category": "essence_shop",
+   "xp": 9,
+   "rule": "essence shop perks",
+   "players": 13
+  },
+  {
+   "id": "CRIMSON_ESSENCE_HEADSTART_KUUDRA_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 26
+  },
+  {
+   "id": "CRIMSON_ESSENCE_HEADSTART_KUUDRA_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 26
+  },
+  {
+   "id": "CRIMSON_ESSENCE_HEADSTART_KUUDRA_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 24
+  },
+  {
+   "id": "CRIMSON_ESSENCE_HEADSTART_KUUDRA_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 24
+  },
+  {
+   "id": "CRIMSON_ESSENCE_HEADSTART_KUUDRA_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 23
+  },
+  {
+   "id": "CRIMSON_ESSENCE_MASTER_KUUDRA_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 18
+  },
+  {
+   "id": "CRIMSON_ESSENCE_STRONGARM_KUUDRA_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 24
+  },
+  {
+   "id": "CRIMSON_ESSENCE_STRONGARM_KUUDRA_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 22
+  },
+  {
+   "id": "CRIMSON_ESSENCE_WITHER_PIPER_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 21
+  },
+  {
+   "id": "CRIMSON_ESSENCE_WITHER_PIPER_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 19
+  },
+  {
+   "id": "CRIMSON_ESSENCE_WITHER_PIPER_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 18
+  },
+  {
+   "id": "CRIMSON_ESSENCE_WITHER_PIPER_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 18
+  },
+  {
+   "id": "CRIMSON_ESSENCE_WITHER_PIPER_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 17
+  },
+  {
+   "id": "DEFEAT_BLAZE_SLAYER_FOUR",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "slayer tiers",
+   "players": 17
+  },
+  {
+   "id": "DEFEAT_BLAZE_SLAYER_ONE",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "slayer tiers",
+   "players": 40
+  },
+  {
+   "id": "DEFEAT_BLAZE_SLAYER_THREE",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "slayer tiers",
+   "players": 20
+  },
+  {
+   "id": "DEFEAT_BLAZE_SLAYER_TWO",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "slayer tiers",
+   "players": 27
+  },
+  {
+   "id": "DEFEAT_ENDERMAN_SLAYER_FOUR",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "slayer tiers",
+   "players": 63
+  },
+  {
+   "id": "DEFEAT_ENDERMAN_SLAYER_ONE",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "slayer tiers",
+   "players": 98
+  },
+  {
+   "id": "DEFEAT_ENDERMAN_SLAYER_THREE",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "slayer tiers",
+   "players": 69
+  },
+  {
+   "id": "DEFEAT_ENDERMAN_SLAYER_TWO",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "slayer tiers",
+   "players": 80
+  },
+  {
+   "id": "DEFEAT_SPIDER_SLAYER_FIVE",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "slayer tiers",
+   "players": 32
+  },
+  {
+   "id": "DEFEAT_SPIDER_SLAYER_FOUR",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "slayer tiers",
+   "players": 93
+  },
+  {
+   "id": "DEFEAT_SPIDER_SLAYER_ONE",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "slayer tiers",
+   "players": 121
+  },
+  {
+   "id": "DEFEAT_SPIDER_SLAYER_THREE",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "slayer tiers",
+   "players": 105
+  },
+  {
+   "id": "DEFEAT_SPIDER_SLAYER_TWO",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "slayer tiers",
+   "players": 121
+  },
+  {
+   "id": "DEFEAT_VAMPIRE_SLAYER_FIVE",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "slayer tiers",
+   "players": 11
+  },
+  {
+   "id": "DEFEAT_VAMPIRE_SLAYER_FOUR",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "slayer tiers",
+   "players": 24
+  },
+  {
+   "id": "DEFEAT_VAMPIRE_SLAYER_ONE",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "slayer tiers",
+   "players": 36
+  },
+  {
+   "id": "DEFEAT_VAMPIRE_SLAYER_THREE",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "slayer tiers",
+   "players": 30
+  },
+  {
+   "id": "DEFEAT_VAMPIRE_SLAYER_TWO",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "slayer tiers",
+   "players": 34
+  },
+  {
+   "id": "DEFEAT_WOLF_SLAYER_FOUR",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "slayer tiers",
+   "players": 103
+  },
+  {
+   "id": "DEFEAT_WOLF_SLAYER_ONE",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "slayer tiers",
+   "players": 119
+  },
+  {
+   "id": "DEFEAT_WOLF_SLAYER_THREE",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "slayer tiers",
+   "players": 109
+  },
+  {
+   "id": "DEFEAT_WOLF_SLAYER_TWO",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "slayer tiers",
+   "players": 117
+  },
+  {
+   "id": "DEFEAT_ZOMBIE_SLAYER_FIVE",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "slayer tiers",
+   "players": 57
+  },
+  {
+   "id": "DEFEAT_ZOMBIE_SLAYER_FOUR",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "slayer tiers",
+   "players": 108
+  },
+  {
+   "id": "DEFEAT_ZOMBIE_SLAYER_ONE",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "slayer tiers",
+   "players": 130
+  },
+  {
+   "id": "DEFEAT_ZOMBIE_SLAYER_THREE",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "slayer tiers",
+   "players": 116
+  },
+  {
+   "id": "DEFEAT_ZOMBIE_SLAYER_TWO",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "slayer tiers",
+   "players": 128
+  },
+  {
+   "id": "DIAMOND_ESSENCE_DIAMOND_IN_THE_ROUGH_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 24
+  },
+  {
+   "id": "DIAMOND_ESSENCE_DIAMOND_IN_THE_ROUGH_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 19
+  },
+  {
+   "id": "DIAMOND_ESSENCE_DIAMOND_IN_THE_ROUGH_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 19
+  },
+  {
+   "id": "DIAMOND_ESSENCE_DIAMOND_IN_THE_ROUGH_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 17
+  },
+  {
+   "id": "DIAMOND_ESSENCE_DIAMOND_IN_THE_ROUGH_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 16
+  },
+  {
+   "id": "DIAMOND_ESSENCE_HIGH_ROLLER_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 36
+  },
+  {
+   "id": "DIAMOND_ESSENCE_RADIANT_FISHER_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 38
+  },
+  {
+   "id": "DIAMOND_ESSENCE_RADIANT_FISHER_10",
+   "category": "essence_shop",
+   "xp": 10,
+   "rule": "essence shop perks",
+   "players": 22
+  },
+  {
+   "id": "DIAMOND_ESSENCE_RADIANT_FISHER_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 32
+  },
+  {
+   "id": "DIAMOND_ESSENCE_RADIANT_FISHER_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 30
+  },
+  {
+   "id": "DIAMOND_ESSENCE_RADIANT_FISHER_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 27
+  },
+  {
+   "id": "DIAMOND_ESSENCE_RADIANT_FISHER_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 27
+  },
+  {
+   "id": "DIAMOND_ESSENCE_RADIANT_FISHER_6",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 26
+  },
+  {
+   "id": "DIAMOND_ESSENCE_RADIANT_FISHER_7",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 24
+  },
+  {
+   "id": "DIAMOND_ESSENCE_RADIANT_FISHER_8",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 22
+  },
+  {
+   "id": "DIAMOND_ESSENCE_RADIANT_FISHER_9",
+   "category": "essence_shop",
+   "xp": 9,
+   "rule": "essence shop perks",
+   "players": 22
+  },
+  {
+   "id": "DIAMOND_ESSENCE_RETURN_TO_SENDER_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 49
+  },
+  {
+   "id": "DIAMOND_ESSENCE_RETURN_TO_SENDER_10",
+   "category": "essence_shop",
+   "xp": 10,
+   "rule": "essence shop perks",
+   "players": 22
+  },
+  {
+   "id": "DIAMOND_ESSENCE_RETURN_TO_SENDER_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 47
+  },
+  {
+   "id": "DIAMOND_ESSENCE_RETURN_TO_SENDER_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 46
+  },
+  {
+   "id": "DIAMOND_ESSENCE_RETURN_TO_SENDER_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 42
+  },
+  {
+   "id": "DIAMOND_ESSENCE_RETURN_TO_SENDER_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 37
+  },
+  {
+   "id": "DIAMOND_ESSENCE_RETURN_TO_SENDER_6",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 34
+  },
+  {
+   "id": "DIAMOND_ESSENCE_RETURN_TO_SENDER_7",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 31
+  },
+  {
+   "id": "DIAMOND_ESSENCE_RETURN_TO_SENDER_8",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 26
+  },
+  {
+   "id": "DIAMOND_ESSENCE_RETURN_TO_SENDER_9",
+   "category": "essence_shop",
+   "xp": 9,
+   "rule": "essence shop perks",
+   "players": 23
+  },
+  {
+   "id": "DIAMOND_ESSENCE_RHINESTONE_INFUSION_1",
+   "category": "essence_shop",
+   "xp": 1,
+   "rule": "essence shop perks",
+   "players": 47
+  },
+  {
+   "id": "DIAMOND_ESSENCE_RHINESTONE_INFUSION_10",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 26
+  },
+  {
+   "id": "DIAMOND_ESSENCE_RHINESTONE_INFUSION_2",
+   "category": "essence_shop",
+   "xp": 1,
+   "rule": "essence shop perks",
+   "players": 43
+  },
+  {
+   "id": "DIAMOND_ESSENCE_RHINESTONE_INFUSION_3",
+   "category": "essence_shop",
+   "xp": 1,
+   "rule": "essence shop perks",
+   "players": 40
+  },
+  {
+   "id": "DIAMOND_ESSENCE_RHINESTONE_INFUSION_4",
+   "category": "essence_shop",
+   "xp": 1,
+   "rule": "essence shop perks",
+   "players": 37
+  },
+  {
+   "id": "DIAMOND_ESSENCE_RHINESTONE_INFUSION_5",
+   "category": "essence_shop",
+   "xp": 1,
+   "rule": "essence shop perks",
+   "players": 32
+  },
+  {
+   "id": "DIAMOND_ESSENCE_RHINESTONE_INFUSION_6",
+   "category": "essence_shop",
+   "xp": 1,
+   "rule": "essence shop perks",
+   "players": 31
+  },
+  {
+   "id": "DIAMOND_ESSENCE_RHINESTONE_INFUSION_7",
+   "category": "essence_shop",
+   "xp": 1,
+   "rule": "essence shop perks",
+   "players": 28
+  },
+  {
+   "id": "DIAMOND_ESSENCE_RHINESTONE_INFUSION_8",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 28
+  },
+  {
+   "id": "DIAMOND_ESSENCE_RHINESTONE_INFUSION_9",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 26
+  },
+  {
+   "id": "DIAMOND_ESSENCE_UNDER_PRESSURE_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 34
+  },
+  {
+   "id": "DIAMOND_ESSENCE_UNDER_PRESSURE_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 23
+  },
+  {
+   "id": "DIAMOND_ESSENCE_UNDER_PRESSURE_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 22
+  },
+  {
+   "id": "DIAMOND_ESSENCE_UNDER_PRESSURE_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 19
+  },
+  {
+   "id": "DIAMOND_ESSENCE_UNDER_PRESSURE_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 18
+  },
+  {
+   "id": "DOJO_BELT_BLACK",
+   "category": "misc",
+   "xp": 150,
+   "rule": "dojo belts",
+   "players": 8
+  },
+  {
+   "id": "DOJO_BELT_BLUE",
+   "category": "misc",
+   "xp": 75,
+   "rule": "dojo belts",
+   "players": 54
+  },
+  {
+   "id": "DOJO_BELT_BROWN",
+   "category": "misc",
+   "xp": 100,
+   "rule": "dojo belts",
+   "players": 15
+  },
+  {
+   "id": "DOJO_BELT_GREEN",
+   "category": "misc",
+   "xp": 50,
+   "rule": "dojo belts",
+   "players": 64
+  },
+  {
+   "id": "DOJO_BELT_WHITE",
+   "category": "misc",
+   "xp": 20,
+   "rule": "dojo belts",
+   "players": 80
+  },
+  {
+   "id": "DOJO_BELT_YELLOW",
+   "category": "misc",
+   "xp": 30,
+   "rule": "dojo belts",
+   "players": 64
+  },
+  {
+   "id": "DOLPHIN_MILESTONE_COMMON",
+   "category": "misc",
+   "xp": 20,
+   "rule": "rock/dolphin milestones",
+   "players": 75
+  },
+  {
+   "id": "DOLPHIN_MILESTONE_EPIC",
+   "category": "misc",
+   "xp": 20,
+   "rule": "rock/dolphin milestones",
+   "players": 42
+  },
+  {
+   "id": "DOLPHIN_MILESTONE_LEGENDARY",
+   "category": "misc",
+   "xp": 20,
+   "rule": "rock/dolphin milestones",
+   "players": 31
+  },
+  {
+   "id": "DOLPHIN_MILESTONE_RARE",
+   "category": "misc",
+   "xp": 20,
+   "rule": "rock/dolphin milestones",
+   "players": 48
+  },
+  {
+   "id": "DOLPHIN_MILESTONE_UNCOMMON",
+   "category": "misc",
+   "xp": 20,
+   "rule": "rock/dolphin milestones",
+   "players": 56
+  },
+  {
+   "id": "DRAGON_ESSENCE_COMBAT_WISDOM_IN_END_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 41
+  },
+  {
+   "id": "DRAGON_ESSENCE_COMBAT_WISDOM_IN_END_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 20
+  },
+  {
+   "id": "DRAGON_ESSENCE_COMBAT_WISDOM_IN_END_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 11
+  },
+  {
+   "id": "DRAGON_ESSENCE_DRAGON_REFORGES_BUFF_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 13
+  },
+  {
+   "id": "DRAGON_ESSENCE_DRAGON_REFORGES_BUFF_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 12
+  },
+  {
+   "id": "DRAGON_ESSENCE_DRAGON_REFORGES_BUFF_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 10
+  },
+  {
+   "id": "DRAGON_ESSENCE_DRAGON_REFORGES_BUFF_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "DRAGON_ESSENCE_DRAGON_REFORGES_BUFF_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "DRAGON_ESSENCE_EDRAG_CD_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 22
+  },
+  {
+   "id": "DRAGON_ESSENCE_EDRAG_CD_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 11
+  },
+  {
+   "id": "DRAGON_ESSENCE_EDRAG_CD_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 9
+  },
+  {
+   "id": "DRAGON_ESSENCE_EDRAG_CD_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 9
+  },
+  {
+   "id": "DRAGON_ESSENCE_EDRAG_CD_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "DRAGON_ESSENCE_FERO_VS_DRAGONS_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 38
+  },
+  {
+   "id": "DRAGON_ESSENCE_FERO_VS_DRAGONS_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 26
+  },
+  {
+   "id": "DRAGON_ESSENCE_FERO_VS_DRAGONS_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 19
+  },
+  {
+   "id": "DRAGON_ESSENCE_FERO_VS_DRAGONS_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 14
+  },
+  {
+   "id": "DRAGON_ESSENCE_FERO_VS_DRAGONS_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 13
+  },
+  {
+   "id": "DRAGON_ESSENCE_FLAT_DAMAGE_VS_ENDER_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 57
+  },
+  {
+   "id": "DRAGON_ESSENCE_FLAT_DAMAGE_VS_ENDER_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 38
+  },
+  {
+   "id": "DRAGON_ESSENCE_FLAT_DAMAGE_VS_ENDER_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 29
+  },
+  {
+   "id": "DRAGON_ESSENCE_FLAT_DAMAGE_VS_ENDER_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 21
+  },
+  {
+   "id": "DRAGON_ESSENCE_FLAT_DAMAGE_VS_ENDER_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 18
+  },
+  {
+   "id": "DRAGON_ESSENCE_INC_ZEALOTS_ODDS_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 72
+  },
+  {
+   "id": "DRAGON_ESSENCE_INC_ZEALOTS_ODDS_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 58
+  },
+  {
+   "id": "DRAGON_ESSENCE_INC_ZEALOTS_ODDS_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 43
+  },
+  {
+   "id": "DRAGON_ESSENCE_INC_ZEALOTS_ODDS_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 28
+  },
+  {
+   "id": "DRAGON_ESSENCE_INC_ZEALOTS_ODDS_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 21
+  },
+  {
+   "id": "DRAGON_ESSENCE_INCREASED_SUP_CHANCES_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 20
+  },
+  {
+   "id": "DRAGON_ESSENCE_MANA_AFTER_ENDER_KILL_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 33
+  },
+  {
+   "id": "DRAGON_ESSENCE_MANA_AFTER_ENDER_KILL_10",
+   "category": "essence_shop",
+   "xp": 10,
+   "rule": "essence shop perks",
+   "players": 20
+  },
+  {
+   "id": "DRAGON_ESSENCE_MANA_AFTER_ENDER_KILL_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 26
+  },
+  {
+   "id": "DRAGON_ESSENCE_MANA_AFTER_ENDER_KILL_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 25
+  },
+  {
+   "id": "DRAGON_ESSENCE_MANA_AFTER_ENDER_KILL_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 25
+  },
+  {
+   "id": "DRAGON_ESSENCE_MANA_AFTER_ENDER_KILL_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 22
+  },
+  {
+   "id": "DRAGON_ESSENCE_MANA_AFTER_ENDER_KILL_6",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 21
+  },
+  {
+   "id": "DRAGON_ESSENCE_MANA_AFTER_ENDER_KILL_7",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 21
+  },
+  {
+   "id": "DRAGON_ESSENCE_MANA_AFTER_ENDER_KILL_8",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 20
+  },
+  {
+   "id": "DRAGON_ESSENCE_MANA_AFTER_ENDER_KILL_9",
+   "category": "essence_shop",
+   "xp": 9,
+   "rule": "essence shop perks",
+   "players": 20
+  },
+  {
+   "id": "DRAGON_ESSENCE_UNBRIDLED_RAGE_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 15
+  },
+  {
+   "id": "DRAGON_ESSENCE_UNBRIDLED_RAGE_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 14
+  },
+  {
+   "id": "DRAGON_ESSENCE_UNBRIDLED_RAGE_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 12
+  },
+  {
+   "id": "DRAGON_ESSENCE_UNBRIDLED_RAGE_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 10
+  },
+  {
+   "id": "DRAGON_ESSENCE_UNBRIDLED_RAGE_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 9
+  },
+  {
+   "id": "FARMING_CONTEST_CACTUS",
+   "category": "events",
+   "xp": 10,
+   "rule": "jacob's contests",
+   "players": 29
+  },
+  {
+   "id": "FARMING_CONTEST_CARROT_ITEM",
+   "category": "events",
+   "xp": 10,
+   "rule": "jacob's contests",
+   "players": 35
+  },
+  {
+   "id": "FARMING_CONTEST_DOUBLE_PLANT",
+   "category": "events",
+   "xp": 10,
+   "rule": "jacob's contests",
+   "players": 23
+  },
+  {
+   "id": "FARMING_CONTEST_INK_SACK:3",
+   "category": "events",
+   "xp": 10,
+   "rule": "jacob's contests",
+   "players": 34
+  },
+  {
+   "id": "FARMING_CONTEST_MELON",
+   "category": "events",
+   "xp": 10,
+   "rule": "jacob's contests",
+   "players": 24
+  },
+  {
+   "id": "FARMING_CONTEST_MOONFLOWER",
+   "category": "events",
+   "xp": 10,
+   "rule": "jacob's contests",
+   "players": 15
+  },
+  {
+   "id": "FARMING_CONTEST_MUSHROOM_COLLECTION",
+   "category": "events",
+   "xp": 10,
+   "rule": "jacob's contests",
+   "players": 37
+  },
+  {
+   "id": "FARMING_CONTEST_NETHER_STALK",
+   "category": "events",
+   "xp": 10,
+   "rule": "jacob's contests",
+   "players": 21
+  },
+  {
+   "id": "FARMING_CONTEST_POTATO_ITEM",
+   "category": "events",
+   "xp": 10,
+   "rule": "jacob's contests",
+   "players": 34
+  },
+  {
+   "id": "FARMING_CONTEST_PUMPKIN",
+   "category": "events",
+   "xp": 10,
+   "rule": "jacob's contests",
+   "players": 33
+  },
+  {
+   "id": "FARMING_CONTEST_SUGAR_CANE",
+   "category": "events",
+   "xp": 10,
+   "rule": "jacob's contests",
+   "players": 30
+  },
+  {
+   "id": "FARMING_CONTEST_WHEAT",
+   "category": "events",
+   "xp": 10,
+   "rule": "jacob's contests",
+   "players": 28
+  },
+  {
+   "id": "FARMING_CONTEST_WILD_ROSE",
+   "category": "events",
+   "xp": 10,
+   "rule": "jacob's contests",
+   "players": 21
+  },
+  {
+   "id": "FAST_TRAVEL_BARN",
+   "category": "fast_travel",
+   "xp": 15,
+   "rule": "fast travel",
+   "players": 50
+  },
+  {
+   "id": "FAST_TRAVEL_BAYOU",
+   "category": "fast_travel",
+   "xp": 15,
+   "rule": "fast travel",
+   "players": 45
+  },
+  {
+   "id": "FAST_TRAVEL_CRYSTAL_HOLLOWS",
+   "category": "fast_travel",
+   "xp": 15,
+   "rule": "fast travel",
+   "players": 108
+  },
+  {
+   "id": "FAST_TRAVEL_CRYSTAL_NUCLEUS",
+   "category": "fast_travel",
+   "xp": 15,
+   "rule": "fast travel",
+   "players": 45
+  },
+  {
+   "id": "FAST_TRAVEL_DEEP",
+   "category": "fast_travel",
+   "xp": 15,
+   "rule": "fast travel",
+   "players": 70
+  },
+  {
+   "id": "FAST_TRAVEL_DWARVEN_BASE_CAMP",
+   "category": "fast_travel",
+   "xp": 15,
+   "rule": "fast travel",
+   "players": 40
+  },
+  {
+   "id": "FAST_TRAVEL_DWARVEN_FORGE",
+   "category": "fast_travel",
+   "xp": 15,
+   "rule": "fast travel",
+   "players": 87
+  },
+  {
+   "id": "FAST_TRAVEL_DWARVEN_MINES",
+   "category": "fast_travel",
+   "xp": 15,
+   "rule": "fast travel",
+   "players": 74
+  },
+  {
+   "id": "FAST_TRAVEL_END",
+   "category": "fast_travel",
+   "xp": 15,
+   "rule": "fast travel",
+   "players": 80
+  },
+  {
+   "id": "FAST_TRAVEL_GLOWING_MUSHROOM_CAVE",
+   "category": "fast_travel",
+   "xp": 15,
+   "rule": "fast travel",
+   "players": 12
+  },
+  {
+   "id": "FAST_TRAVEL_GOLD",
+   "category": "fast_travel",
+   "xp": 15,
+   "rule": "fast travel",
+   "players": 51
+  },
+  {
+   "id": "FAST_TRAVEL_LOTUS_ATOLL",
+   "category": "fast_travel",
+   "xp": 15,
+   "rule": "fast travel",
+   "players": 18
+  },
+  {
+   "id": "FAST_TRAVEL_MURKWATER",
+   "category": "fast_travel",
+   "xp": 15,
+   "rule": "fast travel",
+   "players": 40
+  },
+  {
+   "id": "FAST_TRAVEL_MUSEUM",
+   "category": "fast_travel",
+   "xp": 15,
+   "rule": "fast travel",
+   "players": 49
+  },
+  {
+   "id": "FAST_TRAVEL_MUSHROOM",
+   "category": "fast_travel",
+   "xp": 15,
+   "rule": "fast travel",
+   "players": 43
+  },
+  {
+   "id": "FAST_TRAVEL_NETHER_FORTRESS",
+   "category": "fast_travel",
+   "xp": 15,
+   "rule": "fast travel",
+   "players": 60
+  },
+  {
+   "id": "FAST_TRAVEL_PARK",
+   "category": "fast_travel",
+   "xp": 15,
+   "rule": "fast travel",
+   "players": 126
+  },
+  {
+   "id": "FAST_TRAVEL_SPIDER_DEN",
+   "category": "fast_travel",
+   "xp": 15,
+   "rule": "fast travel",
+   "players": 50
+  },
+  {
+   "id": "FAST_TRAVEL_THE_RIFT",
+   "category": "fast_travel",
+   "xp": 15,
+   "rule": "fast travel",
+   "players": 23
+  },
+  {
+   "id": "FAST_TRAVEL_TORRHUS_CANYON",
+   "category": "fast_travel",
+   "xp": 15,
+   "rule": "fast travel",
+   "players": 44
+  },
+  {
+   "id": "FAST_TRAVEL_TORRHUS_SAFARI_ENTRANCE",
+   "category": "fast_travel",
+   "xp": 15,
+   "rule": "fast travel",
+   "players": 29
+  },
+  {
+   "id": "FAST_TRAVEL_TORRHUS_SPRINGS",
+   "category": "fast_travel",
+   "xp": 15,
+   "rule": "fast travel",
+   "players": 14
+  },
+  {
+   "id": "FAST_TRAVEL_TRAPPERS_DEN",
+   "category": "fast_travel",
+   "xp": 15,
+   "rule": "fast travel",
+   "players": 30
+  },
+  {
+   "id": "FAST_TRAVEL_WIZARD_TOWER",
+   "category": "fast_travel",
+   "xp": 15,
+   "rule": "fast travel",
+   "players": 59
+  },
+  {
+   "id": "FISHING_FESTIVAL_DENTURE_COLLECTOR_1",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 23
+  },
+  {
+   "id": "FISHING_FESTIVAL_DENTURE_COLLECTOR_2",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 18
+  },
+  {
+   "id": "FISHING_FESTIVAL_DENTURE_COLLECTOR_3",
+   "category": "events",
+   "xp": 3,
+   "rule": "event perk shops",
+   "players": 13
+  },
+  {
+   "id": "FISHING_FESTIVAL_ELASMOBRANCHII_AFFINITY_1",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 19
+  },
+  {
+   "id": "FISHING_FESTIVAL_ELASMOBRANCHII_AFFINITY_2",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 6
+  },
+  {
+   "id": "FISHING_FESTIVAL_FISHING_PRODIGY_1",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 20
+  },
+  {
+   "id": "FISHING_FESTIVAL_FISHING_PRODIGY_2",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 16
+  },
+  {
+   "id": "FISHING_FESTIVAL_FISHING_PRODIGY_3",
+   "category": "events",
+   "xp": 3,
+   "rule": "event perk shops",
+   "players": 14
+  },
+  {
+   "id": "FISHING_FESTIVAL_FISHING_PRODIGY_4",
+   "category": "events",
+   "xp": 5,
+   "rule": "event perk shops",
+   "players": 13
+  },
+  {
+   "id": "FISHING_FESTIVAL_FISHING_PRODIGY_5",
+   "category": "events",
+   "xp": 7,
+   "rule": "event perk shops",
+   "players": 11
+  },
+  {
+   "id": "FISHING_FESTIVAL_SHARK_SONAR_1",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 21
+  },
+  {
+   "id": "FISHING_FESTIVAL_SHARK_SONAR_2",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 20
+  },
+  {
+   "id": "FISHING_FESTIVAL_SHARK_SONAR_3",
+   "category": "events",
+   "xp": 3,
+   "rule": "event perk shops",
+   "players": 17
+  },
+  {
+   "id": "FISHING_FESTIVAL_SHARK_SONAR_4",
+   "category": "events",
+   "xp": 5,
+   "rule": "event perk shops",
+   "players": 16
+  },
+  {
+   "id": "FISHING_FESTIVAL_SHARK_SONAR_5",
+   "category": "events",
+   "xp": 7,
+   "rule": "event perk shops",
+   "players": 14
+  },
+  {
+   "id": "FOREST_ESSENCE_AXED_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 31
+  },
+  {
+   "id": "FOREST_ESSENCE_EXTREME_PRESSURE_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 53
+  },
+  {
+   "id": "FOREST_ESSENCE_EXTREME_PRESSURE_10",
+   "category": "essence_shop",
+   "xp": 10,
+   "rule": "essence shop perks",
+   "players": 28
+  },
+  {
+   "id": "FOREST_ESSENCE_EXTREME_PRESSURE_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 47
+  },
+  {
+   "id": "FOREST_ESSENCE_EXTREME_PRESSURE_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 46
+  },
+  {
+   "id": "FOREST_ESSENCE_EXTREME_PRESSURE_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 41
+  },
+  {
+   "id": "FOREST_ESSENCE_EXTREME_PRESSURE_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 40
+  },
+  {
+   "id": "FOREST_ESSENCE_EXTREME_PRESSURE_6",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 35
+  },
+  {
+   "id": "FOREST_ESSENCE_EXTREME_PRESSURE_7",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 31
+  },
+  {
+   "id": "FOREST_ESSENCE_EXTREME_PRESSURE_8",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 30
+  },
+  {
+   "id": "FOREST_ESSENCE_EXTREME_PRESSURE_9",
+   "category": "essence_shop",
+   "xp": 9,
+   "rule": "essence shop perks",
+   "players": 28
+  },
+  {
+   "id": "FOREST_ESSENCE_FOREST_TRAINING_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 55
+  },
+  {
+   "id": "FOREST_ESSENCE_FOREST_TRAINING_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 41
+  },
+  {
+   "id": "FOREST_ESSENCE_FOREST_TRAINING_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 26
+  },
+  {
+   "id": "FOREST_ESSENCE_LUMBERJACK_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 58
+  },
+  {
+   "id": "FOREST_ESSENCE_LUMBERJACK_10",
+   "category": "essence_shop",
+   "xp": 10,
+   "rule": "essence shop perks",
+   "players": 25
+  },
+  {
+   "id": "FOREST_ESSENCE_LUMBERJACK_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 53
+  },
+  {
+   "id": "FOREST_ESSENCE_LUMBERJACK_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 48
+  },
+  {
+   "id": "FOREST_ESSENCE_LUMBERJACK_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 40
+  },
+  {
+   "id": "FOREST_ESSENCE_LUMBERJACK_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 38
+  },
+  {
+   "id": "FOREST_ESSENCE_LUMBERJACK_6",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 33
+  },
+  {
+   "id": "FOREST_ESSENCE_LUMBERJACK_7",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 28
+  },
+  {
+   "id": "FOREST_ESSENCE_LUMBERJACK_8",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 28
+  },
+  {
+   "id": "FOREST_ESSENCE_LUMBERJACK_9",
+   "category": "essence_shop",
+   "xp": 9,
+   "rule": "essence shop perks",
+   "players": 26
+  },
+  {
+   "id": "FOREST_ESSENCE_TASTY_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 38
+  },
+  {
+   "id": "FOREST_ESSENCE_TASTY_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 31
+  },
+  {
+   "id": "FOREST_ESSENCE_TASTY_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 29
+  },
+  {
+   "id": "FOREST_ESSENCE_TASTY_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 25
+  },
+  {
+   "id": "FOREST_ESSENCE_TASTY_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 25
+  },
+  {
+   "id": "FOREST_ESSENCE_TRAPPED_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 47
+  },
+  {
+   "id": "FOREST_ESSENCE_TRAPPED_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 38
+  },
+  {
+   "id": "FOREST_ESSENCE_TRAPPED_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 33
+  },
+  {
+   "id": "FOREST_ESSENCE_TRAPPED_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 30
+  },
+  {
+   "id": "FOREST_ESSENCE_TRAPPED_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 30
+  },
+  {
+   "id": "FOSSIL_ESSENCE_CHILLED_TO_THE_BONE_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 10
+  },
+  {
+   "id": "FOSSIL_ESSENCE_CHILLED_TO_THE_BONE_10",
+   "category": "essence_shop",
+   "xp": 10,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "FOSSIL_ESSENCE_CHILLED_TO_THE_BONE_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 10
+  },
+  {
+   "id": "FOSSIL_ESSENCE_CHILLED_TO_THE_BONE_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 10
+  },
+  {
+   "id": "FOSSIL_ESSENCE_CHILLED_TO_THE_BONE_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 10
+  },
+  {
+   "id": "FOSSIL_ESSENCE_CHILLED_TO_THE_BONE_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "FOSSIL_ESSENCE_CHILLED_TO_THE_BONE_6",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "FOSSIL_ESSENCE_CHILLED_TO_THE_BONE_7",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "FOSSIL_ESSENCE_CHILLED_TO_THE_BONE_8",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "FOSSIL_ESSENCE_CHILLED_TO_THE_BONE_9",
+   "category": "essence_shop",
+   "xp": 9,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "FOSSIL_ESSENCE_CUT_LOOSE_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 15
+  },
+  {
+   "id": "FOSSIL_ESSENCE_CUT_LOOSE_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 11
+  },
+  {
+   "id": "FOSSIL_ESSENCE_CUT_LOOSE_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "FOSSIL_ESSENCE_CUT_LOOSE_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "FOSSIL_ESSENCE_CUT_LOOSE_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 7
+  },
+  {
+   "id": "FOSSIL_ESSENCE_DWARVEN_EXPERTISE_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 15
+  },
+  {
+   "id": "FOSSIL_ESSENCE_DWARVEN_EXPERTISE_10",
+   "category": "essence_shop",
+   "xp": 10,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "FOSSIL_ESSENCE_DWARVEN_EXPERTISE_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 13
+  },
+  {
+   "id": "FOSSIL_ESSENCE_DWARVEN_EXPERTISE_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 11
+  },
+  {
+   "id": "FOSSIL_ESSENCE_DWARVEN_EXPERTISE_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 9
+  },
+  {
+   "id": "FOSSIL_ESSENCE_DWARVEN_EXPERTISE_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 9
+  },
+  {
+   "id": "FOSSIL_ESSENCE_DWARVEN_EXPERTISE_6",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 9
+  },
+  {
+   "id": "FOSSIL_ESSENCE_DWARVEN_EXPERTISE_7",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 9
+  },
+  {
+   "id": "FOSSIL_ESSENCE_DWARVEN_EXPERTISE_8",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 9
+  },
+  {
+   "id": "FOSSIL_ESSENCE_DWARVEN_EXPERTISE_9",
+   "category": "essence_shop",
+   "xp": 9,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "FOSSIL_ESSENCE_PREHISTORIAN_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 14
+  },
+  {
+   "id": "FOSSIL_ESSENCE_PREHISTORIAN_10",
+   "category": "essence_shop",
+   "xp": 10,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "FOSSIL_ESSENCE_PREHISTORIAN_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 13
+  },
+  {
+   "id": "FOSSIL_ESSENCE_PREHISTORIAN_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 11
+  },
+  {
+   "id": "FOSSIL_ESSENCE_PREHISTORIAN_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 11
+  },
+  {
+   "id": "FOSSIL_ESSENCE_PREHISTORIAN_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 10
+  },
+  {
+   "id": "FOSSIL_ESSENCE_PREHISTORIAN_6",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 9
+  },
+  {
+   "id": "FOSSIL_ESSENCE_PREHISTORIAN_7",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 9
+  },
+  {
+   "id": "FOSSIL_ESSENCE_PREHISTORIAN_8",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 9
+  },
+  {
+   "id": "FOSSIL_ESSENCE_PREHISTORIAN_9",
+   "category": "essence_shop",
+   "xp": 9,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "FOSSIL_ESSENCE_RESOURCEFUL_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 12
+  },
+  {
+   "id": "FOSSIL_ESSENCE_RESOURCEFUL_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 10
+  },
+  {
+   "id": "FOSSIL_ESSENCE_RESOURCEFUL_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "FOSSIL_ESSENCE_RESOURCEFUL_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "FOSSIL_ESSENCE_RESOURCEFUL_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "FOSSIL_ESSENCE_SLEIGHT_OF_HAND_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 9
+  },
+  {
+   "id": "GOLD_ESSENCE_DWARVEN_TRAINING_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 48
+  },
+  {
+   "id": "GOLD_ESSENCE_DWARVEN_TRAINING_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 28
+  },
+  {
+   "id": "GOLD_ESSENCE_DWARVEN_TRAINING_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 22
+  },
+  {
+   "id": "GOLD_ESSENCE_EAGER_MINER_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 71
+  },
+  {
+   "id": "GOLD_ESSENCE_EAGER_MINER_10",
+   "category": "essence_shop",
+   "xp": 10,
+   "rule": "essence shop perks",
+   "players": 31
+  },
+  {
+   "id": "GOLD_ESSENCE_EAGER_MINER_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 58
+  },
+  {
+   "id": "GOLD_ESSENCE_EAGER_MINER_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 51
+  },
+  {
+   "id": "GOLD_ESSENCE_EAGER_MINER_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 45
+  },
+  {
+   "id": "GOLD_ESSENCE_EAGER_MINER_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 40
+  },
+  {
+   "id": "GOLD_ESSENCE_EAGER_MINER_6",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 36
+  },
+  {
+   "id": "GOLD_ESSENCE_EAGER_MINER_7",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 34
+  },
+  {
+   "id": "GOLD_ESSENCE_EAGER_MINER_8",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 32
+  },
+  {
+   "id": "GOLD_ESSENCE_EAGER_MINER_9",
+   "category": "essence_shop",
+   "xp": 9,
+   "rule": "essence shop perks",
+   "players": 32
+  },
+  {
+   "id": "GOLD_ESSENCE_HEART_OF_GOLD_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 18
+  },
+  {
+   "id": "GOLD_ESSENCE_HEART_OF_GOLD_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 16
+  },
+  {
+   "id": "GOLD_ESSENCE_HEART_OF_GOLD_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 15
+  },
+  {
+   "id": "GOLD_ESSENCE_HEART_OF_GOLD_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 14
+  },
+  {
+   "id": "GOLD_ESSENCE_HEART_OF_GOLD_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 14
+  },
+  {
+   "id": "GOLD_ESSENCE_MIDAS_LURE_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 38
+  },
+  {
+   "id": "GOLD_ESSENCE_MIDAS_LURE_10",
+   "category": "essence_shop",
+   "xp": 10,
+   "rule": "essence shop perks",
+   "players": 20
+  },
+  {
+   "id": "GOLD_ESSENCE_MIDAS_LURE_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 30
+  },
+  {
+   "id": "GOLD_ESSENCE_MIDAS_LURE_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 27
+  },
+  {
+   "id": "GOLD_ESSENCE_MIDAS_LURE_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 26
+  },
+  {
+   "id": "GOLD_ESSENCE_MIDAS_LURE_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 24
+  },
+  {
+   "id": "GOLD_ESSENCE_MIDAS_LURE_6",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 23
+  },
+  {
+   "id": "GOLD_ESSENCE_MIDAS_LURE_7",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 20
+  },
+  {
+   "id": "GOLD_ESSENCE_MIDAS_LURE_8",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 20
+  },
+  {
+   "id": "GOLD_ESSENCE_MIDAS_LURE_9",
+   "category": "essence_shop",
+   "xp": 9,
+   "rule": "essence shop perks",
+   "players": 20
+  },
+  {
+   "id": "GOLD_ESSENCE_TREASURES_OF_THE_EARTH_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 54
+  },
+  {
+   "id": "GOLD_ESSENCE_TREASURES_OF_THE_EARTH_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 42
+  },
+  {
+   "id": "GOLD_ESSENCE_TREASURES_OF_THE_EARTH_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 37
+  },
+  {
+   "id": "GOLD_ESSENCE_TREASURES_OF_THE_EARTH_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 32
+  },
+  {
+   "id": "GOLD_ESSENCE_TREASURES_OF_THE_EARTH_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 28
+  },
+  {
+   "id": "GOLD_ESSENCE_UNBREAKING_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 52
+  },
+  {
+   "id": "GOLD_ESSENCE_UNBREAKING_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 37
+  },
+  {
+   "id": "GOLD_ESSENCE_UNBREAKING_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 30
+  },
+  {
+   "id": "GOLD_ESSENCE_UNBREAKING_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 25
+  },
+  {
+   "id": "GOLD_ESSENCE_UNBREAKING_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 21
+  },
+  {
+   "id": "HARVEST_FEAST_FEAST_CRASHERS_1",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 13
+  },
+  {
+   "id": "HARVEST_FEAST_FEAST_CRASHERS_2",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 11
+  },
+  {
+   "id": "HARVEST_FEAST_FEAST_CRASHERS_3",
+   "category": "events",
+   "xp": 3,
+   "rule": "event perk shops",
+   "players": 9
+  },
+  {
+   "id": "HARVEST_FEAST_FORTUNATE_FEASTING_1",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 16
+  },
+  {
+   "id": "HARVEST_FEAST_FORTUNATE_FEASTING_2",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 15
+  },
+  {
+   "id": "HARVEST_FEAST_FORTUNATE_FEASTING_3",
+   "category": "events",
+   "xp": 3,
+   "rule": "event perk shops",
+   "players": 12
+  },
+  {
+   "id": "HARVEST_FEAST_FORTUNATE_FEASTING_4",
+   "category": "events",
+   "xp": 5,
+   "rule": "event perk shops",
+   "players": 10
+  },
+  {
+   "id": "HARVEST_FEAST_FORTUNATE_FEASTING_5",
+   "category": "events",
+   "xp": 7,
+   "rule": "event perk shops",
+   "players": 9
+  },
+  {
+   "id": "HARVEST_FEAST_LEFTOVERS_1",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 14
+  },
+  {
+   "id": "HARVEST_FEAST_LEFTOVERS_2",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 7
+  },
+  {
+   "id": "HARVEST_FEAST_NATURAL_TALENT_1",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 19
+  },
+  {
+   "id": "HARVEST_FEAST_NATURAL_TALENT_2",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 16
+  },
+  {
+   "id": "HARVEST_FEAST_NATURAL_TALENT_3",
+   "category": "events",
+   "xp": 3,
+   "rule": "event perk shops",
+   "players": 15
+  },
+  {
+   "id": "HARVEST_FEAST_NATURAL_TALENT_4",
+   "category": "events",
+   "xp": 5,
+   "rule": "event perk shops",
+   "players": 12
+  },
+  {
+   "id": "HARVEST_FEAST_NATURAL_TALENT_5",
+   "category": "events",
+   "xp": 7,
+   "rule": "event perk shops",
+   "players": 11
+  },
+  {
+   "id": "ICE_ESSENCE_COLD_EFFICIENCY_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 29
+  },
+  {
+   "id": "ICE_ESSENCE_COLD_EFFICIENCY_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 16
+  },
+  {
+   "id": "ICE_ESSENCE_COLD_EFFICIENCY_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 14
+  },
+  {
+   "id": "ICE_ESSENCE_COLD_EFFICIENCY_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 12
+  },
+  {
+   "id": "ICE_ESSENCE_COLD_EFFICIENCY_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 12
+  },
+  {
+   "id": "ICE_ESSENCE_COOLED_FORGES_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 38
+  },
+  {
+   "id": "ICE_ESSENCE_COOLED_FORGES_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 22
+  },
+  {
+   "id": "ICE_ESSENCE_COOLED_FORGES_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 13
+  },
+  {
+   "id": "ICE_ESSENCE_COOLED_FORGES_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 11
+  },
+  {
+   "id": "ICE_ESSENCE_COOLED_FORGES_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 11
+  },
+  {
+   "id": "ICE_ESSENCE_DRAKE_PIPER_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 22
+  },
+  {
+   "id": "ICE_ESSENCE_FROZEN_SKIN_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 24
+  },
+  {
+   "id": "ICE_ESSENCE_FROZEN_SKIN_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 17
+  },
+  {
+   "id": "ICE_ESSENCE_FROZEN_SKIN_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 13
+  },
+  {
+   "id": "ICE_ESSENCE_FROZEN_SKIN_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 10
+  },
+  {
+   "id": "ICE_ESSENCE_FROZEN_SKIN_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 10
+  },
+  {
+   "id": "ICE_ESSENCE_SEASON_OF_JOY_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 31
+  },
+  {
+   "id": "ICE_ESSENCE_SEASON_OF_JOY_10",
+   "category": "essence_shop",
+   "xp": 10,
+   "rule": "essence shop perks",
+   "players": 7
+  },
+  {
+   "id": "ICE_ESSENCE_SEASON_OF_JOY_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 23
+  },
+  {
+   "id": "ICE_ESSENCE_SEASON_OF_JOY_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 17
+  },
+  {
+   "id": "ICE_ESSENCE_SEASON_OF_JOY_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 14
+  },
+  {
+   "id": "ICE_ESSENCE_SEASON_OF_JOY_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 11
+  },
+  {
+   "id": "ICE_ESSENCE_SEASON_OF_JOY_6",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 10
+  },
+  {
+   "id": "ICE_ESSENCE_SEASON_OF_JOY_7",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 9
+  },
+  {
+   "id": "ICE_ESSENCE_SEASON_OF_JOY_8",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 7
+  },
+  {
+   "id": "ICE_ESSENCE_SEASON_OF_JOY_9",
+   "category": "essence_shop",
+   "xp": 9,
+   "rule": "essence shop perks",
+   "players": 7
+  },
+  {
+   "id": "KILL_ARACHNE_TIER_1",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "other bosses",
+   "players": 111
+  },
+  {
+   "id": "KILL_ARACHNE_TIER_2",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "other bosses",
+   "players": 103
+  },
+  {
+   "id": "KILL_KUUDRA_BURNING",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "other bosses",
+   "players": 32
+  },
+  {
+   "id": "KILL_KUUDRA_FIERY",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "other bosses",
+   "players": 21
+  },
+  {
+   "id": "KILL_KUUDRA_HOT",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "other bosses",
+   "players": 42
+  },
+  {
+   "id": "KILL_KUUDRA_INFERNAL",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "other bosses",
+   "players": 18
+  },
+  {
+   "id": "KILL_KUUDRA_NONE",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "other bosses",
+   "players": 53
+  },
+  {
+   "id": "KILL_OLD_DRAGON",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "dragons",
+   "players": 96
+  },
+  {
+   "id": "KILL_PROTECTOR_DRAGON",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "dragons",
+   "players": 94
+  },
+  {
+   "id": "KILL_STRONG_DRAGON",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "dragons",
+   "players": 93
+  },
+  {
+   "id": "KILL_SUPERIOR_DRAGON",
+   "category": "slayer",
+   "xp": 50,
+   "rule": "dragons",
+   "players": 78
+  },
+  {
+   "id": "KILL_UNSTABLE_DRAGON",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "dragons",
+   "players": 98
+  },
+  {
+   "id": "KILL_WISE_DRAGON",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "dragons",
+   "players": 95
+  },
+  {
+   "id": "KILL_YOUNG_DRAGON",
+   "category": "slayer",
+   "xp": 25,
+   "rule": "dragons",
+   "players": 98
+  },
+  {
+   "id": "MAGES_FRIENDLY",
+   "category": "misc",
+   "xp": 5,
+   "rule": "reputation",
+   "players": 36
+  },
+  {
+   "id": "MAGES_HERO",
+   "category": "misc",
+   "xp": 40,
+   "rule": "reputation",
+   "players": 16
+  },
+  {
+   "id": "MAGES_HONORED",
+   "category": "misc",
+   "xp": 20,
+   "rule": "reputation",
+   "players": 19
+  },
+  {
+   "id": "MAGES_TRUSTED",
+   "category": "misc",
+   "xp": 10,
+   "rule": "reputation",
+   "players": 25
+  },
+  {
+   "id": "MYTHOLOGICAL_RITUAL_DEADLY_GREED_1",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 19
+  },
+  {
+   "id": "MYTHOLOGICAL_RITUAL_DEADLY_GREED_2",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 14
+  },
+  {
+   "id": "MYTHOLOGICAL_RITUAL_DEADLY_GREED_3",
+   "category": "events",
+   "xp": 3,
+   "rule": "event perk shops",
+   "players": 12
+  },
+  {
+   "id": "MYTHOLOGICAL_RITUAL_DEADLY_GREED_4",
+   "category": "events",
+   "xp": 5,
+   "rule": "event perk shops",
+   "players": 12
+  },
+  {
+   "id": "MYTHOLOGICAL_RITUAL_DEADLY_GREED_5",
+   "category": "events",
+   "xp": 7,
+   "rule": "event perk shops",
+   "players": 11
+  },
+  {
+   "id": "MYTHOLOGICAL_RITUAL_DIANAS_FAVOR_1",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 23
+  },
+  {
+   "id": "MYTHOLOGICAL_RITUAL_DIANAS_FAVOR_2",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 19
+  },
+  {
+   "id": "MYTHOLOGICAL_RITUAL_DIANAS_FAVOR_3",
+   "category": "events",
+   "xp": 3,
+   "rule": "event perk shops",
+   "players": 14
+  },
+  {
+   "id": "MYTHOLOGICAL_RITUAL_ELUSIVE_HUNTER_1",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 23
+  },
+  {
+   "id": "MYTHOLOGICAL_RITUAL_ELUSIVE_HUNTER_2",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 14
+  },
+  {
+   "id": "MYTHOLOGICAL_RITUAL_STORIED_STINGER_1",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 27
+  },
+  {
+   "id": "MYTHOLOGICAL_RITUAL_STORIED_STINGER_2",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 22
+  },
+  {
+   "id": "MYTHOLOGICAL_RITUAL_STORIED_STINGER_3",
+   "category": "events",
+   "xp": 3,
+   "rule": "event perk shops",
+   "players": 21
+  },
+  {
+   "id": "MYTHOLOGICAL_RITUAL_STORIED_STINGER_4",
+   "category": "events",
+   "xp": 5,
+   "rule": "event perk shops",
+   "players": 20
+  },
+  {
+   "id": "MYTHOLOGICAL_RITUAL_STORIED_STINGER_5",
+   "category": "events",
+   "xp": 7,
+   "rule": "event perk shops",
+   "players": 17
+  },
+  {
+   "id": "NATIONAL_MINING_MONTH_FORTUNATE_FESTIVITY_1",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 21
+  },
+  {
+   "id": "NATIONAL_MINING_MONTH_FORTUNATE_FESTIVITY_2",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 18
+  },
+  {
+   "id": "NATIONAL_MINING_MONTH_FORTUNATE_FESTIVITY_3",
+   "category": "events",
+   "xp": 3,
+   "rule": "event perk shops",
+   "players": 16
+  },
+  {
+   "id": "NATIONAL_MINING_MONTH_FORTUNATE_FESTIVITY_4",
+   "category": "events",
+   "xp": 5,
+   "rule": "event perk shops",
+   "players": 13
+  },
+  {
+   "id": "NATIONAL_MINING_MONTH_FORTUNATE_FESTIVITY_5",
+   "category": "events",
+   "xp": 7,
+   "rule": "event perk shops",
+   "players": 12
+  },
+  {
+   "id": "NATIONAL_MINING_MONTH_POWDER_HOARDER_1",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 16
+  },
+  {
+   "id": "NATIONAL_MINING_MONTH_POWDER_HOARDER_2",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 16
+  },
+  {
+   "id": "NATIONAL_MINING_MONTH_POWDER_HOARDER_3",
+   "category": "events",
+   "xp": 3,
+   "rule": "event perk shops",
+   "players": 10
+  },
+  {
+   "id": "NATIONAL_MINING_MONTH_REFINED_MIND_1",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 28
+  },
+  {
+   "id": "NATIONAL_MINING_MONTH_REFINED_MIND_2",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 24
+  },
+  {
+   "id": "NATIONAL_MINING_MONTH_REFINED_MIND_3",
+   "category": "events",
+   "xp": 3,
+   "rule": "event perk shops",
+   "players": 21
+  },
+  {
+   "id": "NATIONAL_MINING_MONTH_REFINED_MIND_4",
+   "category": "events",
+   "xp": 5,
+   "rule": "event perk shops",
+   "players": 21
+  },
+  {
+   "id": "NATIONAL_MINING_MONTH_REFINED_MIND_5",
+   "category": "events",
+   "xp": 7,
+   "rule": "event perk shops",
+   "players": 19
+  },
+  {
+   "id": "NATIONAL_MINING_MONTH_TITANIUM_TENACITY_1",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 14
+  },
+  {
+   "id": "NATIONAL_MINING_MONTH_TITANIUM_TENACITY_2",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 8
+  },
+  {
+   "id": "OBJECTIVE_ANALYZE_CROP",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 54
+  },
+  {
+   "id": "OBJECTIVE_APPLY_ENGINE",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 106
+  },
+  {
+   "id": "OBJECTIVE_APPLY_ROD_PART",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 102
+  },
+  {
+   "id": "OBJECTIVE_BETH_PULL_LEVER",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 56
+  },
+  {
+   "id": "OBJECTIVE_CLEAN_CROP_PLOT",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 113
+  },
+  {
+   "id": "OBJECTIVE_COMPLETE_THE_CHICKEN_RACE_4",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 39
+  },
+  {
+   "id": "OBJECTIVE_COMPLETE_THE_END_RACE_4",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 84
+  },
+  {
+   "id": "OBJECTIVE_COMPLETE_THE_WOODS_RACE_4",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 65
+  },
+  {
+   "id": "OBJECTIVE_EXPLORE_HUB",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 120
+  },
+  {
+   "id": "OBJECTIVE_EXPLORE_NETHER_ISLAND",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 77
+  },
+  {
+   "id": "OBJECTIVE_EXPLORE_VILLAGE",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 97
+  },
+  {
+   "id": "OBJECTIVE_FIRE_TRIAL_TALK_30",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 13
+  },
+  {
+   "id": "OBJECTIVE_GIVE_PICKAXE_LAPIS_MINER",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 92
+  },
+  {
+   "id": "OBJECTIVE_GIVE_SAM_COMPOST",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 116
+  },
+  {
+   "id": "OBJECTIVE_GIVE_SAM_WHEAT",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 119
+  },
+  {
+   "id": "OBJECTIVE_GO_TO_BASE_CAMP",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 58
+  },
+  {
+   "id": "OBJECTIVE_HELP_ELLE",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 96
+  },
+  {
+   "id": "OBJECTIVE_INCREASE_FARMING_SKILL_5",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 137
+  },
+  {
+   "id": "OBJECTIVE_INCREASE_FORAGING_SKILL_5",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 90
+  },
+  {
+   "id": "OBJECTIVE_INSERT_GARDEN_CHIP",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 82
+  },
+  {
+   "id": "OBJECTIVE_KILL_DANGER_MOBS",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 132
+  },
+  {
+   "id": "OBJECTIVE_MEET_BETH_AT_LAB",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 62
+  },
+  {
+   "id": "OBJECTIVE_MINE_COAL",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 138
+  },
+  {
+   "id": "OBJECTIVE_SERVE_FIRST_CUSTOMER",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 110
+  },
+  {
+   "id": "OBJECTIVE_TALK_TO_AGATHA",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 100
+  },
+  {
+   "id": "OBJECTIVE_TALK_TO_BANKER",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 140
+  },
+  {
+   "id": "OBJECTIVE_TALK_TO_CHARLIE_NEW_3",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 130
+  },
+  {
+   "id": "OBJECTIVE_TALK_TO_DAVID_7",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 102
+  },
+  {
+   "id": "OBJECTIVE_TALK_TO_ENID_2",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 117
+  },
+  {
+   "id": "OBJECTIVE_TALK_TO_FARMER",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 102
+  },
+  {
+   "id": "OBJECTIVE_TALK_TO_FARMER_2",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 99
+  },
+  {
+   "id": "OBJECTIVE_TALK_TO_FARMHAND_1",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 110
+  },
+  {
+   "id": "OBJECTIVE_TALK_TO_FISHERMAN_2",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 44
+  },
+  {
+   "id": "OBJECTIVE_TALK_TO_GREENHOUSE_CARPENTER",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 78
+  },
+  {
+   "id": "OBJECTIVE_TALK_TO_GUBER_5",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 84
+  },
+  {
+   "id": "OBJECTIVE_TALK_TO_GULLIVER_4",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 72
+  },
+  {
+   "id": "OBJECTIVE_TALK_TO_GUSTAVE_5",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 65
+  },
+  {
+   "id": "OBJECTIVE_TALK_TO_HATTIE_2",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 98
+  },
+  {
+   "id": "OBJECTIVE_TALK_TO_KELLY_2",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 128
+  },
+  {
+   "id": "OBJECTIVE_TALK_TO_LAZY_MINER",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 129
+  },
+  {
+   "id": "OBJECTIVE_TALK_TO_LIBRARIAN",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 136
+  },
+  {
+   "id": "OBJECTIVE_TALK_TO_LUMBER_JACK_2",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 130
+  },
+  {
+   "id": "OBJECTIVE_TALK_TO_LUMBERJACK",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 86
+  },
+  {
+   "id": "OBJECTIVE_TALK_TO_MELODY_2",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 126
+  },
+  {
+   "id": "OBJECTIVE_TALK_TO_MOLBERT_5",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 89
+  },
+  {
+   "id": "OBJECTIVE_TALK_TO_REDSTONE_MINER_6",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 90
+  },
+  {
+   "id": "OBJECTIVE_TALK_TO_RYAN_3",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 128
+  },
+  {
+   "id": "OBJECTIVE_TALK_TO_SWOOP_4",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 114
+  },
+  {
+   "id": "OBJECTIVE_TALK_TO_TEDDY",
+   "category": "misc",
+   "xp": 5,
+   "rule": "story objectives",
+   "players": 97
+  },
+  {
+   "id": "PERSONAL_BANK_ONE",
+   "category": "bank",
+   "xp": 25,
+   "rule": "personal bank",
+   "players": 76
+  },
+  {
+   "id": "PERSONAL_BANK_THREE",
+   "category": "bank",
+   "xp": 50,
+   "rule": "personal bank",
+   "players": 66
+  },
+  {
+   "id": "PERSONAL_BANK_TWO",
+   "category": "bank",
+   "xp": 35,
+   "rule": "personal bank",
+   "players": 72
+  },
+  {
+   "id": "ROCK_MILESTONE_COMMON",
+   "category": "misc",
+   "xp": 20,
+   "rule": "rock/dolphin milestones",
+   "players": 123
+  },
+  {
+   "id": "ROCK_MILESTONE_EPIC",
+   "category": "misc",
+   "xp": 20,
+   "rule": "rock/dolphin milestones",
+   "players": 61
+  },
+  {
+   "id": "ROCK_MILESTONE_LEGENDARY",
+   "category": "misc",
+   "xp": 20,
+   "rule": "rock/dolphin milestones",
+   "players": 40
+  },
+  {
+   "id": "ROCK_MILESTONE_RARE",
+   "category": "misc",
+   "xp": 20,
+   "rule": "rock/dolphin milestones",
+   "players": 99
+  },
+  {
+   "id": "ROCK_MILESTONE_UNCOMMON",
+   "category": "misc",
+   "xp": 20,
+   "rule": "rock/dolphin milestones",
+   "players": 113
+  },
+  {
+   "id": "SAFARI_ESSENCE_AMATEUR_HOUR_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 24
+  },
+  {
+   "id": "SAFARI_ESSENCE_AMATEUR_HOUR_10",
+   "category": "essence_shop",
+   "xp": 10,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "SAFARI_ESSENCE_AMATEUR_HOUR_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 18
+  },
+  {
+   "id": "SAFARI_ESSENCE_AMATEUR_HOUR_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 16
+  },
+  {
+   "id": "SAFARI_ESSENCE_AMATEUR_HOUR_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 16
+  },
+  {
+   "id": "SAFARI_ESSENCE_AMATEUR_HOUR_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 15
+  },
+  {
+   "id": "SAFARI_ESSENCE_AMATEUR_HOUR_6",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 13
+  },
+  {
+   "id": "SAFARI_ESSENCE_AMATEUR_HOUR_7",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 11
+  },
+  {
+   "id": "SAFARI_ESSENCE_AMATEUR_HOUR_8",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 10
+  },
+  {
+   "id": "SAFARI_ESSENCE_AMATEUR_HOUR_9",
+   "category": "essence_shop",
+   "xp": 9,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "SAFARI_ESSENCE_CRITTER_CATCHER_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 31
+  },
+  {
+   "id": "SAFARI_ESSENCE_CRITTER_CATCHER_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 21
+  },
+  {
+   "id": "SAFARI_ESSENCE_CRITTER_CATCHER_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 18
+  },
+  {
+   "id": "SAFARI_ESSENCE_CRITTER_CATCHER_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 12
+  },
+  {
+   "id": "SAFARI_ESSENCE_CRITTER_CATCHER_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 10
+  },
+  {
+   "id": "SAFARI_ESSENCE_CRITTER_CATCHER_6",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 9
+  },
+  {
+   "id": "SAFARI_ESSENCE_CRITTER_CATCHER_7",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 9
+  },
+  {
+   "id": "SAFARI_ESSENCE_CRITTER_CATCHER_8",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "SAFARI_ESSENCE_CRITTER_MASTER_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 12
+  },
+  {
+   "id": "SAFARI_ESSENCE_DEEP_DIVER_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 18
+  },
+  {
+   "id": "SAFARI_ESSENCE_DEEP_DIVER_10",
+   "category": "essence_shop",
+   "xp": 10,
+   "rule": "essence shop perks",
+   "players": 6
+  },
+  {
+   "id": "SAFARI_ESSENCE_DEEP_DIVER_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 10
+  },
+  {
+   "id": "SAFARI_ESSENCE_DEEP_DIVER_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 9
+  },
+  {
+   "id": "SAFARI_ESSENCE_DEEP_DIVER_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "SAFARI_ESSENCE_DEEP_DIVER_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "SAFARI_ESSENCE_DEEP_DIVER_6",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 7
+  },
+  {
+   "id": "SAFARI_ESSENCE_DEEP_DIVER_7",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 7
+  },
+  {
+   "id": "SAFARI_ESSENCE_DEEP_DIVER_8",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 7
+  },
+  {
+   "id": "SAFARI_ESSENCE_DEEP_DIVER_9",
+   "category": "essence_shop",
+   "xp": 9,
+   "rule": "essence shop perks",
+   "players": 7
+  },
+  {
+   "id": "SAFARI_ESSENCE_FLOORTUNATE_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 22
+  },
+  {
+   "id": "SAFARI_ESSENCE_FLOORTUNATE_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 12
+  },
+  {
+   "id": "SAFARI_ESSENCE_FLOORTUNATE_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 9
+  },
+  {
+   "id": "SAFARI_ESSENCE_FLOORTUNATE_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 9
+  },
+  {
+   "id": "SAFARI_ESSENCE_FLOORTUNATE_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "SAFARI_ESSENCE_FRESH_FOOTPRINTS_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 24
+  },
+  {
+   "id": "SAFARI_ESSENCE_FRESH_FOOTPRINTS_10",
+   "category": "essence_shop",
+   "xp": 10,
+   "rule": "essence shop perks",
+   "players": 7
+  },
+  {
+   "id": "SAFARI_ESSENCE_FRESH_FOOTPRINTS_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 18
+  },
+  {
+   "id": "SAFARI_ESSENCE_FRESH_FOOTPRINTS_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 14
+  },
+  {
+   "id": "SAFARI_ESSENCE_FRESH_FOOTPRINTS_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 12
+  },
+  {
+   "id": "SAFARI_ESSENCE_FRESH_FOOTPRINTS_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 11
+  },
+  {
+   "id": "SAFARI_ESSENCE_FRESH_FOOTPRINTS_6",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "SAFARI_ESSENCE_FRESH_FOOTPRINTS_7",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "SAFARI_ESSENCE_FRESH_FOOTPRINTS_8",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "SAFARI_ESSENCE_FRESH_FOOTPRINTS_9",
+   "category": "essence_shop",
+   "xp": 9,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "SAFARI_ESSENCE_HEAD_START_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 6
+  },
+  {
+   "id": "SAFARI_ESSENCE_HUNTING_HOTSPOT_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 24
+  },
+  {
+   "id": "SAFARI_ESSENCE_HUNTING_HOTSPOT_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 15
+  },
+  {
+   "id": "SAFARI_ESSENCE_HUNTING_HOTSPOT_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 13
+  },
+  {
+   "id": "SAFARI_ESSENCE_HUNTING_HOTSPOT_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 12
+  },
+  {
+   "id": "SAFARI_ESSENCE_HUNTING_HOTSPOT_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 11
+  },
+  {
+   "id": "SAFARI_ESSENCE_QUICKDRAW_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 25
+  },
+  {
+   "id": "SAFARI_ESSENCE_QUICKDRAW_10",
+   "category": "essence_shop",
+   "xp": 10,
+   "rule": "essence shop perks",
+   "players": 11
+  },
+  {
+   "id": "SAFARI_ESSENCE_QUICKDRAW_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 19
+  },
+  {
+   "id": "SAFARI_ESSENCE_QUICKDRAW_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 16
+  },
+  {
+   "id": "SAFARI_ESSENCE_QUICKDRAW_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 13
+  },
+  {
+   "id": "SAFARI_ESSENCE_QUICKDRAW_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 13
+  },
+  {
+   "id": "SAFARI_ESSENCE_QUICKDRAW_6",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 13
+  },
+  {
+   "id": "SAFARI_ESSENCE_QUICKDRAW_7",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 12
+  },
+  {
+   "id": "SAFARI_ESSENCE_QUICKDRAW_8",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 12
+  },
+  {
+   "id": "SAFARI_ESSENCE_QUICKDRAW_9",
+   "category": "essence_shop",
+   "xp": 9,
+   "rule": "essence shop perks",
+   "players": 12
+  },
+  {
+   "id": "SAFARI_ESSENCE_SPARKLING_SPECIALIST_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "SAFARI_ESSENCE_THAWING_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 23
+  },
+  {
+   "id": "SAFARI_ESSENCE_THAWING_10",
+   "category": "essence_shop",
+   "xp": 10,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "SAFARI_ESSENCE_THAWING_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 18
+  },
+  {
+   "id": "SAFARI_ESSENCE_THAWING_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 13
+  },
+  {
+   "id": "SAFARI_ESSENCE_THAWING_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 9
+  },
+  {
+   "id": "SAFARI_ESSENCE_THAWING_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "SAFARI_ESSENCE_THAWING_6",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "SAFARI_ESSENCE_THAWING_7",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "SAFARI_ESSENCE_THAWING_8",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "SAFARI_ESSENCE_THAWING_9",
+   "category": "essence_shop",
+   "xp": 9,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "SAFARI_MILESTONE_CAVERN_1",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 44
+  },
+  {
+   "id": "SAFARI_MILESTONE_CAVERN_10",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 8
+  },
+  {
+   "id": "SAFARI_MILESTONE_CAVERN_2",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 35
+  },
+  {
+   "id": "SAFARI_MILESTONE_CAVERN_3",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 26
+  },
+  {
+   "id": "SAFARI_MILESTONE_CAVERN_4",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 18
+  },
+  {
+   "id": "SAFARI_MILESTONE_CAVERN_5",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 14
+  },
+  {
+   "id": "SAFARI_MILESTONE_CAVERN_6",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 12
+  },
+  {
+   "id": "SAFARI_MILESTONE_CAVERN_7",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 9
+  },
+  {
+   "id": "SAFARI_MILESTONE_CAVERN_8",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 9
+  },
+  {
+   "id": "SAFARI_MILESTONE_CAVERN_9",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 9
+  },
+  {
+   "id": "SAFARI_MILESTONE_FOREST_1",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 43
+  },
+  {
+   "id": "SAFARI_MILESTONE_FOREST_10",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 7
+  },
+  {
+   "id": "SAFARI_MILESTONE_FOREST_2",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 32
+  },
+  {
+   "id": "SAFARI_MILESTONE_FOREST_3",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 26
+  },
+  {
+   "id": "SAFARI_MILESTONE_FOREST_4",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 18
+  },
+  {
+   "id": "SAFARI_MILESTONE_FOREST_5",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 14
+  },
+  {
+   "id": "SAFARI_MILESTONE_FOREST_6",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 9
+  },
+  {
+   "id": "SAFARI_MILESTONE_FOREST_7",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 8
+  },
+  {
+   "id": "SAFARI_MILESTONE_FOREST_8",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 8
+  },
+  {
+   "id": "SAFARI_MILESTONE_FOREST_9",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 7
+  },
+  {
+   "id": "SAFARI_MILESTONE_HAUNTED_1",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 44
+  },
+  {
+   "id": "SAFARI_MILESTONE_HAUNTED_10",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 7
+  },
+  {
+   "id": "SAFARI_MILESTONE_HAUNTED_2",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 31
+  },
+  {
+   "id": "SAFARI_MILESTONE_HAUNTED_3",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 25
+  },
+  {
+   "id": "SAFARI_MILESTONE_HAUNTED_4",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 16
+  },
+  {
+   "id": "SAFARI_MILESTONE_HAUNTED_5",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 13
+  },
+  {
+   "id": "SAFARI_MILESTONE_HAUNTED_6",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 10
+  },
+  {
+   "id": "SAFARI_MILESTONE_HAUNTED_7",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 8
+  },
+  {
+   "id": "SAFARI_MILESTONE_HAUNTED_8",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 8
+  },
+  {
+   "id": "SAFARI_MILESTONE_HAUNTED_9",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 7
+  },
+  {
+   "id": "SAFARI_MILESTONE_ICY_1",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 40
+  },
+  {
+   "id": "SAFARI_MILESTONE_ICY_10",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 7
+  },
+  {
+   "id": "SAFARI_MILESTONE_ICY_2",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 31
+  },
+  {
+   "id": "SAFARI_MILESTONE_ICY_3",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 27
+  },
+  {
+   "id": "SAFARI_MILESTONE_ICY_4",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 21
+  },
+  {
+   "id": "SAFARI_MILESTONE_ICY_5",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 15
+  },
+  {
+   "id": "SAFARI_MILESTONE_ICY_6",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 10
+  },
+  {
+   "id": "SAFARI_MILESTONE_ICY_7",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 8
+  },
+  {
+   "id": "SAFARI_MILESTONE_ICY_8",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 8
+  },
+  {
+   "id": "SAFARI_MILESTONE_ICY_9",
+   "category": "misc",
+   "xp": 5,
+   "rule": "safari milestones",
+   "players": 7
+  },
+  {
+   "id": "SONG_AMAZING_GRACE_100",
+   "category": "rift",
+   "xp": 1,
+   "rule": "harp songs",
+   "players": 41
+  },
+  {
+   "id": "SONG_AMAZING_GRACE_50",
+   "category": "rift",
+   "xp": 1,
+   "rule": "harp songs",
+   "players": 91
+  },
+  {
+   "id": "SONG_AMAZING_GRACE_70",
+   "category": "rift",
+   "xp": 1,
+   "rule": "harp songs",
+   "players": 91
+  },
+  {
+   "id": "SONG_AMAZING_GRACE_80",
+   "category": "rift",
+   "xp": 1,
+   "rule": "harp songs",
+   "players": 90
+  },
+  {
+   "id": "SONG_AMAZING_GRACE_90",
+   "category": "rift",
+   "xp": 1,
+   "rule": "harp songs",
+   "players": 87
+  },
+  {
+   "id": "SONG_BRAHMS_100",
+   "category": "rift",
+   "xp": 2,
+   "rule": "harp songs",
+   "players": 44
+  },
+  {
+   "id": "SONG_BRAHMS_50",
+   "category": "rift",
+   "xp": 2,
+   "rule": "harp songs",
+   "players": 87
+  },
+  {
+   "id": "SONG_BRAHMS_70",
+   "category": "rift",
+   "xp": 2,
+   "rule": "harp songs",
+   "players": 87
+  },
+  {
+   "id": "SONG_BRAHMS_80",
+   "category": "rift",
+   "xp": 2,
+   "rule": "harp songs",
+   "players": 86
+  },
+  {
+   "id": "SONG_BRAHMS_90",
+   "category": "rift",
+   "xp": 2,
+   "rule": "harp songs",
+   "players": 85
+  },
+  {
+   "id": "SONG_FIRE_AND_FLAMES_100",
+   "category": "rift",
+   "xp": 12,
+   "rule": "harp songs",
+   "players": 2
+  },
+  {
+   "id": "SONG_FIRE_AND_FLAMES_50",
+   "category": "rift",
+   "xp": 12,
+   "rule": "harp songs",
+   "players": 20
+  },
+  {
+   "id": "SONG_FIRE_AND_FLAMES_70",
+   "category": "rift",
+   "xp": 12,
+   "rule": "harp songs",
+   "players": 15
+  },
+  {
+   "id": "SONG_FIRE_AND_FLAMES_80",
+   "category": "rift",
+   "xp": 12,
+   "rule": "harp songs",
+   "players": 12
+  },
+  {
+   "id": "SONG_FIRE_AND_FLAMES_90",
+   "category": "rift",
+   "xp": 12,
+   "rule": "harp songs",
+   "players": 10
+  },
+  {
+   "id": "SONG_FRERE_JACQUES_100",
+   "category": "rift",
+   "xp": 1,
+   "rule": "harp songs",
+   "players": 47
+  },
+  {
+   "id": "SONG_FRERE_JACQUES_50",
+   "category": "rift",
+   "xp": 1,
+   "rule": "harp songs",
+   "players": 99
+  },
+  {
+   "id": "SONG_FRERE_JACQUES_70",
+   "category": "rift",
+   "xp": 1,
+   "rule": "harp songs",
+   "players": 98
+  },
+  {
+   "id": "SONG_FRERE_JACQUES_80",
+   "category": "rift",
+   "xp": 1,
+   "rule": "harp songs",
+   "players": 96
+  },
+  {
+   "id": "SONG_FRERE_JACQUES_90",
+   "category": "rift",
+   "xp": 1,
+   "rule": "harp songs",
+   "players": 93
+  },
+  {
+   "id": "SONG_GREENSLEEVES_100",
+   "category": "rift",
+   "xp": 2,
+   "rule": "harp songs",
+   "players": 38
+  },
+  {
+   "id": "SONG_GREENSLEEVES_50",
+   "category": "rift",
+   "xp": 2,
+   "rule": "harp songs",
+   "players": 80
+  },
+  {
+   "id": "SONG_GREENSLEEVES_70",
+   "category": "rift",
+   "xp": 2,
+   "rule": "harp songs",
+   "players": 79
+  },
+  {
+   "id": "SONG_GREENSLEEVES_80",
+   "category": "rift",
+   "xp": 2,
+   "rule": "harp songs",
+   "players": 76
+  },
+  {
+   "id": "SONG_GREENSLEEVES_90",
+   "category": "rift",
+   "xp": 2,
+   "rule": "harp songs",
+   "players": 74
+  },
+  {
+   "id": "SONG_HAPPY_BIRTHDAY_100",
+   "category": "rift",
+   "xp": 2,
+   "rule": "harp songs",
+   "players": 44
+  },
+  {
+   "id": "SONG_HAPPY_BIRTHDAY_50",
+   "category": "rift",
+   "xp": 2,
+   "rule": "harp songs",
+   "players": 85
+  },
+  {
+   "id": "SONG_HAPPY_BIRTHDAY_70",
+   "category": "rift",
+   "xp": 2,
+   "rule": "harp songs",
+   "players": 85
+  },
+  {
+   "id": "SONG_HAPPY_BIRTHDAY_80",
+   "category": "rift",
+   "xp": 2,
+   "rule": "harp songs",
+   "players": 83
+  },
+  {
+   "id": "SONG_HAPPY_BIRTHDAY_90",
+   "category": "rift",
+   "xp": 2,
+   "rule": "harp songs",
+   "players": 82
+  },
+  {
+   "id": "SONG_HYMN_JOY_100",
+   "category": "rift",
+   "xp": 1,
+   "rule": "harp songs",
+   "players": 58
+  },
+  {
+   "id": "SONG_HYMN_JOY_50",
+   "category": "rift",
+   "xp": 1,
+   "rule": "harp songs",
+   "players": 112
+  },
+  {
+   "id": "SONG_HYMN_JOY_70",
+   "category": "rift",
+   "xp": 1,
+   "rule": "harp songs",
+   "players": 110
+  },
+  {
+   "id": "SONG_HYMN_JOY_80",
+   "category": "rift",
+   "xp": 1,
+   "rule": "harp songs",
+   "players": 109
+  },
+  {
+   "id": "SONG_HYMN_JOY_90",
+   "category": "rift",
+   "xp": 1,
+   "rule": "harp songs",
+   "players": 108
+  },
+  {
+   "id": "SONG_JEOPARDY_100",
+   "category": "rift",
+   "xp": 4,
+   "rule": "harp songs",
+   "players": 38
+  },
+  {
+   "id": "SONG_JEOPARDY_50",
+   "category": "rift",
+   "xp": 4,
+   "rule": "harp songs",
+   "players": 74
+  },
+  {
+   "id": "SONG_JEOPARDY_70",
+   "category": "rift",
+   "xp": 4,
+   "rule": "harp songs",
+   "players": 74
+  },
+  {
+   "id": "SONG_JEOPARDY_80",
+   "category": "rift",
+   "xp": 4,
+   "rule": "harp songs",
+   "players": 72
+  },
+  {
+   "id": "SONG_JEOPARDY_90",
+   "category": "rift",
+   "xp": 4,
+   "rule": "harp songs",
+   "players": 73
+  },
+  {
+   "id": "SONG_JOY_WORLD_100",
+   "category": "rift",
+   "xp": 4,
+   "rule": "harp songs",
+   "players": 35
+  },
+  {
+   "id": "SONG_JOY_WORLD_50",
+   "category": "rift",
+   "xp": 4,
+   "rule": "harp songs",
+   "players": 70
+  },
+  {
+   "id": "SONG_JOY_WORLD_70",
+   "category": "rift",
+   "xp": 4,
+   "rule": "harp songs",
+   "players": 70
+  },
+  {
+   "id": "SONG_JOY_WORLD_80",
+   "category": "rift",
+   "xp": 4,
+   "rule": "harp songs",
+   "players": 69
+  },
+  {
+   "id": "SONG_JOY_WORLD_90",
+   "category": "rift",
+   "xp": 4,
+   "rule": "harp songs",
+   "players": 70
+  },
+  {
+   "id": "SONG_MINUET_100",
+   "category": "rift",
+   "xp": 4,
+   "rule": "harp songs",
+   "players": 35
+  },
+  {
+   "id": "SONG_MINUET_50",
+   "category": "rift",
+   "xp": 4,
+   "rule": "harp songs",
+   "players": 73
+  },
+  {
+   "id": "SONG_MINUET_70",
+   "category": "rift",
+   "xp": 4,
+   "rule": "harp songs",
+   "players": 72
+  },
+  {
+   "id": "SONG_MINUET_80",
+   "category": "rift",
+   "xp": 4,
+   "rule": "harp songs",
+   "players": 70
+  },
+  {
+   "id": "SONG_MINUET_90",
+   "category": "rift",
+   "xp": 4,
+   "rule": "harp songs",
+   "players": 71
+  },
+  {
+   "id": "SONG_PACHELBEL_100",
+   "category": "rift",
+   "xp": 12,
+   "rule": "harp songs",
+   "players": 2
+  },
+  {
+   "id": "SONG_PACHELBEL_50",
+   "category": "rift",
+   "xp": 12,
+   "rule": "harp songs",
+   "players": 10
+  },
+  {
+   "id": "SONG_PACHELBEL_70",
+   "category": "rift",
+   "xp": 12,
+   "rule": "harp songs",
+   "players": 10
+  },
+  {
+   "id": "SONG_PACHELBEL_80",
+   "category": "rift",
+   "xp": 12,
+   "rule": "harp songs",
+   "players": 10
+  },
+  {
+   "id": "SONG_PACHELBEL_90",
+   "category": "rift",
+   "xp": 12,
+   "rule": "harp songs",
+   "players": 10
+  },
+  {
+   "id": "SONG_PURE_IMAGINATION_100",
+   "category": "rift",
+   "xp": 7,
+   "rule": "harp songs",
+   "players": 34
+  },
+  {
+   "id": "SONG_PURE_IMAGINATION_50",
+   "category": "rift",
+   "xp": 7,
+   "rule": "harp songs",
+   "players": 70
+  },
+  {
+   "id": "SONG_PURE_IMAGINATION_70",
+   "category": "rift",
+   "xp": 7,
+   "rule": "harp songs",
+   "players": 70
+  },
+  {
+   "id": "SONG_PURE_IMAGINATION_80",
+   "category": "rift",
+   "xp": 7,
+   "rule": "harp songs",
+   "players": 69
+  },
+  {
+   "id": "SONG_PURE_IMAGINATION_90",
+   "category": "rift",
+   "xp": 7,
+   "rule": "harp songs",
+   "players": 70
+  },
+  {
+   "id": "SONG_VIE_EN_ROSE_100",
+   "category": "rift",
+   "xp": 7,
+   "rule": "harp songs",
+   "players": 32
+  },
+  {
+   "id": "SONG_VIE_EN_ROSE_50",
+   "category": "rift",
+   "xp": 7,
+   "rule": "harp songs",
+   "players": 70
+  },
+  {
+   "id": "SONG_VIE_EN_ROSE_70",
+   "category": "rift",
+   "xp": 7,
+   "rule": "harp songs",
+   "players": 70
+  },
+  {
+   "id": "SONG_VIE_EN_ROSE_80",
+   "category": "rift",
+   "xp": 7,
+   "rule": "harp songs",
+   "players": 69
+  },
+  {
+   "id": "SONG_VIE_EN_ROSE_90",
+   "category": "rift",
+   "xp": 7,
+   "rule": "harp songs",
+   "players": 69
+  },
+  {
+   "id": "SPIDER_ESSENCE_BANE_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 50
+  },
+  {
+   "id": "SPIDER_ESSENCE_BANE_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 33
+  },
+  {
+   "id": "SPIDER_ESSENCE_BANE_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 24
+  },
+  {
+   "id": "SPIDER_ESSENCE_BANE_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 12
+  },
+  {
+   "id": "SPIDER_ESSENCE_BANE_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 9
+  },
+  {
+   "id": "SPIDER_ESSENCE_EMPOWERED_AGILITY_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 49
+  },
+  {
+   "id": "SPIDER_ESSENCE_EMPOWERED_AGILITY_10",
+   "category": "essence_shop",
+   "xp": 10,
+   "rule": "essence shop perks",
+   "players": 12
+  },
+  {
+   "id": "SPIDER_ESSENCE_EMPOWERED_AGILITY_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 44
+  },
+  {
+   "id": "SPIDER_ESSENCE_EMPOWERED_AGILITY_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 41
+  },
+  {
+   "id": "SPIDER_ESSENCE_EMPOWERED_AGILITY_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 37
+  },
+  {
+   "id": "SPIDER_ESSENCE_EMPOWERED_AGILITY_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 29
+  },
+  {
+   "id": "SPIDER_ESSENCE_EMPOWERED_AGILITY_6",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 23
+  },
+  {
+   "id": "SPIDER_ESSENCE_EMPOWERED_AGILITY_7",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 19
+  },
+  {
+   "id": "SPIDER_ESSENCE_EMPOWERED_AGILITY_8",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 15
+  },
+  {
+   "id": "SPIDER_ESSENCE_EMPOWERED_AGILITY_9",
+   "category": "essence_shop",
+   "xp": 9,
+   "rule": "essence shop perks",
+   "players": 13
+  },
+  {
+   "id": "SPIDER_ESSENCE_SPIDER_TRAINING_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 39
+  },
+  {
+   "id": "SPIDER_ESSENCE_SPIDER_TRAINING_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 22
+  },
+  {
+   "id": "SPIDER_ESSENCE_SPIDER_TRAINING_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 13
+  },
+  {
+   "id": "SPIDER_ESSENCE_TOXOPHILITE_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 25
+  },
+  {
+   "id": "SPIDER_ESSENCE_TOXOPHILITE_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 14
+  },
+  {
+   "id": "SPIDER_ESSENCE_TOXOPHILITE_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 14
+  },
+  {
+   "id": "SPIDER_ESSENCE_TOXOPHILITE_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 11
+  },
+  {
+   "id": "SPIDER_ESSENCE_TOXOPHILITE_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 11
+  },
+  {
+   "id": "SPIDER_ESSENCE_VERMIN_CONTROL_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 45
+  },
+  {
+   "id": "SPIDER_ESSENCE_VERMIN_CONTROL_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 29
+  },
+  {
+   "id": "SPIDER_ESSENCE_VERMIN_CONTROL_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 24
+  },
+  {
+   "id": "SPIDER_ESSENCE_VERMIN_CONTROL_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 10
+  },
+  {
+   "id": "SPIDER_ESSENCE_VERMIN_CONTROL_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "SPOOKY_FESTIVAL_CANDY_SCAVENGER_1",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 23
+  },
+  {
+   "id": "SPOOKY_FESTIVAL_CANDY_SCAVENGER_2",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 16
+  },
+  {
+   "id": "SPOOKY_FESTIVAL_CANDY_SCAVENGER_3",
+   "category": "events",
+   "xp": 3,
+   "rule": "event perk shops",
+   "players": 15
+  },
+  {
+   "id": "SPOOKY_FESTIVAL_CANDY_SCAVENGER_4",
+   "category": "events",
+   "xp": 5,
+   "rule": "event perk shops",
+   "players": 15
+  },
+  {
+   "id": "SPOOKY_FESTIVAL_CANDY_SCAVENGER_5",
+   "category": "events",
+   "xp": 7,
+   "rule": "event perk shops",
+   "players": 13
+  },
+  {
+   "id": "SPOOKY_FESTIVAL_DIAMOND",
+   "category": "events",
+   "xp": 50,
+   "rule": "festival brackets",
+   "players": 23
+  },
+  {
+   "id": "SPOOKY_FESTIVAL_EMERALD",
+   "category": "events",
+   "xp": 75,
+   "rule": "festival brackets",
+   "players": 11
+  },
+  {
+   "id": "SPOOKY_FESTIVAL_GOLD",
+   "category": "events",
+   "xp": 40,
+   "rule": "festival brackets",
+   "players": 28
+  },
+  {
+   "id": "SPOOKY_FESTIVAL_IRON",
+   "category": "events",
+   "xp": 30,
+   "rule": "festival brackets",
+   "players": 31
+  },
+  {
+   "id": "SPOOKY_FESTIVAL_PURPLE_VOGUE_1",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 21
+  },
+  {
+   "id": "SPOOKY_FESTIVAL_PURPLE_VOGUE_2",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 14
+  },
+  {
+   "id": "SPOOKY_FESTIVAL_PURPLE_VOGUE_3",
+   "category": "events",
+   "xp": 3,
+   "rule": "event perk shops",
+   "players": 9
+  },
+  {
+   "id": "SPOOKY_FESTIVAL_SPOOKY_HOOK_1",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 17
+  },
+  {
+   "id": "SPOOKY_FESTIVAL_SPOOKY_HOOK_2",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 13
+  },
+  {
+   "id": "SPOOKY_FESTIVAL_SPOOKY_HOOK_3",
+   "category": "events",
+   "xp": 3,
+   "rule": "event perk shops",
+   "players": 13
+  },
+  {
+   "id": "SPOOKY_FESTIVAL_SPOOKY_HOOK_4",
+   "category": "events",
+   "xp": 5,
+   "rule": "event perk shops",
+   "players": 13
+  },
+  {
+   "id": "SPOOKY_FESTIVAL_SPOOKY_HOOK_5",
+   "category": "events",
+   "xp": 7,
+   "rule": "event perk shops",
+   "players": 10
+  },
+  {
+   "id": "SPOOKY_FESTIVAL_STONE",
+   "category": "events",
+   "xp": 20,
+   "rule": "festival brackets",
+   "players": 35
+  },
+  {
+   "id": "SPOOKY_FESTIVAL_TRICK_OR_TREAT_ENTHUSIAST_1",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 17
+  },
+  {
+   "id": "SPOOKY_FESTIVAL_TRICK_OR_TREAT_ENTHUSIAST_2",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 6
+  },
+  {
+   "id": "SPOOKY_FESTIVAL_WOOD",
+   "category": "events",
+   "xp": 10,
+   "rule": "festival brackets",
+   "players": 80
+  },
+  {
+   "id": "TROPHY_BLESSED_FROG_BRONZE",
+   "category": "misc",
+   "xp": 4,
+   "rule": "trophy fish",
+   "players": 21
+  },
+  {
+   "id": "TROPHY_BLESSED_FROG_DIAMOND",
+   "category": "misc",
+   "xp": 32,
+   "rule": "trophy fish",
+   "players": 4
+  },
+  {
+   "id": "TROPHY_BLESSED_FROG_GOLD",
+   "category": "misc",
+   "xp": 16,
+   "rule": "trophy fish",
+   "players": 16
+  },
+  {
+   "id": "TROPHY_BLESSED_FROG_SILVER",
+   "category": "misc",
+   "xp": 8,
+   "rule": "trophy fish",
+   "players": 19
+  },
+  {
+   "id": "TROPHY_BLOBFISH_BRONZE",
+   "category": "misc",
+   "xp": 4,
+   "rule": "trophy fish",
+   "players": 79
+  },
+  {
+   "id": "TROPHY_BLOBFISH_DIAMOND",
+   "category": "misc",
+   "xp": 32,
+   "rule": "trophy fish",
+   "players": 26
+  },
+  {
+   "id": "TROPHY_BLOBFISH_GOLD",
+   "category": "misc",
+   "xp": 16,
+   "rule": "trophy fish",
+   "players": 47
+  },
+  {
+   "id": "TROPHY_BLOBFISH_SILVER",
+   "category": "misc",
+   "xp": 8,
+   "rule": "trophy fish",
+   "players": 72
+  },
+  {
+   "id": "TROPHY_BULLFROG_BRONZE",
+   "category": "misc",
+   "xp": 4,
+   "rule": "trophy fish",
+   "players": 24
+  },
+  {
+   "id": "TROPHY_BULLFROG_DIAMOND",
+   "category": "misc",
+   "xp": 32,
+   "rule": "trophy fish",
+   "players": 5
+  },
+  {
+   "id": "TROPHY_BULLFROG_GOLD",
+   "category": "misc",
+   "xp": 16,
+   "rule": "trophy fish",
+   "players": 16
+  },
+  {
+   "id": "TROPHY_BULLFROG_SILVER",
+   "category": "misc",
+   "xp": 8,
+   "rule": "trophy fish",
+   "players": 20
+  },
+  {
+   "id": "TROPHY_CAVE_FROG_BRONZE",
+   "category": "misc",
+   "xp": 4,
+   "rule": "trophy fish",
+   "players": 21
+  },
+  {
+   "id": "TROPHY_CAVE_FROG_DIAMOND",
+   "category": "misc",
+   "xp": 32,
+   "rule": "trophy fish",
+   "players": 4
+  },
+  {
+   "id": "TROPHY_CAVE_FROG_GOLD",
+   "category": "misc",
+   "xp": 16,
+   "rule": "trophy fish",
+   "players": 11
+  },
+  {
+   "id": "TROPHY_CAVE_FROG_SILVER",
+   "category": "misc",
+   "xp": 8,
+   "rule": "trophy fish",
+   "players": 20
+  },
+  {
+   "id": "TROPHY_COMMON_FROG_BRONZE",
+   "category": "misc",
+   "xp": 4,
+   "rule": "trophy fish",
+   "players": 37
+  },
+  {
+   "id": "TROPHY_COMMON_FROG_DIAMOND",
+   "category": "misc",
+   "xp": 32,
+   "rule": "trophy fish",
+   "players": 16
+  },
+  {
+   "id": "TROPHY_COMMON_FROG_GOLD",
+   "category": "misc",
+   "xp": 16,
+   "rule": "trophy fish",
+   "players": 23
+  },
+  {
+   "id": "TROPHY_COMMON_FROG_SILVER",
+   "category": "misc",
+   "xp": 8,
+   "rule": "trophy fish",
+   "players": 34
+  },
+  {
+   "id": "TROPHY_EXPLODING_FROG_BRONZE",
+   "category": "misc",
+   "xp": 4,
+   "rule": "trophy fish",
+   "players": 32
+  },
+  {
+   "id": "TROPHY_EXPLODING_FROG_DIAMOND",
+   "category": "misc",
+   "xp": 32,
+   "rule": "trophy fish",
+   "players": 6
+  },
+  {
+   "id": "TROPHY_EXPLODING_FROG_GOLD",
+   "category": "misc",
+   "xp": 16,
+   "rule": "trophy fish",
+   "players": 14
+  },
+  {
+   "id": "TROPHY_EXPLODING_FROG_SILVER",
+   "category": "misc",
+   "xp": 8,
+   "rule": "trophy fish",
+   "players": 28
+  },
+  {
+   "id": "TROPHY_FLYFISH_BRONZE",
+   "category": "misc",
+   "xp": 4,
+   "rule": "trophy fish",
+   "players": 57
+  },
+  {
+   "id": "TROPHY_FLYFISH_DIAMOND",
+   "category": "misc",
+   "xp": 32,
+   "rule": "trophy fish",
+   "players": 9
+  },
+  {
+   "id": "TROPHY_FLYFISH_GOLD",
+   "category": "misc",
+   "xp": 16,
+   "rule": "trophy fish",
+   "players": 20
+  },
+  {
+   "id": "TROPHY_FLYFISH_SILVER",
+   "category": "misc",
+   "xp": 8,
+   "rule": "trophy fish",
+   "players": 48
+  },
+  {
+   "id": "TROPHY_GOLDEN_FISH_BRONZE",
+   "category": "misc",
+   "xp": 4,
+   "rule": "trophy fish",
+   "players": 67
+  },
+  {
+   "id": "TROPHY_GOLDEN_FISH_DIAMOND",
+   "category": "misc",
+   "xp": 32,
+   "rule": "trophy fish",
+   "players": 9
+  },
+  {
+   "id": "TROPHY_GOLDEN_FISH_GOLD",
+   "category": "misc",
+   "xp": 16,
+   "rule": "trophy fish",
+   "players": 31
+  },
+  {
+   "id": "TROPHY_GOLDEN_FISH_SILVER",
+   "category": "misc",
+   "xp": 8,
+   "rule": "trophy fish",
+   "players": 57
+  },
+  {
+   "id": "TROPHY_GUSHER_BRONZE",
+   "category": "misc",
+   "xp": 4,
+   "rule": "trophy fish",
+   "players": 69
+  },
+  {
+   "id": "TROPHY_GUSHER_DIAMOND",
+   "category": "misc",
+   "xp": 32,
+   "rule": "trophy fish",
+   "players": 20
+  },
+  {
+   "id": "TROPHY_GUSHER_GOLD",
+   "category": "misc",
+   "xp": 16,
+   "rule": "trophy fish",
+   "players": 40
+  },
+  {
+   "id": "TROPHY_GUSHER_SILVER",
+   "category": "misc",
+   "xp": 8,
+   "rule": "trophy fish",
+   "players": 61
+  },
+  {
+   "id": "TROPHY_HIGHLANDS_FROG_BRONZE",
+   "category": "misc",
+   "xp": 4,
+   "rule": "trophy fish",
+   "players": 21
+  },
+  {
+   "id": "TROPHY_HIGHLANDS_FROG_DIAMOND",
+   "category": "misc",
+   "xp": 32,
+   "rule": "trophy fish",
+   "players": 6
+  },
+  {
+   "id": "TROPHY_HIGHLANDS_FROG_GOLD",
+   "category": "misc",
+   "xp": 16,
+   "rule": "trophy fish",
+   "players": 12
+  },
+  {
+   "id": "TROPHY_HIGHLANDS_FROG_SILVER",
+   "category": "misc",
+   "xp": 8,
+   "rule": "trophy fish",
+   "players": 19
+  },
+  {
+   "id": "TROPHY_KARATE_FISH_BRONZE",
+   "category": "misc",
+   "xp": 4,
+   "rule": "trophy fish",
+   "players": 39
+  },
+  {
+   "id": "TROPHY_KARATE_FISH_DIAMOND",
+   "category": "misc",
+   "xp": 32,
+   "rule": "trophy fish",
+   "players": 6
+  },
+  {
+   "id": "TROPHY_KARATE_FISH_GOLD",
+   "category": "misc",
+   "xp": 16,
+   "rule": "trophy fish",
+   "players": 14
+  },
+  {
+   "id": "TROPHY_KARATE_FISH_SILVER",
+   "category": "misc",
+   "xp": 8,
+   "rule": "trophy fish",
+   "players": 30
+  },
+  {
+   "id": "TROPHY_LAVA_HORSE_BRONZE",
+   "category": "misc",
+   "xp": 4,
+   "rule": "trophy fish",
+   "players": 72
+  },
+  {
+   "id": "TROPHY_LAVA_HORSE_DIAMOND",
+   "category": "misc",
+   "xp": 32,
+   "rule": "trophy fish",
+   "players": 12
+  },
+  {
+   "id": "TROPHY_LAVA_HORSE_GOLD",
+   "category": "misc",
+   "xp": 16,
+   "rule": "trophy fish",
+   "players": 34
+  },
+  {
+   "id": "TROPHY_LAVA_HORSE_SILVER",
+   "category": "misc",
+   "xp": 8,
+   "rule": "trophy fish",
+   "players": 56
+  },
+  {
+   "id": "TROPHY_LEAP_FROG_BRONZE",
+   "category": "misc",
+   "xp": 4,
+   "rule": "trophy fish",
+   "players": 22
+  },
+  {
+   "id": "TROPHY_LEAP_FROG_DIAMOND",
+   "category": "misc",
+   "xp": 32,
+   "rule": "trophy fish",
+   "players": 6
+  },
+  {
+   "id": "TROPHY_LEAP_FROG_GOLD",
+   "category": "misc",
+   "xp": 16,
+   "rule": "trophy fish",
+   "players": 12
+  },
+  {
+   "id": "TROPHY_LEAP_FROG_SILVER",
+   "category": "misc",
+   "xp": 8,
+   "rule": "trophy fish",
+   "players": 19
+  },
+  {
+   "id": "TROPHY_MANA_RAY_BRONZE",
+   "category": "misc",
+   "xp": 4,
+   "rule": "trophy fish",
+   "players": 47
+  },
+  {
+   "id": "TROPHY_MANA_RAY_DIAMOND",
+   "category": "misc",
+   "xp": 32,
+   "rule": "trophy fish",
+   "players": 9
+  },
+  {
+   "id": "TROPHY_MANA_RAY_GOLD",
+   "category": "misc",
+   "xp": 16,
+   "rule": "trophy fish",
+   "players": 18
+  },
+  {
+   "id": "TROPHY_MANA_RAY_SILVER",
+   "category": "misc",
+   "xp": 8,
+   "rule": "trophy fish",
+   "players": 39
+  },
+  {
+   "id": "TROPHY_MOLDFIN_BRONZE",
+   "category": "misc",
+   "xp": 4,
+   "rule": "trophy fish",
+   "players": 45
+  },
+  {
+   "id": "TROPHY_MOLDFIN_DIAMOND",
+   "category": "misc",
+   "xp": 32,
+   "rule": "trophy fish",
+   "players": 4
+  },
+  {
+   "id": "TROPHY_MOLDFIN_GOLD",
+   "category": "misc",
+   "xp": 16,
+   "rule": "trophy fish",
+   "players": 17
+  },
+  {
+   "id": "TROPHY_MOLDFIN_SILVER",
+   "category": "misc",
+   "xp": 8,
+   "rule": "trophy fish",
+   "players": 32
+  },
+  {
+   "id": "TROPHY_OBFUSCATED_FISH_1_BRONZE",
+   "category": "misc",
+   "xp": 4,
+   "rule": "trophy fish",
+   "players": 87
+  },
+  {
+   "id": "TROPHY_OBFUSCATED_FISH_1_DIAMOND",
+   "category": "misc",
+   "xp": 32,
+   "rule": "trophy fish",
+   "players": 27
+  },
+  {
+   "id": "TROPHY_OBFUSCATED_FISH_1_GOLD",
+   "category": "misc",
+   "xp": 16,
+   "rule": "trophy fish",
+   "players": 52
+  },
+  {
+   "id": "TROPHY_OBFUSCATED_FISH_1_SILVER",
+   "category": "misc",
+   "xp": 8,
+   "rule": "trophy fish",
+   "players": 71
+  },
+  {
+   "id": "TROPHY_OBFUSCATED_FISH_2_BRONZE",
+   "category": "misc",
+   "xp": 4,
+   "rule": "trophy fish",
+   "players": 35
+  },
+  {
+   "id": "TROPHY_OBFUSCATED_FISH_2_DIAMOND",
+   "category": "misc",
+   "xp": 32,
+   "rule": "trophy fish",
+   "players": 10
+  },
+  {
+   "id": "TROPHY_OBFUSCATED_FISH_2_GOLD",
+   "category": "misc",
+   "xp": 16,
+   "rule": "trophy fish",
+   "players": 21
+  },
+  {
+   "id": "TROPHY_OBFUSCATED_FISH_2_SILVER",
+   "category": "misc",
+   "xp": 8,
+   "rule": "trophy fish",
+   "players": 31
+  },
+  {
+   "id": "TROPHY_OBFUSCATED_FISH_3_BRONZE",
+   "category": "misc",
+   "xp": 4,
+   "rule": "trophy fish",
+   "players": 30
+  },
+  {
+   "id": "TROPHY_OBFUSCATED_FISH_3_DIAMOND",
+   "category": "misc",
+   "xp": 32,
+   "rule": "trophy fish",
+   "players": 5
+  },
+  {
+   "id": "TROPHY_OBFUSCATED_FISH_3_GOLD",
+   "category": "misc",
+   "xp": 16,
+   "rule": "trophy fish",
+   "players": 15
+  },
+  {
+   "id": "TROPHY_OBFUSCATED_FISH_3_SILVER",
+   "category": "misc",
+   "xp": 8,
+   "rule": "trophy fish",
+   "players": 26
+  },
+  {
+   "id": "TROPHY_PUDDLE_JUMPER_BRONZE",
+   "category": "misc",
+   "xp": 4,
+   "rule": "trophy fish",
+   "players": 32
+  },
+  {
+   "id": "TROPHY_PUDDLE_JUMPER_DIAMOND",
+   "category": "misc",
+   "xp": 32,
+   "rule": "trophy fish",
+   "players": 6
+  },
+  {
+   "id": "TROPHY_PUDDLE_JUMPER_GOLD",
+   "category": "misc",
+   "xp": 16,
+   "rule": "trophy fish",
+   "players": 13
+  },
+  {
+   "id": "TROPHY_PUDDLE_JUMPER_SILVER",
+   "category": "misc",
+   "xp": 8,
+   "rule": "trophy fish",
+   "players": 24
+  },
+  {
+   "id": "TROPHY_REALITY_HOPPER_BRONZE",
+   "category": "misc",
+   "xp": 4,
+   "rule": "trophy fish",
+   "players": 28
+  },
+  {
+   "id": "TROPHY_REALITY_HOPPER_DIAMOND",
+   "category": "misc",
+   "xp": 32,
+   "rule": "trophy fish",
+   "players": 6
+  },
+  {
+   "id": "TROPHY_REALITY_HOPPER_GOLD",
+   "category": "misc",
+   "xp": 16,
+   "rule": "trophy fish",
+   "players": 16
+  },
+  {
+   "id": "TROPHY_REALITY_HOPPER_SILVER",
+   "category": "misc",
+   "xp": 8,
+   "rule": "trophy fish",
+   "players": 22
+  },
+  {
+   "id": "TROPHY_SEA_FROG_BRONZE",
+   "category": "misc",
+   "xp": 4,
+   "rule": "trophy fish",
+   "players": 24
+  },
+  {
+   "id": "TROPHY_SEA_FROG_DIAMOND",
+   "category": "misc",
+   "xp": 32,
+   "rule": "trophy fish",
+   "players": 6
+  },
+  {
+   "id": "TROPHY_SEA_FROG_GOLD",
+   "category": "misc",
+   "xp": 16,
+   "rule": "trophy fish",
+   "players": 14
+  },
+  {
+   "id": "TROPHY_SEA_FROG_SILVER",
+   "category": "misc",
+   "xp": 8,
+   "rule": "trophy fish",
+   "players": 21
+  },
+  {
+   "id": "TROPHY_SKELETON_FISH_BRONZE",
+   "category": "misc",
+   "xp": 4,
+   "rule": "trophy fish",
+   "players": 50
+  },
+  {
+   "id": "TROPHY_SKELETON_FISH_DIAMOND",
+   "category": "misc",
+   "xp": 32,
+   "rule": "trophy fish",
+   "players": 5
+  },
+  {
+   "id": "TROPHY_SKELETON_FISH_GOLD",
+   "category": "misc",
+   "xp": 16,
+   "rule": "trophy fish",
+   "players": 20
+  },
+  {
+   "id": "TROPHY_SKELETON_FISH_SILVER",
+   "category": "misc",
+   "xp": 8,
+   "rule": "trophy fish",
+   "players": 34
+  },
+  {
+   "id": "TROPHY_SLUGFISH_BRONZE",
+   "category": "misc",
+   "xp": 4,
+   "rule": "trophy fish",
+   "players": 56
+  },
+  {
+   "id": "TROPHY_SLUGFISH_DIAMOND",
+   "category": "misc",
+   "xp": 32,
+   "rule": "trophy fish",
+   "players": 5
+  },
+  {
+   "id": "TROPHY_SLUGFISH_GOLD",
+   "category": "misc",
+   "xp": 16,
+   "rule": "trophy fish",
+   "players": 19
+  },
+  {
+   "id": "TROPHY_SLUGFISH_SILVER",
+   "category": "misc",
+   "xp": 8,
+   "rule": "trophy fish",
+   "players": 41
+  },
+  {
+   "id": "TROPHY_SOUL_FISH_BRONZE",
+   "category": "misc",
+   "xp": 4,
+   "rule": "trophy fish",
+   "players": 50
+  },
+  {
+   "id": "TROPHY_SOUL_FISH_DIAMOND",
+   "category": "misc",
+   "xp": 32,
+   "rule": "trophy fish",
+   "players": 6
+  },
+  {
+   "id": "TROPHY_SOUL_FISH_GOLD",
+   "category": "misc",
+   "xp": 16,
+   "rule": "trophy fish",
+   "players": 20
+  },
+  {
+   "id": "TROPHY_SOUL_FISH_SILVER",
+   "category": "misc",
+   "xp": 8,
+   "rule": "trophy fish",
+   "players": 36
+  },
+  {
+   "id": "TROPHY_STEAMING_HOT_FLOUNDER_BRONZE",
+   "category": "misc",
+   "xp": 4,
+   "rule": "trophy fish",
+   "players": 51
+  },
+  {
+   "id": "TROPHY_STEAMING_HOT_FLOUNDER_DIAMOND",
+   "category": "misc",
+   "xp": 32,
+   "rule": "trophy fish",
+   "players": 10
+  },
+  {
+   "id": "TROPHY_STEAMING_HOT_FLOUNDER_GOLD",
+   "category": "misc",
+   "xp": 16,
+   "rule": "trophy fish",
+   "players": 20
+  },
+  {
+   "id": "TROPHY_STEAMING_HOT_FLOUNDER_SILVER",
+   "category": "misc",
+   "xp": 8,
+   "rule": "trophy fish",
+   "players": 41
+  },
+  {
+   "id": "TROPHY_SULPHUR_SKITTER_BRONZE",
+   "category": "misc",
+   "xp": 4,
+   "rule": "trophy fish",
+   "players": 53
+  },
+  {
+   "id": "TROPHY_SULPHUR_SKITTER_DIAMOND",
+   "category": "misc",
+   "xp": 32,
+   "rule": "trophy fish",
+   "players": 10
+  },
+  {
+   "id": "TROPHY_SULPHUR_SKITTER_GOLD",
+   "category": "misc",
+   "xp": 16,
+   "rule": "trophy fish",
+   "players": 20
+  },
+  {
+   "id": "TROPHY_SULPHUR_SKITTER_SILVER",
+   "category": "misc",
+   "xp": 8,
+   "rule": "trophy fish",
+   "players": 48
+  },
+  {
+   "id": "TROPHY_TREE_FROG_BRONZE",
+   "category": "misc",
+   "xp": 4,
+   "rule": "trophy fish",
+   "players": 21
+  },
+  {
+   "id": "TROPHY_TREE_FROG_DIAMOND",
+   "category": "misc",
+   "xp": 32,
+   "rule": "trophy fish",
+   "players": 5
+  },
+  {
+   "id": "TROPHY_TREE_FROG_GOLD",
+   "category": "misc",
+   "xp": 16,
+   "rule": "trophy fish",
+   "players": 11
+  },
+  {
+   "id": "TROPHY_TREE_FROG_SILVER",
+   "category": "misc",
+   "xp": 8,
+   "rule": "trophy fish",
+   "players": 20
+  },
+  {
+   "id": "TROPHY_VANILLE_BRONZE",
+   "category": "misc",
+   "xp": 4,
+   "rule": "trophy fish",
+   "players": 65
+  },
+  {
+   "id": "TROPHY_VANILLE_DIAMOND",
+   "category": "misc",
+   "xp": 32,
+   "rule": "trophy fish",
+   "players": 6
+  },
+  {
+   "id": "TROPHY_VANILLE_GOLD",
+   "category": "misc",
+   "xp": 16,
+   "rule": "trophy fish",
+   "players": 17
+  },
+  {
+   "id": "TROPHY_VANILLE_SILVER",
+   "category": "misc",
+   "xp": 8,
+   "rule": "trophy fish",
+   "players": 52
+  },
+  {
+   "id": "TROPHY_VOLCANIC_STONEFISH_BRONZE",
+   "category": "misc",
+   "xp": 4,
+   "rule": "trophy fish",
+   "players": 69
+  },
+  {
+   "id": "TROPHY_VOLCANIC_STONEFISH_DIAMOND",
+   "category": "misc",
+   "xp": 32,
+   "rule": "trophy fish",
+   "players": 6
+  },
+  {
+   "id": "TROPHY_VOLCANIC_STONEFISH_GOLD",
+   "category": "misc",
+   "xp": 16,
+   "rule": "trophy fish",
+   "players": 21
+  },
+  {
+   "id": "TROPHY_VOLCANIC_STONEFISH_SILVER",
+   "category": "misc",
+   "xp": 8,
+   "rule": "trophy fish",
+   "players": 47
+  },
+  {
+   "id": "TROPHY_WETLANDS_FROG_BRONZE",
+   "category": "misc",
+   "xp": 4,
+   "rule": "trophy fish",
+   "players": 31
+  },
+  {
+   "id": "TROPHY_WETLANDS_FROG_DIAMOND",
+   "category": "misc",
+   "xp": 32,
+   "rule": "trophy fish",
+   "players": 6
+  },
+  {
+   "id": "TROPHY_WETLANDS_FROG_GOLD",
+   "category": "misc",
+   "xp": 16,
+   "rule": "trophy fish",
+   "players": 18
+  },
+  {
+   "id": "TROPHY_WETLANDS_FROG_SILVER",
+   "category": "misc",
+   "xp": 8,
+   "rule": "trophy fish",
+   "players": 29
+  },
+  {
+   "id": "UNDEAD_ESSENCE_CATACOMBS_BOSS_LUCK_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 92
+  },
+  {
+   "id": "UNDEAD_ESSENCE_CATACOMBS_BOSS_LUCK_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 77
+  },
+  {
+   "id": "UNDEAD_ESSENCE_CATACOMBS_BOSS_LUCK_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 35
+  },
+  {
+   "id": "UNDEAD_ESSENCE_CATACOMBS_BOSS_LUCK_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 16
+  },
+  {
+   "id": "UNDEAD_ESSENCE_CATACOMBS_CRIT_DAMAGE_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 51
+  },
+  {
+   "id": "UNDEAD_ESSENCE_CATACOMBS_CRIT_DAMAGE_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 36
+  },
+  {
+   "id": "UNDEAD_ESSENCE_CATACOMBS_CRIT_DAMAGE_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 17
+  },
+  {
+   "id": "UNDEAD_ESSENCE_CATACOMBS_CRIT_DAMAGE_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 10
+  },
+  {
+   "id": "UNDEAD_ESSENCE_CATACOMBS_CRIT_DAMAGE_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "UNDEAD_ESSENCE_CATACOMBS_DEFENSE_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 48
+  },
+  {
+   "id": "UNDEAD_ESSENCE_CATACOMBS_DEFENSE_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 22
+  },
+  {
+   "id": "UNDEAD_ESSENCE_CATACOMBS_DEFENSE_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 13
+  },
+  {
+   "id": "UNDEAD_ESSENCE_CATACOMBS_DEFENSE_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 11
+  },
+  {
+   "id": "UNDEAD_ESSENCE_CATACOMBS_DEFENSE_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 9
+  },
+  {
+   "id": "UNDEAD_ESSENCE_CATACOMBS_HEALTH_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 42
+  },
+  {
+   "id": "UNDEAD_ESSENCE_CATACOMBS_HEALTH_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 33
+  },
+  {
+   "id": "UNDEAD_ESSENCE_CATACOMBS_HEALTH_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 17
+  },
+  {
+   "id": "UNDEAD_ESSENCE_CATACOMBS_HEALTH_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 11
+  },
+  {
+   "id": "UNDEAD_ESSENCE_CATACOMBS_HEALTH_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "UNDEAD_ESSENCE_CATACOMBS_INTELLIGENCE_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 39
+  },
+  {
+   "id": "UNDEAD_ESSENCE_CATACOMBS_INTELLIGENCE_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 17
+  },
+  {
+   "id": "UNDEAD_ESSENCE_CATACOMBS_INTELLIGENCE_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 12
+  },
+  {
+   "id": "UNDEAD_ESSENCE_CATACOMBS_INTELLIGENCE_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 12
+  },
+  {
+   "id": "UNDEAD_ESSENCE_CATACOMBS_INTELLIGENCE_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 10
+  },
+  {
+   "id": "UNDEAD_ESSENCE_CATACOMBS_LOOTING_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 53
+  },
+  {
+   "id": "UNDEAD_ESSENCE_CATACOMBS_LOOTING_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 31
+  },
+  {
+   "id": "UNDEAD_ESSENCE_CATACOMBS_LOOTING_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 17
+  },
+  {
+   "id": "UNDEAD_ESSENCE_CATACOMBS_LOOTING_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 14
+  },
+  {
+   "id": "UNDEAD_ESSENCE_CATACOMBS_LOOTING_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 14
+  },
+  {
+   "id": "UNDEAD_ESSENCE_CATACOMBS_STRENGTH_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 55
+  },
+  {
+   "id": "UNDEAD_ESSENCE_CATACOMBS_STRENGTH_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 23
+  },
+  {
+   "id": "UNDEAD_ESSENCE_CATACOMBS_STRENGTH_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 17
+  },
+  {
+   "id": "UNDEAD_ESSENCE_CATACOMBS_STRENGTH_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 13
+  },
+  {
+   "id": "UNDEAD_ESSENCE_CATACOMBS_STRENGTH_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 12
+  },
+  {
+   "id": "UNDEAD_ESSENCE_REVIVE_STONE_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 3
+  },
+  {
+   "id": "UPGRADE_COINS_ALLOWANCE_1",
+   "category": "misc",
+   "xp": 10,
+   "rule": "community shop",
+   "players": 96
+  },
+  {
+   "id": "UPGRADE_COINS_ALLOWANCE_2",
+   "category": "misc",
+   "xp": 10,
+   "rule": "community shop",
+   "players": 85
+  },
+  {
+   "id": "UPGRADE_COINS_ALLOWANCE_3",
+   "category": "misc",
+   "xp": 10,
+   "rule": "community shop",
+   "players": 75
+  },
+  {
+   "id": "UPGRADE_COINS_ALLOWANCE_4",
+   "category": "misc",
+   "xp": 10,
+   "rule": "community shop",
+   "players": 72
+  },
+  {
+   "id": "UPGRADE_COINS_ALLOWANCE_5",
+   "category": "misc",
+   "xp": 10,
+   "rule": "community shop",
+   "players": 68
+  },
+  {
+   "id": "UPGRADE_GUESTS_COUNT_1",
+   "category": "misc",
+   "xp": 10,
+   "rule": "community shop",
+   "players": 68
+  },
+  {
+   "id": "UPGRADE_ISLAND_SIZE_1",
+   "category": "misc",
+   "xp": 10,
+   "rule": "community shop",
+   "players": 88
+  },
+  {
+   "id": "UPGRADE_MINION_SLOTS_1",
+   "category": "misc",
+   "xp": 10,
+   "rule": "community shop",
+   "players": 124
+  },
+  {
+   "id": "UPGRADE_MINION_SLOTS_2",
+   "category": "misc",
+   "xp": 10,
+   "rule": "community shop",
+   "players": 115
+  },
+  {
+   "id": "UPGRADE_MINION_SLOTS_3",
+   "category": "misc",
+   "xp": 10,
+   "rule": "community shop",
+   "players": 108
+  },
+  {
+   "id": "UPGRADE_MINION_SLOTS_4",
+   "category": "misc",
+   "xp": 10,
+   "rule": "community shop",
+   "players": 90
+  },
+  {
+   "id": "UPGRADE_MINION_SLOTS_5",
+   "category": "misc",
+   "xp": 10,
+   "rule": "community shop",
+   "players": 82
+  },
+  {
+   "id": "WINTER_ICY_HOOK_1",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 20
+  },
+  {
+   "id": "WINTER_ICY_HOOK_2",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 15
+  },
+  {
+   "id": "WINTER_ICY_HOOK_3",
+   "category": "events",
+   "xp": 3,
+   "rule": "event perk shops",
+   "players": 12
+  },
+  {
+   "id": "WINTER_ICY_HOOK_4",
+   "category": "events",
+   "xp": 5,
+   "rule": "event perk shops",
+   "players": 10
+  },
+  {
+   "id": "WINTER_ICY_HOOK_5",
+   "category": "events",
+   "xp": 7,
+   "rule": "event perk shops",
+   "players": 10
+  },
+  {
+   "id": "WINTER_PRESENT_CONNOISSEUR_1",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 24
+  },
+  {
+   "id": "WINTER_PRESENT_CONNOISSEUR_2",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 16
+  },
+  {
+   "id": "WINTER_PRESENT_CONNOISSEUR_3",
+   "category": "events",
+   "xp": 3,
+   "rule": "event perk shops",
+   "players": 13
+  },
+  {
+   "id": "WINTER_PRESENT_CONNOISSEUR_4",
+   "category": "events",
+   "xp": 5,
+   "rule": "event perk shops",
+   "players": 13
+  },
+  {
+   "id": "WINTER_PRESENT_CONNOISSEUR_5",
+   "category": "events",
+   "xp": 7,
+   "rule": "event perk shops",
+   "players": 9
+  },
+  {
+   "id": "WINTER_PROFESSIONAL_GIFTER_1",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 12
+  },
+  {
+   "id": "WINTER_PROFESSIONAL_GIFTER_2",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 6
+  },
+  {
+   "id": "WINTER_RED_FAD_1",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 18
+  },
+  {
+   "id": "WINTER_RED_FAD_2",
+   "category": "events",
+   "xp": 2,
+   "rule": "event perk shops",
+   "players": 13
+  },
+  {
+   "id": "WINTER_RED_FAD_3",
+   "category": "events",
+   "xp": 3,
+   "rule": "event perk shops",
+   "players": 10
+  },
+  {
+   "id": "WITHER_ESSENCE_DUNGEONBREAKER_SECRETS_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 25
+  },
+  {
+   "id": "WITHER_ESSENCE_DUNGEONBREAKER_SECRETS_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 13
+  },
+  {
+   "id": "WITHER_ESSENCE_DUNGEONBREAKER_SECRETS_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 11
+  },
+  {
+   "id": "WITHER_ESSENCE_DUNGEONBREAKER_SECRETS_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 9
+  },
+  {
+   "id": "WITHER_ESSENCE_DUNGEONBREAKER_SECRETS_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 8
+  },
+  {
+   "id": "WITHER_ESSENCE_FORBIDDEN_BLESSING_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 51
+  },
+  {
+   "id": "WITHER_ESSENCE_FORBIDDEN_BLESSING_10",
+   "category": "essence_shop",
+   "xp": 10,
+   "rule": "essence shop perks",
+   "players": 14
+  },
+  {
+   "id": "WITHER_ESSENCE_FORBIDDEN_BLESSING_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 43
+  },
+  {
+   "id": "WITHER_ESSENCE_FORBIDDEN_BLESSING_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 26
+  },
+  {
+   "id": "WITHER_ESSENCE_FORBIDDEN_BLESSING_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 24
+  },
+  {
+   "id": "WITHER_ESSENCE_FORBIDDEN_BLESSING_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 23
+  },
+  {
+   "id": "WITHER_ESSENCE_FORBIDDEN_BLESSING_6",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 18
+  },
+  {
+   "id": "WITHER_ESSENCE_FORBIDDEN_BLESSING_7",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 16
+  },
+  {
+   "id": "WITHER_ESSENCE_FORBIDDEN_BLESSING_8",
+   "category": "essence_shop",
+   "xp": 8,
+   "rule": "essence shop perks",
+   "players": 15
+  },
+  {
+   "id": "WITHER_ESSENCE_FORBIDDEN_BLESSING_9",
+   "category": "essence_shop",
+   "xp": 9,
+   "rule": "essence shop perks",
+   "players": 14
+  },
+  {
+   "id": "WITHER_ESSENCE_PERMANENT_DEFENSE_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 45
+  },
+  {
+   "id": "WITHER_ESSENCE_PERMANENT_DEFENSE_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 25
+  },
+  {
+   "id": "WITHER_ESSENCE_PERMANENT_DEFENSE_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 17
+  },
+  {
+   "id": "WITHER_ESSENCE_PERMANENT_DEFENSE_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 16
+  },
+  {
+   "id": "WITHER_ESSENCE_PERMANENT_DEFENSE_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 14
+  },
+  {
+   "id": "WITHER_ESSENCE_PERMANENT_HEALTH_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 46
+  },
+  {
+   "id": "WITHER_ESSENCE_PERMANENT_HEALTH_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 26
+  },
+  {
+   "id": "WITHER_ESSENCE_PERMANENT_HEALTH_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 19
+  },
+  {
+   "id": "WITHER_ESSENCE_PERMANENT_HEALTH_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 16
+  },
+  {
+   "id": "WITHER_ESSENCE_PERMANENT_HEALTH_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 14
+  },
+  {
+   "id": "WITHER_ESSENCE_PERMANENT_INTELLIGENCE_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 40
+  },
+  {
+   "id": "WITHER_ESSENCE_PERMANENT_INTELLIGENCE_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 26
+  },
+  {
+   "id": "WITHER_ESSENCE_PERMANENT_INTELLIGENCE_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 19
+  },
+  {
+   "id": "WITHER_ESSENCE_PERMANENT_INTELLIGENCE_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 17
+  },
+  {
+   "id": "WITHER_ESSENCE_PERMANENT_INTELLIGENCE_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 14
+  },
+  {
+   "id": "WITHER_ESSENCE_PERMANENT_SPEED_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 47
+  },
+  {
+   "id": "WITHER_ESSENCE_PERMANENT_SPEED_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 31
+  },
+  {
+   "id": "WITHER_ESSENCE_PERMANENT_STRENGTH_1",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 52
+  },
+  {
+   "id": "WITHER_ESSENCE_PERMANENT_STRENGTH_2",
+   "category": "essence_shop",
+   "xp": 2,
+   "rule": "essence shop perks",
+   "players": 32
+  },
+  {
+   "id": "WITHER_ESSENCE_PERMANENT_STRENGTH_3",
+   "category": "essence_shop",
+   "xp": 3,
+   "rule": "essence shop perks",
+   "players": 23
+  },
+  {
+   "id": "WITHER_ESSENCE_PERMANENT_STRENGTH_4",
+   "category": "essence_shop",
+   "xp": 5,
+   "rule": "essence shop perks",
+   "players": 17
+  },
+  {
+   "id": "WITHER_ESSENCE_PERMANENT_STRENGTH_5",
+   "category": "essence_shop",
+   "xp": 7,
+   "rule": "essence shop perks",
+   "players": 15
+  },
+  {
+   "id": "YOTW_STEW_AERODYNAMIC_POTPOURRI",
+   "category": "events",
+   "xp": 5,
+   "rule": "yotw stews",
+   "players": 3
+  },
+  {
+   "id": "YOTW_STEW_BONE_BROTH",
+   "category": "events",
+   "xp": 5,
+   "rule": "yotw stews",
+   "players": 12
+  },
+  {
+   "id": "YOTW_STEW_CREMATED_CEREAL",
+   "category": "events",
+   "xp": 5,
+   "rule": "yotw stews",
+   "players": 3
+  },
+  {
+   "id": "YOTW_STEW_DUSTY_BISQUE",
+   "category": "events",
+   "xp": 5,
+   "rule": "yotw stews",
+   "players": 3
+  },
+  {
+   "id": "YOTW_STEW_EFFERVESCENT_BOUILLON",
+   "category": "events",
+   "xp": 5,
+   "rule": "yotw stews",
+   "players": 7
+  },
+  {
+   "id": "YOTW_STEW_ELECTRONIC_ELIXIR",
+   "category": "events",
+   "xp": 5,
+   "rule": "yotw stews",
+   "players": 3
+  },
+  {
+   "id": "YOTW_STEW_FLAMING_HOT_CHILLI",
+   "category": "events",
+   "xp": 5,
+   "rule": "yotw stews",
+   "players": 6
+  },
+  {
+   "id": "YOTW_STEW_FROGSPAWN_CHOWDER",
+   "category": "events",
+   "xp": 5,
+   "rule": "yotw stews",
+   "players": 14
+  },
+  {
+   "id": "YOTW_STEW_GEMSTONE_GOULASH",
+   "category": "events",
+   "xp": 5,
+   "rule": "yotw stews",
+   "players": 10
+  },
+  {
+   "id": "YOTW_STEW_HOPEFULLY_NOT_HUMAN_HODGEPODGE",
+   "category": "events",
+   "xp": 5,
+   "rule": "yotw stews",
+   "players": 9
+  },
+  {
+   "id": "YOTW_STEW_KNOCKOFF_GLACITE_GUMBO",
+   "category": "events",
+   "xp": 5,
+   "rule": "yotw stews",
+   "players": 3
+  },
+  {
+   "id": "YOTW_STEW_LEAFY_LENTIL_SOUP",
+   "category": "events",
+   "xp": 5,
+   "rule": "yotw stews",
+   "players": 3
+  },
+  {
+   "id": "YOTW_STEW_MAYFLY_STEW",
+   "category": "events",
+   "xp": 5,
+   "rule": "yotw stews",
+   "players": 17
+  },
+  {
+   "id": "YOTW_STEW_SMELLY_JELLY",
+   "category": "events",
+   "xp": 5,
+   "rule": "yotw stews",
+   "players": 4
+  },
+  {
+   "id": "YOTW_STEW_SPELLWEAVERS_SOUP",
+   "category": "events",
+   "xp": 5,
+   "rule": "yotw stews",
+   "players": 9
+  },
+  {
+   "id": "YOTW_STEW_SPIDER_EYE_SOUP",
+   "category": "events",
+   "xp": 5,
+   "rule": "yotw stews",
+   "players": 10
+  },
+  {
+   "id": "YOTW_STEW_STRAIGHT_ICE_SLUSHIE",
+   "category": "events",
+   "xp": 5,
+   "rule": "yotw stews",
+   "players": 2
+  },
+  {
+   "id": "YOTW_STEW_VOID_PORRIDGE",
+   "category": "events",
+   "xp": 5,
+   "rule": "yotw stews",
+   "players": 11
+  },
+  {
+   "id": "YOTW_STEW_WATERLICE_LIQUOR",
+   "category": "events",
+   "xp": 5,
+   "rule": "yotw stews",
+   "players": 4
+  },
+  {
+   "id": "YOTW_STEW_WITHERING_PUREE",
+   "category": "events",
+   "xp": 5,
+   "rule": "yotw stews",
+   "players": 8
+  }
+ ]
+}

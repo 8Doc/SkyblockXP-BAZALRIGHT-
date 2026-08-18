@@ -1,0 +1,5817 @@
+{
+ "generatedAt": "2026-08-18T20:07:01.858Z",
+ "source": "https://api.hypixel.net/v2/resources/skyblock",
+ "totalXp": 3644,
+ "donations": [
+  {
+   "itemId": "ABYSMAL_LASSO",
+   "name": "Abysmal Lasso",
+   "xp": 1,
+   "category": "HUNTING",
+   "stage": "STARTER",
+   "tradeable": false
+  },
+  {
+   "itemId": "ADVANCED_GARDENING_AXE",
+   "name": "Advanced Gardening Axe",
+   "xp": 3,
+   "category": "FARMING",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "ADVANCED_GARDENING_HOE",
+   "name": "Advanced Gardening Hoe",
+   "xp": 3,
+   "category": "FARMING",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "ALCHEMISTS_STAFF",
+   "name": "The Alchemist's Staff",
+   "xp": 8,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": false
+  },
+  {
+   "itemId": "ALERT_FLARE",
+   "name": "Alert Flare",
+   "xp": 10,
+   "category": "COMBAT",
+   "stage": "PROFESSIONAL",
+   "tradeable": true
+  },
+  {
+   "itemId": "AMBER_POLISHED_DRILL_ENGINE",
+   "name": "Amber-Polished Drill Engine",
+   "xp": 15,
+   "category": "MINING",
+   "stage": "MASTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "ANCESTRAL_SPADE",
+   "name": "Ancestral Spade",
+   "xp": 2,
+   "category": "COMBAT",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "ANCIENT_CLOAK",
+   "name": "Ancient Cloak",
+   "xp": 8,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "ANNIHILATION_CLOAK",
+   "name": "Annihilation Cloak",
+   "xp": 16,
+   "category": "COMBAT",
+   "stage": "MASTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "APEX_PRAEDATOR",
+   "name": "Savage Huntaxe - Praedator",
+   "xp": 10,
+   "category": "HUNTING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "AQUAMASTER_HYDROMAX",
+   "name": "AquaMaster™ Hydromax",
+   "xp": 8,
+   "category": "FARMING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "AQUAMASTER_X",
+   "name": "AquaMaster™ X",
+   "xp": 6,
+   "category": "FARMING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "ARACK",
+   "name": "Arack",
+   "xp": 2,
+   "category": "COMBAT",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "ARCHAIC_SPADE",
+   "name": "Archaic Spade",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "ARMADILLO_MASK",
+   "name": "Armadillo Mask",
+   "xp": 3,
+   "category": "MINING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "ARTISANAL_SHORTBOW",
+   "name": "Artisanal Shortbow",
+   "xp": 1,
+   "category": "COMBAT",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "ASPECT_OF_THE_DRAGON",
+   "name": "Aspect of the Dragons",
+   "xp": 5,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "ASPECT_OF_THE_END",
+   "name": "Aspect of the End",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "ASPECT_OF_THE_JERRY",
+   "name": "Aspect of the Jerry",
+   "xp": 1,
+   "category": "COMBAT",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "ASPECT_OF_THE_VOID",
+   "name": "Aspect of the Void",
+   "xp": 6,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "ASTRAEA",
+   "name": "Astraea",
+   "xp": 5,
+   "category": "DUNGEONEERING",
+   "stage": "MASTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "ATOMINIZER",
+   "name": "Atominizer",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "ATOMSPLIT_KATANA",
+   "name": "Atomsplit Katana",
+   "xp": 10,
+   "category": "COMBAT",
+   "stage": "PROFESSIONAL",
+   "tradeable": true
+  },
+  {
+   "itemId": "AXE_OF_THE_SHREDDED",
+   "name": "Halberd of the Shredded",
+   "xp": 10,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "BALLOON_SNAKE",
+   "name": "Balloon Snake",
+   "xp": 4,
+   "category": "DUNGEONEERING",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "BANDAGED_MITHRIL_PICKAXE",
+   "name": "Bandaged Mithril Pickaxe",
+   "xp": 2,
+   "category": "MINING",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "BASIC_CHICKEN_AXE",
+   "name": "Basic Chicken Axe",
+   "xp": 1,
+   "category": "FARMING",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "BASIC_COW_AXE",
+   "name": "Basic Cow Axe",
+   "xp": 1,
+   "category": "FARMING",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "BASIC_FISHING_NET",
+   "name": "Basic Fishing Net",
+   "xp": 1,
+   "category": "HUNTING",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "BASIC_GARDENING_AXE",
+   "name": "Basic Gardening Axe",
+   "xp": 2,
+   "category": "FARMING",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "BASIC_GARDENING_HOE",
+   "name": "Basic Gardening Hoe",
+   "xp": 2,
+   "category": "FARMING",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "BASIC_MUSHROOM_COW_AXE",
+   "name": "Basic Mooshroom Axe",
+   "xp": 1,
+   "category": "FARMING",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "BASIC_PIG_AXE",
+   "name": "Basic Pig Axe",
+   "xp": 1,
+   "category": "FARMING",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "BASIC_RABBIT_AXE",
+   "name": "Basic Rabbit Axe",
+   "xp": 1,
+   "category": "FARMING",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "BASIC_SHEEP_AXE",
+   "name": "Basic Sheep Axe",
+   "xp": 1,
+   "category": "FARMING",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "BAT_WAND",
+   "name": "Spirit Sceptre",
+   "xp": 8,
+   "category": "DUNGEONEERING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "BEE_MASK",
+   "name": "Bee Mask",
+   "xp": 4,
+   "category": "FORAGING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "BLADE_OF_THE_VOLCANO",
+   "name": "Blade of the Volcano",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "BLAZETEKK_HAM_RADIO",
+   "name": "Blazetekk™ Ham Radio",
+   "xp": 16,
+   "category": "COMBAT",
+   "stage": "PROFESSIONAL",
+   "tradeable": true
+  },
+  {
+   "itemId": "BLOBFISH_HAT",
+   "name": "Blobfish Hat",
+   "xp": 1,
+   "category": "COMBAT",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "BONE_BOOMERANG",
+   "name": "Bonemerang",
+   "xp": 8,
+   "category": "DUNGEONEERING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "BONE_NECKLACE",
+   "name": "Bone Necklace",
+   "xp": 6,
+   "category": "DUNGEONEERING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "BONE_REAVER",
+   "name": "Bone Reaver",
+   "xp": 8,
+   "category": "DUNGEONEERING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "BONZO_MASK",
+   "name": "Bonzo's Mask",
+   "xp": 4,
+   "category": "DUNGEONEERING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "BONZO_STAFF",
+   "name": "Bonzo's Staff",
+   "xp": 5,
+   "category": "DUNGEONEERING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "BOUQUET_OF_LIES",
+   "name": "Bouquet of Lies",
+   "xp": 8,
+   "category": "DUNGEONEERING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "BURSTFIRE_DAGGER",
+   "name": "Kindlebane Dagger",
+   "xp": 10,
+   "category": "COMBAT",
+   "stage": "MASTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "BURSTMAW_DAGGER",
+   "name": "Mawdredge Dagger",
+   "xp": 10,
+   "category": "COMBAT",
+   "stage": "MASTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "CACTUS_KNIFE",
+   "name": "Cactus Knife Mk. I",
+   "xp": 4,
+   "category": "FARMING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "CACTUS_KNIFE_2",
+   "name": "Cactus Knife Mk. II",
+   "xp": 5,
+   "category": "FARMING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "CACTUS_KNIFE_3",
+   "name": "Cactus Knife Mk. III",
+   "xp": 8,
+   "category": "FARMING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "CELESTE_WAND",
+   "name": "Celeste Wand",
+   "xp": 1,
+   "category": "COMBAT",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "CHALLENGE_ROD",
+   "name": "Challenging Rod",
+   "xp": 2,
+   "category": "FISHING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "CHAMP_ROD",
+   "name": "Rod of Champions",
+   "xp": 3,
+   "category": "FISHING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "CHARMINIZER",
+   "name": "Charminizer",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "CHICKEN_AXE",
+   "name": "Advanced Chicken Axe",
+   "xp": 2,
+   "category": "FARMING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "CHICKEN_HEAD",
+   "name": "Chicken Hat",
+   "xp": 1,
+   "category": "FARMING",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "CHUM_SINKER",
+   "name": "Chum Sinker",
+   "xp": 3,
+   "category": "FISHING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "CLEAVER",
+   "name": "Cleaver",
+   "xp": 1,
+   "category": "DUNGEONEERING",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "CLOWNFISH_HAT",
+   "name": "Tropical Fish Hat",
+   "xp": 1,
+   "category": "COMBAT",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "COCO_CHOPPER",
+   "name": "Cocoa Chopper Mk. I",
+   "xp": 4,
+   "category": "FARMING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "COCO_CHOPPER_2",
+   "name": "Cocoa Chopper Mk. II",
+   "xp": 5,
+   "category": "FARMING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "COCO_CHOPPER_3",
+   "name": "Cocoa Chopper Mk. III",
+   "xp": 8,
+   "category": "FARMING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "COMMON_HOOK",
+   "name": "Common Hook",
+   "xp": 2,
+   "category": "FISHING",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "CONJURING_SWORD",
+   "name": "Conjuring",
+   "xp": 3,
+   "category": "DUNGEONEERING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "COW_AXE",
+   "name": "Advanced Cow Axe",
+   "xp": 2,
+   "category": "FARMING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "COW_HEAD",
+   "name": "Cow Hat",
+   "xp": 1,
+   "category": "COMBAT",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "CREEPER_HAT",
+   "name": "Creeper Hat",
+   "xp": 1,
+   "category": "COMBAT",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "CROWN_OF_AVARICE",
+   "name": "Crown of Avarice",
+   "xp": 10,
+   "category": "COMBAT",
+   "stage": "PROFESSIONAL",
+   "tradeable": true
+  },
+  {
+   "itemId": "CROWN_OF_GREED",
+   "name": "Crown of Greed",
+   "xp": 6,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "CRYPT_BOW",
+   "name": "Soulstealer Bow",
+   "xp": 3,
+   "category": "DUNGEONEERING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "CRYPT_DREADLORD_SWORD",
+   "name": "Dreadlord Sword",
+   "xp": 2,
+   "category": "DUNGEONEERING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "CRYSTALLIZED_HEART",
+   "name": "Crystallized Heart",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "CURSUS_FERAE",
+   "name": "Reinforced Huntaxe - Cursus",
+   "xp": 4,
+   "category": "HUNTING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "DAEDALUS_AXE",
+   "name": "Daedalus Blade",
+   "xp": 10,
+   "category": "COMBAT",
+   "stage": "PROFESSIONAL",
+   "tradeable": true
+  },
+  {
+   "itemId": "DARK_CLAYMORE",
+   "name": "Dark Claymore",
+   "xp": 30,
+   "category": "DUNGEONEERING",
+   "stage": "MASTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "DARK_GOGGLES",
+   "name": "Dark Goggles",
+   "xp": 2,
+   "category": "DUNGEONEERING",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "DAVIDS_CLOAK",
+   "name": "David's Cloak",
+   "xp": 2,
+   "category": "HUNTING",
+   "stage": "STARTER",
+   "tradeable": false
+  },
+  {
+   "itemId": "DEATH_BOW",
+   "name": "Death Bow",
+   "xp": 3,
+   "category": "DUNGEONEERING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "DECENT_AXE",
+   "name": "Decent Axe",
+   "xp": 2,
+   "category": "FORAGING",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "DECENT_BOW",
+   "name": "Decent Bow",
+   "xp": 3,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "DEIFIC_SPADE",
+   "name": "Deific Spade",
+   "xp": 8,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "DELIRIUM_NECKLACE",
+   "name": "Delirium Necklace",
+   "xp": 8,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "DEMONLORD_GAUNTLET",
+   "name": "Demonslayer Gauntlet",
+   "xp": 12,
+   "category": "COMBAT",
+   "stage": "PROFESSIONAL",
+   "tradeable": true
+  },
+  {
+   "itemId": "DESTRUCTION_CLOAK",
+   "name": "Destruction Cloak",
+   "xp": 8,
+   "category": "COMBAT",
+   "stage": "PROFESSIONAL",
+   "tradeable": true
+  },
+  {
+   "itemId": "DIAMOND_BONZO_HEAD",
+   "name": "Diamond Bonzo Head",
+   "xp": 10,
+   "category": "DUNGEONEERING",
+   "stage": "PROFESSIONAL",
+   "tradeable": false
+  },
+  {
+   "itemId": "DIAMOND_LIVID_HEAD",
+   "name": "Diamond Livid Head",
+   "xp": 10,
+   "category": "DUNGEONEERING",
+   "stage": "MASTER",
+   "tradeable": false
+  },
+  {
+   "itemId": "DIAMOND_NECRON_HEAD",
+   "name": "Diamond Necron Head",
+   "xp": 10,
+   "category": "DUNGEONEERING",
+   "stage": "MASTER",
+   "tradeable": false
+  },
+  {
+   "itemId": "DIAMOND_PROFESSOR_HEAD",
+   "name": "Diamond Professor Head",
+   "xp": 10,
+   "category": "DUNGEONEERING",
+   "stage": "PROFESSIONAL",
+   "tradeable": false
+  },
+  {
+   "itemId": "DIAMOND_SADAN_HEAD",
+   "name": "Diamond Sadan Head",
+   "xp": 10,
+   "category": "DUNGEONEERING",
+   "stage": "MASTER",
+   "tradeable": false
+  },
+  {
+   "itemId": "DIAMOND_SCARF_HEAD",
+   "name": "Diamond Scarf Head",
+   "xp": 10,
+   "category": "DUNGEONEERING",
+   "stage": "PROFESSIONAL",
+   "tradeable": false
+  },
+  {
+   "itemId": "DIAMOND_THORN_HEAD",
+   "name": "Diamond Thorn Head",
+   "xp": 10,
+   "category": "DUNGEONEERING",
+   "stage": "PROFESSIONAL",
+   "tradeable": false
+  },
+  {
+   "itemId": "DIVAN_DRILL",
+   "name": "Divan's Drill",
+   "xp": 25,
+   "category": "MINING",
+   "stage": "MASTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "DOJO_BLACK_BELT",
+   "name": "Black Belt",
+   "xp": 12,
+   "category": "COMBAT",
+   "stage": "PROFESSIONAL",
+   "tradeable": false
+  },
+  {
+   "itemId": "DOJO_BLUE_BELT",
+   "name": "Blue Belt",
+   "xp": 2,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": false
+  },
+  {
+   "itemId": "DOJO_BROWN_BELT",
+   "name": "Brown Belt",
+   "xp": 3,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": false
+  },
+  {
+   "itemId": "DOJO_GREEN_BELT",
+   "name": "Green Belt",
+   "xp": 2,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": false
+  },
+  {
+   "itemId": "DOJO_WHITE_BELT",
+   "name": "White Belt",
+   "xp": 1,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": false
+  },
+  {
+   "itemId": "DOJO_YELLOW_BELT",
+   "name": "§eYellow Belt",
+   "xp": 2,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": false
+  },
+  {
+   "itemId": "DRAGON_SHORTBOW",
+   "name": "Dragon Shortbow",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "tradeable": false
+  },
+  {
+   "itemId": "DRAGONFADE_CLOAK",
+   "name": "Dragonfade Cloak",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "DRAGONFUSE_GLOVE",
+   "name": "Dragonfuse Glove",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "DUNGEON_STONE",
+   "name": "Dungeon Orb",
+   "xp": 1,
+   "category": "DUNGEONEERING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "DUNGEONBREAKER",
+   "name": "Dungeonbreaker",
+   "xp": 8,
+   "category": "DUNGEONEERING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "DWARVEN_HANDWARMERS",
+   "name": "Dwarven Handwarmers",
+   "xp": 10,
+   "category": "MINING",
+   "stage": "PROFESSIONAL",
+   "tradeable": true
+  },
+  {
+   "itemId": "EARTH_SHARD",
+   "name": "Earthen Blade",
+   "xp": 4,
+   "category": "DUNGEONEERING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "EDIBLE_MACE",
+   "name": "Edible Mace",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "EFFICIENT_AXE",
+   "name": "Efficient Axe",
+   "xp": 1,
+   "category": "FORAGING",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "EMERALD_BLADE",
+   "name": "Emerald Blade",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "ENCHANTED_JACK_O_LANTERN",
+   "name": "Lantern Helmet",
+   "xp": 3,
+   "category": "FARMING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "ENCHANTED_TIME_CLOCK",
+   "name": "Enchanted Clock",
+   "xp": 7,
+   "category": "MINING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "END_STONE_BOW",
+   "name": "End Stone Bow",
+   "xp": 3,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "END_STONE_SWORD",
+   "name": "End Stone Sword",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "END_SWORD",
+   "name": "End Sword",
+   "xp": 1,
+   "category": "COMBAT",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "ENDER_BOW",
+   "name": "Ender Bow",
+   "xp": 3,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "ENDERMAN_MASK",
+   "name": "Enderman Mask",
+   "xp": 2,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "tradeable": false
+  },
+  {
+   "itemId": "ENTANGLER_LASSO",
+   "name": "Entangler Lasso",
+   "xp": 4,
+   "category": "HUNTING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "EVERSTRETCH_LASSO",
+   "name": "Everstretch Lasso",
+   "xp": 10,
+   "category": "HUNTING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "EXPLOSIVE_BOW",
+   "name": "Explosive Bow",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "FALLEN_STAR_HAT",
+   "name": "Fallen Star Helmet",
+   "xp": 3,
+   "category": "MINING",
+   "stage": "INTERMEDIATE",
+   "tradeable": false
+  },
+  {
+   "itemId": "FALLEN_STAR_TRACKER",
+   "name": "Fallen Star Lozenge",
+   "xp": 2,
+   "category": "MINING",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "FANCY_SWORD",
+   "name": "Fancy Sword",
+   "xp": 1,
+   "category": "COMBAT",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "FARMER_BOOTS",
+   "name": "Farmer Boots",
+   "xp": 4,
+   "category": "FARMING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "FEL_SWORD",
+   "name": "Fel Sword",
+   "xp": 5,
+   "category": "DUNGEONEERING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "FELTHORN_REAPER",
+   "name": "Felthorn Reaper",
+   "xp": 8,
+   "category": "DUNGEONEERING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "FESTIVE_SINKER",
+   "name": "Festive Sinker",
+   "xp": 2,
+   "category": "FISHING",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "FIG_AXE",
+   "name": "Fig Hew",
+   "xp": 2,
+   "category": "FORAGING",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "FIGSTONE_AXE",
+   "name": "Figstone Splitter",
+   "xp": 5,
+   "category": "FORAGING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "FIRE_FREEZE_STAFF",
+   "name": "Fire Freeze Staff",
+   "xp": 5,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "FIRE_FURY_STAFF",
+   "name": "Fire Fury Staff",
+   "xp": 5,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "FIRE_VEIL_WAND",
+   "name": "Fire Veil Wand",
+   "xp": 7,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "FIREDUST_DAGGER",
+   "name": "Firedust Dagger",
+   "xp": 6,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "FISH_HAT",
+   "name": "Fish Hat",
+   "xp": 1,
+   "category": "FISHING",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "FLAMING_FIST",
+   "name": "Flaming Fist",
+   "xp": 15,
+   "category": "COMBAT",
+   "stage": "PROFESSIONAL",
+   "tradeable": true
+  },
+  {
+   "itemId": "FLAMING_FLAY",
+   "name": "Flaming Flay",
+   "xp": 12,
+   "category": "COMBAT",
+   "stage": "MASTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "FLAMING_SWORD",
+   "name": "Flaming Sword",
+   "xp": 3,
+   "category": "COMBAT",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "FLINT_SHOVEL",
+   "name": "Flint Shovel",
+   "xp": 1,
+   "category": "MINING",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "FLORID_ZOMBIE_SWORD",
+   "name": "Florid Zombie Sword",
+   "xp": 5,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "FLOWER_OF_TRUTH",
+   "name": "Flower of Truth",
+   "xp": 6,
+   "category": "DUNGEONEERING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "FRACTURED_MITHRIL_PICKAXE",
+   "name": "Fractured Mithril Pickaxe",
+   "xp": 2,
+   "category": "MINING",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "FROG_MASK",
+   "name": "Frog Mask",
+   "xp": 4,
+   "category": "FORAGING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "FROGGLES",
+   "name": "Froggles",
+   "xp": 2,
+   "category": "FISHING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "FROGGLES_DIAMOND",
+   "name": "Diamond Froggles",
+   "xp": 10,
+   "category": "FISHING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "FROGGLES_GOLD",
+   "name": "Golden Froggles",
+   "xp": 6,
+   "category": "FISHING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "FROGGLES_SILVER",
+   "name": "Silver Froggles",
+   "xp": 4,
+   "category": "FISHING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "FROZEN_SCYTHE",
+   "name": "Frozen Scythe",
+   "xp": 5,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "FUNGI_CUTTER",
+   "name": "Fungi Cutter Mk. I",
+   "xp": 4,
+   "category": "FARMING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "FUNGI_CUTTER_2",
+   "name": "Fungi Cutter Mk. II",
+   "xp": 5,
+   "category": "FARMING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "FUNGI_CUTTER_3",
+   "name": "Fungi Cutter Mk. III",
+   "xp": 8,
+   "category": "FARMING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "GARDEN_SCYTHE",
+   "name": "Garden Scythe",
+   "xp": 2,
+   "category": "FARMING",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "GAUNTLET_OF_CONTAGION",
+   "name": "Gauntlet of Contagion",
+   "xp": 10,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "GEMSTONE_DRILL_1",
+   "name": "Ruby Drill TX-15",
+   "xp": 4,
+   "category": "MINING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "GEMSTONE_DRILL_2",
+   "name": "Gemstone Drill LT-522",
+   "xp": 5,
+   "category": "MINING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "GEMSTONE_DRILL_3",
+   "name": "Topaz Drill KGR-12",
+   "xp": 7,
+   "category": "MINING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "GEMSTONE_DRILL_4",
+   "name": "Jasper Drill X",
+   "xp": 10,
+   "category": "MINING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "GEMSTONE_FUEL_TANK",
+   "name": "Gemstone Fuel Tank",
+   "xp": 10,
+   "category": "MINING",
+   "stage": "PROFESSIONAL",
+   "tradeable": true
+  },
+  {
+   "itemId": "GEMSTONE_GAUNTLET",
+   "name": "Gemstone Gauntlet",
+   "xp": 8,
+   "category": "MINING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "GHOST_BOOTS",
+   "name": "Ghostly Boots",
+   "xp": 5,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "GHOUL_BUSTER",
+   "name": "Ghoul Buster",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "GIANT_CLEAVER",
+   "name": "Giant Cleaver",
+   "xp": 3,
+   "category": "DUNGEONEERING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "GIANTS_SWORD",
+   "name": "Giant's Sword",
+   "xp": 10,
+   "category": "DUNGEONEERING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "GIGANTIC_FISHING_NET",
+   "name": "Gigantic Fishing Net",
+   "xp": 10,
+   "category": "HUNTING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "GLACIAL_SCYTHE",
+   "name": "Glacial Scythe",
+   "xp": 9,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "GLACITE_CHISEL",
+   "name": "Glacite-Plated Chisel",
+   "xp": 10,
+   "category": "MINING",
+   "stage": "PROFESSIONAL",
+   "tradeable": true
+  },
+  {
+   "itemId": "GLACITE_LANTERN",
+   "name": "Glacite Lantern",
+   "xp": 8,
+   "category": "MINING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "GLOOMLOCK_GRIMOIRE",
+   "name": "Gloomlock Grimoire",
+   "xp": 5,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "GOBLIN_OMELETTE",
+   "name": "Goblin Omelette",
+   "xp": 4,
+   "category": "MINING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "GOBLIN_OMELETTE_BLUE_CHEESE",
+   "name": "Blue Cheese Goblin Omelette",
+   "xp": 15,
+   "category": "MINING",
+   "stage": "PROFESSIONAL",
+   "tradeable": true
+  },
+  {
+   "itemId": "GOBLIN_OMELETTE_PESTO",
+   "name": "Pesto Goblin Omelette",
+   "xp": 6,
+   "category": "MINING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "GOBLIN_OMELETTE_SPICY",
+   "name": "Spicy Goblin Omelette",
+   "xp": 8,
+   "category": "MINING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "GOBLIN_OMELETTE_SUNNY_SIDE",
+   "name": "Sunny Side Goblin Omelette",
+   "xp": 6,
+   "category": "MINING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "GOLD_BONZO_HEAD",
+   "name": "Golden Bonzo Head",
+   "xp": 5,
+   "category": "DUNGEONEERING",
+   "stage": "SKILLED",
+   "tradeable": false
+  },
+  {
+   "itemId": "GOLD_LIVID_HEAD",
+   "name": "Golden Livid Head",
+   "xp": 5,
+   "category": "DUNGEONEERING",
+   "stage": "EXPERT",
+   "tradeable": false
+  },
+  {
+   "itemId": "GOLD_NECRON_HEAD",
+   "name": "Golden Necron Head",
+   "xp": 5,
+   "category": "DUNGEONEERING",
+   "stage": "EXPERT",
+   "tradeable": false
+  },
+  {
+   "itemId": "GOLD_PROFESSOR_HEAD",
+   "name": "Golden Professor Head",
+   "xp": 5,
+   "category": "DUNGEONEERING",
+   "stage": "SKILLED",
+   "tradeable": false
+  },
+  {
+   "itemId": "GOLD_SADAN_HEAD",
+   "name": "Golden Sadan Head",
+   "xp": 5,
+   "category": "DUNGEONEERING",
+   "stage": "EXPERT",
+   "tradeable": false
+  },
+  {
+   "itemId": "GOLD_SCARF_HEAD",
+   "name": "Golden Scarf Head",
+   "xp": 5,
+   "category": "DUNGEONEERING",
+   "stage": "SKILLED",
+   "tradeable": false
+  },
+  {
+   "itemId": "GOLD_THORN_HEAD",
+   "name": "Golden Thorn Head",
+   "xp": 5,
+   "category": "DUNGEONEERING",
+   "stage": "SKILLED",
+   "tradeable": false
+  },
+  {
+   "itemId": "GOLDEN_FLEECE",
+   "name": "Golden Fleece",
+   "xp": 10,
+   "category": "COMBAT",
+   "stage": "MASTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "GOLEM_HAT",
+   "name": "Golem Hat",
+   "xp": 1,
+   "category": "MINING",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "GOLEM_SWORD",
+   "name": "Golem Sword",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "GYROKINETIC_WAND",
+   "name": "Gyrokinetic Wand",
+   "xp": 8,
+   "category": "COMBAT",
+   "stage": "PROFESSIONAL",
+   "tradeable": true
+  },
+  {
+   "itemId": "HEARTFIRE_DAGGER",
+   "name": "Pyrochaos Dagger",
+   "xp": 20,
+   "category": "COMBAT",
+   "stage": "MASTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "HEARTMAW_DAGGER",
+   "name": "Deathripper Dagger",
+   "xp": 20,
+   "category": "COMBAT",
+   "stage": "MASTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "HELIX_CHOPPER",
+   "name": "Helix Chopper",
+   "xp": 7,
+   "category": "FORAGING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "HELLFIRE_ROD",
+   "name": "Hellfire Rod",
+   "xp": 20,
+   "category": "FISHING",
+   "stage": "PROFESSIONAL",
+   "tradeable": true
+  },
+  {
+   "itemId": "HELLSTORM_STAFF",
+   "name": "Hellstorm Wand",
+   "xp": 20,
+   "category": "COMBAT",
+   "stage": "MASTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "HOE_OF_GREAT_TILLING",
+   "name": "Hoe of Great Tilling",
+   "xp": 2,
+   "category": "FARMING",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "HOE_OF_GREATER_TILLING",
+   "name": "Hoe of Greater Tilling",
+   "xp": 3,
+   "category": "FARMING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "HOE_OF_GREATEST_TILLING",
+   "name": "Hoe of Greatest Tilling",
+   "xp": 4,
+   "category": "FARMING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "HOLLOW_WAND",
+   "name": "Hollow Wand",
+   "xp": 5,
+   "category": "COMBAT",
+   "stage": "PROFESSIONAL",
+   "tradeable": true
+  },
+  {
+   "itemId": "HOTSPOT_HOOK",
+   "name": "Hotspot Hook",
+   "xp": 6,
+   "category": "FISHING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "HOTSPOT_RADAR",
+   "name": "Hotspot Radar",
+   "xp": 2,
+   "category": "FISHING",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "HOTSPOT_SINKER",
+   "name": "Hotspot Sinker",
+   "xp": 6,
+   "category": "FISHING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "HUNTER_KNIFE",
+   "name": "Hunter Knife",
+   "xp": 2,
+   "category": "COMBAT",
+   "stage": "AMATEUR",
+   "tradeable": false
+  },
+  {
+   "itemId": "HURRICANE_BOW",
+   "name": "Hurricane Bow",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "HYDRO_CAN_1000",
+   "name": "HydroCan™ 1000",
+   "xp": 2,
+   "category": "FARMING",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "HYDRO_CAN_TURBO_2000",
+   "name": "HydroCan™ Turbo 2000",
+   "xp": 2,
+   "category": "FARMING",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "HYDRO_CAN_ULTRA_3000",
+   "name": "HydroCan™ Ultra 3000",
+   "xp": 4,
+   "category": "FARMING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "HYPER_CLEAVER",
+   "name": "Hyper Cleaver",
+   "xp": 2,
+   "category": "DUNGEONEERING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "HYPERION",
+   "name": "Hyperion",
+   "xp": 5,
+   "category": "DUNGEONEERING",
+   "stage": "MASTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "ICE_SPRAY_WAND",
+   "name": "Ice Spray Wand",
+   "xp": 8,
+   "category": "DUNGEONEERING",
+   "stage": "PROFESSIONAL",
+   "tradeable": true
+  },
+  {
+   "itemId": "ICY_SINKER",
+   "name": "Icy Sinker",
+   "xp": 3,
+   "category": "FISHING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "IMPLOSION_BELT",
+   "name": "Implosion Belt",
+   "xp": 10,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "INFERNO_ROD",
+   "name": "Inferno Rod",
+   "xp": 10,
+   "category": "FISHING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "INFINI_VACUUM",
+   "name": "InfiniVacuum™",
+   "xp": 6,
+   "category": "FARMING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "INFINI_VACUUM_HOOVERIUS",
+   "name": "InfiniVacuum™ Hooverius",
+   "xp": 8,
+   "category": "FARMING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "INFINITE_SPIRIT_LEAP",
+   "name": "Infinileap",
+   "xp": 10,
+   "category": "DUNGEONEERING",
+   "stage": "PROFESSIONAL",
+   "tradeable": true
+  },
+  {
+   "itemId": "INFINITE_SUPERBOOM_TNT",
+   "name": "Infinityboom TNT",
+   "xp": 10,
+   "category": "DUNGEONEERING",
+   "stage": "PROFESSIONAL",
+   "tradeable": true
+  },
+  {
+   "itemId": "INK_WAND",
+   "name": "Ink Wand",
+   "xp": 6,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "ITEM_SPIRIT_BOW",
+   "name": "Spirit Shortbow",
+   "xp": 8,
+   "category": "DUNGEONEERING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "JERRY_STAFF",
+   "name": "Jerry-chine Gun",
+   "xp": 6,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "JINGLE_BELLS",
+   "name": "Jingle Bells",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "tradeable": false
+  },
+  {
+   "itemId": "JUICY_SPRAYONATOR",
+   "name": "Juicy Sprayonator",
+   "xp": 4,
+   "category": "FARMING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "JUJU_SHORTBOW",
+   "name": "Juju Shortbow",
+   "xp": 7,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "JUNGLE_AXE",
+   "name": "Spruce Axe",
+   "xp": 2,
+   "category": "FORAGING",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "JUNGLE_PICKAXE",
+   "name": "Jungle Pickaxe",
+   "xp": 3,
+   "category": "MINING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "JUNK_SINKER",
+   "name": "Junk Sinker",
+   "xp": 2,
+   "category": "FISHING",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "KALHUIKI_MASK",
+   "name": "Kalhuiki Mask",
+   "xp": 3,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "KRAMPUS_HELMET",
+   "name": "Krampus Helmet",
+   "xp": 5,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "LANTERN",
+   "name": "Dwarven Lantern",
+   "xp": 1,
+   "category": "MINING",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "LAPIS_PICKAXE",
+   "name": "Lapis Pickaxe",
+   "xp": 2,
+   "category": "MINING",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "LARGE_POCKET_BLACK_HOLE",
+   "name": "Large Pocket Black Hole",
+   "xp": 6,
+   "category": "HUNTING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "LARGE_SCAFFOLDING",
+   "name": "Large Scaffolding",
+   "xp": 4,
+   "category": "FORAGING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "LAST_BREATH",
+   "name": "Last Breath",
+   "xp": 8,
+   "category": "DUNGEONEERING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "LAVA_SHELL_NECKLACE",
+   "name": "Lava Shell Necklace",
+   "xp": 10,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "LEAPING_SWORD",
+   "name": "Leaping Sword",
+   "xp": 5,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "LEGEND_ROD",
+   "name": "Rod of Legends",
+   "xp": 5,
+   "category": "FISHING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "LIVID_DAGGER",
+   "name": "Livid Dagger",
+   "xp": 6,
+   "category": "DUNGEONEERING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "LOTUS_SINKER",
+   "name": "Lotus Sinker",
+   "xp": 4,
+   "category": "FISHING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "LUMINOUS_BRACELET",
+   "name": "Luminous Bracelet",
+   "xp": 3,
+   "category": "FISHING",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "MACHINE_GUN_BOW",
+   "name": "Machine Gun Shortbow",
+   "xp": 3,
+   "category": "DUNGEONEERING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "MAGMA_FISH_HAT",
+   "name": "Magmafish Hat",
+   "xp": 1,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "MAGMA_ROD",
+   "name": "Magma Rod",
+   "xp": 6,
+   "category": "FISHING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "MANA_FLUX_POWER_ORB",
+   "name": "Mana Flux Power Orb",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "MANGROVE_VINE",
+   "name": "Moonglade Belt",
+   "xp": 5,
+   "category": "FORAGING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "MANTICORE_CLAW",
+   "name": "Manticore Claw",
+   "xp": 10,
+   "category": "COMBAT",
+   "stage": "MASTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "MAWDUST_DAGGER",
+   "name": "Twilight Dagger",
+   "xp": 6,
+   "category": "COMBAT",
+   "stage": "PROFESSIONAL",
+   "tradeable": true
+  },
+  {
+   "itemId": "MEDIUM_FISHING_NET",
+   "name": "Medium Fishing Net",
+   "xp": 2,
+   "category": "HUNTING",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "MEDIUM_POCKET_BLACK_HOLE",
+   "name": "Medium Pocket Black Hole",
+   "xp": 4,
+   "category": "HUNTING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "MEDIUM_SCAFFOLDING",
+   "name": "Medium Scaffolding",
+   "xp": 2,
+   "category": "FORAGING",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "MELON_DICER",
+   "name": "Melon Dicer Mk. I",
+   "xp": 4,
+   "category": "FARMING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "MELON_DICER_2",
+   "name": "Melon Dicer Mk. II",
+   "xp": 5,
+   "category": "FARMING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "MELON_DICER_3",
+   "name": "Melon Dicer Mk. III",
+   "xp": 8,
+   "category": "FARMING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "MENDER_CROWN",
+   "name": "Mender Crown",
+   "xp": 6,
+   "category": "DUNGEONEERING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "MENDER_FEDORA",
+   "name": "Mender Fedora",
+   "xp": 2,
+   "category": "DUNGEONEERING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "MENDER_HELMET",
+   "name": "Mender Helmet",
+   "xp": 2,
+   "category": "DUNGEONEERING",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "MERCENARY_AXE",
+   "name": "Mercenary Sword",
+   "xp": 3,
+   "category": "COMBAT",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "METAL_CHESTPLATE",
+   "name": "Metal Chestplate",
+   "xp": 2,
+   "category": "DUNGEONEERING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "MIDAS_STAFF",
+   "name": "Midas Staff",
+   "xp": 12,
+   "category": "COMBAT",
+   "stage": "PROFESSIONAL",
+   "tradeable": true
+  },
+  {
+   "itemId": "MIDAS_SWORD",
+   "name": "Midas' Sword",
+   "xp": 6,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "MITHRIL_COAT",
+   "name": "Mithril Coat",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "MITHRIL_DRILL_1",
+   "name": "Mithril Drill SX-R226",
+   "xp": 6,
+   "category": "MINING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "MITHRIL_DRILL_2",
+   "name": "Mithril Drill SX-R326",
+   "xp": 10,
+   "category": "MINING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "MITHRIL_DRILL_ENGINE",
+   "name": "Mithril-Plated Drill Engine",
+   "xp": 4,
+   "category": "MINING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "MITHRIL_FUEL_TANK",
+   "name": "Mithril-Infused Fuel Tank",
+   "xp": 5,
+   "category": "MINING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "MITHRIL_LANTERN",
+   "name": "Mithril Lantern",
+   "xp": 3,
+   "category": "MINING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "MITHRIL_PICKAXE",
+   "name": "Mithril Pickaxe",
+   "xp": 2,
+   "category": "MINING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "MOBYS_SHEARS",
+   "name": "Moby's Shears",
+   "xp": 4,
+   "category": "FARMING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "MOODY_GRAPPLESHOT",
+   "name": "Moody Grappleshot",
+   "xp": 8,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "MOSQUITO_BOW",
+   "name": "Mosquito Shortbow",
+   "xp": 8,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "MUSHROOM_COW_AXE",
+   "name": "Advanced Mooshroom Axe",
+   "xp": 2,
+   "category": "FARMING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "MUSIC_PANTS",
+   "name": "Stereo Pants",
+   "xp": 2,
+   "category": "FISHING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "NECROMANCER_SWORD",
+   "name": "Necromancer Sword",
+   "xp": 7,
+   "category": "DUNGEONEERING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "NECRON_BLADE",
+   "name": "Necron's Blade (Unrefined)",
+   "xp": 20,
+   "category": "DUNGEONEERING",
+   "stage": "MASTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "NEX_TITANUM",
+   "name": "Prime Huntaxe - Nex Titanum",
+   "xp": 15,
+   "category": "HUNTING",
+   "stage": "PROFESSIONAL",
+   "tradeable": true
+  },
+  {
+   "itemId": "OBSIDIAN_CHESTPLATE",
+   "name": "Obsidian Chestplate",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "ORNATE_ZOMBIE_SWORD",
+   "name": "Ornate Zombie Sword",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "OVERFLUX_POWER_ORB",
+   "name": "Overflux Power Orb",
+   "xp": 10,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "PARROT_MASK",
+   "name": "Parrot Mask",
+   "xp": 3,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "PELT_BELT",
+   "name": "Pelt Belt",
+   "xp": 4,
+   "category": "HUNTING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "PERFECT_CHISEL",
+   "name": "Perfect Chisel",
+   "xp": 15,
+   "category": "MINING",
+   "stage": "MASTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "PERFECTLY_CUT_FUEL_TANK",
+   "name": "Perfectly-Cut Fuel Tank",
+   "xp": 15,
+   "category": "MINING",
+   "stage": "MASTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "PEST_VEST",
+   "name": "Pest Vest",
+   "xp": 4,
+   "category": "FARMING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "PHANTOM_HOOK",
+   "name": "Spooky Hook",
+   "xp": 5,
+   "category": "FISHING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "PIG_AXE",
+   "name": "Advanced Pig Axe",
+   "xp": 2,
+   "category": "FARMING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "PIGMAN_SWORD",
+   "name": "Pigman Sword",
+   "xp": 8,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "PLANT_DIAGNOSTICS_TOOL",
+   "name": "Plant Diagnostics Tool",
+   "xp": 2,
+   "category": "FARMING",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "PLASMAFLUX_POWER_ORB",
+   "name": "Plasmaflux Power Orb",
+   "xp": 15,
+   "category": "COMBAT",
+   "stage": "MASTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "POLISHED_TOPAZ_ROD",
+   "name": "Topaz Rod",
+   "xp": 6,
+   "category": "FISHING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "POOCH_SWORD",
+   "name": "Pooch Sword",
+   "xp": 5,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "PRECURSOR_EYE",
+   "name": "Precursor Eye",
+   "xp": 12,
+   "category": "DUNGEONEERING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "PRISMARINE_BLADE",
+   "name": "Prismarine Blade",
+   "xp": 2,
+   "category": "COMBAT",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "PRISMARINE_BOW",
+   "name": "Prismarine Bow",
+   "xp": 2,
+   "category": "COMBAT",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "PRISMARINE_SINKER",
+   "name": "Prismarine Sinker",
+   "xp": 2,
+   "category": "FISHING",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "PROMISING_AXE",
+   "name": "Promising Axe",
+   "xp": 1,
+   "category": "FORAGING",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "PROMISING_PICKAXE",
+   "name": "Promising Pickaxe",
+   "xp": 2,
+   "category": "MINING",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "PROMISING_SPADE",
+   "name": "Promising Shovel",
+   "xp": 1,
+   "category": "MINING",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "PUDDLE_JUMPER_HOOK",
+   "name": "Puddle Jumper Hook",
+   "xp": 6,
+   "category": "FISHING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "PUFFERFISH_HAT",
+   "name": "Pufferfish Hat",
+   "xp": 1,
+   "category": "COMBAT",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "PUMPKIN_DICER",
+   "name": "Pumpkin Dicer Mk. I",
+   "xp": 4,
+   "category": "FARMING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "PUMPKIN_DICER_2",
+   "name": "Pumpkin Dicer Mk. II",
+   "xp": 5,
+   "category": "FARMING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "PUMPKIN_DICER_3",
+   "name": "Pumpkin Dicer Mk. III",
+   "xp": 8,
+   "category": "FARMING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "PUMPKIN_LAUNCHER",
+   "name": "Pumpkin Launcher",
+   "xp": 6,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "RABBIT_AXE",
+   "name": "Advanced Rabbit Axe",
+   "xp": 2,
+   "category": "FARMING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "RABBIT_HAT",
+   "name": "Rabbit Hat",
+   "xp": 3,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "RADIANT_POWER_ORB",
+   "name": "Radiant Power Orb",
+   "xp": 2,
+   "category": "COMBAT",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "RAGNAROCK_AXE",
+   "name": "Ragnarock",
+   "xp": 6,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "RAIDER_AXE",
+   "name": "Raider Sword",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "RANCHERS_BOOTS",
+   "name": "Rancher's Boots",
+   "xp": 4,
+   "category": "FARMING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "REAPER_MASK",
+   "name": "Reaper Mask",
+   "xp": 8,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "REAPER_SCYTHE",
+   "name": "Reaper Scythe",
+   "xp": 8,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "REAPER_SWORD",
+   "name": "Reaper Falchion",
+   "xp": 7,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "RECLUSE_FANG",
+   "name": "Recluse Fang",
+   "xp": 2,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "RED_SWEATER",
+   "name": "Red Sweater",
+   "xp": 3,
+   "category": "FISHING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "REFINED_MITHRIL_PICKAXE",
+   "name": "Refined Mithril Pickaxe",
+   "xp": 3,
+   "category": "MINING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "REFINED_TITANIUM_PICKAXE",
+   "name": "Polished Titanium Pickaxe",
+   "xp": 4,
+   "category": "MINING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "REINFORCED_CHISEL",
+   "name": "Reinforced Chisel",
+   "xp": 8,
+   "category": "MINING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "RETIA_BASICA",
+   "name": "Small Huntrap",
+   "xp": 1,
+   "category": "HUNTING",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "RETIA_FORTA",
+   "name": "Greater Huntrap",
+   "xp": 4,
+   "category": "HUNTING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "RETIA_MELIORA",
+   "name": "Medium Huntrap",
+   "xp": 2,
+   "category": "HUNTING",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "RETIA_ROBUSTA",
+   "name": "Large Huntrap",
+   "xp": 3,
+   "category": "HUNTING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "RETIA_SUPREMA",
+   "name": "Astral Huntrap",
+   "xp": 5,
+   "category": "HUNTING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "REVENANT_SWORD",
+   "name": "Revenant Falchion",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "REVIVED_HEART",
+   "name": "Revived Heart",
+   "xp": 6,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "RIFT_NECKLACE_OUTSIDE",
+   "name": "%%light_purple%%Rift Necklace",
+   "xp": 5,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "tradeable": false
+  },
+  {
+   "itemId": "ROD_OF_THE_SEA",
+   "name": "Rod of the Sea",
+   "xp": 8,
+   "category": "FISHING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "ROGUE_SWORD",
+   "name": "Rogue Sword",
+   "xp": 1,
+   "category": "COMBAT",
+   "stage": "STARTER",
+   "tradeable": false
+  },
+  {
+   "itemId": "ROOKIE_AXE",
+   "name": "Rookie Foraging Axe",
+   "xp": 1,
+   "category": "FORAGING",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "ROOKIE_FARMING_AXE",
+   "name": "Rookie Farming Axe",
+   "xp": 1,
+   "category": "FARMING",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "ROOKIE_HOE",
+   "name": "Rookie Hoe",
+   "xp": 1,
+   "category": "FARMING",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "ROOKIE_PICKAXE",
+   "name": "Rookie Pickaxe",
+   "xp": 2,
+   "category": "MINING",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "ROYAL_PIGEON",
+   "name": "Royal Pigeon",
+   "xp": 6,
+   "category": "MINING",
+   "stage": "SKILLED",
+   "tradeable": false
+  },
+  {
+   "itemId": "RUBY_POLISHED_DRILL_ENGINE",
+   "name": "Ruby-Polished Drill Engine",
+   "xp": 8,
+   "category": "MINING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "RUNAANS_BOW",
+   "name": "Runaan's Bow",
+   "xp": 6,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "RUNIC_STAFF",
+   "name": "Aurora Staff",
+   "xp": 5,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "RUSTY_TITANIUM_PICKAXE",
+   "name": "Rusty Titanium Pickaxe",
+   "xp": 2,
+   "category": "MINING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "SAFARI_BELT",
+   "name": "Safari Belt",
+   "xp": 2,
+   "category": "HUNTING",
+   "stage": "INTERMEDIATE",
+   "tradeable": false
+  },
+  {
+   "itemId": "SALMON_HAT",
+   "name": "Salmon Hat",
+   "xp": 1,
+   "category": "FISHING",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "SALMON_MASK",
+   "name": "Salmon Mask",
+   "xp": 2,
+   "category": "FISHING",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "SALTY_SPRAYONATOR",
+   "name": "Salty Sprayonator",
+   "xp": 8,
+   "category": "FARMING",
+   "stage": "PROFESSIONAL",
+   "tradeable": true
+  },
+  {
+   "itemId": "SAM_SCYTHE",
+   "name": "Sam's Scythe",
+   "xp": 2,
+   "category": "FARMING",
+   "stage": "AMATEUR",
+   "tradeable": false
+  },
+  {
+   "itemId": "SAPPHIRE_POLISHED_DRILL_ENGINE",
+   "name": "Sapphire-Polished Drill Engine",
+   "xp": 10,
+   "category": "MINING",
+   "stage": "PROFESSIONAL",
+   "tradeable": true
+  },
+  {
+   "itemId": "SAVANA_BOW",
+   "name": "Savanna Bow",
+   "xp": 3,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "SCORPION_BOW",
+   "name": "Spider Shortbow",
+   "xp": 5,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "SCORPION_FOIL",
+   "name": "Scorpion Foil",
+   "xp": 7,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "SCOURGE_CLOAK",
+   "name": "Scourge Cloak",
+   "xp": 10,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "SCOVILLE_BELT",
+   "name": "Scoville Belt",
+   "xp": 10,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "SCULPTORS_AXE",
+   "name": "Sculptor's Axe",
+   "xp": 2,
+   "category": "FORAGING",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "SCYLLA",
+   "name": "Scylla",
+   "xp": 5,
+   "category": "DUNGEONEERING",
+   "stage": "MASTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "SECRET_TRACKER",
+   "name": "Secret Tracker 3000",
+   "xp": 3,
+   "category": "DUNGEONEERING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "SERIOUSLY_DAMAGED_AXE",
+   "name": "Seriously Damaged Axe",
+   "xp": 1,
+   "category": "FORAGING",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "SHADOW_FURY",
+   "name": "Shadow Fury",
+   "xp": 8,
+   "category": "DUNGEONEERING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "SHADOW_GOGGLES",
+   "name": "Shadow Goggles",
+   "xp": 2,
+   "category": "DUNGEONEERING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "SHAMAN_SWORD",
+   "name": "Shaman Sword",
+   "xp": 3,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "SHEEP_AXE",
+   "name": "Advanced Sheep Axe",
+   "xp": 2,
+   "category": "FARMING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "SHREDDED_LINE",
+   "name": "Shredded Line",
+   "xp": 7,
+   "category": "FISHING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "SHRIVELED_BRACELET",
+   "name": "Shriveled Bracelet",
+   "xp": 6,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "SILENT_DEATH",
+   "name": "Silent Death",
+   "xp": 4,
+   "category": "DUNGEONEERING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "SILK_EDGE_SWORD",
+   "name": "Silk-Edge Sword",
+   "xp": 5,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "SILVA_DOMINUS",
+   "name": "Sharpened Huntaxe - Dominus",
+   "xp": 2,
+   "category": "HUNTING",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "SINSEEKER_SCYTHE",
+   "name": "§4Sin§5seeker Scythe",
+   "xp": 7,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "SKELETON_HAT",
+   "name": "Skeleton Hat",
+   "xp": 1,
+   "category": "COMBAT",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "SKYMART_HYPER_VACUUM",
+   "name": "SkyMart Hyper Vacuum",
+   "xp": 4,
+   "category": "FARMING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "SKYMART_TURBO_VACUUM",
+   "name": "SkyMart Turbo Vacuum",
+   "xp": 2,
+   "category": "FARMING",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "SKYMART_VACUUM",
+   "name": "SkyMart Vacuum",
+   "xp": 2,
+   "category": "FARMING",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "SLIME_BOW",
+   "name": "Slime Bow",
+   "xp": 5,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "SLIME_HAT",
+   "name": "Slime Hat",
+   "xp": 1,
+   "category": "COMBAT",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "SMALL_POCKET_BLACK_HOLE",
+   "name": "Small Pocket Black Hole",
+   "xp": 2,
+   "category": "HUNTING",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "SNIPER_BOW",
+   "name": "Sniper Bow",
+   "xp": 2,
+   "category": "DUNGEONEERING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "SNIPER_HELMET",
+   "name": "Sniper Helmet",
+   "xp": 3,
+   "category": "DUNGEONEERING",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "SNOW_BLASTER",
+   "name": "Frosty the Snow Blaster",
+   "xp": 2,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "SNOW_CANNON",
+   "name": "Frosty the Snow Cannon",
+   "xp": 1,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "SNOW_HOWITZER",
+   "name": "Frosty the Howitzer",
+   "xp": 3,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "SNOWMAN_MASK",
+   "name": "Snowman Mask",
+   "xp": 3,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "SOS_FLARE",
+   "name": "SOS Flare",
+   "xp": 25,
+   "category": "COMBAT",
+   "stage": "MASTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "SOUL_ESOWARD",
+   "name": "Soul Esoward",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "SOUL_WHIP",
+   "name": "Soul Whip",
+   "xp": 7,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "SOULS_REBOUND",
+   "name": "Souls Rebound",
+   "xp": 5,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "SOULWEAVER_GLOVES",
+   "name": "Soulweaver Gloves",
+   "xp": 6,
+   "category": "DUNGEONEERING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "SPEEDY_LINE",
+   "name": "Speedy Line",
+   "xp": 3,
+   "category": "FISHING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "SPIDER_HAT",
+   "name": "Spider Hat",
+   "xp": 1,
+   "category": "COMBAT",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "SPIDER_QUEENS_STINGER",
+   "name": "Spider Queen's Stinger",
+   "xp": 3,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "SPIDER_SWORD",
+   "name": "Spider Sword",
+   "xp": 1,
+   "category": "COMBAT",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "SPIRIT_MASK",
+   "name": "Spirit Mask",
+   "xp": 10,
+   "category": "DUNGEONEERING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "SPIRIT_SWORD",
+   "name": "Spirit Sword",
+   "xp": 7,
+   "category": "DUNGEONEERING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "SPONGE_SINKER",
+   "name": "Sponge Sinker",
+   "xp": 2,
+   "category": "FISHING",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "SPORE_HARVESTER",
+   "name": "Spore Harvester",
+   "xp": 3,
+   "category": "FARMING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "SPRAYONATOR",
+   "name": "Sprayonator",
+   "xp": 2,
+   "category": "FARMING",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "SQUEAKY_MOUSEMAT",
+   "name": "Squeaky Mousemat",
+   "xp": 6,
+   "category": "FARMING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "SQUID_BOOTS",
+   "name": "Squid Boots",
+   "xp": 2,
+   "category": "FISHING",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "SQUID_HAT",
+   "name": "Squid Hat",
+   "xp": 1,
+   "category": "FISHING",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "SQUIRE_SWORD",
+   "name": "Squire Sword",
+   "xp": 1,
+   "category": "COMBAT",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "STAFF_OF_THE_VOLCANO",
+   "name": "Staff of the Volcano",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "STARFALL_SEASONING",
+   "name": "Starfall Seasoning",
+   "xp": 3,
+   "category": "MINING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "STARLIGHT_WAND",
+   "name": "Starlight Wand",
+   "xp": 2,
+   "category": "COMBAT",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "STARTER_LAVA_ROD",
+   "name": "Starter Lava Rod",
+   "xp": 4,
+   "category": "FISHING",
+   "stage": "SKILLED",
+   "tradeable": false
+  },
+  {
+   "itemId": "STEEL_CHESTPLATE",
+   "name": "Steel Chestplate",
+   "xp": 6,
+   "category": "DUNGEONEERING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "STING",
+   "name": "Sting",
+   "xp": 10,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "STINGY_SINKER",
+   "name": "Stingy Sinker",
+   "xp": 3,
+   "category": "FISHING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "STONE_BLADE",
+   "name": "Adaptive Blade",
+   "xp": 5,
+   "category": "DUNGEONEERING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "STONE_CHESTPLATE",
+   "name": "Stone Chestplate",
+   "xp": 2,
+   "category": "DUNGEONEERING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "STONK_PICKAXE",
+   "name": "Stonk",
+   "xp": 3,
+   "category": "MINING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "SULPHUR_BOW",
+   "name": "Sulphur Bow",
+   "xp": 5,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "SUMMONING_RING",
+   "name": "Summoning Ring",
+   "xp": 8,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "SUNFLOWER_HEAD",
+   "name": "Sunflower Head",
+   "xp": 3,
+   "category": "FARMING",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "SUPER_CLEAVER",
+   "name": "Super Cleaver",
+   "xp": 2,
+   "category": "DUNGEONEERING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "SUPER_UNDEAD_BOW",
+   "name": "Super Undead Bow",
+   "xp": 2,
+   "category": "DUNGEONEERING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "SWEET_AXE",
+   "name": "Sweet Axe",
+   "xp": 2,
+   "category": "FORAGING",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "SWORD_OF_BAD_HEALTH",
+   "name": "Sword of Bad Health",
+   "xp": 5,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "SWORD_OF_REVELATIONS",
+   "name": "Sword of Revelations",
+   "xp": 8,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "SYNTHESIZER_V1",
+   "name": "Synthesizer v1",
+   "xp": 3,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "SYNTHESIZER_V2",
+   "name": "Synthesizer v2",
+   "xp": 5,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "SYNTHESIZER_V3",
+   "name": "Synthesizer v3",
+   "xp": 15,
+   "category": "COMBAT",
+   "stage": "PROFESSIONAL",
+   "tradeable": true
+  },
+  {
+   "itemId": "TACTICAL_INSERTION",
+   "name": "Tactical Insertion",
+   "xp": 14,
+   "category": "COMBAT",
+   "stage": "PROFESSIONAL",
+   "tradeable": true
+  },
+  {
+   "itemId": "TACTICIAN_SWORD",
+   "name": "Tactician's Sword",
+   "xp": 3,
+   "category": "COMBAT",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "TALBOTS_THEODOLITE",
+   "name": "Talbot's Theodolite",
+   "xp": 4,
+   "category": "HUNTING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "TARANTULA_FANG",
+   "name": "Tarantula Fang",
+   "xp": 5,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "TERA_SHELL_NECKLACE",
+   "name": "Tera Shell Necklace",
+   "xp": 8,
+   "category": "FISHING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "TERMINATOR",
+   "name": "Terminator",
+   "xp": 18,
+   "category": "COMBAT",
+   "stage": "MASTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "THE_PRIMORDIAL",
+   "name": "The Primordial",
+   "xp": 12,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "THEORETICAL_HOE_CANE_1",
+   "name": "Turing Sugar Cane Cutter Mk. I",
+   "xp": 4,
+   "category": "FARMING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "THEORETICAL_HOE_CANE_2",
+   "name": "Turing Sugar Cane Cutter Mk. II",
+   "xp": 5,
+   "category": "FARMING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "THEORETICAL_HOE_CANE_3",
+   "name": "Turing Sugar Cane Cutter Mk. III",
+   "xp": 8,
+   "category": "FARMING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "THEORETICAL_HOE_CARROT_1",
+   "name": "Gauss Carrot Shovel Mk. I",
+   "xp": 4,
+   "category": "FARMING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "THEORETICAL_HOE_CARROT_2",
+   "name": "Gauss Carrot Shovel Mk. II",
+   "xp": 5,
+   "category": "FARMING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "THEORETICAL_HOE_CARROT_3",
+   "name": "Gauss Carrot Shovel Mk. III",
+   "xp": 8,
+   "category": "FARMING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "THEORETICAL_HOE_POTATO_1",
+   "name": "Pythagorean Potato Shovel Mk. I",
+   "xp": 4,
+   "category": "FARMING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "THEORETICAL_HOE_POTATO_2",
+   "name": "Pythagorean Potato Shovel Mk. II",
+   "xp": 5,
+   "category": "FARMING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "THEORETICAL_HOE_POTATO_3",
+   "name": "Pythagorean Potato Shovel Mk. III",
+   "xp": 8,
+   "category": "FARMING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "THEORETICAL_HOE_SUNFLOWER_1",
+   "name": "Eclipse Sickle Mk. I",
+   "xp": 4,
+   "category": "FARMING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "THEORETICAL_HOE_SUNFLOWER_2",
+   "name": "Eclipse Sickle Mk. II",
+   "xp": 5,
+   "category": "FARMING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "THEORETICAL_HOE_SUNFLOWER_3",
+   "name": "Eclipse Sickle Mk. III",
+   "xp": 8,
+   "category": "FARMING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "THEORETICAL_HOE_WARTS_1",
+   "name": "Newton Nether Wart Cutter Mk. I",
+   "xp": 4,
+   "category": "FARMING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "THEORETICAL_HOE_WARTS_2",
+   "name": "Newton Nether Wart Cutter Mk. II",
+   "xp": 5,
+   "category": "FARMING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "THEORETICAL_HOE_WARTS_3",
+   "name": "Newton Nether Wart Cutter Mk. III",
+   "xp": 8,
+   "category": "FARMING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "THEORETICAL_HOE_WHEAT_1",
+   "name": "Euclid's Wheat Sickle Mk. I",
+   "xp": 4,
+   "category": "FARMING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "THEORETICAL_HOE_WHEAT_2",
+   "name": "Euclid's Wheat Sickle Mk. II",
+   "xp": 5,
+   "category": "FARMING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "THEORETICAL_HOE_WHEAT_3",
+   "name": "Euclid's Wheat Sickle Mk. III",
+   "xp": 8,
+   "category": "FARMING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "THEORETICAL_HOE_WILD_ROSE_1",
+   "name": "Wild Rose Cutter Mk. I",
+   "xp": 4,
+   "category": "FARMING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "THEORETICAL_HOE_WILD_ROSE_2",
+   "name": "Wild Rose Cutter Mk. II",
+   "xp": 5,
+   "category": "FARMING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "THEORETICAL_HOE_WILD_ROSE_3",
+   "name": "Wild Rose Cutter Mk. III",
+   "xp": 8,
+   "category": "FARMING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "THORNLEAF_SCYTHE",
+   "name": "Thornleaf Scythe",
+   "xp": 3,
+   "category": "FARMING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "THORNS_BOOTS",
+   "name": "Spirit Boots",
+   "xp": 5,
+   "category": "DUNGEONEERING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "TIKI_MASK",
+   "name": "Tiki Mask",
+   "xp": 10,
+   "category": "FISHING",
+   "stage": "MASTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "TINY_SCAFFOLDING",
+   "name": "Tiny Scaffolding",
+   "xp": 1,
+   "category": "FORAGING",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "TITAN_LINE",
+   "name": "Titan Line",
+   "xp": 8,
+   "category": "FISHING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "TITANIUM_DRILL_1",
+   "name": "Titanium Drill DR-X355",
+   "xp": 10,
+   "category": "MINING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "TITANIUM_DRILL_2",
+   "name": "Titanium Drill DR-X455",
+   "xp": 15,
+   "category": "MINING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "TITANIUM_DRILL_3",
+   "name": "Titanium Drill DR-X555",
+   "xp": 15,
+   "category": "MINING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "TITANIUM_DRILL_4",
+   "name": "Titanium Drill DR-X655",
+   "xp": 20,
+   "category": "MINING",
+   "stage": "PROFESSIONAL",
+   "tradeable": true
+  },
+  {
+   "itemId": "TITANIUM_DRILL_ENGINE",
+   "name": "Titanium-Plated Drill Engine",
+   "xp": 6,
+   "category": "MINING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "TITANIUM_FUEL_TANK",
+   "name": "Titanium-Infused Fuel Tank",
+   "xp": 7,
+   "category": "MINING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "TITANIUM_LANTERN",
+   "name": "Titanium Lantern",
+   "xp": 5,
+   "category": "MINING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "TITANIUM_PICKAXE",
+   "name": "Titanium Pickaxe",
+   "xp": 3,
+   "category": "MINING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "TORMENTOR",
+   "name": "Tormentor",
+   "xp": 20,
+   "category": "COMBAT",
+   "stage": "MASTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "TORRHUS_BELT",
+   "name": "Torrhus Belt",
+   "xp": 8,
+   "category": "FORAGING",
+   "stage": "PROFESSIONAL",
+   "tradeable": true
+  },
+  {
+   "itemId": "TOTEM_OF_CORRUPTION",
+   "name": "Totem of Corruption",
+   "xp": 3,
+   "category": "FISHING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "TREASURE_HOOK",
+   "name": "Treasure Hook",
+   "xp": 6,
+   "category": "FISHING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "TREECAPITATOR_AXE",
+   "name": "Treecapitator",
+   "xp": 4,
+   "category": "FORAGING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "TRIBAL_SPEAR",
+   "name": "Tribal Spear",
+   "xp": 2,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "TROPHY_LINE",
+   "name": "Trophy Line",
+   "xp": 6,
+   "category": "FISHING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "TUNGSTEN_KEYCHAIN",
+   "name": "Tungsten Regulator",
+   "xp": 10,
+   "category": "MINING",
+   "stage": "PROFESSIONAL",
+   "tradeable": true
+  },
+  {
+   "itemId": "TURBO_FISHING_NET",
+   "name": "Turbo Fishing Net",
+   "xp": 7,
+   "category": "HUNTING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "UMBERELLA",
+   "name": "Umberella",
+   "xp": 6,
+   "category": "FISHING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "UNDEAD_BOW",
+   "name": "Undead Bow",
+   "xp": 2,
+   "category": "DUNGEONEERING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "UNDEAD_SWORD",
+   "name": "Undead Sword",
+   "xp": 1,
+   "category": "COMBAT",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "VALKYRIE",
+   "name": "Valkyrie",
+   "xp": 5,
+   "category": "DUNGEONEERING",
+   "stage": "MASTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "VAMPIRE_MASK",
+   "name": "Vampire Mask",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "VAMPIRE_WITCH_MASK",
+   "name": "Vampire Witch Mask",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "VEILSHROOM_BRACELET",
+   "name": "Veilshroom Bracelet",
+   "xp": 8,
+   "category": "FORAGING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "VENATOR_GENESIS",
+   "name": "Worn Huntaxe - Genesis",
+   "xp": 1,
+   "category": "HUNTING",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "VENOMS_TOUCH",
+   "name": "Venom's Touch",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "VINERIP_LASSO",
+   "name": "Vinerip Lasso",
+   "xp": 2,
+   "category": "HUNTING",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "VOID_SWORD",
+   "name": "Void Sword",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "tradeable": false
+  },
+  {
+   "itemId": "VOIDEDGE_KATANA",
+   "name": "Voidedge Katana",
+   "xp": 5,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "VOIDWALKER_KATANA",
+   "name": "Voidwalker Katana",
+   "xp": 3,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "VOODOO_DOLL",
+   "name": "Voodoo Doll",
+   "xp": 5,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "VOODOO_DOLL_WILTED",
+   "name": "Jinxed Voodoo Doll",
+   "xp": 6,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "VORPAL_KATANA",
+   "name": "Vorpal Katana",
+   "xp": 7,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "WAND_OF_ATONEMENT",
+   "name": "Wand of Atonement",
+   "xp": 8,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "WAND_OF_HEALING",
+   "name": "Wand of Healing",
+   "xp": 2,
+   "category": "COMBAT",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "WAND_OF_MENDING",
+   "name": "Wand of Mending",
+   "xp": 2,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "WAND_OF_RESTORATION",
+   "name": "Wand of Restoration",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "WAND_OF_STRENGTH",
+   "name": "Wand of Strength",
+   "xp": 6,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "WARDEN_HELMET",
+   "name": "Warden Helmet",
+   "xp": 12,
+   "category": "COMBAT",
+   "stage": "PROFESSIONAL",
+   "tradeable": true
+  },
+  {
+   "itemId": "WARNING_FLARE",
+   "name": "Warning Flare",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "WATER_HYDRA_HEAD",
+   "name": "Water Hydra Head",
+   "xp": 4,
+   "category": "FISHING",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "WEIRD_TUBA",
+   "name": "Weird Tuba",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "WEIRDER_TUBA",
+   "name": "Weirder Tuba",
+   "xp": 5,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "WILL_O_WISP",
+   "name": "Will-o'-wisp",
+   "xp": 15,
+   "category": "MINING",
+   "stage": "PROFESSIONAL",
+   "tradeable": true
+  },
+  {
+   "itemId": "WITCH_MASK",
+   "name": "Witch Mask",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "WITHER_BOW",
+   "name": "Wither Bow",
+   "xp": 2,
+   "category": "COMBAT",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "WITHER_CLOAK",
+   "name": "Wither Cloak Sword",
+   "xp": 7,
+   "category": "DUNGEONEERING",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "WITHER_GOGGLES",
+   "name": "Wither Goggles",
+   "xp": 6,
+   "category": "DUNGEONEERING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "YETI_SWORD",
+   "name": "Yeti Sword",
+   "xp": 7,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "tradeable": true
+  },
+  {
+   "itemId": "ZOMBIE_COMMANDER_WHIP",
+   "name": "Zombie Commander Whip",
+   "xp": 3,
+   "category": "DUNGEONEERING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "ZOMBIE_HAT",
+   "name": "Zombie Hat",
+   "xp": 1,
+   "category": "COMBAT",
+   "stage": "AMATEUR",
+   "tradeable": true
+  },
+  {
+   "itemId": "ZOMBIE_HEART",
+   "name": "Zombie's Heart",
+   "xp": 3,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "ZOMBIE_KNIGHT_SWORD",
+   "name": "Zombie Knight Sword",
+   "xp": 3,
+   "category": "DUNGEONEERING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "ZOMBIE_MASK",
+   "name": "Zombie Mask",
+   "xp": 2,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "ZOMBIE_PICKAXE",
+   "name": "Zombie Pickaxe",
+   "xp": 2,
+   "category": "MINING",
+   "stage": "STARTER",
+   "tradeable": true
+  },
+  {
+   "itemId": "ZOMBIE_SOLDIER_CUTLASS",
+   "name": "Zombie Soldier Cutlass",
+   "xp": 3,
+   "category": "DUNGEONEERING",
+   "stage": "SKILLED",
+   "tradeable": true
+  },
+  {
+   "itemId": "ZOMBIE_SWORD",
+   "name": "Zombie Sword",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "tradeable": true
+  },
+  {
+   "itemId": "ZORROS_CAPE",
+   "name": "Zorro's Cape",
+   "xp": 15,
+   "category": "FARMING",
+   "stage": "PROFESSIONAL",
+   "tradeable": true
+  }
+ ],
+ "armorSets": [
+  {
+   "setId": "ABYSSAL",
+   "name": "Abyssal",
+   "xp": 10,
+   "category": "FISHING",
+   "stage": "EXPERT",
+   "pieces": [
+    "ABYSSAL_BOOTS",
+    "ABYSSAL_CHESTPLATE",
+    "ABYSSAL_LEGGINGS",
+    "ABYSSAL_HELMET"
+   ]
+  },
+  {
+   "setId": "ADAPTIVE",
+   "name": "Adaptive",
+   "xp": 7,
+   "category": "DUNGEONEERING",
+   "stage": "INTERMEDIATE",
+   "pieces": [
+    "ADAPTIVE_HELMET",
+    "ADAPTIVE_CHESTPLATE",
+    "ADAPTIVE_LEGGINGS",
+    "ADAPTIVE_BOOTS",
+    "ADAPTIVE_BELT"
+   ]
+  },
+  {
+   "setId": "ANGLER",
+   "name": "Angler Belt",
+   "xp": 2,
+   "category": "FISHING",
+   "stage": "AMATEUR",
+   "pieces": [
+    "ANGLER_BELT",
+    "ANGLER_CLOAK",
+    "ANGLER_HELMET",
+    "ANGLER_LEGGINGS",
+    "ANGLER_BOOTS",
+    "ANGLER_CHESTPLATE",
+    "ANGLER_BRACELET",
+    "ANGLER_NECKLACE"
+   ]
+  },
+  {
+   "setId": "ARACHNE",
+   "name": "Arachne's",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "pieces": [
+    "ARACHNE_BOOTS",
+    "ARACHNE_BELT",
+    "ARACHNE_NECKLACE",
+    "ARACHNE_GLOVES",
+    "ARACHNE_HELMET",
+    "ARACHNE_CHESTPLATE",
+    "ARACHNE_CLOAK",
+    "ARACHNE_LEGGINGS"
+   ]
+  },
+  {
+   "setId": "ARMOR_OF_THE_PACK",
+   "name": "Chestplate of the Pack",
+   "xp": 7,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "pieces": [
+    "CHESTPLATE_OF_THE_PACK",
+    "BOOTS_OF_THE_PACK",
+    "LEGGINGS_OF_THE_PACK",
+    "HELMET_OF_THE_PACK"
+   ]
+  },
+  {
+   "setId": "ARMOR_OF_YOG",
+   "name": "Yog",
+   "xp": 3,
+   "category": "MINING",
+   "stage": "SKILLED",
+   "pieces": [
+    "ARMOR_OF_YOG_CHESTPLATE",
+    "ARMOR_OF_YOG_LEGGINGS",
+    "ARMOR_OF_YOG_BOOTS",
+    "ARMOR_OF_YOG_HELMET"
+   ]
+  },
+  {
+   "setId": "AURORA",
+   "name": "Aurora",
+   "xp": 10,
+   "category": "COMBAT",
+   "stage": "PROFESSIONAL",
+   "pieces": [
+    "AURORA_LEGGINGS",
+    "AURORA_BOOTS",
+    "AURORA_HELMET",
+    "AURORA_CHESTPLATE"
+   ]
+  },
+  {
+   "setId": "BACKWATER",
+   "name": "Backwater Cloak",
+   "xp": 6,
+   "category": "FISHING",
+   "stage": "INTERMEDIATE",
+   "pieces": [
+    "BACKWATER_CLOAK",
+    "BACKWATER_BOOTS",
+    "BACKWATER_CHESTPLATE",
+    "BACKWATER_HELMET",
+    "BACKWATER_GLOVES",
+    "BACKWATER_NECKLACE",
+    "BACKWATER_LEGGINGS",
+    "BACKWATER_BELT"
+   ]
+  },
+  {
+   "setId": "BAT_PERSON",
+   "name": "Bat Person",
+   "xp": 7,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "pieces": [
+    "BAT_PERSON_BOOTS",
+    "BAT_PERSON_CHESTPLATE",
+    "BAT_PERSON_LEGGINGS",
+    "BAT_PERSON_HELMET"
+   ]
+  },
+  {
+   "setId": "BERSERKER",
+   "name": "Berserker",
+   "xp": 14,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "pieces": [
+    "BERSERKER_CHESTPLATE",
+    "BERSERKER_BOOTS",
+    "BERSERKER_LEGGINGS",
+    "BERSERKER_HELMET"
+   ]
+  },
+  {
+   "setId": "BIOHAZARD",
+   "name": "Biohazard",
+   "xp": 4,
+   "category": "FARMING",
+   "stage": "AMATEUR",
+   "pieces": [
+    "BIOHAZARD_LEGGINGS",
+    "BIOHAZARD_SUIT",
+    "BIOHAZARD_HELMET",
+    "BIOHAZARD_BOOTS"
+   ]
+  },
+  {
+   "setId": "BLAZE",
+   "name": "Blaze",
+   "xp": 7,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "pieces": [
+    "BLAZE_HELMET",
+    "BLAZE_BELT",
+    "BLAZE_BOOTS",
+    "BLAZE_CHESTPLATE",
+    "BLAZE_LEGGINGS"
+   ]
+  },
+  {
+   "setId": "BLOSSOM",
+   "name": "Blossom Bracelet",
+   "xp": 8,
+   "category": "FARMING",
+   "stage": "EXPERT",
+   "pieces": [
+    "BLOSSOM_BRACELET",
+    "BLOSSOM_BELT",
+    "BLOSSOM_NECKLACE",
+    "BLOSSOM_CLOAK"
+   ]
+  },
+  {
+   "setId": "BOUNCY",
+   "name": "Bouncy",
+   "xp": 4,
+   "category": "DUNGEONEERING",
+   "stage": "SKILLED",
+   "pieces": [
+    "BOUNCY_CHESTPLATE",
+    "BOUNCY_LEGGINGS",
+    "BOUNCY_HELMET",
+    "BOUNCY_BOOTS"
+   ]
+  },
+  {
+   "setId": "BRONZE_HUNTER",
+   "name": "Bronze Hunter",
+   "xp": 10,
+   "category": "FISHING",
+   "stage": "EXPERT",
+   "pieces": [
+    "BRONZE_HUNTER_LEGGINGS",
+    "BRONZE_HUNTER_BOOTS",
+    "BRONZE_HUNTER_CHESTPLATE",
+    "BRONZE_HUNTER_HELMET"
+   ]
+  },
+  {
+   "setId": "CACTUS",
+   "name": "Cactus",
+   "xp": 2,
+   "category": "FARMING",
+   "stage": "STARTER",
+   "pieces": [
+    "CACTUS_CHESTPLATE",
+    "CACTUS_BOOTS",
+    "CACTUS_HELMET",
+    "CACTUS_LEGGINGS"
+   ]
+  },
+  {
+   "setId": "CANOPY",
+   "name": "Canopy Pants",
+   "xp": 3,
+   "category": "FORAGING",
+   "stage": "INTERMEDIATE",
+   "pieces": [
+    "CANOPY_LEGGINGS",
+    "CANOPY_HELMET",
+    "CANOPY_CHESTPLATE",
+    "CANOPY_BOOTS"
+   ]
+  },
+  {
+   "setId": "CELESTE",
+   "name": "Celeste",
+   "xp": 1,
+   "category": "COMBAT",
+   "stage": "STARTER",
+   "pieces": [
+    "CELESTE_LEGGINGS",
+    "CELESTE_BOOTS",
+    "CELESTE_CHESTPLATE",
+    "CELESTE_HELMET"
+   ]
+  },
+  {
+   "setId": "CHALLENGER",
+   "name": "Challenger's",
+   "xp": 6,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "pieces": [
+    "CHALLENGER_BOOTS",
+    "CHALLENGER_BELT",
+    "CHALLENGER_CHESTPLATE",
+    "CHALLENGER_BRACELET",
+    "CHALLENGER_CLOAK",
+    "CHALLENGER_HELMET",
+    "CHALLENGER_NECKLACE",
+    "CHALLENGER_LEGGINGS"
+   ]
+  },
+  {
+   "setId": "CHEAP_TUXEDO",
+   "name": "Cheap Tuxedo Pants",
+   "xp": 3,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "pieces": [
+    "CHEAP_TUXEDO_LEGGINGS",
+    "CHEAP_TUXEDO_CHESTPLATE",
+    "CHEAP_TUXEDO_BOOTS"
+   ]
+  },
+  {
+   "setId": "CRIMSON",
+   "name": "Crimson",
+   "xp": 10,
+   "category": "COMBAT",
+   "stage": "PROFESSIONAL",
+   "pieces": [
+    "CRIMSON_HELMET",
+    "CRIMSON_CHESTPLATE",
+    "CRIMSON_LEGGINGS",
+    "CRIMSON_BOOTS"
+   ]
+  },
+  {
+   "setId": "CRIMSON_HUNTER",
+   "name": "Blaze",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "pieces": [
+    "BLAZE_HELMET",
+    "GHAST_CLOAK",
+    "BLAZE_BELT",
+    "BLAZE_BOOTS",
+    "BLAZE_CHESTPLATE",
+    "BLAZE_LEGGINGS",
+    "GLOWSTONE_GAUNTLET",
+    "MAGMA_NECKLACE"
+   ]
+  },
+  {
+   "setId": "CROPIE",
+   "name": "Cropie",
+   "xp": 6,
+   "category": "FARMING",
+   "stage": "SKILLED",
+   "pieces": [
+    "CROPIE_LEGGINGS",
+    "CROPIE_HELMET",
+    "CROPIE_BOOTS",
+    "CROPIE_CHESTPLATE"
+   ]
+  },
+  {
+   "setId": "CRYSTAL",
+   "name": "Crystal",
+   "xp": 6,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "pieces": [
+    "CRYSTAL_CHESTPLATE",
+    "CRYSTAL_HELMET",
+    "CRYSTAL_BOOTS",
+    "CRYSTAL_LEGGINGS"
+   ]
+  },
+  {
+   "setId": "DIAMOND_HUNTER",
+   "name": "Diamond Hunter",
+   "xp": 25,
+   "category": "FISHING",
+   "stage": "MASTER",
+   "pieces": [
+    "DIAMOND_HUNTER_LEGGINGS",
+    "DIAMOND_HUNTER_HELMET",
+    "DIAMOND_HUNTER_BOOTS",
+    "DIAMOND_HUNTER_CHESTPLATE"
+   ]
+  },
+  {
+   "setId": "DIVAN",
+   "name": "Boots of Divan",
+   "xp": 20,
+   "category": "MINING",
+   "stage": "PROFESSIONAL",
+   "pieces": [
+    "DIVAN_BOOTS",
+    "DIVAN_LEGGINGS",
+    "DIVAN_CHESTPLATE",
+    "DIVAN_HELMET"
+   ]
+  },
+  {
+   "setId": "DIVAN_EQUIPMENT",
+   "name": "Pendant of Divan",
+   "xp": 25,
+   "category": "MINING",
+   "stage": "MASTER",
+   "pieces": [
+    "DIVAN_PENDANT"
+   ]
+  },
+  {
+   "setId": "DIVER",
+   "name": "Diver's",
+   "xp": 10,
+   "category": "FISHING",
+   "stage": "SKILLED",
+   "pieces": [
+    "DIVER_BOOTS",
+    "DIVER_HELMET",
+    "DIVER_LEGGINGS",
+    "DIVER_CHESTPLATE"
+   ]
+  },
+  {
+   "setId": "ELEANOR",
+   "name": "Eleanor's",
+   "xp": 5,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "pieces": [
+    "ELEANOR_TUNIC",
+    "ELEANOR_CAP",
+    "ELEANOR_TROUSERS",
+    "ELEANOR_SLIPPERS"
+   ]
+  },
+  {
+   "setId": "ELEGANT_TUXEDO",
+   "name": "Elegant Tuxedo Pants",
+   "xp": 6,
+   "category": "COMBAT",
+   "stage": "PROFESSIONAL",
+   "pieces": [
+    "ELEGANT_TUXEDO_LEGGINGS",
+    "ELEGANT_TUXEDO_CHESTPLATE",
+    "ELEGANT_TUXEDO_BOOTS"
+   ]
+  },
+  {
+   "setId": "EMERALD_ARMOR",
+   "name": "Emerald Armor",
+   "xp": 5,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "pieces": [
+    "EMERALD_ARMOR_CHESTPLATE",
+    "EMERALD_ARMOR_HELMET",
+    "EMERALD_ARMOR_LEGGINGS",
+    "EMERALD_ARMOR_BOOTS"
+   ]
+  },
+  {
+   "setId": "END",
+   "name": "Ender",
+   "xp": 3,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "pieces": [
+    "END_BOOTS",
+    "END_LEGGINGS",
+    "END_CHESTPLATE",
+    "END_HELMET"
+   ]
+  },
+  {
+   "setId": "FAIRY",
+   "name": "Fairy's Polo",
+   "xp": 2,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "pieces": [
+    "FAIRY_CHESTPLATE",
+    "FAIRY_BOOTS",
+    "FAIRY_LEGGINGS",
+    "FAIRY_HELMET"
+   ]
+  },
+  {
+   "setId": "FANCY_TUXEDO",
+   "name": "Fancy Tuxedo Pants",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "pieces": [
+    "FANCY_TUXEDO_LEGGINGS",
+    "FANCY_TUXEDO_BOOTS",
+    "FANCY_TUXEDO_CHESTPLATE"
+   ]
+  },
+  {
+   "setId": "FARM_ARMOR",
+   "name": "Haymaker",
+   "xp": 2,
+   "category": "FARMING",
+   "stage": "AMATEUR",
+   "pieces": [
+    "FARM_ARMOR_CHESTPLATE",
+    "FARM_ARMOR_BOOTS",
+    "FARM_ARMOR_LEGGINGS",
+    "FARM_ARMOR_HELMET"
+   ]
+  },
+  {
+   "setId": "FARM_SUIT",
+   "name": "Farmhand",
+   "xp": 1,
+   "category": "FARMING",
+   "stage": "STARTER",
+   "pieces": [
+    "FARM_SUIT_BOOTS",
+    "FARM_SUIT_HELMET",
+    "FARM_SUIT_CHESTPLATE",
+    "FARM_SUIT_LEGGINGS"
+   ]
+  },
+  {
+   "setId": "FERMENTO",
+   "name": "Fermento",
+   "xp": 12,
+   "category": "FARMING",
+   "stage": "PROFESSIONAL",
+   "pieces": [
+    "FERMENTO_HELMET",
+    "FERMENTO_CHESTPLATE",
+    "FERMENTO_BOOTS",
+    "FERMENTO_LEGGINGS"
+   ]
+  },
+  {
+   "setId": "FERVOR",
+   "name": "Fervor",
+   "xp": 10,
+   "category": "COMBAT",
+   "stage": "PROFESSIONAL",
+   "pieces": [
+    "FERVOR_LEGGINGS",
+    "FERVOR_HELMET",
+    "FERVOR_BOOTS",
+    "FERVOR_CHESTPLATE"
+   ]
+  },
+  {
+   "setId": "FIG",
+   "name": "Figmail",
+   "xp": 7,
+   "category": "FORAGING",
+   "stage": "EXPERT",
+   "pieces": [
+    "FIG_CHESTPLATE",
+    "FIG_HELMET",
+    "FIG_LEGGINGS",
+    "FIG_BOOTS"
+   ]
+  },
+  {
+   "setId": "FINAL_DESTINATION",
+   "name": "Final Destination",
+   "xp": 8,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "pieces": [
+    "FINAL_DESTINATION_HELMET",
+    "FINAL_DESTINATION_CHESTPLATE",
+    "FINAL_DESTINATION_LEGGINGS",
+    "FINAL_DESTINATION_BOOTS"
+   ]
+  },
+  {
+   "setId": "FINWAVE",
+   "name": "Finwave Gloves",
+   "xp": 10,
+   "category": "FISHING",
+   "stage": "SKILLED",
+   "pieces": [
+    "FINWAVE_GLOVES",
+    "FINWAVE_CLOAK",
+    "FINWAVE_BELT"
+   ]
+  },
+  {
+   "setId": "FISHERMAN",
+   "name": "Prismarine Necklace",
+   "xp": 3,
+   "category": "FISHING",
+   "stage": "AMATEUR",
+   "pieces": [
+    "PRISMARINE_NECKLACE",
+    "SPONGE_BELT",
+    "CLOWNFISH_CLOAK",
+    "CLAY_BRACELET"
+   ]
+  },
+  {
+   "setId": "FLAME_BREAKER",
+   "name": "Flamebreaker",
+   "xp": 3,
+   "category": "MINING",
+   "stage": "SKILLED",
+   "pieces": [
+    "FLAME_BREAKER_BOOTS",
+    "FLAME_BREAKER_LEGGINGS",
+    "FLAME_BREAKER_HELMET",
+    "FLAME_BREAKER_CHESTPLATE"
+   ]
+  },
+  {
+   "setId": "FROZEN",
+   "name": "Frozen Amulet",
+   "xp": 4,
+   "category": "FISHING",
+   "stage": "INTERMEDIATE",
+   "pieces": [
+    "FROZEN_AMULET"
+   ]
+  },
+  {
+   "setId": "FROZEN_BLAZE",
+   "name": "Frozen Blaze",
+   "xp": 10,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "pieces": [
+    "FROZEN_BLAZE_HELMET",
+    "FROZEN_BLAZE_CHESTPLATE",
+    "FROZEN_BLAZE_LEGGINGS",
+    "FROZEN_BLAZE_BOOTS"
+   ]
+  },
+  {
+   "setId": "GEMSTONE",
+   "name": "Jade Belt",
+   "xp": 5,
+   "category": "MINING",
+   "stage": "SKILLED",
+   "pieces": [
+    "JADE_BELT",
+    "SAPPHIRE_CLOAK",
+    "AMBER_NECKLACE",
+    "AMETHYST_GAUNTLET"
+   ]
+  },
+  {
+   "setId": "GILLSPLASH",
+   "name": "Gillsplash Gloves",
+   "xp": 15,
+   "category": "FISHING",
+   "stage": "PROFESSIONAL",
+   "pieces": [
+    "GILLSPLASH_GLOVES",
+    "GILLSPLASH_CLOAK",
+    "GILLSPLASH_BELT"
+   ]
+  },
+  {
+   "setId": "GLACITE",
+   "name": "Glacite",
+   "xp": 4,
+   "category": "MINING",
+   "stage": "INTERMEDIATE",
+   "pieces": [
+    "GLACITE_CHESTPLATE",
+    "GLACITE_HELMET",
+    "GLACITE_LEGGINGS",
+    "GLACITE_BOOTS"
+   ]
+  },
+  {
+   "setId": "GLOSSY_MINERAL",
+   "name": "Glossy Mineral",
+   "xp": 7,
+   "category": "MINING",
+   "stage": "EXPERT",
+   "pieces": [
+    "GLOSSY_MINERAL_CHESTPLATE",
+    "GLOSSY_MINERAL_LEGGINGS",
+    "GLOSSY_MINERAL_HELMET",
+    "GLOSSY_MINERAL_BOOTS"
+   ]
+  },
+  {
+   "setId": "GOBLIN",
+   "name": "Goblin",
+   "xp": 4,
+   "category": "MINING",
+   "stage": "INTERMEDIATE",
+   "pieces": [
+    "GOBLIN_CHESTPLATE",
+    "GOBLIN_LEGGINGS",
+    "GOBLIN_HELMET",
+    "GOBLIN_BOOTS"
+   ]
+  },
+  {
+   "setId": "GOLD_HUNTER",
+   "name": "Gold Hunter",
+   "xp": 16,
+   "category": "FISHING",
+   "stage": "PROFESSIONAL",
+   "pieces": [
+    "GOLD_HUNTER_LEGGINGS",
+    "GOLD_HUNTER_CHESTPLATE",
+    "GOLD_HUNTER_HELMET",
+    "GOLD_HUNTER_BOOTS"
+   ]
+  },
+  {
+   "setId": "GOLEM_ARMOR",
+   "name": "Golem Armor",
+   "xp": 3,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "pieces": [
+    "GOLEM_ARMOR_HELMET",
+    "GOLEM_ARMOR_BOOTS",
+    "GOLEM_ARMOR_CHESTPLATE",
+    "GOLEM_ARMOR_LEGGINGS"
+   ]
+  },
+  {
+   "setId": "GROWTH",
+   "name": "Helmet of Growth",
+   "xp": 3,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "pieces": [
+    "GROWTH_HELMET",
+    "GROWTH_CHESTPLATE",
+    "GROWTH_LEGGINGS",
+    "GROWTH_BOOTS"
+   ]
+  },
+  {
+   "setId": "HARDENED_DIAMOND",
+   "name": "Hardened Diamond",
+   "xp": 3,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "pieces": [
+    "HARDENED_DIAMOND_CHESTPLATE",
+    "HARDENED_DIAMOND_BOOTS",
+    "HARDENED_DIAMOND_HELMET",
+    "HARDENED_DIAMOND_LEGGINGS"
+   ]
+  },
+  {
+   "setId": "HEAT",
+   "name": "Heat",
+   "xp": 2,
+   "category": "MINING",
+   "stage": "SKILLED",
+   "pieces": [
+    "HEAT_HELMET",
+    "HEAT_LEGGINGS",
+    "HEAT_BOOTS",
+    "HEAT_CHESTPLATE"
+   ]
+  },
+  {
+   "setId": "HEAVY",
+   "name": "Heavy",
+   "xp": 3,
+   "category": "DUNGEONEERING",
+   "stage": "AMATEUR",
+   "pieces": [
+    "HEAVY_HELMET",
+    "HEAVY_CHESTPLATE",
+    "HEAVY_LEGGINGS",
+    "HEAVY_BOOTS"
+   ]
+  },
+  {
+   "setId": "HELIANTHUS",
+   "name": "Helianthus",
+   "xp": 15,
+   "category": "FARMING",
+   "stage": "MASTER",
+   "pieces": [
+    "HELIANTHUS_BOOTS",
+    "HELIANTHUS_LEGGINGS",
+    "HELIANTHUS_HELMET",
+    "HELIANTHUS_CHESTPLATE"
+   ]
+  },
+  {
+   "setId": "HELIX_ARMOR",
+   "name": "Helix",
+   "xp": 9,
+   "category": "FORAGING",
+   "stage": "EXPERT",
+   "pieces": [
+    "HELIX_ARMOR_BOOTS",
+    "HELIX_ARMOR_CHESTPLATE",
+    "HELIX_ARMOR_HELMET",
+    "HELIX_ARMOR_LEGGINGS"
+   ]
+  },
+  {
+   "setId": "HOLLOW",
+   "name": "Hollow",
+   "xp": 10,
+   "category": "COMBAT",
+   "stage": "PROFESSIONAL",
+   "pieces": [
+    "HOLLOW_LEGGINGS",
+    "HOLLOW_CHESTPLATE",
+    "HOLLOW_BOOTS",
+    "HOLLOW_HELMET"
+   ]
+  },
+  {
+   "setId": "HOLY_DRAGON",
+   "name": "Holy Dragon",
+   "xp": 10,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "pieces": [
+    "HOLY_DRAGON_CHESTPLATE",
+    "HOLY_DRAGON_LEGGINGS",
+    "HOLY_DRAGON_BOOTS",
+    "HOLY_DRAGON_HELMET"
+   ]
+  },
+  {
+   "setId": "HONEYCOMB",
+   "name": "Honeycomb Necklace",
+   "xp": 8,
+   "category": "FORAGING",
+   "stage": "EXPERT",
+   "pieces": [
+    "HONEYCOMB_NECKLACE"
+   ]
+  },
+  {
+   "setId": "ICHTHYIC",
+   "name": "Ichthyic Gloves",
+   "xp": 6,
+   "category": "FISHING",
+   "stage": "INTERMEDIATE",
+   "pieces": [
+    "ICHTHYIC_GLOVES",
+    "ICHTHYIC_CLOAK",
+    "ICHTHYIC_BELT"
+   ]
+  },
+  {
+   "setId": "LAPIS_ARMOR",
+   "name": "Lapis Armor",
+   "xp": 3,
+   "category": "MINING",
+   "stage": "AMATEUR",
+   "pieces": [
+    "LAPIS_ARMOR_CHESTPLATE",
+    "LAPIS_ARMOR_BOOTS",
+    "LAPIS_ARMOR_LEGGINGS",
+    "LAPIS_ARMOR_HELMET"
+   ]
+  },
+  {
+   "setId": "LAVA_SEA_CREATURE",
+   "name": "Slug",
+   "xp": 10,
+   "category": "FISHING",
+   "stage": "EXPERT",
+   "pieces": [
+    "SLUG_BOOTS",
+    "FLAMING_CHESTPLATE",
+    "TAURUS_HELMET",
+    "MOOGMA_LEGGINGS"
+   ]
+  },
+  {
+   "setId": "LEAFLET",
+   "name": "Leaflet",
+   "xp": 2,
+   "category": "FORAGING",
+   "stage": "STARTER",
+   "pieces": [
+    "LEAFLET_HELMET",
+    "LEAFLET_CHESTPLATE",
+    "LEAFLET_BOOTS",
+    "LEAFLET_LEGGINGS"
+   ]
+  },
+  {
+   "setId": "LOTUS",
+   "name": "Peony Bracelet",
+   "xp": 4,
+   "category": "FARMING",
+   "stage": "INTERMEDIATE",
+   "pieces": [
+    "LOTUS_BRACELET",
+    "LOTUS_BELT",
+    "LOTUS_NECKLACE",
+    "LOTUS_CLOAK"
+   ]
+  },
+  {
+   "setId": "MAGMA_LORD",
+   "name": "Magma Lord",
+   "xp": 20,
+   "category": "FISHING",
+   "stage": "MASTER",
+   "pieces": [
+    "MAGMA_LORD_BOOTS",
+    "MAGMA_LORD_HELMET",
+    "MAGMA_LORD_CHESTPLATE",
+    "MAGMA_LORD_LEGGINGS",
+    "MAGMA_LORD_GAUNTLET"
+   ]
+  },
+  {
+   "setId": "MANGROVE",
+   "name": "Mangrove Grippers",
+   "xp": 8,
+   "category": "FORAGING",
+   "stage": "EXPERT",
+   "pieces": [
+    "MANGROVE_GRIPPERS",
+    "MANGROVE_LOCKET"
+   ]
+  },
+  {
+   "setId": "MASTIFF",
+   "name": "Mastiff",
+   "xp": 8,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "pieces": [
+    "MASTIFF_LEGGINGS",
+    "MASTIFF_HELMET",
+    "MASTIFF_BOOTS",
+    "MASTIFF_CHESTPLATE"
+   ]
+  },
+  {
+   "setId": "MELON",
+   "name": "Tater",
+   "xp": 4,
+   "category": "FARMING",
+   "stage": "INTERMEDIATE",
+   "pieces": [
+    "MELON_HELMET",
+    "MELON_BOOTS",
+    "MELON_CHESTPLATE",
+    "MELON_LEGGINGS"
+   ]
+  },
+  {
+   "setId": "MERCENARY",
+   "name": "Mercenary",
+   "xp": 1,
+   "category": "COMBAT",
+   "stage": "AMATEUR",
+   "pieces": [
+    "MERCENARY_BOOTS",
+    "MERCENARY_CHESTPLATE",
+    "MERCENARY_LEGGINGS",
+    "MERCENARY_HELMET"
+   ]
+  },
+  {
+   "setId": "MINER_OUTFIT",
+   "name": "Prospecting",
+   "xp": 3,
+   "category": "MINING",
+   "stage": "STARTER",
+   "pieces": [
+    "MINER_OUTFIT_CHESTPLATE",
+    "MINER_OUTFIT_BOOTS",
+    "MINER_OUTFIT_HELMET",
+    "MINER_OUTFIT_LEGGINGS"
+   ]
+  },
+  {
+   "setId": "MINERAL",
+   "name": "Mineral",
+   "xp": 4,
+   "category": "MINING",
+   "stage": "SKILLED",
+   "pieces": [
+    "MINERAL_BOOTS",
+    "MINERAL_HELMET",
+    "MINERAL_CHESTPLATE",
+    "MINERAL_LEGGINGS"
+   ]
+  },
+  {
+   "setId": "MITHRIL",
+   "name": "Mithril Belt",
+   "xp": 3,
+   "category": "MINING",
+   "stage": "INTERMEDIATE",
+   "pieces": [
+    "MITHRIL_BELT",
+    "MITHRIL_NECKLACE",
+    "MITHRIL_CLOAK",
+    "MITHRIL_GAUNTLET"
+   ]
+  },
+  {
+   "setId": "MOLTEN",
+   "name": "Molten Necklace",
+   "xp": 10,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "pieces": [
+    "MOLTEN_NECKLACE",
+    "MOLTEN_BRACELET",
+    "MOLTEN_BELT",
+    "MOLTEN_CLOAK"
+   ]
+  },
+  {
+   "setId": "MONSTER_HUNTER",
+   "name": "Skeleton's",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "pieces": [
+    "SKELETON_HELMET",
+    "GUARDIAN_CHESTPLATE",
+    "SPIDER_BOOTS",
+    "CREEPER_LEGGINGS"
+   ]
+  },
+  {
+   "setId": "MONSTER_RAIDER",
+   "name": "Skeleton's",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "pieces": [
+    "SKELETON_HELMET",
+    "GUARDIAN_CHESTPLATE",
+    "SPIDER_BOOTS",
+    "CREEPER_LEGGINGS",
+    "TARANTULA_BOOTS"
+   ]
+  },
+  {
+   "setId": "MUSHROOM",
+   "name": "Mushroom",
+   "xp": 2,
+   "category": "FARMING",
+   "stage": "STARTER",
+   "pieces": [
+    "MUSHROOM_CHESTPLATE",
+    "MUSHROOM_BOOTS",
+    "MUSHROOM_HELMET",
+    "MUSHROOM_LEGGINGS"
+   ]
+  },
+  {
+   "setId": "MYTHOS",
+   "name": "Mythos Cloak",
+   "xp": 12,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "pieces": [
+    "MYTHOS_CLOAK",
+    "MYTHOS_NECKLACE",
+    "MYTHOS_LEGGINGS",
+    "MYTHOS_BRACELET",
+    "MYTHOS_BOOTS",
+    "MYTHOS_BELT",
+    "MYTHOS_CHESTPLATE",
+    "MYTHOS_HELMET"
+   ]
+  },
+  {
+   "setId": "NECROMANCER_LORD",
+   "name": "Necromancer Lord",
+   "xp": 12,
+   "category": "DUNGEONEERING",
+   "stage": "SKILLED",
+   "pieces": [
+    "NECROMANCER_LORD_HELMET",
+    "NECROMANCER_LORD_CHESTPLATE",
+    "NECROMANCER_LORD_LEGGINGS",
+    "NECROMANCER_LORD_BOOTS"
+   ]
+  },
+  {
+   "setId": "NUTCRACKER",
+   "name": "Nutcracker",
+   "xp": 10,
+   "category": "FISHING",
+   "stage": "SKILLED",
+   "pieces": [
+    "NUTCRACKER_HELMET",
+    "NUTCRACKER_BOOTS",
+    "NUTCRACKER_CHESTPLATE",
+    "NUTCRACKER_LEGGINGS"
+   ]
+  },
+  {
+   "setId": "OLD_DRAGON",
+   "name": "Old Dragon",
+   "xp": 10,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "pieces": [
+    "OLD_DRAGON_BOOTS",
+    "OLD_DRAGON_CHESTPLATE",
+    "OLD_DRAGON_LEGGINGS",
+    "OLD_DRAGON_HELMET"
+   ]
+  },
+  {
+   "setId": "PARK",
+   "name": "Charlie's",
+   "xp": 1,
+   "category": "FORAGING",
+   "stage": "STARTER",
+   "pieces": [
+    "CHARLIE_TROUSERS",
+    "MOLE_HAT",
+    "MELODY_SHOES",
+    "KELLY_TSHIRT"
+   ]
+  },
+  {
+   "setId": "PARTY",
+   "name": "Party Top",
+   "xp": 3,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "pieces": [
+    "PARTY_HAT",
+    "PARTY_BELT",
+    "PARTY_NECKLACE",
+    "PARTY_GLOVES",
+    "PARTY_CLOAK"
+   ]
+  },
+  {
+   "setId": "PERFECT_TIER_12",
+   "name": "Perfect Boots - Tier XII",
+   "xp": 8,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "pieces": [
+    "PERFECT_BOOTS_12",
+    "PERFECT_LEGGINGS_12",
+    "PERFECT_HELMET_12",
+    "PERFECT_CHESTPLATE_12"
+   ]
+  },
+  {
+   "setId": "PERFECT_TIER_13",
+   "name": "Perfect Boots - Tier XIII",
+   "xp": 10,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "pieces": [
+    "PERFECT_BOOTS_13",
+    "PERFECT_CHESTPLATE_13",
+    "PERFECT_HELMET_13",
+    "PERFECT_LEGGINGS_13"
+   ]
+  },
+  {
+   "setId": "PESTHUNTER",
+   "name": "Pesthunter's Belt",
+   "xp": 4,
+   "category": "FARMING",
+   "stage": "AMATEUR",
+   "pieces": [
+    "PESTHUNTERS_BELT",
+    "PESTHUNTERS_GLOVES",
+    "PESTHUNTERS_NECKLACE",
+    "PESTHUNTERS_CLOAK"
+   ]
+  },
+  {
+   "setId": "POWER_WITHER",
+   "name": "Necron's",
+   "xp": 6,
+   "category": "DUNGEONEERING",
+   "stage": "PROFESSIONAL",
+   "pieces": [
+    "POWER_WITHER_BOOTS",
+    "POWER_WITHER_CHESTPLATE",
+    "POWER_WITHER_LEGGINGS",
+    "POWER_WITHER_HELMET"
+   ]
+  },
+  {
+   "setId": "PRIMORDIAL",
+   "name": "Primordial",
+   "xp": 10,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "pieces": [
+    "PRIMORDIAL_HELMET",
+    "PRIMORDIAL_BOOTS",
+    "PRIMORDIAL_CHESTPLATE",
+    "PRIMORDIAL_LEGGINGS"
+   ]
+  },
+  {
+   "setId": "PROTECTOR_DRAGON",
+   "name": "Protector Dragon",
+   "xp": 10,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "pieces": [
+    "PROTECTOR_DRAGON_HELMET",
+    "PROTECTOR_DRAGON_BOOTS",
+    "PROTECTOR_DRAGON_CHESTPLATE",
+    "PROTECTOR_DRAGON_LEGGINGS"
+   ]
+  },
+  {
+   "setId": "PUMPKIN",
+   "name": "Sprout",
+   "xp": 3,
+   "category": "FARMING",
+   "stage": "AMATEUR",
+   "pieces": [
+    "PUMPKIN_BOOTS",
+    "PUMPKIN_CHESTPLATE",
+    "PUMPKIN_HELMET",
+    "PUMPKIN_LEGGINGS"
+   ]
+  },
+  {
+   "setId": "RABBIT",
+   "name": "Rabbit",
+   "xp": 1,
+   "category": "FARMING",
+   "stage": "STARTER",
+   "pieces": [
+    "RABBIT_CHESTPLATE",
+    "RABBIT_LEGGINGS",
+    "RABBIT_HELMET",
+    "RABBIT_BOOTS"
+   ]
+  },
+  {
+   "setId": "RAMPART",
+   "name": "Rampart",
+   "xp": 6,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "pieces": [
+    "RAMPART_CHESTPLATE",
+    "RAMPART_LEGGINGS",
+    "RAMPART_BOOTS",
+    "RAMPART_HELMET"
+   ]
+  },
+  {
+   "setId": "REAPER",
+   "name": "Reaper",
+   "xp": 7,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "pieces": [
+    "REAPER_BOOTS",
+    "REAPER_CHESTPLATE",
+    "REAPER_LEGGINGS"
+   ]
+  },
+  {
+   "setId": "REKINDLED_EMBER",
+   "name": "Rekindled Ember",
+   "xp": 10,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "pieces": [
+    "REKINDLED_EMBER_BOOTS",
+    "REKINDLED_EMBER_LEGGINGS",
+    "REKINDLED_EMBER_CHESTPLATE",
+    "REKINDLED_EMBER_HELMET"
+   ]
+  },
+  {
+   "setId": "REVENANT",
+   "name": "Revenant",
+   "xp": 5,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "pieces": [
+    "REVENANT_CHESTPLATE",
+    "REVENANT_BOOTS",
+    "REVENANT_LEGGINGS"
+   ]
+  },
+  {
+   "setId": "ROSETTA",
+   "name": "Rosetta's",
+   "xp": 1,
+   "category": "COMBAT",
+   "stage": "STARTER",
+   "pieces": [
+    "ROSETTA_LEGGINGS",
+    "ROSETTA_CHESTPLATE",
+    "ROSETTA_HELMET",
+    "ROSETTA_BOOTS"
+   ]
+  },
+  {
+   "setId": "ROTTEN",
+   "name": "Rotten",
+   "xp": 2,
+   "category": "DUNGEONEERING",
+   "stage": "AMATEUR",
+   "pieces": [
+    "ROTTEN_HELMET",
+    "ROTTEN_LEGGINGS",
+    "ROTTEN_BOOTS",
+    "ROTTEN_CHESTPLATE"
+   ]
+  },
+  {
+   "setId": "SALMON_NEW",
+   "name": "Salmon",
+   "xp": 3,
+   "category": "FISHING",
+   "stage": "INTERMEDIATE",
+   "pieces": [
+    "SALMON_HELMET_NEW",
+    "SALMON_LEGGINGS_NEW",
+    "SALMON_CHESTPLATE_NEW",
+    "SALMON_BOOTS_NEW"
+   ]
+  },
+  {
+   "setId": "SEYMOUR",
+   "name": "Cashmere Jacket",
+   "xp": 4,
+   "category": "FARMING",
+   "stage": "SKILLED",
+   "pieces": [
+    "CASHMERE_JACKET",
+    "OXFORD_SHOES",
+    "SATIN_TROUSERS",
+    "VELVET_TOP_HAT"
+   ]
+  },
+  {
+   "setId": "SHADOW_ASSASSIN",
+   "name": "Shadow Assassin",
+   "xp": 10,
+   "category": "DUNGEONEERING",
+   "stage": "SKILLED",
+   "pieces": [
+    "SHADOW_ASSASSIN_BOOTS",
+    "SHADOW_ASSASSIN_LEGGINGS",
+    "SHADOW_ASSASSIN_CHESTPLATE",
+    "SHADOW_ASSASSIN_HELMET",
+    "SHADOW_ASSASSIN_CLOAK"
+   ]
+  },
+  {
+   "setId": "SHARK_SCALE",
+   "name": "Shark Scale",
+   "xp": 7,
+   "category": "FISHING",
+   "stage": "SKILLED",
+   "pieces": [
+    "SHARK_SCALE_HELMET",
+    "SHARK_SCALE_BOOTS",
+    "SHARK_SCALE_LEGGINGS",
+    "SHARK_SCALE_CHESTPLATE"
+   ]
+  },
+  {
+   "setId": "SHIMMERING_LIGHT",
+   "name": "Shimmering Light Slippers",
+   "xp": 16,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "pieces": [
+    "SHIMMERING_LIGHT_SLIPPERS",
+    "SHIMMERING_LIGHT_TROUSERS",
+    "SHIMMERING_LIGHT_TUNIC",
+    "SHIMMERING_LIGHT_HOOD"
+   ]
+  },
+  {
+   "setId": "SILVER_HUNTER",
+   "name": "Silver Hunter",
+   "xp": 12,
+   "category": "FISHING",
+   "stage": "EXPERT",
+   "pieces": [
+    "SILVER_HUNTER_HELMET",
+    "SILVER_HUNTER_LEGGINGS",
+    "SILVER_HUNTER_CHESTPLATE",
+    "SILVER_HUNTER_BOOTS"
+   ]
+  },
+  {
+   "setId": "SKELETON_GRUNT",
+   "name": "Skeleton Grunt",
+   "xp": 3,
+   "category": "DUNGEONEERING",
+   "stage": "AMATEUR",
+   "pieces": [
+    "SKELETON_GRUNT_BOOTS",
+    "SKELETON_GRUNT_CHESTPLATE",
+    "SKELETON_GRUNT_HELMET",
+    "SKELETON_GRUNT_LEGGINGS"
+   ]
+  },
+  {
+   "setId": "SKELETON_LORD",
+   "name": "Skeleton Lord",
+   "xp": 10,
+   "category": "DUNGEONEERING",
+   "stage": "SKILLED",
+   "pieces": [
+    "SKELETON_LORD_CHESTPLATE",
+    "SKELETON_LORD_LEGGINGS",
+    "SKELETON_LORD_BOOTS",
+    "SKELETON_LORD_HELMET"
+   ]
+  },
+  {
+   "setId": "SKELETON_MASTER",
+   "name": "Skeleton Master",
+   "xp": 3,
+   "category": "DUNGEONEERING",
+   "stage": "AMATEUR",
+   "pieces": [
+    "SKELETON_MASTER_CHESTPLATE",
+    "SKELETON_MASTER_BOOTS",
+    "SKELETON_MASTER_LEGGINGS",
+    "SKELETON_MASTER_HELMET"
+   ]
+  },
+  {
+   "setId": "SKELETON_SOLDIER",
+   "name": "Skeleton Soldier",
+   "xp": 3,
+   "category": "DUNGEONEERING",
+   "stage": "AMATEUR",
+   "pieces": [
+    "SKELETON_SOLDIER_LEGGINGS",
+    "SKELETON_SOLDIER_HELMET",
+    "SKELETON_SOLDIER_BOOTS",
+    "SKELETON_SOLDIER_CHESTPLATE"
+   ]
+  },
+  {
+   "setId": "SKELETOR",
+   "name": "Skeletor",
+   "xp": 5,
+   "category": "DUNGEONEERING",
+   "stage": "INTERMEDIATE",
+   "pieces": [
+    "SKELETOR_CHESTPLATE",
+    "SKELETOR_LEGGINGS",
+    "SKELETOR_BOOTS",
+    "SKELETOR_HELMET"
+   ]
+  },
+  {
+   "setId": "SNORKELING",
+   "name": "Snorkeling Vest",
+   "xp": 3,
+   "category": "FISHING",
+   "stage": "AMATEUR",
+   "pieces": [
+    "SNORKELING_CHESTPLATE",
+    "SNORKELING_LEGGINGS",
+    "SNORKELING_BOOTS",
+    "SNORKELING_HELMET"
+   ]
+  },
+  {
+   "setId": "SNOW_SUIT",
+   "name": "Snow Suit",
+   "xp": 6,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "pieces": [
+    "SNOW_SUIT_CHESTPLATE",
+    "SNOW_SUIT_LEGGINGS",
+    "SNOW_SUIT_BOOTS",
+    "SNOW_SUIT_HELMET"
+   ]
+  },
+  {
+   "setId": "SORROW",
+   "name": "Sorrow",
+   "xp": 10,
+   "category": "MINING",
+   "stage": "EXPERT",
+   "pieces": [
+    "SORROW_BOOTS",
+    "SORROW_LEGGINGS",
+    "SORROW_CHESTPLATE",
+    "SORROW_HELMET"
+   ]
+  },
+  {
+   "setId": "SPEED_WITHER",
+   "name": "Maxor's",
+   "xp": 6,
+   "category": "DUNGEONEERING",
+   "stage": "PROFESSIONAL",
+   "pieces": [
+    "SPEED_WITHER_HELMET",
+    "SPEED_WITHER_BOOTS",
+    "SPEED_WITHER_CHESTPLATE",
+    "SPEED_WITHER_LEGGINGS"
+   ]
+  },
+  {
+   "setId": "SPEEDSTER",
+   "name": "Speedster",
+   "xp": 5,
+   "category": "FARMING",
+   "stage": "INTERMEDIATE",
+   "pieces": [
+    "SPEEDSTER_LEGGINGS",
+    "SPEEDSTER_BOOTS",
+    "SPEEDSTER_CHESTPLATE",
+    "SPEEDSTER_HELMET"
+   ]
+  },
+  {
+   "setId": "SPONGE",
+   "name": "Prismarine Necklace",
+   "xp": 5,
+   "category": "FISHING",
+   "stage": "AMATEUR",
+   "pieces": [
+    "PRISMARINE_NECKLACE",
+    "SPONGE_BELT",
+    "CLOWNFISH_CLOAK",
+    "CLAY_BRACELET",
+    "SPONGE_HELMET",
+    "SPONGE_BOOTS",
+    "SPONGE_LEGGINGS",
+    "SPONGE_CHESTPLATE"
+   ]
+  },
+  {
+   "setId": "SPOOKY",
+   "name": "Spooky",
+   "xp": 7,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "pieces": [
+    "SPOOKY_CHESTPLATE",
+    "SPOOKY_BOOTS",
+    "SPOOKY_HELMET",
+    "SPOOKY_LEGGINGS"
+   ]
+  },
+  {
+   "setId": "SQUASH",
+   "name": "Squash",
+   "xp": 9,
+   "category": "FARMING",
+   "stage": "SKILLED",
+   "pieces": [
+    "SQUASH_LEGGINGS",
+    "SQUASH_HELMET",
+    "SQUASH_CHESTPLATE",
+    "SQUASH_BOOTS"
+   ]
+  },
+  {
+   "setId": "SQUIRE",
+   "name": "Squire",
+   "xp": 1,
+   "category": "COMBAT",
+   "stage": "STARTER",
+   "pieces": [
+    "SQUIRE_BOOTS",
+    "SQUIRE_HELMET",
+    "SQUIRE_LEGGINGS",
+    "SQUIRE_CHESTPLATE"
+   ]
+  },
+  {
+   "setId": "STARLIGHT",
+   "name": "Starlight",
+   "xp": 2,
+   "category": "COMBAT",
+   "stage": "AMATEUR",
+   "pieces": [
+    "STARLIGHT_LEGGINGS",
+    "STARLIGHT_HELMET",
+    "STARLIGHT_CHESTPLATE",
+    "STARLIGHT_BOOTS"
+   ]
+  },
+  {
+   "setId": "STRONG_DRAGON",
+   "name": "Strong Dragon",
+   "xp": 10,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "pieces": [
+    "STRONG_DRAGON_LEGGINGS",
+    "STRONG_DRAGON_HELMET",
+    "STRONG_DRAGON_BOOTS",
+    "STRONG_DRAGON_CHESTPLATE"
+   ]
+  },
+  {
+   "setId": "SUPER_HEAVY",
+   "name": "Super Heavy",
+   "xp": 3,
+   "category": "DUNGEONEERING",
+   "stage": "INTERMEDIATE",
+   "pieces": [
+    "SUPER_HEAVY_BOOTS",
+    "SUPER_HEAVY_CHESTPLATE",
+    "SUPER_HEAVY_HELMET",
+    "SUPER_HEAVY_LEGGINGS"
+   ]
+  },
+  {
+   "setId": "SUPERIOR_DRAGON",
+   "name": "Superior Dragon",
+   "xp": 15,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "pieces": [
+    "SUPERIOR_DRAGON_CHESTPLATE",
+    "SUPERIOR_DRAGON_HELMET",
+    "SUPERIOR_DRAGON_LEGGINGS",
+    "SUPERIOR_DRAGON_BOOTS"
+   ]
+  },
+  {
+   "setId": "TANK_MINER",
+   "name": "Miner",
+   "xp": 3,
+   "category": "MINING",
+   "stage": "AMATEUR",
+   "pieces": [
+    "TANK_MINER_LEGGINGS",
+    "TANK_MINER_BOOTS",
+    "TANK_MINER_CHESTPLATE",
+    "TANK_MINER_HELMET"
+   ]
+  },
+  {
+   "setId": "TANK_WITHER",
+   "name": "Goldor's",
+   "xp": 6,
+   "category": "DUNGEONEERING",
+   "stage": "PROFESSIONAL",
+   "pieces": [
+    "TANK_WITHER_CHESTPLATE",
+    "TANK_WITHER_LEGGINGS",
+    "TANK_WITHER_HELMET",
+    "TANK_WITHER_BOOTS"
+   ]
+  },
+  {
+   "setId": "TARANTULA",
+   "name": "Tarantula",
+   "xp": 7,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "pieces": [
+    "TARANTULA_CHESTPLATE",
+    "TARANTULA_BOOTS",
+    "TARANTULA_HELMET",
+    "TARANTULA_LEGGINGS"
+   ]
+  },
+  {
+   "setId": "TERROR",
+   "name": "Terror",
+   "xp": 10,
+   "category": "COMBAT",
+   "stage": "PROFESSIONAL",
+   "pieces": [
+    "TERROR_HELMET",
+    "TERROR_LEGGINGS",
+    "TERROR_BOOTS",
+    "TERROR_CHESTPLATE"
+   ]
+  },
+  {
+   "setId": "THERMODYNAMIC",
+   "name": "Thermodynamic",
+   "xp": 10,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "pieces": [
+    "THERMODYNAMIC_CHESTPLATE",
+    "THERMODYNAMIC_BOOTS",
+    "THERMODYNAMIC_LEGGINGS",
+    "THERMODYNAMIC_HELMET"
+   ]
+  },
+  {
+   "setId": "THUNDER",
+   "name": "Thunder",
+   "xp": 15,
+   "category": "FISHING",
+   "stage": "PROFESSIONAL",
+   "pieces": [
+    "THUNDER_CHESTPLATE",
+    "THUNDER_HELMET",
+    "THUNDER_LEGGINGS",
+    "THUNDER_BOOTS",
+    "THUNDERBOLT_NECKLACE"
+   ]
+  },
+  {
+   "setId": "TITANIUM",
+   "name": "Titanium Necklace",
+   "xp": 4,
+   "category": "MINING",
+   "stage": "INTERMEDIATE",
+   "pieces": [
+    "TITANIUM_NECKLACE",
+    "TITANIUM_BELT",
+    "TITANIUM_CLOAK",
+    "TITANIUM_GAUNTLET"
+   ]
+  },
+  {
+   "setId": "UNSTABLE_DRAGON",
+   "name": "Unstable Dragon",
+   "xp": 10,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "pieces": [
+    "UNSTABLE_DRAGON_BOOTS",
+    "UNSTABLE_DRAGON_HELMET",
+    "UNSTABLE_DRAGON_CHESTPLATE",
+    "UNSTABLE_DRAGON_LEGGINGS"
+   ]
+  },
+  {
+   "setId": "VANQUISHED",
+   "name": "Vanquished Ghast Cloak",
+   "xp": 8,
+   "category": "COMBAT",
+   "stage": "EXPERT",
+   "pieces": [
+    "VANQUISHED_GHAST_CLOAK",
+    "VANQUISHED_GLOWSTONE_GAUNTLET",
+    "VANQUISHED_BLAZE_BELT",
+    "VANQUISHED_MAGMA_NECKLACE"
+   ]
+  },
+  {
+   "setId": "WEREWOLF",
+   "name": "Werewolf",
+   "xp": 7,
+   "category": "COMBAT",
+   "stage": "SKILLED",
+   "pieces": [
+    "WEREWOLF_CHESTPLATE",
+    "WEREWOLF_HELMET",
+    "WEREWOLF_BOOTS",
+    "WEREWOLF_LEGGINGS"
+   ]
+  },
+  {
+   "setId": "WISE_DRAGON",
+   "name": "Wise Dragon",
+   "xp": 10,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "pieces": [
+    "WISE_DRAGON_BOOTS",
+    "WISE_DRAGON_LEGGINGS",
+    "WISE_DRAGON_CHESTPLATE",
+    "WISE_DRAGON_HELMET"
+   ]
+  },
+  {
+   "setId": "WISE_WITHER",
+   "name": "Storm's",
+   "xp": 6,
+   "category": "DUNGEONEERING",
+   "stage": "PROFESSIONAL",
+   "pieces": [
+    "WISE_WITHER_BOOTS",
+    "WISE_WITHER_LEGGINGS",
+    "WISE_WITHER_CHESTPLATE",
+    "WISE_WITHER_HELMET"
+   ]
+  },
+  {
+   "setId": "WITHER",
+   "name": "Wither",
+   "xp": 10,
+   "category": "DUNGEONEERING",
+   "stage": "PROFESSIONAL",
+   "pieces": [
+    "WITHER_CHESTPLATE",
+    "WITHER_HELMET",
+    "WITHER_BOOTS",
+    "WITHER_LEGGINGS"
+   ]
+  },
+  {
+   "setId": "YOUNG_DRAGON",
+   "name": "Young Dragon",
+   "xp": 10,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "pieces": [
+    "YOUNG_DRAGON_LEGGINGS",
+    "YOUNG_DRAGON_CHESTPLATE",
+    "YOUNG_DRAGON_BOOTS",
+    "YOUNG_DRAGON_HELMET"
+   ]
+  },
+  {
+   "setId": "ZOMBIE",
+   "name": "Zombie",
+   "xp": 4,
+   "category": "COMBAT",
+   "stage": "INTERMEDIATE",
+   "pieces": [
+    "ZOMBIE_BOOTS",
+    "ZOMBIE_CHESTPLATE",
+    "ZOMBIE_LEGGINGS"
+   ]
+  },
+  {
+   "setId": "ZOMBIE_COMMANDER",
+   "name": "Zombie Commander",
+   "xp": 8,
+   "category": "DUNGEONEERING",
+   "stage": "SKILLED",
+   "pieces": [
+    "ZOMBIE_COMMANDER_CHESTPLATE",
+    "ZOMBIE_COMMANDER_BOOTS",
+    "ZOMBIE_COMMANDER_LEGGINGS",
+    "ZOMBIE_COMMANDER_HELMET"
+   ]
+  },
+  {
+   "setId": "ZOMBIE_KNIGHT",
+   "name": "Zombie Knight",
+   "xp": 7,
+   "category": "DUNGEONEERING",
+   "stage": "INTERMEDIATE",
+   "pieces": [
+    "ZOMBIE_KNIGHT_BOOTS",
+    "ZOMBIE_KNIGHT_HELMET",
+    "ZOMBIE_KNIGHT_CHESTPLATE",
+    "ZOMBIE_KNIGHT_LEGGINGS"
+   ]
+  },
+  {
+   "setId": "ZOMBIE_LORD",
+   "name": "Zombie Lord",
+   "xp": 10,
+   "category": "DUNGEONEERING",
+   "stage": "SKILLED",
+   "pieces": [
+    "ZOMBIE_LORD_LEGGINGS",
+    "ZOMBIE_LORD_HELMET",
+    "ZOMBIE_LORD_CHESTPLATE",
+    "ZOMBIE_LORD_BOOTS"
+   ]
+  },
+  {
+   "setId": "ZOMBIE_SOLDIER",
+   "name": "Zombie Soldier",
+   "xp": 3,
+   "category": "DUNGEONEERING",
+   "stage": "INTERMEDIATE",
+   "pieces": [
+    "ZOMBIE_SOLDIER_LEGGINGS",
+    "ZOMBIE_SOLDIER_HELMET",
+    "ZOMBIE_SOLDIER_BOOTS",
+    "ZOMBIE_SOLDIER_CHESTPLATE"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,3126 @@
+{
+ "generatedAt": "2026-08-18T20:07:01.858Z",
+ "source": "https://api.hypixel.net/v2/resources/skyblock",
+ "totalXp": 8710,
+ "skills": [
+  {
+   "key": "ALCHEMY",
+   "name": "Alchemy",
+   "maxLevel": 50,
+   "levels": [
+    {
+     "level": 1,
+     "totalExpRequired": 50,
+     "xp": 5
+    },
+    {
+     "level": 2,
+     "totalExpRequired": 175,
+     "xp": 5
+    },
+    {
+     "level": 3,
+     "totalExpRequired": 375,
+     "xp": 5
+    },
+    {
+     "level": 4,
+     "totalExpRequired": 675,
+     "xp": 5
+    },
+    {
+     "level": 5,
+     "totalExpRequired": 1175,
+     "xp": 5
+    },
+    {
+     "level": 6,
+     "totalExpRequired": 1925,
+     "xp": 5
+    },
+    {
+     "level": 7,
+     "totalExpRequired": 2925,
+     "xp": 5
+    },
+    {
+     "level": 8,
+     "totalExpRequired": 4425,
+     "xp": 5
+    },
+    {
+     "level": 9,
+     "totalExpRequired": 6425,
+     "xp": 5
+    },
+    {
+     "level": 10,
+     "totalExpRequired": 9925,
+     "xp": 5
+    },
+    {
+     "level": 11,
+     "totalExpRequired": 14925,
+     "xp": 10
+    },
+    {
+     "level": 12,
+     "totalExpRequired": 22425,
+     "xp": 10
+    },
+    {
+     "level": 13,
+     "totalExpRequired": 32425,
+     "xp": 10
+    },
+    {
+     "level": 14,
+     "totalExpRequired": 47425,
+     "xp": 10
+    },
+    {
+     "level": 15,
+     "totalExpRequired": 67425,
+     "xp": 10
+    },
+    {
+     "level": 16,
+     "totalExpRequired": 97425,
+     "xp": 10
+    },
+    {
+     "level": 17,
+     "totalExpRequired": 147425,
+     "xp": 10
+    },
+    {
+     "level": 18,
+     "totalExpRequired": 222425,
+     "xp": 10
+    },
+    {
+     "level": 19,
+     "totalExpRequired": 322425,
+     "xp": 10
+    },
+    {
+     "level": 20,
+     "totalExpRequired": 522425,
+     "xp": 10
+    },
+    {
+     "level": 21,
+     "totalExpRequired": 822425,
+     "xp": 10
+    },
+    {
+     "level": 22,
+     "totalExpRequired": 1222425,
+     "xp": 10
+    },
+    {
+     "level": 23,
+     "totalExpRequired": 1722425,
+     "xp": 10
+    },
+    {
+     "level": 24,
+     "totalExpRequired": 2322425,
+     "xp": 10
+    },
+    {
+     "level": 25,
+     "totalExpRequired": 3022425,
+     "xp": 10
+    },
+    {
+     "level": 26,
+     "totalExpRequired": 3822425,
+     "xp": 20
+    },
+    {
+     "level": 27,
+     "totalExpRequired": 4722425,
+     "xp": 20
+    },
+    {
+     "level": 28,
+     "totalExpRequired": 5722425,
+     "xp": 20
+    },
+    {
+     "level": 29,
+     "totalExpRequired": 6822425,
+     "xp": 20
+    },
+    {
+     "level": 30,
+     "totalExpRequired": 8022425,
+     "xp": 20
+    },
+    {
+     "level": 31,
+     "totalExpRequired": 9322425,
+     "xp": 20
+    },
+    {
+     "level": 32,
+     "totalExpRequired": 10722425,
+     "xp": 20
+    },
+    {
+     "level": 33,
+     "totalExpRequired": 12222425,
+     "xp": 20
+    },
+    {
+     "level": 34,
+     "totalExpRequired": 13822425,
+     "xp": 20
+    },
+    {
+     "level": 35,
+     "totalExpRequired": 15522425,
+     "xp": 20
+    },
+    {
+     "level": 36,
+     "totalExpRequired": 17322425,
+     "xp": 20
+    },
+    {
+     "level": 37,
+     "totalExpRequired": 19222425,
+     "xp": 20
+    },
+    {
+     "level": 38,
+     "totalExpRequired": 21222425,
+     "xp": 20
+    },
+    {
+     "level": 39,
+     "totalExpRequired": 23322425,
+     "xp": 20
+    },
+    {
+     "level": 40,
+     "totalExpRequired": 25522425,
+     "xp": 20
+    },
+    {
+     "level": 41,
+     "totalExpRequired": 27822425,
+     "xp": 20
+    },
+    {
+     "level": 42,
+     "totalExpRequired": 30222425,
+     "xp": 20
+    },
+    {
+     "level": 43,
+     "totalExpRequired": 32722425,
+     "xp": 20
+    },
+    {
+     "level": 44,
+     "totalExpRequired": 35322425,
+     "xp": 20
+    },
+    {
+     "level": 45,
+     "totalExpRequired": 38072425,
+     "xp": 20
+    },
+    {
+     "level": 46,
+     "totalExpRequired": 40972425,
+     "xp": 20
+    },
+    {
+     "level": 47,
+     "totalExpRequired": 44072425,
+     "xp": 20
+    },
+    {
+     "level": 48,
+     "totalExpRequired": 47472425,
+     "xp": 20
+    },
+    {
+     "level": 49,
+     "totalExpRequired": 51172425,
+     "xp": 20
+    },
+    {
+     "level": 50,
+     "totalExpRequired": 55172425,
+     "xp": 20
+    }
+   ]
+  },
+  {
+   "key": "CARPENTRY",
+   "name": "Carpentry",
+   "maxLevel": 50,
+   "levels": [
+    {
+     "level": 1,
+     "totalExpRequired": 50,
+     "xp": 5
+    },
+    {
+     "level": 2,
+     "totalExpRequired": 175,
+     "xp": 5
+    },
+    {
+     "level": 3,
+     "totalExpRequired": 375,
+     "xp": 5
+    },
+    {
+     "level": 4,
+     "totalExpRequired": 675,
+     "xp": 5
+    },
+    {
+     "level": 5,
+     "totalExpRequired": 1175,
+     "xp": 5
+    },
+    {
+     "level": 6,
+     "totalExpRequired": 1925,
+     "xp": 5
+    },
+    {
+     "level": 7,
+     "totalExpRequired": 2925,
+     "xp": 5
+    },
+    {
+     "level": 8,
+     "totalExpRequired": 4425,
+     "xp": 5
+    },
+    {
+     "level": 9,
+     "totalExpRequired": 6425,
+     "xp": 5
+    },
+    {
+     "level": 10,
+     "totalExpRequired": 9925,
+     "xp": 5
+    },
+    {
+     "level": 11,
+     "totalExpRequired": 14925,
+     "xp": 10
+    },
+    {
+     "level": 12,
+     "totalExpRequired": 22425,
+     "xp": 10
+    },
+    {
+     "level": 13,
+     "totalExpRequired": 32425,
+     "xp": 10
+    },
+    {
+     "level": 14,
+     "totalExpRequired": 47425,
+     "xp": 10
+    },
+    {
+     "level": 15,
+     "totalExpRequired": 67425,
+     "xp": 10
+    },
+    {
+     "level": 16,
+     "totalExpRequired": 97425,
+     "xp": 10
+    },
+    {
+     "level": 17,
+     "totalExpRequired": 147425,
+     "xp": 10
+    },
+    {
+     "level": 18,
+     "totalExpRequired": 222425,
+     "xp": 10
+    },
+    {
+     "level": 19,
+     "totalExpRequired": 322425,
+     "xp": 10
+    },
+    {
+     "level": 20,
+     "totalExpRequired": 522425,
+     "xp": 10
+    },
+    {
+     "level": 21,
+     "totalExpRequired": 822425,
+     "xp": 10
+    },
+    {
+     "level": 22,
+     "totalExpRequired": 1222425,
+     "xp": 10
+    },
+    {
+     "level": 23,
+     "totalExpRequired": 1722425,
+     "xp": 10
+    },
+    {
+     "level": 24,
+     "totalExpRequired": 2322425,
+     "xp": 10
+    },
+    {
+     "level": 25,
+     "totalExpRequired": 3022425,
+     "xp": 10
+    },
+    {
+     "level": 26,
+     "totalExpRequired": 3822425,
+     "xp": 20
+    },
+    {
+     "level": 27,
+     "totalExpRequired": 4722425,
+     "xp": 20
+    },
+    {
+     "level": 28,
+     "totalExpRequired": 5722425,
+     "xp": 20
+    },
+    {
+     "level": 29,
+     "totalExpRequired": 6822425,
+     "xp": 20
+    },
+    {
+     "level": 30,
+     "totalExpRequired": 8022425,
+     "xp": 20
+    },
+    {
+     "level": 31,
+     "totalExpRequired": 9322425,
+     "xp": 20
+    },
+    {
+     "level": 32,
+     "totalExpRequired": 10722425,
+     "xp": 20
+    },
+    {
+     "level": 33,
+     "totalExpRequired": 12222425,
+     "xp": 20
+    },
+    {
+     "level": 34,
+     "totalExpRequired": 13822425,
+     "xp": 20
+    },
+    {
+     "level": 35,
+     "totalExpRequired": 15522425,
+     "xp": 20
+    },
+    {
+     "level": 36,
+     "totalExpRequired": 17322425,
+     "xp": 20
+    },
+    {
+     "level": 37,
+     "totalExpRequired": 19222425,
+     "xp": 20
+    },
+    {
+     "level": 38,
+     "totalExpRequired": 21222425,
+     "xp": 20
+    },
+    {
+     "level": 39,
+     "totalExpRequired": 23322425,
+     "xp": 20
+    },
+    {
+     "level": 40,
+     "totalExpRequired": 25522425,
+     "xp": 20
+    },
+    {
+     "level": 41,
+     "totalExpRequired": 27822425,
+     "xp": 20
+    },
+    {
+     "level": 42,
+     "totalExpRequired": 30222425,
+     "xp": 20
+    },
+    {
+     "level": 43,
+     "totalExpRequired": 32722425,
+     "xp": 20
+    },
+    {
+     "level": 44,
+     "totalExpRequired": 35322425,
+     "xp": 20
+    },
+    {
+     "level": 45,
+     "totalExpRequired": 38072425,
+     "xp": 20
+    },
+    {
+     "level": 46,
+     "totalExpRequired": 40972425,
+     "xp": 20
+    },
+    {
+     "level": 47,
+     "totalExpRequired": 44072425,
+     "xp": 20
+    },
+    {
+     "level": 48,
+     "totalExpRequired": 47472425,
+     "xp": 20
+    },
+    {
+     "level": 49,
+     "totalExpRequired": 51172425,
+     "xp": 20
+    },
+    {
+     "level": 50,
+     "totalExpRequired": 55172425,
+     "xp": 20
+    }
+   ]
+  },
+  {
+   "key": "COMBAT",
+   "name": "Combat",
+   "maxLevel": 60,
+   "levels": [
+    {
+     "level": 1,
+     "totalExpRequired": 50,
+     "xp": 5
+    },
+    {
+     "level": 2,
+     "totalExpRequired": 175,
+     "xp": 5
+    },
+    {
+     "level": 3,
+     "totalExpRequired": 375,
+     "xp": 5
+    },
+    {
+     "level": 4,
+     "totalExpRequired": 675,
+     "xp": 5
+    },
+    {
+     "level": 5,
+     "totalExpRequired": 1175,
+     "xp": 5
+    },
+    {
+     "level": 6,
+     "totalExpRequired": 1925,
+     "xp": 5
+    },
+    {
+     "level": 7,
+     "totalExpRequired": 2925,
+     "xp": 5
+    },
+    {
+     "level": 8,
+     "totalExpRequired": 4425,
+     "xp": 5
+    },
+    {
+     "level": 9,
+     "totalExpRequired": 6425,
+     "xp": 5
+    },
+    {
+     "level": 10,
+     "totalExpRequired": 9925,
+     "xp": 5
+    },
+    {
+     "level": 11,
+     "totalExpRequired": 14925,
+     "xp": 10
+    },
+    {
+     "level": 12,
+     "totalExpRequired": 22425,
+     "xp": 10
+    },
+    {
+     "level": 13,
+     "totalExpRequired": 32425,
+     "xp": 10
+    },
+    {
+     "level": 14,
+     "totalExpRequired": 47425,
+     "xp": 10
+    },
+    {
+     "level": 15,
+     "totalExpRequired": 67425,
+     "xp": 10
+    },
+    {
+     "level": 16,
+     "totalExpRequired": 97425,
+     "xp": 10
+    },
+    {
+     "level": 17,
+     "totalExpRequired": 147425,
+     "xp": 10
+    },
+    {
+     "level": 18,
+     "totalExpRequired": 222425,
+     "xp": 10
+    },
+    {
+     "level": 19,
+     "totalExpRequired": 322425,
+     "xp": 10
+    },
+    {
+     "level": 20,
+     "totalExpRequired": 522425,
+     "xp": 10
+    },
+    {
+     "level": 21,
+     "totalExpRequired": 822425,
+     "xp": 10
+    },
+    {
+     "level": 22,
+     "totalExpRequired": 1222425,
+     "xp": 10
+    },
+    {
+     "level": 23,
+     "totalExpRequired": 1722425,
+     "xp": 10
+    },
+    {
+     "level": 24,
+     "totalExpRequired": 2322425,
+     "xp": 10
+    },
+    {
+     "level": 25,
+     "totalExpRequired": 3022425,
+     "xp": 10
+    },
+    {
+     "level": 26,
+     "totalExpRequired": 3822425,
+     "xp": 20
+    },
+    {
+     "level": 27,
+     "totalExpRequired": 4722425,
+     "xp": 20
+    },
+    {
+     "level": 28,
+     "totalExpRequired": 5722425,
+     "xp": 20
+    },
+    {
+     "level": 29,
+     "totalExpRequired": 6822425,
+     "xp": 20
+    },
+    {
+     "level": 30,
+     "totalExpRequired": 8022425,
+     "xp": 20
+    },
+    {
+     "level": 31,
+     "totalExpRequired": 9322425,
+     "xp": 20
+    },
+    {
+     "level": 32,
+     "totalExpRequired": 10722425,
+     "xp": 20
+    },
+    {
+     "level": 33,
+     "totalExpRequired": 12222425,
+     "xp": 20
+    },
+    {
+     "level": 34,
+     "totalExpRequired": 13822425,
+     "xp": 20
+    },
+    {
+     "level": 35,
+     "totalExpRequired": 15522425,
+     "xp": 20
+    },
+    {
+     "level": 36,
+     "totalExpRequired": 17322425,
+     "xp": 20
+    },
+    {
+     "level": 37,
+     "totalExpRequired": 19222425,
+     "xp": 20
+    },
+    {
+     "level": 38,
+     "totalExpRequired": 21222425,
+     "xp": 20
+    },
+    {
+     "level": 39,
+     "totalExpRequired": 23322425,
+     "xp": 20
+    },
+    {
+     "level": 40,
+     "totalExpRequired": 25522425,
+     "xp": 20
+    },
+    {
+     "level": 41,
+     "totalExpRequired": 27822425,
+     "xp": 20
+    },
+    {
+     "level": 42,
+     "totalExpRequired": 30222425,
+     "xp": 20
+    },
+    {
+     "level": 43,
+     "totalExpRequired": 32722425,
+     "xp": 20
+    },
+    {
+     "level": 44,
+     "totalExpRequired": 35322425,
+     "xp": 20
+    },
+    {
+     "level": 45,
+     "totalExpRequired": 38072425,
+     "xp": 20
+    },
+    {
+     "level": 46,
+     "totalExpRequired": 40972425,
+     "xp": 20
+    },
+    {
+     "level": 47,
+     "totalExpRequired": 44072425,
+     "xp": 20
+    },
+    {
+     "level": 48,
+     "totalExpRequired": 47472425,
+     "xp": 20
+    },
+    {
+     "level": 49,
+     "totalExpRequired": 51172425,
+     "xp": 20
+    },
+    {
+     "level": 50,
+     "totalExpRequired": 55172425,
+     "xp": 20
+    },
+    {
+     "level": 51,
+     "totalExpRequired": 59472425,
+     "xp": 30
+    },
+    {
+     "level": 52,
+     "totalExpRequired": 64072425,
+     "xp": 30
+    },
+    {
+     "level": 53,
+     "totalExpRequired": 68972425,
+     "xp": 30
+    },
+    {
+     "level": 54,
+     "totalExpRequired": 74172425,
+     "xp": 30
+    },
+    {
+     "level": 55,
+     "totalExpRequired": 79672425,
+     "xp": 30
+    },
+    {
+     "level": 56,
+     "totalExpRequired": 85472425,
+     "xp": 30
+    },
+    {
+     "level": 57,
+     "totalExpRequired": 91572425,
+     "xp": 30
+    },
+    {
+     "level": 58,
+     "totalExpRequired": 97972425,
+     "xp": 30
+    },
+    {
+     "level": 59,
+     "totalExpRequired": 104672425,
+     "xp": 30
+    },
+    {
+     "level": 60,
+     "totalExpRequired": 111672425,
+     "xp": 30
+    }
+   ]
+  },
+  {
+   "key": "ENCHANTING",
+   "name": "Enchanting",
+   "maxLevel": 60,
+   "levels": [
+    {
+     "level": 1,
+     "totalExpRequired": 50,
+     "xp": 5
+    },
+    {
+     "level": 2,
+     "totalExpRequired": 175,
+     "xp": 5
+    },
+    {
+     "level": 3,
+     "totalExpRequired": 375,
+     "xp": 5
+    },
+    {
+     "level": 4,
+     "totalExpRequired": 675,
+     "xp": 5
+    },
+    {
+     "level": 5,
+     "totalExpRequired": 1175,
+     "xp": 5
+    },
+    {
+     "level": 6,
+     "totalExpRequired": 1925,
+     "xp": 5
+    },
+    {
+     "level": 7,
+     "totalExpRequired": 2925,
+     "xp": 5
+    },
+    {
+     "level": 8,
+     "totalExpRequired": 4425,
+     "xp": 5
+    },
+    {
+     "level": 9,
+     "totalExpRequired": 6425,
+     "xp": 5
+    },
+    {
+     "level": 10,
+     "totalExpRequired": 9925,
+     "xp": 5
+    },
+    {
+     "level": 11,
+     "totalExpRequired": 14925,
+     "xp": 10
+    },
+    {
+     "level": 12,
+     "totalExpRequired": 22425,
+     "xp": 10
+    },
+    {
+     "level": 13,
+     "totalExpRequired": 32425,
+     "xp": 10
+    },
+    {
+     "level": 14,
+     "totalExpRequired": 47425,
+     "xp": 10
+    },
+    {
+     "level": 15,
+     "totalExpRequired": 67425,
+     "xp": 10
+    },
+    {
+     "level": 16,
+     "totalExpRequired": 97425,
+     "xp": 10
+    },
+    {
+     "level": 17,
+     "totalExpRequired": 147425,
+     "xp": 10
+    },
+    {
+     "level": 18,
+     "totalExpRequired": 222425,
+     "xp": 10
+    },
+    {
+     "level": 19,
+     "totalExpRequired": 322425,
+     "xp": 10
+    },
+    {
+     "level": 20,
+     "totalExpRequired": 522425,
+     "xp": 10
+    },
+    {
+     "level": 21,
+     "totalExpRequired": 822425,
+     "xp": 10
+    },
+    {
+     "level": 22,
+     "totalExpRequired": 1222425,
+     "xp": 10
+    },
+    {
+     "level": 23,
+     "totalExpRequired": 1722425,
+     "xp": 10
+    },
+    {
+     "level": 24,
+     "totalExpRequired": 2322425,
+     "xp": 10
+    },
+    {
+     "level": 25,
+     "totalExpRequired": 3022425,
+     "xp": 10
+    },
+    {
+     "level": 26,
+     "totalExpRequired": 3822425,
+     "xp": 20
+    },
+    {
+     "level": 27,
+     "totalExpRequired": 4722425,
+     "xp": 20
+    },
+    {
+     "level": 28,
+     "totalExpRequired": 5722425,
+     "xp": 20
+    },
+    {
+     "level": 29,
+     "totalExpRequired": 6822425,
+     "xp": 20
+    },
+    {
+     "level": 30,
+     "totalExpRequired": 8022425,
+     "xp": 20
+    },
+    {
+     "level": 31,
+     "totalExpRequired": 9322425,
+     "xp": 20
+    },
+    {
+     "level": 32,
+     "totalExpRequired": 10722425,
+     "xp": 20
+    },
+    {
+     "level": 33,
+     "totalExpRequired": 12222425,
+     "xp": 20
+    },
+    {
+     "level": 34,
+     "totalExpRequired": 13822425,
+     "xp": 20
+    },
+    {
+     "level": 35,
+     "totalExpRequired": 15522425,
+     "xp": 20
+    },
+    {
+     "level": 36,
+     "totalExpRequired": 17322425,
+     "xp": 20
+    },
+    {
+     "level": 37,
+     "totalExpRequired": 19222425,
+     "xp": 20
+    },
+    {
+     "level": 38,
+     "totalExpRequired": 21222425,
+     "xp": 20
+    },
+    {
+     "level": 39,
+     "totalExpRequired": 23322425,
+     "xp": 20
+    },
+    {
+     "level": 40,
+     "totalExpRequired": 25522425,
+     "xp": 20
+    },
+    {
+     "level": 41,
+     "totalExpRequired": 27822425,
+     "xp": 20
+    },
+    {
+     "level": 42,
+     "totalExpRequired": 30222425,
+     "xp": 20
+    },
+    {
+     "level": 43,
+     "totalExpRequired": 32722425,
+     "xp": 20
+    },
+    {
+     "level": 44,
+     "totalExpRequired": 35322425,
+     "xp": 20
+    },
+    {
+     "level": 45,
+     "totalExpRequired": 38072425,
+     "xp": 20
+    },
+    {
+     "level": 46,
+     "totalExpRequired": 40972425,
+     "xp": 20
+    },
+    {
+     "level": 47,
+     "totalExpRequired": 44072425,
+     "xp": 20
+    },
+    {
+     "level": 48,
+     "totalExpRequired": 47472425,
+     "xp": 20
+    },
+    {
+     "level": 49,
+     "totalExpRequired": 51172425,
+     "xp": 20
+    },
+    {
+     "level": 50,
+     "totalExpRequired": 55172425,
+     "xp": 20
+    },
+    {
+     "level": 51,
+     "totalExpRequired": 59472425,
+     "xp": 30
+    },
+    {
+     "level": 52,
+     "totalExpRequired": 64072425,
+     "xp": 30
+    },
+    {
+     "level": 53,
+     "totalExpRequired": 68972425,
+     "xp": 30
+    },
+    {
+     "level": 54,
+     "totalExpRequired": 74172425,
+     "xp": 30
+    },
+    {
+     "level": 55,
+     "totalExpRequired": 79672425,
+     "xp": 30
+    },
+    {
+     "level": 56,
+     "totalExpRequired": 85472425,
+     "xp": 30
+    },
+    {
+     "level": 57,
+     "totalExpRequired": 91572425,
+     "xp": 30
+    },
+    {
+     "level": 58,
+     "totalExpRequired": 97972425,
+     "xp": 30
+    },
+    {
+     "level": 59,
+     "totalExpRequired": 104672425,
+     "xp": 30
+    },
+    {
+     "level": 60,
+     "totalExpRequired": 111672425,
+     "xp": 30
+    }
+   ]
+  },
+  {
+   "key": "FARMING",
+   "name": "Farming",
+   "maxLevel": 60,
+   "levels": [
+    {
+     "level": 1,
+     "totalExpRequired": 50,
+     "xp": 5
+    },
+    {
+     "level": 2,
+     "totalExpRequired": 175,
+     "xp": 5
+    },
+    {
+     "level": 3,
+     "totalExpRequired": 375,
+     "xp": 5
+    },
+    {
+     "level": 4,
+     "totalExpRequired": 675,
+     "xp": 5
+    },
+    {
+     "level": 5,
+     "totalExpRequired": 1175,
+     "xp": 5
+    },
+    {
+     "level": 6,
+     "totalExpRequired": 1925,
+     "xp": 5
+    },
+    {
+     "level": 7,
+     "totalExpRequired": 2925,
+     "xp": 5
+    },
+    {
+     "level": 8,
+     "totalExpRequired": 4425,
+     "xp": 5
+    },
+    {
+     "level": 9,
+     "totalExpRequired": 6425,
+     "xp": 5
+    },
+    {
+     "level": 10,
+     "totalExpRequired": 9925,
+     "xp": 5
+    },
+    {
+     "level": 11,
+     "totalExpRequired": 14925,
+     "xp": 10
+    },
+    {
+     "level": 12,
+     "totalExpRequired": 22425,
+     "xp": 10
+    },
+    {
+     "level": 13,
+     "totalExpRequired": 32425,
+     "xp": 10
+    },
+    {
+     "level": 14,
+     "totalExpRequired": 47425,
+     "xp": 10
+    },
+    {
+     "level": 15,
+     "totalExpRequired": 67425,
+     "xp": 10
+    },
+    {
+     "level": 16,
+     "totalExpRequired": 97425,
+     "xp": 10
+    },
+    {
+     "level": 17,
+     "totalExpRequired": 147425,
+     "xp": 10
+    },
+    {
+     "level": 18,
+     "totalExpRequired": 222425,
+     "xp": 10
+    },
+    {
+     "level": 19,
+     "totalExpRequired": 322425,
+     "xp": 10
+    },
+    {
+     "level": 20,
+     "totalExpRequired": 522425,
+     "xp": 10
+    },
+    {
+     "level": 21,
+     "totalExpRequired": 822425,
+     "xp": 10
+    },
+    {
+     "level": 22,
+     "totalExpRequired": 1222425,
+     "xp": 10
+    },
+    {
+     "level": 23,
+     "totalExpRequired": 1722425,
+     "xp": 10
+    },
+    {
+     "level": 24,
+     "totalExpRequired": 2322425,
+     "xp": 10
+    },
+    {
+     "level": 25,
+     "totalExpRequired": 3022425,
+     "xp": 10
+    },
+    {
+     "level": 26,
+     "totalExpRequired": 3822425,
+     "xp": 20
+    },
+    {
+     "level": 27,
+     "totalExpRequired": 4722425,
+     "xp": 20
+    },
+    {
+     "level": 28,
+     "totalExpRequired": 5722425,
+     "xp": 20
+    },
+    {
+     "level": 29,
+     "totalExpRequired": 6822425,
+     "xp": 20
+    },
+    {
+     "level": 30,
+     "totalExpRequired": 8022425,
+     "xp": 20
+    },
+    {
+     "level": 31,
+     "totalExpRequired": 9322425,
+     "xp": 20
+    },
+    {
+     "level": 32,
+     "totalExpRequired": 10722425,
+     "xp": 20
+    },
+    {
+     "level": 33,
+     "totalExpRequired": 12222425,
+     "xp": 20
+    },
+    {
+     "level": 34,
+     "totalExpRequired": 13822425,
+     "xp": 20
+    },
+    {
+     "level": 35,
+     "totalExpRequired": 15522425,
+     "xp": 20
+    },
+    {
+     "level": 36,
+     "totalExpRequired": 17322425,
+     "xp": 20
+    },
+    {
+     "level": 37,
+     "totalExpRequired": 19222425,
+     "xp": 20
+    },
+    {
+     "level": 38,
+     "totalExpRequired": 21222425,
+     "xp": 20
+    },
+    {
+     "level": 39,
+     "totalExpRequired": 23322425,
+     "xp": 20
+    },
+    {
+     "level": 40,
+     "totalExpRequired": 25522425,
+     "xp": 20
+    },
+    {
+     "level": 41,
+     "totalExpRequired": 27822425,
+     "xp": 20
+    },
+    {
+     "level": 42,
+     "totalExpRequired": 30222425,
+     "xp": 20
+    },
+    {
+     "level": 43,
+     "totalExpRequired": 32722425,
+     "xp": 20
+    },
+    {
+     "level": 44,
+     "totalExpRequired": 35322425,
+     "xp": 20
+    },
+    {
+     "level": 45,
+     "totalExpRequired": 38072425,
+     "xp": 20
+    },
+    {
+     "level": 46,
+     "totalExpRequired": 40972425,
+     "xp": 20
+    },
+    {
+     "level": 47,
+     "totalExpRequired": 44072425,
+     "xp": 20
+    },
+    {
+     "level": 48,
+     "totalExpRequired": 47472425,
+     "xp": 20
+    },
+    {
+     "level": 49,
+     "totalExpRequired": 51172425,
+     "xp": 20
+    },
+    {
+     "level": 50,
+     "totalExpRequired": 55172425,
+     "xp": 20
+    },
+    {
+     "level": 51,
+     "totalExpRequired": 59472425,
+     "xp": 30
+    },
+    {
+     "level": 52,
+     "totalExpRequired": 64072425,
+     "xp": 30
+    },
+    {
+     "level": 53,
+     "totalExpRequired": 68972425,
+     "xp": 30
+    },
+    {
+     "level": 54,
+     "totalExpRequired": 74172425,
+     "xp": 30
+    },
+    {
+     "level": 55,
+     "totalExpRequired": 79672425,
+     "xp": 30
+    },
+    {
+     "level": 56,
+     "totalExpRequired": 85472425,
+     "xp": 30
+    },
+    {
+     "level": 57,
+     "totalExpRequired": 91572425,
+     "xp": 30
+    },
+    {
+     "level": 58,
+     "totalExpRequired": 97972425,
+     "xp": 30
+    },
+    {
+     "level": 59,
+     "totalExpRequired": 104672425,
+     "xp": 30
+    },
+    {
+     "level": 60,
+     "totalExpRequired": 111672425,
+     "xp": 30
+    }
+   ]
+  },
+  {
+   "key": "FISHING",
+   "name": "Fishing",
+   "maxLevel": 50,
+   "levels": [
+    {
+     "level": 1,
+     "totalExpRequired": 50,
+     "xp": 5
+    },
+    {
+     "level": 2,
+     "totalExpRequired": 175,
+     "xp": 5
+    },
+    {
+     "level": 3,
+     "totalExpRequired": 375,
+     "xp": 5
+    },
+    {
+     "level": 4,
+     "totalExpRequired": 675,
+     "xp": 5
+    },
+    {
+     "level": 5,
+     "totalExpRequired": 1175,
+     "xp": 5
+    },
+    {
+     "level": 6,
+     "totalExpRequired": 1925,
+     "xp": 5
+    },
+    {
+     "level": 7,
+     "totalExpRequired": 2925,
+     "xp": 5
+    },
+    {
+     "level": 8,
+     "totalExpRequired": 4425,
+     "xp": 5
+    },
+    {
+     "level": 9,
+     "totalExpRequired": 6425,
+     "xp": 5
+    },
+    {
+     "level": 10,
+     "totalExpRequired": 9925,
+     "xp": 5
+    },
+    {
+     "level": 11,
+     "totalExpRequired": 14925,
+     "xp": 10
+    },
+    {
+     "level": 12,
+     "totalExpRequired": 22425,
+     "xp": 10
+    },
+    {
+     "level": 13,
+     "totalExpRequired": 32425,
+     "xp": 10
+    },
+    {
+     "level": 14,
+     "totalExpRequired": 47425,
+     "xp": 10
+    },
+    {
+     "level": 15,
+     "totalExpRequired": 67425,
+     "xp": 10
+    },
+    {
+     "level": 16,
+     "totalExpRequired": 97425,
+     "xp": 10
+    },
+    {
+     "level": 17,
+     "totalExpRequired": 147425,
+     "xp": 10
+    },
+    {
+     "level": 18,
+     "totalExpRequired": 222425,
+     "xp": 10
+    },
+    {
+     "level": 19,
+     "totalExpRequired": 322425,
+     "xp": 10
+    },
+    {
+     "level": 20,
+     "totalExpRequired": 522425,
+     "xp": 10
+    },
+    {
+     "level": 21,
+     "totalExpRequired": 822425,
+     "xp": 10
+    },
+    {
+     "level": 22,
+     "totalExpRequired": 1222425,
+     "xp": 10
+    },
+    {
+     "level": 23,
+     "totalExpRequired": 1722425,
+     "xp": 10
+    },
+    {
+     "level": 24,
+     "totalExpRequired": 2322425,
+     "xp": 10
+    },
+    {
+     "level": 25,
+     "totalExpRequired": 3022425,
+     "xp": 10
+    },
+    {
+     "level": 26,
+     "totalExpRequired": 3822425,
+     "xp": 20
+    },
+    {
+     "level": 27,
+     "totalExpRequired": 4722425,
+     "xp": 20
+    },
+    {
+     "level": 28,
+     "totalExpRequired": 5722425,
+     "xp": 20
+    },
+    {
+     "level": 29,
+     "totalExpRequired": 6822425,
+     "xp": 20
+    },
+    {
+     "level": 30,
+     "totalExpRequired": 8022425,
+     "xp": 20
+    },
+    {
+     "level": 31,
+     "totalExpRequired": 9322425,
+     "xp": 20
+    },
+    {
+     "level": 32,
+     "totalExpRequired": 10722425,
+     "xp": 20
+    },
+    {
+     "level": 33,
+     "totalExpRequired": 12222425,
+     "xp": 20
+    },
+    {
+     "level": 34,
+     "totalExpRequired": 13822425,
+     "xp": 20
+    },
+    {
+     "level": 35,
+     "totalExpRequired": 15522425,
+     "xp": 20
+    },
+    {
+     "level": 36,
+     "totalExpRequired": 17322425,
+     "xp": 20
+    },
+    {
+     "level": 37,
+     "totalExpRequired": 19222425,
+     "xp": 20
+    },
+    {
+     "level": 38,
+     "totalExpRequired": 21222425,
+     "xp": 20
+    },
+    {
+     "level": 39,
+     "totalExpRequired": 23322425,
+     "xp": 20
+    },
+    {
+     "level": 40,
+     "totalExpRequired": 25522425,
+     "xp": 20
+    },
+    {
+     "level": 41,
+     "totalExpRequired": 27822425,
+     "xp": 20
+    },
+    {
+     "level": 42,
+     "totalExpRequired": 30222425,
+     "xp": 20
+    },
+    {
+     "level": 43,
+     "totalExpRequired": 32722425,
+     "xp": 20
+    },
+    {
+     "level": 44,
+     "totalExpRequired": 35322425,
+     "xp": 20
+    },
+    {
+     "level": 45,
+     "totalExpRequired": 38072425,
+     "xp": 20
+    },
+    {
+     "level": 46,
+     "totalExpRequired": 40972425,
+     "xp": 20
+    },
+    {
+     "level": 47,
+     "totalExpRequired": 44072425,
+     "xp": 20
+    },
+    {
+     "level": 48,
+     "totalExpRequired": 47472425,
+     "xp": 20
+    },
+    {
+     "level": 49,
+     "totalExpRequired": 51172425,
+     "xp": 20
+    },
+    {
+     "level": 50,
+     "totalExpRequired": 55172425,
+     "xp": 20
+    }
+   ]
+  },
+  {
+   "key": "FORAGING",
+   "name": "Foraging",
+   "maxLevel": 57,
+   "levels": [
+    {
+     "level": 1,
+     "totalExpRequired": 50,
+     "xp": 5
+    },
+    {
+     "level": 2,
+     "totalExpRequired": 175,
+     "xp": 5
+    },
+    {
+     "level": 3,
+     "totalExpRequired": 375,
+     "xp": 5
+    },
+    {
+     "level": 4,
+     "totalExpRequired": 675,
+     "xp": 5
+    },
+    {
+     "level": 5,
+     "totalExpRequired": 1175,
+     "xp": 5
+    },
+    {
+     "level": 6,
+     "totalExpRequired": 1925,
+     "xp": 5
+    },
+    {
+     "level": 7,
+     "totalExpRequired": 2925,
+     "xp": 5
+    },
+    {
+     "level": 8,
+     "totalExpRequired": 4425,
+     "xp": 5
+    },
+    {
+     "level": 9,
+     "totalExpRequired": 6425,
+     "xp": 5
+    },
+    {
+     "level": 10,
+     "totalExpRequired": 9925,
+     "xp": 5
+    },
+    {
+     "level": 11,
+     "totalExpRequired": 14925,
+     "xp": 10
+    },
+    {
+     "level": 12,
+     "totalExpRequired": 22425,
+     "xp": 10
+    },
+    {
+     "level": 13,
+     "totalExpRequired": 32425,
+     "xp": 10
+    },
+    {
+     "level": 14,
+     "totalExpRequired": 47425,
+     "xp": 10
+    },
+    {
+     "level": 15,
+     "totalExpRequired": 67425,
+     "xp": 10
+    },
+    {
+     "level": 16,
+     "totalExpRequired": 97425,
+     "xp": 10
+    },
+    {
+     "level": 17,
+     "totalExpRequired": 147425,
+     "xp": 10
+    },
+    {
+     "level": 18,
+     "totalExpRequired": 222425,
+     "xp": 10
+    },
+    {
+     "level": 19,
+     "totalExpRequired": 322425,
+     "xp": 10
+    },
+    {
+     "level": 20,
+     "totalExpRequired": 522425,
+     "xp": 10
+    },
+    {
+     "level": 21,
+     "totalExpRequired": 822425,
+     "xp": 10
+    },
+    {
+     "level": 22,
+     "totalExpRequired": 1222425,
+     "xp": 10
+    },
+    {
+     "level": 23,
+     "totalExpRequired": 1722425,
+     "xp": 10
+    },
+    {
+     "level": 24,
+     "totalExpRequired": 2322425,
+     "xp": 10
+    },
+    {
+     "level": 25,
+     "totalExpRequired": 3022425,
+     "xp": 10
+    },
+    {
+     "level": 26,
+     "totalExpRequired": 3822425,
+     "xp": 20
+    },
+    {
+     "level": 27,
+     "totalExpRequired": 4722425,
+     "xp": 20
+    },
+    {
+     "level": 28,
+     "totalExpRequired": 5722425,
+     "xp": 20
+    },
+    {
+     "level": 29,
+     "totalExpRequired": 6822425,
+     "xp": 20
+    },
+    {
+     "level": 30,
+     "totalExpRequired": 8022425,
+     "xp": 20
+    },
+    {
+     "level": 31,
+     "totalExpRequired": 9322425,
+     "xp": 20
+    },
+    {
+     "level": 32,
+     "totalExpRequired": 10722425,
+     "xp": 20
+    },
+    {
+     "level": 33,
+     "totalExpRequired": 12222425,
+     "xp": 20
+    },
+    {
+     "level": 34,
+     "totalExpRequired": 13822425,
+     "xp": 20
+    },
+    {
+     "level": 35,
+     "totalExpRequired": 15522425,
+     "xp": 20
+    },
+    {
+     "level": 36,
+     "totalExpRequired": 17322425,
+     "xp": 20
+    },
+    {
+     "level": 37,
+     "totalExpRequired": 19222425,
+     "xp": 20
+    },
+    {
+     "level": 38,
+     "totalExpRequired": 21222425,
+     "xp": 20
+    },
+    {
+     "level": 39,
+     "totalExpRequired": 23322425,
+     "xp": 20
+    },
+    {
+     "level": 40,
+     "totalExpRequired": 25522425,
+     "xp": 20
+    },
+    {
+     "level": 41,
+     "totalExpRequired": 27822425,
+     "xp": 20
+    },
+    {
+     "level": 42,
+     "totalExpRequired": 30222425,
+     "xp": 20
+    },
+    {
+     "level": 43,
+     "totalExpRequired": 32722425,
+     "xp": 20
+    },
+    {
+     "level": 44,
+     "totalExpRequired": 35322425,
+     "xp": 20
+    },
+    {
+     "level": 45,
+     "totalExpRequired": 38072425,
+     "xp": 20
+    },
+    {
+     "level": 46,
+     "totalExpRequired": 40972425,
+     "xp": 20
+    },
+    {
+     "level": 47,
+     "totalExpRequired": 44072425,
+     "xp": 20
+    },
+    {
+     "level": 48,
+     "totalExpRequired": 47472425,
+     "xp": 20
+    },
+    {
+     "level": 49,
+     "totalExpRequired": 51172425,
+     "xp": 20
+    },
+    {
+     "level": 50,
+     "totalExpRequired": 55172425,
+     "xp": 20
+    },
+    {
+     "level": 51,
+     "totalExpRequired": 59472425,
+     "xp": 30
+    },
+    {
+     "level": 52,
+     "totalExpRequired": 64072425,
+     "xp": 30
+    },
+    {
+     "level": 53,
+     "totalExpRequired": 68972425,
+     "xp": 30
+    },
+    {
+     "level": 54,
+     "totalExpRequired": 74172425,
+     "xp": 30
+    },
+    {
+     "level": 55,
+     "totalExpRequired": 79672425,
+     "xp": 30
+    },
+    {
+     "level": 56,
+     "totalExpRequired": 85472425,
+     "xp": 30
+    },
+    {
+     "level": 57,
+     "totalExpRequired": 91572425,
+     "xp": 30
+    }
+   ]
+  },
+  {
+   "key": "HUNTING",
+   "name": "Hunting",
+   "maxLevel": 50,
+   "levels": [
+    {
+     "level": 1,
+     "totalExpRequired": 50,
+     "xp": 5
+    },
+    {
+     "level": 2,
+     "totalExpRequired": 175,
+     "xp": 5
+    },
+    {
+     "level": 3,
+     "totalExpRequired": 375,
+     "xp": 5
+    },
+    {
+     "level": 4,
+     "totalExpRequired": 675,
+     "xp": 5
+    },
+    {
+     "level": 5,
+     "totalExpRequired": 1175,
+     "xp": 5
+    },
+    {
+     "level": 6,
+     "totalExpRequired": 1925,
+     "xp": 5
+    },
+    {
+     "level": 7,
+     "totalExpRequired": 2925,
+     "xp": 5
+    },
+    {
+     "level": 8,
+     "totalExpRequired": 4425,
+     "xp": 5
+    },
+    {
+     "level": 9,
+     "totalExpRequired": 6425,
+     "xp": 5
+    },
+    {
+     "level": 10,
+     "totalExpRequired": 9925,
+     "xp": 5
+    },
+    {
+     "level": 11,
+     "totalExpRequired": 14925,
+     "xp": 10
+    },
+    {
+     "level": 12,
+     "totalExpRequired": 22425,
+     "xp": 10
+    },
+    {
+     "level": 13,
+     "totalExpRequired": 32425,
+     "xp": 10
+    },
+    {
+     "level": 14,
+     "totalExpRequired": 47425,
+     "xp": 10
+    },
+    {
+     "level": 15,
+     "totalExpRequired": 67425,
+     "xp": 10
+    },
+    {
+     "level": 16,
+     "totalExpRequired": 97425,
+     "xp": 10
+    },
+    {
+     "level": 17,
+     "totalExpRequired": 147425,
+     "xp": 10
+    },
+    {
+     "level": 18,
+     "totalExpRequired": 222425,
+     "xp": 10
+    },
+    {
+     "level": 19,
+     "totalExpRequired": 322425,
+     "xp": 10
+    },
+    {
+     "level": 20,
+     "totalExpRequired": 522425,
+     "xp": 10
+    },
+    {
+     "level": 21,
+     "totalExpRequired": 822425,
+     "xp": 10
+    },
+    {
+     "level": 22,
+     "totalExpRequired": 1222425,
+     "xp": 10
+    },
+    {
+     "level": 23,
+     "totalExpRequired": 1722425,
+     "xp": 10
+    },
+    {
+     "level": 24,
+     "totalExpRequired": 2322425,
+     "xp": 10
+    },
+    {
+     "level": 25,
+     "totalExpRequired": 3022425,
+     "xp": 10
+    },
+    {
+     "level": 26,
+     "totalExpRequired": 3822425,
+     "xp": 20
+    },
+    {
+     "level": 27,
+     "totalExpRequired": 4722425,
+     "xp": 20
+    },
+    {
+     "level": 28,
+     "totalExpRequired": 5722425,
+     "xp": 20
+    },
+    {
+     "level": 29,
+     "totalExpRequired": 6822425,
+     "xp": 20
+    },
+    {
+     "level": 30,
+     "totalExpRequired": 8022425,
+     "xp": 20
+    },
+    {
+     "level": 31,
+     "totalExpRequired": 9322425,
+     "xp": 20
+    },
+    {
+     "level": 32,
+     "totalExpRequired": 10722425,
+     "xp": 20
+    },
+    {
+     "level": 33,
+     "totalExpRequired": 12222425,
+     "xp": 20
+    },
+    {
+     "level": 34,
+     "totalExpRequired": 13822425,
+     "xp": 20
+    },
+    {
+     "level": 35,
+     "totalExpRequired": 15522425,
+     "xp": 20
+    },
+    {
+     "level": 36,
+     "totalExpRequired": 17322425,
+     "xp": 20
+    },
+    {
+     "level": 37,
+     "totalExpRequired": 19222425,
+     "xp": 20
+    },
+    {
+     "level": 38,
+     "totalExpRequired": 21222425,
+     "xp": 20
+    },
+    {
+     "level": 39,
+     "totalExpRequired": 23322425,
+     "xp": 20
+    },
+    {
+     "level": 40,
+     "totalExpRequired": 25522425,
+     "xp": 20
+    },
+    {
+     "level": 41,
+     "totalExpRequired": 27822425,
+     "xp": 20
+    },
+    {
+     "level": 42,
+     "totalExpRequired": 30222425,
+     "xp": 20
+    },
+    {
+     "level": 43,
+     "totalExpRequired": 32722425,
+     "xp": 20
+    },
+    {
+     "level": 44,
+     "totalExpRequired": 35322425,
+     "xp": 20
+    },
+    {
+     "level": 45,
+     "totalExpRequired": 38072425,
+     "xp": 20
+    },
+    {
+     "level": 46,
+     "totalExpRequired": 40972425,
+     "xp": 20
+    },
+    {
+     "level": 47,
+     "totalExpRequired": 44072425,
+     "xp": 20
+    },
+    {
+     "level": 48,
+     "totalExpRequired": 47472425,
+     "xp": 20
+    },
+    {
+     "level": 49,
+     "totalExpRequired": 51172425,
+     "xp": 20
+    },
+    {
+     "level": 50,
+     "totalExpRequired": 55172425,
+     "xp": 20
+    }
+   ]
+  },
+  {
+   "key": "MINING",
+   "name": "Mining",
+   "maxLevel": 60,
+   "levels": [
+    {
+     "level": 1,
+     "totalExpRequired": 50,
+     "xp": 5
+    },
+    {
+     "level": 2,
+     "totalExpRequired": 175,
+     "xp": 5
+    },
+    {
+     "level": 3,
+     "totalExpRequired": 375,
+     "xp": 5
+    },
+    {
+     "level": 4,
+     "totalExpRequired": 675,
+     "xp": 5
+    },
+    {
+     "level": 5,
+     "totalExpRequired": 1175,
+     "xp": 5
+    },
+    {
+     "level": 6,
+     "totalExpRequired": 1925,
+     "xp": 5
+    },
+    {
+     "level": 7,
+     "totalExpRequired": 2925,
+     "xp": 5
+    },
+    {
+     "level": 8,
+     "totalExpRequired": 4425,
+     "xp": 5
+    },
+    {
+     "level": 9,
+     "totalExpRequired": 6425,
+     "xp": 5
+    },
+    {
+     "level": 10,
+     "totalExpRequired": 9925,
+     "xp": 5
+    },
+    {
+     "level": 11,
+     "totalExpRequired": 14925,
+     "xp": 10
+    },
+    {
+     "level": 12,
+     "totalExpRequired": 22425,
+     "xp": 10
+    },
+    {
+     "level": 13,
+     "totalExpRequired": 32425,
+     "xp": 10
+    },
+    {
+     "level": 14,
+     "totalExpRequired": 47425,
+     "xp": 10
+    },
+    {
+     "level": 15,
+     "totalExpRequired": 67425,
+     "xp": 10
+    },
+    {
+     "level": 16,
+     "totalExpRequired": 97425,
+     "xp": 10
+    },
+    {
+     "level": 17,
+     "totalExpRequired": 147425,
+     "xp": 10
+    },
+    {
+     "level": 18,
+     "totalExpRequired": 222425,
+     "xp": 10
+    },
+    {
+     "level": 19,
+     "totalExpRequired": 322425,
+     "xp": 10
+    },
+    {
+     "level": 20,
+     "totalExpRequired": 522425,
+     "xp": 10
+    },
+    {
+     "level": 21,
+     "totalExpRequired": 822425,
+     "xp": 10
+    },
+    {
+     "level": 22,
+     "totalExpRequired": 1222425,
+     "xp": 10
+    },
+    {
+     "level": 23,
+     "totalExpRequired": 1722425,
+     "xp": 10
+    },
+    {
+     "level": 24,
+     "totalExpRequired": 2322425,
+     "xp": 10
+    },
+    {
+     "level": 25,
+     "totalExpRequired": 3022425,
+     "xp": 10
+    },
+    {
+     "level": 26,
+     "totalExpRequired": 3822425,
+     "xp": 20
+    },
+    {
+     "level": 27,
+     "totalExpRequired": 4722425,
+     "xp": 20
+    },
+    {
+     "level": 28,
+     "totalExpRequired": 5722425,
+     "xp": 20
+    },
+    {
+     "level": 29,
+     "totalExpRequired": 6822425,
+     "xp": 20
+    },
+    {
+     "level": 30,
+     "totalExpRequired": 8022425,
+     "xp": 20
+    },
+    {
+     "level": 31,
+     "totalExpRequired": 9322425,
+     "xp": 20
+    },
+    {
+     "level": 32,
+     "totalExpRequired": 10722425,
+     "xp": 20
+    },
+    {
+     "level": 33,
+     "totalExpRequired": 12222425,
+     "xp": 20
+    },
+    {
+     "level": 34,
+     "totalExpRequired": 13822425,
+     "xp": 20
+    },
+    {
+     "level": 35,
+     "totalExpRequired": 15522425,
+     "xp": 20
+    },
+    {
+     "level": 36,
+     "totalExpRequired": 17322425,
+     "xp": 20
+    },
+    {
+     "level": 37,
+     "totalExpRequired": 19222425,
+     "xp": 20
+    },
+    {
+     "level": 38,
+     "totalExpRequired": 21222425,
+     "xp": 20
+    },
+    {
+     "level": 39,
+     "totalExpRequired": 23322425,
+     "xp": 20
+    },
+    {
+     "level": 40,
+     "totalExpRequired": 25522425,
+     "xp": 20
+    },
+    {
+     "level": 41,
+     "totalExpRequired": 27822425,
+     "xp": 20
+    },
+    {
+     "level": 42,
+     "totalExpRequired": 30222425,
+     "xp": 20
+    },
+    {
+     "level": 43,
+     "totalExpRequired": 32722425,
+     "xp": 20
+    },
+    {
+     "level": 44,
+     "totalExpRequired": 35322425,
+     "xp": 20
+    },
+    {
+     "level": 45,
+     "totalExpRequired": 38072425,
+     "xp": 20
+    },
+    {
+     "level": 46,
+     "totalExpRequired": 40972425,
+     "xp": 20
+    },
+    {
+     "level": 47,
+     "totalExpRequired": 44072425,
+     "xp": 20
+    },
+    {
+     "level": 48,
+     "totalExpRequired": 47472425,
+     "xp": 20
+    },
+    {
+     "level": 49,
+     "totalExpRequired": 51172425,
+     "xp": 20
+    },
+    {
+     "level": 50,
+     "totalExpRequired": 55172425,
+     "xp": 20
+    },
+    {
+     "level": 51,
+     "totalExpRequired": 59472425,
+     "xp": 30
+    },
+    {
+     "level": 52,
+     "totalExpRequired": 64072425,
+     "xp": 30
+    },
+    {
+     "level": 53,
+     "totalExpRequired": 68972425,
+     "xp": 30
+    },
+    {
+     "level": 54,
+     "totalExpRequired": 74172425,
+     "xp": 30
+    },
+    {
+     "level": 55,
+     "totalExpRequired": 79672425,
+     "xp": 30
+    },
+    {
+     "level": 56,
+     "totalExpRequired": 85472425,
+     "xp": 30
+    },
+    {
+     "level": 57,
+     "totalExpRequired": 91572425,
+     "xp": 30
+    },
+    {
+     "level": 58,
+     "totalExpRequired": 97972425,
+     "xp": 30
+    },
+    {
+     "level": 59,
+     "totalExpRequired": 104672425,
+     "xp": 30
+    },
+    {
+     "level": 60,
+     "totalExpRequired": 111672425,
+     "xp": 30
+    }
+   ]
+  },
+  {
+   "key": "RUNECRAFTING",
+   "name": "Runecrafting",
+   "maxLevel": 25,
+   "levels": [
+    {
+     "level": 1,
+     "totalExpRequired": 50,
+     "xp": 0
+    },
+    {
+     "level": 2,
+     "totalExpRequired": 150,
+     "xp": 0
+    },
+    {
+     "level": 3,
+     "totalExpRequired": 275,
+     "xp": 0
+    },
+    {
+     "level": 4,
+     "totalExpRequired": 435,
+     "xp": 0
+    },
+    {
+     "level": 5,
+     "totalExpRequired": 635,
+     "xp": 0
+    },
+    {
+     "level": 6,
+     "totalExpRequired": 885,
+     "xp": 0
+    },
+    {
+     "level": 7,
+     "totalExpRequired": 1200,
+     "xp": 0
+    },
+    {
+     "level": 8,
+     "totalExpRequired": 1600,
+     "xp": 0
+    },
+    {
+     "level": 9,
+     "totalExpRequired": 2100,
+     "xp": 0
+    },
+    {
+     "level": 10,
+     "totalExpRequired": 2725,
+     "xp": 0
+    },
+    {
+     "level": 11,
+     "totalExpRequired": 3510,
+     "xp": 0
+    },
+    {
+     "level": 12,
+     "totalExpRequired": 4510,
+     "xp": 0
+    },
+    {
+     "level": 13,
+     "totalExpRequired": 5760,
+     "xp": 0
+    },
+    {
+     "level": 14,
+     "totalExpRequired": 7325,
+     "xp": 0
+    },
+    {
+     "level": 15,
+     "totalExpRequired": 9325,
+     "xp": 0
+    },
+    {
+     "level": 16,
+     "totalExpRequired": 11825,
+     "xp": 0
+    },
+    {
+     "level": 17,
+     "totalExpRequired": 14950,
+     "xp": 0
+    },
+    {
+     "level": 18,
+     "totalExpRequired": 18950,
+     "xp": 0
+    },
+    {
+     "level": 19,
+     "totalExpRequired": 23950,
+     "xp": 0
+    },
+    {
+     "level": 20,
+     "totalExpRequired": 30200,
+     "xp": 0
+    },
+    {
+     "level": 21,
+     "totalExpRequired": 38050,
+     "xp": 0
+    },
+    {
+     "level": 22,
+     "totalExpRequired": 47850,
+     "xp": 0
+    },
+    {
+     "level": 23,
+     "totalExpRequired": 60100,
+     "xp": 0
+    },
+    {
+     "level": 24,
+     "totalExpRequired": 75400,
+     "xp": 0
+    },
+    {
+     "level": 25,
+     "totalExpRequired": 94450,
+     "xp": 0
+    }
+   ]
+  },
+  {
+   "key": "SOCIAL",
+   "name": "Social",
+   "maxLevel": 25,
+   "levels": [
+    {
+     "level": 1,
+     "totalExpRequired": 50,
+     "xp": 0
+    },
+    {
+     "level": 2,
+     "totalExpRequired": 150,
+     "xp": 0
+    },
+    {
+     "level": 3,
+     "totalExpRequired": 300,
+     "xp": 0
+    },
+    {
+     "level": 4,
+     "totalExpRequired": 550,
+     "xp": 0
+    },
+    {
+     "level": 5,
+     "totalExpRequired": 1050,
+     "xp": 0
+    },
+    {
+     "level": 6,
+     "totalExpRequired": 1800,
+     "xp": 0
+    },
+    {
+     "level": 7,
+     "totalExpRequired": 2800,
+     "xp": 0
+    },
+    {
+     "level": 8,
+     "totalExpRequired": 4050,
+     "xp": 0
+    },
+    {
+     "level": 9,
+     "totalExpRequired": 5550,
+     "xp": 0
+    },
+    {
+     "level": 10,
+     "totalExpRequired": 7550,
+     "xp": 0
+    },
+    {
+     "level": 11,
+     "totalExpRequired": 10050,
+     "xp": 0
+    },
+    {
+     "level": 12,
+     "totalExpRequired": 13050,
+     "xp": 0
+    },
+    {
+     "level": 13,
+     "totalExpRequired": 16800,
+     "xp": 0
+    },
+    {
+     "level": 14,
+     "totalExpRequired": 21300,
+     "xp": 0
+    },
+    {
+     "level": 15,
+     "totalExpRequired": 27300,
+     "xp": 0
+    },
+    {
+     "level": 16,
+     "totalExpRequired": 35300,
+     "xp": 0
+    },
+    {
+     "level": 17,
+     "totalExpRequired": 45300,
+     "xp": 0
+    },
+    {
+     "level": 18,
+     "totalExpRequired": 57800,
+     "xp": 0
+    },
+    {
+     "level": 19,
+     "totalExpRequired": 72800,
+     "xp": 0
+    },
+    {
+     "level": 20,
+     "totalExpRequired": 92800,
+     "xp": 0
+    },
+    {
+     "level": 21,
+     "totalExpRequired": 117800,
+     "xp": 0
+    },
+    {
+     "level": 22,
+     "totalExpRequired": 147800,
+     "xp": 0
+    },
+    {
+     "level": 23,
+     "totalExpRequired": 182800,
+     "xp": 0
+    },
+    {
+     "level": 24,
+     "totalExpRequired": 222800,
+     "xp": 0
+    },
+    {
+     "level": 25,
+     "totalExpRequired": 272800,
+     "xp": 0
+    }
+   ]
+  },
+  {
+   "key": "TAMING",
+   "name": "Taming",
+   "maxLevel": 60,
+   "levels": [
+    {
+     "level": 1,
+     "totalExpRequired": 50,
+     "xp": 5
+    },
+    {
+     "level": 2,
+     "totalExpRequired": 175,
+     "xp": 5
+    },
+    {
+     "level": 3,
+     "totalExpRequired": 375,
+     "xp": 5
+    },
+    {
+     "level": 4,
+     "totalExpRequired": 675,
+     "xp": 5
+    },
+    {
+     "level": 5,
+     "totalExpRequired": 1175,
+     "xp": 5
+    },
+    {
+     "level": 6,
+     "totalExpRequired": 1925,
+     "xp": 5
+    },
+    {
+     "level": 7,
+     "totalExpRequired": 2925,
+     "xp": 5
+    },
+    {
+     "level": 8,
+     "totalExpRequired": 4425,
+     "xp": 5
+    },
+    {
+     "level": 9,
+     "totalExpRequired": 6425,
+     "xp": 5
+    },
+    {
+     "level": 10,
+     "totalExpRequired": 9925,
+     "xp": 5
+    },
+    {
+     "level": 11,
+     "totalExpRequired": 14925,
+     "xp": 10
+    },
+    {
+     "level": 12,
+     "totalExpRequired": 22425,
+     "xp": 10
+    },
+    {
+     "level": 13,
+     "totalExpRequired": 32425,
+     "xp": 10
+    },
+    {
+     "level": 14,
+     "totalExpRequired": 47425,
+     "xp": 10
+    },
+    {
+     "level": 15,
+     "totalExpRequired": 67425,
+     "xp": 10
+    },
+    {
+     "level": 16,
+     "totalExpRequired": 97425,
+     "xp": 10
+    },
+    {
+     "level": 17,
+     "totalExpRequired": 147425,
+     "xp": 10
+    },
+    {
+     "level": 18,
+     "totalExpRequired": 222425,
+     "xp": 10
+    },
+    {
+     "level": 19,
+     "totalExpRequired": 322425,
+     "xp": 10
+    },
+    {
+     "level": 20,
+     "totalExpRequired": 522425,
+     "xp": 10
+    },
+    {
+     "level": 21,
+     "totalExpRequired": 822425,
+     "xp": 10
+    },
+    {
+     "level": 22,
+     "totalExpRequired": 1222425,
+     "xp": 10
+    },
+    {
+     "level": 23,
+     "totalExpRequired": 1722425,
+     "xp": 10
+    },
+    {
+     "level": 24,
+     "totalExpRequired": 2322425,
+     "xp": 10
+    },
+    {
+     "level": 25,
+     "totalExpRequired": 3022425,
+     "xp": 10
+    },
+    {
+     "level": 26,
+     "totalExpRequired": 3822425,
+     "xp": 20
+    },
+    {
+     "level": 27,
+     "totalExpRequired": 4722425,
+     "xp": 20
+    },
+    {
+     "level": 28,
+     "totalExpRequired": 5722425,
+     "xp": 20
+    },
+    {
+     "level": 29,
+     "totalExpRequired": 6822425,
+     "xp": 20
+    },
+    {
+     "level": 30,
+     "totalExpRequired": 8022425,
+     "xp": 20
+    },
+    {
+     "level": 31,
+     "totalExpRequired": 9322425,
+     "xp": 20
+    },
+    {
+     "level": 32,
+     "totalExpRequired": 10722425,
+     "xp": 20
+    },
+    {
+     "level": 33,
+     "totalExpRequired": 12222425,
+     "xp": 20
+    },
+    {
+     "level": 34,
+     "totalExpRequired": 13822425,
+     "xp": 20
+    },
+    {
+     "level": 35,
+     "totalExpRequired": 15522425,
+     "xp": 20
+    },
+    {
+     "level": 36,
+     "totalExpRequired": 17322425,
+     "xp": 20
+    },
+    {
+     "level": 37,
+     "totalExpRequired": 19222425,
+     "xp": 20
+    },
+    {
+     "level": 38,
+     "totalExpRequired": 21222425,
+     "xp": 20
+    },
+    {
+     "level": 39,
+     "totalExpRequired": 23322425,
+     "xp": 20
+    },
+    {
+     "level": 40,
+     "totalExpRequired": 25522425,
+     "xp": 20
+    },
+    {
+     "level": 41,
+     "totalExpRequired": 27822425,
+     "xp": 20
+    },
+    {
+     "level": 42,
+     "totalExpRequired": 30222425,
+     "xp": 20
+    },
+    {
+     "level": 43,
+     "totalExpRequired": 32722425,
+     "xp": 20
+    },
+    {
+     "level": 44,
+     "totalExpRequired": 35322425,
+     "xp": 20
+    },
+    {
+     "level": 45,
+     "totalExpRequired": 38072425,
+     "xp": 20
+    },
+    {
+     "level": 46,
+     "totalExpRequired": 40972425,
+     "xp": 20
+    },
+    {
+     "level": 47,
+     "totalExpRequired": 44072425,
+     "xp": 20
+    },
+    {
+     "level": 48,
+     "totalExpRequired": 47472425,
+     "xp": 20
+    },
+    {
+     "level": 49,
+     "totalExpRequired": 51172425,
+     "xp": 20
+    },
+    {
+     "level": 50,
+     "totalExpRequired": 55172425,
+     "xp": 20
+    },
+    {
+     "level": 51,
+     "totalExpRequired": 59472425,
+     "xp": 30
+    },
+    {
+     "level": 52,
+     "totalExpRequired": 64072425,
+     "xp": 30
+    },
+    {
+     "level": 53,
+     "totalExpRequired": 68972425,
+     "xp": 30
+    },
+    {
+     "level": 54,
+     "totalExpRequired": 74172425,
+     "xp": 30
+    },
+    {
+     "level": 55,
+     "totalExpRequired": 79672425,
+     "xp": 30
+    },
+    {
+     "level": 56,
+     "totalExpRequired": 85472425,
+     "xp": 30
+    },
+    {
+     "level": 57,
+     "totalExpRequired": 91572425,
+     "xp": 30
+    },
+    {
+     "level": 58,
+     "totalExpRequired": 97972425,
+     "xp": 30
+    },
+    {
+     "level": 59,
+     "totalExpRequired": 104672425,
+     "xp": 30
+    },
+    {
+     "level": 60,
+     "totalExpRequired": 111672425,
+     "xp": 30
+    }
+   ]
+  }
+ ]
+}

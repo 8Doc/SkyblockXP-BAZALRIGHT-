@@ -1,0 +1,6 @@
+{
+  "note": "Pet score contributed by one pet, by rarity. Only the best copy of each pet counts, so pets behave exactly like accessory families.",
+  "source": "Hypixel Wiki, Pets — Pet Score table",
+  "verified": true,
+  "byRarity": { "COMMON": 1, "UNCOMMON": 2, "RARE": 3, "EPIC": 4, "LEGENDARY": 5, "MYTHIC": 6 }
+}

@@ -1,0 +1,6418 @@
+{
+ "generatedAt": "2026-08-18T20:04:49.552Z",
+ "source": "https://hypixel-skyblock.fandom.com/api.php",
+ "bankUpgrades": {
+  "GOLD": 5077194,
+  "DELUXE": 10385966,
+  "SUPER_DELUXE": 26543862,
+  "PREMIER": 53859655,
+  "LUXURIOUS": 107719310,
+  "PALATIAL": 215438620
+ },
+ "minionRecipes": {
+  "ACACIA": {
+   "1": [
+    {
+     "name": "Acacia Log",
+     "qty": 3600
+    }
+   ],
+   "2": [
+    {
+     "name": "Acacia Log",
+     "qty": 3600
+    }
+   ],
+   "3": [
+    {
+     "name": "Acacia Log",
+     "qty": 3840
+    }
+   ],
+   "4": [
+    {
+     "name": "Acacia Log",
+     "qty": 3840
+    }
+   ],
+   "5": [
+    {
+     "name": "Acacia Log",
+     "qty": 4114
+    }
+   ],
+   "6": [
+    {
+     "name": "Acacia Log",
+     "qty": 4114
+    }
+   ],
+   "7": [
+    {
+     "name": "Acacia Log",
+     "qty": 4547
+    }
+   ],
+   "8": [
+    {
+     "name": "Acacia Log",
+     "qty": 4547
+    }
+   ],
+   "9": [
+    {
+     "name": "Acacia Log",
+     "qty": 5236
+    }
+   ],
+   "10": [
+    {
+     "name": "Acacia Log",
+     "qty": 5236
+    }
+   ],
+   "11": [
+    {
+     "name": "Acacia Log",
+     "qty": 6400
+    }
+   ]
+  },
+  "BIRCH": {
+   "1": [
+    {
+     "name": "Birch Log",
+     "qty": 3600
+    }
+   ],
+   "2": [
+    {
+     "name": "Birch Log",
+     "qty": 3600
+    }
+   ],
+   "3": [
+    {
+     "name": "Birch Log",
+     "qty": 3840
+    }
+   ],
+   "4": [
+    {
+     "name": "Birch Log",
+     "qty": 3840
+    }
+   ],
+   "5": [
+    {
+     "name": "Birch Log",
+     "qty": 4114
+    }
+   ],
+   "6": [
+    {
+     "name": "Birch Log",
+     "qty": 4114
+    }
+   ],
+   "7": [
+    {
+     "name": "Birch Log",
+     "qty": 4547
+    }
+   ],
+   "8": [
+    {
+     "name": "Birch Log",
+     "qty": 4547
+    }
+   ],
+   "9": [
+    {
+     "name": "Birch Log",
+     "qty": 5236
+    }
+   ],
+   "10": [
+    {
+     "name": "Birch Log",
+     "qty": 5236
+    }
+   ],
+   "11": [
+    {
+     "name": "Birch Log",
+     "qty": 6400
+    }
+   ]
+  },
+  "BLAZE": {
+   "1": [
+    {
+     "name": "Blaze Rod",
+     "qty": 1309
+    }
+   ],
+   "2": [
+    {
+     "name": "Blaze Rod",
+     "qty": 1309
+    }
+   ],
+   "3": [
+    {
+     "name": "Blaze Rod",
+     "qty": 1394
+    }
+   ],
+   "4": [
+    {
+     "name": "Blaze Rod",
+     "qty": 1394
+    }
+   ],
+   "5": [
+    {
+     "name": "Blaze Rod",
+     "qty": 1516
+    }
+   ],
+   "6": [
+    {
+     "name": "Blaze Rod",
+     "qty": 1516
+    }
+   ],
+   "7": [
+    {
+     "name": "Blaze Rod",
+     "qty": 1728
+    }
+   ],
+   "8": [
+    {
+     "name": "Blaze Rod",
+     "qty": 1728
+    }
+   ],
+   "9": [
+    {
+     "name": "Blaze Rod",
+     "qty": 2057
+    }
+   ],
+   "10": [
+    {
+     "name": "Blaze Rod",
+     "qty": 2057
+    }
+   ],
+   "11": [
+    {
+     "name": "Blaze Rod",
+     "qty": 2618
+    }
+   ],
+   "12": [
+    {
+     "name": "Blaze Rod",
+     "qty": 2880
+    }
+   ]
+  },
+  "CACTUS": {
+   "1": [
+    {
+     "name": "Cactus",
+     "qty": 4800
+    }
+   ],
+   "2": [
+    {
+     "name": "Cactus",
+     "qty": 4800
+    }
+   ],
+   "3": [
+    {
+     "name": "Cactus",
+     "qty": 5184
+    }
+   ],
+   "4": [
+    {
+     "name": "Cactus",
+     "qty": 5184
+    }
+   ],
+   "5": [
+    {
+     "name": "Cactus",
+     "qty": 5635
+    }
+   ],
+   "6": [
+    {
+     "name": "Cactus",
+     "qty": 5635
+    }
+   ],
+   "7": [
+    {
+     "name": "Cactus",
+     "qty": 6171
+    }
+   ],
+   "8": [
+    {
+     "name": "Cactus",
+     "qty": 6171
+    }
+   ],
+   "9": [
+    {
+     "name": "Cactus",
+     "qty": 7200
+    }
+   ],
+   "10": [
+    {
+     "name": "Cactus",
+     "qty": 7200
+    }
+   ],
+   "11": [
+    {
+     "name": "Cactus",
+     "qty": 8640
+    }
+   ],
+   "12": [
+    {
+     "name": "Cactus",
+     "qty": 10800
+    }
+   ]
+  },
+  "CARROT": {
+   "1": [
+    {
+     "name": "Carrot",
+     "qty": 6480
+    }
+   ],
+   "2": [
+    {
+     "name": "Carrot",
+     "qty": 6480
+    }
+   ],
+   "3": [
+    {
+     "name": "Carrot",
+     "qty": 7200
+    }
+   ],
+   "4": [
+    {
+     "name": "Carrot",
+     "qty": 7200
+    }
+   ],
+   "5": [
+    {
+     "name": "Carrot",
+     "qty": 8100
+    }
+   ],
+   "6": [
+    {
+     "name": "Carrot",
+     "qty": 8100
+    }
+   ],
+   "7": [
+    {
+     "name": "Carrot",
+     "qty": 9257
+    }
+   ],
+   "8": [
+    {
+     "name": "Carrot",
+     "qty": 9257
+    }
+   ],
+   "9": [
+    {
+     "name": "Carrot",
+     "qty": 10800
+    }
+   ],
+   "10": [
+    {
+     "name": "Carrot",
+     "qty": 10800
+    }
+   ],
+   "11": [
+    {
+     "name": "Carrot",
+     "qty": 12960
+    }
+   ],
+   "12": [
+    {
+     "name": "Carrot",
+     "qty": 16200
+    }
+   ]
+  },
+  "CAVESPIDER": {
+   "1": [
+    {
+     "name": "Spider Eye",
+     "qty": 1662
+    },
+    {
+     "name": "String",
+     "qty": 831
+    }
+   ],
+   "2": [
+    {
+     "name": "Spider Eye",
+     "qty": 1662
+    },
+    {
+     "name": "String",
+     "qty": 831
+    }
+   ],
+   "3": [
+    {
+     "name": "Spider Eye",
+     "qty": 1800
+    },
+    {
+     "name": "String",
+     "qty": 900
+    }
+   ],
+   "4": [
+    {
+     "name": "Spider Eye",
+     "qty": 1800
+    },
+    {
+     "name": "String",
+     "qty": 900
+    }
+   ],
+   "5": [
+    {
+     "name": "Spider Eye",
+     "qty": 1964
+    },
+    {
+     "name": "String",
+     "qty": 982
+    }
+   ],
+   "6": [
+    {
+     "name": "Spider Eye",
+     "qty": 1964
+    },
+    {
+     "name": "String",
+     "qty": 982
+    }
+   ],
+   "7": [
+    {
+     "name": "Spider Eye",
+     "qty": 2160
+    },
+    {
+     "name": "String",
+     "qty": 1080
+    }
+   ],
+   "8": [
+    {
+     "name": "Spider Eye",
+     "qty": 2160
+    },
+    {
+     "name": "String",
+     "qty": 1080
+    }
+   ],
+   "9": [
+    {
+     "name": "Spider Eye",
+     "qty": 2541
+    },
+    {
+     "name": "String",
+     "qty": 1271
+    }
+   ],
+   "10": [
+    {
+     "name": "Spider Eye",
+     "qty": 2541
+    },
+    {
+     "name": "String",
+     "qty": 1271
+    }
+   ],
+   "11": [
+    {
+     "name": "Spider Eye",
+     "qty": 3323
+    },
+    {
+     "name": "String",
+     "qty": 1662
+    }
+   ]
+  },
+  "CHICKEN": {
+   "1": [
+    {
+     "name": "Raw Chicken",
+     "qty": 1662
+    },
+    {
+     "name": "Feather",
+     "qty": 1662
+    }
+   ],
+   "2": [
+    {
+     "name": "Raw Chicken",
+     "qty": 1662
+    },
+    {
+     "name": "Feather",
+     "qty": 1662
+    }
+   ],
+   "3": [
+    {
+     "name": "Raw Chicken",
+     "qty": 1800
+    },
+    {
+     "name": "Feather",
+     "qty": 1800
+    }
+   ],
+   "4": [
+    {
+     "name": "Raw Chicken",
+     "qty": 1800
+    },
+    {
+     "name": "Feather",
+     "qty": 1800
+    }
+   ],
+   "5": [
+    {
+     "name": "Raw Chicken",
+     "qty": 1964
+    },
+    {
+     "name": "Feather",
+     "qty": 1964
+    }
+   ],
+   "6": [
+    {
+     "name": "Raw Chicken",
+     "qty": 1964
+    },
+    {
+     "name": "Feather",
+     "qty": 1964
+    }
+   ],
+   "7": [
+    {
+     "name": "Raw Chicken",
+     "qty": 2160
+    },
+    {
+     "name": "Feather",
+     "qty": 2160
+    }
+   ],
+   "8": [
+    {
+     "name": "Raw Chicken",
+     "qty": 2160
+    },
+    {
+     "name": "Feather",
+     "qty": 2160
+    }
+   ],
+   "9": [
+    {
+     "name": "Raw Chicken",
+     "qty": 2400
+    },
+    {
+     "name": "Feather",
+     "qty": 2400
+    }
+   ],
+   "10": [
+    {
+     "name": "Raw Chicken",
+     "qty": 2400
+    },
+    {
+     "name": "Feather",
+     "qty": 2400
+    }
+   ],
+   "11": [
+    {
+     "name": "Raw Chicken",
+     "qty": 2880
+    },
+    {
+     "name": "Feather",
+     "qty": 2880
+    }
+   ],
+   "12": [
+    {
+     "name": "Raw Chicken",
+     "qty": 3600
+    },
+    {
+     "name": "Feather",
+     "qty": 3600
+    }
+   ]
+  },
+  "CLAY": {
+   "1": [
+    {
+     "name": "Clay Ball",
+     "qty": 5400
+    }
+   ],
+   "2": [
+    {
+     "name": "Clay Ball",
+     "qty": 5400
+    }
+   ],
+   "3": [
+    {
+     "name": "Clay Ball",
+     "qty": 5760
+    }
+   ],
+   "4": [
+    {
+     "name": "Clay Ball",
+     "qty": 5760
+    }
+   ],
+   "5": [
+    {
+     "name": "Clay Ball",
+     "qty": 6284
+    }
+   ],
+   "6": [
+    {
+     "name": "Clay Ball",
+     "qty": 6284
+    }
+   ],
+   "7": [
+    {
+     "name": "Clay Ball",
+     "qty": 7200
+    }
+   ],
+   "8": [
+    {
+     "name": "Clay Ball",
+     "qty": 7200
+    }
+   ],
+   "9": [
+    {
+     "name": "Clay Ball",
+     "qty": 8640
+    }
+   ],
+   "10": [
+    {
+     "name": "Clay Ball",
+     "qty": 8640
+    }
+   ],
+   "11": [
+    {
+     "name": "Clay Ball",
+     "qty": 10800
+    }
+   ],
+   "12": [
+    {
+     "name": "Clay Ball",
+     "qty": 12343
+    }
+   ]
+  },
+  "COAL": {
+   "1": [
+    {
+     "name": "Coal",
+     "qty": 2880
+    }
+   ],
+   "2": [
+    {
+     "name": "Coal",
+     "qty": 2880
+    }
+   ],
+   "3": [
+    {
+     "name": "Coal",
+     "qty": 3323
+    }
+   ],
+   "4": [
+    {
+     "name": "Coal",
+     "qty": 3323
+    }
+   ],
+   "5": [
+    {
+     "name": "Coal",
+     "qty": 3600
+    }
+   ],
+   "6": [
+    {
+     "name": "Coal",
+     "qty": 3600
+    }
+   ],
+   "7": [
+    {
+     "name": "Coal",
+     "qty": 4320
+    }
+   ],
+   "8": [
+    {
+     "name": "Coal",
+     "qty": 4320
+    }
+   ],
+   "9": [
+    {
+     "name": "Coal",
+     "qty": 4800
+    }
+   ],
+   "10": [
+    {
+     "name": "Coal",
+     "qty": 4800
+    }
+   ],
+   "11": [
+    {
+     "name": "Coal",
+     "qty": 6171
+    }
+   ],
+   "12": [
+    {
+     "name": "Coal",
+     "qty": 7200
+    }
+   ]
+  },
+  "COBBLESTONE": {
+   "1": [
+    {
+     "name": "Cobblestone",
+     "qty": 3086
+    }
+   ],
+   "2": [
+    {
+     "name": "Cobblestone",
+     "qty": 3086
+    }
+   ],
+   "3": [
+    {
+     "name": "Cobblestone",
+     "qty": 3600
+    }
+   ],
+   "4": [
+    {
+     "name": "Cobblestone",
+     "qty": 3600
+    }
+   ],
+   "5": [
+    {
+     "name": "Cobblestone",
+     "qty": 4320
+    }
+   ],
+   "6": [
+    {
+     "name": "Cobblestone",
+     "qty": 4320
+    }
+   ],
+   "7": [
+    {
+     "name": "Cobblestone",
+     "qty": 4800
+    }
+   ],
+   "8": [
+    {
+     "name": "Cobblestone",
+     "qty": 4800
+    }
+   ],
+   "9": [
+    {
+     "name": "Cobblestone",
+     "qty": 5400
+    }
+   ],
+   "10": [
+    {
+     "name": "Cobblestone",
+     "qty": 5400
+    }
+   ],
+   "11": [
+    {
+     "name": "Cobblestone",
+     "qty": 6171
+    }
+   ],
+   "12": [
+    {
+     "name": "Cobblestone",
+     "qty": 7200
+    }
+   ]
+  },
+  "COCOA": {
+   "1": [
+    {
+     "name": "Cocoa Beans",
+     "qty": 4800
+    }
+   ],
+   "2": [
+    {
+     "name": "Cocoa Beans",
+     "qty": 4800
+    }
+   ],
+   "3": [
+    {
+     "name": "Cocoa Beans",
+     "qty": 5184
+    }
+   ],
+   "4": [
+    {
+     "name": "Cocoa Beans",
+     "qty": 5184
+    }
+   ],
+   "5": [
+    {
+     "name": "Cocoa Beans",
+     "qty": 5635
+    }
+   ],
+   "6": [
+    {
+     "name": "Cocoa Beans",
+     "qty": 5635
+    }
+   ],
+   "7": [
+    {
+     "name": "Cocoa Beans",
+     "qty": 6171
+    }
+   ],
+   "8": [
+    {
+     "name": "Cocoa Beans",
+     "qty": 6171
+    }
+   ],
+   "9": [
+    {
+     "name": "Cocoa Beans",
+     "qty": 7200
+    }
+   ],
+   "10": [
+    {
+     "name": "Cocoa Beans",
+     "qty": 7200
+    }
+   ],
+   "11": [
+    {
+     "name": "Cocoa Beans",
+     "qty": 8640
+    }
+   ],
+   "12": [
+    {
+     "name": "Cocoa Beans",
+     "qty": 10800
+    }
+   ]
+  },
+  "COW": {
+   "1": [
+    {
+     "name": "Raw Beef",
+     "qty": 1662
+    },
+    {
+     "name": "Leather",
+     "qty": 1662
+    }
+   ],
+   "2": [
+    {
+     "name": "Raw Beef",
+     "qty": 1662
+    },
+    {
+     "name": "Leather",
+     "qty": 1662
+    }
+   ],
+   "3": [
+    {
+     "name": "Raw Beef",
+     "qty": 1800
+    },
+    {
+     "name": "Leather",
+     "qty": 1800
+    }
+   ],
+   "4": [
+    {
+     "name": "Raw Beef",
+     "qty": 1800
+    },
+    {
+     "name": "Leather",
+     "qty": 1800
+    }
+   ],
+   "5": [
+    {
+     "name": "Raw Beef",
+     "qty": 1964
+    },
+    {
+     "name": "Leather",
+     "qty": 1964
+    }
+   ],
+   "6": [
+    {
+     "name": "Raw Beef",
+     "qty": 1964
+    },
+    {
+     "name": "Leather",
+     "qty": 1964
+    }
+   ],
+   "7": [
+    {
+     "name": "Raw Beef",
+     "qty": 2160
+    },
+    {
+     "name": "Leather",
+     "qty": 2160
+    }
+   ],
+   "8": [
+    {
+     "name": "Raw Beef",
+     "qty": 2160
+    },
+    {
+     "name": "Leather",
+     "qty": 2160
+    }
+   ],
+   "9": [
+    {
+     "name": "Raw Beef",
+     "qty": 2541
+    },
+    {
+     "name": "Leather",
+     "qty": 2541
+    }
+   ],
+   "10": [
+    {
+     "name": "Raw Beef",
+     "qty": 2541
+    },
+    {
+     "name": "Leather",
+     "qty": 2541
+    }
+   ],
+   "11": [
+    {
+     "name": "Raw Beef",
+     "qty": 3323
+    },
+    {
+     "name": "Leather",
+     "qty": 3323
+    }
+   ],
+   "12": [
+    {
+     "name": "Raw Beef",
+     "qty": 4320
+    },
+    {
+     "name": "Leather",
+     "qty": 4320
+    }
+   ]
+  },
+  "CREEPER": {
+   "1": [
+    {
+     "name": "Gunpowder",
+     "qty": 1600
+    }
+   ],
+   "2": [
+    {
+     "name": "Gunpowder",
+     "qty": 1600
+    }
+   ],
+   "3": [
+    {
+     "name": "Gunpowder",
+     "qty": 1728
+    }
+   ],
+   "4": [
+    {
+     "name": "Gunpowder",
+     "qty": 1728
+    }
+   ],
+   "5": [
+    {
+     "name": "Gunpowder",
+     "qty": 1878
+    }
+   ],
+   "6": [
+    {
+     "name": "Gunpowder",
+     "qty": 1878
+    }
+   ],
+   "7": [
+    {
+     "name": "Gunpowder",
+     "qty": 2057
+    }
+   ],
+   "8": [
+    {
+     "name": "Gunpowder",
+     "qty": 2057
+    }
+   ],
+   "9": [
+    {
+     "name": "Gunpowder",
+     "qty": 2400
+    }
+   ],
+   "10": [
+    {
+     "name": "Gunpowder",
+     "qty": 2400
+    }
+   ],
+   "11": [
+    {
+     "name": "Gunpowder",
+     "qty": 3086
+    }
+   ]
+  },
+  "DARK_OAK": {
+   "1": [
+    {
+     "name": "Dark Oak Log",
+     "qty": 3600
+    }
+   ],
+   "2": [
+    {
+     "name": "Dark Oak Log",
+     "qty": 3600
+    }
+   ],
+   "3": [
+    {
+     "name": "Dark Oak Log",
+     "qty": 3840
+    }
+   ],
+   "4": [
+    {
+     "name": "Dark Oak Log",
+     "qty": 3840
+    }
+   ],
+   "5": [
+    {
+     "name": "Dark Oak Log",
+     "qty": 4114
+    }
+   ],
+   "6": [
+    {
+     "name": "Dark Oak Log",
+     "qty": 4114
+    }
+   ],
+   "7": [
+    {
+     "name": "Dark Oak Log",
+     "qty": 4547
+    }
+   ],
+   "8": [
+    {
+     "name": "Dark Oak Log",
+     "qty": 4547
+    }
+   ],
+   "9": [
+    {
+     "name": "Dark Oak Log",
+     "qty": 5236
+    }
+   ],
+   "10": [
+    {
+     "name": "Dark Oak Log",
+     "qty": 5236
+    }
+   ],
+   "11": [
+    {
+     "name": "Dark Oak Log",
+     "qty": 6400
+    }
+   ]
+  },
+  "DIAMOND": {
+   "1": [
+    {
+     "name": "Diamond",
+     "qty": 1490
+    }
+   ],
+   "2": [
+    {
+     "name": "Diamond",
+     "qty": 1490
+    }
+   ],
+   "3": [
+    {
+     "name": "Diamond",
+     "qty": 1600
+    }
+   ],
+   "4": [
+    {
+     "name": "Diamond",
+     "qty": 1600
+    }
+   ],
+   "5": [
+    {
+     "name": "Diamond",
+     "qty": 1728
+    }
+   ],
+   "6": [
+    {
+     "name": "Diamond",
+     "qty": 1728
+    }
+   ],
+   "7": [
+    {
+     "name": "Diamond",
+     "qty": 1964
+    }
+   ],
+   "8": [
+    {
+     "name": "Diamond",
+     "qty": 1964
+    }
+   ],
+   "9": [
+    {
+     "name": "Diamond",
+     "qty": 2274
+    }
+   ],
+   "10": [
+    {
+     "name": "Diamond",
+     "qty": 2274
+    }
+   ],
+   "11": [
+    {
+     "name": "Diamond",
+     "qty": 2880
+    }
+   ],
+   "12": [
+    {
+     "name": "Diamond",
+     "qty": 3600
+    }
+   ]
+  },
+  "EMERALD": {
+   "1": [
+    {
+     "name": "Emerald",
+     "qty": 1543
+    }
+   ],
+   "2": [
+    {
+     "name": "Emerald",
+     "qty": 1543
+    }
+   ],
+   "3": [
+    {
+     "name": "Emerald",
+     "qty": 1662
+    }
+   ],
+   "4": [
+    {
+     "name": "Emerald",
+     "qty": 1662
+    }
+   ],
+   "5": [
+    {
+     "name": "Emerald",
+     "qty": 1800
+    }
+   ],
+   "6": [
+    {
+     "name": "Emerald",
+     "qty": 1800
+    }
+   ],
+   "7": [
+    {
+     "name": "Emerald",
+     "qty": 2057
+    }
+   ],
+   "8": [
+    {
+     "name": "Emerald",
+     "qty": 2057
+    }
+   ],
+   "9": [
+    {
+     "name": "Emerald",
+     "qty": 2400
+    }
+   ],
+   "10": [
+    {
+     "name": "Emerald",
+     "qty": 2400
+    }
+   ],
+   "11": [
+    {
+     "name": "Emerald",
+     "qty": 3086
+    }
+   ],
+   "12": [
+    {
+     "name": "Emerald",
+     "qty": 3600
+    }
+   ]
+  },
+  "ENDER_STONE": {
+   "1": [
+    {
+     "name": "End Stone",
+     "qty": 1662
+    }
+   ],
+   "2": [
+    {
+     "name": "End Stone",
+     "qty": 1662
+    }
+   ],
+   "3": [
+    {
+     "name": "End Stone",
+     "qty": 1800
+    }
+   ],
+   "4": [
+    {
+     "name": "End Stone",
+     "qty": 1800
+    }
+   ],
+   "5": [
+    {
+     "name": "End Stone",
+     "qty": 1964
+    }
+   ],
+   "6": [
+    {
+     "name": "End Stone",
+     "qty": 1964
+    }
+   ],
+   "7": [
+    {
+     "name": "End Stone",
+     "qty": 2274
+    }
+   ],
+   "8": [
+    {
+     "name": "End Stone",
+     "qty": 2274
+    }
+   ],
+   "9": [
+    {
+     "name": "End Stone",
+     "qty": 2700
+    }
+   ],
+   "10": [
+    {
+     "name": "End Stone",
+     "qty": 2700
+    }
+   ],
+   "11": [
+    {
+     "name": "End Stone",
+     "qty": 3323
+    }
+   ]
+  },
+  "ENDERMAN": {
+   "1": [
+    {
+     "name": "Ender Pearl",
+     "qty": 1350
+    }
+   ],
+   "2": [
+    {
+     "name": "Ender Pearl",
+     "qty": 1350
+    }
+   ],
+   "3": [
+    {
+     "name": "Ender Pearl",
+     "qty": 1440
+    }
+   ],
+   "4": [
+    {
+     "name": "Ender Pearl",
+     "qty": 1440
+    }
+   ],
+   "5": [
+    {
+     "name": "Ender Pearl",
+     "qty": 1543
+    }
+   ],
+   "6": [
+    {
+     "name": "Ender Pearl",
+     "qty": 1543
+    }
+   ],
+   "7": [
+    {
+     "name": "Ender Pearl",
+     "qty": 1728
+    }
+   ],
+   "8": [
+    {
+     "name": "Ender Pearl",
+     "qty": 1728
+    }
+   ],
+   "9": [
+    {
+     "name": "Ender Pearl",
+     "qty": 1964
+    }
+   ],
+   "10": [
+    {
+     "name": "Ender Pearl",
+     "qty": 1964
+    }
+   ],
+   "11": [
+    {
+     "name": "Ender Pearl",
+     "qty": 2400
+    }
+   ]
+  },
+  "FISHING": {
+   "1": [
+    {
+     "name": "Raw Cod",
+     "qty": 576
+    },
+    {
+     "name": "Raw Salmon",
+     "qty": 288
+    },
+    {
+     "name": "Pufferfish",
+     "qty": 138
+    },
+    {
+     "name": "Tropical Fish",
+     "qty": 46
+    },
+    {
+     "name": "Prismarine Crystals",
+     "qty": 35
+    },
+    {
+     "name": "Prismarine Shard",
+     "qty": 35
+    },
+    {
+     "name": "Sponge",
+     "qty": 35
+    }
+   ],
+   "2": [
+    {
+     "name": "Raw Cod",
+     "qty": 576
+    },
+    {
+     "name": "Raw Salmon",
+     "qty": 288
+    },
+    {
+     "name": "Pufferfish",
+     "qty": 138
+    },
+    {
+     "name": "Tropical Fish",
+     "qty": 46
+    },
+    {
+     "name": "Prismarine Crystals",
+     "qty": 35
+    },
+    {
+     "name": "Prismarine Shard",
+     "qty": 35
+    },
+    {
+     "name": "Sponge",
+     "qty": 35
+    }
+   ],
+   "3": [
+    {
+     "name": "Raw Cod",
+     "qty": 645
+    },
+    {
+     "name": "Raw Salmon",
+     "qty": 322
+    },
+    {
+     "name": "Pufferfish",
+     "qty": 155
+    },
+    {
+     "name": "Tropical Fish",
+     "qty": 52
+    },
+    {
+     "name": "Prismarine Crystals",
+     "qty": 39
+    },
+    {
+     "name": "Prismarine Shard",
+     "qty": 39
+    },
+    {
+     "name": "Sponge",
+     "qty": 39
+    }
+   ],
+   "4": [
+    {
+     "name": "Raw Cod",
+     "qty": 645
+    },
+    {
+     "name": "Raw Salmon",
+     "qty": 322
+    },
+    {
+     "name": "Pufferfish",
+     "qty": 155
+    },
+    {
+     "name": "Tropical Fish",
+     "qty": 52
+    },
+    {
+     "name": "Prismarine Crystals",
+     "qty": 39
+    },
+    {
+     "name": "Prismarine Shard",
+     "qty": 39
+    },
+    {
+     "name": "Sponge",
+     "qty": 39
+    }
+   ],
+   "5": [
+    {
+     "name": "Raw Cod",
+     "qty": 732
+    },
+    {
+     "name": "Raw Salmon",
+     "qty": 366
+    },
+    {
+     "name": "Pufferfish",
+     "qty": 176
+    },
+    {
+     "name": "Tropical Fish",
+     "qty": 59
+    },
+    {
+     "name": "Prismarine Crystals",
+     "qty": 44
+    },
+    {
+     "name": "Prismarine Shard",
+     "qty": 44
+    },
+    {
+     "name": "Sponge",
+     "qty": 44
+    }
+   ],
+   "6": [
+    {
+     "name": "Raw Cod",
+     "qty": 732
+    },
+    {
+     "name": "Raw Salmon",
+     "qty": 366
+    },
+    {
+     "name": "Pufferfish",
+     "qty": 176
+    },
+    {
+     "name": "Tropical Fish",
+     "qty": 59
+    },
+    {
+     "name": "Prismarine Crystals",
+     "qty": 44
+    },
+    {
+     "name": "Prismarine Shard",
+     "qty": 44
+    },
+    {
+     "name": "Sponge",
+     "qty": 44
+    }
+   ],
+   "7": [
+    {
+     "name": "Raw Cod",
+     "qty": 847
+    },
+    {
+     "name": "Raw Salmon",
+     "qty": 424
+    },
+    {
+     "name": "Pufferfish",
+     "qty": 203
+    },
+    {
+     "name": "Tropical Fish",
+     "qty": 68
+    },
+    {
+     "name": "Prismarine Crystals",
+     "qty": 51
+    },
+    {
+     "name": "Prismarine Shard",
+     "qty": 51
+    },
+    {
+     "name": "Sponge",
+     "qty": 51
+    }
+   ],
+   "8": [
+    {
+     "name": "Raw Cod",
+     "qty": 847
+    },
+    {
+     "name": "Raw Salmon",
+     "qty": 424
+    },
+    {
+     "name": "Pufferfish",
+     "qty": 203
+    },
+    {
+     "name": "Tropical Fish",
+     "qty": 68
+    },
+    {
+     "name": "Prismarine Crystals",
+     "qty": 51
+    },
+    {
+     "name": "Prismarine Shard",
+     "qty": 51
+    },
+    {
+     "name": "Sponge",
+     "qty": 51
+    }
+   ],
+   "9": [
+    {
+     "name": "Raw Cod",
+     "qty": 1005
+    },
+    {
+     "name": "Raw Salmon",
+     "qty": 502
+    },
+    {
+     "name": "Pufferfish",
+     "qty": 241
+    },
+    {
+     "name": "Tropical Fish",
+     "qty": 80
+    },
+    {
+     "name": "Prismarine Crystals",
+     "qty": 60
+    },
+    {
+     "name": "Prismarine Shard",
+     "qty": 60
+    },
+    {
+     "name": "Sponge",
+     "qty": 60
+    }
+   ],
+   "10": [
+    {
+     "name": "Raw Cod",
+     "qty": 1005
+    },
+    {
+     "name": "Raw Salmon",
+     "qty": 502
+    },
+    {
+     "name": "Pufferfish",
+     "qty": 241
+    },
+    {
+     "name": "Tropical Fish",
+     "qty": 80
+    },
+    {
+     "name": "Prismarine Crystals",
+     "qty": 60
+    },
+    {
+     "name": "Prismarine Shard",
+     "qty": 60
+    },
+    {
+     "name": "Sponge",
+     "qty": 60
+    }
+   ],
+   "11": [
+    {
+     "name": "Raw Cod",
+     "qty": 1234
+    },
+    {
+     "name": "Raw Salmon",
+     "qty": 617
+    },
+    {
+     "name": "Pufferfish",
+     "qty": 296
+    },
+    {
+     "name": "Tropical Fish",
+     "qty": 99
+    },
+    {
+     "name": "Prismarine Crystals",
+     "qty": 74
+    },
+    {
+     "name": "Prismarine Shard",
+     "qty": 74
+    },
+    {
+     "name": "Sponge",
+     "qty": 74
+    }
+   ],
+   "12": [
+    {
+     "name": "Raw Cod",
+     "qty": 1440
+    },
+    {
+     "name": "Raw Salmon",
+     "qty": 720
+    },
+    {
+     "name": "Pufferfish",
+     "qty": 346
+    },
+    {
+     "name": "Tropical Fish",
+     "qty": 115
+    },
+    {
+     "name": "Prismarine Crystals",
+     "qty": 86
+    },
+    {
+     "name": "Prismarine Shard",
+     "qty": 86
+    },
+    {
+     "name": "Sponge",
+     "qty": 86
+    }
+   ]
+  },
+  "FLOWER": {
+   "1": [
+    {
+     "name": "Dandelion",
+     "qty": 504
+    },
+    {
+     "name": "Poppy",
+     "qty": 216
+    },
+    {
+     "name": "Allium",
+     "qty": 60
+    },
+    {
+     "name": "Azure Bluet",
+     "qty": 60
+    },
+    {
+     "name": "Blue Orchid",
+     "qty": 60
+    },
+    {
+     "name": "Oxeye Daisy",
+     "qty": 60
+    },
+    {
+     "name": "Red Tulip",
+     "qty": 60
+    },
+    {
+     "name": "Orange Tulip",
+     "qty": 60
+    },
+    {
+     "name": "White Tulip",
+     "qty": 60
+    },
+    {
+     "name": "Pink Tulip",
+     "qty": 60
+    },
+    {
+     "name": "Lilac",
+     "qty": 60
+    },
+    {
+     "name": "Peony",
+     "qty": 60
+    },
+    {
+     "name": "Rose Bush",
+     "qty": 60
+    }
+   ],
+   "2": [
+    {
+     "name": "Dandelion",
+     "qty": 521
+    },
+    {
+     "name": "Poppy",
+     "qty": 223
+    },
+    {
+     "name": "Allium",
+     "qty": 62
+    },
+    {
+     "name": "Azure Bluet",
+     "qty": 62
+    },
+    {
+     "name": "Blue Orchid",
+     "qty": 62
+    },
+    {
+     "name": "Oxeye Daisy",
+     "qty": 62
+    },
+    {
+     "name": "Red Tulip",
+     "qty": 62
+    },
+    {
+     "name": "Orange Tulip",
+     "qty": 62
+    },
+    {
+     "name": "White Tulip",
+     "qty": 62
+    },
+    {
+     "name": "Pink Tulip",
+     "qty": 62
+    },
+    {
+     "name": "Lilac",
+     "qty": 62
+    },
+    {
+     "name": "Peony",
+     "qty": 62
+    },
+    {
+     "name": "Rose Bush",
+     "qty": 62
+    }
+   ],
+   "3": [
+    {
+     "name": "Dandelion",
+     "qty": 540
+    },
+    {
+     "name": "Poppy",
+     "qty": 231
+    },
+    {
+     "name": "Allium",
+     "qty": 64
+    },
+    {
+     "name": "Azure Bluet",
+     "qty": 64
+    },
+    {
+     "name": "Blue Orchid",
+     "qty": 64
+    },
+    {
+     "name": "Oxeye Daisy",
+     "qty": 64
+    },
+    {
+     "name": "Red Tulip",
+     "qty": 64
+    },
+    {
+     "name": "Orange Tulip",
+     "qty": 64
+    },
+    {
+     "name": "White Tulip",
+     "qty": 64
+    },
+    {
+     "name": "Pink Tulip",
+     "qty": 64
+    },
+    {
+     "name": "Lilac",
+     "qty": 64
+    },
+    {
+     "name": "Peony",
+     "qty": 64
+    },
+    {
+     "name": "Rose Bush",
+     "qty": 64
+    }
+   ],
+   "4": [
+    {
+     "name": "Dandelion",
+     "qty": 560
+    },
+    {
+     "name": "Poppy",
+     "qty": 240
+    },
+    {
+     "name": "Allium",
+     "qty": 67
+    },
+    {
+     "name": "Azure Bluet",
+     "qty": 67
+    },
+    {
+     "name": "Blue Orchid",
+     "qty": 67
+    },
+    {
+     "name": "Oxeye Daisy",
+     "qty": 67
+    },
+    {
+     "name": "Red Tulip",
+     "qty": 67
+    },
+    {
+     "name": "Orange Tulip",
+     "qty": 67
+    },
+    {
+     "name": "White Tulip",
+     "qty": 67
+    },
+    {
+     "name": "Pink Tulip",
+     "qty": 67
+    },
+    {
+     "name": "Lilac",
+     "qty": 67
+    },
+    {
+     "name": "Peony",
+     "qty": 67
+    },
+    {
+     "name": "Rose Bush",
+     "qty": 67
+    }
+   ],
+   "5": [
+    {
+     "name": "Dandelion",
+     "qty": 582
+    },
+    {
+     "name": "Poppy",
+     "qty": 249
+    },
+    {
+     "name": "Allium",
+     "qty": 69
+    },
+    {
+     "name": "Azure Bluet",
+     "qty": 69
+    },
+    {
+     "name": "Blue Orchid",
+     "qty": 69
+    },
+    {
+     "name": "Oxeye Daisy",
+     "qty": 69
+    },
+    {
+     "name": "Red Tulip",
+     "qty": 69
+    },
+    {
+     "name": "Orange Tulip",
+     "qty": 69
+    },
+    {
+     "name": "White Tulip",
+     "qty": 69
+    },
+    {
+     "name": "Pink Tulip",
+     "qty": 69
+    },
+    {
+     "name": "Lilac",
+     "qty": 69
+    },
+    {
+     "name": "Peony",
+     "qty": 69
+    },
+    {
+     "name": "Rose Bush",
+     "qty": 69
+    }
+   ],
+   "6": [
+    {
+     "name": "Dandelion",
+     "qty": 605
+    },
+    {
+     "name": "Poppy",
+     "qty": 259
+    },
+    {
+     "name": "Allium",
+     "qty": 72
+    },
+    {
+     "name": "Azure Bluet",
+     "qty": 72
+    },
+    {
+     "name": "Blue Orchid",
+     "qty": 72
+    },
+    {
+     "name": "Oxeye Daisy",
+     "qty": 72
+    },
+    {
+     "name": "Red Tulip",
+     "qty": 72
+    },
+    {
+     "name": "Orange Tulip",
+     "qty": 72
+    },
+    {
+     "name": "White Tulip",
+     "qty": 72
+    },
+    {
+     "name": "Pink Tulip",
+     "qty": 72
+    },
+    {
+     "name": "Lilac",
+     "qty": 72
+    },
+    {
+     "name": "Peony",
+     "qty": 72
+    },
+    {
+     "name": "Rose Bush",
+     "qty": 72
+    }
+   ],
+   "7": [
+    {
+     "name": "Dandelion",
+     "qty": 630
+    },
+    {
+     "name": "Poppy",
+     "qty": 270
+    },
+    {
+     "name": "Allium",
+     "qty": 75
+    },
+    {
+     "name": "Azure Bluet",
+     "qty": 75
+    },
+    {
+     "name": "Blue Orchid",
+     "qty": 75
+    },
+    {
+     "name": "Oxeye Daisy",
+     "qty": 75
+    },
+    {
+     "name": "Red Tulip",
+     "qty": 75
+    },
+    {
+     "name": "Orange Tulip",
+     "qty": 75
+    },
+    {
+     "name": "White Tulip",
+     "qty": 75
+    },
+    {
+     "name": "Pink Tulip",
+     "qty": 75
+    },
+    {
+     "name": "Lilac",
+     "qty": 75
+    },
+    {
+     "name": "Peony",
+     "qty": 75
+    },
+    {
+     "name": "Rose Bush",
+     "qty": 75
+    }
+   ],
+   "8": [
+    {
+     "name": "Dandelion",
+     "qty": 657
+    },
+    {
+     "name": "Poppy",
+     "qty": 282
+    },
+    {
+     "name": "Allium",
+     "qty": 78
+    },
+    {
+     "name": "Azure Bluet",
+     "qty": 78
+    },
+    {
+     "name": "Blue Orchid",
+     "qty": 78
+    },
+    {
+     "name": "Oxeye Daisy",
+     "qty": 78
+    },
+    {
+     "name": "Red Tulip",
+     "qty": 78
+    },
+    {
+     "name": "Orange Tulip",
+     "qty": 78
+    },
+    {
+     "name": "White Tulip",
+     "qty": 78
+    },
+    {
+     "name": "Pink Tulip",
+     "qty": 78
+    },
+    {
+     "name": "Lilac",
+     "qty": 78
+    },
+    {
+     "name": "Peony",
+     "qty": 78
+    },
+    {
+     "name": "Rose Bush",
+     "qty": 78
+    }
+   ],
+   "9": [
+    {
+     "name": "Dandelion",
+     "qty": 687
+    },
+    {
+     "name": "Poppy",
+     "qty": 295
+    },
+    {
+     "name": "Allium",
+     "qty": 82
+    },
+    {
+     "name": "Azure Bluet",
+     "qty": 82
+    },
+    {
+     "name": "Blue Orchid",
+     "qty": 82
+    },
+    {
+     "name": "Oxeye Daisy",
+     "qty": 82
+    },
+    {
+     "name": "Red Tulip",
+     "qty": 82
+    },
+    {
+     "name": "Orange Tulip",
+     "qty": 82
+    },
+    {
+     "name": "White Tulip",
+     "qty": 82
+    },
+    {
+     "name": "Pink Tulip",
+     "qty": 82
+    },
+    {
+     "name": "Lilac",
+     "qty": 82
+    },
+    {
+     "name": "Peony",
+     "qty": 82
+    },
+    {
+     "name": "Rose Bush",
+     "qty": 82
+    }
+   ],
+   "10": [
+    {
+     "name": "Dandelion",
+     "qty": 756
+    },
+    {
+     "name": "Poppy",
+     "qty": 324
+    },
+    {
+     "name": "Allium",
+     "qty": 90
+    },
+    {
+     "name": "Azure Bluet",
+     "qty": 90
+    },
+    {
+     "name": "Blue Orchid",
+     "qty": 90
+    },
+    {
+     "name": "Oxeye Daisy",
+     "qty": 90
+    },
+    {
+     "name": "Red Tulip",
+     "qty": 90
+    },
+    {
+     "name": "Orange Tulip",
+     "qty": 90
+    },
+    {
+     "name": "White Tulip",
+     "qty": 90
+    },
+    {
+     "name": "Pink Tulip",
+     "qty": 90
+    },
+    {
+     "name": "Lilac",
+     "qty": 90
+    },
+    {
+     "name": "Peony",
+     "qty": 90
+    },
+    {
+     "name": "Rose Bush",
+     "qty": 90
+    }
+   ],
+   "11": [
+    {
+     "name": "Dandelion",
+     "qty": 840
+    },
+    {
+     "name": "Poppy",
+     "qty": 360
+    },
+    {
+     "name": "Allium",
+     "qty": 100
+    },
+    {
+     "name": "Azure Bluet",
+     "qty": 100
+    },
+    {
+     "name": "Blue Orchid",
+     "qty": 100
+    },
+    {
+     "name": "Oxeye Daisy",
+     "qty": 100
+    },
+    {
+     "name": "Red Tulip",
+     "qty": 100
+    },
+    {
+     "name": "Orange Tulip",
+     "qty": 100
+    },
+    {
+     "name": "White Tulip",
+     "qty": 100
+    },
+    {
+     "name": "Pink Tulip",
+     "qty": 100
+    },
+    {
+     "name": "Lilac",
+     "qty": 100
+    },
+    {
+     "name": "Peony",
+     "qty": 100
+    },
+    {
+     "name": "Rose Bush",
+     "qty": 100
+    }
+   ],
+   "12": [
+    {
+     "name": "Dandelion",
+     "qty": 1008
+    },
+    {
+     "name": "Poppy",
+     "qty": 432
+    },
+    {
+     "name": "Allium",
+     "qty": 120
+    },
+    {
+     "name": "Azure Bluet",
+     "qty": 120
+    },
+    {
+     "name": "Blue Orchid",
+     "qty": 120
+    },
+    {
+     "name": "Oxeye Daisy",
+     "qty": 120
+    },
+    {
+     "name": "Red Tulip",
+     "qty": 120
+    },
+    {
+     "name": "Orange Tulip",
+     "qty": 120
+    },
+    {
+     "name": "White Tulip",
+     "qty": 120
+    },
+    {
+     "name": "Pink Tulip",
+     "qty": 120
+    },
+    {
+     "name": "Lilac",
+     "qty": 120
+    },
+    {
+     "name": "Peony",
+     "qty": 120
+    },
+    {
+     "name": "Rose Bush",
+     "qty": 120
+    }
+   ]
+  },
+  "GHAST": {
+   "1": [
+    {
+     "name": "Ghast Tear",
+     "qty": 864
+    }
+   ],
+   "2": [
+    {
+     "name": "Ghast Tear",
+     "qty": 864
+    }
+   ],
+   "3": [
+    {
+     "name": "Ghast Tear",
+     "qty": 919
+    }
+   ],
+   "4": [
+    {
+     "name": "Ghast Tear",
+     "qty": 919
+    }
+   ],
+   "5": [
+    {
+     "name": "Ghast Tear",
+     "qty": 982
+    }
+   ],
+   "6": [
+    {
+     "name": "Ghast Tear",
+     "qty": 982
+    }
+   ],
+   "7": [
+    {
+     "name": "Ghast Tear",
+     "qty": 1054
+    }
+   ],
+   "8": [
+    {
+     "name": "Ghast Tear",
+     "qty": 1054
+    }
+   ],
+   "9": [
+    {
+     "name": "Ghast Tear",
+     "qty": 1137
+    }
+   ],
+   "10": [
+    {
+     "name": "Ghast Tear",
+     "qty": 1137
+    }
+   ],
+   "11": [
+    {
+     "name": "Ghast Tear",
+     "qty": 1350
+    }
+   ],
+   "12": [
+    {
+     "name": "Ghast Tear",
+     "qty": 1440
+    }
+   ]
+  },
+  "GLOWSTONE": {
+   "1": [
+    {
+     "name": "Glowstone Dust",
+     "qty": 5184
+    }
+   ],
+   "2": [
+    {
+     "name": "Glowstone Dust",
+     "qty": 5184
+    }
+   ],
+   "3": [
+    {
+     "name": "Glowstone Dust",
+     "qty": 5635
+    }
+   ],
+   "4": [
+    {
+     "name": "Glowstone Dust",
+     "qty": 5635
+    }
+   ],
+   "5": [
+    {
+     "name": "Glowstone Dust",
+     "qty": 6171
+    }
+   ],
+   "6": [
+    {
+     "name": "Glowstone Dust",
+     "qty": 6171
+    }
+   ],
+   "7": [
+    {
+     "name": "Glowstone Dust",
+     "qty": 6821
+    }
+   ],
+   "8": [
+    {
+     "name": "Glowstone Dust",
+     "qty": 6821
+    }
+   ],
+   "9": [
+    {
+     "name": "Glowstone Dust",
+     "qty": 8100
+    }
+   ],
+   "10": [
+    {
+     "name": "Glowstone Dust",
+     "qty": 8100
+    }
+   ],
+   "11": [
+    {
+     "name": "Glowstone Dust",
+     "qty": 9969
+    }
+   ],
+   "12": [
+    {
+     "name": "Glowstone Dust",
+     "qty": 11782
+    }
+   ]
+  },
+  "GOLD": {
+   "1": [
+    {
+     "name": "Gold Ingot",
+     "qty": 1964
+    }
+   ],
+   "2": [
+    {
+     "name": "Gold Ingot",
+     "qty": 1964
+    }
+   ],
+   "3": [
+    {
+     "name": "Gold Ingot",
+     "qty": 2160
+    }
+   ],
+   "4": [
+    {
+     "name": "Gold Ingot",
+     "qty": 2160
+    }
+   ],
+   "5": [
+    {
+     "name": "Gold Ingot",
+     "qty": 2400
+    }
+   ],
+   "6": [
+    {
+     "name": "Gold Ingot",
+     "qty": 2400
+    }
+   ],
+   "7": [
+    {
+     "name": "Gold Ingot",
+     "qty": 2700
+    }
+   ],
+   "8": [
+    {
+     "name": "Gold Ingot",
+     "qty": 2700
+    }
+   ],
+   "9": [
+    {
+     "name": "Gold Ingot",
+     "qty": 3086
+    }
+   ],
+   "10": [
+    {
+     "name": "Gold Ingot",
+     "qty": 3086
+    }
+   ],
+   "11": [
+    {
+     "name": "Gold Ingot",
+     "qty": 3927
+    }
+   ],
+   "12": [
+    {
+     "name": "Gold Ingot",
+     "qty": 4800
+    }
+   ]
+  },
+  "GRAVEL": {
+   "1": [
+    {
+     "name": "Flint",
+     "qty": 1662
+    }
+   ],
+   "2": [
+    {
+     "name": "Flint",
+     "qty": 1662
+    }
+   ],
+   "3": [
+    {
+     "name": "Flint",
+     "qty": 1800
+    }
+   ],
+   "4": [
+    {
+     "name": "Flint",
+     "qty": 1800
+    }
+   ],
+   "5": [
+    {
+     "name": "Flint",
+     "qty": 1964
+    }
+   ],
+   "6": [
+    {
+     "name": "Flint",
+     "qty": 1964
+    }
+   ],
+   "7": [
+    {
+     "name": "Flint",
+     "qty": 2274
+    }
+   ],
+   "8": [
+    {
+     "name": "Flint",
+     "qty": 2274
+    }
+   ],
+   "9": [
+    {
+     "name": "Flint",
+     "qty": 2700
+    }
+   ],
+   "10": [
+    {
+     "name": "Flint",
+     "qty": 2700
+    }
+   ],
+   "11": [
+    {
+     "name": "Flint",
+     "qty": 3323
+    }
+   ]
+  },
+  "HARD_STONE": {
+   "1": [
+    {
+     "name": "Hard Stone",
+     "qty": 6171
+    }
+   ],
+   "2": [
+    {
+     "name": "Hard Stone",
+     "qty": 6171
+    }
+   ],
+   "3": [
+    {
+     "name": "Hard Stone",
+     "qty": 7200
+    }
+   ],
+   "4": [
+    {
+     "name": "Hard Stone",
+     "qty": 7200
+    }
+   ],
+   "5": [
+    {
+     "name": "Hard Stone",
+     "qty": 8640
+    }
+   ],
+   "6": [
+    {
+     "name": "Hard Stone",
+     "qty": 8640
+    }
+   ],
+   "7": [
+    {
+     "name": "Hard Stone",
+     "qty": 9600
+    }
+   ],
+   "8": [
+    {
+     "name": "Hard Stone",
+     "qty": 9600
+    }
+   ],
+   "9": [
+    {
+     "name": "Hard Stone",
+     "qty": 10800
+    }
+   ],
+   "10": [
+    {
+     "name": "Hard Stone",
+     "qty": 10800
+    }
+   ],
+   "11": [
+    {
+     "name": "Hard Stone",
+     "qty": 12343
+    }
+   ],
+   "12": [
+    {
+     "name": "Hard Stone",
+     "qty": 14400
+    }
+   ]
+  },
+  "ICE": {
+   "1": [
+    {
+     "name": "Ice",
+     "qty": 3086
+    }
+   ],
+   "2": [
+    {
+     "name": "Ice",
+     "qty": 3086
+    }
+   ],
+   "3": [
+    {
+     "name": "Ice",
+     "qty": 3600
+    }
+   ],
+   "4": [
+    {
+     "name": "Ice",
+     "qty": 3600
+    }
+   ],
+   "5": [
+    {
+     "name": "Ice",
+     "qty": 4320
+    }
+   ],
+   "6": [
+    {
+     "name": "Ice",
+     "qty": 4320
+    }
+   ],
+   "7": [
+    {
+     "name": "Ice",
+     "qty": 4800
+    }
+   ],
+   "8": [
+    {
+     "name": "Ice",
+     "qty": 4800
+    }
+   ],
+   "9": [
+    {
+     "name": "Ice",
+     "qty": 5400
+    }
+   ],
+   "10": [
+    {
+     "name": "Ice",
+     "qty": 5400
+    }
+   ],
+   "11": [
+    {
+     "name": "Ice",
+     "qty": 6171
+    }
+   ],
+   "12": [
+    {
+     "name": "Ice",
+     "qty": 7200
+    }
+   ]
+  },
+  "INFERNO": {
+   "1": [
+    {
+     "name": "Crude Gabagool",
+     "qty": 43
+    }
+   ],
+   "2": [
+    {
+     "name": "Crude Gabagool",
+     "qty": 44
+    }
+   ],
+   "3": [
+    {
+     "name": "Crude Gabagool",
+     "qty": 45
+    }
+   ],
+   "4": [
+    {
+     "name": "Crude Gabagool",
+     "qty": 47
+    }
+   ],
+   "5": [
+    {
+     "name": "Crude Gabagool",
+     "qty": 49
+    }
+   ],
+   "6": [
+    {
+     "name": "Crude Gabagool",
+     "qty": 51
+    }
+   ],
+   "7": [
+    {
+     "name": "Crude Gabagool",
+     "qty": 52
+    }
+   ],
+   "8": [
+    {
+     "name": "Crude Gabagool",
+     "qty": 55
+    }
+   ],
+   "9": [
+    {
+     "name": "Crude Gabagool",
+     "qty": 57
+    }
+   ],
+   "10": [
+    {
+     "name": "Crude Gabagool",
+     "qty": 59
+    }
+   ],
+   "11": [
+    {
+     "name": "Crude Gabagool",
+     "qty": 62
+    }
+   ]
+  },
+  "IRON": {
+   "1": [
+    {
+     "name": "Iron Ingot",
+     "qty": 2541
+    }
+   ],
+   "2": [
+    {
+     "name": "Iron Ingot",
+     "qty": 2541
+    }
+   ],
+   "3": [
+    {
+     "name": "Iron Ingot",
+     "qty": 2880
+    }
+   ],
+   "4": [
+    {
+     "name": "Iron Ingot",
+     "qty": 2880
+    }
+   ],
+   "5": [
+    {
+     "name": "Iron Ingot",
+     "qty": 3086
+    }
+   ],
+   "6": [
+    {
+     "name": "Iron Ingot",
+     "qty": 3086
+    }
+   ],
+   "7": [
+    {
+     "name": "Iron Ingot",
+     "qty": 3600
+    }
+   ],
+   "8": [
+    {
+     "name": "Iron Ingot",
+     "qty": 3600
+    }
+   ],
+   "9": [
+    {
+     "name": "Iron Ingot",
+     "qty": 4320
+    }
+   ],
+   "10": [
+    {
+     "name": "Iron Ingot",
+     "qty": 4320
+    }
+   ],
+   "11": [
+    {
+     "name": "Iron Ingot",
+     "qty": 5400
+    }
+   ],
+   "12": [
+    {
+     "name": "Iron Ingot",
+     "qty": 6171
+    }
+   ]
+  },
+  "JUNGLE": {
+   "1": [
+    {
+     "name": "Jungle Log",
+     "qty": 3600
+    }
+   ],
+   "2": [
+    {
+     "name": "Jungle Log",
+     "qty": 3600
+    }
+   ],
+   "3": [
+    {
+     "name": "Jungle Log",
+     "qty": 3840
+    }
+   ],
+   "4": [
+    {
+     "name": "Jungle Log",
+     "qty": 3840
+    }
+   ],
+   "5": [
+    {
+     "name": "Jungle Log",
+     "qty": 4114
+    }
+   ],
+   "6": [
+    {
+     "name": "Jungle Log",
+     "qty": 4114
+    }
+   ],
+   "7": [
+    {
+     "name": "Jungle Log",
+     "qty": 4547
+    }
+   ],
+   "8": [
+    {
+     "name": "Jungle Log",
+     "qty": 4547
+    }
+   ],
+   "9": [
+    {
+     "name": "Jungle Log",
+     "qty": 5236
+    }
+   ],
+   "10": [
+    {
+     "name": "Jungle Log",
+     "qty": 5236
+    }
+   ],
+   "11": [
+    {
+     "name": "Jungle Log",
+     "qty": 6400
+    }
+   ]
+  },
+  "LAPIS": {
+   "1": [
+    {
+     "name": "Lapis Lazuli",
+     "qty": 8938
+    }
+   ],
+   "2": [
+    {
+     "name": "Lapis Lazuli",
+     "qty": 8938
+    }
+   ],
+   "3": [
+    {
+     "name": "Lapis Lazuli",
+     "qty": 9600
+    }
+   ],
+   "4": [
+    {
+     "name": "Lapis Lazuli",
+     "qty": 9600
+    }
+   ],
+   "5": [
+    {
+     "name": "Lapis Lazuli",
+     "qty": 10368
+    }
+   ],
+   "6": [
+    {
+     "name": "Lapis Lazuli",
+     "qty": 10368
+    }
+   ],
+   "7": [
+    {
+     "name": "Lapis Lazuli",
+     "qty": 11270
+    }
+   ],
+   "8": [
+    {
+     "name": "Lapis Lazuli",
+     "qty": 11270
+    }
+   ],
+   "9": [
+    {
+     "name": "Lapis Lazuli",
+     "qty": 12343
+    }
+   ],
+   "10": [
+    {
+     "name": "Lapis Lazuli",
+     "qty": 12343
+    }
+   ],
+   "11": [
+    {
+     "name": "Lapis Lazuli",
+     "qty": 14400
+    }
+   ],
+   "12": [
+    {
+     "name": "Lapis Lazuli",
+     "qty": 16200
+    }
+   ]
+  },
+  "MAGMA_CUBE": {
+   "1": [
+    {
+     "name": "Magma Cream",
+     "qty": 2430
+    }
+   ],
+   "2": [
+    {
+     "name": "Magma Cream",
+     "qty": 2430
+    }
+   ],
+   "3": [
+    {
+     "name": "Magma Cream",
+     "qty": 2592
+    }
+   ],
+   "4": [
+    {
+     "name": "Magma Cream",
+     "qty": 2592
+    }
+   ],
+   "5": [
+    {
+     "name": "Magma Cream",
+     "qty": 2777
+    }
+   ],
+   "6": [
+    {
+     "name": "Magma Cream",
+     "qty": 2777
+    }
+   ],
+   "7": [
+    {
+     "name": "Magma Cream",
+     "qty": 3110
+    }
+   ],
+   "8": [
+    {
+     "name": "Magma Cream",
+     "qty": 3110
+    }
+   ],
+   "9": [
+    {
+     "name": "Magma Cream",
+     "qty": 3535
+    }
+   ],
+   "10": [
+    {
+     "name": "Magma Cream",
+     "qty": 3535
+    }
+   ],
+   "11": [
+    {
+     "name": "Magma Cream",
+     "qty": 4320
+    }
+   ],
+   "12": [
+    {
+     "name": "Magma Cream",
+     "qty": 4860
+    }
+   ]
+  },
+  "MELON": {
+   "1": [
+    {
+     "name": "Melon Slice",
+     "qty": 9000
+    }
+   ],
+   "2": [
+    {
+     "name": "Melon Slice",
+     "qty": 9000
+    }
+   ],
+   "3": [
+    {
+     "name": "Melon Slice",
+     "qty": 9600
+    }
+   ],
+   "4": [
+    {
+     "name": "Melon Slice",
+     "qty": 9600
+    }
+   ],
+   "5": [
+    {
+     "name": "Melon Slice",
+     "qty": 10286
+    }
+   ],
+   "6": [
+    {
+     "name": "Melon Slice",
+     "qty": 10286
+    }
+   ],
+   "7": [
+    {
+     "name": "Melon Slice",
+     "qty": 11676
+    }
+   ],
+   "8": [
+    {
+     "name": "Melon Slice",
+     "qty": 11676
+    }
+   ],
+   "9": [
+    {
+     "name": "Melon Slice",
+     "qty": 13500
+    }
+   ],
+   "10": [
+    {
+     "name": "Melon Slice",
+     "qty": 13500
+    }
+   ],
+   "11": [
+    {
+     "name": "Melon Slice",
+     "qty": 16615
+    }
+   ],
+   "12": [
+    {
+     "name": "Melon Slice",
+     "qty": 21600
+    }
+   ]
+  },
+  "MITHRIL": {
+   "1": [
+    {
+     "name": "Mithril",
+     "qty": 1080
+    }
+   ],
+   "2": [
+    {
+     "name": "Mithril",
+     "qty": 1080
+    }
+   ],
+   "3": [
+    {
+     "name": "Mithril",
+     "qty": 1152
+    }
+   ],
+   "4": [
+    {
+     "name": "Mithril",
+     "qty": 1152
+    }
+   ],
+   "5": [
+    {
+     "name": "Mithril",
+     "qty": 1234
+    }
+   ],
+   "6": [
+    {
+     "name": "Mithril",
+     "qty": 1234
+    }
+   ],
+   "7": [
+    {
+     "name": "Mithril",
+     "qty": 1329
+    }
+   ],
+   "8": [
+    {
+     "name": "Mithril",
+     "qty": 1329
+    }
+   ],
+   "9": [
+    {
+     "name": "Mithril",
+     "qty": 1440
+    }
+   ],
+   "10": [
+    {
+     "name": "Mithril",
+     "qty": 1440
+    }
+   ],
+   "11": [
+    {
+     "name": "Mithril",
+     "qty": 1571
+    }
+   ],
+   "12": [
+    {
+     "name": "Mithril",
+     "qty": 1728
+    }
+   ]
+  },
+  "MUSHROOM": {
+   "1": [
+    {
+     "name": "Brown Mushroom",
+     "qty": 720
+    },
+    {
+     "name": "Red Mushroom",
+     "qty": 720
+    }
+   ],
+   "2": [
+    {
+     "name": "Brown Mushroom",
+     "qty": 720
+    },
+    {
+     "name": "Red Mushroom",
+     "qty": 720
+    }
+   ],
+   "3": [
+    {
+     "name": "Brown Mushroom",
+     "qty": 771
+    },
+    {
+     "name": "Red Mushroom",
+     "qty": 771
+    }
+   ],
+   "4": [
+    {
+     "name": "Brown Mushroom",
+     "qty": 771
+    },
+    {
+     "name": "Red Mushroom",
+     "qty": 771
+    }
+   ],
+   "5": [
+    {
+     "name": "Brown Mushroom",
+     "qty": 831
+    },
+    {
+     "name": "Red Mushroom",
+     "qty": 831
+    }
+   ],
+   "6": [
+    {
+     "name": "Brown Mushroom",
+     "qty": 831
+    },
+    {
+     "name": "Red Mushroom",
+     "qty": 831
+    }
+   ],
+   "7": [
+    {
+     "name": "Brown Mushroom",
+     "qty": 939
+    },
+    {
+     "name": "Red Mushroom",
+     "qty": 939
+    }
+   ],
+   "8": [
+    {
+     "name": "Brown Mushroom",
+     "qty": 939
+    },
+    {
+     "name": "Red Mushroom",
+     "qty": 939
+    }
+   ],
+   "9": [
+    {
+     "name": "Brown Mushroom",
+     "qty": 1080
+    },
+    {
+     "name": "Red Mushroom",
+     "qty": 1080
+    }
+   ],
+   "10": [
+    {
+     "name": "Brown Mushroom",
+     "qty": 1080
+    },
+    {
+     "name": "Red Mushroom",
+     "qty": 1080
+    }
+   ],
+   "11": [
+    {
+     "name": "Brown Mushroom",
+     "qty": 1350
+    },
+    {
+     "name": "Red Mushroom",
+     "qty": 1350
+    }
+   ],
+   "12": [
+    {
+     "name": "Brown Mushroom",
+     "qty": 1800
+    },
+    {
+     "name": "Red Mushroom",
+     "qty": 1800
+    }
+   ]
+  },
+  "MYCELIUM": {
+   "1": [
+    {
+     "name": "Mycelium",
+     "qty": 1662
+    }
+   ],
+   "2": [
+    {
+     "name": "Mycelium",
+     "qty": 1728
+    }
+   ],
+   "3": [
+    {
+     "name": "Mycelium",
+     "qty": 1800
+    }
+   ],
+   "4": [
+    {
+     "name": "Mycelium",
+     "qty": 1878
+    }
+   ],
+   "5": [
+    {
+     "name": "Mycelium",
+     "qty": 1964
+    }
+   ],
+   "6": [
+    {
+     "name": "Mycelium",
+     "qty": 2057
+    }
+   ],
+   "7": [
+    {
+     "name": "Mycelium",
+     "qty": 2160
+    }
+   ],
+   "8": [
+    {
+     "name": "Mycelium",
+     "qty": 2274
+    }
+   ],
+   "9": [
+    {
+     "name": "Mycelium",
+     "qty": 2400
+    }
+   ],
+   "10": [
+    {
+     "name": "Mycelium",
+     "qty": 2700
+    }
+   ],
+   "11": [
+    {
+     "name": "Mycelium",
+     "qty": 3323
+    }
+   ],
+   "12": [
+    {
+     "name": "Mycelium",
+     "qty": 3927
+    }
+   ]
+  },
+  "NETHER_WARTS": {
+   "1": [
+    {
+     "name": "Nether Wart",
+     "qty": 2160
+    }
+   ],
+   "2": [
+    {
+     "name": "Nether Wart",
+     "qty": 2160
+    }
+   ],
+   "3": [
+    {
+     "name": "Nether Wart",
+     "qty": 2298
+    }
+   ],
+   "4": [
+    {
+     "name": "Nether Wart",
+     "qty": 2298
+    }
+   ],
+   "5": [
+    {
+     "name": "Nether Wart",
+     "qty": 2455
+    }
+   ],
+   "6": [
+    {
+     "name": "Nether Wart",
+     "qty": 2455
+    }
+   ],
+   "7": [
+    {
+     "name": "Nether Wart",
+     "qty": 2634
+    }
+   ],
+   "8": [
+    {
+     "name": "Nether Wart",
+     "qty": 2634
+    }
+   ],
+   "9": [
+    {
+     "name": "Nether Wart",
+     "qty": 2842
+    }
+   ],
+   "10": [
+    {
+     "name": "Nether Wart",
+     "qty": 2842
+    }
+   ],
+   "11": [
+    {
+     "name": "Nether Wart",
+     "qty": 3375
+    }
+   ],
+   "12": [
+    {
+     "name": "Nether Wart",
+     "qty": 4000
+    }
+   ]
+  },
+  "OAK": {
+   "1": [
+    {
+     "name": "Oak Log",
+     "qty": 3600
+    }
+   ],
+   "2": [
+    {
+     "name": "Oak Log",
+     "qty": 3600
+    }
+   ],
+   "3": [
+    {
+     "name": "Oak Log",
+     "qty": 3840
+    }
+   ],
+   "4": [
+    {
+     "name": "Oak Log",
+     "qty": 3840
+    }
+   ],
+   "5": [
+    {
+     "name": "Oak Log",
+     "qty": 4114
+    }
+   ],
+   "6": [
+    {
+     "name": "Oak Log",
+     "qty": 4114
+    }
+   ],
+   "7": [
+    {
+     "name": "Oak Log",
+     "qty": 4547
+    }
+   ],
+   "8": [
+    {
+     "name": "Oak Log",
+     "qty": 4547
+    }
+   ],
+   "9": [
+    {
+     "name": "Oak Log",
+     "qty": 5236
+    }
+   ],
+   "10": [
+    {
+     "name": "Oak Log",
+     "qty": 5236
+    }
+   ],
+   "11": [
+    {
+     "name": "Oak Log",
+     "qty": 6400
+    }
+   ]
+  },
+  "OBSIDIAN": {
+   "1": [
+    {
+     "name": "Obsidian",
+     "qty": 960
+    }
+   ],
+   "2": [
+    {
+     "name": "Obsidian",
+     "qty": 960
+    }
+   ],
+   "3": [
+    {
+     "name": "Obsidian",
+     "qty": 1029
+    }
+   ],
+   "4": [
+    {
+     "name": "Obsidian",
+     "qty": 1029
+    }
+   ],
+   "5": [
+    {
+     "name": "Obsidian",
+     "qty": 1108
+    }
+   ],
+   "6": [
+    {
+     "name": "Obsidian",
+     "qty": 1108
+    }
+   ],
+   "7": [
+    {
+     "name": "Obsidian",
+     "qty": 1234
+    }
+   ],
+   "8": [
+    {
+     "name": "Obsidian",
+     "qty": 1234
+    }
+   ],
+   "9": [
+    {
+     "name": "Obsidian",
+     "qty": 1440
+    }
+   ],
+   "10": [
+    {
+     "name": "Obsidian",
+     "qty": 1440
+    }
+   ],
+   "11": [
+    {
+     "name": "Obsidian",
+     "qty": 1800
+    }
+   ],
+   "12": [
+    {
+     "name": "Obsidian",
+     "qty": 2057
+    }
+   ]
+  },
+  "PIG": {
+   "1": [
+    {
+     "name": "Raw Porkchop",
+     "qty": 1662
+    }
+   ],
+   "2": [
+    {
+     "name": "Raw Porkchop",
+     "qty": 1662
+    }
+   ],
+   "3": [
+    {
+     "name": "Raw Porkchop",
+     "qty": 1800
+    }
+   ],
+   "4": [
+    {
+     "name": "Raw Porkchop",
+     "qty": 1800
+    }
+   ],
+   "5": [
+    {
+     "name": "Raw Porkchop",
+     "qty": 1964
+    }
+   ],
+   "6": [
+    {
+     "name": "Raw Porkchop",
+     "qty": 1964
+    }
+   ],
+   "7": [
+    {
+     "name": "Raw Porkchop",
+     "qty": 2160
+    }
+   ],
+   "8": [
+    {
+     "name": "Raw Porkchop",
+     "qty": 2160
+    }
+   ],
+   "9": [
+    {
+     "name": "Raw Porkchop",
+     "qty": 2541
+    }
+   ],
+   "10": [
+    {
+     "name": "Raw Porkchop",
+     "qty": 2541
+    }
+   ],
+   "11": [
+    {
+     "name": "Raw Porkchop",
+     "qty": 3323
+    }
+   ],
+   "12": [
+    {
+     "name": "Raw Porkchop",
+     "qty": 4320
+    }
+   ]
+  },
+  "POTATO": {
+   "1": [
+    {
+     "name": "Potato",
+     "qty": 6480
+    }
+   ],
+   "2": [
+    {
+     "name": "Potato",
+     "qty": 6480
+    }
+   ],
+   "3": [
+    {
+     "name": "Potato",
+     "qty": 7200
+    }
+   ],
+   "4": [
+    {
+     "name": "Potato",
+     "qty": 7200
+    }
+   ],
+   "5": [
+    {
+     "name": "Potato",
+     "qty": 8100
+    }
+   ],
+   "6": [
+    {
+     "name": "Potato",
+     "qty": 8100
+    }
+   ],
+   "7": [
+    {
+     "name": "Potato",
+     "qty": 9257
+    }
+   ],
+   "8": [
+    {
+     "name": "Potato",
+     "qty": 9257
+    }
+   ],
+   "9": [
+    {
+     "name": "Potato",
+     "qty": 10800
+    }
+   ],
+   "10": [
+    {
+     "name": "Potato",
+     "qty": 10800
+    }
+   ],
+   "11": [
+    {
+     "name": "Potato",
+     "qty": 12960
+    }
+   ],
+   "12": [
+    {
+     "name": "Potato",
+     "qty": 16200
+    }
+   ]
+  },
+  "PUMPKIN": {
+   "1": [
+    {
+     "name": "Pumpkin",
+     "qty": 1350
+    }
+   ],
+   "2": [
+    {
+     "name": "Pumpkin",
+     "qty": 1350
+    }
+   ],
+   "3": [
+    {
+     "name": "Pumpkin",
+     "qty": 1440
+    }
+   ],
+   "4": [
+    {
+     "name": "Pumpkin",
+     "qty": 1440
+    }
+   ],
+   "5": [
+    {
+     "name": "Pumpkin",
+     "qty": 1600
+    }
+   ],
+   "6": [
+    {
+     "name": "Pumpkin",
+     "qty": 1600
+    }
+   ],
+   "7": [
+    {
+     "name": "Pumpkin",
+     "qty": 1800
+    }
+   ],
+   "8": [
+    {
+     "name": "Pumpkin",
+     "qty": 1800
+    }
+   ],
+   "9": [
+    {
+     "name": "Pumpkin",
+     "qty": 2160
+    }
+   ],
+   "10": [
+    {
+     "name": "Pumpkin",
+     "qty": 2160
+    }
+   ],
+   "11": [
+    {
+     "name": "Pumpkin",
+     "qty": 2700
+    }
+   ],
+   "12": [
+    {
+     "name": "Pumpkin",
+     "qty": 3600
+    }
+   ]
+  },
+  "QUARTZ": {
+   "1": [
+    {
+     "name": "Nether Quartz",
+     "qty": 1920
+    }
+   ],
+   "2": [
+    {
+     "name": "Nether Quartz",
+     "qty": 1920
+    }
+   ],
+   "3": [
+    {
+     "name": "Nether Quartz",
+     "qty": 2057
+    }
+   ],
+   "4": [
+    {
+     "name": "Nether Quartz",
+     "qty": 2057
+    }
+   ],
+   "5": [
+    {
+     "name": "Nether Quartz",
+     "qty": 2274
+    }
+   ],
+   "6": [
+    {
+     "name": "Nether Quartz",
+     "qty": 2274
+    }
+   ],
+   "7": [
+    {
+     "name": "Nether Quartz",
+     "qty": 2541
+    }
+   ],
+   "8": [
+    {
+     "name": "Nether Quartz",
+     "qty": 2541
+    }
+   ],
+   "9": [
+    {
+     "name": "Nether Quartz",
+     "qty": 2979
+    }
+   ],
+   "10": [
+    {
+     "name": "Nether Quartz",
+     "qty": 2979
+    }
+   ],
+   "11": [
+    {
+     "name": "Nether Quartz",
+     "qty": 3757
+    }
+   ],
+   "12": [
+    {
+     "name": "Nether Quartz",
+     "qty": 4320
+    }
+   ]
+  },
+  "RABBIT": {
+   "1": [
+    {
+     "name": "Raw Rabbit",
+     "qty": 1662
+    },
+    {
+     "name": "Rabbit's Foot",
+     "qty": 582
+    },
+    {
+     "name": "Rabbit Hide",
+     "qty": 582
+    }
+   ],
+   "2": [
+    {
+     "name": "Raw Rabbit",
+     "qty": 1662
+    },
+    {
+     "name": "Rabbit's Foot",
+     "qty": 582
+    },
+    {
+     "name": "Rabbit Hide",
+     "qty": 582
+    }
+   ],
+   "3": [
+    {
+     "name": "Raw Rabbit",
+     "qty": 1800
+    },
+    {
+     "name": "Rabbit's Foot",
+     "qty": 630
+    },
+    {
+     "name": "Rabbit Hide",
+     "qty": 630
+    }
+   ],
+   "4": [
+    {
+     "name": "Raw Rabbit",
+     "qty": 1800
+    },
+    {
+     "name": "Rabbit's Foot",
+     "qty": 630
+    },
+    {
+     "name": "Rabbit Hide",
+     "qty": 630
+    }
+   ],
+   "5": [
+    {
+     "name": "Raw Rabbit",
+     "qty": 1964
+    },
+    {
+     "name": "Rabbit's Foot",
+     "qty": 687
+    },
+    {
+     "name": "Rabbit Hide",
+     "qty": 687
+    }
+   ],
+   "6": [
+    {
+     "name": "Raw Rabbit",
+     "qty": 1964
+    },
+    {
+     "name": "Rabbit's Foot",
+     "qty": 687
+    },
+    {
+     "name": "Rabbit Hide",
+     "qty": 687
+    }
+   ],
+   "7": [
+    {
+     "name": "Raw Rabbit",
+     "qty": 2160
+    },
+    {
+     "name": "Rabbit's Foot",
+     "qty": 756
+    },
+    {
+     "name": "Rabbit Hide",
+     "qty": 756
+    }
+   ],
+   "8": [
+    {
+     "name": "Raw Rabbit",
+     "qty": 2160
+    },
+    {
+     "name": "Rabbit's Foot",
+     "qty": 756
+    },
+    {
+     "name": "Rabbit Hide",
+     "qty": 756
+    }
+   ],
+   "9": [
+    {
+     "name": "Raw Rabbit",
+     "qty": 2541
+    },
+    {
+     "name": "Rabbit's Foot",
+     "qty": 889
+    },
+    {
+     "name": "Rabbit Hide",
+     "qty": 889
+    }
+   ],
+   "10": [
+    {
+     "name": "Raw Rabbit",
+     "qty": 2541
+    },
+    {
+     "name": "Rabbit's Foot",
+     "qty": 889
+    },
+    {
+     "name": "Rabbit Hide",
+     "qty": 889
+    }
+   ],
+   "11": [
+    {
+     "name": "Raw Rabbit",
+     "qty": 3323
+    },
+    {
+     "name": "Rabbit's Foot",
+     "qty": 1163
+    },
+    {
+     "name": "Rabbit Hide",
+     "qty": 1163
+    }
+   ],
+   "12": [
+    {
+     "name": "Raw Rabbit",
+     "qty": 4320
+    },
+    {
+     "name": "Rabbit's Foot",
+     "qty": 1512
+    },
+    {
+     "name": "Rabbit Hide",
+     "qty": 1512
+    }
+   ]
+  },
+  "RED_SAND": {
+   "1": [
+    {
+     "name": "Red Sand",
+     "qty": 1662
+    }
+   ],
+   "2": [
+    {
+     "name": "Red Sand",
+     "qty": 1728
+    }
+   ],
+   "3": [
+    {
+     "name": "Red Sand",
+     "qty": 1800
+    }
+   ],
+   "4": [
+    {
+     "name": "Red Sand",
+     "qty": 1878
+    }
+   ],
+   "5": [
+    {
+     "name": "Red Sand",
+     "qty": 1964
+    }
+   ],
+   "6": [
+    {
+     "name": "Red Sand",
+     "qty": 2057
+    }
+   ],
+   "7": [
+    {
+     "name": "Red Sand",
+     "qty": 2160
+    }
+   ],
+   "8": [
+    {
+     "name": "Red Sand",
+     "qty": 2274
+    }
+   ],
+   "9": [
+    {
+     "name": "Red Sand",
+     "qty": 2400
+    }
+   ],
+   "10": [
+    {
+     "name": "Red Sand",
+     "qty": 2700
+    }
+   ],
+   "11": [
+    {
+     "name": "Red Sand",
+     "qty": 3323
+    }
+   ],
+   "12": [
+    {
+     "name": "Red Sand",
+     "qty": 3927
+    }
+   ]
+  },
+  "REDSTONE": {
+   "1": [
+    {
+     "name": "Redstone Dust",
+     "qty": 6703
+    }
+   ],
+   "2": [
+    {
+     "name": "Redstone Dust",
+     "qty": 6703
+    }
+   ],
+   "3": [
+    {
+     "name": "Redstone Dust",
+     "qty": 7200
+    }
+   ],
+   "4": [
+    {
+     "name": "Redstone Dust",
+     "qty": 7200
+    }
+   ],
+   "5": [
+    {
+     "name": "Redstone Dust",
+     "qty": 7776
+    }
+   ],
+   "6": [
+    {
+     "name": "Redstone Dust",
+     "qty": 7776
+    }
+   ],
+   "7": [
+    {
+     "name": "Redstone Dust",
+     "qty": 8452
+    }
+   ],
+   "8": [
+    {
+     "name": "Redstone Dust",
+     "qty": 8452
+    }
+   ],
+   "9": [
+    {
+     "name": "Redstone Dust",
+     "qty": 9257
+    }
+   ],
+   "10": [
+    {
+     "name": "Redstone Dust",
+     "qty": 9257
+    }
+   ],
+   "11": [
+    {
+     "name": "Redstone Dust",
+     "qty": 10800
+    }
+   ],
+   "12": [
+    {
+     "name": "Redstone Dust",
+     "qty": 12150
+    }
+   ]
+  },
+  "REVENANT": {
+   "1": [
+    {
+     "name": "Rotten Flesh",
+     "qty": 4469
+    },
+    {
+     "name": "Diamond",
+     "qty": 298
+    }
+   ],
+   "2": [
+    {
+     "name": "Rotten Flesh",
+     "qty": 4469
+    },
+    {
+     "name": "Diamond",
+     "qty": 298
+    }
+   ],
+   "3": [
+    {
+     "name": "Rotten Flesh",
+     "qty": 4985
+    },
+    {
+     "name": "Diamond",
+     "qty": 332
+    }
+   ],
+   "4": [
+    {
+     "name": "Rotten Flesh",
+     "qty": 4985
+    },
+    {
+     "name": "Diamond",
+     "qty": 332
+    }
+   ],
+   "5": [
+    {
+     "name": "Rotten Flesh",
+     "qty": 5635
+    },
+    {
+     "name": "Diamond",
+     "qty": 376
+    }
+   ],
+   "6": [
+    {
+     "name": "Rotten Flesh",
+     "qty": 5635
+    },
+    {
+     "name": "Diamond",
+     "qty": 376
+    }
+   ],
+   "7": [
+    {
+     "name": "Rotten Flesh",
+     "qty": 6821
+    },
+    {
+     "name": "Diamond",
+     "qty": 455
+    }
+   ],
+   "8": [
+    {
+     "name": "Rotten Flesh",
+     "qty": 6821
+    },
+    {
+     "name": "Diamond",
+     "qty": 455
+    }
+   ],
+   "9": [
+    {
+     "name": "Rotten Flesh",
+     "qty": 8938
+    },
+    {
+     "name": "Diamond",
+     "qty": 596
+    }
+   ],
+   "10": [
+    {
+     "name": "Rotten Flesh",
+     "qty": 8938
+    },
+    {
+     "name": "Diamond",
+     "qty": 596
+    }
+   ],
+   "11": [
+    {
+     "name": "Rotten Flesh",
+     "qty": 12960
+    },
+    {
+     "name": "Diamond",
+     "qty": 864
+    }
+   ],
+   "12": [
+    {
+     "name": "Rotten Flesh",
+     "qty": 16200
+    },
+    {
+     "name": "Diamond",
+     "qty": 1080
+    }
+   ]
+  },
+  "SAND": {
+   "1": [
+    {
+     "name": "Sand",
+     "qty": 1662
+    }
+   ],
+   "2": [
+    {
+     "name": "Sand",
+     "qty": 1662
+    }
+   ],
+   "3": [
+    {
+     "name": "Sand",
+     "qty": 1800
+    }
+   ],
+   "4": [
+    {
+     "name": "Sand",
+     "qty": 1800
+    }
+   ],
+   "5": [
+    {
+     "name": "Sand",
+     "qty": 1964
+    }
+   ],
+   "6": [
+    {
+     "name": "Sand",
+     "qty": 1964
+    }
+   ],
+   "7": [
+    {
+     "name": "Sand",
+     "qty": 2274
+    }
+   ],
+   "8": [
+    {
+     "name": "Sand",
+     "qty": 2274
+    }
+   ],
+   "9": [
+    {
+     "name": "Sand",
+     "qty": 2700
+    }
+   ],
+   "10": [
+    {
+     "name": "Sand",
+     "qty": 2700
+    }
+   ],
+   "11": [
+    {
+     "name": "Sand",
+     "qty": 3323
+    }
+   ]
+  },
+  "SHEEP": {
+   "1": [
+    {
+     "name": "Raw Mutton",
+     "qty": 1800
+    },
+    {
+     "name": "White Wool",
+     "qty": 1800
+    }
+   ],
+   "2": [
+    {
+     "name": "Raw Mutton",
+     "qty": 1800
+    },
+    {
+     "name": "White Wool",
+     "qty": 1800
+    }
+   ],
+   "3": [
+    {
+     "name": "Raw Mutton",
+     "qty": 1964
+    },
+    {
+     "name": "White Wool",
+     "qty": 1964
+    }
+   ],
+   "4": [
+    {
+     "name": "Raw Mutton",
+     "qty": 1964
+    },
+    {
+     "name": "White Wool",
+     "qty": 1964
+    }
+   ],
+   "5": [
+    {
+     "name": "Raw Mutton",
+     "qty": 2160
+    },
+    {
+     "name": "White Wool",
+     "qty": 2160
+    }
+   ],
+   "6": [
+    {
+     "name": "Raw Mutton",
+     "qty": 2160
+    },
+    {
+     "name": "White Wool",
+     "qty": 2160
+    }
+   ],
+   "7": [
+    {
+     "name": "Raw Mutton",
+     "qty": 2400
+    },
+    {
+     "name": "White Wool",
+     "qty": 2400
+    }
+   ],
+   "8": [
+    {
+     "name": "Raw Mutton",
+     "qty": 2400
+    },
+    {
+     "name": "White Wool",
+     "qty": 2400
+    }
+   ],
+   "9": [
+    {
+     "name": "Raw Mutton",
+     "qty": 2700
+    },
+    {
+     "name": "White Wool",
+     "qty": 2700
+    }
+   ],
+   "10": [
+    {
+     "name": "Raw Mutton",
+     "qty": 2700
+    },
+    {
+     "name": "White Wool",
+     "qty": 2700
+    }
+   ],
+   "11": [
+    {
+     "name": "Raw Mutton",
+     "qty": 3600
+    },
+    {
+     "name": "White Wool",
+     "qty": 3600
+    }
+   ],
+   "12": [
+    {
+     "name": "Raw Mutton",
+     "qty": 4800
+    },
+    {
+     "name": "White Wool",
+     "qty": 4800
+    }
+   ]
+  },
+  "SKELETON": {
+   "1": [
+    {
+     "name": "Bone",
+     "qty": 1662
+    }
+   ],
+   "2": [
+    {
+     "name": "Bone",
+     "qty": 1662
+    }
+   ],
+   "3": [
+    {
+     "name": "Bone",
+     "qty": 1800
+    }
+   ],
+   "4": [
+    {
+     "name": "Bone",
+     "qty": 1800
+    }
+   ],
+   "5": [
+    {
+     "name": "Bone",
+     "qty": 1964
+    }
+   ],
+   "6": [
+    {
+     "name": "Bone",
+     "qty": 1964
+    }
+   ],
+   "7": [
+    {
+     "name": "Bone",
+     "qty": 2160
+    }
+   ],
+   "8": [
+    {
+     "name": "Bone",
+     "qty": 2160
+    }
+   ],
+   "9": [
+    {
+     "name": "Bone",
+     "qty": 2541
+    }
+   ],
+   "10": [
+    {
+     "name": "Bone",
+     "qty": 2541
+    }
+   ],
+   "11": [
+    {
+     "name": "Bone",
+     "qty": 3323
+    }
+   ]
+  },
+  "SLIME": {
+   "1": [
+    {
+     "name": "Slimeball",
+     "qty": 2991
+    }
+   ],
+   "2": [
+    {
+     "name": "Slimeball",
+     "qty": 2991
+    }
+   ],
+   "3": [
+    {
+     "name": "Slimeball",
+     "qty": 3240
+    }
+   ],
+   "4": [
+    {
+     "name": "Slimeball",
+     "qty": 3240
+    }
+   ],
+   "5": [
+    {
+     "name": "Slimeball",
+     "qty": 3535
+    }
+   ],
+   "6": [
+    {
+     "name": "Slimeball",
+     "qty": 3535
+    }
+   ],
+   "7": [
+    {
+     "name": "Slimeball",
+     "qty": 4093
+    }
+   ],
+   "8": [
+    {
+     "name": "Slimeball",
+     "qty": 4093
+    }
+   ],
+   "9": [
+    {
+     "name": "Slimeball",
+     "qty": 4860
+    }
+   ],
+   "10": [
+    {
+     "name": "Slimeball",
+     "qty": 4860
+    }
+   ],
+   "11": [
+    {
+     "name": "Slimeball",
+     "qty": 6480
+    }
+   ]
+  },
+  "SNOW": {
+   "1": [
+    {
+     "name": "Snowball",
+     "qty": 13292
+    }
+   ],
+   "2": [
+    {
+     "name": "Snowball",
+     "qty": 13292
+    }
+   ],
+   "3": [
+    {
+     "name": "Snowball",
+     "qty": 14400
+    }
+   ],
+   "4": [
+    {
+     "name": "Snowball",
+     "qty": 14400
+    }
+   ],
+   "5": [
+    {
+     "name": "Snowball",
+     "qty": 15709
+    }
+   ],
+   "6": [
+    {
+     "name": "Snowball",
+     "qty": 15709
+    }
+   ],
+   "7": [
+    {
+     "name": "Snowball",
+     "qty": 18189
+    }
+   ],
+   "8": [
+    {
+     "name": "Snowball",
+     "qty": 18189
+    }
+   ],
+   "9": [
+    {
+     "name": "Snowball",
+     "qty": 21600
+    }
+   ],
+   "10": [
+    {
+     "name": "Snowball",
+     "qty": 21600
+    }
+   ],
+   "11": [
+    {
+     "name": "Snowball",
+     "qty": 26585
+    }
+   ],
+   "12": [
+    {
+     "name": "Snowball",
+     "qty": 29793
+    }
+   ]
+  },
+  "SPIDER": {
+   "1": [
+    {
+     "name": "String",
+     "qty": 1662
+    },
+    {
+     "name": "Spider Eye",
+     "qty": 831
+    }
+   ],
+   "2": [
+    {
+     "name": "String",
+     "qty": 1662
+    },
+    {
+     "name": "Spider Eye",
+     "qty": 831
+    }
+   ],
+   "3": [
+    {
+     "name": "String",
+     "qty": 1800
+    },
+    {
+     "name": "Spider Eye",
+     "qty": 900
+    }
+   ],
+   "4": [
+    {
+     "name": "String",
+     "qty": 1800
+    },
+    {
+     "name": "Spider Eye",
+     "qty": 900
+    }
+   ],
+   "5": [
+    {
+     "name": "String",
+     "qty": 1964
+    },
+    {
+     "name": "Spider Eye",
+     "qty": 982
+    }
+   ],
+   "6": [
+    {
+     "name": "String",
+     "qty": 1964
+    },
+    {
+     "name": "Spider Eye",
+     "qty": 982
+    }
+   ],
+   "7": [
+    {
+     "name": "String",
+     "qty": 2160
+    },
+    {
+     "name": "Spider Eye",
+     "qty": 1080
+    }
+   ],
+   "8": [
+    {
+     "name": "String",
+     "qty": 2160
+    },
+    {
+     "name": "Spider Eye",
+     "qty": 1080
+    }
+   ],
+   "9": [
+    {
+     "name": "String",
+     "qty": 2541
+    },
+    {
+     "name": "Spider Eye",
+     "qty": 1271
+    }
+   ],
+   "10": [
+    {
+     "name": "String",
+     "qty": 2541
+    },
+    {
+     "name": "Spider Eye",
+     "qty": 1271
+    }
+   ],
+   "11": [
+    {
+     "name": "String",
+     "qty": 3323
+    },
+    {
+     "name": "Spider Eye",
+     "qty": 1662
+    }
+   ]
+  },
+  "SPRUCE": {
+   "1": [
+    {
+     "name": "Spruce Log",
+     "qty": 3600
+    }
+   ],
+   "2": [
+    {
+     "name": "Spruce Log",
+     "qty": 3600
+    }
+   ],
+   "3": [
+    {
+     "name": "Spruce Log",
+     "qty": 3840
+    }
+   ],
+   "4": [
+    {
+     "name": "Spruce Log",
+     "qty": 3840
+    }
+   ],
+   "5": [
+    {
+     "name": "Spruce Log",
+     "qty": 4114
+    }
+   ],
+   "6": [
+    {
+     "name": "Spruce Log",
+     "qty": 4114
+    }
+   ],
+   "7": [
+    {
+     "name": "Spruce Log",
+     "qty": 4547
+    }
+   ],
+   "8": [
+    {
+     "name": "Spruce Log",
+     "qty": 4547
+    }
+   ],
+   "9": [
+    {
+     "name": "Spruce Log",
+     "qty": 5236
+    }
+   ],
+   "10": [
+    {
+     "name": "Spruce Log",
+     "qty": 5236
+    }
+   ],
+   "11": [
+    {
+     "name": "Spruce Log",
+     "qty": 6400
+    }
+   ]
+  },
+  "SUGAR_CANE": {
+   "1": [
+    {
+     "name": "Sugar Cane",
+     "qty": 5891
+    }
+   ],
+   "2": [
+    {
+     "name": "Sugar Cane",
+     "qty": 5891
+    }
+   ],
+   "3": [
+    {
+     "name": "Sugar Cane",
+     "qty": 6480
+    }
+   ],
+   "4": [
+    {
+     "name": "Sugar Cane",
+     "qty": 6480
+    }
+   ],
+   "5": [
+    {
+     "name": "Sugar Cane",
+     "qty": 7200
+    }
+   ],
+   "6": [
+    {
+     "name": "Sugar Cane",
+     "qty": 7200
+    }
+   ],
+   "7": [
+    {
+     "name": "Sugar Cane",
+     "qty": 8100
+    }
+   ],
+   "8": [
+    {
+     "name": "Sugar Cane",
+     "qty": 8100
+    }
+   ],
+   "9": [
+    {
+     "name": "Sugar Cane",
+     "qty": 8938
+    }
+   ],
+   "10": [
+    {
+     "name": "Sugar Cane",
+     "qty": 8938
+    }
+   ],
+   "11": [
+    {
+     "name": "Sugar Cane",
+     "qty": 10800
+    }
+   ],
+   "12": [
+    {
+     "name": "Sugar Cane",
+     "qty": 14400
+    }
+   ]
+  },
+  "SUNFLOWER": {
+   "1": [
+    {
+     "name": "Sunflower",
+     "qty": 5400
+    },
+    {
+     "name": "Moonflower",
+     "qty": 5400
+    }
+   ],
+   "2": [
+    {
+     "name": "Sunflower",
+     "qty": 5635
+    },
+    {
+     "name": "Moonflower",
+     "qty": 5635
+    }
+   ],
+   "3": [
+    {
+     "name": "Sunflower",
+     "qty": 5891
+    },
+    {
+     "name": "Moonflower",
+     "qty": 5891
+    }
+   ],
+   "4": [
+    {
+     "name": "Sunflower",
+     "qty": 6171
+    },
+    {
+     "name": "Moonflower",
+     "qty": 6171
+    }
+   ],
+   "5": [
+    {
+     "name": "Sunflower",
+     "qty": 6480
+    },
+    {
+     "name": "Moonflower",
+     "qty": 6480
+    }
+   ],
+   "6": [
+    {
+     "name": "Sunflower",
+     "qty": 6821
+    },
+    {
+     "name": "Moonflower",
+     "qty": 6821
+    }
+   ],
+   "7": [
+    {
+     "name": "Sunflower",
+     "qty": 7200
+    },
+    {
+     "name": "Moonflower",
+     "qty": 7200
+    }
+   ],
+   "8": [
+    {
+     "name": "Sunflower",
+     "qty": 7624
+    },
+    {
+     "name": "Moonflower",
+     "qty": 7624
+    }
+   ],
+   "9": [
+    {
+     "name": "Sunflower",
+     "qty": 8100
+    },
+    {
+     "name": "Moonflower",
+     "qty": 8100
+    }
+   ],
+   "10": [
+    {
+     "name": "Sunflower",
+     "qty": 8640
+    },
+    {
+     "name": "Moonflower",
+     "qty": 8640
+    }
+   ],
+   "11": [
+    {
+     "name": "Sunflower",
+     "qty": 9257
+    },
+    {
+     "name": "Moonflower",
+     "qty": 9257
+    }
+   ]
+  },
+  "TARANTULA": {
+   "1": [
+    {
+     "name": "String",
+     "qty": 4707
+    },
+    {
+     "name": "Spider Eye",
+     "qty": 1490
+    },
+    {
+     "name": "Iron Ingot",
+     "qty": 298
+    }
+   ],
+   "2": [
+    {
+     "name": "String",
+     "qty": 4707
+    },
+    {
+     "name": "Spider Eye",
+     "qty": 1490
+    },
+    {
+     "name": "Iron Ingot",
+     "qty": 298
+    }
+   ],
+   "3": [
+    {
+     "name": "String",
+     "qty": 5250
+    },
+    {
+     "name": "Spider Eye",
+     "qty": 1662
+    },
+    {
+     "name": "Iron Ingot",
+     "qty": 332
+    }
+   ],
+   "4": [
+    {
+     "name": "String",
+     "qty": 5250
+    },
+    {
+     "name": "Spider Eye",
+     "qty": 1662
+    },
+    {
+     "name": "Iron Ingot",
+     "qty": 332
+    }
+   ],
+   "5": [
+    {
+     "name": "String",
+     "qty": 5935
+    },
+    {
+     "name": "Spider Eye",
+     "qty": 1878
+    },
+    {
+     "name": "Iron Ingot",
+     "qty": 376
+    }
+   ],
+   "6": [
+    {
+     "name": "String",
+     "qty": 5935
+    },
+    {
+     "name": "Spider Eye",
+     "qty": 1878
+    },
+    {
+     "name": "Iron Ingot",
+     "qty": 376
+    }
+   ],
+   "7": [
+    {
+     "name": "String",
+     "qty": 7185
+    },
+    {
+     "name": "Spider Eye",
+     "qty": 2274
+    },
+    {
+     "name": "Iron Ingot",
+     "qty": 455
+    }
+   ],
+   "8": [
+    {
+     "name": "String",
+     "qty": 7185
+    },
+    {
+     "name": "Spider Eye",
+     "qty": 2274
+    },
+    {
+     "name": "Iron Ingot",
+     "qty": 455
+    }
+   ],
+   "9": [
+    {
+     "name": "String",
+     "qty": 9415
+    },
+    {
+     "name": "Spider Eye",
+     "qty": 2979
+    },
+    {
+     "name": "Iron Ingot",
+     "qty": 596
+    }
+   ],
+   "10": [
+    {
+     "name": "String",
+     "qty": 9415
+    },
+    {
+     "name": "Spider Eye",
+     "qty": 2979
+    },
+    {
+     "name": "Iron Ingot",
+     "qty": 596
+    }
+   ],
+   "11": [
+    {
+     "name": "String",
+     "qty": 13651
+    },
+    {
+     "name": "Spider Eye",
+     "qty": 4320
+    },
+    {
+     "name": "Iron Ingot",
+     "qty": 864
+    }
+   ]
+  },
+  "VAMPIRE": {
+   "1": [
+    {
+     "name": "Hemovibe",
+     "qty": 227
+    }
+   ],
+   "2": [
+    {
+     "name": "Hemovibe",
+     "qty": 227
+    }
+   ],
+   "3": [
+    {
+     "name": "Hemovibe",
+     "qty": 247
+    }
+   ],
+   "4": [
+    {
+     "name": "Hemovibe",
+     "qty": 247
+    }
+   ],
+   "5": [
+    {
+     "name": "Hemovibe",
+     "qty": 270
+    }
+   ],
+   "6": [
+    {
+     "name": "Hemovibe",
+     "qty": 270
+    }
+   ],
+   "7": [
+    {
+     "name": "Hemovibe",
+     "qty": 309
+    }
+   ],
+   "8": [
+    {
+     "name": "Hemovibe",
+     "qty": 309
+    }
+   ],
+   "9": [
+    {
+     "name": "Hemovibe",
+     "qty": 369
+    }
+   ],
+   "10": [
+    {
+     "name": "Hemovibe",
+     "qty": 369
+    }
+   ],
+   "11": [
+    {
+     "name": "Hemovibe",
+     "qty": 455
+    }
+   ]
+  },
+  "VOIDLING": {
+   "1": [
+    {
+     "name": "Nether Quartz",
+     "qty": 384
+    },
+    {
+     "name": "Enchanted Ender Pearl",
+     "qty": 6
+    }
+   ],
+   "2": [
+    {
+     "name": "Nether Quartz",
+     "qty": 384
+    },
+    {
+     "name": "Enchanted Ender Pearl",
+     "qty": 6
+    }
+   ],
+   "3": [
+    {
+     "name": "Nether Quartz",
+     "qty": 411
+    },
+    {
+     "name": "Enchanted Ender Pearl",
+     "qty": 6
+    }
+   ],
+   "4": [
+    {
+     "name": "Nether Quartz",
+     "qty": 411
+    },
+    {
+     "name": "Enchanted Ender Pearl",
+     "qty": 6
+    }
+   ],
+   "5": [
+    {
+     "name": "Nether Quartz",
+     "qty": 443
+    },
+    {
+     "name": "Enchanted Ender Pearl",
+     "qty": 7
+    }
+   ],
+   "6": [
+    {
+     "name": "Nether Quartz",
+     "qty": 443
+    },
+    {
+     "name": "Enchanted Ender Pearl",
+     "qty": 7
+    }
+   ],
+   "7": [
+    {
+     "name": "Nether Quartz",
+     "qty": 494
+    },
+    {
+     "name": "Enchanted Ender Pearl",
+     "qty": 8
+    }
+   ],
+   "8": [
+    {
+     "name": "Nether Quartz",
+     "qty": 494
+    },
+    {
+     "name": "Enchanted Ender Pearl",
+     "qty": 8
+    }
+   ],
+   "9": [
+    {
+     "name": "Nether Quartz",
+     "qty": 576
+    },
+    {
+     "name": "Enchanted Ender Pearl",
+     "qty": 9
+    }
+   ],
+   "10": [
+    {
+     "name": "Nether Quartz",
+     "qty": 576
+    },
+    {
+     "name": "Enchanted Ender Pearl",
+     "qty": 9
+    }
+   ],
+   "11": [
+    {
+     "name": "Nether Quartz",
+     "qty": 720
+    },
+    {
+     "name": "Enchanted Ender Pearl",
+     "qty": 1
+    }
+   ]
+  },
+  "WHEAT": {
+   "1": [
+    {
+     "name": "Wheat",
+     "qty": 2880
+    },
+    {
+     "name": "Seeds",
+     "qty": 4320
+    }
+   ],
+   "2": [
+    {
+     "name": "Wheat",
+     "qty": 2880
+    },
+    {
+     "name": "Seeds",
+     "qty": 4320
+    }
+   ],
+   "3": [
+    {
+     "name": "Wheat",
+     "qty": 3323
+    },
+    {
+     "name": "Seeds",
+     "qty": 4985
+    }
+   ],
+   "4": [
+    {
+     "name": "Wheat",
+     "qty": 3323
+    },
+    {
+     "name": "Seeds",
+     "qty": 4985
+    }
+   ],
+   "5": [
+    {
+     "name": "Wheat",
+     "qty": 3927
+    },
+    {
+     "name": "Seeds",
+     "qty": 5891
+    }
+   ],
+   "6": [
+    {
+     "name": "Wheat",
+     "qty": 3927
+    },
+    {
+     "name": "Seeds",
+     "qty": 5891
+    }
+   ],
+   "7": [
+    {
+     "name": "Wheat",
+     "qty": 4320
+    },
+    {
+     "name": "Seeds",
+     "qty": 6480
+    }
+   ],
+   "8": [
+    {
+     "name": "Wheat",
+     "qty": 4320
+    },
+    {
+     "name": "Seeds",
+     "qty": 6480
+    }
+   ],
+   "9": [
+    {
+     "name": "Wheat",
+     "qty": 4800
+    },
+    {
+     "name": "Seeds",
+     "qty": 7200
+    }
+   ],
+   "10": [
+    {
+     "name": "Wheat",
+     "qty": 4800
+    },
+    {
+     "name": "Seeds",
+     "qty": 7200
+    }
+   ],
+   "11": [
+    {
+     "name": "Wheat",
+     "qty": 5400
+    },
+    {
+     "name": "Seeds",
+     "qty": 8100
+    }
+   ],
+   "12": [
+    {
+     "name": "Wheat",
+     "qty": 6171
+    },
+    {
+     "name": "Seeds",
+     "qty": 9257
+    }
+   ]
+  },
+  "ZOMBIE": {
+   "1": [
+    {
+     "name": "Rotten Flesh",
+     "qty": 1662
+    },
+    {
+     "name": "Poisonous Potato",
+     "qty": 83
+    },
+    {
+     "name": "Potato",
+     "qty": 17
+    },
+    {
+     "name": "Carrot",
+     "qty": 17
+    }
+   ],
+   "2": [
+    {
+     "name": "Rotten Flesh",
+     "qty": 1662
+    },
+    {
+     "name": "Poisonous Potato",
+     "qty": 83
+    },
+    {
+     "name": "Potato",
+     "qty": 17
+    },
+    {
+     "name": "Carrot",
+     "qty": 17
+    }
+   ],
+   "3": [
+    {
+     "name": "Rotten Flesh",
+     "qty": 1800
+    },
+    {
+     "name": "Poisonous Potato",
+     "qty": 90
+    },
+    {
+     "name": "Potato",
+     "qty": 18
+    },
+    {
+     "name": "Carrot",
+     "qty": 18
+    }
+   ],
+   "4": [
+    {
+     "name": "Rotten Flesh",
+     "qty": 1800
+    },
+    {
+     "name": "Poisonous Potato",
+     "qty": 90
+    },
+    {
+     "name": "Potato",
+     "qty": 18
+    },
+    {
+     "name": "Carrot",
+     "qty": 18
+    }
+   ],
+   "5": [
+    {
+     "name": "Rotten Flesh",
+     "qty": 1964
+    },
+    {
+     "name": "Poisonous Potato",
+     "qty": 98
+    },
+    {
+     "name": "Potato",
+     "qty": 20
+    },
+    {
+     "name": "Carrot",
+     "qty": 20
+    }
+   ],
+   "6": [
+    {
+     "name": "Rotten Flesh",
+     "qty": 1964
+    },
+    {
+     "name": "Poisonous Potato",
+     "qty": 98
+    },
+    {
+     "name": "Potato",
+     "qty": 20
+    },
+    {
+     "name": "Carrot",
+     "qty": 20
+    }
+   ],
+   "7": [
+    {
+     "name": "Rotten Flesh",
+     "qty": 2160
+    },
+    {
+     "name": "Poisonous Potato",
+     "qty": 108
+    },
+    {
+     "name": "Potato",
+     "qty": 22
+    },
+    {
+     "name": "Carrot",
+     "qty": 22
+    }
+   ],
+   "8": [
+    {
+     "name": "Rotten Flesh",
+     "qty": 2160
+    },
+    {
+     "name": "Poisonous Potato",
+     "qty": 108
+    },
+    {
+     "name": "Potato",
+     "qty": 22
+    },
+    {
+     "name": "Carrot",
+     "qty": 22
+    }
+   ],
+   "9": [
+    {
+     "name": "Rotten Flesh",
+     "qty": 2541
+    },
+    {
+     "name": "Poisonous Potato",
+     "qty": 127
+    },
+    {
+     "name": "Potato",
+     "qty": 25
+    },
+    {
+     "name": "Carrot",
+     "qty": 25
+    }
+   ],
+   "10": [
+    {
+     "name": "Rotten Flesh",
+     "qty": 2541
+    },
+    {
+     "name": "Poisonous Potato",
+     "qty": 127
+    },
+    {
+     "name": "Potato",
+     "qty": 25
+    },
+    {
+     "name": "Carrot",
+     "qty": 25
+    }
+   ],
+   "11": [
+    {
+     "name": "Rotten Flesh",
+     "qty": 3323
+    },
+    {
+     "name": "Poisonous Potato",
+     "qty": 166
+    },
+    {
+     "name": "Potato",
+     "qty": 33
+    },
+    {
+     "name": "Carrot",
+     "qty": 33
+    }
+   ]
+  }
+ },
+ "essencePerks": {
+  "DRAGON|One Punch": {
+   "1": 100,
+   "2": 200,
+   "3": 300,
+   "4": 400,
+   "5": 500
+  },
+  "DRAGON|Recharge": {
+   "1": 100,
+   "2": 100,
+   "3": 100,
+   "4": 100,
+   "5": 100,
+   "6": 100,
+   "7": 100,
+   "8": 100,
+   "9": 100,
+   "10": 100
+  },
+  "DRAGON|Rageborn": {
+   "1": 125,
+   "2": 250,
+   "3": 500,
+   "4": 1000,
+   "5": 1500
+  },
+  "DRAGON|Zealuck": {
+   "1": 150,
+   "2": 500,
+   "3": 1250,
+   "4": 2000,
+   "5": 3000
+  },
+  "DRAGON|Ender Training": {
+   "1": 250,
+   "2": 1250,
+   "3": 5000
+  },
+  "DRAGON|Infused Dragon": {
+   "1": 500,
+   "2": 1500,
+   "3": 2500,
+   "4": 3500,
+   "5": 4000
+  },
+  "DRAGON|Unbridled Rage": {
+   "1": 1000,
+   "2": 1500,
+   "3": 2000,
+   "4": 3000,
+   "5": 5000
+  },
+  "DRAGON|Two-Headed Strike": {
+   "1": 1500,
+   "2": 2250,
+   "3": 3250,
+   "4": 4500,
+   "5": 6500
+  },
+  "DRAGON|Dragon Piper": {
+   "1": 2000
+  },
+  "WITHER|Forbidden Health": {
+   "1": 100,
+   "2": 250,
+   "3": 500,
+   "4": 1000,
+   "5": 1500
+  },
+  "WITHER|Forbidden Defense": {
+   "1": 100,
+   "2": 250,
+   "3": 500,
+   "4": 1000,
+   "5": 1500
+  },
+  "WITHER|Forbidden Speed": {
+   "1": 100,
+   "2": 250
+  },
+  "WITHER|Forbidden Intelligence": {
+   "1": 100,
+   "2": 250,
+   "3": 500,
+   "4": 1000,
+   "5": 1500
+  },
+  "WITHER|Forbidden Strength": {
+   "1": 100,
+   "2": 250,
+   "3": 500,
+   "4": 1000,
+   "5": 1500
+  },
+  "WITHER|Forbidden Blessing": {
+   "1": 200,
+   "2": 400,
+   "3": 600,
+   "4": 800,
+   "5": 1000,
+   "6": 1200,
+   "7": 1400,
+   "8": 1600,
+   "9": 1800,
+   "10": 2000
+  },
+  "WITHER|Echoes of the Lost": {
+   "1": 250,
+   "2": 500,
+   "3": 1000,
+   "4": 2000,
+   "5": 5000
+  },
+  "UNDEAD|Boss Luck": {
+   "1": 100,
+   "2": 1000,
+   "3": 10000,
+   "4": 100000
+  },
+  "UNDEAD|Looting": {
+   "1": 1000,
+   "2": 2000,
+   "3": 3000,
+   "4": 4000,
+   "5": 5000
+  },
+  "UNDEAD|Help of the Fairies": {
+   "1": 200000
+  },
+  "UNDEAD|Health Essence": {
+   "1": 1000,
+   "2": 2500,
+   "3": 5000,
+   "4": 10000,
+   "5": 25000
+  },
+  "UNDEAD|Defense Essence": {
+   "1": 1000,
+   "2": 4000,
+   "3": 6000,
+   "4": 8000,
+   "5": 10000
+  },
+  "UNDEAD|Strength Essence": {
+   "1": 1000,
+   "2": 4000,
+   "3": 6000,
+   "4": 8000,
+   "5": 10000
+  },
+  "UNDEAD|Intelligence Essence": {
+   "1": 1000,
+   "2": 4000,
+   "3": 6000,
+   "4": 8000,
+   "5": 10000
+  },
+  "UNDEAD|Critical Essence": {
+   "1": 1000,
+   "2": 3000,
+   "3": 10000,
+   "4": 20000,
+   "5": 50000
+  },
+  "DIAMOND|Radiant Fisher": {
+   "1": 200,
+   "2": 400,
+   "3": 600,
+   "4": 800,
+   "5": 1000,
+   "6": 1200,
+   "7": 1400,
+   "8": 1600,
+   "9": 1800,
+   "10": 2000
+  },
+  "DIAMOND|Diamond in the Rough": {
+   "1": 1000,
+   "2": 1500,
+   "3": 2000,
+   "4": 3000,
+   "5": 5000
+  },
+  "DIAMOND|Rhinestone Infusion": {
+   "1": 100,
+   "2": 200,
+   "3": 300,
+   "4": 400,
+   "5": 500,
+   "6": 600,
+   "7": 700,
+   "8": 800,
+   "9": 900,
+   "10": 1000
+  },
+  "DIAMOND|Under Pressure": {
+   "1": 125,
+   "2": 250,
+   "3": 500,
+   "4": 1000,
+   "5": 1500
+  },
+  "DIAMOND|High Roller": {
+   "1": 5000
+  },
+  "DIAMOND|Return to Sender": {
+   "1": 50,
+   "2": 75,
+   "3": 100,
+   "4": 150,
+   "5": 250,
+   "6": 400,
+   "7": 750,
+   "8": 1000,
+   "9": 1750,
+   "10": 2500
+  },
+  "FOREST|Trapped": {
+   "1": 100,
+   "2": 200,
+   "3": 300,
+   "4": 400,
+   "5": 500
+  },
+  "FOREST|Axed": {
+   "1": 10000
+  },
+  "FOREST|Extreme Pressure": {
+   "1": 100,
+   "2": 200,
+   "3": 300,
+   "4": 400,
+   "5": 500,
+   "6": 600,
+   "7": 700,
+   "8": 800,
+   "9": 900,
+   "10": 1000
+  },
+  "FOREST|Lumberjack": {
+   "1": 125,
+   "2": 250,
+   "3": 500,
+   "4": 1000,
+   "5": 1500,
+   "6": 2000,
+   "7": 2500,
+   "8": 3000,
+   "9": 3500,
+   "10": 4000
+  },
+  "FOREST|Tasty": {
+   "1": 125,
+   "2": 250,
+   "3": 500,
+   "4": 1000,
+   "5": 1500
+  },
+  "FOREST|Forest Training": {
+   "1": 250,
+   "2": 1250,
+   "3": 5000
+  },
+  "GOLD|Heart of Gold": {
+   "1": 1000,
+   "2": 1500,
+   "3": 2000,
+   "4": 3000,
+   "5": 5000
+  },
+  "GOLD|Treasure of the Earth": {
+   "1": 150,
+   "2": 500,
+   "3": 1250,
+   "4": 2000,
+   "5": 3000
+  },
+  "GOLD|Dwarven Training": {
+   "1": 250,
+   "2": 1250,
+   "3": 5000
+  },
+  "GOLD|Unbreaking": {
+   "1": 150,
+   "2": 500,
+   "3": 1250,
+   "4": 2000,
+   "5": 3000
+  },
+  "GOLD|Eager Miner": {
+   "1": 100,
+   "2": 200,
+   "3": 300,
+   "4": 400,
+   "5": 500,
+   "6": 600,
+   "7": 700,
+   "8": 800,
+   "9": 900,
+   "10": 1000
+  },
+  "GOLD|Midas Lure": {
+   "1": 200,
+   "2": 400,
+   "3": 600,
+   "4": 800,
+   "5": 1000,
+   "6": 1200,
+   "7": 1400,
+   "8": 1600,
+   "9": 1800,
+   "10": 2000
+  },
+  "SPIDER|Empowered Agility": {
+   "1": 50,
+   "2": 75,
+   "3": 100,
+   "4": 150,
+   "5": 250,
+   "6": 400,
+   "7": 750,
+   "8": 1000,
+   "9": 1750,
+   "10": 2500
+  },
+  "SPIDER|Vermin Control": {
+   "1": 100,
+   "2": 500,
+   "3": 1000,
+   "4": 3000,
+   "5": 5000
+  },
+  "SPIDER|Bane": {
+   "1": 100,
+   "2": 500,
+   "3": 1000,
+   "4": 3000,
+   "5": 5000
+  },
+  "SPIDER|Spider Training": {
+   "1": 250,
+   "2": 1250,
+   "3": 5000
+  },
+  "SPIDER|Toxophilite": {
+   "1": 1000,
+   "2": 1500,
+   "3": 2000,
+   "4": 3000,
+   "5": 5000
+  },
+  "ICE|Cold Efficiency": {
+   "1": 1000,
+   "2": 1500,
+   "3": 2000,
+   "4": 3000,
+   "5": 5000
+  },
+  "ICE|Cooled Forges": {
+   "1": 100,
+   "2": 1000,
+   "3": 2000,
+   "4": 3000,
+   "5": 5000
+  },
+  "ICE|Frozen Skin": {
+   "1": 1000,
+   "2": 1500,
+   "3": 2000,
+   "4": 3000,
+   "5": 5000
+  },
+  "ICE|Season of Joy": {
+   "1": 200,
+   "2": 400,
+   "3": 800,
+   "4": 1500,
+   "5": 2100,
+   "6": 3000,
+   "7": 3000,
+   "8": 4000,
+   "9": 4000,
+   "10": 4000
+  },
+  "ICE|Drake Piper": {
+   "1": 2000
+  },
+  "CRIMSON|Strongarm": {
+   "1": 1000,
+   "2": 2000
+  },
+  "CRIMSON|Fresh Tools": {
+   "1": 200,
+   "2": 400,
+   "3": 600,
+   "4": 800,
+   "5": 1000
+  },
+  "CRIMSON|Headstart": {
+   "1": 100,
+   "2": 200,
+   "3": 300,
+   "4": 400,
+   "5": 500
+  },
+  "CRIMSON|Kuudra Master": {
+   "1": 5000
+  },
+  "CRIMSON|Fungus Fortuna": {
+   "1": 100,
+   "2": 200,
+   "3": 300,
+   "4": 400,
+   "5": 500,
+   "6": 600,
+   "7": 700,
+   "8": 800,
+   "9": 900,
+   "10": 1000
+  },
+  "CRIMSON|Harena Fortuna": {
+   "1": 100,
+   "2": 200,
+   "3": 300,
+   "4": 400,
+   "5": 500,
+   "6": 600,
+   "7": 700,
+   "8": 800,
+   "9": 900,
+   "10": 1000
+  },
+  "CRIMSON|Crimson Training": {
+   "1": 250,
+   "2": 1250,
+   "3": 5000
+  },
+  "CRIMSON|Wither Piper": {
+   "1": 500,
+   "2": 750,
+   "3": 1250,
+   "4": 2000,
+   "5": 3000
+  }
+ }
+}

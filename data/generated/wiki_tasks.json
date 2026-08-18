@@ -1,0 +1,10622 @@
+{
+ "generatedAt": "2026-08-18T18:49:54.800Z",
+ "source": "https://hypixel-skyblock.fandom.com/api.php — SkyBlock Levels/Tasks",
+ "rows": [
+  {
+   "tab": "Core",
+   "cells": [
+    "Skill Level Up",
+    "Skill Level Up",
+    "Gain XP by leveling up your Skills!",
+    "Level 1-10:"
+   ],
+   "xp": [
+    5,
+    8120
+   ]
+  },
+  {
+   "tab": "Core",
+   "cells": [
+    "Skill Level Up",
+    "Skill Level Up",
+    "Gain XP by leveling up your Skills!",
+    "Level 11-25:"
+   ],
+   "xp": [
+    10,
+    8120
+   ]
+  },
+  {
+   "tab": "Core",
+   "cells": [
+    "Skill Level Up",
+    "Skill Level Up",
+    "Gain XP by leveling up your Skills!",
+    "Level 26-50:"
+   ],
+   "xp": [
+    20,
+    8120
+   ]
+  },
+  {
+   "tab": "Core",
+   "cells": [
+    "Skill Level Up",
+    "Skill Level Up",
+    "Gain XP by leveling up your Skills!",
+    "Level 50-60:"
+   ],
+   "xp": [
+    30,
+    8120
+   ]
+  },
+  {
+   "tab": "Core",
+   "cells": [
+    "Museum Progression",
+    "Museum Progression",
+    "Gain XP by progressing your Museum!",
+    "See Museum/Milestones"
+   ],
+   "xp": [
+    3522
+   ]
+  },
+  {
+   "tab": "Core",
+   "cells": [
+    "Fairy Souls",
+    "Fairy Souls",
+    "Gain XP by finding and exchanging Fairy Souls!",
+    "Per 5 Fairy Souls:"
+   ],
+   "xp": [
+    10,
+    530
+   ]
+  },
+  {
+   "tab": "Core",
+   "cells": [
+    "Accessory Bag",
+    "Accessory Bag",
+    "Gain XP per Magical Power you have in your Accessory Bag!",
+    "Per Magical Power:"
+   ],
+   "xp": [
+    1,
+    2007
+   ]
+  },
+  {
+   "tab": "Core",
+   "cells": [
+    "Pet Score",
+    "Pet Score",
+    "Gain XP by increasing your Pet Score!",
+    "Per Pet Score:"
+   ],
+   "xp": [
+    3,
+    1518
+   ]
+  },
+  {
+   "tab": "Core",
+   "cells": [
+    "Collections",
+    "Collections",
+    "Gain XP by progressing your Collections!",
+    "Per Collection Milestone:"
+   ],
+   "xp": [
+    4,
+    3024
+   ]
+  },
+  {
+   "tab": "Core",
+   "cells": [
+    "Craft Minions",
+    "Craft Minions",
+    "Gain XP by crafting more unique Minions!",
+    "Tier I:"
+   ],
+   "xp": [
+    1,
+    2963
+   ]
+  },
+  {
+   "tab": "Core",
+   "cells": [
+    "Craft Minions",
+    "Craft Minions",
+    "Gain XP by crafting more unique Minions!",
+    "Tier II:"
+   ],
+   "xp": [
+    1,
+    2963
+   ]
+  },
+  {
+   "tab": "Core",
+   "cells": [
+    "Craft Minions",
+    "Craft Minions",
+    "Gain XP by crafting more unique Minions!",
+    "Tier III:"
+   ],
+   "xp": [
+    1,
+    2963
+   ]
+  },
+  {
+   "tab": "Core",
+   "cells": [
+    "Craft Minions",
+    "Craft Minions",
+    "Gain XP by crafting more unique Minions!",
+    "Tier IV:"
+   ],
+   "xp": [
+    1,
+    2963
+   ]
+  },
+  {
+   "tab": "Core",
+   "cells": [
+    "Craft Minions",
+    "Craft Minions",
+    "Gain XP by crafting more unique Minions!",
+    "Tier V:"
+   ],
+   "xp": [
+    1,
+    2963
+   ]
+  },
+  {
+   "tab": "Core",
+   "cells": [
+    "Craft Minions",
+    "Craft Minions",
+    "Gain XP by crafting more unique Minions!",
+    "Tier VI:"
+   ],
+   "xp": [
+    1,
+    2963
+   ]
+  },
+  {
+   "tab": "Core",
+   "cells": [
+    "Craft Minions",
+    "Craft Minions",
+    "Gain XP by crafting more unique Minions!",
+    "Tier VII:"
+   ],
+   "xp": [
+    2,
+    2963
+   ]
+  },
+  {
+   "tab": "Core",
+   "cells": [
+    "Craft Minions",
+    "Craft Minions",
+    "Gain XP by crafting more unique Minions!",
+    "Tier VIII:"
+   ],
+   "xp": [
+    3,
+    2963
+   ]
+  },
+  {
+   "tab": "Core",
+   "cells": [
+    "Craft Minions",
+    "Craft Minions",
+    "Gain XP by crafting more unique Minions!",
+    "Tier IX:"
+   ],
+   "xp": [
+    4,
+    2963
+   ]
+  },
+  {
+   "tab": "Core",
+   "cells": [
+    "Craft Minions",
+    "Craft Minions",
+    "Gain XP by crafting more unique Minions!",
+    "Tier X:"
+   ],
+   "xp": [
+    6,
+    2963
+   ]
+  },
+  {
+   "tab": "Core",
+   "cells": [
+    "Craft Minions",
+    "Craft Minions",
+    "Gain XP by crafting more unique Minions!",
+    "Tier XI:"
+   ],
+   "xp": [
+    12,
+    2963
+   ]
+  },
+  {
+   "tab": "Core",
+   "cells": [
+    "Craft Minions",
+    "Craft Minions",
+    "Gain XP by crafting more unique Minions!",
+    "Tier XII:"
+   ],
+   "xp": [
+    24,
+    2963
+   ]
+  },
+  {
+   "tab": "Core",
+   "cells": [
+    "Bank Upgrades",
+    "Gold Bank Upgrade",
+    "Upgrade your bank account to gain XP."
+   ],
+   "xp": [
+    20,
+    200
+   ]
+  },
+  {
+   "tab": "Core",
+   "cells": [
+    "Bank Upgrades",
+    "Deluxe Bank Upgrade",
+    "Upgrade your bank account to gain XP."
+   ],
+   "xp": [
+    25,
+    200
+   ]
+  },
+  {
+   "tab": "Core",
+   "cells": [
+    "Bank Upgrades",
+    "Super Deluxe Bank Upgrade",
+    "Upgrade your bank account to gain XP."
+   ],
+   "xp": [
+    30,
+    200
+   ]
+  },
+  {
+   "tab": "Core",
+   "cells": [
+    "Bank Upgrades",
+    "Premier Bank Upgrade",
+    "Upgrade your bank account to gain XP."
+   ],
+   "xp": [
+    35,
+    200
+   ]
+  },
+  {
+   "tab": "Core",
+   "cells": [
+    "Bank Upgrades",
+    "Luxurious Bank Upgrade",
+    "Upgrade your bank account to gain XP."
+   ],
+   "xp": [
+    40,
+    200
+   ]
+  },
+  {
+   "tab": "Core",
+   "cells": [
+    "Bank Upgrades",
+    "Palatial Bank Upgrade",
+    "Upgrade your bank account to gain XP."
+   ],
+   "xp": [
+    50,
+    200
+   ]
+  },
+  {
+   "tab": "Core",
+   "cells": [
+    "Fast Travels Unlocked",
+    "Fast Travels Unlocked",
+    "Gain XP for unlocking Fast Travel!",
+    "Per Travel Scroll:"
+   ],
+   "xp": [
+    15,
+    300
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Mining Fiesta",
+    "Mining Fiesta",
+    "Gain XP by mining ores during the Mining Fiesta event! Blocks contribute their bp towards this task.",
+    "Per 5,000 ores mined: · (Caps at 1,000,000 ores mined)"
+   ],
+   "xp": [
+    1,
+    200
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Fishing Festival",
+    "Fishing Festival",
+    "Gain XP by killing Sharks during the Fishing Festival event!",
+    "Per 50 Sharks killed: · (Caps at 5,000 Sharks killed)"
+   ],
+   "xp": [
+    1,
+    100
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Spooky Festival",
+    "Wood Bracket",
+    "Gain XP by reaching certain amounts of points in a Spooky Festival!"
+   ],
+   "xp": [
+    10,
+    225
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Spooky Festival",
+    "Stone Bracket",
+    "Gain XP by reaching certain amounts of points in a Spooky Festival!"
+   ],
+   "xp": [
+    20,
+    225
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Spooky Festival",
+    "Iron Bracket",
+    "Gain XP by reaching certain amounts of points in a Spooky Festival!"
+   ],
+   "xp": [
+    30,
+    225
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Spooky Festival",
+    "Gold Bracket",
+    "Gain XP by reaching certain amounts of points in a Spooky Festival!"
+   ],
+   "xp": [
+    40,
+    225
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Spooky Festival",
+    "Diamond Bracket",
+    "Gain XP by reaching certain amounts of points in a Spooky Festival!"
+   ],
+   "xp": [
+    50,
+    225
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Spooky Festival",
+    "Emerald Bracket",
+    "Gain XP by reaching certain amounts of points in a Spooky Festival!"
+   ],
+   "xp": [
+    75,
+    225
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Hoppity's Hunt",
+    "Chocolate Factory Prestige",
+    "Gain XP each time you your Chocolate Factory!"
+   ],
+   "xp": [
+    25,
+    125
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Hoppity's Hunt",
+    "Mythic Chocolate Rabbits",
+    "Gain XP each time you find a Chocolate Rabbit!"
+   ],
+   "xp": [
+    10,
+    110
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Hoppity's Hunt",
+    "Divine Chocolate Rabbits",
+    "Gain XP each time you find a Chocolate Rabbit!"
+   ],
+   "xp": [
+    10,
+    50
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Jacob's Farming Contest",
+    "Jacob's Farming Contest",
+    "Gain XP by getting a gold medal in Jacob's Farming Contest",
+    "Per Crop:"
+   ],
+   "xp": [
+    10,
+    130
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Spooky Festival Perk Shop",
+    "Candy Scavenger",
+    "Gain XP by purchasing perk levels from Spooky Festival Perk Shop!",
+    "Tier I:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Spooky Festival Perk Shop",
+    "Candy Scavenger",
+    "Gain XP by purchasing perk levels from Spooky Festival Perk Shop!",
+    "Tier II:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Spooky Festival Perk Shop",
+    "Candy Scavenger",
+    "Gain XP by purchasing perk levels from Spooky Festival Perk Shop!",
+    "Tier III:"
+   ],
+   "xp": [
+    3,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Spooky Festival Perk Shop",
+    "Candy Scavenger",
+    "Gain XP by purchasing perk levels from Spooky Festival Perk Shop!",
+    "Tier IV:"
+   ],
+   "xp": [
+    5,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Spooky Festival Perk Shop",
+    "Candy Scavenger",
+    "Gain XP by purchasing perk levels from Spooky Festival Perk Shop!",
+    "Tier V:"
+   ],
+   "xp": [
+    7,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Spooky Festival Perk Shop",
+    "Spooky Hook",
+    "Gain XP by purchasing perk levels from Spooky Festival Perk Shop!",
+    "Tier I:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Spooky Festival Perk Shop",
+    "Spooky Hook",
+    "Gain XP by purchasing perk levels from Spooky Festival Perk Shop!",
+    "Tier II:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Spooky Festival Perk Shop",
+    "Spooky Hook",
+    "Gain XP by purchasing perk levels from Spooky Festival Perk Shop!",
+    "Tier III:"
+   ],
+   "xp": [
+    3,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Spooky Festival Perk Shop",
+    "Spooky Hook",
+    "Gain XP by purchasing perk levels from Spooky Festival Perk Shop!",
+    "Tier IV:"
+   ],
+   "xp": [
+    5,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Spooky Festival Perk Shop",
+    "Spooky Hook",
+    "Gain XP by purchasing perk levels from Spooky Festival Perk Shop!",
+    "Tier V:"
+   ],
+   "xp": [
+    7,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Spooky Festival Perk Shop",
+    "Purple Vogue",
+    "Gain XP by purchasing perk levels from Spooky Festival Perk Shop!",
+    "Tier I:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Spooky Festival Perk Shop",
+    "Purple Vogue",
+    "Gain XP by purchasing perk levels from Spooky Festival Perk Shop!",
+    "Tier II:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Spooky Festival Perk Shop",
+    "Purple Vogue",
+    "Gain XP by purchasing perk levels from Spooky Festival Perk Shop!",
+    "Tier III:"
+   ],
+   "xp": [
+    3,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Spooky Festival Perk Shop",
+    "Trick or Treat Enthusiast",
+    "Gain XP by purchasing perk levels from Spooky Festival Perk Shop!",
+    "Tier I:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Spooky Festival Perk Shop",
+    "Trick or Treat Enthusiast",
+    "Gain XP by purchasing perk levels from Spooky Festival Perk Shop!",
+    "Tier II:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Season of Jerry Perk Shop",
+    "Icy Hook",
+    "Gain XP by purchasing perk levels from Season of Jerry Perk Shop!",
+    "Tier I:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Season of Jerry Perk Shop",
+    "Icy Hook",
+    "Gain XP by purchasing perk levels from Season of Jerry Perk Shop!",
+    "Tier II:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Season of Jerry Perk Shop",
+    "Icy Hook",
+    "Gain XP by purchasing perk levels from Season of Jerry Perk Shop!",
+    "Tier III:"
+   ],
+   "xp": [
+    3,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Season of Jerry Perk Shop",
+    "Icy Hook",
+    "Gain XP by purchasing perk levels from Season of Jerry Perk Shop!",
+    "Tier IV:"
+   ],
+   "xp": [
+    5,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Season of Jerry Perk Shop",
+    "Icy Hook",
+    "Gain XP by purchasing perk levels from Season of Jerry Perk Shop!",
+    "Tier V:"
+   ],
+   "xp": [
+    7,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Season of Jerry Perk Shop",
+    "Present Connoisseur",
+    "Gain XP by purchasing perk levels from Season of Jerry Perk Shop!",
+    "Tier I:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Season of Jerry Perk Shop",
+    "Present Connoisseur",
+    "Gain XP by purchasing perk levels from Season of Jerry Perk Shop!",
+    "Tier II:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Season of Jerry Perk Shop",
+    "Present Connoisseur",
+    "Gain XP by purchasing perk levels from Season of Jerry Perk Shop!",
+    "Tier III:"
+   ],
+   "xp": [
+    3,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Season of Jerry Perk Shop",
+    "Present Connoisseur",
+    "Gain XP by purchasing perk levels from Season of Jerry Perk Shop!",
+    "Tier IV:"
+   ],
+   "xp": [
+    5,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Season of Jerry Perk Shop",
+    "Present Connoisseur",
+    "Gain XP by purchasing perk levels from Season of Jerry Perk Shop!",
+    "Tier V:"
+   ],
+   "xp": [
+    7,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Season of Jerry Perk Shop",
+    "Professional Gifter",
+    "Gain XP by purchasing perk levels from Season of Jerry Perk Shop!",
+    "Tier I:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Season of Jerry Perk Shop",
+    "Professional Gifter",
+    "Gain XP by purchasing perk levels from Season of Jerry Perk Shop!",
+    "Tier II:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Season of Jerry Perk Shop",
+    "Red Fad",
+    "Gain XP by purchasing perk levels from Season of Jerry Perk Shop!",
+    "Tier I:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Season of Jerry Perk Shop",
+    "Red Fad",
+    "Gain XP by purchasing perk levels from Season of Jerry Perk Shop!",
+    "Tier II:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Season of Jerry Perk Shop",
+    "Red Fad",
+    "Gain XP by purchasing perk levels from Season of Jerry Perk Shop!",
+    "Tier III:"
+   ],
+   "xp": [
+    3,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Fishing Festival Perk Shop",
+    "Fishing Prodigy",
+    "Gain XP by purchasing perk levels from Fishing Festival Perk Shop!",
+    "Tier I:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Fishing Festival Perk Shop",
+    "Fishing Prodigy",
+    "Gain XP by purchasing perk levels from Fishing Festival Perk Shop!",
+    "Tier II:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Fishing Festival Perk Shop",
+    "Fishing Prodigy",
+    "Gain XP by purchasing perk levels from Fishing Festival Perk Shop!",
+    "Tier III:"
+   ],
+   "xp": [
+    3,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Fishing Festival Perk Shop",
+    "Fishing Prodigy",
+    "Gain XP by purchasing perk levels from Fishing Festival Perk Shop!",
+    "Tier IV:"
+   ],
+   "xp": [
+    5,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Fishing Festival Perk Shop",
+    "Fishing Prodigy",
+    "Gain XP by purchasing perk levels from Fishing Festival Perk Shop!",
+    "Tier V:"
+   ],
+   "xp": [
+    7,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Fishing Festival Perk Shop",
+    "Shark Sonar",
+    "Gain XP by purchasing perk levels from Fishing Festival Perk Shop!",
+    "Tier I:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Fishing Festival Perk Shop",
+    "Shark Sonar",
+    "Gain XP by purchasing perk levels from Fishing Festival Perk Shop!",
+    "Tier II:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Fishing Festival Perk Shop",
+    "Shark Sonar",
+    "Gain XP by purchasing perk levels from Fishing Festival Perk Shop!",
+    "Tier III:"
+   ],
+   "xp": [
+    3,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Fishing Festival Perk Shop",
+    "Shark Sonar",
+    "Gain XP by purchasing perk levels from Fishing Festival Perk Shop!",
+    "Tier IV:"
+   ],
+   "xp": [
+    5,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Fishing Festival Perk Shop",
+    "Shark Sonar",
+    "Gain XP by purchasing perk levels from Fishing Festival Perk Shop!",
+    "Tier V:"
+   ],
+   "xp": [
+    7,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Fishing Festival Perk Shop",
+    "Denture Collector",
+    "Gain XP by purchasing perk levels from Fishing Festival Perk Shop!",
+    "Tier I:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Fishing Festival Perk Shop",
+    "Denture Collector",
+    "Gain XP by purchasing perk levels from Fishing Festival Perk Shop!",
+    "Tier II:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Fishing Festival Perk Shop",
+    "Denture Collector",
+    "Gain XP by purchasing perk levels from Fishing Festival Perk Shop!",
+    "Tier III:"
+   ],
+   "xp": [
+    3,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Fishing Festival Perk Shop",
+    "Elasmobranchii Affinity",
+    "Gain XP by purchasing perk levels from Fishing Festival Perk Shop!",
+    "Tier I:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Fishing Festival Perk Shop",
+    "Elasmobranchii Affinity",
+    "Gain XP by purchasing perk levels from Fishing Festival Perk Shop!",
+    "Tier II:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Mining Fiesta Perk Shop",
+    "Refined Mind",
+    "Gain XP by purchasing perk levels from Fishing Festival Perk Shop!",
+    "Tier I:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Mining Fiesta Perk Shop",
+    "Refined Mind",
+    "Gain XP by purchasing perk levels from Fishing Festival Perk Shop!",
+    "Tier II:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Mining Fiesta Perk Shop",
+    "Refined Mind",
+    "Gain XP by purchasing perk levels from Fishing Festival Perk Shop!",
+    "Tier III:"
+   ],
+   "xp": [
+    3,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Mining Fiesta Perk Shop",
+    "Refined Mind",
+    "Gain XP by purchasing perk levels from Fishing Festival Perk Shop!",
+    "Tier IV:"
+   ],
+   "xp": [
+    5,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Mining Fiesta Perk Shop",
+    "Refined Mind",
+    "Gain XP by purchasing perk levels from Fishing Festival Perk Shop!",
+    "Tier V:"
+   ],
+   "xp": [
+    7,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Mining Fiesta Perk Shop",
+    "Fortunate Festivity",
+    "Gain XP by purchasing perk levels from Fishing Festival Perk Shop!",
+    "Tier I:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Mining Fiesta Perk Shop",
+    "Fortunate Festivity",
+    "Gain XP by purchasing perk levels from Fishing Festival Perk Shop!",
+    "Tier II:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Mining Fiesta Perk Shop",
+    "Fortunate Festivity",
+    "Gain XP by purchasing perk levels from Fishing Festival Perk Shop!",
+    "Tier III:"
+   ],
+   "xp": [
+    3,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Mining Fiesta Perk Shop",
+    "Fortunate Festivity",
+    "Gain XP by purchasing perk levels from Fishing Festival Perk Shop!",
+    "Tier IV:"
+   ],
+   "xp": [
+    5,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Mining Fiesta Perk Shop",
+    "Fortunate Festivity",
+    "Gain XP by purchasing perk levels from Fishing Festival Perk Shop!",
+    "Tier V:"
+   ],
+   "xp": [
+    7,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Mining Fiesta Perk Shop",
+    "Powder Hoarder",
+    "Gain XP by purchasing perk levels from Fishing Festival Perk Shop!",
+    "Tier I:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Mining Fiesta Perk Shop",
+    "Powder Hoarder",
+    "Gain XP by purchasing perk levels from Fishing Festival Perk Shop!",
+    "Tier II:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Mining Fiesta Perk Shop",
+    "Powder Hoarder",
+    "Gain XP by purchasing perk levels from Fishing Festival Perk Shop!",
+    "Tier III:"
+   ],
+   "xp": [
+    3,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Mining Fiesta Perk Shop",
+    "Titanium Tenacity",
+    "Gain XP by purchasing perk levels from Fishing Festival Perk Shop!",
+    "Tier I:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Mining Fiesta Perk Shop",
+    "Titanium Tenacity",
+    "Gain XP by purchasing perk levels from Fishing Festival Perk Shop!",
+    "Tier II:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Mythological Rutial Perk Shop",
+    "Storied Stinger",
+    "Gain XP by purchasing perk levels from Mythological Rutial Perk Shop!",
+    "Tier I:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Mythological Rutial Perk Shop",
+    "Storied Stinger",
+    "Gain XP by purchasing perk levels from Mythological Rutial Perk Shop!",
+    "Tier II:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Mythological Rutial Perk Shop",
+    "Storied Stinger",
+    "Gain XP by purchasing perk levels from Mythological Rutial Perk Shop!",
+    "Tier III:"
+   ],
+   "xp": [
+    3,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Mythological Rutial Perk Shop",
+    "Storied Stinger",
+    "Gain XP by purchasing perk levels from Mythological Rutial Perk Shop!",
+    "Tier IV:"
+   ],
+   "xp": [
+    5,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Mythological Rutial Perk Shop",
+    "Storied Stinger",
+    "Gain XP by purchasing perk levels from Mythological Rutial Perk Shop!",
+    "Tier V:"
+   ],
+   "xp": [
+    7,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Mythological Rutial Perk Shop",
+    "Deadly Greed",
+    "Gain XP by purchasing perk levels from Mythological Rutial Perk Shop!",
+    "Tier I:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Mythological Rutial Perk Shop",
+    "Deadly Greed",
+    "Gain XP by purchasing perk levels from Mythological Rutial Perk Shop!",
+    "Tier II:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Mythological Rutial Perk Shop",
+    "Deadly Greed",
+    "Gain XP by purchasing perk levels from Mythological Rutial Perk Shop!",
+    "Tier III:"
+   ],
+   "xp": [
+    3,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Mythological Rutial Perk Shop",
+    "Deadly Greed",
+    "Gain XP by purchasing perk levels from Mythological Rutial Perk Shop!",
+    "Tier IV:"
+   ],
+   "xp": [
+    5,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Mythological Rutial Perk Shop",
+    "Deadly Greed",
+    "Gain XP by purchasing perk levels from Mythological Rutial Perk Shop!",
+    "Tier V:"
+   ],
+   "xp": [
+    7,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Mythological Rutial Perk Shop",
+    "Diana's Favor",
+    "Gain XP by purchasing perk levels from Mythological Rutial Perk Shop!",
+    "Tier I:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Mythological Rutial Perk Shop",
+    "Diana's Favor",
+    "Gain XP by purchasing perk levels from Mythological Rutial Perk Shop!",
+    "Tier II:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Mythological Rutial Perk Shop",
+    "Diana's Favor",
+    "Gain XP by purchasing perk levels from Mythological Rutial Perk Shop!",
+    "Tier III:"
+   ],
+   "xp": [
+    3,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Mythological Rutial Perk Shop",
+    "Elusive Hunter",
+    "Gain XP by purchasing perk levels from Mythological Rutial Perk Shop!",
+    "Tier I:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Mythological Rutial Perk Shop",
+    "Elusive Hunter",
+    "Gain XP by purchasing perk levels from Mythological Rutial Perk Shop!",
+    "Tier II:"
+   ],
+   "xp": [
+    2,
+    49
+   ]
+  },
+  {
+   "tab": "Event",
+   "cells": [
+    "Fishing Festival",
+    "Fishing Festival",
+    "Gain XP by consuming Witches Stew during the Year of the Witch event!",
+    "Per Brew: · (20 Brews Max)"
+   ],
+   "xp": [
+    5,
+    100
+   ]
+  },
+  {
+   "tab": "Dungeon",
+   "cells": [
+    "Catacombs Level Up",
+    "Catacombs Level Up",
+    "Catacombs Level Up",
+    "Gain XP by leveling up your Catacombs level!",
+    "Level 1-39:"
+   ],
+   "xp": [
+    20,
+    1220
+   ]
+  },
+  {
+   "tab": "Dungeon",
+   "cells": [
+    "Catacombs Level Up",
+    "Catacombs Level Up",
+    "Catacombs Level Up",
+    "Gain XP by leveling up your Catacombs level!",
+    "Level 40-50:"
+   ],
+   "xp": [
+    40,
+    1220
+   ]
+  },
+  {
+   "tab": "Dungeon",
+   "cells": [
+    "Class Level Up",
+    "Class Level Up",
+    "Class Level Up",
+    "Gain XP by leveling up your Catacombs Classes!",
+    "Level 1-50:"
+   ],
+   "xp": [
+    4,
+    1000
+   ]
+  },
+  {
+   "tab": "Dungeon",
+   "cells": [
+    "Complete Dungeons",
+    "Complete The Catacombs",
+    "Complete Catacombs Entrance",
+    "Complete The Catacombs to gain XP."
+   ],
+   "xp": [
+    20,
+    190
+   ]
+  },
+  {
+   "tab": "Dungeon",
+   "cells": [
+    "Complete Dungeons",
+    "Complete The Catacombs",
+    "Complete Catacombs Floor I",
+    "Complete The Catacombs to gain XP."
+   ],
+   "xp": [
+    20,
+    190
+   ]
+  },
+  {
+   "tab": "Dungeon",
+   "cells": [
+    "Complete Dungeons",
+    "Complete The Catacombs",
+    "Complete Catacombs Floor II",
+    "Complete The Catacombs to gain XP."
+   ],
+   "xp": [
+    20,
+    190
+   ]
+  },
+  {
+   "tab": "Dungeon",
+   "cells": [
+    "Complete Dungeons",
+    "Complete The Catacombs",
+    "Complete Catacombs Floor III",
+    "Complete The Catacombs to gain XP."
+   ],
+   "xp": [
+    20,
+    190
+   ]
+  },
+  {
+   "tab": "Dungeon",
+   "cells": [
+    "Complete Dungeons",
+    "Complete The Catacombs",
+    "Complete Catacombs Floor IV",
+    "Complete The Catacombs to gain XP."
+   ],
+   "xp": [
+    20,
+    190
+   ]
+  },
+  {
+   "tab": "Dungeon",
+   "cells": [
+    "Complete Dungeons",
+    "Complete The Catacombs",
+    "Complete Catacombs Floor V",
+    "Complete The Catacombs to gain XP."
+   ],
+   "xp": [
+    30,
+    190
+   ]
+  },
+  {
+   "tab": "Dungeon",
+   "cells": [
+    "Complete Dungeons",
+    "Complete The Catacombs",
+    "Complete Catacombs Floor VI",
+    "Complete The Catacombs to gain XP."
+   ],
+   "xp": [
+    30,
+    190
+   ]
+  },
+  {
+   "tab": "Dungeon",
+   "cells": [
+    "Complete Dungeons",
+    "Complete The Catacombs",
+    "Complete Catacombs Floor VII",
+    "Complete The Catacombs to gain XP."
+   ],
+   "xp": [
+    30,
+    190
+   ]
+  },
+  {
+   "tab": "Dungeon",
+   "cells": [
+    "Complete Dungeons",
+    "Complete Master Mode Catacombs",
+    "Complete Catacombs Floor I",
+    "Complete The Catacombs to gain XP."
+   ],
+   "xp": [
+    50,
+    350
+   ]
+  },
+  {
+   "tab": "Dungeon",
+   "cells": [
+    "Complete Dungeons",
+    "Complete Master Mode Catacombs",
+    "Complete Catacombs Floor II",
+    "Complete The Catacombs to gain XP."
+   ],
+   "xp": [
+    50,
+    350
+   ]
+  },
+  {
+   "tab": "Dungeon",
+   "cells": [
+    "Complete Dungeons",
+    "Complete Master Mode Catacombs",
+    "Complete Catacombs Floor III",
+    "Complete The Catacombs to gain XP."
+   ],
+   "xp": [
+    50,
+    350
+   ]
+  },
+  {
+   "tab": "Dungeon",
+   "cells": [
+    "Complete Dungeons",
+    "Complete Master Mode Catacombs",
+    "Complete Catacombs Floor IV",
+    "Complete The Catacombs to gain XP."
+   ],
+   "xp": [
+    50,
+    350
+   ]
+  },
+  {
+   "tab": "Dungeon",
+   "cells": [
+    "Complete Dungeons",
+    "Complete Master Mode Catacombs",
+    "Complete Catacombs Floor V",
+    "Complete The Catacombs to gain XP."
+   ],
+   "xp": [
+    50,
+    350
+   ]
+  },
+  {
+   "tab": "Dungeon",
+   "cells": [
+    "Complete Dungeons",
+    "Complete Master Mode Catacombs",
+    "Complete Catacombs Floor VI",
+    "Complete The Catacombs to gain XP."
+   ],
+   "xp": [
+    50,
+    350
+   ]
+  },
+  {
+   "tab": "Dungeon",
+   "cells": [
+    "Complete Dungeons",
+    "Complete Master Mode Catacombs",
+    "Complete Catacombs Floor VII",
+    "Complete The Catacombs to gain XP."
+   ],
+   "xp": [
+    50,
+    350
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "One Punch",
+    "I",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "One Punch",
+    "II",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "One Punch",
+    "III",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    3,
+    19,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "One Punch",
+    "IV",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    5,
+    19,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "One Punch",
+    "V",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    7,
+    19,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Recharge",
+    "I",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    2,
+    62,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Recharge",
+    "II",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    2,
+    62,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Recharge",
+    "III",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    3,
+    62,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Recharge",
+    "IV",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    5,
+    62,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Recharge",
+    "V",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    7,
+    62,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Recharge",
+    "VI",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    8,
+    62,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Recharge",
+    "VII",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    8,
+    62,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Recharge",
+    "VIII",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    8,
+    62,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Recharge",
+    "IX",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    9,
+    62,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Recharge",
+    "X",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    10,
+    62,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Rageborn",
+    "I",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Rageborn",
+    "II",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Rageborn",
+    "III",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    3,
+    19,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Rageborn",
+    "IV",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    5,
+    19,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Rageborn",
+    "V",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    7,
+    19,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Zealuck",
+    "I",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Zealuck",
+    "II",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Zealuck",
+    "III",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    3,
+    19,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Zealuck",
+    "IV",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    5,
+    19,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Zealuck",
+    "V",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    7,
+    19,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Ender Training",
+    "I",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    2,
+    7,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Ender Training",
+    "II",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    2,
+    7,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Ender Training",
+    "III",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    3,
+    7,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Infused Dragon",
+    "I",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Infused Dragon",
+    "II",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Infused Dragon",
+    "III",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    3,
+    19,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Infused Dragon",
+    "IV",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    5,
+    19,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Infused Dragon",
+    "V",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    7,
+    19,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Unbridled Rage",
+    "I",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Unbridled Rage",
+    "II",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Unbridled Rage",
+    "III",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    3,
+    19,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Unbridled Rage",
+    "IV",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    5,
+    19,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Unbridled Rage",
+    "V",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    7,
+    19,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Two-Headed Strike",
+    "I",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Two-Headed Strike",
+    "II",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Two-Headed Strike",
+    "III",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    3,
+    19,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Two-Headed Strike",
+    "IV",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    5,
+    19,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Two-Headed Strike",
+    "V",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    7,
+    19,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Dragon Essence Shop",
+    "Dragon Piper",
+    "I",
+    "Gain XP by purchasing perks from the Dragon Essence Shop!"
+   ],
+   "xp": [
+    2,
+    2,
+    185
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Ice Essence Shop",
+    "Cooled Forges",
+    "I",
+    "Gain XP by purchasing perks from the Ice Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    121
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Ice Essence Shop",
+    "Cooled Forges",
+    "II",
+    "Gain XP by purchasing perks from the Ice Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    121
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Ice Essence Shop",
+    "Cooled Forges",
+    "III",
+    "Gain XP by purchasing perks from the Ice Essence Shop!"
+   ],
+   "xp": [
+    3,
+    19,
+    121
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Ice Essence Shop",
+    "Cooled Forges",
+    "IV",
+    "Gain XP by purchasing perks from the Ice Essence Shop!"
+   ],
+   "xp": [
+    5,
+    19,
+    121
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Ice Essence Shop",
+    "Cooled Forges",
+    "V",
+    "Gain XP by purchasing perks from the Ice Essence Shop!"
+   ],
+   "xp": [
+    7,
+    19,
+    121
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Ice Essence Shop",
+    "Season Of Joy",
+    "I",
+    "Gain XP by purchasing perks from the Ice Essence Shop!"
+   ],
+   "xp": [
+    2,
+    62,
+    121
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Ice Essence Shop",
+    "Season Of Joy",
+    "II",
+    "Gain XP by purchasing perks from the Ice Essence Shop!"
+   ],
+   "xp": [
+    2,
+    62,
+    121
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Ice Essence Shop",
+    "Season Of Joy",
+    "III",
+    "Gain XP by purchasing perks from the Ice Essence Shop!"
+   ],
+   "xp": [
+    3,
+    62,
+    121
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Ice Essence Shop",
+    "Season Of Joy",
+    "IV",
+    "Gain XP by purchasing perks from the Ice Essence Shop!"
+   ],
+   "xp": [
+    5,
+    62,
+    121
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Ice Essence Shop",
+    "Season Of Joy",
+    "V",
+    "Gain XP by purchasing perks from the Ice Essence Shop!"
+   ],
+   "xp": [
+    7,
+    62,
+    121
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Ice Essence Shop",
+    "Season Of Joy",
+    "VI",
+    "Gain XP by purchasing perks from the Ice Essence Shop!"
+   ],
+   "xp": [
+    8,
+    62,
+    121
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Ice Essence Shop",
+    "Season Of Joy",
+    "VII",
+    "Gain XP by purchasing perks from the Ice Essence Shop!"
+   ],
+   "xp": [
+    8,
+    62,
+    121
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Ice Essence Shop",
+    "Season Of Joy",
+    "VIII",
+    "Gain XP by purchasing perks from the Ice Essence Shop!"
+   ],
+   "xp": [
+    8,
+    62,
+    121
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Ice Essence Shop",
+    "Season Of Joy",
+    "IX",
+    "Gain XP by purchasing perks from the Ice Essence Shop!"
+   ],
+   "xp": [
+    9,
+    62,
+    121
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Ice Essence Shop",
+    "Season Of Joy",
+    "X",
+    "Gain XP by purchasing perks from the Ice Essence Shop!"
+   ],
+   "xp": [
+    10,
+    62,
+    121
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Ice Essence Shop",
+    "Cold Efficiency",
+    "I",
+    "Gain XP by purchasing perks from the Ice Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    121
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Ice Essence Shop",
+    "Cold Efficiency",
+    "II",
+    "Gain XP by purchasing perks from the Ice Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    121
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Ice Essence Shop",
+    "Cold Efficiency",
+    "III",
+    "Gain XP by purchasing perks from the Ice Essence Shop!"
+   ],
+   "xp": [
+    3,
+    19,
+    121
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Ice Essence Shop",
+    "Cold Efficiency",
+    "IV",
+    "Gain XP by purchasing perks from the Ice Essence Shop!"
+   ],
+   "xp": [
+    5,
+    19,
+    121
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Ice Essence Shop",
+    "Cold Efficiency",
+    "V",
+    "Gain XP by purchasing perks from the Ice Essence Shop!"
+   ],
+   "xp": [
+    7,
+    19,
+    121
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Ice Essence Shop",
+    "Frozen Skin",
+    "I",
+    "Gain XP by purchasing perks from the Ice Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    121
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Ice Essence Shop",
+    "Frozen Skin",
+    "II",
+    "Gain XP by purchasing perks from the Ice Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    121
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Ice Essence Shop",
+    "Frozen Skin",
+    "III",
+    "Gain XP by purchasing perks from the Ice Essence Shop!"
+   ],
+   "xp": [
+    3,
+    19,
+    121
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Ice Essence Shop",
+    "Frozen Skin",
+    "IV",
+    "Gain XP by purchasing perks from the Ice Essence Shop!"
+   ],
+   "xp": [
+    5,
+    19,
+    121
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Ice Essence Shop",
+    "Frozen Skin",
+    "V",
+    "Gain XP by purchasing perks from the Ice Essence Shop!"
+   ],
+   "xp": [
+    7,
+    19,
+    121
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Ice Essence Shop",
+    "Drake Piper",
+    "I",
+    "Gain XP by purchasing perks from the Ice Essence Shop!"
+   ],
+   "xp": [
+    2,
+    2,
+    121
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Spider Essence Shop",
+    "Empowered Agility",
+    "I",
+    "Gain XP by purchasing perks from the Spider Essence Shop!"
+   ],
+   "xp": [
+    2,
+    62,
+    126
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Spider Essence Shop",
+    "Empowered Agility",
+    "II",
+    "Gain XP by purchasing perks from the Spider Essence Shop!"
+   ],
+   "xp": [
+    2,
+    62,
+    126
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Spider Essence Shop",
+    "Empowered Agility",
+    "III",
+    "Gain XP by purchasing perks from the Spider Essence Shop!"
+   ],
+   "xp": [
+    3,
+    62,
+    126
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Spider Essence Shop",
+    "Empowered Agility",
+    "IV",
+    "Gain XP by purchasing perks from the Spider Essence Shop!"
+   ],
+   "xp": [
+    5,
+    62,
+    126
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Spider Essence Shop",
+    "Empowered Agility",
+    "V",
+    "Gain XP by purchasing perks from the Spider Essence Shop!"
+   ],
+   "xp": [
+    7,
+    62,
+    126
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Spider Essence Shop",
+    "Empowered Agility",
+    "VI",
+    "Gain XP by purchasing perks from the Spider Essence Shop!"
+   ],
+   "xp": [
+    8,
+    62,
+    126
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Spider Essence Shop",
+    "Empowered Agility",
+    "VII",
+    "Gain XP by purchasing perks from the Spider Essence Shop!"
+   ],
+   "xp": [
+    8,
+    62,
+    126
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Spider Essence Shop",
+    "Empowered Agility",
+    "VIII",
+    "Gain XP by purchasing perks from the Spider Essence Shop!"
+   ],
+   "xp": [
+    8,
+    62,
+    126
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Spider Essence Shop",
+    "Empowered Agility",
+    "IX",
+    "Gain XP by purchasing perks from the Spider Essence Shop!"
+   ],
+   "xp": [
+    9,
+    62,
+    126
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Spider Essence Shop",
+    "Empowered Agility",
+    "X",
+    "Gain XP by purchasing perks from the Spider Essence Shop!"
+   ],
+   "xp": [
+    10,
+    62,
+    126
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Spider Essence Shop",
+    "Vermin Control",
+    "I",
+    "Gain XP by purchasing perks from the Spider Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    126
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Spider Essence Shop",
+    "Vermin Control",
+    "II",
+    "Gain XP by purchasing perks from the Spider Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    126
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Spider Essence Shop",
+    "Vermin Control",
+    "III",
+    "Gain XP by purchasing perks from the Spider Essence Shop!"
+   ],
+   "xp": [
+    3,
+    19,
+    126
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Spider Essence Shop",
+    "Vermin Control",
+    "IV",
+    "Gain XP by purchasing perks from the Spider Essence Shop!"
+   ],
+   "xp": [
+    5,
+    19,
+    126
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Spider Essence Shop",
+    "Vermin Control",
+    "V",
+    "Gain XP by purchasing perks from the Spider Essence Shop!"
+   ],
+   "xp": [
+    7,
+    19,
+    126
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Spider Essence Shop",
+    "Bane",
+    "I",
+    "Gain XP by purchasing perks from the Spider Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    126
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Spider Essence Shop",
+    "Bane",
+    "II",
+    "Gain XP by purchasing perks from the Spider Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    126
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Spider Essence Shop",
+    "Bane",
+    "III",
+    "Gain XP by purchasing perks from the Spider Essence Shop!"
+   ],
+   "xp": [
+    3,
+    19,
+    126
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Spider Essence Shop",
+    "Bane",
+    "IV",
+    "Gain XP by purchasing perks from the Spider Essence Shop!"
+   ],
+   "xp": [
+    5,
+    19,
+    126
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Spider Essence Shop",
+    "Bane",
+    "V",
+    "Gain XP by purchasing perks from the Spider Essence Shop!"
+   ],
+   "xp": [
+    7,
+    19,
+    126
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Spider Essence Shop",
+    "Spider Training",
+    "I",
+    "Gain XP by purchasing perks from the Spider Essence Shop!"
+   ],
+   "xp": [
+    2,
+    7,
+    126
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Spider Essence Shop",
+    "Spider Training",
+    "II",
+    "Gain XP by purchasing perks from the Spider Essence Shop!"
+   ],
+   "xp": [
+    2,
+    7,
+    126
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Spider Essence Shop",
+    "Spider Training",
+    "III",
+    "Gain XP by purchasing perks from the Spider Essence Shop!"
+   ],
+   "xp": [
+    3,
+    7,
+    126
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Spider Essence Shop",
+    "Toxophilite",
+    "I",
+    "Gain XP by purchasing perks from the Spider Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    126
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Spider Essence Shop",
+    "Toxophilite",
+    "II",
+    "Gain XP by purchasing perks from the Spider Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    126
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Spider Essence Shop",
+    "Toxophilite",
+    "III",
+    "Gain XP by purchasing perks from the Spider Essence Shop!"
+   ],
+   "xp": [
+    3,
+    19,
+    126
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Spider Essence Shop",
+    "Toxophilite",
+    "IV",
+    "Gain XP by purchasing perks from the Spider Essence Shop!"
+   ],
+   "xp": [
+    5,
+    19,
+    126
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Spider Essence Shop",
+    "Toxophilite",
+    "V",
+    "Gain XP by purchasing perks from the Spider Essence Shop!"
+   ],
+   "xp": [
+    7,
+    19,
+    126
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Undead Essence Shop",
+    "Boss Luck",
+    "I",
+    "Gain XP by purchasing perks from the Undead Essence Shop!"
+   ],
+   "xp": [
+    2,
+    12,
+    128
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Undead Essence Shop",
+    "Boss Luck",
+    "II",
+    "Gain XP by purchasing perks from the Undead Essence Shop!"
+   ],
+   "xp": [
+    2,
+    12,
+    128
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Undead Essence Shop",
+    "Boss Luck",
+    "III",
+    "Gain XP by purchasing perks from the Undead Essence Shop!"
+   ],
+   "xp": [
+    3,
+    12,
+    128
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Undead Essence Shop",
+    "Boss Luck",
+    "IV",
+    "Gain XP by purchasing perks from the Undead Essence Shop!"
+   ],
+   "xp": [
+    5,
+    12,
+    128
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Undead Essence Shop",
+    "Looting",
+    "I",
+    "Gain XP by purchasing perks from the Undead Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    128
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Undead Essence Shop",
+    "Looting",
+    "II",
+    "Gain XP by purchasing perks from the Undead Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    128
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Undead Essence Shop",
+    "Looting",
+    "III",
+    "Gain XP by purchasing perks from the Undead Essence Shop!"
+   ],
+   "xp": [
+    3,
+    19,
+    128
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Undead Essence Shop",
+    "Looting",
+    "IV",
+    "Gain XP by purchasing perks from the Undead Essence Shop!"
+   ],
+   "xp": [
+    5,
+    19,
+    128
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Undead Essence Shop",
+    "Looting",
+    "V",
+    "Gain XP by purchasing perks from the Undead Essence Shop!"
+   ],
+   "xp": [
+    7,
+    19,
+    128
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Undead Essence Shop",
+    "Health Essence",
+    "I",
+    "Gain XP by purchasing perks from the Undead Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    128
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Undead Essence Shop",
+    "Health Essence",
+    "II",
+    "Gain XP by purchasing perks from the Undead Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    128
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Undead Essence Shop",
+    "Health Essence",
+    "III",
+    "Gain XP by purchasing perks from the Undead Essence Shop!"
+   ],
+   "xp": [
+    3,
+    19,
+    128
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Undead Essence Shop",
+    "Health Essence",
+    "IV",
+    "Gain XP by purchasing perks from the Undead Essence Shop!"
+   ],
+   "xp": [
+    5,
+    19,
+    128
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Undead Essence Shop",
+    "Health Essence",
+    "V",
+    "Gain XP by purchasing perks from the Undead Essence Shop!"
+   ],
+   "xp": [
+    7,
+    19,
+    128
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Undead Essence Shop",
+    "Defense Essence",
+    "I",
+    "Gain XP by purchasing perks from the Undead Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    128
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Undead Essence Shop",
+    "Defense Essence",
+    "II",
+    "Gain XP by purchasing perks from the Undead Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    128
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Undead Essence Shop",
+    "Defense Essence",
+    "III",
+    "Gain XP by purchasing perks from the Undead Essence Shop!"
+   ],
+   "xp": [
+    3,
+    19,
+    128
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Undead Essence Shop",
+    "Defense Essence",
+    "IV",
+    "Gain XP by purchasing perks from the Undead Essence Shop!"
+   ],
+   "xp": [
+    5,
+    19,
+    128
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Undead Essence Shop",
+    "Defense Essence",
+    "V",
+    "Gain XP by purchasing perks from the Undead Essence Shop!"
+   ],
+   "xp": [
+    7,
+    19,
+    128
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Undead Essence Shop",
+    "Strength Essence",
+    "I",
+    "Gain XP by purchasing perks from the Undead Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    128
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Undead Essence Shop",
+    "Strength Essence",
+    "II",
+    "Gain XP by purchasing perks from the Undead Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    128
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Undead Essence Shop",
+    "Strength Essence",
+    "III",
+    "Gain XP by purchasing perks from the Undead Essence Shop!"
+   ],
+   "xp": [
+    3,
+    19,
+    128
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Undead Essence Shop",
+    "Strength Essence",
+    "IV",
+    "Gain XP by purchasing perks from the Undead Essence Shop!"
+   ],
+   "xp": [
+    5,
+    19,
+    128
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Undead Essence Shop",
+    "Strength Essence",
+    "V",
+    "Gain XP by purchasing perks from the Undead Essence Shop!"
+   ],
+   "xp": [
+    7,
+    19,
+    128
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Undead Essence Shop",
+    "Intelligence Essence",
+    "I",
+    "Gain XP by purchasing perks from the Undead Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    128
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Undead Essence Shop",
+    "Intelligence Essence",
+    "II",
+    "Gain XP by purchasing perks from the Undead Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    128
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Undead Essence Shop",
+    "Intelligence Essence",
+    "III",
+    "Gain XP by purchasing perks from the Undead Essence Shop!"
+   ],
+   "xp": [
+    3,
+    19,
+    128
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Undead Essence Shop",
+    "Intelligence Essence",
+    "IV",
+    "Gain XP by purchasing perks from the Undead Essence Shop!"
+   ],
+   "xp": [
+    5,
+    19,
+    128
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Undead Essence Shop",
+    "Intelligence Essence",
+    "V",
+    "Gain XP by purchasing perks from the Undead Essence Shop!"
+   ],
+   "xp": [
+    7,
+    19,
+    128
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Undead Essence Shop",
+    "Critical Essence",
+    "I",
+    "Gain XP by purchasing perks from the Undead Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    128
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Undead Essence Shop",
+    "Critical Essence",
+    "II",
+    "Gain XP by purchasing perks from the Undead Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    128
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Undead Essence Shop",
+    "Critical Essence",
+    "III",
+    "Gain XP by purchasing perks from the Undead Essence Shop!"
+   ],
+   "xp": [
+    3,
+    19,
+    128
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Undead Essence Shop",
+    "Critical Essence",
+    "IV",
+    "Gain XP by purchasing perks from the Undead Essence Shop!"
+   ],
+   "xp": [
+    5,
+    19,
+    128
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Undead Essence Shop",
+    "Critical Essence",
+    "V",
+    "Gain XP by purchasing perks from the Undead Essence Shop!"
+   ],
+   "xp": [
+    7,
+    19,
+    128
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Undead Essence Shop",
+    "Help of the Fairies",
+    "I",
+    "Gain XP by purchasing perks from the Undead Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    128
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Wither Essence Shop",
+    "Forbidden Health",
+    "I",
+    "Gain XP by purchasing perks from the Wither Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    161
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Wither Essence Shop",
+    "Forbidden Health",
+    "II",
+    "Gain XP by purchasing perks from the Wither Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    161
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Wither Essence Shop",
+    "Forbidden Health",
+    "III",
+    "Gain XP by purchasing perks from the Wither Essence Shop!"
+   ],
+   "xp": [
+    3,
+    19,
+    161
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Wither Essence Shop",
+    "Forbidden Health",
+    "IV",
+    "Gain XP by purchasing perks from the Wither Essence Shop!"
+   ],
+   "xp": [
+    5,
+    19,
+    161
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Wither Essence Shop",
+    "Forbidden Health",
+    "V",
+    "Gain XP by purchasing perks from the Wither Essence Shop!"
+   ],
+   "xp": [
+    7,
+    19,
+    161
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Wither Essence Shop",
+    "Forbidden Defense",
+    "I",
+    "Gain XP by purchasing perks from the Wither Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    161
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Wither Essence Shop",
+    "Forbidden Defense",
+    "II",
+    "Gain XP by purchasing perks from the Wither Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    161
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Wither Essence Shop",
+    "Forbidden Defense",
+    "III",
+    "Gain XP by purchasing perks from the Wither Essence Shop!"
+   ],
+   "xp": [
+    3,
+    19,
+    161
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Wither Essence Shop",
+    "Forbidden Defense",
+    "IV",
+    "Gain XP by purchasing perks from the Wither Essence Shop!"
+   ],
+   "xp": [
+    5,
+    19,
+    161
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Wither Essence Shop",
+    "Forbidden Defense",
+    "V",
+    "Gain XP by purchasing perks from the Wither Essence Shop!"
+   ],
+   "xp": [
+    7,
+    19,
+    161
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Wither Essence Shop",
+    "Forbidden Speed",
+    "I",
+    "Gain XP by purchasing perks from the Wither Essence Shop!"
+   ],
+   "xp": [
+    2,
+    4,
+    161
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Wither Essence Shop",
+    "Forbidden Speed",
+    "II",
+    "Gain XP by purchasing perks from the Wither Essence Shop!"
+   ],
+   "xp": [
+    2,
+    4,
+    161
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Wither Essence Shop",
+    "Forbidden Intelligence",
+    "I",
+    "Gain XP by purchasing perks from the Wither Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    161
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Wither Essence Shop",
+    "Forbidden Intelligence",
+    "II",
+    "Gain XP by purchasing perks from the Wither Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    161
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Wither Essence Shop",
+    "Forbidden Intelligence",
+    "III",
+    "Gain XP by purchasing perks from the Wither Essence Shop!"
+   ],
+   "xp": [
+    3,
+    19,
+    161
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Wither Essence Shop",
+    "Forbidden Intelligence",
+    "IV",
+    "Gain XP by purchasing perks from the Wither Essence Shop!"
+   ],
+   "xp": [
+    5,
+    19,
+    161
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Wither Essence Shop",
+    "Forbidden Intelligence",
+    "V",
+    "Gain XP by purchasing perks from the Wither Essence Shop!"
+   ],
+   "xp": [
+    7,
+    19,
+    161
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Wither Essence Shop",
+    "Forbidden Strength",
+    "I",
+    "Gain XP by purchasing perks from the Wither Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    161
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Wither Essence Shop",
+    "Forbidden Strength",
+    "II",
+    "Gain XP by purchasing perks from the Wither Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    161
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Wither Essence Shop",
+    "Forbidden Strength",
+    "III",
+    "Gain XP by purchasing perks from the Wither Essence Shop!"
+   ],
+   "xp": [
+    3,
+    19,
+    161
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Wither Essence Shop",
+    "Forbidden Strength",
+    "IV",
+    "Gain XP by purchasing perks from the Wither Essence Shop!"
+   ],
+   "xp": [
+    5,
+    19,
+    161
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Wither Essence Shop",
+    "Forbidden Strength",
+    "V",
+    "Gain XP by purchasing perks from the Wither Essence Shop!"
+   ],
+   "xp": [
+    7,
+    19,
+    161
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Wither Essence Shop",
+    "Forbidden Blessing",
+    "I",
+    "Gain XP by purchasing perks from the Wither Essence Shop!"
+   ],
+   "xp": [
+    2,
+    62,
+    161
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Wither Essence Shop",
+    "Forbidden Blessing",
+    "II",
+    "Gain XP by purchasing perks from the Wither Essence Shop!"
+   ],
+   "xp": [
+    2,
+    62,
+    161
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Wither Essence Shop",
+    "Forbidden Blessing",
+    "III",
+    "Gain XP by purchasing perks from the Wither Essence Shop!"
+   ],
+   "xp": [
+    3,
+    62,
+    161
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Wither Essence Shop",
+    "Forbidden Blessing",
+    "IV",
+    "Gain XP by purchasing perks from the Wither Essence Shop!"
+   ],
+   "xp": [
+    5,
+    62,
+    161
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Wither Essence Shop",
+    "Forbidden Blessing",
+    "V",
+    "Gain XP by purchasing perks from the Wither Essence Shop!"
+   ],
+   "xp": [
+    7,
+    62,
+    161
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Wither Essence Shop",
+    "Forbidden Blessing",
+    "VI",
+    "Gain XP by purchasing perks from the Wither Essence Shop!"
+   ],
+   "xp": [
+    8,
+    62,
+    161
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Wither Essence Shop",
+    "Forbidden Blessing",
+    "VII",
+    "Gain XP by purchasing perks from the Wither Essence Shop!"
+   ],
+   "xp": [
+    8,
+    62,
+    161
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Wither Essence Shop",
+    "Forbidden Blessing",
+    "VIII",
+    "Gain XP by purchasing perks from the Wither Essence Shop!"
+   ],
+   "xp": [
+    8,
+    62,
+    161
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Wither Essence Shop",
+    "Forbidden Blessing",
+    "IX",
+    "Gain XP by purchasing perks from the Wither Essence Shop!"
+   ],
+   "xp": [
+    9,
+    62,
+    161
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Wither Essence Shop",
+    "Forbidden Blessing",
+    "X",
+    "Gain XP by purchasing perks from the Wither Essence Shop!"
+   ],
+   "xp": [
+    10,
+    62,
+    161
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Fungus Fortuna",
+    "I",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    2,
+    62,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Fungus Fortuna",
+    "II",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    2,
+    62,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Fungus Fortuna",
+    "III",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    3,
+    62,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Fungus Fortuna",
+    "IV",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    5,
+    62,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Fungus Fortuna",
+    "V",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    7,
+    62,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Fungus Fortuna",
+    "VI",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    8,
+    62,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Fungus Fortuna",
+    "VII",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    8,
+    62,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Fungus Fortuna",
+    "VIII",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    8,
+    62,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Fungus Fortuna",
+    "IX",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    9,
+    62,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Fungus Fortuna",
+    "X",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    10,
+    62,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Harena Fortuna",
+    "I",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    2,
+    62,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Harena Fortuna",
+    "II",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    2,
+    62,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Harena Fortuna",
+    "III",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    3,
+    62,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Harena Fortuna",
+    "IV",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    5,
+    62,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Harena Fortuna",
+    "V",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    7,
+    62,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Harena Fortuna",
+    "VI",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    8,
+    62,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Harena Fortuna",
+    "VII",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    8,
+    62,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Harena Fortuna",
+    "VIII",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    8,
+    62,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Harena Fortuna",
+    "IX",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    9,
+    62,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Harena Fortuna",
+    "X",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    10,
+    62,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Headstart",
+    "I",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Headstart",
+    "II",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Headstart",
+    "III",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    3,
+    19,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Headstart",
+    "IV",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    5,
+    19,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Headstart",
+    "V",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    7,
+    19,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Fresh Tools",
+    "I",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Fresh Tools",
+    "II",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Fresh Tools",
+    "III",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    3,
+    19,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Fresh Tools",
+    "IV",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    5,
+    19,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Fresh Tools",
+    "V",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    7,
+    19,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Crimson Training",
+    "I",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    2,
+    7,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Crimson Training",
+    "II",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    2,
+    7,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Crimson Training",
+    "III",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    3,
+    7,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Wither Piper",
+    "I",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Wither Piper",
+    "II",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Wither Piper",
+    "III",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    3,
+    19,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Wither Piper",
+    "IV",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    5,
+    19,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Wither Piper",
+    "V",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    7,
+    19,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Strongarm",
+    "I",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    2,
+    4,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Strongarm",
+    "II",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    2,
+    4,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Crimson Essence Shop",
+    "Kuudra Master",
+    "I",
+    "Gain XP by purchasing perks from the Crimson Essence Shop!"
+   ],
+   "xp": [
+    2,
+    2,
+    194
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Eager Miner",
+    "I",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    2,
+    62,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Eager Miner",
+    "II",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    2,
+    62,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Eager Miner",
+    "III",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    3,
+    62,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Eager Miner",
+    "IV",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    5,
+    62,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Eager Miner",
+    "V",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    7,
+    62,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Eager Miner",
+    "VI",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    8,
+    62,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Eager Miner",
+    "VII",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    8,
+    62,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Eager Miner",
+    "VIII",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    8,
+    62,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Eager Miner",
+    "IX",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    9,
+    62,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Eager Miner",
+    "X",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    10,
+    62,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Treasure of the Earth",
+    "I",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Treasure of the Earth",
+    "II",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Treasure of the Earth",
+    "III",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    3,
+    19,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Treasure of the Earth",
+    "IV",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    5,
+    19,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Treasure of the Earth",
+    "V",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    7,
+    19,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Unbreaking",
+    "I",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Unbreaking",
+    "II",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Unbreaking",
+    "III",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    3,
+    19,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Unbreaking",
+    "IV",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    5,
+    19,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Unbreaking",
+    "V",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    7,
+    19,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Midas Lure",
+    "I",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    2,
+    62,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Midas Lure",
+    "II",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    2,
+    62,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Midas Lure",
+    "III",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    3,
+    62,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Midas Lure",
+    "IV",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    5,
+    62,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Midas Lure",
+    "V",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    7,
+    62,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Midas Lure",
+    "VI",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    8,
+    62,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Midas Lure",
+    "VII",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    8,
+    62,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Midas Lure",
+    "VIII",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    8,
+    62,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Midas Lure",
+    "IX",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    9,
+    62,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Midas Lure",
+    "X",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    10,
+    62,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Dwarven Training",
+    "I",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    2,
+    7,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Dwarven Training",
+    "II",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    2,
+    7,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Dwarven Training",
+    "III",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    3,
+    7,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Heart of Gold",
+    "I",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Heart of Gold",
+    "II",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Heart of Gold",
+    "III",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    3,
+    19,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Heart of Gold",
+    "IV",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    5,
+    19,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Gold Essence Shop",
+    "Heart of Gold",
+    "V",
+    "Gain XP by purchasing perks from the Gold Essence Shop!"
+   ],
+   "xp": [
+    7,
+    19,
+    188
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Return to Sender",
+    "I",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    2,
+    62,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Return to Sender",
+    "II",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    2,
+    62,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Return to Sender",
+    "III",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    3,
+    62,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Return to Sender",
+    "IV",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    5,
+    62,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Return to Sender",
+    "V",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    7,
+    62,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Return to Sender",
+    "VI",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    8,
+    62,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Return to Sender",
+    "VII",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    8,
+    62,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Return to Sender",
+    "VIII",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    8,
+    62,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Return to Sender",
+    "IX",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    9,
+    62,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Return to Sender",
+    "X",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    10,
+    62,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Rhinstone Infusion",
+    "I",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    1,
+    13,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Rhinstone Infusion",
+    "II",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    1,
+    13,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Rhinstone Infusion",
+    "III",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    1,
+    13,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Rhinstone Infusion",
+    "IV",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    1,
+    13,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Rhinstone Infusion",
+    "V",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    1,
+    13,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Rhinstone Infusion",
+    "VI",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    1,
+    13,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Rhinstone Infusion",
+    "VII",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    1,
+    13,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Rhinstone Infusion",
+    "VIII",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    2,
+    13,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Rhinstone Infusion",
+    "IX",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    2,
+    13,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Rhinstone Infusion",
+    "X",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    2,
+    13,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Under Pressure",
+    "I",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Under Pressure",
+    "II",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Under Pressure",
+    "III",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    3,
+    19,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Under Pressure",
+    "IV",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    5,
+    19,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Under Pressure",
+    "V",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    7,
+    19,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Radiant Fisher",
+    "I",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    2,
+    62,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Radiant Fisher",
+    "II",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    2,
+    62,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Radiant Fisher",
+    "III",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    3,
+    62,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Radiant Fisher",
+    "IV",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    5,
+    62,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Radiant Fisher",
+    "V",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    7,
+    62,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Radiant Fisher",
+    "VI",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    8,
+    62,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Radiant Fisher",
+    "VII",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    8,
+    62,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Radiant Fisher",
+    "VIII",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    8,
+    62,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Radiant Fisher",
+    "IX",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    9,
+    62,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Radiant Fisher",
+    "X",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    10,
+    62,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Diamond in the Rough",
+    "I",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Diamond in the Rough",
+    "II",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Diamond in the Rough",
+    "III",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    3,
+    19,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Diamond in the Rough",
+    "IV",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    5,
+    19,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "Diamond in the Rough",
+    "V",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    7,
+    19,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Diamond Essence Shop",
+    "High Roller",
+    "I",
+    "Gain XP by purchasing perks from the Diamond Essence Shop!"
+   ],
+   "xp": [
+    2,
+    2,
+    177
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Forest Essence Shop",
+    "Trapped",
+    "I",
+    "Gain XP by purchasing perks from the Forest Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    171
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Forest Essence Shop",
+    "Trapped",
+    "II",
+    "Gain XP by purchasing perks from the Forest Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    171
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Forest Essence Shop",
+    "Trapped",
+    "III",
+    "Gain XP by purchasing perks from the Forest Essence Shop!"
+   ],
+   "xp": [
+    3,
+    19,
+    171
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Forest Essence Shop",
+    "Trapped",
+    "IV",
+    "Gain XP by purchasing perks from the Forest Essence Shop!"
+   ],
+   "xp": [
+    5,
+    19,
+    171
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Forest Essence Shop",
+    "Trapped",
+    "V",
+    "Gain XP by purchasing perks from the Forest Essence Shop!"
+   ],
+   "xp": [
+    7,
+    19,
+    171
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Forest Essence Shop",
+    "Extreme Pressure",
+    "I",
+    "Gain XP by purchasing perks from the Forest Essence Shop!"
+   ],
+   "xp": [
+    2,
+    62,
+    171
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Forest Essence Shop",
+    "Extreme Pressure",
+    "II",
+    "Gain XP by purchasing perks from the Forest Essence Shop!"
+   ],
+   "xp": [
+    2,
+    62,
+    171
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Forest Essence Shop",
+    "Extreme Pressure",
+    "III",
+    "Gain XP by purchasing perks from the Forest Essence Shop!"
+   ],
+   "xp": [
+    3,
+    62,
+    171
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Forest Essence Shop",
+    "Extreme Pressure",
+    "IV",
+    "Gain XP by purchasing perks from the Forest Essence Shop!"
+   ],
+   "xp": [
+    5,
+    62,
+    171
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Forest Essence Shop",
+    "Extreme Pressure",
+    "V",
+    "Gain XP by purchasing perks from the Forest Essence Shop!"
+   ],
+   "xp": [
+    7,
+    62,
+    171
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Forest Essence Shop",
+    "Extreme Pressure",
+    "VI",
+    "Gain XP by purchasing perks from the Forest Essence Shop!"
+   ],
+   "xp": [
+    8,
+    62,
+    171
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Forest Essence Shop",
+    "Extreme Pressure",
+    "VII",
+    "Gain XP by purchasing perks from the Forest Essence Shop!"
+   ],
+   "xp": [
+    8,
+    62,
+    171
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Forest Essence Shop",
+    "Extreme Pressure",
+    "VIII",
+    "Gain XP by purchasing perks from the Forest Essence Shop!"
+   ],
+   "xp": [
+    8,
+    62,
+    171
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Forest Essence Shop",
+    "Extreme Pressure",
+    "IX",
+    "Gain XP by purchasing perks from the Forest Essence Shop!"
+   ],
+   "xp": [
+    9,
+    62,
+    171
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Forest Essence Shop",
+    "Extreme Pressure",
+    "X",
+    "Gain XP by purchasing perks from the Forest Essence Shop!"
+   ],
+   "xp": [
+    10,
+    62,
+    171
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Forest Essence Shop",
+    "Lumberjack",
+    "I",
+    "Gain XP by purchasing perks from the Forest Essence Shop!"
+   ],
+   "xp": [
+    2,
+    62,
+    171
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Forest Essence Shop",
+    "Lumberjack",
+    "II",
+    "Gain XP by purchasing perks from the Forest Essence Shop!"
+   ],
+   "xp": [
+    2,
+    62,
+    171
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Forest Essence Shop",
+    "Lumberjack",
+    "III",
+    "Gain XP by purchasing perks from the Forest Essence Shop!"
+   ],
+   "xp": [
+    3,
+    62,
+    171
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Forest Essence Shop",
+    "Lumberjack",
+    "IV",
+    "Gain XP by purchasing perks from the Forest Essence Shop!"
+   ],
+   "xp": [
+    5,
+    62,
+    171
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Forest Essence Shop",
+    "Lumberjack",
+    "V",
+    "Gain XP by purchasing perks from the Forest Essence Shop!"
+   ],
+   "xp": [
+    7,
+    62,
+    171
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Forest Essence Shop",
+    "Lumberjack",
+    "VI",
+    "Gain XP by purchasing perks from the Forest Essence Shop!"
+   ],
+   "xp": [
+    8,
+    62,
+    171
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Forest Essence Shop",
+    "Lumberjack",
+    "VII",
+    "Gain XP by purchasing perks from the Forest Essence Shop!"
+   ],
+   "xp": [
+    8,
+    62,
+    171
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Forest Essence Shop",
+    "Lumberjack",
+    "VIII",
+    "Gain XP by purchasing perks from the Forest Essence Shop!"
+   ],
+   "xp": [
+    8,
+    62,
+    171
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Forest Essence Shop",
+    "Lumberjack",
+    "IX",
+    "Gain XP by purchasing perks from the Forest Essence Shop!"
+   ],
+   "xp": [
+    9,
+    62,
+    171
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Forest Essence Shop",
+    "Lumberjack",
+    "X",
+    "Gain XP by purchasing perks from the Forest Essence Shop!"
+   ],
+   "xp": [
+    10,
+    62,
+    171
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Forest Essence Shop",
+    "Tasty",
+    "I",
+    "Gain XP by purchasing perks from the Forest Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    171
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Forest Essence Shop",
+    "Tasty",
+    "II",
+    "Gain XP by purchasing perks from the Forest Essence Shop!"
+   ],
+   "xp": [
+    2,
+    19,
+    171
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Forest Essence Shop",
+    "Tasty",
+    "III",
+    "Gain XP by purchasing perks from the Forest Essence Shop!"
+   ],
+   "xp": [
+    3,
+    19,
+    171
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Forest Essence Shop",
+    "Tasty",
+    "IV",
+    "Gain XP by purchasing perks from the Forest Essence Shop!"
+   ],
+   "xp": [
+    5,
+    19,
+    171
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Forest Essence Shop",
+    "Tasty",
+    "V",
+    "Gain XP by purchasing perks from the Forest Essence Shop!"
+   ],
+   "xp": [
+    7,
+    19,
+    171
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Forest Essence Shop",
+    "Forest Training",
+    "I",
+    "Gain XP by purchasing perks from the Forest Essence Shop!"
+   ],
+   "xp": [
+    2,
+    7,
+    171
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Forest Essence Shop",
+    "Forest Training",
+    "II",
+    "Gain XP by purchasing perks from the Forest Essence Shop!"
+   ],
+   "xp": [
+    2,
+    7,
+    171
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Forest Essence Shop",
+    "Forest Training",
+    "III",
+    "Gain XP by purchasing perks from the Forest Essence Shop!"
+   ],
+   "xp": [
+    3,
+    7,
+    171
+   ]
+  },
+  {
+   "tab": "Essence Shop",
+   "cells": [
+    "Forest Essence Shop",
+    "Axed",
+    "I",
+    "Gain XP by purchasing perks from the Forest Essence Shop!"
+   ],
+   "xp": [
+    2,
+    2,
+    171
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Slayer Level Up",
+    "Slayer Level Up",
+    "Slayer Level Up",
+    "Gain XP by leveling up your Slayer Boss Progress!",
+    "Level 1:"
+   ],
+   "xp": [
+    15,
+    3825
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Slayer Level Up",
+    "Slayer Level Up",
+    "Slayer Level Up",
+    "Gain XP by leveling up your Slayer Boss Progress!",
+    "Level 2:"
+   ],
+   "xp": [
+    25,
+    3825
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Slayer Level Up",
+    "Slayer Level Up",
+    "Slayer Level Up",
+    "Gain XP by leveling up your Slayer Boss Progress!",
+    "Level 3:"
+   ],
+   "xp": [
+    35,
+    3825
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Slayer Level Up",
+    "Slayer Level Up",
+    "Slayer Level Up",
+    "Gain XP by leveling up your Slayer Boss Progress!",
+    "Level 4:"
+   ],
+   "xp": [
+    50,
+    3825
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Slayer Level Up",
+    "Slayer Level Up",
+    "Slayer Level Up",
+    "Gain XP by leveling up your Slayer Boss Progress!",
+    "Level 5:"
+   ],
+   "xp": [
+    70,
+    3825
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Slayer Level Up",
+    "Slayer Level Up",
+    "Slayer Level Up",
+    "Gain XP by leveling up your Slayer Boss Progress!",
+    "Level 6:"
+   ],
+   "xp": [
+    100,
+    3825
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Slayer Level Up",
+    "Slayer Level Up",
+    "Slayer Level Up",
+    "Gain XP by leveling up your Slayer Boss Progress!",
+    "Level 7:"
+   ],
+   "xp": [
+    125,
+    3825
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Slayer Level Up",
+    "Slayer Level Up",
+    "Slayer Level Up",
+    "Gain XP by leveling up your Slayer Boss Progress!",
+    "Level 8:"
+   ],
+   "xp": [
+    150,
+    3825
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Slayer Level Up",
+    "Slayer Level Up",
+    "Slayer Level Up",
+    "Gain XP by leveling up your Slayer Boss Progress!",
+    "Level 9:"
+   ],
+   "xp": [
+    150,
+    3825
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Boss Collections",
+    "Boss Collections",
+    "Boss Collections",
+    "Gain XP by completing your Boss Collections!",
+    "Varies"
+   ],
+   "xp": [
+    1015
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Bestiary Progress",
+    "Bestiary Progress",
+    "Bestiary Progress",
+    "Gain XP by progressing in your Bestiary!",
+    "Each Tier:"
+   ],
+   "xp": [
+    1,
+    4370
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Bestiary Progress",
+    "Bestiary Progress",
+    "Bestiary Progress",
+    "Gain XP by progressing in your Bestiary!",
+    "Every 10 Milestones:"
+   ],
+   "xp": [
+    10,
+    4370
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Mythological Creatures",
+    "Mythological Creatures",
+    "Mythological Creatures",
+    "Gain XP by killing Mythological Creatures and Minos!",
+    "Per 100 Kills: · (Caps at 10,000 kills)"
+   ],
+   "xp": [
+    1,
+    100
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Slay Dragons",
+    "Slay Superior Dragon",
+    "Slay Superior Dragon",
+    "Slay Dragons for the first time to gain XP."
+   ],
+   "xp": [
+    50,
+    200
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Slay Dragons",
+    "Slay Old Dragon",
+    "Slay Old Dragon",
+    "Slay Dragons for the first time to gain XP."
+   ],
+   "xp": [
+    25,
+    200
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Slay Dragons",
+    "Slay Young Dragon",
+    "Slay Young Dragon",
+    "Slay Dragons for the first time to gain XP."
+   ],
+   "xp": [
+    25,
+    200
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Slay Dragons",
+    "Slay Wise Dragon",
+    "Slay Wise Dragon",
+    "Slay Dragons for the first time to gain XP."
+   ],
+   "xp": [
+    25,
+    200
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Slay Dragons",
+    "Slay Protector Dragon",
+    "Slay Protector Dragon",
+    "Slay Dragons for the first time to gain XP."
+   ],
+   "xp": [
+    25,
+    200
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Slay Dragons",
+    "Slay Unstable Dragon",
+    "Slay Unstable Dragon",
+    "Slay Dragons for the first time to gain XP."
+   ],
+   "xp": [
+    25,
+    200
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Slay Dragons",
+    "Slay Strong Dragon",
+    "Slay Strong Dragon",
+    "Slay Dragons for the first time to gain XP."
+   ],
+   "xp": [
+    25,
+    200
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Defeat Slayers",
+    "Defeat Revenant Horror",
+    "Tier I",
+    "Defeat Slayers to gain XP."
+   ],
+   "xp": [
+    25,
+    225
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Defeat Slayers",
+    "Defeat Revenant Horror",
+    "Tier II",
+    "Defeat Slayers to gain XP."
+   ],
+   "xp": [
+    25,
+    225
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Defeat Slayers",
+    "Defeat Revenant Horror",
+    "Tier III",
+    "Defeat Slayers to gain XP."
+   ],
+   "xp": [
+    50,
+    225
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Defeat Slayers",
+    "Defeat Revenant Horror",
+    "Tier IV",
+    "Defeat Slayers to gain XP."
+   ],
+   "xp": [
+    50,
+    225
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Defeat Slayers",
+    "Defeat Revenant Horror",
+    "Tier V",
+    "Defeat Slayers to gain XP."
+   ],
+   "xp": [
+    75,
+    225
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Defeat Slayers",
+    "Defeat Tarantula Broodfather",
+    "Tier I",
+    "Defeat Slayers to gain XP."
+   ],
+   "xp": [
+    25,
+    225
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Defeat Slayers",
+    "Defeat Tarantula Broodfather",
+    "Tier II",
+    "Defeat Slayers to gain XP."
+   ],
+   "xp": [
+    25,
+    225
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Defeat Slayers",
+    "Defeat Tarantula Broodfather",
+    "Tier III",
+    "Defeat Slayers to gain XP."
+   ],
+   "xp": [
+    50,
+    225
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Defeat Slayers",
+    "Defeat Tarantula Broodfather",
+    "Tier IV",
+    "Defeat Slayers to gain XP."
+   ],
+   "xp": [
+    50,
+    225
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Defeat Slayers",
+    "Defeat Tarantula Broodfather",
+    "Tier V",
+    "Defeat Slayers to gain XP."
+   ],
+   "xp": [
+    75,
+    225
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Defeat Slayers",
+    "Defeat Sven Packmaster",
+    "Tier I",
+    "Defeat Slayers to gain XP."
+   ],
+   "xp": [
+    25,
+    150
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Defeat Slayers",
+    "Defeat Sven Packmaster",
+    "Tier II",
+    "Defeat Slayers to gain XP."
+   ],
+   "xp": [
+    25,
+    150
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Defeat Slayers",
+    "Defeat Sven Packmaster",
+    "Tier III",
+    "Defeat Slayers to gain XP."
+   ],
+   "xp": [
+    50,
+    150
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Defeat Slayers",
+    "Defeat Sven Packmaster",
+    "Tier IV",
+    "Defeat Slayers to gain XP."
+   ],
+   "xp": [
+    50,
+    150
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Defeat Slayers",
+    "Defeat Voidgloom Seraph",
+    "Tier I",
+    "Defeat Slayers to gain XP."
+   ],
+   "xp": [
+    25,
+    150
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Defeat Slayers",
+    "Defeat Voidgloom Seraph",
+    "Tier II",
+    "Defeat Slayers to gain XP."
+   ],
+   "xp": [
+    25,
+    150
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Defeat Slayers",
+    "Defeat Voidgloom Seraph",
+    "Tier III",
+    "Defeat Slayers to gain XP."
+   ],
+   "xp": [
+    50,
+    150
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Defeat Slayers",
+    "Defeat Voidgloom Seraph",
+    "Tier IV",
+    "Defeat Slayers to gain XP."
+   ],
+   "xp": [
+    50,
+    150
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Defeat Slayers",
+    "Defeat Riftstalker Bloodfiend",
+    "Tier I",
+    "Defeat Slayers to gain XP."
+   ],
+   "xp": [
+    25,
+    225
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Defeat Slayers",
+    "Defeat Riftstalker Bloodfiend",
+    "Tier II",
+    "Defeat Slayers to gain XP."
+   ],
+   "xp": [
+    25,
+    225
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Defeat Slayers",
+    "Defeat Riftstalker Bloodfiend",
+    "Tier III",
+    "Defeat Slayers to gain XP."
+   ],
+   "xp": [
+    50,
+    225
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Defeat Slayers",
+    "Defeat Riftstalker Bloodfiend",
+    "Tier IV",
+    "Defeat Slayers to gain XP."
+   ],
+   "xp": [
+    50,
+    225
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Defeat Slayers",
+    "Defeat Riftstalker Bloodfiend",
+    "Tier V",
+    "Defeat Slayers to gain XP."
+   ],
+   "xp": [
+    75,
+    225
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Defeat Slayers",
+    "Defeat Inferno Demonlord",
+    "Tier I",
+    "Defeat Slayers to gain XP."
+   ],
+   "xp": [
+    25,
+    150
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Defeat Slayers",
+    "Defeat Inferno Demonlord",
+    "Tier II",
+    "Defeat Slayers to gain XP."
+   ],
+   "xp": [
+    25,
+    150
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Defeat Slayers",
+    "Defeat Inferno Demonlord",
+    "Tier III",
+    "Defeat Slayers to gain XP."
+   ],
+   "xp": [
+    50,
+    150
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Defeat Slayers",
+    "Defeat Inferno Demonlord",
+    "Tier IV",
+    "Defeat Slayers to gain XP."
+   ],
+   "xp": [
+    50,
+    150
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Defeat Kuudra",
+    "Basic Tier",
+    "Basic Tier",
+    "Defeat this Kuudra tier for the first time to gain XP."
+   ],
+   "xp": [
+    20,
+    300
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Defeat Kuudra",
+    "Hot Tier",
+    "Hot Tier",
+    "Defeat this Kuudra tier for the first time to gain XP."
+   ],
+   "xp": [
+    40,
+    300
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Defeat Kuudra",
+    "Burning Tier",
+    "Burning Tier",
+    "Defeat this Kuudra tier for the first time to gain XP."
+   ],
+   "xp": [
+    60,
+    300
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Defeat Kuudra",
+    "Fiery Tier",
+    "Fiery Tier",
+    "Defeat this Kuudra tier for the first time to gain XP."
+   ],
+   "xp": [
+    80,
+    300
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Defeat Kuudra",
+    "Infernal Tier",
+    "Infernal Tier",
+    "Defeat this Kuudra tier for the first time to gain XP."
+   ],
+   "xp": [
+    100,
+    300
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Defeat Arachne",
+    "Tier 1",
+    "Tier 1",
+    "Defeat this Arachne tier for the first time to gain XP."
+   ],
+   "xp": [
+    20,
+    60
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Defeat Arachne",
+    "Tier 2",
+    "Tier 2",
+    "Defeat this Arachne tier for the first time to gain XP."
+   ],
+   "xp": [
+    40,
+    60
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Collect Mob Types",
+    "Collect Mob Types",
+    "Collect Mob Types",
+    "Gain XP by collecting all of the Mob Types!",
+    "Per Unique Mob Type:"
+   ],
+   "xp": [
+    1,
+    33
+   ]
+  },
+  {
+   "tab": "Slaying",
+   "cells": [
+    "Collect Mob Types",
+    "Collect Mob Types",
+    "Collect Mob Types",
+    "Gain XP by collecting all of the Mob Types!",
+    "Collect all Mob Types:"
+   ],
+   "xp": [
+    10,
+    33
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Heart of the Mountain",
+    "Heart of the Mountain",
+    "Heart of the Mountain",
+    "Gain XP by progressing your Heart of the Mountain!",
+    "Tier 1:"
+   ],
+   "xp": [
+    35,
+    1175
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Heart of the Mountain",
+    "Heart of the Mountain",
+    "Heart of the Mountain",
+    "Gain XP by progressing your Heart of the Mountain!",
+    "Tier 2:"
+   ],
+   "xp": [
+    45,
+    1175
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Heart of the Mountain",
+    "Heart of the Mountain",
+    "Heart of the Mountain",
+    "Gain XP by progressing your Heart of the Mountain!",
+    "Tier 3:"
+   ],
+   "xp": [
+    60,
+    1175
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Heart of the Mountain",
+    "Heart of the Mountain",
+    "Heart of the Mountain",
+    "Gain XP by progressing your Heart of the Mountain!",
+    "Tier 4:"
+   ],
+   "xp": [
+    75,
+    1175
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Heart of the Mountain",
+    "Heart of the Mountain",
+    "Heart of the Mountain",
+    "Gain XP by progressing your Heart of the Mountain!",
+    "Tier 5:"
+   ],
+   "xp": [
+    90,
+    1175
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Heart of the Mountain",
+    "Heart of the Mountain",
+    "Heart of the Mountain",
+    "Gain XP by progressing your Heart of the Mountain!",
+    "Tier 6:"
+   ],
+   "xp": [
+    110,
+    1175
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Heart of the Mountain",
+    "Heart of the Mountain",
+    "Heart of the Mountain",
+    "Gain XP by progressing your Heart of the Mountain!",
+    "Tier 7:"
+   ],
+   "xp": [
+    130,
+    1175
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Heart of the Mountain",
+    "Heart of the Mountain",
+    "Heart of the Mountain",
+    "Gain XP by progressing your Heart of the Mountain!",
+    "Tier 8:"
+   ],
+   "xp": [
+    180,
+    1175
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Heart of the Mountain",
+    "Heart of the Mountain",
+    "Heart of the Mountain",
+    "Gain XP by progressing your Heart of the Mountain!",
+    "Tier 9:"
+   ],
+   "xp": [
+    210,
+    1175
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Heart of the Mountain",
+    "Heart of the Mountain",
+    "Heart of the Mountain",
+    "Gain XP by progressing your Heart of the Mountain!",
+    "Tier 10:"
+   ],
+   "xp": [
+    240,
+    1175
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Heart of the Mountain",
+    "Heart of the Mountain",
+    "Heart of the Mountain",
+    "Gain XP by progressing your Heart of the Mountain!",
+    "Per until 600,000 powder: · (Earn an exponentially decreasing amount of XP for powder above the cap until 12,500,000 powder)"
+   ],
+   "xp": [
+    1,
+    1942
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Heart of the Mountain",
+    "Heart of the Mountain",
+    "Heart of the Mountain",
+    "Gain XP by progressing your Heart of the Mountain!",
+    "Per until 600,000 powder: · (Earn an exponentially decreasing amount of XP for powder above the cap until 20,000,000 powder)"
+   ],
+   "xp": [
+    1,
+    1942
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Heart of the Mountain",
+    "Heart of the Mountain",
+    "Heart of the Mountain",
+    "Gain XP by progressing your Heart of the Mountain!",
+    "Per until 600,000 powder: · (Earn an exponentially decreasing amount of XP for powder above the cap until 20,000,000 powder)"
+   ],
+   "xp": [
+    1,
+    1942
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Commission Milestones",
+    "Commission Milestones",
+    "Commission Milestones",
+    "Gain XP for each of your Commission Milestones!",
+    "Tier 1:"
+   ],
+   "xp": [
+    20,
+    255
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Commission Milestones",
+    "Commission Milestones",
+    "Commission Milestones",
+    "Gain XP for each of your Commission Milestones!",
+    "Tier 2:"
+   ],
+   "xp": [
+    30,
+    255
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Commission Milestones",
+    "Commission Milestones",
+    "Commission Milestones",
+    "Gain XP for each of your Commission Milestones!",
+    "Tier 3:"
+   ],
+   "xp": [
+    30,
+    255
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Commission Milestones",
+    "Commission Milestones",
+    "Commission Milestones",
+    "Gain XP for each of your Commission Milestones!",
+    "Tier 4:"
+   ],
+   "xp": [
+    50,
+    255
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Commission Milestones",
+    "Commission Milestones",
+    "Commission Milestones",
+    "Gain XP for each of your Commission Milestones!",
+    "Tier 5:"
+   ],
+   "xp": [
+    50,
+    255
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Commission Milestones",
+    "Commission Milestones",
+    "Commission Milestones",
+    "Gain XP for each of your Commission Milestones!",
+    "Tier 6:"
+   ],
+   "xp": [
+    75,
+    255
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Crystal Nucleus Runs",
+    "Crystal Nucleus Runs",
+    "Crystal Nucleus Runs",
+    "Gain XP for completing Crystal Nucleus runs!",
+    "Per run: · (Caps at 50 runs!)"
+   ],
+   "xp": [
+    4,
+    200
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Peak of the Mountain",
+    "Peak of the Mountain",
+    "Peak of the Mountain",
+    "Gain XP by progressing your Peak of the Mountain!",
+    "Tier 1:"
+   ],
+   "xp": [
+    25,
+    1000
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Peak of the Mountain",
+    "Peak of the Mountain",
+    "Peak of the Mountain",
+    "Gain XP by progressing your Peak of the Mountain!",
+    "Tier 2:"
+   ],
+   "xp": [
+    35,
+    1000
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Peak of the Mountain",
+    "Peak of the Mountain",
+    "Peak of the Mountain",
+    "Gain XP by progressing your Peak of the Mountain!",
+    "Tier 3:"
+   ],
+   "xp": [
+    50,
+    1000
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Peak of the Mountain",
+    "Peak of the Mountain",
+    "Peak of the Mountain",
+    "Gain XP by progressing your Peak of the Mountain!",
+    "Tier 4:"
+   ],
+   "xp": [
+    65,
+    1000
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Peak of the Mountain",
+    "Peak of the Mountain",
+    "Peak of the Mountain",
+    "Gain XP by progressing your Peak of the Mountain!",
+    "Tier 5:"
+   ],
+   "xp": [
+    75,
+    1000
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Peak of the Mountain",
+    "Peak of the Mountain",
+    "Peak of the Mountain",
+    "Gain XP by progressing your Peak of the Mountain!",
+    "Tier 6:"
+   ],
+   "xp": [
+    100,
+    1000
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Peak of the Mountain",
+    "Peak of the Mountain",
+    "Peak of the Mountain",
+    "Gain XP by progressing your Peak of the Mountain!",
+    "Tier 7:"
+   ],
+   "xp": [
+    125,
+    1000
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Peak of the Mountain",
+    "Peak of the Mountain",
+    "Peak of the Mountain",
+    "Gain XP by progressing your Peak of the Mountain!",
+    "Tier 8:"
+   ],
+   "xp": [
+    150,
+    1000
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Peak of the Mountain",
+    "Peak of the Mountain",
+    "Peak of the Mountain",
+    "Gain XP by progressing your Peak of the Mountain!",
+    "Tier 9:"
+   ],
+   "xp": [
+    175,
+    1000
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Peak of the Mountain",
+    "Peak of the Mountain",
+    "Peak of the Mountain",
+    "Gain XP by progressing your Peak of the Mountain!",
+    "Tier 10:"
+   ],
+   "xp": [
+    200,
+    1000
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Fossil Research",
+    "Fossil Research",
+    "Fossil Research",
+    "Gain XP per unique fossil donated to the Research Center!"
+   ],
+   "xp": [
+    10,
+    80
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Rock Milestones",
+    "Gain XP by unlocking Rock Pet Milestones!"
+   ],
+   "xp": [
+    20,
+    100
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Rock Milestones",
+    "Gain XP by unlocking Rock Pet Milestones!"
+   ],
+   "xp": [
+    20,
+    100
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Rock Milestones",
+    "Gain XP by unlocking Rock Pet Milestones!"
+   ],
+   "xp": [
+    20,
+    100
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Rock Milestones",
+    "Gain XP by unlocking Rock Pet Milestones!"
+   ],
+   "xp": [
+    20,
+    100
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Rock Milestones",
+    "Gain XP by unlocking Rock Pet Milestones!"
+   ],
+   "xp": [
+    20,
+    100
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Corpse Milestones",
+    "Corpse Milestones",
+    "Corpse Milestones",
+    "Gain XP by increasing your Frozen Corpse Milestones!",
+    "Tier 1:"
+   ],
+   "xp": [
+    5,
+    140
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Corpse Milestones",
+    "Corpse Milestones",
+    "Corpse Milestones",
+    "Gain XP by increasing your Frozen Corpse Milestones!",
+    "Tier 2:"
+   ],
+   "xp": [
+    10,
+    140
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Corpse Milestones",
+    "Corpse Milestones",
+    "Corpse Milestones",
+    "Gain XP by increasing your Frozen Corpse Milestones!",
+    "Tier 3:"
+   ],
+   "xp": [
+    15,
+    140
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Corpse Milestones",
+    "Corpse Milestones",
+    "Corpse Milestones",
+    "Gain XP by increasing your Frozen Corpse Milestones!",
+    "Tier 4:"
+   ],
+   "xp": [
+    20,
+    140
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Corpse Milestones",
+    "Corpse Milestones",
+    "Corpse Milestones",
+    "Gain XP by increasing your Frozen Corpse Milestones!",
+    "Tier 5:"
+   ],
+   "xp": [
+    25,
+    140
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Corpse Milestones",
+    "Corpse Milestones",
+    "Corpse Milestones",
+    "Gain XP by increasing your Frozen Corpse Milestones!",
+    "Tier 6:"
+   ],
+   "xp": [
+    30,
+    140
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Mining",
+    "Corpse Milestones",
+    "Corpse Milestones",
+    "Corpse Milestones",
+    "Gain XP by increasing your Frozen Corpse Milestones!",
+    "Tier 7:"
+   ],
+   "xp": [
+    35,
+    140
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Farming",
+    "Anita's Shop Upgrades",
+    "Anita's Shop Upgrades",
+    "Anita's Shop Upgrades",
+    "Gain XP by unlocking permanent upgrades (Farming Level Cap and Extra Farming Drops) from Anita's shop!",
+    "Per Upgrade Tier:"
+   ],
+   "xp": [
+    10,
+    250
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Farming",
+    "Garden Level",
+    "Garden Level",
+    "Garden Level",
+    "Gain XP by increasing your Garden Level!",
+    "Per Level:"
+   ],
+   "xp": [
+    10,
+    140
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Farming",
+    "Garden Visitors Served",
+    "Garden Visitors Served",
+    "Garden Visitors Served",
+    "Gain XP by increasing your Garden Unqiue Visitor Milestone!",
+    "Per Milestone:"
+   ],
+   "xp": [
+    3,
+    45
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Farming",
+    "Offers Accepted",
+    "Offers Accepted",
+    "Offers Accepted",
+    "Gain XP by increasing your Offers Accepted Milestone!",
+    "Per Milestone:"
+   ],
+   "xp": [
+    3,
+    90
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Farming",
+    "Crop Upgrades",
+    "Crop Upgrades",
+    "Crop Upgrades",
+    "Gain XP by purchasing Garden Crop Upgrades.",
+    "Per Upgrade:"
+   ],
+   "xp": [
+    1,
+    117
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Farming",
+    "Garden Crop Milestones Reached",
+    "Garden Crop Milestones Reached",
+    "Garden Crop Milestones Reached",
+    "Gain XP by increasing your Crop Milestones!",
+    "Per Milestone:"
+   ],
+   "xp": [
+    1,
+    598
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Farming",
+    "Garden Unlocked Plots",
+    "Garden Unlocked Plots",
+    "Garden Unlocked Plots",
+    "Gain XP by unlocking Garden plots!",
+    "Per Plot:"
+   ],
+   "xp": [
+    5,
+    120
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Farming",
+    "Composter Upgrades",
+    "Composter Upgrades",
+    "Composter Upgrades",
+    "Gain XP by purchasing Garden Composter Upgrades.",
+    "Tiers 1-7:"
+   ],
+   "xp": [
+    1,
+    305
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Farming",
+    "Composter Upgrades",
+    "Composter Upgrades",
+    "Composter Upgrades",
+    "Gain XP by purchasing Garden Composter Upgrades.",
+    "Tiers 8-13:"
+   ],
+   "xp": [
+    2,
+    305
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Farming",
+    "Composter Upgrades",
+    "Composter Upgrades",
+    "Composter Upgrades",
+    "Gain XP by purchasing Garden Composter Upgrades.",
+    "Tiers 14-19:"
+   ],
+   "xp": [
+    3,
+    305
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Farming",
+    "Composter Upgrades",
+    "Composter Upgrades",
+    "Composter Upgrades",
+    "Gain XP by purchasing Garden Composter Upgrades.",
+    "Tiers 20-25:"
+   ],
+   "xp": [
+    4,
+    305
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Farming",
+    "Greenhouse Upgrades",
+    "Greenhouse Upgrades",
+    "Greenhouse Upgrades",
+    "Gain XP by purchasing Greenhouse Upgrades.",
+    "Per Upgrade:"
+   ],
+   "xp": [
+    5,
+    100
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Farming",
+    "DNA Analysis Milestones",
+    "DNA Analysis Milestones",
+    "DNA Analysis Milestones",
+    "Gain XP per DNA Analysis Milestone you have completed!",
+    "Per Milestone:"
+   ],
+   "xp": [
+    15,
+    90
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Farming",
+    "Farming Chips",
+    "Farming Chips",
+    "Farming Chips",
+    "Gain XP by unlocking and leveling your Farming Chips!",
+    "Per Chip unlock:"
+   ],
+   "xp": [
+    1,
+    410
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Farming",
+    "Farming Chips",
+    "Farming Chips",
+    "Farming Chips",
+    "Gain XP by unlocking and leveling your Farming Chips!",
+    "Per upgrade:"
+   ],
+   "xp": [
+    15,
+    410
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Farming",
+    "Farming Chips",
+    "Farming Chips",
+    "Farming Chips",
+    "Gain XP by unlocking and leveling your Farming Chips!",
+    "Per Legendary upgrade:"
+   ],
+   "xp": [
+    25,
+    410
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Farming",
+    "Sowdust",
+    "Sowdust",
+    "Sowdust",
+    "Gain XP from Sowdust!",
+    "Per 1,000,000 Sowdust: · (250,000,000 Sowdust max)"
+   ],
+   "xp": [
+    1,
+    250
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Sulphur Skitter",
+    "Bronze",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    4,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Sulphur Skitter",
+    "Silver",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    8,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Sulphur Skitter",
+    "Gold",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    16,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Sulphur Skitter",
+    "Diamond",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    32,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Obfuscated 1",
+    "Bronze",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    4,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Obfuscated 1",
+    "Silver",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    8,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Obfuscated 1",
+    "Gold",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    16,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Obfuscated 1",
+    "Diamond",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    32,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Steaming-Hot Flounder",
+    "Bronze",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    4,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Steaming-Hot Flounder",
+    "Silver",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    8,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Steaming-Hot Flounder",
+    "Gold",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    16,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Steaming-Hot Flounder",
+    "Diamond",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    32,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Gusher",
+    "Bronze",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    4,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Gusher",
+    "Silver",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    8,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Gusher",
+    "Gold",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    16,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Gusher",
+    "Diamond",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    32,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Blobfish",
+    "Bronze",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    4,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Blobfish",
+    "Silver",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    8,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Blobfish",
+    "Gold",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    16,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Blobfish",
+    "Diamond",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    32,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Obfuscated 2",
+    "Bronze",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    4,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Obfuscated 2",
+    "Silver",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    8,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Obfuscated 2",
+    "Gold",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    16,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Obfuscated 2",
+    "Diamond",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    32,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Slugfish",
+    "Bronze",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    4,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Slugfish",
+    "Silver",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    8,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Slugfish",
+    "Gold",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    16,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Slugfish",
+    "Diamond",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    32,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Flyfish",
+    "Bronze",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    4,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Flyfish",
+    "Silver",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    8,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Flyfish",
+    "Gold",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    16,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Flyfish",
+    "Diamond",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    32,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Obfuscated 3",
+    "Bronze",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    4,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Obfuscated 3",
+    "Silver",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    8,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Obfuscated 3",
+    "Gold",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    16,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Obfuscated 3",
+    "Diamond",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    32,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Lavahorse",
+    "Bronze",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    4,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Lavahorse",
+    "Silver",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    8,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Lavahorse",
+    "Gold",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    16,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Lavahorse",
+    "Diamond",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    32,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Mana Ray",
+    "Bronze",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    4,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Mana Ray",
+    "Silver",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    8,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Mana Ray",
+    "Gold",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    16,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Mana Ray",
+    "Diamond",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    32,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Volcanic Stonefish",
+    "Bronze",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    4,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Volcanic Stonefish",
+    "Silver",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    8,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Volcanic Stonefish",
+    "Gold",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    16,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Volcanic Stonefish",
+    "Diamond",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    32,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Vanille",
+    "Bronze",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    4,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Vanille",
+    "Silver",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    8,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Vanille",
+    "Gold",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    16,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Vanille",
+    "Diamond",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    32,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Skeleton Fish",
+    "Bronze",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    4,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Skeleton Fish",
+    "Silver",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    8,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Skeleton Fish",
+    "Gold",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    16,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Skeleton Fish",
+    "Diamond",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    32,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Moldfin",
+    "Bronze",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    4,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Moldfin",
+    "Silver",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    8,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Moldfin",
+    "Gold",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    16,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Moldfin",
+    "Diamond",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    32,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Soul Fish",
+    "Bronze",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    4,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Soul Fish",
+    "Silver",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    8,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Soul Fish",
+    "Gold",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    16,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Soul Fish",
+    "Diamond",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    32,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Karate Fish",
+    "Bronze",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    4,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Karate Fish",
+    "Silver",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    8,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Karate Fish",
+    "Gold",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    16,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Karate Fish",
+    "Diamond",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    32,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Golden Fish",
+    "Bronze",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    4,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Golden Fish",
+    "Silver",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    8,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Golden Fish",
+    "Gold",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    16,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Trophy Fish",
+    "Golden Fish",
+    "Diamond",
+    "Fish Trophy Fishes to gain XP."
+   ],
+   "xp": [
+    32,
+    60
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Dolphin Milestones",
+    "Gain XP by unlocking Dolphin Pet Milestones!"
+   ],
+   "xp": [
+    20,
+    100
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Dolphin Milestones",
+    "Gain XP by unlocking Dolphin Pet Milestones!"
+   ],
+   "xp": [
+    20,
+    100
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Dolphin Milestones",
+    "Gain XP by unlocking Dolphin Pet Milestones!"
+   ],
+   "xp": [
+    20,
+    100
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Dolphin Milestones",
+    "Gain XP by unlocking Dolphin Pet Milestones!"
+   ],
+   "xp": [
+    20,
+    100
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Dolphin Milestones",
+    "Gain XP by unlocking Dolphin Pet Milestones!"
+   ],
+   "xp": [
+    20,
+    100
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Ship Parts",
+    "Ship Parts",
+    "Ship Parts",
+    "Gain XP by applying Ship Parts to your Ship!",
+    "Bronze Ship Helm:"
+   ],
+   "xp": [
+    5,
+    15
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Ship Parts",
+    "Ship Parts",
+    "Ship Parts",
+    "Gain XP by applying Ship Parts to your Ship!",
+    "Bronze Ship Engine:"
+   ],
+   "xp": [
+    5,
+    15
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Fishing",
+    "Ship Parts",
+    "Ship Parts",
+    "Ship Parts",
+    "Gain XP by applying Ship Parts to your Ship!",
+    "Bronze Ship Hull:"
+   ],
+   "xp": [
+    5,
+    15
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Foraging",
+    "Heart of the Forest",
+    "Heart of the Forest",
+    "Heart of the Forest",
+    "Gain XP by progressing your Heart of the Mountain!",
+    "Tier 1:"
+   ],
+   "xp": [
+    35,
+    545
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Foraging",
+    "Heart of the Forest",
+    "Heart of the Forest",
+    "Heart of the Forest",
+    "Gain XP by progressing your Heart of the Mountain!",
+    "Tier 2:"
+   ],
+   "xp": [
+    45,
+    545
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Foraging",
+    "Heart of the Forest",
+    "Heart of the Forest",
+    "Heart of the Forest",
+    "Gain XP by progressing your Heart of the Mountain!",
+    "Tier 3:"
+   ],
+   "xp": [
+    60,
+    545
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Foraging",
+    "Heart of the Forest",
+    "Heart of the Forest",
+    "Heart of the Forest",
+    "Gain XP by progressing your Heart of the Mountain!",
+    "Tier 4:"
+   ],
+   "xp": [
+    75,
+    545
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Foraging",
+    "Heart of the Forest",
+    "Heart of the Forest",
+    "Heart of the Forest",
+    "Gain XP by progressing your Heart of the Mountain!",
+    "Tier 5:"
+   ],
+   "xp": [
+    90,
+    545
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Foraging",
+    "Heart of the Forest",
+    "Heart of the Forest",
+    "Heart of the Forest",
+    "Gain XP by progressing your Heart of the Mountain!",
+    "Tier 6:"
+   ],
+   "xp": [
+    110,
+    545
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Foraging",
+    "Heart of the Forest",
+    "Heart of the Forest",
+    "Heart of the Forest",
+    "Gain XP by progressing your Heart of the Mountain!",
+    "Tier 7:"
+   ],
+   "xp": [
+    130,
+    545
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Foraging",
+    "Heart of the Forest",
+    "Heart of the Forest",
+    "Heart of the Forest",
+    "Gain XP by progressing your Heart of the Mountain!",
+    "Per until 600,000 whispers: · (Earn an exponentially decreasing amount of XP for powder above the cap until 12,500,000 whispers.)"
+   ],
+   "xp": [
+    1,
+    620
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Foraging",
+    "Center of the Forest",
+    "Center of the Forest",
+    "Center of the Forest",
+    "Gain XP by progressing your Center of the Forest!",
+    "Tier 1:"
+   ],
+   "xp": [
+    25,
+    255
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Foraging",
+    "Center of the Forest",
+    "Center of the Forest",
+    "Center of the Forest",
+    "Gain XP by progressing your Center of the Forest!",
+    "Tier 2:"
+   ],
+   "xp": [
+    35,
+    255
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Foraging",
+    "Center of the Forest",
+    "Center of the Forest",
+    "Center of the Forest",
+    "Gain XP by progressing your Center of the Forest!",
+    "Tier 3:"
+   ],
+   "xp": [
+    50,
+    255
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Foraging",
+    "Center of the Forest",
+    "Center of the Forest",
+    "Center of the Forest",
+    "Gain XP by progressing your Center of the Forest!",
+    "Tier 4:"
+   ],
+   "xp": [
+    65,
+    255
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Foraging",
+    "Center of the Forest",
+    "Center of the Forest",
+    "Center of the Forest",
+    "Gain XP by progressing your Center of the Forest!",
+    "Tier 5:"
+   ],
+   "xp": [
+    75,
+    255
+   ]
+  },
+  {
+   "tab": "Skill Related",
+   "cells": [
+    "Foraging",
+    "Tree Gift Milestones",
+    "Tree Gift Milestones",
+    "Tree Gift Milestones",
+    "Gain XP by increasing your Tree Gift Milestones!",
+    "Per Milestone:"
+   ],
+   "xp": [
+    4,
+    56
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Accessory Bag Upgrades",
+    "Accessory Bag Upgrades",
+    "Accessory Bag Upgrades",
+    "Gain XP by upgrading your Accessory Bag!",
+    "Per Upgrade:"
+   ],
+   "xp": [
+    2,
+    198
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Timecharms",
+    "Timecharms",
+    "Timecharms",
+    "Gain per secured Timecharm in the .",
+    "Per Timecharm:"
+   ],
+   "xp": [
+    100,
+    100,
+    800
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Unlocking Powers",
+    "Unlocking Powers",
+    "Unlocking Powers",
+    "Gain XP per Power unlocked through Power Stones at the Thaumaturgist!",
+    "Per Power:"
+   ],
+   "xp": [
+    15,
+    315
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Upgraded Relays",
+    "Upgraded Relays",
+    "Upgraded Relays",
+    "Gain XP by repairing a !",
+    "Per Relay:"
+   ],
+   "xp": [
+    5,
+    45
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Taming Cap Increases",
+    "Taming Cap Increases",
+    "Taming Cap Increases",
+    "Gain XP by increasing your Skill Cap at !"
+   ],
+   "xp": [
+    10,
+    100
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Hootie Upgrades",
+    "Hootie Upgrades",
+    "Hootie Upgrades",
+    "Gain XP by upgrading Hootie the Owl!",
+    "Per Candy 2nd Slot:"
+   ],
+   "xp": [
+    5,
+    65
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Hootie Upgrades",
+    "Hootie Upgrades",
+    "Hootie Upgrades",
+    "Gain XP by upgrading Hootie the Owl!",
+    "3rd Slot:"
+   ],
+   "xp": [
+    15,
+    65
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Hootie Upgrades",
+    "Hootie Upgrades",
+    "Hootie Upgrades",
+    "Gain XP by upgrading Hootie the Owl!",
+    "Per Coin Milestone:"
+   ],
+   "xp": [
+    5,
+    65
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "The Dojo",
+    "White Belt",
+    "White Belt",
+    "Gain XP by obtaining Dojo Belts!"
+   ],
+   "xp": [
+    20,
+    425
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "The Dojo",
+    "Yellow Belt",
+    "Yellow Belt",
+    "Gain XP by obtaining Dojo Belts!"
+   ],
+   "xp": [
+    30,
+    425
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "The Dojo",
+    "Green Belt",
+    "Green Belt",
+    "Gain XP by obtaining Dojo Belts!"
+   ],
+   "xp": [
+    50,
+    425
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "The Dojo",
+    "Blue Belt",
+    "Blue Belt",
+    "Gain XP by obtaining Dojo Belts!"
+   ],
+   "xp": [
+    75,
+    425
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "The Dojo",
+    "Brown Belt",
+    "Brown Belt",
+    "Gain XP by obtaining Dojo Belts!"
+   ],
+   "xp": [
+    100,
+    425
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "The Dojo",
+    "Black Belt",
+    "Black Belt",
+    "Gain XP by obtaining Dojo Belts!"
+   ],
+   "xp": [
+    150,
+    425
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Hymn to the Joy",
+    "50%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    1,
+    4
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Hymn to the Joy",
+    "70%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    1,
+    4
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Hymn to the Joy",
+    "80%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    1,
+    4
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Hymn to the Joy",
+    "90%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    1,
+    4
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Frère Jacques",
+    "50%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    1,
+    4
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Frère Jacques",
+    "70%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    1,
+    4
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Frère Jacques",
+    "80%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    1,
+    4
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Frère Jacques",
+    "90%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    1,
+    4
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Amazing Grace",
+    "50%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    1,
+    4
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Amazing Grace",
+    "70%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    1,
+    4
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Amazing Grace",
+    "80%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    1,
+    4
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Amazing Grace",
+    "90%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    1,
+    4
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Brahm's Lullaby",
+    "50%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    2,
+    8
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Brahm's Lullaby",
+    "70%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    2,
+    8
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Brahm's Lullaby",
+    "80%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    2,
+    8
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Brahm's Lullaby",
+    "90%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    2,
+    8
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Happy Birthday to You",
+    "50%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    2,
+    8
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Happy Birthday to You",
+    "70%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    2,
+    8
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Happy Birthday to You",
+    "80%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    2,
+    8
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Happy Birthday to You",
+    "90%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    2,
+    8
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Greensleeves",
+    "50%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    2,
+    8
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Greensleeves",
+    "70%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    2,
+    8
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Greensleeves",
+    "80%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    2,
+    8
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Greensleeves",
+    "90%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    2,
+    8
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Geothermy?",
+    "50%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    4,
+    16
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Geothermy?",
+    "70%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    4,
+    16
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Geothermy?",
+    "80%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    4,
+    16
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Geothermy?",
+    "90%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    4,
+    16
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Minuet",
+    "50%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    4,
+    16
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Minuet",
+    "70%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    4,
+    16
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Minuet",
+    "80%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    4,
+    16
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Minuet",
+    "90%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    4,
+    16
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Joy to the World",
+    "50%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    4,
+    16
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Joy to the World",
+    "70%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    4,
+    16
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Joy to the World",
+    "80%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    4,
+    16
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Joy to the World",
+    "90%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    4,
+    16
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Godly Imagination",
+    "50%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    7,
+    28
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Godly Imagination",
+    "70%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    7,
+    28
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Godly Imagination",
+    "80%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    7,
+    28
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Godly Imagination",
+    "90%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    7,
+    28
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "La Vie en Rose",
+    "50%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    7,
+    28
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "La Vie en Rose",
+    "70%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    7,
+    28
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "La Vie en Rose",
+    "80%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    7,
+    28
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "La Vie en Rose",
+    "90%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    7,
+    28
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Through the Campfire",
+    "50%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    12,
+    48
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Through the Campfire",
+    "70%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    12,
+    48
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Through the Campfire",
+    "80%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    12,
+    48
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Through the Campfire",
+    "90%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    12,
+    48
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Pachelbel",
+    "50%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    12,
+    48
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Pachelbel",
+    "70%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    12,
+    48
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Pachelbel",
+    "80%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    12,
+    48
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Harp Songs",
+    "Pachelbel",
+    "90%",
+    "Gain XP by completing Harp Songs!"
+   ],
+   "xp": [
+    12,
+    48
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Abiphone Contacts",
+    "Abiphone Contacts",
+    "Abiphone Contacts",
+    "Gain XP for obtaining Abiphone contacts!",
+    "Per Contact:"
+   ],
+   "xp": [
+    10,
+    800
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Community Shop",
+    "Island Size",
+    "I",
+    "Gain XP by unlocking upgrades in the Community Shop!"
+   ],
+   "xp": [
+    10,
+    10
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Community Shop",
+    "Minion Slots",
+    "I",
+    "Gain XP by unlocking upgrades in the Community Shop!"
+   ],
+   "xp": [
+    10,
+    50
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Community Shop",
+    "Minion Slots",
+    "II",
+    "Gain XP by unlocking upgrades in the Community Shop!"
+   ],
+   "xp": [
+    10,
+    50
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Community Shop",
+    "Minion Slots",
+    "III",
+    "Gain XP by unlocking upgrades in the Community Shop!"
+   ],
+   "xp": [
+    10,
+    50
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Community Shop",
+    "Minion Slots",
+    "IV",
+    "Gain XP by unlocking upgrades in the Community Shop!"
+   ],
+   "xp": [
+    10,
+    50
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Community Shop",
+    "Minion Slots",
+    "V",
+    "Gain XP by unlocking upgrades in the Community Shop!"
+   ],
+   "xp": [
+    10,
+    50
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Community Shop",
+    "Guests Limit",
+    "I",
+    "Gain XP by unlocking upgrades in the Community Shop!"
+   ],
+   "xp": [
+    10,
+    10
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Community Shop",
+    "Coins Allowance",
+    "I",
+    "Gain XP by unlocking upgrades in the Community Shop!"
+   ],
+   "xp": [
+    10,
+    50
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Community Shop",
+    "Coins Allowance",
+    "II",
+    "Gain XP by unlocking upgrades in the Community Shop!"
+   ],
+   "xp": [
+    10,
+    50
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Community Shop",
+    "Coins Allowance",
+    "III",
+    "Gain XP by unlocking upgrades in the Community Shop!"
+   ],
+   "xp": [
+    10,
+    50
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Community Shop",
+    "Coins Allowance",
+    "IV",
+    "Gain XP by unlocking upgrades in the Community Shop!"
+   ],
+   "xp": [
+    10,
+    50
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Community Shop",
+    "Coins Allowance",
+    "V",
+    "Gain XP by unlocking upgrades in the Community Shop!"
+   ],
+   "xp": [
+    10,
+    50
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Personal Bank Upgrades",
+    "II",
+    "II",
+    "Gain XP by upgrading your Personal Bank!"
+   ],
+   "xp": [
+    25,
+    110
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Personal Bank Upgrades",
+    "III",
+    "III",
+    "Gain XP by upgrading your Personal Bank!"
+   ],
+   "xp": [
+    35,
+    110
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Personal Bank Upgrades",
+    "IV",
+    "IV",
+    "Gain XP by upgrading your Personal Bank!"
+   ],
+   "xp": [
+    50,
+    110
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Mage Reputation",
+    "Friendly Status",
+    "Friendly Status",
+    "Gain XP by gaining Mage Reputation!"
+   ],
+   "xp": [
+    5,
+    75
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Mage Reputation",
+    "Trusted Status",
+    "Trusted Status",
+    "Gain XP by gaining Mage Reputation!"
+   ],
+   "xp": [
+    10,
+    75
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Mage Reputation",
+    "Honored Status",
+    "Honored Status",
+    "Gain XP by gaining Mage Reputation!"
+   ],
+   "xp": [
+    20,
+    75
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Mage Reputation",
+    "Hero Status",
+    "Hero Status",
+    "Gain XP by gaining Mage Reputation!"
+   ],
+   "xp": [
+    40,
+    75
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Barbarian Reputation",
+    "Friendly Status",
+    "Friendly Status",
+    "Gain XP by gaining Barbarian Reputation!"
+   ],
+   "xp": [
+    5,
+    75
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Barbarian Reputation",
+    "Trusted Status",
+    "Trusted Status",
+    "Gain XP by gaining Barbarian Reputation!"
+   ],
+   "xp": [
+    10,
+    75
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Barbarian Reputation",
+    "Honored Status",
+    "Honored Status",
+    "Gain XP by gaining Barbarian Reputation!"
+   ],
+   "xp": [
+    20,
+    75
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Barbarian Reputation",
+    "Hero Status",
+    "Hero Status",
+    "Gain XP by gaining Barbarian Reputation!"
+   ],
+   "xp": [
+    40,
+    75
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Attribute Levels",
+    "Attribute Levels",
+    "Attribute Levels",
+    "Gain XP by increasing your Attribute levels!",
+    "Per Level:"
+   ],
+   "xp": [
+    1,
+    1820
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Starlyn Sisters Levels",
+    "Starlyn Sisters Levels",
+    "Starlyn Sisters Levels",
+    "Gain XP by increasing your Starlyn Sister levels!",
+    "Per Level:"
+   ],
+   "xp": [
+    5,
+    20
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Beacon Tiers",
+    "Beacon Tiers",
+    "Beacon Tiers",
+    "Gain XP by upgrading the Signal Strength of your Moonglade Beacon!",
+    "Per Level:"
+   ],
+   "xp": [
+    5,
+    20
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Fish Family",
+    "Fish Family",
+    "Fish Family",
+    "Gain XP each time you show a Fish Family Member!",
+    "Per Fish:"
+   ],
+   "xp": [
+    3,
+    45
+   ]
+  },
+  {
+   "tab": "Miscellaneous",
+   "cells": [
+    "Carrolyn's Exportable Crops",
+    "Carrolyn's Exportable Crops",
+    "Carrolyn's Exportable Crops",
+    "Bring Exportable Crops to to gain XP!",
+    "Per Exportable Crop:"
+   ],
+   "xp": [
+    5,
+    35
+   ]
+  },
+  {
+   "tab": "Story",
+   "cells": [
+    "Rift Guide",
+    "Gain XP by completing the Rift Guide!",
+    "Per Objective Completed:"
+   ],
+   "xp": [
+    3,
+    360
+   ]
+  },
+  {
+   "tab": "Story",
+   "cells": [
+    "Complete Objectives",
+    "Gain XP for completing objectives!",
+    "Per Objective Completed:"
+   ],
+   "xp": [
+    5,
+    212
+   ]
+  },
+  {
+   "tab": "Story",
+   "cells": [
+    "Chapters",
+    "Gain XP each time you complete a chapter!",
+    "Moonglade Marsh:"
+   ],
+   "xp": [
+    140,
+    140
+   ]
+  },
+  {
+   "tab": "Consumables",
+   "cells": [
+    "Metaphysical Serum",
+    "Gain XP by consuming items!"
+   ],
+   "xp": [
+    5,
+    15
+   ]
+  },
+  {
+   "tab": "Consumables",
+   "cells": [
+    "Reaper Peppers",
+    "Gain XP by consuming items!"
+   ],
+   "xp": [
+    10,
+    50
+   ]
+  },
+  {
+   "tab": "Consumables",
+   "cells": [
+    "McGrubber's Burger",
+    "Gain XP by consuming items!"
+   ],
+   "xp": [
+    5,
+    25
+   ]
+  },
+  {
+   "tab": "Consumables",
+   "cells": [
+    "Wriggling Larva",
+    "Gain XP by consuming items!"
+   ],
+   "xp": [
+    5,
+    25
+   ]
+  },
+  {
+   "tab": "Consumables",
+   "cells": [
+    "Wriggling Larva",
+    "Gain XP by consuming items!"
+   ],
+   "xp": [
+    2,
+    10
+   ]
+  },
+  {
+   "tab": "Consumables",
+   "cells": [
+    "Festering Maggot",
+    "Gain XP by consuming items!"
+   ],
+   "xp": [
+    2,
+    10
+   ]
+  },
+  {
+   "tab": "Consumables",
+   "cells": [
+    "Refined Jyrre",
+    "Gain XP by consuming items!"
+   ],
+   "xp": [
+    2,
+    10
+   ]
+  },
+  {
+   "tab": "Consumables",
+   "cells": [
+    "Refined Dark Cacao",
+    "Gain XP by consuming items!"
+   ],
+   "xp": [
+    2,
+    10
+   ]
+  },
+  {
+   "tab": "Consumables",
+   "cells": [
+    "Spotlite",
+    "Gain XP by consuming items!"
+   ],
+   "xp": [
+    2,
+    10
+   ]
+  },
+  {
+   "tab": "Consumables",
+   "cells": [
+    "Dwarven O's Ore Oats",
+    "Gain XP by consuming items!"
+   ],
+   "xp": [
+    2,
+    10
+   ]
+  },
+  {
+   "tab": "Consumables",
+   "cells": [
+    "Dwarven O's Block Bran",
+    "Gain XP by consuming items!"
+   ],
+   "xp": [
+    2,
+    10
+   ]
+  },
+  {
+   "tab": "Consumables",
+   "cells": [
+    "Dwarven O's Gemstone Grahams",
+    "Gain XP by consuming items!"
+   ],
+   "xp": [
+    2,
+    10
+   ]
+  },
+  {
+   "tab": "Consumables",
+   "cells": [
+    "Dwarven O's Metallic Minis",
+    "Gain XP by consuming items!"
+   ],
+   "xp": [
+    2,
+    10
+   ]
+  },
+  {
+   "tab": "Consumables",
+   "cells": [
+    "Moby-Duck: Collector's Edition",
+    "Gain XP by consuming items!"
+   ],
+   "xp": [
+    5,
+    5
+   ]
+  },
+  {
+   "tab": "Consumables",
+   "cells": [
+    "Brain Food",
+    "Gain XP by consuming items!"
+   ],
+   "xp": [
+    5,
+    25
+   ]
+  },
+  {
+   "tab": "Consumables",
+   "cells": [
+    "Filled Rosewater Flask",
+    "Gain XP by consuming items!"
+   ],
+   "xp": [
+    2,
+    10
+   ]
+  },
+  {
+   "tab": "Consumables",
+   "cells": [
+    "Mound of Seagrass",
+    "Gain XP by consuming items!"
+   ],
+   "xp": [
+    2,
+    10
+   ]
+  }
+ ]
+}

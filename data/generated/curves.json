@@ -1,0 +1,339 @@
+{
+ "generatedAt": "2026-08-18T19:01:23.227Z",
+ "source": "https://hypixel-skyblock.fandom.com/api.php",
+ "dungeoneering": {
+  "page": "Dungeoneering",
+  "note": "Drives both Catacombs level (+20 XP per level 1-39, +40 for 40-50) and each class level (+4 per level).",
+  "levels": [
+   {
+    "level": 1,
+    "xpForLevel": 50,
+    "totalXp": 50
+   },
+   {
+    "level": 2,
+    "xpForLevel": 75,
+    "totalXp": 125
+   },
+   {
+    "level": 3,
+    "xpForLevel": 110,
+    "totalXp": 235
+   },
+   {
+    "level": 4,
+    "xpForLevel": 160,
+    "totalXp": 395
+   },
+   {
+    "level": 5,
+    "xpForLevel": 230,
+    "totalXp": 625
+   },
+   {
+    "level": 6,
+    "xpForLevel": 330,
+    "totalXp": 955
+   },
+   {
+    "level": 7,
+    "xpForLevel": 470,
+    "totalXp": 1425
+   },
+   {
+    "level": 8,
+    "xpForLevel": 670,
+    "totalXp": 2095
+   },
+   {
+    "level": 9,
+    "xpForLevel": 950,
+    "totalXp": 3045
+   },
+   {
+    "level": 10,
+    "xpForLevel": 1340,
+    "totalXp": 4385
+   },
+   {
+    "level": 11,
+    "xpForLevel": 1890,
+    "totalXp": 6275
+   },
+   {
+    "level": 12,
+    "xpForLevel": 2665,
+    "totalXp": 8940
+   },
+   {
+    "level": 13,
+    "xpForLevel": 3760,
+    "totalXp": 12700
+   },
+   {
+    "level": 14,
+    "xpForLevel": 5260,
+    "totalXp": 17960
+   },
+   {
+    "level": 15,
+    "xpForLevel": 7380,
+    "totalXp": 25340
+   },
+   {
+    "level": 16,
+    "xpForLevel": 10300,
+    "totalXp": 35640
+   },
+   {
+    "level": 17,
+    "xpForLevel": 14400,
+    "totalXp": 50040
+   },
+   {
+    "level": 18,
+    "xpForLevel": 20000,
+    "totalXp": 70040
+   },
+   {
+    "level": 19,
+    "xpForLevel": 27600,
+    "totalXp": 97640
+   },
+   {
+    "level": 20,
+    "xpForLevel": 38000,
+    "totalXp": 135640
+   },
+   {
+    "level": 21,
+    "xpForLevel": 52500,
+    "totalXp": 188140
+   },
+   {
+    "level": 22,
+    "xpForLevel": 71500,
+    "totalXp": 259640
+   },
+   {
+    "level": 23,
+    "xpForLevel": 97000,
+    "totalXp": 356640
+   },
+   {
+    "level": 24,
+    "xpForLevel": 132000,
+    "totalXp": 488640
+   },
+   {
+    "level": 25,
+    "xpForLevel": 180000,
+    "totalXp": 668640
+   },
+   {
+    "level": 26,
+    "xpForLevel": 243000,
+    "totalXp": 911640
+   },
+   {
+    "level": 27,
+    "xpForLevel": 328000,
+    "totalXp": 1239640
+   },
+   {
+    "level": 28,
+    "xpForLevel": 445000,
+    "totalXp": 1684640
+   },
+   {
+    "level": 29,
+    "xpForLevel": 600000,
+    "totalXp": 2284640
+   },
+   {
+    "level": 30,
+    "xpForLevel": 800000,
+    "totalXp": 3084640
+   },
+   {
+    "level": 31,
+    "xpForLevel": 1065000,
+    "totalXp": 4149640
+   },
+   {
+    "level": 32,
+    "xpForLevel": 1410000,
+    "totalXp": 5559640
+   },
+   {
+    "level": 33,
+    "xpForLevel": 1900000,
+    "totalXp": 7459640
+   },
+   {
+    "level": 34,
+    "xpForLevel": 2500000,
+    "totalXp": 9959640
+   },
+   {
+    "level": 35,
+    "xpForLevel": 3300000,
+    "totalXp": 13259640
+   },
+   {
+    "level": 36,
+    "xpForLevel": 4300000,
+    "totalXp": 17559640
+   },
+   {
+    "level": 37,
+    "xpForLevel": 5600000,
+    "totalXp": 23159640
+   },
+   {
+    "level": 38,
+    "xpForLevel": 7200000,
+    "totalXp": 30359640
+   },
+   {
+    "level": 39,
+    "xpForLevel": 9200000,
+    "totalXp": 39559640
+   },
+   {
+    "level": 40,
+    "xpForLevel": 12000000,
+    "totalXp": 51559640
+   },
+   {
+    "level": 41,
+    "xpForLevel": 15000000,
+    "totalXp": 66559640
+   },
+   {
+    "level": 42,
+    "xpForLevel": 19000000,
+    "totalXp": 85559640
+   },
+   {
+    "level": 43,
+    "xpForLevel": 24000000,
+    "totalXp": 109559640
+   },
+   {
+    "level": 44,
+    "xpForLevel": 30000000,
+    "totalXp": 139559640
+   },
+   {
+    "level": 45,
+    "xpForLevel": 38000000,
+    "totalXp": 177559640
+   },
+   {
+    "level": 46,
+    "xpForLevel": 48000000,
+    "totalXp": 225559640
+   },
+   {
+    "level": 47,
+    "xpForLevel": 60000000,
+    "totalXp": 285559640
+   },
+   {
+    "level": 48,
+    "xpForLevel": 75000000,
+    "totalXp": 360559640
+   },
+   {
+    "level": 49,
+    "xpForLevel": 93000000,
+    "totalXp": 453559640
+   },
+   {
+    "level": 50,
+    "xpForLevel": 116250000,
+    "totalXp": 569809640
+   }
+  ]
+ },
+ "slayer": {
+  "page": "Slayer",
+  "note": "Cumulative slayer XP needed per level, per boss. Reaching a level awards SLAYER_LEVEL_XP[level-1].",
+  "levelXp": [
+   15,
+   25,
+   35,
+   50,
+   70,
+   100,
+   125,
+   150,
+   150
+  ],
+  "bosses": {
+   "zombie": [
+    5,
+    15,
+    200,
+    1000,
+    5000,
+    20000,
+    100000,
+    400000,
+    1000000
+   ],
+   "spider": [
+    5,
+    25,
+    200,
+    1000,
+    5000,
+    20000,
+    100000,
+    400000,
+    1000000
+   ],
+   "wolf": [
+    10,
+    30,
+    250,
+    1500,
+    5000,
+    20000,
+    100000,
+    400000,
+    1000000
+   ],
+   "enderman": [
+    10,
+    30,
+    250,
+    1500,
+    5000,
+    20000,
+    100000,
+    400000,
+    1000000
+   ],
+   "blaze": [
+    10,
+    30,
+    250,
+    1500,
+    5000,
+    20000,
+    100000,
+    400000,
+    1000000
+   ],
+   "vampire": [
+    20,
+    75,
+    240,
+    840,
+    2400
+   ]
+  }
+ }
+}

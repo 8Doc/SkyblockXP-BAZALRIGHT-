@@ -1,0 +1,33 @@
+{
+  "note": "Accessory families: sets where only the best member's magical power counts. Some families are structural and detected mechanically (see familyOf); the rest have to be named, because nothing in the API links them.",
+  "source": "Hypixel Wiki, Accessory Bag \u2014 read against the accessory name list in data/generated/accessories.json",
+  "verified": false,
+  "consequence": "A family we fail to detect inflates the accessory bag's XP ceiling and lets a plan buy the same magical power twice. The computed-vs-reported MP readout in the UI is the check on this.",
+  "endsWithFamilies": [
+    "Shark Tooth Necklace",
+    "Kuudra Core",
+    "Fish Bowl",
+    "Piggy Bank",
+    "Voter's Badge",
+    "Ring of Love",
+    "Master Skull"
+  ],
+  "patternFamilies": [
+    {
+      "match": "Campfire .*Badge",
+      "family": "campfire badge"
+    },
+    {
+      "match": "^Personal Compactor",
+      "family": "personal compactor"
+    },
+    {
+      "match": "^Personal Deletor",
+      "family": "personal deletor"
+    }
+  ],
+  "openQuestions": [
+    "Colour variants (Blue/Green/Purple Jerry Talisman, the Gift Talismans) are treated as separate accessories that each grant magical power. If they are one family each, the bag ceiling is overstated by roughly 40 XP.",
+    "Our ceiling for a fresh profile is ~1,856 XP against the README's ~2,121. The gap is family detection, in one direction or the other, and neither number is checkable from the API. Treat the accessory ceiling as approximate; individual task XP is exact."
+  ]
+}
