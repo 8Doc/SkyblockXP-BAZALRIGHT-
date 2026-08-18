@@ -1,7 +1,7 @@
 import "server-only";
 import { gunzipSync } from "node:zlib";
 import { accessoryBins, bazaar, garden, invalidatePrices, museum, profiles, resolveUuid, HypixelError } from "./hypixel";
-import type { ProfileMember, SkyblockProfile } from "./profile";
+import { coopProgress, type ProfileMember, type SkyblockProfile } from "./profile";
 import { auctionNameIndex, type BagItem } from "./gameData";
 import { bagCapacityFrom, bagItemsFrom, readNbt } from "./nbt";
 import { petsFrom } from "./auctions";
@@ -73,7 +73,15 @@ export async function runPlanner(input: PlannerInput): Promise<PlannerResult> {
   };
 
   const bag = readBag(member);
-  const catalog = buildCatalog(member, data, bag, museumState, bins ? petsFrom(bins) : null, gardenState);
+  const catalog = buildCatalog(
+    member,
+    data,
+    bag,
+    museumState,
+    bins ? petsFrom(bins) : null,
+    gardenState,
+    coopProgress(profile),
+  );
   const report = buildReport(catalog, book, options);
 
   return {

@@ -1,6 +1,6 @@
 import { auctionNameIndex, type BagItem, type GameData } from "../lib/gameData";
 import { coins, num, rate } from "../lib/format";
-import type { BinIndex, GardenState, MuseumState, ProfileMember, SkyblockProfile, BazaarProduct } from "../lib/profile";
+import { coopProgress, type BinIndex, type GardenState, type MuseumState, type ProfileMember, type SkyblockProfile, type BazaarProduct } from "../lib/profile";
 import { petsFrom } from "../lib/auctions";
 import { buildCatalog, type Catalog } from "../lib/catalog";
 import { buildReport, type Report } from "../lib/report";
@@ -200,6 +200,7 @@ async function loadAuctions(force = false): Promise<void> {
 
 function rebuildCatalog(): void {
   if (!state.member) return;
+  const profile = state.profiles.find((p) => p.profile_id === state.profileId);
   state.catalog = buildCatalog(
     state.member,
     data,
@@ -207,6 +208,7 @@ function rebuildCatalog(): void {
     state.museum,
     state.bins ? petsFrom(state.bins) : null,
     state.garden,
+    profile ? coopProgress(profile) : null,
   );
 }
 

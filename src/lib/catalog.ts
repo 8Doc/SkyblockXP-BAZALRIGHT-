@@ -103,6 +103,8 @@ export function buildCatalog(
   museum: MuseumState | null = null,
   pets: { name: string; rarity: string }[] | null = null,
   garden: GardenState | null = null,
+  /** Island-wide progress, unioned across co-op members. Falls back to this member alone. */
+  coop: { craftedGenerators: string[]; unlockedCollectionTiers: string[] } | null = null,
 ): Catalog {
   const tasks: Task[] = [];
   const done = new Set<string>();
@@ -138,7 +140,7 @@ export function buildCatalog(
 
   /* -------------------------------------------------------- collections */
 
-  const unlockedTiers = new Set(member.player_data?.unlocked_coll_tiers ?? []);
+  const unlockedTiers = new Set(coop?.unlockedCollectionTiers ?? member.player_data?.unlocked_coll_tiers ?? []);
   for (const coll of data.collections.collections) {
     let previous: string | null = null;
     for (const tier of coll.tiers) {
@@ -161,7 +163,9 @@ export function buildCatalog(
 
   /* ------------------------------------------------------------ minions */
 
-  const crafted = new Set(member.player_data?.crafted_generators ?? []);
+  // Island-wide: in a co-op one member crafts tiers I-VI and another upgrades to XI, and each
+  // only ever records their own half.
+  const crafted = new Set(coop?.craftedGenerators ?? member.player_data?.crafted_generators ?? []);
   for (const minion of data.minions.minions) {
     let previous: string | null = null;
     for (const tier of minion.tiers) {

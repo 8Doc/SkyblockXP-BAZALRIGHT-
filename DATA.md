@@ -93,6 +93,16 @@ direction is deliberate.
 
 All of it comes from the profile; none of it is guessed.
 
+**Co-op profiles need their members unioned.** Minions and collections belong to the island, but
+the API records `crafted_generators` and `unlocked_coll_tiers` per *member* — whoever personally
+did the crafting. On a seven-person co-op one member's list is full of holes: a real profile
+showed Gravel tiers 7-11 for the viewed player and 1-6 for a co-op mate, so reading one member
+alone made the planner recommend crafting a tier I minion that had been on the island at tier XI
+for months. `coopProgress()` unions the members, which is self-checking: minion tiers are
+strictly sequential upgrades, and on that profile the union closed all 278 gaps below a
+generator's highest tier, leaving exactly zero. Skills, fairy souls and the museum are genuinely
+personal and are *not* unioned.
+
 | Category | Field |
 |---|---|
 | Skills | `player_data.experience.SKILL_*` against the cumulative table |

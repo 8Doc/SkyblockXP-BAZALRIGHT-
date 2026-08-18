@@ -26,6 +26,32 @@ export type ProfileMember = {
   attributes?: { stacks?: Record<string, number> };
 };
 
+/**
+ * Progress that belongs to the island rather than to one player.
+ *
+ * A co-op shares its minions and collections, but the API records `crafted_generators` and
+ * `unlocked_coll_tiers` per *member* — whoever personally did the crafting. On a seven-person
+ * co-op that means one member's list is full of holes: a real profile showed Gravel tiers 7-11
+ * against a co-op mate's 1-6, and reading only one member's list made the planner recommend
+ * crafting a tier I minion that had been sitting on the island at tier XI for months.
+ *
+ * Unioning the members reconstructs what the island actually has. It is self-checking, too:
+ * minion tiers are strictly sequential upgrades, and on that profile the union closed all 278
+ * gaps below a generator's highest tier, leaving exactly zero.
+ */
+export function coopProgress(profile: SkyblockProfile): {
+  craftedGenerators: string[];
+  unlockedCollectionTiers: string[];
+} {
+  const crafted = new Set<string>();
+  const collections = new Set<string>();
+  for (const member of Object.values(profile.members)) {
+    for (const id of member.player_data?.crafted_generators ?? []) crafted.add(id);
+    for (const id of member.player_data?.unlocked_coll_tiers ?? []) collections.add(id);
+  }
+  return { craftedGenerators: [...crafted], unlockedCollectionTiers: [...collections] };
+}
+
 /** What the museum endpoint tells us: which items are already donated. */
 export type MuseumState = {
   donatedItemIds: Set<string>;
