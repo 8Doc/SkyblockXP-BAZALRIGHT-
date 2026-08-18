@@ -14,6 +14,7 @@ export type Category =
   | "events"
   | "rift"
   | "slayer"
+  | "attributes"
   | "misc";
 
 export const CATEGORIES: Category[] = [
@@ -30,6 +31,7 @@ export const CATEGORIES: Category[] = [
   "essence_shop",
   "dungeons",
   "slayer",
+  "attributes",
   "events",
   "rift",
   "misc",
@@ -51,6 +53,7 @@ export const CATEGORY_LABELS: Record<Category, string> = {
   events: "Events",
   rift: "Rift",
   slayer: "Slayer",
+  attributes: "Attribute Shards",
   misc: "Misc",
 };
 

@@ -256,6 +256,7 @@ All 16, ~40,000 XP, 4,964 tasks. `DATA.md` has the provenance for each number.
 | Slayer | 7,220 | wiki curves + harvested ids | slayer XP per boss |
 | Museum | 3,644 | `museum_data.donation_xp` in the items API | `/skyblock/museum` |
 | Minions | 3,165 | resources API | `crafted_generators` |
+| Attribute Shards | 1,810 | wiki attribute list | `attributes.stacks` |
 | Misc | 3,180 | harvested ids | `completed_tasks` |
 | Collections | 3,016 | resources API | `unlocked_coll_tiers` |
 | Dungeons | 2,760 | wiki curve (catacombs + 5 classes + floors) | dungeon XP |

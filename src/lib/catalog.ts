@@ -90,7 +90,7 @@ export const UNMODELLED: { category: Category; note: string; totalXp?: number }[
     totalXp: 1545,
   },
   {
-    category: "misc",
+    category: "attributes",
     note: "Attribute levels are priced from the shards that feed them, which assumes buying every shard outright. Fusing shards you already own is cheaper, so those costs are an upper bound. Six attributes have no bazaar-traded shard and stay unpriced.",
   },
 ];
@@ -424,7 +424,7 @@ export function buildCatalog(
     });
   }
 
-  /* ---------------------------------------------------------- attributes */
+  /* ------------------------------------------------------ attribute shards */
 
   // Every attribute levels on the same shard thresholds, and every level is worth +1 XP.
   //
@@ -452,7 +452,7 @@ export function buildCatalog(
 
       tasks.push({
         id,
-        category: "misc",
+        category: "attributes",
         name: `${attribute.name} ${level}`,
         xp: 1,
         requires: previous ? [previous] : [],
