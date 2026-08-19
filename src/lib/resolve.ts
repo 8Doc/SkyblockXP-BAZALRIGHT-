@@ -12,6 +12,15 @@ import type { CostSpec, ResolvedTask, Task } from "./types";
 export type PriceBook = {
   bazaar: Record<string, BazaarProduct>;
   bins: BinIndex | null;
+  /**
+   * A reference price per item id, for things the auction house isn't listing right now.
+   *
+   * Most museum donations are never on the auction house at any given moment — of 460 tradeable
+   * ones, a full sweep finds a few hundred — so pricing them from listings alone silently drops
+   * the rest out of every cost ranking. A reference price is not something you can click "buy"
+   * on, so it is only ever a fallback, never allowed to undercut a real listing.
+   */
+  reference?: Record<string, number>;
 };
 
 export function priceOf(cost: CostSpec, book: PriceBook): number | null {
@@ -33,7 +42,7 @@ export function priceOf(cost: CostSpec, book: PriceBook): number | null {
     }
     case "auction": {
       const byTier = book.bins?.prices[cost.itemId];
-      if (!byTier) return null;
+      if (!byTier) return referencePrice(cost, book, (cost.surcharge ?? 0) - (cost.sells ? Math.round((cheapestListing(book, cost.sells) ?? 0) * 0.99) : 0));
       // Anything this purchase replaces is sold to offset it. Auction house tax is 1%, and
       // taking it off keeps the net honestly conservative rather than quoting a sale at its
       // shelf price. An item we can't price sells for nothing rather than blocking the row.
@@ -47,7 +56,7 @@ export function priceOf(cost: CostSpec, book: PriceBook): number | null {
       // Cheapest listing of the item at any rarity. If that copy happens to be recombobulated
       // the player gains more magical power than we credited — we under-promise, never over.
       const listed = Object.values(byTier);
-      return listed.length ? Math.min(...listed) + surcharge : null;
+      return listed.length ? Math.min(...listed) + surcharge : referencePrice(cost, book, surcharge);
     }
     case "none":
     case "unknown":
@@ -140,6 +149,7 @@ export function resolveTasks(
       bundleCoins,
       bundleXp,
       efficiency: bundleCoins !== null && bundleXp > 0 ? bundleCoins / bundleXp : null,
+      ...(isReferencePriced(task.cost, book) ? { estimated: true } : {}),
       ...(bundle.length ? bundleLabels(task, bundle, index) : {}),
     };
   });
@@ -191,4 +201,18 @@ function cheapestListing(book: PriceBook, itemId: string): number | null {
   if (!byTier) return null;
   const listed = Object.values(byTier);
   return listed.length ? Math.min(...listed) : null;
+}
+
+/** The fallback price for an item nothing is currently listing. */
+function referencePrice(cost: { itemId: string }, book: PriceBook, surcharge: number): number | null {
+  const price = book.reference?.[cost.itemId];
+  return price === undefined ? null : price + surcharge;
+}
+
+/** True when this price came from the reference feed rather than a live listing. */
+export function isReferencePriced(cost: CostSpec, book: PriceBook): boolean {
+  if (cost.kind !== "auction") return false;
+  const byTier = book.bins?.prices[cost.itemId];
+  const listed = byTier ? Object.values(byTier) : [];
+  return listed.length === 0 && book.reference?.[cost.itemId] !== undefined;
 }

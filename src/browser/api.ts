@@ -251,3 +251,36 @@ export async function readBag(data: string | undefined): Promise<{ items: BagIte
     return { items: null, capacity: 0 };
   }
 }
+
+/* --------------------------------------------------------- reference prices */
+
+const REFERENCE_FEED = "https://raw.githubusercontent.com/SkyHelperBot/Prices/main/pricesV2.json";
+
+/**
+ * A price per item id for things the auction house isn't listing.
+ *
+ * Most museum donations aren't on the auction house at any given moment, so pricing them from
+ * listings alone drops them out of every ranking entirely — which is why the museum's "cheapest
+ * per XP" was missing its cheap half. This is SkyHelper's public price feed: a static JSON file
+ * on GitHub, no key and no rate limit, updated by the bot that publishes it.
+ *
+ * It is a reference, not an offer, so callers only fall back to it and rows priced from it are
+ * marked. A failure here is not fatal: the app simply goes back to listing-only prices.
+ */
+export async function fetchReferencePrices(force = false): Promise<Record<string, number>> {
+  const cached = force ? null : cacheGet<Record<string, number>>("reference", 6 * 3600_000);
+  if (cached) return cached;
+  try {
+    const res = await fetch(REFERENCE_FEED);
+    if (!res.ok) return {};
+    const body = (await res.json()) as Record<string, number>;
+    const trimmed: Record<string, number> = {};
+    for (const [id, price] of Object.entries(body)) {
+      if (typeof price === "number" && price > 0) trimmed[id] = Math.round(price);
+    }
+    cacheSet("reference", trimmed);
+    return trimmed;
+  } catch {
+    return {};
+  }
+}

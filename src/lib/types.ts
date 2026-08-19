@@ -148,6 +148,8 @@ export type ResolvedTask = Task & {
   bundleSpan?: string;
   /** The bundle's combined materials, so the note agrees with the price beside it. */
   bundleNote?: string;
+  /** Priced from the reference feed because nothing is listing it — not a price you can click. */
+  estimated?: boolean;
 };
 
 export type PlanGroup = {

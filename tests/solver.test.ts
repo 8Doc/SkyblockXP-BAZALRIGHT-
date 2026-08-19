@@ -547,3 +547,47 @@ test("a bundled row is named for the span it covers and totals the bundle's mate
   assert.equal(top.bundleNote, "5 levels · 16× Lumisquid Shard", "the note must agree with the price beside it");
   assert.equal(top.bundleCoins, 160);
 });
+
+/* --------------------------------------------------- reference prices */
+
+const museumTask = (): Task => ({
+  id: "museum_FROGGLES",
+  category: "museum",
+  name: "Froggles",
+  xp: 2,
+  requires: [],
+  cost: { kind: "auction", itemId: "FROGGLES" },
+  repeatable: false,
+});
+
+/**
+ * Most museum donations aren't listed at any given moment, so pricing from listings alone drops
+ * them out of every ranking — which is why the museum's cheapest-per-XP was missing its cheap
+ * half.
+ */
+test("an item nothing is listing falls back to the reference price, and says so", () => {
+  const book: PriceBook = { bazaar: {}, bins: null, reference: { FROGGLES: 120_000 } };
+  const { byId } = resolveTasks([museumTask()], new Set(), book);
+  const task = byId.get("museum_FROGGLES")!;
+
+  assert.equal(task.coins, 120_000);
+  assert.equal(task.estimated, true, "a reference price is not one you can click buy on");
+});
+
+test("a real listing always wins, even when the reference is cheaper", () => {
+  const book: PriceBook = {
+    bazaar: {},
+    bins: { prices: { FROGGLES: { UNCOMMON: 649_999 } }, listings: 1, scannedAt: 0, pages: 1 },
+    reference: { FROGGLES: 1_088 },
+  };
+  const { byId } = resolveTasks([museumTask()], new Set(), book);
+  const task = byId.get("museum_FROGGLES")!;
+
+  assert.equal(task.coins, 649_999, "quoting 1,088 would price a purchase nobody can make");
+  assert.ok(!task.estimated);
+});
+
+test("with neither a listing nor a reference the row stays unpriced", () => {
+  const { byId } = resolveTasks([museumTask()], new Set(), { bazaar: {}, bins: null });
+  assert.equal(byId.get("museum_FROGGLES")!.coins, null);
+});

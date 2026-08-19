@@ -7,7 +7,7 @@ import { groupTaskRuns, type TaskRun } from "../lib/grouping";
 import { buildReport, type Report } from "../lib/report";
 import type { PriceBook } from "../lib/resolve";
 import { CATEGORIES, CATEGORY_LABELS, XP_PER_LEVEL, type Category, type ResolvedTask } from "../lib/types";
-import { ApiError, cacheAge, fetchAccessoryBins, fetchBazaar, fetchGarden, fetchMuseum, fetchProfiles, readBag, resolveUuid } from "./api";
+import { ApiError, cacheAge, fetchAccessoryBins, fetchBazaar, fetchReferencePrices, fetchGarden, fetchMuseum, fetchProfiles, readBag, resolveUuid } from "./api";
 
 /**
  * The standalone build. Same domain logic as the Next app — it imports the very same solver
@@ -39,6 +39,8 @@ type State = {
   member: ProfileMember | null;
   bagItems: { items: BagItem[] | null; capacity: number };
   bazaar: Record<string, BazaarProduct>;
+  /** Fallback prices for items nothing is listing. Empty if the feed is unreachable. */
+  reference: Record<string, number>;
   bins: BinIndex | null;
   museum: MuseumState | null;
   garden: GardenState | null;
@@ -68,6 +70,7 @@ const state: State = {
   member: null,
   bagItems: { items: null, capacity: 0 },
   bazaar: {},
+  reference: {},
   bins: null,
   museum: null,
   garden: null,
@@ -90,7 +93,7 @@ const state: State = {
 
 function solveNow(): void {
   if (!state.member || !state.catalog) return;
-  const book: PriceBook = { bazaar: state.bazaar, bins: state.bins };
+  const book: PriceBook = { bazaar: state.bazaar, bins: state.bins, reference: state.reference };
   const targetXp =
     state.targetMode === "level"
       ? Math.max(state.targetLevel * XP_PER_LEVEL - (state.member.leveling?.experience ?? 0), 1)
@@ -160,7 +163,8 @@ async function loadProfile(): Promise<void> {
 
   setStatus("busy", "Fetching bazaar prices…");
   try {
-    state.bazaar = await fetchBazaar();
+    // Fetched alongside the bazaar: both are cheap, and the museum reads as half-empty without it.
+    [state.bazaar, state.reference] = await Promise.all([fetchBazaar(), fetchReferencePrices()]);
   } catch (error) {
     setStatus("error", error instanceof ApiError ? error.message : String(error));
     return;
@@ -217,7 +221,7 @@ function rebuildCatalog(): void {
 async function refreshPrices(): Promise<void> {
   setStatus("busy", "Refreshing bazaar prices…");
   try {
-    state.bazaar = await fetchBazaar(true);
+    [state.bazaar, state.reference] = await Promise.all([fetchBazaar(true), fetchReferencePrices(true)]);
   } catch (error) {
     setStatus("error", error instanceof ApiError ? error.message : String(error));
     return;
@@ -262,7 +266,9 @@ function taskRow(task: ResolvedTask, showBundle: boolean, tag?: string): string 
   return `<li class="task">
     <span class="task-name">${tag ? `<span class="tag cat">${escapeHtml(tag)}</span>` : ""}${escapeHtml(shownName)}${
       bundled ? `<span class="tag">+${task.bundle.length} prereq</span>` : ""
-    }${shownNote ? `<span class="note">${escapeHtml(shownNote)}</span>` : ""}</span>
+    }${task.estimated ? `<span class="tag est" title="Nothing is listing this right now — reference price">est</span>` : ""}${
+      shownNote ? `<span class="note">${escapeHtml(shownNote)}</span>` : ""
+    }</span>
     <span class="task-xp">${bundled ? task.bundleXp : task.xp} xp</span>
     <span class="task-cost">${priceText}</span>
     <span class="task-rate">${rate(task.efficiency)}</span>
