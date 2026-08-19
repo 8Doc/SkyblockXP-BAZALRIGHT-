@@ -170,6 +170,8 @@ export type GameData = {
   bagUpgrades: BagUpgradesData;
   /** Shards per attribute level, keyed by the rarity of the attribute. */
   attributeLevels: { perLevel: Record<string, number[]> };
+  /** Bridges wiki attribute names to the ids the profile actually uses. */
+  attributeApiKeys: { wordAliases: Record<string, string>; droppableSuffixes: string[] };
 };
 
 /** What the nth accessory bag upgrade costs. */

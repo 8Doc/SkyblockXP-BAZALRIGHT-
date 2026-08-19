@@ -39,6 +39,7 @@ export function staticData(): GameData {
     attributeShards: load("generated/attributes.json"),
     bagUpgrades: load("curated/accessory_bag_upgrades.json"),
     attributeLevels: load("curated/attribute_levels.json"),
+    attributeApiKeys: load("curated/attribute_api_keys.json"),
   };
   return cached;
 }

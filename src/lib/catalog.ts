@@ -219,6 +219,11 @@ export function buildCatalog(
   const freeSlots = Math.max(bagState.capacity - bagState.used, 0);
   const nextUpgrade = upgradesPurchased + 1;
   const nextUpgradeCost = nextUpgrade <= data.bagUpgrades.maxUpgrades ? bagUpgradeCost(data, nextUpgrade) : null;
+  // A full bag makes a *new* accessory cost the accessory plus the slot it needs, so a share of
+  // the next bag upgrade is added to its price. Upgrading a family you already own is the
+  // exception and it is the common case: the artifact goes into the slot the ring vacates, so it
+  // needs no new slot. Charging it anyway added several million to almost every row and pushed
+  // the genuinely cheap upgrades down the ranking.
   const slotSurcharge =
     freeSlots > 0 || nextUpgradeCost === null ? 0 : Math.round(nextUpgradeCost / data.bagUpgrades.slotsPerUpgrade);
 
@@ -244,7 +249,7 @@ export function buildCatalog(
       groupBase: alreadyHave,
       requires: [],
       cost: acc.tradeable
-        ? { kind: "auction", itemId: acc.id, surcharge: slotSurcharge || undefined }
+        ? { kind: "auction", itemId: acc.id, surcharge: (alreadyHave > 0 ? 0 : slotSurcharge) || undefined }
         : { kind: "unknown", note: acc.soulbound ? "Soulbound — cannot be bought" : "Not tradeable" },
       repeatable: false,
       note: `${acc.tier.toLowerCase()} · ${power} MP${alreadyHave > 0 ? ` (family already gives ${alreadyHave})` : ""}`,
@@ -466,8 +471,8 @@ export function buildCatalog(
   // SHARD_BLIZZARD — so a level costs the shards it adds times their live price. That's the
   // direct-purchase path; fusing shards you already own is cheaper and isn't modelled, so this
   // is an upper bound on what the level costs.
-  const heldShards = attributeStacks(member.attributes?.stacks);
-  const strandedAttributes = unplacedAttributes(member.attributes?.stacks, data.attributeShards.attributes);
+  const heldShards = attributeStacks(member.attributes?.stacks, data);
+  const strandedAttributes = unplacedAttributes(member.attributes?.stacks, data.attributeShards.attributes, data);
 
   for (const attribute of data.attributeShards.attributes) {
     const held = heldShards(attribute.key);
@@ -677,26 +682,61 @@ const titleCase = (value: string) =>
 /**
  * How many shards the player holds for one of our attributes.
  *
- * The profile publishes progress under `attributes.stacks`, but keyed by the game's own
- * attribute ids, and our list comes from the wiki keyed by display name. Those two vocabularies
- * disagree in three mechanical ways — possessives ("Hunter's Karma" slugs to hunter_s_karma,
- * the API says hunter_karma), word order ("Essence of Ice" against ice_essence), and plurals
- * ("Essence of Dragons" against dragon_essence). Matching on the raw key alone silently drops
- * that progress and tells the player to re-buy levels they already own.
+ * The profile publishes progress under `attributes.stacks`, keyed by the game's own attribute
+ * ids, while our list comes from the wiki keyed by display name. Those two vocabularies disagree
+ * in four ways, and a key we fail to place reads as zero — so the app offers every level of an
+ * attribute the player has already maxed.
  *
- * So keys are compared as an order-independent set of singular, stopword-free words. That is
- * strict — it never accepts a partial overlap, which is what keeps crop_speed away from
- * attack_speed and pest_cooldown away from pest_luck. Anything it still can't place is left
- * alone and reported as a coverage gap rather than guessed at.
+ * Three of the four are mechanical, and comparing keys as an order-independent set of singular,
+ * stopword-free words handles all of them at once: possessives ("Hunter's Karma" slugs to
+ * hunter_s_karma, the API says hunter_karma), word order (essence_of_ice against ice_essence)
+ * and plurals (essence_of_dragons against dragon_essence). It is strict — never a partial
+ * overlap — which is what keeps crop_speed away from attack_speed.
+ *
+ * The fourth isn't mechanical and needs naming: the API sometimes drops the family noun
+ * ("Undead Ruler" is just `undead`, though `skeletal_ruler` keeps it) and it calls one family
+ * by a different word entirely (arthropod is arachno). Those live in attribute_api_keys.json.
+ *
+ * Candidates are tried most-specific first, so an attribute that matches outright never gets
+ * taken by a looser rule meant for a different one.
  */
-function attributeStacks(stacks: Record<string, number> | undefined): (key: string) => number {
+function attributeStacks(stacks: Record<string, number> | undefined, data: GameData): (key: string) => number {
   const held = stacks ?? {};
   const byShape = new Map<string, number>();
   for (const [key, amount] of Object.entries(held)) {
     const shape = attributeShape(key);
     byShape.set(shape, Math.max(byShape.get(shape) ?? 0, amount));
   }
-  return (key) => held[key] ?? byShape.get(attributeShape(key)) ?? 0;
+
+  return (key) => {
+    for (const candidate of attributeCandidates(key, data)) {
+      const direct = held[candidate];
+      if (direct !== undefined) return direct;
+      const shaped = byShape.get(attributeShape(candidate));
+      if (shaped !== undefined) return shaped;
+    }
+    return 0;
+  };
+}
+
+/** The forms one of our attribute keys might appear under in the profile, best guess first. */
+function attributeCandidates(key: string, data: GameData): string[] {
+  const { wordAliases, droppableSuffixes } = data.attributeApiKeys;
+
+  const aliased = key
+    .split("_")
+    .map((word) => wordAliases[word] ?? word)
+    .join("_");
+
+  const forms = [key, aliased];
+  // Dropping the family noun is a *fallback*: skeletal_ruler keeps it and matches outright, so
+  // trying the full key first stops the stem rule stealing an attribute that was never ambiguous.
+  for (const base of [key, aliased]) {
+    for (const suffix of droppableSuffixes) {
+      if (base.endsWith(`_${suffix}`)) forms.push(base.slice(0, -suffix.length - 1));
+    }
+  }
+  return [...new Set(forms)];
 }
 
 const ATTRIBUTE_STOPWORDS = new Set(["of", "the", "a", "s"]);
@@ -715,16 +755,19 @@ function attributeShape(key: string): string {
  * Attributes the profile has progress in that our list doesn't contain at all.
  *
  * Worth counting rather than ignoring: the wiki page this app's attribute list comes from is a
- * snapshot, and the game keeps adding families (foraging, hunting, garden). A silent gap reads
- * as "you have nothing there"; a counted one reads as "this app doesn't know about these yet",
- * which is the true statement.
+ * snapshot, and the game keeps adding families. A silent gap reads as "you have nothing there";
+ * a counted one reads as "this app doesn't know about these yet", which is the true statement.
  */
 function unplacedAttributes(
   stacks: Record<string, number> | undefined,
   attributes: { key: string }[],
+  data: GameData,
 ): number {
   if (!stacks) return 0;
-  const known = new Set(attributes.map((a) => attributeShape(a.key)));
+  const known = new Set<string>();
+  for (const attribute of attributes) {
+    for (const form of attributeCandidates(attribute.key, data)) known.add(attributeShape(form));
+  }
   return Object.entries(stacks).filter(([key, amount]) => amount > 0 && !known.has(attributeShape(key))).length;
 }
 

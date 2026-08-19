@@ -120,11 +120,12 @@ async function buildAccessories() {
   const out = [];
   for (const item of items) {
     if (item.category !== "ACCESSORY") continue;
-    if (!item.tier) continue; // no rarity -> no defined magical power
+    const tier = item.tier ?? impliedTier(item.name);
+    if (!tier) continue; // no rarity we can stand behind -> no defined magical power
     out.push({
       id: item.id,
       name: item.name,
-      tier: item.tier,
+      tier,
       museum: Boolean(item.museum),
       soulbound: Boolean(item.soulbound),
       tradeable: item.can_trade !== false && item.can_auction !== false && !item.soulbound,
@@ -133,6 +134,23 @@ async function buildAccessories() {
   }
   out.sort((a, b) => a.id.localeCompare(b.id));
   return { accessories: out };
+}
+
+/**
+ * A rarity for the accessories the items resource ships without one.
+ *
+ * There are 38 of them and dropping the lot was expensive in both directions: the bag couldn't
+ * credit magical power for an accessory it didn't know (the computed-vs-reported readout was
+ * short by exactly the sort of margin a stack of basic talismans makes), and the family those
+ * accessories anchor looked empty, so the app offered the Ring of a family whose Talisman the
+ * player already wore.
+ *
+ * Only the Talisman step is inferred, and only because it is the base of every family and
+ * common throughout the game. The rest — Master Skulls, Runebook, the Campfire badge ladders,
+ * Beastmaster Crest — carry no rarity anywhere in the API and are left out rather than guessed.
+ */
+function impliedTier(name) {
+  return /(^|\s)Talisman(\s|$)/.test(name ?? "") ? "COMMON" : null;
 }
 
 /* ------------------------------------------------------------------ museum */

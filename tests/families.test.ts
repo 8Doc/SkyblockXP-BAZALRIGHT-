@@ -89,3 +89,27 @@ test("a rarer attribute never needs more shards than a commoner one", () => {
     }
   }
 });
+
+/* ------------------------------------------------- accessory list coverage */
+
+test("the base Talisman of a family is in the list, not dropped for want of a rarity", () => {
+  // The items resource ships 38 accessories with no tier. Dropping them left the bag unable to
+  // credit magical power for an accessory it didn't know, and made the family look empty — so
+  // it offered the Ring of a family whose Talisman the player already wore.
+  const byName = new Map(
+    (accessories as { accessories: { name: string; tier: string }[] }).accessories.map((a) => [a.name, a]),
+  );
+
+  for (const name of ["Feather Talisman", "Sea Creature Talisman", "Talisman of Coins", "Bat Person Talisman"]) {
+    const found = byName.get(name);
+    assert.ok(found, `${name} is missing from the accessory list`);
+    assert.equal(found.tier, "COMMON", `${name} should be the common base of its family`);
+  }
+});
+
+test("a family's Talisman, Ring and Artifact all resolve to one family", () => {
+  for (const stem of ["Feather", "Sea Creature", "Bat Person"]) {
+    const tiers = [`${stem} Talisman`, `${stem} Ring`, `${stem} Artifact`].map(family);
+    assert.equal(new Set(tiers).size, 1, `${stem} split into ${new Set(tiers).size} families`);
+  }
+});

@@ -1,0 +1,9 @@
+{
+  "note": "How the game's own attribute ids differ from the wiki display names this app keys attributes by. Only needed where the difference isn't mechanical — possessives, word order and plurals are handled by comparing keys as a set of singular words.",
+  "source": "Read off member.attributes.stacks against data/generated/attributes.json. Each entry below is a pair where both sides exist and nothing else can claim either.",
+  "consequence": "An unmatched key reads as zero progress, so the app offers every level of an attribute the player has already maxed. Undead Ruler was quoted at ten levels against a profile holding all sixty-four shards.",
+  "wordAliases": {
+    "arthropod": "arachno"
+  },
+  "droppableSuffixes": ["ruler"]
+}

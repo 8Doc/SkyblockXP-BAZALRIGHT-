@@ -56,6 +56,7 @@ const gameData = {
   attributeShards: await loadJson("generated/attributes.json"),
   bagUpgrades: await loadJson("curated/accessory_bag_upgrades.json"),
   attributeLevels: await loadJson("curated/attribute_levels.json"),
+  attributeApiKeys: await loadJson("curated/attribute_api_keys.json"),
 };
 
 const bundle = await build({

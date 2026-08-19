@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-08-18T20:07:01.858Z",
+ "generatedAt": "2026-08-19T13:58:17.129Z",
  "source": "https://api.hypixel.net/v2/resources/skyblock",
  "accessories": [
   {
@@ -231,6 +231,15 @@
    "id": "BAT_PERSON_RING",
    "name": "Bat Person Ring",
    "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "BAT_PERSON_TALISMAN",
+   "name": "Bat Person Talisman",
+   "tier": "COMMON",
    "museum": false,
    "soulbound": false,
    "tradeable": true,
@@ -849,9 +858,27 @@
    "riftTransferrable": false
   },
   {
+   "id": "COIN_TALISMAN",
+   "name": "Talisman of Coins",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
    "id": "COMBO_MANIA_TALISMAN",
    "name": "Combo Mania",
    "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "COMPASS_TALISMAN",
+   "name": "Compass Talisman",
+   "tier": "COMMON",
    "museum": false,
    "soulbound": false,
    "tradeable": true,
@@ -970,6 +997,15 @@
    "name": "Celestial Starstone",
    "tier": "SUPREME",
    "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "DANTE_TALISMAN",
+   "name": "Dante's Talisman",
+   "tier": "COMMON",
+   "museum": true,
    "soulbound": false,
    "tradeable": true,
    "riftTransferrable": false
@@ -1173,6 +1209,15 @@
    "riftTransferrable": false
   },
   {
+   "id": "FEATHER_TALISMAN",
+   "name": "Feather Talisman",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
    "id": "FERMENTO_ARTIFACT",
    "name": "Fermento Artifact",
    "tier": "RARE",
@@ -1185,6 +1230,15 @@
    "id": "FIERY_KUUDRA_CORE",
    "name": "Fiery Kuudra Core",
    "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "FIRE_TALISMAN",
+   "name": "Fire Talisman",
+   "tier": "COMMON",
    "museum": false,
    "soulbound": false,
    "tradeable": true,
@@ -1461,6 +1515,15 @@
    "riftTransferrable": false
   },
   {
+   "id": "HEALING_TALISMAN",
+   "name": "Healing Talisman",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
    "id": "HEGEMONY_ARTIFACT",
    "name": "Hegemony Artifact",
    "tier": "LEGENDARY",
@@ -1578,6 +1641,15 @@
    "riftTransferrable": false
   },
   {
+   "id": "INTIMIDATION_TALISMAN",
+   "name": "Intimidation Talisman",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
    "id": "IQ_POINT",
    "name": "IQ Point",
    "tier": "COMMON",
@@ -1674,6 +1746,15 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "KING_TALISMAN",
+   "name": "King Talisman",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": true,
+   "tradeable": false,
    "riftTransferrable": false
   },
   {
@@ -1935,6 +2016,15 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "MINE_TALISMAN",
+   "name": "Mine Affinity Talisman",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
    "riftTransferrable": false
   },
   {
@@ -2289,6 +2379,24 @@
    "riftTransferrable": false
   },
   {
+   "id": "POTATO_TALISMAN",
+   "name": "Potato Talisman",
+   "tier": "COMMON",
+   "museum": true,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "POTION_AFFINITY_TALISMAN",
+   "name": "Potion Affinity Talisman",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
    "id": "POWER_ARTIFACT",
    "name": "Artifact of Power",
    "tier": "RARE",
@@ -2310,6 +2418,15 @@
    "id": "POWER_RING",
    "name": "Ring of Power",
    "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "POWER_TALISMAN",
+   "name": "Talisman of Power",
+   "tier": "COMMON",
    "museum": false,
    "soulbound": false,
    "tradeable": false,
@@ -2613,6 +2730,15 @@
    "riftTransferrable": false
   },
   {
+   "id": "SCAVENGER_TALISMAN",
+   "name": "Scavenger Talisman",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
    "id": "SEA_CREATURE_ARTIFACT",
    "name": "Sea Creature Artifact",
    "tier": "RARE",
@@ -2625,6 +2751,15 @@
    "id": "SEA_CREATURE_RING",
    "name": "Sea Creature Ring",
    "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SEA_CREATURE_TALISMAN",
+   "name": "Sea Creature Talisman",
+   "tier": "COMMON",
    "museum": false,
    "soulbound": false,
    "tradeable": true,
@@ -2679,6 +2814,15 @@
    "id": "SHENS_REGALIA",
    "name": "Shen's Regalia",
    "tier": "LEGENDARY",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "SKELETON_TALISMAN",
+   "name": "Skeleton Talisman",
+   "tier": "COMMON",
    "museum": false,
    "soulbound": false,
    "tradeable": true,
@@ -2991,6 +3135,15 @@
    "riftTransferrable": false
   },
   {
+   "id": "SPEED_TALISMAN",
+   "name": "Speed Talisman",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
    "id": "SPIDER_ARTIFACT",
    "name": "Spider Artifact",
    "tier": "EPIC",
@@ -3234,6 +3387,15 @@
    "riftTransferrable": false
   },
   {
+   "id": "VACCINE_TALISMAN",
+   "name": "Vaccine Talisman",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
    "id": "VAMPIRE_DENTIST_RELIC",
    "name": "Vampire Dentist Relic",
    "tier": "LEGENDARY",
@@ -3241,6 +3403,15 @@
    "soulbound": false,
    "tradeable": true,
    "riftTransferrable": true
+  },
+  {
+   "id": "VILLAGE_TALISMAN",
+   "name": "Village Affinity Talisman",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
   },
   {
    "id": "VOTER_BADGE",
@@ -3462,6 +3633,15 @@
    "id": "ZOMBIE_RING",
    "name": "Zombie Ring",
    "tier": "UNCOMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "ZOMBIE_TALISMAN",
+   "name": "Zombie Talisman",
+   "tier": "COMMON",
    "museum": false,
    "soulbound": false,
    "tradeable": true,
