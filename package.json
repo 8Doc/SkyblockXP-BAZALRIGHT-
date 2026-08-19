@@ -5,7 +5,7 @@
   "scripts": {
     "build:html": "node scripts/build-html.mjs",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test tests/format.test.ts tests/nbt.test.ts tests/grouping.test.ts tests/families.test.ts tests/gamedata.test.ts tests/solver.test.ts",
+    "test": "tsx --test tests/format.test.ts tests/nbt.test.ts tests/grouping.test.ts tests/families.test.ts tests/gamedata.test.ts tests/collections.test.ts tests/solver.test.ts",
     "gen:data": "node scripts/generate-data.mjs",
     "gen:all": "node scripts/generate-data.mjs && node scripts/fetch-wiki-tasks.mjs && node scripts/fetch-wiki-curves.mjs && node scripts/build-task-table.mjs && node scripts/fetch-attributes.mjs",
     "gen:ids": "node scripts/harvest-task-ids.mjs"

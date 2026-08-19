@@ -105,7 +105,7 @@ export function buildCatalog(
   pets: { name: string; rarity: string }[] | null = null,
   garden: GardenState | null = null,
   /** Island-wide progress, unioned across co-op members. Falls back to this member alone. */
-  coop: { craftedGenerators: string[]; unlockedCollectionTiers: string[] } | null = null,
+  coop: { craftedGenerators: string[]; unlockedCollectionTiers: string[]; collected: Map<string, number> } | null = null,
 ): Catalog {
   const tasks: Task[] = [];
   const done = new Set<string>();
@@ -141,7 +141,18 @@ export function buildCatalog(
 
   /* -------------------------------------------------------- collections */
 
+  // Two signals, and the second one is the reliable half.
+  //
+  // `unlocked_coll_tiers` reads like an event log rather than a state: a maxed Fig Log turns up
+  // as FIG_LOG_4, FIG_LOG_8 and FIG_LOG_-1, with the other six tiers simply absent. Trusting it
+  // alone means offering tiers the player passed long ago — this profile has collected 3.5M figs
+  // against a final tier of 150k.
+  //
+  // The amount collected is the thing the game actually counts, so a tier is done if either
+  // signal says so. Neither is dropped: the list still catches a tier unlocked by some route the
+  // amount doesn't reflect.
   const unlockedTiers = new Set(coop?.unlockedCollectionTiers ?? member.player_data?.unlocked_coll_tiers ?? []);
+  const collectedTotals = coop?.collected ?? collectedFrom(member);
   for (const coll of data.collections.collections) {
     let previous: string | null = null;
     for (const tier of coll.tiers) {
@@ -157,7 +168,8 @@ export function buildCatalog(
         repeatable: false,
         note: `${tier.amountRequired.toLocaleString("en-US")} collected`,
       });
-      if (unlockedTiers.has(`${coll.itemId}_${tier.tier}`)) done.add(id);
+      const have = collectedTotals.get(coll.itemId) ?? 0;
+      if (unlockedTiers.has(`${coll.itemId}_${tier.tier}`) || have >= tier.amountRequired) done.add(id);
       previous = id;
     }
   }
@@ -816,4 +828,13 @@ function cumulativeShards(data: GameData, rarity: string): number[] {
   const perLevel = data.attributeLevels.perLevel[rarity] ?? data.attributeLevels.perLevel.COMMON;
   let running = 0;
   return perLevel.map((step: number) => (running += step));
+}
+
+/** One member's own collection totals, for a profile with no co-op to sum across. */
+function collectedFrom(member: ProfileMember): Map<string, number> {
+  const out = new Map<string, number>();
+  for (const [item, amount] of Object.entries(member.collection ?? {})) {
+    if (typeof amount === "number") out.set(item, amount);
+  }
+  return out;
 }

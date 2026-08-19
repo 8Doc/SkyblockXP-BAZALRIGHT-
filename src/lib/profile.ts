@@ -6,6 +6,8 @@ export type ProfileMember = {
     completed_tasks?: string[];
     highest_pet_score?: number;
   };
+  /** Item id -> how much this member has personally contributed to the co-op's collection. */
+  collection?: Record<string, number>;
   player_data?: {
     experience?: Record<string, number>;
     unlocked_coll_tiers?: string[];
@@ -42,14 +44,24 @@ export type ProfileMember = {
 export function coopProgress(profile: SkyblockProfile): {
   craftedGenerators: string[];
   unlockedCollectionTiers: string[];
+  collected: Map<string, number>;
 } {
   const crafted = new Set<string>();
   const collections = new Set<string>();
+  // Collections are a co-op total: each member's map records what they personally contributed,
+  // and the profile's progress is the sum. Reading one member's map alone understates a shared
+  // profile and would offer tiers the co-op has long since passed.
+  const collected = new Map<string, number>();
+
   for (const member of Object.values(profile.members)) {
     for (const id of member.player_data?.crafted_generators ?? []) crafted.add(id);
     for (const id of member.player_data?.unlocked_coll_tiers ?? []) collections.add(id);
+    for (const [item, amount] of Object.entries(member.collection ?? {})) {
+      if (typeof amount === "number") collected.set(item, (collected.get(item) ?? 0) + amount);
+    }
   }
-  return { craftedGenerators: [...crafted], unlockedCollectionTiers: [...collections] };
+
+  return { craftedGenerators: [...crafted], unlockedCollectionTiers: [...collections], collected };
 }
 
 /** What the museum endpoint tells us: which items are already donated. */
