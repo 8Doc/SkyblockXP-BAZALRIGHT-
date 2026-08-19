@@ -256,10 +256,13 @@ function taskRow(task: ResolvedTask, showBundle: boolean, tag?: string): string 
       : `<span class="dim">no price</span>`
     : coins(bundled ? task.bundleCoins : task.coins);
 
+  const shownName = bundled && task.bundleSpan ? task.bundleSpan : task.name;
+  const shownNote = bundled && task.bundleNote ? task.bundleNote : task.note;
+
   return `<li class="task">
-    <span class="task-name">${tag ? `<span class="tag cat">${escapeHtml(tag)}</span>` : ""}${escapeHtml(task.name)}${
+    <span class="task-name">${tag ? `<span class="tag cat">${escapeHtml(tag)}</span>` : ""}${escapeHtml(shownName)}${
       bundled ? `<span class="tag">+${task.bundle.length} prereq</span>` : ""
-    }${task.note ? `<span class="note">${escapeHtml(task.note)}</span>` : ""}</span>
+    }${shownNote ? `<span class="note">${escapeHtml(shownNote)}</span>` : ""}</span>
     <span class="task-xp">${bundled ? task.bundleXp : task.xp} xp</span>
     <span class="task-cost">${priceText}</span>
     <span class="task-rate">${rate(task.efficiency)}</span>

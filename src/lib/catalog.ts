@@ -3,6 +3,7 @@ import type { GardenState, MuseumState, ProfileMember } from "./profile";
 import { petKey } from "./auctions";
 import {
   bagUpgradeCost,
+  bumpRarity,
   effortOf,
   familyOf,
   magicalPowerOf,
@@ -228,6 +229,7 @@ export function buildCatalog(
     freeSlots > 0 || nextUpgradeCost === null ? 0 : Math.round(nextUpgradeCost / data.bagUpgrades.slotsPerUpgrade);
 
   const excluded = new Set(data.magicalPower.excludedItems.ids);
+  const accessoryById = new Map(data.accessories.accessories.map((a) => [a.id, a]));
   for (const acc of data.accessories.accessories) {
     if (excluded.has(acc.id)) continue;
     const power = magicalPowerOf(data, acc.tier);
@@ -249,7 +251,14 @@ export function buildCatalog(
       groupBase: alreadyHave,
       requires: [],
       cost: acc.tradeable
-        ? { kind: "auction", itemId: acc.id, surcharge: (alreadyHave > 0 ? 0 : slotSurcharge) || undefined }
+        ? {
+            kind: "auction",
+            itemId: acc.id,
+            surcharge: (alreadyHave > 0 ? 0 : slotSurcharge) || undefined,
+            // The member this replaces comes off and goes back on the auction house, so the
+            // upgrade costs the difference rather than the sticker price.
+            sells: bagState.familyBest.get(family)?.id,
+          }
         : { kind: "unknown", note: acc.soulbound ? "Soulbound — cannot be bought" : "Not tradeable" },
       repeatable: false,
       note: `${acc.tier.toLowerCase()} · ${power} MP${alreadyHave > 0 ? ` (family already gives ${alreadyHave})` : ""}`,
@@ -570,6 +579,37 @@ export function buildCatalog(
         previousTier = id;
       }
     }
+  }
+
+  // Recombobulating an accessory raises its rarity by one, which is magical power without
+  // buying anything new. It competes with buying a better family member rather than stacking
+  // with it — both set the family's power — so it shares the family's exclusive group and is
+  // priced at whatever a Recombobulator 3000 costs on the bazaar.
+  //
+  // Only the member actually holding the family is worth recombobulating, and only once: the
+  // game allows a single rarity upgrade per item, which `rarityUpgrades` already records.
+  for (const [family, best] of bagState.familyBest) {
+    if (best.recombobulated) continue;
+    const bumped = bumpRarity(data, best.rarity, 1);
+    if (bumped === best.rarity) continue; // already at the top of the ladder
+    const power = magicalPowerOf(data, bumped);
+    const alreadyHave = bagState.familyPower.get(family) ?? 0;
+    if (power <= alreadyHave) continue;
+
+    const meta = accessoryById.get(best.id);
+    tasks.push({
+      id: `recombobulate_${best.id}`,
+      category: "accessory_bag",
+      name: `Recombobulate ${meta?.name ?? best.id}`,
+      xp: power - alreadyHave,
+      exclusiveGroup: `accessory:${family}`,
+      groupLevel: power,
+      groupBase: alreadyHave,
+      requires: [],
+      cost: { kind: "bazaar", items: [{ id: "RECOMBOBULATOR_3000", qty: 1 }] },
+      repeatable: false,
+      note: `${best.rarity.toLowerCase()} → ${bumped.toLowerCase()} · ${power - alreadyHave} MP`,
+    });
   }
 
   /* ------------------------------------------------- accessory bag slots */

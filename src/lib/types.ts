@@ -77,7 +77,18 @@ export type CostSpec =
    * an accessory has to occupy once the bag is full. Buying the accessory really does cost the
    * item plus the room to keep it.
    */
-  | { kind: "auction"; itemId: string; tier?: string; surcharge?: number }
+  | {
+      kind: "auction";
+      itemId: string;
+      tier?: string;
+      surcharge?: number;
+      /**
+       * An item this purchase makes redundant, sold to pay for it. Buying the Artifact of a
+       * family means the Ring comes off and can go straight back on the auction house, so the
+       * upgrade really costs the difference.
+       */
+      sells?: string;
+    }
   | { kind: "npc"; coins: number }
   | { kind: "essence"; type: EssenceType; amount: number }
   | { kind: "none" }
@@ -133,6 +144,10 @@ export type ResolvedTask = Task & {
   bundle: string[];
   /** bundleCoins / bundleXp. null when unpriceable. */
   efficiency: number | null;
+  /** "Extreme Pressure 2–6" — what a row covering a whole prerequisite chain should be called. */
+  bundleSpan?: string;
+  /** The bundle's combined materials, so the note agrees with the price beside it. */
+  bundleNote?: string;
 };
 
 export type PlanGroup = {

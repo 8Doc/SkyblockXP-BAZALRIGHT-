@@ -38,9 +38,11 @@ export function TaskRow({
     <li className="flex items-baseline gap-3 border-t border-line/60 px-3 py-1.5 text-sm first:border-t-0">
       <span className="flex-1 truncate">
         {tag && <span className="mr-1.5 rounded border border-line px-1 text-[10px] uppercase tracking-wide text-muted/70">{tag}</span>}
-        {task.name}
+        {bundled && task.bundleSpan ? task.bundleSpan : task.name}
         {bundled && <span className="ml-1.5 text-xs text-muted">+{task.bundle.length} prereq</span>}
-        {task.note && <span className="ml-1.5 text-xs text-muted/70">{task.note}</span>}
+        {(bundled && task.bundleNote ? task.bundleNote : task.note) && (
+          <span className="ml-1.5 text-xs text-muted/70">{bundled && task.bundleNote ? task.bundleNote : task.note}</span>
+        )}
       </span>
 
       <span className="w-14 shrink-0 text-right tabular-nums text-gold">

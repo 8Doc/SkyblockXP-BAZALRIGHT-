@@ -257,6 +257,11 @@ export type BagItem = { id: string; rarityUpgrades: number };
 export type BagState = {
   /** family -> magical power already granted by the best owned member. */
   familyPower: Map<string, number>;
+  /**
+   * family -> the item currently holding it, and whether it has been recombobulated. Upgrading
+   * the family sells this one, and recombobulating it is an upgrade in its own right.
+   */
+  familyBest: Map<string, { id: string; rarity: string; recombobulated: boolean }>;
   /** Item ids the player already holds. */
   owned: Set<string>;
   /** Magical power we computed from the bag contents. */
@@ -280,6 +285,7 @@ export function scoreBag(
   const excluded = new Set(data.magicalPower.excludedItems.ids);
 
   const familyPower = new Map<string, number>();
+  const familyBest = new Map<string, { id: string; rarity: string; recombobulated: boolean }>();
   const owned = new Set<string>();
 
   for (const item of items ?? []) {
@@ -289,7 +295,11 @@ export function scoreBag(
     if (!meta) continue;
     const rarity = bumpRarity(data, meta.tier, item.rarityUpgrades);
     const family = familyOf(data, meta.name, meta.id);
-    familyPower.set(family, Math.max(familyPower.get(family) ?? 0, magicalPowerOf(data, rarity)));
+    const power = magicalPowerOf(data, rarity);
+    if (power > (familyPower.get(family) ?? -1)) {
+      familyPower.set(family, power);
+      familyBest.set(family, { id: meta.id, rarity, recombobulated: item.rarityUpgrades > 0 });
+    }
   }
 
   let computedMp = 0;
@@ -297,6 +307,7 @@ export function scoreBag(
 
   return {
     familyPower,
+    familyBest,
     owned,
     computedMp,
     reportedMp,

@@ -484,3 +484,66 @@ test("the same family can still be bought once per plan when it is the best valu
   const all = plan.packages.flatMap((p) => p.groups.flatMap((g) => g.tasks));
   assert.equal(all.length, 2, "locking a group must not stop it being bought at all");
 });
+
+/* ------------------------------------------------------ replacing an item */
+
+test("an upgrade is priced net of selling what it replaces", () => {
+  // Buying the Artifact takes the Ring off, and the Ring goes straight back on the auction
+  // house — so the upgrade costs the difference, not the sticker price.
+  const book: PriceBook = {
+    bazaar: {},
+    bins: { prices: { FEATHER_ARTIFACT: { RARE: 10_000_000 }, FEATHER_RING: { UNCOMMON: 4_000_000 } }, listings: 2, scannedAt: 0, pages: 1 },
+  };
+  const task: Task = {
+    id: "accessory_FEATHER_ARTIFACT",
+    category: "accessory_bag",
+    name: "Feather Artifact",
+    xp: 3,
+    requires: [],
+    cost: { kind: "auction", itemId: "FEATHER_ARTIFACT", sells: "FEATHER_RING" },
+    repeatable: false,
+  };
+
+  const { byId } = resolveTasks([task], new Set(), book);
+  // 10M out, 4M back less the 1% auction house takes.
+  assert.equal(byId.get(task.id)!.coins, 10_000_000 - Math.round(4_000_000 * 0.99));
+});
+
+test("selling something nobody is listing costs nothing rather than voiding the row", () => {
+  const book: PriceBook = {
+    bazaar: {},
+    bins: { prices: { FEATHER_ARTIFACT: { RARE: 10_000_000 } }, listings: 1, scannedAt: 0, pages: 1 },
+  };
+  const task: Task = {
+    id: "accessory_FEATHER_ARTIFACT",
+    category: "accessory_bag",
+    name: "Feather Artifact",
+    xp: 3,
+    requires: [],
+    cost: { kind: "auction", itemId: "FEATHER_ARTIFACT", sells: "NOBODY_SELLS_THIS" },
+    repeatable: false,
+  };
+
+  const { byId } = resolveTasks([task], new Set(), book);
+  assert.equal(byId.get(task.id)!.coins, 10_000_000, "an unpriceable trade-in is worth zero, not null");
+});
+
+test("a bundled row is named for the span it covers and totals the bundle's materials", () => {
+  const level = (n: number, shards: number, coins: number): Task => ({
+    id: `attribute_extreme_pressure_${n}`,
+    category: "attributes",
+    name: `Extreme Pressure ${n}`,
+    xp: 1,
+    requires: n > 2 ? [`attribute_extreme_pressure_${n - 1}`] : [],
+    cost: { kind: "npc", coins },
+    repeatable: false,
+    note: `${shards}× Lumisquid Shard`,
+  });
+  const tasks = [level(2, 2, 20), level(3, 3, 30), level(4, 3, 30), level(5, 4, 40), level(6, 4, 40)];
+
+  const { byId } = resolveTasks(tasks, new Set(), EMPTY_BOOK);
+  const top = byId.get("attribute_extreme_pressure_6")!;
+  assert.equal(top.bundleSpan, "Extreme Pressure 2–6", "not just the top tier, which reads as a skip");
+  assert.equal(top.bundleNote, "5 levels · 16× Lumisquid Shard", "the note must agree with the price beside it");
+  assert.equal(top.bundleCoins, 160);
+});
