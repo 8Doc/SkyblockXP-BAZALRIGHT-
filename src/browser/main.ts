@@ -505,27 +505,39 @@ function grindView(report: Report): string {
     it — so it is grouped into bands rather than pretending to a precise ordering.</p>`;
 
   const bands = ["quick", "short", "long", "marathon"];
+  const byBand = bands.map((band) => grind.filter((t) => (t.effortBand ?? "marathon") === band));
+
+  // The bands are worked through in order, so the running total carries across them: a level
+  // earned late in the quick jobs doesn't restart when the short ones begin.
+  const marks = levelMarks(
+    byBand.flat().map((task) => task.xp),
+    report.progress.xp,
+  );
+
+  let index = 0;
   const panels = bands
-    .map((band) => {
-      const tasks = grind.filter((t) => (t.effortBand ?? "marathon") === band);
+    .map((band, bandIndex) => {
+      const tasks = byBand[bandIndex];
       if (!tasks.length) return "";
       const xp = tasks.reduce((sum, t) => sum + t.xp, 0);
+      const rows = tasks
+        .map((task) => {
+          const crossed = marks.get(index++);
+          const row = `<li class="grind-item">
+            <div class="grind-cat">${CATEGORY_LABELS[task.category]}</div>
+            <ul>${taskRow(task, false)}</ul>
+          </li>`;
+          return row + (crossed ? crossed.map((level) => levelMark(level)).join("") : "");
+        })
+        .join("");
+
       return `<div class="panel">
         <div class="group-head" style="cursor:default">
           <span class="group-name">${BAND_LABEL[band]}</span>
           <span class="flex-note dim">${BAND_BLURB[band]}</span>
           <span class="group-xp">${num(xp)} xp</span>
         </div>
-        <ul class="tasks">
-          ${tasks
-            .map(
-              (task) => `<li class="grind-item">
-                <div class="grind-cat">${CATEGORY_LABELS[task.category]}</div>
-                <ul>${taskRow(task, false)}</ul>
-              </li>`,
-            )
-            .join("")}
-        </ul>
+        <ul class="tasks">${rows}</ul>
       </div>`;
     })
     .join("");
