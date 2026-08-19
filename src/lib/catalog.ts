@@ -650,7 +650,7 @@ export function buildCatalog(
       const id = `power_${entry.power}`;
       tasks.push({
         id,
-        category: "accessory_bag",
+        category: "powers",
         name: `Unlock ${titleCase(entry.power)} power`,
         xp: xpPerPower,
         requires: [],

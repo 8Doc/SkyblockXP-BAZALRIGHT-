@@ -89,6 +89,7 @@ test("a power costs nine of its stone", () => {
   const { tasks } = catalogFor({ accessory_bag_storage: { unlocked_powers: [] } });
   const frozen = tasks.find((t) => t.id === "power_frozen")!;
 
+  assert.equal(frozen.category, "powers", "powers are their own category, not part of the bag");
   assert.equal(frozen.name, "Unlock Frozen power");
   assert.equal(frozen.xp, 15);
   assert.deepEqual(frozen.cost, { kind: "bazaar", items: [{ id: "GLACITE_SHARD", qty: 9 }] });
