@@ -92,7 +92,7 @@ export const UNMODELLED: { category: Category; note: string; totalXp?: number }[
   },
   {
     category: "attributes",
-    note: "Attribute levels are priced from the shards that feed them, which assumes buying every shard outright. Fusing shards you already own is cheaper, so those costs are an upper bound. Six attributes have no bazaar-traded shard and stay unpriced.",
+    note: "Attribute levels are priced from the shards that feed them, which assumes buying every shard outright. Fusing shards you already own is cheaper, so those costs are an upper bound. Six attributes have no bazaar-traded shard and stay unpriced. The attribute list itself comes from the Fandom wiki, which is behind the game.",
   },
 ];
 
@@ -466,12 +466,16 @@ export function buildCatalog(
   // SHARD_BLIZZARD — so a level costs the shards it adds times their live price. That's the
   // direct-purchase path; fusing shards you already own is cheaper and isn't modelled, so this
   // is an upper bound on what the level costs.
-  const shardThresholds = data.curves.attributes.cumulativeShards;
   const heldShards = attributeStacks(member.attributes?.stacks);
   const strandedAttributes = unplacedAttributes(member.attributes?.stacks, data.attributeShards.attributes);
 
   for (const attribute of data.attributeShards.attributes) {
     const held = heldShards(attribute.key);
+    // Rarer attributes level on far fewer shards — a legendary maxes at 24 where a common needs
+    // 96 — so the ladder has to be picked per attribute. Using the common one throughout made
+    // every maxed legendary read as level 5 of 10 and put five levels that don't exist up for
+    // sale. Falls back to common only if an attribute arrives with a rarity we don't have.
+    const shardThresholds = cumulativeShards(data, attribute.rarity);
     let previous: string | null = null;
 
     shardThresholds.forEach((needed, index) => {
@@ -722,4 +726,11 @@ function unplacedAttributes(
   if (!stacks) return 0;
   const known = new Set(attributes.map((a) => attributeShape(a.key)));
   return Object.entries(stacks).filter(([key, amount]) => amount > 0 && !known.has(attributeShape(key))).length;
+}
+
+/** Cumulative shards needed for levels 1-10 of an attribute of the given rarity. */
+function cumulativeShards(data: GameData, rarity: string): number[] {
+  const perLevel = data.attributeLevels.perLevel[rarity] ?? data.attributeLevels.perLevel.COMMON;
+  let running = 0;
+  return perLevel.map((step: number) => (running += step));
 }

@@ -168,6 +168,8 @@ export type GameData = {
   difficulty: DifficultyData;
   attributeShards: AttributesData;
   bagUpgrades: BagUpgradesData;
+  /** Shards per attribute level, keyed by the rarity of the attribute. */
+  attributeLevels: { perLevel: Record<string, number[]> };
 };
 
 /** What the nth accessory bag upgrade costs. */
@@ -216,7 +218,10 @@ export function bumpRarity(data: GameData, rarity: string, steps: number): strin
  * Three structural patterns cover most of it; the stragglers are named in
  * data/curated/accessory_families.json.
  */
-const UPGRADE_WORD = "Talisman|Ring|Artifact|Relic|Orb";
+// The nouns a family climbs through. Heirloom, Badge and Chronomicon were missing, which
+// split four families down the middle — "Bingo Heirloom" sat apart from the rest of Bingo, so
+// the bag offered a legendary you already had the epic of.
+const UPGRADE_WORD = "Talisman|Ring|Artifact|Relic|Orb|Heirloom|Badge|Chronomicon";
 /** "Bat Person Artifact" -> "bat person" */
 const FAMILY_SUFFIX = new RegExp(`\\s+(${UPGRADE_WORD})$`);
 /** "Relic of Coins" -> "of coins" */

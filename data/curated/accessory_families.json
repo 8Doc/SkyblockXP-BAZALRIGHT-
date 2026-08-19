@@ -1,6 +1,6 @@
 {
   "note": "Accessory families: sets where only the best member's magical power counts. Some families are structural and detected mechanically (see familyOf); the rest have to be named, because nothing in the API links them.",
-  "source": "Hypixel Wiki, Accessory Bag \u2014 read against the accessory name list in data/generated/accessories.json",
+  "source": "Hypixel Wiki, Accessory Bag — read against the accessory name list in data/generated/accessories.json",
   "verified": false,
   "consequence": "A family we fail to detect inflates the accessory bag's XP ceiling and lets a plan buy the same magical power twice. The computed-vs-reported MP readout in the UI is the check on this.",
   "endsWithFamilies": [
@@ -24,6 +24,52 @@
     {
       "match": "^Personal Deletor",
       "family": "personal deletor"
+    },
+    {
+      "match": "^(White|Green|Blue|Purple|Gold) Gift Talisman$",
+      "family": "gift talisman",
+      "note": "Christmas gift talismans: the colour is the rarity."
+    },
+    {
+      "match": "^(Nibble Chocolate Stick|Smooth Chocolate Bar|Rich Chocolate Chunk|Ganache Chocolate Slab|Prestige Chocolate Realm)$",
+      "family": "chocolate",
+      "note": "Chocolate Factory line, common through legendary."
+    },
+    {
+      "match": "^(Green|Blue|Purple) Jerry Talisman$|^Golden Jerry Artifact$",
+      "family": "jerry",
+      "note": "Jerry talismans; the legendary breaks the naming and is an Artifact."
+    },
+    {
+      "match": "^Odger's (Bronze|Silver|Gold|Diamond) Tooth$",
+      "family": "odger's tooth",
+      "note": "Fishing, from Odger. Metal is the rarity."
+    },
+    {
+      "match": "^Scarf's (Studies|Thesis|Grimoire)$",
+      "family": "scarf's",
+      "note": "Scarf's line, rare through legendary."
+    },
+    {
+      "match": "^(Student's Studies|Master's Thesis|PhD's Grimoire)$",
+      "family": "academic",
+      "note": "Separate line that reuses the same three nouns as Scarf's — hence matched whole, not by suffix."
+    },
+    {
+      "match": "^Soulflow (Pile|Battery|Supercell)$",
+      "family": "soulflow"
+    },
+    {
+      "match": "^(Glossy )?Mineral Talisman$",
+      "family": "mineral"
+    },
+    {
+      "match": "^(Fried )?Frozen Chicken$",
+      "family": "frozen chicken"
+    },
+    {
+      "match": "^(2 )?IQ Points?$",
+      "family": "iq point"
     }
   ],
   "openQuestions": [

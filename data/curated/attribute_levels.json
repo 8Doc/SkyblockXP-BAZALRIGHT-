@@ -1,0 +1,13 @@
+{
+  "note": "Shards needed per attribute level, by the attribute's rarity. A rarer attribute levels on far fewer shards: a legendary maxes at 24 where a common needs 96.",
+  "source": "https://hypixelskyblock.minecraft.wiki/w/Attributes — the community wiki the game's editors moved to. The Fandom wiki this app's attribute list came from publishes only the common column.",
+  "verified": "The five cumulative maxima (96/64/48/32/24) are exactly the five largest values that appear in member.attributes.stacks on a maxed profile, which is what a maxed attribute of each rarity reads as.",
+  "consequence": "Applying the common table to every attribute understates how far along every rarer attribute is. A maxed legendary sitting at 24 shards reads as level 5 of 10, so the app invents five levels that do not exist, prices them, and sells them.",
+  "perLevel": {
+    "COMMON":    [1, 3, 5, 6, 7, 8, 10, 14, 18, 24],
+    "UNCOMMON":  [1, 2, 3, 4, 5, 6, 7, 8, 12, 16],
+    "RARE":      [1, 2, 3, 3, 4, 4, 5, 6, 8, 12],
+    "EPIC":      [1, 1, 2, 2, 3, 3, 4, 4, 5, 7],
+    "LEGENDARY": [1, 1, 1, 2, 2, 2, 3, 3, 4, 5]
+  }
+}
