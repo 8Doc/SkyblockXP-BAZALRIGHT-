@@ -1,6 +1,7 @@
 import type { Catalog } from "./catalog";
 import { resolveTasks, type PriceBook } from "./resolve";
 import { solve, solvePackages, type SolveOptions } from "./solver";
+import { groupToMax, type TaskRun } from "./grouping";
 import {
   CATEGORIES,
   XP_PER_LEVEL,
@@ -33,7 +34,19 @@ export type Report = {
   progress: { xp: number; level: number; modelledEarnedXp: number; modelledRemainingXp: number };
   plan: Plan;
   packages: PackagePlan;
-  browser: { category: Category; summary: CategorySummary; tasks: ResolvedTask[]; truncated: number }[];
+  browser: {
+    category: Category;
+    summary: CategorySummary;
+    tasks: ResolvedTask[];
+    truncated: number;
+    /**
+     * The same remaining work collapsed to one row per thing rather than one per tier — for
+     * attributes, "max Arthropod Resistance" instead of its ten separate levels. Only emitted
+     * where the tiers are numerous enough that listing them individually is the wrong view.
+     */
+    maxed?: TaskRun[];
+    maxedTruncated?: number;
+  }[];
   /** Every remaining grind, cheapest in effort first, across all categories at once. */
   grind: ResolvedTask[];
   unmodelled: { category: Category; note: string; totalXp?: number; earnedXp?: number }[];
@@ -41,6 +54,13 @@ export type Report = {
 };
 
 const BROWSER_LIMIT = 40;
+
+/**
+ * Categories that read better collapsed to one row per thing. Attributes are the clear case:
+ * 181 of them, ten levels each, every level fed by the same shard, so the per-level rows carry
+ * almost no information the grouped row doesn't.
+ */
+const GROUPABLE = new Set<Category>(["attributes"]);
 
 export function buildReport(catalog: Catalog, book: PriceBook, options: ReportOptions): Report {
   const plan = solve(catalog.tasks, catalog.done, book, options);
@@ -89,11 +109,23 @@ export function buildReport(catalog: Catalog, book: PriceBook, options: ReportOp
         return a.efficiency - b.efficiency;
       });
 
+    // Grouped from the *untruncated* remaining set: the point of the view is that maxing an
+    // attribute is one decision, so it can't be assembled out of whichever forty levels
+    // happened to survive the cut. The XP floor still applies, measured against the grouped
+    // row — a floor is a statement about how small a purchase is worth making, and grouped,
+    // these purchases are large.
+    const maxed = GROUPABLE.has(category)
+      ? groupToMax(remaining).filter((run) => run.xp >= options.minXp)
+      : null;
+
     browser.push({
       category,
       summary,
       tasks: shown.slice(0, BROWSER_LIMIT),
       truncated: Math.max(shown.length - BROWSER_LIMIT, 0),
+      ...(maxed
+        ? { maxed: maxed.slice(0, BROWSER_LIMIT), maxedTruncated: Math.max(maxed.length - BROWSER_LIMIT, 0) }
+        : {}),
     });
   }
 

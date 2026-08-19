@@ -134,3 +134,40 @@ export function groupTaskRuns(tasks: ResolvedTask[]): TaskRun[] {
 
   return runs;
 }
+
+/**
+ * The same tiers, read as "what does finishing this cost?".
+ *
+ * An attribute is ten levels fed by one shard, so the browser lists it as ten rows that differ
+ * only in how many shards they want — and with 181 attributes that's 1,810 rows to page
+ * through forty at a time. Nobody shops that way. You decide to max Arthropod Resistance and
+ * you buy the shards, so this collapses each attribute to a single row: the levels you don't
+ * have, the shards they add up to, and the price of the lot.
+ *
+ * Cheapest per XP first. An attribute whose shard doesn't trade sorts last rather than being
+ * dropped — "you can't buy this one" is a real answer to the question being asked.
+ */
+export function groupToMax(tasks: ResolvedTask[]): TaskRun[] {
+  return groupTaskRuns(tasks)
+    .map((run) => {
+      const first = splitName(run.tasks[0].name);
+      const last = splitName(run.tasks[run.tasks.length - 1].name);
+      const span = run.tasks.length > 1 ? `levels ${first.label}–${last.label}` : `level ${last.label}`;
+      const shards = totalMaterial(run.tasks);
+      return { ...run, name: first.base, note: shards ? `${span} · ${shards}` : span };
+    })
+    .sort((a, b) => {
+      // Unpriced rows can't be ranked on value, so they go to the bottom rather than to the top
+      // where a null would otherwise sort.
+      if (a.coins === null || !a.xp) return b.coins === null || !b.xp ? 0 : 1;
+      if (b.coins === null || !b.xp) return -1;
+      return a.coins / a.xp - b.coins / b.xp;
+    });
+}
+
+/** "66× Voracious Spider Shard" when every level wants the same shard, else nothing. */
+function totalMaterial(tasks: ResolvedTask[]): string | null {
+  const parts = tasks.map((t) => splitNote(t.note));
+  if (!parts.every((p) => p && p.material === parts[0]!.material)) return null;
+  return `${parts.reduce((sum, p) => sum + p!.qty, 0)}× ${parts[0]!.material}`;
+}

@@ -202,3 +202,5 @@ footer { margin-top: 24px; padding-top: 12px; border-top: 1px solid var(--line);
   .task-rate { display: none; }
   .bleed { width: 62px; }
 }
+
+.group-toggle { display: flex; align-items: center; gap: 8px; padding-top: 8px; }

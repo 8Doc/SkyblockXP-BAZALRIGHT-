@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { groupTaskRuns } from "../src/lib/grouping";
+import { groupTaskRuns, groupToMax } from "../src/lib/grouping";
 import type { ResolvedTask } from "../src/lib/types";
 
 function task(id: string, name: string, xp: number, coins: number | null, note?: string): ResolvedTask {
@@ -105,4 +105,44 @@ test("gaps in the tiers are listed, never smoothed into a range", () => {
   assert.equal(run.name, "Crimson essence fungus fortuna 1, 5");
   assert.equal(run.xp, 9);
   assert.equal(run.tasks.length, 2);
+});
+
+/* ------------------------------------------------------------ group maxed */
+
+test("maxing an attribute is one row: the levels left, the shards, the price", () => {
+  // Levels 1-6 are already held, so "max this" means 7 through 10.
+  const tasks = [
+    task("attribute_arthropod_resistance_7", "Arthropod Resistance 7", 1, 100_000, "10× Voracious Spider Shard"),
+    task("attribute_arthropod_resistance_8", "Arthropod Resistance 8", 1, 140_000, "14× Voracious Spider Shard"),
+    task("attribute_arthropod_resistance_9", "Arthropod Resistance 9", 1, 180_000, "18× Voracious Spider Shard"),
+    task("attribute_arthropod_resistance_10", "Arthropod Resistance 10", 1, 240_000, "24× Voracious Spider Shard"),
+  ];
+
+  const [row, ...rest] = groupToMax(tasks);
+  assert.equal(rest.length, 0);
+  assert.equal(row.name, "Arthropod Resistance", "named for the attribute, not the level");
+  assert.equal(row.xp, 4, "four levels left");
+  assert.equal(row.coins, 660_000);
+  assert.equal(row.note, "levels 7–10 · 66× Voracious Spider Shard");
+});
+
+test("a single remaining level reads as a level, not a range", () => {
+  const tasks = [task("attribute_ice_10", "Essence of Ice 10", 1, 240_000, "24× Glacite Walker Shard")];
+
+  const [row] = groupToMax(tasks);
+  assert.equal(row.name, "Essence of Ice");
+  assert.equal(row.note, "level 10 · 24× Glacite Walker Shard");
+});
+
+test("maxed rows rank on value, with the unbuyable ones last", () => {
+  const tasks = [
+    task("attribute_dear_1", "Dear 1", 1, 900_000, "1× Dear Shard"),
+    task("attribute_cheap_1", "Cheap 1", 1, 10_000, "1× Cheap Shard"),
+    task("attribute_untradeable_1", "Untradeable 1", 1, null, "1× Untradeable Shard"),
+  ];
+
+  assert.deepEqual(
+    groupToMax(tasks).map((r) => r.name),
+    ["Cheap", "Dear", "Untradeable"],
+  );
 });

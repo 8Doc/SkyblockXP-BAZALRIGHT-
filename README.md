@@ -33,6 +33,8 @@ This is a **min-cost knapsack**: minimise `sum(cost)` subject to `sum(xp) >= N`.
 ### B. Category browser
 Every category as its own panel: total XP still available, total coin cost, count of remaining tasks, and the tasks themselves sorted by coins/XP. This is the "I'm at the Abiphone anyway, what else can I buy here" view.
 
+Attribute shards get a **Group maxed** toggle in the panel. There are 181 attributes of ten levels each, and the per-level rows differ only in how many of the same shard they want, so listed individually they're 1,810 near-identical lines shown forty at a time. Grouped, each attribute is one row — the levels you're missing, the shards they add up to, and the price of the lot — because maxing an attribute is one decision, not ten. The grouping is built from the untruncated set, so it isn't assembled out of whichever forty levels survived the cut, and the XP floor is applied to the grouped row rather than to its levels.
+
 ### C. Batch plan
 The output of query A, regrouped by category/location rather than by efficiency rank, so the user does one trip per category. Order categories by total XP in the batch, descending.
 

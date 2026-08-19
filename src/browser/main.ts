@@ -487,8 +487,14 @@ function grindView(report: Report): string {
 
 function browserView(report: Report): string {
   const categories = report.browser
-    .map(({ category, summary, tasks, truncated }) => {
+    .map(({ category, summary, tasks, truncated, maxed, maxedTruncated }) => {
       const key = `browser:${category}`;
+      // Same toggled-key mechanism as the panels themselves, so the grouped view needs no
+      // event plumbing of its own.
+      const groupKey = `maxed:${category}`;
+      const isGrouped = maxed !== undefined && open.has(groupKey);
+      const hidden = isGrouped ? (maxedTruncated ?? 0) : truncated;
+
       const body = open.has(key)
         ? `<div class="group-body">
             ${
@@ -496,8 +502,22 @@ function browserView(report: Report): string {
                 ? `<p class="sub">${num(summary.pricedXp)} of ${num(summary.remainingXp)} remaining XP has a live price.</p>`
                 : ""
             }
-            <ul class="tasks">${tasks.map((t) => taskRow(t, true)).join("")}</ul>
-            ${truncated > 0 ? `<p class="sub">+${num(truncated)} more above the XP floor</p>` : ""}
+            ${
+              maxed !== undefined
+                ? `<p class="sub group-toggle">
+                    <button class="chip${isGrouped ? " on" : ""}" data-toggle="${groupKey}">Group maxed</button>
+                    <span class="dim">${
+                      isGrouped
+                        ? "one row per attribute — everything it takes to max it"
+                        : "one row per shard level"
+                    }</span>
+                  </p>`
+                : ""
+            }
+            <ul class="tasks">${
+              isGrouped ? maxed!.map(runRow).join("") : tasks.map((t) => taskRow(t, true)).join("")
+            }</ul>
+            ${hidden > 0 ? `<p class="sub">+${num(hidden)} more above the XP floor</p>` : ""}
           </div>`
         : "";
 
