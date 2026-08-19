@@ -1,22 +1,11 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
 import { coopProgress } from "../src/lib/profile";
 import { buildCatalog } from "../src/lib/catalog";
-import type { GameData } from "../src/lib/gameData";
+import { gameData } from "./gameDataFixture";
 import type { SkyblockProfile } from "../src/lib/profile";
 
-const d = (p: string) => JSON.parse(readFileSync(`data/${p}`, "utf8"));
-const data = {
-  skills: d("generated/skills.json"), collections: d("generated/collections.json"),
-  minions: d("generated/minions.json"), accessories: d("generated/accessories.json"),
-  magicalPower: d("curated/magical_power.json"), accessoryFamilies: d("curated/accessory_families.json"),
-  museum: d("generated/museum.json"), tasks: d("generated/tasks.json"), curves: d("generated/curves.json"),
-  travelScrolls: d("generated/travel_scrolls.json"), costs: d("generated/costs.json"),
-  petScore: d("curated/pet_score.json"), difficulty: d("generated/difficulty.json"),
-  attributeShards: d("generated/attributes.json"), bagUpgrades: d("curated/accessory_bag_upgrades.json"),
-  attributeLevels: d("curated/attribute_levels.json"), attributeApiKeys: d("curated/attribute_api_keys.json"),
-} as GameData;
+const data = gameData();
 
 const figLog = (data as unknown as { collections: { collections: { itemId: string; name: string; tiers: { tier: number; amountRequired: number }[] }[] } })
   .collections.collections.find((c) => c.itemId === "FIG_LOG")!;

@@ -1,0 +1,284 @@
+{
+  "generatedAt": "2026-08-19T16:30:41.973Z",
+  "source": "https://hypixelskyblock.minecraft.wiki/api.php",
+  "npcs": {
+    "Agatha": {
+      "name": "Agatha",
+      "location": "Murkwater Loch",
+      "quest": null,
+      "coords": {
+        "x": -648,
+        "y": 89,
+        "z": -3
+      }
+    },
+    "Banker": {
+      "name": "Banker",
+      "location": "Bank",
+      "quest": "Saving Up",
+      "coords": {
+        "x": -29,
+        "y": 72,
+        "z": -38
+      }
+    },
+    "Beth": {
+      "name": "Beth",
+      "location": "Desert Settlement",
+      "quest": "24px Shady Jake",
+      "coords": {
+        "x": 164,
+        "y": 77,
+        "z": -359
+      }
+    },
+    "Charlie": {
+      "name": "Charlie",
+      "location": "Birch Park",
+      "quest": "A Helping Hand",
+      "coords": {
+        "x": -277,
+        "y": 80,
+        "z": -17
+      }
+    },
+    "David": {
+      "name": "David Hunterborough",
+      "location": "Tangleburg",
+      "quest": null,
+      "coords": {
+        "x": -593,
+        "y": 114,
+        "z": -13
+      }
+    },
+    "Elle": {
+      "name": "Elle",
+      "location": "Stronghold",
+      "quest": "Warrior's Quest",
+      "coords": {
+        "x": -364,
+        "y": 80,
+        "z": -476
+      }
+    },
+    "Enid": {
+      "name": "Fisherwoman Enid",
+      "location": "Village",
+      "quest": null,
+      "coords": {
+        "x": 42,
+        "y": 70,
+        "z": -22
+      }
+    },
+    "Farmer": {
+      "name": "Farmer Rigby",
+      "location": "Farm",
+      "quest": "First Harvest",
+      "coords": {
+        "x": 62,
+        "y": 72,
+        "z": -147
+      }
+    },
+    "Farmhand": {
+      "name": "Farmhand",
+      "location": "The Barn",
+      "quest": "Back at the Barnyard",
+      "coords": {
+        "x": 144,
+        "y": 73,
+        "z": -240
+      }
+    },
+    "Fisherman": {
+      "name": "Fisherman Gerald",
+      "location": "Fishing Outpost",
+      "quest": null,
+      "coords": {
+        "x": 119,
+        "y": 71,
+        "z": -32
+      }
+    },
+    "Greenhouse Carpenter": {
+      "name": "Carpenter",
+      "location": "Foraging Camp",
+      "quest": "Carpentry",
+      "coords": {
+        "x": -137,
+        "y": 74,
+        "z": -41
+      }
+    },
+    "Guber": {
+      "name": "Guber",
+      "location": "The End",
+      "quest": null,
+      "coords": {
+        "x": -494,
+        "y": 121,
+        "z": -241
+      }
+    },
+    "Gulliver": {
+      "name": "Gulliver",
+      "location": "Jerry's Workshop",
+      "quest": null,
+      "coords": {
+        "x": 69,
+        "y": 105,
+        "z": 34
+      }
+    },
+    "Gustave": {
+      "name": "Gustave",
+      "location": "Spruce Woods",
+      "quest": "Woods Racing",
+      "coords": {
+        "x": -363,
+        "y": 89,
+        "z": 45
+      }
+    },
+    "Hattie": {
+      "name": "Hattie",
+      "location": "Backwater Bayou",
+      "quest": null,
+      "coords": {
+        "x": 18,
+        "y": 71,
+        "z": 15
+      }
+    },
+    "Kelly": {
+      "name": "Kelly",
+      "location": "Spruce Woods",
+      "quest": "A Helping Hand",
+      "coords": {
+        "x": -350,
+        "y": 94,
+        "z": 34
+      }
+    },
+    "Lapis Miner": {
+      "name": "Lapis Miner",
+      "location": "Lapis Quarry",
+      "quest": "Helpful Miner",
+      "coords": {
+        "x": -10,
+        "y": 120,
+        "z": 36
+      }
+    },
+    "Lazy Miner": {
+      "name": "Lazy Miner",
+      "location": "Gold Mine",
+      "quest": "Lost And Found",
+      "coords": {
+        "x": -11,
+        "y": 78,
+        "z": -337
+      }
+    },
+    "Librarian": {
+      "name": "Librarian",
+      "location": "Library",
+      "quest": "Library Card",
+      "coords": {
+        "x": -68,
+        "y": 70,
+        "z": -79
+      }
+    },
+    "Lumberjack": {
+      "name": "Lumber Jack",
+      "location": "Foraging Camp",
+      "quest": "Foraging Tutorial",
+      "coords": {
+        "x": -123,
+        "y": 73,
+        "z": -29
+      }
+    },
+    "Melody": {
+      "name": "Melody",
+      "location": "Melody's Plateau",
+      "quest": null,
+      "coords": {
+        "x": -411,
+        "y": 109,
+        "z": 73
+      }
+    },
+    "Molbert": {
+      "name": "Molbert",
+      "location": "Jungle Island",
+      "quest": "Mole Problems",
+      "coords": {
+        "x": -465,
+        "y": 120,
+        "z": -42
+      }
+    },
+    "Redstone Miner": {
+      "name": "Redstone Miner",
+      "location": "Pigmen's Den",
+      "quest": "The Redstone Maniac",
+      "coords": {
+        "x": 25,
+        "y": 104,
+        "z": 17
+      }
+    },
+    "Ryan": {
+      "name": "Ryan",
+      "location": "Trials of Fire",
+      "quest": "Trials of Fire",
+      "coords": {
+        "x": -364,
+        "y": 103,
+        "z": -90
+      }
+    },
+    "Sam": {
+      "name": "Sam",
+      "location": "Private Island",
+      "quest": "Learning to Compost",
+      "coords": {
+        "x": 9,
+        "y": 100,
+        "z": 42
+      }
+    },
+    "Swoop": {
+      "name": "Swoop",
+      "location": "Tangleburg",
+      "quest": null,
+      "coords": {
+        "x": -579,
+        "y": 114,
+        "z": -23
+      }
+    },
+    "Teddy": {
+      "name": "Teddy",
+      "location": "North Reaches",
+      "quest": null,
+      "coords": {
+        "x": -656,
+        "y": 115,
+        "z": -39
+      }
+    }
+  },
+  "objectives": {
+    "OBJECTIVE_BETH_PULL_LEVER": "Beth",
+    "OBJECTIVE_MEET_BETH_AT_LAB": "Beth",
+    "OBJECTIVE_GIVE_SAM_WHEAT": "Sam",
+    "OBJECTIVE_GIVE_SAM_COMPOST": "Sam",
+    "OBJECTIVE_GIVE_PICKAXE_LAPIS_MINER": "Lapis Miner",
+    "OBJECTIVE_HELP_ELLE": "Elle"
+  }
+}

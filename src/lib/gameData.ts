@@ -172,6 +172,8 @@ export type GameData = {
   attributeLevels: { perLevel: Record<string, number[]> };
   /** Bridges wiki attribute names to the ids the profile actually uses. */
   attributeApiKeys: { wordAliases: Record<string, string>; droppableSuffixes: string[] };
+  /** Where the story objectives send you: real name, island and coordinates per NPC. */
+  npcs: { npcs: Record<string, NpcEntry>; objectives: Record<string, string> };
 };
 
 /** What the nth accessory bag upgrade costs. */
@@ -328,3 +330,11 @@ export function auctionNameIndex(data: GameData): Map<string, string> {
   for (const s of data.travelScrolls.scrolls) index.set(s.name.toLowerCase(), s.itemId);
   return index;
 }
+
+/** One NPC, as the wiki's infobox describes them. */
+export type NpcEntry = {
+  name: string;
+  location: string | null;
+  quest: string | null;
+  coords: { x: number; y: number; z: number } | null;
+};

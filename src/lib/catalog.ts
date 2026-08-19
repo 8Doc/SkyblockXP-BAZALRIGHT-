@@ -11,6 +11,7 @@ import {
   type BagItem,
   type BagState,
   type GameData,
+  type NpcEntry,
 } from "./gameData";
 
 /** "DRAGON_ESSENCE_ONE_PUNCH_3" -> "Dragon essence · one punch 3" */
@@ -291,12 +292,12 @@ export function buildCatalog(
     tasks.push({
       id: task.id,
       category: task.category as Category,
-      name: prettyTaskName(task.id),
+      name: objectiveName(task.id, data),
       xp: task.xp,
       requires: [],
       cost: discreteCost(task.id, data, scrollFor),
       repeatable: false,
-      note: task.rule,
+      note: directionsTo(task.id, data) ?? task.rule,
     });
     if (completed.has(task.id)) done.add(task.id);
   }
@@ -837,4 +838,57 @@ function collectedFrom(member: ProfileMember): Map<string, number> {
     if (typeof amount === "number") out.set(item, amount);
   }
   return out;
+}
+
+/**
+ * "OBJECTIVE_TALK_TO_FARMER" -> "Talk to Farmer Rigby".
+ *
+ * The ids are bare slugs harvested off live profiles, so the fallback prettifier rendered them
+ * as "Objective talk to farmer" — which farmer, and where, being left to the reader. Where the
+ * wiki knows the NPC, the real name goes in; the island and coordinates go in the note.
+ */
+function objectiveName(id: string, data: GameData): string {
+  if (!id.startsWith("OBJECTIVE_")) return prettyTaskName(id);
+  const npc = npcFor(id, data);
+  if (npc && id.startsWith("OBJECTIVE_TALK_TO_")) return `Talk to ${npc.name}`;
+
+  const label = prettyTaskName(id.replace(/^OBJECTIVE_/, ""));
+  if (!npc) return label;
+  // "Give sam wheat" -> "Give Sam wheat": the slug flattened the name, so put it back rather
+  // than leaving a character looking like a noun.
+  const key = data.npcs.objectives[id];
+  return key ? label.replace(new RegExp(key, "i"), npc.name) : label;
+}
+
+/** "Farm · 62, 72, -147" — where to actually go. */
+function directionsTo(id: string, data: GameData): string | null {
+  const npc = npcFor(id, data);
+  if (!npc) return null;
+  const where = npc.coords ? `${npc.coords.x}, ${npc.coords.y}, ${npc.coords.z}` : null;
+  const parts = [npc.location, where].filter(Boolean);
+  return parts.length ? parts.join(" · ") : null;
+}
+
+function npcFor(id: string, data: GameData): NpcEntry | null {
+  // Named outright by the objective table, or derivable from a talk-to slug.
+  const listed = data.npcs.objectives[id];
+  if (listed) return data.npcs.npcs[listed] ?? null;
+  if (!id.startsWith("OBJECTIVE_TALK_TO_")) return null;
+  return data.npcs.npcs[npcKeyFrom(id)] ?? null;
+}
+
+/**
+ * The key the NPC table is built under. Mirrors scripts/fetch-npcs.mjs: the trailing number on
+ * an objective is a quest step, not part of the character's name.
+ */
+function npcKeyFrom(id: string): string {
+  return id
+    .replace(/^OBJECTIVE_TALK_TO_/, "")
+    .replace(/_\d+$/, "")
+    .replace(/_NEW$/, "")
+    .replace(/^LUMBER_JACK$/, "LUMBERJACK")
+    .split("_")
+    .filter(Boolean)
+    .map((word) => word.charAt(0) + word.slice(1).toLowerCase())
+    .join(" ");
 }
