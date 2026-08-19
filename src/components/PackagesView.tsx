@@ -4,7 +4,8 @@ import { useState } from "react";
 import type { PackagePlan } from "@/lib/types";
 import { CATEGORY_LABELS } from "@/lib/types";
 import { coins, num } from "@/lib/format";
-import { TaskRow } from "./TaskRow";
+import { groupTaskRuns } from "@/lib/grouping";
+import { TaskRunRow } from "./TaskRunRow";
 
 /**
  * Successive fixed-size shopping trips. Each card is a budget you could actually spend in one
@@ -105,8 +106,8 @@ export function PackagesView({ packages: plan }: { packages: PackagePlan }) {
                       </span>
                     </div>
                     <ul>
-                      {group.tasks.map((task) => (
-                        <TaskRow key={task.id} task={task} showBundle={false} />
+                      {groupTaskRuns(group.tasks).map((run) => (
+                        <TaskRunRow key={run.key} run={run} />
                       ))}
                     </ul>
                   </div>

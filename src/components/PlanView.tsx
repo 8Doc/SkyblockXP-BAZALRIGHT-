@@ -4,7 +4,8 @@ import { useState } from "react";
 import type { Plan } from "@/lib/types";
 import { CATEGORY_LABELS, XP_PER_LEVEL } from "@/lib/types";
 import { coins, num } from "@/lib/format";
-import { TaskRow } from "./TaskRow";
+import { groupTaskRuns } from "@/lib/grouping";
+import { TaskRunRow } from "./TaskRunRow";
 
 /** Query C: the plan, regrouped by category so it's one trip per interface. */
 export function PlanView({ plan, currentXp }: { plan: Plan; currentXp: number }) {
@@ -45,8 +46,8 @@ export function PlanView({ plan, currentXp }: { plan: Plan; currentXp: number })
           </button>
           {open === group.category && (
             <ul className="border-t border-line bg-panel2/40">
-              {group.tasks.map((task) => (
-                <TaskRow key={task.id} task={task} showBundle={false} />
+              {groupTaskRuns(group.tasks).map((run) => (
+                <TaskRunRow key={run.key} run={run} />
               ))}
             </ul>
           )}

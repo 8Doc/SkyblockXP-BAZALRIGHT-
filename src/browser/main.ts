@@ -3,6 +3,7 @@ import { coins, num, rate } from "../lib/format";
 import { coopProgress, type BinIndex, type GardenState, type MuseumState, type ProfileMember, type SkyblockProfile, type BazaarProduct } from "../lib/profile";
 import { petsFrom } from "../lib/auctions";
 import { buildCatalog, type Catalog } from "../lib/catalog";
+import { groupTaskRuns, type TaskRun } from "../lib/grouping";
 import { buildReport, type Report } from "../lib/report";
 import type { PriceBook } from "../lib/resolve";
 import { CATEGORIES, CATEGORY_LABELS, XP_PER_LEVEL, type Category, type ResolvedTask } from "../lib/types";
@@ -265,6 +266,26 @@ function taskRow(task: ResolvedTask, showBundle: boolean): string {
   </li>`;
 }
 
+/**
+ * One line of a plan, where a "line" may be several tiers of the same thing folded together —
+ * "Arthropod Resistance 1–6, 30× Voracious Spider Shard" rather than six near-identical rows.
+ */
+function runRow(run: TaskRun): string {
+  const merged = run.tasks.length > 1;
+  const efficiency = run.coins !== null && run.xp > 0 ? run.coins / run.xp : null;
+
+  return `<li class="task">
+    <span class="task-name">${escapeHtml(run.name)}${merged ? `<span class="count">×${run.tasks.length}</span>` : ""}${
+      run.note ? `<span class="note">${escapeHtml(run.note)}</span>` : ""
+    }</span>
+    <span class="task-xp">${run.xp} xp</span>
+    <span class="task-cost">${run.coins === null ? `<span class="dim">no price</span>` : coins(run.coins)}</span>
+    <span class="task-rate">${rate(efficiency)}</span>
+  </li>`;
+}
+
+const runRows = (tasks: ResolvedTask[]): string => groupTaskRuns(tasks).map(runRow).join("");
+
 function planView(report: Report): string {
   const { plan } = report;
   const currentLevel = Math.floor(report.progress.xp / XP_PER_LEVEL);
@@ -295,7 +316,7 @@ function planView(report: Report): string {
         </button>
         ${
           open.has(`plan:${group.category}`)
-            ? `<ul class="tasks">${group.tasks.map((t) => taskRow(t, false)).join("")}</ul>`
+            ? `<ul class="tasks">${runRows(group.tasks)}</ul>`
             : ""
         }
       </div>`,
@@ -370,7 +391,7 @@ function packagesView(report: Report): string {
                       <div class="pkg-group-head">${CATEGORY_LABELS[group.category]}
                         <span class="dim">${num(group.xp)} xp · ${coins(group.coins)}</span>
                       </div>
-                      <ul class="tasks">${group.tasks.map((t) => taskRow(t, false)).join("")}</ul>
+                      <ul class="tasks">${runRows(group.tasks)}</ul>
                     </div>`,
                   )
                   .join("")}

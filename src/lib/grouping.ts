@@ -1,0 +1,136 @@
+import type { ResolvedTask } from "./types";
+
+/**
+ * Collapses consecutive tiers of the same thing into one line.
+ *
+ * The solver picks tiers individually — it has to, since each is separately priced and the
+ * cheapest cut-off might land anywhere in the chain. But a plan that reads
+ *
+ *     Arthropod Resistance 1    1 xp   9.5k
+ *     Arthropod Resistance 2    1 xp    28k
+ *     ... four more ...
+ *
+ * is six lines describing one trip to one place. As a shopping list it wants to say "levels 1-6,
+ * 30 shards, 66k" on a single row. This is presentation only: the underlying tasks, their
+ * prices and the solver's choices are untouched.
+ */
+
+export type TaskRun = {
+  /** Stable key for rendering. */
+  key: string;
+  /** "Arthropod Resistance 1-6", or just the task name when nothing merged. */
+  name: string;
+  /** The tasks folded into this row, in tier order. */
+  tasks: ResolvedTask[];
+  xp: number;
+  /** Summed cost, or null if any member is unpriced. */
+  coins: number | null;
+  /** Combined materials where every tier wants the same thing — "30x Voracious Spider Shard". */
+  note?: string;
+};
+
+/** Tier suffix on a task id: attribute_X_6, minion_GRAVEL_11, DRAGON_ESSENCE_Y_3. */
+const TIER_SUFFIX = /_(\d+)$/;
+
+/** The chain a task belongs to — its id with the tier stripped. */
+function familyOf(task: ResolvedTask): string | null {
+  const match = TIER_SUFFIX.exec(task.id);
+  return match ? task.id.slice(0, match.index) : null;
+}
+
+const tierOf = (task: ResolvedTask): number => Number(TIER_SUFFIX.exec(task.id)?.[1] ?? 0);
+
+/** "Arthropod Resistance 6" -> { base: "Arthropod Resistance", label: "6" } */
+function splitName(name: string): { base: string; label: string } {
+  const at = name.lastIndexOf(" ");
+  return at < 0 ? { base: name, label: "" } : { base: name.slice(0, at), label: name.slice(at + 1) };
+}
+
+/** "3x Voracious Spider Shard" -> { qty: 3, material: "Voracious Spider Shard" } */
+function splitNote(note: string | undefined): { qty: number; material: string } | null {
+  const match = /^(\d+)[x×]\s*(.+)$/.exec(note ?? "");
+  return match ? { qty: Number(match[1]), material: match[2].trim() } : null;
+}
+
+/**
+ * Merge runs of the same chain. Order is preserved: a run takes the position of its first
+ * member, so the cheapest-first ordering the solver produced still reads correctly.
+ */
+export function groupTaskRuns(tasks: ResolvedTask[]): TaskRun[] {
+  const runs: TaskRun[] = [];
+  const byFamily = new Map<string, ResolvedTask[]>();
+
+  for (const task of tasks) {
+    const family = familyOf(task);
+    if (family === null) continue;
+    const list = byFamily.get(family);
+    if (list) list.push(task);
+    else byFamily.set(family, [task]);
+  }
+
+  const emitted = new Set<string>();
+
+  for (const task of tasks) {
+    const family = familyOf(task);
+    const members = family === null ? null : byFamily.get(family);
+
+    // Alone in its family, or not tiered at all: render as itself.
+    if (!family || !members || members.length < 2) {
+      runs.push({
+        key: task.id,
+        name: task.name,
+        tasks: [task],
+        xp: task.xp,
+        coins: task.coins,
+        note: task.note,
+      });
+      continue;
+    }
+
+    if (emitted.has(family)) continue;
+    emitted.add(family);
+
+    const ordered = [...members].sort((a, b) => tierOf(a) - tierOf(b));
+    const first = splitName(ordered[0].name);
+    const last = splitName(ordered[ordered.length - 1].name);
+
+    const coins = ordered.some((t) => t.coins === null)
+      ? null
+      : ordered.reduce((sum, t) => sum + (t.coins ?? 0), 0);
+
+    // If every tier buys the same material, the run can state the total to buy.
+    let note: string | undefined;
+    const parts = ordered.map((t) => splitNote(t.note));
+    if (parts.every((p) => p && p.material === parts[0]!.material)) {
+      const total = parts.reduce((sum, p) => sum + p!.qty, 0);
+      note = `${ordered.length} levels · ${total}× ${parts[0]!.material}`;
+    } else {
+      note = `${ordered.length} levels`;
+    }
+
+    // A dash range may only be used when the tiers really are consecutive. They often aren't:
+    // the task table is built from ids harvested off live players, so a perk nobody sampled had
+    // at tier 3 simply has no tier 3, and writing "1–5" over tiers 1 and 5 would invent three
+    // purchases that aren't in the plan.
+    const tiers = ordered.map(tierOf);
+    const contiguous = tiers.every((tier, i) => i === 0 || tier === tiers[i - 1] + 1);
+    const labels = ordered.map((t) => splitName(t.name).label);
+    const sharedBase = first.base === last.base && labels.every(Boolean);
+
+    let name: string;
+    if (!sharedBase) name = `${ordered[0].name} +${ordered.length - 1} more`;
+    else if (contiguous) name = `${first.base} ${first.label}–${last.label}`;
+    else name = `${first.base} ${labels.join(", ")}`;
+
+    runs.push({
+      key: family,
+      name,
+      tasks: ordered,
+      xp: ordered.reduce((sum, t) => sum + t.xp, 0),
+      coins,
+      note,
+    });
+  }
+
+  return runs;
+}

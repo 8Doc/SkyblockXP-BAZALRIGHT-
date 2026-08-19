@@ -157,6 +157,14 @@ button:disabled { opacity: 0.45; cursor: default; }
 .task-cost { width: 90px; text-align: right; font-variant-numeric: tabular-nums; }
 .task-rate { width: 100px; text-align: right; color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
 .tag, .note { margin-left: 6px; font-size: 12px; color: var(--muted); }
+.count {
+  margin-left: 6px;
+  padding: 0 4px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  font-size: 11px;
+  color: var(--muted);
+}
 
 .unmodelled { list-style: none; margin: 8px 0 0; padding: 0; font-size: 12px; }
 .unmodelled li { margin-bottom: 5px; }
