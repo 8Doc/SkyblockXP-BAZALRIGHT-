@@ -543,8 +543,8 @@ function browserView(report: Report): string {
                     <button class="chip${isGrouped ? " on" : ""}" data-toggle="${groupKey}">Group maxed</button>
                     <span class="dim">${
                       isGrouped
-                        ? "one row per attribute — everything it takes to max it"
-                        : "one row per shard level"
+                        ? `one row per ${GROUP_NOUN[category] ?? "thing"} — everything it takes to max it`
+                        : `one row per ${GROUP_STEP[category] ?? "level"}`
                     }</span>
                   </p>`
                 : ""
@@ -961,3 +961,13 @@ function render(): void {
 
 renderShell();
 render();
+
+/** What a grouped row stands for, and what an ungrouped one does, per category. */
+const GROUP_NOUN: Partial<Record<Category, string>> = {
+  attributes: "attribute",
+  essence_shop: "perk",
+};
+const GROUP_STEP: Partial<Record<Category, string>> = {
+  attributes: "shard level",
+  essence_shop: "perk level",
+};

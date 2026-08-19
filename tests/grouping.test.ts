@@ -243,3 +243,17 @@ test("a row wholly covered further up the list disappears", () => {
   assert.equal(stepped.length, 1, "level 5 adds nothing once 2–10 is listed");
   assert.equal(stepped[0].bundleSpan, "Extreme Pressure 2–10");
 });
+
+test("a grouped range never spans tiers it doesn't contain", () => {
+  // Essence perk ids are harvested off live players, so a tier nobody sampled simply isn't
+  // there. "levels 1–10" over two of them would invent eight purchases.
+  const tasks = [
+    task("CRIMSON_ESSENCE_FUNGUS_FORTUNA_1", "Crimson essence fungus fortuna 1", 2, 96_000),
+    task("CRIMSON_ESSENCE_FUNGUS_FORTUNA_10", "Crimson essence fungus fortuna 10", 12, 480_000),
+  ];
+
+  const [row] = groupToMax(tasks);
+  assert.equal(row.tasks.length, 2);
+  assert.equal(row.note, "2 levels", "a count, not a range it cannot back up");
+  assert.equal(row.xp, 14);
+});

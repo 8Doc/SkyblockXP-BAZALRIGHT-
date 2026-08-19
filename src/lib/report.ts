@@ -69,11 +69,12 @@ const BROWSER_LIMIT = 40;
 const CHEAPEST_LIMIT = 300;
 
 /**
- * Categories that read better collapsed to one row per thing. Attributes are the clear case:
- * 181 of them, ten levels each, every level fed by the same shard, so the per-level rows carry
- * almost no information the grouped row doesn't.
+ * Categories that read better collapsed to one row per thing — the ones built from long ladders
+ * whose rungs differ only in how many of the same input they want, so the per-level rows carry
+ * almost no information the grouped row doesn't. Attributes are 181 things of ten levels each;
+ * the essence shop is the same shape, a perk at a time.
  */
-const GROUPABLE = new Set<Category>(["attributes"]);
+const GROUPABLE = new Set<Category>(["attributes", "essence_shop"]);
 
 export function buildReport(catalog: Catalog, book: PriceBook, options: ReportOptions): Report {
   const plan = solve(catalog.tasks, catalog.done, book, options);

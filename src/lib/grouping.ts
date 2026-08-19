@@ -205,13 +205,15 @@ function sumOf(key: string, members: ResolvedTask[]): TaskRun {
   // One level left of ten still belongs to its attribute, so it's named for the attribute and
   // says which level — not "Essence of Ice 10", which reads like a thing rather than a step.
   const noun = TIER_NOUN[ordered[0].category] ?? "tiers";
-  // A range needs both ends to be named. Some lines are numbered only in their ids — the museum
-  // drills are MITHRIL_DRILL_1 and _2 but read "SX-R226" and "SX-R326" — and "tiers –" is worse
-  // than saying how many there are.
+  // A range needs both ends named *and* every rung between them present. Task tables built by
+  // harvesting live players can be missing a tier nobody sampled, and "levels 1–10" over eight
+  // of them invents two purchases. Where either fails, say how many there are instead.
+  const ranks = ordered.map(tierRank);
+  const contiguous = ranks.every((rank, i) => i === 0 || rank === ranks[i - 1] + 1);
   const span =
     ordered.length === 1
       ? `${noun.replace(/s$/, "")} ${first.label}`
-      : first.label && last.label
+      : first.label && last.label && contiguous
         ? `${noun} ${first.label}–${last.label}`
         : `${ordered.length} ${noun}`;
   const material = totalMaterial(ordered);
