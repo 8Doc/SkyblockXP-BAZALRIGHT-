@@ -189,7 +189,8 @@ export function buildReport(catalog: Catalog, book: PriceBook, options: ReportOp
       modelledEarnedXp:
         resolved.filter((t) => t.done).reduce((s, t) => s + t.xp, 0) +
         catalog.earnedOutsideTasks.magicalPower +
-        catalog.earnedOutsideTasks.petScore,
+        catalog.earnedOutsideTasks.petScore +
+        catalog.earnedOutsideTasks.bestiary,
       modelledRemainingXp: achievableXp(resolved.filter((t) => !t.done)),
     },
     plan,

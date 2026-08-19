@@ -77,7 +77,7 @@ export type Catalog = {
    * out understated coverage by thousands — it read as missing sources when the sources were
    * modelled and merely uncounted.
    */
-  earnedOutsideTasks: { magicalPower: number; petScore: number };
+  earnedOutsideTasks: { magicalPower: number; petScore: number; bestiary: number };
   /** Category-level notes for anything we can't model as tasks yet. */
   unmodelled: { category: Category; note: string; earnedXp?: number; totalXp?: number }[];
   meta: {
@@ -89,8 +89,7 @@ export type Catalog = {
 export const UNMODELLED: { category: Category; note: string; totalXp?: number }[] = [
   {
     category: "misc",
-    note: "Bestiary is the largest single gap: ~4,370 XP. It needs per-mob kill brackets, which the wiki has but only as a bracket-multiplier table — the mob list itself has to be assembled from the profile's own bestiary keys.",
-    totalXp: 4370,
+    note: "Bestiary XP you have already earned is credited from the profile's own milestone count, so it no longer reads as a missing source. What is not offered is the work still to do: the tiers left need each family's kill bracket, and the top tiers want up to a million kills of one mob, so there is no honest way to rank them against a purchase.",
   },
   {
     category: "misc",
@@ -739,6 +738,7 @@ export function buildCatalog(
       magicalPower: bagState.computedMp,
       // The highest score reached is what the game paid out on, not what the pets are worth now.
       petScore: (member.leveling?.highest_pet_score ?? 0) * 3,
+      bestiary: bestiaryXp(member),
     },
     unmodelled: UNMODELLED.map((u) =>
       u.category === "attributes" && strandedAttributes > 0
@@ -950,4 +950,22 @@ function npcKeyFrom(id: string): string {
     .filter(Boolean)
     .map((word) => word.charAt(0) + word.slice(1).toLowerCase())
     .join(" ");
+}
+
+/**
+ * Bestiary XP already earned, from the profile's own milestone count.
+ *
+ * Two rewards stack. Every family tier pays 1 SkyBlock XP, and every tenth family tier also
+ * pays a milestone reward worth 10 — so ten tiers are worth twenty XP between them, and the
+ * count of milestone rewards is all that is needed.
+ *
+ * `last_claimed_milestone` is that count rather than a tier count, which is worth stating
+ * because the field name doesn't say so. Read as tiers it would put a profile with 452 tracked
+ * families and 856 mob entries on 314 tiers, below what the *easiest* kill bracket gives that
+ * many families; read as milestone rewards it lands at ~3,140 tiers, inside the range every
+ * bracket allows.
+ */
+function bestiaryXp(member: ProfileMember): number {
+  const milestones = member.bestiary?.milestone?.last_claimed_milestone ?? 0;
+  return milestones * 20;
 }

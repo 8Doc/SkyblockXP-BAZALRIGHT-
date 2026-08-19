@@ -1,6 +1,7 @@
 /** The shape of the Hypixel profile fields the planner reads. Shared by both front ends. */
 
 export type ProfileMember = {
+  bestiary?: { milestone?: { last_claimed_milestone?: number } };
   leveling?: {
     experience?: number;
     completed_tasks?: string[];

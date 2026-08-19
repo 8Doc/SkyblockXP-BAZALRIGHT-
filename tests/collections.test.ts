@@ -114,3 +114,13 @@ test("magical power and pet score count as XP already earned", () => {
   assert.equal(earnedOutsideTasks.petScore, 289 * 3, "the highest score reached is what paid out");
   assert.equal(earnedOutsideTasks.magicalPower, 0, "no bag decoded here, so nothing to credit");
 });
+
+test("bestiary XP is credited from the milestone count", () => {
+  // Ten family tiers are worth 20 XP between them: 1 apiece, plus a milestone reward of 10.
+  const { earnedOutsideTasks } = catalogFor({ bestiary: { milestone: { last_claimed_milestone: 314 } } });
+  assert.equal(earnedOutsideTasks.bestiary, 6_280);
+});
+
+test("a profile that has never opened the bestiary earns nothing from it", () => {
+  assert.equal(catalogFor({}).earnedOutsideTasks.bestiary, 0);
+});
