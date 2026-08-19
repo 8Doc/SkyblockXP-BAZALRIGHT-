@@ -1,7 +1,7 @@
 import type { Catalog } from "./catalog";
 import { resolveTasks, type PriceBook } from "./resolve";
 import { solve, solvePackages, type SolveOptions } from "./solver";
-import { groupToMax, type TaskRun } from "./grouping";
+import { groupToMax, progressive, type TaskRun } from "./grouping";
 import {
   CATEGORIES,
   XP_PER_LEVEL,
@@ -87,7 +87,7 @@ export function buildReport(catalog: Catalog, book: PriceBook, options: ReportOp
     packageSize: options.packageSize,
     packageCount: options.packageCount,
   });
-  const { tasks: resolved } = resolveTasks(catalog.tasks, catalog.done, book);
+  const { tasks: resolved, byId } = resolveTasks(catalog.tasks, catalog.done, book);
 
   /* --------------------------------------------- query B: category browser */
 
@@ -131,11 +131,15 @@ export function buildReport(catalog: Catalog, book: PriceBook, options: ReportOp
       ? groupToMax(remaining).filter((run) => run.xp >= options.minXp)
       : null;
 
+    // Trimmed to a sequence: a chain's later rows carry on from where its earlier ones stopped
+    // instead of restating the same purchase from the same starting tier.
+    const stepped = progressive(shown, byId);
+
     browser.push({
       category,
       summary,
-      tasks: shown.slice(0, BROWSER_LIMIT),
-      truncated: Math.max(shown.length - BROWSER_LIMIT, 0),
+      tasks: stepped.slice(0, BROWSER_LIMIT),
+      truncated: Math.max(stepped.length - BROWSER_LIMIT, 0),
       ...(maxed
         ? { maxed: maxed.slice(0, BROWSER_LIMIT), maxedTruncated: Math.max(maxed.length - BROWSER_LIMIT, 0) }
         : {}),
@@ -162,7 +166,7 @@ export function buildReport(catalog: Catalog, book: PriceBook, options: ReportOp
       return a.efficiency - b.efficiency;
     });
 
-  const flat = buyable.filter((t) => t.bundleXp >= options.minXp);
+  const flat = progressive(buyable.filter((t) => t.bundleXp >= options.minXp), byId);
   // Grouped from the unfiltered set for the same reason the browser does it: a folded row is a
   // whole purchase, so it can't be assembled out of whichever tiers cleared the floor on their
   // own. The floor then applies to the folded row.

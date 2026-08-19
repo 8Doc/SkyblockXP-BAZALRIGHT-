@@ -294,3 +294,80 @@ function totalMaterial(tasks: ResolvedTask[]): string | null {
   if (!parts.every((p) => p && p.material === parts[0]!.material)) return null;
   return `${parts.reduce((sum, p) => sum + p!.qty, 0)}× ${parts[0]!.material}`;
 }
+
+/**
+ * Make a ranked list read as a sequence rather than a menu.
+ *
+ * Every tier of a chain is its own task, and each one drags the tiers below it, so a ranked list
+ * shows the same purchase over and over from the same starting point:
+ *
+ *     Extreme Pressure 2–6   5 levels · 16× Lumisquid Shard
+ *     Extreme Pressure 2–7   6 levels · 21× Lumisquid Shard
+ *     Extreme Pressure 2–8   7 levels · 27× Lumisquid Shard
+ *
+ * Those are three ways to describe one decision, and rows two and three re-sell the levels row
+ * one already bought. Read top to bottom — which is how a shopping list is read — the totals are
+ * nonsense.
+ *
+ * So each row is trimmed to what its chain hasn't already covered further up the list: 2–6, then
+ * 7, then 8. A row left with nothing to add disappears. Costs, XP and shard counts are recomputed
+ * over the trimmed span, so the numbers describe the row actually shown.
+ */
+export function progressive(tasks: ResolvedTask[], byId: Map<string, ResolvedTask>): ResolvedTask[] {
+  const covered = new Set<string>();
+  const out: ResolvedTask[] = [];
+
+  for (const task of tasks) {
+    const steps = [...task.bundle, task.id];
+    const remaining = steps.filter((id) => !covered.has(id));
+    // Wholly contained in something already listed: it adds nothing a reader hasn't seen.
+    if (!remaining.includes(task.id)) continue;
+    for (const id of remaining) covered.add(id);
+    // Untouched — either nothing above it shared the chain, or it never had prerequisites.
+    if (remaining.length === steps.length) {
+      out.push(task);
+      continue;
+    }
+    out.push(trimTo(task, remaining, byId));
+  }
+
+  return out;
+}
+
+/** Re-price a row against only the steps it still contributes. */
+function trimTo(task: ResolvedTask, remaining: string[], byId: Map<string, ResolvedTask>): ResolvedTask {
+  const members = remaining.map((id) => byId.get(id)).filter((t): t is ResolvedTask => Boolean(t));
+  if (!members.length) return task;
+
+  const coins = members.some((m) => m.coins === null) ? null : members.reduce((sum, m) => sum + (m.coins ?? 0), 0);
+  const xp = members.reduce((sum, m) => sum + m.xp, 0);
+  const first = splitTier(members[0].name);
+  const last = splitTier(members[members.length - 1].name);
+  const material = totalMaterial(members);
+
+  const span =
+    members.length > 1 && first.base === last.base && first.label && last.label
+      ? `${first.base} ${first.label}–${last.label}`
+      : undefined;
+  const noun = TIER_NOUN[task.category] ?? "tiers";
+  const note =
+    members.length > 1
+      ? material
+        ? `${members.length} ${noun} · ${material}`
+        : `${members.length} ${noun}`
+      : members[0].note;
+
+  return {
+    ...task,
+    // The row now *is* its remaining steps, so the bundle figures and the plain ones agree.
+    bundle: remaining.filter((id) => id !== task.id),
+    coins,
+    bundleCoins: coins,
+    bundleXp: xp,
+    efficiency: coins !== null && xp > 0 ? coins / xp : null,
+    bundleSpan: span,
+    bundleNote: members.length > 1 ? note : undefined,
+    note: members.length > 1 ? task.note : members[0].note,
+    name: members.length === 1 ? members[0].name : task.name,
+  };
+}
