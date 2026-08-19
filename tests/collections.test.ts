@@ -10,9 +10,13 @@ const data = gameData();
 const figLog = (data as unknown as { collections: { collections: { itemId: string; name: string; tiers: { tier: number; amountRequired: number }[] }[] } })
   .collections.collections.find((c) => c.itemId === "FIG_LOG")!;
 
-function catalogFor(member: Record<string, unknown>, profile?: SkyblockProfile) {
+function catalogFor(
+  member: Record<string, unknown>,
+  profile?: SkyblockProfile,
+  museum?: { donatedItemIds: Set<string>; value: number },
+) {
   return buildCatalog(
-    member as never, data, { items: null, capacity: 0 }, null, null, null,
+    member as never, data, { items: null, capacity: 0 }, museum ?? null, null, null,
     profile ? coopProgress(profile) : null,
   );
 }
@@ -123,4 +127,30 @@ test("bestiary XP is credited from the milestone count", () => {
 
 test("a profile that has never opened the bestiary earns nothing from it", () => {
   assert.equal(catalogFor({}).earnedOutsideTasks.bestiary, 0);
+});
+
+/* ---------------------------------------------------------------- museum */
+
+test("a donated armour set is filed under the set id, not its pieces", () => {
+  // The museum files a donated set under its own id. Requiring every piece marked all 73 of a
+  // real profile's donated sets as outstanding, telling the player to hand in armour the museum
+  // was already displaying.
+  const sets = gameData().museum.armorSets;
+  const set = sets.find((s) => s.pieces.length === 4)!;
+
+  const bySetId = catalogFor({}, undefined, { donatedItemIds: new Set([set.setId]), value: 0 });
+  assert.ok(bySetId.done.has(`museum_set_${set.setId}`), `${set.setId} donated as a set`);
+
+  const byPieces = catalogFor({}, undefined, { donatedItemIds: new Set(set.pieces), value: 0 });
+  assert.ok(byPieces.done.has(`museum_set_${set.setId}`), "the piece-by-piece route still works");
+
+  const partial = catalogFor({}, undefined, { donatedItemIds: new Set(set.pieces.slice(0, 2)), value: 0 });
+  assert.equal(partial.done.has(`museum_set_${set.setId}`), false, "half a set is not a set");
+});
+
+test("an item taken back out still counts as donated", () => {
+  // Borrowed items stay in the museum's items map with borrowing: true, and the XP is permanent.
+  const donation = gameData().museum.donations[0];
+  const cat = catalogFor({}, undefined, { donatedItemIds: new Set([donation.itemId]), value: 0 });
+  assert.ok(cat.done.has(`museum_${donation.itemId}`));
 });

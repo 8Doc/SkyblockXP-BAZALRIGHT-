@@ -354,8 +354,11 @@ export function buildCatalog(
       repeatable: false,
       note: `${set.category.toLowerCase()} · ${set.pieces.length} pieces`,
     });
-    // A set counts once every piece is in; the endpoint lists the pieces individually.
-    if (donated && set.pieces.every((piece) => donated.has(piece))) done.add(id);
+    // The museum files a donated armour set under the set's own id, not its four pieces — so
+    // requiring every piece marked all 73 donated sets as outstanding and told the player to
+    // hand in armour the museum was already displaying. The piece-by-piece test is kept as a
+    // fallback for anything filed the other way round.
+    if (donated && (donated.has(set.setId) || set.pieces.every((piece) => donated.has(piece)))) done.add(id);
   }
 
   /* ------------------------------------------------------------- dungeons */
