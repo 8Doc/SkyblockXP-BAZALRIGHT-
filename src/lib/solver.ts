@@ -21,8 +21,9 @@ import { resolveTasks, type PriceBook } from "./resolve";
  *             group (buy the first k tiers of this minion), and accessory families become a
  *             group too (only the best member counts).
  *
- * Both honour exclusive groups: two members of one accessory family never stack, they replace,
- * so a second pick in the same group is only worth the difference.
+ * Both honour exclusive groups: two members of one accessory family or one pet never stack,
+ * they replace. So a plan holds at most one tier of each — the best one — and buying into a
+ * family a second time is priced as the upgrade it is, with the superseded tier taken back out.
  */
 
 export type SolveOptions = {
@@ -72,6 +73,14 @@ export function solve(tasks: Task[], done: Set<string>, book: PriceBook, opts: S
 type FillState = {
   completed: Set<string>;
   groupLevels: Map<string, number>;
+  /**
+   * What each exclusive group has cost the plan so far. Only the best tier of a pet or an
+   * accessory family ever counts, so a second tier is an *upgrade*, not an addition, and has
+   * to be ranked on the difference it costs rather than its sticker price. Ranking upgrades at
+   * full price is what let a greedy buy Bee uncommon, then rare, then epic and call each one
+   * good value. Kept plan-wide so the comparison holds across packages too.
+   */
+  picks: Map<string, { id: string; coins: number; xp: number }>;
 };
 
 /**
@@ -104,9 +113,22 @@ function greedyFill(
     for (const task of resolved) {
       const gain = effectiveXp(task, state.groupLevels);
       if (!eligible(task, opts, gain)) continue;
-      if (limits.budget !== null && spent + task.bundleCoins! > limits.budget) continue;
 
-      const bundleRate = task.bundleCoins! / gain;
+      // Upgrading within a group costs the difference, not the sticker price: the tier being
+      // replaced stops counting the moment this one lands, so the plan gets those coins back.
+      // Pricing the upgrade at full whack is what let a greedy pick Bee uncommon, then rare,
+      // then epic and call all three good value.
+      //
+      // Two different figures fall out of that, and using one for both jobs is wrong:
+      //   marginal — the difference, which is what the upgrade is really worth ranking at.
+      //   outlay   — what *this* package hands over. A tier bought by an earlier package can't
+      //              be refunded into this one's budget, however redundant it is about to be.
+      const prior = task.exclusiveGroup ? state.picks.get(task.exclusiveGroup) : undefined;
+      const marginalCoins = task.bundleCoins! - (prior?.coins ?? 0);
+      const outlay = prior && chosen.has(prior.id) ? task.bundleCoins! - prior.coins : task.bundleCoins!;
+      if (limits.budget !== null && spent + outlay > limits.budget) continue;
+
+      const bundleRate = marginalCoins / gain;
       // Cheapest coins per XP, then the bigger chunk — fewer trips for the same money.
       if (bundleRate < bestRate || (bundleRate === bestRate && gain > bestXp)) {
         best = task;
@@ -123,10 +145,30 @@ function greedyFill(
       state.completed.add(id);
       // Each step contributes its own XP — the bundle total belongs to the ranking, not to
       // the tally, or a shared chain would be counted once per member. Group members are the
-      // exception: a family's second purchase is only worth the difference it adds.
-      const gain = step.exclusiveGroup ? effectiveXp(step, state.groupLevels) : step.xp;
+      // exception: a family's second purchase replaces the first rather than adding to it.
+      let gain = step.exclusiveGroup ? effectiveXp(step, state.groupLevels) : step.xp;
+
+      if (step.exclusiveGroup) {
+        // Retire the tier this one supersedes. Dropping its row and refunding its coins is what
+        // makes "buy the epic" cost the epic's price rather than uncommon + rare + epic; the
+        // survivor then carries the family's whole gain, so the XP tally is unchanged.
+        const prior = state.picks.get(step.exclusiveGroup);
+        if (prior && chosen.has(prior.id)) {
+          // Superseded inside this same package: drop it here and now, so its coins are back in
+          // this package's budget for something else.
+          chosen.delete(prior.id);
+          state.completed.delete(prior.id);
+          spent -= prior.coins;
+          xp -= prior.xp;
+          gain += prior.xp;
+        }
+        // A prior tier bought by an *earlier* package can't be refunded into this one's budget.
+        // settleGroups() retires it from that package once every package is filled.
+        state.groupLevels.set(step.exclusiveGroup, step.groupLevel ?? 0);
+        state.picks.set(step.exclusiveGroup, { id, coins: step.coins ?? 0, xp: gain });
+      }
+
       chosen.set(id, { ...step, xp: gain });
-      if (step.exclusiveGroup) state.groupLevels.set(step.exclusiveGroup, step.groupLevel ?? 0);
       xp += gain;
       spent += step.coins ?? 0;
     }
@@ -156,7 +198,7 @@ function idealFrontier(
   opts: SolveOptions,
   budget: number,
 ): { coins: number; xp: number }[] {
-  const state: FillState = { completed: new Set(done), groupLevels: new Map() };
+  const state: FillState = { completed: new Set(done), groupLevels: new Map(), picks: new Map() };
   const trace: { coins: number; xp: number }[] = [];
   greedyFill(tasks, state, book, { ...opts, minXp: 0 }, { targetXp: Number.POSITIVE_INFINITY, budget }, trace);
   return trace;
@@ -189,7 +231,7 @@ function idealXpAt(frontier: { coins: number; xp: number }[], coins: number): nu
 }
 
 function solveGreedy(tasks: Task[], done: Set<string>, book: PriceBook, opts: SolveOptions): ResolvedTask[] {
-  const state: FillState = { completed: new Set(done), groupLevels: new Map() };
+  const state: FillState = { completed: new Set(done), groupLevels: new Map(), picks: new Map() };
   const chosen = greedyFill(tasks, state, book, opts, { targetXp: opts.targetXp, budget: opts.budget });
   return prune(chosen, opts.targetXp);
 }
@@ -324,7 +366,7 @@ const MAX_PACKAGE_XP = 20_000;
  * strand bundles across boundaries; solving never does.
  */
 export function solvePackages(tasks: Task[], done: Set<string>, book: PriceBook, opts: PackageOptions): PackagePlan {
-  const state: FillState = { completed: new Set(done), groupLevels: new Map() };
+  const state: FillState = { completed: new Set(done), groupLevels: new Map(), picks: new Map() };
   const packages: PackageEntry[] = [];
   let cumulativeCoins = 0;
   let cumulativeXp = 0;
@@ -333,6 +375,7 @@ export function solvePackages(tasks: Task[], done: Set<string>, book: PriceBook,
   // The unpackaged baseline, computed over the same pool and capped at the same total spend.
   const frontier = idealFrontier(tasks, done, book, opts, opts.packageSize * opts.packageCount);
 
+  const fills: ResolvedTask[][] = [];
   for (let index = 1; index <= opts.packageCount; index++) {
     const chosen =
       opts.strategy === "exact"
@@ -343,7 +386,16 @@ export function solvePackages(tasks: Task[], done: Set<string>, book: PriceBook,
       exhausted = true;
       break;
     }
+    fills.push(chosen);
+  }
 
+  // Only now, with every package filled, can a family be settled: an upgrade bought in package 5
+  // retires the tier package 1 bought. Totals are therefore computed after the sweep, never
+  // during the loop.
+  settleGroups(fills);
+
+  for (const [offset, chosen] of fills.entries()) {
+    const index = offset + 1;
     const coins = chosen.reduce((s, t) => s + (t.coins ?? 0), 0);
     const xp = chosen.reduce((s, t) => s + t.xp, 0);
     cumulativeCoins += coins;
@@ -374,6 +426,40 @@ export function solvePackages(tasks: Task[], done: Set<string>, book: PriceBook,
     totalBleedXp: last?.bleedXp ?? 0,
     totalIdealXp: last?.idealXp ?? 0,
   };
+}
+
+/**
+ * Keep one tier per exclusive group across the whole plan — the best one — and drop the rest.
+ *
+ * Within a package the fill already swaps a lower tier out as it goes, but a package can only
+ * refund into its own budget. When package 5 upgrades a pet package 1 bought, package 1's
+ * purchase is the one that has to go, and that can't be known until every package is filled.
+ *
+ * The survivor inherits the family's whole gain, so no XP is lost by the removal — only the
+ * coins that were buying a pet the plan itself was about to make redundant. Package 1 ends up
+ * a little under its size as a result, which is the honest outcome: that money was never
+ * usefully spent.
+ */
+function settleGroups(fills: ResolvedTask[][]): void {
+  const best = new Map<string, ResolvedTask>();
+  for (const fill of fills) {
+    for (const task of fill) {
+      if (!task.exclusiveGroup) continue;
+      const held = best.get(task.exclusiveGroup);
+      if (!held || (task.groupLevel ?? 0) > (held.groupLevel ?? 0)) best.set(task.exclusiveGroup, task);
+    }
+  }
+
+  for (const [offset, fill] of fills.entries()) {
+    fills[offset] = fill.flatMap((task) => {
+      if (!task.exclusiveGroup) return [task];
+      const winner = best.get(task.exclusiveGroup)!;
+      if (winner.id !== task.id) return [];
+      // Credited with everything the family gains over what the player already owns, since the
+      // tiers that were splitting that credit are gone.
+      return [{ ...task, xp: (task.groupLevel ?? 0) - (task.groupBase ?? 0) }];
+    });
+  }
 }
 
 /**
@@ -415,7 +501,9 @@ function exactWithinBudget(
   // Commit the picks to the running board so the next package starts from here.
   for (const task of chosen) {
     state.completed.add(task.id);
-    if (task.exclusiveGroup) state.groupLevels.set(task.exclusiveGroup, task.groupLevel ?? 0);
+    if (!task.exclusiveGroup) continue;
+    state.groupLevels.set(task.exclusiveGroup, task.groupLevel ?? 0);
+    state.picks.set(task.exclusiveGroup, { id: task.id, coins: task.coins ?? 0, xp: task.xp });
   }
   return chosen;
 }

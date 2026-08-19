@@ -415,3 +415,72 @@ test("with slots to spare there is no surcharge", () => {
   const { byId } = resolveTasks([noSurcharge], new Set(), book);
   assert.equal(byId.get("ring")!.coins, 500_000);
 });
+
+/* -------------------------------------------------------- exclusive groups */
+
+/** A pet family: three tiers of one pet, each replacing the last rather than stacking. */
+function pet(rarity: string, level: number, coins: number): Task {
+  return {
+    id: `pet_BEE_${rarity}`,
+    category: "accessory_bag",
+    name: `Bee (${rarity})`,
+    xp: level,
+    exclusiveGroup: "pet:BEE",
+    groupLevel: level,
+    groupBase: 0,
+    requires: [],
+    cost: { kind: "npc", coins },
+    repeatable: false,
+  };
+}
+
+test("a better tier replaces the one below it instead of stacking on top", () => {
+  // Bought naively this reads as three good deals in a row — 6 xp for 190, then +3 for 500,
+  // then +3 for 1,600 — and bills 2,290 for a pet the epic alone would have given.
+  const tasks = [pet("uncommon", 6, 190), pet("rare", 9, 500), pet("epic", 12, 1_600)];
+  const plan = solvePackages(tasks, new Set(), EMPTY_BOOK, packageOptions({ packageSize: 5_000, packageCount: 1 }));
+
+  const bought = plan.packages[0].groups.flatMap((g) => g.tasks);
+  assert.equal(bought.length, 1, `one pet, one row — got ${bought.map((t) => t.name).join(", ")}`);
+  assert.equal(bought[0].id, "pet_BEE_epic", "the survivor is the highest tier");
+  assert.equal(bought[0].xp, 12, "and it carries the family's whole gain");
+  assert.equal(plan.packages[0].coins, 1_600, "billed once, not 190 + 500 + 1,600");
+});
+
+test("coins freed by dropping a superseded tier go to another item", () => {
+  // 700 buys either bee-rare outright, or bee-uncommon plus the filler. Only one of those
+  // leaves the pet at rare *and* the filler bought.
+  const tasks = [pet("uncommon", 6, 190), pet("rare", 9, 500), npc("filler", 4, 200)];
+  const plan = solvePackages(tasks, new Set(), EMPTY_BOOK, packageOptions({ packageSize: 700, packageCount: 1, minXp: 0 }));
+
+  const bought = plan.packages[0].groups.flatMap((g) => g.tasks);
+  const ids = bought.map((t) => t.id).sort();
+  assert.deepEqual(ids, ["filler", "pet_BEE_rare"]);
+  assert.equal(plan.packages[0].coins, 700);
+  assert.equal(plan.packages[0].xp, 13, "9 from the pet, 4 from the filler");
+});
+
+test("an upgrade in a later package retires what an earlier one bought", () => {
+  // Package 1 takes the uncommon and a filler, leaving no room to upgrade; package 2 has the
+  // space for the epic. Left alone that bills both, and the uncommon is dead weight the moment
+  // the epic lands.
+  const tasks = [pet("uncommon", 6, 190), pet("epic", 12, 1_600), npc("filler", 20, 1_000)];
+  const plan = solvePackages(tasks, new Set(), EMPTY_BOOK, packageOptions({ packageSize: 2_000, packageCount: 2, minXp: 0 }));
+
+  const all = plan.packages.flatMap((p) => p.groups.flatMap((g) => g.tasks));
+  const bees = all.filter((t) => t.exclusiveGroup === "pet:BEE");
+  assert.equal(bees.length, 1, `the plan buys one Bee, not ${bees.length}`);
+  assert.equal(bees[0].id, "pet_BEE_epic", "and it is the tier actually worth owning");
+  assert.equal(bees[0].xp, 12, "credited with the family's whole gain");
+  // Package 1 is left short by the retired 190. That money was never usefully spent, so the
+  // plan is cheaper for the same XP rather than the shortfall being padded back out.
+  assert.equal(plan.packages.reduce((s, p) => s + p.coins, 0), 1_600 + 1_000);
+});
+
+test("the same family can still be bought once per plan when it is the best value", () => {
+  const tasks = [pet("epic", 12, 1_600), npc("other", 3, 900)];
+  const plan = solvePackages(tasks, new Set(), EMPTY_BOOK, packageOptions({ packageSize: 5_000, packageCount: 1, minXp: 0 }));
+
+  const all = plan.packages.flatMap((p) => p.groups.flatMap((g) => g.tasks));
+  assert.equal(all.length, 2, "locking a group must not stop it being bought at all");
+});
