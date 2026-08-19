@@ -93,12 +93,12 @@ export const UNMODELLED: { category: Category; note: string; totalXp?: number }[
   },
   {
     category: "misc",
-    note: "Garden is partly covered: plots, crop upgrades and the composter are modelled. Garden level (~140 XP), visitor and offer milestones (~135), crop milestones (~598), greenhouse (~100) and DNA analysis (~90) need threshold tables the wiki doesn't publish in a form worth trusting.",
+    note: "Garden is partly covered: plots, crop upgrades and the composter are modelled. The profile has the raw progress for the rest — garden_experience, resources_collected per crop, the visitor ledger and greenhouse slot count all come off the garden endpoint — but turning those into XP needs the level curve and the per-crop milestone thresholds, and the wiki carries neither in a parseable form. Garden level (~140 XP), visitor and offer milestones (~135), crop milestones (~598), greenhouse (~100) and DNA analysis (~90) wait on those tables rather than on the API.",
     totalXp: 1063,
   },
   {
     category: "misc",
-    note: "Peak of the Mountain (~1,000 XP) and Heart of the Forest (~545) have published XP tables, but a deep search of a maxed profile finds no field carrying their tier. Modelling them would show every player zero progress and overstate what they have left, so they wait for the API to expose a tier.",
+    note: "Heart of the Mountain (1,175 XP) and Center of the Forest (250) are modelled — the profile reports both tiers under skill_tree.nodes. Peak of the Mountain (~1,000) and Heart of the Forest (~545) are not: their XP tables are known, but no node in that tree matches either track, and guessing at one would credit or deny progress on the strength of a name.",
     totalXp: 1545,
   },
   {
