@@ -68,6 +68,16 @@ export type Catalog = {
   bag: BagState;
   /** SkyBlock XP the profile has already earned. */
   currentXp: number;
+  /**
+   * XP the profile has plainly earned that no task can be credited with.
+   *
+   * Magical power and pet score pay out continuously rather than per purchase: an accessory you
+   * already own is worth nothing *more*, so its task carries zero XP and contributes nothing to
+   * any tally of what you have done. The profile states both totals outright, and leaving them
+   * out understated coverage by thousands — it read as missing sources when the sources were
+   * modelled and merely uncounted.
+   */
+  earnedOutsideTasks: { magicalPower: number; petScore: number };
   /** Category-level notes for anything we can't model as tasks yet. */
   unmodelled: { category: Category; note: string; earnedXp?: number; totalXp?: number }[];
   meta: {
@@ -725,6 +735,11 @@ export function buildCatalog(
     currentXp: member.leveling?.experience ?? 0,
     // Pet score is unmodelled as *tasks*, but the profile still tells us exactly how much XP
     // it has already paid out — worth showing rather than discarding.
+    earnedOutsideTasks: {
+      magicalPower: bagState.computedMp,
+      // The highest score reached is what the game paid out on, not what the pets are worth now.
+      petScore: (member.leveling?.highest_pet_score ?? 0) * 3,
+    },
     unmodelled: UNMODELLED.map((u) =>
       u.category === "attributes" && strandedAttributes > 0
         ? {

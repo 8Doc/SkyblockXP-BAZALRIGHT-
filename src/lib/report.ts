@@ -186,7 +186,10 @@ export function buildReport(catalog: Catalog, book: PriceBook, options: ReportOp
     progress: {
       xp,
       level: Math.floor(xp / XP_PER_LEVEL),
-      modelledEarnedXp: resolved.filter((t) => t.done).reduce((s, t) => s + t.xp, 0),
+      modelledEarnedXp:
+        resolved.filter((t) => t.done).reduce((s, t) => s + t.xp, 0) +
+        catalog.earnedOutsideTasks.magicalPower +
+        catalog.earnedOutsideTasks.petScore,
       modelledRemainingXp: achievableXp(resolved.filter((t) => !t.done)),
     },
     plan,

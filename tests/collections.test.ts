@@ -102,3 +102,15 @@ test("every power stone resolves to a real item id", () => {
   const { powers } = gameData().powerStones;
   assert.deepEqual(powers.filter((p) => !p.itemId), []);
 });
+
+test("magical power and pet score count as XP already earned", () => {
+  // An accessory you own is worth nothing more, so its task carries zero XP. Left there, the
+  // coverage figure reads as missing sources when the source is modelled and merely uncounted.
+  const { earnedOutsideTasks } = catalogFor({
+    leveling: { highest_pet_score: 289, completed_tasks: [] },
+    accessory_bag_storage: { unlocked_powers: [] },
+  });
+
+  assert.equal(earnedOutsideTasks.petScore, 289 * 3, "the highest score reached is what paid out");
+  assert.equal(earnedOutsideTasks.magicalPower, 0, "no bag decoded here, so nothing to credit");
+});
