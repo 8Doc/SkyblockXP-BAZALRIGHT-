@@ -206,33 +206,20 @@ For a private, self-hosted build where baking a key in is a deliberate choice, `
 or `--from-env` (reads `.env.local`) will do it — **never commit a build made with either flag**,
 since the key would be sitting in plain text inside the HTML.
 
-### 2. The Next.js app (keeps the key server-side)
+### Rebuilding
 
 ```bash
 npm install
-cp .env.example .env.local   # add your Hypixel API key
-npm run gen:data             # rebuild the static task tables from the resources API
-npm run dev                  # http://localhost:3000
+npm run build:html      # -> dist/skyblock-xp-planner.html
+npm test                # 70 tests over the solver, grouping, NBT and data wiring
+npm run typecheck
 ```
 
-Use this one if the key must not sit in a file you might share.
-
-`npm test` runs 21 tests over the solver, the NBT decoder and formatting; `npm run typecheck`
-and `npm run build` are clean.
-
-### Which does what
-
-|  | Standalone HTML | Next.js app |
-|---|---|---|
-| Needs a server | no | yes |
-| API key location | inside the file / localStorage | server-side `.env.local` |
-| Changing the XP floor | instant, no network | round-trip to the server |
-| Auction sweep | on demand, cached 10 min in localStorage | on demand, cached 10 min in memory |
-| Refresh prices | button — re-pulls both feeds, ignoring the cache | same button, `?refresh=1` clears the server cache |
-
-Both call `buildReport` from `src/lib/report.ts` and the same solver, so identical inputs give
-identical answers — verified against a live profile: both report 1,684 MP computed and the same
-353 XP / 2.90B plan.
+There is no server and no framework. The whole app is `src/browser/` (the page and its API
+calls) over `src/lib/` (the model: catalog, resolver, solver, report), bundled by esbuild into
+one file with the data tables inlined. `npm run gen:data` refreshes those tables from the
+Hypixel resources API when the game changes; the wiki-derived and curated tables under
+`data/` are rebuilt by the other `gen:` scripts.
 
 ## What works
 

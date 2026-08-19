@@ -3,28 +3,44 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 
 /**
- * The game data is assembled twice: once by staticData.ts for the server, once by
- * build-html.mjs for the standalone file. Nothing links them, so a field added to one and
- * forgotten in the other type-checks cleanly and then dies at runtime in the build that missed
- * it — which is exactly how the standalone shipped without attributeLevels and threw
- * "Cannot read properties of undefined (reading 'perLevel')" against every profile.
+ * The standalone build inlines its game data by hand, listing each file in build-html.mjs, while
+ * the code consumes it through the GameData type. Nothing connects the two: add a field to the
+ * type, load it everywhere it's used, forget the one line in the builder, and it type-checks
+ * cleanly and then dies at runtime against every profile — which is exactly how the app once
+ * shipped without attributeLevels and threw "Cannot read properties of undefined".
+ *
+ * So the type and the loader are compared field by field.
  */
-function keysOf(file: string, open: string): string[] {
+function fieldsOf(file: string, open: string, close: string, pattern: RegExp): string[] {
   const source = readFileSync(file, "utf8");
   const start = source.indexOf(open);
   assert.ok(start >= 0, `${file}: could not find "${open}"`);
-  const body = source.slice(start, source.indexOf("\n};", start));
-  return [...body.matchAll(/^\s{2,4}(\w+):/gm)].map((m) => m[1]).sort();
+  const body = source.slice(start, source.indexOf(close, start));
+  return [...body.matchAll(pattern)].map((m) => m[1]).sort();
 }
 
-test("both game-data loaders carry the same fields", () => {
-  const server = keysOf("src/lib/staticData.ts", "cached = {");
-  const standalone = keysOf("scripts/build-html.mjs", "const gameData = {");
+test("the standalone loader carries every field GameData declares", () => {
+  const declared = fieldsOf("src/lib/gameData.ts", "export type GameData = {", "\n};", /^ {2}(\w+):/gm);
+  const loaded = fieldsOf("scripts/build-html.mjs", "const gameData = {", "\n};", /^ {2}(\w+):/gm);
 
-  const missingFromStandalone = server.filter((k) => !standalone.includes(k));
-  const missingFromServer = standalone.filter((k) => !server.includes(k));
+  assert.ok(declared.length > 10, `only found ${declared.length} fields — the parser has drifted`);
+  assert.deepEqual(
+    declared.filter((f) => !loaded.includes(f)),
+    [],
+    "declared on GameData but never loaded — these read as undefined at runtime",
+  );
+  assert.deepEqual(
+    loaded.filter((f) => !declared.includes(f)),
+    [],
+    "loaded into the bundle but not on GameData — dead weight in the HTML",
+  );
+});
 
-  assert.deepEqual(missingFromStandalone, [], "the standalone build would load these as undefined");
-  assert.deepEqual(missingFromServer, [], "the server would load these as undefined");
-  assert.ok(server.length > 10, `only found ${server.length} fields — the parser has drifted`);
+test("every data file the loader names is actually present", () => {
+  const source = readFileSync("scripts/build-html.mjs", "utf8");
+  const paths = [...source.matchAll(/loadJson\("([^"]+)"\)/g)].map((m) => m[1]);
+  assert.ok(paths.length > 10, `only found ${paths.length} data files`);
+  for (const path of paths) {
+    assert.doesNotThrow(() => readFileSync(`data/${path}`), `data/${path} is named by the builder but missing`);
+  }
 });
