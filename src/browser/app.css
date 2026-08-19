@@ -216,3 +216,4 @@ footer { margin-top: 24px; padding-top: 12px; border-top: 1px solid var(--line);
 .level-mark::after { content: ""; flex: 1; height: 1px; background: rgba(95, 211, 188, 0.25); }
 .level-mark span { flex: none; }
 .level-mark .mark-cost { flex: none; margin-left: 8px; text-transform: none; letter-spacing: normal; color: var(--muted); font-variant-numeric: tabular-nums; }
+.task-cost .net { display: block; font-size: 11px; color: var(--aqua); }

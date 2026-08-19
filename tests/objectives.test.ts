@@ -18,9 +18,20 @@ test("a talk-to objective names the NPC and says where they are", () => {
   assert.match(task.note ?? "", /^Farm · -?\d+, -?\d+, -?\d+$/, `got ${task.note}`);
 });
 
-test("the trailing number on an objective is a quest step, not part of the name", () => {
-  assert.equal(byId.get("OBJECTIVE_TALK_TO_CHARLIE_NEW_3")!.name, "Talk to Charlie");
-  assert.equal(byId.get("OBJECTIVE_TALK_TO_DAVID_7")!.name, "Talk to David Hunterborough");
+test("the trailing number names the step rather than joining the NPC's name", () => {
+  assert.equal(byId.get("OBJECTIVE_TALK_TO_CHARLIE_NEW_3")!.name, "Talk to Charlie (step 3)");
+  assert.equal(byId.get("OBJECTIVE_TALK_TO_DAVID_7")!.name, "Talk to David Hunterborough (step 7)");
+});
+
+test("two steps at the same NPC are told apart", () => {
+  // Both carry the same name and the same coordinates, so without the step the row you have
+  // already finished is indistinguishable from the one you have not — which reads as the app
+  // failing to notice you did it.
+  const first = byId.get("OBJECTIVE_TALK_TO_FARMER")!;
+  const second = byId.get("OBJECTIVE_TALK_TO_FARMER_2")!;
+  assert.equal(first.name, "Talk to Farmer Rigby");
+  assert.equal(second.name, "Talk to Farmer Rigby (step 2)");
+  assert.equal(first.note, second.note, "same NPC, so the directions are identical");
 });
 
 test("objectives that name an NPC without saying 'talk to' get directions too", () => {

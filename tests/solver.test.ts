@@ -574,7 +574,7 @@ test("an item nothing is listing falls back to the reference price, and says so"
   assert.equal(task.estimated, true, "a reference price is not one you can click buy on");
 });
 
-test("a real listing always wins, even when the reference is cheaper", () => {
+test("museum prefers the reference feed over whatever happens to be listed", () => {
   const book: PriceBook = {
     bazaar: {},
     bins: { prices: { FROGGLES: { UNCOMMON: 649_999 } }, listings: 1, scannedAt: 0, pages: 1 },
@@ -583,11 +583,32 @@ test("a real listing always wins, even when the reference is cheaper", () => {
   const { byId } = resolveTasks([museumTask()], new Set(), book);
   const task = byId.get("museum_FROGGLES")!;
 
-  assert.equal(task.coins, 649_999, "quoting 1,088 would price a purchase nobody can make");
-  assert.ok(!task.estimated);
+  // The feed is a maintained whole-catalogue read; a listing is only what is up this minute.
+  assert.equal(task.coins, 1_088);
+  assert.ok(!task.estimated, "a listing exists, so this is still something you can go and buy");
 });
 
 test("with neither a listing nor a reference the row stays unpriced", () => {
   const { byId } = resolveTasks([museumTask()], new Set(), { bazaar: {}, bins: null });
   assert.equal(byId.get("museum_FROGGLES")!.coins, null);
+});
+
+test("a category not on the reference-first list still prices from live listings", () => {
+  const book: PriceBook = {
+    bazaar: {},
+    bins: { prices: { SOME_ACCESSORY: { RARE: 500 } }, listings: 1, scannedAt: 0, pages: 1 },
+    reference: { SOME_ACCESSORY: 9_999 },
+  };
+  const task: Task = {
+    id: "fast_travel_x",
+    category: "fast_travel",
+    name: "Somewhere",
+    xp: 5,
+    requires: [],
+    cost: { kind: "auction", itemId: "SOME_ACCESSORY" },
+    repeatable: false,
+  };
+
+  const { byId } = resolveTasks([task], new Set(), book);
+  assert.equal(byId.get("fast_travel_x")!.coins, 500);
 });

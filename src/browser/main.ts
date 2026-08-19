@@ -265,7 +265,10 @@ function taskRow(task: ResolvedTask, showBundle: boolean, tag?: string): string 
             : `${Math.round((1 - task.effort) * 100)}% of sampled players have done this`
         }">${task.effortBand ?? "grind"}</span>`
       : `<span class="dim">no price</span>`
-    : coins(bundled ? task.bundleCoins : task.coins);
+    : task.netCoins !== undefined && task.grossCoins !== undefined && task.netCoins !== task.grossCoins
+      ? // What you hand over, and what it comes to once the copy it replaces is sold.
+        `${coins(task.grossCoins)}<span class="net">${coins(task.netCoins)} net</span>`
+      : coins(bundled ? task.bundleCoins : task.coins);
 
   const shownName = bundled && task.bundleSpan ? task.bundleSpan : task.name;
   const shownNote = bundled && task.bundleNote ? task.bundleNote : task.note;

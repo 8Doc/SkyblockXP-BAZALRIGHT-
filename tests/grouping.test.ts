@@ -305,3 +305,42 @@ test("rows nobody could price count as nothing rather than breaking the total", 
   const dividers = levelDividers([100, 50, 50], [10, null, 20], 0);
   assert.equal(dividers[0].costToNext, 20, "the unpriced row contributes zero");
 });
+
+/* --------------------------------------------------- exclusive-group upgrades */
+
+test("a pet's rarities read as upgrades, priced gross and net", () => {
+  // Squid uncommon, rare and epic are three ways to own one pet, not three purchases. Listed at
+  // full value each, the list sells the same pet over and over.
+  const pet = (rarity: string, score: number, coins: number): ResolvedTask => ({
+    ...task(`pet_SQUID_${rarity}`, `Squid (${rarity})`, score * 3, coins, `${score} pet score`),
+    exclusiveGroup: "pet:SQUID",
+    groupLevel: score * 3,
+    groupBase: 0,
+  });
+  const tasks = [pet("uncommon", 2, 5_000), pet("rare", 3, 100_000), pet("epic", 4, 450_000)];
+
+  const rows = progressive(tasks, new Map(tasks.map((t) => [t.id, t])));
+  assert.equal(rows.length, 3);
+
+  assert.equal(rows[0].xp, 6, "the first tier is worth its full score");
+  assert.equal(rows[0].netCoins, undefined, "nothing to trade in yet");
+
+  assert.equal(rows[1].xp, 3, "rare over uncommon is the three points between them, not nine");
+  assert.equal(rows[1].grossCoins, 100_000, "what you hand over");
+  assert.equal(rows[1].netCoins, 100_000 - Math.round(5_000 * 0.99), "less the uncommon, sold");
+
+  assert.equal(rows[2].xp, 3, "epic over rare");
+  assert.equal(rows[2].netCoins, 450_000 - Math.round(100_000 * 0.99));
+  assert.match(rows[2].note ?? "", /upgrade from Squid \(rare\)/);
+});
+
+test("a tier no better than one already listed is dropped", () => {
+  const pet = (rarity: string, level: number): ResolvedTask => ({
+    ...task(`pet_X_${rarity}`, `X (${rarity})`, level, 100),
+    exclusiveGroup: "pet:X",
+    groupLevel: level,
+    groupBase: 0,
+  });
+  const tasks = [pet("epic", 12), pet("rare", 9)];
+  assert.equal(progressive(tasks, new Map(tasks.map((t) => [t.id, t]))).length, 1);
+});

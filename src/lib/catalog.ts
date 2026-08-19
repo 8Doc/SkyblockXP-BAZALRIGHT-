@@ -288,13 +288,25 @@ export function buildCatalog(
   const completed = new Set(member.leveling?.completed_tasks ?? []);
   const scrollFor = new Map(data.travelScrolls.scrolls.map((s) => [s.taskId, s]));
 
+  // Tiered ladders — essence perks above all — need the rung below them. Without it the list
+  // offers "eager miner 6" priced as a single purchase when reaching it means buying 1 through 6,
+  // which is why the ungrouped view disagreed with the grouped one about where you stand.
+  const discreteIds = new Set(data.tasks.tasks.map((t) => t.id));
+  const rungBelow = (id: string): string[] => {
+    if (id.startsWith("OBJECTIVE_")) return []; // story steps, not a purchase ladder
+    const match = /^(.*)_(\d+)$/.exec(id);
+    if (!match) return [];
+    const previous = `${match[1]}_${Number(match[2]) - 1}`;
+    return discreteIds.has(previous) ? [previous] : [];
+  };
+
   for (const task of data.tasks.tasks) {
     tasks.push({
       id: task.id,
       category: task.category as Category,
       name: objectiveName(task.id, data),
       xp: task.xp,
-      requires: [],
+      requires: rungBelow(task.id),
       cost: discreteCost(task.id, data, scrollFor),
       repeatable: false,
       note: directionsTo(task.id, data) ?? task.rule,
@@ -850,7 +862,12 @@ function collectedFrom(member: ProfileMember): Map<string, number> {
 function objectiveName(id: string, data: GameData): string {
   if (!id.startsWith("OBJECTIVE_")) return prettyTaskName(id);
   const npc = npcFor(id, data);
-  if (npc && id.startsWith("OBJECTIVE_TALK_TO_")) return `Talk to ${npc.name}`;
+  if (npc && id.startsWith("OBJECTIVE_TALK_TO_")) {
+    // The story sends you back to the same NPC more than once. Both steps carry the same name and
+    // name and the same coordinates — so completing one leaves a row that looks untouched.
+    const step = /_(\d+)$/.exec(id)?.[1];
+    return step ? `Talk to ${npc.name} (step ${step})` : `Talk to ${npc.name}`;
+  }
 
   const label = prettyTaskName(id.replace(/^OBJECTIVE_/, ""));
   if (!npc) return label;

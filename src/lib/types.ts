@@ -150,6 +150,10 @@ export type ResolvedTask = Task & {
   bundleNote?: string;
   /** Priced from the reference feed because nothing is listing it — not a price you can click. */
   estimated?: boolean;
+  /** What the item itself costs. */
+  grossCoins?: number;
+  /** What it costs once the copy it replaces is sold. */
+  netCoins?: number;
 };
 
 export type PlanGroup = {

@@ -1,5 +1,5 @@
 import type { BinIndex, BazaarProduct } from "./profile";
-import type { CostSpec, ResolvedTask, Task } from "./types";
+import type { Category, CostSpec, ResolvedTask, Task } from "./types";
 
 /**
  * Turning a CostSpec into coins, and a task into its prerequisite bundle.
@@ -23,14 +23,29 @@ export type PriceBook = {
   reference?: Record<string, number>;
 };
 
-export function priceOf(cost: CostSpec, book: PriceBook): number | null {
+/**
+ * Categories priced from the reference feed first, live markets second.
+ *
+ * The feed is a maintained, whole-catalogue read where a live market is only whatever happens
+ * to be listed this minute, so for the categories it covers well it is the steadier number:
+ * 92% of accessories, 94% of museum donations, and every minion ingredient.
+ *
+ * Attribute shards are deliberately absent. The feed carries no SHARD_* prices at all — nought
+ * of 175 — while the bazaar carries every one of them, live. Preferring the feed there would
+ * price nothing.
+ */
+const REFERENCE_FIRST = new Set<Category>(["accessory_bag", "museum", "minions"]);
+
+export function priceOf(cost: CostSpec, book: PriceBook, preferReference = false): number | null {
+  const referenced = (id: string): number | undefined => (preferReference ? book.reference?.[id] : undefined);
+
   switch (cost.kind) {
     case "npc":
       return cost.coins;
     case "bazaar": {
       let total = 0;
       for (const item of cost.items) {
-        const price = book.bazaar[item.id]?.quick_status?.buyPrice;
+        const price = referenced(item.id) ?? book.bazaar[item.id]?.quick_status?.buyPrice;
         if (!price) return null;
         total += price * item.qty;
       }
@@ -41,14 +56,17 @@ export function priceOf(cost: CostSpec, book: PriceBook): number | null {
       return price ? price * cost.amount : null;
     }
     case "auction": {
+      // Anything this purchase replaces is sold to offset it, priced the same way round so the
+      // buy and the sale don't come from different markets. Auction tax is 1%, and taking it off
+      // keeps the net conservative rather than quoting a sale at shelf price.
+      const sold = cost.sells ? (referenced(cost.sells) ?? cheapestListing(book, cost.sells)) : null;
+      const surcharge = (cost.surcharge ?? 0) - (sold === null ? 0 : Math.round(sold * 0.99));
+
+      const preferred = referenced(cost.itemId);
+      if (preferred !== undefined && !cost.tier) return preferred + surcharge;
+
       const byTier = book.bins?.prices[cost.itemId];
-      if (!byTier) return referencePrice(cost, book, (cost.surcharge ?? 0) - (cost.sells ? Math.round((cheapestListing(book, cost.sells) ?? 0) * 0.99) : 0));
-      // Anything this purchase replaces is sold to offset it. Auction house tax is 1%, and
-      // taking it off keeps the net honestly conservative rather than quoting a sale at its
-      // shelf price. An item we can't price sells for nothing rather than blocking the row.
-      const sold = cost.sells ? cheapestListing(book, cost.sells) : null;
-      const credit = sold === null ? 0 : Math.round(sold * 0.99);
-      const surcharge = (cost.surcharge ?? 0) - credit;
+      if (!byTier) return referencePrice(cost, book, surcharge);
       if (cost.tier) {
         const exact = byTier[cost.tier];
         return exact === undefined ? null : exact + surcharge;
@@ -89,7 +107,7 @@ export function resolveTasks(
   const coinsFor = (task: Task) => {
     let hit = coinCache.get(task.id);
     if (hit === undefined) {
-      hit = priceOf(task.cost, book);
+      hit = priceOf(task.cost, book, REFERENCE_FIRST.has(task.category));
       coinCache.set(task.id, hit);
     }
     return hit;

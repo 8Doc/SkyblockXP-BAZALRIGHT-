@@ -317,9 +317,27 @@ function totalMaterial(tasks: ResolvedTask[]): string | null {
  */
 export function progressive(tasks: ResolvedTask[], byId: Map<string, ResolvedTask>): ResolvedTask[] {
   const covered = new Set<string>();
+  // Best tier of each exclusive family already listed above. A pet's rarities are alternatives,
+  // not a chain, so they need their own bookkeeping: listing Squid uncommon, rare and epic each
+  // at full value describes one purchase three times over.
+  const listed = new Map<string, ResolvedTask>();
   const out: ResolvedTask[] = [];
 
   for (const task of tasks) {
+    if (task.exclusiveGroup) {
+      const previous = listed.get(task.exclusiveGroup);
+      if (!previous) {
+        listed.set(task.exclusiveGroup, task);
+        out.push(task);
+        continue;
+      }
+      const upgraded = asUpgradeOver(task, previous);
+      if (!upgraded) continue; // no better than what is already listed
+      listed.set(task.exclusiveGroup, task);
+      out.push(upgraded);
+      continue;
+    }
+
     const steps = [...task.bundle, task.id];
     const remaining = steps.filter((id) => !covered.has(id));
     // Wholly contained in something already listed: it adds nothing a reader hasn't seen.
@@ -334,6 +352,36 @@ export function progressive(tasks: ResolvedTask[], byId: Map<string, ResolvedTas
   }
 
   return out;
+}
+
+/**
+ * One tier of a family read against the tier listed above it.
+ *
+ * Only the best copy counts, so the XP is the difference the upgrade makes, not the tier's
+ * headline value — Squid rare after Squid uncommon is worth the three points between them. The
+ * price stays the item's real price, because that is what you hand over; the lesser copy comes
+ * off and sells, so the net is carried alongside rather than replacing it.
+ */
+function asUpgradeOver(task: ResolvedTask, previous: ResolvedTask): ResolvedTask | null {
+  const gain = (task.groupLevel ?? 0) - (previous.groupLevel ?? 0);
+  if (gain <= 0) return null;
+
+  const gross = task.coins;
+  const tradeIn = previous.coins === null ? 0 : Math.round(previous.coins * 0.99);
+  const net = gross === null ? null : Math.max(gross - tradeIn, 0);
+
+  return {
+    ...task,
+    xp: gain,
+    bundleXp: gain,
+    coins: gross,
+    bundleCoins: gross,
+    grossCoins: gross ?? undefined,
+    netCoins: net ?? undefined,
+    // Ranked on what it actually costs you once the old one is sold.
+    efficiency: net !== null && gain > 0 ? net / gain : null,
+    note: `upgrade from ${previous.name}${task.note ? ` · ${task.note}` : ""}`,
+  };
 }
 
 /** Re-price a row against only the steps it still contributes. */
