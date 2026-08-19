@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { groupTaskRuns, groupToMax, levelMarks, progressive } from "../src/lib/grouping";
+import { groupTaskRuns, groupToMax, levelDividers, levelMarks, progressive } from "../src/lib/grouping";
 import type { ResolvedTask } from "../src/lib/types";
 
 function task(id: string, name: string, xp: number, coins: number | null, note?: string): ResolvedTask {
@@ -277,4 +277,31 @@ test("landing exactly on a boundary counts as reaching it", () => {
 
 test("a list that never crosses a boundary gets no marks", () => {
   assert.equal(levelMarks([10, 10, 10], 43_000).size, 0);
+});
+
+test("a divider prices the rows between it and the next level, not the ones above", () => {
+  //            row:   0    1    2    3    4    5
+  const xp = [50, 50, 10, 40, 50, 30];
+  const spend = [1, 2, 4, 8, 16, 32];
+  // Starting at 0: row 1 reaches level 1, row 4 reaches level 2.
+  const dividers = levelDividers(xp, spend, 0);
+
+  assert.deepEqual(
+    dividers.map((d) => ({ index: d.index, level: d.level, costToNext: d.costToNext })),
+    [
+      { index: 1, level: 1, costToNext: 4 + 8 + 16 },
+      { index: 4, level: 2, costToNext: null },
+    ],
+    "the figure runs from the row below the divider to the one that earns the next level",
+  );
+});
+
+test("two levels off one row means the second cost nothing extra", () => {
+  const dividers = levelDividers([250, 10], [500, 20], 0);
+  assert.deepEqual(dividers.map((d) => d.costToNext), [0, null]);
+});
+
+test("rows nobody could price count as nothing rather than breaking the total", () => {
+  const dividers = levelDividers([100, 50, 50], [10, null, 20], 0);
+  assert.equal(dividers[0].costToNext, 20, "the unpriced row contributes zero");
 });

@@ -3,7 +3,7 @@ import { coins, num, rate } from "../lib/format";
 import { coopProgress, type BinIndex, type GardenState, type MuseumState, type ProfileMember, type SkyblockProfile, type BazaarProduct } from "../lib/profile";
 import { petsFrom } from "../lib/auctions";
 import { buildCatalog, type Catalog } from "../lib/catalog";
-import { groupTaskRuns, levelMarks, type TaskRun } from "../lib/grouping";
+import { groupTaskRuns, levelDividers, levelMarks, type TaskRun } from "../lib/grouping";
 import { buildReport, type Report } from "../lib/report";
 import type { PriceBook } from "../lib/resolve";
 import {
@@ -469,11 +469,13 @@ function cheapestView(report: Report): string {
     ? withLevelMarks(
         grouped.map((run) => runRow(run, CATEGORY_LABELS[run.tasks[0].category])),
         grouped.map((run) => run.xp),
+        grouped.map((run) => run.coins),
         report.progress.xp,
       )
     : withLevelMarks(
         tasks.map((t) => taskRow(t, true, CATEGORY_LABELS[t.category])),
         tasks.map((t) => t.bundleXp),
+        tasks.map((t) => t.bundleCoins),
         report.progress.xp,
       );
 
@@ -1004,19 +1006,23 @@ const GROUP_STEP: Partial<Record<Category, string>> = {
  * is worth but what it gets you to. The marker goes *after* the row that crosses the boundary,
  * because that is the purchase that earned it.
  */
-function withLevelMarks(rows: string[], xp: number[], startingXp: number): string {
-  const marks = levelMarks(xp, startingXp);
+function withLevelMarks(rows: string[], xp: number[], spend: (number | null)[], startingXp: number): string {
+  const dividers = levelDividers(xp, spend, startingXp);
   return rows
     .map((row, index) => {
-      const crossed = marks.get(index);
-      if (!crossed) return row;
-      return row + crossed.map((level) => levelMark(level)).join("");
+      const here = dividers.filter((d) => d.index === index);
+      return row + here.map((d) => levelMark(d.level, d.costToNext)).join("");
     })
     .join("");
 }
 
-function levelMark(level: number): string {
-  return `<li class="level-mark"><span>Level ${level}</span></li>`;
+/**
+ * A divider naming the level the running total has just reached, and what the next one costs
+ * from here. The last divider carries no figure: there is no next level in the list.
+ */
+function levelMark(level: number, costToNext: number | null = null): string {
+  const cost = costToNext === null ? "" : `<span class="mark-cost">${coins(costToNext)} to next</span>`;
+  return `<li class="level-mark"><span>Level ${level}</span>${cost}</li>`;
 }
 
 /**

@@ -398,3 +398,33 @@ export function levelMarks(xpPerRow: number[], startingXp: number): Map<number, 
 
   return marks;
 }
+
+/** A level boundary in a bought-in-order list, and what the next one costs from there. */
+export type LevelDivider = {
+  /** Row index the divider sits after — the purchase that earned the level. */
+  index: number;
+  level: number;
+  /** Coins across the rows between this divider and the next, or null if this is the last. */
+  costToNext: number | null;
+};
+
+/**
+ * Level boundaries with the spend between them.
+ *
+ * At a boundary the question is whether the next level is worth carrying on for, which is a
+ * question about the rows *below* the divider — so the figure runs from the row after it up to
+ * and including the row that earns the next level. Two levels off one row means the second cost
+ * nothing extra to reach.
+ */
+export function levelDividers(xp: number[], spend: (number | null)[], startingXp: number): LevelDivider[] {
+  const marks = levelMarks(xp, startingXp);
+  const flat = [...marks.entries()].flatMap(([index, levels]) => levels.map((level) => ({ index, level })));
+
+  return flat.map((divider, position) => {
+    const next = flat[position + 1];
+    if (!next) return { ...divider, costToNext: null };
+    let total = 0;
+    for (let i = divider.index + 1; i <= next.index; i++) total += spend[i] ?? 0;
+    return { ...divider, costToNext: total };
+  });
+}
