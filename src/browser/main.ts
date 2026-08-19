@@ -3,10 +3,17 @@ import { coins, num, rate } from "../lib/format";
 import { coopProgress, type BinIndex, type GardenState, type MuseumState, type ProfileMember, type SkyblockProfile, type BazaarProduct } from "../lib/profile";
 import { petsFrom } from "../lib/auctions";
 import { buildCatalog, type Catalog } from "../lib/catalog";
-import { groupTaskRuns, type TaskRun } from "../lib/grouping";
+import { groupTaskRuns, levelMarks, type TaskRun } from "../lib/grouping";
 import { buildReport, type Report } from "../lib/report";
 import type { PriceBook } from "../lib/resolve";
-import { CATEGORIES, CATEGORY_LABELS, XP_PER_LEVEL, type Category, type ResolvedTask } from "../lib/types";
+import {
+  CATEGORIES,
+  CATEGORY_LABELS,
+  XP_PER_LEVEL,
+  type Category,
+  type PackageEntry,
+  type ResolvedTask,
+} from "../lib/types";
 import { ApiError, cacheAge, fetchAccessoryBins, fetchBazaar, fetchReferencePrices, fetchGarden, fetchMuseum, fetchProfiles, readBag, resolveUuid } from "./api";
 
 /**
@@ -394,16 +401,7 @@ function packagesView(report: Report): string {
                       )} XP — this plan bleeds ${num(Math.round(pkg.bleedXp))}`
                     : ""
                 }</p>
-                ${pkg.groups
-                  .map(
-                    (group) => `<div class="pkg-group">
-                      <div class="pkg-group-head">${CATEGORY_LABELS[group.category]}
-                        <span class="dim">${num(group.xp)} xp · ${coins(group.coins)}</span>
-                      </div>
-                      <ul class="tasks">${runRows(group.tasks)}</ul>
-                    </div>`,
-                  )
-                  .join("")}
+                ${packageGroups(pkg, report.progress.xp)}
               </div>`
             : ""
         }
@@ -466,9 +464,18 @@ function cheapestView(report: Report): string {
   const { tasks, truncated, grouped, groupedTruncated } = report.cheapest;
   const on = open.has("cheapest:grouped");
   const hidden = on ? groupedTruncated : truncated;
+  // The list is bought top to bottom, so mark where the running total tips into a new level.
   const rows = on
-    ? grouped.map((run) => runRow(run, CATEGORY_LABELS[run.tasks[0].category])).join("")
-    : tasks.map((t) => taskRow(t, true, CATEGORY_LABELS[t.category])).join("");
+    ? withLevelMarks(
+        grouped.map((run) => runRow(run, CATEGORY_LABELS[run.tasks[0].category])),
+        grouped.map((run) => run.xp),
+        report.progress.xp,
+      )
+    : withLevelMarks(
+        tasks.map((t) => taskRow(t, true, CATEGORY_LABELS[t.category])),
+        tasks.map((t) => t.bundleXp),
+        report.progress.xp,
+      );
 
   return `<div class="panel pad group-toggle">
       <button class="chip${on ? " on" : ""}" data-toggle="cheapest:grouped">Group maxed</button>
@@ -977,3 +984,61 @@ const GROUP_STEP: Partial<Record<Category, string>> = {
   attributes: "shard level",
   essence_shop: "perk level",
 };
+
+/**
+ * Interleave "you hit level N here" markers into a list of already-rendered rows.
+ *
+ * A ranked list is bought top to bottom, so the question at any point is not how much XP a row
+ * is worth but what it gets you to. The marker goes *after* the row that crosses the boundary,
+ * because that is the purchase that earned it.
+ */
+function withLevelMarks(rows: string[], xp: number[], startingXp: number): string {
+  const marks = levelMarks(xp, startingXp);
+  return rows
+    .map((row, index) => {
+      const crossed = marks.get(index);
+      if (!crossed) return row;
+      return row + crossed.map((level) => levelMark(level)).join("");
+    })
+    .join("");
+}
+
+function levelMark(level: number): string {
+  return `<li class="level-mark"><span>Level ${level}</span></li>`;
+}
+
+/**
+ * A package's category groups, with the level markers running across them.
+ *
+ * The marks have to be computed over the package as a whole rather than per group: you buy the
+ * lot, and a level earned partway through the minions doesn't restart at the museum. The offset
+ * carries between packages too, so package 3 marks the levels package 3 actually reaches.
+ */
+function packageGroups(pkg: PackageEntry, currentXp: number): string {
+  const startingXp = currentXp + pkg.cumulativeXp - pkg.xp;
+  const runs = pkg.groups.map((group) => groupTaskRuns(group.tasks));
+  const flat = runs.flat();
+  const marks = levelMarks(
+    flat.map((run) => run.xp),
+    startingXp,
+  );
+
+  let index = 0;
+  return pkg.groups
+    .map((group, groupIndex) => {
+      const body = runs[groupIndex]
+        .map((run) => {
+          const crossed = marks.get(index++);
+          return runRow(run) + (crossed ? crossed.map((level) => levelMark(level)).join("") : "");
+        })
+        .join("");
+
+      return `<div class="pkg-group">
+        <div class="pkg-group-head">${CATEGORY_LABELS[group.category]}
+          <span class="dim">${num(group.xp)} xp · ${coins(group.coins)}</span>
+        </div>
+        <ul class="tasks">${body}</ul>
+      </div>`;
+    })
+    .join("");
+}

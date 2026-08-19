@@ -1,4 +1,4 @@
-import type { ResolvedTask } from "./types";
+import { XP_PER_LEVEL, type ResolvedTask } from "./types";
 
 /**
  * Collapses consecutive tiers of the same thing into one line.
@@ -372,4 +372,29 @@ function trimTo(task: ResolvedTask, remaining: string[], byId: Map<string, Resol
     note: members.length > 1 ? task.note : members[0].note,
     name: members.length === 1 ? members[0].name : task.name,
   };
+}
+
+/**
+ * Where the level-ups land as you work down a list.
+ *
+ * A ranked list is read top to bottom and bought in that order, so the useful question at any
+ * point is not "how much XP is this" but "what does this get me to". Returns, per row index, the
+ * levels the running total crosses once that row is bought — more than one where a chunky row
+ * spans a boundary.
+ */
+export function levelMarks(xpPerRow: number[], startingXp: number): Map<number, number[]> {
+  const marks = new Map<number, number[]>();
+  let total = startingXp;
+
+  for (const [index, xp] of xpPerRow.entries()) {
+    const before = Math.floor(total / XP_PER_LEVEL);
+    total += xp;
+    const after = Math.floor(total / XP_PER_LEVEL);
+    if (after <= before) continue;
+    const crossed: number[] = [];
+    for (let level = before + 1; level <= after; level++) crossed.push(level);
+    marks.set(index, crossed);
+  }
+
+  return marks;
 }

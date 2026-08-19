@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { groupTaskRuns, groupToMax, progressive } from "../src/lib/grouping";
+import { groupTaskRuns, groupToMax, levelMarks, progressive } from "../src/lib/grouping";
 import type { ResolvedTask } from "../src/lib/types";
 
 function task(id: string, name: string, xp: number, coins: number | null, note?: string): ResolvedTask {
@@ -256,4 +256,25 @@ test("a grouped range never spans tiers it doesn't contain", () => {
   assert.equal(row.tasks.length, 2);
   assert.equal(row.note, "2 levels", "a count, not a range it cannot back up");
   assert.equal(row.xp, 14);
+});
+
+/* -------------------------------------------------------------- level marks */
+
+test("a level mark lands on the row that earns it, not the one after", () => {
+  // Starting at 43,050 XP — half way through level 430. 50 more XP tips it over.
+  const marks = levelMarks([20, 20, 20, 20], 43_050);
+  assert.deepEqual([...marks.entries()], [[2, [431]]], "rows 0 and 1 total 40, row 2 crosses");
+});
+
+test("a chunky row can cross more than one level at once", () => {
+  const marks = levelMarks([250], 43_000);
+  assert.deepEqual(marks.get(0), [431, 432], "250 XP from a level boundary spans two");
+});
+
+test("landing exactly on a boundary counts as reaching it", () => {
+  assert.deepEqual([...levelMarks([100], 43_000).entries()], [[0, [431]]]);
+});
+
+test("a list that never crosses a boundary gets no marks", () => {
+  assert.equal(levelMarks([10, 10, 10], 43_000).size, 0);
 });
