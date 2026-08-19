@@ -13,7 +13,9 @@ export type ProfileMember = {
     unlocked_coll_tiers?: string[];
     crafted_generators?: string[];
   };
-  accessory_bag_storage?: { highest_magical_power?: number; bag_upgrades_purchased?: number };
+  accessory_bag_storage?: {
+    /** Powers already unlocked, by name. */
+    unlocked_powers?: string[]; highest_magical_power?: number; bag_upgrades_purchased?: number };
   fairy_soul?: { total_collected?: number };
   inventory?: { bag_contents?: { talisman_bag?: { data?: string } } };
   dungeons?: {

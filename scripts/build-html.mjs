@@ -57,6 +57,7 @@ const gameData = {
   bagUpgrades: await loadJson("curated/accessory_bag_upgrades.json"),
   attributeLevels: await loadJson("curated/attribute_levels.json"),
   attributeApiKeys: await loadJson("curated/attribute_api_keys.json"),
+  powerStones: await loadJson("generated/power_stones.json"),
   npcs: await loadJson("generated/npcs.json"),
 };
 

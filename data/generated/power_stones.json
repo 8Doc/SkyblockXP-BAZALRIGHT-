@@ -1,0 +1,118 @@
+{
+ "generatedAt": "2026-08-19T19:04:17.680Z",
+ "source": "https://api.hypixel.net/v2/resources/skyblock",
+ "stonesPerPower": 9,
+ "xpPerPower": 15,
+ "powers": [
+  {
+   "stone": "Acacia Birdhouse",
+   "power": "forceful",
+   "itemId": "ACACIA_BIRDHOUSE"
+  },
+  {
+   "stone": "Beating Heart",
+   "power": "bloody",
+   "itemId": "BEATING_HEART"
+  },
+  {
+   "stone": "Bubba Blister",
+   "power": "bubba",
+   "itemId": "BUBBA_BLISTER"
+  },
+  {
+   "stone": "Dark Orb",
+   "power": "shaded",
+   "itemId": "DARK_ORB"
+  },
+  {
+   "stone": "Displaced Leech",
+   "power": "sanguisuge",
+   "itemId": "DISPLACED_LEECH"
+  },
+  {
+   "stone": "Eccentric Painting",
+   "power": "bizarre",
+   "itemId": "ECCENTRIC_PAINTING"
+  },
+  {
+   "stone": "End Stone Shulker",
+   "power": "adept",
+   "itemId": "END_STONE_SHULKER"
+  },
+  {
+   "stone": "Ender Monocle",
+   "power": "sighted",
+   "itemId": "ENDER_MONOCLE"
+  },
+  {
+   "stone": "Fang-tastic Chocolate Chip",
+   "power": "crumbly",
+   "itemId": "CHOCOLATE_CHIP"
+  },
+  {
+   "stone": "Furball",
+   "power": "itchy",
+   "itemId": "FURBALL"
+  },
+  {
+   "stone": "Glacite Chunk",
+   "power": "frozen",
+   "itemId": "GLACITE_SHARD"
+  },
+  {
+   "stone": "Hazmat Enderman",
+   "power": "slender",
+   "itemId": "HAZMAT_ENDERMAN"
+  },
+  {
+   "stone": "Horns of Torment",
+   "power": "demonic",
+   "itemId": "HORNS_OF_TORMENT"
+  },
+  {
+   "stone": "Luxurious Spool",
+   "power": "silky",
+   "itemId": "LUXURIOUS_SPOOL"
+  },
+  {
+   "stone": "Magma Urchin",
+   "power": "hurtful",
+   "itemId": "MAGMA_URCHIN"
+  },
+  {
+   "stone": "Mandraa",
+   "power": "strong",
+   "itemId": "MANDRAA"
+  },
+  {
+   "stone": "Obsidian Tablet",
+   "power": "mythical",
+   "itemId": "OBSIDIAN_TABLET"
+  },
+  {
+   "stone": "Precious Pearl",
+   "power": "pleasant",
+   "itemId": "PRECIOUS_PEARL"
+  },
+  {
+   "stone": "Rock Candy",
+   "power": "sweet",
+   "itemId": "ROCK_CANDY"
+  },
+  {
+   "stone": "Scorched Books",
+   "power": "scorching",
+   "itemId": "SCORCHED_BOOKS"
+  },
+  {
+   "stone": "Sunflower Butter",
+   "power": "buttery",
+   "itemId": "SUNFLOWER_BUTTER"
+  },
+  {
+   "stone": "Vitamin Death",
+   "power": "healthy",
+   "itemId": "VITAMIN_DEATH"
+  }
+ ]
+}

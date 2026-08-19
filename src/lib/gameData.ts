@@ -172,6 +172,11 @@ export type GameData = {
   attributeLevels: { perLevel: Record<string, number[]> };
   /** Bridges wiki attribute names to the ids the profile actually uses. */
   attributeApiKeys: { wordAliases: Record<string, string>; droppableSuffixes: string[] };
+  powerStones: {
+    stonesPerPower: number;
+    xpPerPower: number;
+    powers: { stone: string; power: string; itemId: string | null }[];
+  };
   /** Where the story objectives send you: real name, island and coordinates per NPC. */
   npcs: { npcs: Record<string, NpcEntry>; objectives: Record<string, string> };
 };

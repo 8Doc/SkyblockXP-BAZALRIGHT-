@@ -20,5 +20,6 @@ export function gameData(): GameData {
     attributeShards: d("generated/attributes.json"), bagUpgrades: d("curated/accessory_bag_upgrades.json"),
     attributeLevels: d("curated/attribute_levels.json"), attributeApiKeys: d("curated/attribute_api_keys.json"),
     npcs: d("generated/npcs.json"),
-  } as GameData;
+    powerStones: d("generated/power_stones.json"),
+  };
 }

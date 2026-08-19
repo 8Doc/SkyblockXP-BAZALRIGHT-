@@ -9,7 +9,7 @@
  *
  *   node scripts/generate-data.mjs
  */
-import { writeFile, mkdir } from "node:fs/promises";
+import { writeFile, mkdir, readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
@@ -153,6 +153,31 @@ function impliedTier(name) {
   return /(^|\s)Talisman(\s|$)/.test(name ?? "") ? "COMMON" : null;
 }
 
+/**
+ * Power stones, with their item ids resolved from the items resource by name.
+ *
+ * The curated table names the stones because nothing in the API links a stone to the power it
+ * unlocks. The ids are looked up rather than written down: "Glacite Chunk" is GLACITE_SHARD and
+ * "Fang-tastic Chocolate Chip" is CHOCOLATE_CHIP, and hand-keying those is how you end up
+ * pricing a power off the wrong item.
+ */
+async function buildPowerStones() {
+  const { items } = await getJson(`${BASE}/items`);
+  const byName = new Map(items.map((i) => [i.name, i.id]));
+  const curated = JSON.parse(await readFile(join(ROOT, "data", "curated", "power_stones.json"), "utf8"));
+
+  const powers = [];
+  const missing = [];
+  for (const entry of curated.powers) {
+    const itemId = byName.get(entry.stone) ?? null;
+    if (!itemId) missing.push(entry.stone);
+    powers.push({ ...entry, itemId });
+  }
+  if (missing.length) console.log(`  power stones  no item id for: ${missing.join(", ")}`);
+
+  return { stonesPerPower: curated.stonesPerPower, xpPerPower: curated.xpPerPower, powers };
+}
+
 /* ------------------------------------------------------------------ museum */
 
 /**
@@ -232,6 +257,7 @@ const generators = {
   accessories: buildAccessories,
   museum: buildMuseum,
   travel_scrolls: buildTravelScrolls,
+  power_stones: buildPowerStones,
 };
 
 await mkdir(OUT, { recursive: true });

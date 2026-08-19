@@ -71,3 +71,33 @@ test("a co-op's collections are the sum of what its members contributed", () => 
     "the co-op together is not",
   );
 });
+
+/* ---------------------------------------------------------------- powers */
+
+test("a power already unlocked is not offered again", () => {
+  const member = { accessory_bag_storage: { unlocked_powers: ["shaded", "silky"] } };
+  const { tasks, done } = catalogFor(member);
+  const powers = tasks.filter((t) => t.id.startsWith("power_"));
+
+  assert.equal(powers.length, 22);
+  assert.ok(done.has("power_shaded"));
+  assert.ok(done.has("power_silky"));
+  assert.equal(done.has("power_frozen"), false);
+});
+
+test("a power costs nine of its stone", () => {
+  const { tasks } = catalogFor({ accessory_bag_storage: { unlocked_powers: [] } });
+  const frozen = tasks.find((t) => t.id === "power_frozen")!;
+
+  assert.equal(frozen.name, "Unlock Frozen power");
+  assert.equal(frozen.xp, 15);
+  assert.deepEqual(frozen.cost, { kind: "bazaar", items: [{ id: "GLACITE_SHARD", qty: 9 }] });
+  assert.match(frozen.note ?? "", /9× Glacite Chunk/);
+});
+
+test("every power stone resolves to a real item id", () => {
+  // "Glacite Chunk" is GLACITE_SHARD and "Fang-tastic Chocolate Chip" is CHOCOLATE_CHIP — the
+  // ids are looked up from the items resource rather than written down for exactly that reason.
+  const { powers } = gameData().powerStones;
+  assert.deepEqual(powers.filter((p) => !p.itemId), []);
+});

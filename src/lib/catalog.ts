@@ -637,6 +637,33 @@ export function buildCatalog(
     });
   }
 
+  // Powers. Nine of one Power Stone handed to Maxwell unlocks its power for good, and the
+  // profile lists what is already unlocked, so this is exact on the done half. The stones trade,
+  // so the cost is nine of them at whatever they are going for.
+  {
+    const unlocked = new Set(
+      (member.accessory_bag_storage?.unlocked_powers ?? []).map((p) => String(p).toLowerCase()),
+    );
+    const { stonesPerPower, xpPerPower, powers } = data.powerStones;
+
+    for (const entry of powers) {
+      const id = `power_${entry.power}`;
+      tasks.push({
+        id,
+        category: "accessory_bag",
+        name: `Unlock ${titleCase(entry.power)} power`,
+        xp: xpPerPower,
+        requires: [],
+        cost: entry.itemId
+          ? { kind: "bazaar", items: [{ id: entry.itemId, qty: stonesPerPower }] }
+          : { kind: "unknown", note: `No item id for ${entry.stone}` },
+        repeatable: false,
+        note: `${stonesPerPower}× ${entry.stone} to Maxwell`,
+      });
+      if (unlocked.has(entry.power)) done.add(id);
+    }
+  }
+
   /* ------------------------------------------------- accessory bag slots */
 
   // Jacobus sells 99 upgrades, each +2 slots and +2 XP, at a rising price. They're worth

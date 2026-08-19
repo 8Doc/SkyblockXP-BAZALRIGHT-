@@ -1,0 +1,31 @@
+{
+  "note": "Accessory Bag powers. Nine of one Power Stone handed to Maxwell unlocks its power permanently, and the profile lists what you already have under accessory_bag_storage.unlocked_powers.",
+  "source": "https://hypixelskyblock.minecraft.wiki/w/Power_Stones for the stone-to-power mapping and the nine-per-power rule. Item ids are resolved from the Hypixel items resource by name at build time, so a rename can't silently mis-key a stone.",
+  "verified": "The nine-per-power rule and the fact that unlocking grants SkyBlock XP are both stated by the wiki. The XP amount is NOT: the wiki records only that the January 2023 update started granting it, and no power unlock appears in the API's completed-task vocabulary to read a figure off. 15 is the user's recollection and is the one number here nothing independent backs.",
+  "stonesPerPower": 9,
+  "xpPerPower": 15,
+  "powers": [
+    { "stone": "Acacia Birdhouse", "power": "forceful" },
+    { "stone": "Beating Heart", "power": "bloody" },
+    { "stone": "Bubba Blister", "power": "bubba" },
+    { "stone": "Dark Orb", "power": "shaded" },
+    { "stone": "Displaced Leech", "power": "sanguisuge" },
+    { "stone": "Eccentric Painting", "power": "bizarre" },
+    { "stone": "End Stone Shulker", "power": "adept" },
+    { "stone": "Ender Monocle", "power": "sighted" },
+    { "stone": "Fang-tastic Chocolate Chip", "power": "crumbly" },
+    { "stone": "Furball", "power": "itchy" },
+    { "stone": "Glacite Chunk", "power": "frozen" },
+    { "stone": "Hazmat Enderman", "power": "slender" },
+    { "stone": "Horns of Torment", "power": "demonic" },
+    { "stone": "Luxurious Spool", "power": "silky" },
+    { "stone": "Magma Urchin", "power": "hurtful" },
+    { "stone": "Mandraa", "power": "strong" },
+    { "stone": "Obsidian Tablet", "power": "mythical" },
+    { "stone": "Precious Pearl", "power": "pleasant" },
+    { "stone": "Rock Candy", "power": "sweet" },
+    { "stone": "Scorched Books", "power": "scorching" },
+    { "stone": "Sunflower Butter", "power": "buttery" },
+    { "stone": "Vitamin Death", "power": "healthy" }
+  ]
+}
