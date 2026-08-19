@@ -53,7 +53,7 @@ type State = {
   packageCount: number;
   categories: Set<Category>;
   strategy: "greedy" | "exact";
-  tab: "plan" | "packages" | "grind" | "browser";
+  tab: "plan" | "packages" | "cheapest" | "grind" | "browser";
   status: { kind: "idle" | "busy" | "error"; message: string };
   report: Report | null;
 };
@@ -243,7 +243,7 @@ function escapeHtml(value: string): string {
   return value.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
 }
 
-function taskRow(task: ResolvedTask, showBundle: boolean): string {
+function taskRow(task: ResolvedTask, showBundle: boolean, tag?: string): string {
   const bundled = showBundle && task.bundle.length > 0;
   const unpriced = task.bundleCoins === null;
   const priceText = unpriced
@@ -257,7 +257,7 @@ function taskRow(task: ResolvedTask, showBundle: boolean): string {
     : coins(bundled ? task.bundleCoins : task.coins);
 
   return `<li class="task">
-    <span class="task-name">${escapeHtml(task.name)}${
+    <span class="task-name">${tag ? `<span class="tag cat">${escapeHtml(tag)}</span>` : ""}${escapeHtml(task.name)}${
       bundled ? `<span class="tag">+${task.bundle.length} prereq</span>` : ""
     }${task.note ? `<span class="note">${escapeHtml(task.note)}</span>` : ""}</span>
     <span class="task-xp">${bundled ? task.bundleXp : task.xp} xp</span>
@@ -270,12 +270,12 @@ function taskRow(task: ResolvedTask, showBundle: boolean): string {
  * One line of a plan, where a "line" may be several tiers of the same thing folded together —
  * "Arthropod Resistance 1–6, 30× Voracious Spider Shard" rather than six near-identical rows.
  */
-function runRow(run: TaskRun): string {
+function runRow(run: TaskRun, tag?: string): string {
   const merged = run.tasks.length > 1;
   const efficiency = run.coins !== null && run.xp > 0 ? run.coins / run.xp : null;
 
   return `<li class="task">
-    <span class="task-name">${escapeHtml(run.name)}${merged ? `<span class="count">×${run.tasks.length}</span>` : ""}${
+    <span class="task-name">${tag ? `<span class="tag cat">${escapeHtml(tag)}</span>` : ""}${escapeHtml(run.name)}${merged ? `<span class="count">×${run.tasks.length}</span>` : ""}${
       run.note ? `<span class="note">${escapeHtml(run.note)}</span>` : ""
     }</span>
     <span class="task-xp">${run.xp} xp</span>
@@ -284,7 +284,7 @@ function runRow(run: TaskRun): string {
   </li>`;
 }
 
-const runRows = (tasks: ResolvedTask[]): string => groupTaskRuns(tasks).map(runRow).join("");
+const runRows = (tasks: ResolvedTask[]): string => groupTaskRuns(tasks).map((run) => runRow(run)).join("");
 
 function planView(report: Report): string {
   const { plan } = report;
@@ -446,6 +446,38 @@ const BAND_BLURB: Record<string, string> = {
  * walls. Difficulty comes from how many sampled players have already finished each task, which
  * is a proxy for effort rather than a measurement, so it is shown in coarse bands.
  */
+/**
+ * Query D: everything buyable in one list, cheapest per XP first, category walls down.
+ *
+ * "Group maxed" folds each multi-tier thing into the single purchase it really is — all ten
+ * levels of an attribute, but only the best tier of a pet, since the lower ones stop counting
+ * the moment you own the higher one.
+ */
+function cheapestView(report: Report): string {
+  const { tasks, truncated, grouped, groupedTruncated } = report.cheapest;
+  const on = open.has("cheapest:grouped");
+  const hidden = on ? groupedTruncated : truncated;
+  const rows = on
+    ? grouped.map((run) => runRow(run, CATEGORY_LABELS[run.tasks[0].category])).join("")
+    : tasks.map((t) => taskRow(t, true, CATEGORY_LABELS[t.category])).join("");
+
+  return `<div class="panel pad group-toggle">
+      <button class="chip${on ? " on" : ""}" data-toggle="cheapest:grouped">Group maxed</button>
+      <span class="dim">${
+        on
+          ? "each thing folded into one purchase — every tier of an attribute, the best tier of a pet"
+          : "one row per individual upgrade"
+      }</span>
+      <span class="dim push">${num(on ? grouped.length : tasks.length)} shown</span>
+    </div>
+    <ul class="tasks panel">${rows}</ul>
+    ${
+      hidden > 0
+        ? `<p class="sub">+${num(hidden)} more, all worse value than everything above. Narrow the categories or raise the XP floor to bring the tail into view.</p>`
+        : ""
+    }`;
+}
+
 function grindView(report: Report): string {
   const { grind } = report;
   if (!grind.length) {
@@ -515,7 +547,7 @@ function browserView(report: Report): string {
                 : ""
             }
             <ul class="tasks">${
-              isGrouped ? maxed!.map(runRow).join("") : tasks.map((t) => taskRow(t, true)).join("")
+              isGrouped ? maxed!.map((run) => runRow(run)).join("") : tasks.map((t) => taskRow(t, true)).join("")
             }</ul>
             ${hidden > 0 ? `<p class="sub">+${num(hidden)} more above the XP floor</p>` : ""}
           </div>`
@@ -862,6 +894,7 @@ function renderResults(): void {
     <div class="tabs">
       <button class="chip${state.tab === "plan" ? " on" : ""}" data-tab="plan">Batch plan</button>
       <button class="chip${state.tab === "packages" ? " on" : ""}" data-tab="packages">Packages</button>
+      <button class="chip${state.tab === "cheapest" ? " on" : ""}" data-tab="cheapest">Cheapest first</button>
       <button class="chip${state.tab === "grind" ? " on" : ""}" data-tab="grind">Grind order</button>
       <button class="chip${state.tab === "browser" ? " on" : ""}" data-tab="browser">Category browser</button>
     </div>
@@ -871,9 +904,11 @@ function renderResults(): void {
         ? planView(r)
         : state.tab === "packages"
           ? packagesView(r)
-          : state.tab === "grind"
-            ? grindView(r)
-            : browserView(r)
+          : state.tab === "cheapest"
+            ? cheapestView(r)
+            : state.tab === "grind"
+              ? grindView(r)
+              : browserView(r)
     }
 
     <footer>${binsNote} · task tables generated ${new Date(data.skills.generatedAt).toLocaleDateString()}${

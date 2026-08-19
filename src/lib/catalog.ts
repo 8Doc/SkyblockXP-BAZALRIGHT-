@@ -454,6 +454,7 @@ export function buildCatalog(
 
   /* ------------------------------------------------------ attribute shards */
 
+
   // Every attribute levels on the same shard thresholds, and every level is worth +1 XP.
   //
   // The universe comes from the wiki rather than from the player's own stacks: the profile only
@@ -466,10 +467,11 @@ export function buildCatalog(
   // direct-purchase path; fusing shards you already own is cheaper and isn't modelled, so this
   // is an upper bound on what the level costs.
   const shardThresholds = data.curves.attributes.cumulativeShards;
-  const heldShards = member.attributes?.stacks ?? {};
+  const heldShards = attributeStacks(member.attributes?.stacks);
+  const strandedAttributes = unplacedAttributes(member.attributes?.stacks, data.attributeShards.attributes);
 
   for (const attribute of data.attributeShards.attributes) {
-    const held = heldShards[attribute.key] ?? 0;
+    const held = heldShards(attribute.key);
     let previous: string | null = null;
 
     shardThresholds.forEach((needed, index) => {
@@ -622,7 +624,14 @@ export function buildCatalog(
     currentXp: member.leveling?.experience ?? 0,
     // Pet score is unmodelled as *tasks*, but the profile still tells us exactly how much XP
     // it has already paid out — worth showing rather than discarding.
-    unmodelled: UNMODELLED.map((u) => ({ ...u })),
+    unmodelled: UNMODELLED.map((u) =>
+      u.category === "attributes" && strandedAttributes > 0
+        ? {
+            ...u,
+            note: `${u.note} This profile also has shards in ${strandedAttributes} attributes that aren't on the wiki list this app is built from — their progress isn't credited and their levels aren't offered.`,
+          }
+        : { ...u },
+    ),
     meta: {
       fairySouls: { collected },
       skills: skillLevels,
@@ -660,3 +669,57 @@ const titleCase = (value: string) =>
     .split(/[\s_]+/)
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
+
+/**
+ * How many shards the player holds for one of our attributes.
+ *
+ * The profile publishes progress under `attributes.stacks`, but keyed by the game's own
+ * attribute ids, and our list comes from the wiki keyed by display name. Those two vocabularies
+ * disagree in three mechanical ways — possessives ("Hunter's Karma" slugs to hunter_s_karma,
+ * the API says hunter_karma), word order ("Essence of Ice" against ice_essence), and plurals
+ * ("Essence of Dragons" against dragon_essence). Matching on the raw key alone silently drops
+ * that progress and tells the player to re-buy levels they already own.
+ *
+ * So keys are compared as an order-independent set of singular, stopword-free words. That is
+ * strict — it never accepts a partial overlap, which is what keeps crop_speed away from
+ * attack_speed and pest_cooldown away from pest_luck. Anything it still can't place is left
+ * alone and reported as a coverage gap rather than guessed at.
+ */
+function attributeStacks(stacks: Record<string, number> | undefined): (key: string) => number {
+  const held = stacks ?? {};
+  const byShape = new Map<string, number>();
+  for (const [key, amount] of Object.entries(held)) {
+    const shape = attributeShape(key);
+    byShape.set(shape, Math.max(byShape.get(shape) ?? 0, amount));
+  }
+  return (key) => held[key] ?? byShape.get(attributeShape(key)) ?? 0;
+}
+
+const ATTRIBUTE_STOPWORDS = new Set(["of", "the", "a", "s"]);
+
+/** "essence_of_dragons" and "dragon_essence" both reduce to "dragon_essence". */
+function attributeShape(key: string): string {
+  return key
+    .split("_")
+    .filter((word) => word && !ATTRIBUTE_STOPWORDS.has(word))
+    .map((word) => (word.endsWith("s") && word.length > 3 ? word.slice(0, -1) : word))
+    .sort()
+    .join("_");
+}
+
+/**
+ * Attributes the profile has progress in that our list doesn't contain at all.
+ *
+ * Worth counting rather than ignoring: the wiki page this app's attribute list comes from is a
+ * snapshot, and the game keeps adding families (foraging, hunting, garden). A silent gap reads
+ * as "you have nothing there"; a counted one reads as "this app doesn't know about these yet",
+ * which is the true statement.
+ */
+function unplacedAttributes(
+  stacks: Record<string, number> | undefined,
+  attributes: { key: string }[],
+): number {
+  if (!stacks) return 0;
+  const known = new Set(attributes.map((a) => attributeShape(a.key)));
+  return Object.entries(stacks).filter(([key, amount]) => amount > 0 && !known.has(attributeShape(key))).length;
+}

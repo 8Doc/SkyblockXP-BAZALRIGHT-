@@ -35,6 +35,11 @@ Every category as its own panel: total XP still available, total coin cost, coun
 
 Attribute shards get a **Group maxed** toggle in the panel. There are 181 attributes of ten levels each, and the per-level rows differ only in how many of the same shard they want, so listed individually they're 1,810 near-identical lines shown forty at a time. Grouped, each attribute is one row — the levels you're missing, the shards they add up to, and the price of the lot — because maxing an attribute is one decision, not ten. The grouping is built from the untruncated set, so it isn't assembled out of whichever forty levels survived the cut, and the XP floor is applied to the grouped row rather than to its levels.
 
+### D. Cheapest first
+Everything buyable in one list, cheapest coins-per-XP first, category walls down. The browser answers "I'm at the Abiphone anyway, what else"; this answers the blunter question underneath — of everything in the game, what is the next cheapest XP, wherever it lives. Ordered on the same figure the rows display (bundle coins over bundle XP) so the list reads as monotonic.
+
+Its **Group maxed** toggle folds each multi-tier thing into the single purchase it really is, and the two shapes don't fold the same way. Tiers you buy *through* — attribute levels, minion tiers, museum tool marks — are summed, because they all count. Tiers that *replace* — pets, accessory families — collapse to the best member alone, because owning the epic makes the rare worthless; summing those would quote uncommon + rare + epic for a pet you buy once. On a maxed profile that takes 2,288 buyable tasks down to 819 purchases.
+
 ### C. Batch plan
 The output of query A, regrouped by category/location rather than by efficiency rank, so the user does one trip per category. Order categories by total XP in the batch, descending.
 

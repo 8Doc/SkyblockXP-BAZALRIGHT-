@@ -21,13 +21,23 @@ function effortTitle(task: ResolvedTask): string {
  * "Lily Pad Minion V (requires I-IV) — 5 XP for 46.2k total" — rather than quoting the
  * leaf price and letting the user discover the rest at the crafting bench.
  */
-export function TaskRow({ task, showBundle = true }: { task: ResolvedTask; showBundle?: boolean }) {
+export function TaskRow({
+  task,
+  showBundle = true,
+  tag,
+}: {
+  task: ResolvedTask;
+  showBundle?: boolean;
+  /** Where this row lives. Only worth showing once the list crosses categories. */
+  tag?: string;
+}) {
   const bundled = showBundle && task.bundle.length > 0;
   const unpriced = task.bundleCoins === null;
 
   return (
     <li className="flex items-baseline gap-3 border-t border-line/60 px-3 py-1.5 text-sm first:border-t-0">
       <span className="flex-1 truncate">
+        {tag && <span className="mr-1.5 rounded border border-line px-1 text-[10px] uppercase tracking-wide text-muted/70">{tag}</span>}
         {task.name}
         {bundled && <span className="ml-1.5 text-xs text-muted">+{task.bundle.length} prereq</span>}
         {task.note && <span className="ml-1.5 text-xs text-muted/70">{task.note}</span>}

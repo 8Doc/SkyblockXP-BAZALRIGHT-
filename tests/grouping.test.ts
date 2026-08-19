@@ -146,3 +146,37 @@ test("maxed rows rank on value, with the unbuyable ones last", () => {
     ["Cheap", "Dear", "Untradeable"],
   );
 });
+
+test("a line numbered only in its ids says how many tiers, not 'tiers –'", () => {
+  // The museum drills are MITHRIL_DRILL_1 and _2 but read "SX-R226" and "SX-R326".
+  const museum = (id: string, name: string, coins: number): ResolvedTask => ({
+    ...task(id, name, 8, coins),
+    category: "museum",
+  });
+  const tasks = [
+    museum("museum_MITHRIL_DRILL_1", "Mithril Drill SX-R226", 9_000_000),
+    museum("museum_MITHRIL_DRILL_2", "Mithril Drill SX-R326", 10_890_000),
+  ];
+
+  const [row] = groupToMax(tasks);
+  assert.equal(row.note, "2 tiers");
+  assert.equal(row.xp, 16);
+  assert.equal(row.coins, 19_890_000);
+});
+
+test("pets take the best tier alone — never the sum of their tiers", () => {
+  const pet = (rarity: string, level: number, coins: number): ResolvedTask => ({
+    ...task(`pet_BEE_${rarity}`, `Bee (${rarity})`, level, coins, "pet score"),
+    exclusiveGroup: "pet:BEE",
+    groupLevel: level,
+    groupBase: 0,
+  });
+  const tasks = [pet("uncommon", 6, 190_000), pet("rare", 9, 500_000), pet("epic", 12, 1_600_000)];
+
+  const [row, ...rest] = groupToMax(tasks);
+  assert.equal(rest.length, 0);
+  assert.equal(row.name, "Bee (epic)", "named for the tier you actually buy");
+  assert.equal(row.xp, 12);
+  assert.equal(row.coins, 1_600_000, "the epic's price, not uncommon + rare + epic");
+  assert.match(row.note ?? "", /best of 3 tiers/);
+});

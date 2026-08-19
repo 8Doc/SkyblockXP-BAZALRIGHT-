@@ -8,6 +8,7 @@ import { PlanView } from "./PlanView";
 import { PackagesView } from "./PackagesView";
 import { GrindView } from "./GrindView";
 import { CategoryBrowser } from "./CategoryBrowser";
+import { CheapestView } from "./CheapestView";
 
 const DEFAULT_CATEGORIES: Category[] = [...CATEGORIES];
 
@@ -23,7 +24,7 @@ export function Planner() {
   const [budget, setBudget] = useState("");
   const [categories, setCategories] = useState<Category[]>(DEFAULT_CATEGORIES);
   const [strategy, setStrategy] = useState<"greedy" | "exact">("greedy");
-  const [tab, setTab] = useState<"plan" | "packages" | "grind" | "browser">("plan");
+  const [tab, setTab] = useState<"plan" | "packages" | "grind" | "browser" | "cheapest">("plan");
   const [packageSize, setPackageSize] = useState("10M");
   const [packageCount, setPackageCount] = useState("5");
 
@@ -304,14 +305,22 @@ export function Planner() {
           </div>
 
           <div className="mb-3 flex gap-1">
-            {(["plan", "packages", "grind", "browser"] as const).map((t) => (
+            {(["plan", "packages", "cheapest", "grind", "browser"] as const).map((t) => (
               <button
                 key={t}
                 type="button"
                 onClick={() => setTab(t)}
                 className={`chip ${tab === t ? "border-aqua/60 bg-aqua/10 text-aqua" : "border-line text-muted"}`}
               >
-                {t === "plan" ? "Batch plan" : t === "packages" ? "Packages" : t === "grind" ? "Grind order" : "Category browser"}
+                {t === "plan"
+                  ? "Batch plan"
+                  : t === "packages"
+                    ? "Packages"
+                    : t === "cheapest"
+                      ? "Cheapest first"
+                      : t === "grind"
+                        ? "Grind order"
+                        : "Category browser"}
               </button>
             ))}
           </div>
@@ -319,6 +328,7 @@ export function Planner() {
           {tab === "plan" && <PlanView plan={result.plan} currentXp={result.progress.xp} />}
           {tab === "packages" && <PackagesView packages={result.packages} />}
           {tab === "grind" && <GrindView result={result} />}
+          {tab === "cheapest" && <CheapestView result={result} />}
           {tab === "browser" && <CategoryBrowser result={result} />}
 
           <footer className="mt-6 border-t border-line pt-3 text-xs text-muted">

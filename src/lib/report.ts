@@ -49,11 +49,24 @@ export type Report = {
   }[];
   /** Every remaining grind, cheapest in effort first, across all categories at once. */
   grind: ResolvedTask[];
+  /**
+   * Everything buyable, cheapest per XP first, with the category walls down — the raw value
+   * ranking. `grouped` is the same list with each multi-tier thing folded into the single
+   * purchase it really is.
+   */
+  cheapest: { tasks: ResolvedTask[]; truncated: number; grouped: TaskRun[]; groupedTruncated: number };
   unmodelled: { category: Category; note: string; totalXp?: number; earnedXp?: number }[];
   bag: { computedMp: number; reportedMp: number | null; readable: boolean; capacity: number; used: number };
 };
 
 const BROWSER_LIMIT = 40;
+
+/**
+ * The value ranking is one list rather than seventeen, so it can afford to be longer — but not
+ * unbounded: a full profile has thousands of buyable tasks and rendering all of them costs more
+ * than anyone gets from row 2,000 of a list sorted worst-last.
+ */
+const CHEAPEST_LIMIT = 300;
 
 /**
  * Categories that read better collapsed to one row per thing. Attributes are the clear case:
@@ -138,6 +151,30 @@ export function buildReport(catalog: Catalog, book: PriceBook, options: ReportOp
     .sort((a, b) => (a.effort ?? 1) - (b.effort ?? 1) || b.xp - a.xp)
     .slice(0, 60);
 
+  // Query D: value ranking across every category at once. Ordered on the same figure the rows
+  // display — bundle coins per bundle XP — so the list reads as monotonic rather than as a sort
+  // by one number and a display of another.
+  const buyable = resolved
+    .filter((t) => !t.done && t.xp > 0 && options.categories.has(t.category) && t.cost.kind !== "none")
+    .sort((a, b) => {
+      if (a.efficiency === null) return b.efficiency === null ? 0 : 1;
+      if (b.efficiency === null) return -1;
+      return a.efficiency - b.efficiency;
+    });
+
+  const flat = buyable.filter((t) => t.bundleXp >= options.minXp);
+  // Grouped from the unfiltered set for the same reason the browser does it: a folded row is a
+  // whole purchase, so it can't be assembled out of whichever tiers cleared the floor on their
+  // own. The floor then applies to the folded row.
+  const folded = groupToMax(buyable).filter((run) => run.xp >= options.minXp);
+
+  const cheapest = {
+    tasks: flat.slice(0, CHEAPEST_LIMIT),
+    truncated: Math.max(flat.length - CHEAPEST_LIMIT, 0),
+    grouped: folded.slice(0, CHEAPEST_LIMIT),
+    groupedTruncated: Math.max(folded.length - CHEAPEST_LIMIT, 0),
+  };
+
   const xp = catalog.currentXp;
 
   return {
@@ -150,6 +187,7 @@ export function buildReport(catalog: Catalog, book: PriceBook, options: ReportOp
     plan,
     packages,
     browser,
+    cheapest,
     grind,
     unmodelled: catalog.unmodelled,
     bag: {
