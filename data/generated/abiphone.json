@@ -1,0 +1,951 @@
+{
+ "generatedAt": "2026-08-20T17:50:45.085Z",
+ "source": "https://hypixel-skyblock.fandom.com/wiki/Abiphones/ContactsTable",
+ "note": "Costs are the requirement column, parsed. 'npc' with 0 coins is a contact you only have to talk to; 'none' is a quest or a grind with no purchase in it; 'unknown' is a requirement that is a purchase but not one we could reduce to a single item id.",
+ "contacts": [
+  {
+   "taskId": "ABIPHONE_agatha",
+   "matchedBy": "name",
+   "npc": "Agatha",
+   "requirement": "No requirement.",
+   "cost": {
+    "kind": "npc",
+    "coins": 0
+   }
+  },
+  {
+   "taskId": "ABIPHONE_alchemist",
+   "matchedBy": "name",
+   "npc": "Alchemist",
+   "requirement": "Giving 64x Mutant Nether Wart .",
+   "cost": {
+    "kind": "bazaar",
+    "items": [
+     {
+      "id": "MUTANT_NETHER_STALK",
+      "qty": 64
+     }
+    ]
+   },
+   "needs": "64x Mutant Nether Wart"
+  },
+  {
+   "taskId": "ABIPHONE_alda",
+   "matchedBy": "name",
+   "npc": "Alda",
+   "requirement": "No requirement.",
+   "cost": {
+    "kind": "npc",
+    "coins": 0
+   }
+  },
+  {
+   "taskId": "ABIPHONE_anita",
+   "matchedBy": "name",
+   "npc": "Anita",
+   "requirement": "One GOLD medal in any crop and owning Jacob 's contact.",
+   "cost": {
+    "kind": "none"
+   }
+  },
+  {
+   "taskId": "ABIPHONE_aranya",
+   "matchedBy": "name",
+   "npc": "Aranya",
+   "requirement": "No requirement.",
+   "cost": {
+    "kind": "npc",
+    "coins": 0
+   }
+  },
+  {
+   "taskId": "ABIPHONE_bartender",
+   "matchedBy": "name",
+   "npc": "Bartender",
+   "requirement": "Obtaining Spider Slayer 9.",
+   "cost": {
+    "kind": "none"
+   }
+  },
+  {
+   "taskId": "ABIPHONE_blacksmith",
+   "matchedBy": "name",
+   "npc": "Blacksmith",
+   "requirement": "Paying 32,000,000 coins .",
+   "cost": {
+    "kind": "npc",
+    "coins": 32000000
+   }
+  },
+  {
+   "taskId": "ABIPHONE_brynmor",
+   "matchedBy": "name",
+   "npc": "Brynmor",
+   "requirement": "Giving 1x Speckled Teacup .",
+   "cost": {
+    "kind": "bazaar",
+    "items": [
+     {
+      "id": "SPECKLED_TEACUP",
+      "qty": 1
+     }
+    ]
+   },
+   "needs": "1x Speckled Teacup"
+  },
+  {
+   "taskId": "ABIPHONE_builder",
+   "matchedBy": "name",
+   "npc": "Builder",
+   "requirement": "Giving 1x Builder's Wand .",
+   "cost": {
+    "kind": "bazaar",
+    "items": [
+     {
+      "id": "BUILDERS_WAND",
+      "qty": 1
+     }
+    ]
+   },
+   "needs": "1x Builder's Wand"
+  },
+  {
+   "taskId": "ABIPHONE_bulvar",
+   "matchedBy": "name",
+   "npc": "Bulvar",
+   "requirement": "Giving 1x Silex .",
+   "cost": {
+    "kind": "bazaar",
+    "items": [
+     {
+      "id": "SIL_EX",
+      "qty": 1
+     }
+    ]
+   },
+   "needs": "1x Silex"
+  },
+  {
+   "taskId": "ABIPHONE_captain_ahone",
+   "matchedBy": "name",
+   "npc": "Captain Ahone",
+   "requirement": "Automatically granted during the Mage Faction questline. Can be re-added to an Abiphone by talking to Ziri if previously lost.",
+   "cost": {
+    "kind": "none"
+   }
+  },
+  {
+   "taskId": "ABIPHONE_carrolyn",
+   "matchedBy": "name",
+   "npc": "Carrolyn",
+   "requirement": "Giving 1x Magma Core .",
+   "cost": {
+    "kind": "bazaar",
+    "items": [
+     {
+      "id": "MAGMA_CORE",
+      "qty": 1
+     }
+    ]
+   },
+   "needs": "1x Magma Core"
+  },
+  {
+   "taskId": "ABIPHONE_clerk_seraphine",
+   "matchedBy": "name",
+   "npc": "Clerk Seraphine",
+   "requirement": "No requirement.",
+   "cost": {
+    "kind": "npc",
+    "coins": 0
+   }
+  },
+  {
+   "taskId": "ABIPHONE_dalir",
+   "matchedBy": "name",
+   "npc": "Dalir",
+   "requirement": "Wear Fallen Star Helmet and attend 3 meetings during which you talk to Dalir using your Abiphone",
+   "cost": {
+    "kind": "none"
+   }
+  },
+  {
+   "taskId": "ABIPHONE_dean",
+   "matchedBy": "name",
+   "npc": "Dean",
+   "requirement": "Automatically granted during the Mage Faction questline. Can be re-added to an Abiphone by talking to Ziri if previously lost.",
+   "cost": {
+    "kind": "none"
+   }
+  },
+  {
+   "taskId": "ABIPHONE_duncan",
+   "matchedBy": "name",
+   "npc": "Duncan",
+   "requirement": "No requirement.",
+   "cost": {
+    "kind": "npc",
+    "coins": 0
+   }
+  },
+  {
+   "taskId": "ABIPHONE_dusk",
+   "matchedBy": "name",
+   "npc": "Dusk",
+   "requirement": "Slaying a runic Enderman .",
+   "cost": {
+    "kind": "none"
+   }
+  },
+  {
+   "taskId": "ABIPHONE_einary",
+   "matchedBy": "name",
+   "npc": "Einary",
+   "requirement": "Giving 1x Einary's Red Hoodie .",
+   "cost": {
+    "kind": "bazaar",
+    "items": [
+     {
+      "id": "EINARY_RED_HOODIE",
+      "qty": 1
+     }
+    ]
+   },
+   "needs": "1x Einary's Red Hoodie"
+  },
+  {
+   "taskId": "ABIPHONE_community_shop",
+   "matchedBy": "role",
+   "npc": "Elizabeth",
+   "requirement": "No requirement.",
+   "cost": {
+    "kind": "npc",
+    "coins": 0
+   }
+  },
+  {
+   "taskId": "ABIPHONE_elle",
+   "matchedBy": "name",
+   "npc": "Elle",
+   "requirement": "Automatically given during the Mage Faction questline. Can be re-added to an Abiphone by talking to Ziri if previously lost.",
+   "cost": {
+    "kind": "none"
+   }
+  },
+  {
+   "taskId": "ABIPHONE_spooky",
+   "matchedBy": "role",
+   "npc": "Fear Mongerer",
+   "requirement": "Giving 64x Purple Candy and 6x Ectoplasm .",
+   "cost": {
+    "kind": "bazaar",
+    "items": [
+     {
+      "id": "PURPLE_CANDY",
+      "qty": 64
+     },
+     {
+      "id": "ECTOPLASM",
+      "qty": 6
+     }
+    ]
+   },
+   "needs": "64x Purple Candy + 6x Ectoplasm"
+  },
+  {
+   "taskId": "ABIPHONE_frozen_alex",
+   "matchedBy": "name",
+   "npc": "Frozen Alex",
+   "requirement": "Giving 1x Enchanted Lava Bucket .",
+   "cost": {
+    "kind": "bazaar",
+    "items": [
+     {
+      "id": "ENCHANTED_LAVA_BUCKET",
+      "qty": 1
+     }
+    ]
+   },
+   "needs": "1x Enchanted Lava Bucket"
+  },
+  {
+   "taskId": "ABIPHONE_gemma",
+   "matchedBy": "name",
+   "npc": "Gemma",
+   "requirement": "Giving 1x Pure Mithril Gem .",
+   "cost": {
+    "kind": "bazaar",
+    "items": [
+     {
+      "id": "PET_ITEM_PURE_MITHRIL_GEM",
+      "qty": 1
+     }
+    ]
+   },
+   "needs": "1x Pure Mithril Gem"
+  },
+  {
+   "taskId": "ABIPHONE_gemstone",
+   "matchedBy": "role",
+   "npc": "Geo",
+   "requirement": "Giving the following Gemstones in the following order: Flawless Ruby Gemstone Flawless Amber Gemstone Flawless Topaz Gemstone Flawless Jade Gemstone Flawless Sapphire Gemstone Flawless Amethyst Gemstone",
+   "cost": {
+    "kind": "unknown",
+    "note": "Needs the following Gemstones in the following order: Flawless Rub"
+   }
+  },
+  {
+   "taskId": "ABIPHONE_hoppity",
+   "matchedBy": "name",
+   "npc": "Hoppity",
+   "requirement": "Giving 1x Fish Chocolat à la Vapeur .",
+   "cost": {
+    "kind": "bazaar",
+    "items": [
+     {
+      "id": "STEAMED_CHOCOLATE_FISH",
+      "qty": 1
+     }
+    ]
+   },
+   "needs": "1x Fish Chocolat à la Vapeur"
+  },
+  {
+   "taskId": "ABIPHONE_igrupan",
+   "matchedBy": "name",
+   "npc": "Igrupan",
+   "requirement": "Returning their chickens to them. Can be re-added to an Abiphone by talking to Ziri if previously lost.",
+   "cost": {
+    "kind": "none"
+   }
+  },
+  {
+   "taskId": "ABIPHONE_jacob",
+   "matchedBy": "name",
+   "npc": "Jacob",
+   "requirement": "Giving 10x Jacob's Ticket .",
+   "cost": {
+    "kind": "bazaar",
+    "items": [
+     {
+      "id": "JACOBS_TICKET",
+      "qty": 10
+     }
+    ]
+   },
+   "needs": "10x Jacob's Ticket"
+  },
+  {
+   "taskId": "ABIPHONE_jake_lab",
+   "matchedBy": "subset",
+   "npc": "Jake",
+   "requirement": "Giving 1x Chocoberry",
+   "cost": {
+    "kind": "bazaar",
+    "items": [
+     {
+      "id": "CHOCOBERRY",
+      "qty": 1
+     }
+    ]
+   },
+   "needs": "1x Chocoberry"
+  },
+  {
+   "taskId": "ABIPHONE_junker_joel",
+   "matchedBy": "name",
+   "npc": "Junker Joel",
+   "requirement": "Giving 1x Bayou Water Orb .",
+   "cost": {
+    "kind": "bazaar",
+    "items": [
+     {
+      "id": "BAYOU_WATER_ORB",
+      "qty": 1
+     }
+    ]
+   },
+   "needs": "1x Bayou Water Orb"
+  },
+  {
+   "taskId": "ABIPHONE_pet_sitter",
+   "matchedBy": "role",
+   "npc": "Kat",
+   "requirement": "Giving 1x Kat Flower .",
+   "cost": {
+    "kind": "bazaar",
+    "items": [
+     {
+      "id": "KAT_FLOWER",
+      "qty": 1
+     }
+    ]
+   },
+   "needs": "1x Kat Flower"
+  },
+  {
+   "taskId": "ABIPHONE_kaus",
+   "matchedBy": "name",
+   "npc": "Kaus",
+   "requirement": "No requirement.",
+   "cost": {
+    "kind": "npc",
+    "coins": 0
+   }
+  },
+  {
+   "taskId": "ABIPHONE_kiara",
+   "matchedBy": "name",
+   "npc": "Kiara",
+   "requirement": "Giving 1x Chameleon Shard",
+   "cost": {
+    "kind": "bazaar",
+    "items": [
+     {
+      "id": "SHARD_CHAMELEON",
+      "qty": 1
+     }
+    ]
+   },
+   "needs": "1x Chameleon Shard"
+  },
+  {
+   "taskId": "ABIPHONE_kysha",
+   "matchedBy": "name",
+   "npc": "Kysha",
+   "requirement": "Giving 1x Nessie Shard .",
+   "cost": {
+    "kind": "bazaar",
+    "items": [
+     {
+      "id": "SHARD_NESSIE",
+      "qty": 1
+     }
+    ]
+   },
+   "needs": "1x Nessie Shard"
+  },
+  {
+   "taskId": "ABIPHONE_lumber_merchant",
+   "matchedBy": "name",
+   "npc": "Lumber Merchant",
+   "requirement": "Giving 1x Spruce Axe .",
+   "cost": {
+    "kind": "bazaar",
+    "items": [
+     {
+      "id": "JUNGLE_AXE",
+      "qty": 1
+     }
+    ]
+   },
+   "needs": "1x Spruce Axe"
+  },
+  {
+   "taskId": "ABIPHONE_mad_redstone_engineer",
+   "matchedBy": "name",
+   "npc": "Mad Redstone Engineer",
+   "requirement": "Giving 1x Enchanted Redstone Block .",
+   "cost": {
+    "kind": "bazaar",
+    "items": [
+     {
+      "id": "ENCHANTED_REDSTONE_BLOCK",
+      "qty": 1
+     }
+    ]
+   },
+   "needs": "1x Enchanted Redstone Block"
+  },
+  {
+   "taskId": "ABIPHONE_slayer",
+   "matchedBy": "subset",
+   "npc": "Maddox the Slayer",
+   "requirement": "Giving 1x Maddox Batphone .",
+   "cost": {
+    "kind": "bazaar",
+    "items": [
+     {
+      "id": "AATROX_BATPHONE",
+      "qty": 1
+     }
+    ]
+   },
+   "needs": "1x Maddox Batphone"
+  },
+  {
+   "taskId": "ABIPHONE_malik",
+   "matchedBy": "name",
+   "npc": "Malik",
+   "requirement": "Giving 5,000x Undead Essence .",
+   "cost": {
+    "kind": "essence",
+    "type": "UNDEAD",
+    "amount": 5000
+   }
+  },
+  {
+   "taskId": "ABIPHONE_marigold",
+   "matchedBy": "name",
+   "npc": "Marigold",
+   "requirement": "Giving 1x Midas Jewel .",
+   "cost": {
+    "kind": "bazaar",
+    "items": [
+     {
+      "id": "MIDAS_JEWEL",
+      "qty": 1
+     }
+    ]
+   },
+   "needs": "1x Midas Jewel"
+  },
+  {
+   "taskId": "ABIPHONE_thaumaturgist",
+   "matchedBy": "role",
+   "npc": "Maxwell",
+   "requirement": "Giving 2x Ultimate Carrot Candies .",
+   "cost": {
+    "kind": "bazaar",
+    "items": [
+     {
+      "id": "ULTIMATE_CARROT_CANDY",
+      "qty": 2
+     }
+    ]
+   },
+   "needs": "2x Ultimate Carrot Candies"
+  },
+  {
+   "taskId": "ABIPHONE_moby",
+   "matchedBy": "name",
+   "npc": "Moby",
+   "requirement": "Giving 64x Chum Bucket .",
+   "cost": {
+    "kind": "unknown",
+    "note": "No item id for Chum Bucket"
+   }
+  },
+  {
+   "taskId": "ABIPHONE_odger",
+   "matchedBy": "name",
+   "npc": "Odger",
+   "requirement": "Giving any DIAMOND Trophy Fish .",
+   "cost": {
+    "kind": "unknown",
+    "note": "Needs any DIAMOND Trophy Fish"
+   }
+  },
+  {
+   "taskId": "ABIPHONE_ophelia",
+   "matchedBy": "name",
+   "npc": "Ophelia",
+   "requirement": "Giving 1x Catacombs Expert Ring .",
+   "cost": {
+    "kind": "bazaar",
+    "items": [
+     {
+      "id": "CATACOMBS_EXPERT_RING",
+      "qty": 1
+     }
+    ]
+   },
+   "needs": "1x Catacombs Expert Ring"
+  },
+  {
+   "taskId": "ABIPHONE_oringo",
+   "matchedBy": "name",
+   "npc": "Oringo",
+   "requirement": "Giving 64x Silent Pearl .",
+   "cost": {
+    "kind": "bazaar",
+    "items": [
+     {
+      "id": "SILENT_PEARL",
+      "qty": 64
+     }
+    ]
+   },
+   "needs": "64x Silent Pearl"
+  },
+  {
+   "taskId": "ABIPHONE_pablo",
+   "matchedBy": "name",
+   "npc": "Pablo",
+   "requirement": "No requirement.",
+   "cost": {
+    "kind": "npc",
+    "coins": 0
+   }
+  },
+  {
+   "taskId": "ABIPHONE_pesthunter_phillip",
+   "matchedBy": "subset",
+   "npc": "Phillip",
+   "requirement": "Giving 1x Squeaky Toy .",
+   "cost": {
+    "kind": "bazaar",
+    "items": [
+     {
+      "id": "SQUEAKY_TOY",
+      "qty": 1
+     }
+    ]
+   },
+   "needs": "1x Squeaky Toy"
+  },
+  {
+   "taskId": "ABIPHONE_plumber",
+   "matchedBy": "subset",
+   "npc": "Plumber Joe",
+   "requirement": "No requirement.",
+   "cost": {
+    "kind": "npc",
+    "coins": 0
+   }
+  },
+  {
+   "taskId": "ABIPHONE_queen_mismyla",
+   "matchedBy": "name",
+   "npc": "Queen Mismyla",
+   "requirement": "Giving 1x Royal Pigeon .",
+   "cost": {
+    "kind": "bazaar",
+    "items": [
+     {
+      "id": "ROYAL_PIGEON",
+      "qty": 1
+     }
+    ]
+   },
+   "needs": "1x Royal Pigeon"
+  },
+  {
+   "taskId": "ABIPHONE_queen",
+   "matchedBy": "subset",
+   "npc": "Queen Nyx",
+   "requirement": "Reaching 12,000 ቾ Mage Reputation .",
+   "cost": {
+    "kind": "none"
+   }
+  },
+  {
+   "taskId": "ABIPHONE_roddy",
+   "matchedBy": "name",
+   "npc": "Roddy",
+   "requirement": "Giving 1x Torn Cloth",
+   "cost": {
+    "kind": "bazaar",
+    "items": [
+     {
+      "id": "TORN_CLOTH",
+      "qty": 1
+     }
+    ]
+   },
+   "needs": "1x Torn Cloth"
+  },
+  {
+   "taskId": "ABIPHONE_rollim",
+   "matchedBy": "name",
+   "npc": "Rollim",
+   "requirement": "No requirement.",
+   "cost": {
+    "kind": "npc",
+    "coins": 0
+   }
+  },
+  {
+   "taskId": "ABIPHONE_rosemary",
+   "matchedBy": "name",
+   "npc": "Rosemary",
+   "requirement": "Giving 1x Figstone .",
+   "cost": {
+    "kind": "bazaar",
+    "items": [
+     {
+      "id": "FIGSTONE",
+      "qty": 1
+     }
+    ]
+   },
+   "needs": "1x Figstone"
+  },
+  {
+   "taskId": "ABIPHONE_shaggy",
+   "matchedBy": "name",
+   "npc": "Shaggy",
+   "requirement": "Kill Arachne",
+   "cost": {
+    "kind": "none"
+   }
+  },
+  {
+   "taskId": "ABIPHONE_sirih",
+   "matchedBy": "name",
+   "npc": "Sirih",
+   "requirement": "Being a member of the Barbarian Faction . Must be in human form when adding contact.",
+   "cost": {
+    "kind": "none"
+   }
+  },
+  {
+   "taskId": "ABIPHONE_sirius",
+   "matchedBy": "name",
+   "npc": "Sirius",
+   "requirement": "Consuming 1x Sirius' Personal Phone Number .",
+   "cost": {
+    "kind": "none"
+   }
+  },
+  {
+   "taskId": "ABIPHONE_spider_tamer",
+   "matchedBy": "name",
+   "npc": "Spider Tamer",
+   "requirement": "Giving 1x Tarantula Pet ( EPIC ).",
+   "cost": {
+    "kind": "unknown",
+    "note": "No item id for Tarantula Pet ( EPIC )"
+   }
+  },
+  {
+   "taskId": "ABIPHONE_st_jerry",
+   "matchedBy": "name",
+   "npc": "St. Jerry",
+   "requirement": "Typing the following phrase after they say it first: I love the warmth of the Holidays despite the snow",
+   "cost": {
+    "kind": "none"
+   }
+  },
+  {
+   "taskId": "ABIPHONE_suus",
+   "matchedBy": "name",
+   "npc": "Suus",
+   "requirement": "Being a member of the Barbarian Faction",
+   "cost": {
+    "kind": "none"
+   }
+  },
+  {
+   "taskId": "ABIPHONE_talbot",
+   "matchedBy": "name",
+   "npc": "Talbot",
+   "requirement": "Giving 100 Pelts .",
+   "cost": {
+    "kind": "unknown",
+    "note": "No item id for Pelts"
+   }
+  },
+  {
+   "taskId": "ABIPHONE_taylor",
+   "matchedBy": "name",
+   "npc": "Taylor",
+   "requirement": "No requirement.",
+   "cost": {
+    "kind": "npc",
+    "coins": 0
+   }
+  },
+  {
+   "taskId": "ABIPHONE_terry",
+   "matchedBy": "name",
+   "npc": "Terry",
+   "requirement": "Giving 1x Winter Water Orb .",
+   "cost": {
+    "kind": "bazaar",
+    "items": [
+     {
+      "id": "WINTER_WATER_ORB",
+      "qty": 1
+     }
+    ]
+   },
+   "needs": "1x Winter Water Orb"
+  },
+  {
+   "taskId": "ABIPHONE_fairy",
+   "matchedBy": "subset",
+   "npc": "Tia the Fairy",
+   "requirement": "Wearing complete Fairy Armor .",
+   "cost": {
+    "kind": "none"
+   }
+  },
+  {
+   "taskId": "ABIPHONE_tomioka",
+   "matchedBy": "name",
+   "npc": "Tomioka",
+   "requirement": "Giving 1x Titanic Experience Bottle .",
+   "cost": {
+    "kind": "bazaar",
+    "items": [
+     {
+      "id": "TITANIC_EXP_BOTTLE",
+      "qty": 1
+     }
+    ]
+   },
+   "needs": "1x Titanic Experience Bottle"
+  },
+  {
+   "taskId": "ABIPHONE_tony",
+   "matchedBy": "name",
+   "npc": "Tony",
+   "requirement": "Guess his favorite animal in chat (Horse).",
+   "cost": {
+    "kind": "none"
+   }
+  },
+  {
+   "taskId": "ABIPHONE_trevor_the_trapper",
+   "matchedBy": "subset",
+   "npc": "Trevor",
+   "requirement": "Giving 24 Pelts and 1,000,000 coins .",
+   "cost": {
+    "kind": "unknown",
+    "note": "No item id for Pelts"
+   }
+  },
+  {
+   "taskId": "ABIPHONE_trinity",
+   "matchedBy": "name",
+   "npc": "Trinity",
+   "requirement": "Giving 2x Revive Stones .",
+   "cost": {
+    "kind": "bazaar",
+    "items": [
+     {
+      "id": "REVIVE_STONE",
+      "qty": 2
+     }
+    ]
+   },
+   "needs": "2x Revive Stones"
+  },
+  {
+   "taskId": "ABIPHONE_tyzzo",
+   "matchedBy": "name",
+   "npc": "Tyzzo",
+   "requirement": "Giving 1x Dragon Scale .",
+   "cost": {
+    "kind": "bazaar",
+    "items": [
+     {
+      "id": "DRAGON_SCALE",
+      "qty": 1
+     }
+    ]
+   },
+   "needs": "1x Dragon Scale"
+  },
+  {
+   "taskId": "ABIPHONE_vincent",
+   "matchedBy": "name",
+   "npc": "Vincent",
+   "requirement": "Giving 1x Mole Pet .",
+   "cost": {
+    "kind": "unknown",
+    "note": "No item id for Mole Pet"
+   }
+  },
+  {
+   "taskId": "ABIPHONE_vulcan",
+   "matchedBy": "name",
+   "npc": "Vulcan",
+   "requirement": "Infernal Kuudra Completion.",
+   "cost": {
+    "kind": "none"
+   }
+  },
+  {
+   "taskId": "ABIPHONE_walter",
+   "matchedBy": "name",
+   "npc": "Walter",
+   "requirement": "Giving 1x Enchanted Sulphur Cube and having Sulphur VII .",
+   "cost": {
+    "kind": "bazaar",
+    "items": [
+     {
+      "id": "ENCHANTED_SULPHUR_CUBE",
+      "qty": 1
+     }
+    ]
+   },
+   "caveat": "having Sulphur VII",
+   "needs": "1x Enchanted Sulphur Cube"
+  },
+  {
+   "taskId": "ABIPHONE_wool_weaver",
+   "matchedBy": "name",
+   "npc": "Wool Weaver",
+   "requirement": "Giving 512x Enchanted Wool .",
+   "cost": {
+    "kind": "bazaar",
+    "items": [
+     {
+      "id": "ENCHANTED_WOOL",
+      "qty": 512
+     }
+    ]
+   },
+   "needs": "512x Enchanted Wool"
+  },
+  {
+   "taskId": "ABIPHONE_zog",
+   "matchedBy": "name",
+   "npc": "Zog",
+   "requirement": "Having 5 max [ Lv ] Pets of LEGENDARY rarity or above in the player's Pet Menu.",
+   "cost": {
+    "kind": "none"
+   }
+  }
+ ],
+ "unmatched": [
+  {
+   "npc": "Crag",
+   "requirement": "Giving 1x Bezal Shard ."
+  },
+  {
+   "npc": "Fann",
+   "requirement": "Feed 1x Bat the Fish to Hootie."
+  },
+  {
+   "npc": "Fred",
+   "requirement": "Giving 64x Foul Flesh ."
+  },
+  {
+   "npc": "George",
+   "requirement": "Giving three of the following Pets , chosen at random, all at [ Lv1 ] . Ammonite Pet Armadillo Pet Bee Pet Blue Whale Pet Chicken Pet Elephant Pet Enderman Pet Giraffe Pet Griffin Pet Jerry Pet Monkey Pet Pig Pet Rabbit Pet Silverfish Pet Tiger Pet Wolf Pet"
+  },
+  {
+   "npc": "Jax",
+   "requirement": "Paying 10,000,000 coins or completing Target Practice IV in under 11s ."
+  },
+  {
+   "npc": "Jotraeline Greatforge",
+   "requirement": "Giving one of the following Abiphones : Abiphone Basic Abiphone X Red Abiphone X Blue Abiphone XI Yellow"
+  },
+  {
+   "npc": "Mort",
+   "requirement": "Giving 1x Saving Grace and subsequently 1x Spirit Bone ."
+  },
+  {
+   "npc": "Rusty",
+   "requirement": "No requirement."
+  },
+  {
+   "npc": "Shifty",
+   "requirement": "Giving 1x Red Thornleaf Tea and 1x Scarleton Premium ."
+  }
+ ],
+ "totals": {
+  "contacts": 71,
+  "unmatched": 9,
+  "free": 11,
+  "coins": 1,
+  "items": 33,
+  "essence": 1,
+  "unknown": 7,
+  "quest": 18
+ }
+}

@@ -1,0 +1,88 @@
+import { test } from "node:test";
+import assert from "node:assert/strict";
+import { bestiaryFamilyOf, bestiaryTierOf } from "../src/lib/gameData";
+import bestiary from "../data/generated/bestiary.json";
+import bestiaryMobs from "../data/curated/bestiary_mobs.json";
+
+const data = { bestiary, bestiaryMobs } as never;
+
+/**
+ * The scrape's own cross-check, kept as a test so a wiki edit can't quietly change the answer.
+ *
+ * A family lists its bracket, its tier cap and its max kills, and max kills is by definition
+ * the bracket's value at the tier cap. That makes all 249 families independent assertions
+ * about one 7x25 table: if a column were read in the wrong order, or a comma parsed as a
+ * decimal point, they would not agree.
+ */
+test("every family's max kills is its bracket's value at its tier cap", () => {
+  for (const family of bestiary.families) {
+    const ladder = bestiary.brackets[String(family.bracket) as keyof typeof bestiary.brackets];
+    assert.equal(
+      ladder[family.maxTier - 1],
+      family.maxKills,
+      `${family.island}/${family.name}: bracket ${family.bracket} tier ${family.maxTier}`,
+    );
+  }
+});
+
+test("brackets are 25 tiers long and strictly increasing", () => {
+  for (const [id, ladder] of Object.entries(bestiary.brackets)) {
+    assert.equal(ladder.length, 25, `bracket ${id}`);
+    for (let i = 1; i < ladder.length; i++)
+      assert.ok(ladder[i] > ladder[i - 1], `bracket ${id} stalls at tier ${i + 1}`);
+  }
+});
+
+/** The XP the category advertises has to be the XP its tiers can actually pay. */
+test("the advertised ceiling is two XP per tier", () => {
+  const tiers = bestiary.families.reduce((sum, f) => sum + f.maxTier, 0);
+  assert.equal(bestiary.totals.tiers, tiers);
+  assert.equal(bestiary.totals.xp, tiers + Math.floor(tiers / 10) * 10);
+});
+
+/**
+ * The profile writes a mob id per *level* — `crypt_lurker_121` and `crypt_lurker_111` are the
+ * same family — and the bestiary counts master mode and garden pests under the plain name. Get
+ * any of those wrong and a family reads as a fraction of the kills the player really has.
+ */
+test("a mob id resolves to its family through level, master and pest forms", () => {
+  assert.equal(bestiaryFamilyOf(data, "crypt_lurker_121"), "crypt_lurker");
+  assert.equal(bestiaryFamilyOf(data, "master_crypt_lurker_121"), "crypt_lurker");
+  assert.equal(bestiaryFamilyOf(data, "pest_cricket_1"), "cricket");
+  assert.equal(bestiaryFamilyOf(data, "unburried_zombie_30"), "crypt_ghoul", "curated alias");
+});
+
+/**
+ * Three-way on purpose. A mob we know has no family is not the same as a mob we can't place,
+ * and collapsing them would let the catalog credit a family kills it never saw without ever
+ * noticing it had done so.
+ */
+test("a mob with no family and a mob we can't place are different answers", () => {
+  assert.equal(bestiaryFamilyOf(data, "sadan_golem_100"), null, "boss summon, positively excluded");
+  assert.equal(bestiaryFamilyOf(data, "not_a_real_mob_7"), undefined, "unknown, not excluded");
+});
+
+test("every curated alias points at a family that exists", () => {
+  const ids = new Set(bestiary.families.map((f) => f.id));
+  for (const [mob, family] of Object.entries(bestiaryMobs.aliases))
+    assert.ok(ids.has(family), `${mob} -> ${family}, which is not a family`);
+});
+
+test("no mob id is both aliased and declared family-less", () => {
+  for (const mob of Object.keys(bestiaryMobs.aliases))
+    assert.ok(!(mob in bestiaryMobs.noFamily), `${mob} is claimed twice`);
+});
+
+/** Tier is the last threshold passed, so the boundary itself counts and one kill short doesn't. */
+test("a tier is reached exactly at its cumulative kill count", () => {
+  const family = bestiary.families.find((f) => f.id === "crypt_ghoul")!;
+  const ladder = bestiary.brackets[String(family.bracket) as keyof typeof bestiary.brackets];
+  assert.equal(bestiaryTierOf(family, bestiary.brackets, 0), 0);
+  assert.equal(bestiaryTierOf(family, bestiary.brackets, ladder[0]), 1);
+  assert.equal(bestiaryTierOf(family, bestiary.brackets, ladder[0] - 1), 0);
+  assert.equal(
+    bestiaryTierOf(family, bestiary.brackets, family.maxKills * 10),
+    family.maxTier,
+    "a maxed family stops at its cap rather than running off the ladder",
+  );
+});

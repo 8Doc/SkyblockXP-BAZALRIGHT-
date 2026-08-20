@@ -1,4 +1,5 @@
-import type { Task } from "./types";
+import type { Category, Task } from "./types";
+import { CATEGORY_LABELS } from "./types";
 
 /**
  * The static task tables, and the pure logic that reads them.
@@ -152,6 +153,54 @@ export type BagUpgradesData = {
   costBands: { from: number; to: number; coins: number }[];
 };
 
+/**
+ * The bestiary's kill brackets and family list, scraped from the wiki.
+ *
+ * `brackets` is keyed by bracket number, each a 25-long ladder of *cumulative* kills: the
+ * value at index n is the total kills that put a family at tier n+1. A family names the
+ * bracket it climbs and the tier it stops at.
+ */
+export type BestiaryData = {
+  generatedAt: string;
+  source: string;
+  brackets: Record<string, number[]>;
+  families: { island: string; name: string; id: string; maxTier: number; maxKills: number; bracket: number }[];
+  /** Families the wiki lists without a tier cap, so nothing can be offered for them. */
+  undocumented: { island: string; name: string; id: string }[];
+  totals: { families: number; islands: number; tiers: number; xp: number };
+};
+
+/** Internal mob id -> family id, for the ids no rule can derive. */
+export type BestiaryMobsData = {
+  source: string;
+  verified: boolean;
+  note: string;
+  aliases: Record<string, string>;
+  noFamily: Record<string, string>;
+};
+
+/**
+ * What each Abiphone contact costs to add, from the wiki's contacts table.
+ *
+ * Contacts are 10 XP a piece and most are one item handed to an NPC, which makes them some of
+ * the cheapest XP in the game — they were previously filed as grind and never ranked at all.
+ */
+export type AbiphoneData = {
+  generatedAt: string;
+  source: string;
+  contacts: {
+    taskId: string;
+    npc: string;
+    requirement: string;
+    cost: Task["cost"];
+    /** The part of the requirement that isn't a purchase, e.g. "having Sulphur VII". */
+    caveat?: string;
+    /** "64x Silent Pearl" — what the price is actually buying. */
+    needs?: string;
+  }[];
+  totals: { contacts: number; free: number; coins: number; items: number; essence: number; unknown: number; quest: number };
+};
+
 export type GameData = {
   skills: SkillsData;
   collections: CollectionsData;
@@ -167,6 +216,9 @@ export type GameData = {
   petScore: { byRarity: Record<string, number> };
   difficulty: DifficultyData;
   attributeShards: AttributesData;
+  bestiary: BestiaryData;
+  bestiaryMobs: BestiaryMobsData;
+  abiphone: AbiphoneData;
   bagUpgrades: BagUpgradesData;
   /** Shards per attribute level, keyed by the rarity of the attribute. */
   attributeLevels: { perLevel: Record<string, number[]> };
@@ -343,3 +395,69 @@ export type NpcEntry = {
   quest: string | null;
   coords: { x: number; y: number; z: number } | null;
 };
+
+/* ----------------------------------------------------------------- bestiary */
+
+/**
+ * Which family a profile's mob id feeds, or `null` for a mob that has no family, or
+ * `undefined` when we simply don't know.
+ *
+ * The three transformations are structural. A trailing `_127` is the mob's level, and the
+ * bestiary counts a family across every level it spawns at. A `master_` prefix is the master
+ * mode copy of a dungeon mob, which shares its family. A `pest_` prefix is how the garden
+ * names the pests the bestiary lists under their bare names. Everything the rules can't reach
+ * is named in `bestiary_mobs.json`, because nothing published joins ids to families.
+ *
+ * The three-way return matters: `null` is a mob we have positively established is outside the
+ * bestiary (a dungeon boss, a summon), while `undefined` is an id we cannot place — and the
+ * difference is what lets the catalog say how much of the profile it accounted for instead of
+ * quietly treating both as zero.
+ */
+export function bestiaryFamilyOf(data: GameData, mobId: string): string | null | undefined {
+  const stripped = mobId.replace(/_-?\d+$/, "");
+  const candidates = [stripped];
+  for (const prefix of [/^master_/, /^pest_/]) {
+    if (prefix.test(stripped)) candidates.push(stripped.replace(prefix, ""));
+  }
+  const families = bestiaryFamilies(data);
+  for (const candidate of candidates) {
+    const alias = data.bestiaryMobs.aliases[candidate];
+    if (alias) return alias;
+    if (families.has(candidate)) return candidate;
+  }
+  for (const candidate of candidates) if (data.bestiaryMobs.noFamily[candidate]) return null;
+  return undefined;
+}
+
+let familyCache: WeakMap<GameData, Map<string, BestiaryData["families"][number]>> = new WeakMap();
+
+export function bestiaryFamilies(data: GameData): Map<string, BestiaryData["families"][number]> {
+  let cached = familyCache.get(data);
+  if (!cached) {
+    cached = new Map(data.bestiary.families.map((f) => [f.id, f]));
+    familyCache.set(data, cached);
+  }
+  return cached;
+}
+
+/** The highest tier `kills` has reached in this family. Tier 0 means the first tier is unmet. */
+export function bestiaryTierOf(family: BestiaryData["families"][number], brackets: BestiaryData["brackets"], kills: number): number {
+  const ladder = brackets[String(family.bracket)] ?? [];
+  let tier = 0;
+  for (let i = 0; i < family.maxTier && i < ladder.length; i++) if (kills >= ladder[i]) tier = i + 1;
+  return tier;
+}
+
+/**
+ * The label a category shows.
+ *
+ * Bestiary carries its full ceiling in the name on purpose. The list underneath is filtered
+ * twice over — to the tiers within reach, and to families whose kills we could attribute — so
+ * the header is the one place that can state what the whole category is worth without the
+ * filtering making it look smaller than the game.
+ */
+export function categoryLabel(category: Category, data?: GameData): string {
+  const label = CATEGORY_LABELS[category];
+  if (category !== "bestiary" || !data) return label;
+  return `${label} — ${data.bestiary.totals.xp.toLocaleString("en-US")} XP in all`;
+}

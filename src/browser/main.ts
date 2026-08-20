@@ -1,4 +1,4 @@
-import { auctionNameIndex, type BagItem, type GameData } from "../lib/gameData";
+import { auctionNameIndex, categoryLabel, type BagItem, type GameData } from "../lib/gameData";
 import { coins, num, rate } from "../lib/format";
 import { coopProgress, type BinIndex, type GardenState, type MuseumState, type ProfileMember, type SkyblockProfile, type BazaarProduct } from "../lib/profile";
 import { petsFrom } from "../lib/auctions";
@@ -85,7 +85,7 @@ const state: State = {
   targetMode: "xp",
   target: 500,
   targetLevel: 300,
-  minXp: 5,
+  minXp: 0,
   budget: "",
   packageSize: localStorage.getItem("sbxp:packageSize") ?? "10M",
   packageCount: 5,
@@ -507,7 +507,8 @@ function grindView(report: Report): string {
 
   const intro = `<p class="sub bleed-note">Free XP, easiest first, across every category at once. Difficulty is
     estimated from how many real players have already finished each task — a proxy for effort, not a measurement of
-    it — so it is grouped into bands rather than pretending to a precise ordering.</p>`;
+    it — so it is grouped into bands rather than pretending to a precise ordering. Bestiary tiers are the exception:
+    they are ranked on the kills they actually have left.</p>`;
 
   const bands = ["quick", "short", "long", "marathon"];
   const byBand = bands.map((band) => grind.filter((t) => (t.effortBand ?? "marathon") === band));
@@ -588,7 +589,7 @@ function browserView(report: Report): string {
 
       return `<div class="panel">
         <button class="group-head" data-toggle="${key}">
-          <span class="group-name">${CATEGORY_LABELS[category]}</span>
+          <span class="group-name">${categoryLabel(category, data)}</span>
           <span class="dim">${num(summary.remainingTasks)} left</span>
           <span class="group-xp">${num(summary.remainingXp)} xp</span>
           <span class="group-cost">${
@@ -604,8 +605,8 @@ function browserView(report: Report): string {
     .join("");
 
   const unmodelled = `<div class="panel pad">
-    <h3>Not modelled yet</h3>
-    <p class="sub">These categories exist in the game and are missing here. Listed so the totals above read as coverage, not as the whole game.</p>
+    <h3>Not modelled, or only in part</h3>
+    <p class="sub">What each of these is missing, and why. Listed so the totals above read as coverage rather than as the whole game.</p>
     <ul class="unmodelled">
       ${report.unmodelled
         .map(

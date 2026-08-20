@@ -178,6 +178,122 @@ Per-level XP is read from the scraped rows, not typed: an earlier hand-entered g
 15/25/35/50/70/100/**150/250/500** was wrong at the top end (actually **125/150/150**) and
 inflated slayer by 3,400 XP before the totals check caught it.
 
+## The bestiary
+
+The profile reports raw kills and nothing else — `bestiary.kills` is a map of internal mob id
+and level (`crypt_lurker_121`) to a count. No tier, no threshold, no family. Three tables have
+to come from elsewhere, and only two of them exist.
+
+### The brackets and the families — `scripts/fetch-bestiary.mjs`
+
+The wiki's Bestiary page carries both: a "Cumulative Kill Brackets" table of 7 brackets × 25
+tiers, and a per-island family list giving each family's bracket, tier cap and max kills.
+
+**They check each other.** Max kills *is* the bracket's value at the tier cap, so the bracket
+is derived from the other two columns rather than trusted, and all **249 families** across 18
+islands are independent assertions about one 7×25 table. Four rows disagreed with themselves,
+and in each the two numbers outvoted the label:
+
+| Family | Page says | Its own numbers say |
+|---|---|---|
+| Ghost (Dwarven Mines) | bracket 2 | 40,000 kills at tier 15 is bracket 1 |
+| Grunt (Crystal Hollows) | bracket 5 | 4,000 at tier 15 is bracket 3 — and its two siblings on the same row values are labelled 3 |
+| King Minos, Manticore | — | the page says "[More Info Needed]" for all three columns |
+
+The corrections are printed on every run and stored in the output, not swallowed. The two
+undocumented families are excluded rather than guessed at.
+
+**3,920 tiers, 7,840 SkyBlock XP.** Each tier pays 1 XP and every tenth tier pays a milestone
+worth 10, so a tier is worth 2 XP amortised — exact over any ten of them. Note the tasks page
+says 4,370 for the whole bestiary: the wiki is behind itself, because that figure predates the
+families the same wiki now lists.
+
+### The table that doesn't exist — `data/curated/bestiary_mobs.json`
+
+Nothing published joins internal mob ids to family names. The Crypt Ghoul family is fed by
+`unburried_zombie`; the ids appear in no wiki page, in no items resource, and
+`/resources/skyblock/bestiary` returns "Unknown resource provided". Three rules are structural
+and live in code — a trailing `_<level>` is the mob's level, a `master_` prefix is the master
+mode copy of a dungeon mob, a `pest_` prefix is how the garden names a bestiary pest — and the
+rest is hand-mapped with the reason recorded per entry.
+
+The map distinguishes three answers, which is the point: a family, `null` for a mob positively
+established to have none (dungeon bosses and their summons never enter the bestiary), and
+`undefined` for an id we cannot place. Collapsing the last two would let a family be credited a
+fraction of its kills without anything noticing.
+
+**Two guards on top of that.** An unplaced id whose every word appears in a family's name looks
+like a variant of that family, so that family is held back rather than offered — otherwise its
+missing kills would read as a lower tier, and since the list is ordered by how close the next
+tier is, a wrong row would land at the very top. And the profile's own claimed milestone count
+is a floor on the tiers it has earned (ten tiers to a milestone; milestones are claimed rather
+than granted, so the count can lag but can never run ahead). The catalog states both numbers.
+
+On a real 730-id profile that reads: 1,924 tiers within reach, 17 families held back, 71 ids
+unplaced, and 1,731 tiers accounted for against a floor of 2,320 — so about 589 tiers sit in
+families the map can't reach. Most of that is Galatea, whose mobs the wiki has no family
+entries for at all, which is also why 7,840 XP is a floor rather than a ceiling.
+
+### What is offered
+
+One task per tier still to climb, worth 2 XP, priced in kills rather than coins: **how many more
+kills from where the player stands now**, ordered lowest first, and cut off at 5,000. Past that
+a tier is a week of one mob, and there is no honest way to rank it against a purchase. Bestiary
+tiers are the one grind category that does not use the sampled difficulty proxy — the kills
+remaining are a measurement, not an estimate, so they rank on that instead.
+
+## Abiphone contacts
+
+84 contacts at 10 XP each is 840 XP, and until now every one of them was priced at nothing.
+`discreteCost` had no rule for them, so they fell through to `{ kind: "none" }` and were filed
+as grind — which meant the cheapest purchases in the game could never appear in any ranking.
+They are not grind. Most contacts are added by handing one item to an NPC.
+
+### `scripts/fetch-abiphone.mjs`
+
+The wiki's `Abiphones/ContactsTable` states the requirement for all 80 documented contacts, and
+writes it to a pattern rather than freely, which is what makes it parseable:
+
+| Requirement | Becomes | Count |
+|---|---|---|
+| `No requirement.` | `npc`, 0 coins — you only have to talk to them | 11 |
+| `Paying 32,000,000 coins.` | `npc` | 1 |
+| `Giving 64x Silent Pearl.` | `bazaar` | 34 |
+| `Giving 5,000x Undead Essence.` | `essence` | 1 |
+| `Slaying a runic Enderman.` | `none` — a quest, correctly grind | 18 |
+| `Giving three of the following Pets…` | `unknown`, naming what it couldn't reduce | 7 |
+
+Item names join to item ids through the items resource, with two mechanical fallbacks: the wiki
+pluralises a quantity where the item is singular ("2x Ultimate Carrot Candies"), and attribute
+shards are absent from the items resource entirely but trade on the bazaar as `SHARD_<MOB>`,
+which is checked against live products rather than assumed.
+
+**The ids are named by role, not by person.** The profile calls Maddox the Slayer `slayer`, Tia
+the Fairy `fairy`, Trevor `trevor_the_trapper`. Most of that is structural — one name's words
+are a subset of the other's — and the pairing is required to be *unique*, so an ambiguous match
+throws instead of being picked (Queen Nyx and Queen Mismyla both compete for `queen`, and only
+resolve because Mismyla matches by name first). Five roles share no word with the person at all
+and are named in the script with the reason: Kat is the pet sitter, Maxwell the thaumaturgist,
+Elizabeth the community shop, Geo the gemstone trader, the Fear Mongerer the spooky shop.
+
+Nine wiki rows join to no harvested id and are recorded in `unmatched` rather than dropped, so
+the gap is countable. The result: **71 contacts joined, 46 of them priced.**
+
+This is checkable against an independent implementation. SkyHelper's bot prices the same column,
+and the two agree to the coin: Roddy 6,892 against their 6.9K, Walter 254,987 against 254.7K.
+
+## The XP floor was hiding the cheapest XP in the game
+
+The browser defaulted `minXp` to 5, on the reasoning that 1-XP tasks are death by a thousand
+clicks. That reasoning is right about *bulk* and wrong about *value*, and the default inverted
+the app's whole purpose: Red Sand Minion I costs 655 coins for 1 XP, which is the best rate on
+the board by a factor of twenty, and a floor of 5 removed it along with every 2-XP essence perk
+and 3-XP museum donation. What survived was a list starting at 27,000 coins per XP against a
+real floor of 655.
+
+The floor is now **0 by default**. It is still there for anyone who wants it — the tail is real
+— but hiding the best rows is opt-in rather than the shipped behaviour.
+
 ## Accessory bag slots
 
 An accessory needs somewhere to sit. The bag holds a fixed number of accessories, and more room

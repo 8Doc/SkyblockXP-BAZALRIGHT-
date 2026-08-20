@@ -242,11 +242,12 @@ Hypixel resources API when the game changes; the wiki-derived and curated tables
 
 ## Modelled categories
 
-All 16, ~40,000 XP, 4,964 tasks. `DATA.md` has the provenance for each number.
+All 17, ~48,000 XP. `DATA.md` has the provenance for each number.
 
 | Category | XP available | Source of the task list | Source of completion |
 |---|---|---|---|
 | Skills | 8,440 | resources API | profile skill XP |
+| Bestiary | 7,840 | wiki brackets + family list | `bestiary.kills`, per family |
 | Slayer | 7,220 | wiki curves + harvested ids | slayer XP per boss |
 | Museum | 3,644 | `museum_data.donation_xp` in the items API | `/skyblock/museum` |
 | Minions | 3,165 | resources API | `crafted_generators` |
@@ -257,18 +258,27 @@ All 16, ~40,000 XP, 4,964 tasks. `DATA.md` has the provenance for each number.
 | Essence shops | 2,074 | harvested ids | `completed_tasks` |
 | Accessory bag | 1,872 | items API + magical power | talisman bag NBT |
 | Pets | 1,470 | auction house listings | `pets_data.pets` |
-| Abiphone | 840 | harvested ids | `completed_tasks` |
+| Abiphone | 840 | harvested ids + wiki contacts table | `completed_tasks` |
 | Events | 749 | harvested ids | `completed_tasks` |
 | Fairy souls | 570 | formula | `total_collected` |
 | Fast travel | 360 | harvested ids | `completed_tasks` |
 | Bank | 310 | harvested ids | `completed_tasks` |
 | Rift | 295 | harvested ids | `completed_tasks` |
 
+Bestiary is the newest and the only category priced in kills rather than coins. A tier is worth
+2 XP — 1 for the tier and the ten-per-ten milestone amortised — and each one is offered with the
+kills it actually has left, cheapest first, cut off at 5,000. Two things about it are worth
+knowing before trusting a row: the 7,840 is a floor, because Galatea's mobs have no wiki family
+entries yet, and the join from the profile's internal mob ids to family names is hand-mapped,
+because nothing published carries it. Families the map may be under-counting are held back
+rather than shown, and the app prints how many tiers it accounted for against the floor the
+profile's own claimed milestones vouch for.
+
 Attribute levels (1,810, priced from bazaar shards), Heart of the Mountain (1,175), Center of
 the Forest (250) and the garden's plots, crop upgrades and composter (542) are all modelled — see `DATA.md` for where
 each one hides in the API.
 
-Still missing, and named in the UI: bestiary (~4,370), the rest of the garden (~1,063), and
+Still missing, and named in the UI: the rest of the garden (~1,063), and
 Peak of the Mountain plus Heart of the Forest (~1,545 — their XP tables are published but the
 API exposes no tier field, so modelling them would show everyone zero progress). The app shows
 what percentage of your earned XP it can account for, so the gap is visible rather than implied.

@@ -1,7 +1,11 @@
 /** The shape of the Hypixel profile fields the planner reads. Shared by both front ends. */
 
 export type ProfileMember = {
-  bestiary?: { milestone?: { last_claimed_milestone?: number } };
+  bestiary?: {
+    /** Raw kills keyed by internal mob id and level, e.g. `crypt_lurker_121`. */
+    kills?: Record<string, number>;
+    milestone?: { last_claimed_milestone?: number };
+  };
   leveling?: {
     experience?: number;
     completed_tasks?: string[];

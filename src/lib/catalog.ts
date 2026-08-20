@@ -1,8 +1,11 @@
 import type { Category, Task } from "./types";
 import type { GardenState, MuseumState, ProfileMember } from "./profile";
 import { petKey } from "./auctions";
+import { num } from "./format";
 import {
   bagUpgradeCost,
+  bestiaryFamilyOf,
+  bestiaryTierOf,
   bumpRarity,
   effortOf,
   familyOf,
@@ -88,8 +91,8 @@ export type Catalog = {
 
 export const UNMODELLED: { category: Category; note: string; totalXp?: number }[] = [
   {
-    category: "misc",
-    note: "Bestiary XP you have already earned is credited from the profile's own milestone count, so it no longer reads as a missing source. What is not offered is the work still to do: the tiers left need each family's kill bracket, and the top tiers want up to a million kills of one mob, so there is no honest way to rank them against a purchase.",
+    category: "bestiary",
+    note: "Bestiary tiers are offered where the next one is under 5,000 kills away; past that a tier is a week of one mob and there is no honest way to rank it against a purchase. Two further gaps are the wiki's rather than the API's: King Minos and Manticore are listed with no tier cap, and Galatea's mobs have no family entries at all yet, so the ceiling below is a floor.",
   },
   {
     category: "misc",
@@ -318,7 +321,7 @@ export function buildCatalog(
       requires: rungBelow(task.id),
       cost: discreteCost(task.id, data, scrollFor),
       repeatable: false,
-      note: directionsTo(task.id, data) ?? task.rule,
+      note: abiphoneNote(task.id, data) ?? directionsTo(task.id, data) ?? task.rule,
     });
     if (completed.has(task.id)) done.add(task.id);
   }
@@ -700,6 +703,101 @@ export function buildCatalog(
     }
   }
 
+  /* ------------------------------------------------------------- bestiary */
+
+  // The bestiary is a kill counter, and the profile reports only the raw counts: 2,467 crypt
+  // lurkers, no tier, no threshold, no family. Tiers come from the wiki's seven cumulative
+  // kill brackets, and the kills that feed a family have to be gathered from every mob id and
+  // every level that belongs to it.
+  //
+  // Each tier is worth 1 SkyBlock XP and every tenth tier pays a milestone worth 10, so a tier
+  // is worth 2 XP amortised — exact over any ten of them, and the only way to price one tier
+  // without pretending to know which one lands on a milestone.
+  const bestiaryKills = new Map<string, number>();
+  const unaccounted = new Map<string, number>();
+  for (const [mobId, count] of Object.entries(member.bestiary?.kills ?? {})) {
+    if (typeof count !== "number") continue;
+    const family = bestiaryFamilyOf(data, mobId);
+    if (family === undefined) {
+      const base = mobId.replace(/_-?\d+$/, "");
+      unaccounted.set(base, (unaccounted.get(base) ?? 0) + count);
+    } else if (family !== null) {
+      bestiaryKills.set(family, (bestiaryKills.get(family) ?? 0) + count);
+    }
+  }
+
+  // An id we couldn't place is only harmless if it belonged to no family. When it shares a word
+  // with a family's name it probably fed that family, and crediting that family the kills we
+  // *did* place would put it at a lower tier than the player is really on — which, since the
+  // list is ordered by how close the next tier is, would push a wrong row to the very top.
+  // Those families are held back rather than guessed at.
+  const suspect = new Set<string>();
+  for (const id of unaccounted.keys()) {
+    const words = new Set(id.split("_"));
+    for (const family of data.bestiary.families) {
+      if (family.id.split("_").every((word) => words.has(word))) suspect.add(family.id);
+    }
+  }
+
+  const BESTIARY_REACH = 5_000;
+  let bestiaryTiers = 0;
+  let bestiaryOffered = 0;
+
+  for (const family of data.bestiary.families) {
+    const kills = bestiaryKills.get(family.id) ?? 0;
+    const tier = bestiaryTierOf(family, data.bestiary.brackets, kills);
+    bestiaryTiers += tier;
+    if (suspect.has(family.id)) continue;
+
+    const ladder = data.bestiary.brackets[String(family.bracket)] ?? [];
+    let previousTier: string | null = null;
+    for (let next = tier + 1; next <= family.maxTier; next++) {
+      const needed = (ladder[next - 1] ?? Infinity) - kills;
+      // Brackets only ever climb, so the first tier out of reach ends the family.
+      if (needed >= BESTIARY_REACH) break;
+      const id = `bestiary_${family.id}_${next}`;
+      tasks.push({
+        id,
+        category: "bestiary",
+        name: `${family.name} tier ${next} — ${family.island}`,
+        xp: 2,
+        requires: previousTier ? [previousTier] : [],
+        cost: { kind: "none" },
+        repeatable: false,
+        note: `${num(needed)} more kill${needed === 1 ? "" : "s"} (${num(kills)} of ${num(ladder[next - 1] ?? 0)})`,
+        // Grind tasks normally rank on how many players have finished them. The bestiary has
+        // something better: the exact number of kills left. It is the same 0-to-1 scale, but
+        // measured rather than sampled, so it replaces the proxy for this category alone.
+        effort: Math.min(needed / BESTIARY_REACH, 1),
+        effortBand: needed <= 50 ? "quick" : needed <= 500 ? "short" : needed <= 2_000 ? "long" : "marathon",
+      });
+      previousTier = id;
+      bestiaryOffered++;
+    }
+  }
+
+  // The profile's own claimed-milestone count is a floor on the tiers it has earned, and it is
+  // the only independent check on the whole join. Ten tiers to a milestone, and a milestone is
+  // claimed rather than granted, so the count can lag — but it can never run ahead.
+  const bestiaryClaimedFloor = (member.bestiary?.milestone?.last_claimed_milestone ?? 0) * 10;
+  const bestiaryUnaccountedKills = [...unaccounted.values()].reduce((sum, n) => sum + n, 0);
+  const bestiaryCoverage = [
+    `On this profile ${num(bestiaryOffered)} tiers sit under ${num(BESTIARY_REACH)} kills away`,
+    ` across ${num(data.bestiary.totals.families)} documented families`,
+    suspect.size > 0 ? `, with ${num(suspect.size)} families held back` : "",
+    unaccounted.size > 0
+      ? ` because ${num(unaccounted.size)} mob ids (${num(bestiaryUnaccountedKills)} kills) match no family we know`
+      : "",
+    `. Tiers we can account for come to ${num(bestiaryTiers)}`,
+    bestiaryClaimedFloor > 0
+      ? bestiaryTiers >= bestiaryClaimedFloor
+        ? `, against the ${num(bestiaryClaimedFloor)} the profile's own claimed milestones vouch for — so nothing is missing that the profile can prove.`
+        : `, short of the ${num(bestiaryClaimedFloor)} the profile's own claimed milestones vouch for, so ${num(
+            bestiaryClaimedFloor - bestiaryTiers,
+          )} tiers sit in families this map can't reach.`
+      : ".",
+  ].join("");
+
   /* --------------------------------------------------------- fairy souls */
 
   // +10 XP per 5 souls, 570 XP total (README table; the API reports the count but not the reward).
@@ -725,6 +823,8 @@ export function buildCatalog(
   // Grind tasks have no price to rank on, so they carry an observed effort score instead.
   for (const task of tasks) {
     if (task.cost.kind !== "none") continue;
+    // The bestiary already carries a measured effort — kills remaining — so it opts out.
+    if (task.category === "bestiary") continue;
     const { effort, band } = effortOf(data, task.id);
     task.effort = effort;
     task.effortBand = band;
@@ -744,6 +844,14 @@ export function buildCatalog(
       bestiary: bestiaryXp(member),
     },
     unmodelled: UNMODELLED.map((u) =>
+      u.category === "bestiary"
+        ? {
+            ...u,
+            totalXp: data.bestiary.totals.xp,
+            earnedXp: bestiaryXp(member),
+            note: `${u.note} ${bestiaryCoverage}`,
+          }
+        :
       u.category === "attributes" && strandedAttributes > 0
         ? {
             ...u,
@@ -764,9 +872,33 @@ export function buildCatalog(
  * scroll that opens it, where one exists. The rest are actions rather than purchases — including
  * the fourteen fast-travel spots you unlock by walking there, which are free but not buyable.
  */
+/**
+ * What a contact actually asks for, so the price on the row has something to justify it.
+ *
+ * A caveat is the half of the requirement that isn't a purchase — Walter wants the Sulphur
+ * collection as well as the item — and saying so is the difference between a row you can act
+ * on and one that looks a click away when it isn't.
+ */
+function abiphoneNote(id: string, data: GameData): string | undefined {
+  if (!id.startsWith("ABIPHONE_")) return undefined;
+  const contact = data.abiphone?.contacts.find((c) => c.taskId === id);
+  if (!contact) return undefined;
+  const parts = [contact.needs ?? null, contact.caveat ? `also ${contact.caveat}` : null].filter(Boolean);
+  if (contact.cost.kind === "npc" && contact.cost.coins === 0) parts.unshift("Just talk to them");
+  return parts.length ? `${contact.npc} — ${parts.join(", ")}` : undefined;
+}
+
+
 function discreteCost(id: string, data: GameData, scrollFor: Map<string, { itemId: string }>): Task["cost"] {
   const bank = data.costs.bank[id];
   if (bank !== undefined) return { kind: "npc", coins: bank };
+
+  // A contact is 10 XP for one item handed over, which makes these the cheapest purchases in
+  // the game — they were grind-priced until the wiki's requirement column got parsed.
+  if (id.startsWith("ABIPHONE_")) {
+    const contact = data.abiphone?.contacts.find((c) => c.taskId === id);
+    if (contact) return contact.cost;
+  }
 
   const essence = /^([A-Z]+)_ESSENCE_(.+)_(\d+)$/.exec(id);
   if (essence) {
