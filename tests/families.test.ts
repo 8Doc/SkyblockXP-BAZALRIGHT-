@@ -138,3 +138,36 @@ test("rift accessories never leave the rift", () => {
     assert.equal(byId.get(id)?.tradeable, false, `${id} is rift-bound`);
   }
 });
+
+test("the Rift's accessories belong to the Rift's bag, not this one", () => {
+  // 29 of them, 261 magical power. Counting them here told a player who owns every accessory
+  // that reaches the main bag that a Crux line he can never put in it was still outstanding.
+  const list = (accessories as { accessories: { id: string; name: string; rift?: boolean }[] }).accessories;
+  const rift = list.filter((a) => a.rift);
+  assert.ok(rift.length > 20, `only ${rift.length} rift accessories flagged`);
+  assert.ok(rift.some((a) => a.name.startsWith("Crux ")), "the Crux line is rift-bound");
+});
+
+test("an accessory crafted from another is already one family", () => {
+  // The wiki records what each accessory is made from; where an ingredient is itself an
+  // accessory, the two are one progression because the ingredient is consumed. All 16 such
+  // pairs are already detected, so recipes need no separate rule — this guards that.
+  const links = JSON.parse(readFileSync("data/generated/accessory_trade.json", "utf8")).craftedFrom as {
+    id: string; name: string; from: string; fromName: string;
+  }[];
+  assert.ok(links.length > 10, `only ${links.length} craft links found`);
+
+  const byId = new Map(
+    (accessories as { accessories: { id: string; name: string }[] }).accessories.map((a) => [a.id, a]),
+  );
+  for (const link of links) {
+    const product = byId.get(link.id);
+    const ingredient = byId.get(link.from);
+    if (!product || !ingredient) continue;
+    assert.equal(
+      family(product.name),
+      family(ingredient.name),
+      `${link.name} is crafted from ${link.fromName}, so they are one family`,
+    );
+  }
+});

@@ -271,6 +271,10 @@ export function buildCatalog(
   const accessoryById = new Map(data.accessories.accessories.map((a) => [a.id, a]));
   for (const acc of data.accessories.accessories) {
     if (excluded.has(acc.id)) continue;
+    // The Rift keeps its own accessory bag. Counting its 29 accessories towards this one told a
+    // player who owns every accessory that actually reaches it that 261 magical power was still
+    // waiting — the Crux line alone is six rows of it.
+    if (acc.rift) continue;
     const power = magicalPowerOf(data, acc.tier);
     if (power <= 0) continue;
 

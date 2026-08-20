@@ -52,6 +52,8 @@ export type AccessoriesData = {
     museum: boolean;
     soulbound: boolean;
     tradeable: boolean;
+    /** Belongs to the Rift, which keeps its own accessory bag separate from this one. */
+    rift?: boolean;
   }[];
 };
 

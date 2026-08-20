@@ -148,6 +148,9 @@ async function buildAccessories() {
         item.origin !== "RIFT" &&
         !wikiUntradeable.has(item.id),
       riftTransferrable: Boolean(item.rift_transferrable),
+      // The Rift keeps its own accessory bag. These never reach the main one, so counting them
+      // towards its magical power offers a player who owns every real accessory 29 more.
+      rift: item.origin === "RIFT",
     });
   }
   out.sort((a, b) => a.id.localeCompare(b.id));

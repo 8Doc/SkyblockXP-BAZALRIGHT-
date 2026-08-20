@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-08-20T18:57:58.803Z",
+ "generatedAt": "2026-08-20T23:29:05.349Z",
  "source": "Hypixel SkyBlock Fandom wiki infobox: auctionable / tradeable",
  "note": "Accessories the wiki states cannot be bought. Only an explicit no is recorded; silence defers to the items resource.",
  "pagesRead": 325,
@@ -273,6 +273,104 @@
    "id": "WOLF_PAW",
    "name": "Wolf Paw",
    "buyable": false
+  }
+ ],
+ "craftedFrom": [
+  {
+   "id": "BAT_ARTIFACT",
+   "name": "Bat Artifact",
+   "from": "BAT_TALISMAN",
+   "fromName": "Bat Talisman"
+  },
+  {
+   "id": "BAT_RING",
+   "name": "Bat Ring",
+   "from": "BAT_TALISMAN",
+   "fromName": "Bat Talisman"
+  },
+  {
+   "id": "ENDER_RELIC",
+   "name": "Ender Relic",
+   "from": "ENDER_ARTIFACT",
+   "fromName": "Ender Artifact"
+  },
+  {
+   "id": "ETERNAL_HOOF",
+   "name": "Eternal Hoof",
+   "from": "LUCKY_HOOF",
+   "fromName": "Lucky Hoof"
+  },
+  {
+   "id": "FIERY_KUUDRA_CORE",
+   "name": "Fiery Kuudra Core",
+   "from": "BURNING_KUUDRA_CORE",
+   "fromName": "Burning Kuudra Core"
+  },
+  {
+   "id": "GLACIAL_ARTIFACT",
+   "name": "Glacial Artifact",
+   "from": "GLACIAL_TALISMAN",
+   "fromName": "Glacial Talisman"
+  },
+  {
+   "id": "GLACIAL_RING",
+   "name": "Glacial Ring",
+   "from": "GLACIAL_TALISMAN",
+   "fromName": "Glacial Talisman"
+  },
+  {
+   "id": "INFERNAL_KUUDRA_CORE",
+   "name": "Infernal Kuudra Core",
+   "from": "BURNING_KUUDRA_CORE",
+   "fromName": "Burning Kuudra Core"
+  },
+  {
+   "id": "POTATO_RING",
+   "name": "Potato Ring",
+   "from": "POTATO_TALISMAN",
+   "fromName": "Potato Talisman"
+  },
+  {
+   "id": "SCARF_GRIMOIRE",
+   "name": "Scarf's Grimoire",
+   "from": "SCARF_STUDIES",
+   "fromName": "Scarf's Studies"
+  },
+  {
+   "id": "SCARF_THESIS",
+   "name": "Scarf's Thesis",
+   "from": "SCARF_STUDIES",
+   "fromName": "Scarf's Studies"
+  },
+  {
+   "id": "SPIDER_ARTIFACT",
+   "name": "Spider Artifact",
+   "from": "SPIDER_TALISMAN",
+   "fromName": "Spider Talisman"
+  },
+  {
+   "id": "TREASURE_ARTIFACT",
+   "name": "Treasure Artifact",
+   "from": "TREASURE_TALISMAN",
+   "fromName": "Treasure Talisman"
+  },
+  {
+   "id": "TREASURE_RING",
+   "name": "Treasure Ring",
+   "from": "TREASURE_TALISMAN",
+   "fromName": "Treasure Talisman"
+  },
+  {
+   "id": "WITHER_RELIC",
+   "name": "Wither Relic",
+   "from": "WITHER_ARTIFACT",
+   "fromName": "Wither Artifact"
+  },
+  {
+   "id": "ZOMBIE_RING",
+   "name": "Zombie Ring",
+   "from": "ZOMBIE_TALISMAN",
+   "fromName": "Zombie Talisman"
   }
  ]
 }
