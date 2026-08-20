@@ -341,19 +341,22 @@ export function buildCatalog(
   // donation_xp is published per item in the items resource, and the museum endpoint says what
   // has already been donated — so this category is exact on both halves.
   const donated = museum?.donatedItemIds ?? null;
-  // Everything the museum could be holding, under every id it might file it under. Anything
-  // left over is a donation this app has no slot for, and saying how many turns "the museum is
-  // wrong" into a number worth chasing.
-  const museumKnows = new Set<string>();
+  // An entry counts as accounted for only if it actually completes a slot. Merely being a
+  // recognised id isn't enough: three pieces of a four-piece set are three real donations that
+  // finish nothing, and the museum's own counter still credits them — so they belong in the
+  // gap, not hidden by it.
+  const filledBy = new Set<string>();
   for (const donation of data.museum.donations) {
-    museumKnows.add(donation.itemId);
-    for (const alt of donation.mappedIds ?? []) museumKnows.add(alt);
+    for (const id of [donation.itemId, ...(donation.mappedIds ?? [])]) filledBy.add(id);
+    // Anything up the line fills this slot too, so those ids are accounted for as well.
+    let up: string | null | undefined = donation.parentId;
+    for (let hop = 0; up && hop < 12; hop++) {
+      filledBy.add(up);
+      up = data.museum.donations.find((d) => d.itemId === up)?.parentId ?? null;
+    }
   }
-  for (const set of data.museum.armorSets) {
-    museumKnows.add(set.setId);
-    for (const piece of set.pieces) museumKnows.add(piece);
-  }
-  const strandedDonations = donated ? [...donated].filter((held) => !museumKnows.has(held)).length : 0;
+  for (const set of data.museum.armorSets) filledBy.add(set.setId);
+  const strandedDonations = donated ? [...donated].filter((held) => !filledBy.has(held)).length : 0;
   const donatedCount = donated ? donated.size : 0;
   // A slot is filled by its own item, by an alternate id the same item is filed under, or by
   // anything further up its upgrade line: donate a Wand of Atonement and the Healing, Mending

@@ -195,6 +195,15 @@ test("reconciliation counts both sides for the three categories it covers", () =
   const by = new Map(cat.reconciliation.map((r) => [r.category, r]));
 
   assert.deepEqual(by.get("museum"), { category: "museum", credited: 1, reported: 2 });
+
+  // Three pieces of a four-piece set are three real donations that finish no slot, so they
+  // belong in the gap rather than being waved through as "recognised".
+  const partialSet = catalogFor({}, undefined, {
+    donatedItemIds: new Set(["PESTHUNTERS_BELT", "PESTHUNTERS_GLOVES", "PESTHUNTERS_NECKLACE"]),
+    value: 0,
+  });
+  const museum = partialSet.reconciliation.find((r) => r.category === "museum")!;
+  assert.deepEqual(museum, { category: "museum", credited: 0, reported: 3 });
   assert.equal(by.get("attributes")!.reported, 2, "both stacks are reported");
   assert.equal(by.get("attributes")!.credited, 1, "only the one we can place is credited");
 });
