@@ -101,6 +101,10 @@ export type Catalog = {
 
 export const UNMODELLED: { category: Category; note: string; totalXp?: number }[] = [
   {
+    category: "pets",
+    note: "Pet score already earned is exact — the profile reports it outright. What is left to earn is not: the pet list is read off the auction house rather than a fixed catalogue, so a pet nobody is currently selling is missing entirely, and the +1 a pet awards for reaching its maximum level is not counted at all. A full sweep sees 495 of the 521 points available.",
+  },
+  {
     category: "bestiary",
     note: "Bestiary tiers are offered where the next one is under 5,000 kills away; past that a tier is a week of one mob and there is no honest way to rank it against a purchase. Two further gaps are the wiki's rather than the API's: King Minos and Manticore are listed with no tier cap, and Galatea's mobs have no family entries at all yet, so the ceiling below is a floor.",
   },
