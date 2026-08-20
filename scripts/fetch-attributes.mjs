@@ -1,134 +1,111 @@
-#!/usr/bin/env node
 /**
- * Builds the attribute table: every attribute in the game, the shard that feeds it, and the
- * bazaar product that shard trades as.
+ * Every attribute in the game, with the shard that feeds it.
  *
- * This does two things the profile alone can't:
+ * The old source was the Fandom wiki's rendered rarity tables, which document 181 attributes.
+ * The game has 320 — exactly the number of SHARD_* products on the bazaar — so a third of the
+ * category was invisible and the ceiling read 1,810 XP against a real 3,200.
  *
- *   1. Completes the universe. `attributes.stacks` only lists attributes the player already
- *      holds shards in, so deriving the catalogue from it caps a player's ceiling at whatever
- *      they happen to have touched. The wiki lists all of them.
+ * The community wiki the editors moved to carries the full list as template calls, one per
+ * attribute, with the shard and the rarity stated outright:
  *
- *   2. Makes them priceable. Every attribute is fed by a named shard, and those shards trade on
- *      the bazaar — so "get this attribute to level 6" has a real coin cost rather than being a
- *      grind with no ranking. Shard products are named after the *mob*, not the attribute
- *      ("Snow Elemental" is fed by "Blizzard Shard" = SHARD_BLIZZARD), which is why this
- *      mapping has to be scraped rather than guessed.
+ *     {{Attribute Table Entry | id = C1 | shard = Grove | attribute = Nature Elemental ...
  *
- *   node scripts/fetch-attributes.mjs
+ * Rarity matters beyond labelling: it selects the shard ladder, and a rarer attribute maxes on
+ * far fewer shards.
  */
-import { writeFile, mkdir } from "node:fs/promises";
-import { dirname, join } from "node:path";
+import { writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
+import { dirname, join } from "node:path";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-const OUT = join(ROOT, "data", "generated", "attributes.json");
-const WIKI = "https://hypixel-skyblock.fandom.com/api.php";
-
+const WIKI = "https://hypixelskyblock.minecraft.wiki/api.php";
+const UA = { "User-Agent": "skyblock-xp-planner/0.1 (data build script)" };
 const RARITIES = ["Common", "Uncommon", "Rare", "Epic", "Legendary"];
 
-const text = (html) =>
-  html
-    .replace(/<[^>]+>/g, " ")
-    .replace(/&#160;|&nbsp;/g, " ")
-    .replace(/&amp;/g, "&")
-    .replace(/\s+/g, " ")
-    .trim();
-
-async function rendered(page) {
-  const url = `${WIKI}?action=parse&page=${encodeURIComponent(page)}&format=json&prop=text`;
-  const res = await fetch(url, { headers: { "User-Agent": "skyblock-xp-planner/0.1 (data build script)" } });
-  if (!res.ok) return null;
-  const body = await res.json();
-  if (body.error) return null;
-  return body.parse.text["*"];
+/** Template fields are one per line as "| name = value", so this needs no pattern. */
+function field(block, name) {
+  for (const line of block.split("\n")) {
+    const trimmed = line.trim();
+    if (!trimmed.startsWith("|")) continue;
+    const eq = trimmed.indexOf("=");
+    if (eq < 0) continue;
+    if (trimmed.slice(1, eq).trim().toLowerCase() !== name) continue;
+    return trimmed.slice(eq + 1).trim() || null;
+  }
+  return null;
 }
 
-/** "Snow Elemental" -> "snow_elemental", matching the keys in attributes.stacks. */
+/** "Essence of the Forest" -> "essence_of_the_forest", matching how progress is keyed. */
 const attributeKey = (name) =>
   name
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "_")
-    .replace(/^_+|_+$/g, "");
-
-/** "Blizzard Shard" -> "SHARD_BLIZZARD", matching the bazaar product id. */
-const shardId = (name) =>
-  "SHARD_" +
-  name
-    .replace(/\s*Shard\s*$/i, "")
     .toUpperCase()
     .replace(/[^A-Z0-9]+/g, "_")
-    .replace(/^_+|_+$/g, "");
+    .replace(/^_+|_+$/g, "")
+    .toLowerCase();
 
-console.log("fetching bazaar for shard price validation…");
+console.log("fetching the bazaar to see which shards actually trade…");
 const bazaar = await fetch("https://api.hypixel.net/v2/skyblock/bazaar").then((r) => r.json());
 const traded = new Set(Object.keys(bazaar.products ?? {}));
+// The wiki writes the shard's display name and the bazaar writes its id, and the two disagree
+// on where the word breaks: "End Stone Protector" against SHARD_ENDSTONE_PROTECTOR. Comparing
+// letters only settles it without a table of exceptions.
+const letters = (id) => id.replace(/[^A-Za-z0-9]/g, "").toUpperCase();
+const byLetters = new Map([...traded].map((id) => [letters(id), id]));
 
 const attributes = [];
 const seen = new Set();
+let noShard = 0;
 
 for (const rarity of RARITIES) {
-  const html = await rendered(`Attributes/List/${rarity}`);
-  if (!html) {
+  const url = `${WIKI}?action=parse&page=${encodeURIComponent(`Attributes/List/${rarity}`)}&format=json&prop=wikitext`;
+  const body = await fetch(url, { headers: UA }).then((r) => r.json());
+  if (body.error) {
     console.log(`  ${rarity.padEnd(10)} (no page)`);
     continue;
   }
 
-  const rows = [...html.matchAll(/<tr[^>]*>([\s\S]*?)<\/tr>/g)].map((m) =>
-    [...m[1].matchAll(/<t[dh][^>]*>([\s\S]*?)<\/t[dh]>/g)].map((c) => text(c[1])),
-  );
-
-  // The header names the columns; find Attribute and Shard Name by label rather than position,
-  // since the tables don't agree on column order across rarities.
-  const header = rows.find((r) => r.includes("Attribute") && r.some((c) => /Shard Name/i.test(c)));
-  if (!header) {
-    console.log(`  ${rarity.padEnd(10)} (no recognisable header)`);
-    continue;
-  }
-  const attributeAt = header.indexOf("Attribute");
-  const shardAt = header.findIndex((c) => /Shard Name/i.test(c));
-
+  const blocks = body.parse.wikitext["*"].split("{{Attribute Table Entry").slice(1);
   let found = 0;
-  for (const row of rows) {
-    if (row === header || row.length <= Math.max(attributeAt, shardAt)) continue;
-    const name = row[attributeAt];
-    const shard = row[shardAt];
-    if (!name || !shard || !/Shard/i.test(shard)) continue;
+  for (const block of blocks) {
+    const name = field(block, "attribute");
+    const shard = field(block, "shard");
+    if (!name || !shard) continue;
 
     const key = attributeKey(name);
-    if (!key || seen.has(key)) continue;
+    if (seen.has(key)) continue;
     seen.add(key);
 
-    const id = shardId(shard);
-    attributes.push({ key, name, rarity: rarity.toUpperCase(), shardName: shard, shardId: id, tradeable: traded.has(id) });
+    // "Grove" is the shard's own name; the item is "Grove Shard" and the id SHARD_GROVE.
+    const derived = `SHARD_${shard.toUpperCase().replace(/[^A-Z0-9]+/g, "_")}`;
+    const shardId = traded.has(derived) ? derived : (byLetters.get(letters(derived)) ?? derived);
+    if (!traded.has(shardId)) noShard++;
+
+    attributes.push({
+      key,
+      name,
+      rarity: rarity.toUpperCase(),
+      shardName: `${shard} Shard`,
+      shardId,
+      tradeable: traded.has(shardId),
+    });
     found++;
   }
   console.log(`  ${rarity.padEnd(10)} ${found} attributes`);
 }
 
 attributes.sort((a, b) => a.key.localeCompare(b.key));
-const tradeable = attributes.filter((a) => a.tradeable).length;
-
-await mkdir(dirname(OUT), { recursive: true });
 await writeFile(
-  OUT,
+  join(ROOT, "data", "generated", "attributes.json"),
   JSON.stringify(
     {
       generatedAt: new Date().toISOString(),
-      source: `${WIKI} — Attributes/List/<rarity>`,
-      note: "Each attribute is fed by one shard, which trades on the bazaar under the mob's name rather than the attribute's. tradeable=false means no bazaar product matched, so that attribute stays unpriced.",
-      totalAttributes: attributes.length,
-      tradeableAttributes: tradeable,
+      source: `${WIKI} — Attributes/List/{rarity}`,
+      note: "Every attribute and the shard that feeds it. Rarity selects the shard ladder, not just the label.",
+      totalXp: attributes.length * 10,
       attributes,
     },
     null,
     1,
   ) + "\n",
 );
-
-console.log(`\n${attributes.length} attributes, ${tradeable} with a bazaar-traded shard`);
-const untraded = attributes.filter((a) => !a.tradeable);
-if (untraded.length) {
-  console.log(`unpriced (${untraded.length}): ${untraded.slice(0, 10).map((a) => `${a.name} -> ${a.shardId}`).join(", ")}`);
-}
-console.log(`-> ${OUT}`);
+console.log(`\nwrote ${attributes.length} attributes (${attributes.length * 10} XP), ${noShard} with no bazaar shard`);

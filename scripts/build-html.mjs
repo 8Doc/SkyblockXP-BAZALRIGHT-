@@ -52,6 +52,7 @@ const gameData = {
   travelScrolls: await loadJson("generated/travel_scrolls.json"),
   costs: await loadJson("generated/costs.json"),
   petScore: await loadJson("curated/pet_score.json"),
+  pets: await loadJson("generated/pets.json"),
   difficulty: await loadJson("generated/difficulty.json"),
   attributeShards: await loadJson("generated/attributes.json"),
   bestiary: await loadJson("generated/bestiary.json"),

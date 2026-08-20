@@ -1,0 +1,922 @@
+{
+ "generatedAt": "2026-08-20T23:04:37.347Z",
+ "source": "https://hypixelskyblock.minecraft.wiki/api.php — Category:Pets, Infobox/Pet rarity",
+ "note": "Every pet and the rarities it can be. Pet score is the best copy's rarity points plus one for reaching max level.",
+ "maxScore": 525,
+ "pets": [
+  {
+   "name": "Ammonite",
+   "key": "AMMONITE",
+   "rarities": [
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Ankylosaurus",
+   "key": "ANKYLOSAURUS",
+   "rarities": [
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Armadillo",
+   "key": "ARMADILLO",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY",
+    "MYTHIC"
+   ],
+   "maxRarity": "MYTHIC"
+  },
+  {
+   "name": "Baby Yeti",
+   "key": "BABY_YETI",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY",
+    "MYTHIC"
+   ],
+   "maxRarity": "MYTHIC"
+  },
+  {
+   "name": "Bal",
+   "key": "BAL",
+   "rarities": [
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Bat",
+   "key": "BAT",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY",
+    "MYTHIC"
+   ],
+   "maxRarity": "MYTHIC"
+  },
+  {
+   "name": "Bee",
+   "key": "BEE",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY",
+    "MYTHIC"
+   ],
+   "maxRarity": "MYTHIC"
+  },
+  {
+   "name": "Bingo",
+   "key": "BINGO",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY",
+    "MYTHIC"
+   ],
+   "maxRarity": "MYTHIC"
+  },
+  {
+   "name": "Black Cat",
+   "key": "BLACK_CAT",
+   "rarities": [
+    "LEGENDARY",
+    "MYTHIC"
+   ],
+   "maxRarity": "MYTHIC"
+  },
+  {
+   "name": "Blaze",
+   "key": "BLAZE",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Blue Whale",
+   "key": "BLUE_WHALE",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Chicken",
+   "key": "CHICKEN",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Crow",
+   "key": "CROW",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Dolphin",
+   "key": "DOLPHIN",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Elephant",
+   "key": "ELEPHANT",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY",
+    "MYTHIC"
+   ],
+   "maxRarity": "MYTHIC"
+  },
+  {
+   "name": "Ender Dragon",
+   "key": "ENDER_DRAGON",
+   "rarities": [
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Enderman",
+   "key": "ENDERMAN",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY",
+    "MYTHIC"
+   ],
+   "maxRarity": "MYTHIC"
+  },
+  {
+   "name": "Endermite",
+   "key": "ENDERMITE",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY",
+    "MYTHIC"
+   ],
+   "maxRarity": "MYTHIC"
+  },
+  {
+   "name": "Flying Fish",
+   "key": "FLYING_FISH",
+   "rarities": [
+    "RARE",
+    "EPIC",
+    "LEGENDARY",
+    "MYTHIC"
+   ],
+   "maxRarity": "MYTHIC"
+  },
+  {
+   "name": "Frog",
+   "key": "FROG",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY",
+    "MYTHIC"
+   ],
+   "maxRarity": "MYTHIC"
+  },
+  {
+   "name": "Ghoul",
+   "key": "GHOUL",
+   "rarities": [
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Giraffe",
+   "key": "GIRAFFE",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Glacite Golem",
+   "key": "GLACITE_GOLEM",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Goblin",
+   "key": "GOBLIN",
+   "rarities": [
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Golden Dragon",
+   "key": "GOLDEN_DRAGON",
+   "rarities": [
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Golem",
+   "key": "GOLEM",
+   "rarities": [
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Grandma Wolf",
+   "key": "GRANDMA_WOLF",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Griffin",
+   "key": "GRIFFIN",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY",
+    "MYTHIC"
+   ],
+   "maxRarity": "MYTHIC"
+  },
+  {
+   "name": "Guardian",
+   "key": "GUARDIAN",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY",
+    "MYTHIC"
+   ],
+   "maxRarity": "MYTHIC"
+  },
+  {
+   "name": "Hedgehog",
+   "key": "HEDGEHOG",
+   "rarities": [
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Hermit Crab",
+   "key": "HERMIT_CRAB",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY",
+    "MYTHIC"
+   ],
+   "maxRarity": "MYTHIC"
+  },
+  {
+   "name": "Horse",
+   "key": "HORSE",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Hound",
+   "key": "HOUND",
+   "rarities": [
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Jade Dragon",
+   "key": "JADE_DRAGON",
+   "rarities": [
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Jellyfish",
+   "key": "JELLYFISH",
+   "rarities": [
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Jerry",
+   "key": "JERRY",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY",
+    "MYTHIC"
+   ],
+   "maxRarity": "MYTHIC"
+  },
+  {
+   "name": "Kuudra",
+   "key": "KUUDRA",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Lion",
+   "key": "LION",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Magma Cube",
+   "key": "MAGMA_CUBE",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Mammoth",
+   "key": "MAMMOTH",
+   "rarities": [
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Megalodon",
+   "key": "MEGALODON",
+   "rarities": [
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Mithril Golem",
+   "key": "MITHRIL_GOLEM",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY",
+    "MYTHIC"
+   ],
+   "maxRarity": "MYTHIC"
+  },
+  {
+   "name": "Mole",
+   "key": "MOLE",
+   "rarities": [
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Monkey",
+   "key": "MONKEY",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Montezuma",
+   "key": "MONTEZUMA",
+   "rarities": [
+    "RARE",
+    "EPIC"
+   ],
+   "maxRarity": "EPIC"
+  },
+  {
+   "name": "Mooshroom Cow",
+   "key": "MOOSHROOM_COW",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Mosquito",
+   "key": "MOSQUITO",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Ocelot",
+   "key": "OCELOT",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Orchid Mantis",
+   "key": "ORCHID_MANTIS",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Owl",
+   "key": "OWL",
+   "rarities": [
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Parrot",
+   "key": "PARROT",
+   "rarities": [
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Penguin",
+   "key": "PENGUIN",
+   "rarities": [
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Phoenix",
+   "key": "PHOENIX",
+   "rarities": [
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Pig",
+   "key": "PIG",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Pigman",
+   "key": "PIGMAN",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Precursor Drone",
+   "key": "PRECURSOR_DRONE",
+   "rarities": [
+    "COMMON"
+   ],
+   "maxRarity": "COMMON"
+  },
+  {
+   "name": "Rabbit",
+   "key": "RABBIT",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY",
+    "MYTHIC"
+   ],
+   "maxRarity": "MYTHIC"
+  },
+  {
+   "name": "Rat",
+   "key": "RAT",
+   "rarities": [
+    "LEGENDARY",
+    "MYTHIC"
+   ],
+   "maxRarity": "MYTHIC"
+  },
+  {
+   "name": "Reindeer",
+   "key": "REINDEER",
+   "rarities": [
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Rift Ferret",
+   "key": "RIFT_FERRET",
+   "rarities": [
+    "EPIC"
+   ],
+   "maxRarity": "EPIC"
+  },
+  {
+   "name": "Rock",
+   "key": "ROCK",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Rose Dragon",
+   "key": "ROSE_DRAGON",
+   "rarities": [
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Scatha",
+   "key": "SCATHA",
+   "rarities": [
+    "RARE",
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Seal",
+   "key": "SEAL",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Sheep",
+   "key": "SHEEP",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Silverfish",
+   "key": "SILVERFISH",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Skeleton",
+   "key": "SKELETON",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Skeleton Horse",
+   "key": "SKELETON_HORSE",
+   "rarities": [
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Sloth",
+   "key": "SLOTH",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Slug",
+   "key": "SLUG",
+   "rarities": [
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Snail",
+   "key": "SNAIL",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Snowman",
+   "key": "SNOWMAN",
+   "rarities": [
+    "LEGENDARY",
+    "MYTHIC"
+   ],
+   "maxRarity": "MYTHIC"
+  },
+  {
+   "name": "Spider",
+   "key": "SPIDER",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY",
+    "MYTHIC"
+   ],
+   "maxRarity": "MYTHIC"
+  },
+  {
+   "name": "Spinosaurus",
+   "key": "SPINOSAURUS",
+   "rarities": [
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Spirit",
+   "key": "SPIRIT",
+   "rarities": [
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Squid",
+   "key": "SQUID",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "T-Rex",
+   "key": "T_REX",
+   "rarities": [
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Tarantula",
+   "key": "TARANTULA",
+   "rarities": [
+    "EPIC",
+    "LEGENDARY",
+    "MYTHIC"
+   ],
+   "maxRarity": "MYTHIC"
+  },
+  {
+   "name": "Tiger",
+   "key": "TIGER",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Turtle",
+   "key": "TURTLE",
+   "rarities": [
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Wisp",
+   "key": "WISP",
+   "rarities": [
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Witch",
+   "key": "WITCH",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Wither Skeleton",
+   "key": "WITHER_SKELETON",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Wolf",
+   "key": "WOLF",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  },
+  {
+   "name": "Zombie",
+   "key": "ZOMBIE",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY"
+  }
+ ]
+}

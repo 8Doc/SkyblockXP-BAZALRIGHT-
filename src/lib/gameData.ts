@@ -234,6 +234,8 @@ export type GameData = {
   travelScrolls: TravelScrollsData;
   costs: CostsData;
   petScore: { byRarity: Record<string, number> };
+  /** Every pet and the rarities it can be — a fixed catalogue, not whatever is listed today. */
+  pets: { maxScore: number; pets: { name: string; key: string; rarities: string[]; maxRarity: string }[] };
   difficulty: DifficultyData;
   attributeShards: AttributesData;
   bestiary: BestiaryData;

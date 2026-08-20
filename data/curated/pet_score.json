@@ -13,7 +13,7 @@
   "maxScore": 521,
   "maxScoreSource": "Reported by the user; the wiki states the rules but not the total. 521 x 3 = 1,563 SkyBlock XP is therefore the ceiling for the whole category.",
   "knownGaps": [
-    "The max-level bonus is not modelled. The wiki states a pet at its maximum level awards +1 pet score on top of its rarity points, so a fully levelled collection scores higher than the rarity sum this file describes.",
-    "The pet universe is read off the auction house, not a fixed list, so a pet nobody is selling does not exist in the catalogue at all. A full sweep found 97 pets worth 495 score against a real maximum of 521."
+    "The max-level bonus is not modelled as a task. The wiki states a pet at its maximum level awards +1 pet score on top of its rarity points, which is 85 points across the catalogue — the difference between the 440 the purchasable tasks can reach and the 525 the catalogue allows. Marking those done needs the pet level curve, which this app does not carry, so crediting them would mean claiming progress it cannot check.",
+    "XP already earned is unaffected: it comes from the profile's own highest_pet_score, which includes the bonus."
   ]
 }

@@ -102,7 +102,7 @@ export type Catalog = {
 export const UNMODELLED: { category: Category; note: string; totalXp?: number }[] = [
   {
     category: "pets",
-    note: "Pet score already earned is exact — the profile reports it outright. What is left to earn is not: the pet list is read off the auction house rather than a fixed catalogue, so a pet nobody is currently selling is missing entirely, and the +1 a pet awards for reaching its maximum level is not counted at all. A full sweep sees 495 of the 521 points available.",
+    note: "Pet score already earned is exact — the profile reports it outright. The catalogue is now fixed at 85 pets rather than read off the auction house, so a pet nobody is selling is a row with no price instead of a row that does not exist. What is still missing is the +1 a pet awards for reaching its maximum level: 85 points across the catalogue, which would need the pet level curve to know whether you have it.",
   },
   {
     category: "bestiary",
@@ -482,9 +482,13 @@ export function buildCatalog(
 
   // Pet score isn't ground, it's bought: every pet you own contributes by rarity, and only the
   // best copy of a given pet counts — the same rule accessory families follow. So the tasks are
-  // the pets themselves, priced from the auction house, worth three XP per point of score they
-  // add. The auction house doubles as the pet catalogue: there is no pet list in the API, and a
-  // pet nobody is selling is one you can't buy anyway.
+  // the pets themselves, priced from the auction house, worth three XP per point of score.
+  //
+  // The catalogue is fixed, not read off the auction house. Taking it from live listings meant a
+  // pet nobody happened to be selling did not exist: a full sweep saw 97 pets worth 495 score
+  // against a real maximum of 521, so the ceiling drifted with the market. Listings now do only
+  // what they are good for, which is prices — an unlisted pet is a task with no price, not a
+  // task that vanished.
   const petScoreByRarity = data.petScore.byRarity;
   const ownedPetScore = new Map<string, number>();
   for (const pet of member.pets_data?.pets ?? []) {
@@ -493,27 +497,30 @@ export function buildCatalog(
     ownedPetScore.set(key, Math.max(ownedPetScore.get(key) ?? 0, petScoreByRarity[pet.tier ?? ""] ?? 0));
   }
 
-  for (const pet of pets ?? []) {
-    const score = petScoreByRarity[pet.rarity] ?? 0;
-    if (score <= 0) continue;
+  for (const pet of data.pets.pets) {
     const key = petKey(pet.name);
     const owned = ownedPetScore.get(key) ?? 0;
-    const id = `pet_${key}_${pet.rarity}`;
 
-    tasks.push({
-      id,
-      category: "pets",
-      name: `${titleCase(pet.name)} (${pet.rarity.toLowerCase()})`,
-      xp: Math.max(score - owned, 0) * 3,
-      exclusiveGroup: `pet:${key}`,
-      groupLevel: score * 3,
-      groupBase: owned * 3,
-      requires: [],
-      cost: { kind: "auction", itemId: key, tier: pet.rarity },
-      repeatable: false,
-      note: `${score} pet score`,
-    });
-    if (owned >= score) done.add(id);
+    for (const rarity of pet.rarities) {
+      const score = petScoreByRarity[rarity] ?? 0;
+      if (score <= 0) continue;
+      const id = `pet_${key}_${rarity}`;
+
+      tasks.push({
+        id,
+        category: "pets",
+        name: `${titleCase(pet.name)} (${rarity.toLowerCase()})`,
+        xp: Math.max(score - owned, 0) * 3,
+        exclusiveGroup: `pet:${key}`,
+        groupLevel: score * 3,
+        groupBase: owned * 3,
+        requires: [],
+        cost: { kind: "auction", itemId: key, tier: rarity },
+        repeatable: false,
+        note: `${score} pet score`,
+      });
+      if (owned >= score) done.add(id);
+    }
   }
 
   /* --------------------------------------------- perk trees: HOTM and HOTF */

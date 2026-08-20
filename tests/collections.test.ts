@@ -255,3 +255,27 @@ test("trophy fish are their own category, not misc", () => {
   assert.deepEqual([...new Set(trophies.map((t) => t.category))], ["trophy_fish"]);
   assert.equal(tasks.some((t) => t.category === "misc" && t.id.startsWith("TROPHY_")), false);
 });
+
+/* ------------------------------------------------- fixed pet catalogue */
+
+test("the pet catalogue is fixed, not whatever is listed today", () => {
+  const { pets, maxScore } = gameData().pets;
+  assert.ok(pets.length > 80, `only ${pets.length} pets`);
+  assert.ok(maxScore > 500 && maxScore < 560, `max score ${maxScore} is nowhere near the game's 521`);
+  assert.deepEqual(pets.filter((p) => !p.rarities.length), [], "every pet states the rarities it can be");
+});
+
+test("a pet nobody is selling is still a row", () => {
+  // The list used to come off the auction house, so an unlisted pet did not exist at all.
+  const { tasks } = catalogFor({});
+  const golden = tasks.filter((t) => t.id.includes("GOLDEN_DRAGON"));
+  assert.ok(golden.length > 0, "the catalogue carries it with no market involved");
+});
+
+test("attributes cover the whole game, not the third the old wiki listed", () => {
+  const { tasks } = catalogFor({});
+  const attributes = tasks.filter((t) => t.category === "attributes");
+  // 320 attributes at ten levels apiece is 3,200 XP; the old Fandom list carried 181.
+  assert.ok(attributes.length > 3_000, `only ${attributes.length} attribute levels`);
+  assert.equal(attributes.reduce((s, t) => s + t.xp, 0), attributes.length, "one XP per level");
+});

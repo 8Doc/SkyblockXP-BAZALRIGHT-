@@ -16,7 +16,7 @@ export function gameData(): GameData {
     magicalPower: d("curated/magical_power.json"), accessoryFamilies: d("curated/accessory_families.json"),
     museum: d("generated/museum.json"), tasks: d("generated/tasks.json"), curves: d("generated/curves.json"),
     travelScrolls: d("generated/travel_scrolls.json"), costs: d("generated/costs.json"),
-    petScore: d("curated/pet_score.json"), difficulty: d("generated/difficulty.json"),
+    petScore: d("curated/pet_score.json"), pets: d("generated/pets.json"), difficulty: d("generated/difficulty.json"),
     attributeShards: d("generated/attributes.json"),
     bestiary: d("generated/bestiary.json"), bestiaryMobs: d("curated/bestiary_mobs.json"), abiphone: d("generated/abiphone.json"), bagUpgrades: d("curated/accessory_bag_upgrades.json"),
     attributeLevels: d("curated/attribute_levels.json"), attributeApiKeys: d("curated/attribute_api_keys.json"),
