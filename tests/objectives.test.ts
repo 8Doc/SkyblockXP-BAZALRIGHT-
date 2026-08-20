@@ -13,25 +13,43 @@ const byId = new Map(catalog.tasks.map((t) => [t.id, t]));
  * player to work out which farmer, on which island, and where.
  */
 test("a talk-to objective names the NPC and says where they are", () => {
-  const task = byId.get("OBJECTIVE_TALK_TO_FARMER")!;
-  assert.equal(task.name, "Talk to Farmer Rigby", "the slug says FARMER; the character has a name");
-  assert.match(task.note ?? "", /^Farm · -?\d+, -?\d+, -?\d+$/, `got ${task.note}`);
+  // Hattie rather than the Farmer: the Farmer is one of the two characters two objectives share,
+  // so that name carries a disambiguating number and is the wrong example of a clean one.
+  const task = byId.get("OBJECTIVE_TALK_TO_HATTIE_2")!;
+  assert.equal(task.name, "Talk to Hattie", "the slug says HATTIE_2; the character has a name");
+  assert.match(task.note ?? "", /^[A-Za-z' ]+ \u00b7 -?\d+, -?\d+, -?\d+$/, `got ${task.note}`);
 });
 
-test("the trailing number names the step rather than joining the NPC's name", () => {
-  assert.equal(byId.get("OBJECTIVE_TALK_TO_CHARLIE_NEW_3")!.name, "Talk to Charlie (step 3)");
-  assert.equal(byId.get("OBJECTIVE_TALK_TO_DAVID_7")!.name, "Talk to David Hunterborough (step 7)");
+test("a number in the id is not a position in a sequence", () => {
+  // The table carries INCREASE_FARMING_SKILL_5, and TALK_TO_DAVID_7 with no David 1 through 6
+  // anywhere — the number is part of the id. Reading it as a step invented six errands.
+  assert.equal(byId.get("OBJECTIVE_TALK_TO_CHARLIE_NEW_3")!.name, "Talk to Charlie");
+  assert.equal(byId.get("OBJECTIVE_TALK_TO_DAVID_7")!.name, "Talk to David Hunterborough");
 });
 
-test("two steps at the same NPC are told apart", () => {
-  // Both carry the same name and the same coordinates, so without the step the row you have
-  // already finished is indistinguishable from the one you have not — which reads as the app
-  // failing to notice you did it.
+test("two objectives at the same NPC are told apart, and only those", () => {
+  // These two are the table's only pair sharing a character. Both render the same name and the
+  // same coordinates, so undecorated the one you have finished is indistinguishable from the one
+  // you have not — but every other talk-to objective is unique and keeps a clean name.
   const first = byId.get("OBJECTIVE_TALK_TO_FARMER")!;
   const second = byId.get("OBJECTIVE_TALK_TO_FARMER_2")!;
-  assert.equal(first.name, "Talk to Farmer Rigby");
-  assert.equal(second.name, "Talk to Farmer Rigby (step 2)");
+  assert.equal(first.name, "Talk to Farmer Rigby (1)");
+  assert.equal(second.name, "Talk to Farmer Rigby (2)");
   assert.equal(first.note, second.note, "same NPC, so the directions are identical");
+
+  const talkTo = [...byId.values()].filter((t) => t.id.startsWith("OBJECTIVE_TALK_TO_"));
+  const names = talkTo.map((t) => t.name);
+  assert.equal(new Set(names).size, names.length, "no two talk-to objectives may render alike");
+  // Numbered only where the plain name would collide — asserted as the rule rather than a count,
+  // since the table has two such pairs today and may have three tomorrow.
+  const plainName = (t: { name: string }) => t.name.replace(/ \(\d+\)$/, "");
+  const shared = new Set(
+    talkTo.map(plainName).filter((n, i, all) => all.indexOf(n) !== i),
+  );
+  for (const t of talkTo) {
+    const numbered = /\(\d+\)$/.test(t.name);
+    assert.equal(numbered, shared.has(plainName(t)), `${t.id} numbering should follow whether the name collides`);
+  }
 });
 
 test("objectives that name an NPC without saying 'talk to' get directions too", () => {

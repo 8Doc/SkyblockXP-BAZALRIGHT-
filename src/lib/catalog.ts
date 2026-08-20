@@ -1115,10 +1115,17 @@ function objectiveName(id: string, data: GameData): string {
   if (!id.startsWith("OBJECTIVE_")) return prettyTaskName(id);
   const npc = npcFor(id, data);
   if (npc && id.startsWith("OBJECTIVE_TALK_TO_")) {
-    // The story sends you back to the same NPC more than once. Both steps carry the same name and
-    // name and the same coordinates — so completing one leaves a row that looks untouched.
-    const step = /_(\d+)$/.exec(id)?.[1];
-    return step ? `Talk to ${npc.name} (step ${step})` : `Talk to ${npc.name}`;
+    // The trailing number is part of the id, not a position in a sequence: the table carries
+    // INCREASE_FARMING_SKILL_5, and TALK_TO_DAVID_7 with no David 1 through 6 anywhere. Calling
+    // it a step invented six errands that do not exist.
+    //
+    // It is still needed where two objectives send you to the same character, or they render
+    // identically and finishing one leaves a row that looks untouched. Only then, and only as
+    // the bare number.
+    const plain = `Talk to ${npc.name}`;
+    // The un-numbered id is the first of its pair, so it reads as 1 rather than borrowing the
+    // other one's number.
+    return sharesAnNpc(id, data) ? `${plain} (${/_(\d+)$/.exec(id)?.[1] ?? "1"})` : plain;
   }
 
   const label = prettyTaskName(id.replace(/^OBJECTIVE_/, ""));
@@ -1127,6 +1134,14 @@ function objectiveName(id: string, data: GameData): string {
   // than leaving a character looking like a noun.
   const key = data.npcs.objectives[id];
   return key ? label.replace(new RegExp(key, "i"), npc.name) : label;
+}
+
+/** Whether another talk-to objective resolves to the same NPC, making the bare name ambiguous. */
+function sharesAnNpc(id: string, data: GameData): boolean {
+  const mine = npcKeyFrom(id);
+  return data.tasks.tasks.some(
+    (task) => task.id !== id && task.id.startsWith("OBJECTIVE_TALK_TO_") && npcKeyFrom(task.id) === mine,
+  );
 }
 
 /** "Farm · 62, 72, -147" — where to actually go. */
