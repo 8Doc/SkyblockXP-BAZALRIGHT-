@@ -73,7 +73,16 @@ export type AccessoryFamiliesData = {
 export type MuseumData = {
   generatedAt: string;
   totalXp: number;
-  donations: { itemId: string; name: string; xp: number; category: string; stage: string | null; tradeable: boolean }[];
+  donations: {
+    itemId: string;
+    name: string;
+    xp: number;
+    /** Ids the same donation can be filed under — a dungeon-starred copy keeps its own. */
+    mappedIds?: string[];
+    category: string;
+    stage: string | null;
+    tradeable: boolean;
+  }[];
   armorSets: { setId: string; name: string; xp: number; category: string; stage: string | null; pieces: string[] }[];
 };
 

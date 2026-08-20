@@ -199,6 +199,9 @@ async function buildMuseum() {
         itemId: item.id,
         name: item.name,
         xp: museum.donation_xp,
+        // A dungeon-starred copy is filed under its own id: donate a Starred Shadow Fury and the
+        // museum stores STARRED_SHADOW_FURY, which matches nothing unless the alternates come too.
+        mappedIds: museum.mapped_item_ids ?? [],
         category: museum.category ?? "MISC",
         stage: museum.game_stage ?? null,
         tradeable: item.can_trade !== false && !item.soulbound,

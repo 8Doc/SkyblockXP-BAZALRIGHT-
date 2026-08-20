@@ -154,3 +154,20 @@ test("an item taken back out still counts as donated", () => {
   const cat = catalogFor({}, undefined, { donatedItemIds: new Set([donation.itemId]), value: 0 });
   assert.ok(cat.done.has(`museum_${donation.itemId}`));
 });
+
+test("a starred dungeon copy counts as the donation it is", () => {
+  // Donate a Starred Shadow Fury and the museum files it under STARRED_SHADOW_FURY, which
+  // matches nothing unless the alternate ids come along.
+  const withAlts = gameData().museum.donations.find((d) => (d.mappedIds ?? []).length > 0)!;
+  const starred = withAlts.mappedIds![0];
+
+  const cat = catalogFor({}, undefined, { donatedItemIds: new Set([starred]), value: 0 });
+  assert.ok(cat.done.has(`museum_${withAlts.itemId}`), `${starred} should satisfy ${withAlts.itemId}`);
+});
+
+test("donations the app has no slot for are counted and reported", () => {
+  const cat = catalogFor({}, undefined, { donatedItemIds: new Set(["NOT_A_MUSEUM_ITEM"]), value: 0 });
+  const note = cat.unmodelled.find((u) => u.category === "museum");
+  assert.ok(note, "an unmatched donation should raise a note rather than silently read as missing");
+  assert.match(note.note, /1 museum donation/);
+});

@@ -331,6 +331,19 @@ export function buildCatalog(
   // donation_xp is published per item in the items resource, and the museum endpoint says what
   // has already been donated — so this category is exact on both halves.
   const donated = museum?.donatedItemIds ?? null;
+  // Everything the museum could be holding, under every id it might file it under. Anything
+  // left over is a donation this app has no slot for, and saying how many turns "the museum is
+  // wrong" into a number worth chasing.
+  const museumKnows = new Set<string>();
+  for (const donation of data.museum.donations) {
+    museumKnows.add(donation.itemId);
+    for (const alt of donation.mappedIds ?? []) museumKnows.add(alt);
+  }
+  for (const set of data.museum.armorSets) {
+    museumKnows.add(set.setId);
+    for (const piece of set.pieces) museumKnows.add(piece);
+  }
+  const strandedDonations = donated ? [...donated].filter((held) => !museumKnows.has(held)).length : 0;
   for (const donation of data.museum.donations) {
     const id = `museum_${donation.itemId}`;
     tasks.push({
@@ -343,7 +356,10 @@ export function buildCatalog(
       repeatable: false,
       note: `${donation.category.toLowerCase()} · donation is permanent`,
     });
-    if (donated?.has(donation.itemId)) done.add(id);
+    // A dungeon-starred copy is filed under its own id, so the alternates count too — without
+    // them a donated Starred Shadow Fury reads as an empty slot.
+    const heldAs = [donation.itemId, ...(donation.mappedIds ?? [])];
+    if (donated && heldAs.some((held) => donated.has(held))) done.add(id);
   }
   for (const set of data.museum.armorSets) {
     const id = `museum_set_${set.setId}`;
@@ -843,7 +859,19 @@ export function buildCatalog(
       petScore: (member.leveling?.highest_pet_score ?? 0) * 3,
       bestiary: bestiaryXp(member),
     },
-    unmodelled: UNMODELLED.map((u) =>
+    unmodelled: UNMODELLED.concat(
+      strandedDonations > 0
+        ? [
+            {
+              category: "museum" as Category,
+              note:
+                "This profile holds " +
+                strandedDonations +
+                " museum donation(s) the app has no slot for, so they count against you as missing. Every slot the game publishes is modelled, which means these are filed under an id the items resource does not carry — worth reporting rather than guessing at.",
+            },
+          ]
+        : [],
+    ).map((u) =>
       u.category === "bestiary"
         ? {
             ...u,

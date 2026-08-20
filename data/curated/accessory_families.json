@@ -70,6 +70,11 @@
     {
       "match": "^(2 )?IQ Points?$",
       "family": "iq point"
+    },
+    {
+      "match": "^(Lucky|Eternal) Hoof$",
+      "family": "hoof",
+      "note": "Eternal Hoof is crafted from a Lucky Hoof — the wiki infobox says upgrades_from, and nothing in the items resource does."
     }
   ],
   "openQuestions": [
