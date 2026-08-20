@@ -220,3 +220,28 @@ test("special-section donations widen the museum gap rather than vanishing", () 
   const museum = cat.reconciliation.find((r) => r.category === "museum")!;
   assert.deepEqual(museum, { category: "museum", credited: 1, reported: 3 });
 });
+
+test("an upgraded armour set fills the set slot below it", () => {
+  // Set upgrade links are carried by the pieces but keyed by the *set* id, so reading only the
+  // self-keyed links dropped all 174 of them and left donated sets reading as outstanding.
+  const sets = gameData().museum.armorSets;
+  const child = sets.find((s) => s.parentId && sets.some((p) => p.setId === s.parentId))!;
+
+  const cat = catalogFor({}, undefined, {
+    donatedItemIds: new Set([child.parentId!]),
+    specialItemIds: new Set<string>(),
+    value: 0,
+  });
+  assert.ok(cat.done.has(`museum_set_${child.setId}`), `${child.parentId} should fill ${child.setId}`);
+});
+
+test("a lower set does not fill the one above it", () => {
+  const sets = gameData().museum.armorSets;
+  const child = sets.find((s) => s.parentId && sets.some((p) => p.setId === s.parentId))!;
+  const cat = catalogFor({}, undefined, {
+    donatedItemIds: new Set([child.setId]),
+    specialItemIds: new Set<string>(),
+    value: 0,
+  });
+  assert.equal(cat.done.has(`museum_set_${child.parentId}`), false, "the chain only runs upwards");
+});

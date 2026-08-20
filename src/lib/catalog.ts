@@ -406,11 +406,18 @@ export function buildCatalog(
       repeatable: false,
       note: `${set.category.toLowerCase()} · ${set.pieces.length} pieces`,
     });
-    // The museum files a donated armour set under the set's own id, not its four pieces — so
-    // requiring every piece marked all 73 donated sets as outstanding and told the player to
-    // hand in armour the museum was already displaying. The piece-by-piece test is kept as a
-    // fallback for anything filed the other way round.
-    if (donated && (donated.has(set.setId) || set.pieces.every((piece) => slotFilled(piece)))) done.add(id);
+    // A set's slot is filled by its own id, by holding every piece, or by anything further up
+    // its upgrade line — donate the Backwater set and the Angler slot below it is filled too.
+    let setChain: string | null | undefined = set.setId;
+    let setDone = false;
+    for (let hop = 0; setChain && hop < 12; hop++) {
+      if (donated?.has(setChain)) {
+        setDone = true;
+        break;
+      }
+      setChain = data.museum.armorSets.find((s) => s.setId === setChain)?.parentId ?? null;
+    }
+    if (donated && (setDone || set.pieces.every((piece) => slotFilled(piece)))) done.add(id);
   }
 
   /* ------------------------------------------------------------- dungeons */

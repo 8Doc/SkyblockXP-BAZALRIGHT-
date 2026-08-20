@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-08-20T18:58:29.331Z",
+ "generatedAt": "2026-08-20T19:22:02.907Z",
  "source": "https://api.hypixel.net/v2/resources/skyblock",
  "totalXp": 3644,
  "donations": [
@@ -4999,6 +4999,7 @@
  "armorSets": [
   {
    "setId": "ABYSSAL",
+   "parentId": null,
    "name": "Abyssal",
    "xp": 10,
    "category": "FISHING",
@@ -5012,6 +5013,7 @@
   },
   {
    "setId": "ADAPTIVE",
+   "parentId": null,
    "name": "Adaptive",
    "xp": 7,
    "category": "DUNGEONEERING",
@@ -5026,6 +5028,7 @@
   },
   {
    "setId": "ANGLER",
+   "parentId": "BACKWATER",
    "name": "Angler Belt",
    "xp": 2,
    "category": "FISHING",
@@ -5043,6 +5046,7 @@
   },
   {
    "setId": "ARACHNE",
+   "parentId": null,
    "name": "Arachne's",
    "xp": 4,
    "category": "COMBAT",
@@ -5060,6 +5064,7 @@
   },
   {
    "setId": "ARMOR_OF_THE_PACK",
+   "parentId": null,
    "name": "Chestplate of the Pack",
    "xp": 7,
    "category": "COMBAT",
@@ -5073,6 +5078,7 @@
   },
   {
    "setId": "ARMOR_OF_YOG",
+   "parentId": null,
    "name": "Yog",
    "xp": 3,
    "category": "MINING",
@@ -5086,6 +5092,7 @@
   },
   {
    "setId": "AURORA",
+   "parentId": null,
    "name": "Aurora",
    "xp": 10,
    "category": "COMBAT",
@@ -5099,6 +5106,7 @@
   },
   {
    "setId": "BACKWATER",
+   "parentId": null,
    "name": "Backwater Cloak",
    "xp": 6,
    "category": "FISHING",
@@ -5116,6 +5124,7 @@
   },
   {
    "setId": "BAT_PERSON",
+   "parentId": null,
    "name": "Bat Person",
    "xp": 7,
    "category": "COMBAT",
@@ -5129,6 +5138,7 @@
   },
   {
    "setId": "BERSERKER",
+   "parentId": null,
    "name": "Berserker",
    "xp": 14,
    "category": "COMBAT",
@@ -5142,6 +5152,7 @@
   },
   {
    "setId": "BIOHAZARD",
+   "parentId": null,
    "name": "Biohazard",
    "xp": 4,
    "category": "FARMING",
@@ -5155,6 +5166,7 @@
   },
   {
    "setId": "BLAZE",
+   "parentId": "FROZEN_BLAZE",
    "name": "Blaze",
    "xp": 7,
    "category": "COMBAT",
@@ -5169,6 +5181,7 @@
   },
   {
    "setId": "BLOSSOM",
+   "parentId": null,
    "name": "Blossom Bracelet",
    "xp": 8,
    "category": "FARMING",
@@ -5182,6 +5195,7 @@
   },
   {
    "setId": "BOUNCY",
+   "parentId": null,
    "name": "Bouncy",
    "xp": 4,
    "category": "DUNGEONEERING",
@@ -5195,6 +5209,7 @@
   },
   {
    "setId": "BRONZE_HUNTER",
+   "parentId": "SILVER_HUNTER",
    "name": "Bronze Hunter",
    "xp": 10,
    "category": "FISHING",
@@ -5208,6 +5223,7 @@
   },
   {
    "setId": "CACTUS",
+   "parentId": null,
    "name": "Cactus",
    "xp": 2,
    "category": "FARMING",
@@ -5221,6 +5237,7 @@
   },
   {
    "setId": "CANOPY",
+   "parentId": "FIG",
    "name": "Canopy Pants",
    "xp": 3,
    "category": "FORAGING",
@@ -5234,6 +5251,7 @@
   },
   {
    "setId": "CELESTE",
+   "parentId": null,
    "name": "Celeste",
    "xp": 1,
    "category": "COMBAT",
@@ -5247,6 +5265,7 @@
   },
   {
    "setId": "CHALLENGER",
+   "parentId": "MYTHOS",
    "name": "Challenger's",
    "xp": 6,
    "category": "COMBAT",
@@ -5264,6 +5283,7 @@
   },
   {
    "setId": "CHEAP_TUXEDO",
+   "parentId": "FANCY_TUXEDO",
    "name": "Cheap Tuxedo Pants",
    "xp": 3,
    "category": "COMBAT",
@@ -5276,6 +5296,7 @@
   },
   {
    "setId": "CRIMSON",
+   "parentId": null,
    "name": "Crimson",
    "xp": 10,
    "category": "COMBAT",
@@ -5289,6 +5310,7 @@
   },
   {
    "setId": "CRIMSON_HUNTER",
+   "parentId": null,
    "name": "Blaze",
    "xp": 4,
    "category": "COMBAT",
@@ -5306,6 +5328,7 @@
   },
   {
    "setId": "CROPIE",
+   "parentId": "SQUASH",
    "name": "Cropie",
    "xp": 6,
    "category": "FARMING",
@@ -5319,6 +5342,7 @@
   },
   {
    "setId": "CRYSTAL",
+   "parentId": null,
    "name": "Crystal",
    "xp": 6,
    "category": "COMBAT",
@@ -5332,6 +5356,7 @@
   },
   {
    "setId": "DIAMOND_HUNTER",
+   "parentId": null,
    "name": "Diamond Hunter",
    "xp": 25,
    "category": "FISHING",
@@ -5345,6 +5370,7 @@
   },
   {
    "setId": "DIVAN",
+   "parentId": null,
    "name": "Boots of Divan",
    "xp": 20,
    "category": "MINING",
@@ -5358,6 +5384,7 @@
   },
   {
    "setId": "DIVAN_EQUIPMENT",
+   "parentId": null,
    "name": "Pendant of Divan",
    "xp": 25,
    "category": "MINING",
@@ -5368,6 +5395,7 @@
   },
   {
    "setId": "DIVER",
+   "parentId": "ABYSSAL",
    "name": "Diver's",
    "xp": 10,
    "category": "FISHING",
@@ -5381,6 +5409,7 @@
   },
   {
    "setId": "ELEANOR",
+   "parentId": null,
    "name": "Eleanor's",
    "xp": 5,
    "category": "COMBAT",
@@ -5394,6 +5423,7 @@
   },
   {
    "setId": "ELEGANT_TUXEDO",
+   "parentId": null,
    "name": "Elegant Tuxedo Pants",
    "xp": 6,
    "category": "COMBAT",
@@ -5406,6 +5436,7 @@
   },
   {
    "setId": "EMERALD_ARMOR",
+   "parentId": null,
    "name": "Emerald Armor",
    "xp": 5,
    "category": "COMBAT",
@@ -5419,6 +5450,7 @@
   },
   {
    "setId": "END",
+   "parentId": null,
    "name": "Ender",
    "xp": 3,
    "category": "COMBAT",
@@ -5432,6 +5464,7 @@
   },
   {
    "setId": "FAIRY",
+   "parentId": null,
    "name": "Fairy's Polo",
    "xp": 2,
    "category": "COMBAT",
@@ -5445,6 +5478,7 @@
   },
   {
    "setId": "FANCY_TUXEDO",
+   "parentId": "ELEGANT_TUXEDO",
    "name": "Fancy Tuxedo Pants",
    "xp": 4,
    "category": "COMBAT",
@@ -5457,6 +5491,7 @@
   },
   {
    "setId": "FARM_ARMOR",
+   "parentId": "PUMPKIN",
    "name": "Haymaker",
    "xp": 2,
    "category": "FARMING",
@@ -5470,6 +5505,7 @@
   },
   {
    "setId": "FARM_SUIT",
+   "parentId": "FARM_ARMOR",
    "name": "Farmhand",
    "xp": 1,
    "category": "FARMING",
@@ -5483,6 +5519,7 @@
   },
   {
    "setId": "FERMENTO",
+   "parentId": "HELIANTHUS",
    "name": "Fermento",
    "xp": 12,
    "category": "FARMING",
@@ -5496,6 +5533,7 @@
   },
   {
    "setId": "FERVOR",
+   "parentId": null,
    "name": "Fervor",
    "xp": 10,
    "category": "COMBAT",
@@ -5509,6 +5547,7 @@
   },
   {
    "setId": "FIG",
+   "parentId": "HELIX_ARMOR",
    "name": "Figmail",
    "xp": 7,
    "category": "FORAGING",
@@ -5522,6 +5561,7 @@
   },
   {
    "setId": "FINAL_DESTINATION",
+   "parentId": null,
    "name": "Final Destination",
    "xp": 8,
    "category": "COMBAT",
@@ -5535,6 +5575,7 @@
   },
   {
    "setId": "FINWAVE",
+   "parentId": "GILLSPLASH",
    "name": "Finwave Gloves",
    "xp": 10,
    "category": "FISHING",
@@ -5547,6 +5588,7 @@
   },
   {
    "setId": "FISHERMAN",
+   "parentId": null,
    "name": "Prismarine Necklace",
    "xp": 3,
    "category": "FISHING",
@@ -5560,6 +5602,7 @@
   },
   {
    "setId": "FLAME_BREAKER",
+   "parentId": "ARMOR_OF_YOG",
    "name": "Flamebreaker",
    "xp": 3,
    "category": "MINING",
@@ -5573,6 +5616,7 @@
   },
   {
    "setId": "FROZEN",
+   "parentId": null,
    "name": "Frozen Amulet",
    "xp": 4,
    "category": "FISHING",
@@ -5583,6 +5627,7 @@
   },
   {
    "setId": "FROZEN_BLAZE",
+   "parentId": null,
    "name": "Frozen Blaze",
    "xp": 10,
    "category": "COMBAT",
@@ -5596,6 +5641,7 @@
   },
   {
    "setId": "GEMSTONE",
+   "parentId": null,
    "name": "Jade Belt",
    "xp": 5,
    "category": "MINING",
@@ -5609,6 +5655,7 @@
   },
   {
    "setId": "GILLSPLASH",
+   "parentId": null,
    "name": "Gillsplash Gloves",
    "xp": 15,
    "category": "FISHING",
@@ -5621,6 +5668,7 @@
   },
   {
    "setId": "GLACITE",
+   "parentId": null,
    "name": "Glacite",
    "xp": 4,
    "category": "MINING",
@@ -5634,6 +5682,7 @@
   },
   {
    "setId": "GLOSSY_MINERAL",
+   "parentId": null,
    "name": "Glossy Mineral",
    "xp": 7,
    "category": "MINING",
@@ -5647,6 +5696,7 @@
   },
   {
    "setId": "GOBLIN",
+   "parentId": null,
    "name": "Goblin",
    "xp": 4,
    "category": "MINING",
@@ -5660,6 +5710,7 @@
   },
   {
    "setId": "GOLD_HUNTER",
+   "parentId": "DIAMOND_HUNTER",
    "name": "Gold Hunter",
    "xp": 16,
    "category": "FISHING",
@@ -5673,6 +5724,7 @@
   },
   {
    "setId": "GOLEM_ARMOR",
+   "parentId": null,
    "name": "Golem Armor",
    "xp": 3,
    "category": "COMBAT",
@@ -5686,6 +5738,7 @@
   },
   {
    "setId": "GROWTH",
+   "parentId": "MASTIFF",
    "name": "Helmet of Growth",
    "xp": 3,
    "category": "COMBAT",
@@ -5699,6 +5752,7 @@
   },
   {
    "setId": "HARDENED_DIAMOND",
+   "parentId": "MINERAL",
    "name": "Hardened Diamond",
    "xp": 3,
    "category": "COMBAT",
@@ -5712,6 +5766,7 @@
   },
   {
    "setId": "HEAT",
+   "parentId": null,
    "name": "Heat",
    "xp": 2,
    "category": "MINING",
@@ -5725,6 +5780,7 @@
   },
   {
    "setId": "HEAVY",
+   "parentId": null,
    "name": "Heavy",
    "xp": 3,
    "category": "DUNGEONEERING",
@@ -5738,6 +5794,7 @@
   },
   {
    "setId": "HELIANTHUS",
+   "parentId": null,
    "name": "Helianthus",
    "xp": 15,
    "category": "FARMING",
@@ -5751,6 +5808,7 @@
   },
   {
    "setId": "HELIX_ARMOR",
+   "parentId": null,
    "name": "Helix",
    "xp": 9,
    "category": "FORAGING",
@@ -5764,6 +5822,7 @@
   },
   {
    "setId": "HOLLOW",
+   "parentId": null,
    "name": "Hollow",
    "xp": 10,
    "category": "COMBAT",
@@ -5777,6 +5836,7 @@
   },
   {
    "setId": "HOLY_DRAGON",
+   "parentId": null,
    "name": "Holy Dragon",
    "xp": 10,
    "category": "COMBAT",
@@ -5790,6 +5850,7 @@
   },
   {
    "setId": "HONEYCOMB",
+   "parentId": null,
    "name": "Honeycomb Necklace",
    "xp": 8,
    "category": "FORAGING",
@@ -5800,6 +5861,7 @@
   },
   {
    "setId": "ICHTHYIC",
+   "parentId": "FINWAVE",
    "name": "Ichthyic Gloves",
    "xp": 6,
    "category": "FISHING",
@@ -5812,6 +5874,7 @@
   },
   {
    "setId": "LAPIS_ARMOR",
+   "parentId": null,
    "name": "Lapis Armor",
    "xp": 3,
    "category": "MINING",
@@ -5825,6 +5888,7 @@
   },
   {
    "setId": "LAVA_SEA_CREATURE",
+   "parentId": null,
    "name": "Slug",
    "xp": 10,
    "category": "FISHING",
@@ -5838,6 +5902,7 @@
   },
   {
    "setId": "LEAFLET",
+   "parentId": null,
    "name": "Leaflet",
    "xp": 2,
    "category": "FORAGING",
@@ -5851,6 +5916,7 @@
   },
   {
    "setId": "LOTUS",
+   "parentId": "BLOSSOM",
    "name": "Peony Bracelet",
    "xp": 4,
    "category": "FARMING",
@@ -5864,6 +5930,7 @@
   },
   {
    "setId": "MAGMA_LORD",
+   "parentId": null,
    "name": "Magma Lord",
    "xp": 20,
    "category": "FISHING",
@@ -5878,6 +5945,7 @@
   },
   {
    "setId": "MANGROVE",
+   "parentId": null,
    "name": "Mangrove Grippers",
    "xp": 8,
    "category": "FORAGING",
@@ -5889,6 +5957,7 @@
   },
   {
    "setId": "MASTIFF",
+   "parentId": null,
    "name": "Mastiff",
    "xp": 8,
    "category": "COMBAT",
@@ -5902,6 +5971,7 @@
   },
   {
    "setId": "MELON",
+   "parentId": "CROPIE",
    "name": "Tater",
    "xp": 4,
    "category": "FARMING",
@@ -5915,6 +5985,7 @@
   },
   {
    "setId": "MERCENARY",
+   "parentId": null,
    "name": "Mercenary",
    "xp": 1,
    "category": "COMBAT",
@@ -5928,6 +5999,7 @@
   },
   {
    "setId": "MINER_OUTFIT",
+   "parentId": null,
    "name": "Prospecting",
    "xp": 3,
    "category": "MINING",
@@ -5941,6 +6013,7 @@
   },
   {
    "setId": "MINERAL",
+   "parentId": "GLOSSY_MINERAL",
    "name": "Mineral",
    "xp": 4,
    "category": "MINING",
@@ -5954,6 +6027,7 @@
   },
   {
    "setId": "MITHRIL",
+   "parentId": "TITANIUM",
    "name": "Mithril Belt",
    "xp": 3,
    "category": "MINING",
@@ -5967,6 +6041,7 @@
   },
   {
    "setId": "MOLTEN",
+   "parentId": null,
    "name": "Molten Necklace",
    "xp": 10,
    "category": "COMBAT",
@@ -5980,6 +6055,7 @@
   },
   {
    "setId": "MONSTER_HUNTER",
+   "parentId": "MONSTER_RAIDER",
    "name": "Skeleton's",
    "xp": 4,
    "category": "COMBAT",
@@ -5993,6 +6069,7 @@
   },
   {
    "setId": "MONSTER_RAIDER",
+   "parentId": null,
    "name": "Skeleton's",
    "xp": 4,
    "category": "COMBAT",
@@ -6007,6 +6084,7 @@
   },
   {
    "setId": "MUSHROOM",
+   "parentId": "BIOHAZARD",
    "name": "Mushroom",
    "xp": 2,
    "category": "FARMING",
@@ -6020,6 +6098,7 @@
   },
   {
    "setId": "MYTHOS",
+   "parentId": null,
    "name": "Mythos Cloak",
    "xp": 12,
    "category": "COMBAT",
@@ -6037,6 +6116,7 @@
   },
   {
    "setId": "NECROMANCER_LORD",
+   "parentId": null,
    "name": "Necromancer Lord",
    "xp": 12,
    "category": "DUNGEONEERING",
@@ -6050,6 +6130,7 @@
   },
   {
    "setId": "NUTCRACKER",
+   "parentId": null,
    "name": "Nutcracker",
    "xp": 10,
    "category": "FISHING",
@@ -6063,6 +6144,7 @@
   },
   {
    "setId": "OLD_DRAGON",
+   "parentId": null,
    "name": "Old Dragon",
    "xp": 10,
    "category": "COMBAT",
@@ -6076,6 +6158,7 @@
   },
   {
    "setId": "PARK",
+   "parentId": null,
    "name": "Charlie's",
    "xp": 1,
    "category": "FORAGING",
@@ -6089,6 +6172,7 @@
   },
   {
    "setId": "PARTY",
+   "parentId": null,
    "name": "Party Top",
    "xp": 3,
    "category": "COMBAT",
@@ -6103,6 +6187,7 @@
   },
   {
    "setId": "PERFECT_TIER_12",
+   "parentId": "PERFECT_TIER_13",
    "name": "Perfect Boots - Tier XII",
    "xp": 8,
    "category": "COMBAT",
@@ -6116,6 +6201,7 @@
   },
   {
    "setId": "PERFECT_TIER_13",
+   "parentId": null,
    "name": "Perfect Boots - Tier XIII",
    "xp": 10,
    "category": "COMBAT",
@@ -6129,6 +6215,7 @@
   },
   {
    "setId": "PESTHUNTER",
+   "parentId": null,
    "name": "Pesthunter's Belt",
    "xp": 4,
    "category": "FARMING",
@@ -6142,6 +6229,7 @@
   },
   {
    "setId": "POWER_WITHER",
+   "parentId": null,
    "name": "Necron's",
    "xp": 6,
    "category": "DUNGEONEERING",
@@ -6155,6 +6243,7 @@
   },
   {
    "setId": "PRIMORDIAL",
+   "parentId": null,
    "name": "Primordial",
    "xp": 10,
    "category": "COMBAT",
@@ -6168,6 +6257,7 @@
   },
   {
    "setId": "PROTECTOR_DRAGON",
+   "parentId": null,
    "name": "Protector Dragon",
    "xp": 10,
    "category": "COMBAT",
@@ -6181,6 +6271,7 @@
   },
   {
    "setId": "PUMPKIN",
+   "parentId": "MELON",
    "name": "Sprout",
    "xp": 3,
    "category": "FARMING",
@@ -6194,6 +6285,7 @@
   },
   {
    "setId": "RABBIT",
+   "parentId": null,
    "name": "Rabbit",
    "xp": 1,
    "category": "FARMING",
@@ -6207,6 +6299,7 @@
   },
   {
    "setId": "RAMPART",
+   "parentId": null,
    "name": "Rampart",
    "xp": 6,
    "category": "COMBAT",
@@ -6220,6 +6313,7 @@
   },
   {
    "setId": "REAPER",
+   "parentId": null,
    "name": "Reaper",
    "xp": 7,
    "category": "COMBAT",
@@ -6232,6 +6326,7 @@
   },
   {
    "setId": "REKINDLED_EMBER",
+   "parentId": null,
    "name": "Rekindled Ember",
    "xp": 10,
    "category": "COMBAT",
@@ -6245,6 +6340,7 @@
   },
   {
    "setId": "REVENANT",
+   "parentId": "REAPER",
    "name": "Revenant",
    "xp": 5,
    "category": "COMBAT",
@@ -6257,6 +6353,7 @@
   },
   {
    "setId": "ROSETTA",
+   "parentId": null,
    "name": "Rosetta's",
    "xp": 1,
    "category": "COMBAT",
@@ -6270,6 +6367,7 @@
   },
   {
    "setId": "ROTTEN",
+   "parentId": null,
    "name": "Rotten",
    "xp": 2,
    "category": "DUNGEONEERING",
@@ -6283,6 +6381,7 @@
   },
   {
    "setId": "SALMON_NEW",
+   "parentId": null,
    "name": "Salmon",
    "xp": 3,
    "category": "FISHING",
@@ -6296,6 +6395,7 @@
   },
   {
    "setId": "SEYMOUR",
+   "parentId": null,
    "name": "Cashmere Jacket",
    "xp": 4,
    "category": "FARMING",
@@ -6309,6 +6409,7 @@
   },
   {
    "setId": "SHADOW_ASSASSIN",
+   "parentId": null,
    "name": "Shadow Assassin",
    "xp": 10,
    "category": "DUNGEONEERING",
@@ -6323,6 +6424,7 @@
   },
   {
    "setId": "SHARK_SCALE",
+   "parentId": null,
    "name": "Shark Scale",
    "xp": 7,
    "category": "FISHING",
@@ -6336,6 +6438,7 @@
   },
   {
    "setId": "SHIMMERING_LIGHT",
+   "parentId": null,
    "name": "Shimmering Light Slippers",
    "xp": 16,
    "category": "COMBAT",
@@ -6349,6 +6452,7 @@
   },
   {
    "setId": "SILVER_HUNTER",
+   "parentId": "GOLD_HUNTER",
    "name": "Silver Hunter",
    "xp": 12,
    "category": "FISHING",
@@ -6362,6 +6466,7 @@
   },
   {
    "setId": "SKELETON_GRUNT",
+   "parentId": null,
    "name": "Skeleton Grunt",
    "xp": 3,
    "category": "DUNGEONEERING",
@@ -6375,6 +6480,7 @@
   },
   {
    "setId": "SKELETON_LORD",
+   "parentId": null,
    "name": "Skeleton Lord",
    "xp": 10,
    "category": "DUNGEONEERING",
@@ -6388,6 +6494,7 @@
   },
   {
    "setId": "SKELETON_MASTER",
+   "parentId": null,
    "name": "Skeleton Master",
    "xp": 3,
    "category": "DUNGEONEERING",
@@ -6401,6 +6508,7 @@
   },
   {
    "setId": "SKELETON_SOLDIER",
+   "parentId": null,
    "name": "Skeleton Soldier",
    "xp": 3,
    "category": "DUNGEONEERING",
@@ -6414,6 +6522,7 @@
   },
   {
    "setId": "SKELETOR",
+   "parentId": null,
    "name": "Skeletor",
    "xp": 5,
    "category": "DUNGEONEERING",
@@ -6427,6 +6536,7 @@
   },
   {
    "setId": "SNORKELING",
+   "parentId": "DIVER",
    "name": "Snorkeling Vest",
    "xp": 3,
    "category": "FISHING",
@@ -6440,6 +6550,7 @@
   },
   {
    "setId": "SNOW_SUIT",
+   "parentId": "NUTCRACKER",
    "name": "Snow Suit",
    "xp": 6,
    "category": "COMBAT",
@@ -6453,6 +6564,7 @@
   },
   {
    "setId": "SORROW",
+   "parentId": null,
    "name": "Sorrow",
    "xp": 10,
    "category": "MINING",
@@ -6466,6 +6578,7 @@
   },
   {
    "setId": "SPEED_WITHER",
+   "parentId": "POWER_WITHER",
    "name": "Maxor's",
    "xp": 6,
    "category": "DUNGEONEERING",
@@ -6479,6 +6592,7 @@
   },
   {
    "setId": "SPEEDSTER",
+   "parentId": "THERMODYNAMIC",
    "name": "Speedster",
    "xp": 5,
    "category": "FARMING",
@@ -6492,6 +6606,7 @@
   },
   {
    "setId": "SPONGE",
+   "parentId": null,
    "name": "Prismarine Necklace",
    "xp": 5,
    "category": "FISHING",
@@ -6509,6 +6624,7 @@
   },
   {
    "setId": "SPOOKY",
+   "parentId": "BAT_PERSON",
    "name": "Spooky",
    "xp": 7,
    "category": "COMBAT",
@@ -6522,6 +6638,7 @@
   },
   {
    "setId": "SQUASH",
+   "parentId": "FERMENTO",
    "name": "Squash",
    "xp": 9,
    "category": "FARMING",
@@ -6535,6 +6652,7 @@
   },
   {
    "setId": "SQUIRE",
+   "parentId": null,
    "name": "Squire",
    "xp": 1,
    "category": "COMBAT",
@@ -6548,6 +6666,7 @@
   },
   {
    "setId": "STARLIGHT",
+   "parentId": null,
    "name": "Starlight",
    "xp": 2,
    "category": "COMBAT",
@@ -6561,6 +6680,7 @@
   },
   {
    "setId": "STRONG_DRAGON",
+   "parentId": null,
    "name": "Strong Dragon",
    "xp": 10,
    "category": "COMBAT",
@@ -6574,6 +6694,7 @@
   },
   {
    "setId": "SUPER_HEAVY",
+   "parentId": null,
    "name": "Super Heavy",
    "xp": 3,
    "category": "DUNGEONEERING",
@@ -6587,6 +6708,7 @@
   },
   {
    "setId": "SUPERIOR_DRAGON",
+   "parentId": null,
    "name": "Superior Dragon",
    "xp": 15,
    "category": "COMBAT",
@@ -6600,6 +6722,7 @@
   },
   {
    "setId": "TANK_MINER",
+   "parentId": "HEAT",
    "name": "Miner",
    "xp": 3,
    "category": "MINING",
@@ -6613,6 +6736,7 @@
   },
   {
    "setId": "TANK_WITHER",
+   "parentId": "WISE_WITHER",
    "name": "Goldor's",
    "xp": 6,
    "category": "DUNGEONEERING",
@@ -6626,6 +6750,7 @@
   },
   {
    "setId": "TARANTULA",
+   "parentId": "PRIMORDIAL",
    "name": "Tarantula",
    "xp": 7,
    "category": "COMBAT",
@@ -6639,6 +6764,7 @@
   },
   {
    "setId": "TERROR",
+   "parentId": null,
    "name": "Terror",
    "xp": 10,
    "category": "COMBAT",
@@ -6652,6 +6778,7 @@
   },
   {
    "setId": "THERMODYNAMIC",
+   "parentId": null,
    "name": "Thermodynamic",
    "xp": 10,
    "category": "COMBAT",
@@ -6665,6 +6792,7 @@
   },
   {
    "setId": "THUNDER",
+   "parentId": null,
    "name": "Thunder",
    "xp": 15,
    "category": "FISHING",
@@ -6679,6 +6807,7 @@
   },
   {
    "setId": "TITANIUM",
+   "parentId": null,
    "name": "Titanium Necklace",
    "xp": 4,
    "category": "MINING",
@@ -6692,6 +6821,7 @@
   },
   {
    "setId": "UNSTABLE_DRAGON",
+   "parentId": null,
    "name": "Unstable Dragon",
    "xp": 10,
    "category": "COMBAT",
@@ -6705,6 +6835,7 @@
   },
   {
    "setId": "VANQUISHED",
+   "parentId": null,
    "name": "Vanquished Ghast Cloak",
    "xp": 8,
    "category": "COMBAT",
@@ -6718,6 +6849,7 @@
   },
   {
    "setId": "WEREWOLF",
+   "parentId": null,
    "name": "Werewolf",
    "xp": 7,
    "category": "COMBAT",
@@ -6731,6 +6863,7 @@
   },
   {
    "setId": "WISE_DRAGON",
+   "parentId": null,
    "name": "Wise Dragon",
    "xp": 10,
    "category": "COMBAT",
@@ -6744,6 +6877,7 @@
   },
   {
    "setId": "WISE_WITHER",
+   "parentId": "SPEED_WITHER",
    "name": "Storm's",
    "xp": 6,
    "category": "DUNGEONEERING",
@@ -6757,6 +6891,7 @@
   },
   {
    "setId": "WITHER",
+   "parentId": "TANK_WITHER",
    "name": "Wither",
    "xp": 10,
    "category": "DUNGEONEERING",
@@ -6770,6 +6905,7 @@
   },
   {
    "setId": "YOUNG_DRAGON",
+   "parentId": null,
    "name": "Young Dragon",
    "xp": 10,
    "category": "COMBAT",
@@ -6783,6 +6919,7 @@
   },
   {
    "setId": "ZOMBIE",
+   "parentId": "REVENANT",
    "name": "Zombie",
    "xp": 4,
    "category": "COMBAT",
@@ -6795,6 +6932,7 @@
   },
   {
    "setId": "ZOMBIE_COMMANDER",
+   "parentId": null,
    "name": "Zombie Commander",
    "xp": 8,
    "category": "DUNGEONEERING",
@@ -6808,6 +6946,7 @@
   },
   {
    "setId": "ZOMBIE_KNIGHT",
+   "parentId": null,
    "name": "Zombie Knight",
    "xp": 7,
    "category": "DUNGEONEERING",
@@ -6821,6 +6960,7 @@
   },
   {
    "setId": "ZOMBIE_LORD",
+   "parentId": null,
    "name": "Zombie Lord",
    "xp": 10,
    "category": "DUNGEONEERING",
@@ -6834,6 +6974,7 @@
   },
   {
    "setId": "ZOMBIE_SOLDIER",
+   "parentId": null,
    "name": "Zombie Soldier",
    "xp": 3,
    "category": "DUNGEONEERING",

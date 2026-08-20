@@ -85,7 +85,16 @@ export type MuseumData = {
     stage: string | null;
     tradeable: boolean;
   }[];
-  armorSets: { setId: string; name: string; xp: number; category: string; stage: string | null; pieces: string[] }[];
+  armorSets: {
+    setId: string;
+    name: string;
+    xp: number;
+    /** The set this one upgrades into, if any. Donating that fills this slot too. */
+    parentId?: string | null;
+    category: string;
+    stage: string | null;
+    pieces: string[];
+  }[];
 };
 
 /** Discrete tasks: real ids harvested from live profiles, XP from wiki-derived rules. */

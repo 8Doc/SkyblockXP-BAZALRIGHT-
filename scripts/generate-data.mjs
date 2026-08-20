@@ -237,6 +237,14 @@ async function buildMuseum() {
       }
       armorSets.set(set, {
         setId: set,
+        // A set's upgrade parent is carried by its pieces, keyed by the *set* id rather than the
+        // piece's own — donate the Backwater set and the Angler slot below it is filled. Reading
+        // only the self-keyed links dropped all 174 of these.
+        parentId: museum.parent?.[set] ?? null,
+        // A set's upgrade parent is carried by its pieces, keyed by the *set* id rather than the
+        // piece's own — donate the Backwater set and the Angler slot below it is filled. Reading
+        // only the self-keyed links dropped all 174 of these.
+        parentId: museum.parent?.[set] ?? null,
         name: item.name.replace(/ (Helmet|Chestplate|Leggings|Boots|Hat|Cap|Tunic|Trousers|Shoes)$/i, "").trim(),
         xp,
         category: museum.category ?? "MISC",
