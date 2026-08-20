@@ -83,9 +83,20 @@ async function page(title) {
 
 const tasks = JSON.parse(await readFile(join(ROOT, "data", "generated", "tasks.json"), "utf8")).tasks;
 const ids = tasks.map((t) => t.id).filter((id) => /^OBJECTIVE_TALK_TO_/.test(id));
-const wanted = [...new Set([...ids.map(npcNameFrom), ...Object.values(OBJECTIVE_NPCS)])].sort();
 
-console.log(`resolving ${wanted.length} NPCs from ${ids.length} talk-to objectives…`);
+// Abiphone contacts are the same problem in a different category: the row names a character and
+// says nothing about which island they are on, and there are seventy of them.
+let abiphoneNames = [];
+try {
+  const abiphone = JSON.parse(await readFile(join(ROOT, "data", "generated", "abiphone.json"), "utf8"));
+  abiphoneNames = abiphone.contacts.map((c) => c.npc).filter(Boolean);
+} catch {
+  console.log("  (no abiphone.json — contacts will have no directions)");
+}
+
+const wanted = [...new Set([...ids.map(npcNameFrom), ...Object.values(OBJECTIVE_NPCS), ...abiphoneNames])].sort();
+
+console.log(`resolving ${wanted.length} NPCs from ${ids.length} talk-to objectives and ${abiphoneNames.length} contacts…`);
 const npcs = {};
 let missing = 0;
 

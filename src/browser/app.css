@@ -218,3 +218,6 @@ footer { margin-top: 24px; padding-top: 12px; border-top: 1px solid var(--line);
 .level-mark .mark-cost { flex: none; margin-left: 8px; text-transform: none; letter-spacing: normal; color: var(--muted); font-variant-numeric: tabular-nums; }
 .task-cost .net { display: block; font-size: 11px; color: var(--aqua); }
 .inaccuracy { margin-left: 8px; padding: 0 5px; border: 1px solid rgba(240, 198, 116, 0.45); border-radius: 3px; font-size: 11px; font-weight: 400; color: var(--gold); }
+.npc-name { padding: 0; border: none; background: none; color: inherit; font: inherit; border-bottom: 1px dotted var(--muted); cursor: pointer; }
+.npc-name:hover { color: var(--aqua); border-bottom-color: var(--aqua); }
+.where { margin-left: 8px; font-size: 12px; color: var(--aqua); font-variant-numeric: tabular-nums; }

@@ -117,6 +117,12 @@ export type Task = {
   /** Short provenance / caveat shown in the UI. */
   note?: string;
   /**
+   * Where to physically go — "Hub · 62, 72, -147". Kept apart from the note so the UI can put it
+   * behind the character's name rather than spending a line on it: a contact list is seventy
+   * rows long and only the one you are walking to needs an address.
+   */
+  where?: string;
+  /**
    * Tasks that compete rather than stack. An accessory family is the case that forces this:
    * Bat Talisman, Bat Ring and Bat Artifact are 3, 8 and 12 magical power, but owning all
    * three is still worth 12 — only the best member counts. Without this the bag would

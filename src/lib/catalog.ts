@@ -332,6 +332,7 @@ export function buildCatalog(
       cost: discreteCost(task.id, data, scrollFor),
       repeatable: false,
       note: abiphoneNote(task.id, data) ?? directionsTo(task.id, data) ?? task.rule,
+      where: contactLocation(task.id, data),
     });
     if (completed.has(task.id)) done.add(task.id);
   }
@@ -1177,4 +1178,15 @@ function npcKeyFrom(id: string): string {
 function bestiaryXp(member: ProfileMember): number {
   const milestones = member.bestiary?.milestone?.last_claimed_milestone ?? 0;
   return milestones * 20;
+}
+
+/** Where an Abiphone contact stands — island and coordinates, from the wiki's NPC infobox. */
+function contactLocation(id: string, data: GameData): string | undefined {
+  if (!id.startsWith("ABIPHONE_")) return undefined;
+  const contact = data.abiphone?.contacts.find((c) => c.taskId === id);
+  const npc = contact?.npc ? data.npcs.npcs[contact.npc] : undefined;
+  if (!npc) return undefined;
+  const where = npc.coords ? `${npc.coords.x}, ${npc.coords.y}, ${npc.coords.z}` : null;
+  const parts = [npc.location, where].filter(Boolean);
+  return parts.length ? parts.join(" · ") : undefined;
 }

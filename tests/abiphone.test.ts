@@ -1,5 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import { buildCatalog } from "../src/lib/catalog";
+import { gameData } from "./gameDataFixture";
 import abiphone from "../data/generated/abiphone.json";
 import tasks from "../data/generated/tasks.json";
 
@@ -78,4 +80,16 @@ test("the totals agree with the contacts they count", () => {
   assert.equal(t.contacts, abiphone.contacts.length);
   const counted = t.free + t.coins + t.items + t.essence + t.unknown + t.quest;
   assert.equal(counted, abiphone.contacts.length, "every contact lands in exactly one bucket");
+});
+
+test("contacts carry the island and coordinates of the character", () => {
+  // A contact list is seventy rows long and names a character without saying where they stand.
+  const cat = buildCatalog({ leveling: { completed_tasks: [] } } as never, gameData(), { items: null, capacity: 0 }, null, null, null, null);
+  const contacts = cat.tasks.filter((t) => t.id.startsWith("ABIPHONE_"));
+
+  const located = contacts.filter((t) => t.where);
+  assert.ok(located.length > 60, `only ${located.length} of ${contacts.length} contacts have directions`);
+
+  const alchemist = contacts.find((t) => t.id === "ABIPHONE_alchemist")!;
+  assert.match(alchemist.where ?? "", /^Farm · -?\d+, -?\d+, -?\d+$/, "island then x, y, z");
 });

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-19T16:30:41.973Z",
+  "generatedAt": "2026-08-20T19:40:40.642Z",
   "source": "https://hypixelskyblock.minecraft.wiki/api.php",
   "npcs": {
     "Agatha": {
@@ -12,6 +12,46 @@
         "z": -3
       }
     },
+    "Alchemist": {
+      "name": "Alchemist",
+      "location": "Farm",
+      "quest": null,
+      "coords": {
+        "x": 81,
+        "y": 72,
+        "z": -90
+      }
+    },
+    "Alda": {
+      "name": "Alda",
+      "location": "Abiphones & Co.",
+      "quest": null,
+      "coords": {
+        "x": 71,
+        "y": 80,
+        "z": -59
+      }
+    },
+    "Anita": {
+      "name": "Anita",
+      "location": "Farmhouse",
+      "quest": null,
+      "coords": {
+        "x": 54,
+        "y": 73,
+        "z": -128
+      }
+    },
+    "Aranya": {
+      "name": "Aranya",
+      "location": "The Wasteland",
+      "quest": null,
+      "coords": {
+        "x": -322,
+        "y": 152,
+        "z": -1007
+      }
+    },
     "Banker": {
       "name": "Banker",
       "location": "Bank",
@@ -20,6 +60,16 @@
         "x": -29,
         "y": 72,
         "z": -38
+      }
+    },
+    "Bartender": {
+      "name": "Bartender",
+      "location": "Combat Settlement",
+      "quest": null,
+      "coords": {
+        "x": -40,
+        "y": 69,
+        "z": -72
       }
     },
     "Beth": {
@@ -32,6 +82,66 @@
         "z": -359
       }
     },
+    "Blacksmith": {
+      "name": "Blacksmith",
+      "location": "Blacksmith (Zone)",
+      "quest": null,
+      "coords": {
+        "x": 11,
+        "y": 63,
+        "z": -126
+      }
+    },
+    "Brynmor": {
+      "name": "Brynmor",
+      "location": "Dwarven Tavern",
+      "quest": null,
+      "coords": {
+        "x": 32,
+        "y": 202,
+        "z": -154
+      }
+    },
+    "Builder": {
+      "name": "Builder",
+      "location": "Builder's House",
+      "quest": null,
+      "coords": {
+        "x": -8,
+        "y": 71,
+        "z": -61
+      }
+    },
+    "Bulvar": {
+      "name": "Bulvar",
+      "location": "Dwarven Village",
+      "quest": null,
+      "coords": {
+        "x": -15,
+        "y": 201,
+        "z": -98
+      }
+    },
+    "Captain Ahone": {
+      "name": "Captain Ahone",
+      "location": "Mage Council",
+      "quest": null,
+      "coords": {
+        "x": -121,
+        "y": 82,
+        "z": -756
+      }
+    },
+    "Carrolyn": {
+      "name": "Carrolyn",
+      "location": "Scarleton",
+      "quest": null,
+      "coords": {
+        "x": 1,
+        "y": 103,
+        "z": -803
+      }
+    },
     "Charlie": {
       "name": "Charlie",
       "location": "Birch Park",
@@ -42,6 +152,26 @@
         "z": -17
       }
     },
+    "Clerk Seraphine": {
+      "name": "Clerk Seraphine",
+      "location": "Community Center",
+      "quest": null,
+      "coords": {
+        "x": -1,
+        "y": 79,
+        "z": 11
+      }
+    },
+    "Dalir": {
+      "name": "Cult of the Fallen Star",
+      "location": "Cliffside Veins",
+      "quest": null,
+      "coords": {
+        "x": -44,
+        "y": 192,
+        "z": 48
+      }
+    },
     "David": {
       "name": "David Hunterborough",
       "location": "Tangleburg",
@@ -50,6 +180,52 @@
         "x": -593,
         "y": 114,
         "z": -13
+      }
+    },
+    "Dean": {
+      "name": "Dean",
+      "location": "Cathedral",
+      "quest": null,
+      "coords": {
+        "x": -16,
+        "y": 123,
+        "z": -882
+      }
+    },
+    "Duncan": {
+      "name": "Duncan",
+      "location": "The Catacombs",
+      "quest": null,
+      "coords": null
+    },
+    "Dusk": {
+      "name": "Dusk",
+      "location": "Blacksmith (Zone)",
+      "quest": null,
+      "coords": {
+        "x": 21,
+        "y": 63,
+        "z": -135
+      }
+    },
+    "Einary": {
+      "name": "Einary",
+      "location": "Jerry's Workshop",
+      "quest": null,
+      "coords": {
+        "x": -16,
+        "y": 76,
+        "z": 64
+      }
+    },
+    "Elizabeth": {
+      "name": "Elizabeth",
+      "location": "Community Center",
+      "quest": null,
+      "coords": {
+        "x": -6,
+        "y": 79,
+        "z": 19
       }
     },
     "Elle": {
@@ -92,6 +268,16 @@
         "z": -240
       }
     },
+    "Fear Mongerer": {
+      "name": "Fear Mongerer",
+      "location": "Village",
+      "quest": null,
+      "coords": {
+        "x": -32,
+        "y": 69,
+        "z": 7
+      }
+    },
     "Fisherman": {
       "name": "Fisherman Gerald",
       "location": "Fishing Outpost",
@@ -100,6 +286,36 @@
         "x": 119,
         "y": 71,
         "z": -32
+      }
+    },
+    "Frozen Alex": {
+      "name": "Frozen Alex",
+      "location": "Jerry Pond",
+      "quest": null,
+      "coords": {
+        "x": -43,
+        "y": 84,
+        "z": -1
+      }
+    },
+    "Gemma": {
+      "name": "Gemma",
+      "location": "Crystal Nucleus",
+      "quest": null,
+      "coords": {
+        "x": 476,
+        "y": 106,
+        "z": 514
+      }
+    },
+    "Geo": {
+      "name": "Geo",
+      "location": "Dwarven Mines",
+      "quest": null,
+      "coords": {
+        "x": 88,
+        "y": 199,
+        "z": -115
       }
     },
     "Greenhouse Carpenter": {
@@ -152,6 +368,76 @@
         "z": 15
       }
     },
+    "Hoppity": {
+      "name": "Hoppity",
+      "location": "Village",
+      "quest": null,
+      "coords": {
+        "x": 57,
+        "y": 70,
+        "z": -2
+      }
+    },
+    "Igrupan": {
+      "name": "Igrupan",
+      "location": "Igrupan's Chicken Coop",
+      "quest": null,
+      "coords": {
+        "x": -31,
+        "y": 93,
+        "z": -824
+      }
+    },
+    "Jacob": {
+      "name": "Jacob",
+      "location": "Farmhouse",
+      "quest": null,
+      "coords": {
+        "x": 47,
+        "y": 73,
+        "z": -128
+      }
+    },
+    "Jake": {
+      "name": "Jake",
+      "location": "Jake's House",
+      "quest": null,
+      "coords": {
+        "x": 262,
+        "y": 184,
+        "z": -565
+      }
+    },
+    "Junker Joel": {
+      "name": "Junker Joel",
+      "location": "Backwater Bayou",
+      "quest": null,
+      "coords": {
+        "x": 7,
+        "y": 72,
+        "z": 5
+      }
+    },
+    "Kat": {
+      "name": "Kat",
+      "location": "Pet Care",
+      "quest": null,
+      "coords": {
+        "x": 11,
+        "y": 72,
+        "z": -53
+      }
+    },
+    "Kaus": {
+      "name": "Kaus",
+      "location": "Dragontail",
+      "quest": null,
+      "coords": {
+        "x": -596,
+        "y": 113,
+        "z": -640
+      }
+    },
     "Kelly": {
       "name": "Kelly",
       "location": "Spruce Woods",
@@ -160,6 +446,26 @@
         "x": -350,
         "y": 94,
         "z": 34
+      }
+    },
+    "Kiara": {
+      "name": "Kiara",
+      "location": "North Reaches",
+      "quest": null,
+      "coords": {
+        "x": -654,
+        "y": 113,
+        "z": -70
+      }
+    },
+    "Kysha": {
+      "name": "Kysha",
+      "location": "Fusion House",
+      "quest": null,
+      "coords": {
+        "x": -601,
+        "y": 115,
+        "z": -12
       }
     },
     "Lapis Miner": {
@@ -192,6 +498,16 @@
         "z": -79
       }
     },
+    "Lumber Merchant": {
+      "name": "Lumber Merchant",
+      "location": "Foraging Camp",
+      "quest": null,
+      "coords": {
+        "x": -125,
+        "y": 73,
+        "z": -42
+      }
+    },
     "Lumberjack": {
       "name": "Lumber Jack",
       "location": "Foraging Camp",
@@ -200,6 +516,56 @@
         "x": -123,
         "y": 73,
         "z": -29
+      }
+    },
+    "Mad Redstone Engineer": {
+      "name": "Mad Redstone Engineer",
+      "location": "Builder's House",
+      "quest": null,
+      "coords": {
+        "x": -8,
+        "y": 71,
+        "z": -55
+      }
+    },
+    "Maddox the Slayer": {
+      "name": "Maddox the Slayer",
+      "location": "Tavern",
+      "quest": null,
+      "coords": {
+        "x": -83,
+        "y": 68,
+        "z": -129
+      }
+    },
+    "Malik": {
+      "name": "Malik",
+      "location": "Catacombs Entrance",
+      "quest": null,
+      "coords": {
+        "x": -80,
+        "y": 56,
+        "z": -119
+      }
+    },
+    "Marigold": {
+      "name": "Marigold",
+      "location": "Royal Mines",
+      "quest": null,
+      "coords": {
+        "x": 182,
+        "y": 150,
+        "z": 61
+      }
+    },
+    "Maxwell": {
+      "name": "Maxwell",
+      "location": "Thaumaturgist",
+      "quest": null,
+      "coords": {
+        "x": -66,
+        "y": 70,
+        "z": -66
       }
     },
     "Melody": {
@@ -212,6 +578,16 @@
         "z": 73
       }
     },
+    "Moby": {
+      "name": "Moby",
+      "location": "Glowing Mushroom Cave",
+      "quest": null,
+      "coords": {
+        "x": 206,
+        "y": 43,
+        "z": -500
+      }
+    },
     "Molbert": {
       "name": "Molbert",
       "location": "Jungle Island",
@@ -222,6 +598,82 @@
         "z": -42
       }
     },
+    "Odger": {
+      "name": "Odger",
+      "location": "Odger's Hut",
+      "quest": null,
+      "coords": {
+        "x": -373,
+        "y": 207,
+        "z": -810
+      }
+    },
+    "Ophelia": {
+      "name": "Ophelia",
+      "location": "Catacombs Entrance",
+      "quest": null,
+      "coords": {
+        "x": -85,
+        "y": 55,
+        "z": -139
+      }
+    },
+    "Oringo": {
+      "name": "Oringo",
+      "location": "Village",
+      "quest": null,
+      "coords": {
+        "x": -34,
+        "y": 69,
+        "z": 6
+      }
+    },
+    "Pablo": {
+      "name": "Pablo",
+      "location": "Scarleton",
+      "quest": null,
+      "coords": {
+        "x": -130,
+        "y": 128,
+        "z": -815
+      }
+    },
+    "Phillip": {
+      "name": "Pesthunter Phillip",
+      "location": "The Garden",
+      "quest": null,
+      "coords": null
+    },
+    "Plumber Joe": {
+      "name": "Plumber Joe",
+      "location": "Fishing Outpost",
+      "quest": null,
+      "coords": {
+        "x": 124,
+        "y": 74,
+        "z": -38
+      }
+    },
+    "Queen Mismyla": {
+      "name": "Queen Mismyla",
+      "location": "Royal Palace",
+      "quest": null,
+      "coords": {
+        "x": 127,
+        "y": 195,
+        "z": 196
+      }
+    },
+    "Queen Nyx": {
+      "name": "Queen Nyx",
+      "location": "Throne Room",
+      "quest": null,
+      "coords": {
+        "x": -117,
+        "y": 105,
+        "z": -754
+      }
+    },
     "Redstone Miner": {
       "name": "Redstone Miner",
       "location": "Pigmen's Den",
@@ -230,6 +682,36 @@
         "x": 25,
         "y": 104,
         "z": 17
+      }
+    },
+    "Roddy": {
+      "name": "Roddy",
+      "location": "Backwater Bayou",
+      "quest": null,
+      "coords": {
+        "x": 24,
+        "y": 78,
+        "z": -24
+      }
+    },
+    "Rollim": {
+      "name": "Rollim",
+      "location": "Scarleton",
+      "quest": null,
+      "coords": {
+        "x": -147,
+        "y": 106,
+        "z": -854
+      }
+    },
+    "Rosemary": {
+      "name": "Rosemary",
+      "location": "Murkwater Outpost",
+      "quest": null,
+      "coords": {
+        "x": -703,
+        "y": 162,
+        "z": 4
       }
     },
     "Ryan": {
@@ -252,6 +734,66 @@
         "z": 42
       }
     },
+    "Shaggy": {
+      "name": "Shaggy",
+      "location": "Grandma's House",
+      "quest": null,
+      "coords": {
+        "x": -278,
+        "y": 121,
+        "z": -182
+      }
+    },
+    "Sirih": {
+      "name": "Sirih",
+      "location": "Dragontail",
+      "quest": null,
+      "coords": {
+        "x": -699,
+        "y": 131,
+        "z": -887
+      }
+    },
+    "Sirius": {
+      "name": "Sirius",
+      "location": "Wilderness",
+      "quest": null,
+      "coords": {
+        "x": 92,
+        "y": 75,
+        "z": 177
+      }
+    },
+    "Spider Tamer": {
+      "name": "Spider Tamer",
+      "location": "Arachne's Sanctuary",
+      "quest": null,
+      "coords": {
+        "x": -298,
+        "y": 62,
+        "z": -194
+      }
+    },
+    "St. Jerry": {
+      "name": "St. Jerry",
+      "location": "Jerry's Workshop",
+      "quest": null,
+      "coords": {
+        "x": -22,
+        "y": 76,
+        "z": 93
+      }
+    },
+    "Suus": {
+      "name": "Suus",
+      "location": "Dragontail",
+      "quest": null,
+      "coords": {
+        "x": -615,
+        "y": 115,
+        "z": -706
+      }
+    },
     "Swoop": {
       "name": "Swoop",
       "location": "Tangleburg",
@@ -262,6 +804,26 @@
         "z": -23
       }
     },
+    "Talbot": {
+      "name": "Talbot",
+      "location": "Trapper's Den",
+      "quest": null,
+      "coords": {
+        "x": 286,
+        "y": 104,
+        "z": -548
+      }
+    },
+    "Taylor": {
+      "name": "Taylor",
+      "location": "Taylor's Shop",
+      "quest": null,
+      "coords": {
+        "x": 38,
+        "y": 74,
+        "z": -39
+      }
+    },
     "Teddy": {
       "name": "Teddy",
       "location": "North Reaches",
@@ -270,6 +832,118 @@
         "x": -656,
         "y": 115,
         "z": -39
+      }
+    },
+    "Terry": {
+      "name": "Terry",
+      "location": "Terry's Shack",
+      "quest": null,
+      "coords": {
+        "x": -92,
+        "y": 78,
+        "z": 26
+      }
+    },
+    "Tia the Fairy": {
+      "name": "Tia the Fairy",
+      "location": "Wilderness",
+      "quest": "Fairy Souls",
+      "coords": {
+        "x": 120,
+        "y": 65,
+        "z": 148
+      }
+    },
+    "Tomioka": {
+      "name": "Tomioka",
+      "location": "The Catacombs",
+      "quest": null,
+      "coords": null
+    },
+    "Tony": {
+      "name": "Tony",
+      "location": "Trapper's Den",
+      "quest": null,
+      "coords": {
+        "x": 279,
+        "y": 104,
+        "z": -544
+      }
+    },
+    "Trevor": {
+      "name": "Trevor",
+      "location": "Trapper's Den",
+      "quest": null,
+      "coords": {
+        "x": 282,
+        "y": 104,
+        "z": -542
+      }
+    },
+    "Trinity": {
+      "name": "Trinity",
+      "location": "The Catacombs",
+      "quest": null,
+      "coords": null
+    },
+    "Tyzzo": {
+      "name": "Tyzzo",
+      "location": "Void Slate",
+      "quest": null,
+      "coords": {
+        "x": -597,
+        "y": 5,
+        "z": -272
+      }
+    },
+    "Vincent": {
+      "name": "Vincent",
+      "location": "Artist's Abode",
+      "quest": null,
+      "coords": {
+        "x": 80,
+        "y": 74,
+        "z": 54
+      }
+    },
+    "Vulcan": {
+      "name": "Vulcan",
+      "location": "Forgotten Skull",
+      "quest": null,
+      "coords": {
+        "x": -363,
+        "y": 115,
+        "z": -1031
+      }
+    },
+    "Walter": {
+      "name": "Walter",
+      "location": "Gunpowder Mines",
+      "quest": null,
+      "coords": {
+        "x": 19,
+        "y": 156,
+        "z": -36
+      }
+    },
+    "Wool Weaver": {
+      "name": "Wool Weaver",
+      "location": "Builder's House",
+      "quest": null,
+      "coords": {
+        "x": -17,
+        "y": 71,
+        "z": -57
+      }
+    },
+    "Zog": {
+      "name": "Zog",
+      "location": "Pet Care",
+      "quest": null,
+      "coords": {
+        "x": 10,
+        "y": 69,
+        "z": -71
       }
     }
   },

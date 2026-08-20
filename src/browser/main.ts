@@ -273,8 +273,17 @@ function taskRow(task: ResolvedTask, showBundle: boolean, tag?: string): string 
   const shownName = bundled && task.bundleSpan ? task.bundleSpan : task.name;
   const shownNote = bundled && task.bundleNote ? task.bundleNote : task.note;
 
+  // A contact list is seventy rows long and only the one you are walking to needs an address, so
+  // the name is the control: click it and the island and coordinates appear on that row.
+  const whereKey = `where:${task.id}`;
+  const nameCell = task.where
+    ? `<button class="npc-name" data-toggle="${whereKey}" title="Where to find them">${escapeHtml(shownName)}</button>${
+        open.has(whereKey) ? `<span class="where">${escapeHtml(task.where)}</span>` : ""
+      }`
+    : escapeHtml(shownName);
+
   return `<li class="task">
-    <span class="task-name">${tag ? `<span class="tag cat">${escapeHtml(tag)}</span>` : ""}${escapeHtml(shownName)}${
+    <span class="task-name">${tag ? `<span class="tag cat">${escapeHtml(tag)}</span>` : ""}${nameCell}${
       bundled ? `<span class="tag">+${task.bundle.length} prereq</span>` : ""
     }${task.estimated ? `<span class="tag est" title="Nothing is listing this right now — reference price">est</span>` : ""}${
       shownNote ? `<span class="note">${escapeHtml(shownNote)}</span>` : ""
