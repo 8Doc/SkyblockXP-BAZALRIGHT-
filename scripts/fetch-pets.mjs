@@ -41,7 +41,13 @@ const members = await fetch(
 ).then((r) => r.json());
 
 // Pages in the category that are not pets — Autopet, Kat, the menu — do not end in " Pet".
-const titles = (members.query?.categorymembers ?? []).map((m) => m.title).filter((t) => t.endsWith(" Pet"));
+// Pages in the category that are not pets — Autopet, Kat, the menu — do not end in " Pet".
+// The Bingo Pet is dropped outright: it exists only on Bingo profiles, so on a normal one it is
+// a row nobody can ever complete. The wiki counts the game's pets as 81, or 80 without it.
+const BINGO_ONLY = new Set(["Bingo Pet"]);
+const titles = (members.query?.categorymembers ?? [])
+  .map((m) => m.title)
+  .filter((t) => t.endsWith(" Pet") && !BINGO_ONLY.has(t));
 console.log(`reading ${titles.length} pet pages…`);
 
 const pets = [];
@@ -83,7 +89,17 @@ for (let i = 0; i < titles.length; i += 50) {
     }
     const best = codes[codes.length - 1];
 
+    // A pet the auction house will never carry cannot be bought, and this category is a
+    // shopping list. The Rift's pets are the case that matters: Montezuma is rift-bound, so a
+    // player with every buyable pet was still being told to go and get it.
+    const saysNo = (name) => {
+      const value = (field(box, name) ?? "").toLowerCase();
+      return value === "n" || value === "no" || value === "false";
+    };
+    const buyable = !(saysNo("auctionable") || saysNo("tradeable"));
+
     pets.push({
+      buyable,
       name: page.title.replace(/ Pet$/, ""),
       key: page.title.replace(/ Pet$/, "").toUpperCase().replace(/[^A-Z0-9]+/g, "_"),
       rarities: codes.map((c) => RARITY[c]),
@@ -98,6 +114,7 @@ const SCORE = { COMMON: 1, UNCOMMON: 2, RARE: 3, EPIC: 4, LEGENDARY: 5, MYTHIC: 
 pets.sort((a, b) => a.key.localeCompare(b.key));
 // A pet is worth its rarity points, plus one more for reaching its maximum level.
 const maxScore = pets.reduce((total, pet) => total + SCORE[pet.maxRarity] + 1, 0);
+const unbuyable = pets.filter((p) => !p.buyable);
 
 await writeFile(
   join(ROOT, "data", "generated", "pets.json"),
@@ -115,3 +132,4 @@ await writeFile(
 );
 if (unparsed.length) console.log(`  no rarity on: ${unparsed.slice(0, 8).join(", ")}${unparsed.length > 8 ? " …" : ""}`);
 console.log(`wrote ${pets.length} pets · maximum pet score ${maxScore} (the game's is 521)`);
+console.log(`  ${unbuyable.length} cannot be bought: ${unbuyable.map((p) => p.name).join(", ")}`);

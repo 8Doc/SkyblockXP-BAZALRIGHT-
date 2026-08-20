@@ -1,10 +1,11 @@
 {
- "generatedAt": "2026-08-20T23:04:37.347Z",
+ "generatedAt": "2026-08-20T23:16:53.975Z",
  "source": "https://hypixelskyblock.minecraft.wiki/api.php — Category:Pets, Infobox/Pet rarity",
  "note": "Every pet and the rarities it can be. Pet score is the best copy's rarity points plus one for reaching max level.",
- "maxScore": 525,
+ "maxScore": 518,
  "pets": [
   {
+   "buyable": true,
    "name": "Ammonite",
    "key": "AMMONITE",
    "rarities": [
@@ -13,6 +14,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Ankylosaurus",
    "key": "ANKYLOSAURUS",
    "rarities": [
@@ -21,6 +23,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Armadillo",
    "key": "ARMADILLO",
    "rarities": [
@@ -34,6 +37,7 @@
    "maxRarity": "MYTHIC"
   },
   {
+   "buyable": true,
    "name": "Baby Yeti",
    "key": "BABY_YETI",
    "rarities": [
@@ -47,6 +51,7 @@
    "maxRarity": "MYTHIC"
   },
   {
+   "buyable": true,
    "name": "Bal",
    "key": "BAL",
    "rarities": [
@@ -56,6 +61,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Bat",
    "key": "BAT",
    "rarities": [
@@ -69,6 +75,7 @@
    "maxRarity": "MYTHIC"
   },
   {
+   "buyable": true,
    "name": "Bee",
    "key": "BEE",
    "rarities": [
@@ -82,19 +89,7 @@
    "maxRarity": "MYTHIC"
   },
   {
-   "name": "Bingo",
-   "key": "BINGO",
-   "rarities": [
-    "COMMON",
-    "UNCOMMON",
-    "RARE",
-    "EPIC",
-    "LEGENDARY",
-    "MYTHIC"
-   ],
-   "maxRarity": "MYTHIC"
-  },
-  {
+   "buyable": true,
    "name": "Black Cat",
    "key": "BLACK_CAT",
    "rarities": [
@@ -104,6 +99,7 @@
    "maxRarity": "MYTHIC"
   },
   {
+   "buyable": true,
    "name": "Blaze",
    "key": "BLAZE",
    "rarities": [
@@ -116,6 +112,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Blue Whale",
    "key": "BLUE_WHALE",
    "rarities": [
@@ -128,6 +125,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Chicken",
    "key": "CHICKEN",
    "rarities": [
@@ -140,6 +138,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Crow",
    "key": "CROW",
    "rarities": [
@@ -152,6 +151,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Dolphin",
    "key": "DOLPHIN",
    "rarities": [
@@ -164,6 +164,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Elephant",
    "key": "ELEPHANT",
    "rarities": [
@@ -177,6 +178,7 @@
    "maxRarity": "MYTHIC"
   },
   {
+   "buyable": true,
    "name": "Ender Dragon",
    "key": "ENDER_DRAGON",
    "rarities": [
@@ -186,6 +188,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Enderman",
    "key": "ENDERMAN",
    "rarities": [
@@ -199,6 +202,7 @@
    "maxRarity": "MYTHIC"
   },
   {
+   "buyable": true,
    "name": "Endermite",
    "key": "ENDERMITE",
    "rarities": [
@@ -212,6 +216,7 @@
    "maxRarity": "MYTHIC"
   },
   {
+   "buyable": true,
    "name": "Flying Fish",
    "key": "FLYING_FISH",
    "rarities": [
@@ -223,6 +228,7 @@
    "maxRarity": "MYTHIC"
   },
   {
+   "buyable": true,
    "name": "Frog",
    "key": "FROG",
    "rarities": [
@@ -236,6 +242,7 @@
    "maxRarity": "MYTHIC"
   },
   {
+   "buyable": true,
    "name": "Ghoul",
    "key": "GHOUL",
    "rarities": [
@@ -245,6 +252,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Giraffe",
    "key": "GIRAFFE",
    "rarities": [
@@ -257,6 +265,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Glacite Golem",
    "key": "GLACITE_GOLEM",
    "rarities": [
@@ -269,6 +278,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Goblin",
    "key": "GOBLIN",
    "rarities": [
@@ -277,6 +287,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Golden Dragon",
    "key": "GOLDEN_DRAGON",
    "rarities": [
@@ -285,6 +296,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Golem",
    "key": "GOLEM",
    "rarities": [
@@ -294,6 +306,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": false,
    "name": "Grandma Wolf",
    "key": "GRANDMA_WOLF",
    "rarities": [
@@ -306,6 +319,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Griffin",
    "key": "GRIFFIN",
    "rarities": [
@@ -319,6 +333,7 @@
    "maxRarity": "MYTHIC"
   },
   {
+   "buyable": true,
    "name": "Guardian",
    "key": "GUARDIAN",
    "rarities": [
@@ -332,6 +347,7 @@
    "maxRarity": "MYTHIC"
   },
   {
+   "buyable": true,
    "name": "Hedgehog",
    "key": "HEDGEHOG",
    "rarities": [
@@ -340,6 +356,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Hermit Crab",
    "key": "HERMIT_CRAB",
    "rarities": [
@@ -353,6 +370,7 @@
    "maxRarity": "MYTHIC"
   },
   {
+   "buyable": true,
    "name": "Horse",
    "key": "HORSE",
    "rarities": [
@@ -365,6 +383,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Hound",
    "key": "HOUND",
    "rarities": [
@@ -374,6 +393,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Jade Dragon",
    "key": "JADE_DRAGON",
    "rarities": [
@@ -382,6 +402,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Jellyfish",
    "key": "JELLYFISH",
    "rarities": [
@@ -391,6 +412,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Jerry",
    "key": "JERRY",
    "rarities": [
@@ -404,6 +426,7 @@
    "maxRarity": "MYTHIC"
   },
   {
+   "buyable": false,
    "name": "Kuudra",
    "key": "KUUDRA",
    "rarities": [
@@ -416,6 +439,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Lion",
    "key": "LION",
    "rarities": [
@@ -428,6 +452,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Magma Cube",
    "key": "MAGMA_CUBE",
    "rarities": [
@@ -440,6 +465,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Mammoth",
    "key": "MAMMOTH",
    "rarities": [
@@ -448,6 +474,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Megalodon",
    "key": "MEGALODON",
    "rarities": [
@@ -457,6 +484,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Mithril Golem",
    "key": "MITHRIL_GOLEM",
    "rarities": [
@@ -470,6 +498,7 @@
    "maxRarity": "MYTHIC"
   },
   {
+   "buyable": true,
    "name": "Mole",
    "key": "MOLE",
    "rarities": [
@@ -478,6 +507,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Monkey",
    "key": "MONKEY",
    "rarities": [
@@ -490,6 +520,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": false,
    "name": "Montezuma",
    "key": "MONTEZUMA",
    "rarities": [
@@ -499,6 +530,7 @@
    "maxRarity": "EPIC"
   },
   {
+   "buyable": true,
    "name": "Mooshroom Cow",
    "key": "MOOSHROOM_COW",
    "rarities": [
@@ -511,6 +543,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Mosquito",
    "key": "MOSQUITO",
    "rarities": [
@@ -523,6 +556,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Ocelot",
    "key": "OCELOT",
    "rarities": [
@@ -535,6 +569,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Orchid Mantis",
    "key": "ORCHID_MANTIS",
    "rarities": [
@@ -547,6 +582,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Owl",
    "key": "OWL",
    "rarities": [
@@ -555,6 +591,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Parrot",
    "key": "PARROT",
    "rarities": [
@@ -564,6 +601,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Penguin",
    "key": "PENGUIN",
    "rarities": [
@@ -572,6 +610,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Phoenix",
    "key": "PHOENIX",
    "rarities": [
@@ -581,6 +620,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Pig",
    "key": "PIG",
    "rarities": [
@@ -593,6 +633,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Pigman",
    "key": "PIGMAN",
    "rarities": [
@@ -605,6 +646,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Precursor Drone",
    "key": "PRECURSOR_DRONE",
    "rarities": [
@@ -613,6 +655,7 @@
    "maxRarity": "COMMON"
   },
   {
+   "buyable": true,
    "name": "Rabbit",
    "key": "RABBIT",
    "rarities": [
@@ -626,6 +669,7 @@
    "maxRarity": "MYTHIC"
   },
   {
+   "buyable": true,
    "name": "Rat",
    "key": "RAT",
    "rarities": [
@@ -635,6 +679,7 @@
    "maxRarity": "MYTHIC"
   },
   {
+   "buyable": true,
    "name": "Reindeer",
    "key": "REINDEER",
    "rarities": [
@@ -643,6 +688,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": false,
    "name": "Rift Ferret",
    "key": "RIFT_FERRET",
    "rarities": [
@@ -651,6 +697,7 @@
    "maxRarity": "EPIC"
   },
   {
+   "buyable": true,
    "name": "Rock",
    "key": "ROCK",
    "rarities": [
@@ -663,6 +710,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Rose Dragon",
    "key": "ROSE_DRAGON",
    "rarities": [
@@ -671,6 +719,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Scatha",
    "key": "SCATHA",
    "rarities": [
@@ -681,6 +730,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Seal",
    "key": "SEAL",
    "rarities": [
@@ -693,6 +743,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Sheep",
    "key": "SHEEP",
    "rarities": [
@@ -705,6 +756,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Silverfish",
    "key": "SILVERFISH",
    "rarities": [
@@ -717,6 +769,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Skeleton",
    "key": "SKELETON",
    "rarities": [
@@ -729,6 +782,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Skeleton Horse",
    "key": "SKELETON_HORSE",
    "rarities": [
@@ -737,6 +791,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Sloth",
    "key": "SLOTH",
    "rarities": [
@@ -749,6 +804,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Slug",
    "key": "SLUG",
    "rarities": [
@@ -758,6 +814,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Snail",
    "key": "SNAIL",
    "rarities": [
@@ -770,6 +827,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Snowman",
    "key": "SNOWMAN",
    "rarities": [
@@ -779,6 +837,7 @@
    "maxRarity": "MYTHIC"
   },
   {
+   "buyable": true,
    "name": "Spider",
    "key": "SPIDER",
    "rarities": [
@@ -792,6 +851,7 @@
    "maxRarity": "MYTHIC"
   },
   {
+   "buyable": true,
    "name": "Spinosaurus",
    "key": "SPINOSAURUS",
    "rarities": [
@@ -800,6 +860,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Spirit",
    "key": "SPIRIT",
    "rarities": [
@@ -809,6 +870,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Squid",
    "key": "SQUID",
    "rarities": [
@@ -821,6 +883,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "T-Rex",
    "key": "T_REX",
    "rarities": [
@@ -829,6 +892,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Tarantula",
    "key": "TARANTULA",
    "rarities": [
@@ -839,6 +903,7 @@
    "maxRarity": "MYTHIC"
   },
   {
+   "buyable": true,
    "name": "Tiger",
    "key": "TIGER",
    "rarities": [
@@ -851,6 +916,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Turtle",
    "key": "TURTLE",
    "rarities": [
@@ -860,6 +926,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Wisp",
    "key": "WISP",
    "rarities": [
@@ -871,6 +938,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Witch",
    "key": "WITCH",
    "rarities": [
@@ -883,6 +951,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Wither Skeleton",
    "key": "WITHER_SKELETON",
    "rarities": [
@@ -895,6 +964,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Wolf",
    "key": "WOLF",
    "rarities": [
@@ -907,6 +977,7 @@
    "maxRarity": "LEGENDARY"
   },
   {
+   "buyable": true,
    "name": "Zombie",
    "key": "ZOMBIE",
    "rarities": [

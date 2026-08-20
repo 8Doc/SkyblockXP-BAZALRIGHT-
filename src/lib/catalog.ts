@@ -498,6 +498,10 @@ export function buildCatalog(
   }
 
   for (const pet of data.pets.pets) {
+    // A pet the auction house never carries cannot be bought, and this is a shopping list. The
+    // Rift's are the case that matters: rift-bound pets were being offered to players who had
+    // every purchasable one.
+    if (pet.buyable === false) continue;
     const key = petKey(pet.name);
     const owned = ownedPetScore.get(key) ?? 0;
 
@@ -592,7 +596,18 @@ export function buildCatalog(
   const strandedAttributes = unplacedAttributes(member.attributes?.stacks, data.attributeShards.attributes, data);
   const attributeCount = Object.values(member.attributes?.stacks ?? {}).filter((n) => n > 0).length;
 
+  // An attribute whose key we cannot find in the profile has unknown progress, not zero. The
+  // two vocabularies disagree on about twenty names — the wiki writes Arthropod Ruler where the
+  // game writes arachno — and offering all ten levels of those told a player with every
+  // attribute maxed that 171 levels were outstanding. Unknown is not the same as undone, so
+  // they are held back and counted in the reconciliation instead.
+  //
+  // Only when the profile actually reports attributes: a fresh profile legitimately has none,
+  // and there the whole category really is ahead of you.
+  const reportsAttributes = Object.keys(member.attributes?.stacks ?? {}).length > 0;
+
   for (const attribute of data.attributeShards.attributes) {
+    if (reportsAttributes && !heldShards.placed(attribute.key)) continue;
     const held = heldShards(attribute.key);
     // Rarer attributes level on far fewer shards — a legendary maxes at 24 where a common needs
     // 96 — so the ladder has to be picked per attribute. Using the common one throughout made
@@ -1028,7 +1043,12 @@ const titleCase = (value: string) =>
  * Candidates are tried most-specific first, so an attribute that matches outright never gets
  * taken by a looser rule meant for a different one.
  */
-function attributeStacks(stacks: Record<string, number> | undefined, data: GameData): (key: string) => number {
+type AttributeStacks = ((key: string) => number) & {
+  /** Whether the profile carries this attribute at all under any name we recognise. */
+  placed: (key: string) => boolean;
+};
+
+function attributeStacks(stacks: Record<string, number> | undefined, data: GameData): AttributeStacks {
   const held = stacks ?? {};
   const byShape = new Map<string, number>();
   for (const [key, amount] of Object.entries(held)) {
@@ -1036,15 +1056,19 @@ function attributeStacks(stacks: Record<string, number> | undefined, data: GameD
     byShape.set(shape, Math.max(byShape.get(shape) ?? 0, amount));
   }
 
-  return (key) => {
+  const lookup = (key: string): number | undefined => {
     for (const candidate of attributeCandidates(key, data)) {
       const direct = held[candidate];
       if (direct !== undefined) return direct;
       const shaped = byShape.get(attributeShape(candidate));
       if (shaped !== undefined) return shaped;
     }
-    return 0;
+    return undefined;
   };
+
+  const read = ((key: string) => lookup(key) ?? 0) as AttributeStacks;
+  read.placed = (key) => lookup(key) !== undefined;
+  return read;
 }
 
 /** The forms one of our attribute keys might appear under in the profile, best guess first. */

@@ -235,7 +235,10 @@ export type GameData = {
   costs: CostsData;
   petScore: { byRarity: Record<string, number> };
   /** Every pet and the rarities it can be — a fixed catalogue, not whatever is listed today. */
-  pets: { maxScore: number; pets: { name: string; key: string; rarities: string[]; maxRarity: string }[] };
+  pets: {
+    maxScore: number;
+    pets: { name: string; key: string; rarities: string[]; maxRarity: string; buyable?: boolean }[];
+  };
   difficulty: DifficultyData;
   attributeShards: AttributesData;
   bestiary: BestiaryData;

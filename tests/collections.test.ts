@@ -279,3 +279,29 @@ test("attributes cover the whole game, not the third the old wiki listed", () =>
   assert.ok(attributes.length > 3_000, `only ${attributes.length} attribute levels`);
   assert.equal(attributes.reduce((s, t) => s + t.xp, 0), attributes.length, "one XP per level");
 });
+
+/* ------------------------------------------- false positives on a maxed profile */
+
+test("an attribute we cannot place is held back, not offered as ten fresh levels", () => {
+  // The wiki writes Arthropod Ruler where the game writes arachno. About twenty names disagree,
+  // and offering all ten levels of each told a player with every attribute maxed that 171 levels
+  // were outstanding. Unknown progress is not the same as no progress.
+  const withAttributes = catalogFor({ attributes: { stacks: { speed: 96 } } });
+  const offered = withAttributes.tasks.filter((t) => t.category === "attributes");
+  const names = new Set(offered.map((t) => t.name.replace(/ \d+$/, "")));
+  assert.ok(!names.has("Arthropod Ruler"), "no key in this profile matches it, so its progress is unknown");
+
+  // A profile that reports nothing is a different case: there the category really is all ahead.
+  const fresh = catalogFor({});
+  assert.ok(fresh.tasks.filter((t) => t.category === "attributes").length > 3_000);
+});
+
+test("pets nobody can buy are not on a shopping list", () => {
+  // Rift-bound pets were offered to a player who owned every purchasable one.
+  const pets = catalogFor({}).tasks.filter((t) => t.category === "pets");
+  for (const name of ["MONTEZUMA", "RIFT_FERRET", "KUUDRA", "GRANDMA_WOLF"]) {
+    assert.equal(pets.some((t) => t.id.includes(name)), false, `the ${name} pet cannot be bought`);
+  }
+  assert.equal(pets.some((t) => t.id.includes("BINGO")), false, "the Bingo pet needs a Bingo profile");
+  assert.ok(pets.length > 200, "the rest of the catalogue is still there");
+});
