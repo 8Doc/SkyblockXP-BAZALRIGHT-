@@ -122,9 +122,14 @@ async function buildAccessories() {
   // bag absorbs items nobody can sell you. The wiki states it outright; where it says no, that
   // wins. Rift accessories are the worst of it — two of them were priced at a billion each.
   let wikiUntradeable = new Set();
+  // The items resource ships eighteen accessories with no tier at all, and without a rarity
+  // there is no magical power to give them — so they were dropped, and four of them turned out
+  // to be sitting in a top player's bag, unreadable. The wiki states the rarity for every one.
+  let wikiRarity = new Map();
   try {
     const trade = JSON.parse(await readFile(join(OUT, "accessory_trade.json"), "utf8"));
     wikiUntradeable = new Set(trade.untradeable.map((entry) => entry.id));
+    wikiRarity = new Map((trade.rarities ?? []).map((entry) => [entry.id, entry.rarity]));
   } catch {
     console.log("  accessories  no accessory_trade.json — run fetch-accessory-trade.mjs");
   }
@@ -132,7 +137,7 @@ async function buildAccessories() {
   const out = [];
   for (const item of items) {
     if (item.category !== "ACCESSORY") continue;
-    const tier = item.tier ?? impliedTier(item.name);
+    const tier = item.tier ?? wikiRarity.get(item.id) ?? impliedTier(item.name);
     if (!tier) continue; // no rarity we can stand behind -> no defined magical power
     out.push({
       id: item.id,

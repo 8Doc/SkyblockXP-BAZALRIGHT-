@@ -6,7 +6,9 @@ import accessories from "../data/generated/accessories.json";
 import accessoryFamilies from "../data/curated/accessory_families.json";
 import magicalPower from "../data/curated/magical_power.json";
 
-const data = { accessories, accessoryFamilies, magicalPower } as never;
+import accessoryChains from "../data/generated/accessory_trade.json";
+
+const data = { accessories, accessoryFamilies, magicalPower, accessoryChains } as never;
 const family = (name: string) => familyOf(data, name, name);
 
 /**
@@ -158,16 +160,51 @@ test("an accessory crafted from another is already one family", () => {
   assert.ok(links.length > 10, `only ${links.length} craft links found`);
 
   const byId = new Map(
-    (accessories as { accessories: { id: string; name: string }[] }).accessories.map((a) => [a.id, a]),
+    (accessories as { accessories: { id: string; name: string; rift?: boolean }[] }).accessories.map((a) => [a.id, a]),
   );
   for (const link of links) {
     const product = byId.get(link.id);
     const ingredient = byId.get(link.from);
     if (!product || !ingredient) continue;
+    // Rift accessories never reach this bag, so their families are moot — and the wiki carries a
+    // typo page for one of them that resolves to no accessory of its own.
+    if (product.rift || ingredient.rift) continue;
+    // Chains are keyed by item id, so the ids have to be the ones passed in.
     assert.equal(
-      family(product.name),
-      family(ingredient.name),
+      familyOf(data, product.name, product.id),
+      familyOf(data, ingredient.name, ingredient.id),
       `${link.name} is crafted from ${link.fromName}, so they are one family`,
     );
+  }
+});
+
+test("an upgrade line is one family however long it runs", () => {
+  // Named by the wiki's upgrades_from, which raw_materials cannot give: that field breaks a
+  // recipe down to bazaar goods, so Sunshine Crystal reads as quartz and sunflowers rather than
+  // as a Day Crystal.
+  const list = (accessories as { accessories: { id: string; name: string }[] }).accessories;
+  const byName = new Map(list.map((a) => [a.name, a]));
+  const oneFamily = (names: string[]) => {
+    const found = names.map((n) => byName.get(n)).filter(Boolean) as { id: string; name: string }[];
+    assert.equal(found.length, names.length, `missing one of ${names.join(", ")}`);
+    const fams = new Set(found.map((a) => familyOf(data, a.name, a.id)));
+    assert.equal(fams.size, 1, `${names.join(" / ")} split into ${fams.size} families`);
+  };
+
+  oneFamily(["Day Crystal", "Sunshine Crystal"]);
+  oneFamily(["Night Crystal", "Moonlight Crystal"]);
+  oneFamily(["Bait Ring", "Spiked Atrocity"]);
+  oneFamily(["Kuudra's Kidney", "Kuudra's Lung", "Kuudra's Heart"]);
+  // Four deep, and no two of them share a word.
+  oneFamily(["Cropie Talisman", "Squash Ring", "Fermento Artifact", "Helianthus Relic"]);
+});
+
+test("accessories the items resource ships with no tier are still catalogued", () => {
+  // Four of them were sitting in a top player's accessory bag, unreadable, so his magical power
+  // came out short and their families read as untouched.
+  const list = (accessories as { accessories: { id: string; tier: string }[] }).accessories;
+  const byId = new Map(list.map((a) => [a.id, a]));
+  for (const id of ["RUNEBOOK", "POCKET_ESPRESSO_MACHINE", "NIGHT_VISION_CHARM", "HANDY_BLOOD_CHALICE"]) {
+    assert.ok(byId.get(id), `${id} should be catalogued from the wiki's rarity`);
   }
 });

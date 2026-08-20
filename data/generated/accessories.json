@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-08-20T23:31:05.175Z",
+ "generatedAt": "2026-08-20T23:45:58.364Z",
  "source": "https://api.hypixel.net/v2/resources/skyblock",
  "accessories": [
   {
@@ -1643,6 +1643,16 @@
    "rift": false
   },
   {
+   "id": "HANDY_BLOOD_CHALICE",
+   "name": "Handy Blood Chalice",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false,
+   "rift": false
+  },
+  {
    "id": "HARMONIOUS_SURGERY_TOOLKIT",
    "name": "Harmonious Surgery Toolkit",
    "tier": "UNCOMMON",
@@ -2363,6 +2373,16 @@
    "rift": false
   },
   {
+   "id": "NIGHT_VISION_CHARM",
+   "name": "Night Vision Charm",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false,
+   "rift": false
+  },
+  {
    "id": "ODGERS_BRONZE_TOOTH",
    "name": "Odger's Bronze Tooth",
    "tier": "COMMON",
@@ -2633,6 +2653,16 @@
    "rift": false
   },
   {
+   "id": "POCKET_ESPRESSO_MACHINE",
+   "name": "Pocket Espresso Machine",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false,
+   "rift": false
+  },
+  {
    "id": "POTATO_RING",
    "name": "Potato Ring",
    "tier": "UNCOMMON",
@@ -2766,6 +2796,16 @@
    "id": "PURPLE_GIFT_TALISMAN",
    "name": "Purple Gift Talisman",
    "tier": "EPIC",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false,
+   "rift": false
+  },
+  {
+   "id": "RAGGEDY_SHARK_TOOTH_NECKLACE",
+   "name": "Raggedy Shark Tooth Necklace",
+   "tier": "COMMON",
    "museum": false,
    "soulbound": false,
    "tradeable": true,
@@ -2955,6 +2995,16 @@
   {
    "id": "RUNEBLADE_TALISMAN",
    "name": "Runeblade Talisman",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false,
+   "rift": false
+  },
+  {
+   "id": "RUNEBOOK",
+   "name": "Runebook",
    "tier": "COMMON",
    "museum": false,
    "soulbound": false,

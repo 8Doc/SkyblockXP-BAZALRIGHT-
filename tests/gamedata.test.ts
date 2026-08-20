@@ -20,8 +20,8 @@ function fieldsOf(file: string, open: string, close: string, pattern: RegExp): s
 }
 
 test("the standalone loader carries every field GameData declares", () => {
-  const declared = fieldsOf("src/lib/gameData.ts", "export type GameData = {", "\n};", /^ {2}(\w+):/gm);
-  const loaded = fieldsOf("scripts/build-html.mjs", "const gameData = {", "\n};", /^ {2}(\w+):/gm);
+  const declared = fieldsOf("src/lib/gameData.ts", "export type GameData = {", "\n};", /^ {2}(\w+)\??:/gm);
+  const loaded = fieldsOf("scripts/build-html.mjs", "const gameData = {", "\n};", /^ {2}(\w+)\??:/gm);
 
   assert.ok(declared.length > 10, `only found ${declared.length} fields — the parser has drifted`);
   assert.deepEqual(

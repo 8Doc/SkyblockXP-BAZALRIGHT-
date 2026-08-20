@@ -230,6 +230,8 @@ export type GameData = {
   accessories: AccessoriesData;
   magicalPower: MagicalPowerData;
   accessoryFamilies: AccessoryFamiliesData;
+  /** Upgrade chains read off the wiki, as a family id per member. */
+  accessoryChains?: { chains: { family: string; members: string[] }[] };
   museum: MuseumData;
   tasks: TasksData;
   curves: CurvesData;
@@ -318,6 +320,12 @@ const FAMILY_OF = new RegExp(`^(${UPGRADE_WORD}) (of .+)$`);
 const TIER_MARKER = /(\s+-\s+Tier\s+\d+|\s+\d+)$/;
 
 export function familyOf(data: GameData, name: string, id: string): string {
+  // An upgrade line the wiki states outright beats any guess made from the name. Cropie
+  // Talisman, Squash Ring, Fermento Artifact and Helianthus Relic share no word between them,
+  // but each is crafted from the last, so only the one you hold is in your bag.
+  const chained = chainFamily(data, id);
+  if (chained) return chained;
+
   for (const phrase of data.accessoryFamilies.endsWithFamilies) {
     if (name.endsWith(phrase)) return phrase.toLowerCase();
   }
@@ -494,4 +502,25 @@ export function categoryLabel(category: Category, data?: GameData): string {
   const label = CATEGORY_LABELS[category];
   if (category !== "bestiary" || !data) return label;
   return `${label} — ${data.bestiary.totals.xp.toLocaleString("en-US")} XP in all`;
+}
+
+/**
+ * Accessory id to the upgrade chain it belongs to.
+ *
+ * Keyed on the data object rather than cached in a single slot: a module-level cache takes its
+ * shape from whichever caller arrives first, so one test passing a cut-down table poisoned it
+ * for everything after.
+ */
+const chainLookups = new WeakMap<object, Map<string, string>>();
+
+function chainFamily(data: GameData, id: string): string | null {
+  let lookup = chainLookups.get(data);
+  if (!lookup) {
+    lookup = new Map();
+    for (const chain of data.accessoryChains?.chains ?? []) {
+      for (const member of chain.members) lookup.set(member, `chain:${chain.family}`);
+    }
+    chainLookups.set(data, lookup);
+  }
+  return lookup.get(id) ?? null;
 }

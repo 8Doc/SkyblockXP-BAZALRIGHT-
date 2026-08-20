@@ -13,7 +13,7 @@ export function gameData(): GameData {
   return {
     skills: d("generated/skills.json"), collections: d("generated/collections.json"),
     minions: d("generated/minions.json"), accessories: d("generated/accessories.json"),
-    magicalPower: d("curated/magical_power.json"), accessoryFamilies: d("curated/accessory_families.json"),
+    magicalPower: d("curated/magical_power.json"), accessoryFamilies: d("curated/accessory_families.json"), accessoryChains: d("generated/accessory_trade.json"),
     museum: d("generated/museum.json"), tasks: d("generated/tasks.json"), curves: d("generated/curves.json"),
     travelScrolls: d("generated/travel_scrolls.json"), costs: d("generated/costs.json"),
     petScore: d("curated/pet_score.json"), pets: d("generated/pets.json"), difficulty: d("generated/difficulty.json"),

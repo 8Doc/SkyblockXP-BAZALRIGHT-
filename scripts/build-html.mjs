@@ -46,6 +46,7 @@ const gameData = {
   accessories: await loadJson("generated/accessories.json"),
   magicalPower: await loadJson("curated/magical_power.json"),
   accessoryFamilies: await loadJson("curated/accessory_families.json"),
+  accessoryChains: await loadJson("generated/accessory_trade.json"),
   museum: await loadJson("generated/museum.json"),
   tasks: await loadJson("generated/tasks.json"),
   curves: await loadJson("generated/curves.json"),

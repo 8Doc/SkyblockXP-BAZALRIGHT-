@@ -17,8 +17,14 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const WIKI = "https://hypixel-skyblock.fandom.com/api.php";
 const UA = { "User-Agent": "skyblock-xp-planner/0.1 (data build script)" };
 
+// Every accessory the game has, not just the ones already in our table. The eighteen the items
+// resource ships without a tier are dropped from that table for want of a rarity — and four of
+// them sit in a top player's bag — so the list has to come from upstream or the scrape can never
+// supply what the API omits.
 const accessories = JSON.parse(await readFile(join(ROOT, "data/generated/accessories.json"), "utf8")).accessories;
-const titles = accessories.map((a) => a.name);
+const { items } = await fetch("https://api.hypixel.net/v2/resources/skyblock/items").then((r) => r.json());
+const everyAccessory = items.filter((i) => i.category === "ACCESSORY" && i.name);
+const titles = [...new Set(everyAccessory.map((i) => i.name))];
 
 /** Infobox flags are y/n/yes/no; anything else is left undecided rather than guessed. */
 function flagOf(wikitext, field) {
@@ -32,6 +38,37 @@ function flagOf(wikitext, field) {
     if (value === "y" || value === "yes" || value === "true") return true;
     if (value === "n" || value === "no" || value === "false") return false;
     return null;
+  }
+  return null;
+}
+
+/** Rarity codes the infobox uses, lowest first. */
+const RARITY_ORDER = ["COMMON", "UNCOMMON", "RARE", "EPIC", "LEGENDARY", "MYTHIC", "SPECIAL", "VERY SPECIAL"];
+const RARITY_LETTER = { c: "COMMON", u: "UNCOMMON", r: "RARE", e: "EPIC", l: "LEGENDARY", m: "MYTHIC" };
+
+/**
+ * The lowest rarity the infobox names. "{{R|c}}-{{R|l}}" is a range and the low end is the safe
+ * read: an accessory quoted above its base invents magical power, and under-promising is the
+ * rule everywhere else here.
+ */
+function rarityOf(text) {
+  const raw = fieldOf(text, "rarity") ?? fieldOf(text, "rarities");
+  if (!raw) return null;
+  const value = raw.toUpperCase();
+  for (const name of RARITY_ORDER) if (value.includes(name)) return name;
+  const letters = [...raw.toLowerCase().matchAll(/\{\{r\|([curelm])\}\}/g)].map((m) => RARITY_LETTER[m[1]]);
+  return letters.length ? letters[0] : null;
+}
+
+/** One infobox field's raw value. */
+function fieldOf(text, name) {
+  for (const line of text.split("\n")) {
+    const trimmed = line.trim();
+    if (!trimmed.startsWith("|")) continue;
+    const eq = trimmed.indexOf("=");
+    if (eq < 0) continue;
+    if (trimmed.slice(1, eq).trim().toLowerCase() !== name) continue;
+    return trimmed.slice(eq + 1).replace(/[\[\]]/g, "").trim() || null;
   }
   return null;
 }
@@ -66,8 +103,13 @@ for (let i = 0; i < titles.length; i += 50) {
       auctionable: flagOf(text, "auctionable"),
       tradeable: flagOf(text, "tradeable"),
       sellable: flagOf(text, "sellable"),
-      // What the item is crafted from. An accessory consumed into a better one is gone from the
-      // bag, so it reads as unowned unless the two are known to be the same progression.
+      // The accessory this one is upgraded from. raw_materials is the wrong field for this: it
+      // lists the recipe broken all the way down to bazaar goods, so Sunshine Crystal reads as
+      // nether quartz and sunflowers rather than as a Day Crystal.
+      upgradesFrom: fieldOf(text, "upgrades_from"),
+      // The items resource leaves 18 accessories with no tier, and four of them sit in a top
+      // player's bag. The wiki states the rarity, so it can supply what the API omits.
+      rarity: rarityOf(text),
       materials: materialsOf(text),
     });
   }
@@ -81,13 +123,50 @@ process.stdout.write("\n");
 const accessoryNames = new Map(accessories.map((a) => [a.name.toLowerCase(), a]));
 const craftedFrom = [];
 for (const acc of accessories) {
+  // Stated outright by the infobox, and the only reliable half: Day Crystal into Sunshine
+  // Crystal, Bait Ring into Spiked Atrocity, Fermento Artifact into Helianthus Relic.
+  const stated = byName.get(acc.name)?.upgradesFrom;
+  const statedFrom = stated ? accessoryNames.get(stated.toLowerCase()) : undefined;
+  if (statedFrom && statedFrom.id !== acc.id) {
+    craftedFrom.push({ id: acc.id, name: acc.name, from: statedFrom.id, fromName: statedFrom.name });
+  }
+
   for (const material of byName.get(acc.name)?.materials ?? []) {
     // "1 Lucky Hoof" or "8 Soul Fragment" — drop the count and look the rest up.
-    const named = material.replace(/^[0-9,]+ */, "").replace(/[[]]/g, "").trim().toLowerCase();
+    const named = material.replace(/^[0-9,]+ */, "").replace(/[\[\]]/g, "").trim().toLowerCase();
     const ingredient = accessoryNames.get(named);
     if (ingredient && ingredient.id !== acc.id) craftedFrom.push({ id: acc.id, name: acc.name, from: ingredient.id, fromName: ingredient.name });
   }
 }
+
+// An upgrade line is one family however long it runs: Cropie Talisman becomes a Squash Ring,
+// which becomes a Fermento Artifact, which becomes a Helianthus Relic, and only the last one is
+// in your bag. Union the links so a chain of four is a chain of four, not four separate rows.
+const parent = new Map();
+const find = (id) => {
+  let root = id;
+  while (parent.get(root) !== undefined && parent.get(root) !== root) root = parent.get(root);
+  return root;
+};
+const union = (a, b) => {
+  const [ra, rb] = [find(a), find(b)];
+  if (ra !== rb) parent.set(rb, ra);
+};
+for (const link of craftedFrom) {
+  if (!parent.has(link.id)) parent.set(link.id, link.id);
+  if (!parent.has(link.from)) parent.set(link.from, link.from);
+  union(link.from, link.id);
+}
+const grouped = new Map();
+for (const id of parent.keys()) {
+  const root = find(id);
+  if (!grouped.has(root)) grouped.set(root, []);
+  grouped.get(root).push(id);
+}
+const chains = [...grouped.entries()]
+  .filter(([, members]) => members.length > 1)
+  .map(([root, members]) => ({ family: root, members: members.sort() }));
+console.log(`  ${chains.length} upgrade chains, longest ${Math.max(0, ...chains.map((c) => c.members.length))} deep`);
 
 const out = [];
 let untradeable = 0;
@@ -112,6 +191,10 @@ await writeFile(
       pagesRead: byName.size,
       untradeable: out,
       craftedFrom,
+      chains,
+      rarities: everyAccessory
+        .map((item) => ({ id: item.id, rarity: byName.get(item.name)?.rarity ?? null }))
+        .filter((entry) => entry.rarity),
     },
     null,
     1,
