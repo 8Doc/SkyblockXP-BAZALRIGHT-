@@ -325,7 +325,7 @@ export function buildCatalog(
   for (const task of data.tasks.tasks) {
     tasks.push({
       id: task.id,
-      category: task.category as Category,
+      category: discreteCategory(task.id, task.category as Category),
       name: objectiveName(task.id, data),
       xp: task.xp,
       requires: rungBelow(task.id),
@@ -1189,4 +1189,15 @@ function contactLocation(id: string, data: GameData): string | undefined {
   const where = npc.coords ? `${npc.coords.x}, ${npc.coords.y}, ${npc.coords.z}` : null;
   const parts = [npc.location, where].filter(Boolean);
   return parts.length ? parts.join(" · ") : undefined;
+}
+
+/**
+ * Where a discrete task belongs.
+ *
+ * The harvested table files everything it can't place under misc, which had swallowed 120 trophy
+ * fish tasks worth 1,800 XP — a whole fishing track buried in a bucket of odds and ends, with no
+ * way to switch it off on its own.
+ */
+function discreteCategory(id: string, declared: Category): Category {
+  return id.startsWith("TROPHY_") ? "trophy_fish" : declared;
 }

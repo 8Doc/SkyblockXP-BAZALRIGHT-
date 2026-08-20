@@ -245,3 +245,13 @@ test("a lower set does not fill the one above it", () => {
   });
   assert.equal(cat.done.has(`museum_set_${child.parentId}`), false, "the chain only runs upwards");
 });
+
+test("trophy fish are their own category, not misc", () => {
+  // 120 tasks worth 1,800 XP were buried in misc with no way to switch them off on their own.
+  const { tasks } = catalogFor({});
+  const trophies = tasks.filter((t) => t.id.startsWith("TROPHY_"));
+
+  assert.ok(trophies.length > 100, `only ${trophies.length} trophy tasks`);
+  assert.deepEqual([...new Set(trophies.map((t) => t.category))], ["trophy_fish"]);
+  assert.equal(tasks.some((t) => t.category === "misc" && t.id.startsWith("TROPHY_")), false);
+});

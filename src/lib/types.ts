@@ -17,6 +17,7 @@ export type Category =
   | "bestiary"
   | "attributes"
   | "powers"
+  | "trophy_fish"
   | "misc";
 
 export const CATEGORIES: Category[] = [
@@ -36,6 +37,7 @@ export const CATEGORIES: Category[] = [
   "bestiary",
   "attributes",
   "powers",
+  "trophy_fish",
   "events",
   "rift",
   "misc",
@@ -60,6 +62,7 @@ export const CATEGORY_LABELS: Record<Category, string> = {
   slayer: "Slayer",
   attributes: "Attribute Shards",
   powers: "Powers",
+  trophy_fish: "Trophy Fish",
   misc: "Misc",
 };
 
