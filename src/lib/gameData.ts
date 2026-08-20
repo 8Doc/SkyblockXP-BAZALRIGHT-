@@ -79,6 +79,8 @@ export type MuseumData = {
     xp: number;
     /** Ids the same donation can be filed under — a dungeon-starred copy keeps its own. */
     mappedIds?: string[];
+    /** The next item up this slot's upgrade line, if it has one. */
+    parentId?: string | null;
     category: string;
     stage: string | null;
     tradeable: boolean;
@@ -334,6 +336,9 @@ export type BagState = {
   owned: Set<string>;
   /** Magical power we computed from the bag contents. */
   computedMp: number;
+  /** Accessories in the bag, and how many of them this app recognises. */
+  held: number;
+  identified: number;
   /** Magical power the API reports. A gap means our model is missing something. */
   reportedMp: number | null;
   readable: boolean;
@@ -356,11 +361,13 @@ export function scoreBag(
   const familyBest = new Map<string, { id: string; rarity: string; recombobulated: boolean }>();
   const owned = new Set<string>();
 
+  let identified = 0;
   for (const item of items ?? []) {
     owned.add(item.id);
     if (excluded.has(item.id)) continue;
     const meta = byId.get(item.id);
     if (!meta) continue;
+    identified++;
     const rarity = bumpRarity(data, meta.tier, item.rarityUpgrades);
     const family = familyOf(data, meta.name, meta.id);
     const power = magicalPowerOf(data, rarity);
@@ -376,6 +383,8 @@ export function scoreBag(
   return {
     familyPower,
     familyBest,
+    held: (items ?? []).filter((item) => !excluded.has(item.id)).length,
+    identified,
     owned,
     computedMp,
     reportedMp,

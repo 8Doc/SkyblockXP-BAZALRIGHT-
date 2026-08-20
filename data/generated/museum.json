@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-08-20T18:28:46.975Z",
+ "generatedAt": "2026-08-20T18:36:57.580Z",
  "source": "https://api.hypixel.net/v2/resources/skyblock",
  "totalXp": 3644,
  "donations": [
@@ -8,6 +8,7 @@
    "name": "Abysmal Lasso",
    "xp": 1,
    "mappedIds": [],
+   "parentId": "VINERIP_LASSO",
    "category": "HUNTING",
    "stage": "STARTER",
    "tradeable": false
@@ -17,6 +18,7 @@
    "name": "Advanced Gardening Axe",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "AMATEUR",
    "tradeable": true
@@ -26,6 +28,7 @@
    "name": "Advanced Gardening Hoe",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "AMATEUR",
    "tradeable": true
@@ -35,6 +38,7 @@
    "name": "The Alchemist's Staff",
    "xp": 8,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": false
@@ -44,6 +48,7 @@
    "name": "Alert Flare",
    "xp": 10,
    "mappedIds": [],
+   "parentId": "SOS_FLARE",
    "category": "COMBAT",
    "stage": "PROFESSIONAL",
    "tradeable": true
@@ -53,6 +58,7 @@
    "name": "Amber-Polished Drill Engine",
    "xp": 15,
    "mappedIds": [],
+   "parentId": null,
    "category": "MINING",
    "stage": "MASTER",
    "tradeable": true
@@ -62,6 +68,7 @@
    "name": "Ancestral Spade",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "ARCHAIC_SPADE",
    "category": "COMBAT",
    "stage": "AMATEUR",
    "tradeable": true
@@ -71,6 +78,7 @@
    "name": "Ancient Cloak",
    "xp": 8,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -80,6 +88,7 @@
    "name": "Annihilation Cloak",
    "xp": 16,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "MASTER",
    "tradeable": true
@@ -89,6 +98,7 @@
    "name": "Savage Huntaxe - Praedator",
    "xp": 10,
    "mappedIds": [],
+   "parentId": "NEX_TITANUM",
    "category": "HUNTING",
    "stage": "EXPERT",
    "tradeable": true
@@ -98,6 +108,7 @@
    "name": "AquaMaster™ Hydromax",
    "xp": 8,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "EXPERT",
    "tradeable": true
@@ -107,6 +118,7 @@
    "name": "AquaMaster™ X",
    "xp": 6,
    "mappedIds": [],
+   "parentId": "AQUAMASTER_HYDROMAX",
    "category": "FARMING",
    "stage": "SKILLED",
    "tradeable": true
@@ -116,6 +128,7 @@
    "name": "Arack",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "AMATEUR",
    "tradeable": true
@@ -125,6 +138,7 @@
    "name": "Archaic Spade",
    "xp": 4,
    "mappedIds": [],
+   "parentId": "DEIFIC_SPADE",
    "category": "COMBAT",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -134,6 +148,7 @@
    "name": "Armadillo Mask",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "MINING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -143,6 +158,7 @@
    "name": "Artisanal Shortbow",
    "xp": 1,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "STARTER",
    "tradeable": true
@@ -152,6 +168,7 @@
    "name": "Aspect of the Dragons",
    "xp": 5,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -161,6 +178,7 @@
    "name": "Aspect of the End",
    "xp": 4,
    "mappedIds": [],
+   "parentId": "ASPECT_OF_THE_VOID",
    "category": "COMBAT",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -170,6 +188,7 @@
    "name": "Aspect of the Jerry",
    "xp": 1,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "STARTER",
    "tradeable": true
@@ -179,6 +198,7 @@
    "name": "Aspect of the Void",
    "xp": 6,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -188,6 +208,7 @@
    "name": "Astraea",
    "xp": 5,
    "mappedIds": [],
+   "parentId": "SCYLLA",
    "category": "DUNGEONEERING",
    "stage": "MASTER",
    "tradeable": true
@@ -197,6 +218,7 @@
    "name": "Atominizer",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -206,6 +228,7 @@
    "name": "Atomsplit Katana",
    "xp": 10,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "PROFESSIONAL",
    "tradeable": true
@@ -215,6 +238,7 @@
    "name": "Halberd of the Shredded",
    "xp": 10,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -224,6 +248,7 @@
    "name": "Balloon Snake",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "AMATEUR",
    "tradeable": true
@@ -233,6 +258,7 @@
    "name": "Bandaged Mithril Pickaxe",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "MITHRIL_PICKAXE",
    "category": "MINING",
    "stage": "AMATEUR",
    "tradeable": true
@@ -242,6 +268,7 @@
    "name": "Basic Chicken Axe",
    "xp": 1,
    "mappedIds": [],
+   "parentId": "CHICKEN_AXE",
    "category": "FARMING",
    "stage": "STARTER",
    "tradeable": true
@@ -251,6 +278,7 @@
    "name": "Basic Cow Axe",
    "xp": 1,
    "mappedIds": [],
+   "parentId": "COW_AXE",
    "category": "FARMING",
    "stage": "STARTER",
    "tradeable": true
@@ -260,6 +288,7 @@
    "name": "Basic Fishing Net",
    "xp": 1,
    "mappedIds": [],
+   "parentId": "MEDIUM_FISHING_NET",
    "category": "HUNTING",
    "stage": "STARTER",
    "tradeable": true
@@ -269,6 +298,7 @@
    "name": "Basic Gardening Axe",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "ADVANCED_GARDENING_AXE",
    "category": "FARMING",
    "stage": "AMATEUR",
    "tradeable": true
@@ -278,6 +308,7 @@
    "name": "Basic Gardening Hoe",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "ADVANCED_GARDENING_HOE",
    "category": "FARMING",
    "stage": "AMATEUR",
    "tradeable": true
@@ -287,6 +318,7 @@
    "name": "Basic Mooshroom Axe",
    "xp": 1,
    "mappedIds": [],
+   "parentId": "MUSHROOM_COW_AXE",
    "category": "FARMING",
    "stage": "STARTER",
    "tradeable": true
@@ -296,6 +328,7 @@
    "name": "Basic Pig Axe",
    "xp": 1,
    "mappedIds": [],
+   "parentId": "PIG_AXE",
    "category": "FARMING",
    "stage": "STARTER",
    "tradeable": true
@@ -305,6 +338,7 @@
    "name": "Basic Rabbit Axe",
    "xp": 1,
    "mappedIds": [],
+   "parentId": "RABBIT_AXE",
    "category": "FARMING",
    "stage": "STARTER",
    "tradeable": true
@@ -314,6 +348,7 @@
    "name": "Basic Sheep Axe",
    "xp": 1,
    "mappedIds": [],
+   "parentId": "SHEEP_AXE",
    "category": "FARMING",
    "stage": "STARTER",
    "tradeable": true
@@ -325,6 +360,7 @@
    "mappedIds": [
     "STARRED_BAT_WAND"
    ],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "SKILLED",
    "tradeable": true
@@ -334,6 +370,7 @@
    "name": "Bee Mask",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "FORAGING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -343,6 +380,7 @@
    "name": "Blade of the Volcano",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -352,6 +390,7 @@
    "name": "Blazetekk™ Ham Radio",
    "xp": 16,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "PROFESSIONAL",
    "tradeable": true
@@ -361,6 +400,7 @@
    "name": "Blobfish Hat",
    "xp": 1,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "AMATEUR",
    "tradeable": true
@@ -372,6 +412,7 @@
    "mappedIds": [
     "STARRED_BONE_BOOMERANG"
    ],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "SKILLED",
    "tradeable": true
@@ -383,6 +424,7 @@
    "mappedIds": [
     "STARRED_BONE_NECKLACE"
    ],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "SKILLED",
    "tradeable": true
@@ -392,6 +434,7 @@
    "name": "Bone Reaver",
    "xp": 8,
    "mappedIds": [],
+   "parentId": "FELTHORN_REAPER",
    "category": "DUNGEONEERING",
    "stage": "SKILLED",
    "tradeable": true
@@ -403,6 +446,7 @@
    "mappedIds": [
     "STARRED_BONZO_MASK"
    ],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -414,6 +458,7 @@
    "mappedIds": [
     "STARRED_BONZO_STAFF"
    ],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -423,6 +468,7 @@
    "name": "Bouquet of Lies",
    "xp": 8,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "EXPERT",
    "tradeable": true
@@ -432,6 +478,7 @@
    "name": "Kindlebane Dagger",
    "xp": 10,
    "mappedIds": [],
+   "parentId": "HEARTFIRE_DAGGER",
    "category": "COMBAT",
    "stage": "MASTER",
    "tradeable": true
@@ -441,6 +488,7 @@
    "name": "Mawdredge Dagger",
    "xp": 10,
    "mappedIds": [],
+   "parentId": "HEARTMAW_DAGGER",
    "category": "COMBAT",
    "stage": "MASTER",
    "tradeable": true
@@ -450,6 +498,7 @@
    "name": "Cactus Knife Mk. I",
    "xp": 4,
    "mappedIds": [],
+   "parentId": "CACTUS_KNIFE_2",
    "category": "FARMING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -459,6 +508,7 @@
    "name": "Cactus Knife Mk. II",
    "xp": 5,
    "mappedIds": [],
+   "parentId": "CACTUS_KNIFE_3",
    "category": "FARMING",
    "stage": "SKILLED",
    "tradeable": true
@@ -468,6 +518,7 @@
    "name": "Cactus Knife Mk. III",
    "xp": 8,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "EXPERT",
    "tradeable": true
@@ -477,6 +528,7 @@
    "name": "Celeste Wand",
    "xp": 1,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "AMATEUR",
    "tradeable": true
@@ -486,6 +538,7 @@
    "name": "Challenging Rod",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "CHAMP_ROD",
    "category": "FISHING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -495,6 +548,7 @@
    "name": "Rod of Champions",
    "xp": 3,
    "mappedIds": [],
+   "parentId": "LEGEND_ROD",
    "category": "FISHING",
    "stage": "SKILLED",
    "tradeable": true
@@ -504,6 +558,7 @@
    "name": "Charminizer",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -513,6 +568,7 @@
    "name": "Advanced Chicken Axe",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -522,6 +578,7 @@
    "name": "Chicken Hat",
    "xp": 1,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "STARTER",
    "tradeable": true
@@ -531,6 +588,7 @@
    "name": "Chum Sinker",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "FISHING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -540,6 +598,7 @@
    "name": "Cleaver",
    "xp": 1,
    "mappedIds": [],
+   "parentId": "SUPER_CLEAVER",
    "category": "DUNGEONEERING",
    "stage": "STARTER",
    "tradeable": true
@@ -549,6 +608,7 @@
    "name": "Tropical Fish Hat",
    "xp": 1,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "STARTER",
    "tradeable": true
@@ -558,6 +618,7 @@
    "name": "Cocoa Chopper Mk. I",
    "xp": 4,
    "mappedIds": [],
+   "parentId": "COCO_CHOPPER_2",
    "category": "FARMING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -567,6 +628,7 @@
    "name": "Cocoa Chopper Mk. II",
    "xp": 5,
    "mappedIds": [],
+   "parentId": "COCO_CHOPPER_3",
    "category": "FARMING",
    "stage": "SKILLED",
    "tradeable": true
@@ -576,6 +638,7 @@
    "name": "Cocoa Chopper Mk. III",
    "xp": 8,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "EXPERT",
    "tradeable": true
@@ -585,6 +648,7 @@
    "name": "Common Hook",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "FISHING",
    "stage": "STARTER",
    "tradeable": true
@@ -594,6 +658,7 @@
    "name": "Conjuring",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -603,6 +668,7 @@
    "name": "Advanced Cow Axe",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -612,6 +678,7 @@
    "name": "Cow Hat",
    "xp": 1,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "STARTER",
    "tradeable": true
@@ -621,6 +688,7 @@
    "name": "Creeper Hat",
    "xp": 1,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "STARTER",
    "tradeable": true
@@ -630,6 +698,7 @@
    "name": "Crown of Avarice",
    "xp": 10,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "PROFESSIONAL",
    "tradeable": true
@@ -639,6 +708,7 @@
    "name": "Crown of Greed",
    "xp": 6,
    "mappedIds": [],
+   "parentId": "CROWN_OF_AVARICE",
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -648,6 +718,7 @@
    "name": "Soulstealer Bow",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -657,6 +728,7 @@
    "name": "Dreadlord Sword",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -666,6 +738,7 @@
    "name": "Crystallized Heart",
    "xp": 4,
    "mappedIds": [],
+   "parentId": "REVIVED_HEART",
    "category": "COMBAT",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -675,6 +748,7 @@
    "name": "Reinforced Huntaxe - Cursus",
    "xp": 4,
    "mappedIds": [],
+   "parentId": "APEX_PRAEDATOR",
    "category": "HUNTING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -686,6 +760,7 @@
    "mappedIds": [
     "STARRED_DAEDALUS_AXE"
    ],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "PROFESSIONAL",
    "tradeable": true
@@ -695,6 +770,7 @@
    "name": "Dark Claymore",
    "xp": 30,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "MASTER",
    "tradeable": true
@@ -704,6 +780,7 @@
    "name": "Dark Goggles",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "SHADOW_GOGGLES",
    "category": "DUNGEONEERING",
    "stage": "AMATEUR",
    "tradeable": true
@@ -713,6 +790,7 @@
    "name": "David's Cloak",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "HUNTING",
    "stage": "STARTER",
    "tradeable": false
@@ -722,6 +800,7 @@
    "name": "Death Bow",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "EXPERT",
    "tradeable": true
@@ -731,6 +810,7 @@
    "name": "Decent Axe",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "FORAGING",
    "stage": "STARTER",
    "tradeable": true
@@ -740,6 +820,7 @@
    "name": "Decent Bow",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -749,6 +830,7 @@
    "name": "Deific Spade",
    "xp": 8,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -758,6 +840,7 @@
    "name": "Delirium Necklace",
    "xp": 8,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -767,6 +850,7 @@
    "name": "Demonslayer Gauntlet",
    "xp": 12,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "PROFESSIONAL",
    "tradeable": true
@@ -776,6 +860,7 @@
    "name": "Destruction Cloak",
    "xp": 8,
    "mappedIds": [],
+   "parentId": "ANNIHILATION_CLOAK",
    "category": "COMBAT",
    "stage": "PROFESSIONAL",
    "tradeable": true
@@ -785,6 +870,7 @@
    "name": "Diamond Bonzo Head",
    "xp": 10,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "PROFESSIONAL",
    "tradeable": false
@@ -794,6 +880,7 @@
    "name": "Diamond Livid Head",
    "xp": 10,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "MASTER",
    "tradeable": false
@@ -803,6 +890,7 @@
    "name": "Diamond Necron Head",
    "xp": 10,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "MASTER",
    "tradeable": false
@@ -812,6 +900,7 @@
    "name": "Diamond Professor Head",
    "xp": 10,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "PROFESSIONAL",
    "tradeable": false
@@ -821,6 +910,7 @@
    "name": "Diamond Sadan Head",
    "xp": 10,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "MASTER",
    "tradeable": false
@@ -830,6 +920,7 @@
    "name": "Diamond Scarf Head",
    "xp": 10,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "PROFESSIONAL",
    "tradeable": false
@@ -839,6 +930,7 @@
    "name": "Diamond Thorn Head",
    "xp": 10,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "PROFESSIONAL",
    "tradeable": false
@@ -848,6 +940,7 @@
    "name": "Divan's Drill",
    "xp": 25,
    "mappedIds": [],
+   "parentId": null,
    "category": "MINING",
    "stage": "MASTER",
    "tradeable": true
@@ -857,6 +950,7 @@
    "name": "Black Belt",
    "xp": 12,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "PROFESSIONAL",
    "tradeable": false
@@ -866,6 +960,7 @@
    "name": "Blue Belt",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "DOJO_BROWN_BELT",
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": false
@@ -875,6 +970,7 @@
    "name": "Brown Belt",
    "xp": 3,
    "mappedIds": [],
+   "parentId": "DOJO_BLACK_BELT",
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": false
@@ -884,6 +980,7 @@
    "name": "Green Belt",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "DOJO_BLUE_BELT",
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": false
@@ -893,6 +990,7 @@
    "name": "White Belt",
    "xp": 1,
    "mappedIds": [],
+   "parentId": "DOJO_YELLOW_BELT",
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": false
@@ -902,6 +1000,7 @@
    "name": "§eYellow Belt",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "DOJO_GREEN_BELT",
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": false
@@ -911,6 +1010,7 @@
    "name": "Dragon Shortbow",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "INTERMEDIATE",
    "tradeable": false
@@ -920,6 +1020,7 @@
    "name": "Dragonfade Cloak",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -929,6 +1030,7 @@
    "name": "Dragonfuse Glove",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -938,6 +1040,7 @@
    "name": "Dungeon Orb",
    "xp": 1,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -947,6 +1050,7 @@
    "name": "Dungeonbreaker",
    "xp": 8,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "SKILLED",
    "tradeable": true
@@ -956,6 +1060,7 @@
    "name": "Dwarven Handwarmers",
    "xp": 10,
    "mappedIds": [],
+   "parentId": null,
    "category": "MINING",
    "stage": "PROFESSIONAL",
    "tradeable": true
@@ -965,6 +1070,7 @@
    "name": "Earthen Blade",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "SKILLED",
    "tradeable": true
@@ -974,6 +1080,7 @@
    "name": "Edible Mace",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -983,6 +1090,7 @@
    "name": "Efficient Axe",
    "xp": 1,
    "mappedIds": [],
+   "parentId": null,
    "category": "FORAGING",
    "stage": "STARTER",
    "tradeable": true
@@ -992,6 +1100,7 @@
    "name": "Emerald Blade",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -1001,6 +1110,7 @@
    "name": "Lantern Helmet",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -1010,6 +1120,7 @@
    "name": "Enchanted Clock",
    "xp": 7,
    "mappedIds": [],
+   "parentId": null,
    "category": "MINING",
    "stage": "EXPERT",
    "tradeable": true
@@ -1019,6 +1130,7 @@
    "name": "End Stone Bow",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -1028,6 +1140,7 @@
    "name": "End Stone Sword",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -1037,6 +1150,7 @@
    "name": "End Sword",
    "xp": 1,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "STARTER",
    "tradeable": true
@@ -1046,6 +1160,7 @@
    "name": "Ender Bow",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -1055,6 +1170,7 @@
    "name": "Enderman Mask",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "INTERMEDIATE",
    "tradeable": false
@@ -1064,6 +1180,7 @@
    "name": "Entangler Lasso",
    "xp": 4,
    "mappedIds": [],
+   "parentId": "EVERSTRETCH_LASSO",
    "category": "HUNTING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -1073,6 +1190,7 @@
    "name": "Everstretch Lasso",
    "xp": 10,
    "mappedIds": [],
+   "parentId": null,
    "category": "HUNTING",
    "stage": "EXPERT",
    "tradeable": true
@@ -1082,6 +1200,7 @@
    "name": "Explosive Bow",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -1091,6 +1210,7 @@
    "name": "Fallen Star Helmet",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "MINING",
    "stage": "INTERMEDIATE",
    "tradeable": false
@@ -1100,6 +1220,7 @@
    "name": "Fallen Star Lozenge",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "MINING",
    "stage": "AMATEUR",
    "tradeable": true
@@ -1109,6 +1230,7 @@
    "name": "Fancy Sword",
    "xp": 1,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "STARTER",
    "tradeable": true
@@ -1118,6 +1240,7 @@
    "name": "Farmer Boots",
    "xp": 4,
    "mappedIds": [],
+   "parentId": "RANCHERS_BOOTS",
    "category": "FARMING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -1127,6 +1250,7 @@
    "name": "Fel Sword",
    "xp": 5,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "SKILLED",
    "tradeable": true
@@ -1138,6 +1262,7 @@
    "mappedIds": [
     "STARRED_FELTHORN_REAPER"
    ],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "EXPERT",
    "tradeable": true
@@ -1147,6 +1272,7 @@
    "name": "Festive Sinker",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "FISHING",
    "stage": "STARTER",
    "tradeable": true
@@ -1156,6 +1282,7 @@
    "name": "Fig Hew",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "FIGSTONE_AXE",
    "category": "FORAGING",
    "stage": "AMATEUR",
    "tradeable": true
@@ -1165,6 +1292,7 @@
    "name": "Figstone Splitter",
    "xp": 5,
    "mappedIds": [],
+   "parentId": "HELIX_CHOPPER",
    "category": "FORAGING",
    "stage": "SKILLED",
    "tradeable": true
@@ -1174,6 +1302,7 @@
    "name": "Fire Freeze Staff",
    "xp": 5,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -1183,6 +1312,7 @@
    "name": "Fire Fury Staff",
    "xp": 5,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -1192,6 +1322,7 @@
    "name": "Fire Veil Wand",
    "xp": 7,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -1201,6 +1332,7 @@
    "name": "Firedust Dagger",
    "xp": 6,
    "mappedIds": [],
+   "parentId": "BURSTFIRE_DAGGER",
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -1210,6 +1342,7 @@
    "name": "Fish Hat",
    "xp": 1,
    "mappedIds": [],
+   "parentId": null,
    "category": "FISHING",
    "stage": "STARTER",
    "tradeable": true
@@ -1219,6 +1352,7 @@
    "name": "Flaming Fist",
    "xp": 15,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "PROFESSIONAL",
    "tradeable": true
@@ -1228,6 +1362,7 @@
    "name": "Flaming Flay",
    "xp": 12,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "MASTER",
    "tradeable": true
@@ -1237,6 +1372,7 @@
    "name": "Flaming Sword",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "AMATEUR",
    "tradeable": true
@@ -1246,6 +1382,7 @@
    "name": "Flint Shovel",
    "xp": 1,
    "mappedIds": [],
+   "parentId": null,
    "category": "MINING",
    "stage": "STARTER",
    "tradeable": true
@@ -1255,6 +1392,7 @@
    "name": "Florid Zombie Sword",
    "xp": 5,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -1264,6 +1402,7 @@
    "name": "Flower of Truth",
    "xp": 6,
    "mappedIds": [],
+   "parentId": "BOUQUET_OF_LIES",
    "category": "DUNGEONEERING",
    "stage": "SKILLED",
    "tradeable": true
@@ -1273,6 +1412,7 @@
    "name": "Fractured Mithril Pickaxe",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "BANDAGED_MITHRIL_PICKAXE",
    "category": "MINING",
    "stage": "AMATEUR",
    "tradeable": true
@@ -1282,6 +1422,7 @@
    "name": "Frog Mask",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "FORAGING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -1291,6 +1432,7 @@
    "name": "Froggles",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "FROGGLES_SILVER",
    "category": "FISHING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -1300,6 +1442,7 @@
    "name": "Diamond Froggles",
    "xp": 10,
    "mappedIds": [],
+   "parentId": null,
    "category": "FISHING",
    "stage": "EXPERT",
    "tradeable": true
@@ -1309,6 +1452,7 @@
    "name": "Golden Froggles",
    "xp": 6,
    "mappedIds": [],
+   "parentId": "FROGGLES_DIAMOND",
    "category": "FISHING",
    "stage": "SKILLED",
    "tradeable": true
@@ -1318,6 +1462,7 @@
    "name": "Silver Froggles",
    "xp": 4,
    "mappedIds": [],
+   "parentId": "FROGGLES_GOLD",
    "category": "FISHING",
    "stage": "SKILLED",
    "tradeable": true
@@ -1327,6 +1472,7 @@
    "name": "Frozen Scythe",
    "xp": 5,
    "mappedIds": [],
+   "parentId": "GLACIAL_SCYTHE",
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -1336,6 +1482,7 @@
    "name": "Fungi Cutter Mk. I",
    "xp": 4,
    "mappedIds": [],
+   "parentId": "FUNGI_CUTTER_2",
    "category": "FARMING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -1345,6 +1492,7 @@
    "name": "Fungi Cutter Mk. II",
    "xp": 5,
    "mappedIds": [],
+   "parentId": "FUNGI_CUTTER_3",
    "category": "FARMING",
    "stage": "SKILLED",
    "tradeable": true
@@ -1354,6 +1502,7 @@
    "name": "Fungi Cutter Mk. III",
    "xp": 8,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "EXPERT",
    "tradeable": true
@@ -1363,6 +1512,7 @@
    "name": "Garden Scythe",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "AMATEUR",
    "tradeable": true
@@ -1372,6 +1522,7 @@
    "name": "Gauntlet of Contagion",
    "xp": 10,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -1381,6 +1532,7 @@
    "name": "Ruby Drill TX-15",
    "xp": 4,
    "mappedIds": [],
+   "parentId": "GEMSTONE_DRILL_2",
    "category": "MINING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -1390,6 +1542,7 @@
    "name": "Gemstone Drill LT-522",
    "xp": 5,
    "mappedIds": [],
+   "parentId": "GEMSTONE_DRILL_3",
    "category": "MINING",
    "stage": "SKILLED",
    "tradeable": true
@@ -1399,6 +1552,7 @@
    "name": "Topaz Drill KGR-12",
    "xp": 7,
    "mappedIds": [],
+   "parentId": "GEMSTONE_DRILL_4",
    "category": "MINING",
    "stage": "SKILLED",
    "tradeable": true
@@ -1408,6 +1562,7 @@
    "name": "Jasper Drill X",
    "xp": 10,
    "mappedIds": [],
+   "parentId": null,
    "category": "MINING",
    "stage": "EXPERT",
    "tradeable": true
@@ -1417,6 +1572,7 @@
    "name": "Gemstone Fuel Tank",
    "xp": 10,
    "mappedIds": [],
+   "parentId": "PERFECTLY_CUT_FUEL_TANK",
    "category": "MINING",
    "stage": "PROFESSIONAL",
    "tradeable": true
@@ -1426,6 +1582,7 @@
    "name": "Gemstone Gauntlet",
    "xp": 8,
    "mappedIds": [],
+   "parentId": null,
    "category": "MINING",
    "stage": "EXPERT",
    "tradeable": true
@@ -1435,6 +1592,7 @@
    "name": "Ghostly Boots",
    "xp": 5,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -1444,6 +1602,7 @@
    "name": "Ghoul Buster",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -1453,6 +1612,7 @@
    "name": "Giant Cleaver",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "SKILLED",
    "tradeable": true
@@ -1462,6 +1622,7 @@
    "name": "Giant's Sword",
    "xp": 10,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "EXPERT",
    "tradeable": true
@@ -1471,6 +1632,7 @@
    "name": "Gigantic Fishing Net",
    "xp": 10,
    "mappedIds": [],
+   "parentId": null,
    "category": "HUNTING",
    "stage": "EXPERT",
    "tradeable": true
@@ -1482,6 +1644,7 @@
    "mappedIds": [
     "STARRED_GLACIAL_SCYTHE"
    ],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -1491,6 +1654,7 @@
    "name": "Glacite-Plated Chisel",
    "xp": 10,
    "mappedIds": [],
+   "parentId": "PERFECT_CHISEL",
    "category": "MINING",
    "stage": "PROFESSIONAL",
    "tradeable": true
@@ -1500,6 +1664,7 @@
    "name": "Glacite Lantern",
    "xp": 8,
    "mappedIds": [],
+   "parentId": "WILL_O_WISP",
    "category": "MINING",
    "stage": "EXPERT",
    "tradeable": true
@@ -1509,6 +1674,7 @@
    "name": "Gloomlock Grimoire",
    "xp": 5,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -1518,6 +1684,7 @@
    "name": "Goblin Omelette",
    "xp": 4,
    "mappedIds": [],
+   "parentId": "GOBLIN_OMELETTE_PESTO",
    "category": "MINING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -1527,6 +1694,7 @@
    "name": "Blue Cheese Goblin Omelette",
    "xp": 15,
    "mappedIds": [],
+   "parentId": null,
    "category": "MINING",
    "stage": "PROFESSIONAL",
    "tradeable": true
@@ -1536,6 +1704,7 @@
    "name": "Pesto Goblin Omelette",
    "xp": 6,
    "mappedIds": [],
+   "parentId": null,
    "category": "MINING",
    "stage": "SKILLED",
    "tradeable": true
@@ -1545,6 +1714,7 @@
    "name": "Spicy Goblin Omelette",
    "xp": 8,
    "mappedIds": [],
+   "parentId": null,
    "category": "MINING",
    "stage": "EXPERT",
    "tradeable": true
@@ -1554,6 +1724,7 @@
    "name": "Sunny Side Goblin Omelette",
    "xp": 6,
    "mappedIds": [],
+   "parentId": null,
    "category": "MINING",
    "stage": "SKILLED",
    "tradeable": true
@@ -1563,6 +1734,7 @@
    "name": "Golden Bonzo Head",
    "xp": 5,
    "mappedIds": [],
+   "parentId": "DIAMOND_BONZO_HEAD",
    "category": "DUNGEONEERING",
    "stage": "SKILLED",
    "tradeable": false
@@ -1572,6 +1744,7 @@
    "name": "Golden Livid Head",
    "xp": 5,
    "mappedIds": [],
+   "parentId": "DIAMOND_LIVID_HEAD",
    "category": "DUNGEONEERING",
    "stage": "EXPERT",
    "tradeable": false
@@ -1581,6 +1754,7 @@
    "name": "Golden Necron Head",
    "xp": 5,
    "mappedIds": [],
+   "parentId": "DIAMOND_NECRON_HEAD",
    "category": "DUNGEONEERING",
    "stage": "EXPERT",
    "tradeable": false
@@ -1590,6 +1764,7 @@
    "name": "Golden Professor Head",
    "xp": 5,
    "mappedIds": [],
+   "parentId": "DIAMOND_PROFESSOR_HEAD",
    "category": "DUNGEONEERING",
    "stage": "SKILLED",
    "tradeable": false
@@ -1599,6 +1774,7 @@
    "name": "Golden Sadan Head",
    "xp": 5,
    "mappedIds": [],
+   "parentId": "DIAMOND_SADAN_HEAD",
    "category": "DUNGEONEERING",
    "stage": "EXPERT",
    "tradeable": false
@@ -1608,6 +1784,7 @@
    "name": "Golden Scarf Head",
    "xp": 5,
    "mappedIds": [],
+   "parentId": "DIAMOND_SCARF_HEAD",
    "category": "DUNGEONEERING",
    "stage": "SKILLED",
    "tradeable": false
@@ -1617,6 +1794,7 @@
    "name": "Golden Thorn Head",
    "xp": 5,
    "mappedIds": [],
+   "parentId": "DIAMOND_THORN_HEAD",
    "category": "DUNGEONEERING",
    "stage": "SKILLED",
    "tradeable": false
@@ -1626,6 +1804,7 @@
    "name": "Golden Fleece",
    "xp": 10,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "MASTER",
    "tradeable": true
@@ -1635,6 +1814,7 @@
    "name": "Golem Hat",
    "xp": 1,
    "mappedIds": [],
+   "parentId": null,
    "category": "MINING",
    "stage": "AMATEUR",
    "tradeable": true
@@ -1644,6 +1824,7 @@
    "name": "Golem Sword",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -1653,6 +1834,7 @@
    "name": "Gyrokinetic Wand",
    "xp": 8,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "PROFESSIONAL",
    "tradeable": true
@@ -1662,6 +1844,7 @@
    "name": "Pyrochaos Dagger",
    "xp": 20,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "MASTER",
    "tradeable": true
@@ -1671,6 +1854,7 @@
    "name": "Deathripper Dagger",
    "xp": 20,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "MASTER",
    "tradeable": true
@@ -1680,6 +1864,7 @@
    "name": "Helix Chopper",
    "xp": 7,
    "mappedIds": [],
+   "parentId": null,
    "category": "FORAGING",
    "stage": "EXPERT",
    "tradeable": true
@@ -1689,6 +1874,7 @@
    "name": "Hellfire Rod",
    "xp": 20,
    "mappedIds": [],
+   "parentId": null,
    "category": "FISHING",
    "stage": "PROFESSIONAL",
    "tradeable": true
@@ -1698,6 +1884,7 @@
    "name": "Hellstorm Wand",
    "xp": 20,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "MASTER",
    "tradeable": true
@@ -1707,6 +1894,7 @@
    "name": "Hoe of Great Tilling",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "HOE_OF_GREATER_TILLING",
    "category": "FARMING",
    "stage": "AMATEUR",
    "tradeable": true
@@ -1716,6 +1904,7 @@
    "name": "Hoe of Greater Tilling",
    "xp": 3,
    "mappedIds": [],
+   "parentId": "HOE_OF_GREATEST_TILLING",
    "category": "FARMING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -1725,6 +1914,7 @@
    "name": "Hoe of Greatest Tilling",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -1734,6 +1924,7 @@
    "name": "Hollow Wand",
    "xp": 5,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "PROFESSIONAL",
    "tradeable": true
@@ -1743,6 +1934,7 @@
    "name": "Hotspot Hook",
    "xp": 6,
    "mappedIds": [],
+   "parentId": null,
    "category": "FISHING",
    "stage": "EXPERT",
    "tradeable": true
@@ -1752,6 +1944,7 @@
    "name": "Hotspot Radar",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "FISHING",
    "stage": "AMATEUR",
    "tradeable": true
@@ -1761,6 +1954,7 @@
    "name": "Hotspot Sinker",
    "xp": 6,
    "mappedIds": [],
+   "parentId": null,
    "category": "FISHING",
    "stage": "EXPERT",
    "tradeable": true
@@ -1770,6 +1964,7 @@
    "name": "Hunter Knife",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "AMATEUR",
    "tradeable": false
@@ -1779,6 +1974,7 @@
    "name": "Hurricane Bow",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -1788,6 +1984,7 @@
    "name": "HydroCan™ 1000",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "HYDRO_CAN_TURBO_2000",
    "category": "FARMING",
    "stage": "AMATEUR",
    "tradeable": true
@@ -1797,6 +1994,7 @@
    "name": "HydroCan™ Turbo 2000",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "HYDRO_CAN_ULTRA_3000",
    "category": "FARMING",
    "stage": "AMATEUR",
    "tradeable": true
@@ -1806,6 +2004,7 @@
    "name": "HydroCan™ Ultra 3000",
    "xp": 4,
    "mappedIds": [],
+   "parentId": "AQUAMASTER_X",
    "category": "FARMING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -1815,6 +2014,7 @@
    "name": "Hyper Cleaver",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "GIANT_CLEAVER",
    "category": "DUNGEONEERING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -1824,6 +2024,7 @@
    "name": "Hyperion",
    "xp": 5,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "MASTER",
    "tradeable": true
@@ -1835,6 +2036,7 @@
    "mappedIds": [
     "STARRED_ICE_SPRAY_WAND"
    ],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "PROFESSIONAL",
    "tradeable": true
@@ -1844,6 +2046,7 @@
    "name": "Icy Sinker",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "FISHING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -1853,6 +2056,7 @@
    "name": "Implosion Belt",
    "xp": 10,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -1862,6 +2066,7 @@
    "name": "Inferno Rod",
    "xp": 10,
    "mappedIds": [],
+   "parentId": "HELLFIRE_ROD",
    "category": "FISHING",
    "stage": "EXPERT",
    "tradeable": true
@@ -1871,6 +2076,7 @@
    "name": "InfiniVacuum™",
    "xp": 6,
    "mappedIds": [],
+   "parentId": "INFINI_VACUUM_HOOVERIUS",
    "category": "FARMING",
    "stage": "SKILLED",
    "tradeable": true
@@ -1880,6 +2086,7 @@
    "name": "InfiniVacuum™ Hooverius",
    "xp": 8,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "EXPERT",
    "tradeable": true
@@ -1889,6 +2096,7 @@
    "name": "Infinileap",
    "xp": 10,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "PROFESSIONAL",
    "tradeable": true
@@ -1898,6 +2106,7 @@
    "name": "Infinityboom TNT",
    "xp": 10,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "PROFESSIONAL",
    "tradeable": true
@@ -1907,6 +2116,7 @@
    "name": "Ink Wand",
    "xp": 6,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -1918,6 +2128,7 @@
    "mappedIds": [
     "STARRED_ITEM_SPIRIT_BOW"
    ],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "SKILLED",
    "tradeable": true
@@ -1927,6 +2138,7 @@
    "name": "Jerry-chine Gun",
    "xp": 6,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -1936,6 +2148,7 @@
    "name": "Jingle Bells",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "INTERMEDIATE",
    "tradeable": false
@@ -1945,6 +2158,7 @@
    "name": "Juicy Sprayonator",
    "xp": 4,
    "mappedIds": [],
+   "parentId": "SALTY_SPRAYONATOR",
    "category": "FARMING",
    "stage": "SKILLED",
    "tradeable": true
@@ -1954,6 +2168,7 @@
    "name": "Juju Shortbow",
    "xp": 7,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -1963,6 +2178,7 @@
    "name": "Spruce Axe",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "TREECAPITATOR_AXE",
    "category": "FORAGING",
    "stage": "AMATEUR",
    "tradeable": true
@@ -1972,6 +2188,7 @@
    "name": "Jungle Pickaxe",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "MINING",
    "stage": "SKILLED",
    "tradeable": true
@@ -1981,6 +2198,7 @@
    "name": "Junk Sinker",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "FISHING",
    "stage": "STARTER",
    "tradeable": true
@@ -1990,6 +2208,7 @@
    "name": "Kalhuiki Mask",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -1999,6 +2218,7 @@
    "name": "Krampus Helmet",
    "xp": 5,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -2008,6 +2228,7 @@
    "name": "Dwarven Lantern",
    "xp": 1,
    "mappedIds": [],
+   "parentId": "MITHRIL_LANTERN",
    "category": "MINING",
    "stage": "AMATEUR",
    "tradeable": true
@@ -2017,6 +2238,7 @@
    "name": "Lapis Pickaxe",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "MINING",
    "stage": "AMATEUR",
    "tradeable": true
@@ -2026,6 +2248,7 @@
    "name": "Large Pocket Black Hole",
    "xp": 6,
    "mappedIds": [],
+   "parentId": null,
    "category": "HUNTING",
    "stage": "SKILLED",
    "tradeable": true
@@ -2035,6 +2258,7 @@
    "name": "Large Scaffolding",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "FORAGING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -2046,6 +2270,7 @@
    "mappedIds": [
     "STARRED_LAST_BREATH"
    ],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "SKILLED",
    "tradeable": true
@@ -2055,6 +2280,7 @@
    "name": "Lava Shell Necklace",
    "xp": 10,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -2064,6 +2290,7 @@
    "name": "Leaping Sword",
    "xp": 5,
    "mappedIds": [],
+   "parentId": "SILK_EDGE_SWORD",
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -2073,6 +2300,7 @@
    "name": "Rod of Legends",
    "xp": 5,
    "mappedIds": [],
+   "parentId": "ROD_OF_THE_SEA",
    "category": "FISHING",
    "stage": "EXPERT",
    "tradeable": true
@@ -2082,6 +2310,7 @@
    "name": "Livid Dagger",
    "xp": 6,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "SKILLED",
    "tradeable": true
@@ -2091,6 +2320,7 @@
    "name": "Lotus Sinker",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "FISHING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -2100,6 +2330,7 @@
    "name": "Luminous Bracelet",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "FISHING",
    "stage": "AMATEUR",
    "tradeable": true
@@ -2109,6 +2340,7 @@
    "name": "Machine Gun Shortbow",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -2118,6 +2350,7 @@
    "name": "Magmafish Hat",
    "xp": 1,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -2127,6 +2360,7 @@
    "name": "Magma Rod",
    "xp": 6,
    "mappedIds": [],
+   "parentId": "INFERNO_ROD",
    "category": "FISHING",
    "stage": "SKILLED",
    "tradeable": true
@@ -2136,6 +2370,7 @@
    "name": "Mana Flux Power Orb",
    "xp": 4,
    "mappedIds": [],
+   "parentId": "OVERFLUX_POWER_ORB",
    "category": "COMBAT",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -2145,6 +2380,7 @@
    "name": "Moonglade Belt",
    "xp": 5,
    "mappedIds": [],
+   "parentId": "TORRHUS_BELT",
    "category": "FORAGING",
    "stage": "EXPERT",
    "tradeable": true
@@ -2154,6 +2390,7 @@
    "name": "Manticore Claw",
    "xp": 10,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "MASTER",
    "tradeable": true
@@ -2163,6 +2400,7 @@
    "name": "Twilight Dagger",
    "xp": 6,
    "mappedIds": [],
+   "parentId": "BURSTMAW_DAGGER",
    "category": "COMBAT",
    "stage": "PROFESSIONAL",
    "tradeable": true
@@ -2172,6 +2410,7 @@
    "name": "Medium Fishing Net",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "TURBO_FISHING_NET",
    "category": "HUNTING",
    "stage": "AMATEUR",
    "tradeable": true
@@ -2181,6 +2420,7 @@
    "name": "Medium Pocket Black Hole",
    "xp": 4,
    "mappedIds": [],
+   "parentId": "LARGE_POCKET_BLACK_HOLE",
    "category": "HUNTING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -2190,6 +2430,7 @@
    "name": "Medium Scaffolding",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "LARGE_SCAFFOLDING",
    "category": "FORAGING",
    "stage": "AMATEUR",
    "tradeable": true
@@ -2199,6 +2440,7 @@
    "name": "Melon Dicer Mk. I",
    "xp": 4,
    "mappedIds": [],
+   "parentId": "MELON_DICER_2",
    "category": "FARMING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -2208,6 +2450,7 @@
    "name": "Melon Dicer Mk. II",
    "xp": 5,
    "mappedIds": [],
+   "parentId": "MELON_DICER_3",
    "category": "FARMING",
    "stage": "SKILLED",
    "tradeable": true
@@ -2217,6 +2460,7 @@
    "name": "Melon Dicer Mk. III",
    "xp": 8,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "EXPERT",
    "tradeable": true
@@ -2226,6 +2470,7 @@
    "name": "Mender Crown",
    "xp": 6,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "SKILLED",
    "tradeable": true
@@ -2235,6 +2480,7 @@
    "name": "Mender Fedora",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "MENDER_CROWN",
    "category": "DUNGEONEERING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -2244,6 +2490,7 @@
    "name": "Mender Helmet",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "MENDER_FEDORA",
    "category": "DUNGEONEERING",
    "stage": "AMATEUR",
    "tradeable": true
@@ -2253,6 +2500,7 @@
    "name": "Mercenary Sword",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "AMATEUR",
    "tradeable": true
@@ -2262,6 +2510,7 @@
    "name": "Metal Chestplate",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "STEEL_CHESTPLATE",
    "category": "DUNGEONEERING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -2273,6 +2522,7 @@
    "mappedIds": [
     "STARRED_MIDAS_STAFF"
    ],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "PROFESSIONAL",
    "tradeable": true
@@ -2284,6 +2534,7 @@
    "mappedIds": [
     "STARRED_MIDAS_SWORD"
    ],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -2293,6 +2544,7 @@
    "name": "Mithril Coat",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -2302,6 +2554,7 @@
    "name": "Mithril Drill SX-R226",
    "xp": 6,
    "mappedIds": [],
+   "parentId": "MITHRIL_DRILL_2",
    "category": "MINING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -2311,6 +2564,7 @@
    "name": "Mithril Drill SX-R326",
    "xp": 10,
    "mappedIds": [],
+   "parentId": null,
    "category": "MINING",
    "stage": "SKILLED",
    "tradeable": true
@@ -2320,6 +2574,7 @@
    "name": "Mithril-Plated Drill Engine",
    "xp": 4,
    "mappedIds": [],
+   "parentId": "TITANIUM_DRILL_ENGINE",
    "category": "MINING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -2329,6 +2584,7 @@
    "name": "Mithril-Infused Fuel Tank",
    "xp": 5,
    "mappedIds": [],
+   "parentId": "TITANIUM_FUEL_TANK",
    "category": "MINING",
    "stage": "SKILLED",
    "tradeable": true
@@ -2338,6 +2594,7 @@
    "name": "Mithril Lantern",
    "xp": 3,
    "mappedIds": [],
+   "parentId": "TITANIUM_LANTERN",
    "category": "MINING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -2347,6 +2604,7 @@
    "name": "Mithril Pickaxe",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "REFINED_MITHRIL_PICKAXE",
    "category": "MINING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -2356,6 +2614,7 @@
    "name": "Moby's Shears",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -2365,6 +2624,7 @@
    "name": "Moody Grappleshot",
    "xp": 8,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -2374,6 +2634,7 @@
    "name": "Mosquito Shortbow",
    "xp": 8,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -2383,6 +2644,7 @@
    "name": "Advanced Mooshroom Axe",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -2392,6 +2654,7 @@
    "name": "Stereo Pants",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "FISHING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -2401,6 +2664,7 @@
    "name": "Necromancer Sword",
    "xp": 7,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "EXPERT",
    "tradeable": true
@@ -2410,6 +2674,7 @@
    "name": "Necron's Blade (Unrefined)",
    "xp": 20,
    "mappedIds": [],
+   "parentId": "ASTRAEA",
    "category": "DUNGEONEERING",
    "stage": "MASTER",
    "tradeable": true
@@ -2419,6 +2684,7 @@
    "name": "Prime Huntaxe - Nex Titanum",
    "xp": 15,
    "mappedIds": [],
+   "parentId": null,
    "category": "HUNTING",
    "stage": "PROFESSIONAL",
    "tradeable": true
@@ -2428,6 +2694,7 @@
    "name": "Obsidian Chestplate",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -2437,6 +2704,7 @@
    "name": "Ornate Zombie Sword",
    "xp": 4,
    "mappedIds": [],
+   "parentId": "FLORID_ZOMBIE_SWORD",
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -2446,6 +2714,7 @@
    "name": "Overflux Power Orb",
    "xp": 10,
    "mappedIds": [],
+   "parentId": "PLASMAFLUX_POWER_ORB",
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -2455,6 +2724,7 @@
    "name": "Parrot Mask",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -2464,6 +2734,7 @@
    "name": "Pelt Belt",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "HUNTING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -2473,6 +2744,7 @@
    "name": "Perfect Chisel",
    "xp": 15,
    "mappedIds": [],
+   "parentId": null,
    "category": "MINING",
    "stage": "MASTER",
    "tradeable": true
@@ -2482,6 +2754,7 @@
    "name": "Perfectly-Cut Fuel Tank",
    "xp": 15,
    "mappedIds": [],
+   "parentId": null,
    "category": "MINING",
    "stage": "MASTER",
    "tradeable": true
@@ -2491,6 +2764,7 @@
    "name": "Pest Vest",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -2500,6 +2774,7 @@
    "name": "Spooky Hook",
    "xp": 5,
    "mappedIds": [],
+   "parentId": null,
    "category": "FISHING",
    "stage": "SKILLED",
    "tradeable": true
@@ -2509,6 +2784,7 @@
    "name": "Advanced Pig Axe",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -2518,6 +2794,7 @@
    "name": "Pigman Sword",
    "xp": 8,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -2527,6 +2804,7 @@
    "name": "Plant Diagnostics Tool",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "AMATEUR",
    "tradeable": true
@@ -2536,6 +2814,7 @@
    "name": "Plasmaflux Power Orb",
    "xp": 15,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "MASTER",
    "tradeable": true
@@ -2545,6 +2824,7 @@
    "name": "Topaz Rod",
    "xp": 6,
    "mappedIds": [],
+   "parentId": null,
    "category": "FISHING",
    "stage": "SKILLED",
    "tradeable": true
@@ -2554,6 +2834,7 @@
    "name": "Pooch Sword",
    "xp": 5,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -2563,6 +2844,7 @@
    "name": "Precursor Eye",
    "xp": 12,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "EXPERT",
    "tradeable": true
@@ -2572,6 +2854,7 @@
    "name": "Prismarine Blade",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "AMATEUR",
    "tradeable": true
@@ -2581,6 +2864,7 @@
    "name": "Prismarine Bow",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "AMATEUR",
    "tradeable": true
@@ -2590,6 +2874,7 @@
    "name": "Prismarine Sinker",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "FISHING",
    "stage": "STARTER",
    "tradeable": true
@@ -2599,6 +2884,7 @@
    "name": "Promising Axe",
    "xp": 1,
    "mappedIds": [],
+   "parentId": null,
    "category": "FORAGING",
    "stage": "STARTER",
    "tradeable": true
@@ -2608,6 +2894,7 @@
    "name": "Promising Pickaxe",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "MINING",
    "stage": "STARTER",
    "tradeable": true
@@ -2617,6 +2904,7 @@
    "name": "Promising Shovel",
    "xp": 1,
    "mappedIds": [],
+   "parentId": null,
    "category": "MINING",
    "stage": "STARTER",
    "tradeable": true
@@ -2626,6 +2914,7 @@
    "name": "Puddle Jumper Hook",
    "xp": 6,
    "mappedIds": [],
+   "parentId": null,
    "category": "FISHING",
    "stage": "EXPERT",
    "tradeable": true
@@ -2637,6 +2926,7 @@
    "mappedIds": [
     "PUFFERFISH_HAT_CELEBRATION"
    ],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "AMATEUR",
    "tradeable": true
@@ -2646,6 +2936,7 @@
    "name": "Pumpkin Dicer Mk. I",
    "xp": 4,
    "mappedIds": [],
+   "parentId": "PUMPKIN_DICER_2",
    "category": "FARMING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -2655,6 +2946,7 @@
    "name": "Pumpkin Dicer Mk. II",
    "xp": 5,
    "mappedIds": [],
+   "parentId": "PUMPKIN_DICER_3",
    "category": "FARMING",
    "stage": "SKILLED",
    "tradeable": true
@@ -2664,6 +2956,7 @@
    "name": "Pumpkin Dicer Mk. III",
    "xp": 8,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "EXPERT",
    "tradeable": true
@@ -2673,6 +2966,7 @@
    "name": "Pumpkin Launcher",
    "xp": 6,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -2682,6 +2976,7 @@
    "name": "Advanced Rabbit Axe",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -2691,6 +2986,7 @@
    "name": "Rabbit Hat",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -2700,6 +2996,7 @@
    "name": "Radiant Power Orb",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "MANA_FLUX_POWER_ORB",
    "category": "COMBAT",
    "stage": "AMATEUR",
    "tradeable": true
@@ -2709,6 +3006,7 @@
    "name": "Ragnarock",
    "xp": 6,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -2718,6 +3016,7 @@
    "name": "Raider Sword",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "AMATEUR",
    "tradeable": true
@@ -2727,6 +3026,7 @@
    "name": "Rancher's Boots",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "SKILLED",
    "tradeable": true
@@ -2736,6 +3036,7 @@
    "name": "Reaper Mask",
    "xp": 8,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -2745,6 +3046,7 @@
    "name": "Reaper Scythe",
    "xp": 8,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -2754,6 +3056,7 @@
    "name": "Reaper Falchion",
    "xp": 7,
    "mappedIds": [],
+   "parentId": "AXE_OF_THE_SHREDDED",
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -2763,6 +3066,7 @@
    "name": "Recluse Fang",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "TARANTULA_FANG",
    "category": "COMBAT",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -2772,6 +3076,7 @@
    "name": "Red Sweater",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "FISHING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -2781,6 +3086,7 @@
    "name": "Refined Mithril Pickaxe",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "MINING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -2790,6 +3096,7 @@
    "name": "Polished Titanium Pickaxe",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "MINING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -2799,6 +3106,7 @@
    "name": "Reinforced Chisel",
    "xp": 8,
    "mappedIds": [],
+   "parentId": "GLACITE_CHISEL",
    "category": "MINING",
    "stage": "EXPERT",
    "tradeable": true
@@ -2808,6 +3116,7 @@
    "name": "Small Huntrap",
    "xp": 1,
    "mappedIds": [],
+   "parentId": "RETIA_MELIORA",
    "category": "HUNTING",
    "stage": "STARTER",
    "tradeable": true
@@ -2817,6 +3126,7 @@
    "name": "Greater Huntrap",
    "xp": 4,
    "mappedIds": [],
+   "parentId": "RETIA_SUPREMA",
    "category": "HUNTING",
    "stage": "SKILLED",
    "tradeable": true
@@ -2826,6 +3136,7 @@
    "name": "Medium Huntrap",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "RETIA_ROBUSTA",
    "category": "HUNTING",
    "stage": "AMATEUR",
    "tradeable": true
@@ -2835,6 +3146,7 @@
    "name": "Large Huntrap",
    "xp": 3,
    "mappedIds": [],
+   "parentId": "RETIA_FORTA",
    "category": "HUNTING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -2844,6 +3156,7 @@
    "name": "Astral Huntrap",
    "xp": 5,
    "mappedIds": [],
+   "parentId": null,
    "category": "HUNTING",
    "stage": "EXPERT",
    "tradeable": true
@@ -2853,6 +3166,7 @@
    "name": "Revenant Falchion",
    "xp": 4,
    "mappedIds": [],
+   "parentId": "REAPER_SWORD",
    "category": "COMBAT",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -2862,6 +3176,7 @@
    "name": "Revived Heart",
    "xp": 6,
    "mappedIds": [],
+   "parentId": "REAPER_MASK",
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -2871,6 +3186,7 @@
    "name": "%%light_purple%%Rift Necklace",
    "xp": 5,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "INTERMEDIATE",
    "tradeable": false
@@ -2880,6 +3196,7 @@
    "name": "Rod of the Sea",
    "xp": 8,
    "mappedIds": [],
+   "parentId": null,
    "category": "FISHING",
    "stage": "EXPERT",
    "tradeable": true
@@ -2889,6 +3206,7 @@
    "name": "Rogue Sword",
    "xp": 1,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "STARTER",
    "tradeable": false
@@ -2898,6 +3216,7 @@
    "name": "Rookie Foraging Axe",
    "xp": 1,
    "mappedIds": [],
+   "parentId": null,
    "category": "FORAGING",
    "stage": "STARTER",
    "tradeable": true
@@ -2907,6 +3226,7 @@
    "name": "Rookie Farming Axe",
    "xp": 1,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "STARTER",
    "tradeable": true
@@ -2916,6 +3236,7 @@
    "name": "Rookie Hoe",
    "xp": 1,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "STARTER",
    "tradeable": true
@@ -2925,6 +3246,7 @@
    "name": "Rookie Pickaxe",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "MINING",
    "stage": "STARTER",
    "tradeable": true
@@ -2934,6 +3256,7 @@
    "name": "Royal Pigeon",
    "xp": 6,
    "mappedIds": [],
+   "parentId": null,
    "category": "MINING",
    "stage": "SKILLED",
    "tradeable": false
@@ -2943,6 +3266,7 @@
    "name": "Ruby-Polished Drill Engine",
    "xp": 8,
    "mappedIds": [],
+   "parentId": "SAPPHIRE_POLISHED_DRILL_ENGINE",
    "category": "MINING",
    "stage": "EXPERT",
    "tradeable": true
@@ -2952,6 +3276,7 @@
    "name": "Runaan's Bow",
    "xp": 6,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -2961,6 +3286,7 @@
    "name": "Aurora Staff",
    "xp": 5,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -2970,6 +3296,7 @@
    "name": "Rusty Titanium Pickaxe",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "TITANIUM_PICKAXE",
    "category": "MINING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -2979,6 +3306,7 @@
    "name": "Safari Belt",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "HUNTING",
    "stage": "INTERMEDIATE",
    "tradeable": false
@@ -2988,6 +3316,7 @@
    "name": "Salmon Hat",
    "xp": 1,
    "mappedIds": [],
+   "parentId": null,
    "category": "FISHING",
    "stage": "STARTER",
    "tradeable": true
@@ -2997,6 +3326,7 @@
    "name": "Salmon Mask",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "FISHING",
    "stage": "AMATEUR",
    "tradeable": true
@@ -3006,6 +3336,7 @@
    "name": "Salty Sprayonator",
    "xp": 8,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "PROFESSIONAL",
    "tradeable": true
@@ -3015,6 +3346,7 @@
    "name": "Sam's Scythe",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "GARDEN_SCYTHE",
    "category": "FARMING",
    "stage": "AMATEUR",
    "tradeable": false
@@ -3024,6 +3356,7 @@
    "name": "Sapphire-Polished Drill Engine",
    "xp": 10,
    "mappedIds": [],
+   "parentId": "AMBER_POLISHED_DRILL_ENGINE",
    "category": "MINING",
    "stage": "PROFESSIONAL",
    "tradeable": true
@@ -3033,6 +3366,7 @@
    "name": "Savanna Bow",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -3042,6 +3376,7 @@
    "name": "Spider Shortbow",
    "xp": 5,
    "mappedIds": [],
+   "parentId": "MOSQUITO_BOW",
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -3051,6 +3386,7 @@
    "name": "Scorpion Foil",
    "xp": 7,
    "mappedIds": [],
+   "parentId": "STING",
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -3060,6 +3396,7 @@
    "name": "Scourge Cloak",
    "xp": 10,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -3069,6 +3406,7 @@
    "name": "Scoville Belt",
    "xp": 10,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -3078,6 +3416,7 @@
    "name": "Sculptor's Axe",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "FORAGING",
    "stage": "STARTER",
    "tradeable": true
@@ -3087,6 +3426,7 @@
    "name": "Scylla",
    "xp": 5,
    "mappedIds": [],
+   "parentId": "VALKYRIE",
    "category": "DUNGEONEERING",
    "stage": "MASTER",
    "tradeable": true
@@ -3096,6 +3436,7 @@
    "name": "Secret Tracker 3000",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -3105,6 +3446,7 @@
    "name": "Seriously Damaged Axe",
    "xp": 1,
    "mappedIds": [],
+   "parentId": "DECENT_AXE",
    "category": "FORAGING",
    "stage": "STARTER",
    "tradeable": true
@@ -3116,6 +3458,7 @@
    "mappedIds": [
     "STARRED_SHADOW_FURY"
    ],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "SKILLED",
    "tradeable": true
@@ -3125,6 +3468,7 @@
    "name": "Shadow Goggles",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "WITHER_GOGGLES",
    "category": "DUNGEONEERING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -3134,6 +3478,7 @@
    "name": "Shaman Sword",
    "xp": 3,
    "mappedIds": [],
+   "parentId": "POOCH_SWORD",
    "category": "COMBAT",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -3143,6 +3488,7 @@
    "name": "Advanced Sheep Axe",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -3152,6 +3498,7 @@
    "name": "Shredded Line",
    "xp": 7,
    "mappedIds": [],
+   "parentId": null,
    "category": "FISHING",
    "stage": "SKILLED",
    "tradeable": true
@@ -3161,6 +3508,7 @@
    "name": "Shriveled Bracelet",
    "xp": 6,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -3170,6 +3518,7 @@
    "name": "Silent Death",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "SKILLED",
    "tradeable": true
@@ -3179,6 +3528,7 @@
    "name": "Silk-Edge Sword",
    "xp": 5,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -3188,6 +3538,7 @@
    "name": "Sharpened Huntaxe - Dominus",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "CURSUS_FERAE",
    "category": "HUNTING",
    "stage": "AMATEUR",
    "tradeable": true
@@ -3197,6 +3548,7 @@
    "name": "§4Sin§5seeker Scythe",
    "xp": 7,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -3206,6 +3558,7 @@
    "name": "Skeleton Hat",
    "xp": 1,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "STARTER",
    "tradeable": true
@@ -3215,6 +3568,7 @@
    "name": "SkyMart Hyper Vacuum",
    "xp": 4,
    "mappedIds": [],
+   "parentId": "INFINI_VACUUM",
    "category": "FARMING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -3224,6 +3578,7 @@
    "name": "SkyMart Turbo Vacuum",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "SKYMART_HYPER_VACUUM",
    "category": "FARMING",
    "stage": "AMATEUR",
    "tradeable": true
@@ -3233,6 +3588,7 @@
    "name": "SkyMart Vacuum",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "SKYMART_TURBO_VACUUM",
    "category": "FARMING",
    "stage": "AMATEUR",
    "tradeable": true
@@ -3242,6 +3598,7 @@
    "name": "Slime Bow",
    "xp": 5,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -3251,6 +3608,7 @@
    "name": "Slime Hat",
    "xp": 1,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "AMATEUR",
    "tradeable": true
@@ -3260,6 +3618,7 @@
    "name": "Small Pocket Black Hole",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "MEDIUM_POCKET_BLACK_HOLE",
    "category": "HUNTING",
    "stage": "STARTER",
    "tradeable": true
@@ -3269,6 +3628,7 @@
    "name": "Sniper Bow",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "SKILLED",
    "tradeable": true
@@ -3278,6 +3638,7 @@
    "name": "Sniper Helmet",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "AMATEUR",
    "tradeable": true
@@ -3287,6 +3648,7 @@
    "name": "Frosty the Snow Blaster",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "SNOW_HOWITZER",
    "category": "COMBAT",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -3296,6 +3658,7 @@
    "name": "Frosty the Snow Cannon",
    "xp": 1,
    "mappedIds": [],
+   "parentId": "SNOW_BLASTER",
    "category": "COMBAT",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -3305,6 +3668,7 @@
    "name": "Frosty the Howitzer",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -3314,6 +3678,7 @@
    "name": "Snowman Mask",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -3323,6 +3688,7 @@
    "name": "SOS Flare",
    "xp": 25,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "MASTER",
    "tradeable": true
@@ -3332,6 +3698,7 @@
    "name": "Soul Esoward",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -3341,6 +3708,7 @@
    "name": "Soul Whip",
    "xp": 7,
    "mappedIds": [],
+   "parentId": "FLAMING_FLAY",
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -3350,6 +3718,7 @@
    "name": "Souls Rebound",
    "xp": 5,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -3359,6 +3728,7 @@
    "name": "Soulweaver Gloves",
    "xp": 6,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "SKILLED",
    "tradeable": true
@@ -3368,6 +3738,7 @@
    "name": "Speedy Line",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "FISHING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -3377,6 +3748,7 @@
    "name": "Spider Hat",
    "xp": 1,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "STARTER",
    "tradeable": true
@@ -3388,6 +3760,7 @@
    "mappedIds": [
     "STARRED_SPIDER_QUEENS_STINGER"
    ],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -3397,6 +3770,7 @@
    "name": "Spider Sword",
    "xp": 1,
    "mappedIds": [],
+   "parentId": "RECLUSE_FANG",
    "category": "COMBAT",
    "stage": "STARTER",
    "tradeable": true
@@ -3408,6 +3782,7 @@
    "mappedIds": [
     "STARRED_SPIRIT_MASK"
    ],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "EXPERT",
    "tradeable": true
@@ -3417,6 +3792,7 @@
    "name": "Spirit Sword",
    "xp": 7,
    "mappedIds": [],
+   "parentId": "BONE_REAVER",
    "category": "DUNGEONEERING",
    "stage": "SKILLED",
    "tradeable": true
@@ -3426,6 +3802,7 @@
    "name": "Sponge Sinker",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "FISHING",
    "stage": "STARTER",
    "tradeable": true
@@ -3435,6 +3812,7 @@
    "name": "Spore Harvester",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "SKILLED",
    "tradeable": true
@@ -3444,6 +3822,7 @@
    "name": "Sprayonator",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "JUICY_SPRAYONATOR",
    "category": "FARMING",
    "stage": "AMATEUR",
    "tradeable": true
@@ -3453,6 +3832,7 @@
    "name": "Squeaky Mousemat",
    "xp": 6,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "EXPERT",
    "tradeable": true
@@ -3462,6 +3842,7 @@
    "name": "Squid Boots",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "FISHING",
    "stage": "STARTER",
    "tradeable": true
@@ -3471,6 +3852,7 @@
    "name": "Squid Hat",
    "xp": 1,
    "mappedIds": [],
+   "parentId": null,
    "category": "FISHING",
    "stage": "STARTER",
    "tradeable": true
@@ -3480,6 +3862,7 @@
    "name": "Squire Sword",
    "xp": 1,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "STARTER",
    "tradeable": true
@@ -3489,6 +3872,7 @@
    "name": "Staff of the Volcano",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -3498,6 +3882,7 @@
    "name": "Starfall Seasoning",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "MINING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -3507,6 +3892,7 @@
    "name": "Starlight Wand",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "AMATEUR",
    "tradeable": true
@@ -3516,6 +3902,7 @@
    "name": "Starter Lava Rod",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "FISHING",
    "stage": "SKILLED",
    "tradeable": false
@@ -3525,6 +3912,7 @@
    "name": "Steel Chestplate",
    "xp": 6,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "SKILLED",
    "tradeable": true
@@ -3534,6 +3922,7 @@
    "name": "Sting",
    "xp": 10,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -3543,6 +3932,7 @@
    "name": "Stingy Sinker",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "FISHING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -3554,6 +3944,7 @@
    "mappedIds": [
     "STARRED_STONE_BLADE"
    ],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -3563,6 +3954,7 @@
    "name": "Stone Chestplate",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "METAL_CHESTPLATE",
    "category": "DUNGEONEERING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -3572,6 +3964,7 @@
    "name": "Stonk",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "MINING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -3581,6 +3974,7 @@
    "name": "Sulphur Bow",
    "xp": 5,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -3590,6 +3984,7 @@
    "name": "Summoning Ring",
    "xp": 8,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -3599,6 +3994,7 @@
    "name": "Sunflower Head",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "AMATEUR",
    "tradeable": true
@@ -3608,6 +4004,7 @@
    "name": "Super Cleaver",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "HYPER_CLEAVER",
    "category": "DUNGEONEERING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -3617,6 +4014,7 @@
    "name": "Super Undead Bow",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "DEATH_BOW",
    "category": "DUNGEONEERING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -3626,6 +4024,7 @@
    "name": "Sweet Axe",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "FORAGING",
    "stage": "STARTER",
    "tradeable": true
@@ -3635,6 +4034,7 @@
    "name": "Sword of Bad Health",
    "xp": 5,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -3644,6 +4044,7 @@
    "name": "Sword of Revelations",
    "xp": 8,
    "mappedIds": [],
+   "parentId": "DAEDALUS_AXE",
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -3653,6 +4054,7 @@
    "name": "Synthesizer v1",
    "xp": 3,
    "mappedIds": [],
+   "parentId": "SYNTHESIZER_V2",
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -3662,6 +4064,7 @@
    "name": "Synthesizer v2",
    "xp": 5,
    "mappedIds": [],
+   "parentId": "SYNTHESIZER_V3",
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -3671,6 +4074,7 @@
    "name": "Synthesizer v3",
    "xp": 15,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "PROFESSIONAL",
    "tradeable": true
@@ -3680,6 +4084,7 @@
    "name": "Tactical Insertion",
    "xp": 14,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "PROFESSIONAL",
    "tradeable": true
@@ -3689,6 +4094,7 @@
    "name": "Tactician's Sword",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "AMATEUR",
    "tradeable": true
@@ -3698,6 +4104,7 @@
    "name": "Talbot's Theodolite",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "HUNTING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -3707,6 +4114,7 @@
    "name": "Tarantula Fang",
    "xp": 5,
    "mappedIds": [],
+   "parentId": "SCORPION_FOIL",
    "category": "COMBAT",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -3716,6 +4124,7 @@
    "name": "Tera Shell Necklace",
    "xp": 8,
    "mappedIds": [],
+   "parentId": null,
    "category": "FISHING",
    "stage": "EXPERT",
    "tradeable": true
@@ -3725,6 +4134,7 @@
    "name": "Terminator",
    "xp": 18,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "MASTER",
    "tradeable": true
@@ -3734,6 +4144,7 @@
    "name": "The Primordial",
    "xp": 12,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -3743,6 +4154,7 @@
    "name": "Turing Sugar Cane Cutter Mk. I",
    "xp": 4,
    "mappedIds": [],
+   "parentId": "THEORETICAL_HOE_CANE_2",
    "category": "FARMING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -3752,6 +4164,7 @@
    "name": "Turing Sugar Cane Cutter Mk. II",
    "xp": 5,
    "mappedIds": [],
+   "parentId": "THEORETICAL_HOE_CANE_3",
    "category": "FARMING",
    "stage": "SKILLED",
    "tradeable": true
@@ -3761,6 +4174,7 @@
    "name": "Turing Sugar Cane Cutter Mk. III",
    "xp": 8,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "EXPERT",
    "tradeable": true
@@ -3770,6 +4184,7 @@
    "name": "Gauss Carrot Shovel Mk. I",
    "xp": 4,
    "mappedIds": [],
+   "parentId": "THEORETICAL_HOE_CARROT_2",
    "category": "FARMING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -3779,6 +4194,7 @@
    "name": "Gauss Carrot Shovel Mk. II",
    "xp": 5,
    "mappedIds": [],
+   "parentId": "THEORETICAL_HOE_CARROT_3",
    "category": "FARMING",
    "stage": "SKILLED",
    "tradeable": true
@@ -3788,6 +4204,7 @@
    "name": "Gauss Carrot Shovel Mk. III",
    "xp": 8,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "EXPERT",
    "tradeable": true
@@ -3797,6 +4214,7 @@
    "name": "Pythagorean Potato Shovel Mk. I",
    "xp": 4,
    "mappedIds": [],
+   "parentId": "THEORETICAL_HOE_POTATO_2",
    "category": "FARMING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -3806,6 +4224,7 @@
    "name": "Pythagorean Potato Shovel Mk. II",
    "xp": 5,
    "mappedIds": [],
+   "parentId": "THEORETICAL_HOE_POTATO_3",
    "category": "FARMING",
    "stage": "SKILLED",
    "tradeable": true
@@ -3815,6 +4234,7 @@
    "name": "Pythagorean Potato Shovel Mk. III",
    "xp": 8,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "EXPERT",
    "tradeable": true
@@ -3824,6 +4244,7 @@
    "name": "Eclipse Sickle Mk. I",
    "xp": 4,
    "mappedIds": [],
+   "parentId": "THEORETICAL_HOE_SUNFLOWER_2",
    "category": "FARMING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -3833,6 +4254,7 @@
    "name": "Eclipse Sickle Mk. II",
    "xp": 5,
    "mappedIds": [],
+   "parentId": "THEORETICAL_HOE_SUNFLOWER_3",
    "category": "FARMING",
    "stage": "SKILLED",
    "tradeable": true
@@ -3842,6 +4264,7 @@
    "name": "Eclipse Sickle Mk. III",
    "xp": 8,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "EXPERT",
    "tradeable": true
@@ -3851,6 +4274,7 @@
    "name": "Newton Nether Wart Cutter Mk. I",
    "xp": 4,
    "mappedIds": [],
+   "parentId": "THEORETICAL_HOE_WARTS_2",
    "category": "FARMING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -3860,6 +4284,7 @@
    "name": "Newton Nether Wart Cutter Mk. II",
    "xp": 5,
    "mappedIds": [],
+   "parentId": "THEORETICAL_HOE_WARTS_3",
    "category": "FARMING",
    "stage": "SKILLED",
    "tradeable": true
@@ -3869,6 +4294,7 @@
    "name": "Newton Nether Wart Cutter Mk. III",
    "xp": 8,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "EXPERT",
    "tradeable": true
@@ -3878,6 +4304,7 @@
    "name": "Euclid's Wheat Sickle Mk. I",
    "xp": 4,
    "mappedIds": [],
+   "parentId": "THEORETICAL_HOE_WHEAT_2",
    "category": "FARMING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -3887,6 +4314,7 @@
    "name": "Euclid's Wheat Sickle Mk. II",
    "xp": 5,
    "mappedIds": [],
+   "parentId": "THEORETICAL_HOE_WHEAT_3",
    "category": "FARMING",
    "stage": "SKILLED",
    "tradeable": true
@@ -3896,6 +4324,7 @@
    "name": "Euclid's Wheat Sickle Mk. III",
    "xp": 8,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "EXPERT",
    "tradeable": true
@@ -3905,6 +4334,7 @@
    "name": "Wild Rose Cutter Mk. I",
    "xp": 4,
    "mappedIds": [],
+   "parentId": "THEORETICAL_HOE_WILD_ROSE_2",
    "category": "FARMING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -3914,6 +4344,7 @@
    "name": "Wild Rose Cutter Mk. II",
    "xp": 5,
    "mappedIds": [],
+   "parentId": "THEORETICAL_HOE_WILD_ROSE_3",
    "category": "FARMING",
    "stage": "SKILLED",
    "tradeable": true
@@ -3923,6 +4354,7 @@
    "name": "Wild Rose Cutter Mk. III",
    "xp": 8,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "EXPERT",
    "tradeable": true
@@ -3932,6 +4364,7 @@
    "name": "Thornleaf Scythe",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "SKILLED",
    "tradeable": true
@@ -3943,6 +4376,7 @@
    "mappedIds": [
     "STARRED_THORNS_BOOTS"
    ],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -3952,6 +4386,7 @@
    "name": "Tiki Mask",
    "xp": 10,
    "mappedIds": [],
+   "parentId": null,
    "category": "FISHING",
    "stage": "MASTER",
    "tradeable": true
@@ -3961,6 +4396,7 @@
    "name": "Tiny Scaffolding",
    "xp": 1,
    "mappedIds": [],
+   "parentId": "MEDIUM_SCAFFOLDING",
    "category": "FORAGING",
    "stage": "STARTER",
    "tradeable": true
@@ -3970,6 +4406,7 @@
    "name": "Titan Line",
    "xp": 8,
    "mappedIds": [],
+   "parentId": null,
    "category": "FISHING",
    "stage": "EXPERT",
    "tradeable": true
@@ -3979,6 +4416,7 @@
    "name": "Titanium Drill DR-X355",
    "xp": 10,
    "mappedIds": [],
+   "parentId": "TITANIUM_DRILL_2",
    "category": "MINING",
    "stage": "SKILLED",
    "tradeable": true
@@ -3988,6 +4426,7 @@
    "name": "Titanium Drill DR-X455",
    "xp": 15,
    "mappedIds": [],
+   "parentId": "TITANIUM_DRILL_3",
    "category": "MINING",
    "stage": "SKILLED",
    "tradeable": true
@@ -3997,6 +4436,7 @@
    "name": "Titanium Drill DR-X555",
    "xp": 15,
    "mappedIds": [],
+   "parentId": "TITANIUM_DRILL_4",
    "category": "MINING",
    "stage": "EXPERT",
    "tradeable": true
@@ -4006,6 +4446,7 @@
    "name": "Titanium Drill DR-X655",
    "xp": 20,
    "mappedIds": [],
+   "parentId": "DIVAN_DRILL",
    "category": "MINING",
    "stage": "PROFESSIONAL",
    "tradeable": true
@@ -4015,6 +4456,7 @@
    "name": "Titanium-Plated Drill Engine",
    "xp": 6,
    "mappedIds": [],
+   "parentId": "RUBY_POLISHED_DRILL_ENGINE",
    "category": "MINING",
    "stage": "SKILLED",
    "tradeable": true
@@ -4024,6 +4466,7 @@
    "name": "Titanium-Infused Fuel Tank",
    "xp": 7,
    "mappedIds": [],
+   "parentId": "GEMSTONE_FUEL_TANK",
    "category": "MINING",
    "stage": "EXPERT",
    "tradeable": true
@@ -4033,6 +4476,7 @@
    "name": "Titanium Lantern",
    "xp": 5,
    "mappedIds": [],
+   "parentId": "GLACITE_LANTERN",
    "category": "MINING",
    "stage": "SKILLED",
    "tradeable": true
@@ -4042,6 +4486,7 @@
    "name": "Titanium Pickaxe",
    "xp": 3,
    "mappedIds": [],
+   "parentId": "REFINED_TITANIUM_PICKAXE",
    "category": "MINING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -4051,6 +4496,7 @@
    "name": "Tormentor",
    "xp": 20,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "MASTER",
    "tradeable": true
@@ -4060,6 +4506,7 @@
    "name": "Torrhus Belt",
    "xp": 8,
    "mappedIds": [],
+   "parentId": null,
    "category": "FORAGING",
    "stage": "PROFESSIONAL",
    "tradeable": true
@@ -4069,6 +4516,7 @@
    "name": "Totem of Corruption",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "FISHING",
    "stage": "SKILLED",
    "tradeable": true
@@ -4078,6 +4526,7 @@
    "name": "Treasure Hook",
    "xp": 6,
    "mappedIds": [],
+   "parentId": null,
    "category": "FISHING",
    "stage": "EXPERT",
    "tradeable": true
@@ -4087,6 +4536,7 @@
    "name": "Treecapitator",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "FORAGING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -4096,6 +4546,7 @@
    "name": "Tribal Spear",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -4105,6 +4556,7 @@
    "name": "Trophy Line",
    "xp": 6,
    "mappedIds": [],
+   "parentId": null,
    "category": "FISHING",
    "stage": "EXPERT",
    "tradeable": true
@@ -4114,6 +4566,7 @@
    "name": "Tungsten Regulator",
    "xp": 10,
    "mappedIds": [],
+   "parentId": null,
    "category": "MINING",
    "stage": "PROFESSIONAL",
    "tradeable": true
@@ -4123,6 +4576,7 @@
    "name": "Turbo Fishing Net",
    "xp": 7,
    "mappedIds": [],
+   "parentId": "GIGANTIC_FISHING_NET",
    "category": "HUNTING",
    "stage": "SKILLED",
    "tradeable": true
@@ -4132,6 +4586,7 @@
    "name": "Umberella",
    "xp": 6,
    "mappedIds": [],
+   "parentId": null,
    "category": "FISHING",
    "stage": "EXPERT",
    "tradeable": true
@@ -4141,6 +4596,7 @@
    "name": "Undead Bow",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "SUPER_UNDEAD_BOW",
    "category": "DUNGEONEERING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -4150,6 +4606,7 @@
    "name": "Undead Sword",
    "xp": 1,
    "mappedIds": [],
+   "parentId": "REVENANT_SWORD",
    "category": "COMBAT",
    "stage": "STARTER",
    "tradeable": true
@@ -4159,6 +4616,7 @@
    "name": "Valkyrie",
    "xp": 5,
    "mappedIds": [],
+   "parentId": "HYPERION",
    "category": "DUNGEONEERING",
    "stage": "MASTER",
    "tradeable": true
@@ -4168,6 +4626,7 @@
    "name": "Vampire Mask",
    "xp": 4,
    "mappedIds": [],
+   "parentId": "WITCH_MASK",
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -4177,6 +4636,7 @@
    "name": "Vampire Witch Mask",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -4186,6 +4646,7 @@
    "name": "Veilshroom Bracelet",
    "xp": 8,
    "mappedIds": [],
+   "parentId": null,
    "category": "FORAGING",
    "stage": "EXPERT",
    "tradeable": true
@@ -4195,6 +4656,7 @@
    "name": "Worn Huntaxe - Genesis",
    "xp": 1,
    "mappedIds": [],
+   "parentId": "SILVA_DOMINUS",
    "category": "HUNTING",
    "stage": "STARTER",
    "tradeable": true
@@ -4206,6 +4668,7 @@
    "mappedIds": [
     "STARRED_VENOMS_TOUCH"
    ],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -4215,6 +4678,7 @@
    "name": "Vinerip Lasso",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "ENTANGLER_LASSO",
    "category": "HUNTING",
    "stage": "AMATEUR",
    "tradeable": true
@@ -4224,6 +4688,7 @@
    "name": "Void Sword",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "INTERMEDIATE",
    "tradeable": false
@@ -4233,6 +4698,7 @@
    "name": "Voidedge Katana",
    "xp": 5,
    "mappedIds": [],
+   "parentId": "VORPAL_KATANA",
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -4242,6 +4708,7 @@
    "name": "Voidwalker Katana",
    "xp": 3,
    "mappedIds": [],
+   "parentId": "VOIDEDGE_KATANA",
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -4251,6 +4718,7 @@
    "name": "Voodoo Doll",
    "xp": 5,
    "mappedIds": [],
+   "parentId": "VOODOO_DOLL_WILTED",
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -4260,6 +4728,7 @@
    "name": "Jinxed Voodoo Doll",
    "xp": 6,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -4269,6 +4738,7 @@
    "name": "Vorpal Katana",
    "xp": 7,
    "mappedIds": [],
+   "parentId": "ATOMSPLIT_KATANA",
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -4278,6 +4748,7 @@
    "name": "Wand of Atonement",
    "xp": 8,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -4287,6 +4758,7 @@
    "name": "Wand of Healing",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "WAND_OF_MENDING",
    "category": "COMBAT",
    "stage": "AMATEUR",
    "tradeable": true
@@ -4296,6 +4768,7 @@
    "name": "Wand of Mending",
    "xp": 2,
    "mappedIds": [],
+   "parentId": "WAND_OF_RESTORATION",
    "category": "COMBAT",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -4305,6 +4778,7 @@
    "name": "Wand of Restoration",
    "xp": 4,
    "mappedIds": [],
+   "parentId": "WAND_OF_ATONEMENT",
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -4314,6 +4788,7 @@
    "name": "Wand of Strength",
    "xp": 6,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -4323,6 +4798,7 @@
    "name": "Warden Helmet",
    "xp": 12,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "PROFESSIONAL",
    "tradeable": true
@@ -4332,6 +4808,7 @@
    "name": "Warning Flare",
    "xp": 4,
    "mappedIds": [],
+   "parentId": "ALERT_FLARE",
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -4341,6 +4818,7 @@
    "name": "Water Hydra Head",
    "xp": 4,
    "mappedIds": [],
+   "parentId": null,
    "category": "FISHING",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -4350,6 +4828,7 @@
    "name": "Weird Tuba",
    "xp": 4,
    "mappedIds": [],
+   "parentId": "WEIRDER_TUBA",
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -4359,6 +4838,7 @@
    "name": "Weirder Tuba",
    "xp": 5,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -4368,6 +4848,7 @@
    "name": "Will-o'-wisp",
    "xp": 15,
    "mappedIds": [],
+   "parentId": null,
    "category": "MINING",
    "stage": "PROFESSIONAL",
    "tradeable": true
@@ -4377,6 +4858,7 @@
    "name": "Witch Mask",
    "xp": 4,
    "mappedIds": [],
+   "parentId": "VAMPIRE_WITCH_MASK",
    "category": "COMBAT",
    "stage": "SKILLED",
    "tradeable": true
@@ -4386,6 +4868,7 @@
    "name": "Wither Bow",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "STARTER",
    "tradeable": true
@@ -4395,6 +4878,7 @@
    "name": "Wither Cloak Sword",
    "xp": 7,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "EXPERT",
    "tradeable": true
@@ -4404,6 +4888,7 @@
    "name": "Wither Goggles",
    "xp": 6,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "SKILLED",
    "tradeable": true
@@ -4415,6 +4900,7 @@
    "mappedIds": [
     "STARRED_YETI_SWORD"
    ],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "EXPERT",
    "tradeable": true
@@ -4424,6 +4910,7 @@
    "name": "Zombie Commander Whip",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "SKILLED",
    "tradeable": true
@@ -4433,6 +4920,7 @@
    "name": "Zombie Hat",
    "xp": 1,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "AMATEUR",
    "tradeable": true
@@ -4442,6 +4930,7 @@
    "name": "Zombie's Heart",
    "xp": 3,
    "mappedIds": [],
+   "parentId": "CRYSTALLIZED_HEART",
    "category": "COMBAT",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -4451,6 +4940,7 @@
    "name": "Zombie Knight Sword",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "SKILLED",
    "tradeable": true
@@ -4460,6 +4950,7 @@
    "name": "Zombie Mask",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "COMBAT",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -4469,6 +4960,7 @@
    "name": "Zombie Pickaxe",
    "xp": 2,
    "mappedIds": [],
+   "parentId": null,
    "category": "MINING",
    "stage": "STARTER",
    "tradeable": true
@@ -4478,6 +4970,7 @@
    "name": "Zombie Soldier Cutlass",
    "xp": 3,
    "mappedIds": [],
+   "parentId": null,
    "category": "DUNGEONEERING",
    "stage": "SKILLED",
    "tradeable": true
@@ -4487,6 +4980,7 @@
    "name": "Zombie Sword",
    "xp": 4,
    "mappedIds": [],
+   "parentId": "ORNATE_ZOMBIE_SWORD",
    "category": "COMBAT",
    "stage": "INTERMEDIATE",
    "tradeable": true
@@ -4496,6 +4990,7 @@
    "name": "Zorro's Cape",
    "xp": 15,
    "mappedIds": [],
+   "parentId": null,
    "category": "FARMING",
    "stage": "PROFESSIONAL",
    "tradeable": true

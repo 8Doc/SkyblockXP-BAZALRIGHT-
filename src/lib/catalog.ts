@@ -81,6 +81,16 @@ export type Catalog = {
    * modelled and merely uncounted.
    */
   earnedOutsideTasks: { magicalPower: number; petScore: number; bestiary: number };
+  /**
+   * What the profile says you have against what this app could credit you for.
+   *
+   * Every gap chased in these three categories has been a matching failure rather than a missing
+   * feature: a museum donation filed under a starred id, an attribute keyed by a name the wiki
+   * doesn't use, an accessory the items resource never listed. Each looked like "the numbers are
+   * wrong" and took a profile dump to pin down. Counting both sides makes the discrepancy a
+   * figure on the category instead.
+   */
+  reconciliation: { category: Category; credited: number; reported: number }[];
   /** Category-level notes for anything we can't model as tasks yet. */
   unmodelled: { category: Category; note: string; earnedXp?: number; totalXp?: number }[];
   meta: {
@@ -344,6 +354,23 @@ export function buildCatalog(
     for (const piece of set.pieces) museumKnows.add(piece);
   }
   const strandedDonations = donated ? [...donated].filter((held) => !museumKnows.has(held)).length : 0;
+  const donatedCount = donated ? donated.size : 0;
+  // A slot is filled by its own item, by an alternate id the same item is filed under, or by
+  // anything further up its upgrade line: donate a Wand of Atonement and the Healing, Mending
+  // and Restoration slots below it are filled too. Walking that chain is the difference between
+  // 275 and 311 slots on a profile the game scores at 313.
+  const parentOf = new Map(data.museum.donations.map((d) => [d.itemId, d.parentId ?? null]));
+  const altsOf = new Map(data.museum.donations.map((d) => [d.itemId, d.mappedIds ?? []]));
+  const slotFilled = (itemId: string): boolean => {
+    let current: string | null | undefined = itemId;
+    // The chains are short; the guard is against bad data, not depth.
+    for (let hop = 0; current && hop < 12; hop++) {
+      if (donated!.has(current)) return true;
+      for (const alt of altsOf.get(current) ?? []) if (donated!.has(alt)) return true;
+      current = parentOf.get(current);
+    }
+    return false;
+  };
   for (const donation of data.museum.donations) {
     const id = `museum_${donation.itemId}`;
     tasks.push({
@@ -356,10 +383,7 @@ export function buildCatalog(
       repeatable: false,
       note: `${donation.category.toLowerCase()} · donation is permanent`,
     });
-    // A dungeon-starred copy is filed under its own id, so the alternates count too — without
-    // them a donated Starred Shadow Fury reads as an empty slot.
-    const heldAs = [donation.itemId, ...(donation.mappedIds ?? [])];
-    if (donated && heldAs.some((held) => donated.has(held))) done.add(id);
+    if (donated && slotFilled(donation.itemId)) done.add(id);
   }
   for (const set of data.museum.armorSets) {
     const id = `museum_set_${set.setId}`;
@@ -377,7 +401,7 @@ export function buildCatalog(
     // requiring every piece marked all 73 donated sets as outstanding and told the player to
     // hand in armour the museum was already displaying. The piece-by-piece test is kept as a
     // fallback for anything filed the other way round.
-    if (donated && (donated.has(set.setId) || set.pieces.every((piece) => donated.has(piece)))) done.add(id);
+    if (donated && (donated.has(set.setId) || set.pieces.every((piece) => slotFilled(piece)))) done.add(id);
   }
 
   /* ------------------------------------------------------------- dungeons */
@@ -538,6 +562,7 @@ export function buildCatalog(
   // is an upper bound on what the level costs.
   const heldShards = attributeStacks(member.attributes?.stacks, data);
   const strandedAttributes = unplacedAttributes(member.attributes?.stacks, data.attributeShards.attributes, data);
+  const attributeCount = Object.values(member.attributes?.stacks ?? {}).filter((n) => n > 0).length;
 
   for (const attribute of data.attributeShards.attributes) {
     const held = heldShards(attribute.key);
@@ -859,6 +884,11 @@ export function buildCatalog(
       petScore: (member.leveling?.highest_pet_score ?? 0) * 3,
       bestiary: bestiaryXp(member),
     },
+    reconciliation: [
+      { category: "museum" as Category, credited: donatedCount - strandedDonations, reported: donatedCount },
+      { category: "attributes" as Category, credited: attributeCount - strandedAttributes, reported: attributeCount },
+      { category: "accessory_bag" as Category, credited: bagState.identified, reported: bagState.held },
+    ],
     unmodelled: UNMODELLED.concat(
       strandedDonations > 0
         ? [

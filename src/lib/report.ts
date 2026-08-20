@@ -56,6 +56,8 @@ export type Report = {
    */
   cheapest: { tasks: ResolvedTask[]; truncated: number; grouped: TaskRun[]; groupedTruncated: number };
   unmodelled: { category: Category; note: string; totalXp?: number; earnedXp?: number }[];
+  /** Per category: what the profile says you have against what we could credit. */
+  reconciliation: { category: Category; credited: number; reported: number }[];
   bag: { computedMp: number; reportedMp: number | null; readable: boolean; capacity: number; used: number };
 };
 
@@ -197,6 +199,7 @@ export function buildReport(catalog: Catalog, book: PriceBook, options: ReportOp
     packages,
     browser,
     cheapest,
+    reconciliation: catalog.reconciliation,
     grind,
     unmodelled: catalog.unmodelled,
     bag: {

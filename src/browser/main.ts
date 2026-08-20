@@ -589,7 +589,7 @@ function browserView(report: Report): string {
 
       return `<div class="panel">
         <button class="group-head" data-toggle="${key}">
-          <span class="group-name">${categoryLabel(category, data)}</span>
+          <span class="group-name">${categoryLabel(category, data)}${inaccuracyBadge(report, category)}</span>
           <span class="dim">${num(summary.remainingTasks)} left</span>
           <span class="group-xp">${num(summary.remainingXp)} xp</span>
           <span class="group-cost">${
@@ -1063,4 +1063,20 @@ function packageGroups(pkg: PackageEntry, currentXp: number): string {
       </div>`;
     })
     .join("");
+}
+/**
+ * "+3 inaccuracy" / "-38 inaccuracy" — how far our count is from the profile's own.
+ *
+ * Negative means the profile holds things we could not place, so the category understates what
+ * you have done; positive means we credited more than the profile reports. Silent when they
+ * agree, which is the normal case and does not need saying.
+ */
+function inaccuracyBadge(report: Report, category: Category): string {
+  const row = report.reconciliation?.find((r) => r.category === category);
+  if (!row) return "";
+  const delta = row.credited - row.reported;
+  if (delta === 0) return "";
+  const sign = delta > 0 ? "+" : "−";
+  const title = `Your profile reports ${row.reported}; this app can account for ${row.credited}.`;
+  return `<span class="inaccuracy" title="${escapeHtml(title)}">${sign}${Math.abs(delta)} inaccuracy</span>`;
 }

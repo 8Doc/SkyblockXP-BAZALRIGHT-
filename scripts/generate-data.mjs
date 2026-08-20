@@ -202,6 +202,9 @@ async function buildMuseum() {
         // A dungeon-starred copy is filed under its own id: donate a Starred Shadow Fury and the
         // museum stores STARRED_SHADOW_FURY, which matches nothing unless the alternates come too.
         mappedIds: museum.mapped_item_ids ?? [],
+        // The next item up this slot's upgrade line. Donating a Wand of Atonement fills the
+        // Healing, Mending and Restoration slots below it, so the chain has to be walked.
+        parentId: museum.parent?.[item.id] ?? null,
         category: museum.category ?? "MISC",
         stage: museum.game_stage ?? null,
         tradeable: item.can_trade !== false && !item.soulbound,

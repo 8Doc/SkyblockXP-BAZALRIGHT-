@@ -171,3 +171,30 @@ test("donations the app has no slot for are counted and reported", () => {
   assert.ok(note, "an unmatched donation should raise a note rather than silently read as missing");
   assert.match(note.note, /1 museum donation/);
 });
+
+test("an upgraded donation fills the slots below it", () => {
+  // Donate a Wand of Atonement and the Healing, Mending and Restoration slots are filled too.
+  const cat = catalogFor({}, undefined, { donatedItemIds: new Set(["WAND_OF_ATONEMENT"]), value: 0 });
+  for (const id of ["WAND_OF_HEALING", "WAND_OF_MENDING", "WAND_OF_RESTORATION", "WAND_OF_ATONEMENT"]) {
+    assert.ok(cat.done.has(`museum_${id}`), `${id} should be filled by the Atonement`);
+  }
+});
+
+test("a lower donation does not fill the slots above it", () => {
+  const cat = catalogFor({}, undefined, { donatedItemIds: new Set(["WAND_OF_HEALING"]), value: 0 });
+  assert.ok(cat.done.has("museum_WAND_OF_HEALING"));
+  assert.equal(cat.done.has("museum_WAND_OF_ATONEMENT"), false, "the chain only runs upwards");
+});
+
+test("reconciliation counts both sides for the three categories it covers", () => {
+  const cat = catalogFor(
+    { attributes: { stacks: { speed: 10, NOT_AN_ATTRIBUTE: 5 } } },
+    undefined,
+    { donatedItemIds: new Set(["WAND_OF_HEALING", "NOT_A_MUSEUM_ITEM"]), value: 0 },
+  );
+  const by = new Map(cat.reconciliation.map((r) => [r.category, r]));
+
+  assert.deepEqual(by.get("museum"), { category: "museum", credited: 1, reported: 2 });
+  assert.equal(by.get("attributes")!.reported, 2, "both stacks are reported");
+  assert.equal(by.get("attributes")!.credited, 1, "only the one we can place is credited");
+});
