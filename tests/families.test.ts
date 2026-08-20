@@ -90,6 +90,28 @@ test("every upgrade edge the wiki states ends up inside one family", () => {
   assert.deepEqual(split, [], "an upgrade the planner would still offer as a separate purchase");
 });
 
+/**
+ * Two ladders, not one. The pattern that catches the campfire badges was unanchored, so it also
+ * swallowed the soul ones and counted 26 badges as tiers of a family they have nothing to do
+ * with — magical power the player really holds, hidden.
+ */
+test("the soul campfire ladder is separate from the ordinary one", () => {
+  const ordinary = ["Campfire Adept Badge I", "Campfire Cultist Badge V", "Campfire God Badge IX"].map(family);
+  const soul = ["Soul Campfire Adept Badge I", "Soul Campfire Cultist Badge V", "Soul Campfire God Badge IX"].map(family);
+
+  assert.equal(new Set(ordinary).size, 1, "the ordinary badges are one ladder");
+  assert.equal(new Set(soul).size, 1, "the soul badges are one ladder");
+  assert.notEqual(ordinary[0], soul[0], "but they are not the same ladder");
+});
+
+test("both campfire ladders are whole, so no badge is stranded on its own", () => {
+  const list = (accessories as { accessories: { id: string; name: string }[] }).accessories;
+  const badges = list.filter((a) => /Campfire .*Badge/.test(a.name));
+  // 26 a side. A badge falling through to a family of its own would show up here as a third key.
+  assert.equal(badges.length, 52, `expected 52 campfire badges, found ${badges.length}`);
+  assert.deepEqual(new Set(badges.map((a) => family(a.name))).size, 2);
+});
+
 test("accessories that merely share a word are left apart", () => {
   assert.notEqual(family("Broken Piggy Bank"), family("Ring of Broken Love"));
   assert.notEqual(family("Grizzly Paw"), family("Wolf Paw"));

@@ -45,7 +45,14 @@ code (`namedFamilyOf`):
 - `Master Skull - Tier 3`, `Personal Compactor 6000` → tier markers stripped
 
 The rest are named in the file: shark tooth necklaces, Kuudra cores, fish bowls, piggy banks,
-voter's badges, rings of love, campfire badges.
+voter's badges, rings of love, and the two campfire badge ladders.
+
+Those two are worth a word, because the pattern that caught them used to be unanchored and so
+swallowed both: `Campfire .*Badge` matches `Soul Campfire Adept Badge I` just as happily as
+`Campfire Adept Badge I`. They are separate ladders in game — 26 badges a side, under separate
+ids (`CAMPFIRE_TALISMAN_*` against `SOUL_CAMPFIRE_TALISMAN_*`) — so merging them hid a whole
+ladder's magical power. This is the error the *other* way round from the rename lines below: too
+eager a merge hides XP the player has, where too shy a one sells XP they already own.
 
 A name is only ever a proxy for the thing that matters, which is whether one accessory is an
 upgrade of another, so this is half of family detection. The other half is

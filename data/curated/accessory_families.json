@@ -14,8 +14,14 @@
   ],
   "patternFamilies": [
     {
-      "match": "Campfire .*Badge",
-      "family": "campfire badge"
+      "match": "^Soul Campfire .*Badge",
+      "family": "soul campfire badge",
+      "note": "The soul badges are their own ladder, not the tail of the ordinary one — 26 of each, under separate ids (SOUL_CAMPFIRE_TALISMAN_* against CAMPFIRE_TALISMAN_*). Listed first so it wins over the pattern below."
+    },
+    {
+      "match": "^Campfire .*Badge",
+      "family": "campfire badge",
+      "note": "Anchored, because unanchored it also swallowed the Soul Campfire ladder and hid 26 badges' worth of magical power."
     },
     {
       "match": "^Personal Compactor",
@@ -79,7 +85,6 @@
   ],
   "openQuestions": [
     "Colour variants (Blue/Green/Purple Jerry Talisman, the Gift Talismans) are treated as separate accessories that each grant magical power. If they are one family each, the bag ceiling is overstated by roughly 40 XP.",
-    "Soul Campfire badges match the Campfire badge pattern and so merge into one family with the ordinary ones. If the two ladders are independent in game, that hides real XP. Nothing checked it either way.",
     "The ceiling is approximate and always has been: it moves whenever family detection does, and neither it nor the README's ~2,121 is checkable from the API. Individual task XP is exact — a specific accessory's magical power is right, and so is the 'already owned' subtraction. It is the category total that is soft."
   ]
 }
