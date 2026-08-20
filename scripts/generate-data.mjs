@@ -117,6 +117,18 @@ async function buildMinions() {
 /** Every accessory in the game, with the rarity it drops at. Magical power comes from rarity. */
 async function buildAccessories() {
   const { items } = await getJson(`${BASE}/items`);
+  // The items resource leaves can_trade, can_auction and soulbound unset on plenty of things
+  // that cannot be bought at all, so everything defaults to buyable and the cost to finish the
+  // bag absorbs items nobody can sell you. The wiki states it outright; where it says no, that
+  // wins. Rift accessories are the worst of it — two of them were priced at a billion each.
+  let wikiUntradeable = new Set();
+  try {
+    const trade = JSON.parse(await readFile(join(OUT, "accessory_trade.json"), "utf8"));
+    wikiUntradeable = new Set(trade.untradeable.map((entry) => entry.id));
+  } catch {
+    console.log("  accessories  no accessory_trade.json — run fetch-accessory-trade.mjs");
+  }
+
   const out = [];
   for (const item of items) {
     if (item.category !== "ACCESSORY") continue;
@@ -128,7 +140,13 @@ async function buildAccessories() {
       tier,
       museum: Boolean(item.museum),
       soulbound: Boolean(item.soulbound),
-      tradeable: item.can_trade !== false && item.can_auction !== false && !item.soulbound,
+      tradeable:
+        item.can_trade !== false &&
+        item.can_auction !== false &&
+        !item.soulbound &&
+        // Rift items never leave the rift, whatever the resource says.
+        item.origin !== "RIFT" &&
+        !wikiUntradeable.has(item.id),
       riftTransferrable: Boolean(item.rift_transferrable),
     });
   }

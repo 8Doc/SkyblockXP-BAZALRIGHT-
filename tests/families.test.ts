@@ -1,5 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import { familyOf } from "../src/lib/gameData";
 import accessories from "../data/generated/accessories.json";
 import accessoryFamilies from "../data/curated/accessory_families.json";
@@ -111,5 +112,29 @@ test("a family's Talisman, Ring and Artifact all resolve to one family", () => {
   for (const stem of ["Feather", "Sea Creature", "Bat Person"]) {
     const tiers = [`${stem} Talisman`, `${stem} Ring`, `${stem} Artifact`].map(family);
     assert.equal(new Set(tiers).size, 1, `${stem} split into ${new Set(tiers).size} families`);
+  }
+});
+
+/* --------------------------------------------------- what can be bought */
+
+test("accessories the wiki says cannot be bought are not priced", () => {
+  // The items resource leaves can_trade and soulbound unset on plenty of untradeable things, so
+  // everything defaulted to buyable and the bag's cost to finish absorbed items nobody can sell.
+  const list = (accessories as { accessories: { id: string; name: string; tradeable: boolean }[] }).accessories;
+  const byId = new Map(list.map((a) => [a.id, a]));
+
+  const trade = JSON.parse(readFileSync("data/generated/accessory_trade.json", "utf8")) as {
+    untradeable: { id: string; name: string }[];
+  };
+  const stillBuyable = trade.untradeable.filter((u) => byId.get(u.id)?.tradeable);
+  assert.deepEqual(stillBuyable, [], "the wiki said no; the generated list should agree");
+});
+
+test("rift accessories never leave the rift", () => {
+  const list = (accessories as { accessories: { id: string; tradeable: boolean }[] }).accessories;
+  const byId = new Map(list.map((a) => [a.id, a]));
+  // Two of these were being priced at a billion coins each.
+  for (const id of ["CRUX_TALISMAN_6", "CRUX_TALISMAN_7"]) {
+    assert.equal(byId.get(id)?.tradeable, false, `${id} is rift-bound`);
   }
 });

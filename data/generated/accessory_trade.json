@@ -1,0 +1,278 @@
+{
+ "generatedAt": "2026-08-20T18:57:58.803Z",
+ "source": "Hypixel SkyBlock Fandom wiki infobox: auctionable / tradeable",
+ "note": "Accessories the wiki states cannot be bought. Only an explicit no is recorded; silence defers to the items resource.",
+ "pagesRead": 325,
+ "untradeable": [
+  {
+   "id": "ARCHAEOLOGIST_COMPASS",
+   "name": "Archaeologist's Compass",
+   "buyable": false
+  },
+  {
+   "id": "BIG_BRAIN_TALISMAN",
+   "name": "Big Brain Talisman",
+   "buyable": false
+  },
+  {
+   "id": "BOOK_OF_PROGRESSION",
+   "name": "Book of Progression",
+   "buyable": false
+  },
+  {
+   "id": "CAT_TALISMAN",
+   "name": "Cat Talisman",
+   "buyable": false
+  },
+  {
+   "id": "CHEETAH_TALISMAN",
+   "name": "Cheetah Talisman",
+   "buyable": false
+  },
+  {
+   "id": "COMBO_MANIA_TALISMAN",
+   "name": "Combo Mania",
+   "buyable": false
+  },
+  {
+   "id": "CROOKED_ARTIFACT",
+   "name": "Crooked Artifact",
+   "buyable": false
+  },
+  {
+   "id": "CRUX_TALISMAN_1",
+   "name": "Crux Talisman",
+   "buyable": false
+  },
+  {
+   "id": "CRUX_TALISMAN_2",
+   "name": "Crux Ring",
+   "buyable": false
+  },
+  {
+   "id": "CRUX_TALISMAN_3",
+   "name": "Crux Artifact",
+   "buyable": false
+  },
+  {
+   "id": "CRUX_TALISMAN_4",
+   "name": "Crux Relic",
+   "buyable": false
+  },
+  {
+   "id": "CRUX_TALISMAN_5",
+   "name": "Crux Heirloom",
+   "buyable": false
+  },
+  {
+   "id": "CRUX_TALISMAN_6",
+   "name": "Crux Chronomicon",
+   "buyable": false
+  },
+  {
+   "id": "CRUX_TALISMAN_7",
+   "name": "Celestial Starstone",
+   "buyable": false
+  },
+  {
+   "id": "DEFECTIVE_MONITOR",
+   "name": "Defective Monitor",
+   "buyable": false
+  },
+  {
+   "id": "FRIED_FROZEN_CHICKEN",
+   "name": "Fried Frozen Chicken",
+   "buyable": false
+  },
+  {
+   "id": "FROZEN_CHICKEN",
+   "name": "Frozen Chicken",
+   "buyable": false
+  },
+  {
+   "id": "FUTURE_CALORIES",
+   "name": "Future Calories Talisman",
+   "buyable": false
+  },
+  {
+   "id": "GARLIC_FLAVORED_GUMMY_BEAR",
+   "name": "Perma-Jelled Garlic-Flavored Re-Heated Gummy Polar Bear",
+   "buyable": false
+  },
+  {
+   "id": "HARMONIOUS_SURGERY_TOOLKIT",
+   "name": "Harmonious Surgery Toolkit",
+   "buyable": false
+  },
+  {
+   "id": "IQ_POINT",
+   "name": "IQ Point",
+   "buyable": false
+  },
+  {
+   "id": "JACOBUS_REGISTER",
+   "name": "Jacobus Register",
+   "buyable": false
+  },
+  {
+   "id": "JAKE_PLUSHIE",
+   "name": "Jake's Plushie",
+   "buyable": false
+  },
+  {
+   "id": "KING_TALISMAN",
+   "name": "King Talisman",
+   "buyable": false
+  },
+  {
+   "id": "KUUDRA_FOLLOWER_ARTIFACT",
+   "name": "Kuudra Follower Artifact",
+   "buyable": false
+  },
+  {
+   "id": "KUUDRA_FOLLOWER_RELIC",
+   "name": "Kuudra Follower Relic",
+   "buyable": false
+  },
+  {
+   "id": "LYNX_TALISMAN",
+   "name": "Lynx Talisman",
+   "buyable": false
+  },
+  {
+   "id": "MELODY_HAIR",
+   "name": "Melody's Hair",
+   "buyable": false
+  },
+  {
+   "id": "MINIATURIZED_TUBULATOR",
+   "name": "Miniaturized Tubulator",
+   "buyable": false
+  },
+  {
+   "id": "PERSONAL_DELETOR_4000",
+   "name": "Personal Deletor 4000",
+   "buyable": false
+  },
+  {
+   "id": "PERSONAL_DELETOR_5000",
+   "name": "Personal Deletor 5000",
+   "buyable": false
+  },
+  {
+   "id": "PERSONAL_DELETOR_6000",
+   "name": "Personal Deletor 6000",
+   "buyable": false
+  },
+  {
+   "id": "PERSONAL_DELETOR_7000",
+   "name": "Personal Deletor 7000",
+   "buyable": false
+  },
+  {
+   "id": "PIGS_FOOT",
+   "name": "Pig's Foot",
+   "buyable": false
+  },
+  {
+   "id": "POWER_ARTIFACT",
+   "name": "Artifact of Power",
+   "buyable": false
+  },
+  {
+   "id": "POWER_RELIC",
+   "name": "Relic of Power",
+   "buyable": false
+  },
+  {
+   "id": "POWER_RING",
+   "name": "Ring of Power",
+   "buyable": false
+  },
+  {
+   "id": "POWER_TALISMAN",
+   "name": "Talisman of Power",
+   "buyable": false
+  },
+  {
+   "id": "PUNCHCARD_ARTIFACT",
+   "name": "Punchcard Artifact",
+   "buyable": false
+  },
+  {
+   "id": "RING_OF_BROKEN_LOVE",
+   "name": "Ring of Broken Love",
+   "buyable": false
+  },
+  {
+   "id": "RING_OF_ETERNAL_LOVE",
+   "name": "Ring of Eternal Love",
+   "buyable": false
+  },
+  {
+   "id": "SATELITE",
+   "name": "Satelite",
+   "buyable": false
+  },
+  {
+   "id": "SEAL_OF_THE_FAMILY",
+   "name": "Seal of the Family",
+   "buyable": false
+  },
+  {
+   "id": "SHADY_RING",
+   "name": "Shady Ring",
+   "buyable": false
+  },
+  {
+   "id": "SURVIVOR_CUBE",
+   "name": "Survivor Cube",
+   "buyable": false
+  },
+  {
+   "id": "TEST_BUCKET_PLEASE_IGNORE",
+   "name": "Test Bucket Please Ignore",
+   "buyable": false
+  },
+  {
+   "id": "TINY_DANCER",
+   "name": "Tiny Dancer",
+   "buyable": false
+  },
+  {
+   "id": "TWO_IQ_POINT",
+   "name": "2 IQ Points",
+   "buyable": false
+  },
+  {
+   "id": "VOTER_BADGE",
+   "name": "Voter's Badge",
+   "buyable": false
+  },
+  {
+   "id": "VOTER_BADGE_ELITE",
+   "name": "Elite Voter's Badge",
+   "buyable": false
+  },
+  {
+   "id": "VOTER_BADGE_SUPREME",
+   "name": "Supreme Voter's Badge",
+   "buyable": false
+  },
+  {
+   "id": "VOTER_BADGE_VIP",
+   "name": "VIP Voter's Badge",
+   "buyable": false
+  },
+  {
+   "id": "WARDING_TRINKET",
+   "name": "Warding Trinket",
+   "buyable": false
+  },
+  {
+   "id": "WOLF_PAW",
+   "name": "Wolf Paw",
+   "buyable": false
+  }
+ ]
+}

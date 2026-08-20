@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-08-20T18:36:57.580Z",
+ "generatedAt": "2026-08-20T18:58:29.331Z",
  "source": "https://api.hypixel.net/v2/resources/skyblock",
  "accessories": [
   {
@@ -143,7 +143,7 @@
    "tier": "EPIC",
    "museum": false,
    "soulbound": false,
-   "tradeable": true,
+   "tradeable": false,
    "riftTransferrable": false
   },
   {
@@ -404,7 +404,7 @@
    "tier": "RARE",
    "museum": false,
    "soulbound": false,
-   "tradeable": true,
+   "tradeable": false,
    "riftTransferrable": true
   },
   {
@@ -413,7 +413,7 @@
    "tier": "UNCOMMON",
    "museum": false,
    "soulbound": false,
-   "tradeable": true,
+   "tradeable": false,
    "riftTransferrable": true
   },
   {
@@ -422,7 +422,7 @@
    "tier": "COMMON",
    "museum": false,
    "soulbound": false,
-   "tradeable": true,
+   "tradeable": false,
    "riftTransferrable": true
   },
   {
@@ -458,7 +458,7 @@
    "tier": "RARE",
    "museum": false,
    "soulbound": false,
-   "tradeable": true,
+   "tradeable": false,
    "riftTransferrable": true
   },
   {
@@ -467,7 +467,7 @@
    "tier": "COMMON",
    "museum": false,
    "soulbound": false,
-   "tradeable": true,
+   "tradeable": false,
    "riftTransferrable": false
   },
   {
@@ -872,7 +872,7 @@
    "tier": "UNCOMMON",
    "museum": false,
    "soulbound": false,
-   "tradeable": true,
+   "tradeable": false,
    "riftTransferrable": false
   },
   {
@@ -944,7 +944,7 @@
    "tier": "COMMON",
    "museum": false,
    "soulbound": false,
-   "tradeable": true,
+   "tradeable": false,
    "riftTransferrable": false
   },
   {
@@ -953,7 +953,7 @@
    "tier": "UNCOMMON",
    "museum": false,
    "soulbound": false,
-   "tradeable": true,
+   "tradeable": false,
    "riftTransferrable": false
   },
   {
@@ -962,7 +962,7 @@
    "tier": "RARE",
    "museum": false,
    "soulbound": false,
-   "tradeable": true,
+   "tradeable": false,
    "riftTransferrable": false
   },
   {
@@ -971,7 +971,7 @@
    "tier": "EPIC",
    "museum": false,
    "soulbound": false,
-   "tradeable": true,
+   "tradeable": false,
    "riftTransferrable": false
   },
   {
@@ -980,7 +980,7 @@
    "tier": "LEGENDARY",
    "museum": false,
    "soulbound": false,
-   "tradeable": true,
+   "tradeable": false,
    "riftTransferrable": false
   },
   {
@@ -989,7 +989,7 @@
    "tier": "MYTHIC",
    "museum": false,
    "soulbound": false,
-   "tradeable": true,
+   "tradeable": false,
    "riftTransferrable": false
   },
   {
@@ -998,7 +998,7 @@
    "tier": "SUPREME",
    "museum": false,
    "soulbound": false,
-   "tradeable": true,
+   "tradeable": false,
    "riftTransferrable": false
   },
   {
@@ -1025,7 +1025,7 @@
    "tier": "EPIC",
    "museum": false,
    "soulbound": false,
-   "tradeable": true,
+   "tradeable": false,
    "riftTransferrable": false
   },
   {
@@ -1322,7 +1322,7 @@
    "tier": "COMMON",
    "museum": false,
    "soulbound": false,
-   "tradeable": true,
+   "tradeable": false,
    "riftTransferrable": true
   },
   {
@@ -1340,7 +1340,7 @@
    "tier": "EPIC",
    "museum": false,
    "soulbound": false,
-   "tradeable": true,
+   "tradeable": false,
    "riftTransferrable": false
   },
   {
@@ -1484,7 +1484,7 @@
    "tier": "UNCOMMON",
    "museum": false,
    "soulbound": false,
-   "tradeable": true,
+   "tradeable": false,
    "riftTransferrable": false
   },
   {
@@ -2483,7 +2483,7 @@
    "tier": "EPIC",
    "museum": false,
    "soulbound": false,
-   "tradeable": true,
+   "tradeable": false,
    "riftTransferrable": false
   },
   {
@@ -2591,7 +2591,7 @@
    "tier": "RARE",
    "museum": false,
    "soulbound": false,
-   "tradeable": true,
+   "tradeable": false,
    "riftTransferrable": true
   },
   {
@@ -2600,7 +2600,7 @@
    "tier": "LEGENDARY",
    "museum": false,
    "soulbound": false,
-   "tradeable": true,
+   "tradeable": false,
    "riftTransferrable": false
   },
   {
@@ -2618,7 +2618,7 @@
    "tier": "LEGENDARY",
    "museum": false,
    "soulbound": false,
-   "tradeable": true,
+   "tradeable": false,
    "riftTransferrable": false
   },
   {
@@ -2681,7 +2681,7 @@
    "tier": "LEGENDARY",
    "museum": false,
    "soulbound": false,
-   "tradeable": true,
+   "tradeable": false,
    "riftTransferrable": false
   },
   {
@@ -3401,7 +3401,7 @@
    "tier": "LEGENDARY",
    "museum": false,
    "soulbound": false,
-   "tradeable": true,
+   "tradeable": false,
    "riftTransferrable": true
   },
   {
@@ -3455,7 +3455,7 @@
    "tier": "EPIC",
    "museum": false,
    "soulbound": false,
-   "tradeable": true,
+   "tradeable": false,
    "riftTransferrable": false
   },
   {
