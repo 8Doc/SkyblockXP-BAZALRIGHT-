@@ -356,8 +356,14 @@ export function buildCatalog(
     }
   }
   for (const set of data.museum.armorSets) filledBy.add(set.setId);
-  const strandedDonations = donated ? [...donated].filter((held) => !filledBy.has(held)).length : 0;
-  const donatedCount = donated ? donated.size : 0;
+  // Special-section donations fill none of the 636 numbered slots, so they can only ever widen
+  // the gap — but the game counts them, and leaving them out made our total read short by
+  // exactly their number against the in-game one.
+  const specials = museum?.specialItemIds ?? new Set<string>();
+  const strandedDonations = donated
+    ? [...donated].filter((held) => !filledBy.has(held)).length + specials.size
+    : specials.size;
+  const donatedCount = (donated ? donated.size : 0) + specials.size;
   // A slot is filled by its own item, by an alternate id the same item is filed under, or by
   // anything further up its upgrade line: donate a Wand of Atonement and the Healing, Mending
   // and Restoration slots below it are filled too. Walking that chain is the difference between

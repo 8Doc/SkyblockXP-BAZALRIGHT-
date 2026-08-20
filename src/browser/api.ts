@@ -1,6 +1,6 @@
 import type { BazaarProduct, BinIndex, GardenState, MuseumState, SkyblockProfile } from "../lib/profile";
 import { absorbAuctionPage, createBinIndex, type AuctionRecord } from "../lib/auctions";
-import { bagCapacityFrom, bagItemsFrom, readNbt } from "../lib/nbt";
+import { bagCapacityFrom, bagItemsFrom, itemIdsFrom, readNbt } from "../lib/nbt";
 import type { BagItem } from "../lib/gameData";
 
 /**
@@ -132,13 +132,32 @@ export async function fetchProfiles(uuid: string, key: string): Promise<Skyblock
 /** Which items this profile has already donated. Undocumented endpoint, same open CORS. */
 export async function fetchMuseum(profileId: string, uuid: string, key: string): Promise<MuseumState | null> {
   try {
-    const body = await hypixel<{ members?: Record<string, { items?: Record<string, unknown>; value?: number }> }>(
-      `/skyblock/museum?profile=${profileId}`,
-      key,
-    );
+    const body = await hypixel<{
+      members?: Record<
+        string,
+        { items?: Record<string, unknown>; special?: { items?: { data?: string } }[]; value?: number }
+      >;
+    }>(`/skyblock/museum?profile=${profileId}`, key);
     const member = body.members?.[uuid];
     if (!member) return null;
-    return { donatedItemIds: new Set(Object.keys(member.items ?? {})), value: member.value ?? 0 };
+
+    // Special donations are stored as gzipped item blobs rather than keyed by id, so they have
+    // to be decoded to be counted at all.
+    const special = new Set<string>();
+    for (const entry of member.special ?? []) {
+      if (!entry?.items?.data) continue;
+      try {
+        for (const id of await itemIdsIn(entry.items.data)) special.add(id);
+      } catch {
+        // One unreadable blob shouldn't cost the whole museum.
+      }
+    }
+
+    return {
+      donatedItemIds: new Set(Object.keys(member.items ?? {})),
+      specialItemIds: special,
+      value: member.value ?? 0,
+    };
   } catch {
     // Museum data is opt-in per player; a refusal just means donations stay unmarked.
     return null;
@@ -250,6 +269,13 @@ export async function readBag(data: string | undefined): Promise<{ items: BagIte
     // A bag we can't read is a bag we report as unknown, not one we pretend is empty.
     return { items: null, capacity: 0 };
   }
+}
+
+/** Item ids inside a gzipped NBT blob — the same decode readBag does, without the bag parts. */
+async function itemIdsIn(data: string): Promise<string[]> {
+  const stream = new Blob([base64ToBytes(data)]).stream().pipeThrough(new DecompressionStream("gzip"));
+  const bytes = new Uint8Array(await new Response(stream).arrayBuffer());
+  return itemIdsFrom(readNbt(bytes));
 }
 
 /* --------------------------------------------------------- reference prices */

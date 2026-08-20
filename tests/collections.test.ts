@@ -13,10 +13,10 @@ const figLog = (data as unknown as { collections: { collections: { itemId: strin
 function catalogFor(
   member: Record<string, unknown>,
   profile?: SkyblockProfile,
-  museum?: { donatedItemIds: Set<string>; value: number },
+  museum?: { donatedItemIds: Set<string>; specialItemIds?: Set<string>; value: number },
 ) {
   return buildCatalog(
-    member as never, data, { items: null, capacity: 0 }, museum ?? null, null, null,
+    member as never, data, { items: null, capacity: 0 }, museum ? { specialItemIds: new Set<string>(), ...museum } : null, null, null,
     profile ? coopProgress(profile) : null,
   );
 }
@@ -206,4 +206,17 @@ test("reconciliation counts both sides for the three categories it covers", () =
   assert.deepEqual(museum, { category: "museum", credited: 0, reported: 3 });
   assert.equal(by.get("attributes")!.reported, 2, "both stacks are reported");
   assert.equal(by.get("attributes")!.credited, 1, "only the one we can place is credited");
+});
+
+test("special-section donations widen the museum gap rather than vanishing", () => {
+  // They fill none of the 636 numbered slots — no Cake Soul or Singing Fish is a slot — but the
+  // game counts them as donated, so leaving them out made our total read short by exactly their
+  // number against the in-game one.
+  const cat = catalogFor({}, undefined, {
+    donatedItemIds: new Set(["WAND_OF_HEALING"]),
+    specialItemIds: new Set(["CAKE_SOUL", "SINGING_FISH"]),
+    value: 0,
+  });
+  const museum = cat.reconciliation.find((r) => r.category === "museum")!;
+  assert.deepEqual(museum, { category: "museum", credited: 1, reported: 3 });
 });

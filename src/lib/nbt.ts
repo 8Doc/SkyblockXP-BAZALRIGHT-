@@ -178,3 +178,8 @@ export function bagItemsFrom(root: NbtCompound): BagItem[] {
   }
   return items;
 }
+
+/** Every item id in an NBT blob's slot list, ignoring empty slots. */
+export function itemIdsFrom(root: NbtCompound): string[] {
+  return bagItemsFrom(root).map((item) => item.id);
+}

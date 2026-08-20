@@ -74,6 +74,12 @@ export function coopProgress(profile: SkyblockProfile): {
 /** What the museum endpoint tells us: which items are already donated. */
 export type MuseumState = {
   donatedItemIds: Set<string>;
+  /**
+   * Donations in the museum's Special section. They sit outside the 636 numbered slots — none
+   * of them is an item this app has a slot for — but the game still counts them as donated, so
+   * ignoring them made our total read short against the in-game one by exactly their number.
+   */
+  specialItemIds: Set<string>;
   value: number;
 };
 
