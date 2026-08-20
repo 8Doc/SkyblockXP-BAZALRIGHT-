@@ -1,9 +1,9 @@
 {
- "generatedAt": "2026-08-20T23:17:47.577Z",
+ "generatedAt": "2026-08-20T23:57:48.065Z",
  "source": "Hypixel SkyBlock Fandom wiki infobox: upgrades_from",
  "note": "child upgrades from parent, so the two never count at once. Both ids are accessories we model; an upgrades_from naming something outside that set is left in `unresolved` rather than guessed at.",
  "consequence": "A missing edge lets the bag offer a tier the player has already upgraded past, and inflates the category ceiling. A wrong edge hides real XP. Names that don't resolve are dropped, never approximated.",
- "pagesRead": 310,
+ "pagesRead": 316,
  "edges": [
   {
    "child": "AGARIMOO_ARTIFACT",
@@ -88,6 +88,12 @@
    "parent": "BLOOD_DONOR_TALISMAN",
    "childName": "Blood Donor Ring",
    "parentName": "Blood Donor Talisman"
+  },
+  {
+   "child": "BLOOD_GOD_SIGIL",
+   "parent": "BLOOD_GOD_CREST",
+   "childName": "Blood God Sigil",
+   "parentName": "Blood God Crest"
   },
   {
    "child": "BLUE_GIFT_TALISMAN",
@@ -202,6 +208,12 @@
    "parent": "DRACONIC_TALISMAN",
    "childName": "Draconic Ring",
    "parentName": "Draconic Talisman"
+  },
+  {
+   "child": "DULL_SHARK_TOOTH_NECKLACE",
+   "parent": "RAGGEDY_SHARK_TOOTH_NECKLACE",
+   "childName": "Dull Shark Tooth Necklace",
+   "parentName": "Raggedy Shark Tooth Necklace"
   },
   {
    "child": "EMERALD_ARTIFACT",
@@ -894,14 +906,5 @@
    "parentName": "Zombie Talisman"
   }
  ],
- "unresolved": [
-  {
-   "page": "Blood God Sigil",
-   "upgradesFrom": "Blood God Crest"
-  },
-  {
-   "page": "Dull Shark Tooth Necklace",
-   "upgradesFrom": "Raggedy Shark Tooth Necklace"
-  }
- ]
+ "unresolved": []
 }

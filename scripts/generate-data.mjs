@@ -129,10 +129,21 @@ async function buildAccessories() {
     console.log("  accessories  no accessory_trade.json — run fetch-accessory-trade.mjs");
   }
 
+  // Rarity for the accessories the resource ships without one, read off the wiki infobox. See
+  // fetch-accessory-rarity.mjs: without it these are dropped, which loses the magical power of
+  // any the player is wearing and leaves the family they anchor looking empty.
+  let wikiRarity = new Map();
+  try {
+    const rarity = JSON.parse(await readFile(join(OUT, "accessory_rarity.json"), "utf8"));
+    wikiRarity = new Map(rarity.rarities.map((entry) => [entry.id, entry.rarity]));
+  } catch {
+    console.log("  accessories  no accessory_rarity.json — run fetch-accessory-rarity.mjs");
+  }
+
   const out = [];
   for (const item of items) {
     if (item.category !== "ACCESSORY") continue;
-    const tier = item.tier ?? impliedTier(item.name);
+    const tier = item.tier ?? wikiRarity.get(item.id) ?? null;
     if (!tier) continue; // no rarity we can stand behind -> no defined magical power
     out.push({
       id: item.id,
@@ -147,28 +158,19 @@ async function buildAccessories() {
         // Rift items never leave the rift, whatever the resource says.
         item.origin !== "RIFT" &&
         !wikiUntradeable.has(item.id),
+      // Only a stated no counts. The resource sets this on the nine accessories that cannot take
+      // a Recombobulator 3000 — the Voter's Badges, Rift Prism, Pandora's Box, Runebook, Safety
+      // Badge, Book of Progression — and says nothing at all about the rest, which can.
+      recombobulatable: item.can_recombobulate !== false,
+      // A rift accessory that cannot be transferred out never enters the accessory bag and never
+      // grants magical power. Both flags are needed to say so: plenty of ordinary accessories are
+      // not rift-transferrable either, and for them it means nothing.
+      rift: item.origin === "RIFT",
       riftTransferrable: Boolean(item.rift_transferrable),
     });
   }
   out.sort((a, b) => a.id.localeCompare(b.id));
   return { accessories: out };
-}
-
-/**
- * A rarity for the accessories the items resource ships without one.
- *
- * There are 38 of them and dropping the lot was expensive in both directions: the bag couldn't
- * credit magical power for an accessory it didn't know (the computed-vs-reported readout was
- * short by exactly the sort of margin a stack of basic talismans makes), and the family those
- * accessories anchor looked empty, so the app offered the Ring of a family whose Talisman the
- * player already wore.
- *
- * Only the Talisman step is inferred, and only because it is the base of every family and
- * common throughout the game. The rest — Master Skulls, Runebook, the Campfire badge ladders,
- * Beastmaster Crest — carry no rarity anywhere in the API and are left out rather than guessed.
- */
-function impliedTier(name) {
-  return /(^|\s)Talisman(\s|$)/.test(name ?? "") ? "COMMON" : null;
 }
 
 /**

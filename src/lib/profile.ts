@@ -21,6 +21,8 @@ export type ProfileMember = {
   accessory_bag_storage?: {
     /** Powers already unlocked, by name. */
     unlocked_powers?: string[]; highest_magical_power?: number; bag_upgrades_purchased?: number };
+  /** Abiphone contacts, keyed by NPC. An Abicase turns every two of them into magical power. */
+  nether_island_player_data?: { abiphone?: { contact_data?: Record<string, unknown> } };
   fairy_soul?: { total_collected?: number };
   inventory?: { bag_contents?: { talisman_bag?: { data?: string } } };
   dungeons?: {

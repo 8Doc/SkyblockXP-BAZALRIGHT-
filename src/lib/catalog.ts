@@ -9,6 +9,7 @@ import {
   bumpRarity,
   effortOf,
   familyOf,
+  grantsMagicalPower,
   magicalPowerOf,
   scoreBag,
   type BagItem,
@@ -243,11 +244,13 @@ export function buildCatalog(
 
   /* ------------------------------------------------------- accessory bag */
 
+  const abiphoneContacts = Object.keys(member.nether_island_player_data?.abiphone?.contact_data ?? {}).length;
   const bagState = scoreBag(
     data,
     bag.items,
     member.accessory_bag_storage?.highest_magical_power ?? null,
     bag.capacity,
+    abiphoneContacts,
   );
 
   // Slots are a real constraint on buying accessories: the bag holds what it holds, and more
@@ -271,6 +274,8 @@ export function buildCatalog(
   const accessoryById = new Map(data.accessories.accessories.map((a) => [a.id, a]));
   for (const acc of data.accessories.accessories) {
     if (excluded.has(acc.id)) continue;
+    // A rift-bound accessory never reaches the bag, so its magical power is not on offer.
+    if (!grantsMagicalPower(acc)) continue;
     const power = magicalPowerOf(data, acc.tier);
     if (power <= 0) continue;
 
@@ -692,6 +697,11 @@ export function buildCatalog(
   // game allows a single rarity upgrade per item, which `rarityUpgrades` already records.
   for (const [family, best] of bagState.familyBest) {
     if (best.recombobulated) continue;
+    // Nine accessories refuse a Recombobulator outright, and the resource says which. Offering
+    // one anyway is an impossible task priced at a real Recombobulator: on a maxed profile every
+    // recombobulate row the app produced was one of these — all four of them, the Voter's Badge
+    // among them.
+    if (accessoryById.get(best.id)?.recombobulatable === false) continue;
     const bumped = bumpRarity(data, best.rarity, 1);
     if (bumped === best.rarity) continue; // already at the top of the ladder
     const power = magicalPowerOf(data, bumped);

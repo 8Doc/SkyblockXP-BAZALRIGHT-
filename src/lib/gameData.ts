@@ -52,8 +52,25 @@ export type AccessoriesData = {
     museum: boolean;
     soulbound: boolean;
     tradeable: boolean;
+    /** False only where the resource says so outright — a Recombobulator 3000 won't take. */
+    recombobulatable: boolean;
+    /** From the Rift. Only the transferrable ones ever reach the accessory bag. */
+    rift: boolean;
+    riftTransferrable: boolean;
   }[];
 };
+
+/**
+ * Whether an accessory can grant magical power at all.
+ *
+ * A rift accessory that cannot leave the rift cannot go in the accessory bag, so it never grants
+ * magical power and must never be offered as XP to buy. Seventeen of the twenty-nine rift
+ * accessories are in that state, and between them they were advertising about 140 magical power
+ * that no one can ever collect — the Crux line, both Rings of Love, Satelite and the trinkets.
+ */
+export function grantsMagicalPower(acc: { rift: boolean; riftTransferrable: boolean }): boolean {
+  return !acc.rift || acc.riftTransferrable;
+}
 
 export type MagicalPowerData = {
   source: string;
@@ -446,7 +463,20 @@ export function familyOf(data: GameData, name: string, id: string): string {
 
 /* --------------------------------------------------------------- bag scoring */
 
-export type BagItem = { id: string; rarityUpgrades: number };
+export type BagItem = { id: string; rarityUpgrades: number; rarity?: string | null };
+
+/**
+ * The accessories the game scores by its own rules rather than by rarity alone.
+ *
+ * All three are stated on the wiki's Magical Power page. Without them a maxed bag reads low by
+ * a wide margin, and the computed-vs-reported gap — the one readout that tells you the model is
+ * wrong — gets blamed on family detection instead.
+ */
+const HEGEMONY = "HEGEMONY_ARTIFACT";
+/** An Abicase grants one extra magical power for every two Abiphone contacts. */
+function abicaseBonus(contacts: number): number {
+  return Math.floor(contacts / 2);
+}
 
 export type BagState = {
   /** family -> magical power already granted by the best owned member. */
@@ -477,6 +507,8 @@ export function scoreBag(
   items: BagItem[] | null,
   reportedMp: number | null,
   capacity = 0,
+  /** Abiphone contacts, which an Abicase converts into magical power at one per two. */
+  abiphoneContacts = 0,
 ): BagState {
   const byId = new Map(data.accessories.accessories.map((a) => [a.id, a]));
   const excluded = new Set(data.magicalPower.excludedItems.ids);
@@ -486,22 +518,29 @@ export function scoreBag(
   const owned = new Set<string>();
 
   let identified = 0;
+  let bonusMp = 0;
   for (const item of items ?? []) {
     owned.add(item.id);
     if (excluded.has(item.id)) continue;
     const meta = byId.get(item.id);
     if (!meta) continue;
     identified++;
-    const rarity = bumpRarity(data, meta.tier, item.rarityUpgrades);
+    // The item's own lore wins over the resource where it has one: a Book of Progression climbs
+    // to mythic through play and the resource still calls it common.
+    const rarity = item.rarity ?? bumpRarity(data, meta.tier, item.rarityUpgrades);
     const family = familyOf(data, meta.name, meta.id);
     const power = magicalPowerOf(data, rarity);
     if (power > (familyPower.get(family) ?? -1)) {
       familyPower.set(family, power);
       familyBest.set(family, { id: meta.id, rarity, recombobulated: item.rarityUpgrades > 0 });
     }
+    // Hegemony grants its magical power twice over. Counted as a bonus rather than by doubling
+    // the family's figure, so the family still ranks against its rivals on what it really is.
+    if (meta.id === HEGEMONY) bonusMp += power;
+    if (meta.id.startsWith("ABICASE")) bonusMp += abicaseBonus(abiphoneContacts);
   }
 
-  let computedMp = 0;
+  let computedMp = bonusMp;
   for (const power of familyPower.values()) computedMp += power;
 
   return {

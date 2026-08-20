@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-08-20T19:22:02.907Z",
+ "generatedAt": "2026-08-20T23:57:44.771Z",
  "source": "https://api.hypixel.net/v2/resources/skyblock",
  "accessories": [
   {
@@ -9,6 +9,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -18,6 +20,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -27,6 +31,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -36,6 +42,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -45,6 +53,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -54,6 +64,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -63,6 +75,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -72,6 +86,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -81,6 +97,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -90,6 +108,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -99,6 +119,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -108,6 +130,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -117,6 +141,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -126,6 +152,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -135,6 +163,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -144,6 +174,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": true,
    "riftTransferrable": false
   },
   {
@@ -153,6 +185,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -162,6 +196,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -171,6 +207,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -180,6 +218,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -189,6 +229,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -198,6 +240,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -207,6 +251,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -216,6 +262,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -225,6 +273,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -234,6 +284,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -243,6 +295,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -252,6 +306,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -261,6 +317,19 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "BEASTMASTER_CREST_COMMON",
+   "name": "Beastmaster Crest",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -270,6 +339,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -279,6 +350,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -288,6 +361,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -297,6 +372,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -306,6 +383,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": true,
    "riftTransferrable": true
   },
   {
@@ -315,6 +394,8 @@
    "museum": true,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -324,6 +405,8 @@
    "museum": true,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -333,6 +416,8 @@
    "museum": true,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -342,6 +427,8 @@
    "museum": true,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -351,6 +438,8 @@
    "museum": true,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -360,6 +449,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -369,6 +460,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -378,6 +471,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -387,6 +482,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -396,6 +493,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -405,6 +504,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": true,
    "riftTransferrable": true
   },
   {
@@ -414,6 +515,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": true,
    "riftTransferrable": true
   },
   {
@@ -423,7 +526,20 @@
    "museum": false,
    "soulbound": false,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": true,
    "riftTransferrable": true
+  },
+  {
+   "id": "BLOOD_GOD_CREST",
+   "name": "Blood God Crest",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
+   "riftTransferrable": false
   },
   {
    "id": "BLOOD_GOD_SIGIL",
@@ -432,6 +548,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -441,6 +559,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -450,6 +570,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -459,6 +581,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": true,
    "riftTransferrable": true
   },
   {
@@ -468,6 +592,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": false,
+   "recombobulatable": false,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -477,6 +603,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -486,6 +614,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -495,6 +625,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -504,6 +636,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -513,6 +647,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -522,6 +658,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -531,6 +669,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -540,6 +680,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -549,6 +691,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -558,6 +702,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -567,6 +713,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -576,6 +724,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -585,6 +735,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -594,6 +746,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -603,6 +757,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -612,6 +768,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -621,6 +779,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -630,6 +790,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -639,6 +801,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -648,6 +812,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -657,6 +823,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -666,6 +834,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -675,6 +845,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -684,6 +856,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -693,6 +867,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -702,6 +878,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -711,6 +889,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -720,6 +900,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -729,6 +911,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -738,6 +922,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -747,6 +933,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -756,6 +944,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -765,6 +955,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -774,6 +966,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -783,6 +977,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -792,6 +988,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -801,6 +999,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -810,6 +1010,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -819,6 +1021,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -828,6 +1032,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -837,6 +1043,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -846,6 +1054,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -855,6 +1065,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -864,6 +1076,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -873,15 +1087,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": false,
-   "riftTransferrable": false
-  },
-  {
-   "id": "COMPASS_TALISMAN",
-   "name": "Compass Talisman",
-   "tier": "COMMON",
-   "museum": false,
-   "soulbound": false,
-   "tradeable": true,
+   "recombobulatable": true,
+   "rift": true,
    "riftTransferrable": false
   },
   {
@@ -891,6 +1098,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -900,6 +1109,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -909,6 +1120,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -918,6 +1131,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -927,6 +1142,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -936,6 +1153,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -945,6 +1164,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": true,
    "riftTransferrable": false
   },
   {
@@ -954,6 +1175,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": true,
    "riftTransferrable": false
   },
   {
@@ -963,6 +1186,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": true,
    "riftTransferrable": false
   },
   {
@@ -972,6 +1197,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": true,
    "riftTransferrable": false
   },
   {
@@ -981,6 +1208,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": true,
    "riftTransferrable": false
   },
   {
@@ -990,6 +1219,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": true,
    "riftTransferrable": false
   },
   {
@@ -999,6 +1230,19 @@
    "museum": false,
    "soulbound": false,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": true,
+   "riftTransferrable": false
+  },
+  {
+   "id": "DANTE_RING",
+   "name": "Dante's Ring",
+   "tier": "COMMON",
+   "museum": true,
+   "soulbound": false,
+   "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1008,6 +1252,8 @@
    "museum": true,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1017,6 +1263,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1026,6 +1274,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": true,
    "riftTransferrable": false
   },
   {
@@ -1035,6 +1285,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1044,6 +1296,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1053,6 +1307,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1062,6 +1318,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1071,6 +1329,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1080,6 +1340,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1089,6 +1351,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1098,6 +1362,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1107,6 +1373,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1116,6 +1384,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1125,6 +1395,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1134,6 +1406,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1143,6 +1417,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1152,6 +1428,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1161,6 +1439,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1170,6 +1450,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1179,6 +1461,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1188,6 +1472,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1197,6 +1483,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1206,6 +1494,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1215,6 +1505,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1224,6 +1516,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1233,6 +1527,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1242,6 +1538,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1251,6 +1549,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1260,6 +1560,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1269,6 +1571,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1278,6 +1582,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1287,6 +1593,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1296,6 +1604,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1305,6 +1615,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1314,6 +1626,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1323,6 +1637,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": true
   },
   {
@@ -1332,6 +1648,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1341,6 +1659,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": true,
    "riftTransferrable": false
   },
   {
@@ -1350,6 +1670,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1359,6 +1681,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1368,6 +1692,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1377,6 +1703,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1386,6 +1714,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1395,6 +1725,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1404,6 +1736,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1413,6 +1747,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1422,6 +1758,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1431,6 +1769,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1440,6 +1780,8 @@
    "museum": true,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1449,6 +1791,8 @@
    "museum": true,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1458,6 +1802,8 @@
    "museum": true,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1467,6 +1813,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1476,6 +1824,19 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "HANDY_BLOOD_CHALICE",
+   "name": "Handy Blood Chalice",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1485,6 +1846,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": true,
    "riftTransferrable": false
   },
   {
@@ -1494,6 +1857,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1503,6 +1868,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1512,6 +1879,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1521,6 +1890,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1530,6 +1901,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1539,6 +1912,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1548,6 +1923,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": true
   },
   {
@@ -1557,6 +1934,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1566,6 +1945,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1575,6 +1956,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1584,6 +1967,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1593,6 +1978,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1602,6 +1989,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1611,6 +2000,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1620,6 +2011,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1629,6 +2022,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1638,6 +2033,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1647,6 +2044,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1656,6 +2055,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": true,
    "riftTransferrable": true
   },
   {
@@ -1665,6 +2066,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1674,6 +2077,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1683,6 +2088,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1692,6 +2099,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1701,6 +2110,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1710,6 +2121,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1719,6 +2132,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1728,6 +2143,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1737,6 +2154,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1746,6 +2165,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1755,6 +2176,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1764,6 +2187,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1773,6 +2198,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1782,6 +2209,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1791,6 +2220,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1800,6 +2231,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1809,6 +2242,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1818,6 +2253,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1827,6 +2264,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1836,6 +2275,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1845,6 +2286,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1854,6 +2297,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1863,6 +2308,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1872,6 +2319,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1881,6 +2330,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1890,6 +2341,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1899,6 +2352,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1908,6 +2363,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1917,6 +2374,19 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "MASTER_SKULL_TIER_1",
+   "name": "Master Skull - Tier 1",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1926,6 +2396,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1935,6 +2407,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1944,6 +2418,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1953,6 +2429,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1962,6 +2440,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1971,6 +2451,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1980,6 +2462,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1989,6 +2473,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -1998,6 +2484,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2007,6 +2495,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2016,6 +2506,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2025,6 +2517,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2034,6 +2528,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2043,6 +2539,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": true,
    "riftTransferrable": true
   },
   {
@@ -2052,6 +2550,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2061,6 +2561,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2070,6 +2572,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2079,6 +2583,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2088,6 +2594,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2097,6 +2605,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2106,6 +2616,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2115,6 +2627,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2124,6 +2638,19 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "NIGHT_VISION_CHARM",
+   "name": "Night Vision Charm",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2133,6 +2660,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2142,6 +2671,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2151,6 +2682,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2160,6 +2693,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2169,6 +2704,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2178,6 +2715,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2187,6 +2726,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2196,6 +2737,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2205,6 +2748,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": false,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2214,6 +2759,8 @@
    "museum": true,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2223,6 +2770,8 @@
    "museum": true,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2232,6 +2781,8 @@
    "museum": true,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2241,6 +2792,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2250,6 +2803,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2259,6 +2814,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2268,6 +2825,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2277,6 +2836,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2286,6 +2847,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2295,6 +2858,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2304,6 +2869,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2313,6 +2880,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2322,6 +2891,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2331,6 +2902,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2340,6 +2913,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2349,6 +2924,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2358,6 +2935,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2367,6 +2946,19 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "POCKET_ESPRESSO_MACHINE",
+   "name": "Pocket Espresso Machine",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2376,6 +2968,8 @@
    "museum": true,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2385,6 +2979,8 @@
    "museum": true,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2394,6 +2990,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2403,6 +3001,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2412,6 +3012,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2421,6 +3023,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2430,6 +3034,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2439,6 +3045,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2448,6 +3056,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2457,6 +3067,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2466,6 +3078,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2475,6 +3089,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2484,6 +3100,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": true,
    "riftTransferrable": false
   },
   {
@@ -2493,6 +3111,19 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "RAGGEDY_SHARK_TOOTH_NECKLACE",
+   "name": "Raggedy Shark Tooth Necklace",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2502,6 +3133,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2511,6 +3144,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2520,6 +3155,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2529,6 +3166,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2538,6 +3177,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2547,6 +3188,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2556,6 +3199,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": true
   },
   {
@@ -2565,6 +3210,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": true
   },
   {
@@ -2574,6 +3221,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": true
   },
   {
@@ -2583,6 +3232,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2592,6 +3243,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": false,
+   "recombobulatable": false,
+   "rift": true,
    "riftTransferrable": true
   },
   {
@@ -2601,6 +3254,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": true,
    "riftTransferrable": false
   },
   {
@@ -2610,6 +3265,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2619,6 +3276,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": true,
    "riftTransferrable": false
   },
   {
@@ -2628,6 +3287,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2637,6 +3298,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2646,6 +3309,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2655,6 +3320,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2664,6 +3331,19 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
+   "riftTransferrable": false
+  },
+  {
+   "id": "RUNEBOOK",
+   "name": "Runebook",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "recombobulatable": false,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2673,6 +3353,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": false,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2682,6 +3364,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": true,
    "riftTransferrable": false
   },
   {
@@ -2691,6 +3375,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": true
   },
   {
@@ -2700,6 +3386,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": true
   },
   {
@@ -2709,6 +3397,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": true
   },
   {
@@ -2718,6 +3408,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2727,6 +3419,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2736,6 +3430,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2745,6 +3441,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2754,6 +3452,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2763,6 +3463,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2772,6 +3474,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2781,6 +3485,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2790,6 +3496,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2799,6 +3507,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2808,6 +3518,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2817,6 +3529,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2826,6 +3540,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2835,6 +3551,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2844,6 +3562,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2853,6 +3573,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2862,6 +3584,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2871,6 +3595,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2880,6 +3606,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2889,6 +3617,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2898,6 +3628,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2907,6 +3639,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2916,6 +3650,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2925,6 +3661,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2934,6 +3672,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2943,6 +3683,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2952,6 +3694,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2961,6 +3705,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2970,6 +3716,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2979,6 +3727,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2988,6 +3738,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -2997,6 +3749,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3006,6 +3760,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3015,6 +3771,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3024,6 +3782,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3033,6 +3793,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3042,6 +3804,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3051,6 +3815,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3060,6 +3826,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3069,6 +3837,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3078,6 +3848,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3087,6 +3859,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3096,6 +3870,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3105,6 +3881,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3114,6 +3892,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3123,6 +3903,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3132,6 +3914,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3141,6 +3925,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3150,6 +3936,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3159,6 +3947,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3168,6 +3958,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3177,6 +3969,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3186,6 +3980,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3195,6 +3991,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3204,6 +4002,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3213,6 +4013,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3222,6 +4024,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3231,6 +4035,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3240,6 +4046,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3249,6 +4057,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": true,
    "riftTransferrable": true
   },
   {
@@ -3258,6 +4068,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": true,
    "riftTransferrable": true
   },
   {
@@ -3267,6 +4079,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3276,6 +4090,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3285,6 +4101,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3294,6 +4112,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3303,6 +4123,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3312,6 +4134,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3321,6 +4145,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3330,6 +4156,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3339,6 +4167,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3348,6 +4178,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3357,6 +4189,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3366,6 +4200,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": true,
    "riftTransferrable": true
   },
   {
@@ -3375,6 +4211,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3384,6 +4222,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3393,6 +4233,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3402,6 +4244,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": true,
    "riftTransferrable": true
   },
   {
@@ -3411,6 +4255,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3420,6 +4266,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": false,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3429,6 +4277,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": false,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3438,6 +4288,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": false,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3447,6 +4299,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": false,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3456,6 +4310,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": true,
    "riftTransferrable": false
   },
   {
@@ -3465,6 +4321,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3474,6 +4332,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3483,6 +4343,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3492,6 +4354,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3501,6 +4365,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3510,6 +4376,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3519,6 +4387,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3528,6 +4398,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3537,6 +4409,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3546,6 +4420,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3555,6 +4431,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3564,6 +4442,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3573,6 +4453,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3582,6 +4464,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3591,6 +4475,8 @@
    "museum": false,
    "soulbound": true,
    "tradeable": false,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3600,6 +4486,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3609,6 +4497,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3618,6 +4508,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3627,6 +4519,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3636,6 +4530,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   },
   {
@@ -3645,6 +4541,8 @@
    "museum": false,
    "soulbound": false,
    "tradeable": true,
+   "recombobulatable": true,
+   "rift": false,
    "riftTransferrable": false
   }
  ]

@@ -123,9 +123,54 @@ test("pulls item ids and recombobulations out of a bag", () => {
   });
 
   assert.deepEqual(bagItemsFrom(readNbt(bytes)), [
-    { id: "TARANTULA_RING", rarityUpgrades: 1 },
-    { id: "BAT_RING", rarityUpgrades: 0 },
+    { id: "TARANTULA_RING", rarityUpgrades: 1, rarity: null },
+    { id: "BAT_RING", rarityUpgrades: 0, rarity: null },
   ]);
+});
+
+/**
+ * The items resource is not the last word on rarity. A Book of Progression is COMMON there and
+ * MYTHIC in the bag, having climbed there through play, so reading the resource scored it 3
+ * magical power against a real 22. The item's own lore says what it actually is.
+ */
+test("reads the rarity an item's lore claims", () => {
+  const bytes = document((w) => {
+    w.tag(9, "i").u8(10).i32(1);
+    w.tag(10, "tag");
+    w.tag(10, "ExtraAttributes");
+    w.tag(8, "id").str("BOOK_OF_PROGRESSION");
+    w.end();
+    w.tag(10, "display");
+    w.tag(9, "Lore").u8(8).i32(2);
+    // Ability text above, the rarity line last — which is why it is read from the bottom.
+    w.str("§7Grants a very RARE bonus");
+    w.str("§d§lMYTHIC ACCESSORY");
+    w.end(); // display
+    w.end(); // tag
+    w.end(); // slot
+  });
+
+  assert.deepEqual(bagItemsFrom(readNbt(bytes)), [
+    { id: "BOOK_OF_PROGRESSION", rarityUpgrades: 0, rarity: "MYTHIC" },
+  ]);
+});
+
+test("VERY SPECIAL is not read as SPECIAL", () => {
+  const bytes = document((w) => {
+    w.tag(9, "i").u8(10).i32(1);
+    w.tag(10, "tag");
+    w.tag(10, "ExtraAttributes");
+    w.tag(8, "id").str("PARTY_HAT_CRAB");
+    w.end();
+    w.tag(10, "display");
+    w.tag(9, "Lore").u8(8).i32(1);
+    w.str("§c§lVERY SPECIAL ACCESSORY");
+    w.end();
+    w.end();
+    w.end();
+  });
+
+  assert.equal(bagItemsFrom(readNbt(bytes))[0].rarity, "VERY_SPECIAL");
 });
 
 test("a document with no inventory list yields no items", () => {

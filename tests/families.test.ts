@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { familyOf } from "../src/lib/gameData";
+import { familyOf, grantsMagicalPower } from "../src/lib/gameData";
 import accessories from "../data/generated/accessories.json";
 import accessoryFamilies from "../data/curated/accessory_families.json";
 import accessoryUpgrades from "../data/generated/accessory_upgrades.json";
@@ -182,6 +182,47 @@ test("a family's Talisman, Ring and Artifact all resolve to one family", () => {
     const tiers = [`${stem} Talisman`, `${stem} Ring`, `${stem} Artifact`].map(family);
     assert.equal(new Set(tiers).size, 1, `${stem} split into ${new Set(tiers).size} families`);
   }
+});
+
+/* ------------------------------------------- what can grant magical power */
+
+/**
+ * A rift accessory that cannot leave the rift cannot go in the accessory bag, so its magical
+ * power is unreachable and must never be offered as XP to buy. Seventeen of the twenty-nine
+ * were, worth about 140 magical power between them.
+ */
+test("rift accessories that cannot leave the rift grant no magical power", () => {
+  const list = (accessories as { accessories: { id: string; name: string; rift: boolean; riftTransferrable: boolean }[] })
+    .accessories;
+  const byId = new Map(list.map((a) => [a.id, a]));
+
+  // CRUX_TALISMAN_6 is the Crux Chronomicon, the 22-MP top of a line that is entirely rift-bound.
+  for (const id of ["CRUX_TALISMAN_6", "SATELITE", "PUNCHCARD_ARTIFACT", "RING_OF_BROKEN_LOVE"]) {
+    const acc = byId.get(id);
+    assert.ok(acc, `${id} is missing from the accessory list`);
+    assert.equal(grantsMagicalPower(acc), false, `${id} never reaches the bag`);
+  }
+  // The transferrable ones do count, and an ordinary non-rift accessory is unaffected.
+  for (const id of ["RIFT_PRISM", "BLUETOOTH_RING", "BAT_ARTIFACT"]) {
+    const acc = byId.get(id);
+    assert.ok(acc, `${id} is missing from the accessory list`);
+    assert.equal(grantsMagicalPower(acc), true, `${id} should still count`);
+  }
+});
+
+/**
+ * Nine accessories refuse a Recombobulator and the resource says which. On a maxed profile every
+ * recombobulate row the app produced was one of them — four impossible tasks, each priced at a
+ * real Recombobulator 3000, the Voter's Badge among them.
+ */
+test("the accessories that refuse a recombobulator are flagged", () => {
+  const list = (accessories as { accessories: { id: string; recombobulatable: boolean }[] }).accessories;
+  const byId = new Map(list.map((a) => [a.id, a]));
+
+  for (const id of ["VOTER_BADGE_SUPREME", "PANDORAS_BOX", "BOOK_OF_PROGRESSION", "SAFETY_BADGE", "RIFT_PRISM"]) {
+    assert.equal(byId.get(id)?.recombobulatable, false, `${id} cannot be recombobulated`);
+  }
+  assert.equal(byId.get("BAT_ARTIFACT")?.recombobulatable, true, "an ordinary accessory still can be");
 });
 
 /* --------------------------------------------------- what can be bought */

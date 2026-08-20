@@ -104,6 +104,45 @@ rules and either source alone still yields a usable answer. 310 of 405 pages res
 that don't are the ladders the name rules already handle. Two `upgrades_from` values name
 something outside the modelled set and are recorded in `unresolved` rather than guessed at.
 
+### `accessory_rarity.json`
+
+Rarity for the 38 accessories the items resource ships without one, read off the wiki infobox.
+
+Magical power is a function of rarity and nothing else, so an accessory with no rarity has no
+defined magical power and gets dropped from the model altogether. That costs twice: the bag
+cannot credit one the player is wearing, and the family it anchors reads as empty, so the
+planner offers a tier they have already upgraded past. A maxed profile was wearing six of them —
+Dante's Ring among them — and being offered Dante's Talisman as missing XP.
+
+This replaces a rule that guessed COMMON for anything named "... Talisman", which was right as
+far as it went and reached only the Talisman step. 28 of the 38 now have a stated rarity; the
+other 10 (the Campfire Initiate badges, Master Skull tier 2, two joke Wedding Rings) have no
+page that states one and stay dropped, listed in `missing` rather than guessed at.
+
+## What the accessory bag is really worth
+
+Magical power is 1 SkyBlock XP each, so the bag's XP is only as good as the magical power model.
+Four rules matter, all of them stated on the wiki's Magical Power page and none of them in the
+API:
+
+- **Rarity sets it** — 3 / 5 / 8 / 12 / 16 / 22 for common through mythic.
+- **Hegemony Artifact counts twice.**
+- **An Abicase adds 1 per 2 Abiphone contacts** — 40 magical power on a profile with 80.
+- **Rift accessories only count if they can leave the rift.** 17 of the 29 cannot, and they
+  cannot enter the accessory bag at all, so their magical power is unreachable. They were being
+  advertised as buyable XP: the whole Crux line, both Rings of Love, Satelite and the trinkets,
+  about 140 magical power nobody can ever collect.
+
+There is a fifth rule the API actively misleads on. **Some accessories climb in rarity through
+play** — a Book of Progression and a Pandora's Box are both COMMON in the items resource and
+both MYTHIC in a real bag, worth 22 rather than 3. The bag's own NBT carries what the item
+actually is, in the last line of its lore, so that is what `bagItemsFrom` now reads and
+`scoreBag` prefers. Only about a tenth of bagged items carry lore at all, so this is a
+correction where it exists rather than a replacement for the resource.
+
+Checked against a maxed profile reporting **2,122** magical power in game, the model reads
+**2,078**. It read 1,946 before this work. What is left is named in `magical_power.json`.
+
 ## Running without a server
 
 The standalone HTML calls Hypixel from the page. Two things make that possible, and both were

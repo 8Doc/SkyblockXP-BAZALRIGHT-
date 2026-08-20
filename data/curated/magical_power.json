@@ -30,6 +30,8 @@
   },
   "knownGaps": [
     "highest_magical_power is a high-water mark, not a current reading, so computed MP can sit below it legitimately.",
-    "Hegemony Artifact (doubles its own MP), Abicase (MP scales with contacts) and Rift Prism are special-cased by the game and not by us."
+    "Hegemony Artifact (doubles its own MP) and the Abicase (+1 MP per 2 Abiphone contacts) are now modelled in scoreBag. Rift Prism is not: the wiki lists its 11 MP under 'other sources', which reads as a permanent grant for imbuing it rather than for carrying it, and nothing in the profile says whether a player has imbued one.",
+    "Measured against a maxed profile (2,122 MP in game) the model reaches 2,078. The residual 44 is: a Balloon Hat 2024 the items resource does not carry at all; whether a Personal Deletor 6000 and 7000 are one family or two; and the Rift Prism above.",
+    "Accessories whose rarity climbs through play — Book of Progression, Pandora's Box, Runebook — are COMMON in the items resource and much higher in the bag. Reading the item's own lore fixes this for what a player holds, but the model still prices the *unowned* ones off the resource, so their share of the ceiling is understated."
   ]
 }
