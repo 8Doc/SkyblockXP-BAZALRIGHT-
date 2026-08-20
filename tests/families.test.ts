@@ -4,9 +4,10 @@ import { readFileSync } from "node:fs";
 import { familyOf } from "../src/lib/gameData";
 import accessories from "../data/generated/accessories.json";
 import accessoryFamilies from "../data/curated/accessory_families.json";
+import accessoryUpgrades from "../data/generated/accessory_upgrades.json";
 import magicalPower from "../data/curated/magical_power.json";
 
-const data = { accessories, accessoryFamilies, magicalPower } as never;
+const data = { accessories, accessoryFamilies, accessoryUpgrades, magicalPower } as never;
 const family = (name: string) => familyOf(data, name, name);
 
 /**
@@ -41,6 +42,52 @@ test("Heirloom, Badge and Chronomicon are upgrade steps, not new families", () =
   assert.equal(family("Bingo Heirloom"), family("Bingo Talisman"));
   assert.equal(family("Crux Chronomicon"), family("Crux Ring"));
   assert.equal(family("Pesthunter Badge"), family("Pesthunter Ring"));
+});
+
+/* ------------------------------------------------ lines that rename as they climb */
+
+/**
+ * The reported symptom: the bag kept listing accessories the player had already upgraded past.
+ * A name rule cannot see these families, because no two tiers share a word — the wiki's
+ * `upgrades_from` is the only thing that joins them, and nothing in the items resource does.
+ */
+test("an upgrade line that renames at every step is still one family", () => {
+  for (const [label, names] of [
+    ["the farming line", ["Cropie Talisman", "Squash Ring", "Fermento Artifact", "Helianthus Relic"]],
+    ["the cat line", ["Cat Talisman", "Lynx Talisman", "Cheetah Talisman"]],
+    ["the shady line", ["Shady Ring", "Crooked Artifact", "Seal of the Family"]],
+    ["kuudra's organs", ["Kuudra's Kidney", "Kuudra's Lung", "Kuudra's Heart"]],
+    ["the night line", ["Night Crystal", "Moonlight Crystal"]],
+    ["the day line", ["Day Crystal", "Sunshine Crystal"]],
+  ] as [string, string[]][]) {
+    const found = new Set(names.map(family));
+    assert.equal(found.size, 1, `${label} split into ${found.size}: ${[...found].join(", ")}`);
+  }
+});
+
+test("the wiki's edges compose, so the ends of a long line meet in the middle", () => {
+  // Three separate `upgrades_from` statements are what make Cropie and Helianthus one family.
+  // Reading them one at a time, without a union, would leave the two ends apart.
+  assert.equal(family("Cropie Talisman"), family("Helianthus Relic"));
+  assert.equal(family("Crux Talisman"), family("Celestial Starstone"));
+});
+
+test("merging a renamed tier in leaves the family under the name most of it already had", () => {
+  // Celestial Starstone joins the Crux line, but the family stays "crux" rather than being
+  // renamed after its newest member — plans and group keys stay recognisable.
+  assert.equal(family("Crux Ring"), "crux");
+});
+
+test("every upgrade edge the wiki states ends up inside one family", () => {
+  const byId = new Map(
+    (accessories as { accessories: { id: string; name: string }[] }).accessories.map((a) => [a.id, a]),
+  );
+  const split = accessoryUpgrades.edges.filter((e) => {
+    const child = byId.get(e.child);
+    const parent = byId.get(e.parent);
+    return child && parent && family(child.name) !== family(parent.name);
+  });
+  assert.deepEqual(split, [], "an upgrade the planner would still offer as a separate purchase");
 });
 
 test("accessories that merely share a word are left apart", () => {

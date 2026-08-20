@@ -1,0 +1,907 @@
+{
+ "generatedAt": "2026-08-20T23:17:47.577Z",
+ "source": "Hypixel SkyBlock Fandom wiki infobox: upgrades_from",
+ "note": "child upgrades from parent, so the two never count at once. Both ids are accessories we model; an upgrades_from naming something outside that set is left in `unresolved` rather than guessed at.",
+ "consequence": "A missing edge lets the bag offer a tier the player has already upgraded past, and inflates the category ceiling. A wrong edge hides real XP. Names that don't resolve are dropped, never approximated.",
+ "pagesRead": 310,
+ "edges": [
+  {
+   "child": "AGARIMOO_ARTIFACT",
+   "parent": "AGARIMOO_RING",
+   "childName": "Agarimoo Artifact",
+   "parentName": "Agarimoo Ring"
+  },
+  {
+   "child": "AGARIMOO_RING",
+   "parent": "AGARIMOO_TALISMAN",
+   "childName": "Agarimoo Ring",
+   "parentName": "Agarimoo Talisman"
+  },
+  {
+   "child": "ANGUISH_ARTIFACT",
+   "parent": "ANGUISH_RING",
+   "childName": "Anguish Artifact",
+   "parentName": "Anguish Ring"
+  },
+  {
+   "child": "ANGUISH_RING",
+   "parent": "ANGUISH_TALISMAN",
+   "childName": "Anguish Ring",
+   "parentName": "Anguish Talisman"
+  },
+  {
+   "child": "ARTIFACT_OF_COINS",
+   "parent": "RING_OF_COINS",
+   "childName": "Artifact of Coins",
+   "parentName": "Ring of Coins"
+  },
+  {
+   "child": "ARTIFACT_POTION_AFFINITY",
+   "parent": "RING_POTION_AFFINITY",
+   "childName": "Potion Affinity Artifact",
+   "parentName": "Potion Affinity Ring"
+  },
+  {
+   "child": "BAT_ARTIFACT",
+   "parent": "BAT_RING",
+   "childName": "Bat Artifact",
+   "parentName": "Bat Ring"
+  },
+  {
+   "child": "BAT_PERSON_ARTIFACT",
+   "parent": "BAT_PERSON_RING",
+   "childName": "Bat Person Artifact",
+   "parentName": "Bat Person Ring"
+  },
+  {
+   "child": "BAT_PERSON_RING",
+   "parent": "BAT_PERSON_TALISMAN",
+   "childName": "Bat Person Ring",
+   "parentName": "Bat Person Talisman"
+  },
+  {
+   "child": "BAT_RING",
+   "parent": "BAT_TALISMAN",
+   "childName": "Bat Ring",
+   "parentName": "Bat Talisman"
+  },
+  {
+   "child": "BIOANALYSIS_ARTIFACT",
+   "parent": "BIOANALYSIS_RING",
+   "childName": "Bioanalysis Artifact",
+   "parentName": "Bioanalysis Ring"
+  },
+  {
+   "child": "BIOANALYSIS_RING",
+   "parent": "BIOANALYSIS_TALISMAN",
+   "childName": "Bioanalysis Ring",
+   "parentName": "Bioanalysis Talisman"
+  },
+  {
+   "child": "BLOOD_DONOR_ARTIFACT",
+   "parent": "BLOOD_DONOR_RING",
+   "childName": "Blood Donor Artifact",
+   "parentName": "Blood Donor Ring"
+  },
+  {
+   "child": "BLOOD_DONOR_RING",
+   "parent": "BLOOD_DONOR_TALISMAN",
+   "childName": "Blood Donor Ring",
+   "parentName": "Blood Donor Talisman"
+  },
+  {
+   "child": "BLUE_GIFT_TALISMAN",
+   "parent": "GREEN_GIFT_TALISMAN",
+   "childName": "Blue Gift Talisman",
+   "parentName": "Green Gift Talisman"
+  },
+  {
+   "child": "BLUERTOOTH_RING",
+   "parent": "BLUETOOTH_RING",
+   "childName": "Bluertooth Ring",
+   "parentName": "Bluetooth Ring"
+  },
+  {
+   "child": "BURSTSTOPPER_ARTIFACT",
+   "parent": "BURSTSTOPPER_TALISMAN",
+   "childName": "Burststopper Artifact",
+   "parentName": "Burststopper Talisman"
+  },
+  {
+   "child": "CANDY_ARTIFACT",
+   "parent": "CANDY_RING",
+   "childName": "Candy Artifact",
+   "parentName": "Candy Ring"
+  },
+  {
+   "child": "CANDY_RELIC",
+   "parent": "CANDY_ARTIFACT",
+   "childName": "Candy Relic",
+   "parentName": "Candy Artifact"
+  },
+  {
+   "child": "CANDY_RING",
+   "parent": "CANDY_TALISMAN",
+   "childName": "Candy Ring",
+   "parentName": "Candy Talisman"
+  },
+  {
+   "child": "CENTURY_RING",
+   "parent": "CENTURY_TALISMAN",
+   "childName": "Ring of the Century",
+   "parentName": "Talisman of the Century"
+  },
+  {
+   "child": "CHEETAH_TALISMAN",
+   "parent": "LYNX_TALISMAN",
+   "childName": "Cheetah Talisman",
+   "parentName": "Lynx Talisman"
+  },
+  {
+   "child": "COPPER_ARTIFACT",
+   "parent": "COPPER_RING",
+   "childName": "Copper Artifact",
+   "parentName": "Copper Ring"
+  },
+  {
+   "child": "COPPER_RING",
+   "parent": "COPPER_TALISMAN",
+   "childName": "Copper Ring",
+   "parentName": "Copper Talisman"
+  },
+  {
+   "child": "CROOKED_ARTIFACT",
+   "parent": "SHADY_RING",
+   "childName": "Crooked Artifact",
+   "parentName": "Shady Ring"
+  },
+  {
+   "child": "CRUX_TALISMAN_2",
+   "parent": "CRUX_TALISMAN_1",
+   "childName": "Crux Ring",
+   "parentName": "Crux Talisman"
+  },
+  {
+   "child": "CRUX_TALISMAN_3",
+   "parent": "CRUX_TALISMAN_2",
+   "childName": "Crux Artifact",
+   "parentName": "Crux Ring"
+  },
+  {
+   "child": "CRUX_TALISMAN_4",
+   "parent": "CRUX_TALISMAN_3",
+   "childName": "Crux Relic",
+   "parentName": "Crux Artifact"
+  },
+  {
+   "child": "CRUX_TALISMAN_5",
+   "parent": "CRUX_TALISMAN_4",
+   "childName": "Crux Heirloom",
+   "parentName": "Crux Relic"
+  },
+  {
+   "child": "CRUX_TALISMAN_6",
+   "parent": "CRUX_TALISMAN_5",
+   "childName": "Crux Chronomicon",
+   "parentName": "Crux Heirloom"
+  },
+  {
+   "child": "CRUX_TALISMAN_7",
+   "parent": "CRUX_TALISMAN_6",
+   "childName": "Celestial Starstone",
+   "parentName": "Crux Chronomicon"
+  },
+  {
+   "child": "DRACONIC_ARTIFACT",
+   "parent": "DRACONIC_RING",
+   "childName": "Draconic Artifact",
+   "parentName": "Draconic Ring"
+  },
+  {
+   "child": "DRACONIC_RING",
+   "parent": "DRACONIC_TALISMAN",
+   "childName": "Draconic Ring",
+   "parentName": "Draconic Talisman"
+  },
+  {
+   "child": "EMERALD_ARTIFACT",
+   "parent": "EMERALD_RING",
+   "childName": "Emerald Artifact",
+   "parentName": "Emerald Ring"
+  },
+  {
+   "child": "EMPEROR_ARTIFACT",
+   "parent": "EMPEROR_RING",
+   "childName": "Emperor's Artifact",
+   "parentName": "Emperor's Ring"
+  },
+  {
+   "child": "EMPEROR_RING",
+   "parent": "EMPEROR_TALISMAN",
+   "childName": "Emperor's Ring",
+   "parentName": "Emperor's Talisman"
+  },
+  {
+   "child": "ENDER_RELIC",
+   "parent": "ENDER_ARTIFACT",
+   "childName": "Ender Relic",
+   "parentName": "Ender Artifact"
+  },
+  {
+   "child": "ETERNAL_HOOF",
+   "parent": "LUCKY_HOOF",
+   "childName": "Eternal Hoof",
+   "parentName": "Lucky Hoof"
+  },
+  {
+   "child": "FEATHER_ARTIFACT",
+   "parent": "FEATHER_RING",
+   "childName": "Feather Artifact",
+   "parentName": "Feather Ring"
+  },
+  {
+   "child": "FEATHER_RING",
+   "parent": "FEATHER_TALISMAN",
+   "childName": "Feather Ring",
+   "parentName": "Feather Talisman"
+  },
+  {
+   "child": "FERMENTO_ARTIFACT",
+   "parent": "SQUASH_RING",
+   "childName": "Fermento Artifact",
+   "parentName": "Squash Ring"
+  },
+  {
+   "child": "FIERY_KUUDRA_CORE",
+   "parent": "BURNING_KUUDRA_CORE",
+   "childName": "Fiery Kuudra Core",
+   "parentName": "Burning Kuudra Core"
+  },
+  {
+   "child": "FRESHLY_BAKED_ARTIFACT",
+   "parent": "FRESHLY_BAKED_RING",
+   "childName": "Freshly Baked Artifact",
+   "parentName": "Freshly Baked Ring"
+  },
+  {
+   "child": "FRESHLY_BAKED_HEIRLOOM",
+   "parent": "FRESHLY_BAKED_RELIC",
+   "childName": "Freshly Baked Heirloom",
+   "parentName": "Freshly Baked Relic"
+  },
+  {
+   "child": "FRESHLY_BAKED_RELIC",
+   "parent": "FRESHLY_BAKED_ARTIFACT",
+   "childName": "Freshly Baked Relic",
+   "parentName": "Freshly Baked Artifact"
+  },
+  {
+   "child": "FRESHLY_BAKED_RING",
+   "parent": "FRESHLY_BAKED_TALISMAN",
+   "childName": "Freshly Baked Ring",
+   "parentName": "Freshly Baked Talisman"
+  },
+  {
+   "child": "FRIED_FROZEN_CHICKEN",
+   "parent": "FROZEN_CHICKEN",
+   "childName": "Fried Frozen Chicken",
+   "parentName": "Frozen Chicken"
+  },
+  {
+   "child": "GANACHE_CHOCOLATE_SLAB",
+   "parent": "RICH_CHOCOLATE_CHUNK",
+   "childName": "Ganache Chocolate Slab",
+   "parentName": "Rich Chocolate Chunk"
+  },
+  {
+   "child": "GLACIAL_ARTIFACT",
+   "parent": "GLACIAL_RING",
+   "childName": "Glacial Artifact",
+   "parentName": "Glacial Ring"
+  },
+  {
+   "child": "GLACIAL_RING",
+   "parent": "GLACIAL_TALISMAN",
+   "childName": "Glacial Ring",
+   "parentName": "Glacial Talisman"
+  },
+  {
+   "child": "GLOSSY_MINERAL_TALISMAN",
+   "parent": "MINERAL_TALISMAN",
+   "childName": "Glossy Mineral Talisman",
+   "parentName": "Mineral Talisman"
+  },
+  {
+   "child": "GOLD_GIFT_TALISMAN",
+   "parent": "PURPLE_GIFT_TALISMAN",
+   "childName": "Gold Gift Talisman",
+   "parentName": "Purple Gift Talisman"
+  },
+  {
+   "child": "GRATITUDE_RING",
+   "parent": "GRATITUDE_TALISMAN",
+   "childName": "Gratitude Ring",
+   "parentName": "Gratitude Talisman"
+  },
+  {
+   "child": "GREAT_SPOOK_ARTIFACT",
+   "parent": "GREAT_SPOOK_RING",
+   "childName": "Great Spook Artifact",
+   "parentName": "Great Spook Ring"
+  },
+  {
+   "child": "GREAT_SPOOK_RING",
+   "parent": "GREAT_SPOOK_TALISMAN",
+   "childName": "Great Spook Ring",
+   "parentName": "Great Spook Talisman"
+  },
+  {
+   "child": "GREEN_GIFT_TALISMAN",
+   "parent": "WHITE_GIFT_TALISMAN",
+   "childName": "Green Gift Talisman",
+   "parentName": "White Gift Talisman"
+  },
+  {
+   "child": "HASTE_ARTIFACT",
+   "parent": "HASTE_RING",
+   "childName": "Haste Artifact",
+   "parentName": "Haste Ring"
+  },
+  {
+   "child": "HEALING_RING",
+   "parent": "HEALING_TALISMAN",
+   "childName": "Healing Ring",
+   "parentName": "Healing Talisman"
+  },
+  {
+   "child": "HELIANTHUS_RELIC",
+   "parent": "FERMENTO_ARTIFACT",
+   "childName": "Helianthus Relic",
+   "parentName": "Fermento Artifact"
+  },
+  {
+   "child": "HONED_SHARK_TOOTH_NECKLACE",
+   "parent": "DULL_SHARK_TOOTH_NECKLACE",
+   "childName": "Honed Shark Tooth Necklace",
+   "parentName": "Dull Shark Tooth Necklace"
+  },
+  {
+   "child": "HUNTER_RING",
+   "parent": "HUNTER_TALISMAN",
+   "childName": "Hunter Ring",
+   "parentName": "Hunter Talisman"
+  },
+  {
+   "child": "INFERNAL_KUUDRA_CORE",
+   "parent": "FIERY_KUUDRA_CORE",
+   "childName": "Infernal Kuudra Core",
+   "parentName": "Fiery Kuudra Core"
+  },
+  {
+   "child": "INTIMIDATION_ARTIFACT",
+   "parent": "INTIMIDATION_RING",
+   "childName": "Intimidation Artifact",
+   "parentName": "Intimidation Ring"
+  },
+  {
+   "child": "INTIMIDATION_RELIC",
+   "parent": "INTIMIDATION_ARTIFACT",
+   "childName": "Intimidation Relic",
+   "parentName": "Intimidation Artifact"
+  },
+  {
+   "child": "INTIMIDATION_RING",
+   "parent": "INTIMIDATION_TALISMAN",
+   "childName": "Intimidation Ring",
+   "parentName": "Intimidation Talisman"
+  },
+  {
+   "child": "JERRY_TALISMAN_BLUE",
+   "parent": "JERRY_TALISMAN_GREEN",
+   "childName": "Blue Jerry Talisman",
+   "parentName": "Green Jerry Talisman"
+  },
+  {
+   "child": "JERRY_TALISMAN_GOLDEN",
+   "parent": "JERRY_TALISMAN_PURPLE",
+   "childName": "Golden Jerry Artifact",
+   "parentName": "Purple Jerry Talisman"
+  },
+  {
+   "child": "JERRY_TALISMAN_PURPLE",
+   "parent": "JERRY_TALISMAN_BLUE",
+   "childName": "Purple Jerry Talisman",
+   "parentName": "Blue Jerry Talisman"
+  },
+  {
+   "child": "JUNK_ARTIFACT",
+   "parent": "JUNK_RING",
+   "childName": "Junk Artifact",
+   "parentName": "Junk Ring"
+  },
+  {
+   "child": "JUNK_RING",
+   "parent": "JUNK_TALISMAN",
+   "childName": "Junk Ring",
+   "parentName": "Junk Talisman"
+  },
+  {
+   "child": "KUUDRA_FOLLOWER_RELIC",
+   "parent": "KUUDRA_FOLLOWER_ARTIFACT",
+   "childName": "Kuudra Follower Relic",
+   "parentName": "Kuudra Follower Artifact"
+  },
+  {
+   "child": "KUUDRAS_HEART",
+   "parent": "KUUDRAS_LUNG",
+   "childName": "Kuudra's Heart",
+   "parentName": "Kuudra's Lung"
+  },
+  {
+   "child": "KUUDRAS_LUNG",
+   "parent": "KUUDRAS_KIDNEY",
+   "childName": "Kuudra's Lung",
+   "parentName": "Kuudra's Kidney"
+  },
+  {
+   "child": "LARGE_FISH_BOWL",
+   "parent": "MEDIUM_FISH_BOWL",
+   "childName": "Large Fish Bowl",
+   "parentName": "Medium Fish Bowl"
+  },
+  {
+   "child": "LUSH_ARTIFACT",
+   "parent": "LUSH_RING",
+   "childName": "Lush Artifact",
+   "parentName": "Lush Ring"
+  },
+  {
+   "child": "LUSH_RING",
+   "parent": "LUSH_TALISMAN",
+   "childName": "Lush Ring",
+   "parentName": "Lush Talisman"
+  },
+  {
+   "child": "LYNX_TALISMAN",
+   "parent": "CAT_TALISMAN",
+   "childName": "Lynx Talisman",
+   "parentName": "Cat Talisman"
+  },
+  {
+   "child": "MEDIUM_FISH_BOWL",
+   "parent": "SMALL_FISH_BOWL",
+   "childName": "Medium Fish Bowl",
+   "parentName": "Small Fish Bowl"
+  },
+  {
+   "child": "MOONGLADE_ARTIFACT",
+   "parent": "MOONGLADE_RING",
+   "childName": "Moonglade Artifact",
+   "parentName": "Moonglade Ring"
+  },
+  {
+   "child": "MOONGLADE_RING",
+   "parent": "MOONGLADE_TALISMAN",
+   "childName": "Moonglade Ring",
+   "parentName": "Moonglade Talisman"
+  },
+  {
+   "child": "MOONLIGHT_CRYSTAL",
+   "parent": "NIGHT_CRYSTAL",
+   "childName": "Moonlight Crystal",
+   "parentName": "Night Crystal"
+  },
+  {
+   "child": "ORGAN_DONOR_ARTIFACT",
+   "parent": "ORGAN_DONOR_RING",
+   "childName": "Organ Donor Artifact",
+   "parentName": "Organ Donor Ring"
+  },
+  {
+   "child": "ORGAN_DONOR_RING",
+   "parent": "ORGAN_DONOR_TALISMAN",
+   "childName": "Organ Donor Ring",
+   "parentName": "Organ Donor Talisman"
+  },
+  {
+   "child": "PERSONAL_COMPACTOR_5000",
+   "parent": "PERSONAL_COMPACTOR_4000",
+   "childName": "Personal Compactor 5000",
+   "parentName": "Personal Compactor 4000"
+  },
+  {
+   "child": "PERSONAL_COMPACTOR_6000",
+   "parent": "PERSONAL_COMPACTOR_5000",
+   "childName": "Personal Compactor 6000",
+   "parentName": "Personal Compactor 5000"
+  },
+  {
+   "child": "PERSONAL_COMPACTOR_7000",
+   "parent": "PERSONAL_COMPACTOR_6000",
+   "childName": "Personal Compactor 7000",
+   "parentName": "Personal Compactor 6000"
+  },
+  {
+   "child": "PERSONAL_DELETOR_5000",
+   "parent": "PERSONAL_DELETOR_4000",
+   "childName": "Personal Deletor 5000",
+   "parentName": "Personal Deletor 4000"
+  },
+  {
+   "child": "PERSONAL_DELETOR_6000",
+   "parent": "PERSONAL_DELETOR_5000",
+   "childName": "Personal Deletor 6000",
+   "parentName": "Personal Deletor 5000"
+  },
+  {
+   "child": "PERSONAL_DELETOR_7000",
+   "parent": "PERSONAL_DELETOR_6000",
+   "childName": "Personal Deletor 7000",
+   "parentName": "Personal Deletor 6000"
+  },
+  {
+   "child": "PESTHUNTER_ARTIFACT",
+   "parent": "PESTHUNTER_RING",
+   "childName": "Pesthunter Artifact",
+   "parentName": "Pesthunter Ring"
+  },
+  {
+   "child": "PESTHUNTER_RELIC",
+   "parent": "PESTHUNTER_ARTIFACT",
+   "childName": "Pesthunter Relic",
+   "parentName": "Pesthunter Artifact"
+  },
+  {
+   "child": "PESTHUNTER_RING",
+   "parent": "PESTHUNTER_BADGE",
+   "childName": "Pesthunter Ring",
+   "parentName": "Pesthunter Badge"
+  },
+  {
+   "child": "POTATO_RING",
+   "parent": "POTATO_TALISMAN",
+   "childName": "Potato Ring",
+   "parentName": "Potato Talisman"
+  },
+  {
+   "child": "POWER_ARTIFACT",
+   "parent": "POWER_RING",
+   "childName": "Artifact of Power",
+   "parentName": "Ring of Power"
+  },
+  {
+   "child": "POWER_RELIC",
+   "parent": "POWER_ARTIFACT",
+   "childName": "Relic of Power",
+   "parentName": "Artifact of Power"
+  },
+  {
+   "child": "PRESSURE_ARTIFACT",
+   "parent": "PRESSURE_RING",
+   "childName": "Pressure Artifact",
+   "parentName": "Pressure Ring"
+  },
+  {
+   "child": "PRESSURE_RING",
+   "parent": "PRESSURE_TALISMAN",
+   "childName": "Pressure Ring",
+   "parentName": "Pressure Talisman"
+  },
+  {
+   "child": "PRESTIGE_CHOCOLATE_REALM",
+   "parent": "GANACHE_CHOCOLATE_SLAB",
+   "childName": "Prestige Chocolate Realm",
+   "parentName": "Ganache Chocolate Slab"
+  },
+  {
+   "child": "PURPLE_GIFT_TALISMAN",
+   "parent": "BLUE_GIFT_TALISMAN",
+   "childName": "Purple Gift Talisman",
+   "parentName": "Blue Gift Talisman"
+  },
+  {
+   "child": "RAZOR_SHARP_SHARK_TOOTH_NECKLACE",
+   "parent": "SHARP_SHARK_TOOTH_NECKLACE",
+   "childName": "Razor-sharp Shark Tooth Necklace",
+   "parentName": "Sharp Shark Tooth Necklace"
+  },
+  {
+   "child": "RED_CLAW_ARTIFACT",
+   "parent": "RED_CLAW_RING",
+   "childName": "Red Claw Artifact",
+   "parentName": "Red Claw Ring"
+  },
+  {
+   "child": "RED_CLAW_RING",
+   "parent": "RED_CLAW_TALISMAN",
+   "childName": "Red Claw Ring",
+   "parentName": "Red Claw Talisman"
+  },
+  {
+   "child": "RELIC_OF_COINS",
+   "parent": "ARTIFACT_OF_COINS",
+   "childName": "Relic of Coins",
+   "parentName": "Artifact of Coins"
+  },
+  {
+   "child": "RESPIRATION_ARTIFACT",
+   "parent": "RESPIRATION_RING",
+   "childName": "Respiration Artifact",
+   "parentName": "Respiration Ring"
+  },
+  {
+   "child": "RESPIRATION_RING",
+   "parent": "RESPIRATION_TALISMAN",
+   "childName": "Respiration Ring",
+   "parentName": "Respiration Talisman"
+  },
+  {
+   "child": "RICH_CHOCOLATE_CHUNK",
+   "parent": "SMOOTH_CHOCOLATE_BAR",
+   "childName": "Rich Chocolate Chunk",
+   "parentName": "Smooth Chocolate Bar"
+  },
+  {
+   "child": "RING_OF_COINS",
+   "parent": "COIN_TALISMAN",
+   "childName": "Ring of Coins",
+   "parentName": "Talisman of Coins"
+  },
+  {
+   "child": "RING_POTION_AFFINITY",
+   "parent": "POTION_AFFINITY_TALISMAN",
+   "childName": "Potion Affinity Ring",
+   "parentName": "Potion Affinity Talisman"
+  },
+  {
+   "child": "RUNEBLADE_ARTIFACT",
+   "parent": "RUNEBLADE_RING",
+   "childName": "Runeblade Artifact",
+   "parentName": "Runeblade Ring"
+  },
+  {
+   "child": "RUNEBLADE_RING",
+   "parent": "RUNEBLADE_TALISMAN",
+   "childName": "Runeblade Ring",
+   "parentName": "Runeblade Talisman"
+  },
+  {
+   "child": "SCARF_GRIMOIRE",
+   "parent": "SCARF_THESIS",
+   "childName": "Scarf's Grimoire",
+   "parentName": "Scarf's Thesis"
+  },
+  {
+   "child": "SCARF_THESIS",
+   "parent": "SCARF_STUDIES",
+   "childName": "Scarf's Thesis",
+   "parentName": "Scarf's Studies"
+  },
+  {
+   "child": "SCAVENGER_ARTIFACT",
+   "parent": "SCAVENGER_RING",
+   "childName": "Scavenger Artifact",
+   "parentName": "Scavenger Ring"
+  },
+  {
+   "child": "SCAVENGER_RING",
+   "parent": "SCAVENGER_TALISMAN",
+   "childName": "Scavenger Ring",
+   "parentName": "Scavenger Talisman"
+  },
+  {
+   "child": "SEA_CREATURE_ARTIFACT",
+   "parent": "SEA_CREATURE_RING",
+   "childName": "Sea Creature Artifact",
+   "parentName": "Sea Creature Ring"
+  },
+  {
+   "child": "SEA_CREATURE_RING",
+   "parent": "SEA_CREATURE_TALISMAN",
+   "childName": "Sea Creature Ring",
+   "parentName": "Sea Creature Talisman"
+  },
+  {
+   "child": "SEAL_OF_THE_FAMILY",
+   "parent": "CROOKED_ARTIFACT",
+   "childName": "Seal of the Family",
+   "parentName": "Crooked Artifact"
+  },
+  {
+   "child": "SEAL_RING",
+   "parent": "SEAL_TALISMAN",
+   "childName": "Seal Ring",
+   "parentName": "Seal Talisman"
+  },
+  {
+   "child": "SHARP_SHARK_TOOTH_NECKLACE",
+   "parent": "HONED_SHARK_TOOTH_NECKLACE",
+   "childName": "Sharp Shark Tooth Necklace",
+   "parentName": "Honed Shark Tooth Necklace"
+  },
+  {
+   "child": "SMOOTH_CHOCOLATE_BAR",
+   "parent": "NIBBLE_CHOCOLATE_STICK",
+   "childName": "Smooth Chocolate Bar",
+   "parentName": "Nibble Chocolate Stick"
+  },
+  {
+   "child": "SOULFLOW_BATTERY",
+   "parent": "SOULFLOW_PILE",
+   "childName": "Soulflow Battery",
+   "parentName": "Soulflow Pile"
+  },
+  {
+   "child": "SOULFLOW_SUPERCELL",
+   "parent": "SOULFLOW_BATTERY",
+   "childName": "Soulflow Supercell",
+   "parentName": "Soulflow Battery"
+  },
+  {
+   "child": "SPEED_ARTIFACT",
+   "parent": "SPEED_RING",
+   "childName": "Speed Artifact",
+   "parentName": "Speed Ring"
+  },
+  {
+   "child": "SPEED_RELIC",
+   "parent": "SPEED_ARTIFACT",
+   "childName": "Speed Relic",
+   "parentName": "Speed Artifact"
+  },
+  {
+   "child": "SPEED_RING",
+   "parent": "SPEED_TALISMAN",
+   "childName": "Speed Ring",
+   "parentName": "Speed Talisman"
+  },
+  {
+   "child": "SPIDER_ARTIFACT",
+   "parent": "SPIDER_RING",
+   "childName": "Spider Artifact",
+   "parentName": "Spider Ring"
+  },
+  {
+   "child": "SPIDER_RING",
+   "parent": "SPIDER_TALISMAN",
+   "childName": "Spider Ring",
+   "parentName": "Spider Talisman"
+  },
+  {
+   "child": "SPIKED_ATROCITY",
+   "parent": "BAIT_RING",
+   "childName": "Spiked Atrocity",
+   "parentName": "Bait Ring"
+  },
+  {
+   "child": "SQUASH_RING",
+   "parent": "CROPIE_TALISMAN",
+   "childName": "Squash Ring",
+   "parentName": "Cropie Talisman"
+  },
+  {
+   "child": "SUNSHINE_CRYSTAL",
+   "parent": "DAY_CRYSTAL",
+   "childName": "Sunshine Crystal",
+   "parentName": "Day Crystal"
+  },
+  {
+   "child": "TARANTULA_RING",
+   "parent": "TARANTULA_TALISMAN",
+   "childName": "Tarantula Ring",
+   "parentName": "Tarantula Talisman"
+  },
+  {
+   "child": "TITANIUM_ARTIFACT",
+   "parent": "TITANIUM_RING",
+   "childName": "Titanium Artifact",
+   "parentName": "Titanium Ring"
+  },
+  {
+   "child": "TITANIUM_RELIC",
+   "parent": "TITANIUM_ARTIFACT",
+   "childName": "Titanium Relic",
+   "parentName": "Titanium Artifact"
+  },
+  {
+   "child": "TITANIUM_RING",
+   "parent": "TITANIUM_TALISMAN",
+   "childName": "Titanium Ring",
+   "parentName": "Titanium Talisman"
+  },
+  {
+   "child": "TREASURE_ARTIFACT",
+   "parent": "TREASURE_RING",
+   "childName": "Treasure Artifact",
+   "parentName": "Treasure Ring"
+  },
+  {
+   "child": "TREASURE_RING",
+   "parent": "TREASURE_TALISMAN",
+   "childName": "Treasure Ring",
+   "parentName": "Treasure Talisman"
+  },
+  {
+   "child": "TWO_IQ_POINT",
+   "parent": "IQ_POINT",
+   "childName": "2 IQ Points",
+   "parentName": "IQ Point"
+  },
+  {
+   "child": "VACCINE_ARTIFACT",
+   "parent": "VACCINE_RING",
+   "childName": "Vaccine Artifact",
+   "parentName": "Vaccine Ring"
+  },
+  {
+   "child": "VACCINE_RING",
+   "parent": "VACCINE_TALISMAN",
+   "childName": "Vaccine Ring",
+   "parentName": "Vaccine Talisman"
+  },
+  {
+   "child": "VOTER_BADGE_ELITE",
+   "parent": "VOTER_BADGE_VIP",
+   "childName": "Elite Voter's Badge",
+   "parentName": "VIP Voter's Badge"
+  },
+  {
+   "child": "VOTER_BADGE_SUPREME",
+   "parent": "VOTER_BADGE_ELITE",
+   "childName": "Supreme Voter's Badge",
+   "parentName": "Elite Voter's Badge"
+  },
+  {
+   "child": "VOTER_BADGE_VIP",
+   "parent": "VOTER_BADGE",
+   "childName": "VIP Voter's Badge",
+   "parentName": "Voter's Badge"
+  },
+  {
+   "child": "WITCH_ARTIFACT",
+   "parent": "WITCH_RING",
+   "childName": "Witch's Artifact",
+   "parentName": "Witch's Ring"
+  },
+  {
+   "child": "WITCH_RING",
+   "parent": "WITCH_TALISMAN",
+   "childName": "Witch's Ring",
+   "parentName": "Witch's Talisman"
+  },
+  {
+   "child": "WITHER_RELIC",
+   "parent": "WITHER_ARTIFACT",
+   "childName": "Wither Relic",
+   "parentName": "Wither Artifact"
+  },
+  {
+   "child": "WOLF_RING",
+   "parent": "WOLF_TALISMAN",
+   "childName": "Wolf Ring",
+   "parentName": "Wolf Talisman"
+  },
+  {
+   "child": "ZOMBIE_ARTIFACT",
+   "parent": "ZOMBIE_RING",
+   "childName": "Zombie Artifact",
+   "parentName": "Zombie Ring"
+  },
+  {
+   "child": "ZOMBIE_RING",
+   "parent": "ZOMBIE_TALISMAN",
+   "childName": "Zombie Ring",
+   "parentName": "Zombie Talisman"
+  }
+ ],
+ "unresolved": [
+  {
+   "page": "Blood God Sigil",
+   "upgradesFrom": "Blood God Crest"
+  },
+  {
+   "page": "Dull Shark Tooth Necklace",
+   "upgradesFrom": "Raggedy Shark Tooth Necklace"
+  }
+ ]
+}

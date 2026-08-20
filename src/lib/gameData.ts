@@ -70,6 +70,20 @@ export type AccessoryFamiliesData = {
   patternFamilies: { match: string; family: string }[];
 };
 
+/**
+ * Which accessory is an upgrade of which, as the wiki's `upgrades_from` states it. The items
+ * resource publishes no recipe or upgrade field on any accessory, so this is the only source
+ * for the lines that rename as they climb and cannot be inferred from names.
+ */
+export type AccessoryUpgradesData = {
+  generatedAt: string;
+  source: string;
+  pagesRead: number;
+  /** `child` upgrades from `parent`, so the two never grant magical power at the same time. */
+  edges: { child: string; parent: string; childName: string; parentName: string }[];
+  unresolved: { page: string; upgradesFrom: string }[];
+};
+
 export type MuseumData = {
   generatedAt: string;
   totalXp: number;
@@ -228,6 +242,7 @@ export type GameData = {
   accessories: AccessoriesData;
   magicalPower: MagicalPowerData;
   accessoryFamilies: AccessoryFamiliesData;
+  accessoryUpgrades: AccessoryUpgradesData;
   museum: MuseumData;
   tasks: TasksData;
   curves: CurvesData;
@@ -292,12 +307,17 @@ export function bumpRarity(data: GameData, rarity: string, steps: number): strin
 /* ----------------------------------------------------------------- families */
 
 /**
- * Which family an accessory belongs to. Only the best member of a family grants magical power,
- * so getting this wrong in either direction matters: merge too eagerly and real XP disappears,
- * merge too little and a plan buys the same magical power twice over.
+ * Which family an accessory belongs to, going on its name alone. Only the best member of a
+ * family grants magical power, so getting this wrong in either direction matters: merge too
+ * eagerly and real XP disappears, merge too little and a plan buys the same magical power twice
+ * over.
  *
  * Three structural patterns cover most of it; the stragglers are named in
  * data/curated/accessory_families.json.
+ *
+ * Names are only ever a proxy for the thing that actually matters, which is whether one
+ * accessory is an upgrade of another — so this is half the answer. `familyOf` merges it with
+ * the wiki's upgrade graph, which is what catches the lines that rename as they climb.
  */
 // The nouns a family climbs through. Heirloom, Badge and Chronomicon were missing, which
 // split four families down the middle — "Bingo Heirloom" sat apart from the rest of Bingo, so
@@ -310,7 +330,7 @@ const FAMILY_OF = new RegExp(`^(${UPGRADE_WORD}) (of .+)$`);
 /** "Master Skull - Tier 3", "Personal Compactor 6000" -> drop the tier marker */
 const TIER_MARKER = /(\s+-\s+Tier\s+\d+|\s+\d+)$/;
 
-export function familyOf(data: GameData, name: string, id: string): string {
+function namedFamilyOf(data: GameData, name: string, id: string): string {
   for (const phrase of data.accessoryFamilies.endsWithFamilies) {
     if (name.endsWith(phrase)) return phrase.toLowerCase();
   }
@@ -327,6 +347,101 @@ export function familyOf(data: GameData, name: string, id: string): string {
   // No family pattern matched. Same-named accessories at different rarities still belong
   // together, so key on the name rather than the id.
   return untiered.toLowerCase() || `#${id}`;
+}
+
+/**
+ * Lowercased accessory name -> family key, with the name rules and the wiki's `upgrades_from`
+ * edges merged into one answer.
+ *
+ * A name rule can only see a family that keeps its stem, and fourteen lines don't: a Shady Ring
+ * becomes a Crooked Artifact, a Cat Talisman climbs to Lynx and then Cheetah, and the whole
+ * farming line runs Cropie -> Squash -> Fermento -> Helianthus without repeating a word. Those
+ * read as separate families, so the bag kept offering a player the base tier of a line they had
+ * already upgraded past — the accessory equivalent of being sold a rare pet you own the epic of.
+ *
+ * Merging both sources rather than preferring one is deliberate, because each covers what the
+ * other misses. The wiki has no page for the Campfire badge ladders or the Master Skull tiers,
+ * which the name rules handle by construction; the name rules cannot possibly know that a
+ * Fermento Artifact makes a Cropie Talisman worthless. Unioning is also the only way to get the
+ * transitive closure right: the wiki states one edge at a time, and it takes three of them to
+ * learn that Cropie and Helianthus are the same family.
+ */
+type FamilyIndex = Map<string, string>;
+const FAMILY_INDEX = new WeakMap<GameData, FamilyIndex>();
+
+function familyIndex(data: GameData): FamilyIndex {
+  const cached = FAMILY_INDEX.get(data);
+  if (cached) return cached;
+
+  const accessories = data.accessories.accessories;
+  const named = new Map(accessories.map((a) => [a.id, namedFamilyOf(data, a.name, a.id)]));
+
+  // Union-find over accessory ids. Seeded with the name rules, then the wiki's edges are unioned
+  // on top, so a family is whatever either source says plus everything that follows from both.
+  const parent = new Map(accessories.map((a) => [a.id, a.id]));
+  const find = (id: string): string => {
+    let root = id;
+    while (parent.get(root) !== root) root = parent.get(root)!;
+    // Path compression, because deep lines like Crux are walked once per accessory.
+    for (let at = id; at !== root; ) {
+      const next = parent.get(at)!;
+      parent.set(at, root);
+      at = next;
+    }
+    return root;
+  };
+  const union = (a: string, b: string) => {
+    const [ra, rb] = [find(a), find(b)];
+    if (ra !== rb) parent.set(ra, rb);
+  };
+
+  const anchor = new Map<string, string>();
+  for (const [id, family] of named) {
+    const seen = anchor.get(family);
+    if (seen) union(id, seen);
+    else anchor.set(family, id);
+  }
+  // An edge naming something we don't model — a non-accessory, or an item dropped for want of a
+  // rarity — is skipped rather than invented, the same way the fetch script drops it.
+  for (const edge of data.accessoryUpgrades?.edges ?? []) {
+    if (parent.has(edge.child) && parent.has(edge.parent)) union(edge.child, edge.parent);
+  }
+
+  // Name each merged family after the name rule most of its members already agreed on, ties
+  // broken alphabetically. Keeping the majority name means merging Celestial Starstone into the
+  // Crux line leaves that family still called "crux", so the keys stay recognisable in a plan.
+  const tally = new Map<string, Map<string, number>>();
+  for (const [id, family] of named) {
+    const root = find(id);
+    const counts = tally.get(root) ?? new Map<string, number>();
+    counts.set(family, (counts.get(family) ?? 0) + 1);
+    tally.set(root, counts);
+  }
+  const keyOf = new Map<string, string>();
+  for (const [root, counts] of tally) {
+    let best = "";
+    let bestCount = -1;
+    for (const [family, count] of counts) {
+      if (count > bestCount || (count === bestCount && family < best)) [best, bestCount] = [family, count];
+    }
+    keyOf.set(root, best);
+  }
+
+  const index: FamilyIndex = new Map();
+  for (const a of accessories) index.set(a.name.toLowerCase(), keyOf.get(find(a.id))!);
+  FAMILY_INDEX.set(data, index);
+  return index;
+}
+
+/**
+ * Which family an accessory belongs to. Members of a family replace each other rather than
+ * stacking, so this is what stops a plan buying the same magical power twice and what stops the
+ * bag listing a tier the player has already upgraded past.
+ */
+export function familyOf(data: GameData, name: string, id: string): string {
+  // An accessory we don't model — a name a test made up, or an item with no published rarity —
+  // has no place in the index, and the name rules are still a defensible answer for it.
+  return familyIndex(data).get(name.toLowerCase()) ?? namedFamilyOf(data, name, id);
 }
 
 /* --------------------------------------------------------------- bag scoring */

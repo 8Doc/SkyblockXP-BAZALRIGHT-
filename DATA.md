@@ -38,7 +38,7 @@ excluding them on a hunch would hide buyable XP.
 ### `accessory_families.json`
 Only the best member of an accessory family counts, so families have to be detected or the
 same magical power gets sold to the user twice. Three patterns are structural and handled in
-code (`familyOf`):
+code (`namedFamilyOf`):
 
 - `Bat Person Artifact` → `bat person` (the Talisman/Ring/Artifact/Relic/Orb chain)
 - `Relic of Coins` → `of coins`
@@ -47,10 +47,55 @@ code (`familyOf`):
 The rest are named in the file: shark tooth necklaces, Kuudra cores, fish bowls, piggy banks,
 voter's badges, rings of love, campfire badges.
 
-**Known imprecision.** Our ceiling for a fresh profile is ~1,872 XP against the README's
-~2,121. The gap is family detection in one direction or the other and it is not checkable from
-the API. Individual task XP is exact — a specific accessory's magical power is right, and the
-"already owned" subtraction is right. It's the category *total* that's approximate.
+A name is only ever a proxy for the thing that matters, which is whether one accessory is an
+upgrade of another, so this is half of family detection. The other half is
+`accessory_upgrades.json` below, and `familyOf` unions the two.
+
+**Known imprecision.** The ceiling moves whenever family detection does, and neither it nor the
+README's ~2,121 is checkable from the API. Individual task XP is exact — a specific accessory's
+magical power is right, and the "already owned" subtraction is right. It's the category *total*
+that's approximate.
+
+### `accessory_upgrades.json`
+
+Which accessory is an upgrade of which, from the wiki infobox's `upgrades_from`.
+
+The API was checked first and does not have it. Sweeping all 423 accessories in
+`resources/skyblock/items` for a field that links tiers turns up **nothing** — no `recipe`, no
+`upgrade_costs`, no `upgrades_from`. The fields those items actually carry are `id`, `name`,
+`category`, `material`, `tier`, `stats` and a scatter of flags, and none of them says that a
+Fermento Artifact replaces a Cropie Talisman.
+
+Names carry the link whenever a line keeps its stem, which is most of them — Bat Talisman → Bat
+Ring → Bat Artifact. **Fourteen lines rename as they climb**, and for those a name rule cannot
+work in principle, not just in practice:
+
+| The line | What the name rules saw |
+|---|---|
+| Cropie → Squash → Fermento → Helianthus | four families |
+| Cat → Lynx → Cheetah | three |
+| Shady Ring → Crooked Artifact → Seal of the Family | three |
+| Kuudra's Kidney → Lung → Heart | three |
+| Night Crystal → Moonlight Crystal | two |
+| Day Crystal → Sunshine Crystal | two |
+| Bait Ring → Spiked Atrocity | two |
+| Crux Chronomicon → Celestial Starstone | two |
+| Bluetooth Ring → Bluertooth Ring | two |
+
+The symptom was the reported one: the bag listed accessories the player had already upgraded
+past, because the tier they owned sat in a family the planner thought was empty. It also
+inflated the ceiling — the same magical power counted once per split — by **97 MP**.
+
+The two sources are unioned rather than ranked, because each covers the other's blind spots. The
+wiki has no page for the Campfire badge ladders, the Master Skull tiers or the Rings of Love,
+all of which the name rules get by construction; the name rules cannot see any of the fourteen
+above. Unioning is also the only way to close a chain: the wiki states one edge at a time, and
+it takes three of them to learn that Cropie and Helianthus are the same family.
+
+Edges are stored, not finished families, so the union happens in one place next to the name
+rules and either source alone still yields a usable answer. 310 of 405 pages resolve; the 95
+that don't are the ladders the name rules already handle. Two `upgrades_from` values name
+something outside the modelled set and are recorded in `unresolved` rather than guessed at.
 
 ## Running without a server
 
