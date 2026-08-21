@@ -792,20 +792,39 @@ export function buildCatalog(
   // with it — both set the family's power — so it shares the family's exclusive group and is
   // priced at whatever a Recombobulator 3000 costs on the bazaar.
   //
-  // Only the member actually holding the family is worth recombobulating, and only once: the
-  // game allows a single rarity upgrade per item, which `rarityUpgrades` already records.
+  // Only one member of a family is worth recombobulating, and only once: the game allows a
+  // single rarity upgrade per item, which `rarityUpgrades` already records.
   //
-  // A family the player has not started yet counts too. The accessory on offer above can be
-  // recombobulated the moment it is bought, and leaving that out held the whole category more
-  // than a hundred magical power below what the game says is there — the gap only closed for
-  // families that happened to be in the bag already.
+  // Which member is not always the one in the bag. Three cases, and the first two were each
+  // wrong once. A family with nothing in it can still be recombobulated the moment its accessory
+  // is bought, and leaving that out held the category more than a hundred magical power below
+  // what the game says is there. A family holding a *lower* member than the one on offer is the
+  // same mistake in miniature — recombobulating the Artifact of Power in the bag reaches epic,
+  // buying the Relic of Power and recombobulating that reaches mythic — so the candidates are
+  // compared on where they end up rather than on which one is already owned.
   const recombobulatable = new Map<
     string,
     { id: string; rarity: string; from: number; requires: string[] }
   >();
+  const considerRecombobulation = (
+    family: string,
+    candidate: { id: string; rarity: string; from: number; requires: string[] },
+  ): void => {
+    if (accessoryById.get(candidate.id)?.recombobulable === false) return;
+    const reaches = accessoryPowerOf(data, candidate.id, bumpRarity(data, candidate.rarity, 1), contactIds.size);
+    const standing = recombobulatable.get(family);
+    if (!standing) {
+      recombobulatable.set(family, candidate);
+      return;
+    }
+    const held = accessoryPowerOf(data, standing.id, bumpRarity(data, standing.rarity, 1), contactIds.size);
+    // A tie goes to whatever needs no purchase, which is the one already in the bag.
+    if (reaches > held) recombobulatable.set(family, candidate);
+  };
+
   for (const [family, best] of bagState.familyBest) {
     if (best.recombobulated) continue;
-    recombobulatable.set(family, {
+    considerRecombobulation(family, {
       id: best.id,
       rarity: best.rarity,
       from: bagState.familyPower.get(family) ?? 0,
@@ -813,14 +832,12 @@ export function buildCatalog(
     });
   }
   for (const [family, offer] of familyOffer) {
-    if (recombobulatable.has(family)) continue;
-    if (bagState.familyBest.has(family)) continue; // held and already recombobulated
-    recombobulatable.set(family, {
+    considerRecombobulation(family, {
       id: offer.id,
       rarity: offer.rarity,
       // Measured against the accessory once bought, not against an empty slot, or the row would
       // claim the whole family's power for the price of a Recombobulator.
-      from: offer.power,
+      from: Math.max(offer.power, bagState.familyPower.get(family) ?? 0),
       requires: [offer.taskId],
     });
   }
@@ -848,6 +865,50 @@ export function buildCatalog(
       note: `${target.rarity.toLowerCase()} → ${bumped.toLowerCase()} · ${power - target.from} MP`,
     });
   }
+
+  /**
+   * Six accessories climb the rarity ladder in place, through their own mechanic rather than a
+   * Recombobulator: the Book of Progression rises with your SkyBlock level, the Pulse Ring on
+   * Thunder in a Bottle, the Trapper Crest on pelts, the Relic of Power on perfect gemstones,
+   * and Pandora's Box arrives at whatever rarity Shen's Auction gives it.
+   *
+   * None of them is a purchase, so none has a price, and the climb is the last of the gap
+   * between what this can account for and the 2,121 the wiki publishes. The row carries the
+   * mechanic as its note and the accessory itself as a prerequisite, since you cannot upgrade
+   * what you do not own.
+   *
+   * Deliberately outside the family's exclusive group. The group is already capped at what the
+   * ladder plus one Recombobulator reaches, and this is the step beyond that — inside the group
+   * it would compete with the purchase it depends on instead of adding to it.
+   */
+  for (const climb of data.magicalPower.climbing?.items ?? []) {
+    const meta = accessoryById.get(climb.id);
+    if (!meta) continue;
+    const family = familyOf(data, meta.name, meta.id);
+    const target = accessoryPowerOf(data, meta.id, climb.to, contactIds.size);
+
+    // What the family can already reach without climbing: the best rung any row already offers,
+    // or what is in the bag if that is higher.
+    const group = `accessory:${family}`;
+    let reached = bagState.familyPower.get(family) ?? 0;
+    for (const task of tasks) {
+      if (task.exclusiveGroup === group) reached = Math.max(reached, task.groupLevel ?? 0);
+    }
+
+    const id = `accessory_climb_${meta.id}`;
+    tasks.push({
+      id,
+      category: "accessory_grind",
+      name: `${meta.name} to ${climb.to.toLowerCase()}`,
+      xp: Math.max(target - reached, 0),
+      requires: tasks.some((task) => task.id === `accessory_${meta.id}`) ? [`accessory_${meta.id}`] : [],
+      cost: { kind: "unknown", note: "Not a purchase" },
+      repeatable: false,
+      note: `${climb.from.toLowerCase()} → ${climb.to.toLowerCase()} · ${climb.by}`,
+    });
+    if (target <= reached) done.add(id);
+  }
+
 
   // Powers. Nine of one Power Stone handed to Maxwell unlocks its power for good, and the
   // profile lists what is already unlocked, so this is exact on the done half. The stones trade,

@@ -182,3 +182,51 @@ test("the grind-only category follows the accessory bag", () => {
   assert.equal(CATEGORIES[bag + 1], "accessory_grind");
   assert.equal(CATEGORY_LABELS.accessory_grind, "Accessory Bag — Grind Only");
 });
+
+/**
+ * The six accessories that climb rarity in place, through their own mechanic rather than a
+ * Recombobulator. They were the last of the gap between what this accounts for and the 2,121
+ * the wiki publishes, and they are grind rows: no price, the mechanic as the note, and the
+ * accessory itself as a prerequisite, because you cannot upgrade what you do not own.
+ */
+test("the accessories that climb in place are grind rows", () => {
+  const catalog = buildCatalog({} as ProfileMember, data, { items: [], capacity: 400 });
+  for (const climb of data.magicalPower.climbing!.items) {
+    const row = catalog.tasks.find((task) => task.id === `accessory_climb_${climb.id}`);
+    assert.ok(row, `${climb.id} should have a climb row`);
+    assert.equal(row!.category, "accessory_grind");
+    assert.equal(row!.cost.kind, "unknown", "a climb is not a purchase");
+    assert.deepEqual(row!.requires, [`accessory_${climb.id}`], "the accessory comes first");
+    assert.match(row!.note ?? "", new RegExp(climb.to.toLowerCase()));
+    assert.equal(row!.xp, climb.forgone, `${climb.id} should be worth its stated forgone power`);
+  }
+});
+
+/**
+ * A climb sits outside its family's exclusive group on purpose: the group is already capped at
+ * what the rarity ladder plus one Recombobulator reaches, and the climb is the step beyond it.
+ * Inside the group it would compete with the purchase it depends on rather than add to it.
+ */
+test("a climb adds to its family rather than competing with it", () => {
+  const catalog = buildCatalog({} as ProfileMember, data, { items: [], capacity: 400 });
+  for (const climb of data.magicalPower.climbing!.items) {
+    const row = catalog.tasks.find((task) => task.id === `accessory_climb_${climb.id}`)!;
+    assert.equal(row.exclusiveGroup, undefined, `${climb.id}'s climb should not join the family group`);
+  }
+});
+
+/**
+ * Recombobulating is worth doing to whichever member of a family reaches highest, which is not
+ * always the one in the bag: recombobulating a held Artifact of Power reaches epic, while buying
+ * the Relic of Power and recombobulating that reaches mythic. Picking the held one regardless
+ * left every such family four magical power short.
+ */
+test("recombobulation targets whichever family member reaches highest", () => {
+  const catalog = buildCatalog({} as ProfileMember, data, { items: [], capacity: 400 });
+  const relic = catalog.tasks.find((task) => task.id === "recombobulate_POWER_RELIC");
+  assert.ok(relic, "the Relic of Power is the member worth recombobulating in its family");
+  assert.ok(
+    relic!.requires.includes("accessory_POWER_RELIC"),
+    "recombobulating something you have yet to buy has to depend on buying it",
+  );
+});
