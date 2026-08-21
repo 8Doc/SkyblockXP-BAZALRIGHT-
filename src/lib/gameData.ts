@@ -57,6 +57,8 @@ export type AccessoriesData = {
     /** From the Rift. Only the transferrable ones ever reach the accessory bag. */
     rift: boolean;
     riftTransferrable: boolean;
+    /** False for staff curios and things removed from the game — nobody can get one. */
+    obtainable: boolean;
   }[];
 };
 
@@ -544,8 +546,10 @@ export function scoreBag(
     if (!meta) continue;
     identified++;
     // The item's own lore wins over the resource where it has one: a Book of Progression climbs
-    // to mythic through play and the resource still calls it common.
-    const rarity = item.rarity ?? bumpRarity(data, meta.tier, item.rarityUpgrades);
+    // to mythic through play and the resource still calls it common. A rarity the table has no
+    // figure for is not an improvement on the resource, so it falls back rather than scoring nil.
+    const fromResource = bumpRarity(data, meta.tier, item.rarityUpgrades);
+    const rarity = item.rarity && magicalPowerOf(data, item.rarity) > 0 ? item.rarity : fromResource;
     const family = familyOf(data, meta.name, meta.id);
     const power = magicalPowerOf(data, rarity);
     if (power > (familyPower.get(family) ?? -1)) {

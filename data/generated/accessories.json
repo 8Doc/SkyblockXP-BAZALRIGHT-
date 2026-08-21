@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-08-20T23:57:44.771Z",
+ "generatedAt": "2026-08-21T10:28:02.554Z",
  "source": "https://api.hypixel.net/v2/resources/skyblock",
  "accessories": [
   {
@@ -11,7 +11,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "ACCRETION_ARTIFACT",
@@ -22,7 +23,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "ACCRETION_RING",
@@ -33,7 +35,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "ACCRETION_TALISMAN",
@@ -44,7 +47,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "AGARIMOO_ARTIFACT",
@@ -55,7 +59,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "AGARIMOO_RING",
@@ -66,7 +71,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "AGARIMOO_TALISMAN",
@@ -77,7 +83,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "ANGUISH_ARTIFACT",
@@ -88,7 +95,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "ANGUISH_RING",
@@ -99,7 +107,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "ANGUISH_TALISMAN",
@@ -110,7 +119,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "ANITA_ARTIFACT",
@@ -121,7 +131,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "ANITA_RING",
@@ -132,7 +143,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "ANITA_TALISMAN",
@@ -143,7 +155,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "APPLICANT_STATEMENT",
@@ -154,7 +167,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "ARCHAEOLOGIST_COMPASS",
@@ -165,7 +179,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "ARGOFAY_TRINKET",
@@ -176,7 +191,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": true,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": false
   },
   {
    "id": "ARTIFACT_OF_COINS",
@@ -187,7 +203,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "ARTIFACT_OF_CONTROL",
@@ -198,7 +215,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "ARTIFACT_OF_SPACE",
@@ -209,7 +227,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": false
   },
   {
    "id": "ARTIFACT_POTION_AFFINITY",
@@ -220,7 +239,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "ATMOSPHERIC_FILTER",
@@ -231,7 +251,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "AUTO_RECOMBOBULATOR",
@@ -242,7 +263,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "BAIT_RING",
@@ -253,7 +275,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "BAT_ARTIFACT",
@@ -264,7 +287,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "BAT_PERSON_ARTIFACT",
@@ -275,7 +299,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "BAT_PERSON_RING",
@@ -286,7 +311,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "BAT_PERSON_TALISMAN",
@@ -297,7 +323,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "BAT_RING",
@@ -308,7 +335,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "BAT_TALISMAN",
@@ -319,7 +347,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "BEASTMASTER_CREST_COMMON",
@@ -330,7 +359,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "BEASTMASTER_CREST_EPIC",
@@ -341,7 +371,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "BEASTMASTER_CREST_LEGENDARY",
@@ -352,7 +383,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "BEASTMASTER_CREST_RARE",
@@ -363,7 +395,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "BEASTMASTER_CREST_UNCOMMON",
@@ -374,7 +407,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "BIG_BRAIN_TALISMAN",
@@ -385,7 +419,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": true,
-   "riftTransferrable": true
+   "riftTransferrable": true,
+   "obtainable": true
   },
   {
    "id": "BINGO_ARTIFACT",
@@ -396,7 +431,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "BINGO_HEIRLOOM",
@@ -407,7 +443,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": false
   },
   {
    "id": "BINGO_RELIC",
@@ -418,7 +455,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "BINGO_RING",
@@ -429,7 +467,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "BINGO_TALISMAN",
@@ -440,7 +479,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "BIOANALYSIS_ARTIFACT",
@@ -451,7 +491,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "BIOANALYSIS_RING",
@@ -462,7 +503,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "BIOANALYSIS_TALISMAN",
@@ -473,7 +515,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "BITS_TALISMAN",
@@ -484,7 +527,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "BLAZE_TALISMAN",
@@ -495,7 +539,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "BLOOD_DONOR_ARTIFACT",
@@ -506,7 +551,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": true,
-   "riftTransferrable": true
+   "riftTransferrable": true,
+   "obtainable": true
   },
   {
    "id": "BLOOD_DONOR_RING",
@@ -517,7 +563,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": true,
-   "riftTransferrable": true
+   "riftTransferrable": true,
+   "obtainable": true
   },
   {
    "id": "BLOOD_DONOR_TALISMAN",
@@ -528,7 +575,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": true,
-   "riftTransferrable": true
+   "riftTransferrable": true,
+   "obtainable": true
   },
   {
    "id": "BLOOD_GOD_CREST",
@@ -539,7 +587,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "BLOOD_GOD_SIGIL",
@@ -550,7 +599,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "BLUE_GIFT_TALISMAN",
@@ -561,7 +611,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "BLUERTOOTH_RING",
@@ -572,7 +623,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "BLUETOOTH_RING",
@@ -583,7 +635,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": true,
-   "riftTransferrable": true
+   "riftTransferrable": true,
+   "obtainable": true
   },
   {
    "id": "BOOK_OF_PROGRESSION",
@@ -594,7 +647,8 @@
    "tradeable": false,
    "recombobulatable": false,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "BROKEN_PIGGY_BANK",
@@ -605,7 +659,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "BUCKET_OF_DYE",
@@ -616,7 +671,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "BURNING_KUUDRA_CORE",
@@ -627,7 +683,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "BURSTSTOPPER_ARTIFACT",
@@ -638,7 +695,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "BURSTSTOPPER_TALISMAN",
@@ -649,7 +707,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CAMPFIRE_TALISMAN_10",
@@ -660,7 +719,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CAMPFIRE_TALISMAN_11",
@@ -671,7 +731,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CAMPFIRE_TALISMAN_12",
@@ -682,7 +743,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CAMPFIRE_TALISMAN_13",
@@ -693,7 +755,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CAMPFIRE_TALISMAN_14",
@@ -704,7 +767,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CAMPFIRE_TALISMAN_15",
@@ -715,7 +779,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CAMPFIRE_TALISMAN_16",
@@ -726,7 +791,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CAMPFIRE_TALISMAN_17",
@@ -737,7 +803,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CAMPFIRE_TALISMAN_18",
@@ -748,7 +815,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CAMPFIRE_TALISMAN_19",
@@ -759,7 +827,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CAMPFIRE_TALISMAN_20",
@@ -770,7 +839,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CAMPFIRE_TALISMAN_21",
@@ -781,7 +851,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CAMPFIRE_TALISMAN_22",
@@ -792,7 +863,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CAMPFIRE_TALISMAN_23",
@@ -803,7 +875,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CAMPFIRE_TALISMAN_24",
@@ -814,7 +887,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CAMPFIRE_TALISMAN_25",
@@ -825,7 +899,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CAMPFIRE_TALISMAN_26",
@@ -836,7 +911,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CAMPFIRE_TALISMAN_27",
@@ -847,7 +923,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CAMPFIRE_TALISMAN_28",
@@ -858,7 +935,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CAMPFIRE_TALISMAN_29",
@@ -869,7 +947,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CAMPFIRE_TALISMAN_4",
@@ -880,7 +959,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CAMPFIRE_TALISMAN_5",
@@ -891,7 +971,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CAMPFIRE_TALISMAN_6",
@@ -902,7 +983,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CAMPFIRE_TALISMAN_7",
@@ -913,7 +995,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CAMPFIRE_TALISMAN_8",
@@ -924,7 +1007,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CAMPFIRE_TALISMAN_9",
@@ -935,7 +1019,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CANDY_ARTIFACT",
@@ -946,7 +1031,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CANDY_RELIC",
@@ -957,7 +1043,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CANDY_RING",
@@ -968,7 +1055,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CANDY_TALISMAN",
@@ -979,7 +1067,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CARNIVAL_MASK_BAG",
@@ -990,7 +1079,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CAT_TALISMAN",
@@ -1001,7 +1091,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CATACOMBS_EXPERT_RING",
@@ -1012,7 +1103,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CENTURY_ARTIFACT",
@@ -1023,7 +1115,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CENTURY_RING",
@@ -1034,7 +1127,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CENTURY_TALISMAN",
@@ -1045,7 +1139,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CHEETAH_TALISMAN",
@@ -1056,7 +1151,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CHUMMING_TALISMAN",
@@ -1067,7 +1163,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "COIN_TALISMAN",
@@ -1078,7 +1175,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "COMBO_MANIA_TALISMAN",
@@ -1089,7 +1187,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": true,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "COPPER_ARTIFACT",
@@ -1100,7 +1199,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "COPPER_RING",
@@ -1111,7 +1211,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "COPPER_TALISMAN",
@@ -1122,7 +1223,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CRACKED_PIGGY_BANK",
@@ -1133,7 +1235,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CROOKED_ARTIFACT",
@@ -1144,7 +1247,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CROPIE_TALISMAN",
@@ -1155,7 +1259,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CRUX_TALISMAN_1",
@@ -1166,7 +1271,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": true,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CRUX_TALISMAN_2",
@@ -1177,7 +1283,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": true,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CRUX_TALISMAN_3",
@@ -1188,7 +1295,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": true,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CRUX_TALISMAN_4",
@@ -1199,7 +1307,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": true,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CRUX_TALISMAN_5",
@@ -1210,7 +1319,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": true,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CRUX_TALISMAN_6",
@@ -1221,7 +1331,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": true,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "CRUX_TALISMAN_7",
@@ -1232,7 +1343,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": true,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "DANTE_RING",
@@ -1243,7 +1355,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "DANTE_TALISMAN",
@@ -1254,7 +1367,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "DAY_CRYSTAL",
@@ -1265,7 +1379,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "DEFECTIVE_MONITOR",
@@ -1276,7 +1391,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": true,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "DEVOUR_RING",
@@ -1287,7 +1403,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "DRACONIC_ARTIFACT",
@@ -1298,7 +1415,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "DRACONIC_RING",
@@ -1309,7 +1427,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "DRACONIC_TALISMAN",
@@ -1320,7 +1439,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "DULL_SHARK_TOOTH_NECKLACE",
@@ -1331,7 +1451,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "DWARVEN_METAL",
@@ -1342,7 +1463,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "EMERALD_ARTIFACT",
@@ -1353,7 +1475,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "EMERALD_RING",
@@ -1364,7 +1487,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "EMPEROR_ARTIFACT",
@@ -1375,7 +1499,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "EMPEROR_RING",
@@ -1386,7 +1511,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "EMPEROR_TALISMAN",
@@ -1397,7 +1523,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "ENDER_ARTIFACT",
@@ -1408,7 +1535,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "ENDER_RELIC",
@@ -1419,7 +1547,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "ETERNAL_CRYSTAL",
@@ -1430,7 +1559,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": false
   },
   {
    "id": "ETERNAL_HOOF",
@@ -1441,7 +1571,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "EXPERIENCE_ARTIFACT",
@@ -1452,7 +1583,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "FARMER_ORB",
@@ -1463,7 +1595,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "FARMING_TALISMAN",
@@ -1474,7 +1607,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "FEATHER_ARTIFACT",
@@ -1485,7 +1619,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "FEATHER_RING",
@@ -1496,7 +1631,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "FEATHER_TALISMAN",
@@ -1507,7 +1643,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "FERMENTO_ARTIFACT",
@@ -1518,7 +1655,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "FIERY_KUUDRA_CORE",
@@ -1529,7 +1667,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "FIRE_TALISMAN",
@@ -1540,7 +1679,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "FISH_AFFINITY_TALISMAN",
@@ -1551,7 +1691,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "FRESHLY_BAKED_ARTIFACT",
@@ -1562,7 +1703,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "FRESHLY_BAKED_HEIRLOOM",
@@ -1573,7 +1715,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "FRESHLY_BAKED_RELIC",
@@ -1584,7 +1727,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "FRESHLY_BAKED_RING",
@@ -1595,7 +1739,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "FRESHLY_BAKED_TALISMAN",
@@ -1606,7 +1751,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "FRIED_FROZEN_CHICKEN",
@@ -1617,7 +1763,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "FROZEN_CHICKEN",
@@ -1628,7 +1775,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "FUTURE_CALORIES",
@@ -1639,7 +1787,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": true
+   "riftTransferrable": true,
+   "obtainable": true
   },
   {
    "id": "GANACHE_CHOCOLATE_SLAB",
@@ -1650,7 +1799,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "GARLIC_FLAVORED_GUMMY_BEAR",
@@ -1661,7 +1811,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": true,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "GENERAL_MEDALLION",
@@ -1672,7 +1823,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "GLACIAL_ARTIFACT",
@@ -1683,7 +1835,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "GLACIAL_RING",
@@ -1694,7 +1847,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "GLACIAL_TALISMAN",
@@ -1705,7 +1859,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "GLOSSY_MINERAL_TALISMAN",
@@ -1716,7 +1871,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "GOLD_GIFT_TALISMAN",
@@ -1727,7 +1883,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "GRATITUDE_ARTIFACT",
@@ -1738,7 +1895,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "GRATITUDE_RING",
@@ -1749,7 +1907,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "GRATITUDE_TALISMAN",
@@ -1760,7 +1919,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "GRAVITY_TALISMAN",
@@ -1771,7 +1931,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "GREAT_SPOOK_ARTIFACT",
@@ -1782,7 +1943,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "GREAT_SPOOK_RING",
@@ -1793,7 +1955,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "GREAT_SPOOK_TALISMAN",
@@ -1804,7 +1967,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "GREEN_GIFT_TALISMAN",
@@ -1815,7 +1979,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "GRIZZLY_PAW",
@@ -1826,7 +1991,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": false
   },
   {
    "id": "HANDY_BLOOD_CHALICE",
@@ -1837,7 +2003,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "HARMONIOUS_SURGERY_TOOLKIT",
@@ -1848,7 +2015,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": true,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "HASTE_ARTIFACT",
@@ -1859,7 +2027,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "HASTE_RING",
@@ -1870,7 +2039,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "HEALING_RING",
@@ -1881,7 +2051,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "HEALING_TALISMAN",
@@ -1892,7 +2063,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "HEGEMONY_ARTIFACT",
@@ -1903,7 +2075,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "HELIANTHUS_RELIC",
@@ -1914,7 +2087,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "HOCUS_POCUS_CIPHER",
@@ -1925,7 +2099,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": true
+   "riftTransferrable": true,
+   "obtainable": true
   },
   {
    "id": "HONED_SHARK_TOOTH_NECKLACE",
@@ -1936,7 +2111,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "HONEYCOMB_ARTIFACT",
@@ -1947,7 +2123,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "HONEYCOMB_RING",
@@ -1958,7 +2135,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "HONEYCOMB_TALISMAN",
@@ -1969,7 +2147,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "HUNTER_RING",
@@ -1980,7 +2159,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "HUNTER_TALISMAN",
@@ -1991,7 +2171,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "INFERNAL_KUUDRA_CORE",
@@ -2002,7 +2183,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "INTIMIDATION_ARTIFACT",
@@ -2013,7 +2195,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "INTIMIDATION_RELIC",
@@ -2024,7 +2207,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "INTIMIDATION_RING",
@@ -2035,7 +2219,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "INTIMIDATION_TALISMAN",
@@ -2046,7 +2231,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "IQ_POINT",
@@ -2057,7 +2243,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": true,
-   "riftTransferrable": true
+   "riftTransferrable": true,
+   "obtainable": true
   },
   {
    "id": "JACOBUS_REGISTER",
@@ -2068,7 +2255,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "JAKE_PLUSHIE",
@@ -2079,7 +2267,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "JERRY_TALISMAN_BLUE",
@@ -2090,7 +2279,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "JERRY_TALISMAN_GOLDEN",
@@ -2101,7 +2291,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "JERRY_TALISMAN_GREEN",
@@ -2112,7 +2303,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "JERRY_TALISMAN_PURPLE",
@@ -2123,7 +2315,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "JUNGLE_AMULET",
@@ -2134,7 +2327,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "JUNK_ARTIFACT",
@@ -2145,7 +2339,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "JUNK_RING",
@@ -2156,7 +2351,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "JUNK_TALISMAN",
@@ -2167,7 +2363,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "KING_TALISMAN",
@@ -2178,7 +2375,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "KUUDRA_FOLLOWER_ARTIFACT",
@@ -2189,7 +2387,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "KUUDRA_FOLLOWER_RELIC",
@@ -2200,7 +2399,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "KUUDRAS_HEART",
@@ -2211,7 +2411,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "KUUDRAS_KIDNEY",
@@ -2222,7 +2423,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "KUUDRAS_LUNG",
@@ -2233,7 +2435,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "LARGE_FISH_BOWL",
@@ -2244,7 +2447,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "LAVA_TALISMAN",
@@ -2255,7 +2459,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "LUCK_TALISMAN",
@@ -2266,7 +2471,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": false
   },
   {
    "id": "LUCKY_HOOF",
@@ -2277,7 +2483,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "LUMBERJACK_ARTIFACT",
@@ -2288,7 +2495,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "LUMBERJACK_RING",
@@ -2299,7 +2507,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "LUMBERJACK_TALISMAN",
@@ -2310,7 +2519,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "LUSH_ARTIFACT",
@@ -2321,7 +2531,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "LUSH_RING",
@@ -2332,7 +2543,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "LUSH_TALISMAN",
@@ -2343,7 +2555,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "LYNX_TALISMAN",
@@ -2354,7 +2567,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "MAGIC_8_BALL",
@@ -2365,7 +2579,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "MAGNETIC_TALISMAN",
@@ -2376,7 +2591,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "MASTER_SKULL_TIER_1",
@@ -2387,7 +2603,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "MASTER_SKULL_TIER_10",
@@ -2398,7 +2615,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": false
   },
   {
    "id": "MASTER_SKULL_TIER_3",
@@ -2409,7 +2627,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "MASTER_SKULL_TIER_4",
@@ -2420,7 +2639,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "MASTER_SKULL_TIER_5",
@@ -2431,7 +2651,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "MASTER_SKULL_TIER_6",
@@ -2442,7 +2663,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "MASTER_SKULL_TIER_7",
@@ -2453,7 +2675,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "MASTER_SKULL_TIER_8",
@@ -2464,7 +2687,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": false
   },
   {
    "id": "MASTER_SKULL_TIER_9",
@@ -2475,7 +2699,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": false
   },
   {
    "id": "MASTER_THESIS",
@@ -2486,7 +2711,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "MEDIUM_FISH_BOWL",
@@ -2497,7 +2723,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "MELODY_HAIR",
@@ -2508,7 +2735,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "MINE_TALISMAN",
@@ -2519,7 +2747,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "MINERAL_TALISMAN",
@@ -2530,7 +2759,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "MINIATURIZED_TUBULATOR",
@@ -2541,7 +2771,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": true,
-   "riftTransferrable": true
+   "riftTransferrable": true,
+   "obtainable": true
   },
   {
    "id": "MOONGLADE_ARTIFACT",
@@ -2552,7 +2783,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "MOONGLADE_RING",
@@ -2563,7 +2795,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "MOONGLADE_TALISMAN",
@@ -2574,7 +2807,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "MOONLIGHT_CRYSTAL",
@@ -2585,7 +2819,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "NETHER_ARTIFACT",
@@ -2596,7 +2831,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "NETHERRACK_LOOKING_SUNSHADE",
@@ -2607,7 +2843,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "NEW_YEAR_CAKE_BAG",
@@ -2618,7 +2855,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "NIBBLE_CHOCOLATE_STICK",
@@ -2629,7 +2867,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "NIGHT_CRYSTAL",
@@ -2640,7 +2879,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "NIGHT_VISION_CHARM",
@@ -2651,7 +2891,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "ODGERS_BRONZE_TOOTH",
@@ -2662,7 +2903,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "ODGERS_DIAMOND_TOOTH",
@@ -2673,7 +2915,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "ODGERS_GOLD_TOOTH",
@@ -2684,7 +2927,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "ODGERS_SILVER_TOOTH",
@@ -2695,7 +2939,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "OLD_BOOT",
@@ -2706,7 +2951,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": false
   },
   {
    "id": "ORGAN_DONOR_ARTIFACT",
@@ -2717,7 +2963,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "ORGAN_DONOR_RING",
@@ -2728,7 +2975,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "ORGAN_DONOR_TALISMAN",
@@ -2739,7 +2987,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "PANDORAS_BOX",
@@ -2750,7 +2999,8 @@
    "tradeable": true,
    "recombobulatable": false,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "PARTY_HAT_CRAB",
@@ -2761,7 +3011,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "PARTY_HAT_CRAB_ANIMATED",
@@ -2772,7 +3023,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "PARTY_HAT_SLOTH",
@@ -2783,7 +3035,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "PERSONAL_COMPACTOR_4000",
@@ -2794,7 +3047,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "PERSONAL_COMPACTOR_5000",
@@ -2805,7 +3059,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "PERSONAL_COMPACTOR_6000",
@@ -2816,7 +3071,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "PERSONAL_COMPACTOR_7000",
@@ -2827,7 +3083,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "PERSONAL_DELETOR_4000",
@@ -2838,7 +3095,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "PERSONAL_DELETOR_5000",
@@ -2849,7 +3107,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "PERSONAL_DELETOR_6000",
@@ -2860,7 +3119,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "PERSONAL_DELETOR_7000",
@@ -2871,7 +3131,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "PESTHUNTER_ARTIFACT",
@@ -2882,7 +3143,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "PESTHUNTER_BADGE",
@@ -2893,7 +3155,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "PESTHUNTER_RELIC",
@@ -2904,7 +3167,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "PESTHUNTER_RING",
@@ -2915,7 +3179,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "PHD_GRIMOIRE",
@@ -2926,7 +3191,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "PIGGY_BANK",
@@ -2937,7 +3203,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "PIGS_FOOT",
@@ -2948,7 +3215,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "POCKET_ESPRESSO_MACHINE",
@@ -2959,7 +3227,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "POTATO_RING",
@@ -2970,7 +3239,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "POTATO_TALISMAN",
@@ -2981,7 +3251,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "POTION_AFFINITY_TALISMAN",
@@ -2992,7 +3263,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "POWER_ARTIFACT",
@@ -3003,7 +3275,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "POWER_RELIC",
@@ -3014,7 +3287,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "POWER_RING",
@@ -3025,7 +3299,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "POWER_TALISMAN",
@@ -3036,7 +3311,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "PRESSURE_ARTIFACT",
@@ -3047,7 +3323,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "PRESSURE_RING",
@@ -3058,7 +3335,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "PRESSURE_TALISMAN",
@@ -3069,7 +3347,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "PRESTIGE_CHOCOLATE_REALM",
@@ -3080,7 +3359,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "PULSE_RING",
@@ -3091,7 +3371,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "PUNCHCARD_ARTIFACT",
@@ -3102,7 +3383,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": true,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "PURPLE_GIFT_TALISMAN",
@@ -3113,7 +3395,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "RAGGEDY_SHARK_TOOTH_NECKLACE",
@@ -3124,7 +3407,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "RAZOR_SHARP_SHARK_TOOTH_NECKLACE",
@@ -3135,7 +3419,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "REAPER_ORB",
@@ -3146,7 +3431,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "RED_CLAW_ARTIFACT",
@@ -3157,7 +3443,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "RED_CLAW_RING",
@@ -3168,7 +3455,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "RED_CLAW_TALISMAN",
@@ -3179,7 +3467,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "RELIC_OF_COINS",
@@ -3190,7 +3479,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "RESPIRATION_ARTIFACT",
@@ -3201,7 +3491,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": true
+   "riftTransferrable": true,
+   "obtainable": true
   },
   {
    "id": "RESPIRATION_RING",
@@ -3212,7 +3503,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": true
+   "riftTransferrable": true,
+   "obtainable": true
   },
   {
    "id": "RESPIRATION_TALISMAN",
@@ -3223,7 +3515,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": true
+   "riftTransferrable": true,
+   "obtainable": true
   },
   {
    "id": "RICH_CHOCOLATE_CHUNK",
@@ -3234,7 +3527,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "RIFT_PRISM",
@@ -3245,7 +3539,8 @@
    "tradeable": false,
    "recombobulatable": false,
    "rift": true,
-   "riftTransferrable": true
+   "riftTransferrable": true,
+   "obtainable": true
   },
   {
    "id": "RING_OF_BROKEN_LOVE",
@@ -3256,7 +3551,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": true,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "RING_OF_COINS",
@@ -3267,7 +3563,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "RING_OF_ETERNAL_LOVE",
@@ -3278,7 +3575,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": true,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "RING_OF_SPACE",
@@ -3289,7 +3587,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": false
   },
   {
    "id": "RING_POTION_AFFINITY",
@@ -3300,7 +3599,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "RUNEBLADE_ARTIFACT",
@@ -3311,7 +3611,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "RUNEBLADE_RING",
@@ -3322,7 +3623,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "RUNEBLADE_TALISMAN",
@@ -3333,7 +3635,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "RUNEBOOK",
@@ -3344,7 +3647,8 @@
    "tradeable": true,
    "recombobulatable": false,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SAFETY_BADGE",
@@ -3355,7 +3659,8 @@
    "tradeable": false,
    "recombobulatable": false,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SATELITE",
@@ -3366,7 +3671,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": true,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SCARF_GRIMOIRE",
@@ -3377,7 +3683,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": true
+   "riftTransferrable": true,
+   "obtainable": true
   },
   {
    "id": "SCARF_STUDIES",
@@ -3388,7 +3695,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": true
+   "riftTransferrable": true,
+   "obtainable": true
   },
   {
    "id": "SCARF_THESIS",
@@ -3399,7 +3707,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": true
+   "riftTransferrable": true,
+   "obtainable": true
   },
   {
    "id": "SCAVENGER_ARTIFACT",
@@ -3410,7 +3719,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SCAVENGER_RING",
@@ -3421,7 +3731,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SCAVENGER_TALISMAN",
@@ -3432,7 +3743,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SEA_CREATURE_ARTIFACT",
@@ -3443,7 +3755,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SEA_CREATURE_RING",
@@ -3454,7 +3767,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SEA_CREATURE_TALISMAN",
@@ -3465,7 +3779,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SEAL_OF_THE_FAMILY",
@@ -3476,7 +3791,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SEAL_RING",
@@ -3487,7 +3803,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SEAL_TALISMAN",
@@ -3498,7 +3815,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SHADY_RING",
@@ -3509,7 +3827,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SHARP_SHARK_TOOTH_NECKLACE",
@@ -3520,7 +3839,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SHENS_REGALIA",
@@ -3531,7 +3851,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SKELETON_TALISMAN",
@@ -3542,7 +3863,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SMALL_FISH_BOWL",
@@ -3553,7 +3875,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SMOOTH_CHOCOLATE_BAR",
@@ -3564,7 +3887,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SOUL_CAMPFIRE_TALISMAN_10",
@@ -3575,7 +3899,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SOUL_CAMPFIRE_TALISMAN_11",
@@ -3586,7 +3911,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SOUL_CAMPFIRE_TALISMAN_12",
@@ -3597,7 +3923,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SOUL_CAMPFIRE_TALISMAN_13",
@@ -3608,7 +3935,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SOUL_CAMPFIRE_TALISMAN_14",
@@ -3619,7 +3947,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SOUL_CAMPFIRE_TALISMAN_15",
@@ -3630,7 +3959,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SOUL_CAMPFIRE_TALISMAN_16",
@@ -3641,7 +3971,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SOUL_CAMPFIRE_TALISMAN_17",
@@ -3652,7 +3983,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SOUL_CAMPFIRE_TALISMAN_18",
@@ -3663,7 +3995,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SOUL_CAMPFIRE_TALISMAN_19",
@@ -3674,7 +4007,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SOUL_CAMPFIRE_TALISMAN_20",
@@ -3685,7 +4019,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SOUL_CAMPFIRE_TALISMAN_21",
@@ -3696,7 +4031,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SOUL_CAMPFIRE_TALISMAN_22",
@@ -3707,7 +4043,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SOUL_CAMPFIRE_TALISMAN_23",
@@ -3718,7 +4055,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SOUL_CAMPFIRE_TALISMAN_24",
@@ -3729,7 +4067,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SOUL_CAMPFIRE_TALISMAN_25",
@@ -3740,7 +4079,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SOUL_CAMPFIRE_TALISMAN_26",
@@ -3751,7 +4091,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SOUL_CAMPFIRE_TALISMAN_27",
@@ -3762,7 +4103,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SOUL_CAMPFIRE_TALISMAN_28",
@@ -3773,7 +4115,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SOUL_CAMPFIRE_TALISMAN_29",
@@ -3784,7 +4127,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SOUL_CAMPFIRE_TALISMAN_4",
@@ -3795,7 +4139,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SOUL_CAMPFIRE_TALISMAN_5",
@@ -3806,7 +4151,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SOUL_CAMPFIRE_TALISMAN_6",
@@ -3817,7 +4163,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SOUL_CAMPFIRE_TALISMAN_7",
@@ -3828,7 +4175,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SOUL_CAMPFIRE_TALISMAN_8",
@@ -3839,7 +4187,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SOUL_CAMPFIRE_TALISMAN_9",
@@ -3850,7 +4199,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SOULFLOW_BATTERY",
@@ -3861,7 +4211,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SOULFLOW_PILE",
@@ -3872,7 +4223,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SOULFLOW_SUPERCELL",
@@ -3883,7 +4235,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SPEED_ARTIFACT",
@@ -3894,7 +4247,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SPEED_RELIC",
@@ -3905,7 +4259,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SPEED_RING",
@@ -3916,7 +4271,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SPEED_TALISMAN",
@@ -3927,7 +4283,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SPIDER_ARTIFACT",
@@ -3938,7 +4295,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SPIDER_RING",
@@ -3949,7 +4307,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SPIDER_TALISMAN",
@@ -3960,7 +4319,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SPIKED_ATROCITY",
@@ -3971,7 +4331,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SQUASH_RING",
@@ -3982,7 +4343,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "STUDENT_STUDIES",
@@ -3993,7 +4355,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SUNSHINE_CRYSTAL",
@@ -4004,7 +4367,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "SURVIVOR_CUBE",
@@ -4015,7 +4379,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "TALISMAN_OF_SPACE",
@@ -4026,7 +4391,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": false
   },
   {
    "id": "TARANTULA_RING",
@@ -4037,7 +4403,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "TARANTULA_TALISMAN",
@@ -4048,7 +4415,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "TEST_BUCKET_PLEASE_IGNORE",
@@ -4059,7 +4427,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": true,
-   "riftTransferrable": true
+   "riftTransferrable": true,
+   "obtainable": true
   },
   {
    "id": "TINY_DANCER",
@@ -4070,7 +4439,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": true,
-   "riftTransferrable": true
+   "riftTransferrable": true,
+   "obtainable": true
   },
   {
    "id": "TITANIUM_ARTIFACT",
@@ -4081,7 +4451,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "TITANIUM_RELIC",
@@ -4092,7 +4463,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "TITANIUM_RING",
@@ -4103,7 +4475,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "TITANIUM_TALISMAN",
@@ -4114,7 +4487,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "TORRHUS_ARTIFACT",
@@ -4125,7 +4499,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "TORRHUS_RING",
@@ -4136,7 +4511,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "TORRHUS_TALISMAN",
@@ -4147,7 +4523,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "TRAPPER_CREST",
@@ -4158,7 +4535,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "TREASURE_ARTIFACT",
@@ -4169,7 +4547,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "TREASURE_RING",
@@ -4180,7 +4559,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "TREASURE_TALISMAN",
@@ -4191,7 +4571,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "TWO_IQ_POINT",
@@ -4202,7 +4583,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": true,
-   "riftTransferrable": true
+   "riftTransferrable": true,
+   "obtainable": true
   },
   {
    "id": "VACCINE_ARTIFACT",
@@ -4213,7 +4595,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "VACCINE_RING",
@@ -4224,7 +4607,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "VACCINE_TALISMAN",
@@ -4235,7 +4619,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "VAMPIRE_DENTIST_RELIC",
@@ -4246,7 +4631,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": true,
-   "riftTransferrable": true
+   "riftTransferrable": true,
+   "obtainable": true
   },
   {
    "id": "VILLAGE_TALISMAN",
@@ -4257,7 +4643,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "VOTER_BADGE",
@@ -4268,7 +4655,8 @@
    "tradeable": false,
    "recombobulatable": false,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "VOTER_BADGE_ELITE",
@@ -4279,7 +4667,8 @@
    "tradeable": false,
    "recombobulatable": false,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "VOTER_BADGE_SUPREME",
@@ -4290,7 +4679,8 @@
    "tradeable": false,
    "recombobulatable": false,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "VOTER_BADGE_VIP",
@@ -4301,7 +4691,8 @@
    "tradeable": false,
    "recombobulatable": false,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "WARDING_TRINKET",
@@ -4312,7 +4703,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": true,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "WEDDING_RING_2",
@@ -4323,7 +4715,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "WEDDING_RING_3",
@@ -4334,7 +4727,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "WEDDING_RING_4",
@@ -4345,7 +4739,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "WEDDING_RING_5",
@@ -4356,7 +4751,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "WEDDING_RING_6",
@@ -4367,7 +4763,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "WEDDING_RING_7",
@@ -4378,7 +4775,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "WEDDING_RING_8",
@@ -4389,7 +4787,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "WEDDING_RING_9",
@@ -4400,7 +4799,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "WHITE_GIFT_TALISMAN",
@@ -4411,7 +4811,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "WITCH_ARTIFACT",
@@ -4422,7 +4823,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "WITCH_RING",
@@ -4433,7 +4835,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "WITCH_TALISMAN",
@@ -4444,7 +4847,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "WITHER_ARTIFACT",
@@ -4455,7 +4859,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "WITHER_RELIC",
@@ -4466,7 +4871,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "WOLF_PAW",
@@ -4477,7 +4883,8 @@
    "tradeable": false,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "WOLF_RING",
@@ -4488,7 +4895,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "WOLF_TALISMAN",
@@ -4499,7 +4907,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "WOOD_TALISMAN",
@@ -4510,7 +4919,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "ZOMBIE_ARTIFACT",
@@ -4521,7 +4931,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "ZOMBIE_RING",
@@ -4532,7 +4943,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   },
   {
    "id": "ZOMBIE_TALISMAN",
@@ -4543,7 +4955,8 @@
    "tradeable": true,
    "recombobulatable": true,
    "rift": false,
-   "riftTransferrable": false
+   "riftTransferrable": false,
+   "obtainable": true
   }
  ]
 }

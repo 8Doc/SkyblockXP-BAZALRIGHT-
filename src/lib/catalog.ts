@@ -277,6 +277,9 @@ export function buildCatalog(
     if (excluded.has(acc.id)) continue;
     // A rift-bound accessory never reaches the bag, so its magical power is not on offer.
     if (!grantsMagicalPower(acc)) continue;
+    // Neither is a staff curio or something the game has withdrawn. A player who owns one is
+    // still credited for it by scoreBag — this only stops it being listed as XP left to get.
+    if (!acc.obtainable) continue;
     const power = magicalPowerOf(data, acc.tier);
     if (power <= 0) continue;
 

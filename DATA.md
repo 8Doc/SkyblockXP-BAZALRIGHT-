@@ -100,9 +100,14 @@ above. Unioning is also the only way to close a chain: the wiki states one edge 
 it takes three of them to learn that Cropie and Helianthus are the same family.
 
 Edges are stored, not finished families, so the union happens in one place next to the name
-rules and either source alone still yields a usable answer. 310 of 405 pages resolve; the 95
-that don't are the ladders the name rules already handle. Two `upgrades_from` values name
-something outside the modelled set and are recorded in `unresolved` rather than guessed at.
+rules and either source alone still yields a usable answer.
+
+Both wikis are read, and both ends of the link. Fandom is the fuller of the two but the
+community wiki carries pages it never got — the Applicant's Statement's is the only one saying
+it becomes a Student's Studies, without which a maxed player is offered it as missing XP. And
+an editor records the link from whichever end they were editing, so `upgrades_to` states lines
+that `upgrades_from` never mentions. 651 pages across the two yield 163 edges; the three that
+don't resolve name something outside the modelled set and are recorded rather than guessed at.
 
 ### `accessory_rarity.json`
 
@@ -146,16 +151,31 @@ actually is, in the last line of its lore, so that is what `bagItemsFrom` now re
 `scoreBag` prefers. Only about a tenth of bagged items carry lore at all, so this is a
 correction where it exists rather than a replacement for the resource.
 
-Checked against a maxed profile reporting **2,122** magical power in game, the model reads
-**2,091**. It read 1,946 before this work, and the rows it offered that player as still missing
-went from 30 to 10.
+There is a sixth rule that is not about magical power at all: **some accessories nobody can
+have.** The Talisman, Ring and Artifact of Space are uncommon, rare and epic in the items
+resource and have only ever sat in a former admin's inventory; the Eternal Crystal stopped being
+craftable in 2019. Twelve are in that state, recorded in `accessory_obtainable.json`, and
+listing them told a player who owns everything to go and buy a staff curio.
 
-Four candidates for the remaining 31 were ruled out by measuring rather than by arguing:
-dungeon accessories counting double overshoots to 2,216; the wiki's Enrichments page never
-mentions magical power; no family scores below its own ceiling; and the wiki states Personal
-Deletor 7000 `upgrades_from` 6000, so merging them is right and the 12 magical power they
-suppress is suppressed correctly. One part of what is left is known — a Balloon Hat 2024 the
-player wears that the items resource does not carry at all — and the rest is not.
+**Hatcessories are one family.** Every Hat of Celebration counts for the same magical power and
+only once — the wiki says different editions used to stack and that the stacking was removed —
+so a player wearing the Sloth was being offered both Crabs.
+
+Checked against a maxed profile reporting **2,122** magical power in game, the model reads
+**2,122**, and offers that player **nothing** as still missing. It read 1,946 against 30 rows
+before this work.
+
+The last 31 of that gap were all one bug, and it was in the lore reader. A recombobulated item
+writes its rarity line as `§d§l§ka§r §d§lMYTHIC ACCESSORY §d§l§ka`, where `§k` is Minecraft's
+obfuscation code and the `a` either side is the shimmer it scrambles. Stripping only the colour
+codes leaves `a MYTHIC ACCESSORY a`, which starts with no rarity at all — so **142 of 157**
+items on that bag quietly fell back to the items resource, and with them every accessory that
+climbs rarity in place. A Pulse Ring reads UNCOMMON in the resource and MYTHIC on the item.
+
+Ruled out along the way, by measuring rather than arguing: dungeon accessories counting double
+(that overshoots to 2,216), enrichments (the wiki's Enrichments page never mentions magical
+power), and Personal Deletor 6000 against 7000 being separate families (the wiki states 7000
+`upgrades_from` 6000, so merging them is right).
 
 ## Running without a server
 

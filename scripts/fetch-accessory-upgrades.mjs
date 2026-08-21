@@ -25,6 +25,8 @@ import { dirname, join } from "node:path";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const WIKI = "https://hypixel-skyblock.fandom.com/api.php";
+/** The community wiki, which carries pages Fandom never got. */
+const COMMUNITY = "https://hypixelskyblock.minecraft.wiki/api.php";
 const UA = { "User-Agent": "skyblock-xp-planner/0.1 (data build script)" };
 
 const accessories = JSON.parse(await readFile(join(ROOT, "data/generated/accessories.json"), "utf8")).accessories;
@@ -58,45 +60,74 @@ function plainName(value) {
   return bare || null;
 }
 
-const pages = [];
-const titles = accessories.map((a) => a.name);
-for (let i = 0; i < titles.length; i += 50) {
-  const batch = titles.slice(i, i + 50);
-  // redirects=1 because a line often shares one page: "Accretion Talisman" and "Accretion Ring"
-  // both land on it, and without following the redirect they read as pages that don't exist.
-  const url = `${WIKI}?action=query&prop=revisions&rvprop=content&rvslots=main&redirects=1&format=json&titles=${batch
-    .map(encodeURIComponent)
-    .join("|")}`;
-  const body = await fetch(url, { headers: UA }).then((r) => r.json());
-  for (const page of Object.values(body.query?.pages ?? {})) {
-    const text = page.revisions?.[0]?.slots?.main?.["*"];
-    if (!text) continue;
-    pages.push({ title: page.title, id: fieldOf(text, "id"), upgradesFrom: fieldOf(text, "upgrades_from") });
+/** Every accessory page one wiki has, with the three fields that matter. */
+async function readPages(api, label) {
+  const pages = [];
+  const titles = accessories.map((a) => a.name);
+  for (let i = 0; i < titles.length; i += 50) {
+    const batch = titles.slice(i, i + 50);
+    // redirects=1 because a line often shares one page: "Accretion Talisman" and "Accretion Ring"
+    // both land on it, and without following the redirect they read as pages that don't exist.
+    const url = `${api}?action=query&prop=revisions&rvprop=content&rvslots=main&redirects=1&format=json&titles=${batch
+      .map(encodeURIComponent)
+      .join("|")}`;
+    const body = await fetch(url, { headers: UA })
+      .then((r) => r.json())
+      .catch(() => null);
+    for (const page of Object.values(body?.query?.pages ?? {})) {
+      const text = page.revisions?.[0]?.slots?.main?.["*"];
+      if (!text) continue;
+      pages.push({
+        title: page.title,
+        id: fieldOf(text, "id"),
+        upgradesFrom: fieldOf(text, "upgrades_from"),
+        // Editors record the link from whichever end they happened to be editing, so a line can
+        // be stated only as an upgrades_to. The Applicant's Statement is the case that matters:
+        // the only page saying it becomes a Student's Studies is on the community wiki.
+        upgradesTo: fieldOf(text, "upgrades_to"),
+      });
+    }
+    process.stdout.write(`\r  ${label} ${Math.min(i + 50, titles.length)}/${titles.length}`);
   }
-  process.stdout.write(`\r  ${Math.min(i + 50, titles.length)}/${titles.length}`);
+  process.stdout.write("\n");
+  return pages;
 }
-process.stdout.write("\n");
+
+// Both wikis, because neither has every page. Fandom is the fuller one; the community wiki is
+// the only one carrying the pages Fandom never got.
+const pages = [...(await readPages(WIKI, "fandom   ")), ...(await readPages(COMMUNITY, "community"))];
 
 const edges = [];
 const unresolved = [];
 const seen = new Set();
 for (const page of pages) {
-  if (!page.upgradesFrom) continue;
+  if (!page.upgradesFrom && !page.upgradesTo) continue;
   // The infobox states the item id outright, which beats matching the page title: a redirect
   // means the title we asked for and the title we got need not be the same accessory. Upper-cased
   // first because fifteen pages don't — `Agarimoo_RING`, `lucky_hoof` — and item ids never vary.
   const stated = page.id ? page.id.toUpperCase() : null;
-  const child = stated && byId.has(stated) ? stated : byName.get(page.title.toLowerCase());
-  const parentName = plainName(page.upgradesFrom);
-  const parent = parentName ? byName.get(parentName.toLowerCase()) : undefined;
-  if (!child || !parent || child === parent) {
-    unresolved.push({ page: page.title, upgradesFrom: page.upgradesFrom });
-    continue;
+  const self = stated && byId.has(stated) ? stated : byName.get(page.title.toLowerCase());
+
+  // upgrades_from names what this page is made of; upgrades_to names what it becomes. Both state
+  // one edge, only from opposite ends, so they are read into the same shape.
+  for (const [field, raw] of [
+    ["upgrades_from", page.upgradesFrom],
+    ["upgrades_to", page.upgradesTo],
+  ]) {
+    if (!raw) continue;
+    const otherName = plainName(raw);
+    const other = otherName ? byName.get(otherName.toLowerCase()) : undefined;
+    const child = field === "upgrades_from" ? self : other;
+    const parent = field === "upgrades_from" ? other : self;
+    if (!child || !parent || child === parent) {
+      unresolved.push({ page: page.title, field, states: raw });
+      continue;
+    }
+    const key = `${child}<-${parent}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    edges.push({ child, parent, childName: byId.get(child).name, parentName: byId.get(parent).name });
   }
-  const key = `${child}<-${parent}`;
-  if (seen.has(key)) continue;
-  seen.add(key);
-  edges.push({ child, parent, childName: byId.get(child).name, parentName: byId.get(parent).name });
 }
 edges.sort((a, b) => a.child.localeCompare(b.child));
 

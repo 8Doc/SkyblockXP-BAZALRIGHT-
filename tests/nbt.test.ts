@@ -155,6 +155,34 @@ test("reads the rarity an item's lore claims", () => {
   ]);
 });
 
+/**
+ * A recombobulated item shimmers: "§d§l§ka§r §d§lMYTHIC ACCESSORY §d§l§ka", where §k is
+ * Minecraft's obfuscation code and the `a` either side is what it scrambles. Strip only the
+ * colour codes and that reads "a MYTHIC ACCESSORY a", so every recombobulated item fell back to
+ * the items resource — 142 of 157 on a real maxed bag, and with them every accessory that
+ * climbs rarity in place. A Pulse Ring is UNCOMMON in the resource and MYTHIC on the item.
+ */
+test("the shimmer on a recombobulated item does not hide its rarity", () => {
+  const bytes = document((w) => {
+    w.tag(9, "i").u8(10).i32(1);
+    w.tag(10, "tag");
+    w.tag(10, "ExtraAttributes");
+    w.tag(8, "id").str("PULSE_RING");
+    w.tag(3, "rarity_upgrades").i32(1);
+    w.end();
+    w.tag(10, "display");
+    w.tag(9, "Lore").u8(8).i32(1);
+    w.str("§d§l§ka§r §d§lMYTHIC ACCESSORY §d§l§ka");
+    w.end();
+    w.end();
+    w.end();
+  });
+
+  assert.deepEqual(bagItemsFrom(readNbt(bytes)), [
+    { id: "PULSE_RING", rarityUpgrades: 1, rarity: "MYTHIC" },
+  ]);
+});
+
 test("VERY SPECIAL is not read as SPECIAL", () => {
   const bytes = document((w) => {
     w.tag(9, "i").u8(10).i32(1);

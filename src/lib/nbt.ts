@@ -171,14 +171,25 @@ const RARITY_WORDS = [
  * The rarity an item's lore states, e.g. "§d§lMYTHIC ACCESSORY".
  *
  * Read from the bottom, because the rarity line is the last one and words like "RARE" turn up
- * in ability text above it. Colour codes are stripped first; a bagged item that carries no lore
- * at all is a null, which leaves the caller on the resource's rarity.
+ * in ability text above it.
+ *
+ * A recombobulated item writes that line differently, and the difference is easy to miss:
+ * "§d§l§ka§r §d§lMYTHIC ACCESSORY §d§l§ka". `§k` is Minecraft's obfuscation code and the
+ * character after it is the shimmer the recombobulator puts either side of the rarity. Strip
+ * only the colour codes and the line reads "a MYTHIC ACCESSORY a", which starts with neither a
+ * rarity nor anything useful — so every recombobulated item silently fell through to the items
+ * resource. On a maxed bag that was 142 of 157 items, and it hid the accessories that climb
+ * rarity in place: a Pulse Ring reads UNCOMMON in the resource and MYTHIC on the item.
  */
 function rarityFromLore(display: NbtCompound | null): string | null {
   const lore = display?.Lore;
   if (!Array.isArray(lore)) return null;
   for (let i = lore.length - 1; i >= 0; i--) {
-    const line = String(lore[i]).replace(/§./g, "").trim();
+    const line = String(lore[i])
+      // The obfuscated run first: from §k to the §r that ends it, or to the end of the line.
+      .replace(/§k.*?(?:§r|$)/g, "")
+      .replace(/§./g, "")
+      .trim();
     const hit = RARITY_WORDS.find((word) => line.startsWith(word));
     if (hit) return hit.replace(" ", "_");
   }

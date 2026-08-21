@@ -1,10 +1,22 @@
 {
- "generatedAt": "2026-08-20T23:57:48.065Z",
+ "generatedAt": "2026-08-21T10:29:31.750Z",
  "source": "Hypixel SkyBlock Fandom wiki infobox: upgrades_from",
  "note": "child upgrades from parent, so the two never count at once. Both ids are accessories we model; an upgrades_from naming something outside that set is left in `unresolved` rather than guessed at.",
  "consequence": "A missing edge lets the bag offer a tier the player has already upgraded past, and inflates the category ceiling. A wrong edge hides real XP. Names that don't resolve are dropped, never approximated.",
- "pagesRead": 316,
+ "pagesRead": 651,
  "edges": [
+  {
+   "child": "ACCRETION_ARTIFACT",
+   "parent": "ACCRETION_RING",
+   "childName": "Accretion Artifact",
+   "parentName": "Accretion Ring"
+  },
+  {
+   "child": "ACCRETION_RING",
+   "parent": "ACCRETION_TALISMAN",
+   "childName": "Accretion Ring",
+   "parentName": "Accretion Talisman"
+  },
   {
    "child": "AGARIMOO_ARTIFACT",
    "parent": "AGARIMOO_RING",
@@ -130,6 +142,12 @@
    "parent": "CANDY_TALISMAN",
    "childName": "Candy Ring",
    "parentName": "Candy Talisman"
+  },
+  {
+   "child": "CENTURY_ARTIFACT",
+   "parent": "CENTURY_RING",
+   "childName": "Artifact of the Century",
+   "parentName": "Ring of the Century"
   },
   {
    "child": "CENTURY_RING",
@@ -330,6 +348,12 @@
    "parentName": "Purple Gift Talisman"
   },
   {
+   "child": "GRATITUDE_ARTIFACT",
+   "parent": "GRATITUDE_RING",
+   "childName": "Gratitude Artifact",
+   "parentName": "Gratitude Ring"
+  },
+  {
    "child": "GRATITUDE_RING",
    "parent": "GRATITUDE_TALISMAN",
    "childName": "Gratitude Ring",
@@ -376,6 +400,18 @@
    "parent": "DULL_SHARK_TOOTH_NECKLACE",
    "childName": "Honed Shark Tooth Necklace",
    "parentName": "Dull Shark Tooth Necklace"
+  },
+  {
+   "child": "HONEYCOMB_ARTIFACT",
+   "parent": "HONEYCOMB_RING",
+   "childName": "Honeycomb Artifact",
+   "parentName": "Honeycomb Ring"
+  },
+  {
+   "child": "HONEYCOMB_RING",
+   "parent": "HONEYCOMB_TALISMAN",
+   "childName": "Honeycomb Ring",
+   "parentName": "Honeycomb Talisman"
   },
   {
    "child": "HUNTER_RING",
@@ -462,6 +498,18 @@
    "parentName": "Medium Fish Bowl"
   },
   {
+   "child": "LUMBERJACK_ARTIFACT",
+   "parent": "LUMBERJACK_RING",
+   "childName": "Lumberjack Artifact",
+   "parentName": "Lumberjack Ring"
+  },
+  {
+   "child": "LUMBERJACK_RING",
+   "parent": "LUMBERJACK_TALISMAN",
+   "childName": "Lumberjack Ring",
+   "parentName": "Lumberjack Talisman"
+  },
+  {
    "child": "LUSH_ARTIFACT",
    "parent": "LUSH_RING",
    "childName": "Lush Artifact",
@@ -478,6 +526,12 @@
    "parent": "CAT_TALISMAN",
    "childName": "Lynx Talisman",
    "parentName": "Cat Talisman"
+  },
+  {
+   "child": "MASTER_THESIS",
+   "parent": "STUDENT_STUDIES",
+   "childName": "Master's Thesis",
+   "parentName": "Student's Studies"
   },
   {
    "child": "MEDIUM_FISH_BOWL",
@@ -568,6 +622,12 @@
    "parent": "PESTHUNTER_BADGE",
    "childName": "Pesthunter Ring",
    "parentName": "Pesthunter Badge"
+  },
+  {
+   "child": "PHD_GRIMOIRE",
+   "parent": "MASTER_THESIS",
+   "childName": "PhD's Grimoire",
+   "parentName": "Master's Thesis"
   },
   {
    "child": "POTATO_RING",
@@ -792,6 +852,12 @@
    "parentName": "Cropie Talisman"
   },
   {
+   "child": "STUDENT_STUDIES",
+   "parent": "APPLICANT_STATEMENT",
+   "childName": "Student's Studies",
+   "parentName": "Applicant's Statement"
+  },
+  {
    "child": "SUNSHINE_CRYSTAL",
    "parent": "DAY_CRYSTAL",
    "childName": "Sunshine Crystal",
@@ -820,6 +886,18 @@
    "parent": "TITANIUM_TALISMAN",
    "childName": "Titanium Ring",
    "parentName": "Titanium Talisman"
+  },
+  {
+   "child": "TORRHUS_ARTIFACT",
+   "parent": "TORRHUS_RING",
+   "childName": "Torrhus Artifact",
+   "parentName": "Torrhus Ring"
+  },
+  {
+   "child": "TORRHUS_RING",
+   "parent": "TORRHUS_TALISMAN",
+   "childName": "Torrhus Ring",
+   "parentName": "Torrhus Talisman"
   },
   {
    "child": "TREASURE_ARTIFACT",
@@ -906,5 +984,21 @@
    "parentName": "Zombie Talisman"
   }
  ],
- "unresolved": []
+ "unresolved": [
+  {
+   "page": "IQ Point",
+   "field": "upgrades_to",
+   "states": "1 2 IQ Points"
+  },
+  {
+   "page": "Gratitude Artifact",
+   "field": "upgrades_to",
+   "states": "Gratitude Artifact"
+  },
+  {
+   "page": "IQ Point",
+   "field": "upgrades_to",
+   "states": "1 2 IQ Points"
+  }
+ ]
 }

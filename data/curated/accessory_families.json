@@ -14,6 +14,11 @@
   ],
   "patternFamilies": [
     {
+      "match": "Hat of Celebration|Balloon Hat",
+      "family": "hatcessory",
+      "note": "Every Hatcessory counts for the same magical power and only once. The wiki is explicit that different editions used to stack and that the stacking was removed before Aug 2022, so the Crab, the 2022 Crab and the Sloth are one family — a player wearing the Sloth was being offered both Crabs."
+    },
+    {
       "match": "^Soul Campfire .*Badge",
       "family": "soul campfire badge",
       "note": "The soul badges are their own ladder, not the tail of the ordinary one — 26 of each, under separate ids (SOUL_CAMPFIRE_TALISMAN_* against CAMPFIRE_TALISMAN_*). Listed first so it wins over the pattern below."

@@ -140,6 +140,16 @@ async function buildAccessories() {
     console.log("  accessories  no accessory_rarity.json — run fetch-accessory-rarity.mjs");
   }
 
+  // Staff curios and things removed from the game. They read as ordinary accessories here, so
+  // without the wiki a maxed player is offered a former admin's Ring of Space as missing XP.
+  let unobtainable = new Set();
+  try {
+    const list = JSON.parse(await readFile(join(OUT, "accessory_obtainable.json"), "utf8"));
+    unobtainable = new Set(list.unobtainable.map((entry) => entry.id));
+  } catch {
+    console.log("  accessories  no accessory_obtainable.json — run fetch-accessory-obtainable.mjs");
+  }
+
   const out = [];
   for (const item of items) {
     if (item.category !== "ACCESSORY") continue;
@@ -167,6 +177,7 @@ async function buildAccessories() {
       // not rift-transferrable either, and for them it means nothing.
       rift: item.origin === "RIFT",
       riftTransferrable: Boolean(item.rift_transferrable),
+      obtainable: !unobtainable.has(item.id),
     });
   }
   out.sort((a, b) => a.id.localeCompare(b.id));

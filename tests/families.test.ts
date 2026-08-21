@@ -268,6 +268,36 @@ test("the accessories that refuse a recombobulator are flagged", () => {
   assert.equal(byId.get("BAT_ARTIFACT")?.recombobulatable, true, "an ordinary accessory still can be");
 });
 
+/**
+ * Every Hatcessory counts for the same magical power and only once. The wiki is explicit that
+ * different editions used to stack and that the stacking was removed, so a player wearing the
+ * Sloth was being offered both Crabs as XP still to collect.
+ */
+test("the Hats of Celebration are one family", () => {
+  const hats = ["Crab Hat of Celebration", "Crab Hat of Celebration - 2022 Edition", "Sloth Hat of Celebration"];
+  const found = new Set(hats.map(family));
+  assert.equal(found.size, 1, `split into ${found.size}: ${[...found].join(", ")}`);
+});
+
+/**
+ * Staff curios and withdrawn items read as ordinary accessories in the items resource — the
+ * Talisman, Ring and Artifact of Space are uncommon, rare and epic — so nothing but the wiki
+ * says nobody can have one. Listing them tells a maxed player to go and buy a former admin's
+ * inventory.
+ */
+test("accessories nobody can hold are flagged unobtainable", () => {
+  const list = (accessories as { accessories: { id: string; name: string; obtainable: boolean }[] }).accessories;
+  const byId = new Map(list.map((a) => [a.id, a]));
+
+  for (const id of ["ARTIFACT_OF_SPACE", "RING_OF_SPACE", "TALISMAN_OF_SPACE", "GRIZZLY_PAW", "OLD_BOOT", "ETERNAL_CRYSTAL"]) {
+    assert.equal(byId.get(id)?.obtainable, false, `${id} is a staff curio or withdrawn`);
+  }
+  // The check runs the other way too: an ordinary accessory must stay obtainable.
+  for (const id of ["BAT_ARTIFACT", "HEGEMONY_ARTIFACT"]) {
+    assert.equal(byId.get(id)?.obtainable, true, `${id} is perfectly obtainable`);
+  }
+});
+
 /* --------------------------------------------------- what can be bought */
 
 test("accessories the wiki says cannot be bought are not priced", () => {
