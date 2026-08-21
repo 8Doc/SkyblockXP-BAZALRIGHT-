@@ -403,7 +403,12 @@ function nameFamilyOf(data: GameData, name: string, id: string): string {
 
 /* --------------------------------------------------------------- bag scoring */
 
-export type BagItem = { id: string; rarityUpgrades: number };
+export type BagItem = {
+  id: string;
+  rarityUpgrades: number;
+  /** What the item's own lore says it is, which is the final word when the blob carries it. */
+  rarity?: string;
+};
 
 export type BagState = {
   /** family -> magical power already granted by the best owned member. */
@@ -451,7 +456,10 @@ export function scoreBag(
     const meta = byId.get(item.id);
     if (!meta) continue;
     identified++;
-    const rarity = bumpRarity(data, meta.tier, item.rarityUpgrades);
+    // The item's own lore beats anything derived from its base rarity: six accessories climb
+    // the ladder through their own mechanics, so a base tier plus a Recombobulator count reads
+    // a maxed player's mythic Book of Progression as common.
+    const rarity = item.rarity ?? bumpRarity(data, meta.tier, item.rarityUpgrades);
     const family = familyOf(data, meta.name, meta.id);
     const power = accessoryPowerOf(data, meta.id, rarity, abiphoneContacts);
     if (power > (familyPower.get(family) ?? -1)) {

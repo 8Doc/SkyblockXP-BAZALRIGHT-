@@ -261,3 +261,65 @@ test("every Hat of Celebration is one family", () => {
   const families = new Set(hats.map((hat) => familyOf(data, hat.name, hat.id)));
   assert.equal(families.size, 1, `the hats split into ${[...families].join(", ")}`);
 });
+
+/**
+ * Two lines, not one. A maxed player holds Campfire God Badge IX and Soul Campfire God Badge IX
+ * at once and the game counts both, but the pattern that grouped the Campfire line was
+ * unanchored and swallowed the Soul line with it, crediting twenty-two of the forty-four.
+ */
+test("the Campfire and Soul Campfire badges are separate lines", () => {
+  const campfire = data.accessories.accessories.find((a) => a.name === "Campfire God Badge IX")!;
+  const soul = data.accessories.accessories.find((a) => a.name === "Soul Campfire God Badge IX")!;
+  assert.notEqual(
+    familyOf(data, campfire.name, campfire.id),
+    familyOf(data, soul.name, soul.id),
+    "these stack, so they cannot share a family",
+  );
+  // Within each line the rungs still compete.
+  const lower = data.accessories.accessories.find((a) => a.name === "Campfire God Badge I")!;
+  assert.equal(familyOf(data, campfire.name, campfire.id), familyOf(data, lower.name, lower.id));
+});
+
+/** Blood God Crest fills with kills into the Sigil, and nothing in the data links them. */
+test("the Blood God line is one family", () => {
+  const crest = data.accessories.accessories.find((a) => a.name === "Blood God Crest")!;
+  const sigil = data.accessories.accessories.find((a) => a.name === "Blood God Sigil")!;
+  assert.equal(familyOf(data, crest.name, crest.id), familyOf(data, sigil.name, sigil.id));
+});
+
+/**
+ * Imbuing the Rift Prism at Erihann grants its eleven accessory power for good and consumes the
+ * item, so it is never in the bag to be found. The profile records the act, and a player at the
+ * documented maximum was still being told to go and get one.
+ */
+test("an imbued Rift Prism is not offered again", () => {
+  const bag = { items: [], capacity: 400 };
+  const before = buildCatalog({} as ProfileMember, data, bag);
+  assert.ok(!before.done.has("accessory_RIFT_PRISM"), "an un-imbued prism is still worth getting");
+
+  const imbued = { rift: { access: { consumed_prism: true } } } as unknown as ProfileMember;
+  const after = buildCatalog(imbued, data, bag);
+  assert.ok(after.done.has("accessory_RIFT_PRISM"), "an imbued prism is spent and counted");
+  assert.equal(
+    after.earnedOutsideTasks.magicalPower - before.earnedOutsideTasks.magicalPower,
+    11,
+    "its eleven power is earned even though the item is gone",
+  );
+});
+
+/**
+ * The Abicase is worth one accessory power per two Abiphone contacts, counted off the profile's
+ * own ids. Our contact list is what we can offer, which is not what a player has: one maxed
+ * profile carries 84 contacts to our 71, and scoring against the shorter list cost seven power.
+ */
+test("the Abicase counts the contacts the profile reports, not the ones we list", () => {
+  const contacts = Array.from({ length: 84 }, (_, i) => `ABIPHONE_unknown_${i}`);
+  const member = { leveling: { completed_tasks: contacts } } as unknown as ProfileMember;
+  const catalog = buildCatalog(member, data, { items: [{ id: "ABICASE", rarityUpgrades: 0 }], capacity: 400 });
+  const abicase = catalog.tasks.find((task) => task.id === "accessory_ABICASE")!;
+  assert.ok(catalog.done.has(abicase.id), "an Abicase already held is not bought again");
+  assert.ok(
+    catalog.earnedOutsideTasks.magicalPower >= 42,
+    `84 contacts are worth 42 power, got ${catalog.earnedOutsideTasks.magicalPower}`,
+  );
+});

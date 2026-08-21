@@ -250,7 +250,10 @@ export function buildCatalog(
   // most of its value is: five times what its rarity alone would give, once the phone is full.
   const contactIds = new Set((data.abiphone?.contacts ?? []).map((contact) => contact.taskId));
   const completedIds = member.leveling?.completed_tasks ?? [];
-  const contactsHeld = completedIds.filter((id) => contactIds.has(id)).length;
+  // Counted off the profile's own ids rather than against our list of contacts. The list is what
+  // we can offer, which is not the same as what a player has: one maxed profile carries 84
+  // contacts to our 71, and scoring the Abicase against the shorter list cost it seven power.
+  const contactsHeld = completedIds.filter((id) => id.startsWith("ABIPHONE_")).length;
 
   const bagState = scoreBag(
     data,
@@ -288,6 +291,11 @@ export function buildCatalog(
       `${item.tokens.toLocaleString()} ${data.carnivalShop!.currency} from ${data.carnivalShop!.npc}`,
     ]),
   );
+
+  // Imbuing the Rift Prism at Erihann grants its eleven accessory power for good, and consumes
+  // the item — so it is never in the bag to be counted, and the profile records the act instead.
+  // A player with the maximum 2,122 was still being told to go and get one.
+  const prismImbued = member.rift?.access?.consumed_prism === true;
 
   const excluded = new Set(data.magicalPower.excludedItems.ids);
   const accessoryById = new Map(data.accessories.accessories.map((a) => [a.id, a]));
@@ -365,6 +373,7 @@ export function buildCatalog(
     });
 
     if (bagState.owned.has(acc.id) || gain <= 0) done.add(id);
+    if (acc.id === "RIFT_PRISM" && prismImbued) done.add(id);
 
     const offered = familyOffer.get(family);
     if (!offered || power > offered.power) {
@@ -1096,7 +1105,9 @@ export function buildCatalog(
     // Pet score is unmodelled as *tasks*, but the profile still tells us exactly how much XP
     // it has already paid out — worth showing rather than discarding.
     earnedOutsideTasks: {
-      magicalPower: bagState.computedMp,
+      // The imbued prism's eleven are earned and gone from the bag, so they are counted here
+      // rather than in what the bag scores.
+      magicalPower: bagState.computedMp + (prismImbued ? accessoryPowerOf(data, "RIFT_PRISM", "RARE") : 0),
       // The highest score reached is what the game paid out on, not what the pets are worth now.
       petScore: (member.leveling?.highest_pet_score ?? 0) * 3,
       bestiary: bestiaryXp(member),

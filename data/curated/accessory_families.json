@@ -14,7 +14,12 @@
   ],
   "patternFamilies": [
     {
-      "match": "Campfire .*Badge",
+      "match": "^Soul Campfire .*Badge",
+      "family": "soul campfire badge",
+      "why": "A separate line from the Campfire Badge, and a separate accessory: a maxed player holds Campfire God Badge IX and Soul Campfire God Badge IX at once and the game counts both. The old pattern was unanchored, so it swallowed the Soul line and credited one of the two."
+    },
+    {
+      "match": "^Campfire .*Badge",
       "family": "campfire badge"
     },
     {
@@ -80,6 +85,11 @@
       "match": "Hat of Celebration",
       "family": "hat of celebration",
       "why": "The anniversary hats do not stack. The wiki's own tally of the maximum accessory power lists exactly one of them across every colour and both editions, noting that it has other versions — and a player with a maxed bag was being offered two more."
+    },
+    {
+      "match": "^Blood God",
+      "family": "blood god",
+      "why": "Blood God Crest upgrades into Blood God Sigil as its kill counter fills. The wiki records the Crest and flags the Sigil as the higher form, but nothing links them as a recipe, so a maxed player holding the Sigil was offered the Crest."
     }
   ],
   "openQuestions": [

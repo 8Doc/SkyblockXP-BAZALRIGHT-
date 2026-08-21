@@ -42,6 +42,8 @@ export type ProfileMember = {
   skill_tree?: { nodes?: Record<string, Record<string, number | boolean> | undefined> };
   /** Attribute shard counts, keyed by attribute name. Levels are derived from these. */
   attributes?: { stacks?: Record<string, number> };
+  /** The Rift. `consumed_prism` records that the Rift Prism has been imbued at Erihann. */
+  rift?: { access?: { consumed_prism?: boolean } };
 };
 
 /**

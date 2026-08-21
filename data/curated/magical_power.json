@@ -36,7 +36,9 @@
   },
   "knownGaps": [
     "highest_magical_power is a high-water mark, not a current reading, so computed power can sit below it legitimately.",
-    "Divine and Ultimate accessories are listed for completeness; none is obtainable without glitches."
+    "Divine and Ultimate accessories are listed for completeness; none is obtainable without glitches.",
+    "BALLOON_HAT_2024, the Green 5th Anniversary Balloon Hat, sits in a maxed player's bag and appears nowhere in the items resource, so it cannot be catalogued or credited.",
+    "The Abiphone contact catalogue holds 71 of the 84 a maxed profile carries. The Abicase is scored off the profile's own contact ids so this costs it nothing, but the missing 13 are contacts we cannot offer."
   ],
   "maximum": {
     "power": 2121,
@@ -99,19 +101,22 @@
         "to": "RARE",
         "forgone": 3,
         "by": "collecting pelts from trapper quests"
-      },
+      }
+    ],
+    "disproved": [
       {
         "id": "FARMER_ORB",
         "from": "COMMON",
         "to": "RARE",
         "forgone": 3,
-        "by": "stated only by the summary table, which flags its own rarities as unreliable"
+        "by": "stated only by the summary table, which flags its own rarities as unreliable",
+        "disprovedBy": "A player at the documented maximum of 2,122 accessory power holds an uncommon Farmer Orb, which is a common base plus one Recombobulator. The rare the summary table claims is not reachable, and that table flags its own rarities as unreliable."
       }
     ]
   },
   "unlisted": {
-    "power": 49,
+    "power": 52,
     "note": "What neither side can name, measured rather than argued: the wiki's trivia counts 147 accessories, its own table lists 121 and names 20 more as missing, and it flags twelve of the rarities it does state as wrong. This is the slack that leaves against our own ceiling, and it is a tolerance for a check rather than a figure to add to anything.",
-    "history": "Was 44 until the Hats of Celebration were merged into one family. We had been counting three, the wiki's tally counts one — so our ceiling had ten magical power in it that the 2,121 never did, and the honest comparison is five wider once five accessories recovered from the wiki's bare-letter rarity fields are added back."
+    "history": "Was 44 until the Hats of Celebration were merged into one family. We had been counting three, the wiki's tally counts one — so our ceiling had ten magical power in it that the 2,121 never did, and the honest comparison is five wider once five accessories recovered from the wiki's bare-letter rarity fields are added back. Then 52, when the Farmer Orb was struck off the climbing list on a maxed player's evidence: three power the wiki claims and nobody can reach moves from climbing to slack."
   }
 }

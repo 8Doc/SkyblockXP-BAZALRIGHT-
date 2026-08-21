@@ -135,3 +135,59 @@ test("a document with no inventory list yields no items", () => {
 test("refuses a document that isn't a compound", () => {
   assert.throws(() => readNbt(new Uint8Array([8, 0, 0])), /root compound/);
 });
+
+/**
+ * An accessory's own lore states what it is: "§d§lMYTHIC ACCESSORY". That is the only exact
+ * answer available, because six accessories climb the rarity ladder through their own mechanics
+ * — a maxed player's Book of Progression reads mythic where the items resource calls it common.
+ * Deriving rarity from a base tier plus a Recombobulator count read those six wrong, which cost
+ * that player sixty-five magical power.
+ */
+test("an item's rarity is read from its lore when the blob carries it", () => {
+  const bytes = document((w) => {
+    w.tag(9, "i").u8(10).i32(2);
+
+    w.tag(10, "tag");
+    w.tag(10, "ExtraAttributes");
+    w.tag(8, "id").str("BOOK_OF_PROGRESSION");
+    w.end();
+    w.tag(10, "display");
+    w.tag(9, "Lore").u8(8).i32(2);
+    w.str("§7Works while in Accessory Bag!");
+    w.str("§d§lMYTHIC ACCESSORY");
+    w.end(); // display
+    w.end(); // tag
+    w.end(); // slot
+
+    // The obfuscated banner a recombobulated item carries, whose §ka markers leave a stray "a".
+    w.tag(10, "tag");
+    w.tag(10, "ExtraAttributes");
+    w.tag(8, "id").str("TRAPPER_CREST");
+    w.end();
+    w.tag(10, "display");
+    w.tag(9, "Lore").u8(8).i32(1);
+    w.str("§5§l§ka§r §5§lEPIC ACCESSORY §5§l§ka");
+    w.end();
+    w.end();
+    w.end();
+  });
+
+  assert.deepEqual(bagItemsFrom(readNbt(bytes)), [
+    { id: "BOOK_OF_PROGRESSION", rarityUpgrades: 0, rarity: "MYTHIC" },
+    { id: "TRAPPER_CREST", rarityUpgrades: 0, rarity: "EPIC" },
+  ]);
+});
+
+/** A blob with no lore says nothing, and must not invent a rarity. */
+test("an item with no lore reports no rarity at all", () => {
+  const bytes = document((w) => {
+    w.tag(9, "i").u8(10).i32(1);
+    w.tag(10, "tag");
+    w.tag(10, "ExtraAttributes");
+    w.tag(8, "id").str("BAT_RING");
+    w.end();
+    w.end();
+    w.end();
+  });
+  assert.deepEqual(bagItemsFrom(readNbt(bytes)), [{ id: "BAT_RING", rarityUpgrades: 0 }]);
+});
