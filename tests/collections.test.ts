@@ -141,6 +141,34 @@ test("an accessory you have yet to buy still has a recombobulator step", () => {
   assert.ok(recomb.xp > buy.xp, `${recomb.xp} should beat the ${buy.xp} of the plain accessory`);
 });
 
+/**
+ * Six accessories climb past any rarity you can buy, and imbuing a Rift Prism pays eleven for
+ * good. None can be priced, so all of it used to be absent — and the category came up short by
+ * exactly that on every profile below the maximum. They belong in the browser as grind.
+ */
+test("what no purchase can reach is still listed, as grind", () => {
+  const { tasks, done } = catalogFor({ accessory_bag_storage: { unlocked_powers: [] } });
+  const live = tasks.filter((t) => t.category === "accessory_bag" && !done.has(t.id));
+
+  const box = live.find((t) => t.id === "climb_PANDORAS_BOX");
+  assert.ok(box, "Pandora's Box reaches mythic by being won, not bought");
+  assert.equal(box.cost.kind, "none", "so it is grind, and stays out of the coin plans");
+  assert.equal(box.xp, 22, "the mythic it actually reaches, not the common it starts at");
+
+  const prism = live.find((t) => t.id === "climb_RIFT_PRISM");
+  assert.ok(prism, "an unimbued prism is 11 magical power still to earn");
+  assert.equal(prism.cost.kind, "none");
+});
+
+test("a climbing accessory competes with buying its family rather than adding to it", () => {
+  const { tasks } = catalogFor({ accessory_bag_storage: { unlocked_powers: [] } });
+  const climb = tasks.find((t) => t.id === "climb_PULSE_RING")!;
+  const buy = tasks.find((t) => t.id === "accessory_PULSE_RING")!;
+  // Same family, so a total counts the better of the two rather than both.
+  assert.equal(climb.exclusiveGroup, buy.exclusiveGroup);
+  assert.ok(climb.xp > buy.xp);
+});
+
 test("an accessory that refuses a recombobulator is not offered one", () => {
   const { tasks } = catalogFor({ accessory_bag_storage: { unlocked_powers: [] } });
   for (const id of ["VOTER_BADGE_SUPREME", "PANDORAS_BOX", "RIFT_PRISM"]) {

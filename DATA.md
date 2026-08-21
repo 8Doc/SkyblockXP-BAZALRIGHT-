@@ -197,12 +197,25 @@ said 22 rather than 44 — the largest single row in the category, ranked as tho
 its size. `accessoryPower` now applies the doubling in both places, so what it is worth to buy
 and what it is worth to hold are the same number.
 
-What remains is not buyable, and the app is right not to quote it as though it were. On the
-profile above: 11 for imbuing a Rift Prism at Erihann, about 36 more from Abiphone contacts as
-the Abicase scales (those contacts are tasks, but they live in the Abiphone category), and 53
-across the accessories that climb rarity by being played rather than bought — a Pandora's Box
-won at Shen's Auction, a Pulse Ring fed Thunder in a Bottle, a Relic of Power filled with
-perfect gemstones.
+**Owning a lesser member of a family hid the whole upgrade.** A recombobulated Bat Person Ring
+is worth exactly as much as a fresh Bat Person Artifact, so buying the Artifact gained nothing
+and was marked done and hidden — and the Recombobulator row only ever covered what was already
+in the bag, which was the Ring, and the Ring had already had one. The two steps that actually
+pay, buy the better one *and then* recombobulate it, appeared nowhere. That was 73 magical
+power across seventeen families on one profile.
+
+**What no purchase can reach is listed too, as grind.** Six accessories climb past their bought
+rarity through a mechanic of their own, and imbuing a Rift Prism pays 11 for good. The rarities
+they reach are in `magical_power.json` under `climbing`, read off the bag of a profile sitting
+at the documented maximum — stated by the item rather than claimed by a table, which is what
+makes them maxima rather than guesses. The Abicase's magical power scales with Abiphone
+contacts at one per two, which arrives with the contacts rather than being bought, so it is a
+grind row here while the contacts stay priced in their own category.
+
+Two profiles well below the maximum both reconcile to **2,115 of 2,122**, and landing on the
+same figure from different bags is what says the 7 is structural rather than an error: the
+Abiphone book holds 71 contacts against the 84 a maxed profile carries, and 13 contacts is
+between 6 and 7 magical power the Abicase can reach and we cannot name.
 
 ## Running without a server
 

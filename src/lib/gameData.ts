@@ -80,6 +80,14 @@ export type MagicalPowerData = {
   byRarity: Record<string, number>;
   rarityOrder: string[];
   excludedItems: { ids: string[] };
+  /**
+   * Accessories that climb past what any purchase can reach, and the Rift Prism's imbue. Neither
+   * is buyable, so both are grind rows — left out entirely, a maxed bag reads as short.
+   */
+  climbing: {
+    items: { id: string; reaches: string; by: string }[];
+    riftPrism: { power: number; by: string };
+  };
 };
 
 export type AccessoryFamiliesData = {
@@ -489,9 +497,10 @@ export function accessoryPower(data: GameData, id: string, rarity: string): numb
   return id === HEGEMONY ? power * 2 : power;
 }
 /** An Abicase grants one extra magical power for every two Abiphone contacts. */
-function abicaseBonus(contacts: number): number {
+export function abicaseBonusFor(contacts: number): number {
   return Math.floor(contacts / 2);
 }
+const abicaseBonus = abicaseBonusFor;
 
 /**
  * A Rift Prism imbued at Erihann is worth 11 magical power, and keeps paying it once consumed —

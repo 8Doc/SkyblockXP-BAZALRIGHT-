@@ -3,6 +3,7 @@ import type { GardenState, MuseumState, ProfileMember } from "./profile";
 import { petKey } from "./auctions";
 import { num } from "./format";
 import {
+  abicaseBonusFor,
   accessoryPower,
   bagUpgradeCost,
   bestiaryFamilyOf,
@@ -247,12 +248,13 @@ export function buildCatalog(
 
   const abiphone = member.nether_island_player_data?.abiphone;
   const abiphoneContacts = abiphone?.active_contacts?.length ?? Object.keys(abiphone?.contact_data ?? {}).length;
+  const riftPrismConsumed = member.rift?.access?.consumed_prism === true;
   const bagState = scoreBag(
     data,
     bag.items,
     member.accessory_bag_storage?.highest_magical_power ?? null,
     bag.capacity,
-    { abiphoneContacts, riftPrismConsumed: member.rift?.access?.consumed_prism === true },
+    { abiphoneContacts, riftPrismConsumed },
   );
 
   // Slots are a real constraint on buying accessories: the bag holds what it holds, and more
@@ -274,6 +276,30 @@ export function buildCatalog(
 
   const excluded = new Set(data.magicalPower.excludedItems.ids);
   const accessoryById = new Map(data.accessories.accessories.map((a) => [a.id, a]));
+
+  /**
+   * The best accessory each family has, and what it is worth once recombobulated.
+   *
+   * A player holding a lesser member of a family still has two steps ahead of them — buy the
+   * better one, then recombobulate that — and the pair was invisible. Buying the better one
+   * alone often gains nothing, because a recombobulated Bat Person Ring is worth exactly as much
+   * as a fresh Bat Person Artifact, so the purchase was marked done and hidden; and the
+   * recombobulator row only ever covered what was already in the bag, which was the Ring, and
+   * the Ring had already had one. On one profile that hid 73 magical power across seventeen
+   * families.
+   */
+  const familyTop = new Map<string, { id: string; base: number; top: number }>();
+  for (const acc of data.accessories.accessories) {
+    if (excluded.has(acc.id) || !grantsMagicalPower(acc) || !acc.obtainable) continue;
+    const base = accessoryPower(data, acc.id, acc.tier);
+    if (base <= 0) continue;
+    const top =
+      acc.recombobulatable === false ? base : Math.max(base, accessoryPower(data, acc.id, bumpRarity(data, acc.tier, 1)));
+    const family = familyOf(data, acc.name, acc.id);
+    const held = familyTop.get(family);
+    if (!held || top > held.top || (top === held.top && base > held.base)) familyTop.set(family, { id: acc.id, base, top });
+  }
+
   for (const acc of data.accessories.accessories) {
     if (excluded.has(acc.id)) continue;
     // A rift-bound accessory never reaches the bag, so its magical power is not on offer.
@@ -313,7 +339,12 @@ export function buildCatalog(
       note: `${acc.tier.toLowerCase()} · ${power} MP${alreadyHave > 0 ? ` (family already gives ${alreadyHave})` : ""}`,
     });
 
-    if (bagState.owned.has(acc.id) || gain <= 0) done.add(id);
+    // An accessory worth nothing on its own is still worth buying when a Recombobulator on top
+    // of it beats what the family has. Marking it done then would hide the purchase and, worse,
+    // let the Recombobulator row below treat it as already paid for.
+    const top = familyTop.get(family);
+    const stepAfterIt = top?.id === acc.id && top.top > alreadyHave;
+    if (bagState.owned.has(acc.id) || (gain <= 0 && !stepAfterIt)) done.add(id);
   }
 
   /* ------------------------------------------------------ discrete tasks */
@@ -739,38 +770,108 @@ export function buildCatalog(
   //
   // The accessory is a prerequisite rather than a separate row, so the bundle is priced at the
   // accessory plus the Recombobulator, which is what the pair really costs.
-  const unownedBest = new Map<string, { id: string; name: string; tier: string; power: number }>();
-  for (const acc of data.accessories.accessories) {
-    if (excluded.has(acc.id) || !grantsMagicalPower(acc) || !acc.obtainable) continue;
-    if (acc.recombobulatable === false) continue;
-    const power = accessoryPower(data, acc.id, acc.tier);
-    if (power <= 0) continue;
-    const family = familyOf(data, acc.name, acc.id);
-    if (bagState.familyBest.has(family)) continue; // the loop above already covers it
-    const held = unownedBest.get(family);
-    if (!held || power > held.power) unownedBest.set(family, { id: acc.id, name: acc.name, tier: acc.tier, power });
-  }
-  for (const [family, best] of unownedBest) {
-    const bumped = bumpRarity(data, best.tier, 1);
-    const power = accessoryPower(data, best.id, bumped);
+  for (const [family, top] of familyTop) {
+    // What is already in the bag is the loop above's business — including the case where it has
+    // had its Recombobulator and there is nothing left to do to it.
+    if (bagState.owned.has(top.id)) continue;
+    const acc = accessoryById.get(top.id);
+    if (!acc || acc.recombobulatable === false) continue;
+    const bumped = bumpRarity(data, acc.tier, 1);
+    const power = accessoryPower(data, acc.id, bumped);
     // A step that gains nothing is no step: the top of the ladder wraps onto the odd rarities,
     // which are worth less than the mythic they would be replacing.
-    if (power <= best.power) continue;
+    if (power <= top.base) continue;
     const alreadyHave = bagState.familyPower.get(family) ?? 0;
+    if (power <= alreadyHave) continue;
 
     tasks.push({
-      id: `recombobulate_${best.id}`,
+      id: `recombobulate_${acc.id}`,
       category: "accessory_bag",
-      name: `Recombobulate ${best.name}`,
+      name: `Recombobulate ${acc.name}`,
       xp: power - alreadyHave,
       exclusiveGroup: `accessory:${family}`,
       groupLevel: power,
       groupBase: alreadyHave,
-      requires: [`accessory_${best.id}`],
+      requires: [`accessory_${acc.id}`],
       cost: { kind: "bazaar", items: [{ id: "RECOMBOBULATOR_3000", qty: 1 }] },
       repeatable: false,
-      note: `${best.tier.toLowerCase()} → ${bumped.toLowerCase()} · buy the accessory first`,
+      note: `${acc.tier.toLowerCase()} → ${bumped.toLowerCase()} · buy the accessory first`,
     });
+  }
+
+  // What no purchase can reach.
+  //
+  // Six accessories climb past their bought rarity through a mechanic of their own — a Pandora's
+  // Box won at Shen's Auction, a Pulse Ring fed Thunder in a Bottle — and imbuing a Rift Prism
+  // pays eleven for good. None of it can be priced, so all of it was simply absent, and the
+  // category's total came up short by exactly that much on every profile short of the maximum.
+  // Grind rows keep them in the browser and out of the coin plans, which is where they belong.
+  for (const climb of data.magicalPower.climbing.items) {
+    const meta = accessoryById.get(climb.id);
+    if (!meta) continue;
+    const family = familyOf(data, meta.name, meta.id);
+    const power = accessoryPower(data, meta.id, climb.reaches);
+    const alreadyHave = bagState.familyPower.get(family) ?? 0;
+    if (power <= alreadyHave) continue;
+
+    tasks.push({
+      id: `climb_${meta.id}`,
+      category: "accessory_bag",
+      name: `${meta.name} to ${climb.reaches.toLowerCase().replace("_", " ")}`,
+      xp: power - alreadyHave,
+      exclusiveGroup: `accessory:${family}`,
+      groupLevel: power,
+      groupBase: alreadyHave,
+      requires: [],
+      cost: { kind: "none" },
+      repeatable: false,
+      note: `${power} MP · ${climb.by}`,
+    });
+  }
+
+  if (!riftPrismConsumed) {
+    const prism = accessoryById.get("RIFT_PRISM");
+    const { power, by } = data.magicalPower.climbing.riftPrism;
+    if (prism) {
+      const family = familyOf(data, prism.name, prism.id);
+      const alreadyHave = bagState.familyPower.get(family) ?? 0;
+      if (power > alreadyHave) {
+        tasks.push({
+          id: "climb_RIFT_PRISM",
+          category: "accessory_bag",
+          name: "Imbue the Rift Prism",
+          xp: power - alreadyHave,
+          exclusiveGroup: `accessory:${family}`,
+          groupLevel: power,
+          groupBase: alreadyHave,
+          requires: [],
+          cost: { kind: "none" },
+          repeatable: false,
+          note: `${power} MP · ${by}`,
+        });
+      }
+    }
+  }
+
+  // The Abicase turns Abiphone contacts into magical power, one for every two, so every contact
+  // is half a point of accessory XP on top of the ten the contact itself pays. It is not a
+  // purchase of its own — it arrives with the contacts, which stay priced in their own category
+  // — so it is a grind row here, and without it the bag reads short by the whole Abiphone book.
+  if ([...bagState.owned].some((id) => id.startsWith("ABICASE"))) {
+    const reachable = abicaseBonusFor(data.abiphone?.contacts.length ?? 0);
+    const now = abicaseBonusFor(abiphoneContacts);
+    if (reachable > now) {
+      tasks.push({
+        id: "abicase_contacts",
+        category: "accessory_bag",
+        name: "Abicase — more Abiphone contacts",
+        xp: reachable - now,
+        requires: [],
+        cost: { kind: "none" },
+        repeatable: false,
+        note: `1 MP per 2 contacts · ${abiphoneContacts} saved, ${data.abiphone?.contacts.length ?? 0} in the book`,
+      });
+    }
   }
 
   // Powers. Nine of one Power Stone handed to Maxwell unlocks its power for good, and the
