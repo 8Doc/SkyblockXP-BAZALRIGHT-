@@ -80,6 +80,7 @@ export function priceOf(cost: CostSpec, book: PriceBook, preferReference = false
     case "owned":
       return 0;
     case "none":
+    case "grind":
     case "unknown":
       return null;
   }

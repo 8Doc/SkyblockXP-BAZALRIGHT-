@@ -46,6 +46,12 @@ export type Report = {
      */
     maxed?: TaskRun[];
     maxedTruncated?: number;
+    /**
+     * The same remaining work with everything buyable taken out, so what is left is what no
+     * amount of coins will finish. Emitted only where a category has both kinds.
+     */
+    unpriced?: ResolvedTask[];
+    unpricedTruncated?: number;
   }[];
   /** Every remaining grind, cheapest in effort first, across all categories at once. */
   grind: ResolvedTask[];
@@ -146,6 +152,13 @@ export function buildReport(catalog: Catalog, book: PriceBook, options: ReportOp
     // instead of restating the same purchase from the same starting tier.
     const stepped = progressive(shown, byId);
 
+    // What coins will never finish, from the untruncated set for the same reason the grouped
+    // view is: these rows are the tail of a list sorted by price, so a cut made before the
+    // filter would leave almost none of them. Only worth offering where a category has both
+    // kinds — a list with nothing buyable in it needs no button to say so.
+    const unpricedRows = stepped.filter((task) => task.bundleCoins === null);
+    const hasBoth = unpricedRows.length > 0 && unpricedRows.length < stepped.length;
+
     browser.push({
       category,
       summary,
@@ -154,6 +167,12 @@ export function buildReport(catalog: Catalog, book: PriceBook, options: ReportOp
       ...(maxed
         ? { maxed: maxed.slice(0, BROWSER_LIMIT), maxedTruncated: Math.max(maxed.length - BROWSER_LIMIT, 0) }
         : {}),
+      ...(hasBoth
+        ? {
+            unpriced: unpricedRows.slice(0, BROWSER_LIMIT),
+            unpricedTruncated: Math.max(unpricedRows.length - BROWSER_LIMIT, 0),
+          }
+        : {}),
     });
   }
 
@@ -161,7 +180,16 @@ export function buildReport(catalog: Catalog, book: PriceBook, options: ReportOp
   // evening on something free, this is the list to spend it on, easiest first. XP breaks ties,
   // so equally-common tasks lead with the ones that actually pay.
   const grind = resolved
-    .filter((t) => !t.done && t.xp > 0 && t.cost.kind === "none" && options.categories.has(t.category))
+    .filter(
+      (t) =>
+        !t.done &&
+        t.xp > 0 &&
+        // An accessory nobody may sell is a grind with an item at the end of it, and belongs
+        // here as much as a skill level does. "unknown" stays out: those have a price we simply
+        // could not find, so sending someone off to grind for one would be wrong.
+        (t.cost.kind === "none" || t.cost.kind === "grind") &&
+        options.categories.has(t.category),
+    )
     .filter((t) => t.xp >= options.minXp)
     .sort((a, b) => (a.effort ?? 1) - (b.effort ?? 1) || b.xp - a.xp)
     .slice(0, 60);

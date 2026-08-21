@@ -117,6 +117,13 @@ export type CostSpec =
    * the API). Inventing a number would poison every ranking downstream, and dropping the task
    * would hide real XP from the browser. "unknown" keeps it visible and out of the solver.
    */
+  /**
+   * Obtainable, but never for coins — a soulbound accessory, or one the game only ever drops.
+   * Distinct from "unknown", which means a price exists and we could not source it, and from
+   * "none", which is a free grind with no item at the end of it. This one is a grind that ends
+   * in an item, so it belongs in the grind order and never in the buy list.
+   */
+  | { kind: "grind"; note: string }
   | { kind: "unknown"; note: string };
 
 export type Task = {

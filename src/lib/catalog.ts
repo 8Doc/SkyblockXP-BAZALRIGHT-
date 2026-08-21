@@ -367,7 +367,13 @@ export function buildCatalog(
             // upgrade costs the difference rather than the sticker price.
             sells: bagState.familyBest.get(family)?.id,
           }
-        : { kind: "unknown", note: acc.soulbound ? "Soulbound — cannot be bought" : "Not tradeable" },
+        : {
+            // A grind rather than an unknown: these have no price because nobody may sell them,
+            // not because we failed to find one. That is the difference between "go and get it"
+            // and "we cannot say", and only the first belongs in the grind order.
+            kind: "grind",
+            note: acc.soulbound ? "Soulbound — cannot be bought" : "Not tradeable",
+          },
       repeatable: false,
       note: `${acc.tier.toLowerCase()} · ${power} MP${alreadyHave > 0 ? ` (family already gives ${alreadyHave})` : ""}${
         slotNeeded && alreadyHave <= 0 ? " · bag is full, needs a slot" : ""
@@ -1158,8 +1164,9 @@ export function buildCatalog(
   }
 
   // Grind tasks have no price to rank on, so they carry an observed effort score instead.
+  // Both kinds of grind: one that ends in an item is ranked the same way as one that does not.
   for (const task of tasks) {
-    if (task.cost.kind !== "none") continue;
+    if (task.cost.kind !== "none" && task.cost.kind !== "grind") continue;
     // The bestiary already carries a measured effort — kills remaining — so it opts out.
     if (task.category === "bestiary") continue;
     const { effort, band } = effortOf(data, task.id);

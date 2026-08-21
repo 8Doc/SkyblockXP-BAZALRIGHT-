@@ -199,7 +199,7 @@ export type AttributesData = {
   }[];
 };
 
-/** Observed completion rates, from scripts/harvest-difficulty.mjs. */
+/** Observed completion rates, from scripts/harvest-difficulty.ts. */
 export type DifficultyData = {
   generatedAt: string;
   playersScanned: number;

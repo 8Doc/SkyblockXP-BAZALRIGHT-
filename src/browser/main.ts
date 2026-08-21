@@ -265,7 +265,7 @@ function taskRow(task: ResolvedTask, showBundle: boolean, tag?: string): string 
   const bundled = showBundle && task.bundle.length > 0;
   const unpriced = task.bundleCoins === null;
   const priceText = unpriced
-    ? task.cost.kind === "none"
+    ? task.cost.kind === "none" || task.cost.kind === "grind"
       ? `<span class="effort ${task.effortBand ?? "marathon"}" title="${
           task.effort === undefined
             ? "No completion data — treated as the longest grind"
@@ -571,13 +571,18 @@ function grindView(report: Report): string {
 
 function browserView(report: Report): string {
   const categories = report.browser
-    .map(({ category, summary, tasks, truncated, maxed, maxedTruncated }) => {
+    .map(({ category, summary, tasks, truncated, maxed, maxedTruncated, unpriced, unpricedTruncated }) => {
       const key = `browser:${category}`;
       // Same toggled-key mechanism as the panels themselves, so the grouped view needs no
       // event plumbing of its own.
       const groupKey = `maxed:${category}`;
       const isGrouped = maxed !== undefined && open.has(groupKey);
-      const hidden = isGrouped ? (maxedTruncated ?? 0) : truncated;
+      // Coins finish most of a category and none of the rest of it, and the rest is what a
+      // player planning an evening's grinding wants to see. Reusing the same toggled-key
+      // mechanism as the panels, so it needs no event plumbing of its own.
+      const unpricedKey = `unpriced:${category}`;
+      const showUnpriced = unpriced !== undefined && open.has(unpricedKey) && !isGrouped;
+      const hidden = isGrouped ? (maxedTruncated ?? 0) : showUnpriced ? (unpricedTruncated ?? 0) : truncated;
 
       const body = open.has(key)
         ? `<div class="group-body">
@@ -597,6 +602,18 @@ function browserView(report: Report): string {
                 : ""
             }
             ${
+              unpriced !== undefined && !isGrouped
+                ? `<p class="sub group-toggle">
+                    <button class="chip${showUnpriced ? " on" : ""}" data-toggle="${unpricedKey}">No price</button>
+                    <span class="dim">${
+                      showUnpriced
+                        ? "only what coins cannot finish — go and get these"
+                        : `${num(unpriced.length + (unpricedTruncated ?? 0))} of these cannot be bought at any price`
+                    }</span>
+                  </p>`
+                : ""
+            }
+            ${
               maxed !== undefined
                 ? `<p class="sub group-toggle">
                     <button class="chip${isGrouped ? " on" : ""}" data-toggle="${groupKey}">Group maxed</button>
@@ -609,7 +626,9 @@ function browserView(report: Report): string {
                 : ""
             }
             <ul class="tasks">${
-              isGrouped ? maxed!.map((run) => runRow(run)).join("") : tasks.map((t) => taskRow(t, true)).join("")
+              isGrouped
+                ? maxed!.map((run) => runRow(run)).join("")
+                : (showUnpriced ? unpriced! : tasks).map((t) => taskRow(t, true)).join("")
             }</ul>
             ${hidden > 0 ? `<p class="sub">+${num(hidden)} more above the XP floor</p>` : ""}
           </div>`

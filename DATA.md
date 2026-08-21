@@ -532,7 +532,7 @@ publishes — a skill level, a collection tier, a slayer level and a trophy fish
 four incompatible units.
 
 The one unit they share is **how many people have already done it**.
-`scripts/harvest-difficulty.mjs` samples live profiles and records, for every task the catalogue
+`scripts/harvest-difficulty.ts` samples live profiles and records, for every task the catalogue
 can generate, whether that player has finished it. The completion rate becomes the difficulty
 score: 100% of players have Combat 1, 21% have Combat 60.
 
@@ -551,7 +551,18 @@ it produces matches intuition (numbers below from the 600-player run):
 | 21% | Healer 30 |
 | 15% | Catacombs 40 |
 
-3,543 tasks are rated this way. They are shown as four bands — quick / a session / a long haul /
+Accessories are rated the same way, and were the last grind that was not. A completion there is
+not a flag on the profile but an item inside a gzipped blob, so the harvester decodes each
+player's accessory bag and records what is in it — which is why that script is TypeScript rather
+than plain JavaScript, so it can share the NBT reader with the app instead of keeping a second
+copy of it in step.
+
+That matters because the accessories nobody can buy — soulbound ones, and the ones the game only
+ever drops — are a grind and nothing else. They used to be priced "unknown", the kind that means
+a price exists and we could not find it, which kept them out of the grind order altogether. They
+are priced `grind` now: obtainable, never for coins, ranked by how many players have one.
+
+3,937 tasks are rated this way, 393 of them accessories. They are shown as four bands — quick / a session / a long haul /
 a marathon — because the signal doesn't justify more precision than that.
 
 ### It is a proxy — and the bias is now measured, not just disclosed
