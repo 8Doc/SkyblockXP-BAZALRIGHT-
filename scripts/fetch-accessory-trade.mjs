@@ -15,6 +15,7 @@ import { dirname, join } from "node:path";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const WIKI = "https://hypixel-skyblock.fandom.com/api.php";
+const NEWER_WIKI = "https://hypixelskyblock.minecraft.wiki/api.php";
 const UA = { "User-Agent": "skyblock-xp-planner/0.1 (data build script)" };
 
 // Every accessory the game has, not just the ones already in our table. The eighteen the items
@@ -89,33 +90,109 @@ function materialsOf(text) {
   return out;
 }
 
-const byName = new Map();
-for (let i = 0; i < titles.length; i += 50) {
-  const batch = titles.slice(i, i + 50);
-  const url = `${WIKI}?action=query&prop=revisions&rvprop=content&rvslots=main&format=json&titles=${batch
-    .map(encodeURIComponent)
-    .join("|")}`;
-  const body = await fetch(url, { headers: UA }).then((r) => r.json());
-  for (const page of Object.values(body.query?.pages ?? {})) {
-    const text = page.revisions?.[0]?.slots?.main?.["*"];
-    if (!text) continue;
-    byName.set(page.title, {
-      auctionable: flagOf(text, "auctionable"),
-      tradeable: flagOf(text, "tradeable"),
-      sellable: flagOf(text, "sellable"),
-      // The accessory this one is upgraded from. raw_materials is the wrong field for this: it
-      // lists the recipe broken all the way down to bazaar goods, so Sunshine Crystal reads as
-      // nether quartz and sunflowers rather than as a Day Crystal.
-      upgradesFrom: fieldOf(text, "upgrades_from"),
-      // The items resource leaves 18 accessories with no tier, and four of them sit in a top
-      // player's bag. The wiki states the rarity, so it can supply what the API omits.
-      rarity: rarityOf(text),
-      materials: materialsOf(text),
-    });
-  }
-  process.stdout.write(`\r  ${Math.min(i + 50, titles.length)}/${titles.length}`);
+/**
+ * Why no player can hold this, in the wiki's own words. Several of these read as ordinary
+ * accessories in the items resource — Grizzly Paw and the Talisman and Artifact of Space sit in
+ * a former admin's inventory and nowhere else — so nothing but the page says they are off limits.
+ */
+function unobtainableReason(text) {
+  const head = text.slice(0, 400);
+  if (/\{\{\s*Admin only/i.test(head)) return "admin only";
+  if (/\{\{\s*Historical article/i.test(head)) return "removed from the game";
+  if (/\{\{\s*Unobtainable/i.test(head)) return "unobtainable";
+  return null;
 }
-process.stdout.write("\n");
+
+/** Everything one page has to say, in the fields both wikis happen to share. */
+function readPage(text) {
+  return {
+    auctionable: flagOf(text, "auctionable"),
+    tradeable: flagOf(text, "tradeable"),
+    sellable: flagOf(text, "sellable"),
+    // The accessory this one is upgraded from. raw_materials is the wrong field for this: it
+    // lists the recipe broken all the way down to bazaar goods, so Sunshine Crystal reads as
+    // nether quartz and sunflowers rather than as a Day Crystal.
+    upgradesFrom: fieldOf(text, "upgrades_from"),
+    // Recorded on either end depending on which page an editor reached for.
+    upgradesTo: fieldOf(text, "upgrades_to"),
+    // The items resource leaves 18 accessories with no tier, and four of them sit in a top
+    // player's bag. The wiki states the rarity, so it can supply what the API omits.
+    rarity: rarityOf(text),
+    materials: materialsOf(text),
+    unobtainable: unobtainableReason(text),
+  };
+}
+
+/** Every title read from one wiki, fifty at a time, which is the API's limit for a batch. */
+async function readWiki(api, label) {
+  const pages = new Map();
+  const redirects = new Map();
+  for (let i = 0; i < titles.length; i += 50) {
+    const batch = titles.slice(i, i + 50);
+    const url = `${api}?action=query&prop=revisions&rvprop=content&rvslots=main&format=json&redirects=1&titles=${batch
+      .map(encodeURIComponent)
+      .join("|")}`;
+    const body = await fetch(url, { headers: UA }).then((r) => r.json());
+    // A redirect answers under the target's title, so remember which titles asked for it. One of
+    // our accessories redirects to the register of removed features, which is the whole answer
+    // about that item, and another redirects to the page its own edition is a tab of.
+    const aliases = new Map();
+    for (const hop of body.query?.redirects ?? []) {
+      redirects.set(hop.from, hop.to);
+      if (!aliases.has(hop.to)) aliases.set(hop.to, []);
+      aliases.get(hop.to).push(hop.from);
+    }
+    for (const page of Object.values(body.query?.pages ?? {})) {
+      const text = page.revisions?.[0]?.slots?.main?.["*"];
+      if (!text) continue;
+      const flags = readPage(text);
+      pages.set(page.title, flags);
+      for (const alias of aliases.get(page.title) ?? []) pages.set(alias, flags);
+    }
+    process.stdout.write(`\r  ${label} ${Math.min(i + 50, titles.length)}/${titles.length}`);
+  }
+  process.stdout.write("\n");
+  return { pages, redirects };
+}
+
+/**
+ * Two wikis, because neither is complete. The Fandom wiki records the upgrade lines most fully,
+ * while the newer community wiki is the only one carrying the pages Fandom never got — the
+ * Applicant's Statement, whose page is the only place stating that it upgrades into Student's
+ * Studies, and the Admin-only register, which is the only place naming the two accessories
+ * that have no page of their own on either wiki.
+ */
+/**
+ * Every item id the newer wiki lists on its Admin-only page, which is a plain table of the
+ * things only staff have ever held. Two of them — the Old Boot and the Ring of Space — have no
+ * page of their own on either wiki, so this table is the only place that says so, and without
+ * it a maxed player is told to go and buy a former admin's curio.
+ */
+async function readAdminOnly() {
+  const url = `${NEWER_WIKI}?action=query&prop=revisions&rvprop=content&rvslots=main&format=json&redirects=1&titles=Admin-only`;
+  const body = await fetch(url, { headers: UA }).then((r) => r.json());
+  const text = Object.values(body.query?.pages ?? {})[0]?.revisions?.[0]?.slots?.main?.["*"] ?? "";
+  return new Set([...text.matchAll(/\{\{\s*Code\s*\|\s*([A-Z0-9_]+)\s*\}\}/g)].map((m) => m[1]));
+}
+
+const adminOnly = await readAdminOnly();
+console.log(`  ${adminOnly.size} admin-only item ids listed by the community wiki`);
+
+const fandom = await readWiki(WIKI, "fandom   ");
+const community = await readWiki(NEWER_WIKI, "community");
+
+const byName = new Map();
+const redirectedTo = new Map([...community.redirects, ...fandom.redirects]);
+for (const name of new Set([...fandom.pages.keys(), ...community.pages.keys()])) {
+  const a = fandom.pages.get(name) ?? {};
+  const b = community.pages.get(name) ?? {};
+  // Field by field rather than page by page: a wiki silent on one field should not suppress the
+  // other wiki's answer to it.
+  const merged = {};
+  for (const field of new Set([...Object.keys(a), ...Object.keys(b)])) merged[field] = a[field] ?? b[field];
+  byName.set(name, merged);
+}
+
 
 // An accessory crafted from another accessory is the same progression: the ingredient is
 // consumed, so it leaves the bag and reads as unowned for ever after. Matching materials
@@ -129,6 +206,14 @@ for (const acc of accessories) {
   const statedFrom = stated ? accessoryNames.get(stated.toLowerCase()) : undefined;
   if (statedFrom && statedFrom.id !== acc.id) {
     craftedFrom.push({ id: acc.id, name: acc.name, from: statedFrom.id, fromName: statedFrom.name });
+  }
+
+  // The same link seen from the other side. Pages disagree on which end records it, and reading
+  // only one direction loses whole lines where the upper page does not exist at all.
+  const onward = byName.get(acc.name)?.upgradesTo;
+  const statedTo = onward ? accessoryNames.get(onward.toLowerCase()) : undefined;
+  if (statedTo && statedTo.id !== acc.id) {
+    craftedFrom.push({ id: statedTo.id, name: statedTo.name, from: acc.id, fromName: acc.name });
   }
 
   for (const material of byName.get(acc.name)?.materials ?? []) {
@@ -169,9 +254,19 @@ const chains = [...grouped.entries()]
 console.log(`  ${chains.length} upgrade chains, longest ${Math.max(0, ...chains.map((c) => c.members.length))} deep`);
 
 const out = [];
+const unobtainable = [];
 let untradeable = 0;
 for (const acc of accessories) {
   const flags = byName.get(acc.name);
+  // A page that only redirects to the register of removed features is that register's entry.
+  const target = redirectedTo.get(acc.name) ?? "";
+  // An items own page beats the register: the Compass Talisman appears on both, and the page
+  // is the one that knows it was a Redstone collection reward before it was taken out.
+  const reason =
+    flags?.unobtainable ??
+    (/Removed|Coming Soon/i.test(target) ? "removed from the game" : null) ??
+    (adminOnly.has(acc.id) ? "admin only" : null);
+  if (reason) unobtainable.push({ id: acc.id, name: acc.name, reason });
   if (!flags) continue;
   // Only a stated "no" overrides. A page that doesn't say is left to the items resource.
   const buyable = flags.auctionable ?? flags.tradeable;
@@ -190,6 +285,7 @@ await writeFile(
       note: "Accessories the wiki states cannot be bought. Only an explicit no is recorded; silence defers to the items resource.",
       pagesRead: byName.size,
       untradeable: out,
+      unobtainable,
       craftedFrom,
       chains,
       rarities: everyAccessory
@@ -201,5 +297,6 @@ await writeFile(
   ) + "\n",
 );
 console.log(`  read ${byName.size} pages, ${untradeable} accessories the wiki says cannot be bought`);
+console.log(`  ${unobtainable.length} accessories no player can obtain: ${unobtainable.map((u) => u.name).join(", ")}`);
 console.log(`  ${craftedFrom.length} accessories crafted from another accessory`);
 for (const link of craftedFrom.slice(0, 12)) console.log(`     ${link.name} <- ${link.fromName}`);

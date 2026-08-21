@@ -126,9 +126,14 @@ async function buildAccessories() {
   // there is no magical power to give them — so they were dropped, and four of them turned out
   // to be sitting in a top player's bag, unreadable. The wiki states the rarity for every one.
   let wikiRarity = new Map();
+  // Nine accessories no player can go and get: three sat in a former admin's inventory, three
+  // were removed from the game years ago, and three were handed out at an anniversary that has
+  // been and gone. Nothing in the items resource distinguishes them from ordinary accessories.
+  let wikiUnobtainable = new Map();
   try {
     const trade = JSON.parse(await readFile(join(OUT, "accessory_trade.json"), "utf8"));
     wikiUntradeable = new Set(trade.untradeable.map((entry) => entry.id));
+    wikiUnobtainable = new Map((trade.unobtainable ?? []).map((entry) => [entry.id, entry.reason]));
     wikiRarity = new Map((trade.rarities ?? []).map((entry) => [entry.id, entry.rarity]));
   } catch {
     console.log("  accessories  no accessory_trade.json — run fetch-accessory-trade.mjs");
@@ -156,6 +161,10 @@ async function buildAccessories() {
       // The Rift keeps its own accessory bag. These never reach the main one, so counting them
       // towards its magical power offers a player who owns every real accessory 29 more.
       rift: item.origin === "RIFT",
+      // Nine accessories cannot take a Recombobulator at all — the Voter's Badges, Pandora's
+      // Box, the Runebook. Offering the upgrade on those is offering something the game refuses.
+      recombobulable: item.can_recombobulate !== false,
+      ...(wikiUnobtainable.has(item.id) ? { unobtainable: wikiUnobtainable.get(item.id) } : {}),
     });
   }
   out.sort((a, b) => a.id.localeCompare(b.id));

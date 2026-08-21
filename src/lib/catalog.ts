@@ -275,6 +275,10 @@ export function buildCatalog(
     // player who owns every accessory that actually reaches it that 261 magical power was still
     // waiting — the Crux line alone is six rows of it.
     if (acc.rift) continue;
+    // Admin-only curios, accessories removed from the game years ago, and hats handed out at an
+    // anniversary that has been and gone. A maxed player was being told to go and buy nine of
+    // these; not one of them can be bought at any price.
+    if (acc.unobtainable) continue;
     const power = magicalPowerOf(data, acc.tier);
     if (power <= 0) continue;
 
@@ -718,6 +722,8 @@ export function buildCatalog(
   // game allows a single rarity upgrade per item, which `rarityUpgrades` already records.
   for (const [family, best] of bagState.familyBest) {
     if (best.recombobulated) continue;
+    // Some accessories will not take a Recombobulator at all, and the items resource says which.
+    if (accessoryById.get(best.id)?.recombobulable === false) continue;
     const bumped = bumpRarity(data, best.rarity, 1);
     if (bumped === best.rarity) continue; // already at the top of the ladder
     const power = magicalPowerOf(data, bumped);

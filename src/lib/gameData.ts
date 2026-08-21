@@ -54,6 +54,10 @@ export type AccessoriesData = {
     tradeable: boolean;
     /** Belongs to the Rift, which keeps its own accessory bag separate from this one. */
     rift?: boolean;
+    /** False for the handful the game refuses to recombobulate. */
+    recombobulable?: boolean;
+    /** Why no player can obtain this one, if the wiki says no player can. */
+    unobtainable?: string;
   }[];
 };
 
@@ -325,6 +329,11 @@ export function familyOf(data: GameData, name: string, id: string): string {
   // but each is crafted from the last, so only the one you hold is in your bag.
   const chained = chainFamily(data, id);
   if (chained) return chained;
+  return nameFamilyOf(data, name, id);
+}
+
+/** The family a name alone implies, before any upgrade line is taken into account. */
+function nameFamilyOf(data: GameData, name: string, id: string): string {
 
   for (const phrase of data.accessoryFamilies.endsWithFamilies) {
     if (name.endsWith(phrase)) return phrase.toLowerCase();
@@ -517,8 +526,25 @@ function chainFamily(data: GameData, id: string): string | null {
   let lookup = chainLookups.get(data);
   if (!lookup) {
     lookup = new Map();
+    // A chain absorbs whatever the name rule already grouped with any of its members, rather
+    // than replacing it. Otherwise a line the wiki only half documents splits a family that was
+    // whole: Ring and Talisman of the Century are chained, the Artifact is not, and all three
+    // are plainly "of the century".
+    const chainOfNameFamily = new Map<string, string>();
     for (const chain of data.accessoryChains?.chains ?? []) {
-      for (const member of chain.members) lookup.set(member, `chain:${chain.family}`);
+      const chainId = `chain:${chain.family}`;
+      for (const member of chain.members) {
+        lookup.set(member, chainId);
+        const meta = data.accessories.accessories.find((a) => a.id === member);
+        if (!meta) continue;
+        const byName = nameFamilyOf(data, meta.name, meta.id);
+        if (!chainOfNameFamily.has(byName)) chainOfNameFamily.set(byName, chainId);
+      }
+    }
+    for (const accessory of data.accessories.accessories) {
+      if (lookup.has(accessory.id)) continue;
+      const chainId = chainOfNameFamily.get(nameFamilyOf(data, accessory.name, accessory.id));
+      if (chainId) lookup.set(accessory.id, chainId);
     }
     chainLookups.set(data, lookup);
   }

@@ -208,3 +208,71 @@ test("accessories the items resource ships with no tier are still catalogued", (
     assert.ok(byId.get(id), `${id} should be catalogued from the wiki's rarity`);
   }
 });
+
+/**
+ * Three upgrade lines the wiki records badly, all reported from NobelErso's maxed profile as
+ * accessories he was told to buy while already holding the finished article. The Artifact of
+ * the Century has no wiki page at all, and the Gratitude Artifact's page names itself as its
+ * own upgrade, so neither line can be read from `upgrades_from` alone.
+ */
+test("half-documented upgrade lines still come out as one family", () => {
+  const byName = new Map(accessories.accessories.map((a) => [a.name, a.id]));
+  const lines = [
+    ["Ring of the Century", "Talisman of the Century", "Artifact of the Century"],
+    ["Raggedy Shark Tooth Necklace", "Dull Shark Tooth Necklace", "Honed Shark Tooth Necklace"],
+    ["Gratitude Ring", "Gratitude Artifact"],
+  ];
+  for (const line of lines) {
+    const families = line.map((name) => {
+      const id = byName.get(name);
+      assert.ok(id, `${name} is missing from the catalogue`);
+      return familyOf(data, name, id!);
+    });
+    assert.equal(new Set(families).size, 1, `${line.join(" / ")} split into ${[...new Set(families)].join(", ")}`);
+  }
+});
+
+/**
+ * The game refuses a Recombobulator on nine accessories, and offering the upgrade anyway sells
+ * a player something they cannot buy. The items resource states it outright.
+ */
+test("accessories the game will not recombobulate are marked as such", () => {
+  const refused = accessories.accessories.filter((a) => a.recombobulable === false).map((a) => a.name);
+  for (const name of ["Pandora's Box", "Book of Progression", "Safety Badge", "Supreme Voter's Badge", "Rift Prism"]) {
+    assert.ok(refused.includes(name), `${name} should be flagged as un-recombobulatable`);
+  }
+  assert.ok(refused.length < 20, `${refused.length} refusals looks like the flag has inverted`);
+});
+
+/**
+ * The community wiki is the only source for some of this. Its page for the Applicant's Statement
+ * — which Fandom has never had — is the only place recording that it upgrades into Student's
+ * Studies, and its Admin-only register is the only place naming the Old Boot and the Ring of
+ * Space, two accessories with no page of their own on either wiki.
+ */
+test("the academic line starts at the Applicant's Statement", () => {
+  const byName = new Map(accessories.accessories.map((a) => [a.name, a.id]));
+  const line = ["Applicant's Statement", "Student's Studies", "Master's Thesis"];
+  const families = line.map((name) => familyOf(data, name, byName.get(name)!));
+  assert.equal(new Set(families).size, 1, `split into ${[...new Set(families)].join(", ")}`);
+});
+
+/**
+ * Guarded in both directions, because both mistakes were made. Admin curios and items removed
+ * from the game were being sold to a maxed player; then a Legacy banner was read as "gone",
+ * which wrongly condemned three Hats of Celebration that are auctionable to this day and sit in
+ * top players' bags.
+ */
+test("only what no player can hold is written off as unobtainable", () => {
+  const written = new Map(accessories.accessories.filter((a) => a.unobtainable).map((a) => [a.name, a.unobtainable]));
+  for (const name of ["Grizzly Paw", "Talisman of Space", "Ring of Space", "Old Boot"]) {
+    assert.equal(written.get(name), "admin only", `${name} is an admin-only curio`);
+  }
+  for (const name of ["Compass Talisman", "Eternal Crystal", "Luck Talisman"]) {
+    assert.equal(written.get(name), "removed from the game", `${name} was removed from the game`);
+  }
+  for (const name of ["Crab Hat of Celebration", "Sloth Hat of Celebration"]) {
+    assert.ok(!written.has(name), `${name} is still auctionable and held by top players`);
+  }
+  assert.ok(written.size < 30, `${written.size} write-offs looks like a rule has gone too wide`);
+});
