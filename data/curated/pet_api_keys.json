@@ -1,0 +1,21 @@
+{
+  "note": "How the game's own pet ids differ from the wiki page titles this app keys pets by. Only the ones nothing mechanical can bridge: the app already matches by stripping punctuation and case, so `T-Rex` and `T_REX` need no help, but `TYRANNOSAURUS` does.",
+  "source": "Harvested from live profiles — every `pets_data.pets[].type` seen across 70 accounts off the auction house that our catalogue could not place, then each one confirmed against its wiki page. Nothing here is inferred from a name.",
+  "consequence": "An unmatched id reads as a pet the player does not own, so the app offers a pet already sitting in their menu. Two maxed profiles were being told to go and buy a T-Rex and the whole Wisp line.",
+  "aliases": {
+    "TYRANNOSAURUS": "T_REX",
+    "DROPLET_WISP": "WISP",
+    "FROST_WISP": "WISP",
+    "GLACIAL_WISP": "WISP",
+    "SUBZERO_WISP": "WISP"
+  },
+  "why": {
+    "TYRANNOSAURUS": "The wiki titles the page T-Rex Pet; the game calls it TYRANNOSAURUS.",
+    "WISP": "The Wisp is the one pet that renames as it climbs — its own wiki page says so outright — so it has four ids rather than one: droplet at uncommon, frost at rare, glacial at epic and subzero at legendary. Upgrading it with a Wisp Upgrade Stone swaps the id, which is why matching on a single name can never work."
+  },
+  "notInTheCatalogue": {
+    "note": "Pet ids seen on live profiles that are not aliases of anything we hold — they are pets the catalogue is missing. Recorded rather than aliased, because pointing them at a pet they are not would credit the wrong score.",
+    "EERIE": "The Eerie Pet, bought from the Tyashoi Alchemist in the Rift. Common, rare and legendary. Its own pet, not the Montezuma it sits beside.",
+    "BINGO": "The Bingo Pet, handed out on creating a Bingo profile. Common through mythic, and only on those profiles."
+  }
+}

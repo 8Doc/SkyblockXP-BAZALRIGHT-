@@ -230,6 +230,68 @@ test("an accessory that refuses a recombobulator is not offered one", () => {
   }
 });
 
+/* ------------------------------------------------------------------ pets */
+
+/**
+ * The catalogue is keyed by the wiki's page titles and the profile by the game's own ids, and
+ * for two pets those are different words entirely. Two maxed profiles were being told to go and
+ * buy a T-Rex and the whole Wisp line, both of which were sitting in their pet menus.
+ */
+test("a pet the game names differently is still recognised", () => {
+  const owned = (type: string, tier: string) =>
+    catalogFor({ pets_data: { pets: [{ type, tier }] }, accessory_bag_storage: { unlocked_powers: [] } });
+
+  // The game calls the T-Rex a TYRANNOSAURUS.
+  const trex = owned("TYRANNOSAURUS", "LEGENDARY");
+  assert.ok(trex.done.has("pet_PET:T_REX_LEGENDARY"), "a held T-Rex is not offered again");
+
+  // And the Wisp renames as it climbs, so it has four ids rather than one.
+  for (const [id, tier] of [
+    ["DROPLET_WISP", "UNCOMMON"],
+    ["FROST_WISP", "RARE"],
+    ["GLACIAL_WISP", "EPIC"],
+    ["SUBZERO_WISP", "LEGENDARY"],
+  ]) {
+    const cat = owned(id, tier);
+    assert.ok(cat.done.has(`pet_PET:WISP_${tier}`), `${id} is a ${tier.toLowerCase()} Wisp`);
+  }
+});
+
+test("every pet alias points at a pet the catalogue actually has", () => {
+  const keys = new Set(data.pets.pets.map((p) => p.key));
+  for (const [id, target] of Object.entries(data.petApiKeys.aliases)) {
+    assert.ok(keys.has(target), `${id} is aliased to ${target}, which is not in the catalogue`);
+  }
+});
+
+/* ---------------------------------------------------------------- museum */
+
+/**
+ * A set's upgrade parent is carried by its pieces, and by *some* of them rather than all. The
+ * Crimson Hunter is upgraded by the Vanquished set, and the two pieces that say so are the Ghast
+ * Cloak and the Glowstone Gauntlet — its Blaze Helmet only knows that Blaze becomes Frozen
+ * Blaze. Reading the parent off whichever piece came first lost it, and a maxed player was told
+ * to donate a Blaze set they had long since upgraded away.
+ */
+test("a set's upgrade parent is found on whichever piece states it", () => {
+  const sets = new Map(data.museum.armorSets.map((s) => [s.setId, s]));
+  assert.equal(sets.get("CRIMSON_HUNTER")?.parentId, "VANQUISHED");
+  assert.equal(sets.get("BLAZE")?.parentId, "FROZEN_BLAZE");
+});
+
+test("no two armour sets answer to the same name", () => {
+  // Every set takes its name from a piece, and a piece can belong to more than one set — which
+  // left two sets called "Blaze", two "Prismarine Necklace" and two "Skeleton's". A row naming a
+  // set that is not the one it means cannot be acted on.
+  const byName = new Map<string, string[]>();
+  for (const set of data.museum.armorSets) byName.set(set.name, [...(byName.get(set.name) ?? []), set.setId]);
+  const shared = [...byName].filter(([, ids]) => ids.length > 1);
+  assert.deepEqual(shared, []);
+  assert.equal(sets(data).get("CRIMSON_HUNTER")?.name, "Crimson Hunter");
+});
+
+const sets = (d: typeof data) => new Map(d.museum.armorSets.map((s) => [s.setId, s]));
+
 test("bestiary XP is credited from the milestone count", () => {
   // Ten family tiers are worth 20 XP between them: 1 apiece, plus a milestone reward of 10.
   const { earnedOutsideTasks } = catalogFor({ bestiary: { milestone: { last_claimed_milestone: 314 } } });

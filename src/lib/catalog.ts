@@ -581,11 +581,18 @@ export function buildCatalog(
   // against a real maximum of 521, so the ceiling drifted with the market. Listings now do only
   // what they are good for, which is prices — an unlisted pet is a task with no price, not a
   // task that vanished.
+  //
+  // The catalogue is keyed by the wiki's page titles and the profile by the game's own ids, and
+  // for two pets those are different words entirely. A T-Rex is a TYRANNOSAURUS on the profile,
+  // and the Wisp — the one pet that renames as it climbs, which its own wiki page says outright
+  // — is a DROPLET, FROST, GLACIAL or SUBZERO_WISP depending on rarity, so it has four ids and
+  // no single name can match it. Both were being offered to players who owned them.
   const petScoreByRarity = data.petScore.byRarity;
+  const petAliases = data.petApiKeys?.aliases ?? {};
   const ownedPetScore = new Map<string, number>();
   for (const pet of member.pets_data?.pets ?? []) {
     if (!pet?.type) continue;
-    const key = petKey(pet.type);
+    const key = petKey(petAliases[pet.type] ?? pet.type);
     ownedPetScore.set(key, Math.max(ownedPetScore.get(key) ?? 0, petScoreByRarity[pet.tier ?? ""] ?? 0));
   }
 

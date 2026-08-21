@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-08-21T12:08:47.296Z",
+ "generatedAt": "2026-08-21T18:34:55.245Z",
  "source": "https://api.hypixel.net/v2/resources/skyblock",
  "totalXp": 3644,
  "donations": [
@@ -5310,8 +5310,8 @@
   },
   {
    "setId": "CRIMSON_HUNTER",
-   "parentId": null,
-   "name": "Blaze",
+   "parentId": "VANQUISHED",
+   "name": "Crimson Hunter",
    "xp": 4,
    "category": "COMBAT",
    "stage": "EXPERT",
@@ -5589,7 +5589,7 @@
   {
    "setId": "FISHERMAN",
    "parentId": null,
-   "name": "Prismarine Necklace",
+   "name": "Fisherman",
    "xp": 3,
    "category": "FISHING",
    "stage": "AMATEUR",
@@ -6056,7 +6056,7 @@
   {
    "setId": "MONSTER_HUNTER",
    "parentId": "MONSTER_RAIDER",
-   "name": "Skeleton's",
+   "name": "Monster Hunter",
    "xp": 4,
    "category": "COMBAT",
    "stage": "SKILLED",
@@ -6070,7 +6070,7 @@
   {
    "setId": "MONSTER_RAIDER",
    "parentId": null,
-   "name": "Skeleton's",
+   "name": "Monster Raider",
    "xp": 4,
    "category": "COMBAT",
    "stage": "SKILLED",
@@ -6606,8 +6606,8 @@
   },
   {
    "setId": "SPONGE",
-   "parentId": null,
-   "name": "Prismarine Necklace",
+   "parentId": "SHARK_SCALE",
+   "name": "Sponge",
    "xp": 5,
    "category": "FISHING",
    "stage": "AMATEUR",

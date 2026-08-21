@@ -252,21 +252,27 @@ async function buildMuseum() {
     }
 
     for (const [set, xp] of Object.entries(museum.armor_set_donation_xp ?? {})) {
+      // A set's upgrade parent is carried by its pieces, keyed by the *set* id rather than the
+      // piece's own — donate the Backwater set and the Angler slot below it is filled. Reading
+      // only the self-keyed links dropped all 174 of these.
+      //
+      // And it is carried by *some* of the pieces, not all: the Crimson Hunter set is upgraded
+      // by the Vanquished set, and the two pieces that say so are the Ghast Cloak and the
+      // Glowstone Gauntlet. Its Blaze Helmet does not — that one only knows Blaze becomes Frozen
+      // Blaze. Taking the parent from whichever piece happened to be read first therefore lost
+      // it, and a maxed player was told to go and donate a Blaze set they had upgraded away.
+      const parent = museum.parent?.[set] ?? null;
       const existing = armorSets.get(set);
       if (existing) {
         existing.pieces.push(item.id);
+        existing.parentId ??= parent;
         continue;
       }
       armorSets.set(set, {
         setId: set,
-        // A set's upgrade parent is carried by its pieces, keyed by the *set* id rather than the
-        // piece's own — donate the Backwater set and the Angler slot below it is filled. Reading
-        // only the self-keyed links dropped all 174 of these.
-        parentId: museum.parent?.[set] ?? null,
-        // A set's upgrade parent is carried by its pieces, keyed by the *set* id rather than the
-        // piece's own — donate the Backwater set and the Angler slot below it is filled. Reading
-        // only the self-keyed links dropped all 174 of these.
-        parentId: museum.parent?.[set] ?? null,
+        parentId: parent,
+        // The pieces of a set do not have to be named after it — every piece of the Crimson
+        // Hunter is a Blaze something — so the set id is the name where no piece agrees with it.
         name: item.name.replace(/ (Helmet|Chestplate|Leggings|Boots|Hat|Cap|Tunic|Trousers|Shoes)$/i, "").trim(),
         xp,
         category: museum.category ?? "MISC",
@@ -277,6 +283,19 @@ async function buildMuseum() {
   }
 
   donations.sort((a, b) => a.itemId.localeCompare(b.itemId));
+
+  // Name a set after its own id wherever the piece-derived name is not its own. Three sets were
+  // sharing a name with another — two called "Blaze", two "Prismarine Necklace", two
+  // "Skeleton's" — because each takes its name off a piece, and a piece can belong to more than
+  // one set. A row saying "Blaze (set)" when it means the Crimson Hunter cannot be acted on.
+  const titleCased = (id) =>
+    id.toLowerCase().split("_").filter(Boolean).map((w) => w[0].toUpperCase() + w.slice(1)).join(" ");
+  const byName = new Map();
+  for (const set of armorSets.values()) byName.set(set.name, (byName.get(set.name) ?? 0) + 1);
+  for (const set of armorSets.values()) {
+    if (byName.get(set.name) > 1 && set.name !== titleCased(set.setId)) set.name = titleCased(set.setId);
+  }
+
   const sets = [...armorSets.values()].sort((a, b) => a.setId.localeCompare(b.setId));
   const total = donations.reduce((s, d) => s + d.xp, 0) + sets.reduce((s, d) => s + d.xp, 0);
   return { totalXp: total, donations, armorSets: sets };

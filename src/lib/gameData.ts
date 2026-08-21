@@ -281,6 +281,8 @@ export type GameData = {
     maxScore: number;
     pets: { name: string; key: string; rarities: string[]; maxRarity: string; buyable?: boolean }[];
   };
+  /** Bridges the wiki's pet titles to the ids the profile actually uses. */
+  petApiKeys: { aliases: Record<string, string> };
   difficulty: DifficultyData;
   attributeShards: AttributesData;
   bestiary: BestiaryData;
