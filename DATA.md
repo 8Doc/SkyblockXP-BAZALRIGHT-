@@ -177,6 +177,33 @@ Ruled out along the way, by measuring rather than arguing: dungeon accessories c
 power), and Personal Deletor 6000 against 7000 being separate families (the wiki states 7000
 `upgrades_from` 6000, so merging them is right).
 
+### Why the magical power you have and the XP still listed don't add up to 2,122
+
+They are not meant to, and two of the three reasons were bugs.
+
+**Bag slot upgrades are in the category but are not magical power.** They are ordinary SkyBlock
+XP for buying room from Jacobus — 146 of the 395 one profile was quoted. Any sum that expects
+`magical power + category XP = 2,122` has to drop these first.
+
+**The recombobulator step was only offered on what you already own.** A maxed bag is
+recombobulated throughout — one profile had done it to 124 of the 128 families it held, and the
+four it hadn't were the four that refuse one — so an accessory you have yet to buy is worth its
+rarity *and then the step after it*. Quoting only the first left the rest of the bag priced at
+base rarities. The step is now offered for unowned families too, with the accessory as a
+prerequisite so the bundle costs what the pair really costs.
+
+**The Hegemony was quoted at half price.** It counts double in the bag and the row offering it
+said 22 rather than 44 — the largest single row in the category, ranked as though it were half
+its size. `accessoryPower` now applies the doubling in both places, so what it is worth to buy
+and what it is worth to hold are the same number.
+
+What remains is not buyable, and the app is right not to quote it as though it were. On the
+profile above: 11 for imbuing a Rift Prism at Erihann, about 36 more from Abiphone contacts as
+the Abicase scales (those contacts are tasks, but they live in the Abiphone category), and 53
+across the accessories that climb rarity by being played rather than bought — a Pandora's Box
+won at Shen's Auction, a Pulse Ring fed Thunder in a Bottle, a Relic of Power filled with
+perfect gemstones.
+
 ## Running without a server
 
 The standalone HTML calls Hypixel from the page. Two things make that possible, and both were

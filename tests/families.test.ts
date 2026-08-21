@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { familyOf, grantsMagicalPower, scoreBag } from "../src/lib/gameData";
+import { accessoryPower, familyOf, grantsMagicalPower, scoreBag } from "../src/lib/gameData";
 import accessories from "../data/generated/accessories.json";
 import accessoryFamilies from "../data/curated/accessory_families.json";
 import accessoryUpgrades from "../data/generated/accessory_upgrades.json";
@@ -191,6 +191,12 @@ test("a family's Talisman, Ring and Artifact all resolve to one family", () => {
  * trace in the bag at all. Measured against a maxed profile they were worth 75 magical power
  * between them, which is most of what the model was missing.
  */
+test("what the Hegemony is worth to buy is what it is worth to hold", () => {
+  // Quoting it at its rarity made the single largest row in the category look half its size.
+  assert.equal(accessoryPower(data, "HEGEMONY_ARTIFACT", "MYTHIC"), 44);
+  assert.equal(accessoryPower(data, "BAT_ARTIFACT", "MYTHIC"), 22, "nothing else doubles");
+});
+
 test("Hegemony grants its magical power twice over", () => {
   const bare = scoreBag(data, [{ id: "BAT_ARTIFACT", rarityUpgrades: 0, rarity: null }], null);
   const heg = scoreBag(

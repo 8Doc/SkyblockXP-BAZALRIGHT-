@@ -3,6 +3,7 @@ import type { GardenState, MuseumState, ProfileMember } from "./profile";
 import { petKey } from "./auctions";
 import { num } from "./format";
 import {
+  accessoryPower,
   bagUpgradeCost,
   bestiaryFamilyOf,
   bestiaryTierOf,
@@ -280,7 +281,7 @@ export function buildCatalog(
     // Neither is a staff curio or something the game has withdrawn. A player who owns one is
     // still credited for it by scoreBag — this only stops it being listed as XP left to get.
     if (!acc.obtainable) continue;
-    const power = magicalPowerOf(data, acc.tier);
+    const power = accessoryPower(data, acc.id, acc.tier);
     if (power <= 0) continue;
 
     const family = familyOf(data, acc.name, acc.id);
@@ -708,7 +709,7 @@ export function buildCatalog(
     if (accessoryById.get(best.id)?.recombobulatable === false) continue;
     const bumped = bumpRarity(data, best.rarity, 1);
     if (bumped === best.rarity) continue; // already at the top of the ladder
-    const power = magicalPowerOf(data, bumped);
+    const power = accessoryPower(data, best.id, bumped);
     const alreadyHave = bagState.familyPower.get(family) ?? 0;
     if (power <= alreadyHave) continue;
 
@@ -725,6 +726,50 @@ export function buildCatalog(
       cost: { kind: "bazaar", items: [{ id: "RECOMBOBULATOR_3000", qty: 1 }] },
       repeatable: false,
       note: `${best.rarity.toLowerCase()} → ${bumped.toLowerCase()} · ${power - alreadyHave} MP`,
+    });
+  }
+
+  // The same step, for a family the player does not hold anything in yet.
+  //
+  // Buying the accessory is only half the magical power that family is worth, because a maxed
+  // bag is recombobulated throughout — one profile had done it to 124 of the 128 families it
+  // held, and the four it hadn't were the four that refuse a Recombobulator. Offering the step
+  // only on what is already owned quoted the rest of the bag at base rarities, so the category's
+  // remaining XP read far below what is actually left to get.
+  //
+  // The accessory is a prerequisite rather than a separate row, so the bundle is priced at the
+  // accessory plus the Recombobulator, which is what the pair really costs.
+  const unownedBest = new Map<string, { id: string; name: string; tier: string; power: number }>();
+  for (const acc of data.accessories.accessories) {
+    if (excluded.has(acc.id) || !grantsMagicalPower(acc) || !acc.obtainable) continue;
+    if (acc.recombobulatable === false) continue;
+    const power = accessoryPower(data, acc.id, acc.tier);
+    if (power <= 0) continue;
+    const family = familyOf(data, acc.name, acc.id);
+    if (bagState.familyBest.has(family)) continue; // the loop above already covers it
+    const held = unownedBest.get(family);
+    if (!held || power > held.power) unownedBest.set(family, { id: acc.id, name: acc.name, tier: acc.tier, power });
+  }
+  for (const [family, best] of unownedBest) {
+    const bumped = bumpRarity(data, best.tier, 1);
+    const power = accessoryPower(data, best.id, bumped);
+    // A step that gains nothing is no step: the top of the ladder wraps onto the odd rarities,
+    // which are worth less than the mythic they would be replacing.
+    if (power <= best.power) continue;
+    const alreadyHave = bagState.familyPower.get(family) ?? 0;
+
+    tasks.push({
+      id: `recombobulate_${best.id}`,
+      category: "accessory_bag",
+      name: `Recombobulate ${best.name}`,
+      xp: power - alreadyHave,
+      exclusiveGroup: `accessory:${family}`,
+      groupLevel: power,
+      groupBase: alreadyHave,
+      requires: [`accessory_${best.id}`],
+      cost: { kind: "bazaar", items: [{ id: "RECOMBOBULATOR_3000", qty: 1 }] },
+      repeatable: false,
+      note: `${best.tier.toLowerCase()} → ${bumped.toLowerCase()} · buy the accessory first`,
     });
   }
 

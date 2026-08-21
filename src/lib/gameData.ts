@@ -475,6 +475,19 @@ export type BagItem = { id: string; rarityUpgrades: number; rarity?: string | nu
  * wrong — gets blamed on family detection instead.
  */
 const HEGEMONY = "HEGEMONY_ARTIFACT";
+
+/**
+ * What one accessory is worth in the bag: its rarity, doubled if it is the Hegemony.
+ *
+ * Counted here rather than added on afterwards so that the figure the planner offers for buying
+ * one matches the figure the bag credits for holding it. Quoting the Hegemony at its rarity made
+ * it look like 22 magical power to buy when it is really 44 — the single largest row in the
+ * category, ranked as though it were half its size.
+ */
+export function accessoryPower(data: GameData, id: string, rarity: string): number {
+  const power = magicalPowerOf(data, rarity);
+  return id === HEGEMONY ? power * 2 : power;
+}
 /** An Abicase grants one extra magical power for every two Abiphone contacts. */
 function abicaseBonus(contacts: number): number {
   return Math.floor(contacts / 2);
@@ -551,14 +564,12 @@ export function scoreBag(
     const fromResource = bumpRarity(data, meta.tier, item.rarityUpgrades);
     const rarity = item.rarity && magicalPowerOf(data, item.rarity) > 0 ? item.rarity : fromResource;
     const family = familyOf(data, meta.name, meta.id);
-    const power = magicalPowerOf(data, rarity);
+    // Hegemony's doubling is inside this figure, so holding one and buying one agree.
+    const power = accessoryPower(data, meta.id, rarity);
     if (power > (familyPower.get(family) ?? -1)) {
       familyPower.set(family, power);
       familyBest.set(family, { id: meta.id, rarity, recombobulated: item.rarityUpgrades > 0 });
     }
-    // Hegemony grants its magical power twice over. Counted as a bonus rather than by doubling
-    // the family's figure, so the family still ranks against its rivals on what it really is.
-    if (meta.id === HEGEMONY) bonusMp += power;
     if (meta.id.startsWith("ABICASE")) bonusMp += abicaseBonus(abiphoneContacts);
   }
 

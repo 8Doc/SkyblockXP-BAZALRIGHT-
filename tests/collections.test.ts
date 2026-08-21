@@ -119,6 +119,39 @@ test("magical power and pet score count as XP already earned", () => {
   assert.equal(earnedOutsideTasks.magicalPower, 0, "no bag decoded here, so nothing to credit");
 });
 
+/**
+ * A maxed bag is recombobulated throughout — one real profile had done it to 124 of the 128
+ * families it held — so buying an accessory is only half the magical power that family is
+ * worth. Offering the step only on what is already owned quoted the rest of the bag at base
+ * rarities, and the category's remaining XP read far below what is actually left to get.
+ */
+test("an accessory you have yet to buy still has a recombobulator step", () => {
+  const { tasks, done } = catalogFor({ accessory_bag_storage: { unlocked_powers: [] } });
+  const live = tasks.filter((t) => t.category === "accessory_bag" && !done.has(t.id));
+
+  const buy = live.find((t) => t.id === "accessory_BAT_ARTIFACT");
+  const recomb = live.find((t) => t.id === "recombobulate_BAT_ARTIFACT");
+  assert.ok(buy, "the accessory itself is on offer");
+  assert.ok(recomb, "and so is the recombobulator that follows it");
+
+  // The step needs the accessory first, so the pair is priced as the pair.
+  assert.deepEqual(recomb.requires, ["accessory_BAT_ARTIFACT"]);
+  // Both belong to the family, so a total counts the better of the two rather than both.
+  assert.equal(recomb.exclusiveGroup, buy.exclusiveGroup);
+  assert.ok(recomb.xp > buy.xp, `${recomb.xp} should beat the ${buy.xp} of the plain accessory`);
+});
+
+test("an accessory that refuses a recombobulator is not offered one", () => {
+  const { tasks } = catalogFor({ accessory_bag_storage: { unlocked_powers: [] } });
+  for (const id of ["VOTER_BADGE_SUPREME", "PANDORAS_BOX", "RIFT_PRISM"]) {
+    assert.equal(
+      tasks.find((t) => t.id === `recombobulate_${id}`),
+      undefined,
+      `${id} cannot take one`,
+    );
+  }
+});
+
 test("bestiary XP is credited from the milestone count", () => {
   // Ten family tiers are worth 20 XP between them: 1 apiece, plus a milestone reward of 10.
   const { earnedOutsideTasks } = catalogFor({ bestiary: { milestone: { last_claimed_milestone: 314 } } });
