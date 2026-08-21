@@ -1,37 +1,11 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
 import { buildCatalog } from "../src/lib/catalog";
-import type { GameData } from "../src/lib/gameData";
+import { priceOf } from "../src/lib/resolve";
+import { gameData } from "./gameDataFixture";
 import type { ProfileMember } from "../src/lib/profile";
 
-const load = (path: string) => JSON.parse(readFileSync(`data/${path}`, "utf8"));
-const data = {
-  skills: load("generated/skills.json"),
-  collections: load("generated/collections.json"),
-  minions: load("generated/minions.json"),
-  accessories: load("generated/accessories.json"),
-  magicalPower: load("curated/magical_power.json"),
-  accessoryFamilies: load("curated/accessory_families.json"),
-  accessoryChains: load("generated/accessory_trade.json"),
-  museum: load("generated/museum.json"),
-  tasks: load("generated/tasks.json"),
-  curves: load("generated/curves.json"),
-  travelScrolls: load("generated/travel_scrolls.json"),
-  costs: load("generated/costs.json"),
-  petScore: load("curated/pet_score.json"),
-  pets: load("generated/pets.json"),
-  difficulty: load("generated/difficulty.json"),
-  attributeShards: load("generated/attributes.json"),
-  bestiary: load("generated/bestiary.json"),
-  bestiaryMobs: load("curated/bestiary_mobs.json"),
-  abiphone: load("generated/abiphone.json"),
-  bagUpgrades: load("curated/accessory_bag_upgrades.json"),
-  attributeLevels: load("curated/attribute_levels.json"),
-  attributeApiKeys: load("curated/attribute_api_keys.json"),
-  powerStones: load("generated/power_stones.json"),
-  npcs: load("generated/npcs.json"),
-} as unknown as GameData;
+const data = gameData();
 
 const member = {} as ProfileMember;
 const emptyBag = { items: [], capacity: 0 };
@@ -51,8 +25,12 @@ test("a donation already in the player's inventory costs nothing", () => {
   assert.equal(before.cost.kind, "auction", "an item you do not hold is still a purchase");
 
   const after = museumRows(new Set([held.itemId])).find((task) => task.id === `museum_${held.itemId}`)!;
-  assert.equal(after.cost.kind, "none", `${held.name} is in hand and should be free to donate`);
+  assert.equal(after.cost.kind, "owned", `${held.name} is in hand and should be free to donate`);
   assert.match(after.note ?? "", /already in your inventory/);
+  // "none" would have been the obvious kind and was the wrong one: it means unpriced, so the
+  // rows sorted to the bottom of six hundred and fell past the forty-row cut instead of to the
+  // top at zero. Costing nothing has to be a price, not the absence of one.
+  assert.equal(priceOf(after.cost, { bazaar: {}, bins: null }), 0, "a held donation must price at zero, not null");
 });
 
 /**
@@ -62,11 +40,11 @@ test("a donation already in the player's inventory costs nothing", () => {
 test("holding one item leaves every other donation priced", () => {
   const held = data.museum.donations.find((donation) => donation.tradeable)!;
   const rows = museumRows(new Set([held.itemId]));
-  const free = rows.filter((task) => task.cost.kind === "none");
+  const free = rows.filter((task) => task.cost.kind === "owned");
   assert.equal(free.length, 1, `${free.length} rows went free on the strength of one held item`);
 
   const blind = museumRows(null);
-  assert.equal(blind.filter((task) => task.cost.kind === "none").length, 0);
+  assert.equal(blind.filter((task) => task.cost.kind === "owned").length, 0);
   assert.equal(blind.length, rows.length, "the row count should not depend on what is held");
 });
 
@@ -74,8 +52,82 @@ test("holding one item leaves every other donation priced", () => {
 test("an armour set costs nothing only when all its pieces are held", () => {
   const set = data.museum.armorSets.find((entry) => entry.pieces.length > 1)!;
   const partial = museumRows(new Set([set.pieces[0]!])).find((task) => task.id === `museum_set_${set.setId}`)!;
-  assert.notEqual(partial.cost.kind, "none", "one piece is not a set");
+  assert.notEqual(partial.cost.kind, "owned", "one piece is not a set");
 
   const whole = museumRows(new Set(set.pieces)).find((task) => task.id === `museum_set_${set.setId}`)!;
-  assert.equal(whole.cost.kind, "none", `${set.name} is complete and should be free to donate`);
+  assert.equal(whole.cost.kind, "owned", `${set.name} is complete and should be free to donate`);
+  assert.equal(priceOf(whole.cost, { bazaar: {}, bins: null }), 0);
+});
+
+/**
+ * An accessory costs what it is listed at. A full bag used to add half the next Jacobus upgrade
+ * on top — six million a row on a real profile, which quoted a Large Fish Bowl listing at 9.8M
+ * as 19.8M, and billed for a slot the bag upgrade task was already charging for. The slot is a
+ * prerequisite now, so it is paid once and the price stays the price.
+ */
+test("a full accessory bag adds a prerequisite, not a markup", () => {
+  const full = {
+    accessory_bag_storage: { bag_upgrades_purchased: 13 },
+  } as unknown as ProfileMember;
+  const bag = { items: [], capacity: 0 };
+
+  const catalog = buildCatalog(full, data, bag);
+  const rows = catalog.tasks.filter((task) => task.category === "accessory_bag" && task.cost.kind === "auction");
+  assert.ok(rows.length > 0, "expected accessories on offer");
+
+  for (const row of rows) {
+    const cost = row.cost as { kind: "auction"; surcharge?: number };
+    assert.ok(
+      cost.surcharge === undefined || cost.surcharge <= 0,
+      `${row.name} is marked up by ${cost.surcharge} for a slot it should require instead`,
+    );
+  }
+
+  const needsSlot = rows.filter((row) => row.requires.some((id) => id.startsWith("bag_upgrade_")));
+  assert.ok(needsSlot.length > 0, "a bag with no free slots should make new accessories need one");
+  assert.match(needsSlot[0]!.note ?? "", /bag is full/);
+});
+
+/** With room to spare, nothing is required and nothing is added. */
+test("an accessory bag with room needs no upgrade first", () => {
+  const roomy = {
+    accessory_bag_storage: { bag_upgrades_purchased: 13 },
+  } as unknown as ProfileMember;
+  const catalog = buildCatalog(roomy, data, { items: [], capacity: 40 });
+  const rows = catalog.tasks.filter((task) => task.category === "accessory_bag" && task.cost.kind === "auction");
+  assert.equal(
+    rows.filter((row) => row.requires.some((id) => id.startsWith("bag_upgrade_"))).length,
+    0,
+    "an accessory should not wait on a slot the bag already has",
+  );
+});
+
+/**
+ * Doug's shop at the Carnival. Its perks are not XP and are deliberately absent — they grant
+ * fishing wisdom and mining fortune during their own events, Doug's page mentions SkyBlock XP
+ * nowhere, and of the 1,056 distinct completed-task ids seen across five real profiles not one
+ * is a Carnival id. What the shop does sell that pays XP is the masks, every one a museum
+ * donation, and the mask bag, which is an accessory. Those are priced from the auction house
+ * like anything else, so the token price rides along as the cheaper route to the same row.
+ */
+test("Doug's masks carry their token price alongside the auction one", () => {
+  const catalog = buildCatalog({} as ProfileMember, data, { items: [], capacity: 40 });
+  const shop = data.carnivalShop!;
+
+  for (const item of shop.items) {
+    const row = catalog.tasks.find(
+      (task) => task.id === `museum_${item.id}` || task.id === `accessory_${item.id}`,
+    );
+    assert.ok(row, `${item.name} should be a museum donation or an accessory`);
+    assert.match(
+      row!.note ?? "",
+      new RegExp(`${item.tokens.toLocaleString()} ${shop.currency} from ${shop.npc}`),
+      `${item.name} should say what Doug charges`,
+    );
+  }
+
+  // The Bee Mask is the case that makes the point: nine million on the auction house.
+  const bee = catalog.tasks.find((task) => task.id === "museum_BEE_MASK")!;
+  assert.equal(bee.cost.kind, "auction", "the mask is still bought at the market price by default");
+  assert.ok(bee.xp > 0);
 });

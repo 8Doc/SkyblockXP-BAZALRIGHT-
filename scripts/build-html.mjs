@@ -64,6 +64,7 @@ const gameData = {
   attributeApiKeys: await loadJson("curated/attribute_api_keys.json"),
   powerStones: await loadJson("generated/power_stones.json"),
   npcs: await loadJson("generated/npcs.json"),
+  carnivalShop: await loadJson("curated/carnival_shop.json"),
 };
 
 const bundle = await build({

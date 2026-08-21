@@ -261,21 +261,33 @@ export function buildCatalog(
   );
 
   // Slots are a real constraint on buying accessories: the bag holds what it holds, and more
-  // room is bought from Jacobus at +2 slots a time. Each upgrade is its own task below, but an
-  // accessory bought into a *full* bag genuinely costs the accessory plus the slot it sits in,
-  // so half an upgrade is added to its price. With slots to spare that surcharge is zero, which
-  // is why it's computed rather than always applied.
+  // room is bought from Jacobus at +2 slots a time.
   const upgradesPurchased = member.accessory_bag_storage?.bag_upgrades_purchased ?? 0;
   const freeSlots = Math.max(bagState.capacity - bagState.used, 0);
   const nextUpgrade = upgradesPurchased + 1;
   const nextUpgradeCost = nextUpgrade <= data.bagUpgrades.maxUpgrades ? bagUpgradeCost(data, nextUpgrade) : null;
-  // A full bag makes a *new* accessory cost the accessory plus the slot it needs, so a share of
-  // the next bag upgrade is added to its price. Upgrading a family you already own is the
-  // exception and it is the common case: the artifact goes into the slot the ring vacates, so it
-  // needs no new slot. Charging it anyway added several million to almost every row and pushed
-  // the genuinely cheap upgrades down the ranking.
-  const slotSurcharge =
-    freeSlots > 0 || nextUpgradeCost === null ? 0 : Math.round(nextUpgradeCost / data.bagUpgrades.slotsPerUpgrade);
+  // A full bag makes a new accessory need a slot, and the slot is bought from Jacobus. That used
+  // to be folded into the accessory's price as a share of the next upgrade, which was wrong
+  // twice over: the upgrade is already a task of its own with its own price, so it was charged
+  // for once in each place, and it doubled what the row said an accessory cost — a Large Fish
+  // Bowl listing at 9.8M was quoted at 19.8M. The slot is a prerequisite instead, which the
+  // solver already understands and which leaves the price the price.
+  //
+  // Upgrading a family you already own needs no slot: the artifact goes into the one the ring
+  // vacates. That is the common case, which is why this is decided per accessory.
+  const slotNeeded = freeSlots <= 0 && nextUpgradeCost !== null;
+  const slotTaskId = `bag_upgrade_${nextUpgrade}`;
+
+  // Doug sells seven of these for Carnival Tokens, which is minigame play rather than coins.
+  // The rows are priced from the auction house like everything else — a Bee Mask really is nine
+  // million there — but the token price is worth saying, because it is the cheap way to the
+  // same XP whenever Foxy is mayor.
+  const carnivalPrice = new Map(
+    (data.carnivalShop?.items ?? []).map((item) => [
+      item.id,
+      `${item.tokens.toLocaleString()} ${data.carnivalShop!.currency} from ${data.carnivalShop!.npc}`,
+    ]),
+  );
 
   const excluded = new Set(data.magicalPower.excludedItems.ids);
   const accessoryById = new Map(data.accessories.accessories.map((a) => [a.id, a]));
@@ -313,19 +325,20 @@ export function buildCatalog(
       exclusiveGroup: `accessory:${family}`,
       groupLevel: power,
       groupBase: alreadyHave,
-      requires: [],
+      requires: slotNeeded && alreadyHave <= 0 ? [slotTaskId] : [],
       cost: acc.tradeable
         ? {
             kind: "auction",
             itemId: acc.id,
-            surcharge: (alreadyHave > 0 ? 0 : slotSurcharge) || undefined,
             // The member this replaces comes off and goes back on the auction house, so the
             // upgrade costs the difference rather than the sticker price.
             sells: bagState.familyBest.get(family)?.id,
           }
         : { kind: "unknown", note: acc.soulbound ? "Soulbound — cannot be bought" : "Not tradeable" },
       repeatable: false,
-      note: `${acc.tier.toLowerCase()} · ${power} MP${alreadyHave > 0 ? ` (family already gives ${alreadyHave})` : ""}`,
+      note: `${acc.tier.toLowerCase()} · ${power} MP${alreadyHave > 0 ? ` (family already gives ${alreadyHave})` : ""}${
+        slotNeeded && alreadyHave <= 0 ? " · bag is full, needs a slot" : ""
+      }${carnivalPrice.has(acc.id) ? ` · or ${carnivalPrice.get(acc.id)}` : ""}`,
     });
 
     if (bagState.owned.has(acc.id) || gain <= 0) done.add(id);
@@ -430,12 +443,14 @@ export function buildCatalog(
       xp: donation.xp,
       requires: [],
       cost: held
-        ? { kind: "none" }
+        ? { kind: "owned", note: "already in your inventory" }
         : donation.tradeable
           ? { kind: "auction", itemId: donation.itemId }
           : { kind: "unknown", note: "Not tradeable" },
       repeatable: false,
-      note: `${donation.category.toLowerCase()} · ${held ? "already in your inventory" : "donation is permanent"}`,
+      note: `${donation.category.toLowerCase()} · ${held ? "already in your inventory" : "donation is permanent"}${
+        !held && carnivalPrice.has(donation.itemId) ? ` · or ${carnivalPrice.get(donation.itemId)}` : ""
+      }`,
     });
     if (donated && slotFilled(donation.itemId)) done.add(id);
   }
@@ -447,7 +462,9 @@ export function buildCatalog(
       name: `${set.name} (set)`,
       xp: set.xp,
       requires: [],
-      cost: set.pieces.every((piece) => inHand(piece)) ? { kind: "none" } : { kind: "unknown", note: "Whole armour set" },
+      cost: set.pieces.every((piece) => inHand(piece))
+        ? { kind: "owned", note: "every piece already in your inventory" }
+        : { kind: "unknown", note: "Whole armour set" },
       repeatable: false,
       note: `${set.category.toLowerCase()} · ${set.pieces.length} pieces${
         set.pieces.every((piece) => inHand(piece)) ? ", all already in your inventory" : ""

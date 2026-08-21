@@ -22,5 +22,6 @@ export function gameData(): GameData {
     attributeLevels: d("curated/attribute_levels.json"), attributeApiKeys: d("curated/attribute_api_keys.json"),
     npcs: d("generated/npcs.json"),
     powerStones: d("generated/power_stones.json"),
+    carnivalShop: d("curated/carnival_shop.json"),
   };
 }

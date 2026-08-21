@@ -76,6 +76,9 @@ export function priceOf(cost: CostSpec, book: PriceBook, preferReference = false
       const listed = Object.values(byTier);
       return listed.length ? Math.min(...listed) + surcharge : referencePrice(cost, book, surcharge);
     }
+    // Nothing left to pay: the item is in the player's inventory already.
+    case "owned":
+      return 0;
     case "none":
     case "unknown":
       return null;

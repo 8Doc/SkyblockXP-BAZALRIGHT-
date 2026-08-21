@@ -81,15 +81,16 @@ export type EssenceType =
 
 export type CostSpec =
   | { kind: "bazaar"; items: { id: string; qty: number }[] }
-  /**
-   * `surcharge` is coins added on top of the listing price — used for the accessory bag slot
-   * an accessory has to occupy once the bag is full. Buying the accessory really does cost the
-   * item plus the room to keep it.
-   */
   | {
       kind: "auction";
       itemId: string;
       tier?: string;
+      /**
+       * Coins on top of the listing price. Only ever negative now, carrying the sale of whatever
+       * `sells` names; the accessory bag slot used to be added here and is a prerequisite instead,
+       * because charging for it here both doubled the row and billed for a slot the bag upgrade
+       * task was already charging for.
+       */
       surcharge?: number;
       /**
        * An item this purchase makes redundant, sold to pay for it. Buying the Artifact of a
@@ -101,6 +102,12 @@ export type CostSpec =
   | { kind: "npc"; coins: number }
   | { kind: "essence"; type: EssenceType; amount: number }
   | { kind: "none" }
+  /**
+   * Already in the player's hands, so it costs nothing to hand over. Distinct from "none": that
+   * marks a grind with no purchase behind it and belongs in the grind order, while this is an
+   * acquisition the player has already made and belongs in the buy list at zero.
+   */
+  | { kind: "owned"; note?: string }
   /**
    * Not in the README's spec. Added because the alternative is worse: several categories have
    * a known XP value but no price we can source yet (minion tiers I-XI have no recipe data in

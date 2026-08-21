@@ -1,0 +1,24 @@
+{
+  "note": "Doug's shop at the Carnival, which opens on the Hub when Foxy is elected with the Chivalrous Carnival perk. Tokens are earned from the three minigames at one per hundred points, so everything here is a grind rather than a purchase — and every mask is a museum donation, which is where the SkyBlock XP comes from. Listing the token price alongside the auction price is the point: a Bee Mask is 9M on the auction house and 2,000 tokens from Doug.",
+  "source": "Hypixel SkyBlock community wiki, Doug (shop id CARNIVAL_SHOP), read 2026-08-21",
+  "verified": true,
+  "npc": "Doug",
+  "where": "Carnival, Hub Island (-78.5, 70.5, 22.5)",
+  "currency": "Carnival Tokens",
+  "items": [
+    { "id": "CARNIVAL_MASK_BAG", "name": "Carnival Mask Bag", "tokens": 250 },
+    { "id": "ZOMBIE_MASK", "name": "Zombie Mask", "tokens": 500 },
+    { "id": "SALMON_MASK", "name": "Salmon Mask", "tokens": 500 },
+    { "id": "ARMADILLO_MASK", "name": "Armadillo Mask", "tokens": 1000 },
+    { "id": "PARROT_MASK", "name": "Parrot Mask", "tokens": 1000 },
+    { "id": "BEE_MASK", "name": "Bee Mask", "tokens": 2000 },
+    { "id": "FROG_MASK", "name": "Frog Mask", "tokens": 2000 }
+  ],
+  "notSold": {
+    "note": "The Snowman Mask is a museum donation and a Carnival Mask, but Doug does not sell it — it comes from the Season of Jerry. It is left to the auction house like any other donation."
+  },
+  "eventPerks": {
+    "note": "Doug's other half is a perk shop: Fishing Prodigy, Shark Sonar, Refined Mind and the rest, tiered I to V for 50 to 250 tokens each, across the Fishing Festival, Mining Fiesta, Mythological Ritual, Spooky Festival, Season of Jerry and Harvest Feast. They are deliberately not modelled as XP, because they grant none. They award fishing wisdom, mining fortune and drop chances during their own event and nothing else.",
+    "evidence": "Doug's page mentions SkyBlock XP zero times; the SkyBlock Levels page does not mention the Carnival at all; and of the 1,056 distinct completed-task ids seen across five real profiles, including maxed ones, not one is a Carnival id."
+  }
+}

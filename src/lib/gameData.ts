@@ -278,6 +278,17 @@ export type GameData = {
   };
   /** Where the story objectives send you: real name, island and coordinates per NPC. */
   npcs: { npcs: Record<string, NpcEntry>; objectives: Record<string, string> };
+  /**
+   * Doug's shop at the Carnival. Its masks are museum donations and its mask bag is an
+   * accessory, so the XP is already counted where it belongs; what this adds is the token
+   * price, which is the cheap way to the same rows.
+   */
+  carnivalShop?: {
+    npc: string;
+    where: string;
+    currency: string;
+    items: { id: string; name: string; tokens: number }[];
+  };
 };
 
 /** What the nth accessory bag upgrade costs. */
