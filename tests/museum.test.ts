@@ -2,6 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { buildCatalog } from "../src/lib/catalog";
 import { priceOf } from "../src/lib/resolve";
+import { familyOf } from "../src/lib/gameData";
 import { gameData } from "./gameDataFixture";
 import type { ProfileMember } from "../src/lib/profile";
 import { CATEGORIES, CATEGORY_LABELS } from "../src/lib/types";
@@ -229,4 +230,34 @@ test("recombobulation targets whichever family member reaches highest", () => {
     relic!.requires.includes("accessory_POWER_RELIC"),
     "recombobulating something you have yet to buy has to depend on buying it",
   );
+});
+
+/**
+ * Thirteen accessories were missing from the catalogue for want of a rarity, because half these
+ * infoboxes write it as a bare letter — "|rarity = c" — and the parser only understood full
+ * words and the {{r|c}} template. Dante's Ring was one of them, which is why a player holding
+ * one was told to go and buy Dante's Talisman.
+ */
+test("accessories whose rarity is written as a bare letter are catalogued", () => {
+  const byId = new Map(data.accessories.accessories.map((a) => [a.id, a]));
+  for (const id of ["DANTE_RING", "BLOOD_GOD_CREST", "BEASTMASTER_CREST_COMMON", "MASTER_SKULL_TIER_1"]) {
+    assert.ok(byId.has(id), `${id} should be in the catalogue`);
+  }
+  assert.equal(
+    familyOf(data, byId.get("DANTE_RING")!.name, "DANTE_RING"),
+    familyOf(data, byId.get("DANTE_TALISMAN")!.name, "DANTE_TALISMAN"),
+    "the Dante line is one family",
+  );
+});
+
+/**
+ * The anniversary hats do not stack. The wiki's tally of the maximum lists exactly one across
+ * every colour and both editions, noting that it has other versions — and a player with a maxed
+ * accessory bag was being offered two more.
+ */
+test("every Hat of Celebration is one family", () => {
+  const hats = data.accessories.accessories.filter((a) => /Hat of Celebration/.test(a.name));
+  assert.ok(hats.length >= 3, "expected several hats");
+  const families = new Set(hats.map((hat) => familyOf(data, hat.name, hat.id)));
+  assert.equal(families.size, 1, `the hats split into ${[...families].join(", ")}`);
 });

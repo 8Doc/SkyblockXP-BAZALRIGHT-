@@ -58,7 +58,11 @@ function rarityOf(text) {
   const value = raw.toUpperCase();
   for (const name of RARITY_ORDER) if (value.includes(name)) return name;
   const letters = [...raw.toLowerCase().matchAll(/\{\{r\|([curelm])\}\}/g)].map((m) => RARITY_LETTER[m[1]]);
-  return letters.length ? letters[0] : null;
+  if (letters.length) return letters[0];
+  // A bare letter, which is how a good half of these infoboxes write it: "|rarity = c". Missing
+  // it left thirteen accessories out of the catalogue for want of a rarity — Dante's Ring among
+  // them, which is why a player holding one was told to go and buy Dante's Talisman.
+  return RARITY_LETTER[raw.trim().toLowerCase()] ?? null;
 }
 
 /** One infobox field's raw value. */

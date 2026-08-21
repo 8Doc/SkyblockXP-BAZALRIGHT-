@@ -110,7 +110,8 @@
     ]
   },
   "unlisted": {
-    "power": 44,
-    "note": "What neither side can name. The wiki's trivia counts 147 accessories, its own table lists 121 and names 20 more as missing, so six of its 147 appear nowhere — and the colour variants of the Hats of Celebration it rates Very Special exist under ids the items resource does not carry. This is the slack that leaves, and it is an allowance for a check rather than a figure to add to anything."
+    "power": 49,
+    "note": "What neither side can name, measured rather than argued: the wiki's trivia counts 147 accessories, its own table lists 121 and names 20 more as missing, and it flags twelve of the rarities it does state as wrong. This is the slack that leaves against our own ceiling, and it is a tolerance for a check rather than a figure to add to anything.",
+    "history": "Was 44 until the Hats of Celebration were merged into one family. We had been counting three, the wiki's tally counts one — so our ceiling had ten magical power in it that the 2,121 never did, and the honest comparison is five wider once five accessories recovered from the wiki's bare-letter rarity fields are added back."
   }
 }

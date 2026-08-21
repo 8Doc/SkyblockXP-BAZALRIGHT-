@@ -75,6 +75,11 @@
       "match": "^(Lucky|Eternal) Hoof$",
       "family": "hoof",
       "note": "Eternal Hoof is crafted from a Lucky Hoof — the wiki infobox says upgrades_from, and nothing in the items resource does."
+    },
+    {
+      "match": "Hat of Celebration",
+      "family": "hat of celebration",
+      "why": "The anniversary hats do not stack. The wiki's own tally of the maximum accessory power lists exactly one of them across every colour and both editions, noting that it has other versions — and a player with a maxed bag was being offered two more."
     }
   ],
   "openQuestions": [

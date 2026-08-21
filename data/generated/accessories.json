@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-08-21T00:23:30.399Z",
+ "generatedAt": "2026-08-21T10:12:52.986Z",
  "source": "https://api.hypixel.net/v2/resources/skyblock",
  "accessories": [
   {
@@ -324,6 +324,17 @@
    "recombobulable": true
   },
   {
+   "id": "BEASTMASTER_CREST_COMMON",
+   "name": "Beastmaster Crest",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false,
+   "rift": false,
+   "recombobulable": true
+  },
+  {
    "id": "BEASTMASTER_CREST_EPIC",
    "name": "Beastmaster Crest",
    "tier": "EPIC",
@@ -520,6 +531,17 @@
    "tradeable": false,
    "riftTransferrable": true,
    "rift": true,
+   "recombobulable": true
+  },
+  {
+   "id": "BLOOD_GOD_CREST",
+   "name": "Blood God Crest",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false,
+   "rift": false,
    "recombobulable": true
   },
   {
@@ -1225,6 +1247,17 @@
    "tradeable": false,
    "riftTransferrable": false,
    "rift": true,
+   "recombobulable": true
+  },
+  {
+   "id": "DANTE_RING",
+   "name": "Dante's Ring",
+   "tier": "COMMON",
+   "museum": true,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false,
+   "rift": false,
    "recombobulable": true
   },
   {
@@ -2364,6 +2397,17 @@
    "recombobulable": true
   },
   {
+   "id": "MASTER_SKULL_TIER_1",
+   "name": "Master Skull - Tier 1",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false,
+   "rift": false,
+   "recombobulable": true
+  },
+  {
    "id": "MASTER_SKULL_TIER_10",
    "name": "Master Skull - Tier 10",
    "tier": "LEGENDARY",
@@ -2374,6 +2418,17 @@
    "rift": false,
    "recombobulable": true,
    "unobtainable": "admin only"
+  },
+  {
+   "id": "MASTER_SKULL_TIER_2",
+   "name": "Master Skull - Tier 2",
+   "tier": "COMMON",
+   "museum": false,
+   "soulbound": false,
+   "tradeable": true,
+   "riftTransferrable": false,
+   "rift": false,
+   "recombobulable": true
   },
   {
    "id": "MASTER_SKULL_TIER_3",

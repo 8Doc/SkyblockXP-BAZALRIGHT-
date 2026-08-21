@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-08-21T00:08:31.555Z",
+ "generatedAt": "2026-08-21T10:12:52.883Z",
  "source": "Hypixel SkyBlock Fandom wiki infobox: auctionable / tradeable",
  "note": "Accessories the wiki states cannot be bought. Only an explicit no is recorded; silence defers to the items resource.",
  "pagesRead": 358,
@@ -3132,8 +3132,20 @@
  ],
  "rarities": [
   {
+   "id": "TARANTULA_RING",
+   "rarity": "LEGENDARY"
+  },
+  {
+   "id": "ARCHAEOLOGIST_COMPASS",
+   "rarity": "COMMON"
+  },
+  {
    "id": "ANITA_TALISMAN",
    "rarity": "COMMON"
+  },
+  {
+   "id": "PESTHUNTER_RING",
+   "rarity": "RARE"
   },
   {
    "id": "ANITA_ARTIFACT",
@@ -3142,6 +3154,14 @@
   {
    "id": "ANITA_RING",
    "rarity": "COMMON"
+  },
+  {
+   "id": "PESTHUNTER_BADGE",
+   "rarity": "UNCOMMON"
+  },
+  {
+   "id": "PESTHUNTER_ARTIFACT",
+   "rarity": "EPIC"
   },
   {
    "id": "PARTY_HAT_SLOTH",
@@ -3192,6 +3212,26 @@
    "rarity": "COMMON"
   },
   {
+   "id": "JUNK_ARTIFACT",
+   "rarity": "RARE"
+  },
+  {
+   "id": "WITCH_TALISMAN",
+   "rarity": "COMMON"
+  },
+  {
+   "id": "WITCH_RING",
+   "rarity": "UNCOMMON"
+  },
+  {
+   "id": "WITCH_ARTIFACT",
+   "rarity": "RARE"
+  },
+  {
+   "id": "CENTURY_TALISMAN",
+   "rarity": "COMMON"
+  },
+  {
    "id": "RUNEBOOK",
    "rarity": "COMMON"
   },
@@ -3224,6 +3264,14 @@
    "rarity": "COMMON"
   },
   {
+   "id": "GREAT_SPOOK_TALISMAN",
+   "rarity": "COMMON"
+  },
+  {
+   "id": "GREAT_SPOOK_ARTIFACT",
+   "rarity": "RARE"
+  },
+  {
    "id": "GREAT_SPOOK_RING",
    "rarity": "COMMON"
   },
@@ -3232,8 +3280,48 @@
    "rarity": "RARE"
   },
   {
+   "id": "ABICASE",
+   "rarity": "RARE"
+  },
+  {
    "id": "MINERAL_TALISMAN",
    "rarity": "RARE"
+  },
+  {
+   "id": "GLOSSY_MINERAL_TALISMAN",
+   "rarity": "EPIC"
+  },
+  {
+   "id": "FRESHLY_BAKED_HEIRLOOM",
+   "rarity": "LEGENDARY"
+  },
+  {
+   "id": "GRATITUDE_ARTIFACT",
+   "rarity": "RARE"
+  },
+  {
+   "id": "FRESHLY_BAKED_ARTIFACT",
+   "rarity": "RARE"
+  },
+  {
+   "id": "FRESHLY_BAKED_RELIC",
+   "rarity": "EPIC"
+  },
+  {
+   "id": "GRATITUDE_TALISMAN",
+   "rarity": "COMMON"
+  },
+  {
+   "id": "FRESHLY_BAKED_RING",
+   "rarity": "UNCOMMON"
+  },
+  {
+   "id": "GRATITUDE_RING",
+   "rarity": "UNCOMMON"
+  },
+  {
+   "id": "FRESHLY_BAKED_TALISMAN",
+   "rarity": "COMMON"
   },
   {
    "id": "SCAVENGER_ARTIFACT",
@@ -3244,8 +3332,40 @@
    "rarity": "COMMON"
   },
   {
+   "id": "ANGUISH_RING",
+   "rarity": "EPIC"
+  },
+  {
+   "id": "BEASTMASTER_CREST_COMMON",
+   "rarity": "COMMON"
+  },
+  {
+   "id": "BEASTMASTER_CREST_LEGENDARY",
+   "rarity": "COMMON"
+  },
+  {
+   "id": "BEASTMASTER_CREST_EPIC",
+   "rarity": "COMMON"
+  },
+  {
+   "id": "BEASTMASTER_CREST_UNCOMMON",
+   "rarity": "COMMON"
+  },
+  {
+   "id": "ANGUISH_ARTIFACT",
+   "rarity": "LEGENDARY"
+  },
+  {
+   "id": "BEASTMASTER_CREST_RARE",
+   "rarity": "COMMON"
+  },
+  {
    "id": "ANGUISH_TALISMAN",
    "rarity": "RARE"
+  },
+  {
+   "id": "PESTHUNTER_RELIC",
+   "rarity": "LEGENDARY"
   },
   {
    "id": "JERRY_TALISMAN_BLUE",
@@ -3262,6 +3382,10 @@
   {
    "id": "JERRY_TALISMAN_PURPLE",
    "rarity": "EPIC"
+  },
+  {
+   "id": "HEGEMONY_ARTIFACT",
+   "rarity": "LEGENDARY"
   },
   {
    "id": "DULL_SHARK_TOOTH_NECKLACE",
@@ -3284,8 +3408,44 @@
    "rarity": "LEGENDARY"
   },
   {
+   "id": "BINGO_RELIC",
+   "rarity": "EPIC"
+  },
+  {
+   "id": "BINGO_HEIRLOOM",
+   "rarity": "LEGENDARY"
+  },
+  {
+   "id": "BINGO_TALISMAN",
+   "rarity": "COMMON"
+  },
+  {
+   "id": "BINGO_RING",
+   "rarity": "UNCOMMON"
+  },
+  {
+   "id": "BINGO_ARTIFACT",
+   "rarity": "RARE"
+  },
+  {
+   "id": "BUCKET_OF_DYE",
+   "rarity": "RARE"
+  },
+  {
+   "id": "SEA_CREATURE_TALISMAN",
+   "rarity": "COMMON"
+  },
+  {
    "id": "INTIMIDATION_ARTIFACT",
    "rarity": "RARE"
+  },
+  {
+   "id": "ODGERS_BRONZE_TOOTH",
+   "rarity": "COMMON"
+  },
+  {
+   "id": "SCARF_THESIS",
+   "rarity": "EPIC"
   },
   {
    "id": "POWER_ARTIFACT",
@@ -3294,6 +3454,10 @@
   {
    "id": "BAT_PERSON_ARTIFACT",
    "rarity": "RARE"
+  },
+  {
+   "id": "WOLF_PAW",
+   "rarity": "UNCOMMON"
   },
   {
    "id": "FEATHER_ARTIFACT",
@@ -3320,20 +3484,68 @@
    "rarity": "COMMON"
   },
   {
+   "id": "MASTER_SKULL_TIER_4",
+   "rarity": "COMMON"
+  },
+  {
    "id": "INTIMIDATION_RING",
    "rarity": "COMMON"
+  },
+  {
+   "id": "HEALING_RING",
+   "rarity": "UNCOMMON"
+  },
+  {
+   "id": "BAT_ARTIFACT",
+   "rarity": "LEGENDARY"
+  },
+  {
+   "id": "EMERALD_ARTIFACT",
+   "rarity": "RARE"
+  },
+  {
+   "id": "SEAL_RING",
+   "rarity": "RARE"
+  },
+  {
+   "id": "ARTIFACT_OF_COINS",
+   "rarity": "RARE"
   },
   {
    "id": "NEW_YEAR_CAKE_BAG",
    "rarity": "COMMON"
   },
   {
+   "id": "RING_OF_COINS",
+   "rarity": "UNCOMMON"
+  },
+  {
    "id": "FIRE_TALISMAN",
    "rarity": "COMMON"
   },
   {
+   "id": "ODGERS_GOLD_TOOTH",
+   "rarity": "COMMON"
+  },
+  {
+   "id": "TITANIUM_RELIC",
+   "rarity": "LEGENDARY"
+  },
+  {
+   "id": "TITANIUM_ARTIFACT",
+   "rarity": "EPIC"
+  },
+  {
    "id": "WOOD_TALISMAN",
    "rarity": "COMMON"
+  },
+  {
+   "id": "CRACKED_PIGGY_BANK",
+   "rarity": "UNCOMMON"
+  },
+  {
+   "id": "TITANIUM_RING",
+   "rarity": "RARE"
   },
   {
    "id": "VACCINE_RING",
@@ -3356,6 +3568,10 @@
    "rarity": "EPIC"
   },
   {
+   "id": "TITANIUM_TALISMAN",
+   "rarity": "UNCOMMON"
+  },
+  {
    "id": "HASTE_RING",
    "rarity": "RARE"
   },
@@ -3368,8 +3584,16 @@
    "rarity": "COMMON"
   },
   {
+   "id": "ODGERS_DIAMOND_TOOTH",
+   "rarity": "COMMON"
+  },
+  {
    "id": "PERSONAL_COMPACTOR_4000",
    "rarity": "COMMON"
+  },
+  {
+   "id": "CANDY_RELIC",
+   "rarity": "LEGENDARY"
   },
   {
    "id": "LUCKY_HOOF",
@@ -3388,8 +3612,24 @@
    "rarity": "LEGENDARY"
   },
   {
+   "id": "MASTER_SKULL_TIER_1",
+   "rarity": "COMMON"
+  },
+  {
+   "id": "MASTER_SKULL_TIER_5",
+   "rarity": "COMMON"
+  },
+  {
+   "id": "POTATO_RING",
+   "rarity": "UNCOMMON"
+  },
+  {
    "id": "PERSONAL_DELETOR_7000",
    "rarity": "LEGENDARY"
+  },
+  {
+   "id": "CATACOMBS_EXPERT_RING",
+   "rarity": "EPIC"
   },
   {
    "id": "SCARF_STUDIES",
@@ -3410,6 +3650,10 @@
   {
    "id": "SPEED_RING",
    "rarity": "COMMON"
+  },
+  {
+   "id": "HASTE_ARTIFACT",
+   "rarity": "EPIC"
   },
   {
    "id": "DAY_CRYSTAL",
@@ -3436,6 +3680,14 @@
    "rarity": "LEGENDARY"
   },
   {
+   "id": "AUTO_RECOMBOBULATOR",
+   "rarity": "LEGENDARY"
+  },
+  {
+   "id": "FIERY_KUUDRA_CORE",
+   "rarity": "EPIC"
+  },
+  {
    "id": "VILLAGE_TALISMAN",
    "rarity": "COMMON"
   },
@@ -3452,12 +3704,36 @@
    "rarity": "EPIC"
   },
   {
+   "id": "MASTER_SKULL_TIER_7",
+   "rarity": "COMMON"
+  },
+  {
    "id": "MINE_TALISMAN",
    "rarity": "COMMON"
   },
   {
    "id": "TREASURE_RING",
    "rarity": "EPIC"
+  },
+  {
+   "id": "WOLF_TALISMAN",
+   "rarity": "UNCOMMON"
+  },
+  {
+   "id": "DANTE_TALISMAN",
+   "rarity": "COMMON"
+  },
+  {
+   "id": "BURNING_KUUDRA_CORE",
+   "rarity": "RARE"
+  },
+  {
+   "id": "ARTIFACT_OF_SPACE",
+   "rarity": "EPIC"
+  },
+  {
+   "id": "DANTE_RING",
+   "rarity": "COMMON"
   },
   {
    "id": "EMERALD_RING",
@@ -3468,16 +3744,36 @@
    "rarity": "EPIC"
   },
   {
+   "id": "PIGGY_BANK",
+   "rarity": "UNCOMMON"
+  },
+  {
    "id": "POTATO_TALISMAN",
    "rarity": "COMMON"
+  },
+  {
+   "id": "BLOOD_GOD_SIGIL",
+   "rarity": "UNCOMMON"
   },
   {
    "id": "PERSONAL_DELETOR_5000",
    "rarity": "RARE"
   },
   {
+   "id": "KUUDRA_FOLLOWER_RELIC",
+   "rarity": "LEGENDARY"
+  },
+  {
+   "id": "SPEED_RELIC",
+   "rarity": "EPIC"
+  },
+  {
    "id": "NIGHT_CRYSTAL",
    "rarity": "RARE"
+  },
+  {
+   "id": "SHENS_REGALIA",
+   "rarity": "LEGENDARY"
   },
   {
    "id": "ETERNAL_HOOF",
@@ -3512,11 +3808,31 @@
    "rarity": "RARE"
   },
   {
+   "id": "ODGERS_SILVER_TOOTH",
+   "rarity": "COMMON"
+  },
+  {
    "id": "POTION_AFFINITY_TALISMAN",
    "rarity": "COMMON"
   },
   {
+   "id": "WOLF_RING",
+   "rarity": "RARE"
+  },
+  {
+   "id": "MASTER_SKULL_TIER_2",
+   "rarity": "COMMON"
+  },
+  {
+   "id": "RELIC_OF_COINS",
+   "rarity": "EPIC"
+  },
+  {
    "id": "INTIMIDATION_TALISMAN",
+   "rarity": "COMMON"
+  },
+  {
+   "id": "PANDORAS_BOX",
    "rarity": "COMMON"
   },
   {
@@ -3532,12 +3848,24 @@
    "rarity": "COMMON"
   },
   {
+   "id": "CANDY_ARTIFACT",
+   "rarity": "EPIC"
+  },
+  {
    "id": "TREASURE_TALISMAN",
    "rarity": "RARE"
   },
   {
+   "id": "ARTIFACT_OF_CONTROL",
+   "rarity": "LEGENDARY"
+  },
+  {
    "id": "CARNIVAL_MASK_BAG",
    "rarity": "COMMON"
+  },
+  {
+   "id": "BROKEN_PIGGY_BANK",
+   "rarity": "UNCOMMON"
   },
   {
    "id": "CANDY_RING",
@@ -3564,8 +3892,16 @@
    "rarity": "RARE"
   },
   {
+   "id": "MASTER_SKULL_TIER_3",
+   "rarity": "COMMON"
+  },
+  {
    "id": "SPIDER_TALISMAN",
    "rarity": "COMMON"
+  },
+  {
+   "id": "BAT_RING",
+   "rarity": "EPIC"
   },
   {
    "id": "VACCINE_TALISMAN",
@@ -3584,12 +3920,20 @@
    "rarity": "COMMON"
   },
   {
+   "id": "MASTER_SKULL_TIER_6",
+   "rarity": "COMMON"
+  },
+  {
    "id": "SEA_CREATURE_ARTIFACT",
    "rarity": "RARE"
   },
   {
    "id": "RING_POTION_AFFINITY",
    "rarity": "COMMON"
+  },
+  {
+   "id": "INFERNAL_KUUDRA_CORE",
+   "rarity": "LEGENDARY"
   },
   {
    "id": "JUNGLE_AMULET",
@@ -3612,7 +3956,19 @@
    "rarity": "COMMON"
   },
   {
+   "id": "SEAL_TALISMAN",
+   "rarity": "UNCOMMON"
+  },
+  {
+   "id": "EXPERIENCE_ARTIFACT",
+   "rarity": "EPIC"
+  },
+  {
    "id": "CANDY_TALISMAN",
+   "rarity": "COMMON"
+  },
+  {
+   "id": "BLOOD_GOD_CREST",
    "rarity": "COMMON"
   },
   {
@@ -3622,6 +3978,10 @@
   {
    "id": "BOOK_OF_PROGRESSION",
    "rarity": "COMMON"
+  },
+  {
+   "id": "BLAZE_TALISMAN",
+   "rarity": "RARE"
   },
   {
    "id": "BURSTSTOPPER_ARTIFACT",
@@ -3696,6 +4056,10 @@
    "rarity": "RARE"
   },
   {
+   "id": "RED_CLAW_RING",
+   "rarity": "RARE"
+  },
+  {
    "id": "RED_CLAW_ARTIFACT",
    "rarity": "EPIC"
   },
@@ -3704,8 +4068,84 @@
    "rarity": "COMMON"
   },
   {
+   "id": "DWARVEN_METAL",
+   "rarity": "UNCOMMON"
+  },
+  {
    "id": "POWER_RELIC",
    "rarity": "EPIC"
+  },
+  {
+   "id": "SQUASH_RING",
+   "rarity": "UNCOMMON"
+  },
+  {
+   "id": "CROPIE_TALISMAN",
+   "rarity": "COMMON"
+  },
+  {
+   "id": "BIOANALYSIS_RING",
+   "rarity": "COMMON"
+  },
+  {
+   "id": "MOONLIGHT_CRYSTAL",
+   "rarity": "EPIC"
+  },
+  {
+   "id": "COPPER_RING",
+   "rarity": "UNCOMMON"
+  },
+  {
+   "id": "COPPER_ARTIFACT",
+   "rarity": "RARE"
+  },
+  {
+   "id": "COPPER_TALISMAN",
+   "rarity": "COMMON"
+  },
+  {
+   "id": "BIOANALYSIS_TALISMAN",
+   "rarity": "COMMON"
+  },
+  {
+   "id": "BIOANALYSIS_ARTIFACT",
+   "rarity": "RARE"
+  },
+  {
+   "id": "SUNSHINE_CRYSTAL",
+   "rarity": "EPIC"
+  },
+  {
+   "id": "ATMOSPHERIC_FILTER",
+   "rarity": "RARE"
+  },
+  {
+   "id": "HELIANTHUS_RELIC",
+   "rarity": "EPIC"
+  },
+  {
+   "id": "JAKE_PLUSHIE",
+   "rarity": "UNCOMMON"
+  },
+  {
+   "id": "FERMENTO_ARTIFACT",
+   "rarity": "RARE"
+  },
+  {
+   "id": "VOTER_BADGE_ELITE",
+   "rarity": "RARE"
+  },
+  {
+   "id": "VOTER_BADGE",
+   "rarity": "COMMON"
+  },
+  {
+   "id": "VOTER_BADGE_SUPREME",
+   "rarity": "EPIC"
+  },
+  {
+   "id": "VOTER_BADGE_VIP",
+   "rarity": "UNCOMMON"
   },
   {
    "id": "BLUE_GIFT_TALISMAN",
@@ -3714,6 +4154,10 @@
   {
    "id": "PURPLE_GIFT_TALISMAN",
    "rarity": "EPIC"
+  },
+  {
+   "id": "GOLD_GIFT_TALISMAN",
+   "rarity": "LEGENDARY"
   },
   {
    "id": "WHITE_GIFT_TALISMAN",
@@ -3730,6 +4174,10 @@
   {
    "id": "GLACIAL_ARTIFACT",
    "rarity": "RARE"
+  },
+  {
+   "id": "GLACIAL_TALISMAN",
+   "rarity": "COMMON"
   },
   {
    "id": "LUMBERJACK_RING",
@@ -3780,12 +4228,200 @@
    "rarity": "RARE"
   },
   {
+   "id": "FUTURE_CALORIES",
+   "rarity": "COMMON"
+  },
+  {
+   "id": "RIFT_PRISM",
+   "rarity": "RARE"
+  },
+  {
+   "id": "PUNCHCARD_ARTIFACT",
+   "rarity": "EPIC"
+  },
+  {
+   "id": "WARDING_TRINKET",
+   "rarity": "EPIC"
+  },
+  {
+   "id": "HARMONIOUS_SURGERY_TOOLKIT",
+   "rarity": "UNCOMMON"
+  },
+  {
+   "id": "CRUX_TALISMAN_4",
+   "rarity": "EPIC"
+  },
+  {
+   "id": "CRUX_TALISMAN_3",
+   "rarity": "RARE"
+  },
+  {
+   "id": "CRUX_TALISMAN_2",
+   "rarity": "UNCOMMON"
+  },
+  {
+   "id": "CRUX_TALISMAN_5",
+   "rarity": "LEGENDARY"
+  },
+  {
+   "id": "CRUX_TALISMAN_1",
+   "rarity": "COMMON"
+  },
+  {
+   "id": "CRUX_TALISMAN_6",
+   "rarity": "MYTHIC"
+  },
+  {
+   "id": "IQ_POINT",
+   "rarity": "COMMON"
+  },
+  {
+   "id": "RING_OF_BROKEN_LOVE",
+   "rarity": "LEGENDARY"
+  },
+  {
+   "id": "RING_OF_ETERNAL_LOVE",
+   "rarity": "LEGENDARY"
+  },
+  {
+   "id": "TWO_IQ_POINT",
+   "rarity": "UNCOMMON"
+  },
+  {
+   "id": "DEFECTIVE_MONITOR",
+   "rarity": "EPIC"
+  },
+  {
+   "id": "BLUERTOOTH_RING",
+   "rarity": "EPIC"
+  },
+  {
+   "id": "BLUETOOTH_RING",
+   "rarity": "RARE"
+  },
+  {
+   "id": "LUSH_RING",
+   "rarity": "RARE"
+  },
+  {
+   "id": "LUSH_ARTIFACT",
+   "rarity": "EPIC"
+  },
+  {
+   "id": "LUSH_TALISMAN",
+   "rarity": "UNCOMMON"
+  },
+  {
+   "id": "AGARIMOO_TALISMAN",
+   "rarity": "COMMON"
+  },
+  {
+   "id": "AGARIMOO_RING",
+   "rarity": "UNCOMMON"
+  },
+  {
+   "id": "AGARIMOO_ARTIFACT",
+   "rarity": "RARE"
+  },
+  {
+   "id": "HOCUS_POCUS_CIPHER",
+   "rarity": "EPIC"
+  },
+  {
+   "id": "SATELITE",
+   "rarity": "LEGENDARY"
+  },
+  {
    "id": "COMBO_MANIA_TALISMAN",
    "rarity": "COMMON"
   },
   {
+   "id": "TINY_DANCER",
+   "rarity": "UNCOMMON"
+  },
+  {
+   "id": "TEST_BUCKET_PLEASE_IGNORE",
+   "rarity": "UNCOMMON"
+  },
+  {
+   "id": "BIG_BRAIN_TALISMAN",
+   "rarity": "COMMON"
+  },
+  {
+   "id": "MINIATURIZED_TUBULATOR",
+   "rarity": "UNCOMMON"
+  },
+  {
+   "id": "GARLIC_FLAVORED_GUMMY_BEAR",
+   "rarity": "EPIC"
+  },
+  {
+   "id": "BLOOD_DONOR_RING",
+   "rarity": "UNCOMMON"
+  },
+  {
+   "id": "BLOOD_DONOR_ARTIFACT",
+   "rarity": "RARE"
+  },
+  {
+   "id": "BLOOD_DONOR_TALISMAN",
+   "rarity": "COMMON"
+  },
+  {
+   "id": "VAMPIRE_DENTIST_RELIC",
+   "rarity": "LEGENDARY"
+  },
+  {
+   "id": "ORGAN_DONOR_TALISMAN",
+   "rarity": "RARE"
+  },
+  {
+   "id": "ORGAN_DONOR_RING",
+   "rarity": "RARE"
+  },
+  {
+   "id": "ORGAN_DONOR_ARTIFACT",
+   "rarity": "RARE"
+  },
+  {
+   "id": "DRACONIC_ARTIFACT",
+   "rarity": "EPIC"
+  },
+  {
+   "id": "DRACONIC_RING",
+   "rarity": "RARE"
+  },
+  {
    "id": "ENDER_ARTIFACT",
    "rarity": "EPIC"
+  },
+  {
+   "id": "DRACONIC_TALISMAN",
+   "rarity": "UNCOMMON"
+  },
+  {
+   "id": "RESPIRATION_ARTIFACT",
+   "rarity": "RARE"
+  },
+  {
+   "id": "RESPIRATION_RING",
+   "rarity": "UNCOMMON"
+  },
+  {
+   "id": "RESPIRATION_TALISMAN",
+   "rarity": "COMMON"
+  },
+  {
+   "id": "MOONGLADE_ARTIFACT",
+   "rarity": "RARE"
+  },
+  {
+   "id": "MOONGLADE_TALISMAN",
+   "rarity": "COMMON"
+  },
+  {
+   "id": "MOONGLADE_RING",
+   "rarity": "UNCOMMON"
   },
   {
    "id": "EMPEROR_ARTIFACT",
@@ -3812,15 +4448,71 @@
    "rarity": "COMMON"
   },
   {
+   "id": "RUNEBLADE_RING",
+   "rarity": "UNCOMMON"
+  },
+  {
+   "id": "RUNEBLADE_TALISMAN",
+   "rarity": "COMMON"
+  },
+  {
+   "id": "RUNEBLADE_ARTIFACT",
+   "rarity": "RARE"
+  },
+  {
+   "id": "LARGE_FISH_BOWL",
+   "rarity": "RARE"
+  },
+  {
+   "id": "MEDIUM_FISH_BOWL",
+   "rarity": "UNCOMMON"
+  },
+  {
+   "id": "SMALL_FISH_BOWL",
+   "rarity": "COMMON"
+  },
+  {
+   "id": "CHUMMING_TALISMAN",
+   "rarity": "UNCOMMON"
+  },
+  {
    "id": "TRAPPER_CREST",
    "rarity": "COMMON"
+  },
+  {
+   "id": "GENERAL_MEDALLION",
+   "rarity": "RARE"
   },
   {
    "id": "PULSE_RING",
    "rarity": "UNCOMMON"
   },
   {
+   "id": "KUUDRA_FOLLOWER_ARTIFACT",
+   "rarity": "EPIC"
+  },
+  {
+   "id": "NETHERRACK_LOOKING_SUNSHADE",
+   "rarity": "COMMON"
+  },
+  {
+   "id": "KUUDRAS_HEART",
+   "rarity": "LEGENDARY"
+  },
+  {
+   "id": "KUUDRAS_LUNG",
+   "rarity": "EPIC"
+  },
+  {
+   "id": "KUUDRAS_KIDNEY",
+   "rarity": "RARE"
+  },
+  {
    "id": "MELODY_HAIR",
+   "rarity": "EPIC"
+  },
+  {
+   "id": "MAGIC_8_BALL",
    "rarity": "EPIC"
   }
  ]
