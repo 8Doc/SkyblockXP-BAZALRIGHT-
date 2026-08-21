@@ -306,7 +306,7 @@ footer { margin-top: 24px; padding-top: 12px; border-top: 1px solid var(--line);
         <ul class="tasks">${b}</ul>
       </div>`}).join("");return n+c}function Rs(t){let e=t.browser.map(({category:s,summary:r,tasks:o,truncated:i,maxed:c,maxedTruncated:l})=>{let y=`browser:${s}`,h=`maxed:${s}`,u=c!==void 0&&O.has(h),b=u?l??0:i,k=O.has(y)?`<div class="group-body">
             ${r.pricedXp>0&&r.pricedXp<r.remainingXp?`<p class="sub">${T(r.pricedXp)} of ${T(r.remainingXp)} remaining XP has a live price.</p>`:""}
-            ${s==="accessory_bag"&&t.bag.powerLeft>0?`<p class="sub">${T(t.bag.powerLeft)} of that is magical power, which would take you to ${T(t.bag.computedMp+t.bag.powerLeft)}. The other ${T(r.remainingXp-t.bag.powerLeft)} is bag slots from Jacobus \u2014 XP for buying room, not magical power.</p>`:""}
+            ${s==="accessory_bag"&&t.bag.powerLeft>0?`<p class="sub">${T(t.bag.powerLeft)} of that is magical power, the other ${T(r.remainingXp-t.bag.powerLeft)} bag slots from Jacobus.</p>`:""}
             ${c!==void 0?`<p class="sub group-toggle">
                     <button class="chip${u?" on":""}" data-toggle="${h}">Group maxed</button>
                     <span class="dim">${u?`one row per ${Es[s]??"thing"} \u2014 everything it takes to max it`:`one row per ${Bs[s]??"level"}`}</span>

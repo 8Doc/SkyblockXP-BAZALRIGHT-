@@ -582,11 +582,9 @@ function browserView(report: Report): string {
               // here because the sum of it and the magical power you hold overshoots the game's
               // maximum by exactly the slots you have left, which reads as a bug and is not one.
               category === "accessory_bag" && report.bag.powerLeft > 0
-                ? `<p class="sub">${num(report.bag.powerLeft)} of that is magical power, which would take you to ${num(
-                    report.bag.computedMp + report.bag.powerLeft,
-                  )}. The other ${num(
+                ? `<p class="sub">${num(report.bag.powerLeft)} of that is magical power, the other ${num(
                     summary.remainingXp - report.bag.powerLeft,
-                  )} is bag slots from Jacobus — XP for buying room, not magical power.</p>`
+                  )} bag slots from Jacobus.</p>`
                 : ""
             }
             ${
