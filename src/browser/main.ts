@@ -578,6 +578,18 @@ function browserView(report: Report): string {
                 : ""
             }
             ${
+              // The one category whose total is two unlike things added together. Said out loud
+              // here because the sum of it and the magical power you hold overshoots the game's
+              // maximum by exactly the slots you have left, which reads as a bug and is not one.
+              category === "accessory_bag" && report.bag.powerLeft > 0
+                ? `<p class="sub">${num(report.bag.powerLeft)} of that is magical power, which would take you to ${num(
+                    report.bag.computedMp + report.bag.powerLeft,
+                  )}. The other ${num(
+                    summary.remainingXp - report.bag.powerLeft,
+                  )} is bag slots from Jacobus — XP for buying room, not magical power.</p>`
+                : ""
+            }
+            ${
               maxed !== undefined
                 ? `<p class="sub group-toggle">
                     <button class="chip${isGrouped ? " on" : ""}" data-toggle="${groupKey}">Group maxed</button>
@@ -600,19 +612,7 @@ function browserView(report: Report): string {
         <button class="group-head" data-toggle="${key}">
           <span class="group-name">${categoryLabel(category, data)}${inaccuracyBadge(report, category)}</span>
           <span class="dim">${num(summary.remainingTasks)} left</span>
-          <span class="group-xp"${
-            // The one category whose total is two different things added together, which reads as
-            // an overshoot against the game's magical power maximum and is not one.
-            category === "accessory_bag" && report.bag.powerLeft > 0
-              ? ` title="${escapeHtml(
-                  `${report.bag.powerLeft} of this is magical power, taking you to ${
-                    report.bag.computedMp + report.bag.powerLeft
-                  }. The remaining ${
-                    summary.remainingXp - report.bag.powerLeft
-                  } is bag slot upgrades, which are XP for buying room rather than magical power.`,
-                )}"`
-              : ""
-          }>${num(summary.remainingXp)} xp</span>
+          <span class="group-xp">${num(summary.remainingXp)} xp</span>
           <span class="group-cost">${
             summary.pricedXp > 0
               ? `${coins(summary.pricedCoins)}<span class="note">buys ${num(summary.pricedXp)} xp</span>`
