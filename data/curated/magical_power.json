@@ -1,6 +1,6 @@
 {
-  "note": "Magical power granted by one accessory, by rarity. Hand-entered: the items resource exposes an accessory's rarity but not its magical power. Everything else in the accessory model is API-derived.",
-  "source": "Hypixel Wiki, Accessory Bag",
+  "note": "Accessory power (formerly magical power) granted by one accessory, by rarity, plus the three accessories the game scores differently. Hand-entered: the items resource exposes an accessory's rarity but not its accessory power. Everything else in the accessory model is API-derived.",
+  "source": "Hypixel SkyBlock community wiki, Accessory Power/Mechanics and Template:Max AP",
   "verified": false,
   "byRarity": {
     "COMMON": 3,
@@ -11,7 +11,10 @@
     "MYTHIC": 22,
     "SPECIAL": 3,
     "VERY_SPECIAL": 5,
-    "SUPREME": 3
+    "SUPREME": 3,
+    "DIVINE": 28,
+    "ULTIMATE": 1,
+    "ADMIN": 22
   },
   "rarityOrder": [
     "COMMON",
@@ -20,16 +23,94 @@
     "EPIC",
     "LEGENDARY",
     "MYTHIC",
+    "DIVINE",
     "SUPREME",
     "SPECIAL",
-    "VERY_SPECIAL"
+    "VERY_SPECIAL",
+    "ULTIMATE",
+    "ADMIN"
   ],
   "excludedItems": {
     "note": "Empty on purpose. Several bag items (party hats, cake bag) are classified ACCESSORY by the items resource, and nothing in the API says whether they grant magical power. Excluding them on a hunch would hide buyable XP; the computed-vs-reported MP readout is the check instead.",
     "ids": []
   },
   "knownGaps": [
-    "highest_magical_power is a high-water mark, not a current reading, so computed MP can sit below it legitimately.",
-    "Hegemony Artifact (doubles its own MP), Abicase (MP scales with contacts) and Rift Prism are special-cased by the game and not by us."
-  ]
+    "highest_magical_power is a high-water mark, not a current reading, so computed power can sit below it legitimately.",
+    "Divine and Ultimate accessories are listed for completeness; none is obtainable without glitches."
+  ],
+  "maximum": {
+    "power": 2121,
+    "accessories": 147,
+    "note": "The wiki's stated ceiling, used as the check on our own. Excludes the extra 240 that dungeon accessories grant only while inside dungeons.",
+    "source": "Template:Max AP"
+  },
+  "special": {
+    "note": "The only accessories the game scores by anything other than their rarity. Named on the Accessory Power page.",
+    "HEGEMONY_ARTIFACT": {
+      "rule": "double",
+      "note": "gives double accessory power"
+    },
+    "RIFT_PRISM": {
+      "rule": "fixed",
+      "power": 11,
+      "note": "grants 11 accessory power once imbued at Erihann"
+    },
+    "ABICASE": {
+      "rule": "perAbiphoneContacts",
+      "per": 2,
+      "note": "grants 1 accessory power for every 2 Abiphone contacts"
+    }
+  },
+  "climbing": {
+    "note": "Accessories whose rarity climbs in place, through their own mechanic rather than a Recombobulator. The items resource reports where each one starts, so the catalogue values them there and adds the one Recombobulator step it knows about; `forgone` is what that leaves on the table against the rarity the wiki says the accessory finally reaches. Each mechanic is different and none is a purchase that can be priced from the bazaar or the auction house, so they are recorded rather than guessed at.",
+    "source": "individual wiki pages and Template:Max AP, read 2026-08-21",
+    "items": [
+      {
+        "id": "BOOK_OF_PROGRESSION",
+        "from": "COMMON",
+        "to": "MYTHIC",
+        "forgone": 19,
+        "by": "SkyBlock level: common at 25, uncommon at 75, rare at 150, and on up. Takes no Recombobulator."
+      },
+      {
+        "id": "PULSE_RING",
+        "from": "UNCOMMON",
+        "to": "MYTHIC",
+        "forgone": 14,
+        "by": "feeding it Thunder in a Bottle, four rarities' worth"
+      },
+      {
+        "id": "PANDORAS_BOX",
+        "from": "COMMON",
+        "to": "MYTHIC",
+        "forgone": 19,
+        "by": "won from Shen's Auction; the wiki cites its mythic form as the maximum. Takes no Recombobulator."
+      },
+      {
+        "id": "RELIC_OF_POWER",
+        "from": "EPIC",
+        "to": "MYTHIC",
+        "forgone": 6,
+        "by": "twelve perfect gemstones carry it to legendary, and a Recombobulator then reaches mythic"
+      },
+      {
+        "id": "TRAPPER_CREST",
+        "from": "COMMON",
+        "to": "RARE",
+        "forgone": 3,
+        "by": "collecting pelts from trapper quests"
+      },
+      {
+        "id": "FARMER_ORB",
+        "from": "COMMON",
+        "to": "RARE",
+        "forgone": 3,
+        "by": "stated only by the summary table, which flags its own rarities as unreliable"
+      }
+    ]
+  },
+  "unlisted": {
+    "power": 44,
+    "note": "What neither side can name. The wiki's trivia counts 147 accessories, its own table lists 121 and names 20 more as missing, so six of its 147 appear nowhere — and the colour variants of the Hats of Celebration it rates Very Special exist under ids the items resource does not carry. This is the slack that leaves, and it is an allowance for a check rather than a figure to add to anything."
+  }
 }

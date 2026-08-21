@@ -215,32 +215,74 @@ export function buildReport(catalog: Catalog, book: PriceBook, options: ReportOp
 /**
  * XP a set of tasks can actually deliver. Members of an exclusive group compete rather than
  * add — every accessory in the Bat family is worth 12 MP at most between them, not 23 — so
- * each group contributes only its best member.
+ * each group contributes only what carries the family highest.
+ *
+ * Which is not the same as its biggest single row. Buying an accessory and then recombobulating
+ * it are two rows of one group, and the second is measured from the first, so it is always the
+ * smaller of the two while being the one that reaches furthest. Taking the biggest row threw
+ * away every recombobulation of an accessory the player had yet to buy.
  */
 export function achievableXp(tasks: ResolvedTask[]): number {
   let total = 0;
-  const best = new Map<string, number>();
+  const groups = new Map<string, { top: number; base: number; xp: number }>();
   for (const task of tasks) {
-    if (!task.exclusiveGroup) total += task.xp;
-    else best.set(task.exclusiveGroup, Math.max(best.get(task.exclusiveGroup) ?? 0, task.xp));
+    if (!task.exclusiveGroup) {
+      total += task.xp;
+      continue;
+    }
+    const group = groups.get(task.exclusiveGroup);
+    if (!group) {
+      groups.set(task.exclusiveGroup, {
+        top: task.groupLevel ?? 0,
+        base: task.groupBase ?? 0,
+        xp: task.xp,
+      });
+      continue;
+    }
+    group.top = Math.max(group.top, task.groupLevel ?? 0);
+    group.base = Math.min(group.base, task.groupBase ?? 0);
+    group.xp = Math.max(group.xp, task.xp);
   }
-  for (const xp of best.values()) total += xp;
+  // Groups that carry no level — pets before the catalogue knew their tiers — fall back to the
+  // biggest row, which is what the whole group used to be measured by.
+  for (const group of groups.values()) total += Math.max(group.top - group.base, group.xp);
   return total;
 }
 
-/** Coins to buy the achievable set: one purchase per exclusive group, the one worth the most. */
+/**
+ * Coins to buy the achievable set. Within an exclusive group only one member is bought — the
+ * one that carries the family highest — plus anything that group still needs on top of it. A
+ * recombobulation is exactly that: it costs a Recombobulator 3000 on top of the accessory it
+ * is applied to, so both are paid, which is why this counts the step that reaches furthest and
+ * everything that step depends on rather than a single row.
+ */
 export function bestMemberCost(tasks: ResolvedTask[]): number {
   let total = 0;
-  const best = new Map<string, { xp: number; coins: number }>();
+  const byId = new Map(tasks.map((task) => [task.id, task]));
+  const best = new Map<string, ResolvedTask>();
   for (const task of tasks) {
-    const coins = task.coins ?? 0;
     if (!task.exclusiveGroup) {
-      total += coins;
+      total += task.coins ?? 0;
       continue;
     }
     const current = best.get(task.exclusiveGroup);
-    if (!current || task.xp > current.xp) best.set(task.exclusiveGroup, { xp: task.xp, coins });
+    const reaches = (t: ResolvedTask) => t.groupLevel ?? t.xp;
+    if (!current || reaches(task) > reaches(current)) best.set(task.exclusiveGroup, task);
   }
-  for (const entry of best.values()) total += entry.coins;
+  for (const winner of best.values()) {
+    // Walk what it depends on, so an upgrade is priced with the thing it upgrades.
+    const seen = new Set<string>();
+    const stack = [winner];
+    while (stack.length) {
+      const step = stack.pop()!;
+      if (seen.has(step.id)) continue;
+      seen.add(step.id);
+      total += step.coins ?? 0;
+      for (const need of step.requires ?? []) {
+        const dependency = byId.get(need);
+        if (dependency && !dependency.done) stack.push(dependency);
+      }
+    }
+  }
   return total;
 }

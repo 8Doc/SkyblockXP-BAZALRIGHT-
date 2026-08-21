@@ -54,6 +54,8 @@ export type AccessoriesData = {
     tradeable: boolean;
     /** Belongs to the Rift, which keeps its own accessory bag separate from this one. */
     rift?: boolean;
+    /** A Rift accessory that can leave the Rift, and so does reach the main bag. */
+    riftTransferrable?: boolean;
     /** False for the handful the game refuses to recombobulate. */
     recombobulable?: boolean;
     /** Why no player can obtain this one, if the wiki says no player can. */
@@ -67,6 +69,18 @@ export type MagicalPowerData = {
   byRarity: Record<string, number>;
   rarityOrder: string[];
   excludedItems: { ids: string[] };
+  /** The wiki's stated ceiling, to check ours against. */
+  maximum?: { power: number; accessories: number; note: string; source: string };
+  /** The three accessories the game scores by something other than their rarity. */
+  special?: Record<string, { rule?: string; power?: number; per?: number; note?: string }>;
+  /** Accessories whose rarity climbs in place, through a mechanic we do not price. */
+  climbing?: {
+    note: string;
+    source: string;
+    items: { id: string; from: string; to: string; forgone: number; by: string }[];
+  };
+  /** Slack for what neither the wiki table nor the items resource names. */
+  unlisted?: { power: number; note: string };
 };
 
 export type AccessoryFamiliesData = {
@@ -292,6 +306,29 @@ export function effortOf(data: GameData, taskId: string): { effort: number; band
 export function magicalPowerOf(data: GameData, rarity: string): number {
   return data.magicalPower.byRarity[rarity] ?? 0;
 }
+/**
+ * What one accessory is actually worth, which for all but three is its rarity's value. The
+ * Accessory Power page names the exceptions: the Hegemony Artifact counts double, the Rift Prism
+ * is worth 11 once imbued at Erihann whatever its rarity says, and an Abicase is worth one for
+ * every two Abiphone contacts — up to 41, which is five times what its rarity alone would give.
+ */
+export function accessoryPowerOf(
+  data: GameData,
+  id: string,
+  rarity: string,
+  abiphoneContacts = 0,
+): number {
+  const base = magicalPowerOf(data, rarity);
+  const special = data.magicalPower.special?.[id];
+  if (!special) return base;
+  if (special.rule === "double") return base * 2;
+  if (special.rule === "fixed") return special.power ?? base;
+  if (special.rule === "perAbiphoneContacts") {
+    return Math.max(base, Math.floor(abiphoneContacts / (special.per ?? 2)));
+  }
+  return base;
+}
+
 
 /** Recombobulator bumps an accessory one step up the rarity ladder. */
 export function bumpRarity(data: GameData, rarity: string, steps: number): string {
@@ -386,6 +423,8 @@ export function scoreBag(
   items: BagItem[] | null,
   reportedMp: number | null,
   capacity = 0,
+  /** An Abicase is worth one accessory power for every two of these. */
+  abiphoneContacts = 0,
 ): BagState {
   const byId = new Map(data.accessories.accessories.map((a) => [a.id, a]));
   const excluded = new Set(data.magicalPower.excludedItems.ids);
@@ -403,7 +442,7 @@ export function scoreBag(
     identified++;
     const rarity = bumpRarity(data, meta.tier, item.rarityUpgrades);
     const family = familyOf(data, meta.name, meta.id);
-    const power = magicalPowerOf(data, rarity);
+    const power = accessoryPowerOf(data, meta.id, rarity, abiphoneContacts);
     if (power > (familyPower.get(family) ?? -1)) {
       familyPower.set(family, power);
       familyBest.set(family, { id: meta.id, rarity, recombobulated: item.rarityUpgrades > 0 });

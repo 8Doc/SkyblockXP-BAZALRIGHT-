@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { familyOf } from "../src/lib/gameData";
+import { accessoryPowerOf, familyOf } from "../src/lib/gameData";
 import accessories from "../data/generated/accessories.json";
 import accessoryFamilies from "../data/curated/accessory_families.json";
 import magicalPower from "../data/curated/magical_power.json";
@@ -275,4 +275,42 @@ test("only what no player can hold is written off as unobtainable", () => {
     assert.ok(!written.has(name), `${name} is still auctionable and held by top players`);
   }
   assert.ok(written.size < 30, `${written.size} write-offs looks like a rule has gone too wide`);
+});
+
+/**
+ * The whole accessory bag, measured against the figure the wiki publishes. A player reported the
+ * category reaching only 1,850 of the 2,122 the game has, and every piece of that shortfall was
+ * a rule we had wrong: Rift accessories written off wholesale when seven of them transfer out,
+ * the Hegemony Artifact's doubling, the Rift Prism's fixed eleven, the Abicase's one per two
+ * Abiphone contacts. What is left is the six accessories whose rarity climbs in place.
+ */
+test("our ceiling lands within the climbing accessories of the wiki's", () => {
+  const order = magicalPower.rarityOrder;
+  const contacts = 71;
+  const best = new Map<string, number>();
+  for (const accessory of accessories.accessories) {
+    if ((accessory.rift && !accessory.riftTransferrable) || accessory.unobtainable) continue;
+    const top =
+      accessory.recombobulable === false
+        ? accessory.tier
+        : order[Math.min(order.indexOf(accessory.tier) + 1, order.length - 1)] ?? accessory.tier;
+    const power = accessoryPowerOf(data, accessory.id, top, contacts);
+    if (power <= 0) continue;
+    const family = familyOf(data, accessory.name, accessory.id);
+    best.set(family, Math.max(best.get(family) ?? 0, power));
+  }
+  let ceiling = 0;
+  for (const power of best.values()) ceiling += power;
+
+  const stated = magicalPower.maximum!.power;
+  const climbing = magicalPower.climbing!.items.reduce((sum, item) => sum + item.forgone, 0);
+  const allowed = climbing + magicalPower.unlisted!.power;
+  assert.ok(
+    ceiling <= stated,
+    `our ceiling of ${ceiling} is above the wiki's stated ${stated}, so something is double counted`,
+  );
+  assert.ok(
+    stated - ceiling <= allowed,
+    `${stated - ceiling} accessory power unaccounted for, more than the ${allowed} that the climbing accessories and the wiki's own unlisted six explain`,
+  );
 });
