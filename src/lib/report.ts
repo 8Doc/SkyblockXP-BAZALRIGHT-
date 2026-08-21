@@ -58,7 +58,15 @@ export type Report = {
   unmodelled: { category: Category; note: string; totalXp?: number; earnedXp?: number }[];
   /** Per category: what the profile says you have against what we could credit. */
   reconciliation: { category: Category; credited: number; reported: number }[];
-  bag: { computedMp: number; reportedMp: number | null; readable: boolean; capacity: number; used: number };
+  bag: {
+    computedMp: number;
+    reportedMp: number | null;
+    readable: boolean;
+    capacity: number;
+    used: number;
+    /** Magical power still to gain — the accessory bag category *without* its slot upgrades. */
+    powerLeft: number;
+  };
 };
 
 const BROWSER_LIMIT = 40;
@@ -208,6 +216,14 @@ export function buildReport(catalog: Catalog, book: PriceBook, options: ReportOp
       readable: catalog.bag.readable,
       capacity: catalog.bag.capacity,
       used: catalog.bag.used,
+      // Magical power still to gain, which is not the same as the accessory bag category's XP:
+      // the category also holds the bag's slot upgrades, and those are ordinary SkyBlock XP for
+      // buying room from Jacobus rather than magical power. Adding the category to the magical
+      // power you hold therefore overshoots the game's maximum by whatever slots you have left,
+      // which reads exactly like a bug and is not one. Kept apart so the readout can say so.
+      powerLeft: achievableXp(
+        resolved.filter((t) => !t.done && t.category === "accessory_bag" && !t.id.startsWith("bag_upgrade_")),
+      ),
     },
   };
 }

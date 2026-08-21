@@ -600,7 +600,19 @@ function browserView(report: Report): string {
         <button class="group-head" data-toggle="${key}">
           <span class="group-name">${categoryLabel(category, data)}${inaccuracyBadge(report, category)}</span>
           <span class="dim">${num(summary.remainingTasks)} left</span>
-          <span class="group-xp">${num(summary.remainingXp)} xp</span>
+          <span class="group-xp"${
+            // The one category whose total is two different things added together, which reads as
+            // an overshoot against the game's magical power maximum and is not one.
+            category === "accessory_bag" && report.bag.powerLeft > 0
+              ? ` title="${escapeHtml(
+                  `${report.bag.powerLeft} of this is magical power, taking you to ${
+                    report.bag.computedMp + report.bag.powerLeft
+                  }. The remaining ${
+                    summary.remainingXp - report.bag.powerLeft
+                  } is bag slot upgrades, which are XP for buying room rather than magical power.`,
+                )}"`
+              : ""
+          }>${num(summary.remainingXp)} xp</span>
           <span class="group-cost">${
             summary.pricedXp > 0
               ? `${coins(summary.pricedCoins)}<span class="note">buys ${num(summary.pricedXp)} xp</span>`
@@ -922,7 +934,9 @@ function renderResults(): void {
       }
       ${
         r.bag.reportedMp !== null
-          ? `<span class="dim">${r.bag.computedMp} MP computed${
+          ? `<span class="dim" title="Magical power you hold, and the most this bag can reach. The Accessory Bag category totals more than the difference because it also holds the bag's slot upgrades, and those are XP for buying room rather than magical power.">${
+              r.bag.computedMp
+            } of ${r.bag.computedMp + r.bag.powerLeft} MP${
               r.bag.reportedMp !== r.bag.computedMp ? ` · <span class="gold">${r.bag.reportedMp} reported</span>` : ""
             }</span>`
           : ""
