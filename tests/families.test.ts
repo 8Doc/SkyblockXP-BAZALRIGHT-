@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { familyOf, grantsMagicalPower } from "../src/lib/gameData";
+import { familyOf, grantsMagicalPower, scoreBag } from "../src/lib/gameData";
 import accessories from "../data/generated/accessories.json";
 import accessoryFamilies from "../data/curated/accessory_families.json";
 import accessoryUpgrades from "../data/generated/accessory_upgrades.json";
@@ -182,6 +182,49 @@ test("a family's Talisman, Ring and Artifact all resolve to one family", () => {
     const tiers = [`${stem} Talisman`, `${stem} Ring`, `${stem} Artifact`].map(family);
     assert.equal(new Set(tiers).size, 1, `${stem} split into ${new Set(tiers).size} families`);
   }
+});
+
+/* ------------------------------- magical power the bag's contents don't show */
+
+/**
+ * Three accessories are scored by their own rule rather than by rarity, and two of them leave no
+ * trace in the bag at all. Measured against a maxed profile they were worth 75 magical power
+ * between them, which is most of what the model was missing.
+ */
+test("Hegemony grants its magical power twice over", () => {
+  const bare = scoreBag(data, [{ id: "BAT_ARTIFACT", rarityUpgrades: 0, rarity: null }], null);
+  const heg = scoreBag(
+    data,
+    [
+      { id: "BAT_ARTIFACT", rarityUpgrades: 0, rarity: null },
+      { id: "HEGEMONY_ARTIFACT", rarityUpgrades: 0, rarity: "MYTHIC" },
+    ],
+    null,
+  );
+  // 22 for the accessory, and 22 again for being the Hegemony.
+  assert.equal(heg.computedMp - bare.computedMp, 44);
+});
+
+test("an Abicase turns Abiphone contacts into magical power, one per two", () => {
+  const bag = [{ id: "ABICASE", rarityUpgrades: 0, rarity: null }];
+  const none = scoreBag(data, bag, null, 0, { abiphoneContacts: 0 });
+  const many = scoreBag(data, bag, null, 0, { abiphoneContacts: 84 });
+  assert.equal(many.computedMp - none.computedMp, 42);
+});
+
+/**
+ * The prism is consumed when it is imbued, so there is nothing left in the bag to find it by —
+ * only `rift.access.consumed_prism` on the profile says it happened. Without reading that, the
+ * planner both lost the 11 magical power and went on offering the prism as XP still to buy.
+ */
+test("an imbued Rift Prism keeps paying after it is consumed", () => {
+  const without = scoreBag(data, [], null, 0, {});
+  const imbued = scoreBag(data, [], null, 0, { riftPrismConsumed: true });
+  assert.equal(imbued.computedMp - without.computedMp, 11);
+
+  const family = familyOf(data, "Rift Prism", "RIFT_PRISM");
+  assert.equal(imbued.familyPower.get(family), 11, "the family reads as filled, so it stops being offered");
+  assert.equal(without.familyPower.get(family), undefined);
 });
 
 /* ------------------------------------------- what can grant magical power */

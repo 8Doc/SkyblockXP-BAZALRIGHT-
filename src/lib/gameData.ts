@@ -478,6 +478,24 @@ function abicaseBonus(contacts: number): number {
   return Math.floor(contacts / 2);
 }
 
+/**
+ * A Rift Prism imbued at Erihann is worth 11 magical power, and keeps paying it once consumed —
+ * the prism itself is gone, so there is nothing in the bag to find it by. The profile records
+ * the act instead, under `rift.access.consumed_prism`, which is also the only way to know the
+ * prism is not still owed: it was being offered as 8 magical power of missing XP to a player who
+ * had already drunk it.
+ */
+const RIFT_PRISM = "RIFT_PRISM";
+const RIFT_PRISM_MP = 11;
+
+/** What the bag scorer needs that isn't in the bag. */
+export type BagExtras = {
+  /** Contacts from `active_contacts`, which is the full list; `contact_data` holds only some. */
+  abiphoneContacts?: number;
+  /** `rift.access.consumed_prism` — the prism has been imbued and its magical power banked. */
+  riftPrismConsumed?: boolean;
+};
+
 export type BagState = {
   /** family -> magical power already granted by the best owned member. */
   familyPower: Map<string, number>;
@@ -507,9 +525,9 @@ export function scoreBag(
   items: BagItem[] | null,
   reportedMp: number | null,
   capacity = 0,
-  /** Abiphone contacts, which an Abicase converts into magical power at one per two. */
-  abiphoneContacts = 0,
+  extras: BagExtras = {},
 ): BagState {
+  const { abiphoneContacts = 0, riftPrismConsumed = false } = extras;
   const byId = new Map(data.accessories.accessories.map((a) => [a.id, a]));
   const excluded = new Set(data.magicalPower.excludedItems.ids);
 
@@ -538,6 +556,16 @@ export function scoreBag(
     // the family's figure, so the family still ranks against its rivals on what it really is.
     if (meta.id === HEGEMONY) bonusMp += power;
     if (meta.id.startsWith("ABICASE")) bonusMp += abicaseBonus(abiphoneContacts);
+  }
+
+  // An imbued prism is gone from the bag but its magical power is not. Recorded against the
+  // family so the planner also stops offering the prism itself as XP still to buy.
+  if (riftPrismConsumed) {
+    const prism = byId.get(RIFT_PRISM);
+    if (prism) {
+      const family = familyOf(data, prism.name, prism.id);
+      if (RIFT_PRISM_MP > (familyPower.get(family) ?? -1)) familyPower.set(family, RIFT_PRISM_MP);
+    }
   }
 
   let computedMp = bonusMp;

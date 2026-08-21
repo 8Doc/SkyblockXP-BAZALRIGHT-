@@ -244,13 +244,14 @@ export function buildCatalog(
 
   /* ------------------------------------------------------- accessory bag */
 
-  const abiphoneContacts = Object.keys(member.nether_island_player_data?.abiphone?.contact_data ?? {}).length;
+  const abiphone = member.nether_island_player_data?.abiphone;
+  const abiphoneContacts = abiphone?.active_contacts?.length ?? Object.keys(abiphone?.contact_data ?? {}).length;
   const bagState = scoreBag(
     data,
     bag.items,
     member.accessory_bag_storage?.highest_magical_power ?? null,
     bag.capacity,
-    abiphoneContacts,
+    { abiphoneContacts, riftPrismConsumed: member.rift?.access?.consumed_prism === true },
   );
 
   // Slots are a real constraint on buying accessories: the bag holds what it holds, and more

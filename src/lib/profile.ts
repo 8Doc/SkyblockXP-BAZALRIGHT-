@@ -21,8 +21,16 @@ export type ProfileMember = {
   accessory_bag_storage?: {
     /** Powers already unlocked, by name. */
     unlocked_powers?: string[]; highest_magical_power?: number; bag_upgrades_purchased?: number };
-  /** Abiphone contacts, keyed by NPC. An Abicase turns every two of them into magical power. */
-  nether_island_player_data?: { abiphone?: { contact_data?: Record<string, unknown> } };
+  /**
+   * Abiphone contacts. An Abicase turns every two of them into magical power, and the count has
+   * to come from `active_contacts`: `contact_data` carries only the contacts with state attached
+   * and ran four short of the real list on the profile this was checked against.
+   */
+  nether_island_player_data?: {
+    abiphone?: { active_contacts?: string[]; contact_data?: Record<string, unknown> };
+  };
+  /** `access.consumed_prism` says a Rift Prism has been imbued, which is worth 11 magical power. */
+  rift?: { access?: { consumed_prism?: boolean } };
   fairy_soul?: { total_collected?: number };
   inventory?: { bag_contents?: { talisman_bag?: { data?: string } } };
   dungeons?: {

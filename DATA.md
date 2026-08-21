@@ -127,7 +127,13 @@ API:
 
 - **Rarity sets it** — 3 / 5 / 8 / 12 / 16 / 22 for common through mythic.
 - **Hegemony Artifact counts twice.**
-- **An Abicase adds 1 per 2 Abiphone contacts** — 40 magical power on a profile with 80.
+- **An Abicase adds 1 per 2 Abiphone contacts.** Count them from `active_contacts`, not from
+  `contact_data`: the latter holds only the contacts with state attached and reads 80 against a
+  real 84 on the profile this was checked against.
+- **An imbued Rift Prism is worth 11**, and keeps paying after it is gone. Imbuing consumes the
+  prism, so nothing in the bag can find it; the profile records the act as
+  `rift.access.consumed_prism`. Without reading that, the planner lost the 11 *and* went on
+  offering the prism as 8 magical power of XP still to buy.
 - **Rift accessories only count if they can leave the rift.** 17 of the 29 cannot, and they
   cannot enter the accessory bag at all, so their magical power is unreachable. They were being
   advertised as buyable XP: the whole Crux line, both Rings of Love, Satelite and the trinkets,
@@ -141,7 +147,15 @@ actually is, in the last line of its lore, so that is what `bagItemsFrom` now re
 correction where it exists rather than a replacement for the resource.
 
 Checked against a maxed profile reporting **2,122** magical power in game, the model reads
-**2,078**. It read 1,946 before this work. What is left is named in `magical_power.json`.
+**2,091**. It read 1,946 before this work, and the rows it offered that player as still missing
+went from 30 to 10.
+
+Four candidates for the remaining 31 were ruled out by measuring rather than by arguing:
+dungeon accessories counting double overshoots to 2,216; the wiki's Enrichments page never
+mentions magical power; no family scores below its own ceiling; and the wiki states Personal
+Deletor 7000 `upgrades_from` 6000, so merging them is right and the 12 magical power they
+suppress is suppressed correctly. One part of what is left is known — a Balloon Hat 2024 the
+player wears that the items resource does not carry at all — and the rest is not.
 
 ## Running without a server
 
