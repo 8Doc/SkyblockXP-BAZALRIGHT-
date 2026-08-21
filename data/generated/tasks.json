@@ -1,13 +1,13 @@
 {
- "generatedAt": "2026-08-18T18:54:47.331Z",
+ "generatedAt": "2026-08-21T18:57:19.211Z",
  "sources": {
   "ids": "data/generated/task_ids.json (harvested from live profiles)",
   "xp": "data/generated/wiki_tasks.json (Hypixel Wiki, SkyBlock Levels/Tasks)"
  },
  "playersScanned": 140,
  "totals": {
-  "tasks": 1056,
-  "xp": 9398,
+  "tasks": 1043,
+  "xp": 9339,
   "byCategory": {
    "abiphone": 840,
    "bank": 310,
@@ -17,10 +17,24 @@
    "slayer": 1050,
    "events": 749,
    "fast_travel": 360,
-   "rift": 295
+   "rift": 236
   }
  },
- "unmatchedIds": [],
+ "unmatchedIds": [
+  "SONG_HYMN_JOY_100",
+  "SONG_FRERE_JACQUES_100",
+  "SONG_BRAHMS_100",
+  "SONG_HAPPY_BIRTHDAY_100",
+  "SONG_AMAZING_GRACE_100",
+  "SONG_GREENSLEEVES_100",
+  "SONG_JEOPARDY_100",
+  "SONG_MINUET_100",
+  "SONG_JOY_WORLD_100",
+  "SONG_PURE_IMAGINATION_100",
+  "SONG_VIE_EN_ROSE_100",
+  "SONG_PACHELBEL_100",
+  "SONG_FIRE_AND_FLAMES_100"
+ ],
  "tasks": [
   {
    "id": "ABIPHONE_agatha",
@@ -4944,13 +4958,6 @@
    "players": 7
   },
   {
-   "id": "SONG_AMAZING_GRACE_100",
-   "category": "rift",
-   "xp": 1,
-   "rule": "harp songs",
-   "players": 41
-  },
-  {
    "id": "SONG_AMAZING_GRACE_50",
    "category": "rift",
    "xp": 1,
@@ -4977,13 +4984,6 @@
    "xp": 1,
    "rule": "harp songs",
    "players": 87
-  },
-  {
-   "id": "SONG_BRAHMS_100",
-   "category": "rift",
-   "xp": 2,
-   "rule": "harp songs",
-   "players": 44
   },
   {
    "id": "SONG_BRAHMS_50",
@@ -5014,13 +5014,6 @@
    "players": 85
   },
   {
-   "id": "SONG_FIRE_AND_FLAMES_100",
-   "category": "rift",
-   "xp": 12,
-   "rule": "harp songs",
-   "players": 2
-  },
-  {
    "id": "SONG_FIRE_AND_FLAMES_50",
    "category": "rift",
    "xp": 12,
@@ -5047,13 +5040,6 @@
    "xp": 12,
    "rule": "harp songs",
    "players": 10
-  },
-  {
-   "id": "SONG_FRERE_JACQUES_100",
-   "category": "rift",
-   "xp": 1,
-   "rule": "harp songs",
-   "players": 47
   },
   {
    "id": "SONG_FRERE_JACQUES_50",
@@ -5084,13 +5070,6 @@
    "players": 93
   },
   {
-   "id": "SONG_GREENSLEEVES_100",
-   "category": "rift",
-   "xp": 2,
-   "rule": "harp songs",
-   "players": 38
-  },
-  {
    "id": "SONG_GREENSLEEVES_50",
    "category": "rift",
    "xp": 2,
@@ -5117,13 +5096,6 @@
    "xp": 2,
    "rule": "harp songs",
    "players": 74
-  },
-  {
-   "id": "SONG_HAPPY_BIRTHDAY_100",
-   "category": "rift",
-   "xp": 2,
-   "rule": "harp songs",
-   "players": 44
   },
   {
    "id": "SONG_HAPPY_BIRTHDAY_50",
@@ -5154,13 +5126,6 @@
    "players": 82
   },
   {
-   "id": "SONG_HYMN_JOY_100",
-   "category": "rift",
-   "xp": 1,
-   "rule": "harp songs",
-   "players": 58
-  },
-  {
    "id": "SONG_HYMN_JOY_50",
    "category": "rift",
    "xp": 1,
@@ -5187,13 +5152,6 @@
    "xp": 1,
    "rule": "harp songs",
    "players": 108
-  },
-  {
-   "id": "SONG_JEOPARDY_100",
-   "category": "rift",
-   "xp": 4,
-   "rule": "harp songs",
-   "players": 38
   },
   {
    "id": "SONG_JEOPARDY_50",
@@ -5224,13 +5182,6 @@
    "players": 73
   },
   {
-   "id": "SONG_JOY_WORLD_100",
-   "category": "rift",
-   "xp": 4,
-   "rule": "harp songs",
-   "players": 35
-  },
-  {
    "id": "SONG_JOY_WORLD_50",
    "category": "rift",
    "xp": 4,
@@ -5257,13 +5208,6 @@
    "xp": 4,
    "rule": "harp songs",
    "players": 70
-  },
-  {
-   "id": "SONG_MINUET_100",
-   "category": "rift",
-   "xp": 4,
-   "rule": "harp songs",
-   "players": 35
   },
   {
    "id": "SONG_MINUET_50",
@@ -5294,13 +5238,6 @@
    "players": 71
   },
   {
-   "id": "SONG_PACHELBEL_100",
-   "category": "rift",
-   "xp": 12,
-   "rule": "harp songs",
-   "players": 2
-  },
-  {
    "id": "SONG_PACHELBEL_50",
    "category": "rift",
    "xp": 12,
@@ -5329,13 +5266,6 @@
    "players": 10
   },
   {
-   "id": "SONG_PURE_IMAGINATION_100",
-   "category": "rift",
-   "xp": 7,
-   "rule": "harp songs",
-   "players": 34
-  },
-  {
    "id": "SONG_PURE_IMAGINATION_50",
    "category": "rift",
    "xp": 7,
@@ -5362,13 +5292,6 @@
    "xp": 7,
    "rule": "harp songs",
    "players": 70
-  },
-  {
-   "id": "SONG_VIE_EN_ROSE_100",
-   "category": "rift",
-   "xp": 7,
-   "rule": "harp songs",
-   "players": 32
   },
   {
    "id": "SONG_VIE_EN_ROSE_50",

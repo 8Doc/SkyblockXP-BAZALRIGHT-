@@ -264,6 +264,43 @@ test("every pet alias points at a pet the catalogue actually has", () => {
   }
 });
 
+/* ------------------------------------------------------------ attributes */
+
+/**
+ * When the game moves an attribute it writes the same key with `_new` on the end and leaves the
+ * old one holding whatever it had at the time. A maxed profile carries humanoid_ruler at 48 and
+ * humanoid_ruler_new at 64, and reading the first offered the last level of an attribute that
+ * was already full.
+ */
+test("a migrated attribute is read from the key the game moved it to", () => {
+  const { tasks, done } = catalogFor({ attributes: { stacks: { humanoid_ruler: 48, humanoid_ruler_new: 64 } } });
+  const rows = tasks.filter((t) => t.id.startsWith("attribute_humanoid_ruler_"));
+  assert.ok(rows.length > 0, "the attribute is modelled");
+  assert.deepEqual(rows.filter((t) => !done.has(t.id)), [], "64 shards is the uncommon maximum");
+});
+
+test("an attribute with only the old key still reads", () => {
+  // The fallback matters: most attributes have never been moved and carry no `_new` at all.
+  const { done } = catalogFor({ attributes: { stacks: { humanoid_ruler: 64 } } });
+  assert.ok(done.has("attribute_humanoid_ruler_10"), "the plain key is still matched");
+});
+
+/* --------------------------------------------------------------- harp songs */
+
+/**
+ * Four of a song's five recorded percentages pay SkyBlock XP. The wiki's task table lists 50, 70,
+ * 80 and 90 for each of the thirteen songs — 52 rows, each percentage appearing exactly thirteen
+ * times — and 100 appears nowhere in it. The game does record a SONG_..._100 for finishing a song
+ * outright, and a maxed profile carries all thirteen, but that pays intelligence and Melody's
+ * Hair rather than levels XP.
+ */
+test("finishing a harp song outright pays no SkyBlock XP", () => {
+  const songs = data.tasks.tasks.filter((t) => t.id.startsWith("SONG_"));
+  assert.equal(songs.length, 52, "thirteen songs at four paying percentages");
+  assert.deepEqual(songs.filter((t) => t.id.endsWith("_100")), []);
+  assert.equal(songs.reduce((s, t) => s + t.xp, 0), 236);
+});
+
 /* ---------------------------------------------------------------- museum */
 
 /**

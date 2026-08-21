@@ -110,8 +110,15 @@ const RULES = [
     name: "harp songs",
     category: "rift",
     // SONG_HYMN_JOY_50 -> the trailing number is the completion percentage, not a tier.
+    //
+    // Four of those percentages pay and the fifth does not. The wiki's task table lists 50, 70,
+    // 80 and 90 for each of the thirteen songs — 52 rows, and each percentage appears exactly
+    // thirteen times — while 100 appears nowhere in it. The game does record a SONG_..._100 for
+    // finishing a song outright, and a maxed profile carries all thirteen, but what that pays is
+    // intelligence and Melody's Hair rather than SkyBlock XP. Matching the id alone credited a
+    // fifth step that does not exist and put 59 XP into the Rift that nobody can earn.
     match: /^SONG_/,
-    xp: (id) => SONG_XP[id.replace(/_\d+$/, "")] ?? null,
+    xp: (id) => (/_(50|70|80|90)$/.test(id) ? SONG_XP[id.replace(/_\d+$/, "")] ?? null : null),
     source: "wiki Miscellaneous — Harp Songs, per-song XP × 4 difficulty steps",
   },
 ];

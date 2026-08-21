@@ -1319,7 +1319,12 @@ function attributeCandidates(key: string, data: GameData): string[] {
       if (base.endsWith(`_${suffix}`)) forms.push(base.slice(0, -suffix.length - 1));
     }
   }
-  return [...new Set(forms)];
+  // A migrated attribute is left in the profile twice, under its old key and under the same key
+  // with `_new` on the end, and the old one keeps whatever it held when the game moved on. One
+  // maxed profile carries humanoid_ruler at 48 and humanoid_ruler_new at 64, and reading the
+  // first offered the last level of an attribute that was already full. The new key is tried
+  // ahead of each form it belongs to: it names one attribute and cannot be mistaken for another.
+  return [...new Set(forms.flatMap((form) => [`${form}_new`, form]))];
 }
 
 const ATTRIBUTE_STOPWORDS = new Set(["of", "the", "a", "s"]);
