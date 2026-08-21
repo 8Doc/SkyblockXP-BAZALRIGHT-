@@ -248,11 +248,18 @@ export function buildCatalog(
 
   /* ------------------------------------------------------- accessory bag */
 
-  // Three places record the contacts and they disagree, so the order matters rather than the
-  // largest winning. `active_contacts` is the list the game keeps and the only one that makes
-  // computed power match what the profile reports: one bag reconciles exactly on its 12 while
-  // `contact_data` claims 51, and another reads 84 against contact_data's 80. The other two are
-  // fallbacks for profiles that carry no `active_contacts` at all.
+  // A contact's XP and a contact's magical power are earned on different terms, so they are
+  // counted off different fields and the difference is not a discrepancy.
+  //
+  // The XP is paid once, when the contact is first saved, and keeps paying after the contact is
+  // deleted — so it is credited from `completed_tasks` with the rest of the discrete tasks, and
+  // is permanent. The magical power is not: the Abicase reads the phone as it stands, so a
+  // contact removed is magical power lost.
+  //
+  // That is why `active_contacts` is the count here rather than the larger `contact_data`. One
+  // profile has XP for 45 contacts and data for 51, but only 12 in the phone, and its magical
+  // power reconciles exactly on the 12. The other two fields are fallbacks for profiles that
+  // carry no `active_contacts` at all.
   const abiphone = member.nether_island_player_data?.abiphone;
   const abiphoneContacts =
     abiphone?.active_contacts?.length ??
@@ -946,7 +953,9 @@ export function buildCatalog(
         requires: hasAbicase ? [] : ["accessory_ABICASE"],
         cost: { kind: "none" },
         repeatable: false,
-        note: `1 MP per 2 contacts · ${abiphoneContacts} of ${everyContact} saved${hasAbicase ? "" : " · needs an Abicase"}`,
+        note: `1 MP per 2 contacts in the phone · ${abiphoneContacts} of ${everyContact} active${
+          hasAbicase ? "" : " · needs an Abicase"
+        }`,
       });
     }
   }

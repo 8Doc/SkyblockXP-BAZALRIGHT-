@@ -188,6 +188,37 @@ test("the Abicase's contacts are offered before you own an Abicase", () => {
   assert.equal(row.xp, Math.floor(contacts / 2), "one magical power per two contacts");
 });
 
+/**
+ * A contact's XP and a contact's magical power are earned on different terms, and reading both
+ * off one field gets one of them wrong.
+ *
+ * The XP is paid once when the contact is first saved and survives deleting it. The magical
+ * power does not: the Abicase reads the phone as it stands. A real profile has XP for 45
+ * contacts, stored data for 51, and only 12 in the phone — and its magical power reconciles on
+ * the 12 while its XP reconciles on the 45.
+ */
+test("a deleted contact keeps its XP and loses its magical power", () => {
+  const member = {
+    // Saved once, so the XP is banked...
+    leveling: { completed_tasks: ["ABIPHONE_agatha", "ABIPHONE_bartender", "ABIPHONE_zog"] },
+    // ...but only one of the three is still in the phone.
+    nether_island_player_data: { abiphone: { active_contacts: ["agatha"], contact_data: { agatha: {}, zog: {} } } },
+    accessory_bag_storage: { unlocked_powers: [] },
+  };
+  const { tasks, done } = catalogFor(member);
+
+  for (const id of ["ABIPHONE_agatha", "ABIPHONE_bartender", "ABIPHONE_zog"]) {
+    assert.ok(done.has(id), `${id} was saved once, so its XP is kept`);
+  }
+
+  // One contact in the phone is worth no magical power at all, so everything is still to gain.
+  const row = tasks.find((t) => t.id === "abicase_contacts");
+  const contacts = data.tasks.tasks.filter((t) => t.id.startsWith("ABIPHONE_")).length;
+  assert.ok(row, "the Abicase row is still on offer");
+  assert.equal(row.xp, Math.floor(contacts / 2), "one active contact is half a point, which rounds to none");
+  assert.match(row.note ?? "", /1 of \d+ active/, "the note counts what is in the phone, not what was saved");
+});
+
 test("an accessory that refuses a recombobulator is not offered one", () => {
   const { tasks } = catalogFor({ accessory_bag_storage: { unlocked_powers: [] } });
   for (const id of ["VOTER_BADGE_SUPREME", "PANDORAS_BOX", "RIFT_PRISM"]) {
