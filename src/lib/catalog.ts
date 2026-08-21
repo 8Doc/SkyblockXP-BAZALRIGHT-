@@ -1057,6 +1057,23 @@ export function buildCatalog(
     }
   }
 
+  // A family with no kills against it is only at tier 0 if we could have seen its kills. When
+  // the profile is carrying mob ids we cannot place — 163 of them and 201,000 kills on one maxed
+  // bag — "no kills" means we did not look in the right place, not that the player never fought
+  // it. That profile has never once killed a Golden Ghoul according to this map, and was being
+  // told to go and get tier 1.
+  //
+  // The ids and the families are the same list seen from two ends: the game names mobs
+  // internally (`old_blaze_110`) and the bestiary names families by display name
+  // (Millennia-Aged Blaze), and nothing published joins them — no items resource, no bestiary
+  // endpoint, and no id on any wiki page. Until that map is complete, a family we have no
+  // evidence about is unknown rather than empty, and unknown is not something to sell.
+  if (unaccounted.size > 0) {
+    for (const family of data.bestiary.families) {
+      if (!bestiaryKills.has(family.id)) suspect.add(family.id);
+    }
+  }
+
   const BESTIARY_REACH = 5_000;
   let bestiaryTiers = 0;
   let bestiaryOffered = 0;

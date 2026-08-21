@@ -1,10 +1,14 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { bestiaryFamilyOf, bestiaryTierOf } from "../src/lib/gameData";
+import { buildCatalog } from "../src/lib/catalog";
+import { gameData } from "./gameDataFixture";
 import bestiary from "../data/generated/bestiary.json";
 import bestiaryMobs from "../data/curated/bestiary_mobs.json";
 
 const data = { bestiary, bestiaryMobs } as never;
+/** The whole table, for the tests that need to build a catalog rather than read the join. */
+const full = gameData();
 
 /**
  * The scrape's own cross-check, kept as a test so a wiki edit can't quietly change the answer.
@@ -49,6 +53,40 @@ test("a tier is worth one XP, and the milestones are the remainder", () => {
     bestiary.totals.statedTotal,
     "the tiers and the milestones together are the whole category",
   );
+});
+
+/**
+ * A family with no kills against it is only at tier 0 if its kills could have been seen. When
+ * the profile carries mob ids the map cannot place, "no kills" means we looked in the wrong
+ * place. A maxed profile had 163 such ids and 201,000 unplaced kills, and was being told to go
+ * and get tier 1 of a Golden Ghoul it had certainly killed.
+ */
+test("a family is not offered when the profile is carrying kills we cannot place", () => {
+  const withGap = buildCatalog(
+    {
+      bestiary: {
+        kills: { zombie_1: 100, some_mob_we_cannot_place_99: 5_000 },
+        milestone: { last_claimed_milestone: 0 },
+      },
+    } as never,
+    full,
+    { items: null, capacity: 0 },
+  );
+  const offered = withGap.tasks.filter((t) => t.category === "bestiary" && !withGap.done.has(t.id));
+  const families = new Set(offered.map((t) => /^bestiary_(.*)_\d+$/.exec(t.id)?.[1]));
+  assert.ok(families.has("zombie"), "a family we did see kills for is still offered");
+  assert.ok(!families.has("golden_ghoul"), "one we saw nothing for, while blind, is not");
+});
+
+test("with nothing unplaced, a family with no kills is genuinely at tier zero", () => {
+  // The rule must not swallow a real beginner: no unplaced ids means no blind spot.
+  const clean = buildCatalog(
+    { bestiary: { kills: { zombie_1: 100 }, milestone: { last_claimed_milestone: 0 } } } as never,
+    full,
+    { items: null, capacity: 0 },
+  );
+  const offered = clean.tasks.filter((t) => t.category === "bestiary" && !clean.done.has(t.id));
+  assert.ok(offered.some((t) => t.id.startsWith("bestiary_golden_ghoul_")), "still offered when we can see clearly");
 });
 
 /**

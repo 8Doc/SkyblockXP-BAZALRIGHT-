@@ -742,3 +742,19 @@ principle since essence trades on the bazaar — but the perk *costs* (how much 
 takes) aren't published, so they carry `kind: "unknown"` and stay out of the solver. Museum
 donations are marked `auction` but need a full-catalogue BIN index rather than the accessory-only
 sweep, which is the next thing worth building.
+
+### What a milestone counts, and why the published numbers disagree
+
+A milestone is ten family level-ups across the bestiary as a whole — the wiki says "Milestone
+rewards are obtained after reaching 10 family milestones", and every ten milestones pay 10 XP.
+
+That reading does not close, and the notes say so rather than picking a side. A maxed profile
+claims **513** milestones, which at ten level-ups each is about **5,130 tiers** — more than the
+**3,920** our family table holds at full, and more than the **4,370** the tasks page gives the
+whole category, which the tiers alone would already exceed. One of those published figures is
+stale and nothing available says which: there is no bestiary resource on the API, and the wiki's
+own family list is missing islands the game has shipped since.
+
+So the two halves are still credited from what each can support — tiers from the kills, the
+milestone half from the profile's own count — and capped at the stated total. The cap is doing
+real work: without it the old reading credited 10,260 against a category of 4,370.
