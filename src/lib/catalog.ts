@@ -134,6 +134,8 @@ export function buildCatalog(
   garden: GardenState | null = null,
   /** Island-wide progress, unioned across co-op members. Falls back to this member alone. */
   coop: { craftedGenerators: string[]; unlockedCollectionTiers: string[]; collected: Map<string, number> } | null = null,
+  /** Item ids the player is already holding, or null when the profile publishes no inventory. */
+  owned: Set<string> | null = null,
 ): Catalog {
   const tasks: Task[] = [];
   const done = new Set<string>();
@@ -413,17 +415,27 @@ export function buildCatalog(
     }
     return false;
   };
+  // Anything already in hand is a walk to the museum, not a purchase. Pricing it at what one
+  // costs on the auction house buries the free donations under the bought ones, when they are
+  // the cheapest experience on the profile by a distance.
+  const inHand = (itemId: string): boolean => owned?.has(itemId) ?? false;
+
   for (const donation of data.museum.donations) {
     const id = `museum_${donation.itemId}`;
+    const held = inHand(donation.itemId) || (donation.mappedIds ?? []).some(inHand);
     tasks.push({
       id,
       category: "museum",
       name: donation.name,
       xp: donation.xp,
       requires: [],
-      cost: donation.tradeable ? { kind: "auction", itemId: donation.itemId } : { kind: "unknown", note: "Not tradeable" },
+      cost: held
+        ? { kind: "none" }
+        : donation.tradeable
+          ? { kind: "auction", itemId: donation.itemId }
+          : { kind: "unknown", note: "Not tradeable" },
       repeatable: false,
-      note: `${donation.category.toLowerCase()} · donation is permanent`,
+      note: `${donation.category.toLowerCase()} · ${held ? "already in your inventory" : "donation is permanent"}`,
     });
     if (donated && slotFilled(donation.itemId)) done.add(id);
   }
@@ -435,9 +447,11 @@ export function buildCatalog(
       name: `${set.name} (set)`,
       xp: set.xp,
       requires: [],
-      cost: { kind: "unknown", note: "Whole armour set" },
+      cost: set.pieces.every((piece) => inHand(piece)) ? { kind: "none" } : { kind: "unknown", note: "Whole armour set" },
       repeatable: false,
-      note: `${set.category.toLowerCase()} · ${set.pieces.length} pieces`,
+      note: `${set.category.toLowerCase()} · ${set.pieces.length} pieces${
+        set.pieces.every((piece) => inHand(piece)) ? ", all already in your inventory" : ""
+      }`,
     });
     // A set's slot is filled by its own id, by holding every piece, or by anything further up
     // its upgrade line — donate the Backwater set and the Angler slot below it is filled too.

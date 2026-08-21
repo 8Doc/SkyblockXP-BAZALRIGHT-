@@ -1,4 +1,4 @@
-import type { BazaarProduct, BinIndex, GardenState, MuseumState, SkyblockProfile } from "../lib/profile";
+import type { BazaarProduct, BinIndex, GardenState, MuseumState, ProfileMember, SkyblockProfile } from "../lib/profile";
 import { absorbAuctionPage, createBinIndex, type AuctionRecord } from "../lib/auctions";
 import { bagCapacityFrom, bagItemsFrom, itemIdsFrom, readNbt } from "../lib/nbt";
 import type { BagItem } from "../lib/gameData";
@@ -269,6 +269,45 @@ export async function readBag(data: string | undefined): Promise<{ items: BagIte
     // A bag we can't read is a bag we report as unknown, not one we pretend is empty.
     return { items: null, capacity: 0 };
   }
+}
+
+/**
+ * Every item id the player is holding, across the inventory, ender chest, backpacks, wardrobe,
+ * vault, equipment and the bags. A museum donation costs nothing when the item is already in
+ * hand — the auction price is what it would cost to go and buy one, which is the wrong number
+ * for something sitting in your ender chest.
+ *
+ * Inventories are the one part of a profile a player can switch off in their API settings. An
+ * empty set is then indistinguishable from an empty inventory, so this returns null when the
+ * profile publishes nothing at all and the caller prices as before rather than guessing.
+ */
+export async function readOwnedItems(member: ProfileMember): Promise<Set<string> | null> {
+  const inventory = member.inventory;
+  if (!inventory) return null;
+
+  const blobs: (string | undefined)[] = [
+    inventory.inv_contents?.data,
+    inventory.inv_armor?.data,
+    inventory.ender_chest_contents?.data,
+    inventory.wardrobe_contents?.data,
+    inventory.personal_vault_contents?.data,
+    inventory.equipment_contents?.data,
+    ...Object.values(inventory.backpack_contents ?? {}).map((page) => page?.data),
+    ...Object.values(inventory.bag_contents ?? {}).map((bag) => bag?.data),
+  ];
+
+  const present = blobs.filter((data): data is string => Boolean(data));
+  if (present.length === 0) return null;
+
+  const owned = new Set<string>();
+  for (const data of present) {
+    try {
+      for (const id of await itemIdsIn(data)) owned.add(id);
+    } catch {
+      // One unreadable blob shouldn't cost the rest of the inventory.
+    }
+  }
+  return owned;
 }
 
 /** Item ids inside a gzipped NBT blob — the same decode readBag does, without the bag parts. */

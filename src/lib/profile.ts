@@ -22,7 +22,16 @@ export type ProfileMember = {
     /** Powers already unlocked, by name. */
     unlocked_powers?: string[]; highest_magical_power?: number; bag_upgrades_purchased?: number };
   fairy_soul?: { total_collected?: number };
-  inventory?: { bag_contents?: { talisman_bag?: { data?: string } } };
+  inventory?: {
+    bag_contents?: Record<string, { data?: string } | undefined>;
+    inv_contents?: { data?: string };
+    inv_armor?: { data?: string };
+    ender_chest_contents?: { data?: string };
+    backpack_contents?: Record<string, { data?: string } | undefined>;
+    wardrobe_contents?: { data?: string };
+    personal_vault_contents?: { data?: string };
+    equipment_contents?: { data?: string };
+  };
   dungeons?: {
     dungeon_types?: { catacombs?: { experience?: number } };
     player_classes?: Record<string, { experience?: number } | undefined>;

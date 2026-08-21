@@ -14,7 +14,7 @@ import {
   type PackageEntry,
   type ResolvedTask,
 } from "../lib/types";
-import { ApiError, cacheAge, fetchAccessoryBins, fetchBazaar, fetchReferencePrices, fetchGarden, fetchMuseum, fetchProfiles, readBag, resolveUuid } from "./api";
+import { ApiError, cacheAge, fetchAccessoryBins, fetchBazaar, fetchReferencePrices, fetchGarden, fetchMuseum, fetchProfiles, readBag, readOwnedItems, resolveUuid } from "./api";
 
 /**
  * The standalone build. Same domain logic as the Next app — it imports the very same solver
@@ -45,6 +45,8 @@ type State = {
   profileId: string | null;
   member: ProfileMember | null;
   bagItems: { items: BagItem[] | null; capacity: number };
+  /** Item ids the player is holding, or null when the profile publishes no inventory. */
+  owned: Set<string> | null;
   bazaar: Record<string, BazaarProduct>;
   /** Fallback prices for items nothing is listing. Empty if the feed is unreachable. */
   reference: Record<string, number>;
@@ -76,6 +78,7 @@ const state: State = {
   profileId: null,
   member: null,
   bagItems: { items: null, capacity: 0 },
+  owned: null,
   bazaar: {},
   reference: {},
   bins: null,
@@ -162,6 +165,9 @@ async function loadProfile(): Promise<void> {
   setStatus("busy", "Reading accessory bag…");
   state.bagItems = await readBag(member.inventory?.bag_contents?.talisman_bag?.data);
 
+  setStatus("busy", "Reading inventories…");
+  state.owned = await readOwnedItems(member);
+
   setStatus("busy", "Reading museum donations…");
   state.museum = await fetchMuseum(state.profileId, state.uuid, state.apiKey.trim());
 
@@ -221,6 +227,7 @@ function rebuildCatalog(): void {
     state.bins ? petsFrom(state.bins) : null,
     state.garden,
     profile ? coopProgress(profile) : null,
+    state.owned,
   );
 }
 
