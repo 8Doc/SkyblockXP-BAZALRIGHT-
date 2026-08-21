@@ -34,7 +34,7 @@ export type PriceBook = {
  * of 175 — while the bazaar carries every one of them, live. Preferring the feed there would
  * price nothing.
  */
-const REFERENCE_FIRST = new Set<Category>(["accessory_bag", "museum", "minions"]);
+const REFERENCE_FIRST = new Set<Category>(["accessory_bag", "accessory_grind", "museum", "minions"]);
 
 export function priceOf(cost: CostSpec, book: PriceBook, preferReference = false): number | null {
   const referenced = (id: string): number | undefined => (preferReference ? book.reference?.[id] : undefined);

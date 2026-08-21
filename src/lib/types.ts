@@ -7,6 +7,7 @@ export type Category =
   | "essence_shop"
   | "fairy_souls"
   | "accessory_bag"
+  | "accessory_grind"
   | "pets"
   | "collections"
   | "skills"
@@ -22,6 +23,7 @@ export type Category =
 
 export const CATEGORIES: Category[] = [
   "accessory_bag",
+  "accessory_grind",
   "minions",
   "skills",
   "collections",
@@ -52,6 +54,7 @@ export const CATEGORY_LABELS: Record<Category, string> = {
   essence_shop: "Essence Shops",
   fairy_souls: "Fairy Souls",
   accessory_bag: "Accessory Bag",
+  accessory_grind: "Accessory Bag — Grind Only",
   pets: "Pets",
   collections: "Collections",
   skills: "Skills",

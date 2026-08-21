@@ -291,6 +291,28 @@ export function buildCatalog(
 
   const excluded = new Set(data.magicalPower.excludedItems.ids);
   const accessoryById = new Map(data.accessories.accessories.map((a) => [a.id, a]));
+
+  /**
+   * Families nobody can buy their way into, which get a category of their own.
+   *
+   * Decided per family rather than per accessory, because a family is one exclusive group and
+   * splitting a group across two categories would credit its magical power to both. Only one
+   * family of the 149 is mixed — the Bluetooth Ring chain — and a family with any buyable member
+   * is a family you can buy your way to the top of, so it stays with the rest.
+   */
+  const grindOnlyFamily = new Set<string>();
+  {
+    const buyable = new Set<string>();
+    for (const acc of data.accessories.accessories) {
+      if (excluded.has(acc.id)) continue;
+      if ((acc.rift && !acc.riftTransferrable) || acc.unobtainable) continue;
+      if (accessoryPowerOf(data, acc.id, acc.tier, contactIds.size) <= 0) continue;
+      const family = familyOf(data, acc.name, acc.id);
+      if (acc.tradeable) buyable.add(family);
+      else grindOnlyFamily.add(family);
+    }
+    for (const family of buyable) grindOnlyFamily.delete(family);
+  }
   // The best accessory on offer for each family, so a family the player has yet to start can
   // still be told what recombobulating it would be worth once bought.
   const familyOffer = new Map<string, { id: string; taskId: string; rarity: string; power: number }>();
@@ -315,10 +337,11 @@ export function buildCatalog(
     const alreadyHave = bagState.familyPower.get(family) ?? 0;
     const gain = power - alreadyHave;
     const id = `accessory_${acc.id}`;
+    const category: Category = grindOnlyFamily.has(family) ? "accessory_grind" : "accessory_bag";
 
     tasks.push({
       id,
-      category: "accessory_bag",
+      category,
       name: acc.name,
       // 1 XP per magical power, and only the improvement over the family's current best counts.
       xp: Math.max(gain, 0),
@@ -813,7 +836,7 @@ export function buildCatalog(
     const meta = accessoryById.get(target.id);
     tasks.push({
       id: `recombobulate_${target.id}`,
-      category: "accessory_bag",
+      category: grindOnlyFamily.has(family) ? "accessory_grind" : "accessory_bag",
       name: `Recombobulate ${meta?.name ?? target.id}`,
       xp: power - target.from,
       exclusiveGroup: `accessory:${family}`,

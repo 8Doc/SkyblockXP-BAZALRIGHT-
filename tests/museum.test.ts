@@ -4,6 +4,7 @@ import { buildCatalog } from "../src/lib/catalog";
 import { priceOf } from "../src/lib/resolve";
 import { gameData } from "./gameDataFixture";
 import type { ProfileMember } from "../src/lib/profile";
+import { CATEGORIES, CATEGORY_LABELS } from "../src/lib/types";
 
 const data = gameData();
 
@@ -130,4 +131,54 @@ test("Doug's masks carry their token price alongside the auction one", () => {
   const bee = catalog.tasks.find((task) => task.id === "museum_BEE_MASK")!;
   assert.equal(bee.cost.kind, "auction", "the mask is still bought at the market price by default");
   assert.ok(bee.xp > 0);
+});
+
+/**
+ * Accessories nobody can buy get a category of their own, directly below the accessory bag.
+ * They were never missing from the totals — they sat among the purchasable rows with no price,
+ * where a list ordered by coins per XP has nowhere sensible to put them.
+ */
+test("accessories with no way to buy them are their own category", () => {
+  const catalog = buildCatalog({} as ProfileMember, data, { items: [], capacity: 400 });
+  const grind = catalog.tasks.filter((task) => task.category === "accessory_grind");
+  const shop = catalog.tasks.filter((task) => task.category === "accessory_bag");
+
+  assert.ok(grind.length > 0, "expected some accessories to be unbuyable");
+  assert.ok(shop.length > grind.length, "most accessories should still be purchasable");
+
+  // An unpriceable row may stay in the buy list only when its family can be bought through
+  // some other member — the Rift's Bluetooth Ring shares a chain with the Bluertooth Ring, which
+  // is on the auction house, so that family really is one you can buy your way to the top of.
+  for (const task of shop.filter((row) => row.cost.kind === "unknown")) {
+    const group = task.exclusiveGroup;
+    assert.ok(group, `${task.name} has no price and no family to reach it through`);
+    const buyable = shop.some((row) => row.exclusiveGroup === group && row.cost.kind !== "unknown");
+    assert.ok(buyable, `${task.name} cannot be bought and belongs in the grind category`);
+  }
+});
+
+/**
+ * A family is one exclusive group, so it has to sit in one category: split across two, its
+ * magical power is credited to both and the totals quietly gain a few hundred XP. Only the
+ * Bluetooth Ring chain is mixed, and a family with any buyable member is one you can buy your
+ * way to the top of, so it stays in the buy list.
+ */
+test("no accessory family is split across the two categories", () => {
+  const catalog = buildCatalog({} as ProfileMember, data, { items: [], capacity: 400 });
+  const categoryOf = new Map<string, Set<string>>();
+  for (const task of catalog.tasks) {
+    if (task.category !== "accessory_bag" && task.category !== "accessory_grind") continue;
+    if (!task.exclusiveGroup) continue;
+    if (!categoryOf.has(task.exclusiveGroup)) categoryOf.set(task.exclusiveGroup, new Set());
+    categoryOf.get(task.exclusiveGroup)!.add(task.category);
+  }
+  const split = [...categoryOf.entries()].filter(([, seen]) => seen.size > 1).map(([group]) => group);
+  assert.deepEqual(split, [], "these families are counted in both categories");
+});
+
+/** The new category sits directly below the accessory bag, which is where it was asked for. */
+test("the grind-only category follows the accessory bag", () => {
+  const bag = CATEGORIES.indexOf("accessory_bag");
+  assert.equal(CATEGORIES[bag + 1], "accessory_grind");
+  assert.equal(CATEGORY_LABELS.accessory_grind, "Accessory Bag — Grind Only");
 });
