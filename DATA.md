@@ -212,10 +212,25 @@ makes them maxima rather than guesses. The Abicase's magical power scales with A
 contacts at one per two, which arrives with the contacts rather than being bought, so it is a
 grind row here while the contacts stay priced in their own category.
 
-Two profiles well below the maximum both reconcile to **2,115 of 2,122**, and landing on the
-same figure from different bags is what says the 7 is structural rather than an error: the
-Abiphone book holds 71 contacts against the 84 a maxed profile carries, and 13 contacts is
-between 6 and 7 magical power the Abicase can reach and we cannot name.
+**Count the Abiphone contacts off the task list, not the pricing table.** The two disagree and
+only one is complete: `tasks.json` holds all 84 contacts, from the id namespace harvested off
+live players, while the wiki's contacts table states 71 and never mentions the drill fuel
+mechanic, the forge foreman or eleven others. Reading the short one capped the Abicase seven
+magical power below what it reaches — and seven is exactly `floor(84/2) - floor(71/2)`.
+
+**And offer that magical power before the Abicase is bought.** It was gated on already holding
+one, which is the wrong way round: not owning the Abicase makes it a prerequisite, not a reason
+to hide the 42 magical power behind it.
+
+Checked against **49 profiles sampled at random from the auction house**, plus four named ones.
+Before these two changes, 18 of the 49 reconciled to 2,122 and 28 sat exactly 42 short — the
+whole Abiphone book, which is what identified the gating as the cause. After, **48 of 49 land
+on 2,122 exactly**.
+
+The one that does not is 22 over, and it is also the profile whose computed power runs 17 above
+its own reported figure, so the disagreement is upstream of the ceiling. Still open, along with
+the accessories a bag can hold that the items resource does not carry at all: the Balloon Hats
+of 2024 and 2025 and the Cake Hat of 2026 turned up on 21 of those 49 bags.
 
 ## Running without a server
 

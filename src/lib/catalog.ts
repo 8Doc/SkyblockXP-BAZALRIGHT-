@@ -857,19 +857,30 @@ export function buildCatalog(
   // is half a point of accessory XP on top of the ten the contact itself pays. It is not a
   // purchase of its own — it arrives with the contacts, which stay priced in their own category
   // — so it is a grind row here, and without it the bag reads short by the whole Abiphone book.
-  if ([...bagState.owned].some((id) => id.startsWith("ABICASE"))) {
-    const reachable = abicaseBonusFor(data.abiphone?.contacts.length ?? 0);
+  {
+    // How many contacts there are to have, counted off the task list rather than off the pricing
+    // table. The two disagree and only one of them is complete: the tasks come from the id
+    // namespace harvested from live players and hold all 84, while the wiki's contacts table
+    // states 71 and never mentions the drill fuel mechanic, the forge foreman, or eleven others.
+    // Reading the short one capped the Abicase seven magical power below what it reaches.
+    const everyContact = data.tasks.tasks.filter((t) => t.id.startsWith("ABIPHONE_")).length;
+    const reachable = abicaseBonusFor(everyContact);
     const now = abicaseBonusFor(abiphoneContacts);
+    const hasAbicase = [...bagState.owned].some((id) => id.startsWith("ABICASE"));
+    // Offered whether or not there is an Abicase in the bag yet: on a sample of live profiles
+    // most players had none, and holding the row back left every one of them 42 magical power
+    // short of a ceiling they can perfectly well reach by buying one. Not owning it makes the
+    // Abicase a prerequisite, not a reason to hide the XP behind it.
     if (reachable > now) {
       tasks.push({
         id: "abicase_contacts",
         category: "accessory_bag",
         name: "Abicase — more Abiphone contacts",
-        xp: reachable - now,
-        requires: [],
+        xp: reachable - (hasAbicase ? now : 0),
+        requires: hasAbicase ? [] : ["accessory_ABICASE"],
         cost: { kind: "none" },
         repeatable: false,
-        note: `1 MP per 2 contacts · ${abiphoneContacts} saved, ${data.abiphone?.contacts.length ?? 0} in the book`,
+        note: `1 MP per 2 contacts · ${abiphoneContacts} of ${everyContact} saved${hasAbicase ? "" : " · needs an Abicase"}`,
       });
     }
   }

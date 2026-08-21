@@ -169,6 +169,25 @@ test("a climbing accessory competes with buying its family rather than adding to
   assert.ok(climb.xp > buy.xp);
 });
 
+/**
+ * The Abicase's magical power scales with Abiphone contacts, and the contacts come from the task
+ * list rather than from the wiki's pricing table — the table names 71 and the game has 84, which
+ * capped it seven short. It is offered whether or not there is an Abicase in the bag yet: on a
+ * sample of 49 live profiles most had none, and holding the row back left 28 of them 42 magical
+ * power below a ceiling they can reach by buying one.
+ */
+test("the Abicase's contacts are offered before you own an Abicase", () => {
+  const { tasks, done } = catalogFor({ accessory_bag_storage: { unlocked_powers: [] } });
+  const row = tasks.find((t) => t.id === "abicase_contacts" && !done.has(t.id));
+  assert.ok(row, "an empty bag still has the whole Abiphone book ahead of it");
+  assert.deepEqual(row.requires, ["accessory_ABICASE"], "the Abicase is a prerequisite, not a gate");
+  assert.equal(row.cost.kind, "none", "the contacts are priced in their own category");
+
+  const contacts = data.tasks.tasks.filter((t) => t.id.startsWith("ABIPHONE_")).length;
+  assert.equal(contacts, 84, "the task list holds every contact");
+  assert.equal(row.xp, Math.floor(contacts / 2), "one magical power per two contacts");
+});
+
 test("an accessory that refuses a recombobulator is not offered one", () => {
   const { tasks } = catalogFor({ accessory_bag_storage: { unlocked_powers: [] } });
   for (const id of ["VOTER_BADGE_SUPREME", "PANDORAS_BOX", "RIFT_PRISM"]) {
