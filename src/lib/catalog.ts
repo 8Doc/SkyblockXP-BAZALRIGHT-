@@ -1025,9 +1025,12 @@ export function buildCatalog(
   // kill brackets, and the kills that feed a family have to be gathered from every mob id and
   // every level that belongs to it.
   //
-  // Each tier is worth 1 SkyBlock XP and every tenth tier pays a milestone worth 10, so a tier
-  // is worth 2 XP amortised — exact over any ten of them, and the only way to price one tier
-  // without pretending to know which one lands on a milestone.
+  // A tier is worth 1 SkyBlock XP. The other half of the category is the milestones, which the
+  // task table pays at 10 per ten of them — and a milestone is a thing the bestiary counts in
+  // its own right, not every tenth tier. Reading it as every tenth tier made a tier worth 2 and
+  // the category worth 7,840 against a stated 4,370. What the milestones pay is credited from
+  // the profile's own count instead of being spread across these rows, because nothing published
+  // says how many tiers a milestone takes.
   const bestiaryKills = new Map<string, number>();
   const unaccounted = new Map<string, number>();
   for (const [mobId, count] of Object.entries(member.bestiary?.kills ?? {})) {
@@ -1075,7 +1078,9 @@ export function buildCatalog(
         id,
         category: "bestiary",
         name: `${family.name} tier ${next} — ${family.island}`,
-        xp: 2,
+        // One. The task table pays 1 per tier and 10 per ten *milestones*, and reading the second
+        // as every tenth tier made every row here worth double.
+        xp: 1,
         requires: previousTier ? [previousTier] : [],
         cost: { kind: "none" },
         repeatable: false,
@@ -1156,7 +1161,7 @@ export function buildCatalog(
       magicalPower: bagState.computedMp,
       // The highest score reached is what the game paid out on, not what the pets are worth now.
       petScore: (member.leveling?.highest_pet_score ?? 0) * 3,
-      bestiary: bestiaryXp(member),
+      bestiary: bestiaryXp(data, member, bestiaryTiers),
     },
     reconciliation: [
       { category: "museum" as Category, credited: donatedCount - strandedDonations, reported: donatedCount },
@@ -1179,8 +1184,8 @@ export function buildCatalog(
       u.category === "bestiary"
         ? {
             ...u,
-            totalXp: data.bestiary.totals.xp,
-            earnedXp: bestiaryXp(member),
+            totalXp: data.bestiary.totals.statedTotal ?? data.bestiary.totals.xp,
+            earnedXp: bestiaryXp(data, member, bestiaryTiers),
             note: `${u.note} ${bestiaryCoverage}`,
           }
         :
@@ -1449,21 +1454,25 @@ function npcKeyFrom(id: string): string {
 }
 
 /**
- * Bestiary XP already earned, from the profile's own milestone count.
+ * Bestiary XP already earned: the tiers the kills reach, plus what the milestones pay.
  *
- * Two rewards stack. Every family tier pays 1 SkyBlock XP, and every tenth family tier also
- * pays a milestone reward worth 10 — so ten tiers are worth twenty XP between them, and the
- * count of milestone rewards is all that is needed.
+ * The task table gives two rewards — "Each Tier: +1" and "Every 10 Milestones: +10" — and this
+ * used to read the second as every tenth *tier*, making a tier worth 2 and the whole category
+ * 7,840 against a stated 4,370. Credited that way a maxed profile came out at 10,260, more than
+ * twice everything the bestiary holds, which is the kind of figure that should never have been
+ * possible: it is checked against the total now, and cannot exceed it.
  *
- * `last_claimed_milestone` is that count rather than a tier count, which is worth stating
- * because the field name doesn't say so. Read as tiers it would put a profile with 452 tracked
- * families and 856 mob entries on 314 tiers, below what the *easiest* kill bracket gives that
- * many families; read as milestone rewards it lands at ~3,140 tiers, inside the range every
- * bracket allows.
+ * The two halves come from different places because only one of them is knowable. Tiers are
+ * computed from the kills the profile publishes, which is exact where a mob id can be placed and
+ * short where it cannot — 163 ids on one profile, 201,000 kills, so this reads low rather than
+ * high. Milestones are taken from `last_claimed_milestone`, which is exact but claimed rather
+ * than granted, so it lags. Neither is inflated to cover the other.
  */
-function bestiaryXp(member: ProfileMember): number {
+function bestiaryXp(data: GameData, member: ProfileMember, tiersReached: number): number {
   const milestones = member.bestiary?.milestone?.last_claimed_milestone ?? 0;
-  return milestones * 20;
+  const totals = data.bestiary.totals;
+  const earned = tiersReached + Math.floor(milestones / 10) * 10;
+  return Math.min(earned, totals.statedTotal ?? totals.xp);
 }
 
 /** Where an Abiphone contact stands — island and coordinates, from the wiki's NPC infobox. */

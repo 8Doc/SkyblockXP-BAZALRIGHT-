@@ -383,10 +383,29 @@ and in each the two numbers outvoted the label:
 The corrections are printed on every run and stored in the output, not swallowed. The two
 undocumented families are excluded rather than guessed at.
 
-**3,920 tiers, 7,840 SkyBlock XP.** Each tier pays 1 XP and every tenth tier pays a milestone
-worth 10, so a tier is worth 2 XP amortised — exact over any ten of them. Note the tasks page
-says 4,370 for the whole bestiary: the wiki is behind itself, because that figure predates the
-families the same wiki now lists.
+**3,920 tiers, 3,920 SkyBlock XP, and 450 more from the milestones — 4,370 in all.**
+
+This used to read 7,840, on the reading that "every tenth tier pays a milestone worth 10, so a
+tier is worth 2 XP amortised". The tasks page says something else, in two lines: **"Each Tier:
++1"** and **"Every 10 _Milestones_: +10"**. A milestone is a thing the bestiary counts in its own
+right, not every tenth tier, so the second line was being spent on the first.
+
+The tasks page also states the category total outright — **4,370** — and that figure was
+dismissed here as the wiki being behind itself. It is not: 3,920 tiers at 1 XP plus 450 of
+milestones is exactly 4,370, and the two halves reconcile against a number this file had already
+written down. Doubling every tier put the category at 7,840, and crediting a maxed profile by
+its milestone count alone put it at **10,260 — more than twice everything the bestiary holds**,
+which is the shape of error a stated total exists to catch.
+
+What the milestones pay is credited from the profile's own `last_claimed_milestone` at 10 per
+ten, and the tiers from the kills. They are kept apart because only one of them is knowable:
+the milestone count is exact but lags, since a milestone is claimed rather than granted, while
+the tier count is short wherever a mob id can't be placed. Neither is inflated to cover the
+other, and the pair is capped at the total so it can't exceed the category again.
+
+How many tiers a milestone actually takes is still not established. On live profiles the ratio
+runs between one milestone per 6.5 and one per 7.5 tiers and is not consistent between them, so
+no per-tier share of the milestone half would be honest.
 
 ### The table that doesn't exist — `data/curated/bestiary_mobs.json`
 
@@ -412,7 +431,7 @@ than granted, so the count can lag but can never run ahead). The catalog states 
 On a real 730-id profile that reads: 1,924 tiers within reach, 17 families held back, 71 ids
 unplaced, and 1,731 tiers accounted for against a floor of 2,320 — so about 589 tiers sit in
 families the map can't reach. Most of that is Galatea, whose mobs the wiki has no family
-entries for at all, which is also why 7,840 XP is a floor rather than a ceiling.
+entries for at all, which is why the tier half reads low rather than high.
 
 ### What is offered
 

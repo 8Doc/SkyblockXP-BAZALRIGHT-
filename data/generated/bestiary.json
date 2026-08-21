@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-08-20T13:39:25.385Z",
+ "generatedAt": "2026-08-21T19:13:15.185Z",
  "source": "https://hypixel-skyblock.fandom.com/wiki/Bestiary",
  "note": "brackets[bracket][maxTier-1] === maxKills for every family — the bracket is derived from that identity, and the build fails on any family the identity can't place.",
  "brackets": {
@@ -2221,6 +2221,9 @@
   "families": 249,
   "islands": 18,
   "tiers": 3920,
-  "xp": 7840
+  "xp": 3920,
+  "milestoneXp": 450,
+  "statedTotal": 4370,
+  "statedTotalSource": "wiki SkyBlock Levels/Tasks — Bestiary Progress, each tier +1 and every 10 milestones +10"
  }
 }

@@ -329,10 +329,22 @@ test("no two armour sets answer to the same name", () => {
 
 const sets = (d: typeof data) => new Map(d.museum.armorSets.map((s) => [s.setId, s]));
 
-test("bestiary XP is credited from the milestone count", () => {
-  // Ten family tiers are worth 20 XP between them: 1 apiece, plus a milestone reward of 10.
+/**
+ * The two halves are credited from different places because only one of them is knowable. The
+ * milestones are exact and come off the profile; the tiers are computed from the kills, which is
+ * short wherever a mob id cannot be placed. Neither is inflated to cover the other, and the pair
+ * is checked against the category total — crediting more than the bestiary holds is what the old
+ * reading did, at 10,260 against a stated 4,370.
+ */
+test("bestiary milestones pay ten for every ten of them", () => {
   const { earnedOutsideTasks } = catalogFor({ bestiary: { milestone: { last_claimed_milestone: 314 } } });
-  assert.equal(earnedOutsideTasks.bestiary, 6_280);
+  // No kills here, so no tiers — what is left is the milestone half alone.
+  assert.equal(earnedOutsideTasks.bestiary, 310);
+});
+
+test("bestiary XP earned can never exceed what the category holds", () => {
+  const absurd = catalogFor({ bestiary: { milestone: { last_claimed_milestone: 99_999 } } });
+  assert.equal(absurd.earnedOutsideTasks.bestiary, data.bestiary.totals.statedTotal);
 });
 
 test("a profile that has never opened the bestiary earns nothing from it", () => {

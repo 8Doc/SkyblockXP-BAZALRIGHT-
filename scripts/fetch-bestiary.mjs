@@ -150,8 +150,23 @@ for (const f of corrected)
 for (const f of undocumented) console.log(`undocumented: ${f.island} / ${f.name} — the wiki gives it no tier cap`);
 
 const tiers = families.reduce((sum, f) => sum + f.maxTier, 0);
-// Each tier pays 1 SkyBlock XP, and every tenth tier is a milestone paying another 10.
-const xp = tiers + Math.floor(tiers / 10) * 10;
+/**
+ * Each tier pays 1 SkyBlock XP. That is the whole of what this table can price.
+ *
+ * It used to pay 2, on the reading that "every tenth tier is a milestone paying another 10".
+ * The task table says something else: "Each Tier: +1" and "Every 10 **Milestones**: +10" — a
+ * milestone is its own thing that the bestiary counts, not every tenth tier. Doubling every tier
+ * put the category at 7,840 against a stated 4,370, and a maxed profile was credited 10,260,
+ * which is more than twice everything the category holds.
+ *
+ * The 450 between our 3,920 tiers and the stated 4,370 is the milestone half. It is recorded
+ * rather than spread across the tiers, because nothing published says how many tiers a milestone
+ * takes: the count on a real profile runs about one milestone per 6.5 to 7.5 tiers and is not
+ * consistent between profiles, so any per-tier share of it would be invented.
+ */
+const xp = tiers;
+const STATED_TOTAL = 4370;
+const milestoneXp = STATED_TOTAL - tiers;
 
 await mkdir(dirname(OUT), { recursive: true });
 await writeFile(
@@ -167,7 +182,16 @@ await writeFile(
       families,
       undocumented,
       corrected,
-      totals: { families: families.length, islands: new Set(families.map((f) => f.island)).size, tiers, xp },
+      totals: {
+        families: families.length,
+        islands: new Set(families.map((f) => f.island)).size,
+        tiers,
+        xp,
+        /** What the milestones pay on top of the tiers, and what the two come to together. */
+        milestoneXp,
+        statedTotal: STATED_TOTAL,
+        statedTotalSource: "wiki SkyBlock Levels/Tasks — Bestiary Progress, each tier +1 and every 10 milestones +10",
+      },
     },
     null,
     1,

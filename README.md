@@ -247,7 +247,7 @@ All 17, ~48,000 XP. `DATA.md` has the provenance for each number.
 | Category | XP available | Source of the task list | Source of completion |
 |---|---|---|---|
 | Skills | 8,440 | resources API | profile skill XP |
-| Bestiary | 7,840 | wiki brackets + family list | `bestiary.kills`, per family |
+| Bestiary | 4,370 | wiki brackets + family list, and the tasks page for the total | `bestiary.kills` per family, plus `milestone.last_claimed_milestone` |
 | Slayer | 7,220 | wiki curves + harvested ids | slayer XP per boss |
 | Museum | 3,644 | `museum_data.donation_xp` in the items API | `/skyblock/museum` |
 | Minions | 3,165 | resources API | `crafted_generators` |

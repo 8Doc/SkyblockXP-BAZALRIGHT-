@@ -228,7 +228,16 @@ export type BestiaryData = {
   families: { island: string; name: string; id: string; maxTier: number; maxKills: number; bracket: number }[];
   /** Families the wiki lists without a tier cap, so nothing can be offered for them. */
   undocumented: { island: string; name: string; id: string }[];
-  totals: { families: number; islands: number; tiers: number; xp: number };
+  totals: {
+    families: number;
+    islands: number;
+    tiers: number;
+    /** One per tier, which is all this table can price. */
+    xp: number;
+    /** What the milestones pay on top, and the two together — the figure the wiki states. */
+    milestoneXp?: number;
+    statedTotal?: number;
+  };
 };
 
 /** Internal mob id -> family id, for the ids no rule can derive. */

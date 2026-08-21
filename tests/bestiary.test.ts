@@ -33,11 +33,22 @@ test("brackets are 25 tiers long and strictly increasing", () => {
   }
 });
 
-/** The XP the category advertises has to be the XP its tiers can actually pay. */
-test("the advertised ceiling is two XP per tier", () => {
+/**
+ * One XP per tier, and the milestones are the rest of the category rather than a share of each
+ * tier. The task table says "Each Tier: +1" and "Every 10 Milestones: +10", and reading the
+ * second as every tenth *tier* doubled every row: the category advertised 7,840 against a
+ * stated 4,370, and a maxed profile was credited 10,260 — more than twice everything in it.
+ */
+test("a tier is worth one XP, and the milestones are the remainder", () => {
   const tiers = bestiary.families.reduce((sum, f) => sum + f.maxTier, 0);
   assert.equal(bestiary.totals.tiers, tiers);
-  assert.equal(bestiary.totals.xp, tiers + Math.floor(tiers / 10) * 10);
+  assert.equal(bestiary.totals.xp, tiers, "the tiers pay one apiece");
+  assert.equal(bestiary.totals.statedTotal, 4_370, "what the task table says the category holds");
+  assert.equal(
+    bestiary.totals.xp + bestiary.totals.milestoneXp,
+    bestiary.totals.statedTotal,
+    "the tiers and the milestones together are the whole category",
+  );
 });
 
 /**
