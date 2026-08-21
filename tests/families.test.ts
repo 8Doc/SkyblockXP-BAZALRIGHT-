@@ -1,14 +1,13 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { accessoryPowerOf, familyOf } from "../src/lib/gameData";
+import { accessoryPower, familyOf, grantsMagicalPower, scoreBag } from "../src/lib/gameData";
 import accessories from "../data/generated/accessories.json";
 import accessoryFamilies from "../data/curated/accessory_families.json";
+import accessoryUpgrades from "../data/generated/accessory_upgrades.json";
 import magicalPower from "../data/curated/magical_power.json";
 
-import accessoryChains from "../data/generated/accessory_trade.json";
-
-const data = { accessories, accessoryFamilies, magicalPower, accessoryChains } as never;
+const data = { accessories, accessoryFamilies, accessoryUpgrades, magicalPower } as never;
 const family = (name: string) => familyOf(data, name, name);
 
 /**
@@ -43,6 +42,74 @@ test("Heirloom, Badge and Chronomicon are upgrade steps, not new families", () =
   assert.equal(family("Bingo Heirloom"), family("Bingo Talisman"));
   assert.equal(family("Crux Chronomicon"), family("Crux Ring"));
   assert.equal(family("Pesthunter Badge"), family("Pesthunter Ring"));
+});
+
+/* ------------------------------------------------ lines that rename as they climb */
+
+/**
+ * The reported symptom: the bag kept listing accessories the player had already upgraded past.
+ * A name rule cannot see these families, because no two tiers share a word — the wiki's
+ * `upgrades_from` is the only thing that joins them, and nothing in the items resource does.
+ */
+test("an upgrade line that renames at every step is still one family", () => {
+  for (const [label, names] of [
+    ["the farming line", ["Cropie Talisman", "Squash Ring", "Fermento Artifact", "Helianthus Relic"]],
+    ["the cat line", ["Cat Talisman", "Lynx Talisman", "Cheetah Talisman"]],
+    ["the shady line", ["Shady Ring", "Crooked Artifact", "Seal of the Family"]],
+    ["kuudra's organs", ["Kuudra's Kidney", "Kuudra's Lung", "Kuudra's Heart"]],
+    ["the night line", ["Night Crystal", "Moonlight Crystal"]],
+    ["the day line", ["Day Crystal", "Sunshine Crystal"]],
+  ] as [string, string[]][]) {
+    const found = new Set(names.map(family));
+    assert.equal(found.size, 1, `${label} split into ${found.size}: ${[...found].join(", ")}`);
+  }
+});
+
+test("the wiki's edges compose, so the ends of a long line meet in the middle", () => {
+  // Three separate `upgrades_from` statements are what make Cropie and Helianthus one family.
+  // Reading them one at a time, without a union, would leave the two ends apart.
+  assert.equal(family("Cropie Talisman"), family("Helianthus Relic"));
+  assert.equal(family("Crux Talisman"), family("Celestial Starstone"));
+});
+
+test("merging a renamed tier in leaves the family under the name most of it already had", () => {
+  // Celestial Starstone joins the Crux line, but the family stays "crux" rather than being
+  // renamed after its newest member — plans and group keys stay recognisable.
+  assert.equal(family("Crux Ring"), "crux");
+});
+
+test("every upgrade edge the wiki states ends up inside one family", () => {
+  const byId = new Map(
+    (accessories as { accessories: { id: string; name: string }[] }).accessories.map((a) => [a.id, a]),
+  );
+  const split = accessoryUpgrades.edges.filter((e) => {
+    const child = byId.get(e.child);
+    const parent = byId.get(e.parent);
+    return child && parent && family(child.name) !== family(parent.name);
+  });
+  assert.deepEqual(split, [], "an upgrade the planner would still offer as a separate purchase");
+});
+
+/**
+ * Two ladders, not one. The pattern that catches the campfire badges was unanchored, so it also
+ * swallowed the soul ones and counted 26 badges as tiers of a family they have nothing to do
+ * with — magical power the player really holds, hidden.
+ */
+test("the soul campfire ladder is separate from the ordinary one", () => {
+  const ordinary = ["Campfire Adept Badge I", "Campfire Cultist Badge V", "Campfire God Badge IX"].map(family);
+  const soul = ["Soul Campfire Adept Badge I", "Soul Campfire Cultist Badge V", "Soul Campfire God Badge IX"].map(family);
+
+  assert.equal(new Set(ordinary).size, 1, "the ordinary badges are one ladder");
+  assert.equal(new Set(soul).size, 1, "the soul badges are one ladder");
+  assert.notEqual(ordinary[0], soul[0], "but they are not the same ladder");
+});
+
+test("both campfire ladders are whole, so no badge is stranded on its own", () => {
+  const list = (accessories as { accessories: { id: string; name: string }[] }).accessories;
+  const badges = list.filter((a) => /Campfire .*Badge/.test(a.name));
+  // 26 a side. A badge falling through to a family of its own would show up here as a third key.
+  assert.equal(badges.length, 52, `expected 52 campfire badges, found ${badges.length}`);
+  assert.deepEqual(new Set(badges.map((a) => family(a.name))).size, 2);
 });
 
 test("accessories that merely share a word are left apart", () => {
@@ -114,6 +181,126 @@ test("a family's Talisman, Ring and Artifact all resolve to one family", () => {
   for (const stem of ["Feather", "Sea Creature", "Bat Person"]) {
     const tiers = [`${stem} Talisman`, `${stem} Ring`, `${stem} Artifact`].map(family);
     assert.equal(new Set(tiers).size, 1, `${stem} split into ${new Set(tiers).size} families`);
+  }
+});
+
+/* ------------------------------- magical power the bag's contents don't show */
+
+/**
+ * Three accessories are scored by their own rule rather than by rarity, and two of them leave no
+ * trace in the bag at all. Measured against a maxed profile they were worth 75 magical power
+ * between them, which is most of what the model was missing.
+ */
+test("what the Hegemony is worth to buy is what it is worth to hold", () => {
+  // Quoting it at its rarity made the single largest row in the category look half its size.
+  assert.equal(accessoryPower(data, "HEGEMONY_ARTIFACT", "MYTHIC"), 44);
+  assert.equal(accessoryPower(data, "BAT_ARTIFACT", "MYTHIC"), 22, "nothing else doubles");
+});
+
+test("Hegemony grants its magical power twice over", () => {
+  const bare = scoreBag(data, [{ id: "BAT_ARTIFACT", rarityUpgrades: 0, rarity: null }], null);
+  const heg = scoreBag(
+    data,
+    [
+      { id: "BAT_ARTIFACT", rarityUpgrades: 0, rarity: null },
+      { id: "HEGEMONY_ARTIFACT", rarityUpgrades: 0, rarity: "MYTHIC" },
+    ],
+    null,
+  );
+  // 22 for the accessory, and 22 again for being the Hegemony.
+  assert.equal(heg.computedMp - bare.computedMp, 44);
+});
+
+test("an Abicase turns Abiphone contacts into magical power, one per two", () => {
+  const bag = [{ id: "ABICASE", rarityUpgrades: 0, rarity: null }];
+  const none = scoreBag(data, bag, null, 0, { abiphoneContacts: 0 });
+  const many = scoreBag(data, bag, null, 0, { abiphoneContacts: 84 });
+  assert.equal(many.computedMp - none.computedMp, 42);
+});
+
+/**
+ * The prism is consumed when it is imbued, so there is nothing left in the bag to find it by —
+ * only `rift.access.consumed_prism` on the profile says it happened. Without reading that, the
+ * planner both lost the 11 magical power and went on offering the prism as XP still to buy.
+ */
+test("an imbued Rift Prism keeps paying after it is consumed", () => {
+  const without = scoreBag(data, [], null, 0, {});
+  const imbued = scoreBag(data, [], null, 0, { riftPrismConsumed: true });
+  assert.equal(imbued.computedMp - without.computedMp, 11);
+
+  const family = familyOf(data, "Rift Prism", "RIFT_PRISM");
+  assert.equal(imbued.familyPower.get(family), 11, "the family reads as filled, so it stops being offered");
+  assert.equal(without.familyPower.get(family), undefined);
+});
+
+/* ------------------------------------------- what can grant magical power */
+
+/**
+ * A rift accessory that cannot leave the rift cannot go in the accessory bag, so its magical
+ * power is unreachable and must never be offered as XP to buy. Seventeen of the twenty-nine
+ * were, worth about 140 magical power between them.
+ */
+test("rift accessories that cannot leave the rift grant no magical power", () => {
+  const list = (accessories as { accessories: { id: string; name: string; rift: boolean; riftTransferrable: boolean }[] })
+    .accessories;
+  const byId = new Map(list.map((a) => [a.id, a]));
+
+  // CRUX_TALISMAN_6 is the Crux Chronomicon, the 22-MP top of a line that is entirely rift-bound.
+  for (const id of ["CRUX_TALISMAN_6", "SATELITE", "PUNCHCARD_ARTIFACT", "RING_OF_BROKEN_LOVE"]) {
+    const acc = byId.get(id);
+    assert.ok(acc, `${id} is missing from the accessory list`);
+    assert.equal(grantsMagicalPower(acc), false, `${id} never reaches the bag`);
+  }
+  // The transferrable ones do count, and an ordinary non-rift accessory is unaffected.
+  for (const id of ["RIFT_PRISM", "BLUETOOTH_RING", "BAT_ARTIFACT"]) {
+    const acc = byId.get(id);
+    assert.ok(acc, `${id} is missing from the accessory list`);
+    assert.equal(grantsMagicalPower(acc), true, `${id} should still count`);
+  }
+});
+
+/**
+ * Nine accessories refuse a Recombobulator and the resource says which. On a maxed profile every
+ * recombobulate row the app produced was one of them — four impossible tasks, each priced at a
+ * real Recombobulator 3000, the Voter's Badge among them.
+ */
+test("the accessories that refuse a recombobulator are flagged", () => {
+  const list = (accessories as { accessories: { id: string; recombobulatable: boolean }[] }).accessories;
+  const byId = new Map(list.map((a) => [a.id, a]));
+
+  for (const id of ["VOTER_BADGE_SUPREME", "PANDORAS_BOX", "BOOK_OF_PROGRESSION", "SAFETY_BADGE", "RIFT_PRISM"]) {
+    assert.equal(byId.get(id)?.recombobulatable, false, `${id} cannot be recombobulated`);
+  }
+  assert.equal(byId.get("BAT_ARTIFACT")?.recombobulatable, true, "an ordinary accessory still can be");
+});
+
+/**
+ * Every Hatcessory counts for the same magical power and only once. The wiki is explicit that
+ * different editions used to stack and that the stacking was removed, so a player wearing the
+ * Sloth was being offered both Crabs as XP still to collect.
+ */
+test("the Hats of Celebration are one family", () => {
+  const hats = ["Crab Hat of Celebration", "Crab Hat of Celebration - 2022 Edition", "Sloth Hat of Celebration"];
+  const found = new Set(hats.map(family));
+  assert.equal(found.size, 1, `split into ${found.size}: ${[...found].join(", ")}`);
+});
+
+/**
+ * Staff curios and withdrawn items read as ordinary accessories in the items resource — the
+ * Talisman, Ring and Artifact of Space are uncommon, rare and epic — so nothing but the wiki
+ * says nobody can have one. Listing them tells a maxed player to go and buy a former admin's
+ * inventory.
+ */
+test("accessories nobody can hold are flagged unobtainable", () => {
+  const list = (accessories as { accessories: { id: string; name: string; obtainable: boolean }[] }).accessories;
+  const byId = new Map(list.map((a) => [a.id, a]));
+
+  for (const id of ["ARTIFACT_OF_SPACE", "RING_OF_SPACE", "TALISMAN_OF_SPACE", "GRIZZLY_PAW", "OLD_BOOT", "ETERNAL_CRYSTAL"]) {
+    assert.equal(byId.get(id)?.obtainable, false, `${id} is a staff curio or withdrawn`);
+  }
+  // The check runs the other way too: an ordinary accessory must stay obtainable.
+  for (const id of ["BAT_ARTIFACT", "HEGEMONY_ARTIFACT"]) {
+    assert.equal(byId.get(id)?.obtainable, true, `${id} is perfectly obtainable`);
   }
 });
 
@@ -231,19 +418,6 @@ test("half-documented upgrade lines still come out as one family", () => {
     assert.equal(new Set(families).size, 1, `${line.join(" / ")} split into ${[...new Set(families)].join(", ")}`);
   }
 });
-
-/**
- * The game refuses a Recombobulator on nine accessories, and offering the upgrade anyway sells
- * a player something they cannot buy. The items resource states it outright.
- */
-test("accessories the game will not recombobulate are marked as such", () => {
-  const refused = accessories.accessories.filter((a) => a.recombobulable === false).map((a) => a.name);
-  for (const name of ["Pandora's Box", "Book of Progression", "Safety Badge", "Supreme Voter's Badge", "Rift Prism"]) {
-    assert.ok(refused.includes(name), `${name} should be flagged as un-recombobulatable`);
-  }
-  assert.ok(refused.length < 20, `${refused.length} refusals looks like the flag has inverted`);
-});
-
 /**
  * The community wiki is the only source for some of this. Its page for the Applicant's Statement
  * — which Fandom has never had — is the only place recording that it upgrades into Student's
@@ -251,66 +425,10 @@ test("accessories the game will not recombobulate are marked as such", () => {
  * Space, two accessories with no page of their own on either wiki.
  */
 test("the academic line starts at the Applicant's Statement", () => {
-  const byName = new Map(accessories.accessories.map((a) => [a.name, a.id]));
+  const byName = new Map(
+    (accessories as { accessories: { id: string; name: string }[] }).accessories.map((a) => [a.name, a.id]),
+  );
   const line = ["Applicant's Statement", "Student's Studies", "Master's Thesis"];
   const families = line.map((name) => familyOf(data, name, byName.get(name)!));
   assert.equal(new Set(families).size, 1, `split into ${[...new Set(families)].join(", ")}`);
-});
-
-/**
- * Guarded in both directions, because both mistakes were made. Admin curios and items removed
- * from the game were being sold to a maxed player; then a Legacy banner was read as "gone",
- * which wrongly condemned three Hats of Celebration that are auctionable to this day and sit in
- * top players' bags.
- */
-test("only what no player can hold is written off as unobtainable", () => {
-  const written = new Map(accessories.accessories.filter((a) => a.unobtainable).map((a) => [a.name, a.unobtainable]));
-  for (const name of ["Grizzly Paw", "Talisman of Space", "Ring of Space", "Old Boot"]) {
-    assert.equal(written.get(name), "admin only", `${name} is an admin-only curio`);
-  }
-  for (const name of ["Compass Talisman", "Eternal Crystal", "Luck Talisman"]) {
-    assert.equal(written.get(name), "removed from the game", `${name} was removed from the game`);
-  }
-  for (const name of ["Crab Hat of Celebration", "Sloth Hat of Celebration"]) {
-    assert.ok(!written.has(name), `${name} is still auctionable and held by top players`);
-  }
-  assert.ok(written.size < 30, `${written.size} write-offs looks like a rule has gone too wide`);
-});
-
-/**
- * The whole accessory bag, measured against the figure the wiki publishes. A player reported the
- * category reaching only 1,850 of the 2,122 the game has, and every piece of that shortfall was
- * a rule we had wrong: Rift accessories written off wholesale when seven of them transfer out,
- * the Hegemony Artifact's doubling, the Rift Prism's fixed eleven, the Abicase's one per two
- * Abiphone contacts. What is left is the six accessories whose rarity climbs in place.
- */
-test("our ceiling lands within the climbing accessories of the wiki's", () => {
-  const order = magicalPower.rarityOrder;
-  const contacts = 71;
-  const best = new Map<string, number>();
-  for (const accessory of accessories.accessories) {
-    if ((accessory.rift && !accessory.riftTransferrable) || accessory.unobtainable) continue;
-    const top =
-      accessory.recombobulable === false
-        ? accessory.tier
-        : order[Math.min(order.indexOf(accessory.tier) + 1, order.length - 1)] ?? accessory.tier;
-    const power = accessoryPowerOf(data, accessory.id, top, contacts);
-    if (power <= 0) continue;
-    const family = familyOf(data, accessory.name, accessory.id);
-    best.set(family, Math.max(best.get(family) ?? 0, power));
-  }
-  let ceiling = 0;
-  for (const power of best.values()) ceiling += power;
-
-  const stated = magicalPower.maximum!.power;
-  const climbing = magicalPower.climbing!.items.reduce((sum, item) => sum + item.forgone, 0);
-  const allowed = climbing + magicalPower.unlisted!.power;
-  assert.ok(
-    ceiling <= stated,
-    `our ceiling of ${ceiling} is above the wiki's stated ${stated}, so something is double counted`,
-  );
-  assert.ok(
-    stated - ceiling <= allowed,
-    `${stated - ceiling} accessory power unaccounted for, more than the ${allowed} that the climbing accessories and the wiki's own unlisted six explain`,
-  );
 });

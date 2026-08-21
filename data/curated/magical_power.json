@@ -16,6 +16,7 @@
     "ULTIMATE": 1,
     "ADMIN": 22
   },
+  "rarityOrderNote": "The ladder a Recombobulator climbs, which is not every rarity that exists. Divine, Ultimate and Admin have a magical power above but are deliberately off the ladder: no Recombobulator reaches them, and putting Divine after Mythic offered every mythic accessory a step up to 28 that nobody can take.",
   "rarityOrder": [
     "COMMON",
     "UNCOMMON",
@@ -23,100 +24,38 @@
     "EPIC",
     "LEGENDARY",
     "MYTHIC",
-    "DIVINE",
     "SUPREME",
     "SPECIAL",
-    "VERY_SPECIAL",
-    "ULTIMATE",
-    "ADMIN"
+    "VERY_SPECIAL"
   ],
   "excludedItems": {
     "note": "Empty on purpose. Several bag items (party hats, cake bag) are classified ACCESSORY by the items resource, and nothing in the API says whether they grant magical power. Excluding them on a hunch would hide buyable XP; the computed-vs-reported MP readout is the check instead.",
     "ids": []
   },
-  "knownGaps": [
-    "highest_magical_power is a high-water mark, not a current reading, so computed power can sit below it legitimately.",
-    "Divine and Ultimate accessories are listed for completeness; none is obtainable without glitches.",
-    "BALLOON_HAT_2024, the Green 5th Anniversary Balloon Hat, sits in a maxed player's bag and appears nowhere in the items resource, so it cannot be catalogued or credited.",
-    "The Abiphone contact catalogue holds 71 of the 84 a maxed profile carries. The Abicase is scored off the profile's own contact ids so this costs it nothing, but the missing 13 are contacts we cannot offer."
-  ],
-  "maximum": {
-    "power": 2121,
-    "accessories": 147,
-    "note": "The wiki's stated ceiling, used as the check on our own. Excludes the extra 240 that dungeon accessories grant only while inside dungeons.",
-    "source": "Template:Max AP"
-  },
-  "special": {
-    "note": "The only accessories the game scores by anything other than their rarity. Named on the Accessory Power page.",
-    "HEGEMONY_ARTIFACT": {
-      "rule": "double",
-      "note": "gives double accessory power"
-    },
-    "RIFT_PRISM": {
-      "rule": "fixed",
+  "climbing": {
+    "note": "Accessories whose rarity climbs in place, through their own mechanic rather than by being bought. The items resource states where each one starts and nothing states where it ends, so the catalogue could only ever offer the base rarity and the one Recombobulator step after it. The rest is real XP that no purchase can reach, and it belongs in the browser as a grind rather than being left out of the total.",
+    "source": "Read off the bag of a profile sitting at the documented maximum of 2,122 accessory power. Every rarity here is one a real player is holding — stated by the item, not claimed by a table — which is what makes it a maximum rather than a guess. Where the item was also recombobulated, that step is inside the figure.",
+    "verified": true,
+    "consequence": "Too high and the browser offers XP nobody can reach; too low and a maxed bag reads as short. The check is that the profile these came from reconciles to 2,122 exactly with nothing outstanding.",
+    "items": [
+      { "id": "BOOK_OF_PROGRESSION", "reaches": "MYTHIC", "by": "rises with your SkyBlock level" },
+      { "id": "PANDORAS_BOX", "reaches": "MYTHIC", "by": "won from Shen's Auction" },
+      { "id": "PULSE_RING", "reaches": "MYTHIC", "by": "fed Thunder in a Bottle" },
+      { "id": "POWER_RELIC", "reaches": "MYTHIC", "by": "twelve perfect gemstones, then a Recombobulator" },
+      { "id": "TRAPPER_CREST", "reaches": "EPIC", "by": "pelts from trapper quests" },
+      { "id": "RUNEBOOK", "reaches": "LEGENDARY", "by": "runes bound into it" }
+    ],
+    "riftPrism": {
       "power": 11,
-      "note": "grants 11 accessory power once imbued at Erihann"
-    },
-    "ABICASE": {
-      "rule": "perAbiphoneContacts",
-      "per": 2,
-      "note": "grants 1 accessory power for every 2 Abiphone contacts"
+      "by": "imbued at Erihann, which consumes the prism and pays for good"
     }
   },
-  "climbing": {
-    "note": "Accessories whose rarity climbs in place, through their own mechanic rather than a Recombobulator. The items resource reports where each one starts, so the catalogue values them there and adds the one Recombobulator step it knows about; `forgone` is what that leaves on the table against the rarity the wiki says the accessory finally reaches. Each mechanic is different and none is a purchase that can be priced from the bazaar or the auction house, so they are recorded rather than guessed at.",
-    "source": "individual wiki pages and Template:Max AP, read 2026-08-21",
-    "items": [
-      {
-        "id": "BOOK_OF_PROGRESSION",
-        "from": "COMMON",
-        "to": "MYTHIC",
-        "forgone": 19,
-        "by": "SkyBlock level: common at 25, uncommon at 75, rare at 150, and on up. Takes no Recombobulator."
-      },
-      {
-        "id": "PULSE_RING",
-        "from": "UNCOMMON",
-        "to": "MYTHIC",
-        "forgone": 14,
-        "by": "feeding it Thunder in a Bottle, four rarities' worth"
-      },
-      {
-        "id": "PANDORAS_BOX",
-        "from": "COMMON",
-        "to": "MYTHIC",
-        "forgone": 19,
-        "by": "won from Shen's Auction; the wiki cites its mythic form as the maximum. Takes no Recombobulator."
-      },
-      {
-        "id": "POWER_RELIC",
-        "from": "EPIC",
-        "to": "MYTHIC",
-        "forgone": 6,
-        "by": "twelve perfect gemstones carry it to legendary, and a Recombobulator then reaches mythic"
-      },
-      {
-        "id": "TRAPPER_CREST",
-        "from": "COMMON",
-        "to": "RARE",
-        "forgone": 3,
-        "by": "collecting pelts from trapper quests"
-      }
-    ],
-    "disproved": [
-      {
-        "id": "FARMER_ORB",
-        "from": "COMMON",
-        "to": "RARE",
-        "forgone": 3,
-        "by": "stated only by the summary table, which flags its own rarities as unreliable",
-        "disprovedBy": "A player at the documented maximum of 2,122 accessory power holds an uncommon Farmer Orb, which is a common base plus one Recombobulator. The rare the summary table claims is not reachable, and that table flags its own rarities as unreliable."
-      }
-    ]
-  },
-  "unlisted": {
-    "power": 52,
-    "note": "What neither side can name, measured rather than argued: the wiki's trivia counts 147 accessories, its own table lists 121 and names 20 more as missing, and it flags twelve of the rarities it does state as wrong. This is the slack that leaves against our own ceiling, and it is a tolerance for a check rather than a figure to add to anything.",
-    "history": "Was 44 until the Hats of Celebration were merged into one family. We had been counting three, the wiki's tally counts one — so our ceiling had ten magical power in it that the 2,121 never did, and the honest comparison is five wider once five accessories recovered from the wiki's bare-letter rarity fields are added back. Then 52, when the Farmer Orb was struck off the climbing list on a maxed player's evidence: three power the wiki claims and nobody can reach moves from climbing to slack."
-  }
+  "knownGaps": [
+    "highest_magical_power is a high-water mark, not a current reading, so computed MP can sit below it legitimately.",
+    "All three special cases are modelled now: Hegemony doubles its own MP, an Abicase adds 1 per 2 Abiphone contacts, and an imbued Rift Prism is worth 11 whether or not it is still in the bag (the profile records it as rift.access.consumed_prism, since imbuing consumes it).",
+    "Contacts are counted from active_contacts, not contact_data. The two disagree: contact_data holds only the contacts with state attached and read 80 against a real 84 on the profile this was checked against, which is 2 MP.",
+    "Against a maxed profile reporting 2,122 MP in game the model now reads 2,122 exactly, and offers that player nothing at all as still missing. Ruled out along the way, by measurement rather than argument: dungeon accessories counting double (overshoots to 2,216), enrichments (the wiki's Enrichments page never mentions magical power), and Personal Deletor 6000 vs 7000 being separate families (the wiki states 7000 upgrades_from 6000, so merging them is right).",
+    "Accessories whose rarity climbs through play — Book of Progression, Pandora's Box, Pulse Ring, Relic of Power, Trapper Crest — are far below their real rarity in the items resource. The item's own lore carries the truth and is what scoreBag reads. The *unowned* ones are still priced off the resource, so their share of the ceiling is understated: nothing published says what rarity a player would end up at, and assuming the maximum would sell XP that takes a mechanic rather than coins.",
+    "A rarity the byRarity table has no figure for falls back to the resource rather than scoring nil, so a lore line we have not seen before cannot silently zero an accessory."
+  ]
 }

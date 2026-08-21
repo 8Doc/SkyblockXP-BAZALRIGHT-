@@ -119,6 +119,86 @@ test("magical power and pet score count as XP already earned", () => {
   assert.equal(earnedOutsideTasks.magicalPower, 0, "no bag decoded here, so nothing to credit");
 });
 
+/**
+ * A maxed bag is recombobulated throughout — one real profile had done it to 124 of the 128
+ * families it held — so buying an accessory is only half the magical power that family is
+ * worth. Offering the step only on what is already owned quoted the rest of the bag at base
+ * rarities, and the category's remaining XP read far below what is actually left to get.
+ */
+test("an accessory you have yet to buy still has a recombobulator step", () => {
+  const { tasks, done } = catalogFor({ accessory_bag_storage: { unlocked_powers: [] } });
+  const live = tasks.filter((t) => t.category === "accessory_bag" && !done.has(t.id));
+
+  const buy = live.find((t) => t.id === "accessory_BAT_ARTIFACT");
+  const recomb = live.find((t) => t.id === "recombobulate_BAT_ARTIFACT");
+  assert.ok(buy, "the accessory itself is on offer");
+  assert.ok(recomb, "and so is the recombobulator that follows it");
+
+  // The step needs the accessory first, so the pair is priced as the pair.
+  assert.deepEqual(recomb.requires, ["accessory_BAT_ARTIFACT"]);
+  // Both belong to the family, so a total counts the better of the two rather than both.
+  assert.equal(recomb.exclusiveGroup, buy.exclusiveGroup);
+  assert.ok(recomb.xp > buy.xp, `${recomb.xp} should beat the ${buy.xp} of the plain accessory`);
+});
+
+/**
+ * Six accessories climb past any rarity you can buy, and imbuing a Rift Prism pays eleven for
+ * good. None can be priced, so all of it used to be absent — and the category came up short by
+ * exactly that on every profile below the maximum. They belong in the browser as grind.
+ */
+test("what no purchase can reach is still listed, as grind", () => {
+  const { tasks, done } = catalogFor({ accessory_bag_storage: { unlocked_powers: [] } });
+  const live = tasks.filter((t) => t.category === "accessory_bag" && !done.has(t.id));
+
+  const box = live.find((t) => t.id === "climb_PANDORAS_BOX");
+  assert.ok(box, "Pandora's Box reaches mythic by being won, not bought");
+  assert.equal(box.cost.kind, "none", "so it is grind, and stays out of the coin plans");
+  assert.equal(box.xp, 22, "the mythic it actually reaches, not the common it starts at");
+
+  const prism = live.find((t) => t.id === "climb_RIFT_PRISM");
+  assert.ok(prism, "an unimbued prism is 11 magical power still to earn");
+  assert.equal(prism.cost.kind, "none");
+});
+
+test("a climbing accessory competes with buying its family rather than adding to it", () => {
+  const { tasks } = catalogFor({ accessory_bag_storage: { unlocked_powers: [] } });
+  const climb = tasks.find((t) => t.id === "climb_PULSE_RING")!;
+  const buy = tasks.find((t) => t.id === "accessory_PULSE_RING")!;
+  // Same family, so a total counts the better of the two rather than both.
+  assert.equal(climb.exclusiveGroup, buy.exclusiveGroup);
+  assert.ok(climb.xp > buy.xp);
+});
+
+/**
+ * The Abicase's magical power scales with Abiphone contacts, and the contacts come from the task
+ * list rather than from the wiki's pricing table — the table names 71 and the game has 84, which
+ * capped it seven short. It is offered whether or not there is an Abicase in the bag yet: on a
+ * sample of 49 live profiles most had none, and holding the row back left 28 of them 42 magical
+ * power below a ceiling they can reach by buying one.
+ */
+test("the Abicase's contacts are offered before you own an Abicase", () => {
+  const { tasks, done } = catalogFor({ accessory_bag_storage: { unlocked_powers: [] } });
+  const row = tasks.find((t) => t.id === "abicase_contacts" && !done.has(t.id));
+  assert.ok(row, "an empty bag still has the whole Abiphone book ahead of it");
+  assert.deepEqual(row.requires, ["accessory_ABICASE"], "the Abicase is a prerequisite, not a gate");
+  assert.equal(row.cost.kind, "none", "the contacts are priced in their own category");
+
+  const contacts = data.tasks.tasks.filter((t) => t.id.startsWith("ABIPHONE_")).length;
+  assert.equal(contacts, 84, "the task list holds every contact");
+  assert.equal(row.xp, Math.floor(contacts / 2), "one magical power per two contacts");
+});
+
+test("an accessory that refuses a recombobulator is not offered one", () => {
+  const { tasks } = catalogFor({ accessory_bag_storage: { unlocked_powers: [] } });
+  for (const id of ["VOTER_BADGE_SUPREME", "PANDORAS_BOX", "RIFT_PRISM"]) {
+    assert.equal(
+      tasks.find((t) => t.id === `recombobulate_${id}`),
+      undefined,
+      `${id} cannot take one`,
+    );
+  }
+});
+
 test("bestiary XP is credited from the milestone count", () => {
   // Ten family tiers are worth 20 XP between them: 1 apiece, plus a milestone reward of 10.
   const { earnedOutsideTasks } = catalogFor({ bestiary: { milestone: { last_claimed_milestone: 314 } } });

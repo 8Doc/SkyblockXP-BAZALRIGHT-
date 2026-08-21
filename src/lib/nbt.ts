@@ -150,9 +150,51 @@ export function readNbt(bytes: Uint8Array): NbtCompound {
 export type BagItem = {
   id: string;
   rarityUpgrades: number;
-  /** What the item's own lore says it is, which is the final word when the blob carries it. */
-  rarity?: string;
+  /**
+   * The rarity the item itself claims, off its lore, or null where it carries no lore.
+   *
+   * Worth reading because for some accessories the items resource is not the last word: a Book
+   * of Progression and a Pandora's Box are both COMMON in the resource and both MYTHIC in the
+   * bag, having climbed there through play. Trusting the resource scored them 3 magical power
+   * each instead of 22.
+   */
+  rarity: string | null;
 };
+
+/** Rarities longest-first, so "VERY SPECIAL" is never read as "SPECIAL". */
+const RARITY_WORDS = [
+  "VERY SPECIAL", "SPECIAL", "SUPREME", "DIVINE", "MYTHIC",
+  "LEGENDARY", "EPIC", "RARE", "UNCOMMON", "COMMON", "ULTIMATE", "ADMIN",
+];
+
+/**
+ * The rarity an item's lore states, e.g. "§d§lMYTHIC ACCESSORY".
+ *
+ * Read from the bottom, because the rarity line is the last one and words like "RARE" turn up
+ * in ability text above it.
+ *
+ * A recombobulated item writes that line differently, and the difference is easy to miss:
+ * "§d§l§ka§r §d§lMYTHIC ACCESSORY §d§l§ka". `§k` is Minecraft's obfuscation code and the
+ * character after it is the shimmer the recombobulator puts either side of the rarity. Strip
+ * only the colour codes and the line reads "a MYTHIC ACCESSORY a", which starts with neither a
+ * rarity nor anything useful — so every recombobulated item silently fell through to the items
+ * resource. On a maxed bag that was 142 of 157 items, and it hid the accessories that climb
+ * rarity in place: a Pulse Ring reads UNCOMMON in the resource and MYTHIC on the item.
+ */
+function rarityFromLore(display: NbtCompound | null): string | null {
+  const lore = display?.Lore;
+  if (!Array.isArray(lore)) return null;
+  for (let i = lore.length - 1; i >= 0; i--) {
+    const line = String(lore[i])
+      // The obfuscated run first: from §k to the §r that ends it, or to the end of the line.
+      .replace(/§k.*?(?:§r|$)/g, "")
+      .replace(/§./g, "")
+      .trim();
+    const hit = RARITY_WORDS.find((word) => line.startsWith(word));
+    if (hit) return hit.replace(" ", "_");
+  }
+  return null;
+}
 
 function asCompound(value: NbtValue | undefined): NbtCompound | null {
   return value && typeof value === "object" && !Array.isArray(value) && !(value instanceof Uint8Array)
@@ -166,46 +208,6 @@ export function bagCapacityFrom(root: NbtCompound): number {
 }
 
 /**
- * The rarity an item says it is, from the last line of its lore: "§d§lMYTHIC ACCESSORY".
- *
- * This is the only exact answer available. A base rarity plus a Recombobulator count guesses at
- * it and gets six accessories wrong, because they climb the ladder through their own mechanics
- * — a maxed player's Book of Progression reads mythic while the items resource calls it common,
- * and his Trapper Crest reads epic against a common base. Between them that is sixty-five
- * magical power the bag was not being credited for.
- */
-function rarityFromLore(tag: NbtValue | undefined): string | null {
-  const lines = asCompound(asCompound(tag)?.display)?.Lore;
-  if (!Array.isArray(lines)) return null;
-  // Last line first: the rarity banner sits at the bottom, under the ability text.
-  for (let i = lines.length - 1; i >= 0; i--) {
-    const line: string = typeof lines[i] === "string" ? (lines[i] as string) : "";
-    // Strip Minecraft's formatting codes. What is left of "§d§l§ka§r §d§lMYTHIC ACCESSORY §d§l§ka"
-    // is "a MYTHIC ACCESSORY a", the obfuscation markers leaving their literal letter behind.
-    const plain = line.replace(/\u00a7./g, "").toUpperCase();
-    for (const rarity of LORE_RARITIES) {
-      if (plain.includes(`${rarity.text} `)) return rarity.key;
-    }
-  }
-  return null;
-}
-
-// Longest first: "VERY SPECIAL ACCESSORY" also contains "SPECIAL".
-const LORE_RARITIES: { text: string; key: string }[] = [
-  { text: "VERY SPECIAL", key: "VERY_SPECIAL" },
-  { text: "ULTIMATE", key: "ULTIMATE" },
-  { text: "SUPREME", key: "SUPREME" },
-  { text: "DIVINE", key: "DIVINE" },
-  { text: "MYTHIC", key: "MYTHIC" },
-  { text: "LEGENDARY", key: "LEGENDARY" },
-  { text: "SPECIAL", key: "SPECIAL" },
-  { text: "EPIC", key: "EPIC" },
-  { text: "RARE", key: "RARE" },
-  { text: "UNCOMMON", key: "UNCOMMON" },
-  { text: "COMMON", key: "COMMON" },
-];
-
-/**
  * Pull the SkyBlock item ids out of a decoded inventory document. Slots are `i`, item metadata
  * lives under `tag.ExtraAttributes`, and `rarity_upgrades` is how a recombobulator shows up.
  */
@@ -215,17 +217,15 @@ export function bagItemsFrom(root: NbtCompound): BagItem[] {
 
   const items: BagItem[] = [];
   for (const slot of slots) {
-    const extra = asCompound(asCompound(asCompound(slot)?.tag)?.ExtraAttributes);
+    const tag = asCompound(asCompound(slot)?.tag);
+    const extra = asCompound(tag?.ExtraAttributes);
     const id = extra?.id;
     if (typeof id !== "string") continue; // empty slot
     const upgrades = extra?.rarity_upgrades;
-    // Already final: the banner is what the item is now, recombobulation and all. Left off
-    // entirely when the blob does not carry it, so the absence is visible rather than undefined.
-    const stated = rarityFromLore(asCompound(slot)?.tag);
     items.push({
       id,
       rarityUpgrades: typeof upgrades === "number" ? upgrades : 0,
-      ...(stated ? { rarity: stated } : {}),
+      rarity: rarityFromLore(asCompound(tag?.display)),
     });
   }
   return items;

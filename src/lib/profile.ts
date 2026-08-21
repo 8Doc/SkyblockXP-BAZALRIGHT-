@@ -21,6 +21,16 @@ export type ProfileMember = {
   accessory_bag_storage?: {
     /** Powers already unlocked, by name. */
     unlocked_powers?: string[]; highest_magical_power?: number; bag_upgrades_purchased?: number };
+  /**
+   * Abiphone contacts. An Abicase turns every two of them into magical power, and the count has
+   * to come from `active_contacts`: `contact_data` carries only the contacts with state attached
+   * and ran four short of the real list on the profile this was checked against.
+   */
+  nether_island_player_data?: {
+    abiphone?: { active_contacts?: string[]; contact_data?: Record<string, unknown> };
+  };
+  /** `access.consumed_prism` says a Rift Prism has been imbued, which is worth 11 magical power. */
+  rift?: { access?: { consumed_prism?: boolean } };
   fairy_soul?: { total_collected?: number };
   inventory?: {
     bag_contents?: Record<string, { data?: string } | undefined>;
@@ -42,8 +52,6 @@ export type ProfileMember = {
   skill_tree?: { nodes?: Record<string, Record<string, number | boolean> | undefined> };
   /** Attribute shard counts, keyed by attribute name. Levels are derived from these. */
   attributes?: { stacks?: Record<string, number> };
-  /** The Rift. `consumed_prism` records that the Rift Prism has been imbued at Erihann. */
-  rift?: { access?: { consumed_prism?: boolean } };
 };
 
 /**

@@ -1,5 +1,5 @@
 {
-  "note": "Accessory families: sets where only the best member's magical power counts. Some families are structural and detected mechanically (see familyOf); the rest have to be named, because nothing in the API links them.",
+  "note": "Accessory families: sets where only the best member's magical power counts. This file is the name half of the answer — families a rule can spot from what the accessory is called. The other half is data/generated/accessory_upgrades.json, the wiki's upgrades_from graph, which catches the lines that rename as they climb and could never be inferred from a name. familyOf unions the two, so a family here does not have to be complete to be useful.",
   "source": "Hypixel Wiki, Accessory Bag — read against the accessory name list in data/generated/accessories.json",
   "verified": false,
   "consequence": "A family we fail to detect inflates the accessory bag's XP ceiling and lets a plan buy the same magical power twice. The computed-vs-reported MP readout in the UI is the check on this.",
@@ -14,13 +14,19 @@
   ],
   "patternFamilies": [
     {
+      "match": "Hat of Celebration|Balloon Hat",
+      "family": "hatcessory",
+      "note": "Every Hatcessory counts for the same magical power and only once. The wiki is explicit that different editions used to stack and that the stacking was removed before Aug 2022, so the Crab, the 2022 Crab and the Sloth are one family — a player wearing the Sloth was being offered both Crabs."
+    },
+    {
       "match": "^Soul Campfire .*Badge",
       "family": "soul campfire badge",
-      "why": "A separate line from the Campfire Badge, and a separate accessory: a maxed player holds Campfire God Badge IX and Soul Campfire God Badge IX at once and the game counts both. The old pattern was unanchored, so it swallowed the Soul line and credited one of the two."
+      "note": "The soul badges are their own ladder, not the tail of the ordinary one — 26 of each, under separate ids (SOUL_CAMPFIRE_TALISMAN_* against CAMPFIRE_TALISMAN_*). Listed first so it wins over the pattern below."
     },
     {
       "match": "^Campfire .*Badge",
-      "family": "campfire badge"
+      "family": "campfire badge",
+      "note": "Anchored, because unanchored it also swallowed the Soul Campfire ladder and hid 26 badges' worth of magical power."
     },
     {
       "match": "^Personal Compactor",
@@ -94,6 +100,6 @@
   ],
   "openQuestions": [
     "Colour variants (Blue/Green/Purple Jerry Talisman, the Gift Talismans) are treated as separate accessories that each grant magical power. If they are one family each, the bag ceiling is overstated by roughly 40 XP.",
-    "Our ceiling for a fresh profile is ~1,856 XP against the README's ~2,121. The gap is family detection, in one direction or the other, and neither number is checkable from the API. Treat the accessory ceiling as approximate; individual task XP is exact."
+    "The ceiling is approximate and always has been: it moves whenever family detection does, and neither it nor the README's ~2,121 is checkable from the API. Individual task XP is exact — a specific accessory's magical power is right, and so is the 'already owned' subtraction. It is the category total that is soft."
   ]
 }

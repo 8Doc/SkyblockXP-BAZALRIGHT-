@@ -1,0 +1,218 @@
+{
+ "generatedAt": "2026-08-20T23:57:44.322Z",
+ "source": "Hypixel SkyBlock Fandom wiki infobox: rarity",
+ "note": "Rarity for accessories the items resource ships without one. Magical power is a function of rarity, so without this they have no defined magical power and are dropped from the model — uncreditable when worn, and leaving their family looking empty.",
+ "consequence": "A wrong rarity mis-prices an accessory's magical power in both the bag total and the task. Anything the wiki does not state plainly is left in `missing` and stays dropped, rather than guessed at.",
+ "rarities": [
+  {
+   "id": "BAT_PERSON_TALISMAN",
+   "name": "Bat Person Talisman",
+   "rarity": "COMMON",
+   "page": "Bat Person Talisman"
+  },
+  {
+   "id": "BEASTMASTER_CREST_COMMON",
+   "name": "Beastmaster Crest",
+   "rarity": "COMMON",
+   "page": "Beastmaster Crest"
+  },
+  {
+   "id": "BLOOD_GOD_CREST",
+   "name": "Blood God Crest",
+   "rarity": "COMMON",
+   "page": "Blood God Crest"
+  },
+  {
+   "id": "COIN_TALISMAN",
+   "name": "Talisman of Coins",
+   "rarity": "COMMON",
+   "page": "Talisman of Coins"
+  },
+  {
+   "id": "DANTE_RING",
+   "name": "Dante's Ring",
+   "rarity": "COMMON",
+   "page": "Dante's Ring"
+  },
+  {
+   "id": "DANTE_TALISMAN",
+   "name": "Dante's Talisman",
+   "rarity": "COMMON",
+   "page": "Dante's Talisman"
+  },
+  {
+   "id": "FEATHER_TALISMAN",
+   "name": "Feather Talisman",
+   "rarity": "COMMON",
+   "page": "Feather Talisman"
+  },
+  {
+   "id": "FIRE_TALISMAN",
+   "name": "Fire Talisman",
+   "rarity": "COMMON",
+   "page": "Fire Talisman"
+  },
+  {
+   "id": "HANDY_BLOOD_CHALICE",
+   "name": "Handy Blood Chalice",
+   "rarity": "COMMON",
+   "page": "Handy Blood Chalice"
+  },
+  {
+   "id": "HEALING_TALISMAN",
+   "name": "Healing Talisman",
+   "rarity": "COMMON",
+   "page": "Healing Talisman"
+  },
+  {
+   "id": "INTIMIDATION_TALISMAN",
+   "name": "Intimidation Talisman",
+   "rarity": "COMMON",
+   "page": "Intimidation Talisman"
+  },
+  {
+   "id": "KING_TALISMAN",
+   "name": "King Talisman",
+   "rarity": "COMMON",
+   "page": "King Talisman"
+  },
+  {
+   "id": "MASTER_SKULL_TIER_1",
+   "name": "Master Skull - Tier 1",
+   "rarity": "COMMON",
+   "page": "Master Skull"
+  },
+  {
+   "id": "MINE_TALISMAN",
+   "name": "Mine Affinity Talisman",
+   "rarity": "COMMON",
+   "page": "Mine Affinity Talisman"
+  },
+  {
+   "id": "NIGHT_VISION_CHARM",
+   "name": "Night Vision Charm",
+   "rarity": "COMMON",
+   "page": "Night Vision Charm"
+  },
+  {
+   "id": "POCKET_ESPRESSO_MACHINE",
+   "name": "Pocket Espresso Machine",
+   "rarity": "COMMON",
+   "page": "Pocket Espresso Machine"
+  },
+  {
+   "id": "POTATO_TALISMAN",
+   "name": "Potato Talisman",
+   "rarity": "COMMON",
+   "page": "Potato Talisman"
+  },
+  {
+   "id": "POTION_AFFINITY_TALISMAN",
+   "name": "Potion Affinity Talisman",
+   "rarity": "COMMON",
+   "page": "Potion Affinity Talisman"
+  },
+  {
+   "id": "POWER_TALISMAN",
+   "name": "Talisman of Power",
+   "rarity": "COMMON",
+   "page": "Talisman of Power"
+  },
+  {
+   "id": "RAGGEDY_SHARK_TOOTH_NECKLACE",
+   "name": "Raggedy Shark Tooth Necklace",
+   "rarity": "COMMON",
+   "page": "Raggedy Shark Tooth Necklace"
+  },
+  {
+   "id": "RUNEBOOK",
+   "name": "Runebook",
+   "rarity": "COMMON",
+   "page": "Runebook"
+  },
+  {
+   "id": "SCAVENGER_TALISMAN",
+   "name": "Scavenger Talisman",
+   "rarity": "COMMON",
+   "page": "Scavenger Talisman"
+  },
+  {
+   "id": "SEA_CREATURE_TALISMAN",
+   "name": "Sea Creature Talisman",
+   "rarity": "COMMON",
+   "page": "Sea Creature Talisman"
+  },
+  {
+   "id": "SKELETON_TALISMAN",
+   "name": "Skeleton Talisman",
+   "rarity": "COMMON",
+   "page": "Skeleton Talisman"
+  },
+  {
+   "id": "SPEED_TALISMAN",
+   "name": "Speed Talisman",
+   "rarity": "COMMON",
+   "page": "Speed Talisman"
+  },
+  {
+   "id": "VACCINE_TALISMAN",
+   "name": "Vaccine Talisman",
+   "rarity": "COMMON",
+   "page": "Vaccine Talisman"
+  },
+  {
+   "id": "VILLAGE_TALISMAN",
+   "name": "Village Affinity Talisman",
+   "rarity": "COMMON",
+   "page": "Village Affinity Talisman"
+  },
+  {
+   "id": "ZOMBIE_TALISMAN",
+   "name": "Zombie Talisman",
+   "rarity": "COMMON",
+   "page": "Zombie Talisman"
+  }
+ ],
+ "missing": [
+  {
+   "id": "CAMPFIRE_TALISMAN_1",
+   "name": "Campfire Initiate Badge I"
+  },
+  {
+   "id": "CAMPFIRE_TALISMAN_2",
+   "name": "Campfire Initiate Badge II"
+  },
+  {
+   "id": "CAMPFIRE_TALISMAN_3",
+   "name": "Campfire Initiate Badge III"
+  },
+  {
+   "id": "COMPASS_TALISMAN",
+   "name": "Compass Talisman"
+  },
+  {
+   "id": "MASTER_SKULL_TIER_2",
+   "name": "Master Skull - Tier 2"
+  },
+  {
+   "id": "SOUL_CAMPFIRE_TALISMAN_1",
+   "name": "Soul Campfire Initiate Badge I"
+  },
+  {
+   "id": "SOUL_CAMPFIRE_TALISMAN_2",
+   "name": "Soul Campfire Initiate Badge II"
+  },
+  {
+   "id": "SOUL_CAMPFIRE_TALISMAN_3",
+   "name": "Soul Campfire Initiate Badge III"
+  },
+  {
+   "id": "WEDDING_RING_0",
+   "name": "§eShiny Yellow Rock"
+  },
+  {
+   "id": "WEDDING_RING_1",
+   "name": "§eYellow Rock of Love"
+  }
+ ]
+}

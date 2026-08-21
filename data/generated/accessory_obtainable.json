@@ -1,0 +1,68 @@
+{
+ "generatedAt": "2026-08-21T10:27:09.207Z",
+ "source": "Hypixel SkyBlock Fandom wiki page heads, plus the community wiki's Admin-only register",
+ "note": "Accessories no player can hold: staff curios and things removed from the game. They read as ordinary accessories in the items resource, so nothing but the wiki says they are off limits.",
+ "consequence": "Listing one offers a maxed player a former admin's curio as missing XP, and inflates the bag's ceiling by magical power nobody can collect. Being wrong the other way hides real XP, so only an explicit statement counts and silence means obtainable.",
+ "unobtainable": [
+  {
+   "id": "ARGOFAY_TRINKET",
+   "name": "Argofay Trinket",
+   "reason": "admin only"
+  },
+  {
+   "id": "ARTIFACT_OF_SPACE",
+   "name": "Artifact of Space",
+   "reason": "admin only"
+  },
+  {
+   "id": "BINGO_HEIRLOOM",
+   "name": "Bingo Heirloom",
+   "reason": "admin only"
+  },
+  {
+   "id": "ETERNAL_CRYSTAL",
+   "name": "Eternal Crystal",
+   "reason": "removed from the game"
+  },
+  {
+   "id": "GRIZZLY_PAW",
+   "name": "Grizzly Paw",
+   "reason": "admin only"
+  },
+  {
+   "id": "LUCK_TALISMAN",
+   "name": "Luck Talisman",
+   "reason": "admin only"
+  },
+  {
+   "id": "MASTER_SKULL_TIER_10",
+   "name": "Master Skull - Tier 10",
+   "reason": "admin only"
+  },
+  {
+   "id": "MASTER_SKULL_TIER_8",
+   "name": "Master Skull - Tier 8",
+   "reason": "admin only"
+  },
+  {
+   "id": "MASTER_SKULL_TIER_9",
+   "name": "Master Skull - Tier 9",
+   "reason": "admin only"
+  },
+  {
+   "id": "OLD_BOOT",
+   "name": "Old Boot",
+   "reason": "admin only"
+  },
+  {
+   "id": "RING_OF_SPACE",
+   "name": "Ring of Space",
+   "reason": "admin only"
+  },
+  {
+   "id": "TALISMAN_OF_SPACE",
+   "name": "Talisman of Space",
+   "reason": "admin only"
+  }
+ ]
+}

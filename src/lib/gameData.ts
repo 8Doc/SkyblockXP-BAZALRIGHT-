@@ -52,16 +52,27 @@ export type AccessoriesData = {
     museum: boolean;
     soulbound: boolean;
     tradeable: boolean;
-    /** Belongs to the Rift, which keeps its own accessory bag separate from this one. */
-    rift?: boolean;
-    /** A Rift accessory that can leave the Rift, and so does reach the main bag. */
-    riftTransferrable?: boolean;
-    /** False for the handful the game refuses to recombobulate. */
-    recombobulable?: boolean;
-    /** Why no player can obtain this one, if the wiki says no player can. */
-    unobtainable?: string;
+    /** False only where the resource says so outright — a Recombobulator 3000 won't take. */
+    recombobulatable: boolean;
+    /** From the Rift. Only the transferrable ones ever reach the accessory bag. */
+    rift: boolean;
+    riftTransferrable: boolean;
+    /** False for staff curios and things removed from the game — nobody can get one. */
+    obtainable: boolean;
   }[];
 };
+
+/**
+ * Whether an accessory can grant magical power at all.
+ *
+ * A rift accessory that cannot leave the rift cannot go in the accessory bag, so it never grants
+ * magical power and must never be offered as XP to buy. Seventeen of the twenty-nine rift
+ * accessories are in that state, and between them they were advertising about 140 magical power
+ * that no one can ever collect — the Crux line, both Rings of Love, Satelite and the trinkets.
+ */
+export function grantsMagicalPower(acc: { rift: boolean; riftTransferrable: boolean }): boolean {
+  return !acc.rift || acc.riftTransferrable;
+}
 
 export type MagicalPowerData = {
   source: string;
@@ -69,18 +80,14 @@ export type MagicalPowerData = {
   byRarity: Record<string, number>;
   rarityOrder: string[];
   excludedItems: { ids: string[] };
-  /** The wiki's stated ceiling, to check ours against. */
-  maximum?: { power: number; accessories: number; note: string; source: string };
-  /** The three accessories the game scores by something other than their rarity. */
-  special?: Record<string, { rule?: string; power?: number; per?: number; note?: string }>;
-  /** Accessories whose rarity climbs in place, through a mechanic we do not price. */
-  climbing?: {
-    note: string;
-    source: string;
-    items: { id: string; from: string; to: string; forgone: number; by: string }[];
+  /**
+   * Accessories that climb past what any purchase can reach, and the Rift Prism's imbue. Neither
+   * is buyable, so both are grind rows — left out entirely, a maxed bag reads as short.
+   */
+  climbing: {
+    items: { id: string; reaches: string; by: string }[];
+    riftPrism: { power: number; by: string };
   };
-  /** Slack for what neither the wiki table nor the items resource names. */
-  unlisted?: { power: number; note: string };
 };
 
 export type AccessoryFamiliesData = {
@@ -88,6 +95,20 @@ export type AccessoryFamiliesData = {
   verified: boolean;
   endsWithFamilies: string[];
   patternFamilies: { match: string; family: string }[];
+};
+
+/**
+ * Which accessory is an upgrade of which, as the wiki's `upgrades_from` states it. The items
+ * resource publishes no recipe or upgrade field on any accessory, so this is the only source
+ * for the lines that rename as they climb and cannot be inferred from names.
+ */
+export type AccessoryUpgradesData = {
+  generatedAt: string;
+  source: string;
+  pagesRead: number;
+  /** `child` upgrades from `parent`, so the two never grant magical power at the same time. */
+  edges: { child: string; parent: string; childName: string; parentName: string }[];
+  unresolved: { page: string; upgradesFrom: string }[];
 };
 
 export type MuseumData = {
@@ -248,8 +269,7 @@ export type GameData = {
   accessories: AccessoriesData;
   magicalPower: MagicalPowerData;
   accessoryFamilies: AccessoryFamiliesData;
-  /** Upgrade chains read off the wiki, as a family id per member. */
-  accessoryChains?: { chains: { family: string; members: string[] }[] };
+  accessoryUpgrades: AccessoryUpgradesData;
   museum: MuseumData;
   tasks: TasksData;
   curves: CurvesData;
@@ -317,29 +337,6 @@ export function effortOf(data: GameData, taskId: string): { effort: number; band
 export function magicalPowerOf(data: GameData, rarity: string): number {
   return data.magicalPower.byRarity[rarity] ?? 0;
 }
-/**
- * What one accessory is actually worth, which for all but three is its rarity's value. The
- * Accessory Power page names the exceptions: the Hegemony Artifact counts double, the Rift Prism
- * is worth 11 once imbued at Erihann whatever its rarity says, and an Abicase is worth one for
- * every two Abiphone contacts — up to 41, which is five times what its rarity alone would give.
- */
-export function accessoryPowerOf(
-  data: GameData,
-  id: string,
-  rarity: string,
-  abiphoneContacts = 0,
-): number {
-  const base = magicalPowerOf(data, rarity);
-  const special = data.magicalPower.special?.[id];
-  if (!special) return base;
-  if (special.rule === "double") return base * 2;
-  if (special.rule === "fixed") return special.power ?? base;
-  if (special.rule === "perAbiphoneContacts") {
-    return Math.max(base, Math.floor(abiphoneContacts / (special.per ?? 2)));
-  }
-  return base;
-}
-
 
 /** Recombobulator bumps an accessory one step up the rarity ladder. */
 export function bumpRarity(data: GameData, rarity: string, steps: number): string {
@@ -353,12 +350,17 @@ export function bumpRarity(data: GameData, rarity: string, steps: number): strin
 /* ----------------------------------------------------------------- families */
 
 /**
- * Which family an accessory belongs to. Only the best member of a family grants magical power,
- * so getting this wrong in either direction matters: merge too eagerly and real XP disappears,
- * merge too little and a plan buys the same magical power twice over.
+ * Which family an accessory belongs to, going on its name alone. Only the best member of a
+ * family grants magical power, so getting this wrong in either direction matters: merge too
+ * eagerly and real XP disappears, merge too little and a plan buys the same magical power twice
+ * over.
  *
  * Three structural patterns cover most of it; the stragglers are named in
  * data/curated/accessory_families.json.
+ *
+ * Names are only ever a proxy for the thing that actually matters, which is whether one
+ * accessory is an upgrade of another — so this is half the answer. `familyOf` merges it with
+ * the wiki's upgrade graph, which is what catches the lines that rename as they climb.
  */
 // The nouns a family climbs through. Heirloom, Badge and Chronomicon were missing, which
 // split four families down the middle — "Bingo Heirloom" sat apart from the rest of Bingo, so
@@ -371,18 +373,7 @@ const FAMILY_OF = new RegExp(`^(${UPGRADE_WORD}) (of .+)$`);
 /** "Master Skull - Tier 3", "Personal Compactor 6000" -> drop the tier marker */
 const TIER_MARKER = /(\s+-\s+Tier\s+\d+|\s+\d+)$/;
 
-export function familyOf(data: GameData, name: string, id: string): string {
-  // An upgrade line the wiki states outright beats any guess made from the name. Cropie
-  // Talisman, Squash Ring, Fermento Artifact and Helianthus Relic share no word between them,
-  // but each is crafted from the last, so only the one you hold is in your bag.
-  const chained = chainFamily(data, id);
-  if (chained) return chained;
-  return nameFamilyOf(data, name, id);
-}
-
-/** The family a name alone implies, before any upgrade line is taken into account. */
-function nameFamilyOf(data: GameData, name: string, id: string): string {
-
+function namedFamilyOf(data: GameData, name: string, id: string): string {
   for (const phrase of data.accessoryFamilies.endsWithFamilies) {
     if (name.endsWith(phrase)) return phrase.toLowerCase();
   }
@@ -401,13 +392,148 @@ function nameFamilyOf(data: GameData, name: string, id: string): string {
   return untiered.toLowerCase() || `#${id}`;
 }
 
+/**
+ * Lowercased accessory name -> family key, with the name rules and the wiki's `upgrades_from`
+ * edges merged into one answer.
+ *
+ * A name rule can only see a family that keeps its stem, and fourteen lines don't: a Shady Ring
+ * becomes a Crooked Artifact, a Cat Talisman climbs to Lynx and then Cheetah, and the whole
+ * farming line runs Cropie -> Squash -> Fermento -> Helianthus without repeating a word. Those
+ * read as separate families, so the bag kept offering a player the base tier of a line they had
+ * already upgraded past — the accessory equivalent of being sold a rare pet you own the epic of.
+ *
+ * Merging both sources rather than preferring one is deliberate, because each covers what the
+ * other misses. The wiki has no page for the Campfire badge ladders or the Master Skull tiers,
+ * which the name rules handle by construction; the name rules cannot possibly know that a
+ * Fermento Artifact makes a Cropie Talisman worthless. Unioning is also the only way to get the
+ * transitive closure right: the wiki states one edge at a time, and it takes three of them to
+ * learn that Cropie and Helianthus are the same family.
+ */
+type FamilyIndex = Map<string, string>;
+const FAMILY_INDEX = new WeakMap<GameData, FamilyIndex>();
+
+function familyIndex(data: GameData): FamilyIndex {
+  const cached = FAMILY_INDEX.get(data);
+  if (cached) return cached;
+
+  const accessories = data.accessories.accessories;
+  const named = new Map(accessories.map((a) => [a.id, namedFamilyOf(data, a.name, a.id)]));
+
+  // Union-find over accessory ids. Seeded with the name rules, then the wiki's edges are unioned
+  // on top, so a family is whatever either source says plus everything that follows from both.
+  const parent = new Map(accessories.map((a) => [a.id, a.id]));
+  const find = (id: string): string => {
+    let root = id;
+    while (parent.get(root) !== root) root = parent.get(root)!;
+    // Path compression, because deep lines like Crux are walked once per accessory.
+    for (let at = id; at !== root; ) {
+      const next = parent.get(at)!;
+      parent.set(at, root);
+      at = next;
+    }
+    return root;
+  };
+  const union = (a: string, b: string) => {
+    const [ra, rb] = [find(a), find(b)];
+    if (ra !== rb) parent.set(ra, rb);
+  };
+
+  const anchor = new Map<string, string>();
+  for (const [id, family] of named) {
+    const seen = anchor.get(family);
+    if (seen) union(id, seen);
+    else anchor.set(family, id);
+  }
+  // An edge naming something we don't model — a non-accessory, or an item dropped for want of a
+  // rarity — is skipped rather than invented, the same way the fetch script drops it.
+  for (const edge of data.accessoryUpgrades?.edges ?? []) {
+    if (parent.has(edge.child) && parent.has(edge.parent)) union(edge.child, edge.parent);
+  }
+
+  // Name each merged family after the name rule most of its members already agreed on, ties
+  // broken alphabetically. Keeping the majority name means merging Celestial Starstone into the
+  // Crux line leaves that family still called "crux", so the keys stay recognisable in a plan.
+  const tally = new Map<string, Map<string, number>>();
+  for (const [id, family] of named) {
+    const root = find(id);
+    const counts = tally.get(root) ?? new Map<string, number>();
+    counts.set(family, (counts.get(family) ?? 0) + 1);
+    tally.set(root, counts);
+  }
+  const keyOf = new Map<string, string>();
+  for (const [root, counts] of tally) {
+    let best = "";
+    let bestCount = -1;
+    for (const [family, count] of counts) {
+      if (count > bestCount || (count === bestCount && family < best)) [best, bestCount] = [family, count];
+    }
+    keyOf.set(root, best);
+  }
+
+  const index: FamilyIndex = new Map();
+  for (const a of accessories) index.set(a.name.toLowerCase(), keyOf.get(find(a.id))!);
+  FAMILY_INDEX.set(data, index);
+  return index;
+}
+
+/**
+ * Which family an accessory belongs to. Members of a family replace each other rather than
+ * stacking, so this is what stops a plan buying the same magical power twice and what stops the
+ * bag listing a tier the player has already upgraded past.
+ */
+export function familyOf(data: GameData, name: string, id: string): string {
+  // An accessory we don't model — a name a test made up, or an item with no published rarity —
+  // has no place in the index, and the name rules are still a defensible answer for it.
+  return familyIndex(data).get(name.toLowerCase()) ?? namedFamilyOf(data, name, id);
+}
+
 /* --------------------------------------------------------------- bag scoring */
 
-export type BagItem = {
-  id: string;
-  rarityUpgrades: number;
-  /** What the item's own lore says it is, which is the final word when the blob carries it. */
-  rarity?: string;
+export type BagItem = { id: string; rarityUpgrades: number; rarity?: string | null };
+
+/**
+ * The accessories the game scores by its own rules rather than by rarity alone.
+ *
+ * All three are stated on the wiki's Magical Power page. Without them a maxed bag reads low by
+ * a wide margin, and the computed-vs-reported gap — the one readout that tells you the model is
+ * wrong — gets blamed on family detection instead.
+ */
+const HEGEMONY = "HEGEMONY_ARTIFACT";
+
+/**
+ * What one accessory is worth in the bag: its rarity, doubled if it is the Hegemony.
+ *
+ * Counted here rather than added on afterwards so that the figure the planner offers for buying
+ * one matches the figure the bag credits for holding it. Quoting the Hegemony at its rarity made
+ * it look like 22 magical power to buy when it is really 44 — the single largest row in the
+ * category, ranked as though it were half its size.
+ */
+export function accessoryPower(data: GameData, id: string, rarity: string): number {
+  const power = magicalPowerOf(data, rarity);
+  return id === HEGEMONY ? power * 2 : power;
+}
+/** An Abicase grants one extra magical power for every two Abiphone contacts. */
+export function abicaseBonusFor(contacts: number): number {
+  return Math.floor(contacts / 2);
+}
+const abicaseBonus = abicaseBonusFor;
+
+/**
+ * A Rift Prism imbued at Erihann is worth 11 magical power, and keeps paying it once consumed —
+ * the prism itself is gone, so there is nothing in the bag to find it by. The profile records
+ * the act instead, under `rift.access.consumed_prism`, which is also the only way to know the
+ * prism is not still owed: it was being offered as 8 magical power of missing XP to a player who
+ * had already drunk it.
+ */
+const RIFT_PRISM = "RIFT_PRISM";
+const RIFT_PRISM_MP = 11;
+
+/** What the bag scorer needs that isn't in the bag. */
+export type BagExtras = {
+  /** Contacts from `active_contacts`, which is the full list; `contact_data` holds only some. */
+  abiphoneContacts?: number;
+  /** `rift.access.consumed_prism` — the prism has been imbued and its magical power banked. */
+  riftPrismConsumed?: boolean;
 };
 
 export type BagState = {
@@ -439,9 +565,9 @@ export function scoreBag(
   items: BagItem[] | null,
   reportedMp: number | null,
   capacity = 0,
-  /** An Abicase is worth one accessory power for every two of these. */
-  abiphoneContacts = 0,
+  extras: BagExtras = {},
 ): BagState {
+  const { abiphoneContacts = 0, riftPrismConsumed = false } = extras;
   const byId = new Map(data.accessories.accessories.map((a) => [a.id, a]));
   const excluded = new Set(data.magicalPower.excludedItems.ids);
 
@@ -450,25 +576,39 @@ export function scoreBag(
   const owned = new Set<string>();
 
   let identified = 0;
+  let bonusMp = 0;
   for (const item of items ?? []) {
     owned.add(item.id);
     if (excluded.has(item.id)) continue;
     const meta = byId.get(item.id);
     if (!meta) continue;
     identified++;
-    // The item's own lore beats anything derived from its base rarity: six accessories climb
-    // the ladder through their own mechanics, so a base tier plus a Recombobulator count reads
-    // a maxed player's mythic Book of Progression as common.
-    const rarity = item.rarity ?? bumpRarity(data, meta.tier, item.rarityUpgrades);
+    // The item's own lore wins over the resource where it has one: a Book of Progression climbs
+    // to mythic through play and the resource still calls it common. A rarity the table has no
+    // figure for is not an improvement on the resource, so it falls back rather than scoring nil.
+    const fromResource = bumpRarity(data, meta.tier, item.rarityUpgrades);
+    const rarity = item.rarity && magicalPowerOf(data, item.rarity) > 0 ? item.rarity : fromResource;
     const family = familyOf(data, meta.name, meta.id);
-    const power = accessoryPowerOf(data, meta.id, rarity, abiphoneContacts);
+    // Hegemony's doubling is inside this figure, so holding one and buying one agree.
+    const power = accessoryPower(data, meta.id, rarity);
     if (power > (familyPower.get(family) ?? -1)) {
       familyPower.set(family, power);
       familyBest.set(family, { id: meta.id, rarity, recombobulated: item.rarityUpgrades > 0 });
     }
+    if (meta.id.startsWith("ABICASE")) bonusMp += abicaseBonus(abiphoneContacts);
   }
 
-  let computedMp = 0;
+  // An imbued prism is gone from the bag but its magical power is not. Recorded against the
+  // family so the planner also stops offering the prism itself as XP still to buy.
+  if (riftPrismConsumed) {
+    const prism = byId.get(RIFT_PRISM);
+    if (prism) {
+      const family = familyOf(data, prism.name, prism.id);
+      if (RIFT_PRISM_MP > (familyPower.get(family) ?? -1)) familyPower.set(family, RIFT_PRISM_MP);
+    }
+  }
+
+  let computedMp = bonusMp;
   for (const power of familyPower.values()) computedMp += power;
 
   return {
@@ -571,40 +711,3 @@ export function categoryLabel(category: Category, data?: GameData): string {
   return `${label} — ${data.bestiary.totals.xp.toLocaleString("en-US")} XP in all`;
 }
 
-/**
- * Accessory id to the upgrade chain it belongs to.
- *
- * Keyed on the data object rather than cached in a single slot: a module-level cache takes its
- * shape from whichever caller arrives first, so one test passing a cut-down table poisoned it
- * for everything after.
- */
-const chainLookups = new WeakMap<object, Map<string, string>>();
-
-function chainFamily(data: GameData, id: string): string | null {
-  let lookup = chainLookups.get(data);
-  if (!lookup) {
-    lookup = new Map();
-    // A chain absorbs whatever the name rule already grouped with any of its members, rather
-    // than replacing it. Otherwise a line the wiki only half documents splits a family that was
-    // whole: Ring and Talisman of the Century are chained, the Artifact is not, and all three
-    // are plainly "of the century".
-    const chainOfNameFamily = new Map<string, string>();
-    for (const chain of data.accessoryChains?.chains ?? []) {
-      const chainId = `chain:${chain.family}`;
-      for (const member of chain.members) {
-        lookup.set(member, chainId);
-        const meta = data.accessories.accessories.find((a) => a.id === member);
-        if (!meta) continue;
-        const byName = nameFamilyOf(data, meta.name, meta.id);
-        if (!chainOfNameFamily.has(byName)) chainOfNameFamily.set(byName, chainId);
-      }
-    }
-    for (const accessory of data.accessories.accessories) {
-      if (lookup.has(accessory.id)) continue;
-      const chainId = chainOfNameFamily.get(nameFamilyOf(data, accessory.name, accessory.id));
-      if (chainId) lookup.set(accessory.id, chainId);
-    }
-    chainLookups.set(data, lookup);
-  }
-  return lookup.get(id) ?? null;
-}

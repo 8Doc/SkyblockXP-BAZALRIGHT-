@@ -587,6 +587,16 @@ function browserView(report: Report): string {
                 : ""
             }
             ${
+              // The one category whose total is two unlike things added together. Said out loud
+              // here because the sum of it and the magical power you hold overshoots the game's
+              // maximum by exactly the slots you have left, which reads as a bug and is not one.
+              category === "accessory_bag" && report.bag.powerLeft > 0
+                ? `<p class="sub">${num(report.bag.powerLeft)} of that is magical power, the other ${num(
+                    summary.remainingXp - report.bag.powerLeft,
+                  )} bag slots from Jacobus.</p>`
+                : ""
+            }
+            ${
               maxed !== undefined
                 ? `<p class="sub group-toggle">
                     <button class="chip${isGrouped ? " on" : ""}" data-toggle="${groupKey}">Group maxed</button>
@@ -931,7 +941,9 @@ function renderResults(): void {
       }
       ${
         r.bag.reportedMp !== null
-          ? `<span class="dim">${r.bag.computedMp} MP computed${
+          ? `<span class="dim" title="Magical power you hold, and the most this bag can reach. The Accessory Bag category totals more than the difference because it also holds the bag's slot upgrades, and those are XP for buying room rather than magical power.">${
+              r.bag.computedMp
+            } of ${r.bag.computedMp + r.bag.powerLeft} MP${
               r.bag.reportedMp !== r.bag.computedMp ? ` · <span class="gold">${r.bag.reportedMp} reported</span>` : ""
             }</span>`
           : ""

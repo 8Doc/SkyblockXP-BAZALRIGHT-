@@ -303,7 +303,8 @@ that check is what caught a wrong slayer curve and a mis-spelled essence perk.
 
 ```bash
 npm run gen:ids    # resample the task-id namespace from live players (slow, ~140 API calls)
-npm run gen:all    # rebuild every table: API resources, wiki tasks, wiki curves, the join
+npm run gen:all    # rebuild every table: API resources, wiki tasks, wiki curves, accessory
+                   # upgrade lines, the join
 ```
 
 ## Deviations from the spec above
@@ -344,4 +345,8 @@ Three, all deliberate:
   long accessory plan may exceed what the player can actually carry.
 - The XP floor filters on a bundle's total XP, not per click. A five-tier minion bundle worth
   5 XP passes a floor of 5 while being five actions.
-- Accessory family coverage is best-effort; see `DATA.md`.
+- Accessory family coverage is best-effort; see `DATA.md`. Families now come from the wiki's
+  `upgrades_from` graph unioned with the name rules, which closed the fourteen lines that rename
+  as they climb (Cropie → Squash → Fermento → Helianthus was being offered as four separate
+  purchases). What is left is the reverse risk — a family the wiki doesn't state and no name rule
+  spots — and the computed-vs-reported MP readout is the check on it.

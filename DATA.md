@@ -38,19 +38,199 @@ excluding them on a hunch would hide buyable XP.
 ### `accessory_families.json`
 Only the best member of an accessory family counts, so families have to be detected or the
 same magical power gets sold to the user twice. Three patterns are structural and handled in
-code (`familyOf`):
+code (`namedFamilyOf`):
 
 - `Bat Person Artifact` → `bat person` (the Talisman/Ring/Artifact/Relic/Orb chain)
 - `Relic of Coins` → `of coins`
 - `Master Skull - Tier 3`, `Personal Compactor 6000` → tier markers stripped
 
 The rest are named in the file: shark tooth necklaces, Kuudra cores, fish bowls, piggy banks,
-voter's badges, rings of love, campfire badges.
+voter's badges, rings of love, and the two campfire badge ladders.
 
-**Known imprecision.** Our ceiling for a fresh profile is ~1,872 XP against the README's
-~2,121. The gap is family detection in one direction or the other and it is not checkable from
-the API. Individual task XP is exact — a specific accessory's magical power is right, and the
-"already owned" subtraction is right. It's the category *total* that's approximate.
+Those two are worth a word, because the pattern that caught them used to be unanchored and so
+swallowed both: `Campfire .*Badge` matches `Soul Campfire Adept Badge I` just as happily as
+`Campfire Adept Badge I`. They are separate ladders in game — 26 badges a side, under separate
+ids (`CAMPFIRE_TALISMAN_*` against `SOUL_CAMPFIRE_TALISMAN_*`) — so merging them hid a whole
+ladder's magical power. This is the error the *other* way round from the rename lines below: too
+eager a merge hides XP the player has, where too shy a one sells XP they already own.
+
+A name is only ever a proxy for the thing that matters, which is whether one accessory is an
+upgrade of another, so this is half of family detection. The other half is
+`accessory_upgrades.json` below, and `familyOf` unions the two.
+
+**Known imprecision.** The ceiling moves whenever family detection does, and neither it nor the
+README's ~2,121 is checkable from the API. Individual task XP is exact — a specific accessory's
+magical power is right, and the "already owned" subtraction is right. It's the category *total*
+that's approximate.
+
+### `accessory_upgrades.json`
+
+Which accessory is an upgrade of which, from the wiki infobox's `upgrades_from`.
+
+The API was checked first and does not have it. Sweeping all 423 accessories in
+`resources/skyblock/items` for a field that links tiers turns up **nothing** — no `recipe`, no
+`upgrade_costs`, no `upgrades_from`. The fields those items actually carry are `id`, `name`,
+`category`, `material`, `tier`, `stats` and a scatter of flags, and none of them says that a
+Fermento Artifact replaces a Cropie Talisman.
+
+Names carry the link whenever a line keeps its stem, which is most of them — Bat Talisman → Bat
+Ring → Bat Artifact. **Fourteen lines rename as they climb**, and for those a name rule cannot
+work in principle, not just in practice:
+
+| The line | What the name rules saw |
+|---|---|
+| Cropie → Squash → Fermento → Helianthus | four families |
+| Cat → Lynx → Cheetah | three |
+| Shady Ring → Crooked Artifact → Seal of the Family | three |
+| Kuudra's Kidney → Lung → Heart | three |
+| Night Crystal → Moonlight Crystal | two |
+| Day Crystal → Sunshine Crystal | two |
+| Bait Ring → Spiked Atrocity | two |
+| Crux Chronomicon → Celestial Starstone | two |
+| Bluetooth Ring → Bluertooth Ring | two |
+
+The symptom was the reported one: the bag listed accessories the player had already upgraded
+past, because the tier they owned sat in a family the planner thought was empty. It also
+inflated the ceiling — the same magical power counted once per split — by **97 MP**.
+
+The two sources are unioned rather than ranked, because each covers the other's blind spots. The
+wiki has no page for the Campfire badge ladders, the Master Skull tiers or the Rings of Love,
+all of which the name rules get by construction; the name rules cannot see any of the fourteen
+above. Unioning is also the only way to close a chain: the wiki states one edge at a time, and
+it takes three of them to learn that Cropie and Helianthus are the same family.
+
+Edges are stored, not finished families, so the union happens in one place next to the name
+rules and either source alone still yields a usable answer.
+
+Both wikis are read, and both ends of the link. Fandom is the fuller of the two but the
+community wiki carries pages it never got — the Applicant's Statement's is the only one saying
+it becomes a Student's Studies, without which a maxed player is offered it as missing XP. And
+an editor records the link from whichever end they were editing, so `upgrades_to` states lines
+that `upgrades_from` never mentions. 651 pages across the two yield 163 edges; the three that
+don't resolve name something outside the modelled set and are recorded rather than guessed at.
+
+### `accessory_rarity.json`
+
+Rarity for the 38 accessories the items resource ships without one, read off the wiki infobox.
+
+Magical power is a function of rarity and nothing else, so an accessory with no rarity has no
+defined magical power and gets dropped from the model altogether. That costs twice: the bag
+cannot credit one the player is wearing, and the family it anchors reads as empty, so the
+planner offers a tier they have already upgraded past. A maxed profile was wearing six of them —
+Dante's Ring among them — and being offered Dante's Talisman as missing XP.
+
+This replaces a rule that guessed COMMON for anything named "... Talisman", which was right as
+far as it went and reached only the Talisman step. 28 of the 38 now have a stated rarity; the
+other 10 (the Campfire Initiate badges, Master Skull tier 2, two joke Wedding Rings) have no
+page that states one and stay dropped, listed in `missing` rather than guessed at.
+
+## What the accessory bag is really worth
+
+Magical power is 1 SkyBlock XP each, so the bag's XP is only as good as the magical power model.
+Four rules matter, all of them stated on the wiki's Magical Power page and none of them in the
+API:
+
+- **Rarity sets it** — 3 / 5 / 8 / 12 / 16 / 22 for common through mythic.
+- **Hegemony Artifact counts twice.**
+- **An Abicase adds 1 per 2 Abiphone contacts.** Count them from `active_contacts`, not from
+  `contact_data`: the latter holds only the contacts with state attached and reads 80 against a
+  real 84 on the profile this was checked against.
+- **An imbued Rift Prism is worth 11**, and keeps paying after it is gone. Imbuing consumes the
+  prism, so nothing in the bag can find it; the profile records the act as
+  `rift.access.consumed_prism`. Without reading that, the planner lost the 11 *and* went on
+  offering the prism as 8 magical power of XP still to buy.
+- **Rift accessories only count if they can leave the rift.** 17 of the 29 cannot, and they
+  cannot enter the accessory bag at all, so their magical power is unreachable. They were being
+  advertised as buyable XP: the whole Crux line, both Rings of Love, Satelite and the trinkets,
+  about 140 magical power nobody can ever collect.
+
+There is a fifth rule the API actively misleads on. **Some accessories climb in rarity through
+play** — a Book of Progression and a Pandora's Box are both COMMON in the items resource and
+both MYTHIC in a real bag, worth 22 rather than 3. The bag's own NBT carries what the item
+actually is, in the last line of its lore, so that is what `bagItemsFrom` now reads and
+`scoreBag` prefers. Only about a tenth of bagged items carry lore at all, so this is a
+correction where it exists rather than a replacement for the resource.
+
+There is a sixth rule that is not about magical power at all: **some accessories nobody can
+have.** The Talisman, Ring and Artifact of Space are uncommon, rare and epic in the items
+resource and have only ever sat in a former admin's inventory; the Eternal Crystal stopped being
+craftable in 2019. Twelve are in that state, recorded in `accessory_obtainable.json`, and
+listing them told a player who owns everything to go and buy a staff curio.
+
+**Hatcessories are one family.** Every Hat of Celebration counts for the same magical power and
+only once — the wiki says different editions used to stack and that the stacking was removed —
+so a player wearing the Sloth was being offered both Crabs.
+
+Checked against a maxed profile reporting **2,122** magical power in game, the model reads
+**2,122**, and offers that player **nothing** as still missing. It read 1,946 against 30 rows
+before this work.
+
+The last 31 of that gap were all one bug, and it was in the lore reader. A recombobulated item
+writes its rarity line as `§d§l§ka§r §d§lMYTHIC ACCESSORY §d§l§ka`, where `§k` is Minecraft's
+obfuscation code and the `a` either side is the shimmer it scrambles. Stripping only the colour
+codes leaves `a MYTHIC ACCESSORY a`, which starts with no rarity at all — so **142 of 157**
+items on that bag quietly fell back to the items resource, and with them every accessory that
+climbs rarity in place. A Pulse Ring reads UNCOMMON in the resource and MYTHIC on the item.
+
+Ruled out along the way, by measuring rather than arguing: dungeon accessories counting double
+(that overshoots to 2,216), enrichments (the wiki's Enrichments page never mentions magical
+power), and Personal Deletor 6000 against 7000 being separate families (the wiki states 7000
+`upgrades_from` 6000, so merging them is right).
+
+### Why the magical power you have and the XP still listed don't add up to 2,122
+
+They are not meant to, and two of the three reasons were bugs.
+
+**Bag slot upgrades are in the category but are not magical power.** They are ordinary SkyBlock
+XP for buying room from Jacobus — 146 of the 395 one profile was quoted. Any sum that expects
+`magical power + category XP = 2,122` has to drop these first.
+
+**The recombobulator step was only offered on what you already own.** A maxed bag is
+recombobulated throughout — one profile had done it to 124 of the 128 families it held, and the
+four it hadn't were the four that refuse one — so an accessory you have yet to buy is worth its
+rarity *and then the step after it*. Quoting only the first left the rest of the bag priced at
+base rarities. The step is now offered for unowned families too, with the accessory as a
+prerequisite so the bundle costs what the pair really costs.
+
+**The Hegemony was quoted at half price.** It counts double in the bag and the row offering it
+said 22 rather than 44 — the largest single row in the category, ranked as though it were half
+its size. `accessoryPower` now applies the doubling in both places, so what it is worth to buy
+and what it is worth to hold are the same number.
+
+**Owning a lesser member of a family hid the whole upgrade.** A recombobulated Bat Person Ring
+is worth exactly as much as a fresh Bat Person Artifact, so buying the Artifact gained nothing
+and was marked done and hidden — and the Recombobulator row only ever covered what was already
+in the bag, which was the Ring, and the Ring had already had one. The two steps that actually
+pay, buy the better one *and then* recombobulate it, appeared nowhere. That was 73 magical
+power across seventeen families on one profile.
+
+**What no purchase can reach is listed too, as grind.** Six accessories climb past their bought
+rarity through a mechanic of their own, and imbuing a Rift Prism pays 11 for good. The rarities
+they reach are in `magical_power.json` under `climbing`, read off the bag of a profile sitting
+at the documented maximum — stated by the item rather than claimed by a table, which is what
+makes them maxima rather than guesses. The Abicase's magical power scales with Abiphone
+contacts at one per two, which arrives with the contacts rather than being bought, so it is a
+grind row here while the contacts stay priced in their own category.
+
+**Count the Abiphone contacts off the task list, not the pricing table.** The two disagree and
+only one is complete: `tasks.json` holds all 84 contacts, from the id namespace harvested off
+live players, while the wiki's contacts table states 71 and never mentions the drill fuel
+mechanic, the forge foreman or eleven others. Reading the short one capped the Abicase seven
+magical power below what it reaches — and seven is exactly `floor(84/2) - floor(71/2)`.
+
+**And offer that magical power before the Abicase is bought.** It was gated on already holding
+one, which is the wrong way round: not owning the Abicase makes it a prerequisite, not a reason
+to hide the 42 magical power behind it.
+
+Checked against **49 profiles sampled at random from the auction house**, plus four named ones.
+Before these two changes, 18 of the 49 reconciled to 2,122 and 28 sat exactly 42 short — the
+whole Abiphone book, which is what identified the gating as the cause. After, **48 of 49 land
+on 2,122 exactly**.
+
+The one that does not is 22 over, and it is also the profile whose computed power runs 17 above
+its own reported figure, so the disagreement is upstream of the ceiling. Still open, along with
+the accessories a bag can hold that the items resource does not carry at all: the Balloon Hats
+of 2024 and 2025 and the Cake Hat of 2026 turned up on 21 of those 49 bags.
 
 ## Running without a server
 
