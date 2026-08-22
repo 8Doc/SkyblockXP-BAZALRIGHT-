@@ -99,6 +99,23 @@ export type Flip = {
    * time an item that thin pays you nothing at all.
    */
   badHourCoins: number;
+
+  /**
+   * How long each side of the book would last against the flow that has been going through it,
+   * in hours, and the thinner of the two.
+   *
+   * This is the test for whether a price is a price. A quote is set by whoever is at the front of
+   * the book, and when the book behind them is nearly empty that is one straggler rather than a
+   * market — Turtlellini asked 457k against a 72k bid, an 84% margin and top of the list, on a
+   * sell side holding a hundred and twenty-seven items against six hundred instabuys an hour. The
+   * volume figure sitting beside it was earned a week earlier at a fifth of the price.
+   *
+   * In items the two are incomparable; in hours they are not. A hundred and twenty-seven
+   * Turtlellini is eleven minutes and nine thousand Enchanted Quartz Blocks is twelve hours.
+   */
+  supplyHours: number;
+  demandHours: number;
+  bookHours: number;
 };
 
 /**
@@ -185,6 +202,11 @@ export function flip(p: ProductSnapshot): Flip | null {
 
   const badHourFills = Math.min(badHourCount(bought), badHourCount(sold));
 
+  // Each side is drained by the other side's traffic: sell offers are eaten by instabuys, buy
+  // orders by instasells.
+  const supplyHours = p.supply / bought;
+  const demandHours = p.demand / sold;
+
   return {
     id: p.id,
     buyAt: p.instasell,
@@ -201,6 +223,9 @@ export function flip(p: ProductSnapshot): Flip | null {
     returnOnCapital: capital > 0 ? coinsPerHour / capital : 0,
     badHourFills,
     badHourCoins: netMargin * badHourFills,
+    supplyHours,
+    demandHours,
+    bookHours: Math.min(supplyHours, demandHours),
   };
 }
 

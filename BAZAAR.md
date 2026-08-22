@@ -315,6 +315,51 @@ The budget column then reads "buy as many as you can afford, up to the window":
 That last row is the point, and it is why the count is discrete rather than interpolated. Someone
 holding 50M does not earn a quarter of a 181M flip; they cannot place the order at all.
 
+### A price nobody is trading at
+
+The third way, and the one a reader spots before any formula does. Turtlellini sat at the top of
+the list with an 84% margin: a 457k ask against a 72k bid, 662 round trips an hour, 248M an hour.
+Nobody is buying Turtlellini at 457k.
+
+Its sell side held **127 items**. Against 111,172 instabuys a week, that is eleven minutes of
+book. The ask was not a price, it was the last straggler left after the book was cleared out — and
+the 662-an-hour figure sitting beside it was earned a week earlier at a fifth of the price.
+
+That is the shape every fictional row has, and it is measurable from the snapshot alone without
+any history at all:
+
+```
+bookHours = min( supply / instabuys per hour , demand / instasells per hour )
+```
+
+**In items the two sides of a market are incomparable; in hours they are not.** A hundred and
+twenty-seven Turtlellini is eleven minutes. Nine thousand Enchanted Quartz Blocks is twelve hours.
+Across a live read of 1,323 flips the median book held **22.8 hours** and the first percentile held
+34 minutes, so the measure separates cleanly.
+
+An hour is the default floor, and it is where the data puts it. Everything below it on a live read
+was fiction —
+
+| | margin | book | coins/hr |
+|---|---|---|---|
+| Bloodbat Shard | 100% | **no buy orders at all** | 5.7M |
+| Spiked Hook 6 | 100% | 1 buy order | 0.1M |
+| Hardened Mana 1 | 81% | 2 items of supply | 0.3M |
+| Scavenger 5 | 95% | 9 items of supply | 2.2M |
+| Wolverine Shard | 33% | 38 items · 21 min | 11.8M |
+| Turtlellini | 28–84% | 127 items · 11 min | 17M |
+
+— and nothing above a million an hour was lost. It hides 20 of 1,727.
+
+The floor is a slider on the same 1-2-3-5-7 principle, from off to five days, and the **Depth**
+column shows the figure and which side is the thin one, so nothing is hidden from judgement. It
+applies to flips only: a craft's price comes from a recipe rather than from whoever is left at the
+front of a book, and its bottleneck already says how fast it can really go.
+
+The three controls catch three different lies and none substitutes for another. Ultimate Fatal
+Tempo 1 has 84% margin and a book **1.2 days** deep — depth passes it, and one round trip an hour
+is what makes it fiction, so the volume floor and the bad hour take it instead.
+
 ### What we did not use
 
 Competition looked like the obvious culprit and is not. The book publishes `orders`, the count of
@@ -423,8 +468,8 @@ away unmounts it — a page nobody is looking at should not be making a request 
 It ships **Flips** and **Crafts**. Every column is sortable and both default to coins per hour
 descending. Flips carries the allocate, bad-hour and budget columns above.
 
-Both carry a **volume floor**, because no amount of cleverness in the ranking removes the reader's
-need to say "not that slow". Its slider was a linear 0–200, which was useless: bazaar volumes run
+Both carry a **volume floor**, and flips also carry a **depth floor**, because no amount of
+cleverness in the ranking removes the reader's need to say "not that slow" and "not that fake". Its slider was a linear 0–200, which was useless: bazaar volumes run
 from a couple of trades a week to two hundred thousand an hour, so nine tenths of the travel sat in
 a range nobody wants and it could not express "a thousand" at all. It is now the 1-2-3-5-7
 preferred numbers, five stops to a decade, from off to 100,000 — resolution where the decisions
@@ -457,7 +502,7 @@ Two things it does that skyblock.bz's does not:
 
 ## What this repo has, and what it still needs
 
-Implemented and tested (`tests/bazaar.test.ts` and `tests/recipes.test.ts`, 35 cases):
+Implemented and tested (`tests/bazaar.test.ts` and `tests/recipes.test.ts`, 42 cases):
 
 
 - [`bazaarTypes.ts`](src/lib/bazaarTypes.ts) — the raw and relabelled shapes, and the history row.

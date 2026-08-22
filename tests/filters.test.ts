@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { VOLUME_LADDER, ladderIndex, volumeNote } from "../src/lib/volumeFloor";
+import { DEPTH_LADDER, VOLUME_LADDER, depthIndex, depthNote, ladderIndex, volumeNote } from "../src/lib/filters";
 
 /**
  * The volume floor's slider. It replaced a linear 0–200 control, which spent nine tenths of its
@@ -36,4 +36,35 @@ test("the floor reads as a wait, because a wait is the thing you are choosing", 
   // wait all the way up would have a hundred an hour reading as one a minute.
   assert.equal(volumeNote(100), "100/hr · 2 a minute");
   assert.equal(volumeNote(10_000), "10,000/hr · 167 a minute");
+});
+
+/* -------------------------------------------------------------- depth floor */
+
+test("the depth ladder climbs from minutes to days", () => {
+  for (let i = 1; i < DEPTH_LADDER.length; i++) {
+    assert.ok(DEPTH_LADDER[i] > DEPTH_LADDER[i - 1], `stop ${i} should be above the one below it`);
+  }
+  assert.equal(DEPTH_LADDER[0], 0, "the first stop is off");
+  assert.ok(DEPTH_LADDER.includes(60), "an hour is a stop, since it is the default");
+  assert.ok(DEPTH_LADDER.at(-1)! >= 24 * 60 * 5, "the last reaches the deep books");
+});
+
+test("a remembered depth lands back on its own notch", () => {
+  for (const [index, stop] of DEPTH_LADDER.entries()) {
+    assert.equal(depthIndex(stop), index, `${stop} should map back to stop ${index}`);
+  }
+  assert.equal(DEPTH_LADDER[depthIndex(50)], 45, "a value between stops falls to the one below");
+  assert.equal(DEPTH_LADDER[depthIndex(999_999)], DEPTH_LADDER.at(-1), "and past the end it stops there");
+});
+
+test("depth reads as a duration, because that is what it is", () => {
+  assert.equal(depthNote(0), "off");
+  assert.equal(depthNote(11), "11 min");
+  assert.equal(depthNote(45), "45 min");
+  assert.equal(depthNote(60), "1 hr");
+  assert.equal(depthNote(90), "1.5 hr");
+  assert.equal(depthNote(1440), "1 day");
+  assert.equal(depthNote(2880), "2 days");
+  assert.equal(depthNote(1200), "20 hr", "under a day stays in hours");
+  assert.equal(depthNote(1740), "1.2 days", "and over one does not");
 });

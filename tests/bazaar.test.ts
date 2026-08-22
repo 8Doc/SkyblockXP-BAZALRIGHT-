@@ -285,6 +285,37 @@ test("a budget caps what a flip can pay you, and no budget means no cap", () => 
   );
 });
 
+test("a book measured in hours tells a market from a straggler", () => {
+  // Turtlellini as it stood: 127 items of supply against six hundred instabuys an hour, holding
+  // up an ask five times the bid. Eleven minutes of book is not a price.
+  const drained = normalise("TURTLELLINI", {
+    buy_summary: [{ amount: 1, pricePerUnit: 457_178, orders: 1 }],
+    sell_summary: [{ amount: 160, pricePerUnit: 71_793, orders: 1 }],
+    quick_status: {
+      buyPrice: 457_178,
+      buyVolume: 127,
+      buyMovingWeek: 111_172,
+      buyOrders: 6,
+      sellPrice: 71_793,
+      sellVolume: 464_758,
+      sellMovingWeek: 134_796,
+      sellOrders: 900,
+    },
+  });
+  assert.ok(drained);
+
+  const f = flip(drained);
+  assert.ok(f);
+  assert.ok(f.supplyHours * 60 < 15, `the sell side is minutes deep, got ${f.supplyHours * 60}`);
+  assert.ok(f.demandHours > 100, "while the buy side is weeks deep");
+  assert.equal(f.bookHours, f.supplyHours, "the thinner side is the one that matters");
+
+  // The same measure on a working market runs to hours, which is what makes them comparable.
+  const healthy = flip(cactus());
+  assert.ok(healthy);
+  assert.ok(healthy.bookHours > 1, `a real book holds hours, got ${healthy.bookHours}`);
+});
+
 test("a flip you cannot afford one of pays nothing, not a fraction", () => {
   const f = flip(thin());
   assert.ok(f);

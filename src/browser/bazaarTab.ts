@@ -2,7 +2,7 @@ import { normalise } from "../lib/bazaar";
 import { affordableCoinsPerHour, craft, flip, type Craft, type Flip, type Recipe } from "../lib/bazaarViews";
 import type { ProductSnapshot, RawBazaarProduct } from "../lib/bazaarTypes";
 import { coins, num, parseBudget } from "../lib/format";
-import { VOLUME_LADDER, ladderIndex, volumeNote } from "../lib/volumeFloor";
+import { DEPTH_LADDER, VOLUME_LADDER, depthIndex, depthNote, ladderIndex, volumeNote } from "../lib/filters";
 
 /**
  * The bazaar tab: flips and crafts, off a live read of Hypixel.
@@ -64,6 +64,8 @@ type BazaarState = {
   minFills: number;
   /** Coins on hand, as typed. Empty means "don't ask what I can afford". */
   budget: string;
+  /** Minutes of flow a book must hold before its price is treated as a price. Flips only. */
+  minDepth: number;
   market: Map<string, ProductSnapshot>;
   lastUpdated: number | null;
   fetchedAt: number | null;
@@ -77,6 +79,7 @@ const state: BazaarState = {
   search: "",
   budget: localStorage.getItem("sbxp:bzbudget") ?? "",
   minFills: Number(localStorage.getItem("sbxp:bzminfills") ?? 1),
+  minDepth: Number(localStorage.getItem("sbxp:bzmindepth") ?? 60),
   market: new Map(),
   lastUpdated: null,
   fetchedAt: null,
@@ -125,6 +128,20 @@ const BASE_FLIP_COLUMNS: Column<Flip>[] = [
       "of it is idling in a queue. The bazaar holds the whole order up front, so this is real " +
       "money committed, not a notional position. Never below one item: on something this thin " +
       "the smallest order allowed is already more than twenty minutes of flow.",
+  },
+  {
+    id: "bookHours",
+    label: "Depth",
+    value: (r) => r.bookHours,
+    render: (r) => {
+      const side = r.supplyHours <= r.demandHours ? "supply" : "demand";
+      return `${depthNote(r.bookHours * 60)} <span class="dim">${side}</span>`;
+    },
+    title:
+      "How long the thinner side of the book would last against the traffic going through it. A " +
+      "quote is set by whoever is at the front, and a nearly empty book behind them is one " +
+      "straggler rather than a market — which is how a 457k ask stands against a 72k bid on an " +
+      "item nobody is trading at either price.",
   },
   { id: "badHourCoins", label: "Bad hour", value: (r) => r.badHourCoins, render: (r) => coins(r.badHourCoins), title: "What a quarter of your hours are worse than. Coins per hour is a mean, and a mean is a poor summary of four trades — zero here means a quarter of the time this pays nothing at all." },
   { id: "coinsPerHour", label: "Coins/hr", value: (r) => r.coinsPerHour, render: (r) => coins(r.coinsPerHour), title: "After-tax margin times the round-trip rate. This is the ranking figure." },
@@ -231,9 +248,17 @@ function craftRows(): Craft[] {
   return [...best.values()];
 }
 
-/** How many rows the volume floor alone is holding back. */
-function belowFloor(rows: (Flip | Craft)[]): number {
-  return rows.reduce((n, row) => n + (volumeOf(row) < state.minFills ? 1 : 0), 0);
+/**
+ * What each floor is holding back, counted on its own.
+ *
+ * Separately, and not as "everything the search left out", or typing a word would look like the
+ * floors had suddenly swallowed a thousand rows.
+ */
+function hiddenCounts(rows: (Flip | Craft)[]): { volume: number; depth: number } {
+  return {
+    volume: rows.reduce((n, row) => n + (volumeOf(row) < state.minFills ? 1 : 0), 0),
+    depth: rows.reduce((n, row) => n + (tooThin(row) ? 1 : 0), 0),
+  };
 }
 
 /** How much of this row moves in an hour — round trips for a flip, items for a craft. */
@@ -249,9 +274,21 @@ function filtered<T extends Flip | Craft>(rows: T[]): T[] {
   const needle = state.search.trim().toLowerCase();
   return rows.filter((row) => {
     if (volumeOf(row) < state.minFills) return false;
+    if (tooThin(row)) return false;
     if (!needle) return true;
     return nameOf(row.id).toLowerCase().includes(needle) || row.id.toLowerCase().includes(needle);
   });
+}
+
+/**
+ * A row whose price is not standing on anything.
+ *
+ * Flips only. A craft's price comes from a recipe rather than from whoever is left at the front
+ * of a book, so the same failure does not arise, and the bottleneck already says how fast it can
+ * really go.
+ */
+function tooThin(row: Flip | Craft): boolean {
+  return "bookHours" in row && row.bookHours * 60 < state.minDepth;
 }
 
 function sorted<T extends Flip | Craft>(rows: T[], columns: Column<T>[], sort: Sort): T[] {
@@ -328,6 +365,14 @@ export function mountBazaar(container: HTMLElement, tables: BazaarData): void {
       renderTable();
       return;
     }
+    if (el.id === "bzmindepth") {
+      state.minDepth = DEPTH_LADDER[Number(el.value)] ?? 0;
+      localStorage.setItem("sbxp:bzmindepth", String(state.minDepth));
+      const label = document.getElementById("bzmindepthvalue");
+      if (label) label.textContent = depthNote(state.minDepth);
+      renderTable();
+      return;
+    }
     if (el.id === "bzminfills") {
       state.minFills = VOLUME_LADDER[Number(el.value)] ?? 0;
       localStorage.setItem("sbxp:bzminfills", String(state.minFills));
@@ -371,6 +416,14 @@ function render(): void {
           Minimum volume <span class="dim" id="bzminfillsvalue">${volumeNote(state.minFills)}</span>
           <input type="range" id="bzminfills" min="0" max="${VOLUME_LADDER.length - 1}" step="1" value="${ladderIndex(state.minFills)}">
         </label>
+        ${
+          state.view === "flips"
+            ? `<label class="wide" title="A price is only a price if something is standing behind it. This hides rows where the thinner side of the book would be gone in less than this much of its own traffic — the state a 457k ask against a 72k bid is always in.">
+          Minimum book depth <span class="dim" id="bzmindepthvalue">${depthNote(state.minDepth)}</span>
+          <input type="range" id="bzmindepth" min="0" max="${DEPTH_LADDER.length - 1}" step="1" value="${depthIndex(state.minDepth)}">
+        </label>`
+            : ""
+        }
       </div>
     </div>
 
@@ -399,14 +452,12 @@ function renderTable(): void {
   const target = document.getElementById("bztable");
   if (!target) return;
 
-  // The floor's count is taken on its own, not as "everything the search left out", or typing a
-  // word would look like the volume filter had suddenly hidden a thousand rows.
   if (state.view === "flips") {
     const all = flipRows();
-    target.innerHTML = table(filtered(all), belowFloor(all), flipColumns(), state.sorts.flips, FLIPS_NOTE);
+    target.innerHTML = table(filtered(all), hiddenCounts(all), flipColumns(), state.sorts.flips, FLIPS_NOTE);
   } else {
     const all = craftRows();
-    target.innerHTML = table(filtered(all), belowFloor(all), CRAFT_COLUMNS, state.sorts.crafts, CRAFTS_NOTE);
+    target.innerHTML = table(filtered(all), hiddenCounts(all), CRAFT_COLUMNS, state.sorts.crafts, CRAFTS_NOTE);
   }
 }
 
@@ -421,7 +472,13 @@ const CRAFTS_NOTE =
   "per hour, which is the margin times whichever runs out first — the output's demand or the " +
   "scarcest ingredient's supply.";
 
-function table<T extends Flip | Craft>(rows: T[], belowFloor: number, columns: Column<T>[], sort: Sort, note: string): string {
+function table<T extends Flip | Craft>(
+  rows: T[],
+  hidden: { volume: number; depth: number },
+  columns: Column<T>[],
+  sort: Sort,
+  note: string,
+): string {
   if (state.market.size === 0) return `<p class="dim pad">Waiting for the first read of the bazaar…</p>`;
   if (rows.length === 0) {
     const because = state.minFills > 0 ? ` Nothing moves ${num(state.minFills)} times an hour that also matches.` : "";
@@ -456,7 +513,9 @@ function table<T extends Flip | Craft>(rows: T[], belowFloor: number, columns: C
     .join("");
 
   const more = ordered.length > shown.length ? ` · showing the top ${num(shown.length)}` : "";
-  const floor = belowFloor > 0 ? ` · ${num(belowFloor)} below the volume floor` : "";
+  const floor =
+    (hidden.volume > 0 ? ` · ${num(hidden.volume)} below the volume floor` : "") +
+    (hidden.depth > 0 ? ` · ${num(hidden.depth)} on too thin a book` : "");
 
   return `
     <p class="dim pad">${escapeHtml(note)}</p>
