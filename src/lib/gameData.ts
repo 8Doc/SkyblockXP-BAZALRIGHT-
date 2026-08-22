@@ -196,6 +196,12 @@ export type AttributesData = {
     shardName: string;
     shardId: string;
     tradeable: boolean;
+    /**
+     * The id the game keys this attribute by in `member.attributes.stacks`, joined at build
+     * time against the list three maxed profiles agree on. Absent when the join could not be
+     * made, which is the only case where progress is genuinely unknown.
+     */
+    apiKey?: string;
   }[];
 };
 
@@ -301,7 +307,12 @@ export type GameData = {
   /** Shards per attribute level, keyed by the rarity of the attribute. */
   attributeLevels: { perLevel: Record<string, number[]> };
   /** Bridges wiki attribute names to the ids the profile actually uses. */
-  attributeApiKeys: { wordAliases: Record<string, string>; droppableSuffixes: string[] };
+  attributeApiKeys: {
+    wordAliases: Record<string, string>;
+    droppableSuffixes: string[];
+    /** Every attribute id the game reports, from profiles that have all of them. */
+    gameKeys: { total: number; keys: string[]; stale?: Record<string, string> };
+  };
   powerStones: {
     stonesPerPower: number;
     xpPerPower: number;

@@ -123,7 +123,7 @@ export const UNMODELLED: { category: Category; note: string; totalXp?: number }[
   },
   {
     category: "attributes",
-    note: "Attribute levels are priced from the shards that feed them, which assumes buying every shard outright. Fusing shards you already own is cheaper, so those costs are an upper bound. Six attributes have no bazaar-traded shard and stay unpriced. The attribute list itself comes from the Fandom wiki, which is behind the game.",
+    note: "Attribute levels are priced from the shards that feed them, which assumes buying every shard outright. Fusing shards you already own is cheaper, so those costs are an upper bound. Eleven attributes have no bazaar-traded shard and stay unpriced. The list comes from the community wiki and is matched to the ids the game reports; the few that cannot be matched are held back rather than offered against progress that cannot be read.",
   },
 ];
 
@@ -697,23 +697,38 @@ export function buildCatalog(
   // SHARD_BLIZZARD — so a level costs the shards it adds times their live price. That's the
   // direct-purchase path; fusing shards you already own is cheaper and isn't modelled, so this
   // is an upper bound on what the level costs.
-  const heldShards = attributeStacks(member.attributes?.stacks, data);
-  const strandedAttributes = unplacedAttributes(member.attributes?.stacks, data.attributeShards.attributes, data);
-  const attributeCount = Object.values(member.attributes?.stacks ?? {}).filter((n) => n > 0).length;
+  const heldStacks = member.attributes?.stacks ?? {};
+  // Attributes whose id we could not work out. Their progress is genuinely unknown, so they are
+  // the only ones held back — see the note below.
+  const unplaceable = data.attributeShards.attributes.filter((a) => !a.apiKey).length;
+  // Reconciliation reads the other way round: of the attributes this profile has progress in,
+  // how many can be credited to something we model. The pre-migration copy of a moved attribute
+  // is not a second attribute and is left out of both sides.
+  const staleKeys = new Set(Object.keys(data.attributeApiKeys.gameKeys.stale ?? {}));
+  const placedKeys = new Set(
+    data.attributeShards.attributes.map((a) => a.apiKey).filter((key): key is string => Boolean(key)),
+  );
+  const profileAttributes = Object.entries(heldStacks).filter(
+    ([key, amount]) => amount > 0 && !staleKeys.has(key),
+  );
+  const attributeCount = profileAttributes.length;
+  const strandedAttributes = profileAttributes.filter(([key]) => !placedKeys.has(key)).length;
 
-  // An attribute whose key we cannot find in the profile has unknown progress, not zero. The
-  // two vocabularies disagree on about twenty names — the wiki writes Arthropod Ruler where the
-  // game writes arachno — and offering all ten levels of those told a player with every
-  // attribute maxed that 171 levels were outstanding. Unknown is not the same as undone, so
-  // they are held back and counted in the reconciliation instead.
+  // Absent from the profile means zero shards, not unknown — but only because the id is now
+  // settled at build time against the list the game itself reports. It used to be guessed here,
+  // and a guess that missed was indistinguishable from an attribute the player had never
+  // touched, so every unmatched attribute was held back. On a profile with 170 of 320 started
+  // that swallowed the 150 untouched ones too: 747 XP offered where 2,309 were outstanding.
   //
-  // Only when the profile actually reports attributes: a fresh profile legitimately has none,
-  // and there the whole category really is ahead of you.
-  const reportsAttributes = Object.keys(member.attributes?.stacks ?? {}).length > 0;
-
+  // What is still held back is the handful whose id could not be worked out at all. Four of
+  // ours have no counterpart the evidence can single out, and offering ten levels of an
+  // attribute a player may already have maxed is the error worth avoiding.
   for (const attribute of data.attributeShards.attributes) {
-    if (reportsAttributes && !heldShards.placed(attribute.key)) continue;
-    const held = heldShards(attribute.key);
+    if (!attribute.apiKey) continue;
+    // The moved key first, then the one it moved from: a profile that predates the migration
+    // carries only the old one, and the game leaves both in place afterwards.
+    const priorKey = attribute.apiKey.endsWith("_new") ? attribute.apiKey.slice(0, -4) : null;
+    const held = heldStacks[attribute.apiKey] ?? (priorKey ? (heldStacks[priorKey] ?? 0) : 0);
     // Rarer attributes level on far fewer shards — a legendary maxes at 24 where a common needs
     // 96 — so the ladder has to be picked per attribute. Using the common one throughout made
     // every maxed legendary read as level 5 of 10 and put five levels that don't exist up for
@@ -1213,10 +1228,10 @@ export function buildCatalog(
             note: `${u.note} ${bestiaryCoverage}`,
           }
         :
-      u.category === "attributes" && strandedAttributes > 0
+      u.category === "attributes" && unplaceable > 0
         ? {
             ...u,
-            note: `${u.note} This profile also has shards in ${strandedAttributes} attributes that aren't on the wiki list this app is built from — their progress isn't credited and their levels aren't offered.`,
+            note: `${u.note} ${unplaceable} of the wiki's attributes have no counterpart in the list the game reports, so their levels are held back rather than offered against progress we cannot read.`,
           }
         : { ...u },
     ),
@@ -1283,110 +1298,13 @@ const titleCase = (value: string) =>
     .join(" ");
 
 /**
- * How many shards the player holds for one of our attributes.
+ * Attributes our list has that the game's does not answer for.
  *
- * The profile publishes progress under `attributes.stacks`, keyed by the game's own attribute
- * ids, while our list comes from the wiki keyed by display name. Those two vocabularies disagree
- * in four ways, and a key we fail to place reads as zero — so the app offers every level of an
- * attribute the player has already maxed.
- *
- * Three of the four are mechanical, and comparing keys as an order-independent set of singular,
- * stopword-free words handles all of them at once: possessives ("Hunter's Karma" slugs to
- * hunter_s_karma, the API says hunter_karma), word order (essence_of_ice against ice_essence)
- * and plurals (essence_of_dragons against dragon_essence). It is strict — never a partial
- * overlap — which is what keeps crop_speed away from attack_speed.
- *
- * The fourth isn't mechanical and needs naming: the API sometimes drops the family noun
- * ("Undead Ruler" is just `undead`, though `skeletal_ruler` keeps it) and it calls one family
- * by a different word entirely (arthropod is arachno). Those live in attribute_api_keys.json.
- *
- * Candidates are tried most-specific first, so an attribute that matches outright never gets
- * taken by a looser rule meant for a different one.
+ * Worth counting rather than ignoring: the wiki page this app's attribute list comes from is
+ * a snapshot, and it carries 321 entries against the 320 the game reports. A silent gap reads
+ * as "you have nothing there"; a counted one reads as "this app cannot place these", which is
+ * the true statement. The join itself is made at build time — see scripts/fetch-attributes.mjs.
  */
-type AttributeStacks = ((key: string) => number) & {
-  /** Whether the profile carries this attribute at all under any name we recognise. */
-  placed: (key: string) => boolean;
-};
-
-function attributeStacks(stacks: Record<string, number> | undefined, data: GameData): AttributeStacks {
-  const held = stacks ?? {};
-  const byShape = new Map<string, number>();
-  for (const [key, amount] of Object.entries(held)) {
-    const shape = attributeShape(key);
-    byShape.set(shape, Math.max(byShape.get(shape) ?? 0, amount));
-  }
-
-  const lookup = (key: string): number | undefined => {
-    for (const candidate of attributeCandidates(key, data)) {
-      const direct = held[candidate];
-      if (direct !== undefined) return direct;
-      const shaped = byShape.get(attributeShape(candidate));
-      if (shaped !== undefined) return shaped;
-    }
-    return undefined;
-  };
-
-  const read = ((key: string) => lookup(key) ?? 0) as AttributeStacks;
-  read.placed = (key) => lookup(key) !== undefined;
-  return read;
-}
-
-/** The forms one of our attribute keys might appear under in the profile, best guess first. */
-function attributeCandidates(key: string, data: GameData): string[] {
-  const { wordAliases, droppableSuffixes } = data.attributeApiKeys;
-
-  const aliased = key
-    .split("_")
-    .map((word) => wordAliases[word] ?? word)
-    .join("_");
-
-  const forms = [key, aliased];
-  // Dropping the family noun is a *fallback*: skeletal_ruler keeps it and matches outright, so
-  // trying the full key first stops the stem rule stealing an attribute that was never ambiguous.
-  for (const base of [key, aliased]) {
-    for (const suffix of droppableSuffixes) {
-      if (base.endsWith(`_${suffix}`)) forms.push(base.slice(0, -suffix.length - 1));
-    }
-  }
-  // A migrated attribute is left in the profile twice, under its old key and under the same key
-  // with `_new` on the end, and the old one keeps whatever it held when the game moved on. One
-  // maxed profile carries humanoid_ruler at 48 and humanoid_ruler_new at 64, and reading the
-  // first offered the last level of an attribute that was already full. The new key is tried
-  // ahead of each form it belongs to: it names one attribute and cannot be mistaken for another.
-  return [...new Set(forms.flatMap((form) => [`${form}_new`, form]))];
-}
-
-const ATTRIBUTE_STOPWORDS = new Set(["of", "the", "a", "s"]);
-
-/** "essence_of_dragons" and "dragon_essence" both reduce to "dragon_essence". */
-function attributeShape(key: string): string {
-  return key
-    .split("_")
-    .filter((word) => word && !ATTRIBUTE_STOPWORDS.has(word))
-    .map((word) => (word.endsWith("s") && word.length > 3 ? word.slice(0, -1) : word))
-    .sort()
-    .join("_");
-}
-
-/**
- * Attributes the profile has progress in that our list doesn't contain at all.
- *
- * Worth counting rather than ignoring: the wiki page this app's attribute list comes from is a
- * snapshot, and the game keeps adding families. A silent gap reads as "you have nothing there";
- * a counted one reads as "this app doesn't know about these yet", which is the true statement.
- */
-function unplacedAttributes(
-  stacks: Record<string, number> | undefined,
-  attributes: { key: string }[],
-  data: GameData,
-): number {
-  if (!stacks) return 0;
-  const known = new Set<string>();
-  for (const attribute of attributes) {
-    for (const form of attributeCandidates(attribute.key, data)) known.add(attributeShape(form));
-  }
-  return Object.entries(stacks).filter(([key, amount]) => amount > 0 && !known.has(attributeShape(key))).length;
-}
 
 /** Cumulative shards needed for levels 1-10 of an attribute of the given rarity. */
 function cumulativeShards(data: GameData, rarity: string): number[] {

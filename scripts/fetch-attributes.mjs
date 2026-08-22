@@ -13,7 +13,7 @@
  * Rarity matters beyond labelling: it selects the shard ladder, and a rarer attribute maxes on
  * far fewer shards.
  */
-import { writeFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
@@ -92,6 +92,74 @@ for (const rarity of RARITIES) {
   }
   console.log(`  ${rarity.padEnd(10)} ${found} attributes`);
 }
+
+/* ------------------------------------------------ joining to the game's own ids */
+
+/**
+ * Our key is the display name slugified; the game keys the same attribute by an id of its own,
+ * and the two disagree on about a sixth of the list. That join used to be guessed at runtime,
+ * and a guess that missed read as "this player has no shards in it" — which is indistinguishable
+ * from a player who has genuinely never touched it. So an attribute we failed to match was held
+ * back, and on a profile with 170 of 320 attributes started, the 150 untouched ones were held
+ * back with them: 1,500 XP of the category, silently absent.
+ *
+ * The game's own list settles it. Three maxed profiles agree on all 320 ids, and the join is
+ * made here, once, against that list — so at runtime an attribute either has an id, in which
+ * case an absent id means zero shards, or it has none and is the only thing held back.
+ */
+const apiKeys = JSON.parse(await readFile(join(ROOT, "data", "curated", "attribute_api_keys.json"), "utf8"));
+const gameKeys = new Set(apiKeys.gameKeys.keys);
+const stale = new Set(Object.keys(apiKeys.gameKeys.stale ?? {}));
+const curated = apiKeys.curatedPairs.pairs;
+
+const STOPWORDS = new Set(["of", "the", "a", "s"]);
+/** An order-independent, singular, stopword-free set of words — "essence of ice" and "ice essence". */
+const shapeOf = (key) =>
+  [...new Set(key.split("_").filter((w) => w && !STOPWORDS.has(w)).map((w) => w.replace(/s$/, "")))]
+    .sort()
+    .join("|");
+
+const byShape = new Map();
+for (const key of gameKeys) {
+  if (stale.has(key)) continue;
+  const shape = shapeOf(key);
+  if (!byShape.has(shape)) byShape.set(shape, []);
+  byShape.get(shape).push(key);
+}
+
+function resolveApiKey(key) {
+  if (curated[key]) return curated[key];
+  const aliased = key.split("_").map((w) => apiKeys.wordAliases[w] ?? w).join("_");
+  const forms = [key, aliased];
+  for (const base of [key, aliased]) {
+    for (const suffix of apiKeys.droppableSuffixes) {
+      if (base.endsWith(`_${suffix}`)) forms.push(base.slice(0, -suffix.length - 1));
+    }
+  }
+  // A migrated attribute answers under `<key>_new`, and that name can belong to nothing else.
+  for (const form of forms.flatMap((f) => [`${f}_new`, f])) {
+    if (gameKeys.has(form) && !stale.has(form)) return form;
+    // Only when the shape names exactly one attribute. A shape shared by two is not a match.
+    const shaped = byShape.get(shapeOf(form));
+    if (shaped?.length === 1) return shaped[0];
+  }
+  return null;
+}
+
+const claimed = new Set();
+let unresolved = 0;
+for (const attribute of attributes) {
+  const apiKey = resolveApiKey(attribute.key);
+  if (apiKey && !claimed.has(apiKey)) {
+    attribute.apiKey = apiKey;
+    claimed.add(apiKey);
+  } else {
+    unresolved++;
+  }
+}
+console.log(
+  `  joined ${claimed.size} of the game's ${gameKeys.size - stale.size} attributes; ${unresolved} of ours have no id`,
+);
 
 attributes.sort((a, b) => a.key.localeCompare(b.key));
 await writeFile(

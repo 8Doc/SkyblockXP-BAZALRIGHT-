@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-08-20T23:02:20.381Z",
+ "generatedAt": "2026-08-22T00:57:52.581Z",
  "source": "https://hypixelskyblock.minecraft.wiki/api.php — Attributes/List/{rarity}",
  "note": "Every attribute and the shard that feeds it. Rarity selects the shard ladder, not just the label.",
  "totalXp": 3210,
@@ -10,7 +10,8 @@
    "rarity": "RARE",
    "shardName": "Hideonring Shard",
    "shardId": "SHARD_HIDEONRING",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "accessory_size"
   },
   {
    "key": "airborne_resistance",
@@ -18,7 +19,8 @@
    "rarity": "COMMON",
    "shardName": "Blue Jay Shard",
    "shardId": "SHARD_BLUE_JAY",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "airborne_resistance"
   },
   {
    "key": "airborne_ruler",
@@ -26,7 +28,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Bluebird Shard",
    "shardId": "SHARD_BLUEBIRD",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "airborne_ruler"
   },
   {
    "key": "almighty",
@@ -34,7 +37,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Molthorn Shard",
    "shardId": "SHARD_MOLTHORN",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "almighty"
   },
   {
    "key": "animal_expertise",
@@ -42,7 +46,8 @@
    "rarity": "RARE",
    "shardName": "Bambloom Shard",
    "shardId": "SHARD_BAMBLOOM",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "animal_expertise"
   },
   {
    "key": "animal_fortune",
@@ -50,7 +55,8 @@
    "rarity": "RARE",
    "shardName": "Wild Hog Shard",
    "shardId": "SHARD_WILD_HOG",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "animal_fortune"
   },
   {
    "key": "animal_resistance",
@@ -58,7 +64,8 @@
    "rarity": "COMMON",
    "shardName": "Howling Spirit Shard",
    "shardId": "SHARD_HOWLING_SPIRIT",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "animal_resistance"
   },
   {
    "key": "animal_ruler",
@@ -66,7 +73,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Sprawl Shard",
    "shardId": "SHARD_SPRAWL",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "animal_ruler"
   },
   {
    "key": "aquatic_fortune",
@@ -74,7 +82,8 @@
    "rarity": "RARE",
    "shardName": "Giant Water Bug Shard",
    "shardId": "SHARD_GIANT_WATER_BUG",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "aquatic_fortune"
   },
   {
    "key": "aquatic_resistance",
@@ -82,7 +91,8 @@
    "rarity": "COMMON",
    "shardName": "Dumpster Diver Shard",
    "shardId": "SHARD_DUMPSTER_DIVER",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "aquatic_resistance"
   },
   {
    "key": "arcane_fortune",
@@ -90,7 +100,8 @@
    "rarity": "RARE",
    "shardName": "Hideonwall Shard",
    "shardId": "SHARD_HIDEONWALL",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "arcane_fortune"
   },
   {
    "key": "arcane_resistance",
@@ -98,7 +109,8 @@
    "rarity": "COMMON",
    "shardName": "Brineling Shard",
    "shardId": "SHARD_BRINELING",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "arcane_resistance"
   },
   {
    "key": "arcane_ruler",
@@ -106,7 +118,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Duplico Shard",
    "shardId": "SHARD_DUPLICO",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "arcane_ruler"
   },
   {
    "key": "arthropod_fortune",
@@ -114,7 +127,8 @@
    "rarity": "RARE",
    "shardName": "Black Widow Shard",
    "shardId": "SHARD_BLACK_WIDOW",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "arthropod_fortune"
   },
   {
    "key": "arthropod_resistance",
@@ -122,7 +136,8 @@
    "rarity": "COMMON",
    "shardName": "Voracious Spider Shard",
    "shardId": "SHARD_VORACIOUS_SPIDER",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "arachno_resistance"
   },
   {
    "key": "arthropod_ruler",
@@ -130,7 +145,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Flaming Spider Shard",
    "shardId": "SHARD_FLAMING_SPIDER",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "arachno"
   },
   {
    "key": "atomized_crystals",
@@ -138,7 +154,8 @@
    "rarity": "RARE",
    "shardName": "Thyst Shard",
    "shardId": "SHARD_THYST",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "atomized_crystals"
   },
   {
    "key": "atomized_glacite",
@@ -146,7 +163,8 @@
    "rarity": "RARE",
    "shardName": "Stalagmight Shard",
    "shardId": "SHARD_STALAGMIGHT",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "atomized_glacite"
   },
   {
    "key": "atomized_mithril",
@@ -154,7 +172,8 @@
    "rarity": "RARE",
    "shardName": "Star Sentry Shard",
    "shardId": "SHARD_STAR_SENTRY",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "atomized_mithril"
   },
   {
    "key": "atomized_whispers",
@@ -162,7 +181,8 @@
    "rarity": "RARE",
    "shardName": "Pangolin Shard",
    "shardId": "SHARD_PANGOLIN",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "atomized_whispers"
   },
   {
    "key": "attack_speed",
@@ -170,7 +190,8 @@
    "rarity": "EPIC",
    "shardName": "Inferno Demonlord Shard",
    "shardId": "SHARD_INFERNO_DEMONLORD",
-   "tradeable": false
+   "tradeable": false,
+   "apiKey": "attack_speed"
   },
   {
    "key": "axe_cooldown",
@@ -178,7 +199,8 @@
    "rarity": "RARE",
    "shardName": "Drybark Shard",
    "shardId": "SHARD_DRYBARK",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "axe_cooldown"
   },
   {
    "key": "bartender_discount",
@@ -186,7 +208,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Bloodbat Shard",
    "shardId": "SHARD_BLOODBAT",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "bartender_discount"
   },
   {
    "key": "battle_arachnid",
@@ -194,7 +217,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Areita Shard",
    "shardId": "SHARD_AREITA",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "battle_arachnid"
   },
   {
    "key": "battle_experience",
@@ -202,7 +226,8 @@
    "rarity": "RARE",
    "shardName": "Falcon Shard",
    "shardId": "SHARD_FALCON",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "battle_experience"
   },
   {
    "key": "battle_frog",
@@ -210,7 +235,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Rana Shard",
    "shardId": "SHARD_RANA",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "battle_frog"
   },
   {
    "key": "battle_tracker",
@@ -218,7 +244,8 @@
    "rarity": "RARE",
    "shardName": "Badger Shard",
    "shardId": "SHARD_BADGER",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "battle_tracker"
   },
   {
    "key": "bayou_hook",
@@ -226,7 +253,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Titanoboa Shard",
    "shardId": "SHARD_TITANOBOA",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "bayou_biter"
   },
   {
    "key": "bayou_treasure",
@@ -234,7 +262,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Cheeky Tiki Shard",
    "shardId": "SHARD_CHEEKY_TIKI",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "bayou_treasure"
   },
   {
    "key": "beacon_zealot",
@@ -242,7 +271,8 @@
    "rarity": "RARE",
    "shardName": "Beaconmite Shard",
    "shardId": "SHARD_BEACONMITE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "beacon_zealot"
   },
   {
    "key": "berry_enjoyer",
@@ -250,7 +280,8 @@
    "rarity": "RARE",
    "shardName": "Bullfrog Shard",
    "shardId": "SHARD_BULLFROG",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "berry_enjoyer"
   },
   {
    "key": "berry_mogul",
@@ -258,7 +289,8 @@
    "rarity": "EPIC",
    "shardName": "Fenlord Shard",
    "shardId": "SHARD_FENLORD",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "berry_mogul"
   },
   {
    "key": "bigger_box",
@@ -266,7 +298,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Hideoncave Shard",
    "shardId": "SHARD_HIDEONCAVE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "bigger_box"
   },
   {
    "key": "blazing_fortune",
@@ -274,7 +307,8 @@
    "rarity": "RARE",
    "shardName": "Lava Flame Shard",
    "shardId": "SHARD_LAVA_FLAME",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "blazing_fortune"
   },
   {
    "key": "blazing_resistance",
@@ -282,7 +316,8 @@
    "rarity": "COMMON",
    "shardName": "Bezal Shard",
    "shardId": "SHARD_BEZAL",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "blazing_resistance"
   },
   {
    "key": "bone_font",
@@ -290,7 +325,8 @@
    "rarity": "RARE",
    "shardName": "Lapis Skeleton Shard",
    "shardId": "SHARD_LAPIS_SKELETON",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "bone_font"
   },
   {
    "key": "bonus_pest_chance",
@@ -298,7 +334,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Keeled Slug Shard",
    "shardId": "SHARD_KEELED_SLUG",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "bonus_pest_chance"
   },
   {
    "key": "book_wisdom",
@@ -306,7 +343,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Lapis Creeper Shard",
    "shardId": "SHARD_LAPIS_CREEPER",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "book_wisdom"
   },
   {
    "key": "boot_fisher",
@@ -314,7 +352,8 @@
    "rarity": "RARE",
    "shardName": "Maggot Shard",
    "shardId": "SHARD_MAGGOT",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "boot_fisher"
   },
   {
    "key": "breeze",
@@ -322,7 +361,8 @@
    "rarity": "RARE",
    "shardName": "Wither Spectre Shard",
    "shardId": "SHARD_WITHER_SPECTRE",
-   "tradeable": false
+   "tradeable": false,
+   "apiKey": "breeze"
   },
   {
    "key": "bucket_greed",
@@ -330,7 +370,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Sepialot Shard",
    "shardId": "SHARD_SEPIALOT",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "bucket_greed"
   },
   {
    "key": "bucket_lover",
@@ -338,7 +379,8 @@
    "rarity": "COMMON",
    "shardName": "Coralot Shard",
    "shardId": "SHARD_CORALOT",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "bucket_lover"
   },
   {
    "key": "buckle_fisher",
@@ -346,7 +388,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Litterbug Shard",
    "shardId": "SHARD_LITTERBUG",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "buckle_fisher"
   },
   {
    "key": "builder_discount",
@@ -354,7 +397,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Woodchucker Shard",
    "shardId": "SHARD_WOODCHUCKER",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "builder_discount"
   },
   {
    "key": "catacombs_box",
@@ -362,7 +406,8 @@
    "rarity": "RARE",
    "shardName": "Hideongeon Shard",
    "shardId": "SHARD_HIDEONGEON",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "catacomb_box"
   },
   {
    "key": "catacombs_explorer",
@@ -370,7 +415,8 @@
    "rarity": "EPIC",
    "shardName": "Bonzo Shard",
    "shardId": "SHARD_BONZO",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "catacombs_explorer"
   },
   {
    "key": "catacombs_graduate",
@@ -378,7 +424,8 @@
    "rarity": "EPIC",
    "shardName": "Scarf Shard",
    "shardId": "SHARD_SCARF",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "catacombs_graduate"
   },
   {
    "key": "cave_fishing",
@@ -386,7 +433,8 @@
    "rarity": "COMMON",
    "shardName": "Cavernfish Shard",
    "shardId": "SHARD_CAVERNFISH",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "cave_fishing"
   },
   {
    "key": "cavern_wisdom",
@@ -394,7 +442,8 @@
    "rarity": "EPIC",
    "shardName": "Cavernshade Shard",
    "shardId": "SHARD_CAVERNSHADE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "cavern_wisdom"
   },
   {
    "key": "cavernous_tracker",
@@ -402,7 +451,8 @@
    "rarity": "RARE",
    "shardName": "Rockmite Shard",
    "shardId": "SHARD_ROCKMITE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "cavernous_tracker"
   },
   {
    "key": "charmed",
@@ -410,7 +460,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Naga Shard",
    "shardId": "SHARD_NAGA",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "charmed"
   },
   {
    "key": "cheapstake",
@@ -418,7 +469,8 @@
    "rarity": "COMMON",
    "shardName": "Cod Shard",
    "shardId": "SHARD_COD",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "cheapstake"
   },
   {
    "key": "chocolate_speed",
@@ -426,7 +478,8 @@
    "rarity": "COMMON",
    "shardName": "Bunbun Shard",
    "shardId": "SHARD_BUNBUN",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "chocolate_speed"
   },
   {
    "key": "chop",
@@ -434,7 +487,8 @@
    "rarity": "RARE",
    "shardName": "Hummingbird Shard",
    "shardId": "SHARD_HUMMINGBIRD",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "chop"
   },
   {
    "key": "cloak_improvement",
@@ -442,7 +496,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Tortoise Shard",
    "shardId": "SHARD_TORTOISE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "cloak_improvement"
   },
   {
    "key": "cocoon_chance",
@@ -450,7 +505,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Primordial Shard",
    "shardId": "SHARD_PRIMORDIAL",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "cocoon_chance"
   },
   {
    "key": "cold_resistance",
@@ -458,7 +514,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Wumpa Shard",
    "shardId": "SHARD_WUMPA",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "cold_resistance"
   },
   {
    "key": "combat_trap",
@@ -466,7 +523,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Dustybit Shard",
    "shardId": "SHARD_DUSTYBIT",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "combat_trap"
   },
   {
    "key": "combo",
@@ -474,7 +532,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Soul of the Alpha Shard",
    "shardId": "SHARD_SOUL_OF_THE_ALPHA",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "combo"
   },
   {
    "key": "compost_speed",
@@ -482,7 +541,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Bayou Sludge Shard",
    "shardId": "SHARD_BAYOU_SLUDGE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "compost_speed"
   },
   {
    "key": "construct_fortune",
@@ -490,7 +550,8 @@
    "rarity": "RARE",
    "shardName": "Wiki Tiki Shard",
    "shardId": "SHARD_WIKI_TIKI",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "construct_fortune"
   },
   {
    "key": "construct_ruler",
@@ -498,7 +559,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Shrieky Tiki Shard",
    "shardId": "SHARD_SHRIEKY_TIKI",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "construct_ruler"
   },
   {
    "key": "cookie_eater",
@@ -506,7 +568,8 @@
    "rarity": "RARE",
    "shardName": "Bitbug Shard",
    "shardId": "SHARD_BITBUG",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "cookie_eater"
   },
   {
    "key": "creature_fisher",
@@ -514,7 +577,8 @@
    "rarity": "COMMON",
    "shardName": "Bogged Shard",
    "shardId": "SHARD_BOGGED",
-   "tradeable": false
+   "tradeable": false,
+   "apiKey": "hunter"
   },
   {
    "key": "crimson_hook",
@@ -522,7 +586,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Lord Jawbus Shard",
    "shardId": "SHARD_LORD_JAWBUS",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "double_hook"
   },
   {
    "key": "crimson_serendipity",
@@ -530,7 +595,8 @@
    "rarity": "RARE",
    "shardName": "Inferno Koi Shard",
    "shardId": "SHARD_INFERNO_KOI",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "crimson_serendipity"
   },
   {
    "key": "critter_fortune",
@@ -538,7 +604,8 @@
    "rarity": "RARE",
    "shardName": "Hewver Shard",
    "shardId": "SHARD_HEWVER",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "critter_fortune"
   },
   {
    "key": "crop_bug",
@@ -546,7 +613,8 @@
    "rarity": "RARE",
    "shardName": "Beetle Shard",
    "shardId": "SHARD_BEETLE",
-   "tradeable": false
+   "tradeable": false,
+   "apiKey": "crop_bug"
   },
   {
    "key": "crop_speed",
@@ -554,7 +622,8 @@
    "rarity": "COMMON",
    "shardName": "Locust Shard",
    "shardId": "SHARD_LOCUST",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "crop_speed"
   },
   {
    "key": "crystal_serendipity",
@@ -562,7 +631,8 @@
    "rarity": "RARE",
    "shardName": "Silentdepth Shard",
    "shardId": "SHARD_SILENTDEPTH",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "crystal_serendipity"
   },
   {
    "key": "cubic_fortune",
@@ -570,7 +640,8 @@
    "rarity": "RARE",
    "shardName": "Hivethief Shard",
    "shardId": "SHARD_HIVETHIEF",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "cubic_fortune"
   },
   {
    "key": "deadeye",
@@ -578,7 +649,8 @@
    "rarity": "RARE",
    "shardName": "Skeletor Shard",
    "shardId": "SHARD_SKELETOR",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "deadeye"
   },
   {
    "key": "decent_karma",
@@ -586,7 +658,8 @@
    "rarity": "COMMON",
    "shardName": "Newt Shard",
    "shardId": "SHARD_NEWT",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "decent_karma"
   },
   {
    "key": "deep_diving",
@@ -594,7 +667,8 @@
    "rarity": "RARE",
    "shardName": "Joydive Shard",
    "shardId": "SHARD_JOYDIVE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "deep_diving"
   },
   {
    "key": "deep_technique",
@@ -602,7 +676,8 @@
    "rarity": "EPIC",
    "shardName": "Bal Shard",
    "shardId": "SHARD_BAL",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "deep_technique"
   },
   {
    "key": "devouring_spread",
@@ -610,7 +685,8 @@
    "rarity": "EPIC",
    "shardName": "Gemzie Shard",
    "shardId": "SHARD_GEMZIE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "devouring_spread"
   },
   {
    "key": "diamond_frog",
@@ -618,7 +694,8 @@
    "rarity": "RARE",
    "shardName": "Seashine Shard",
    "shardId": "SHARD_SEA_SHINE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "diamond_frog"
   },
   {
    "key": "diurnal_animal",
@@ -626,7 +703,8 @@
    "rarity": "COMMON",
    "shardName": "Groundhog Shard",
    "shardId": "SHARD_GROUNDHOG",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "diurnal_animal"
   },
   {
    "key": "divine_rabbit_luck",
@@ -634,7 +712,8 @@
    "rarity": "EPIC",
    "shardName": "Rabbit Godmother Shard",
    "shardId": "SHARD_RABBIT_GODMOTHER",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "divine_rabbit_luck"
   },
   {
    "key": "dominance",
@@ -642,7 +721,8 @@
    "rarity": "EPIC",
    "shardName": "Thorn Shard",
    "shardId": "SHARD_THORN",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "dominance"
   },
   {
    "key": "dragon_shortbow_improvement",
@@ -650,7 +730,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Seer Shard",
    "shardId": "SHARD_SEER",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "dragon_shortbow_improvement"
   },
   {
    "key": "dwarven_serendipity",
@@ -658,7 +739,8 @@
    "rarity": "RARE",
    "shardName": "Abyssal Lanternfish Shard",
    "shardId": "SHARD_ABYSSAL_LANTERNFISH",
-   "tradeable": false
+   "tradeable": false,
+   "apiKey": "dwarven_serendipity"
   },
   {
    "key": "dwarven_training",
@@ -666,7 +748,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Treasure Hoarder Shard",
    "shardId": "SHARD_TREASURE_HOARDER",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "dwarven_training"
   },
   {
    "key": "earth_elemental",
@@ -674,7 +757,8 @@
    "rarity": "EPIC",
    "shardName": "Terra Shard",
    "shardId": "SHARD_TERRA",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "earth_elemental"
   },
   {
    "key": "echo_of_atomized",
@@ -682,7 +766,8 @@
    "rarity": "EPIC",
    "shardName": "Iguana Shard",
    "shardId": "SHARD_IGUANA",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "echo_of_atomized"
   },
   {
    "key": "echo_of_boxes",
@@ -690,7 +775,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Cuboa Shard",
    "shardId": "SHARD_CUBOA",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "echo_of_boxes"
   },
   {
    "key": "echo_of_buckets",
@@ -698,7 +784,8 @@
    "rarity": "RARE",
    "shardName": "Goldolot Shard",
    "shardId": "SHARD_GOLDOLOT",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "echo_of_buckets"
   },
   {
    "key": "echo_of_echoes",
@@ -706,7 +793,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Tiamat Shard",
    "shardId": "SHARD_TIAMAT",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "echo_of_echoes"
   },
   {
    "key": "echo_of_elemental",
@@ -714,7 +802,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Starborn Shard",
    "shardId": "SHARD_STARBORN",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "echo_of_elemental"
   },
   {
    "key": "echo_of_essence",
@@ -722,7 +811,8 @@
    "rarity": "EPIC",
    "shardName": "Komodo Dragon Shard",
    "shardId": "SHARD_KOMODO_DRAGON",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "echo_of_essence"
   },
   {
    "key": "echo_of_hunter",
@@ -730,7 +820,8 @@
    "rarity": "EPIC",
    "shardName": "Sea Serpent Shard",
    "shardId": "SHARD_SEA_SERPENT",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "echo_of_hunter"
   },
   {
    "key": "echo_of_resistance",
@@ -738,7 +829,8 @@
    "rarity": "EPIC",
    "shardName": "Alligator Shard",
    "shardId": "SHARD_ALLIGATOR",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "echo_of_resistance"
   },
   {
    "key": "echo_of_ruler",
@@ -746,7 +838,8 @@
    "rarity": "EPIC",
    "shardName": "Caiman Shard",
    "shardId": "SHARD_CAIMAN",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "echo_of_ruler"
   },
   {
    "key": "echo_of_sharpening",
@@ -754,7 +847,8 @@
    "rarity": "RARE",
    "shardName": "Gecko Shard",
    "shardId": "SHARD_GECKO",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "echo_of_sharpening"
   },
   {
    "key": "echo_of_tracking",
@@ -762,7 +856,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Doomspiral Shard",
    "shardId": "SHARD_DOOMSPIRAL",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "echo_of_tracking"
   },
   {
    "key": "echo_of_wisdom",
@@ -770,7 +865,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Wyvern Shard",
    "shardId": "SHARD_WYVERN",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "echo_of_wisdom"
   },
   {
    "key": "eelastic",
@@ -778,7 +874,8 @@
    "rarity": "RARE",
    "shardName": "Eel Shard",
    "shardId": "SHARD_EEL",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "eelastic"
   },
   {
    "key": "egg_finder",
@@ -786,7 +883,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Rabbit Godfather Shard",
    "shardId": "SHARD_RABBIT_GODFATHER",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "egg_finder"
   },
   {
    "key": "elite",
@@ -794,7 +892,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Power Dragon Shard",
    "shardId": "SHARD_POWER_DRAGON",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "elite"
   },
   {
    "key": "elusive_fortune",
@@ -802,7 +901,8 @@
    "rarity": "RARE",
    "shardName": "Hideyho Shard",
    "shardId": "SHARD_HIDEYHO",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "elusive_fortune"
   },
   {
    "key": "elusive_ruler",
@@ -810,7 +910,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Queen Ant Shard",
    "shardId": "SHARD_QUEEN_ANT",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "elusive_ruler"
   },
   {
    "key": "enchanted_farmer",
@@ -818,7 +919,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Mosquito Shard",
    "shardId": "SHARD_MOSQUITO",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "enchanted_farmer"
   },
   {
    "key": "ender_resistance",
@@ -826,7 +928,8 @@
    "rarity": "COMMON",
    "shardName": "Zealot Shard",
    "shardId": "SHARD_ZEALOT",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "ender_resistance"
   },
   {
    "key": "ender_ruler",
@@ -834,7 +937,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Zealot Bruiser Shard",
    "shardId": "SHARD_ZEALOT_BRUISER",
-   "tradeable": false
+   "tradeable": false,
+   "apiKey": "ender"
   },
   {
    "key": "essence_of_arthropods",
@@ -842,7 +946,8 @@
    "rarity": "RARE",
    "shardName": "Arachne Shard",
    "shardId": "SHARD_ARACHNE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "spider_essence"
   },
   {
    "key": "essence_of_crimson",
@@ -850,7 +955,8 @@
    "rarity": "RARE",
    "shardName": "Lava Leech Shard",
    "shardId": "SHARD_LAVA_LEECH",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "crimson_essence"
   },
   {
    "key": "essence_of_dragons",
@@ -858,7 +964,8 @@
    "rarity": "RARE",
    "shardName": "Draconic Shard",
    "shardId": "SHARD_DRACONIC",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "dragon_essence"
   },
   {
    "key": "essence_of_fossils",
@@ -866,7 +973,8 @@
    "rarity": "RARE",
    "shardName": "Troodon Shard",
    "shardId": "SHARD_TROODON",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "essence_of_fossils"
   },
   {
    "key": "essence_of_ice",
@@ -874,7 +982,8 @@
    "rarity": "RARE",
    "shardName": "Glacite Walker Shard",
    "shardId": "SHARD_GLACITE_WALKER",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "ice_essence"
   },
   {
    "key": "essence_of_the_forest",
@@ -882,7 +991,8 @@
    "rarity": "RARE",
    "shardName": "Dreadwing Shard",
    "shardId": "SHARD_DREADWING",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "forest_essence"
   },
   {
    "key": "essence_of_unliving",
@@ -890,7 +1000,8 @@
    "rarity": "RARE",
    "shardName": "Revenant Shard",
    "shardId": "SHARD_REVENANT",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "undead_essence"
   },
   {
    "key": "essence_of_wither",
@@ -898,7 +1009,8 @@
    "rarity": "RARE",
    "shardName": "Wither Shard",
    "shardId": "SHARD_WITHER",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "wither_essence"
   },
   {
    "key": "excellent_karma",
@@ -906,7 +1018,8 @@
    "rarity": "EPIC",
    "shardName": "Leviathan Shard",
    "shardId": "SHARD_LEVIATHAN",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "excellent_karma"
   },
   {
    "key": "experience",
@@ -914,7 +1027,8 @@
    "rarity": "COMMON",
    "shardName": "Lapis Zombie Shard",
    "shardId": "SHARD_LAPIS_ZOMBIE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "experience"
   },
   {
    "key": "extreme_pressure",
@@ -922,7 +1036,8 @@
    "rarity": "RARE",
    "shardName": "Lumisquid Shard",
    "shardId": "SHARD_LUMISQUID",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "extreme_pressure"
   },
   {
    "key": "faker",
@@ -930,7 +1045,8 @@
    "rarity": "EPIC",
    "shardName": "Mimic Shard",
    "shardId": "SHARD_MIMIC",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "faker"
   },
   {
    "key": "fancy_visit",
@@ -938,7 +1054,8 @@
    "rarity": "RARE",
    "shardName": "Invisibug Shard",
    "shardId": "SHARD_INVISIBUG",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "fancy_visit"
   },
   {
    "key": "fig_collector",
@@ -946,7 +1063,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Sparrow Shard",
    "shardId": "SHARD_SPARROW",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "fig_collector"
   },
   {
    "key": "fig_sharpening",
@@ -954,7 +1072,8 @@
    "rarity": "COMMON",
    "shardName": "Crow Shard",
    "shardId": "SHARD_CROW",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "fig_sharpening"
   },
   {
    "key": "filter_upgrade",
@@ -962,7 +1081,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Mite Shard",
    "shardId": "SHARD_MITE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "filter_upgrade"
   },
   {
    "key": "first_sweep",
@@ -970,7 +1090,8 @@
    "rarity": "RARE",
    "shardName": "Torrid Shard",
    "shardId": "SHARD_TORRID",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "first_sweep"
   },
   {
    "key": "fisher_s_fortune",
@@ -978,7 +1099,8 @@
    "rarity": "EPIC",
    "shardName": "Giant Isopod Shard",
    "shardId": "SHARD_GIANT_ISOPOD",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "fishers_fortune"
   },
   {
    "key": "fisherman",
@@ -986,7 +1108,8 @@
    "rarity": "COMMON",
    "shardName": "Inkling Shard",
    "shardId": "SHARD_INKLING",
-   "tradeable": false
+   "tradeable": false,
+   "apiKey": "fisherman"
   },
   {
    "key": "fishing_speed",
@@ -994,7 +1117,8 @@
    "rarity": "EPIC",
    "shardName": "Water Hydra Shard",
    "shardId": "SHARD_WATER_HYDRA",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "fishing_speed"
   },
   {
    "key": "flexible_fisher",
@@ -1002,7 +1126,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Osedax Shard",
    "shardId": "SHARD_OSEDAX",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "flexible_fisher"
   },
   {
    "key": "floor_fortune",
@@ -1010,7 +1135,8 @@
    "rarity": "RARE",
    "shardName": "Anteater Shard",
    "shardId": "SHARD_ANTEATER",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "floor_fortune"
   },
   {
    "key": "flying_fortune",
@@ -1018,7 +1144,8 @@
    "rarity": "RARE",
    "shardName": "Parakeet Shard",
    "shardId": "SHARD_PARAKEET",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "flying_fortune"
   },
   {
    "key": "fog_elemental",
@@ -1026,7 +1153,8 @@
    "rarity": "COMMON",
    "shardName": "Mist Shard",
    "shardId": "SHARD_MIST",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "fog_elemental"
   },
   {
    "key": "forager_s_fortune",
@@ -1034,7 +1162,8 @@
    "rarity": "EPIC",
    "shardName": "Silkbreeze Shard",
    "shardId": "SHARD_SILKBREEZE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "foragers_fortune"
   },
   {
    "key": "foraging_frog",
@@ -1042,7 +1171,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Treefrog Shard",
    "shardId": "SHARD_TREEFROG",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "foraging_frog"
   },
   {
    "key": "foraging_speed",
@@ -1050,7 +1180,8 @@
    "rarity": "COMMON",
    "shardName": "Foxtrot Shard",
    "shardId": "SHARD_FOXTROT",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "foraging_speed"
   },
   {
    "key": "foraging_tracker",
@@ -1058,7 +1189,8 @@
    "rarity": "RARE",
    "shardName": "Fluffling Shard",
    "shardId": "SHARD_FLUFFLING",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "foraging_tracker"
   },
   {
    "key": "foraging_wisdom",
@@ -1066,7 +1198,8 @@
    "rarity": "EPIC",
    "shardName": "Pandarai Shard",
    "shardId": "SHARD_PANDARAI",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "foraging_wisdom"
   },
   {
    "key": "forest_elemental",
@@ -1074,7 +1207,8 @@
    "rarity": "RARE",
    "shardName": "Sylvan Shard",
    "shardId": "SHARD_SYLVAN",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "forest_elemental"
   },
   {
    "key": "forest_felling",
@@ -1082,7 +1216,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Woodpecker Shard",
    "shardId": "SHARD_WOODPECKER",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "forest_felling"
   },
   {
    "key": "forest_fishing",
@@ -1090,7 +1225,8 @@
    "rarity": "COMMON",
    "shardName": "Verdant Shard",
    "shardId": "SHARD_VERDANT",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "forest_fishing"
   },
   {
    "key": "forest_serendipity",
@@ -1098,7 +1234,8 @@
    "rarity": "RARE",
    "shardName": "Puck Shard",
    "shardId": "SHARD_PUCK",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "forest_serendipity"
   },
   {
    "key": "forest_strength",
@@ -1106,7 +1243,8 @@
    "rarity": "COMMON",
    "shardName": "Azure Shard",
    "shardId": "SHARD_AZURE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "forest_strength"
   },
   {
    "key": "forest_trap",
@@ -1114,7 +1252,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Mossybit Shard",
    "shardId": "SHARD_MOSSYBIT",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "forest_trap"
   },
   {
    "key": "fortunate_farmer",
@@ -1122,7 +1261,8 @@
    "rarity": "COMMON",
    "shardName": "Fly Shard",
    "shardId": "SHARD_FLY",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "fortunate_farmer"
   },
   {
    "key": "fortunate_miner",
@@ -1130,7 +1270,8 @@
    "rarity": "COMMON",
    "shardName": "Flitter Shard",
    "shardId": "SHARD_FLITTER",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "fortunate_miner"
   },
   {
    "key": "freezing_spread",
@@ -1138,7 +1279,8 @@
    "rarity": "EPIC",
    "shardName": "Littlefoot Shard",
    "shardId": "SHARD_LITTLEFOOT",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "freezing_spread"
   },
   {
    "key": "frog_legs",
@@ -1146,7 +1288,8 @@
    "rarity": "RARE",
    "shardName": "Toad Shard",
    "shardId": "SHARD_TOAD",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "frog_legs"
   },
   {
    "key": "frost_elemental",
@@ -1154,7 +1297,8 @@
    "rarity": "EPIC",
    "shardName": "Cryo Shard",
    "shardId": "SHARD_CRYO",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "frost_elemental"
   },
   {
    "key": "frozen_fortune",
@@ -1162,7 +1306,8 @@
    "rarity": "RARE",
    "shardName": "Billygoat Shard",
    "shardId": "SHARD_BILLYGOAT",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "frozen_fortune"
   },
   {
    "key": "frozen_resistance",
@@ -1170,7 +1315,8 @@
    "rarity": "COMMON",
    "shardName": "Strongarm Shard",
    "shardId": "SHARD_STRONGARM",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "frozen_resistance"
   },
   {
    "key": "frozen_ruler",
@@ -1178,7 +1324,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Polaris Shard",
    "shardId": "SHARD_POLARIS",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "frozen_ruler"
   },
   {
    "key": "fungy_luck",
@@ -1186,7 +1333,8 @@
    "rarity": "RARE",
    "shardName": "Fungloom Shard",
    "shardId": "SHARD_FUNGLOOM",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "fungy_luck"
   },
   {
    "key": "galatea_training",
@@ -1194,7 +1342,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Ember Shard",
    "shardId": "SHARD_EMBER",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "galatea_training"
   },
   {
    "key": "garden_wisdom",
@@ -1202,7 +1351,8 @@
    "rarity": "EPIC",
    "shardName": "Dragonfly Shard",
    "shardId": "SHARD_DRAGONFLY",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "garden_wisdom"
   },
   {
    "key": "ghastly_distraction",
@@ -1210,7 +1360,8 @@
    "rarity": "EPIC",
    "shardName": "Dive Ghast Shard",
    "shardId": "SHARD_DIVE_GHAST",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "ghastly_distraction"
   },
   {
    "key": "glossy_fortune",
@@ -1218,7 +1369,8 @@
    "rarity": "EPIC",
    "shardName": "Scatha Shard",
    "shardId": "SHARD_SCATHA",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "glossy_fortune"
   },
   {
    "key": "gold_bait",
@@ -1226,7 +1378,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Goldfin Shard",
    "shardId": "SHARD_GOLDFIN",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "gold_bait"
   },
   {
    "key": "gold_box",
@@ -1234,7 +1387,8 @@
    "rarity": "COMMON",
    "shardName": "Hideonsun Shard",
    "shardId": "SHARD_HIDEONSUN",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "gold_box"
   },
   {
    "key": "golden_frog",
@@ -1242,7 +1396,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Flipflopper Shard",
    "shardId": "SHARD_FLIP_FLOPPER",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "golden_frog"
   },
   {
    "key": "good_karma",
@@ -1250,7 +1405,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Salamander Shard",
    "shardId": "SHARD_SALAMANDER",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "good_karma"
   },
   {
    "key": "great_karma",
@@ -1258,7 +1414,8 @@
    "rarity": "RARE",
    "shardName": "Lizard King Shard",
    "shardId": "SHARD_LIZARD_KING",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "great_karma"
   },
   {
    "key": "great_treasure",
@@ -1266,7 +1423,8 @@
    "rarity": "RARE",
    "shardName": "Mantis Shrimp Shard",
    "shardId": "SHARD_MANTIS_SHRIMP",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "great_treasure"
   },
   {
    "key": "greedy_goblin",
@@ -1274,7 +1432,8 @@
    "rarity": "RARE",
    "shardName": "Gimmiegold Shard",
    "shardId": "SHARD_GIMMIEGOLD",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "greedy_goblin"
   },
   {
    "key": "greenhouse_speed",
@@ -1282,7 +1441,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Timestalk Clone Shard",
    "shardId": "SHARD_TIMESTALK_CLONE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "greenhouse_speed"
   },
   {
    "key": "groovy_radar",
@@ -1290,7 +1450,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Cocoaleech Shard",
    "shardId": "SHARD_COCOALEECH",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "groovy_radar"
   },
   {
    "key": "happy_box",
@@ -1298,7 +1459,8 @@
    "rarity": "COMMON",
    "shardName": "Hideongift Shard",
    "shardId": "SHARD_HIDEONGIFT",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "happy_box"
   },
   {
    "key": "helix_collector",
@@ -1306,7 +1468,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Hawk Shard",
    "shardId": "SHARD_HAWK",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "helix_collector"
   },
   {
    "key": "helix_sharpening",
@@ -1314,7 +1477,8 @@
    "rarity": "RARE",
    "shardName": "Vulture Shard",
    "shardId": "SHARD_VULTURE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "helix_sharpening"
   },
   {
    "key": "help_from_above",
@@ -1322,7 +1486,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Shinyfish Shard",
    "shardId": "SHARD_SHINYFISH",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "rare_bird"
   },
   {
    "key": "hitman_cooldown",
@@ -1330,7 +1495,8 @@
    "rarity": "COMMON",
    "shardName": "Rabbit Mafioso Shard",
    "shardId": "SHARD_RABBIT_MAFIOSO",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "hitman_cooldown"
   },
   {
    "key": "honey_haul",
@@ -1338,7 +1504,8 @@
    "rarity": "COMMON",
    "shardName": "Honeybuzz Shard",
    "shardId": "SHARD_HONEYBUZZ",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "honey_haul"
   },
   {
    "key": "honey_luck",
@@ -1346,7 +1513,8 @@
    "rarity": "COMMON",
    "shardName": "Pollendart Shard",
    "shardId": "SHARD_POLLENDART",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "honey_luck"
   },
   {
    "key": "honey_refill",
@@ -1354,7 +1522,8 @@
    "rarity": "EPIC",
    "shardName": "Queen Bee Shard",
    "shardId": "SHARD_QUEEN_BEE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "honey_refill"
   },
   {
    "key": "honey_serendipity",
@@ -1362,7 +1531,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Honey Badger Shard",
    "shardId": "SHARD_HONEY_BADGER",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "honey_serendipity"
   },
   {
    "key": "honey_speed",
@@ -1370,7 +1540,8 @@
    "rarity": "COMMON",
    "shardName": "Honeyhog Shard",
    "shardId": "SHARD_HONEYHOG",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "honey_speed"
   },
   {
    "key": "humanoid_ruler",
@@ -1378,7 +1549,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Wetwing Shard",
    "shardId": "SHARD_WETWING",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "humanoid_ruler_new"
   },
   {
    "key": "hunt_wisdom",
@@ -1386,7 +1558,8 @@
    "rarity": "EPIC",
    "shardName": "Leatherback Shard",
    "shardId": "SHARD_LEATHERBACK",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "hunt_wisdom"
   },
   {
    "key": "hunter_s_fang",
@@ -1394,7 +1567,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Viper Shard",
    "shardId": "SHARD_VIPER",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "hunters_fangs"
   },
   {
    "key": "hunter_s_grasp",
@@ -1402,7 +1576,8 @@
    "rarity": "RARE",
    "shardName": "King Cobra Shard",
    "shardId": "SHARD_KING_COBRA",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "hunters_grasp"
   },
   {
    "key": "hunter_s_karma",
@@ -1410,7 +1585,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Megalith Shard",
    "shardId": "SHARD_MEGALITH",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "hunter_karma"
   },
   {
    "key": "hunter_s_pressure",
@@ -1418,7 +1594,8 @@
    "rarity": "RARE",
    "shardName": "Python Shard",
    "shardId": "SHARD_PYTHON",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "hunters_pressure"
   },
   {
    "key": "hunter_s_suppress",
@@ -1426,7 +1603,8 @@
    "rarity": "EPIC",
    "shardName": "Basilisk Shard",
    "shardId": "SHARD_BASILISK",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "hunters_suppress"
   },
   {
    "key": "ignition",
@@ -1434,7 +1612,8 @@
    "rarity": "RARE",
    "shardName": "Matcho Shard",
    "shardId": "SHARD_MATCHO",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "ignition"
   },
   {
    "key": "infection",
@@ -1442,7 +1621,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Magma Slug Shard",
    "shardId": "SHARD_MAGMA_SLUG",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "infection"
   },
   {
    "key": "infernal_ruler",
@@ -1450,7 +1630,8 @@
    "rarity": "EPIC",
    "shardName": "Flare Shard",
    "shardId": "SHARD_FLARE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "blazing"
   },
   {
    "key": "infiltration",
@@ -1458,7 +1639,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Earthworm Shard",
    "shardId": "SHARD_EARTHWORM",
-   "tradeable": false
+   "tradeable": false,
+   "apiKey": "infiltration"
   },
   {
    "key": "kat_s_favorite",
@@ -1466,7 +1648,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Kiwi Shard",
    "shardId": "SHARD_KIWI",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "kat_favorite"
   },
   {
    "key": "king_of_greed",
@@ -1474,7 +1657,8 @@
    "rarity": "EPIC",
    "shardName": "King Minos Shard",
    "shardId": "SHARD_KING_MINOS",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "king_of_greed"
   },
   {
    "key": "kuudra_s_box",
@@ -1482,7 +1666,8 @@
    "rarity": "RARE",
    "shardName": "Hideondra Shard",
    "shardId": "SHARD_HIDEONDRA",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "kuudra_box"
   },
   {
    "key": "lake_fishing",
@@ -1490,7 +1675,8 @@
    "rarity": "COMMON",
    "shardName": "Tepid Shard",
    "shardId": "SHARD_TEPID",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "lake_fishing"
   },
   {
    "key": "lathering_greed",
@@ -1498,7 +1684,8 @@
    "rarity": "EPIC",
    "shardName": "Beeheemoth Shard",
    "shardId": "SHARD_BEEHEEMOTH",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "lathering_greed"
   },
   {
    "key": "legendary_rabbit_luck",
@@ -1506,7 +1693,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Rabbit Cat Shard",
    "shardId": "SHARD_RABBIT_CAT",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "legendary_rabbit_luck"
   },
   {
    "key": "life_recovery",
@@ -1514,7 +1702,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Sycophant Shard",
    "shardId": "SHARD_SYCOPHANT",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "life_recovery"
   },
   {
    "key": "lifeline",
@@ -1522,7 +1711,8 @@
    "rarity": "RARE",
    "shardName": "Kada Knight Shard",
    "shardId": "SHARD_KADA_KNIGHT",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "lifeline"
   },
   {
    "key": "light_elemental",
@@ -1530,7 +1720,8 @@
    "rarity": "COMMON",
    "shardName": "Flash Shard",
    "shardId": "SHARD_FLASH",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "light_elemental"
   },
   {
    "key": "lightning_elemental",
@@ -1538,7 +1729,8 @@
    "rarity": "RARE",
    "shardName": "Bolt Shard",
    "shardId": "SHARD_BOLT",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "lightning_elemental"
   },
   {
    "key": "lily_puncher",
@@ -1546,7 +1738,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Tewtil Shard",
    "shardId": "SHARD_TEWTIL",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "lily_puncher"
   },
   {
    "key": "lily_tracker",
@@ -1554,7 +1747,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Lotum Shard",
    "shardId": "SHARD_LOTUM",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "lily_tracker"
   },
   {
    "key": "loch_hook",
@@ -1562,7 +1756,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Nessie Shard",
    "shardId": "SHARD_NESSIE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "loch_hook"
   },
   {
    "key": "lost_and_found",
@@ -1570,7 +1765,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Salmon Shard",
    "shardId": "SHARD_SALMON",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "lost_and_found"
   },
   {
    "key": "lotus_trophy",
@@ -1578,7 +1774,8 @@
    "rarity": "COMMON",
    "shardName": "Lotusfish Shard",
    "shardId": "SHARD_LOTUS_FISH",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "lotus_trophy"
   },
   {
    "key": "lucky_rod",
@@ -1586,7 +1783,8 @@
    "rarity": "EPIC",
    "shardName": "Moray Eel Shard",
    "shardId": "SHARD_MORAY_EEL",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "lucky_rod"
   },
   {
    "key": "lunar_power",
@@ -1594,7 +1792,8 @@
    "rarity": "EPIC",
    "shardName": "Lunar Moth Shard",
    "shardId": "SHARD_LUNAR_MOTH",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "lunar_power"
   },
   {
    "key": "magic_find",
@@ -1602,7 +1801,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Cinderbat Shard",
    "shardId": "SHARD_CINDER_BAT",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "magic_find"
   },
   {
    "key": "magmatic_ruler",
@@ -1610,7 +1810,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Stridersurfer Shard",
    "shardId": "SHARD_STRIDER_SURFER",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "magmatic_ruler"
   },
   {
    "key": "mana_regeneration",
@@ -1618,7 +1819,8 @@
    "rarity": "EPIC",
    "shardName": "XYZ Shard",
    "shardId": "SHARD_XYZ",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "mana_regeneration"
   },
   {
    "key": "mana_steal",
@@ -1626,7 +1828,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Rain Slime Shard",
    "shardId": "SHARD_RAIN_SLIME",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "mana_steal"
   },
   {
    "key": "mangrove_collector",
@@ -1634,7 +1837,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Seagull Shard",
    "shardId": "SHARD_SEAGULL",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "mangrove_collector"
   },
   {
    "key": "mangrove_sharpening",
@@ -1642,7 +1846,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Heron Shard",
    "shardId": "SHARD_HERON",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "mangrove_sharpening"
   },
   {
    "key": "matriarch_cubs",
@@ -1650,7 +1855,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Hellwisp Shard",
    "shardId": "SHARD_HELLWISP",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "matriarch_cubs"
   },
   {
    "key": "midas_touch",
@@ -1658,7 +1864,8 @@
    "rarity": "COMMON",
    "shardName": "Golden Ghoul Shard",
    "shardId": "SHARD_GOLDEN_GHOUL",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "midas_touch"
   },
   {
    "key": "miracle_chance",
@@ -1666,7 +1873,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Rainbug Shard",
    "shardId": "SHARD_RAINBUG",
-   "tradeable": false
+   "tradeable": false,
+   "apiKey": "miracle_chance"
   },
   {
    "key": "mite_spawner",
@@ -1674,7 +1882,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Honeymite Shard",
    "shardId": "SHARD_HONEYMITE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "mite_spawner"
   },
   {
    "key": "moonglade_mastery",
@@ -1682,7 +1891,8 @@
    "rarity": "COMMON",
    "shardName": "Phanflare Shard",
    "shardId": "SHARD_PHANFLARE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "moonglade_mastery"
   },
   {
    "key": "moonglade_serendipity",
@@ -1690,7 +1900,8 @@
    "rarity": "RARE",
    "shardName": "Piranha Shard",
    "shardId": "SHARD_PIRANHA",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "moonglade_serendipity"
   },
   {
    "key": "mossy_box",
@@ -1698,7 +1909,8 @@
    "rarity": "COMMON",
    "shardName": "Hideonleaf Shard",
    "shardId": "SHARD_HIDEONLEAF",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "mossy_box"
   },
   {
    "key": "mountain_climber",
@@ -1706,7 +1918,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Troglobyte Shard",
    "shardId": "SHARD_TROGLOBYTE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "mountain_climber"
   },
   {
    "key": "mutation_serendipity",
@@ -1714,7 +1927,8 @@
    "rarity": "RARE",
    "shardName": "Zombuddy Shard",
    "shardId": "SHARD_ZOMBUDDY",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "mutation_serendipity"
   },
   {
    "key": "mythic_rabbit_luck",
@@ -1722,7 +1936,8 @@
    "rarity": "RARE",
    "shardName": "Rabbit Neighbor Shard",
    "shardId": "SHARD_RABBIT_NEIGHBOR",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "mythic_rabbit_luck"
   },
   {
    "key": "mythological_fortune",
@@ -1730,7 +1945,8 @@
    "rarity": "RARE",
    "shardName": "Minotaur Shard",
    "shardId": "SHARD_MINOTAUR",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "mythological_fortune"
   },
   {
    "key": "mythological_resistance",
@@ -1738,7 +1954,8 @@
    "rarity": "COMMON",
    "shardName": "Cretan Bull Shard",
    "shardId": "SHARD_CRETAN_BULL",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "mythological_resistance"
   },
   {
    "key": "mythological_ruler",
@@ -1746,7 +1963,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Minos Hunter Shard",
    "shardId": "SHARD_MINOS_HUNTER",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "mythological_ruler"
   },
   {
    "key": "mythological_tracker",
@@ -1754,7 +1972,8 @@
    "rarity": "EPIC",
    "shardName": "Sphinx Shard",
    "shardId": "SHARD_SPHINX",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "big_game_hunter"
   },
   {
    "key": "nature_elemental",
@@ -1762,7 +1981,8 @@
    "rarity": "COMMON",
    "shardName": "Grove Shard",
    "shardId": "SHARD_GROVE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "nature_elemental"
   },
   {
    "key": "nocturnal_animal",
@@ -1770,7 +1990,8 @@
    "rarity": "COMMON",
    "shardName": "Phanpyre Shard",
    "shardId": "SHARD_PHANPYRE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "nocturnal_animal"
   },
   {
    "key": "outstanding_fisher",
@@ -1778,7 +1999,8 @@
    "rarity": "EPIC",
    "shardName": "Blue Crab Shard",
    "shardId": "SHARD_BLUE_CRAB",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "outstanding_fisher"
   },
   {
    "key": "owl_friend",
@@ -1786,7 +2008,8 @@
    "rarity": "COMMON",
    "shardName": "Boreal Owl Shard",
    "shardId": "SHARD_BOREAL_OWL",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "owl_friend"
   },
   {
    "key": "payback",
@@ -1794,7 +2017,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Spike Shard",
    "shardId": "SHARD_SPIKE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "payback"
   },
   {
    "key": "pest_cooldown",
@@ -1802,7 +2026,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Moth Shard",
    "shardId": "SHARD_MOTH",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "pest_cooldown"
   },
   {
    "key": "pest_fortune",
@@ -1810,7 +2035,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Cricket Shard",
    "shardId": "SHARD_CRICKET",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "pest_fortune"
   },
   {
    "key": "pest_luck",
@@ -1818,7 +2044,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Field Mouse Shard",
    "shardId": "SHARD_FIELD_MOUSE",
-   "tradeable": false
+   "tradeable": false,
+   "apiKey": "pest_luck"
   },
   {
    "key": "pest_ruler",
@@ -1826,7 +2053,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Praying Mantis Shard",
    "shardId": "SHARD_PRAYING_MANTIS",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "insect_power"
   },
   {
    "key": "pet_wisdom",
@@ -1834,7 +2062,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Condor Shard",
    "shardId": "SHARD_CONDOR",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "pet_wisdom"
   },
   {
    "key": "pickaxe_cooldown",
@@ -1842,7 +2071,8 @@
    "rarity": "EPIC",
    "shardName": "Abyssal Miner Shard",
    "shardId": "SHARD_ABYSSAL_MINER",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "pickaxe_cooldown"
   },
   {
    "key": "pity",
@@ -1850,7 +2080,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Daemon Shard",
    "shardId": "SHARD_DAEMON",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "pity"
   },
   {
    "key": "pretty_clothes",
@@ -1858,7 +2089,8 @@
    "rarity": "RARE",
    "shardName": "Ladybug Shard",
    "shardId": "SHARD_LADYBUG",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "pretty_clothes"
   },
   {
    "key": "pure_reptile",
@@ -1866,7 +2098,8 @@
    "rarity": "RARE",
    "shardName": "Crocodile Shard",
    "shardId": "SHARD_CROCODILE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "pure_reptile"
   },
   {
    "key": "quartz_speed",
@@ -1874,7 +2107,8 @@
    "rarity": "RARE",
    "shardName": "Quartzfang Shard",
    "shardId": "SHARD_QUARTZFANG",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "quartz_speed"
   },
   {
    "key": "queen_tracker",
@@ -1882,7 +2116,8 @@
    "rarity": "COMMON",
    "shardName": "Ant Shard",
    "shardId": "SHARD_ANT",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "queen_tracker"
   },
   {
    "key": "queenly_echo",
@@ -1890,7 +2125,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Queen Snake Shard",
    "shardId": "SHARD_QUEEN_SNAKE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "queenly_echo"
   },
   {
    "key": "rabbit_crew",
@@ -1898,7 +2134,8 @@
    "rarity": "RARE",
    "shardName": "Carrot King Shard",
    "shardId": "SHARD_CARROT_KING",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "rabbit_crew"
   },
   {
    "key": "reborn",
@@ -1906,7 +2143,8 @@
    "rarity": "EPIC",
    "shardName": "Prince Shard",
    "shardId": "SHARD_PRINCE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "reborn"
   },
   {
    "key": "refined_luck",
@@ -1914,7 +2152,8 @@
    "rarity": "RARE",
    "shardName": "Stoneworm Shard",
    "shardId": "SHARD_STONEWORM",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "refined_luck"
   },
   {
    "key": "rekindle",
@@ -1922,7 +2161,8 @@
    "rarity": "RARE",
    "shardName": "Murkbat Shard",
    "shardId": "SHARD_MURKBAT",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "rekindle"
   },
   {
    "key": "reptiloid",
@@ -1938,7 +2178,8 @@
    "rarity": "COMMON",
    "shardName": "Miner Zombie Shard",
    "shardId": "SHARD_MINER_ZOMBIE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "rotten_pickaxe"
   },
   {
    "key": "royal_riches",
@@ -1946,7 +2187,8 @@
    "rarity": "EPIC",
    "shardName": "Nilbog Shard",
    "shardId": "SHARD_NILBOG",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "royal_riches"
   },
   {
    "key": "sack_size",
@@ -1954,7 +2196,8 @@
    "rarity": "EPIC",
    "shardName": "Hideonsack Shard",
    "shardId": "SHARD_HIDEONSACK",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "sack_size"
   },
   {
    "key": "scrap_chance",
@@ -1962,7 +2205,8 @@
    "rarity": "RARE",
    "shardName": "Scrappy Shard",
    "shardId": "SHARD_SCRAPPY",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "scrap_chance"
   },
   {
    "key": "sea_wisdom",
@@ -1970,7 +2214,8 @@
    "rarity": "EPIC",
    "shardName": "Loch Emperor Shard",
    "shardId": "SHARD_LOCH_EMPEROR",
-   "tradeable": false
+   "tradeable": false,
+   "apiKey": "fishing_experience"
   },
   {
    "key": "shadow_elemental",
@@ -1978,7 +2223,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Tenebris Shard",
    "shardId": "SHARD_TENEBRIS",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "shadow_elemental"
   },
   {
    "key": "shell",
@@ -1986,7 +2232,8 @@
    "rarity": "EPIC",
    "shardName": "Shellwise Shard",
    "shardId": "SHARD_SHELLWISE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "shell"
   },
   {
    "key": "skeletal_resistance",
@@ -1994,7 +2241,8 @@
    "rarity": "COMMON",
    "shardName": "Haggard Shard",
    "shardId": "SHARD_HAGGARD",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "skeletal_resistance"
   },
   {
    "key": "skeletal_ruler",
@@ -2002,7 +2250,8 @@
    "rarity": "COMMON",
    "shardName": "Chill Shard",
    "shardId": "SHARD_CHILL",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "skeletal_ruler"
   },
   {
    "key": "sky_high",
@@ -2010,7 +2259,8 @@
    "rarity": "EPIC",
    "shardName": "Murderwing Shard",
    "shardId": "SHARD_MURDERWING",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "sky_high"
   },
   {
    "key": "slayer_discount",
@@ -2018,7 +2268,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Paragon Shard",
    "shardId": "SHARD_PARAGON",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "slayer_discount"
   },
   {
    "key": "slayer_progress",
@@ -2026,7 +2277,8 @@
    "rarity": "EPIC",
    "shardName": "Wolverine Shard",
    "shardId": "SHARD_WOLVERINE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "slayer_progress"
   },
   {
    "key": "sleepy_spread",
@@ -2034,7 +2286,8 @@
    "rarity": "RARE",
    "shardName": "Snoozle Shard",
    "shardId": "SHARD_SNOOZLE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "sleepy_spread"
   },
   {
    "key": "snow_elemental",
@@ -2042,7 +2295,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Blizzard Shard",
    "shardId": "SHARD_BLIZZARD",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "snow_elemental"
   },
   {
    "key": "social_wisdom",
@@ -2050,7 +2304,8 @@
    "rarity": "EPIC",
    "shardName": "Mountain Goat Shard",
    "shardId": "SHARD_MOUNTAIN_GOAT",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "social_wisdom"
   },
   {
    "key": "solar_power",
@@ -2058,7 +2313,8 @@
    "rarity": "EPIC",
    "shardName": "Firefly Shard",
    "shardId": "SHARD_FIREFLY",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "solar_power"
   },
   {
    "key": "soul_snatcher",
@@ -2066,7 +2322,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Solsnatcher Shard",
    "shardId": "SHARD_SOLSNATCHER",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "soul_snatcher"
   },
   {
    "key": "special_upgrades",
@@ -2074,7 +2331,8 @@
    "rarity": "EPIC",
    "shardName": "Special Zealot Shard",
    "shardId": "SHARD_SPECIAL_ZEALOT",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "special_upgrades"
   },
   {
    "key": "speed",
@@ -2082,7 +2340,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Obsidian Defender Shard",
    "shardId": "SHARD_OBSIDIAN_DEFENDER",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "speed"
   },
   {
    "key": "splendor",
@@ -2090,7 +2349,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Macaw Shard",
    "shardId": "SHARD_MACAW",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "splendor"
   },
   {
    "key": "sprayonator_serendipity",
@@ -2098,7 +2358,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Rat Shard",
    "shardId": "SHARD_RAT",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "sprayonator_serendipity"
   },
   {
    "key": "star_bait",
@@ -2106,7 +2367,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Moltenfish Shard",
    "shardId": "SHARD_MOLTENFISH",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "star_bait"
   },
   {
    "key": "starborn",
@@ -2114,7 +2376,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Sun Fish Shard",
    "shardId": "SHARD_SUN_FISH",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "starborn"
   },
   {
    "key": "starlyn_training",
@@ -2122,7 +2385,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Solar Shard",
    "shardId": "SHARD_SOLAR",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "starlyn_training"
   },
   {
    "key": "stone_elemental",
@@ -2130,7 +2394,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Quake Shard",
    "shardId": "SHARD_QUAKE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "stone_elemental"
   },
   {
    "key": "storm_elemental",
@@ -2138,7 +2403,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Tempest Shard",
    "shardId": "SHARD_TEMPEST",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "storm_elemental"
   },
   {
    "key": "strong_arms",
@@ -2146,7 +2412,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Bambuleaf Shard",
    "shardId": "SHARD_BAMBULEAF",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "strong_arms"
   },
   {
    "key": "strong_legs",
@@ -2154,7 +2421,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Mochibear Shard",
    "shardId": "SHARD_MOCHIBEAR",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "strong_legs"
   },
   {
    "key": "subterranean_fortune",
@@ -2162,7 +2430,8 @@
    "rarity": "RARE",
    "shardName": "Chuckwalla Shard",
    "shardId": "SHARD_CHUCKWALLA",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "subterranean_fortune"
   },
   {
    "key": "subterranean_resistance",
@@ -2170,7 +2439,8 @@
    "rarity": "COMMON",
    "shardName": "Shyworm Shard",
    "shardId": "SHARD_SHYWORM",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "subterranean_resistance"
   },
   {
    "key": "subterranean_ruler",
@@ -2178,7 +2448,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Driftling Shard",
    "shardId": "SHARD_DRIFTLING",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "subterranean_ruler"
   },
   {
    "key": "thunder_speed",
@@ -2186,7 +2457,8 @@
    "rarity": "RARE",
    "shardName": "Thunder Shard",
    "shardId": "SHARD_THUNDER",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "thunder_speed"
   },
   {
    "key": "ticket_discount",
@@ -2194,7 +2466,8 @@
    "rarity": "UNCOMMON",
    "shardName": "June Bug Shard",
    "shardId": "SHARD_JUNE_BUG",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "ticket_discount"
   },
   {
    "key": "tiki_tracker",
@@ -2202,7 +2475,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Sneaky Tiki Shard",
    "shardId": "SHARD_SNEAKY_TIKI",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "tiki_tracker"
   },
   {
    "key": "titanoboa_tracker",
@@ -2210,7 +2484,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Water Snake Shard",
    "shardId": "SHARD_WATER_SNAKE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "titanoboa_tracker"
   },
   {
    "key": "torrent_elemental",
@@ -2218,7 +2493,8 @@
    "rarity": "RARE",
    "shardName": "Cascade Shard",
    "shardId": "SHARD_CASCADE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "torrent_elemental"
   },
   {
    "key": "torrhus_diver",
@@ -2226,7 +2502,8 @@
    "rarity": "COMMON",
    "shardName": "Timil Shard",
    "shardId": "SHARD_TIMIL",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "torrhus_diver"
   },
   {
    "key": "torrhus_mastery",
@@ -2234,7 +2511,8 @@
    "rarity": "COMMON",
    "shardName": "Firefox Shard",
    "shardId": "SHARD_FIREFOX",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "torrhus_mastery"
   },
   {
    "key": "torrhus_serendipity",
@@ -2242,7 +2520,8 @@
    "rarity": "RARE",
    "shardName": "Stingray Shard",
    "shardId": "SHARD_STINGRAY",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "torrhus_serendipity"
   },
   {
    "key": "tough_claws",
@@ -2250,7 +2529,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Grizzly Bear Shard",
    "shardId": "SHARD_GRIZZLY_BEAR",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "tough_claws"
   },
   {
    "key": "tracking",
@@ -2266,7 +2546,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Ghost Crab Shard",
    "shardId": "SHARD_GHOST_CRAB",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "treasure_fisher"
   },
   {
    "key": "tree_lurker",
@@ -2274,7 +2555,8 @@
    "rarity": "COMMON",
    "shardName": "Harpy Shard",
    "shardId": "SHARD_HARPY",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "tree_lurker"
   },
   {
    "key": "trophy_hunter",
@@ -2282,7 +2564,8 @@
    "rarity": "EPIC",
    "shardName": "Fire Eel Shard",
    "shardId": "SHARD_FIRE_EEL",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "trophy_hunter"
   },
   {
    "key": "tuning_box",
@@ -2290,7 +2573,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Hideonbox Shard",
    "shardId": "SHARD_HIDEONBOX",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "tuning_box"
   },
   {
    "key": "ultimate_dna",
@@ -2298,7 +2582,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Galaxy Fish Shard",
    "shardId": "SHARD_GALAXY_FISH",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "ultimate_dna"
   },
   {
    "key": "undead_fortune",
@@ -2314,7 +2599,8 @@
    "rarity": "COMMON",
    "shardName": "Tank Zombie Shard",
    "shardId": "SHARD_TANK_ZOMBIE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "undead_resistance"
   },
   {
    "key": "undead_ruler",
@@ -2322,7 +2608,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Zombie Soldier Shard",
    "shardId": "SHARD_ZOMBIE_SOLDIER",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "undead"
   },
   {
    "key": "underwater_tracker",
@@ -2330,7 +2617,8 @@
    "rarity": "RARE",
    "shardName": "Nozzlenose Shard",
    "shardId": "SHARD_NOZZLENOSE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "underwater_tracker"
   },
   {
    "key": "unity_is_strength",
@@ -2338,7 +2626,8 @@
    "rarity": "COMMON",
    "shardName": "Tadgang Shard",
    "shardId": "SHARD_TADGANG",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "unity_is_strength"
   },
   {
    "key": "unlimited_energy",
@@ -2346,7 +2635,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Etherdrake Shard",
    "shardId": "SHARD_ETHERDRAKE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "unlimited_energy"
   },
   {
    "key": "unlimited_fortitude",
@@ -2354,7 +2644,8 @@
    "rarity": "LEGENDARY",
    "shardName": "End Stone Protector Shard",
    "shardId": "SHARD_ENDSTONE_PROTECTOR",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "fortitude"
   },
   {
    "key": "unlimited_power",
@@ -2362,7 +2653,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Jormung Shard",
    "shardId": "SHARD_JORMUNG",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "unlimited_power"
   },
   {
    "key": "unlimited_torment",
@@ -2370,7 +2662,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Taurus Shard",
    "shardId": "SHARD_TAURUS",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "maximal_torment"
   },
   {
    "key": "veil",
@@ -2378,7 +2671,8 @@
    "rarity": "EPIC",
    "shardName": "Ghost Shard",
    "shardId": "SHARD_GHOST",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "veil"
   },
   {
    "key": "veteran",
@@ -2386,7 +2680,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Apex Dragon Shard",
    "shardId": "SHARD_APEX_DRAGON",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "veteran"
   },
   {
    "key": "visitor_bait",
@@ -2394,7 +2689,8 @@
    "rarity": "COMMON",
    "shardName": "Mudworm Shard",
    "shardId": "SHARD_MUDWORM",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "visitor_bait"
   },
   {
    "key": "visitor_cheese",
@@ -2402,7 +2698,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Woodlouse Shard",
    "shardId": "SHARD_WOODLOUSE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "visitor_cheese"
   },
   {
    "key": "visitor_compost",
@@ -2410,7 +2707,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Parched Shard",
    "shardId": "SHARD_PARCHED",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "visitor_compost"
   },
   {
    "key": "visitor_dung",
@@ -2418,7 +2716,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Dung Beetle Shard",
    "shardId": "SHARD_DUNG_BEETLE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "visitor_dung"
   },
   {
    "key": "visitor_honey",
@@ -2426,7 +2725,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Honeybug Shard",
    "shardId": "SHARD_HONEYBUG",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "visitor_honey"
   },
   {
    "key": "visitor_plant",
@@ -2434,7 +2734,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Red Panda Shard",
    "shardId": "SHARD_RED_PANDA",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "visitor_plant"
   },
   {
    "key": "vitality",
@@ -2450,7 +2751,8 @@
    "rarity": "EPIC",
    "shardName": "Barbarian Duke X Shard",
    "shardId": "SHARD_BARBARIAN_DUKE_X",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "warrior"
   },
   {
    "key": "wart_eater",
@@ -2458,7 +2760,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Wartybug Shard",
    "shardId": "SHARD_WARTYBUG",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "wart_eater"
   },
   {
    "key": "water_elemental",
@@ -2466,7 +2769,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Tide Shard",
    "shardId": "SHARD_TIDE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "water_elemental"
   },
   {
    "key": "why_not_more",
@@ -2474,7 +2778,8 @@
    "rarity": "EPIC",
    "shardName": "Toucan Shard",
    "shardId": "SHARD_TOUCAN",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "why_not_more"
   },
   {
    "key": "wind_elemental",
@@ -2482,7 +2787,8 @@
    "rarity": "EPIC",
    "shardName": "Aero Shard",
    "shardId": "SHARD_AERO",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "wind_elemental"
   },
   {
    "key": "wings_of_destiny",
@@ -2490,7 +2796,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Ananke Shard",
    "shardId": "SHARD_ANANKE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "wings_of_destiny"
   },
   {
    "key": "winter_s_serendipity",
@@ -2498,7 +2805,8 @@
    "rarity": "RARE",
    "shardName": "Snowfin Shard",
    "shardId": "SHARD_SNOWFIN",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "winter_serendipity"
   },
   {
    "key": "witch_s_fortune",
@@ -2506,7 +2814,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Sea Witch Shard",
    "shardId": "SHARD_SEA_WITCH",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "witchs_fortune"
   },
   {
    "key": "wood_elemental",
@@ -2514,7 +2823,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Bramble Shard",
    "shardId": "SHARD_BRAMBLE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "wood_elemental"
   },
   {
    "key": "woodland_fortune",
@@ -2522,7 +2832,8 @@
    "rarity": "RARE",
    "shardName": "Hideonfloor Shard",
    "shardId": "SHARD_HIDEONFLOOR",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "woodland_fortune"
   },
   {
    "key": "woodland_resistance",
@@ -2530,7 +2841,8 @@
    "rarity": "COMMON",
    "shardName": "Stag Beetle Shard",
    "shardId": "SHARD_STAG_BEETLE",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "woodland_resistance"
   },
   {
    "key": "woodland_ruler",
@@ -2538,7 +2850,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Ent Shard",
    "shardId": "SHARD_ENT",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "spirit_axe"
   },
   {
    "key": "yeti_tracker",
@@ -2546,7 +2859,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Shuddersquid Shard",
    "shardId": "SHARD_SHUDDERSQUID",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "yeti_tracker"
   },
   {
    "key": "yog_membrane",
@@ -2554,7 +2868,8 @@
    "rarity": "COMMON",
    "shardName": "Yog Shard",
    "shardId": "SHARD_YOG",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "yog_membrane"
   },
   {
    "key": "yummy",
@@ -2562,7 +2877,8 @@
    "rarity": "COMMON",
    "shardName": "Birries Shard",
    "shardId": "SHARD_BIRRIES",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "yummy"
   },
   {
    "key": "zealot_tracker",
@@ -2570,7 +2886,8 @@
    "rarity": "UNCOMMON",
    "shardName": "Gazer Shard",
    "shardId": "SHARD_GAZER",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "zealot_tracker"
   }
  ]
 }

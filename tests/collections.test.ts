@@ -504,18 +504,50 @@ test("attributes cover the whole game, not the third the old wiki listed", () =>
 
 /* ------------------------------------------- false positives on a maxed profile */
 
-test("an attribute we cannot place is held back, not offered as ten fresh levels", () => {
-  // The wiki writes Arthropod Ruler where the game writes arachno. About twenty names disagree,
-  // and offering all ten levels of each told a player with every attribute maxed that 171 levels
-  // were outstanding. Unknown progress is not the same as no progress.
-  const withAttributes = catalogFor({ attributes: { stacks: { speed: 96 } } });
-  const offered = withAttributes.tasks.filter((t) => t.category === "attributes");
-  const names = new Set(offered.map((t) => t.name.replace(/ \d+$/, "")));
-  assert.ok(!names.has("Arthropod Ruler"), "no key in this profile matches it, so its progress is unknown");
+/**
+ * The wiki writes Arthropod Ruler where the game writes arachno, and about a sixth of the list
+ * disagrees like that. The join used to be guessed at runtime, where a miss was indistinguishable
+ * from an attribute the player had never started — so every unmatched attribute was held back,
+ * and with them every attribute the player simply had not begun. A profile with 170 of 320
+ * started was offered 747 XP where 2,309 were outstanding.
+ *
+ * The join is settled at build time now, against the id list three maxed profiles agree on, so
+ * an attribute absent from a profile means zero shards and is offered in full.
+ */
+test("an attribute the player has not started is offered in full", () => {
+  const started = catalogFor({ attributes: { stacks: { speed: 96 } } });
+  const offered = started.tasks.filter((t) => t.category === "attributes" && !started.done.has(t.id));
+  const arthropod = offered.filter((t) => t.name.startsWith("Arthropod Ruler "));
+  assert.equal(arthropod.length, 10, "no arachno shards on this profile, so all ten levels are ahead");
 
-  // A profile that reports nothing is a different case: there the category really is all ahead.
+  // And the one the profile *has* maxed is not offered at all. Matched on the id, because
+  // "Speed Ruler" and "Speed Wisdom" are different attributes that start with the same word.
+  const speed = started.tasks.filter((t) => /^attribute_speed_d+$/.test(t.id) && !started.done.has(t.id));
+  assert.deepEqual(speed, [], "96 shards is past the uncommon maximum of 64");
+
+  // A profile that reports nothing is the same case, not a special one.
   const fresh = catalogFor({});
   assert.ok(fresh.tasks.filter((t) => t.category === "attributes").length > 3_000);
+});
+
+/**
+ * What is still held back: the handful whose id no evidence can single out. Four of the wiki's
+ * attributes have no counterpart the game reports — its list carries 321 against the game's 320
+ * — and offering ten levels of one a player may already have maxed is the error worth avoiding.
+ */
+test("an attribute with no id at all is held back", () => {
+  const unplaceable = data.attributeShards.attributes.filter((a) => !a.apiKey);
+  assert.ok(unplaceable.length > 0 && unplaceable.length < 10, `${unplaceable.length} unplaceable`);
+  const offered = catalogFor({ attributes: { stacks: { speed: 96 } } }).tasks.filter(
+    (t) => t.category === "attributes",
+  );
+  for (const attribute of unplaceable) {
+    assert.equal(
+      offered.some((t) => t.id.startsWith(`attribute_${attribute.key}_`)),
+      false,
+      `${attribute.name} has no id, so its progress cannot be read`,
+    );
+  }
 });
 
 test("pets nobody can buy are not on a shopping list", () => {
@@ -526,4 +558,38 @@ test("pets nobody can buy are not on a shopping list", () => {
   }
   assert.equal(pets.some((t) => t.id.includes("BINGO")), false, "the Bingo pet needs a Bingo profile");
   assert.ok(pets.length > 200, "the rest of the catalogue is still there");
+});
+
+/**
+ * A profile with every attribute at its maximum has nothing left in the category. This is the
+ * check the old runtime guess could never pass honestly: it hid unmatched attributes, so a maxed
+ * profile looked finished for the wrong reason, and a half-finished one looked far closer to
+ * done than it was — 747 XP outstanding against a real 2,309.
+ */
+test("a profile with every attribute maxed is offered nothing", () => {
+  const stacks: Record<string, number> = {};
+  // 96 is the largest of the five maxima, so this is at or past every one of them.
+  for (const key of data.attributeApiKeys.gameKeys.keys) stacks[key] = 96;
+  const cat = catalogFor({ attributes: { stacks } });
+  const open = cat.tasks.filter((t) => t.category === "attributes" && !cat.done.has(t.id));
+  assert.deepEqual(open, [], `${open.length} levels offered to a profile that has them all`);
+});
+
+/**
+ * And one with nothing has the whole category ahead of it, which must come to what the game
+ * publishes: 320 attributes at ten levels each. What is short of 3,200 is the handful whose id
+ * no evidence can settle, and that is reported rather than quietly missing.
+ */
+test("an untouched profile is offered the whole category", () => {
+  const cat = catalogFor({});
+  const rows = cat.tasks.filter((t) => t.category === "attributes");
+  const unplaceable = data.attributeShards.attributes.filter((a) => !a.apiKey).length;
+  const placeable = data.attributeApiKeys.gameKeys.total - Object.keys(data.attributeApiKeys.gameKeys.stale ?? {}).length;
+
+  assert.equal(rows.length % 10, 0, "ten levels an attribute");
+  assert.equal(rows.length / 10, data.attributeShards.attributes.length - unplaceable);
+  assert.ok(
+    rows.length >= (placeable - unplaceable) * 10,
+    `${rows.length} levels modelled, short of the ${placeable * 10} the game publishes`,
+  );
 });
