@@ -39,9 +39,10 @@ const slug = (name) =>
     .replace(/^_|_$/g, "");
 
 /**
- * Families whose SkyCrypt name is not the name our wiki list uses. Four, and each is the same
- * family under a name the game or the wiki has since changed — checked one at a time against the
- * island and the mob ids, not matched by string distance.
+ * Families whose SkyCrypt name is not the name our wiki list uses, where the difference is not a
+ * rename either wiki records. Each was checked against the island and the mob ids rather than
+ * matched by string distance. The renames the wikis *do* record arrive with the family list
+ * instead, under `renames`, so this stays to the cases nothing published settles.
  */
 const RENAMED = {
   "Arachne's Brood": "arachne_s_brood",
@@ -86,7 +87,9 @@ let families = 0;
 for (const island of Object.values(BESTIARY)) {
   for (const family of island.mobs ?? []) {
     families++;
-    const id = RENAMED[family.name] ?? slug(family.name);
+    // SkyCrypt predates the wikis' renames, so it still says Gravel Skeleton and Endstone
+    // Protector; the family list carries what those became.
+    const id = RENAMED[family.name] ?? ours.renames?.[family.name] ?? slug(family.name);
     if (!ourIds.has(id)) {
       unmatched.push({ name: family.name, island: island.name, ids: family.mobs ?? [] });
       continue;

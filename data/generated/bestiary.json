@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-08-22T04:10:39.738Z",
+ "generatedAt": "2026-08-22T10:40:06.330Z",
  "source": "hypixelskyblock.minecraft.wiki Bestiary and Bestiary/List, plus the sections only hypixel-skyblock.fandom.com still carries",
  "note": "A family is placed on a ladder by the identity ladder[maxTier-1] === maxKills rather than by the bracket its page states. Critters and hunting mobs have their own five brackets, keyed to shard rarity.",
  "brackets": {
@@ -762,15 +762,6 @@
   },
   {
    "island": "Families",
-   "name": "Angry Archeologist",
-   "id": "angry_archeologist",
-   "maxTier": 25,
-   "maxKills": 3000,
-   "bracket": 7,
-   "table": "main"
-  },
-  {
-   "island": "Families",
    "name": "Banshee",
    "id": "banshee",
    "maxTier": 15,
@@ -843,15 +834,6 @@
   },
   {
    "island": "Families",
-   "name": "Endstone Protector",
-   "id": "endstone_protector",
-   "maxTier": 20,
-   "maxKills": 500,
-   "bracket": 7,
-   "table": "main"
-  },
-  {
-   "island": "Families",
    "name": "Fiery Scuttler",
    "id": "fiery_scuttler",
    "maxTier": 15,
@@ -917,15 +899,6 @@
    "island": "Families",
    "name": "Frozen Steve",
    "id": "frozen_steve",
-   "maxTier": 15,
-   "maxKills": 4000,
-   "bracket": 3,
-   "table": "main"
-  },
-  {
-   "island": "Families",
-   "name": "Gravel Skeleton",
-   "id": "gravel_skeleton",
    "maxTier": 15,
    "maxKills": 4000,
    "bracket": 3,
@@ -3155,6 +3128,11 @@
    "table": "hunting"
   }
  ],
+ "renames": {
+  "Angry Archeologist": "angry_archaeologist",
+  "Endstone Protector": "end_stone_protector",
+  "Gravel Skeleton": "flint_skeleton"
+ },
  "undocumented": [
   {
    "island": "Families",
@@ -3163,12 +3141,12 @@
   }
  ],
  "totals": {
-  "families": 319,
+  "families": 316,
   "islands": 20,
-  "tiers": 4630,
-  "xp": 4630,
-  "milestoneXp": 460,
-  "statedTotal": 5090,
+  "tiers": 4570,
+  "xp": 4570,
+  "milestoneXp": 450,
+  "statedTotal": 5020,
   "statedTotalSource": "1 XP a tier, plus 10 XP per ten milestones where a milestone is ten tiers — wiki Bestiary, Leveling and Milestone Rewards"
  }
 }

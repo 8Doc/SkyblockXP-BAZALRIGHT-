@@ -243,6 +243,12 @@ export type BestiaryData = {
     /** Which of the two tables the bracket indexes into. */
     table?: "main" | "hunting";
   }[];
+  /**
+   * Older names for a family, where both wikis' redirects agree the two are one page. The two
+   * wikis spell some families differently, and slugging both gave four ids for two families —
+   * two of which then read as families nobody had ever killed.
+   */
+  renames?: Record<string, string>;
   /** Families the wiki lists without a tier cap, so nothing can be offered for them. */
   undocumented: { island: string; name: string; id: string }[];
   totals: {

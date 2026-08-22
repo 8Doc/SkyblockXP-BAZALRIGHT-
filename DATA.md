@@ -460,11 +460,23 @@ bounded and measurable: the in-game menu states the category at 5,660 XP against
 table sums to (see `data/curated/bestiary_known_max.json`), so roughly 570 XP is missing families
 rather than a broken join.
 
-**A duplicate to watch.** The two-wiki merge produced at least two pairs that look like one
-family listed twice under different spellings: `endstone_protector` (Families) against
-`end_stone_protector` (The End), and `angry_archeologist` (Families) against
-`angry_archaeologist` (The Catacombs). Both inflate the family count and the tier total, and the
-first is the only thing blocking the compact-name rule from resolving cleanly.
+**Duplicates across the two wikis.** The wikis spell some families differently — Fandom writes
+"Endstone Protector", "Angry Archeologist" and "Gravel Skeleton" where the community wiki writes
+"End Stone Protector", "Angry Archaeologist" and "Flint Skeleton" — and slugging both gave six ids
+for three families. The extra three read as families nobody had ever killed, and a maxed profile
+was offered 60 tiers of mobs that do not separately exist.
+
+Both wikis carry redirects between the spellings, so the merge folds a Fandom name when the
+redirect resolves the same way **on both wikis**. The agreement is the whole guard: the community
+wiki alone points "Worm" at "Stoneworm", because its Stoneworm article covers the shard creature
+and it has no page for the Crystal Hollows worms — while Fandom keeps a real Worm family, the one
+Scatha feeds. Folding on one wiki's say-so merged two different families and stranded every Scatha
+kill. Fandom has no such redirect, and that disagreement is what catches it.
+
+What the merge folded is published in `bestiary.json` as `renames`, so anything joining on a
+family name can follow it. `fetch-bestiary-mobs.mjs` needs exactly that: SkyCrypt predates the
+renames and still says Gravel Skeleton, so without the bridge three families' mob ids would go
+unmapped again.
 
 ### What is offered
 

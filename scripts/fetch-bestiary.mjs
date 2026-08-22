@@ -163,14 +163,75 @@ function placeOnLadder(family) {
 
 const merged = new Map();
 for (const f of community) merged.set(slug(f.name), { ...f, id: slug(f.name) });
+
+/**
+ * The two wikis spell some families differently. Fandom writes "Endstone Protector" and "Angry
+ * Archeologist" where the community wiki writes "End Stone Protector" and "Angry Archaeologist",
+ * and slugging both gives four ids for two families — which then read as two families nobody has
+ * ever killed, and inflate the family count and the category total with them.
+ *
+ * Both wikis carry a redirect from one spelling to the other, so the wikis themselves state that
+ * the pages are the same thing. That is used instead of a spelling rule of our own: collapsing
+ * "archeologist" onto "archaeologist" by hand would be guessing at which differences are
+ * cosmetic, and the next pair would not look like this one.
+ *
+ * Both wikis have to agree, because a redirect is about articles rather than about families. The
+ * community wiki points "Worm" at "Stoneworm" — its Stoneworm article covers the shard creature,
+ * and it has no separate page for the Crystal Hollows worms — while Fandom keeps a real Worm
+ * family that Scatha feeds. Folding on one wiki's say-so would have merged two different families
+ * and stranded the Scatha kills. Fandom has no such redirect, and that disagreement is the signal.
+ */
+async function redirectsFrom(api, names) {
+  const map = new Map();
+  for (let i = 0; i < names.length; i += 50) {
+    const batch = names.slice(i, i + 50);
+    const url = `${api}?action=query&format=json&redirects=1&titles=${batch.map(encodeURIComponent).join("|")}`;
+    const body = await fetch(url, { headers: UA }).then((r) => r.json());
+    for (const step of [...(body.query?.normalized ?? []), ...(body.query?.redirects ?? [])])
+      map.set(step.from, step.to);
+  }
+  return map;
+}
+
+/** A redirect can point at another redirect, and a cycle would otherwise spin here. */
+function follow(map, name) {
+  const seen = new Set();
+  let at = name;
+  while (map.has(at) && !seen.has(at)) {
+    seen.add(at);
+    at = map.get(at);
+  }
+  return at;
+}
+
+const unresolved = [...new Set(fandom.map((f) => f.name))].filter((n) => !merged.has(slug(n)));
+const [onCommunity, onFandom] = await Promise.all([
+  redirectsFrom(COMMUNITY, unresolved),
+  redirectsFrom(FANDOM, unresolved),
+]);
+const canonical = new Map();
+for (const name of unresolved) {
+  const community = follow(onCommunity, name);
+  const fandomSide = follow(onFandom, name);
+  if (community === fandomSide && community !== name) canonical.set(name, community);
+}
+
+const resolveName = (name) => canonical.get(name) ?? name;
+
 let added = 0;
+const folded = [];
 for (const f of fandom) {
-  const id = slug(f.name);
-  if (merged.has(id)) continue;
-  merged.set(id, { ...f, id });
+  const name = resolveName(f.name);
+  const id = slug(name);
+  if (merged.has(id)) {
+    if (id !== slug(f.name)) folded.push(`${f.name} -> ${name}`);
+    continue;
+  }
+  merged.set(id, { ...f, name, id });
   added++;
 }
 console.log(`  ${merged.size} families after the merge, ${added} of them only on Fandom`);
+for (const fold of [...new Set(folded)]) console.log(`    folded by the wikis' own redirect: ${fold}`);
 
 const families = [];
 const undocumented = [];
@@ -208,6 +269,14 @@ await writeFile(
       brackets,
       huntingBrackets,
       families,
+      /**
+       * Names that are this family under an older spelling, as both wikis' redirects agree. Kept
+       * so anything joining on a family name — SkyCrypt's mob ids among them — can follow the
+       * rename instead of failing to match and dropping the mobs on the floor.
+       */
+      renames: Object.fromEntries(
+        [...canonical].map(([from, to]) => [from, slug(to)]).sort(([a], [b]) => a.localeCompare(b)),
+      ),
       undocumented,
       totals: {
         families: families.length,

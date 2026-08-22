@@ -254,8 +254,42 @@ test("a curated alias wins over the scraped map", () => {
 test("a name split differently resolves, unless two families claim it", () => {
   assert.equal(bestiaryFamilyOf(data, "lotus_fish_1"), "lotusfish");
   assert.equal(bestiaryFamilyOf(data, "flip_flopper_1"), "flipflopper");
-  assert.equal(bestiaryFamilyOf(data, "endstone_protector_1"), "endstone_protector", "an exact id still wins");
-  assert.equal(bestiaryFamilyOf(data, "end_stoneprotector_1"), undefined, "ambiguous, so refused");
+  assert.equal(bestiaryFamilyOf(data, "endstone_protector_1"), "end_stone_protector", "Fandom's spelling");
+
+  // Synthetic, because the pair that motivated the guard was itself the duplicate the merge now
+  // folds — the guard has to keep working for the next one rather than for that one.
+  const ambiguous = {
+    bestiary: { families: [{ id: "a_bc" }, { id: "ab_c" }], brackets: {} },
+    bestiaryMobs: { aliases: {}, noFamily: {} },
+    bestiaryMobIds: { aliases: {} },
+  } as never;
+  assert.equal(bestiaryFamilyOf(ambiguous, "abc_1"), undefined, "two families compact to it, so refused");
+  assert.equal(bestiaryFamilyOf(ambiguous, "a_bc_1"), "a_bc", "an exact id is never ambiguous");
+});
+
+/**
+ * The two wikis spell some families differently, and slugging both gave four ids for two
+ * families. The extra two then read as families nobody had ever killed — a maxed profile was
+ * offered 60 tiers of mobs that do not separately exist. Both wikis have to agree a name is a
+ * redirect before it folds: the community wiki alone points Worm at Stoneworm, which would have
+ * merged the Crystal Hollows worms into a shard creature and stranded every Scatha kill.
+ */
+test("a family is not listed twice under two wikis' spellings", () => {
+  const compact = new Map<string, string>();
+  for (const family of bestiary.families) {
+    const key = family.id.replace(/_/g, "");
+    assert.ok(!compact.has(key), `${family.id} and ${compact.get(key)} are one family listed twice`);
+    compact.set(key, family.id);
+  }
+  for (const [from, to] of Object.entries(bestiary.renames ?? {})) {
+    assert.ok(
+      bestiary.families.some((f) => f.id === to),
+      `${from} folds into ${to}, which is not a family`,
+    );
+    assert.ok(!bestiary.families.some((f) => f.id === from.toLowerCase().replace(/[^a-z0-9]+/g, "_")),
+      `${from} was folded but is still listed`);
+  }
+  assert.ok(bestiary.families.some((f) => f.id === "worm"), "Worm survives: only one wiki calls it Stoneworm");
 });
 
 test("every scraped alias points at a family that exists", () => {
