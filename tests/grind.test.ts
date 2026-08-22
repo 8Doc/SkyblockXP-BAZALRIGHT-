@@ -3,6 +3,8 @@ import assert from "node:assert/strict";
 import { buildCatalog } from "../src/lib/catalog";
 import { buildReport } from "../src/lib/report";
 import { CATEGORIES, type Category, type ResolvedTask } from "../src/lib/types";
+import { groupTaskRuns } from "../src/lib/grouping";
+import { resolveTasks } from "../src/lib/resolve";
 import { gameData } from "./gameDataFixture";
 import type { ProfileMember } from "../src/lib/profile";
 
@@ -237,4 +239,26 @@ test("bag slots are listed where the room runs out", () => {
     if (row.id.startsWith("accessory_") && (row.groupBase ?? 0) <= 0) sinceUpgrade++;
     assert.ok(sinceUpgrade <= 2, `${row.name} is the ${sinceUpgrade}th accessory since the last slot was bought`);
   }
+});
+
+/**
+ * Bag slots are interchangeable — each is +2 at the going rate — so a run of them is a quantity
+ * to buy, not a span of numbered things. A package saying "Accessory bag upgrade 14–23" makes
+ * you count them yourself; "Upgrade Jacobus 10×" is the instruction, and buying them first is
+ * what makes the rest of the package fit.
+ */
+test("a package stacks Jacobus upgrades into a count", () => {
+  const member = { accessory_bag_storage: { bag_upgrades_purchased: 13 } } as unknown as ProfileMember;
+  const catalog = buildCatalog(member, data, { items: [], capacity: 0 });
+  const { tasks } = resolveTasks(catalog.tasks, catalog.done, { bazaar: {}, bins: null });
+  const upgrades = tasks.filter((t) => t.id.startsWith("bag_upgrade_") && !catalog.done.has(t.id)).slice(0, 10);
+
+  const runs = groupTaskRuns(upgrades);
+  assert.equal(runs.length, 1, "ten upgrades are one instruction");
+  assert.equal(runs[0]!.name, "Upgrade Jacobus 10×");
+  assert.equal(runs[0]!.xp, 20, "two XP apiece");
+  assert.match(runs[0]!.note ?? "", /\+20 slots/);
+
+  // One on its own is still named for itself rather than as "1×".
+  assert.equal(groupTaskRuns(upgrades.slice(0, 1))[0]!.name, upgrades[0]!.name);
 });

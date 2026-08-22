@@ -104,6 +104,8 @@ export function groupTaskRuns(tasks: ResolvedTask[]): TaskRun[] {
     if (parts.every((p) => p && p.material === parts[0]!.material)) {
       const total = parts.reduce((sum, p) => sum + p!.qty, 0);
       note = `${ordered.length} levels · ${total}× ${parts[0]!.material}`;
+    } else if (family === "bag_upgrade") {
+      note = `+${ordered.length * 2} slots · buy these first and the rest of the package fits`;
     } else {
       note = `${ordered.length} levels`;
     }
@@ -118,7 +120,11 @@ export function groupTaskRuns(tasks: ResolvedTask[]): TaskRun[] {
     const sharedBase = first.base === last.base && labels.every(Boolean);
 
     let name: string;
-    if (!sharedBase) name = `${ordered[0].name} +${ordered.length - 1} more`;
+    // Bag slots are interchangeable — each is +2 slots at the going rate — so a run of them is
+    // a quantity to buy rather than a span of numbered things. "Upgrade Jacobus 10×" is the
+    // instruction; "Accessory bag upgrade 14–23" makes you count them yourself.
+    if (family === "bag_upgrade") name = `Upgrade Jacobus ${ordered.length}×`;
+    else if (!sharedBase) name = `${ordered[0].name} +${ordered.length - 1} more`;
     else if (contiguous) name = `${first.base} ${first.label}–${last.label}`;
     else name = `${first.base} ${labels.join(", ")}`;
 

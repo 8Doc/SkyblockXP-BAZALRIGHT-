@@ -584,16 +584,27 @@ function browserView(report: Report): string {
       const unpricedKey = `unpriced:${category}`;
       const showUnpriced = unpriced !== undefined && open.has(unpricedKey);
 
+      // Jacobus sells 99 of one thing, so his rows are a tenth of this category and say nothing
+      // about which accessory to buy. Hidden they stay out of the way; shown they mark where the
+      // bag runs out of room.
+      const jacobusKey = `jacobus:${category}`;
+      const hideJacobus = category === "accessory_bag" && open.has(jacobusKey);
+
       // Two independent questions — "one row per thing" and "only what I cannot buy" — so both
       // can be on at once, and the fourth combination is a list of its own rather than one
       // toggle quietly cancelling the other.
-      const rows = isGrouped
+      const chosen = isGrouped
         ? showUnpriced
           ? (entry.unpricedMaxed ?? [])
           : maxed!
         : showUnpriced
           ? unpriced!
           : tasks;
+      const rows = hideJacobus
+        ? (chosen as { tasks?: ResolvedTask[]; id?: string }[]).filter((row) =>
+            row.id ? !row.id.startsWith("bag_upgrade_") : !row.tasks?.[0]?.id.startsWith("bag_upgrade_"),
+          )
+        : chosen;
       const hidden = isGrouped
         ? showUnpriced
           ? (entry.unpricedMaxedTruncated ?? 0)
@@ -617,6 +628,18 @@ function browserView(report: Report): string {
                 ? `<p class="sub">${num(report.bag.powerLeft)} of that is magical power, the other ${num(
                     summary.remainingXp - report.bag.powerLeft,
                   )} bag slots from Jacobus.</p>`
+                : ""
+            }
+            ${
+              category === "accessory_bag"
+                ? `<p class="sub group-toggle">
+                    <button class="chip${hideJacobus ? " on" : ""}" data-toggle="${jacobusKey}">Hide Jacobus</button>
+                    <span class="dim">${
+                      hideJacobus
+                        ? "bag slots hidden — accessories only"
+                        : "bag slots are shown where the bag runs out of room"
+                    }</span>
+                  </p>`
                 : ""
             }
             ${
