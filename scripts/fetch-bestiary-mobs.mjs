@@ -51,6 +51,11 @@ const RENAMED = {
   "Ice Walker": "glacite_walker",
   // SkyCrypt spells it with one 'n'.
   "Millenia-Aged Blaze": "millennia_aged_blaze",
+  // Both wikis redirect these two, and an in-game reading agrees: a profile's 21 skeleton_emperor
+  // and 8 guardian_emperor kills show up as 29 against The Loch Emperor. watcher_55 is the End
+  // mob, not the dungeon boss — those carry their own stems (watcher_bonzo, watcher_scarf).
+  "The Sea Emperor": "the_loch_emperor",
+  Watcher: "seer",
 };
 
 const source = await fetch(SOURCE, {

@@ -4,9 +4,13 @@
   "note": "The profile names mobs by internal id (unburried_zombie); the bestiary names families by display name (Crypt Ghoul). Nothing published joins them - the ids appear in no wiki page, no items resource and no resources endpoint. Three rules are structural and live in code (a trailing _<level>, a master_ prefix for master-mode dungeon mobs, a pest_ prefix for garden pests); everything below is named because it cannot be derived. A wrong entry credits kills to the wrong family, so the catalog cross-checks its result against the profile's own milestone count and reports how much of the bestiary it could account for. Entries that SkyCrypt's published grouping contradicts have been removed rather than kept as overrides: this file was hand-mapped from names before that grouping was available, and where the two disagree the name-guess was wrong every time it could be checked - tentaclees is a Fels rather than a Tentacle, crypt_witherskeleton a Withermancer rather than a Wither Husk, and Sadan's golems and statues do have families despite reading like boss summons.",
   "aliases": {
     "bal_boss": "bal",
+    "batty_witch": "crazy_witch",
     "bloated_mithril_grubber": "mithril_grubber",
     "brood_mother_spider": "broodmother",
     "caverns_ghost": "ghost",
+    "cheeky_tiki": "tiki",
+    "chillblade": "chill",
+    "chillshot": "chill",
     "crypt_tank_zombie": "tank_zombie",
     "crypt_undead": "undead",
     "crypt_undead_alexander": "undead",
@@ -47,6 +51,7 @@
     "skeletor_prime": "skeletor",
     "small_mithril_grubber": "mithril_grubber",
     "sniper_skeleton": "sniper",
+    "spike_pufferfish": "spike",
     "splitter_spider_silverfish": "silverfish",
     "strong_dragon": "dragon",
     "superior_dragon": "dragon",
@@ -61,47 +66,91 @@
     "zealot_special_enderman": "zealot"
   },
   "noFamily": {
-    "last_killed_mob": "Not a kill count - the profile stores the last mob's name here.",
-    "watcher": "Dungeon boss. Bosses and their summons are killed, tracked, and never enter the bestiary.",
-    "watcher_bonzo": "Boss summon.",
-    "watcher_scarf": "Boss summon.",
-    "watcher_livid": "Boss summon.",
-    "watcher_giant_laser": "Boss summon.",
-    "watcher_giant_boulder": "Boss summon.",
-    "watcher_giant_diamond": "Boss summon.",
-    "watcher_giant_bigfoot": "Boss summon.",
+    "bat_pinata": "Event mob.",
+    "blaze_higher_or_lower": "Blaze dungeon puzzle mob.",
     "bonzo": "Dungeon boss.",
     "bonzo_summon_undead": "Boss summon.",
-    "scarf": "Dungeon boss.",
-    "scarf_archer": "Boss summon.",
-    "scarf_warrior": "Boss summon.",
-    "scarf_priest": "Boss summon.",
-    "scarf_mage": "Boss summon.",
-    "professor": "Dungeon boss.",
-    "professor_mage_guardian": "Boss summon.",
-    "professor_archer_guardian": "Boss summon.",
-    "professor_warrior_guardian": "Boss summon.",
-    "professor_priest_guardian": "Boss summon.",
-    "professor_guardian_summon": "Boss summon.",
-    "thorn": "Dungeon boss.",
-    "livid": "Dungeon boss.",
-    "livid_clone": "Boss summon.",
-    "sadan": "Dungeon boss.",
-    "sadan_giant": "Boss summon.",
-    "necron": "Dungeon boss.",
-    "spirit_bat": "Thorn's spirit mobs sit outside the bestiary.",
-    "spirit_wolf": "Thorn's spirit mobs sit outside the bestiary.",
-    "spirit_bull": "Thorn's spirit mobs sit outside the bestiary.",
-    "spirit_chicken": "Thorn's spirit mobs sit outside the bestiary.",
-    "spirit_rabbit": "Thorn's spirit mobs sit outside the bestiary.",
-    "spirit_sheep": "Thorn's spirit mobs sit outside the bestiary.",
-    "spirit_miniboss": "Thorn's spirit mobs sit outside the bestiary.",
+    "dojo_knockback_zombie": "Dojo training dummy.",
     "horseman_horse": "Spooky event boss mount.",
     "horseman_zombie": "Spooky event boss summon.",
-    "blaze_higher_or_lower": "Blaze dungeon puzzle mob.",
-    "jockey_skeleton": "Rides another mob; the ride is what the bestiary counts.",
-    "dojo_knockback_zombie": "Dojo training dummy.",
     "intro_blaze": "Tutorial mob.",
-    "bat_pinata": "Event mob."
+    "jockey_skeleton": "Rides another mob; the ride is what the bestiary counts.",
+    "last_killed_mob": "Not a kill count - the profile stores the last mob's name here.",
+    "livid": "Dungeon boss.",
+    "livid_clone": "Boss summon.",
+    "necron": "Dungeon boss.",
+    "professor": "Dungeon boss.",
+    "professor_archer_guardian": "Boss summon.",
+    "professor_guardian_summon": "Boss summon.",
+    "professor_mage_guardian": "Boss summon.",
+    "professor_priest_guardian": "Boss summon.",
+    "professor_warrior_guardian": "Boss summon.",
+    "sadan": "Dungeon boss.",
+    "sadan_giant": "Boss summon.",
+    "scarf": "Dungeon boss.",
+    "scarf_archer": "Boss summon.",
+    "scarf_mage": "Boss summon.",
+    "scarf_priest": "Boss summon.",
+    "scarf_warrior": "Boss summon.",
+    "spirit_bat": "Thorn's spirit mobs sit outside the bestiary.",
+    "spirit_bull": "Thorn's spirit mobs sit outside the bestiary.",
+    "spirit_chicken": "Thorn's spirit mobs sit outside the bestiary.",
+    "spirit_miniboss": "Thorn's spirit mobs sit outside the bestiary.",
+    "spirit_rabbit": "Thorn's spirit mobs sit outside the bestiary.",
+    "spirit_sheep": "Thorn's spirit mobs sit outside the bestiary.",
+    "spirit_wolf": "Thorn's spirit mobs sit outside the bestiary.",
+    "thorn": "Dungeon boss.",
+    "watcher_bonzo": "Boss summon.",
+    "watcher_giant_bigfoot": "Boss summon.",
+    "watcher_giant_boulder": "Boss summon.",
+    "watcher_giant_diamond": "Boss summon.",
+    "watcher_giant_laser": "Boss summon.",
+    "watcher_livid": "Boss summon.",
+    "watcher_scarf": "Boss summon."
+  },
+  "verifiedInGame": {
+    "note": "Aliases confirmed by reading the in-game Bestiary screen and matching its kill count against this profile's own mob ids. A family fed by two ids shows their sum in game, which is what distinguishes a real match from a name that merely looks right.",
+    "profile": "samlaval",
+    "date": "2026-08-22",
+    "matches": [
+      {
+        "family": "chill",
+        "inGameKills": 272,
+        "from": {
+          "chillshot_31": 144,
+          "chillblade_31": 128
+        }
+      },
+      {
+        "family": "the_loch_emperor",
+        "inGameKills": 29,
+        "from": {
+          "skeleton_emperor_150": 21,
+          "guardian_emperor_150": 8
+        }
+      },
+      {
+        "family": "crazy_witch",
+        "inGameKills": 27,
+        "from": {
+          "batty_witch_60": 27
+        }
+      },
+      {
+        "family": "spike",
+        "inGameKills": 25,
+        "from": {
+          "spike_pufferfish_5": 25
+        }
+      },
+      {
+        "family": "tiki",
+        "inGameKills": 2,
+        "from": {
+          "cheeky_tiki_71": 2
+        }
+      }
+    ],
+    "unresolved": "sneaky_tiki and shrieky_tiki look like Tiki variants by name, but this profile has no kills on either, so its figure of 2 cannot tell them apart from a family of their own. Left unmapped rather than assumed."
   }
 }
