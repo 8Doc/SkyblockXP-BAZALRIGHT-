@@ -367,7 +367,11 @@ function asUpgradeOver(task: ResolvedTask, previous: ResolvedTask): ResolvedTask
   if (gain <= 0) return null;
 
   const gross = task.coins;
-  const tradeIn = previous.coins === null ? 0 : Math.round(previous.coins * 0.99);
+  // You sell what you replace, never what you build on. Recombobulating the Lumberjack Artifact
+  // is a step that needs the Artifact in hand, so quoting it net of the Artifact's sale price
+  // described selling the very thing being upgraded — 9.6M of Recombobulator reading as 6.4M.
+  const buildsOn = task.requires.includes(previous.id) || task.bundle.includes(previous.id);
+  const tradeIn = buildsOn || previous.coins === null ? 0 : Math.round(previous.coins * 0.99);
   const net = gross === null ? null : Math.max(gross - tradeIn, 0);
 
   return {
@@ -380,7 +384,7 @@ function asUpgradeOver(task: ResolvedTask, previous: ResolvedTask): ResolvedTask
     netCoins: net ?? undefined,
     // Ranked on what it actually costs you once the old one is sold.
     efficiency: net !== null && gain > 0 ? net / gain : null,
-    note: `upgrade from ${previous.name}${task.note ? ` · ${task.note}` : ""}`,
+    note: `${buildsOn ? "needs" : "upgrade from"} ${previous.name}${task.note ? ` · ${task.note}` : ""}`,
   };
 }
 

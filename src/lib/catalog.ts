@@ -290,13 +290,12 @@ export function buildCatalog(
   const freeSlots = Math.max(bagState.capacity - bagState.used, 0);
   const nextUpgrade = upgradesPurchased + 1;
   const nextUpgradeCost = nextUpgrade <= data.bagUpgrades.maxUpgrades ? bagUpgradeCost(data, nextUpgrade) : null;
-  // A full bag makes a *new* accessory cost the slot it sits in as well — but as a prerequisite
-  // rather than a markup. The upgrade is a real task at a real price, so requiring it prices the
-  // pair honestly and only once, where smearing a share of it across every accessory added
-  // several million to each and buried the rows that were genuinely cheap. Upgrading a family
-  // already in the bag is the common case and needs no slot: the artifact goes where the ring was.
-  const slotNeeded = freeSlots <= 0 && nextUpgradeCost !== null;
-  const slotTaskId = `bag_upgrade_${nextUpgrade}`;
+  // A slot is not part of an accessory's price and not a prerequisite of any particular one.
+  // It is its own purchase, needed once every two accessories that go into a bag with no room,
+  // and the browser puts it in the list at the point the room runs out — see bagSlotsWhereNeeded
+  // in report.ts. Charging it against a specific accessory, as a markup or as a prereq, made
+  // whichever one happened to sort first carry a cost that belongs to all of them.
+  void nextUpgradeCost;
 
   // Doug sells seven of these for Carnival Tokens, which is minigame play rather than coins.
   // The rows are priced from the auction house like everything else — a Bee Mask really is nine
@@ -363,7 +362,7 @@ export function buildCatalog(
       // prerequisite rather than a markup: the upgrade is a real task with a real price, and
       // smearing a share of it across every row hid which rows were actually cheap. Upgrading a
       // family already in the bag needs no new slot — the artifact goes where the ring was.
-      requires: slotNeeded && alreadyHave <= 0 ? [slotTaskId] : [],
+      requires: [],
       cost: acc.tradeable
         ? {
             kind: "auction",
@@ -380,9 +379,7 @@ export function buildCatalog(
             note: acc.soulbound ? "Soulbound — cannot be bought" : "Not tradeable",
           },
       repeatable: false,
-      note: `${acc.tier.toLowerCase()} · ${power} MP${alreadyHave > 0 ? ` (family already gives ${alreadyHave})` : ""}${
-        slotNeeded && alreadyHave <= 0 ? " · bag is full, needs a slot" : ""
-      }${carnivalPrice.has(acc.id) ? ` · or ${carnivalPrice.get(acc.id)}` : ""}`,
+      note: `${acc.tier.toLowerCase()} · ${power} MP${alreadyHave > 0 ? ` (family already gives ${alreadyHave})` : ""}${carnivalPrice.has(acc.id) ? ` · or ${carnivalPrice.get(acc.id)}` : ""}`,
     });
 
     // An accessory worth nothing on its own is still worth buying when a Recombobulator on top
@@ -854,7 +851,7 @@ export function buildCatalog(
     tasks.push({
       id: `recombobulate_${best.id}`,
       category: "accessory_bag",
-      name: `Recombobulate ${meta?.name ?? best.id}`,
+      name: `Recomb ${meta?.name ?? best.id}`,
       xp: power - alreadyHave,
       exclusiveGroup: `accessory:${family}`,
       groupLevel: power,
@@ -893,9 +890,10 @@ export function buildCatalog(
     tasks.push({
       id: `recombobulate_${acc.id}`,
       category: "accessory_bag",
-      // One row, two purchases — so it is named for what you end up holding rather than for the
-      // second half of the job. "Recombobulate Vaccine Artifact" read as though you had one.
-      name: `${acc.name} + Recomb`,
+      // Its own row, and named as its own step. Buying the accessory is listed separately just
+      // above it, so folding the two into one line described a single purchase that is really
+      // two and priced it as the pair.
+      name: `Recomb ${acc.name}`,
       xp: power - alreadyHave,
       exclusiveGroup: `accessory:${family}`,
       groupLevel: power,
@@ -1271,7 +1269,8 @@ export function buildCatalog(
   return {
     tasks,
     done,
-    bag: bagState,
+    // The browser needs to know how much room an upgrade buys to place them in the list.
+    bag: { ...bagState, slotsPerUpgrade: data.bagUpgrades.slotsPerUpgrade },
     currentXp: member.leveling?.experience ?? 0,
     // Pet score is unmodelled as *tasks*, but the profile still tells us exactly how much XP
     // it has already paid out — worth showing rather than discarding.

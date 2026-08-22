@@ -579,6 +579,8 @@ export type BagState = {
   /** Slots the bag container has, and how many hold an accessory. */
   capacity: number;
   used: number;
+  /** How many slots one Jacobus upgrade adds, so the browser knows where the room runs out. */
+  slotsPerUpgrade?: number;
 };
 
 /** Score a bag the way the game does: one accessory per family, best rarity wins. */

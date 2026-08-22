@@ -153,7 +153,19 @@ export function buildReport(catalog: Catalog, book: PriceBook, options: ReportOp
 
     // Trimmed to a sequence: a chain's later rows carry on from where its earlier ones stopped
     // instead of restating the same purchase from the same starting tier.
-    const stepped = progressive(shown, byId);
+    let stepped = progressive(shown, byId);
+
+    // Bag slots come out of the price ranking and go back in where the bag runs out of room.
+    if (category === "accessory_bag") {
+      const upgrades = stepped.filter((task) => task.id.startsWith("bag_upgrade_"));
+      const rest = stepped.filter((task) => !task.id.startsWith("bag_upgrade_"));
+      stepped = bagSlotsWhereNeeded(
+        rest,
+        upgrades,
+        Math.max(catalog.bag.capacity - catalog.bag.used, 0),
+        catalog.bag.slotsPerUpgrade ?? 2,
+      );
+    }
 
     // What coins will never finish, from the untruncated set for the same reason the grouped
     // view is: these rows are the tail of a list sorted by price, so a cut made before the
@@ -274,6 +286,54 @@ export function buildReport(catalog: Catalog, book: PriceBook, options: ReportOp
       ),
     },
   };
+}
+
+/**
+ * Jacobus's slots, put in the list where the room actually runs out.
+ *
+ * A slot is not part of any accessory's price. It is its own purchase, needed once every two
+ * accessories that go into a bag with no room — so charging it against whichever accessory
+ * happened to sort first, whether as a markup or as a prerequisite, put a shared cost on one row
+ * and hid it from the rest.
+ *
+ * Reading down the list is the only sense in which "when" is answerable here: the browser is a
+ * ranking, not a schedule, so this walks it in the order shown, spends a slot on every accessory
+ * that needs a new one, and inserts the next upgrade at the point the count hits zero. Only a
+ * new family takes a slot — upgrading one already in the bag puts the artifact where the ring
+ * was, and recombobulating takes no room at all.
+ */
+function bagSlotsWhereNeeded(
+  rows: ResolvedTask[],
+  upgrades: ResolvedTask[],
+  freeSlots: number,
+  slotsPerUpgrade: number,
+): ResolvedTask[] {
+  if (upgrades.length === 0 || slotsPerUpgrade <= 0) return rows;
+
+  const queue = [...upgrades].sort(
+    (a, b) => Number(a.id.replace("bag_upgrade_", "")) - Number(b.id.replace("bag_upgrade_", "")),
+  );
+  const out: ResolvedTask[] = [];
+  let free = freeSlots;
+
+  for (const row of rows) {
+    // A family with nothing in it yet is the only kind that needs somewhere to put it.
+    const needsSlot = row.id.startsWith("accessory_") && (row.groupBase ?? 0) <= 0;
+    if (needsSlot && free <= 0) {
+      const upgrade = queue.shift();
+      // Jacobus stops at 99. Past that the bag holds what it holds, and there is nothing to add.
+      if (upgrade) {
+        out.push({ ...upgrade, note: `${upgrade.note ?? ""} · the bag is full at this point`.trim() });
+        free += slotsPerUpgrade;
+      }
+    }
+    if (needsSlot) free--;
+    out.push(row);
+  }
+
+  // Whatever is left over still pays its XP, and still has to be listed.
+  out.push(...queue);
+  return out;
 }
 
 /**

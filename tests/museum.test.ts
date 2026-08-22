@@ -62,12 +62,14 @@ test("an armour set costs nothing only when all its pieces are held", () => {
 });
 
 /**
- * An accessory costs what it is listed at. A full bag used to add half the next Jacobus upgrade
- * on top — six million a row on a real profile, which quoted a Large Fish Bowl listing at 9.8M
- * as 19.8M, and billed for a slot the bag upgrade task was already charging for. The slot is a
- * prerequisite now, so it is paid once and the price stays the price.
+ * An accessory costs what it is listed at, and a slot is not part of it.
+ *
+ * A full bag first added half the next Jacobus upgrade to every accessory, which quoted a Large
+ * Fish Bowl listing at 9.8M as 19.8M; then it made the upgrade a prerequisite of whichever
+ * accessory happened to sort first, which is a shared cost carried by one row. It is neither
+ * now: the upgrade is its own purchase, and the browser places it where the room runs out.
  */
-test("a full accessory bag adds a prerequisite, not a markup", () => {
+test("a full accessory bag charges the slot to no accessory at all", () => {
   const full = {
     accessory_bag_storage: { bag_upgrades_purchased: 13 },
   } as unknown as ProfileMember;
@@ -85,9 +87,11 @@ test("a full accessory bag adds a prerequisite, not a markup", () => {
     );
   }
 
-  const needsSlot = rows.filter((row) => row.requires.some((id) => id.startsWith("bag_upgrade_")));
-  assert.ok(needsSlot.length > 0, "a bag with no free slots should make new accessories need one");
-  assert.match(needsSlot[0]!.note ?? "", /bag is full/);
+  assert.deepEqual(
+    rows.filter((row) => row.requires.some((id) => id.startsWith("bag_upgrade_"))).map((r) => r.name),
+    [],
+    "no accessory should carry the bag upgrade as its own prerequisite",
+  );
 });
 
 /** With room to spare, nothing is required and nothing is added. */
