@@ -571,7 +571,8 @@ function grindView(report: Report): string {
 
 function browserView(report: Report): string {
   const categories = report.browser
-    .map(({ category, summary, tasks, truncated, maxed, maxedTruncated, unpriced, unpricedTruncated }) => {
+    .map((entry) => {
+      const { category, summary, tasks, truncated, maxed, maxedTruncated, unpriced, unpricedTruncated } = entry;
       const key = `browser:${category}`;
       // Same toggled-key mechanism as the panels themselves, so the grouped view needs no
       // event plumbing of its own.
@@ -581,8 +582,25 @@ function browserView(report: Report): string {
       // player planning an evening's grinding wants to see. Reusing the same toggled-key
       // mechanism as the panels, so it needs no event plumbing of its own.
       const unpricedKey = `unpriced:${category}`;
-      const showUnpriced = unpriced !== undefined && open.has(unpricedKey) && !isGrouped;
-      const hidden = isGrouped ? (maxedTruncated ?? 0) : showUnpriced ? (unpricedTruncated ?? 0) : truncated;
+      const showUnpriced = unpriced !== undefined && open.has(unpricedKey);
+
+      // Two independent questions — "one row per thing" and "only what I cannot buy" — so both
+      // can be on at once, and the fourth combination is a list of its own rather than one
+      // toggle quietly cancelling the other.
+      const rows = isGrouped
+        ? showUnpriced
+          ? (entry.unpricedMaxed ?? [])
+          : maxed!
+        : showUnpriced
+          ? unpriced!
+          : tasks;
+      const hidden = isGrouped
+        ? showUnpriced
+          ? (entry.unpricedMaxedTruncated ?? 0)
+          : (maxedTruncated ?? 0)
+        : showUnpriced
+          ? (unpricedTruncated ?? 0)
+          : truncated;
 
       const body = open.has(key)
         ? `<div class="group-body">
@@ -602,7 +620,7 @@ function browserView(report: Report): string {
                 : ""
             }
             ${
-              unpriced !== undefined && !isGrouped
+              unpriced !== undefined
                 ? `<p class="sub group-toggle">
                     <button class="chip${showUnpriced ? " on" : ""}" data-toggle="${unpricedKey}">No price</button>
                     <span class="dim">${
@@ -627,9 +645,14 @@ function browserView(report: Report): string {
             }
             <ul class="tasks">${
               isGrouped
-                ? maxed!.map((run) => runRow(run)).join("")
-                : (showUnpriced ? unpriced! : tasks).map((t) => taskRow(t, true)).join("")
+                ? (rows as TaskRun[]).map((run) => runRow(run)).join("")
+                : (rows as ResolvedTask[]).map((t) => taskRow(t, true)).join("")
             }</ul>
+            ${
+              isGrouped && showUnpriced && rows.length === 0
+                ? `<p class="sub">Nothing in this category is both groupable and unbuyable.</p>`
+                : ""
+            }
             ${hidden > 0 ? `<p class="sub">+${num(hidden)} more above the XP floor</p>` : ""}
           </div>`
         : "";

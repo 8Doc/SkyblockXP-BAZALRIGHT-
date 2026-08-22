@@ -92,3 +92,57 @@ test("a category with nothing buyable does not offer it", () => {
     assert.ok(priced, `${entry.category} has nothing priced, so the filter is noise`);
   }
 });
+
+/**
+ * "One row per thing" and "only what I cannot buy" are independent questions, so both can be on
+ * at once. Turning the second on used to hide the first's button, which made the pair of them
+ * unreachable — a category where the unbuyable half is a dozen attributes is exactly where you
+ * want to see it grouped.
+ */
+test("grouping and the no-price filter compose", () => {
+  // A price book with the bazaar in it, so a category ends up with both kinds in it. Attributes
+  // are priced from the shards that feed them, and eleven of those shards do not trade.
+  const bazaar: Record<string, unknown> = {};
+  for (const attribute of data.attributeShards.attributes) {
+    if (attribute.tradeable) bazaar[attribute.shardId] = { quick_status: { buyPrice: 100 } };
+  }
+  const built = buildReport(
+    buildCatalog({} as ProfileMember, data, { items: [], capacity: 400 }),
+    { bazaar: bazaar as never, bins: null },
+    {
+      categories: new Set(CATEGORIES),
+      minXp: 0,
+      packageSize: 1e9,
+      packageCount: 3,
+      targetXp: Number.POSITIVE_INFINITY,
+      budget: null,
+    } as never,
+  );
+
+  const attributes = built.browser.find((entry) => entry.category === "attributes")!;
+  assert.ok(attributes.maxed?.length, "attributes group");
+  assert.ok(attributes.unpriced?.length, "and some of them cannot be bought");
+  assert.ok(attributes.unpricedMaxed?.length, "so the pair of them has to produce rows");
+
+  // Grouped *then* filtered would leave rows half-made of purchases. Filtered then grouped means
+  // a row is the whole of what it takes to max that attribute by grinding.
+  for (const run of attributes.unpricedMaxed!) {
+    for (const task of run.tasks) {
+      assert.equal(task.bundleCoins, null, `${run.name} contains a level that can be bought`);
+    }
+  }
+  assert.ok(
+    attributes.unpricedMaxed!.length <= attributes.maxed!.length,
+    "the filter cannot produce more rows than grouping alone",
+  );
+});
+
+/** A category with nothing groupable offers no combined view rather than an empty one. */
+test("the combined view is absent where there is nothing to group", () => {
+  const built = report();
+  for (const entry of built.browser) {
+    if (entry.unpricedMaxed === undefined) continue;
+    assert.ok(entry.maxed !== undefined, `${entry.category} has a combined view but nothing to group`);
+    assert.ok(entry.unpriced !== undefined, `${entry.category} has a combined view but nothing unpriced`);
+  }
+});

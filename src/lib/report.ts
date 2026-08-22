@@ -52,6 +52,9 @@ export type Report = {
      */
     unpriced?: ResolvedTask[];
     unpricedTruncated?: number;
+    /** Both at once: one row per thing, counting only what coins cannot finish. */
+    unpricedMaxed?: TaskRun[];
+    unpricedMaxedTruncated?: number;
   }[];
   /** Every remaining grind, cheapest in effort first, across all categories at once. */
   grind: ResolvedTask[];
@@ -159,6 +162,17 @@ export function buildReport(catalog: Catalog, book: PriceBook, options: ReportOp
     const unpricedRows = stepped.filter((task) => task.bundleCoins === null);
     const hasBoth = unpricedRows.length > 0 && unpricedRows.length < stepped.length;
 
+    // The two views are independent questions — "one row per thing" and "only what I cannot buy"
+    // — so they have to compose. Grouped from the same untruncated set the other grouping uses,
+    // and filtered before grouping rather than after, so a row says what it takes to max the
+    // thing by grinding rather than what is left of a purchase.
+    const unpricedMaxed =
+      maxed && hasBoth
+        ? groupToMax(remaining.filter((task) => task.bundleCoins === null)).filter(
+            (run) => run.xp >= options.minXp,
+          )
+        : null;
+
     browser.push({
       category,
       summary,
@@ -171,6 +185,12 @@ export function buildReport(catalog: Catalog, book: PriceBook, options: ReportOp
         ? {
             unpriced: unpricedRows.slice(0, BROWSER_LIMIT),
             unpricedTruncated: Math.max(unpricedRows.length - BROWSER_LIMIT, 0),
+          }
+        : {}),
+      ...(unpricedMaxed
+        ? {
+            unpricedMaxed: unpricedMaxed.slice(0, BROWSER_LIMIT),
+            unpricedMaxedTruncated: Math.max(unpricedMaxed.length - BROWSER_LIMIT, 0),
           }
         : {}),
     });
