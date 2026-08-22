@@ -15,6 +15,8 @@ import {
   type ResolvedTask,
 } from "../lib/types";
 import { ApiError, cacheAge, fetchAccessoryBins, fetchBazaar, fetchReferencePrices, fetchGarden, fetchMuseum, fetchProfiles, readBag, readOwnedItems, resolveUuid } from "./api";
+import { mountBazaar, unmountBazaar } from "./bazaarTab";
+import type { Recipe } from "../lib/bazaarViews";
 
 /**
  * The standalone build. Same domain logic as the Next app — it imports the very same solver
@@ -27,6 +29,12 @@ import { ApiError, cacheAge, fetchAccessoryBins, fetchBazaar, fetchReferencePric
 declare global {
   interface Window {
     __GAME_DATA__: GameData;
+    /**
+     * The bazaar tab's tables, kept out of `__GAME_DATA__` on purpose. The two halves of this
+     * page answer different questions off different data, and nothing good comes of one being
+     * able to reach into the other's tables.
+     */
+    __BAZAAR_DATA__: { recipes: Recipe[]; names: Record<string, string> };
   }
 }
 
@@ -64,6 +72,11 @@ type State = {
   packageCount: number;
   categories: Set<Category>;
   strategy: "greedy" | "exact";
+  /**
+   * Which half of the site is on screen. The planner needs a key, a name and a profile; the
+   * bazaar needs none of them, so it is a section rather than another tab inside the report.
+   */
+  section: "planner" | "bazaar";
   tab: "plan" | "packages" | "cheapest" | "grind" | "browser";
   status: { kind: "idle" | "busy" | "error"; message: string };
   report: Report | null;
@@ -94,6 +107,7 @@ const state: State = {
   packageCount: 5,
   categories: new Set(CATEGORIES),
   strategy: "greedy",
+  section: (localStorage.getItem("sbxp:section") as "planner" | "bazaar") ?? "planner",
   tab: "plan",
   status: { kind: "idle", message: "" },
   report: null,
@@ -743,12 +757,19 @@ const root = document.getElementById("app")!;
 function renderShell(): void {
   root.innerHTML = `
     <header>
-      <h1>SkyBlock <span class="gold">XP Planner</span></h1>
-      <p class="sub">The cheapest set of tasks that reaches your XP target — grouped by where you have to go, with the 1 XP filler filtered out.</p>
+      <h1>SkyBlock <span class="gold" id="sectiontitle"></span></h1>
+      <p class="sub" id="sectionsub"></p>
+      <div class="tabs sections">
+        <button class="chip" data-section="planner">XP Planner</button>
+        <button class="chip" data-section="bazaar">Bazaar</button>
+      </div>
     </header>
-    <form class="panel pad controls" id="controls"></form>
-    <div id="status"></div>
-    <div id="results"></div>
+    <div id="planner">
+      <form class="panel pad controls" id="controls"></form>
+      <div id="status"></div>
+      <div id="results"></div>
+    </div>
+    <div id="bazaar" hidden></div>
   `;
 
   // Delegated once on the container, so nothing needs re-binding after a repaint.
@@ -832,6 +853,14 @@ function renderShell(): void {
       if (open.has(key)) open.delete(key);
       else open.add(key);
       renderResults();
+      return;
+    }
+
+    const section = target.closest<HTMLElement>("[data-section]");
+    if (section) {
+      state.section = section.dataset.section as State["section"];
+      localStorage.setItem("sbxp:section", state.section);
+      renderSection();
       return;
     }
 
@@ -1082,10 +1111,38 @@ function markPending(pending: boolean): void {
 }
 
 /** Full repaint. Used on load and on status changes — never on a keystroke. */
+/**
+ * Show one half of the site and put the other away.
+ *
+ * The bazaar polls Hypixel every twenty seconds while it is on screen, so leaving it mounted
+ * behind the planner would be a request a minute for a page nobody is looking at. Switching
+ * away unmounts it; switching back starts it again with a fresh read.
+ */
+function renderSection(): void {
+  const bazaar = state.section === "bazaar";
+
+  document.getElementById("planner")!.hidden = bazaar;
+  const bazaarHost = document.getElementById("bazaar")!;
+  bazaarHost.hidden = !bazaar;
+
+  document.getElementById("sectiontitle")!.textContent = bazaar ? "Bazaar" : "XP Planner";
+  document.getElementById("sectionsub")!.textContent = bazaar
+    ? "Flips and crafts off a live read of the bazaar, ranked on coins per hour rather than on the spread."
+    : "The cheapest set of tasks that reaches your XP target — grouped by where you have to go, with the 1 XP filler filtered out.";
+
+  for (const chip of root.querySelectorAll<HTMLElement>("[data-section]")) {
+    chip.classList.toggle("on", chip.dataset.section === state.section);
+  }
+
+  if (bazaar) mountBazaar(bazaarHost, window.__BAZAAR_DATA__);
+  else unmountBazaar();
+}
+
 function render(): void {
   renderControls();
   renderStatus();
   renderResults();
+  renderSection();
 }
 
 renderShell();

@@ -1,0 +1,5058 @@
+{
+  "generatedAt": "2026-08-22T22:16:22.763Z",
+  "source": "https://github.com/NotEnoughUpdates/NotEnoughUpdates-REPO",
+  "note": "Crafting-grid recipes whose output trades on the bazaar. Alternatives are all kept; the price layer picks the cheapest. `offBazaar` names ingredients the bazaar does not sell, which need a shop price before that recipe can be costed. Forge and fusion are not carried.",
+  "offBazaarIngredients": {
+    "GLASS_BOTTLE": 6,
+    "BASE_GRIFFIN_UPGRADE_STONE": 5,
+    "GOLD_BLOCK": 3,
+    "BOWL": 3,
+    "HILT_OF_TRUE_ICE": 2,
+    "COAL_BLOCK": 2,
+    "DIAMOND_BLOCK": 2,
+    "EMERALD_BLOCK": 2,
+    "STICK": 2,
+    "BLAZE_POWDER": 2,
+    "PAPER": 2,
+    "IRON_BLOCK": 2,
+    "REDSTONE_BLOCK": 2,
+    "VOLT_CRUX": 2,
+    "SCRIBE_CRUX": 2,
+    "HEAT_CORE": 2,
+    "LEVER": 2,
+    "MINION_STORAGE_EXPANDER": 2,
+    "ALL_IN_ALOE_FRAGMENT": 1,
+    "WILTED_BERBERIS": 1,
+    "CHEST": 1,
+    "WATER_HYDRA_HEAD": 1,
+    "COLOSSAL_EXP_BOTTLE_UPGRADE": 1,
+    "VINE": 1,
+    "INK_SACK:2": 1,
+    "MILK_BUCKET": 1,
+    "SUGAR": 1,
+    "SPECKLED_MELON": 1,
+    "LAPIS_BLOCK": 1,
+    "HALF_EATEN_CARROT": 1,
+    "NEARLY_WHOLE_CARROT": 1,
+    "YOUNGITE": 1,
+    "TIMITE": 1,
+    "OBSOLITE": 1,
+    "HYPER_CATALYST_UPGRADE": 1,
+    "PLUMBER_SPONGE": 1,
+    "LITTLEFOOT_FLUFF": 1,
+    "FROSTY_CRUX": 1,
+    "METAL_HEART": 1,
+    "SHRIVELED_WASP": 1,
+    "SLIME_BLOCK": 1,
+    "GLASS": 1,
+    "WOOD": 1,
+    "ULTIMATE_CARROT_CANDY_UPGRADE": 1,
+    "INK_SACK:15": 1
+  },
+  "recipes": [
+    {
+      "output": "ABSOLUTE_ENDER_PEARL",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_ENDER_PEARL",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "ACACIA_BIRDHOUSE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_ACACIA_LOG",
+          "qty": 384
+        }
+      ]
+    },
+    {
+      "output": "ALL_IN_ALOE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ALL_IN_ALOE_FRAGMENT",
+          "qty": 9
+        }
+      ],
+      "offBazaar": [
+        "ALL_IN_ALOE_FRAGMENT"
+      ]
+    },
+    {
+      "output": "AMALGAMATED_CRIMSONITE_NEW",
+      "yield": 40,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_GLOWSTONE",
+          "qty": 4
+        },
+        {
+          "id": "ENCHANTED_MYCELIUM_CUBE",
+          "qty": 1
+        },
+        {
+          "id": "WHIPPED_MAGMA_CREAM",
+          "qty": 4
+        },
+        {
+          "id": "ENCHANTED_BLAZE_ROD",
+          "qty": 4
+        },
+        {
+          "id": "ENCHANTED_RED_SAND_CUBE",
+          "qty": 1
+        },
+        {
+          "id": "MUTANT_NETHER_STALK",
+          "qty": 4
+        }
+      ]
+    },
+    {
+      "output": "AMALGAMATED_CRIMSONITE_NEW",
+      "yield": 2,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_GLOWSTONE_DUST",
+          "qty": 32
+        },
+        {
+          "id": "ENCHANTED_MYCELIUM",
+          "qty": 8
+        },
+        {
+          "id": "ENCHANTED_MAGMA_CREAM",
+          "qty": 32
+        },
+        {
+          "id": "ENCHANTED_BLAZE_POWDER",
+          "qty": 32
+        },
+        {
+          "id": "ENCHANTED_RED_SAND",
+          "qty": 8
+        },
+        {
+          "id": "ENCHANTED_NETHER_STALK",
+          "qty": 32
+        }
+      ]
+    },
+    {
+      "output": "AUTO_SMELTER",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "COBBLESTONE",
+          "qty": 64
+        },
+        {
+          "id": "COAL",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "BACHELOR_ROSE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "COMPACTED_WILD_ROSE",
+          "qty": 8
+        },
+        {
+          "id": "RED_ROSE",
+          "qty": 64
+        }
+      ]
+    },
+    {
+      "output": "BAYOU_WATER_ORB",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "BUSTED_BELT_BUCKLE",
+          "qty": 8
+        },
+        {
+          "id": "OLD_LEATHER_BOOT",
+          "qty": 1
+        },
+        {
+          "id": "ALLIGATOR_SKIN",
+          "qty": 8
+        },
+        {
+          "id": "BRONZE_BOWL",
+          "qty": 16
+        },
+        {
+          "id": "WATER_ORB",
+          "qty": 1
+        },
+        {
+          "id": "TORN_CLOTH",
+          "qty": 16
+        },
+        {
+          "id": "CONDENSED_WATER_LILY",
+          "qty": 1
+        },
+        {
+          "id": "RUSTY_COIN",
+          "qty": 64
+        },
+        {
+          "id": "POISON_SAMPLE",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "BEE_SALIVA",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_HELIX_LOG",
+          "qty": 64
+        },
+        {
+          "id": "ENCHANTED_HONEYCOMB_BLOCK",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "BERBERIS_FUEL_INJECTOR",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "WILTED_BERBERIS",
+          "qty": 336
+        }
+      ],
+      "offBazaar": [
+        "WILTED_BERBERIS"
+      ]
+    },
+    {
+      "output": "BLAZE_WAX",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_BLAZE_POWDER",
+          "qty": 80
+        },
+        {
+          "id": "BEZOS",
+          "qty": 10
+        }
+      ]
+    },
+    {
+      "output": "BLESSED_BAIT",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "GOLD_BLOCK",
+          "qty": 1
+        },
+        {
+          "id": "RAW_FISH",
+          "qty": 1
+        },
+        {
+          "id": "PRISMARINE_CRYSTALS",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "GOLD_BLOCK"
+      ]
+    },
+    {
+      "output": "BLIZZARD_BOTTLE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "WALNUT",
+          "qty": 4
+        },
+        {
+          "id": "ICE_HUNK",
+          "qty": 48
+        },
+        {
+          "id": "HILT_OF_TRUE_ICE",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "HILT_OF_TRUE_ICE"
+      ]
+    },
+    {
+      "output": "BLOOD_SOAKED_COINS",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "HEMOGLASS",
+          "qty": 32
+        },
+        {
+          "id": "BLOOD_STAINED_COINS",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "BLOOD_STAINED_COINS",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "HEMOGLASS",
+          "qty": 4
+        },
+        {
+          "id": "FRESHLY_MINTED_COINS",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "BLOOMING_THORNS",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "CACTUS_FLOWER",
+          "qty": 18
+        },
+        {
+          "id": "THORN_FRAGMENT",
+          "qty": 4
+        },
+        {
+          "id": "THORNSHADE",
+          "qty": 2
+        },
+        {
+          "id": "COMPACTED_WILD_ROSE",
+          "qty": 18
+        }
+      ]
+    },
+    {
+      "output": "BLUE_ICE_HUNK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ICE_HUNK",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "BOX_OF_SEEDS",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_SEEDS",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "BRAIDED_GRIFFIN_FEATHER",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "GRIFFIN_FEATHER",
+          "qty": 160
+        },
+        {
+          "id": "SOUL_STRING",
+          "qty": 256
+        }
+      ]
+    },
+    {
+      "output": "BUCKET_OF_FROGSPAWN",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "CONDENSED_WATER_LILY",
+          "qty": 7
+        },
+        {
+          "id": "LOTUS_WATER_ORB",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "BUDGET_HOPPER",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_IRON",
+          "qty": 5
+        },
+        {
+          "id": "CHEST",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "CHEST"
+      ]
+    },
+    {
+      "output": "CAPSAICIN_EYEDROPS_NO_CHARGES",
+      "yield": 3,
+      "ingredients": [
+        {
+          "id": "CHILI_PEPPER",
+          "qty": 4
+        },
+        {
+          "id": "EXPORTABLE_CARROTS",
+          "qty": 128
+        },
+        {
+          "id": "ENCHANTED_CARROT",
+          "qty": 128
+        },
+        {
+          "id": "WATER_HYDRA_HEAD",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "WATER_HYDRA_HEAD"
+      ]
+    },
+    {
+      "output": "CARROT_BAIT",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "CARROT_ITEM",
+          "qty": 1
+        },
+        {
+          "id": "RAW_FISH",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "CATALYST",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENDER_STONE",
+          "qty": 8
+        },
+        {
+          "id": "CRYSTAL_FRAGMENT",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "CELESTIAL_MASON_JAR",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "FEAST_FLASK",
+          "qty": 4
+        },
+        {
+          "id": "GLASS_BOTTLE",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "GLASS_BOTTLE"
+      ]
+    },
+    {
+      "output": "COAL",
+      "yield": 9,
+      "ingredients": [
+        {
+          "id": "COAL_BLOCK",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "COAL_BLOCK"
+      ]
+    },
+    {
+      "output": "COLOSSAL_EXP_BOTTLE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "COLOSSAL_EXP_BOTTLE_UPGRADE",
+          "qty": 1
+        },
+        {
+          "id": "TITANIC_EXP_BOTTLE",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "COLOSSAL_EXP_BOTTLE_UPGRADE"
+      ]
+    },
+    {
+      "output": "COMPACTED_MOONFLOWER",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_MOONFLOWER",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "COMPACTED_SUNFLOWER",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_SUNFLOWER",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "COMPACTED_WILD_ROSE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_WILD_ROSE",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "COMPACTOR",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_COBBLESTONE",
+          "qty": 7
+        },
+        {
+          "id": "ENCHANTED_REDSTONE",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "CONCENTRATED_STONE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_HARD_STONE",
+          "qty": 576
+        }
+      ]
+    },
+    {
+      "output": "CONDENSED_FERMENTO",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "FERMENTO",
+          "qty": 9
+        }
+      ]
+    },
+    {
+      "output": "CONDENSED_HELIANTHUS",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "HELIANTHUS",
+          "qty": 9
+        }
+      ]
+    },
+    {
+      "output": "CONDENSED_WATER_LILY",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_WATER_LILY",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "CORRUPT_SOIL",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_MYCELIUM",
+          "qty": 160
+        },
+        {
+          "id": "CORRUPTED_FRAGMENT",
+          "qty": 20
+        }
+      ]
+    },
+    {
+      "output": "CORRUPTED_BAIT",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "CORRUPTED_FRAGMENT",
+          "qty": 1
+        },
+        {
+          "id": "MAGMA_FISH",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "DAEDALUS_NOTES",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "MYTHOS_FRAGMENT",
+          "qty": 4
+        },
+        {
+          "id": "GRIFFIN_FEATHER",
+          "qty": 64
+        },
+        {
+          "id": "ENCHANTED_PAPER",
+          "qty": 128
+        },
+        {
+          "id": "DAEDALUS_STICK",
+          "qty": 1
+        },
+        {
+          "id": "ENCHANTED_ANCIENT_CLAW",
+          "qty": 32
+        }
+      ]
+    },
+    {
+      "output": "DARK_BAIT",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "INK_SACK",
+          "qty": 1
+        },
+        {
+          "id": "RAW_FISH",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "DIAMOND",
+      "yield": 9,
+      "ingredients": [
+        {
+          "id": "DIAMOND_BLOCK",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "DIAMOND_BLOCK"
+      ]
+    },
+    {
+      "output": "DIAMOND_SPREADING",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "VINE",
+          "qty": 8
+        },
+        {
+          "id": "ENCHANTED_DIAMOND",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "VINE"
+      ]
+    },
+    {
+      "output": "DISPLACED_LEECH",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_BONE",
+          "qty": 64
+        },
+        {
+          "id": "HEMOGLASS",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "DWARVEN_COMPACTOR",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_MITHRIL",
+          "qty": 56
+        },
+        {
+          "id": "AUTO_SMELTER",
+          "qty": 1
+        },
+        {
+          "id": "SUPER_COMPACTOR_3000",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "EMERALD",
+      "yield": 9,
+      "ingredients": [
+        {
+          "id": "EMERALD_BLOCK",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "EMERALD_BLOCK"
+      ]
+    },
+    {
+      "output": "ENCHANTED_ACACIA_LOG",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "LOG_2",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_ANCIENT_CLAW",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ANCIENT_CLAW",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_BAKED_POTATO",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_POTATO",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_BIRCH_LOG",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "LOG:2",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_BLAZE_POWDER",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "BLAZE_ROD",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_BLAZE_ROD",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_BLAZE_POWDER",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_BONE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "BONE",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_BONE_BLOCK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_BONE",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_BREAD",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "WHEAT",
+          "qty": 60
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_BROWN_MUSHROOM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "BROWN_MUSHROOM",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_CACTUS",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_CACTUS_GREEN",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_CACTUS_GREEN",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "CACTUS",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_CACTUS_GREEN",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "INK_SACK:2",
+          "qty": 160
+        }
+      ],
+      "offBazaar": [
+        "INK_SACK:2"
+      ]
+    },
+    {
+      "output": "ENCHANTED_CAKE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "MILK_BUCKET",
+          "qty": 3
+        },
+        {
+          "id": "ENCHANTED_SUGAR",
+          "qty": 2
+        },
+        {
+          "id": "ENCHANTED_EGG",
+          "qty": 1
+        },
+        {
+          "id": "WHEAT",
+          "qty": 3
+        }
+      ],
+      "offBazaar": [
+        "MILK_BUCKET"
+      ]
+    },
+    {
+      "output": "ENCHANTED_CARROT",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "CARROT_ITEM",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_CARROT_STICK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "STICK",
+          "qty": 3
+        },
+        {
+          "id": "ENCHANTED_CARROT",
+          "qty": 64
+        }
+      ],
+      "offBazaar": [
+        "STICK"
+      ]
+    },
+    {
+      "output": "ENCHANTED_CHARCOAL",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "COAL",
+          "qty": 128
+        },
+        {
+          "id": "LOG",
+          "qty": 32
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_CLAY_BALL",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "CLAY_BALL",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_CLAY_BLOCK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_CLAY_BALL",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_CLOWNFISH",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "RAW_FISH:2",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_COAL",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "COAL",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_COAL",
+      "yield": 9,
+      "ingredients": [
+        {
+          "id": "COAL_BLOCK",
+          "qty": 160
+        }
+      ],
+      "offBazaar": [
+        "COAL_BLOCK"
+      ]
+    },
+    {
+      "output": "ENCHANTED_COAL_BLOCK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_COAL",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_COBBLESTONE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "COBBLESTONE",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_COCOA",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "INK_SACK:3",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_COMPOST",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "COMPOST",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_COOKED_FISH",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_RAW_FISH",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_COOKED_MUTTON",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_MUTTON",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_COOKED_RABBIT",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_RABBIT",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_COOKED_SALMON",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_RAW_SALMON",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_COOKIE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_COCOA",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_DANDELION",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "YELLOW_FLOWER",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_DARK_OAK_LOG",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "LOG_2:1",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_DIAMOND",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "DIAMOND",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_DIAMOND",
+      "yield": 9,
+      "ingredients": [
+        {
+          "id": "DIAMOND_BLOCK",
+          "qty": 160
+        }
+      ],
+      "offBazaar": [
+        "DIAMOND_BLOCK"
+      ]
+    },
+    {
+      "output": "ENCHANTED_DIAMOND_BLOCK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_DIAMOND",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_EGG",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "EGG",
+          "qty": 144
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_EMERALD",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "EMERALD",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_EMERALD",
+      "yield": 9,
+      "ingredients": [
+        {
+          "id": "EMERALD_BLOCK",
+          "qty": 160
+        }
+      ],
+      "offBazaar": [
+        "EMERALD_BLOCK"
+      ]
+    },
+    {
+      "output": "ENCHANTED_EMERALD_BLOCK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_EMERALD",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_ENDER_PEARL",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENDER_PEARL",
+          "qty": 20
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_ENDSTONE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENDER_STONE",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_EYE_OF_ENDER",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "BLAZE_POWDER",
+          "qty": 64
+        },
+        {
+          "id": "ENCHANTED_ENDER_PEARL",
+          "qty": 16
+        }
+      ],
+      "offBazaar": [
+        "BLAZE_POWDER"
+      ]
+    },
+    {
+      "output": "ENCHANTED_FEATHER",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "FEATHER",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_FERMENTED_SPIDER_EYE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "BROWN_MUSHROOM",
+          "qty": 64
+        },
+        {
+          "id": "SUGAR",
+          "qty": 64
+        },
+        {
+          "id": "ENCHANTED_SPIDER_EYE",
+          "qty": 64
+        }
+      ],
+      "offBazaar": [
+        "SUGAR"
+      ]
+    },
+    {
+      "output": "ENCHANTED_FIG_LOG",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "FIG_LOG",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_FIREWORK_ROCKET",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_GUNPOWDER",
+          "qty": 64
+        },
+        {
+          "id": "PAPER",
+          "qty": 16
+        }
+      ],
+      "offBazaar": [
+        "PAPER"
+      ]
+    },
+    {
+      "output": "ENCHANTED_FLINT",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "FLINT",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_GHAST_TEAR",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "GHAST_TEAR",
+          "qty": 5
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_GLACITE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "GLACITE",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_GLISTERING_MELON",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "SPECKLED_MELON",
+          "qty": 256
+        }
+      ],
+      "offBazaar": [
+        "SPECKLED_MELON"
+      ]
+    },
+    {
+      "output": "ENCHANTED_GLOWSTONE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_GLOWSTONE_DUST",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_GLOWSTONE_DUST",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "GLOWSTONE_DUST",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_GOLD",
+      "yield": 9,
+      "ingredients": [
+        {
+          "id": "GOLD_BLOCK",
+          "qty": 160
+        }
+      ],
+      "offBazaar": [
+        "GOLD_BLOCK"
+      ]
+    },
+    {
+      "output": "ENCHANTED_GOLD",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "GOLD_INGOT",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_GOLD_BLOCK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_GOLD",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_GOLDEN_CARROT",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_CARROT",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_GRILLED_PORK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_PORK",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_GUNPOWDER",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "SULPHUR",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_HARD_STONE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "HARD_STONE",
+          "qty": 576
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_HAY_BALE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_WHEAT",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_HELIX_LOG",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "HELIX_LOG",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_HONEYCOMB",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "HONEYCOMB",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_HONEYCOMB_BLOCK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_HONEYCOMB",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_HOPPER",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_IRON_BLOCK",
+          "qty": 5
+        },
+        {
+          "id": "BUDGET_HOPPER",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_HUGE_MUSHROOM_1",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_BROWN_MUSHROOM",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_HUGE_MUSHROOM_2",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_RED_MUSHROOM",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_ICE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ICE",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_INK_SACK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "INK_SACK",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_IRON",
+      "yield": 9,
+      "ingredients": [
+        {
+          "id": "IRON_BLOCK",
+          "qty": 160
+        }
+      ],
+      "offBazaar": [
+        "IRON_BLOCK"
+      ]
+    },
+    {
+      "output": "ENCHANTED_IRON",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "IRON_INGOT",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_IRON_BLOCK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_IRON",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_JUNGLE_LOG",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "LOG:3",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_LAPIS_LAZULI",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "INK_SACK:4",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_LAPIS_LAZULI",
+      "yield": 9,
+      "ingredients": [
+        {
+          "id": "LAPIS_BLOCK",
+          "qty": 160
+        }
+      ],
+      "offBazaar": [
+        "LAPIS_BLOCK"
+      ]
+    },
+    {
+      "output": "ENCHANTED_LAPIS_LAZULI_BLOCK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_LAPIS_LAZULI",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_LAVA_BUCKET",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_IRON",
+          "qty": 3
+        },
+        {
+          "id": "ENCHANTED_COAL_BLOCK",
+          "qty": 2
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_LEATHER",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "LEATHER",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_LUSH_BERBERIS",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "LUSH_BERBERIS",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_MAGMA_CREAM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "MAGMA_CREAM",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_MANGROVE_LOG",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "MANGROVE_LOG",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_MELON",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "MELON",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_MELON_BLOCK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_MELON",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_MITHRIL",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "MITHRIL_ORE",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_MOONFLOWER",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "MOONFLOWER",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_MUTTON",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "MUTTON",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_MYCELIUM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "MYCEL",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_MYCELIUM_CUBE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_MYCELIUM",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_NETHER_STALK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "NETHER_STALK",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_NETHERRACK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "NETHERRACK",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_OAK_LOG",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "LOG",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_OBSIDIAN",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "OBSIDIAN",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_PACKED_ICE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_ICE",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_PAPER",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "SUGAR_CANE",
+          "qty": 192
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_POISONOUS_POTATO",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "POISONOUS_POTATO",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_POPPY",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "RED_ROSE",
+          "qty": 576
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_PORK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "PORK",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_POTATO",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "POTATO_ITEM",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_PRISMARINE_CRYSTALS",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "PRISMARINE_CRYSTALS",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_PRISMARINE_SHARD",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "PRISMARINE_SHARD",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_PUFFERFISH",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "RAW_FISH:3",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_PUMPKIN",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "PUMPKIN",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_QUARTZ",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "QUARTZ",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_QUARTZ_BLOCK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_QUARTZ",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_RABBIT",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "RABBIT",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_RABBIT_FOOT",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "RABBIT_FOOT",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_RABBIT_HIDE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "RABBIT_HIDE",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_RAW_BEEF",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "RAW_BEEF",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_RAW_CHICKEN",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "RAW_CHICKEN",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_RAW_FISH",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "RAW_FISH",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_RAW_SALMON",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "RAW_FISH:1",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_RED_MUSHROOM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "RED_MUSHROOM",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_RED_SAND",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "SAND:1",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_RED_SAND_CUBE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_RED_SAND",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_REDSTONE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "REDSTONE",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_REDSTONE",
+      "yield": 9,
+      "ingredients": [
+        {
+          "id": "REDSTONE_BLOCK",
+          "qty": 160
+        }
+      ],
+      "offBazaar": [
+        "REDSTONE_BLOCK"
+      ]
+    },
+    {
+      "output": "ENCHANTED_REDSTONE_BLOCK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_REDSTONE",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_REDSTONE_LAMP",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_REDSTONE",
+          "qty": 128
+        },
+        {
+          "id": "ENCHANTED_GLOWSTONE_DUST",
+          "qty": 32
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_ROTTEN_FLESH",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ROTTEN_FLESH",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_RUBY_VEILSHROOM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "RUBY_VEILSHROOM",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_SAND",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "SAND",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_SEA_LUMIES",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "SEA_LUMIES",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_SEEDS",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "SEEDS",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_SHARK_FIN",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "SHARK_FIN",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_SLIME_BALL",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "SLIME_BALL",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_SLIME_BLOCK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_SLIME_BALL",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_SNOW_BLOCK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "SNOW_BLOCK",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_SPIDER_EYE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "SPIDER_EYE",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_SPONGE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "SPONGE",
+          "qty": 40
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_SPRUCE_LOG",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "LOG:1",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_STRING",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "STRING",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_SUGAR",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "SUGAR_CANE",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_SUGAR_CANE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_SUGAR",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_SULPHUR",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "SULPHUR_ORE",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_SULPHUR_CUBE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_SULPHUR",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_SUNFLOWER",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "DOUBLE_PLANT",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_TENDER_WOOD",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "TENDER_WOOD",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_TITANIUM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "TITANIUM_ORE",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_TUNGSTEN",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "TUNGSTEN",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_TURBO_GOURD",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "TURBO_GOURD",
+          "qty": 5
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_UMBER",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "UMBER",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_VINESAP",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "VINESAP",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_WATER_LILY",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "WATER_LILY",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_WET_SPONGE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_SPONGE",
+          "qty": 40
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_WHEAT",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "WHEAT",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_WILD_ROSE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "WILD_ROSE",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENCHANTED_WOOL",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "WOOL",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "ENTROPY_SUPPRESSOR",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "CHILI_PEPPER",
+          "qty": 32
+        },
+        {
+          "id": "HEAVY_GABAGOOL",
+          "qty": 16
+        },
+        {
+          "id": "KELVIN_INVERTER",
+          "qty": 4
+        }
+      ]
+    },
+    {
+      "output": "EXALTED_LUSHLILAC_BONBON",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "LUSHLILAC",
+          "qty": 64
+        },
+        {
+          "id": "ENCHANTED_SEA_LUMIES",
+          "qty": 4
+        }
+      ]
+    },
+    {
+      "output": "EXP_BOTTLE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "INK_SACK:4",
+          "qty": 6
+        },
+        {
+          "id": "GLASS_BOTTLE",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "GLASS_BOTTLE"
+      ]
+    },
+    {
+      "output": "EXPORTABLE_CARROTS",
+      "yield": 48,
+      "ingredients": [
+        {
+          "id": "VOLT_CRUX",
+          "qty": 1
+        },
+        {
+          "id": "HALF_EATEN_CARROT",
+          "qty": 120
+        },
+        {
+          "id": "SCRIBE_CRUX",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "VOLT_CRUX",
+        "HALF_EATEN_CARROT",
+        "SCRIBE_CRUX"
+      ]
+    },
+    {
+      "output": "EXPORTABLE_CARROTS",
+      "yield": 64,
+      "ingredients": [
+        {
+          "id": "VOLT_CRUX",
+          "qty": 1
+        },
+        {
+          "id": "NEARLY_WHOLE_CARROT",
+          "qty": 2
+        },
+        {
+          "id": "SCRIBE_CRUX",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "VOLT_CRUX",
+        "NEARLY_WHOLE_CARROT",
+        "SCRIBE_CRUX"
+      ]
+    },
+    {
+      "output": "FEAST_BURGER",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_HAY_BALE",
+          "qty": 24
+        },
+        {
+          "id": "DEEPFRIES",
+          "qty": 12
+        },
+        {
+          "id": "FEASTFUNGUS",
+          "qty": 12
+        },
+        {
+          "id": "CORNUCOPIA",
+          "qty": 12
+        }
+      ]
+    },
+    {
+      "output": "FIGSTONE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_FIG_LOG",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "FINE_AMBER_GEM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "FLAWED_AMBER_GEM",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "FINE_AMETHYST_GEM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "FLAWED_AMETHYST_GEM",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "FINE_AQUAMARINE_GEM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "FLAWED_AQUAMARINE_GEM",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "FINE_CITRINE_GEM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "FLAWED_CITRINE_GEM",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "FINE_JADE_GEM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "FLAWED_JADE_GEM",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "FINE_JASPER_GEM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "FLAWED_JASPER_GEM",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "FINE_ONYX_GEM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "FLAWED_ONYX_GEM",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "FINE_OPAL_GEM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "FLAWED_OPAL_GEM",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "FINE_PERIDOT_GEM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "FLAWED_PERIDOT_GEM",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "FINE_RUBY_GEM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "FLAWED_RUBY_GEM",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "FINE_SAPPHIRE_GEM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "FLAWED_SAPPHIRE_GEM",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "FINE_TOPAZ_GEM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "FLAWED_TOPAZ_GEM",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "FISH_BAIT",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "RAW_FISH:1",
+          "qty": 1
+        },
+        {
+          "id": "RAW_FISH",
+          "qty": 2
+        }
+      ]
+    },
+    {
+      "output": "FLAWED_AMBER_GEM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ROUGH_AMBER_GEM",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "FLAWED_AMETHYST_GEM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ROUGH_AMETHYST_GEM",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "FLAWED_AQUAMARINE_GEM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ROUGH_AQUAMARINE_GEM",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "FLAWED_CITRINE_GEM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ROUGH_CITRINE_GEM",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "FLAWED_JADE_GEM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ROUGH_JADE_GEM",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "FLAWED_JASPER_GEM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ROUGH_JASPER_GEM",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "FLAWED_ONYX_GEM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ROUGH_ONYX_GEM",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "FLAWED_OPAL_GEM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ROUGH_OPAL_GEM",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "FLAWED_PERIDOT_GEM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ROUGH_PERIDOT_GEM",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "FLAWED_RUBY_GEM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ROUGH_RUBY_GEM",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "FLAWED_SAPPHIRE_GEM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ROUGH_SAPPHIRE_GEM",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "FLAWED_TOPAZ_GEM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ROUGH_TOPAZ_GEM",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "FLAWLESS_AMBER_GEM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "FINE_AMBER_GEM",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "FLAWLESS_AMETHYST_GEM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "FINE_AMETHYST_GEM",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "FLAWLESS_AQUAMARINE_GEM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "FINE_AQUAMARINE_GEM",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "FLAWLESS_CITRINE_GEM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "FINE_CITRINE_GEM",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "FLAWLESS_JADE_GEM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "FINE_JADE_GEM",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "FLAWLESS_JASPER_GEM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "FINE_JASPER_GEM",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "FLAWLESS_ONYX_GEM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "FINE_ONYX_GEM",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "FLAWLESS_OPAL_GEM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "FINE_OPAL_GEM",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "FLAWLESS_PERIDOT_GEM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "FINE_PERIDOT_GEM",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "FLAWLESS_RUBY_GEM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "FINE_RUBY_GEM",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "FLAWLESS_SAPPHIRE_GEM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "FINE_SAPPHIRE_GEM",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "FLAWLESS_TOPAZ_GEM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "FINE_TOPAZ_GEM",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "FLYCATCHER_UPGRADE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "TARANTULA_SILK",
+          "qty": 102
+        },
+        {
+          "id": "FLY_SWATTER",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "FRAGRANCED_BROWN_MUSHROOM_PASTE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "FEASTFUNGUS",
+          "qty": 2
+        },
+        {
+          "id": "ENCHANTED_HUGE_MUSHROOM_1",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "FUEL_GABAGOOL",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "CRUDE_GABAGOOL",
+          "qty": 24
+        },
+        {
+          "id": "SULPHURIC_COAL",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "FUEL_GABAGOOL",
+      "yield": 8,
+      "ingredients": [
+        {
+          "id": "SULPHURIC_COAL",
+          "qty": 8
+        },
+        {
+          "id": "VERY_CRUDE_GABAGOOL",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "FULL_CHUM_BUCKET",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "CHUM",
+          "qty": 10
+        },
+        {
+          "id": "EMPTY_CHUM_BUCKET",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "FULL_JAW_FANGING_KIT",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "HEMOGLASS",
+          "qty": 32
+        },
+        {
+          "id": "ENCHANTED_REDSTONE_BLOCK",
+          "qty": 3
+        },
+        {
+          "id": "ENCHANTED_BONE_BLOCK",
+          "qty": 3
+        }
+      ]
+    },
+    {
+      "output": "GEOMETRIC_ODDITY",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "INK_SACK",
+          "qty": 32
+        },
+        {
+          "id": "RUSTY_COIN",
+          "qty": 16
+        },
+        {
+          "id": "REVERSE_REFORGE_STONE_CORE",
+          "qty": 1
+        },
+        {
+          "id": "FROGCOIN",
+          "qty": 8
+        },
+        {
+          "id": "TREASURE_BAIT",
+          "qty": 64
+        }
+      ]
+    },
+    {
+      "output": "GOLD_INGOT",
+      "yield": 9,
+      "ingredients": [
+        {
+          "id": "GOLD_BLOCK",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "GOLD_BLOCK"
+      ]
+    },
+    {
+      "output": "GOLDEN_TOOTH",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "WOLF_TOOTH",
+          "qty": 128
+        },
+        {
+          "id": "ENCHANTED_GOLD",
+          "qty": 32
+        }
+      ]
+    },
+    {
+      "output": "GRAND_EXP_BOTTLE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_LAPIS_LAZULI",
+          "qty": 6
+        },
+        {
+          "id": "GLASS_BOTTLE",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "GLASS_BOTTLE"
+      ]
+    },
+    {
+      "output": "GREAT_CARROT_CANDY",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_CARROT",
+          "qty": 320
+        },
+        {
+          "id": "SIMPLE_CARROT_CANDY",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "GREAT_WHITE_TOOTH_MEAL",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "GREAT_WHITE_SHARK_TOOTH",
+          "qty": 4
+        },
+        {
+          "id": "ENCHANTED_BONE",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "GRIFFIN_UPGRADE_STONE_EPIC",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "GRIFFIN_FEATHER",
+          "qty": 64
+        },
+        {
+          "id": "MYTHOS_FRAGMENT",
+          "qty": 4
+        },
+        {
+          "id": "ENCHANTED_ANCIENT_CLAW",
+          "qty": 4
+        },
+        {
+          "id": "BASE_GRIFFIN_UPGRADE_STONE",
+          "qty": 1
+        },
+        {
+          "id": "ENCHANTED_GOLD_BLOCK",
+          "qty": 12
+        }
+      ],
+      "offBazaar": [
+        "BASE_GRIFFIN_UPGRADE_STONE"
+      ]
+    },
+    {
+      "output": "GRIFFIN_UPGRADE_STONE_LEGENDARY",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "MYTHOS_FRAGMENT",
+          "qty": 16
+        },
+        {
+          "id": "BRAIDED_GRIFFIN_FEATHER",
+          "qty": 1
+        },
+        {
+          "id": "ENCHANTED_ANCIENT_CLAW",
+          "qty": 32
+        },
+        {
+          "id": "BASE_GRIFFIN_UPGRADE_STONE",
+          "qty": 1
+        },
+        {
+          "id": "ENCHANTED_GOLD_BLOCK",
+          "qty": 96
+        }
+      ],
+      "offBazaar": [
+        "BASE_GRIFFIN_UPGRADE_STONE"
+      ]
+    },
+    {
+      "output": "GRIFFIN_UPGRADE_STONE_MYTHIC",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "BRAIDED_GRIFFIN_FEATHER",
+          "qty": 2
+        },
+        {
+          "id": "MYTHOS_FRAGMENT",
+          "qty": 48
+        },
+        {
+          "id": "ENCHANTED_ANCIENT_CLAW",
+          "qty": 128
+        },
+        {
+          "id": "BASE_GRIFFIN_UPGRADE_STONE",
+          "qty": 1
+        },
+        {
+          "id": "ENCHANTED_GOLD_BLOCK",
+          "qty": 192
+        }
+      ],
+      "offBazaar": [
+        "BASE_GRIFFIN_UPGRADE_STONE"
+      ]
+    },
+    {
+      "output": "GRIFFIN_UPGRADE_STONE_RARE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "GRIFFIN_FEATHER",
+          "qty": 16
+        },
+        {
+          "id": "ENCHANTED_GOLD_BLOCK",
+          "qty": 4
+        },
+        {
+          "id": "ANCIENT_CLAW",
+          "qty": 64
+        },
+        {
+          "id": "BASE_GRIFFIN_UPGRADE_STONE",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "BASE_GRIFFIN_UPGRADE_STONE"
+      ]
+    },
+    {
+      "output": "GRIFFIN_UPGRADE_STONE_UNCOMMON",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "GRIFFIN_FEATHER",
+          "qty": 8
+        },
+        {
+          "id": "ENCHANTED_GOLD",
+          "qty": 64
+        },
+        {
+          "id": "ANCIENT_CLAW",
+          "qty": 32
+        },
+        {
+          "id": "BASE_GRIFFIN_UPGRADE_STONE",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "BASE_GRIFFIN_UPGRADE_STONE"
+      ]
+    },
+    {
+      "output": "HASHBROWN",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "DEEPFRIES",
+          "qty": 12
+        },
+        {
+          "id": "SUNFLOWER_OIL",
+          "qty": 8
+        },
+        {
+          "id": "ENCHANTED_BAKED_POTATO",
+          "qty": 16
+        }
+      ]
+    },
+    {
+      "output": "HAY_BLOCK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "WHEAT",
+          "qty": 9
+        }
+      ]
+    },
+    {
+      "output": "HEAVY_GABAGOOL",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "FUEL_GABAGOOL",
+          "qty": 24
+        },
+        {
+          "id": "SULPHURIC_COAL",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "HELIXIS",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_HELIX_LOG",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "HEMOBOMB",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "HEMOGLASS",
+          "qty": 15
+        }
+      ]
+    },
+    {
+      "output": "HEMOGLASS",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "HEMOVIBE",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "HIGHLITE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "YOUNGITE",
+          "qty": 32
+        },
+        {
+          "id": "TIMITE",
+          "qty": 32
+        },
+        {
+          "id": "OBSOLITE",
+          "qty": 16
+        }
+      ],
+      "offBazaar": [
+        "YOUNGITE",
+        "TIMITE",
+        "OBSOLITE"
+      ]
+    },
+    {
+      "output": "HORNS_OF_TORMENT",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_MUTTON",
+          "qty": 192
+        },
+        {
+          "id": "HORN_OF_TAURUS",
+          "qty": 32
+        }
+      ]
+    },
+    {
+      "output": "HOT_BAIT",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "BLAZE_ASHES",
+          "qty": 1
+        },
+        {
+          "id": "MAGMA_FISH",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "HOT_POTATO_BOOK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "PAPER",
+          "qty": 3
+        },
+        {
+          "id": "ENCHANTED_BAKED_POTATO",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "PAPER"
+      ]
+    },
+    {
+      "output": "HOTSPOT_BAIT",
+      "yield": 32,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_PUFFERFISH",
+          "qty": 1
+        },
+        {
+          "id": "SCORCHED_CRAB_STICK",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "HOTSPOT_WATER_ORB",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "HALF_EATEN_MUSHROOM",
+          "qty": 64
+        },
+        {
+          "id": "SCORCHED_CRAB_STICK",
+          "qty": 8
+        },
+        {
+          "id": "FRIED_FEATHER",
+          "qty": 64
+        },
+        {
+          "id": "BROKEN_RADAR",
+          "qty": 8
+        },
+        {
+          "id": "WATER_ORB",
+          "qty": 1
+        },
+        {
+          "id": "SINGED_POWDER",
+          "qty": 8
+        },
+        {
+          "id": "INK_SPLAT",
+          "qty": 16
+        },
+        {
+          "id": "BLUE_RING",
+          "qty": 8
+        },
+        {
+          "id": "SEARED_ESCARGOT",
+          "qty": 16
+        }
+      ]
+    },
+    {
+      "output": "HUGE_MUSHROOM_1",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "BROWN_MUSHROOM",
+          "qty": 9
+        }
+      ]
+    },
+    {
+      "output": "HUGE_MUSHROOM_2",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "RED_MUSHROOM",
+          "qty": 9
+        }
+      ]
+    },
+    {
+      "output": "HYPER_CATALYST",
+      "yield": 8,
+      "ingredients": [
+        {
+          "id": "CATALYST",
+          "qty": 8
+        },
+        {
+          "id": "HYPER_CATALYST_UPGRADE",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "HYPER_CATALYST_UPGRADE"
+      ]
+    },
+    {
+      "output": "HYPERGOLIC_GABAGOOL",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "HEAVY_GABAGOOL",
+          "qty": 12
+        },
+        {
+          "id": "SULPHURIC_COAL",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "ICE_BAIT",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ICE",
+          "qty": 1
+        },
+        {
+          "id": "RAW_FISH",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "INFERNO_APEX",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "INFERNO_VERTEX",
+          "qty": 64
+        },
+        {
+          "id": "MOLTEN_POWDER",
+          "qty": 64
+        },
+        {
+          "id": "HYPERGOLIC_IONIZED_CERAMICS",
+          "qty": 16
+        }
+      ]
+    },
+    {
+      "output": "INFERNO_VERTEX",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "MOLTEN_POWDER",
+          "qty": 64
+        },
+        {
+          "id": "HYPERGOLIC_IONIZED_CERAMICS",
+          "qty": 6
+        }
+      ]
+    },
+    {
+      "output": "IRON_INGOT",
+      "yield": 9,
+      "ingredients": [
+        {
+          "id": "IRON_BLOCK",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "IRON_BLOCK"
+      ]
+    },
+    {
+      "output": "JACOBS_PARTICIPATION_MEDAL",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "BOTROOT",
+          "qty": 32
+        },
+        {
+          "id": "JACOBS_TICKET",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "JALAPENO_BOOK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_PAPER",
+          "qty": 3
+        },
+        {
+          "id": "STUFFED_CHILI_PEPPER",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "LARGE_ENCHANTED_CHEST",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_OAK_LOG",
+          "qty": 256
+        },
+        {
+          "id": "MEDIUM_ENCHANTED_CHEST",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "LAVA_WATER_ORB",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "MAGMA_FISH_SILVER",
+          "qty": 32
+        },
+        {
+          "id": "THUNDER_SHARDS",
+          "qty": 2
+        },
+        {
+          "id": "MOOGMA_PELT",
+          "qty": 64
+        },
+        {
+          "id": "WATER_ORB",
+          "qty": 1
+        },
+        {
+          "id": "LUMP_OF_MAGMA",
+          "qty": 64
+        },
+        {
+          "id": "CUP_OF_BLOOD",
+          "qty": 32
+        },
+        {
+          "id": "HORN_OF_TAURUS",
+          "qty": 16
+        },
+        {
+          "id": "FLAMING_HEART",
+          "qty": 32
+        }
+      ]
+    },
+    {
+      "output": "LEATHER",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "RABBIT_HIDE",
+          "qty": 4
+        }
+      ]
+    },
+    {
+      "output": "LESSER_SOULFLOW_ENGINE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "NULL_OVOID",
+          "qty": 6
+        },
+        {
+          "id": "ENCHANTED_EYE_OF_ENDER",
+          "qty": 48
+        },
+        {
+          "id": "ENCHANTED_IRON_BLOCK",
+          "qty": 8
+        }
+      ]
+    },
+    {
+      "output": "LIGHT_BAIT",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "PRISMARINE_CRYSTALS",
+          "qty": 2
+        },
+        {
+          "id": "RAW_FISH",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "LOTUS_DIAMOND",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "LOTUS_GOLD",
+          "qty": 20
+        }
+      ]
+    },
+    {
+      "output": "LOTUS_GOLD",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "LOTUS_SILVER",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "LOTUS_SILVER",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "LOTUS",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "LOTUS_WATER_ORB",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "FROGCOIN",
+          "qty": 32
+        },
+        {
+          "id": "REVERSE_REFORGE_STONE_CORE",
+          "qty": 8
+        },
+        {
+          "id": "LOTUS_GOLD",
+          "qty": 16
+        },
+        {
+          "id": "WATER_ORB",
+          "qty": 1
+        },
+        {
+          "id": "UNLUCKY_DOUBLOON",
+          "qty": 8
+        }
+      ]
+    },
+    {
+      "output": "LUSHLILAC_BONBON",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "LUSHLILAC",
+          "qty": 4
+        },
+        {
+          "id": "SEA_LUMIES",
+          "qty": 4
+        }
+      ]
+    },
+    {
+      "output": "MAGIC_MUSHROOM_SOUP",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "GLOWSTONE_DUST",
+          "qty": 1
+        },
+        {
+          "id": "RED_MUSHROOM",
+          "qty": 1
+        },
+        {
+          "id": "BROWN_MUSHROOM",
+          "qty": 1
+        },
+        {
+          "id": "REDSTONE",
+          "qty": 1
+        },
+        {
+          "id": "BOWL",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "BOWL"
+      ]
+    },
+    {
+      "output": "MAGMA_BUCKET",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_LAVA_BUCKET",
+          "qty": 2
+        },
+        {
+          "id": "HEAT_CORE",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "HEAT_CORE"
+      ]
+    },
+    {
+      "output": "MAGMA_CREAM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "BLAZE_POWDER",
+          "qty": 1
+        },
+        {
+          "id": "SLIME_BALL",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "BLAZE_POWDER"
+      ]
+    },
+    {
+      "output": "MAGMA_FISH_DIAMOND",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "MAGMA_FISH_GOLD",
+          "qty": 20
+        }
+      ]
+    },
+    {
+      "output": "MAGMA_FISH_GOLD",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "MAGMA_FISH_SILVER",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "MAGMA_FISH_SILVER",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "MAGMA_FISH",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "MANGCORE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_MANGROVE_LOG",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "MANGROVE_GEM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_MANGROVE_LOG",
+          "qty": 144
+        }
+      ]
+    },
+    {
+      "output": "MATCH_STICKS",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "SULPHUR_ORE",
+          "qty": 1
+        },
+        {
+          "id": "STICK",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "STICK"
+      ]
+    },
+    {
+      "output": "MEDIUM_ENCHANTED_CHEST",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_OAK_LOG",
+          "qty": 8
+        },
+        {
+          "id": "SMALL_ENCHANTED_CHEST",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "MELON_BLOCK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "MELON",
+          "qty": 9
+        }
+      ]
+    },
+    {
+      "output": "METEOR_SHARD",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "SILVER_FANG",
+          "qty": 40
+        },
+        {
+          "id": "STARFALL",
+          "qty": 20
+        },
+        {
+          "id": "TENTACLE_MEAT",
+          "qty": 10
+        }
+      ]
+    },
+    {
+      "output": "MINION_EXPANDER",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_QUARTZ",
+          "qty": 16
+        },
+        {
+          "id": "ENCHANTED_REDSTONE",
+          "qty": 2
+        }
+      ]
+    },
+    {
+      "output": "MINNOW_BAIT",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "RAW_FISH",
+          "qty": 2
+        }
+      ]
+    },
+    {
+      "output": "MITHRIL_INFUSION",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_MITHRIL",
+          "qty": 512
+        },
+        {
+          "id": "MAGMA_BUCKET",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "MIXED_MITE_GEL",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "MITE_GEL",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "MOLTEN_POWDER",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "DERELICT_ASHE",
+          "qty": 128
+        },
+        {
+          "id": "AMALGAMATED_CRIMSONITE_NEW",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "MOONDEW",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "CRYSTALIZED_MOONLIGHT",
+          "qty": 2
+        },
+        {
+          "id": "ENCHANTED_ENDSTONE",
+          "qty": 16
+        }
+      ]
+    },
+    {
+      "output": "MOONSTONE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "COMPACTED_MOONFLOWER",
+          "qty": 8
+        },
+        {
+          "id": "FINE_AMETHYST_GEM",
+          "qty": 8
+        }
+      ]
+    },
+    {
+      "output": "MUTANT_NETHER_STALK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_NETHER_STALK",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "NIGHTSWITCH",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_MOONFLOWER",
+          "qty": 64
+        },
+        {
+          "id": "ENCHANTED_ENDSTONE",
+          "qty": 64
+        },
+        {
+          "id": "LEVER",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "LEVER"
+      ]
+    },
+    {
+      "output": "NULL_BLADE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "NULL_OVOID",
+          "qty": 64
+        },
+        {
+          "id": "NULL_EDGE",
+          "qty": 3
+        },
+        {
+          "id": "ENCHANTED_QUARTZ_BLOCK",
+          "qty": 64
+        }
+      ]
+    },
+    {
+      "output": "NULL_EDGE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_MITHRIL",
+          "qty": 192
+        },
+        {
+          "id": "NULL_ATOM",
+          "qty": 3
+        }
+      ]
+    },
+    {
+      "output": "NULL_OVOID",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "NULL_SPHERE",
+          "qty": 128
+        },
+        {
+          "id": "ENCHANTED_OBSIDIAN",
+          "qty": 32
+        }
+      ]
+    },
+    {
+      "output": "OBSIDIAN_TABLET",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_OBSIDIAN",
+          "qty": 192
+        },
+        {
+          "id": "SUMMONING_EYE",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "OCEANDY",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "LUSHLILAC",
+          "qty": 4
+        },
+        {
+          "id": "WET_WATER",
+          "qty": 4
+        }
+      ]
+    },
+    {
+      "output": "OMEGA_EGG",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "SUPER_EGG",
+          "qty": 9
+        }
+      ]
+    },
+    {
+      "output": "OVERPRICED_DRINK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "AGGOURDIAN",
+          "qty": 8
+        },
+        {
+          "id": "DESIGNER_COFFEE_BEANS",
+          "qty": 8
+        },
+        {
+          "id": "GLASS_BOTTLE",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "GLASS_BOTTLE"
+      ]
+    },
+    {
+      "output": "PACKED_ICE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ICE",
+          "qty": 9
+        }
+      ]
+    },
+    {
+      "output": "PLASMA_BUCKET",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "MAGMA_BUCKET",
+          "qty": 2
+        },
+        {
+          "id": "HEAT_CORE",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "HEAT_CORE"
+      ]
+    },
+    {
+      "output": "PLOT_ERASER",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_WILD_ROSE",
+          "qty": 32
+        },
+        {
+          "id": "PLUMBER_SPONGE",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "PLUMBER_SPONGE"
+      ]
+    },
+    {
+      "output": "POCKET_SIZED_IGLOO",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "HILT_OF_TRUE_ICE",
+          "qty": 4
+        },
+        {
+          "id": "ENCHANTED_PACKED_ICE",
+          "qty": 64
+        },
+        {
+          "id": "LITTLEFOOT_FLUFF",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "HILT_OF_TRUE_ICE",
+        "LITTLEFOOT_FLUFF"
+      ]
+    },
+    {
+      "output": "POLARVOID_BOOK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "FROSTY_CRUX",
+          "qty": 3
+        },
+        {
+          "id": "METAL_HEART",
+          "qty": 20
+        }
+      ],
+      "offBazaar": [
+        "FROSTY_CRUX",
+        "METAL_HEART"
+      ]
+    },
+    {
+      "output": "POLISHED_PUMPKIN",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_PUMPKIN",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "POTTED_CACTUS",
+      "yield": 60,
+      "ingredients": [
+        {
+          "id": "THORNSHADE",
+          "qty": 1
+        },
+        {
+          "id": "CACTUS_FLOWER",
+          "qty": 2
+        },
+        {
+          "id": "ENCHANTED_CACTUS",
+          "qty": 1
+        },
+        {
+          "id": "ENCHANTED_CLAY_BLOCK",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "PRECURSOR_APPARATUS",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "CONTROL_SWITCH",
+          "qty": 1
+        },
+        {
+          "id": "ELECTRON_TRANSMITTER",
+          "qty": 1
+        },
+        {
+          "id": "FTX_3070",
+          "qty": 1
+        },
+        {
+          "id": "ROBOTRON_REFLECTOR",
+          "qty": 1
+        },
+        {
+          "id": "SUPERLITE_MOTOR",
+          "qty": 1
+        },
+        {
+          "id": "SYNTHETIC_HEART",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "PRESUMED_GALLON_OF_RED_PAINT",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_COBBLESTONE",
+          "qty": 32
+        },
+        {
+          "id": "HEMOGLASS",
+          "qty": 32
+        },
+        {
+          "id": "ENCHANTED_DARK_OAK_LOG",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "PRICKLY_CREEPER",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "CACTUS_FLOWER",
+          "qty": 16
+        },
+        {
+          "id": "ENCHANTED_CACTUS",
+          "qty": 7
+        },
+        {
+          "id": "ENCHANTED_GUNPOWDER",
+          "qty": 64
+        }
+      ]
+    },
+    {
+      "output": "PRICKLY_KISS",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_WILD_ROSE",
+          "qty": 5
+        }
+      ]
+    },
+    {
+      "output": "PRIME_LUSHLILAC_BONBON",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "SEA_LUMIES",
+          "qty": 64
+        },
+        {
+          "id": "LUSHLILAC",
+          "qty": 12
+        }
+      ]
+    },
+    {
+      "output": "PUMPKIN_BOMB",
+      "yield": 32,
+      "ingredients": [
+        {
+          "id": "GREEN_CANDY",
+          "qty": 8
+        },
+        {
+          "id": "PUMPKIN_GUTS",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "REDSTONE",
+      "yield": 9,
+      "ingredients": [
+        {
+          "id": "REDSTONE_BLOCK",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "REDSTONE_BLOCK"
+      ]
+    },
+    {
+      "output": "REHEATED_GUMMY_POLAR_BEAR",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "CHILI_PEPPER",
+          "qty": 4
+        },
+        {
+          "id": "ENCHANTED_SLIME_BALL",
+          "qty": 4
+        },
+        {
+          "id": "ENCHANTED_SNOW_BLOCK",
+          "qty": 4
+        }
+      ]
+    },
+    {
+      "output": "REVENANT_VISCERA",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "REVENANT_FLESH",
+          "qty": 128
+        },
+        {
+          "id": "ENCHANTED_STRING",
+          "qty": 32
+        }
+      ]
+    },
+    {
+      "output": "ROYAL_JELLY",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "FLORAL_GELATIN",
+          "qty": 128
+        },
+        {
+          "id": "JELLY",
+          "qty": 64
+        }
+      ]
+    },
+    {
+      "output": "SEARING_STONE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_MAGMA_CREAM",
+          "qty": 50
+        },
+        {
+          "id": "MAGMA_CHUNK",
+          "qty": 50
+        },
+        {
+          "id": "ENCHANTED_NETHERRACK",
+          "qty": 30
+        }
+      ]
+    },
+    {
+      "output": "SHARK_BAIT",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "SHARK_FIN",
+          "qty": 2
+        }
+      ]
+    },
+    {
+      "output": "SHARK_WATER_ORB",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_SHARK_FIN",
+          "qty": 4
+        },
+        {
+          "id": "GREAT_WHITE_SHARK_TOOTH",
+          "qty": 1
+        },
+        {
+          "id": "BLUE_SHARK_TOOTH",
+          "qty": 6
+        },
+        {
+          "id": "WATER_ORB",
+          "qty": 1
+        },
+        {
+          "id": "NURSE_SHARK_TOOTH",
+          "qty": 12
+        },
+        {
+          "id": "TIGER_SHARK_TOOTH",
+          "qty": 4
+        }
+      ]
+    },
+    {
+      "output": "SHINY_PRISM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_GLOWSTONE_DUST",
+          "qty": 80
+        },
+        {
+          "id": "GAZING_PEARL",
+          "qty": 10
+        }
+      ]
+    },
+    {
+      "output": "SHRIVELED_CORNEA",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "SHRIVELED_WASP",
+          "qty": 4
+        },
+        {
+          "id": "ENCHANTED_EYE_OF_ENDER",
+          "qty": 64
+        }
+      ],
+      "offBazaar": [
+        "SHRIVELED_WASP"
+      ]
+    },
+    {
+      "output": "SIL_EX",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "CONCENTRATED_STONE",
+          "qty": 9
+        }
+      ]
+    },
+    {
+      "output": "SILVER_FANG",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_GHAST_TEAR",
+          "qty": 25
+        }
+      ]
+    },
+    {
+      "output": "SIMPLE_CARROT_CANDY",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "CARROT_ITEM",
+          "qty": 576
+        }
+      ]
+    },
+    {
+      "output": "SLIME_BALL",
+      "yield": 9,
+      "ingredients": [
+        {
+          "id": "SLIME_BLOCK",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "SLIME_BLOCK"
+      ]
+    },
+    {
+      "output": "SMALL_ENCHANTED_CHEST",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "LOG",
+          "qty": 64
+        }
+      ]
+    },
+    {
+      "output": "SNOW_BLOCK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "SNOW_BALL",
+          "qty": 4
+        }
+      ]
+    },
+    {
+      "output": "SOLAR_PANEL",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "GLASS",
+          "qty": 3
+        },
+        {
+          "id": "ENCHANTED_QUARTZ",
+          "qty": 192
+        },
+        {
+          "id": "WOOD",
+          "qty": 3
+        }
+      ],
+      "offBazaar": [
+        "GLASS",
+        "WOOD"
+      ]
+    },
+    {
+      "output": "SOULFLOW",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "RAW_SOULFLOW",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "SOULFLOW_ENGINE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "NULL_ATOM",
+          "qty": 2
+        },
+        {
+          "id": "LESSER_SOULFLOW_ENGINE",
+          "qty": 4
+        },
+        {
+          "id": "NULL_OVOID",
+          "qty": 64
+        },
+        {
+          "id": "REFINED_TITANIUM",
+          "qty": 12
+        }
+      ]
+    },
+    {
+      "output": "SPIKED_BAIT",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "RAW_FISH",
+          "qty": 1
+        },
+        {
+          "id": "RAW_FISH:3",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "SPOOKY_BAIT",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "PUMPKIN",
+          "qty": 1
+        },
+        {
+          "id": "RAW_FISH",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "SPOOKY_WATER_ORB",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "PURPLE_CANDY",
+          "qty": 64
+        },
+        {
+          "id": "SOUL_FRAGMENT",
+          "qty": 1
+        },
+        {
+          "id": "WEREWOLF_SKIN",
+          "qty": 24
+        },
+        {
+          "id": "WATER_ORB",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "STUFFED_CHILI_PEPPER",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "CHILI_PEPPER",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "SULPHURIC_COAL",
+      "yield": 4,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_COAL",
+          "qty": 16
+        },
+        {
+          "id": "ENCHANTED_SULPHUR",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "SUNFLOWER_BUTTER",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_BLAZE_POWDER",
+          "qty": 8
+        },
+        {
+          "id": "SALTED_SUNFLOWER_SEEDS",
+          "qty": 8
+        },
+        {
+          "id": "ENCHANTED_PACKED_ICE",
+          "qty": 8
+        },
+        {
+          "id": "BOWL",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "BOWL"
+      ]
+    },
+    {
+      "output": "SUNFLOWER_OIL",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_SUNFLOWER",
+          "qty": 9
+        }
+      ]
+    },
+    {
+      "output": "SUNSTONE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "COMPACTED_SUNFLOWER",
+          "qty": 8
+        },
+        {
+          "id": "FINE_TOPAZ_GEM",
+          "qty": 8
+        }
+      ]
+    },
+    {
+      "output": "SUPER_COMPACTOR_3000",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_COBBLESTONE",
+          "qty": 224
+        },
+        {
+          "id": "COMPACTOR",
+          "qty": 1
+        },
+        {
+          "id": "ENCHANTED_REDSTONE",
+          "qty": 32
+        }
+      ]
+    },
+    {
+      "output": "SUPER_EGG",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_EGG",
+          "qty": 144
+        }
+      ]
+    },
+    {
+      "output": "SUPER_MAGIC_MUSHROOM_SOUP",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_GLOWSTONE_DUST",
+          "qty": 1
+        },
+        {
+          "id": "ENCHANTED_RED_MUSHROOM",
+          "qty": 1
+        },
+        {
+          "id": "ENCHANTED_BROWN_MUSHROOM",
+          "qty": 1
+        },
+        {
+          "id": "ENCHANTED_REDSTONE",
+          "qty": 1
+        },
+        {
+          "id": "BOWL",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "BOWL"
+      ]
+    },
+    {
+      "output": "SUPERB_CARROT_CANDY",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_GOLDEN_CARROT",
+          "qty": 24
+        },
+        {
+          "id": "GREAT_CARROT_CANDY",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "TARANTULA_SILK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "TARANTULA_WEB",
+          "qty": 128
+        },
+        {
+          "id": "ENCHANTED_FLINT",
+          "qty": 32
+        }
+      ]
+    },
+    {
+      "output": "TESSELLATED_ENDER_PEARL",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_LAPIS_LAZULI_BLOCK",
+          "qty": 32
+        },
+        {
+          "id": "ABSOLUTE_ENDER_PEARL",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "THORNY_VINES",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_CACTUS",
+          "qty": 16
+        },
+        {
+          "id": "ENCHANTED_WILD_ROSE",
+          "qty": 16
+        },
+        {
+          "id": "LEVER",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "LEVER"
+      ]
+    },
+    {
+      "output": "TITANIC_EXP_BOTTLE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_LAPIS_LAZULI_BLOCK",
+          "qty": 6
+        },
+        {
+          "id": "GLASS_BOTTLE",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "GLASS_BOTTLE"
+      ]
+    },
+    {
+      "output": "TRUNK_POLISH",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "MELON_JUICE",
+          "qty": 128
+        },
+        {
+          "id": "CREAMBLOOM",
+          "qty": 4
+        },
+        {
+          "id": "GLASS_BOTTLE",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "GLASS_BOTTLE"
+      ]
+    },
+    {
+      "output": "TURBO_GOURD",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "AGGOURDIAN",
+          "qty": 2
+        },
+        {
+          "id": "GLOOMGOURD",
+          "qty": 2
+        },
+        {
+          "id": "SQUASH",
+          "qty": 2
+        },
+        {
+          "id": "POLISHED_PUMPKIN",
+          "qty": 2
+        }
+      ]
+    },
+    {
+      "output": "ULTIMATE_CARROT_CANDY",
+      "yield": 10,
+      "ingredients": [
+        {
+          "id": "SUPERB_CARROT_CANDY",
+          "qty": 8
+        },
+        {
+          "id": "ULTIMATE_CARROT_CANDY_UPGRADE",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "ULTIMATE_CARROT_CANDY_UPGRADE"
+      ]
+    },
+    {
+      "output": "UNALLOYED_SPEED",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_SUGAR",
+          "qty": 512
+        },
+        {
+          "id": "CANE_KNOT",
+          "qty": 32
+        }
+      ]
+    },
+    {
+      "output": "VEILSHROOM_BUNCH",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_RUBY_VEILSHROOM",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "VERY_CRUDE_GABAGOOL",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "CRUDE_GABAGOOL",
+          "qty": 192
+        }
+      ]
+    },
+    {
+      "output": "WATER_ORB",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_RAW_FISH",
+          "qty": 16
+        },
+        {
+          "id": "ENCHANTED_SPONGE",
+          "qty": 8
+        },
+        {
+          "id": "ENCHANTED_RAW_SALMON",
+          "qty": 16
+        },
+        {
+          "id": "ENCHANTED_PRISMARINE_SHARD",
+          "qty": 16
+        },
+        {
+          "id": "ENCHANTED_WATER_LILY",
+          "qty": 16
+        },
+        {
+          "id": "ENCHANTED_PRISMARINE_CRYSTALS",
+          "qty": 16
+        },
+        {
+          "id": "ENCHANTED_CLAY_BALL",
+          "qty": 16
+        },
+        {
+          "id": "ENCHANTED_PUFFERFISH",
+          "qty": 16
+        },
+        {
+          "id": "ENCHANTED_CLOWNFISH",
+          "qty": 16
+        }
+      ]
+    },
+    {
+      "output": "WHALE_BAIT",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "FISH_BAIT",
+          "qty": 1
+        },
+        {
+          "id": "LIGHT_BAIT",
+          "qty": 1
+        },
+        {
+          "id": "DARK_BAIT",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "WHALE_BAIT",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "RAW_FISH",
+          "qty": 4
+        },
+        {
+          "id": "INK_SACK",
+          "qty": 1
+        },
+        {
+          "id": "RAW_FISH:1",
+          "qty": 1
+        },
+        {
+          "id": "PRISMARINE_CRYSTALS",
+          "qty": 2
+        }
+      ]
+    },
+    {
+      "output": "WHEAT",
+      "yield": 9,
+      "ingredients": [
+        {
+          "id": "HAY_BLOCK",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "WHIPPED_MAGMA_CREAM",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ENCHANTED_MAGMA_CREAM",
+          "qty": 160
+        }
+      ]
+    },
+    {
+      "output": "WINTER_WATER_ORB",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "ICE_HUNK",
+          "qty": 128
+        },
+        {
+          "id": "ENCHANTED_SNOW_BLOCK",
+          "qty": 64
+        },
+        {
+          "id": "WHITE_GIFT",
+          "qty": 64
+        },
+        {
+          "id": "WATER_ORB",
+          "qty": 1
+        },
+        {
+          "id": "GREEN_GIFT",
+          "qty": 16
+        },
+        {
+          "id": "BLUE_ICE_HUNK",
+          "qty": 32
+        }
+      ]
+    },
+    {
+      "output": "WOOL",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "INK_SACK:15",
+          "qty": 1
+        },
+        {
+          "id": "WOOL",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "INK_SACK:15"
+      ]
+    },
+    {
+      "output": "WORM_BAIT",
+      "yield": 16,
+      "ingredients": [
+        {
+          "id": "WORM_MEMBRANE",
+          "qty": 1
+        },
+        {
+          "id": "CLAY_BALL",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "XLARGE_ENCHANTED_CHEST",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "MINION_STORAGE_EXPANDER",
+          "qty": 1
+        },
+        {
+          "id": "LARGE_ENCHANTED_CHEST",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "MINION_STORAGE_EXPANDER"
+      ]
+    },
+    {
+      "output": "XXLARGE_ENCHANTED_CHEST",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "MINION_STORAGE_EXPANDER",
+          "qty": 1
+        },
+        {
+          "id": "XLARGE_ENCHANTED_CHEST",
+          "qty": 1
+        }
+      ],
+      "offBazaar": [
+        "MINION_STORAGE_EXPANDER"
+      ]
+    }
+  ]
+}

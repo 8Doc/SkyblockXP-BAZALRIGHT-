@@ -2,6 +2,10 @@
 
 A web app for answering **"what's the cheapest way to get the next N SkyBlock XP?"** — grouped by category, with low-value filler filtered out.
 
+The page has a second half. **Bazaar** — flips and crafts off a live read of Hypixel, ranked on
+coins per hour rather than on the spread — needs no API key and no profile, and is documented
+separately in [BAZAAR.md](BAZAAR.md).
+
 ## The problem with existing tools
 
 Current bots (SkyHelper `/level` and similar) sort every remaining task by **coins per SkyBlock XP**, ascending, across 30+ pages. That's technically correct and practically useless:

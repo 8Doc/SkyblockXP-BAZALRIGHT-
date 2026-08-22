@@ -70,6 +70,16 @@ const gameData = {
   carnivalShop: await loadJson("curated/carnival_shop.json"),
 };
 
+/**
+ * The bazaar tab's tables, inlined separately from the planner's. They answer a different
+ * question off different data, and keeping them apart means neither can quietly grow a
+ * dependency on the other.
+ */
+const bazaarData = {
+  recipes: (await loadJson("generated/recipes.json")).recipes,
+  names: (await loadJson("generated/bazaar_items.json")).names,
+};
+
 const bundle = await build({
   entryPoints: [join(ROOT, "src", "browser", "main.ts")],
   bundle: true,
@@ -86,6 +96,7 @@ const css = await readFile(join(ROOT, "src", "browser", "app.css"), "utf8");
 
 // </script> inside inlined JSON would close the tag early.
 const dataJson = JSON.stringify(gameData).replace(/</g, "\\u003c");
+const bazaarJson = JSON.stringify(bazaarData).replace(/</g, "\\u003c");
 
 const html = `<!doctype html>
 <html lang="en">
@@ -100,6 +111,7 @@ ${css}
 <body>
 <div id="app"></div>
 <script>window.__GAME_DATA__ = ${dataJson};</script>
+<script>window.__BAZAAR_DATA__ = ${bazaarJson};</script>
 <script>
 ${script}
 </script>
@@ -112,6 +124,7 @@ await writeFile(OUT, html);
 
 const kb = (n) => `${(n / 1024).toFixed(0)} KB`;
 console.log(`  data    ${kb(dataJson.length)}`);
+console.log(`  bazaar  ${kb(bazaarJson.length)}`);
 console.log(`  script  ${kb(script.length)}`);
 console.log(`  css     ${kb(css.length)}`);
 console.log(`  -> dist/skyblock-xp-planner.html  ${kb(html.length)}`);

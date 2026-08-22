@@ -223,3 +223,48 @@ footer { margin-top: 24px; padding-top: 12px; border-top: 1px solid var(--line);
 .npc-name { padding: 0; border: none; background: none; color: inherit; font: inherit; border-bottom: 1px dotted var(--muted); cursor: pointer; }
 .npc-name:hover { color: var(--aqua); border-bottom-color: var(--aqua); }
 .where { margin-left: 8px; font-size: 12px; color: var(--aqua); font-variant-numeric: tabular-nums; }
+
+/* -------------------------------------------------------------------- bazaar */
+
+/* The section switch sits above both halves of the site, so it keeps its own margin. */
+.tabs.sections { margin-bottom: 20px; }
+
+/* #app is 1000px, which is right for a task list and cramped for a nine-column table. The
+   bazaar half widens the page instead of shrinking the type. */
+#app:has(#bazaar:not([hidden])) { max-width: 1400px; }
+
+/* A wide table scrolls inside its own panel rather than pushing the page sideways. */
+.panel.scroll { overflow-x: auto; }
+
+table.bz {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+table.bz th, table.bz td { padding: 7px 12px; text-align: left; white-space: nowrap; }
+table.bz td.num, table.bz th.num { text-align: right; }
+
+table.bz thead th {
+  position: sticky;
+  top: 0;
+  background: var(--panel2);
+  border-bottom: 1px solid var(--line);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  font-weight: 500;
+}
+table.bz thead th[data-bzsort] { cursor: pointer; user-select: none; }
+table.bz thead th[data-bzsort]:hover { color: var(--aqua); }
+table.bz thead th.on { color: var(--aqua); }
+
+table.bz tbody tr + tr td { border-top: 1px solid var(--line); }
+table.bz tbody tr:hover td { background: var(--panel2); }
+
+/* The ranking column is the one the eye should land on. */
+table.bz td:last-child { color: var(--gold); }
+
+/* A range input inside a label needs to stop stretching to the full row. */
+#bzminfills { max-width: 220px; }
