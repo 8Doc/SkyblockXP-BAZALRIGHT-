@@ -2,6 +2,7 @@ import { normalise } from "../lib/bazaar";
 import { affordableCoinsPerHour, craft, flip, type Craft, type Flip, type Recipe } from "../lib/bazaarViews";
 import type { ProductSnapshot, RawBazaarProduct } from "../lib/bazaarTypes";
 import { coins, num, parseBudget } from "../lib/format";
+import { VOLUME_LADDER, ladderIndex, volumeNote } from "../lib/volumeFloor";
 
 /**
  * The bazaar tab: flips and crafts, off a live read of Hypixel.
@@ -54,7 +55,7 @@ const state: BazaarState = {
   view: "flips",
   search: "",
   budget: localStorage.getItem("sbxp:bzbudget") ?? "",
-  minFills: 1,
+  minFills: Number(localStorage.getItem("sbxp:bzminfills") ?? 1),
   market: new Map(),
   lastUpdated: null,
   fetchedAt: null,
@@ -191,7 +192,7 @@ function flipRows(): Flip[] {
   const rows: Flip[] = [];
   for (const product of state.market.values()) {
     const f = flip(product);
-    if (f && f.hourlyFills >= state.minFills) rows.push(f);
+    if (f) rows.push(f);
   }
   return rows;
 }
@@ -202,24 +203,37 @@ function craftRows(): Craft[] {
   const best = new Map<string, Craft>();
   for (const recipe of data.recipes) {
     const c = craft(recipe, state.market);
-    if (!c || c.bottleneck < state.minFills || c.margin <= 0) continue;
+    if (!c || c.margin <= 0) continue;
     const prior = best.get(c.id);
     if (!prior || c.craftCost < prior.craftCost) best.set(c.id, c);
   }
   return [...best.values()];
 }
 
+/** How many rows the volume floor alone is holding back. */
+function belowFloor(rows: (Flip | Craft)[]): number {
+  return rows.reduce((n, row) => n + (volumeOf(row) < state.minFills ? 1 : 0), 0);
+}
+
+/** How much of this row moves in an hour — round trips for a flip, items for a craft. */
+function volumeOf(row: Flip | Craft): number {
+  return "hourlyFills" in row ? row.hourlyFills : row.bottleneck;
+}
+
 function nameOf(id: string): string {
   return data.names[id] ?? id;
 }
 
-function filtered<T extends { id: string }>(rows: T[]): T[] {
+function filtered<T extends Flip | Craft>(rows: T[]): T[] {
   const needle = state.search.trim().toLowerCase();
-  if (!needle) return rows;
-  return rows.filter((row) => nameOf(row.id).toLowerCase().includes(needle) || row.id.toLowerCase().includes(needle));
+  return rows.filter((row) => {
+    if (volumeOf(row) < state.minFills) return false;
+    if (!needle) return true;
+    return nameOf(row.id).toLowerCase().includes(needle) || row.id.toLowerCase().includes(needle);
+  });
 }
 
-function sorted<T extends { id: string }>(rows: T[], columns: Column<T>[], sort: Sort): T[] {
+function sorted<T extends Flip | Craft>(rows: T[], columns: Column<T>[], sort: Sort): T[] {
   const column = columns.find((c) => c.id === sort.column);
   if (!column) return rows;
   const direction = sort.descending ? -1 : 1;
@@ -281,9 +295,11 @@ export function mountBazaar(container: HTMLElement, tables: BazaarData): void {
       return;
     }
     if (el.id === "bzminfills") {
-      state.minFills = Number(el.value) || 0;
+      state.minFills = VOLUME_LADDER[Number(el.value)] ?? 0;
+      localStorage.setItem("sbxp:bzminfills", String(state.minFills));
+      // The handle should track the finger even if the table takes a moment behind it.
       const label = document.getElementById("bzminfillsvalue");
-      if (label) label.textContent = num(state.minFills);
+      if (label) label.textContent = volumeNote(state.minFills);
       renderTable();
     }
   });
@@ -317,9 +333,9 @@ function render(): void {
         <label title="What you have to flip with. Adds a column for what each row can actually pay you, rather than what it would pay someone with unlimited coins.">Coins on hand
           <input id="bzbudget" value="${escapeHtml(state.budget)}" placeholder="optional · 500M" autocomplete="off">
         </label>
-        <label title="A huge spread on something that trades twice a week is not an opportunity. This hides anything that cannot complete this many round trips an hour.">
-          Minimum round trips per hour <span id="bzminfillsvalue">${num(state.minFills)}</span>
-          <input type="range" id="bzminfills" min="0" max="200" step="1" value="${state.minFills}">
+        <label class="wide" title="A huge spread on something that trades twice a week is not an opportunity. This hides anything moving slower than the floor — round trips an hour on flips, items an hour on crafts.">
+          Minimum volume <span class="dim" id="bzminfillsvalue">${volumeNote(state.minFills)}</span>
+          <input type="range" id="bzminfills" min="0" max="${VOLUME_LADDER.length - 1}" step="1" value="${ladderIndex(state.minFills)}">
         </label>
       </div>
     </div>
@@ -349,10 +365,15 @@ function renderTable(): void {
   const target = document.getElementById("bztable");
   if (!target) return;
 
-  target.innerHTML =
-    state.view === "flips"
-      ? table(filtered(flipRows()), flipColumns(), state.sorts.flips, FLIPS_NOTE)
-      : table(filtered(craftRows()), CRAFT_COLUMNS, state.sorts.crafts, CRAFTS_NOTE);
+  // The floor's count is taken on its own, not as "everything the search left out", or typing a
+  // word would look like the volume filter had suddenly hidden a thousand rows.
+  if (state.view === "flips") {
+    const all = flipRows();
+    target.innerHTML = table(filtered(all), belowFloor(all), flipColumns(), state.sorts.flips, FLIPS_NOTE);
+  } else {
+    const all = craftRows();
+    target.innerHTML = table(filtered(all), belowFloor(all), CRAFT_COLUMNS, state.sorts.crafts, CRAFTS_NOTE);
+  }
 }
 
 const FLIPS_NOTE =
@@ -366,9 +387,12 @@ const CRAFTS_NOTE =
   "per hour, which is the margin times whichever runs out first — the output's demand or the " +
   "scarcest ingredient's supply.";
 
-function table<T extends { id: string }>(rows: T[], columns: Column<T>[], sort: Sort, note: string): string {
+function table<T extends Flip | Craft>(rows: T[], belowFloor: number, columns: Column<T>[], sort: Sort, note: string): string {
   if (state.market.size === 0) return `<p class="dim pad">Waiting for the first read of the bazaar…</p>`;
-  if (rows.length === 0) return `<p class="dim pad">Nothing matches. Try a lower round-trip floor.</p>`;
+  if (rows.length === 0) {
+    const because = state.minFills > 0 ? ` Nothing moves ${num(state.minFills)} times an hour that also matches.` : "";
+    return `<p class="dim pad">Nothing matches.${because}</p>`;
+  }
 
   const ordered = sorted(rows, columns, sort);
   const shown = ordered.slice(0, ROW_LIMIT);
@@ -391,6 +415,7 @@ function table<T extends { id: string }>(rows: T[], columns: Column<T>[], sort: 
     .join("");
 
   const more = ordered.length > shown.length ? ` · showing the top ${num(shown.length)}` : "";
+  const floor = belowFloor > 0 ? ` · ${num(belowFloor)} below the volume floor` : "";
 
   return `
     <p class="dim pad">${escapeHtml(note)}</p>
@@ -400,7 +425,7 @@ function table<T extends { id: string }>(rows: T[], columns: Column<T>[], sort: 
         <tbody>${body}</tbody>
       </table>
     </div>
-    <p class="dim pad">${num(ordered.length)} rows${more}</p>
+    <p class="dim pad">${num(ordered.length)} rows${more}${floor}</p>
   `;
 }
 

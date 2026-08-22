@@ -266,5 +266,5 @@ table.bz tbody tr:hover td { background: var(--panel2); }
 /* The ranking column is the one the eye should land on. */
 table.bz td:last-child { color: var(--gold); }
 
-/* A range input inside a label needs to stop stretching to the full row. */
-#bzminfills { max-width: 220px; }
+/* Twenty-five stops need travel to be placeable, but not the whole width of a 1400px page. */
+#bzminfills { width: 100%; max-width: 520px; display: block; }

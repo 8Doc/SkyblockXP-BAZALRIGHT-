@@ -420,9 +420,19 @@ API key, a username and a profile, and the bazaar needs none of them, so it sits
 than inside. `src/browser/bazaarTab.ts` keeps its own state and its own polling, and switching
 away unmounts it — a page nobody is looking at should not be making a request a minute.
 
-It ships **Flips** and **Crafts**. Every column is sortable, both default to coins per hour
-descending, and both carry a *minimum round trips per hour* floor. Flips additionally carries the
-capital, bad-hour and budget columns above, which are the honest version of that floor.
+It ships **Flips** and **Crafts**. Every column is sortable and both default to coins per hour
+descending. Flips carries the allocate, bad-hour and budget columns above.
+
+Both carry a **volume floor**, because no amount of cleverness in the ranking removes the reader's
+need to say "not that slow". Its slider was a linear 0–200, which was useless: bazaar volumes run
+from a couple of trades a week to two hundred thousand an hour, so nine tenths of the travel sat in
+a range nobody wants and it could not express "a thousand" at all. It is now the 1-2-3-5-7
+preferred numbers, five stops to a decade, from off to 100,000 — resolution where the decisions
+are, since three an hour against seven an hour is the difference between a flip that works and one
+that does not, while 20,000 against 50,000 is not a difference. The stop reads as a wait rather
+than a rate ("20/hr · one every 3 min"), because the wait is the thing being chosen, and the row
+count underneath says how many the floor is holding back. It persists, and it applies to round
+trips on flips and to items an hour on crafts.
 
 Two things it does that skyblock.bz's does not:
 
