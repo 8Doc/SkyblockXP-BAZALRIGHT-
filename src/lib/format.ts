@@ -31,3 +31,17 @@ export function rate(n: number | null): string {
   if (n === null) return "—";
   return `${coins(n)}/xp`;
 }
+
+/**
+ * "50M" / "1.5b" / "250000" into coins. Null when it isn't a number.
+ *
+ * Shared by both halves of the page: the planner spends a budget on XP, the bazaar tab asks what
+ * a budget can actually capture. Same shorthand either way, because it is the shorthand the game
+ * itself uses.
+ */
+export function parseBudget(input: string): number | null {
+  const match = /^([\d.]+)\s*([kmb])?$/i.exec(input.trim());
+  if (!match) return null;
+  const scale = { k: 1e3, m: 1e6, b: 1e9 }[match[2]?.toLowerCase() ?? ""] ?? 1;
+  return Math.round(Number(match[1]) * scale);
+}

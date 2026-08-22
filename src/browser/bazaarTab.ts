@@ -1,7 +1,7 @@
 import { normalise } from "../lib/bazaar";
-import { craft, flip, type Craft, type Flip, type Recipe } from "../lib/bazaarViews";
+import { affordableCoinsPerHour, craft, flip, type Craft, type Flip, type Recipe } from "../lib/bazaarViews";
 import type { ProductSnapshot, RawBazaarProduct } from "../lib/bazaarTypes";
-import { coins, num } from "../lib/format";
+import { coins, num, parseBudget } from "../lib/format";
 
 /**
  * The bazaar tab: flips and crafts, off a live read of Hypixel.
@@ -40,6 +40,8 @@ type BazaarState = {
   search: string;
   /** Hide rows whose round-trip rate makes the coins-per-hour meaningless. */
   minFills: number;
+  /** Coins on hand, as typed. Empty means "don't ask what I can afford". */
+  budget: string;
   market: Map<string, ProductSnapshot>;
   lastUpdated: number | null;
   fetchedAt: number | null;
@@ -51,6 +53,7 @@ type BazaarState = {
 const state: BazaarState = {
   view: "flips",
   search: "",
+  budget: localStorage.getItem("sbxp:bzbudget") ?? "",
   minFills: 1,
   market: new Map(),
   lastUpdated: null,
@@ -80,7 +83,7 @@ type Column<T> = {
   title?: string;
 };
 
-const FLIP_COLUMNS: Column<Flip>[] = [
+const BASE_FLIP_COLUMNS: Column<Flip>[] = [
   { id: "buyAt", label: "Buy order", value: (r) => r.buyAt, render: (r) => coins(r.buyAt), title: "What buyers are already bidding — put your buy order here." },
   { id: "sellAt", label: "Sell order", value: (r) => r.sellAt, render: (r) => coins(r.sellAt), title: "What sellers are already asking — put your sell order here." },
   { id: "margin", label: "Margin", value: (r) => r.margin, render: (r) => coins(r.margin), title: "The gross spread between the two order books." },
@@ -89,8 +92,33 @@ const FLIP_COLUMNS: Column<Flip>[] = [
   { id: "hourlyBought", label: "Instabuys/hr", value: (r) => r.hourlyBought, render: (r) => num(Math.round(r.hourlyBought)), title: "Items instabought per hour, averaged over the moving week. How fast your sell order fills." },
   { id: "hourlySold", label: "Instasells/hr", value: (r) => r.hourlySold, render: (r) => num(Math.round(r.hourlySold)), title: "Items instasold per hour. How fast your buy order fills." },
   { id: "hourlyFills", label: "Round trips/hr", value: (r) => r.hourlyFills, render: (r) => num(Math.round(r.hourlyFills)), title: "The slower of the two sides. Both legs have to fill for the flip to close." },
+  { id: "capital", label: "Capital", value: (r) => r.capital, render: (r) => coins(r.capital), title: "Coins tied up keeping this running at the market's own pace — about two units in flight, never more." },
+  { id: "badHourCoins", label: "Bad hour", value: (r) => r.badHourCoins, render: (r) => coins(r.badHourCoins), title: "What a quarter of your hours are worse than. Coins per hour is a mean, and a mean is a poor summary of four trades — zero here means a quarter of the time this pays nothing at all." },
   { id: "coinsPerHour", label: "Coins/hr", value: (r) => r.coinsPerHour, render: (r) => coins(r.coinsPerHour), title: "After-tax margin times the round-trip rate. This is the ranking figure." },
 ];
+
+/**
+ * The budget column only exists once there is a budget, because a column of em-dashes is noise.
+ * It goes last, where the eye already is, and the default sort is left alone — this is a second
+ * opinion on the ranking rather than a replacement for it.
+ */
+function flipColumns(): Column<Flip>[] {
+  const budget = parseBudget(state.budget);
+  if (budget === null) return BASE_FLIP_COLUMNS;
+
+  return [
+    ...BASE_FLIP_COLUMNS,
+    {
+      id: "affordable",
+      label: `With ${coins(budget)}`,
+      value: (r) => affordableCoinsPerHour(r, budget),
+      render: (r) => coins(affordableCoinsPerHour(r, budget)),
+      title:
+        "What your coins can actually take out of this, per hour. The market only turns over so " +
+        "fast and your coins only turn over so fast; the lower ceiling binds.",
+    },
+  ];
+}
 
 const CRAFT_COLUMNS: Column<Craft>[] = [
   { id: "craftCost", label: "Craft cost", value: (r) => r.craftCost, render: (r) => coins(r.craftCost), title: "What one costs to make, every ingredient bought through a buy order. Per item, not per craft — some recipes make thirty-two." },
@@ -108,7 +136,7 @@ const CRAFT_COLUMNS: Column<Craft>[] = [
 async function refresh(): Promise<void> {
   state.status = state.market.size ? "refreshing" : "loading the bazaar…";
   state.error = null;
-  render();
+  renderMeta();
 
   try {
     const response = await fetch(BAZAAR);
@@ -132,7 +160,10 @@ async function refresh(): Promise<void> {
     state.status = "";
   }
 
-  render();
+  // Only the meta line and the table, never the controls: this runs every twenty seconds, and a
+  // full repaint would take the cursor out of the search box mid-word.
+  renderMeta();
+  renderTable();
   schedule();
 }
 
@@ -217,7 +248,7 @@ export function mountBazaar(container: HTMLElement, tables: BazaarData): void {
       // every column here is a "more is better" figure.
       if (sort.column === id) sort.descending = !sort.descending;
       else state.sorts[state.view] = { column: id, descending: true };
-      render();
+      renderTable();
       return;
     }
 
@@ -228,6 +259,13 @@ export function mountBazaar(container: HTMLElement, tables: BazaarData): void {
     const el = event.target as HTMLInputElement;
     if (el.id === "bzsearch") {
       state.search = el.value;
+      renderTable();
+      return;
+    }
+    if (el.id === "bzbudget") {
+      state.budget = el.value;
+      localStorage.setItem("sbxp:bzbudget", el.value);
+      // The column set changes with it, so this is a header repaint rather than a body one.
       renderTable();
       return;
     }
@@ -253,13 +291,7 @@ function render(): void {
   if (!host) return;
 
   host.innerHTML = `
-    <div class="meta">
-      <strong>${num(state.market.size)} products</strong>
-      <span class="dim" id="bzage">${ageNote()}</span>
-      ${state.status ? `<span class="dim">${escapeHtml(state.status)}</span>` : ""}
-      ${state.error ? `<span class="gold">${escapeHtml(state.error)}</span>` : ""}
-      <button type="button" class="chip" id="bzrefresh" title="Hypixel republishes every 20 seconds; this tab already wakes for it.">Refresh now</button>
-    </div>
+    <div class="meta" id="bzmeta">${metaHtml()}</div>
 
     <div class="tabs">
       <button class="chip${state.view === "flips" ? " on" : ""}" data-bzview="flips">Flips</button>
@@ -270,6 +302,9 @@ function render(): void {
       <div class="row">
         <label>Search
           <input id="bzsearch" value="${escapeHtml(state.search)}" placeholder="e.g. enchanted cactus" autocomplete="off">
+        </label>
+        <label title="What you have to flip with. Adds a column for what each row can actually pay you, rather than what it would pay someone with unlimited coins.">Coins on hand
+          <input id="bzbudget" value="${escapeHtml(state.budget)}" placeholder="optional · 500M" autocomplete="off">
         </label>
         <label title="A huge spread on something that trades twice a week is not an opportunity. This hides anything that cannot complete this many round trips an hour.">
           Minimum round trips per hour <span id="bzminfillsvalue">${num(state.minFills)}</span>
@@ -284,19 +319,36 @@ function render(): void {
   renderTable();
 }
 
+function metaHtml(): string {
+  return `
+    <strong>${num(state.market.size)} products</strong>
+    <span class="dim">${ageNote()}</span>
+    ${state.status ? `<span class="dim">${escapeHtml(state.status)}</span>` : ""}
+    ${state.error ? `<span class="gold">${escapeHtml(state.error)}</span>` : ""}
+    <button type="button" class="chip" id="bzrefresh" title="Hypixel republishes every 20 seconds; this tab already wakes for it.">Refresh now</button>
+  `;
+}
+
+function renderMeta(): void {
+  const meta = document.getElementById("bzmeta");
+  if (meta) meta.innerHTML = metaHtml();
+}
+
 function renderTable(): void {
   const target = document.getElementById("bztable");
   if (!target) return;
 
   target.innerHTML =
     state.view === "flips"
-      ? table(filtered(flipRows()), FLIP_COLUMNS, state.sorts.flips, FLIPS_NOTE)
+      ? table(filtered(flipRows()), flipColumns(), state.sorts.flips, FLIPS_NOTE)
       : table(filtered(craftRows()), CRAFT_COLUMNS, state.sorts.crafts, CRAFTS_NOTE);
 }
 
 const FLIPS_NOTE =
   "Buy at the top of the buy book, sell at the top of the sell book. Ranked on coins per hour " +
-  "rather than on the spread, because both legs have to fill and the slower side sets the pace.";
+  "rather than on the spread, because both legs have to fill and the slower side sets the pace. " +
+  "Read that figure against the two beside it: a bad hour says what the mean is hiding on a thin " +
+  "item, and capital says how much you need on hand before the rate is even available to you.";
 
 const CRAFTS_NOTE =
   "Ingredients bought through buy orders, the output sold through a sell order. Ranked on coins " +

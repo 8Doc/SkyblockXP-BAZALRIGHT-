@@ -1,5 +1,5 @@
 import { auctionNameIndex, categoryLabel, type BagItem, type GameData } from "../lib/gameData";
-import { coins, num, rate } from "../lib/format";
+import { coins, num, parseBudget, rate } from "../lib/format";
 import { coopProgress, type BinIndex, type GardenState, type MuseumState, type ProfileMember, type SkyblockProfile, type BazaarProduct } from "../lib/profile";
 import { petsFrom } from "../lib/auctions";
 import { buildCatalog, type Catalog } from "../lib/catalog";
@@ -135,13 +135,6 @@ function solveNow(): void {
 }
 
 /** Accepts "50M", "1.2b", "500k" or a plain number. Empty means no cap. */
-function parseBudget(input: string): number | null {
-  const match = /^([\d.]+)\s*([kmb])?$/i.exec(input.trim());
-  if (!match) return null;
-  const scale = { k: 1e3, m: 1e6, b: 1e9 }[match[2]?.toLowerCase() ?? ""] ?? 1;
-  return Math.round(Number(match[1]) * scale);
-}
-
 /* ------------------------------------------------------------------ loading */
 
 async function loadPlayer(): Promise<void> {

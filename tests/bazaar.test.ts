@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { NET_OF_TAX, costToBuy, hourlySold, normalise, proceedsFromSelling, walk } from "../src/lib/bazaar";
-import { crash, craft, flip, manipulation } from "../src/lib/bazaarViews";
+import { affordableCoinsPerHour, badHourCount, crash, craft, flip, manipulation } from "../src/lib/bazaarViews";
 import { daily, decode, despike, encode, proximityToAverage, sample, trim } from "../src/lib/bazaarHistory";
 import type { HistoryRow, ProductSnapshot, RawBazaarProduct } from "../src/lib/bazaarTypes";
 
@@ -139,6 +139,87 @@ test("a flip with no spread is not a flip", () => {
   });
   assert.ok(crossed);
   assert.equal(flip(crossed), null);
+});
+
+/**
+ * The Shadow Warp problem: a 180M item with a 12M spread and three round trips an hour, which
+ * plain coins-per-hour ranks eighth of fifteen hundred flips and nobody with 50M can actually
+ * run. Both figures below exist to say so.
+ */
+function thin(): ProductSnapshot {
+  const p = normalise("SHADOW_WARP_SCROLL", {
+    buy_summary: [{ amount: 2, pricePerUnit: 195_000_000, orders: 1 }],
+    sell_summary: [{ amount: 1, pricePerUnit: 180_000_000, orders: 1 }],
+    quick_status: {
+      buyPrice: 195_000_000,
+      buyVolume: 30,
+      buyMovingWeek: 655,
+      buyOrders: 12,
+      sellPrice: 180_000_000,
+      sellVolume: 12,
+      sellMovingWeek: 588,
+      sellOrders: 9,
+    },
+  });
+  assert.ok(p);
+  return p;
+}
+
+test("a bad hour is zero for anything that trades once an hour", () => {
+  // Poisson(1) puts 37% of its mass on nought, so the quarter-worst hour of a once-an-hour item
+  // has no trades in it at all. That is the whole complaint about ranking on a mean.
+  assert.equal(badHourCount(1), 0);
+  assert.equal(badHourCount(1.4), 1, "and the cliff is where the arithmetic puts it");
+  assert.equal(badHourCount(4), 3, "four an hour is usually three");
+  assert.equal(badHourCount(0), 0, "an item that never trades cannot have a good hour either");
+
+  // High rates barely move, which is the point: missing one of eight hundred costs nothing.
+  const busy = badHourCount(800);
+  assert.ok(busy > 780 && busy < 800, `800/hr stays near 800, got ${busy}`);
+});
+
+test("a thin flip's bad hour is far below its mean", () => {
+  const f = flip(thin());
+  assert.ok(f);
+
+  assert.ok(f.hourlyFills < 4, "three and a half round trips an hour");
+  assert.ok(f.badHourFills < f.hourlyFills, "a quarter of hours are worse than the mean");
+  assert.ok(
+    f.badHourCoins < f.coinsPerHour * 0.75,
+    `a bad hour should cost this flip a quarter or more, got ${f.badHourCoins} of ${f.coinsPerHour}`,
+  );
+});
+
+test("a busy flip's bad hour is barely below its mean", () => {
+  const f = flip(cactus());
+  assert.ok(f);
+  // Over a thousand round trips an hour: variance stops mattering.
+  assert.ok(f.badHourCoins > f.coinsPerHour * 0.95, "a busy item's bad hour is not much of a hour");
+});
+
+test("capital is what the flip ties up, not what you are willing to spend", () => {
+  const f = flip(thin());
+  assert.ok(f);
+
+  // Little's Law: throughput times time-in-system, and a unit waits to be sold to and then to be
+  // bought from. Balanced legs put two units in flight and never more.
+  const expected = f.buyAt * f.hourlyFills * (1 / f.hourlySold + 1 / f.hourlyBought);
+  assert.equal(round(f.capital), round(expected));
+  assert.ok(f.capital > f.buyAt && f.capital <= f.buyAt * 2, "between one and two units of it");
+});
+
+test("a budget caps what a flip can pay you, and no budget means no cap", () => {
+  const f = flip(thin());
+  assert.ok(f);
+
+  assert.equal(affordableCoinsPerHour(f, null), f.coinsPerHour, "unasked is unlimited");
+
+  // With the capital it needs, the market's own rate is the binding ceiling.
+  assert.equal(round(affordableCoinsPerHour(f, f.capital * 10)), round(f.coinsPerHour));
+
+  // With a tenth of it, your coins are. This is the number that moves Shadow Warp down the list.
+  const tenth = affordableCoinsPerHour(f, f.capital / 10);
+  assert.ok(tenth < f.coinsPerHour / 9, `a tenth of the capital earns about a tenth, got ${tenth}`);
 });
 
 /**

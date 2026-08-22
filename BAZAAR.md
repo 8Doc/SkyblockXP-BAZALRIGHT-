@@ -245,6 +245,80 @@ be argued with. Read the number as a shape, not a forecast.
 
 ---
 
+## Where coins-per-hour lies
+
+Coins-per-hour is a real improvement on ranking by spread, and it is still wrong in two ways that
+put the same rows at the top of every flip list on every site that uses it.
+
+Shadow Warp: a 14M spread, three and a half round trips an hour, 181M a unit. Plain
+coins-per-hour makes that 33M an hour and **eighth of 1,521 flips**. Two things are missing.
+
+### It is a mean, and a mean is a poor summary of four trades
+
+Miss one of four trades and you have lost a quarter of the hour. The mean never says so. Trades
+arrive independently, so an hour's count is Poisson about the moving-week rate, and the 25th
+percentile of that count is a straightforward thing to ask for — a quarter of your hours are
+worse than this. Because a round trip needs an instasell to fill the buy order *and* an instabuy
+to fill the sell order, it is taken on both legs and the worse one wins.
+
+```
+Ultimate Fatal Tempo 3   86.4M/hr mean  →      0    0.4 round trips an hour
+Medium Witch Cauldron    32.0M/hr mean  →      0    0.4
+Ultimate Bobbin Time 3   39.5M/hr mean  →  19.5M    2.0
+Shadow Warp              33.0M/hr mean  →  19.0M    3.5
+Enchanted Quartz Block   41.1M/hr mean  →  40.1M    793
+```
+
+Everything under about 1.4 round trips an hour goes to **literal zero** — a quarter of the time an
+item that thin pays nothing at all — while a busy row barely moves. That is the volume floor a
+flip list needs, except the cliff is where the arithmetic puts it rather than where anyone guessed,
+and it can tell a thin row with a huge margin from a thin row with a small one.
+
+### It reports the market's ceiling, not yours
+
+The bigger omission. Coins-per-hour asks how fast the *market* turns over and never asks how fast
+*your coins* do, and those are different constraints with different winners.
+
+By Little's Law you never hold more than two units in flight: what you hold is the throughput
+times how long each unit sits with you, and a unit sits from the moment the buy order goes in
+(waiting `1/hourlySold` for someone to sell to it) until the sell order clears (waiting
+`1/hourlyBought` for someone to buy from it). Two units when the legs are balanced, fewer when they
+are not, never more. So a flip's capital requirement is a property of its price, not of your
+appetite — and it is computable for every row.
+
+Shadow Warp ties up **329M** and returns about 10% an hour on it. Enchanted Quartz Block ties up
+250k and returns 15,808%. Cap the rate at `budget × returnOnCapital` and the list stops pretending:
+
+| budget | Shadow Warp's rank | what it actually pays |
+|---|---|---|
+| 50M | **#263** | 5.0M/hr |
+| 500M | #8 | 33M/hr |
+| 5B | #8 | 33M/hr |
+
+No threshold and nothing tuned. With 50M you cannot run that flip, so the number says 5.0M.
+
+### What we did not use
+
+Competition looked like the obvious culprit and is not. The book publishes `orders`, the count of
+separate orders standing at each price, which skyblock.bz reads and then discards — sit behind
+eight of them and you are ninth in the queue. **Shadow Warp has exactly one order at the best
+bid.** Order stacking turns up on cheap farm goods instead (Seeds 11, Pumpkin 12 — bots), not on
+the thin expensive rows. It is a real signal and it is not this one.
+
+### On screen
+
+The Flips table carries **Capital** and **Bad hour** as columns beside **Coins/hr**, and a
+*Coins on hand* field adds a **With 50M** column when it is filled in. The default sort is left on
+coins-per-hour: these are a second opinion on the ranking, not a replacement for it, and every
+column sorts on click. The Shadow Warp row now reads its own warning across:
+
+```
+Shadow Warp   181M  195M  14M  9.4M  7.1%  4  4  4   329M   19M   33M   5.0M
+                                          capital ^  bad ^  mean ^  yours ^
+```
+
+---
+
 ## Where the data comes from
 
 Three candidate sources were polled every three seconds for three minutes, on the same item, and
@@ -329,8 +403,8 @@ than inside. `src/browser/bazaarTab.ts` keeps its own state and its own polling,
 away unmounts it — a page nobody is looking at should not be making a request a minute.
 
 It ships **Flips** and **Crafts**. Every column is sortable, both default to coins per hour
-descending, and both carry a *minimum round trips per hour* floor, because a 200M spread on
-something that trades four times a week is the single most common way a flip list lies.
+descending, and both carry a *minimum round trips per hour* floor. Flips additionally carries the
+capital, bad-hour and budget columns above, which are the honest version of that floor.
 
 Two things it does that skyblock.bz's does not:
 
@@ -346,12 +420,13 @@ Two things it does that skyblock.bz's does not:
 
 ## What this repo has, and what it still needs
 
-Implemented and tested (`tests/bazaar.test.ts` and `tests/recipes.test.ts`, 26 cases):
+Implemented and tested (`tests/bazaar.test.ts` and `tests/recipes.test.ts`, 31 cases):
 
 
 - [`bazaarTypes.ts`](src/lib/bazaarTypes.ts) — the raw and relabelled shapes, and the history row.
 - [`bazaar.ts`](src/lib/bazaar.ts) — `normalise`, the book walk, the tax and rate constants.
-- [`bazaarViews.ts`](src/lib/bazaarViews.ts) — all seven derivations.
+- [`bazaarViews.ts`](src/lib/bazaarViews.ts) — all seven derivations, plus the capital, bad-hour
+  and budget-cap figures a flip list needs and skyblock.bz's does not carry.
 - [`bazaarHistory.ts`](src/lib/bazaarHistory.ts) — delta codec, rolling window, daily rollup,
   proximity-to-average, despike.
 - [`scripts/fetch-bazaar-data.mjs`](scripts/fetch-bazaar-data.mjs) — the recipe table and a name

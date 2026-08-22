@@ -48,7 +48,73 @@ export type Flip = {
   /** Round trips per hour, which is the slower of the two sides. */
   hourlyFills: number;
   coinsPerHour: number;
+
+  /**
+   * Coins tied up keeping this flip running at the market's own pace.
+   *
+   * Little's Law: what you hold is the throughput times how long each unit sits with you, and a
+   * unit sits from the moment you place the buy order until the sell order fills — `1/hourlySold`
+   * waiting to be sold to, then `1/hourlyBought` waiting to be bought from. On a balanced item
+   * that works out to two units in flight and never more, which is why a flip's capital is a
+   * property of its *price*, not of how much you are willing to spend.
+   */
+  capital: number;
+  /** `coinsPerHour / capital`. How hard the coins work, per hour. */
+  returnOnCapital: number;
+
+  /** Round trips a quarter-bad hour delivers. */
+  badHourFills: number;
+  /**
+   * What a quarter-bad hour pays.
+   *
+   * Coins-per-hour is a mean, and a mean is a poor summary of four trades. Missing one of them
+   * costs a quarter of the hour; the mean never says so. This is the 25th percentile instead —
+   * a quarter of your hours are worse than this — and because it is taken on both legs, it also
+   * prices in the fact that a round trip needs an instasell *and* an instabuy to arrive.
+   *
+   * Below about 1.4 round trips an hour it is zero, which is the honest reading: a quarter of the
+   * time an item that thin pays you nothing at all.
+   */
+  badHourCoins: number;
 };
+
+/**
+ * The 25th percentile of a Poisson count — a bad-but-not-freak hour.
+ *
+ * Trades arrive independently, so an hour's count is Poisson about the moving-week rate. Summing
+ * the mass is exact and cheap for the small rates that matter; past a few hundred an hour the
+ * `exp(-lambda)` seed underflows to zero and the normal approximation is indistinguishable anyway.
+ */
+export function badHourCount(lambda: number): number {
+  if (!(lambda > 0)) return 0;
+  if (lambda > 500) return Math.max(0, lambda - Z25 * Math.sqrt(lambda));
+
+  let cdf = Math.exp(-lambda);
+  let term = cdf;
+  let k = 0;
+  while (cdf < 0.25 && k < 10_000) {
+    k++;
+    term *= lambda / k;
+    cdf += term;
+  }
+  return k;
+}
+
+/** Standard normal deviate at the 25th percentile. */
+const Z25 = 0.674489750196;
+
+/**
+ * What a budget can actually take out of a flip, per hour.
+ *
+ * Two ceilings, and the lower one binds. The market only turns over so fast, and your coins only
+ * turn over so fast — which is the distinction plain coins-per-hour throws away. A 180M-a-unit
+ * flip doing three round trips an hour is a fine trade with 500M behind it and unavailable with
+ * 50M, and the same number is quoted for both until you divide by the capital.
+ */
+export function affordableCoinsPerHour(f: Flip, budget: number | null): number {
+  if (budget === null) return f.coinsPerHour;
+  return Math.min(f.coinsPerHour, budget * f.returnOnCapital);
+}
 
 export function flip(p: ProductSnapshot): Flip | null {
   // An empty side of the book is not a price of zero. Quoting one as if it were turns every
@@ -68,6 +134,14 @@ export function flip(p: ProductSnapshot): Flip | null {
   // order simply never fills and the coins-per-hour is fiction.
   const hourlyFills = Math.min(bought, sold);
 
+  // A unit is yours from the moment the buy order goes in until the sell order clears: it waits
+  // for someone to instasell to it, then for someone to instabuy from it.
+  const inFlight = hourlyFills * (1 / sold + 1 / bought);
+  const capital = p.instasell * inFlight;
+  const coinsPerHour = netMargin * hourlyFills;
+
+  const badHourFills = Math.min(badHourCount(bought), badHourCount(sold));
+
   return {
     id: p.id,
     buyAt: p.instasell,
@@ -78,7 +152,11 @@ export function flip(p: ProductSnapshot): Flip | null {
     hourlyBought: bought,
     hourlySold: sold,
     hourlyFills,
-    coinsPerHour: netMargin * hourlyFills,
+    coinsPerHour,
+    capital,
+    returnOnCapital: capital > 0 ? coinsPerHour / capital : 0,
+    badHourFills,
+    badHourCoins: netMargin * badHourFills,
   };
 }
 
