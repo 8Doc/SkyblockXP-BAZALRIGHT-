@@ -5,8 +5,9 @@ import { buildCatalog } from "../src/lib/catalog";
 import { gameData } from "./gameDataFixture";
 import bestiary from "../data/generated/bestiary.json";
 import bestiaryMobs from "../data/curated/bestiary_mobs.json";
+import bestiaryMobIds from "../data/generated/bestiary_mob_ids.json";
 
-const data = { bestiary, bestiaryMobs } as never;
+const data = { bestiary, bestiaryMobs, bestiaryMobIds } as never;
 /** The whole table, for the tests that need to build a catalog rather than read the join. */
 const full = gameData();
 
@@ -215,4 +216,58 @@ test("tiers are ranked on a share of their family's ladder", () => {
   // Nothing is cut for being far off: the category's total is what the player really has left.
   const families = new Set(cat.tasks.filter((t) => t.category === "bestiary").map((t) => t.id.split("_").slice(1, -1).join("_")));
   assert.ok(families.size > 300, `only ${families.size} families reach the list`);
+});
+
+/**
+ * The join the API refuses to publish. `bestiary.kills` is keyed by internal mob id and nothing
+ * groups those ids into families, so the same family arrives under names no rule could connect:
+ * a Bezal is a Blaze, a Scatha is a Worm, and six goblin ids are one Goblin Raiders. SkyCrypt
+ * publishes the grouping because drawing the page needs it, and these are the cases that prove
+ * the map is loaded rather than the name happening to match.
+ */
+test("a mob id the name rules cannot reach is placed by the scraped map", () => {
+  assert.equal(bestiaryFamilyOf(data, "bezal_80"), "blaze");
+  assert.equal(bestiaryFamilyOf(data, "scatha_10"), "worm");
+  assert.equal(bestiaryFamilyOf(data, "team_treasurite_wendy_100"), "grunt");
+  assert.equal(bestiaryFamilyOf(data, "ice_walker_45"), "glacite_walker", "renamed since SkyCrypt read it");
+});
+
+test("six goblin ids are one family, which is why ids cannot stand in for families", () => {
+  for (const id of ["goblin_weakling_melee_25", "goblin_weakling_bow_5", "goblin_battler_1", "goblin_creepertamer_1", "goblin_murderlover_1", "goblin_golem_1"])
+    assert.equal(bestiaryFamilyOf(data, id), "goblin_raiders", id);
+});
+
+/** Curated first, so a stale scraped entry can always be overridden by hand rather than by edit. */
+test("a curated alias wins over the scraped map", () => {
+  const shadowed = { ...data as any, bestiaryMobs: { aliases: { bezal: "zombie" }, noFamily: {} } };
+  assert.equal(bestiaryFamilyOf(shadowed, "bezal_80"), "zombie");
+  const excluded = { ...data as any, bestiaryMobs: { aliases: {}, noFamily: { bezal: "not a bestiary mob" } } };
+  assert.equal(bestiaryFamilyOf(excluded, "bezal_80"), null, "a positive exclusion also outranks it");
+});
+
+/**
+ * The game writes `lotus_fish` where the wiki writes `Lotusfish` — the same name, split
+ * differently. Compacting settles those, but only where one family compacts to it: the merged
+ * family list carries both `endstone_protector` and `end_stone_protector`, and picking one
+ * would credit a coin flip.
+ */
+test("a name split differently resolves, unless two families claim it", () => {
+  assert.equal(bestiaryFamilyOf(data, "lotus_fish_1"), "lotusfish");
+  assert.equal(bestiaryFamilyOf(data, "flip_flopper_1"), "flipflopper");
+  assert.equal(bestiaryFamilyOf(data, "endstone_protector_1"), "endstone_protector", "an exact id still wins");
+  assert.equal(bestiaryFamilyOf(data, "end_stoneprotector_1"), undefined, "ambiguous, so refused");
+});
+
+test("every scraped alias points at a family that exists", () => {
+  const ids = new Set(bestiary.families.map((f) => f.id));
+  for (const [mob, family] of Object.entries(bestiaryMobIds.aliases))
+    assert.ok(ids.has(family), `${mob} -> ${family}, which is not a family`);
+});
+
+/** SkyCrypt's caps are older than the wiki's, so only its grouping is taken. Creeper caps at 50
+ * kills in game, which is the wiki's figure against SkyCrypt's 200 — checked in game, not read. */
+test("the scraped file carries no tier maths of its own", () => {
+  const keys = new Set(Object.keys(bestiaryMobIds));
+  assert.ok(!keys.has("brackets"), "brackets stay with the wiki scrape");
+  for (const value of Object.values(bestiaryMobIds.aliases)) assert.equal(typeof value, "string");
 });

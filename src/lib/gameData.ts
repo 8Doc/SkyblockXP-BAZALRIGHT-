@@ -270,6 +270,23 @@ export type BestiaryKnownMaxData = {
   xp: number;
 };
 
+/**
+ * Internal mob id -> family id, scraped from SkyCrypt's bestiary constants.
+ *
+ * The same join `BestiaryMobsData` carries by hand, for the ids a published source already
+ * settles. Curated entries win over these, so a wrong entry here can always be overridden by
+ * name rather than by editing generated data.
+ */
+export type BestiaryMobIdsData = {
+  generatedAt: string;
+  source: string;
+  note: string;
+  totals: { skyCryptFamilies: number; mapped: number; unmatched: number };
+  /** Families the source knows that our own list has no entry for, so their kills stay unplaced. */
+  unmatched: { name: string; island: string; ids: string[] }[];
+  aliases: Record<string, string>;
+};
+
 /** Internal mob id -> family id, for the ids no rule can derive. */
 export type BestiaryMobsData = {
   source: string;
@@ -326,6 +343,7 @@ export type GameData = {
   attributeShards: AttributesData;
   bestiary: BestiaryData;
   bestiaryKnownMax: BestiaryKnownMaxData;
+  bestiaryMobIds: BestiaryMobIdsData;
   bestiaryMobs: BestiaryMobsData;
   abiphone: AbiphoneData;
   bagUpgrades: BagUpgradesData;
@@ -724,7 +742,44 @@ export function bestiaryFamilyOf(data: GameData, mobId: string): string | null |
     if (families.has(candidate)) return candidate;
   }
   for (const candidate of candidates) if (data.bestiaryMobs.noFamily[candidate]) return null;
+  // The scraped join last, so a curated entry or a positive "no family" always wins over it.
+  for (const candidate of candidates) {
+    const mapped = data.bestiaryMobIds?.aliases[candidate];
+    if (mapped && families.has(mapped)) return mapped;
+  }
+  // Same name, split differently: the game writes `lotus_fish` where the wiki writes `Lotusfish`.
+  // Only when one family compacts to it — `endstone_protector` and `end_stone_protector` both do,
+  // and an ambiguous match is exactly the case where guessing credits the wrong family.
+  const compacted = bestiaryCompactIds(data);
+  for (const candidate of candidates) {
+    const match = compacted.get(candidate.replace(/_/g, ""));
+    if (match) return match;
+  }
   return undefined;
+}
+
+let compactCache: WeakMap<GameData, Map<string, string>> = new WeakMap();
+
+/**
+ * Family ids with their underscores removed, for the ids that differ only in where the words
+ * break. Ambiguous compactions are dropped rather than resolved to whichever came first.
+ */
+function bestiaryCompactIds(data: GameData): Map<string, string> {
+  let cached = compactCache.get(data);
+  if (!cached) {
+    cached = new Map();
+    const seen = new Set<string>();
+    for (const family of data.bestiary.families) {
+      const key = family.id.replace(/_/g, "");
+      if (seen.has(key)) cached.delete(key);
+      else {
+        seen.add(key);
+        cached.set(key, family.id);
+      }
+    }
+    compactCache.set(data, cached);
+  }
+  return cached;
 }
 
 let familyCache: WeakMap<GameData, Map<string, BestiaryData["families"][number]>> = new WeakMap();

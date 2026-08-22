@@ -409,12 +409,32 @@ no per-tier share of the milestone half would be honest.
 
 ### The table that doesn't exist — `data/curated/bestiary_mobs.json`
 
-Nothing published joins internal mob ids to family names. The Crypt Ghoul family is fed by
+Neither wiki nor the API joins internal mob ids to family names. The Crypt Ghoul family is fed by
 `unburried_zombie`; the ids appear in no wiki page, in no items resource, and
 `/resources/skyblock/bestiary` returns "Unknown resource provided". Three rules are structural
 and live in code — a trailing `_<level>` is the mob's level, a `master_` prefix is the master
 mode copy of a dungeon mob, a `pest_` prefix is how the garden names a bestiary pest — and the
-rest is hand-mapped with the reason recorded per entry.
+rest cannot be derived from the names at all: `bezal` is a Blaze, `scatha` is a Worm,
+`team_treasurite_wendy` is a Grunt, and six separate goblin ids are one Goblin Raiders family.
+Grouping is information, not spelling, which is also why the ids cannot simply stand in for the
+families: one family routinely covers many ids, and an id says nothing about a tier threshold or
+a cap.
+
+**One third party does publish it — `scripts/fetch-bestiary-mobs.mjs`.** SkyCrypt has to know the
+grouping to draw its bestiary page, and its constants carry a `mobs[]` array per family. Only
+that array is taken. Its `cap` and `bracket` are dropped: they disagree with the wiki's on 92 of
+the families both describe, and the wiki is the one that matches the game — Creeper caps at 50
+kills in game, which is the wiki's figure against SkyCrypt's 200, checked in game rather than
+read off a page. Its family list stopping at 208 against the wikis' 319 says the same thing. A
+rebalance moves a cap; it does not stop a Bezal being a Blaze, so the durable half is kept and
+joined onto our own family list by name (199 of 208 match outright, four are renames named in the
+script, five have no family of ours to attach to and are recorded in the output).
+
+Precedence is curated first, then the scrape, so a stale third-party entry can always be
+overridden by hand without editing generated data. Last of all, a family id is matched with its
+underscores removed — the game writes `lotus_fish` where the wiki writes `Lotusfish` — but only
+where exactly one family compacts to it, since the merged list carries both `endstone_protector`
+and `end_stone_protector` and picking one would credit a coin flip.
 
 The map distinguishes three answers, which is the point: a family, `null` for a mob positively
 established to have none (dungeon bosses and their summons never enter the bestiary), and
@@ -428,10 +448,23 @@ tier is, a wrong row would land at the very top. And the profile's own claimed m
 is a floor on the tiers it has earned (ten tiers to a milestone; milestones are claimed rather
 than granted, so the count can lag but can never run ahead). The catalog states both numbers.
 
-On a real 730-id profile that reads: 1,924 tiers within reach, 17 families held back, 71 ids
-unplaced, and 1,731 tiers accounted for against a floor of 2,320 — so about 589 tiers sit in
-families the map can't reach. Most of that is Galatea, whose mobs the wiki has no family
-entries for at all, which is why the tier half reads low rather than high.
+On an 847-id maxed profile the scrape took unplaced ids from 94 stems / 174,628 kills to 58 /
+74,986, and families reading as never touched from 41 to 27 — worth +151 XP credited and 110
+fewer rows offered that the player had in fact already done. Every profile measured improved.
+
+What is left is the **family list**, not the join. Moogma (32,949 kills on one profile), The Sea
+Emperor and Pigman are families SkyCrypt knows and ours has no entry for; Pyroclastic Worm we
+list with no tier cap; and 123 id stems are unknown to both sources, most of them the Hunting
+shard creatures — our table holds 37 of those and no Galatea families at all. That gap is
+bounded and measurable: the in-game menu states the category at 5,660 XP against the 5,090 our
+table sums to (see `data/curated/bestiary_known_max.json`), so roughly 570 XP is missing families
+rather than a broken join.
+
+**A duplicate to watch.** The two-wiki merge produced at least two pairs that look like one
+family listed twice under different spellings: `endstone_protector` (Families) against
+`end_stone_protector` (The End), and `angry_archeologist` (Families) against
+`angry_archaeologist` (The Catacombs). Both inflate the family count and the tier total, and the
+first is the only thing blocking the compact-name rule from resolving cleanly.
 
 ### What is offered
 
