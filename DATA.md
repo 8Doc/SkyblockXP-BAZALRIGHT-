@@ -478,6 +478,30 @@ correction actually changes which bracket it lands on rather than leaving the wr
 with a patched kill count. Pyroclastic Worm needed no such entry — once read correctly, the
 wiki's own numbers (15, 1,000, bracket 4) were right all along.
 
+**The level is sometimes the family.** Almost always a family owns every level a mob spawns at,
+and the level is noise — `crypt_lurker_121` and `crypt_lurker_111` are one family. But sixteen ids
+are split by it: `unburried_zombie_30` is a Crypt Ghoul and `unburried_zombie_60` a Golden Ghoul,
+`pond_squid_1` a Squid and `pond_squid_300` a Plhlegblast, `goblin_50` a Golden Goblin and
+`goblin_500` a Diamond one. Stripping the level poured both families' kills into whichever one the
+map named and left the other reading as untouched — a maxed profile holding 58,277 Golden Ghoul
+kills was being offered its tier 1, which is the symptom this whole line of work started from.
+Those are keyed by the whole id in `levelAliases`, checked before the stem because they are the
+more specific fact.
+
+**Where the hand-mapped file disagreed with the scrape, the hand-mapping lost.** The curated file
+was written from names before SkyCrypt's grouping was available, and every disagreement that could
+be checked came out against the name-guess: `tentaclees` reads like a Tentacle but is a Fels,
+`crypt_witherskeleton` reads like a Wither Husk but is a Withermancer, `random_slime` is a Rain
+Slime rather than the Private Island Slime. Seven more had been positively excluded as boss
+summons or secret mobs — Sadan's golems and statues, the invisible creepers, the dungeon
+`diamond_guy` — and all of them do have families; a profile records thousands of kills for each
+under `bestiary.kills`, which is not where a mob outside the bestiary would appear. Those entries
+were deleted rather than left as overrides, because curated wins by design and a wrong override is
+invisible.
+
+Together those took families reading as never-touched across six profiles from **22 to 10**, and
+kills credited to a family from 94.4% to **98.4%**.
+
 **Duplicates across the two wikis.** The wikis spell some families differently — Fandom writes
 "Endstone Protector", "Angry Archeologist" and "Gravel Skeleton" where the community wiki writes
 "End Stone Protector", "Angry Archaeologist" and "Flint Skeleton" — and slugging both gave six ids

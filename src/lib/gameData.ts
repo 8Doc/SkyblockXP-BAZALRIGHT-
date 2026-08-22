@@ -287,9 +287,14 @@ export type BestiaryMobIdsData = {
   generatedAt: string;
   source: string;
   note: string;
-  totals: { skyCryptFamilies: number; mapped: number; unmatched: number };
+  totals: { skyCryptFamilies: number; mapped: number; levelKeyed?: number; unmatched: number };
   /** Families the source knows that our own list has no entry for, so their kills stay unplaced. */
   unmatched: { name: string; island: string; ids: string[] }[];
+  /**
+   * Keyed by the whole id rather than the stem, for the few mobs where the level is the only
+   * thing telling two families apart. Checked first, being the more specific fact.
+   */
+  levelAliases?: Record<string, string>;
   aliases: Record<string, string>;
 };
 
@@ -742,6 +747,13 @@ export function bestiaryFamilyOf(data: GameData, mobId: string): string | null |
     if (prefix.test(stripped)) candidates.push(stripped.replace(prefix, ""));
   }
   const families = bestiaryFamilies(data);
+
+  // The whole id first, because it is the more specific fact. Twice the level is the only thing
+  // separating two families — unburried_zombie_30 is a Crypt Ghoul, unburried_zombie_60 a Golden
+  // Ghoul — and answering from the stem there hands one family both families' kills.
+  const exact = data.bestiaryMobs.aliases[mobId] ?? data.bestiaryMobIds?.levelAliases?.[mobId];
+  if (exact && families.has(exact)) return exact;
+  if (data.bestiaryMobs.noFamily[mobId]) return null;
   for (const candidate of candidates) {
     const alias = data.bestiaryMobs.aliases[candidate];
     if (alias) return alias;

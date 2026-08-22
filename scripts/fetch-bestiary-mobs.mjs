@@ -81,29 +81,64 @@ const ours = JSON.parse(await readFile(join(ROOT, "data", "generated", "bestiary
 const ourIds = new Set(ours.families.map((f) => f.id));
 
 const aliases = {};
+const levelAliases = {};
 const unmatched = [];
 let families = 0;
+
+/** familyIdFor(family) once, so the two passes below cannot disagree about a rename. */
+const targetOf = (family) => RENAMED[family.name] ?? ours.renames?.[family.name] ?? slug(family.name);
+
+/**
+ * Which stems does the level tell apart?
+ *
+ * Usually a family owns every level a mob spawns at and the level is noise — `crypt_lurker_121`
+ * and `crypt_lurker_111` are one family. But twice the level is the *only* thing separating two
+ * families: `unburried_zombie_30` is a Crypt Ghoul and `unburried_zombie_60` is a Golden Ghoul,
+ * `pond_squid_1` is a Squid and `pond_squid_300` is a Plhlegblast. Stripping the level there
+ * pours both families' kills into whichever one the map named, and the other reads as a family
+ * the player has never touched — a maxed profile holding 58,277 Golden Ghoul kills was being
+ * offered its tier 1.
+ */
+const familiesPerStem = new Map();
+for (const island of Object.values(BESTIARY)) {
+  for (const family of island.mobs ?? []) {
+    const id = targetOf(family);
+    if (!ourIds.has(id)) continue;
+    for (const mob of family.mobs ?? []) {
+      const stem = String(mob).replace(/_-?\d+$/, "");
+      if (!familiesPerStem.has(stem)) familiesPerStem.set(stem, new Set());
+      familiesPerStem.get(stem).add(id);
+    }
+  }
+}
 
 for (const island of Object.values(BESTIARY)) {
   for (const family of island.mobs ?? []) {
     families++;
     // SkyCrypt predates the wikis' renames, so it still says Gravel Skeleton and Endstone
     // Protector; the family list carries what those became.
-    const id = RENAMED[family.name] ?? ours.renames?.[family.name] ?? slug(family.name);
+    const id = targetOf(family);
     if (!ourIds.has(id)) {
       unmatched.push({ name: family.name, island: island.name, ids: family.mobs ?? [] });
       continue;
     }
     for (const mob of family.mobs ?? []) {
-      // The id carries the mob's level; the bestiary counts a family across every level.
+      // The id carries the mob's level; the bestiary usually counts a family across every level.
       const stem = String(mob).replace(/_-?\d+$/, "");
+      if (familiesPerStem.get(stem).size > 1) {
+        // The level is load-bearing here, so the whole id is the key.
+        levelAliases[String(mob)] = id;
+        continue;
+      }
       // A stem that already resolves to itself is what the structural rule handles anyway.
       if (stem !== id) aliases[stem] = id;
     }
   }
 }
 
-const sorted = Object.fromEntries(Object.entries(aliases).sort(([a], [b]) => a.localeCompare(b)));
+const sortEntries = (o) => Object.fromEntries(Object.entries(o).sort(([a], [b]) => a.localeCompare(b)));
+const sorted = sortEntries(aliases);
+const sortedLevels = sortEntries(levelAliases);
 
 await writeFile(
   OUT,
@@ -111,10 +146,17 @@ await writeFile(
     {
       generatedAt: new Date().toISOString(),
       source: SOURCE,
-      note: "Internal mob id (level suffix stripped) -> the family id in bestiary.json it feeds. Taken from SkyCrypt's bestiary constants, which publish the grouping because rendering the page needs it. Only the mobs[] arrays are used: SkyCrypt's own caps and brackets are older than the wiki's and disagree with them on 92 families, so the tier maths stays with fetch-bestiary.mjs. Curated entries in bestiary_mobs.json are applied first and override anything here.",
-      totals: { skyCryptFamilies: families, mapped: Object.keys(sorted).length, unmatched: unmatched.length },
+      note: "Internal mob id -> the family id in bestiary.json it feeds. Taken from SkyCrypt's bestiary constants, which publish the grouping because rendering the page needs it. `aliases` is keyed by the id with its level stripped, which is how the bestiary counts almost every family. `levelAliases` is keyed by the whole id, for the handful where the level is the only thing telling two families apart — unburried_zombie_30 is a Crypt Ghoul and unburried_zombie_60 is a Golden Ghoul. Only the mobs[] arrays are used: SkyCrypt's own caps and brackets are older than the wiki's and disagree with them on 92 families, so the tier maths stays with fetch-bestiary.mjs.",
+      totals: {
+        skyCryptFamilies: families,
+        mapped: Object.keys(sorted).length,
+        levelKeyed: Object.keys(sortedLevels).length,
+        unmatched: unmatched.length,
+      },
       /** SkyCrypt families with no counterpart in our list — mobs we cannot score even so. */
       unmatched,
+      /** Whole-id keys, checked before the stem ones because they are the more specific fact. */
+      levelAliases: sortedLevels,
       aliases: sorted,
     },
     null,
@@ -124,6 +166,8 @@ await writeFile(
 );
 
 console.log(`-> ${Object.keys(sorted).length} mob ids mapped across ${families} SkyCrypt families`);
+console.log(`   ${Object.keys(sortedLevels).length} keyed by whole id, where the level tells two families apart:`);
+for (const [mob, id] of Object.entries(sortedLevels)) console.log(`     ${mob} -> ${id}`);
 if (unmatched.length) {
   console.log(`   ${unmatched.length} SkyCrypt families have no family of ours to attach to:`);
   for (const u of unmatched) console.log(`     ${u.name} (${u.island})`);

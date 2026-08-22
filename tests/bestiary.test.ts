@@ -146,7 +146,10 @@ test("a mob id resolves to its family through level, master and pest forms", () 
  * noticing it had done so.
  */
 test("a mob with no family and a mob we can't place are different answers", () => {
-  assert.equal(bestiaryFamilyOf(data, "sadan_golem_100"), null, "boss summon, positively excluded");
+  // Sadan's golems used to sit here, excluded by hand as "boss summon". SkyCrypt lists them under
+  // Golem and a real profile records 1,988 sadan_statue kills under bestiary.kills, so the
+  // exclusion was a guess from the name and it was wrong. Ashfang's blazes still stand.
+  assert.equal(bestiaryFamilyOf(data, "bonzo_summon_undead_100"), null, "boss summon, positively excluded");
   assert.equal(bestiaryFamilyOf(data, "not_a_real_mob_7"), undefined, "unknown, not excluded");
 });
 
@@ -233,9 +236,46 @@ test("a mob id the name rules cannot reach is placed by the scraped map", () => 
   assert.equal(bestiaryFamilyOf(data, "ice_walker_45"), "glacite_walker", "renamed since SkyCrypt read it");
 });
 
-test("six goblin ids are one family, which is why ids cannot stand in for families", () => {
-  for (const id of ["goblin_weakling_melee_25", "goblin_weakling_bow_5", "goblin_battler_1", "goblin_creepertamer_1", "goblin_murderlover_1", "goblin_golem_1"])
-    assert.equal(bestiaryFamilyOf(data, id), "goblin_raiders", id);
+test("many ids are one family, which is why ids cannot stand in for families", () => {
+  // Six of Sadan's crypt undead, each named after a different player, all one Undead family.
+  for (const id of ["crypt_undead_alexander_100", "crypt_undead_bernhard_100", "crypt_undead_christian_100", "crypt_undead_marius_100", "crypt_undead_valentin_100", "crypt_undead_pieter_100"])
+    assert.equal(bestiaryFamilyOf(data, id), "undead", id);
+  // Three Team Treasurite members, one Grunt family.
+  for (const id of ["team_treasurite_wendy_100", "team_treasurite_sebastian_100", "team_treasurite_viper_100"])
+    assert.equal(bestiaryFamilyOf(data, id), "grunt", id);
+});
+
+/**
+ * The goblins are the other half of the same lesson: the level matters as well as the name.
+ * `goblin_weakling_melee_5` is a Goblin Raider and `goblin_weakling_melee_25` is a plain Goblin,
+ * so an id stripped of its level cannot answer for either — and a bare `goblin_50` is a Golden
+ * Goblin while `goblin_500` is a Diamond one.
+ */
+test("the level picks the family where two families share an id", () => {
+  assert.equal(bestiaryFamilyOf(data, "goblin_weakling_melee_5"), "goblin_raiders");
+  assert.equal(bestiaryFamilyOf(data, "goblin_weakling_melee_25"), "goblin");
+  assert.equal(bestiaryFamilyOf(data, "goblin_50"), "golden_goblin");
+  assert.equal(bestiaryFamilyOf(data, "goblin_500"), "diamond_goblin");
+  assert.equal(bestiaryFamilyOf(data, "unburried_zombie_30"), "crypt_ghoul");
+  assert.equal(bestiaryFamilyOf(data, "unburried_zombie_60"), "golden_ghoul", "58,277 kills that read as tier 0");
+  assert.equal(bestiaryFamilyOf(data, "pond_squid_1"), "squid");
+  assert.equal(bestiaryFamilyOf(data, "pond_squid_300"), "plhlegblast");
+});
+
+/**
+ * The curated file was hand-mapped from names before SkyCrypt's grouping was available, and every
+ * disagreement that could be checked came out against the name-guess: tentaclees reads like a
+ * Tentacle but is a Fels, crypt_witherskeleton reads like a Wither Husk but is a Withermancer.
+ * Those entries are removed rather than left to override, since curated wins by design.
+ */
+test("the name-guesses that SkyCrypt contradicts are gone, not overriding it", () => {
+  assert.equal(bestiaryFamilyOf(data, "tentaclees_110"), "fels", "not the Crimson Isle Tentacle");
+  assert.equal(bestiaryFamilyOf(data, "crypt_witherskeleton_120"), "withermancer", "not Wither Husk");
+  assert.equal(bestiaryFamilyOf(data, "random_slime_8"), "rain_slime", "not the Private Island Slime");
+  assert.equal(bestiaryFamilyOf(data, "sadan_statue_1"), "terracotta", "1,988 kills, not a bare summon");
+  assert.equal(bestiaryFamilyOf(data, "sadan_golem_1"), "golem");
+  assert.equal(bestiaryFamilyOf(data, "invisible_creeper_3"), "sneaky_creeper");
+  assert.equal(bestiaryFamilyOf(data, "diamond_guy_160"), "angry_archaeologist");
 });
 
 /** Curated first, so a stale scraped entry can always be overridden by hand rather than by edit. */
