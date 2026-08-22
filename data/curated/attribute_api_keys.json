@@ -340,7 +340,7 @@
     }
   },
   "curatedPairs": {
-    "note": "Attributes our name-derived key cannot reach by rule. Each is settled by two things at once: the rarity has to agree — a maxed profile's shard count states it outright, 96 common through 24 legendary — and within that rarity the pairing has to be the only one left. Where both hold, the pair is recorded; where they leave a choice, nothing is recorded and the attribute is held back instead.",
+    "note": "Attributes our name-derived key cannot reach by rule. Most are settled by two facts at once: the rarity has to agree — a maxed profile's shard count states it outright, 96 common through 24 legendary — and within that rarity the pairing has to be the only one left. Three are settled by what the wiki says rather than by elimination: Vitality's page states its internal name is mending; Help From Above grants Health Regen, which is what life_regeneration is; and Tracking is fed by the Dodo Shard, the rare bird.",
     "pairs": {
       "creature_fisher": "hunter",
       "pest_ruler": "insect_power",
@@ -352,22 +352,19 @@
       "mythological_tracker": "big_game_hunter",
       "bayou_hook": "bayou_biter",
       "crimson_hook": "double_hook",
-      "help_from_above": "rare_bird",
+      "help_from_above": "life_regeneration",
       "unlimited_fortitude": "fortitude",
-      "unlimited_torment": "maximal_torment"
+      "unlimited_torment": "maximal_torment",
+      "tracking": "rare_bird",
+      "vitality": "mending"
     },
     "unsettled": {
-      "note": "Three of ours against two of the game's, all legendary, and no evidence that separates them: Vitality (Kraken Shard), Reptiloid (Chameleon Shard) and Tracking (Dodo Shard) against life_regeneration and mending. One of the three is an attribute the wiki lists and the game does not — our list has 321 entries against the game's 320 — and picking which would be a guess. All three are held back, and the category reports them.",
+      "note": "Two of the wiki's attributes have no counterpart in the list the game reports, and both look like the wiki's list being wider than the game's rather than a join we failed to make. Reptiloid is not a stat at all — its effect is a shard-fusion rule, 'fusing a Chameleon with a Shard grants the next 3 Shards from that Shard's ID line', and it cannot be syphoned. Undead Fortune reads like a real attribute, granting Magic Find against undead mobs, but no id answers for it; the game's bare `undead` is Undead Ruler, matched by the rule that drops a family noun. Both are held back rather than offered against progress that cannot be read.",
       "ours": [
-        "vitality",
         "reptiloid",
-        "tracking",
         "undead_fortune"
       ],
-      "theirs": [
-        "life_regeneration",
-        "mending"
-      ]
+      "theirs": []
     }
   }
 }

@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-08-22T00:57:52.581Z",
+ "generatedAt": "2026-08-22T04:25:12.436Z",
  "source": "https://hypixelskyblock.minecraft.wiki/api.php — Attributes/List/{rarity}",
  "note": "Every attribute and the shard that feeds it. Rarity selects the shard ladder, not just the label.",
  "totalXp": 3210,
@@ -1487,7 +1487,7 @@
    "shardName": "Shinyfish Shard",
    "shardId": "SHARD_SHINYFISH",
    "tradeable": true,
-   "apiKey": "rare_bird"
+   "apiKey": "life_regeneration"
   },
   {
    "key": "hitman_cooldown",
@@ -2538,7 +2538,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Dodo Shard",
    "shardId": "SHARD_DODO",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "rare_bird"
   },
   {
    "key": "treasure_fisher",
@@ -2743,7 +2744,8 @@
    "rarity": "LEGENDARY",
    "shardName": "Kraken Shard",
    "shardId": "SHARD_KRAKEN",
-   "tradeable": true
+   "tradeable": true,
+   "apiKey": "mending"
   },
   {
    "key": "warrior",
