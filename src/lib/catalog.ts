@@ -1033,7 +1033,7 @@ export function buildCatalog(
       tasks.push({
         id,
         category: "accessory_bag",
-        name: `Accessory bag upgrade ${upgrade}`,
+        name: `Jacobus ${upgrade}`,
         xp: data.bagUpgrades.xpPerUpgrade,
         requires: previousUpgrade ? [previousUpgrade] : [],
         cost: coins === null ? { kind: "unknown", note: "No published price" } : { kind: "npc", coins },

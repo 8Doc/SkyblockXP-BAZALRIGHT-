@@ -262,3 +262,21 @@ test("a package stacks Jacobus upgrades into a count", () => {
   // One on its own is still named for itself rather than as "1×".
   assert.equal(groupTaskRuns(upgrades.slice(0, 1))[0]!.name, upgrades[0]!.name);
 });
+
+/**
+ * Jacobus's rows are named for the shop rather than the thing. Every other row in this category
+ * is an accessory, so "Accessory bag upgrade 15" read like one at a glance when it is the slot
+ * you put one in.
+ */
+test("bag slots are named for Jacobus", () => {
+  const member = { accessory_bag_storage: { bag_upgrades_purchased: 13 } } as unknown as ProfileMember;
+  const catalog = buildCatalog(member, data, { items: [], capacity: 0 });
+  const upgrades = catalog.tasks.filter((t) => t.id.startsWith("bag_upgrade_"));
+  assert.equal(upgrades.length, data.bagUpgrades.maxUpgrades);
+  assert.equal(upgrades[13]!.name, "Jacobus 14", "numbered by the upgrade, named by the shop");
+
+  // The stacked package row still reads as an instruction rather than a range.
+  const { tasks } = resolveTasks(catalog.tasks, catalog.done, { bazaar: {}, bins: null });
+  const open = tasks.filter((t) => t.id.startsWith("bag_upgrade_") && !catalog.done.has(t.id)).slice(0, 10);
+  assert.equal(groupTaskRuns(open)[0]!.name, "Upgrade Jacobus 10×");
+});

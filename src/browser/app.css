@@ -152,6 +152,8 @@ button:disabled { opacity: 0.45; cursor: default; }
 .group-body .tasks { border-top: none; }
 .task { display: flex; align-items: baseline; gap: 12px; padding: 5px 14px; font-size: 13px; border-top: 1px solid rgba(39, 45, 58, 0.6); }
 .task:first-child { border-top: none; }
+/* Jacobus's slots: the same purchase 99 times, and never the answer to "what should I buy". */
+.task.aside, .task.aside .task-xp, .task.aside .task-cost { color: var(--muted); }
 .task-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .task-xp { width: 64px; text-align: right; color: var(--gold); font-variant-numeric: tabular-nums; }
 .task-cost { width: 90px; text-align: right; font-variant-numeric: tabular-nums; }

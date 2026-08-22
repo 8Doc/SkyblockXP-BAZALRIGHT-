@@ -291,7 +291,9 @@ function taskRow(task: ResolvedTask, showBundle: boolean, tag?: string): string 
       }`
     : escapeHtml(shownName);
 
-  return `<li class="task">
+  const aside = task.id.startsWith("bag_upgrade_");
+
+  return `<li class="task${aside ? " aside" : ""}">
     <span class="task-name">${tag ? `<span class="tag cat">${escapeHtml(tag)}</span>` : ""}${nameCell}${
       bundled ? `<span class="tag">+${task.bundle.length} prereq</span>` : ""
     }${task.estimated ? `<span class="tag est" title="Nothing is listing this right now — reference price">est</span>` : ""}${
@@ -310,8 +312,9 @@ function taskRow(task: ResolvedTask, showBundle: boolean, tag?: string): string 
 function runRow(run: TaskRun, tag?: string): string {
   const merged = run.tasks.length > 1;
   const efficiency = run.coins !== null && run.xp > 0 ? run.coins / run.xp : null;
+  const aside = run.tasks[0]?.id.startsWith("bag_upgrade_") ?? false;
 
-  return `<li class="task">
+  return `<li class="task${aside ? " aside" : ""}">
     <span class="task-name">${tag ? `<span class="tag cat">${escapeHtml(tag)}</span>` : ""}${escapeHtml(run.name)}${merged ? `<span class="count">×${run.tasks.length}</span>` : ""}${
       run.note ? `<span class="note">${escapeHtml(run.note)}</span>` : ""
     }</span>
