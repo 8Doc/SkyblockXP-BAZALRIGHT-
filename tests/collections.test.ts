@@ -593,3 +593,54 @@ test("an untouched profile is offered the whole category", () => {
     `${rows.length} levels modelled, short of the ${placeable * 10} the game publishes`,
   );
 });
+
+/**
+ * Trophy frogs are a separate task from trophy fish and pay less for it. The wiki's own rows are
+ * "Fish 18 Trophy Fish" at 4/8/16/32 and "Fish 12 Trophy Frogs" at 3/6/12/24 — 1,080 and 540,
+ * 1,620 together. Paying the frogs the fish rate put the category at 1,800, and a profile with
+ * 140 earned was told 1,660 was left where the game said 1,480.
+ */
+test("trophy frogs pay the frog rate, not the fish rate", () => {
+  const rows = data.tasks.tasks.filter((t) => t.id.startsWith("TROPHY_"));
+  const isFrog = (id: string) => /_(FROG|JUMPER|HOPPER)/.test(id) || id.includes("BULLFROG");
+  const fish = rows.filter((t) => !isFrog(t.id));
+  const frogs = rows.filter((t) => isFrog(t.id));
+
+  assert.equal(fish.length / 4, 18, "eighteen trophy fish");
+  assert.equal(frogs.length / 4, 12, "twelve trophy frogs");
+  assert.equal(fish.reduce((s, t) => s + t.xp, 0), 1_080);
+  assert.equal(frogs.reduce((s, t) => s + t.xp, 0), 540);
+  assert.equal(rows.reduce((s, t) => s + t.xp, 0), 1_620, "the category totals what the game states");
+
+  const grades = (t: { id: string }) => t.id.split("_").pop()!;
+  for (const t of frogs) assert.equal(t.xp, { BRONZE: 3, SILVER: 6, GOLD: 12, DIAMOND: 24 }[grades(t)]);
+});
+
+/**
+ * Three event tasks the game counts rather than ticking off. Everything else in the category is
+ * a completed_tasks id, so these were missing outright — 425 XP of a category the game states at
+ * 1,439 and this app was showing 749 of.
+ */
+test("events the profile counts are modelled from its counters", () => {
+  const cat = catalogFor({
+    leveling: { mining_fiesta_ores_mined: 48_077, fishing_festival_sharks_killed: 38 },
+    events: { easter: { rabbits: { prestige: 1 } } },
+  });
+  const xp = (prefix: string) => {
+    const rows = cat.tasks.filter((t) => t.id.startsWith(prefix));
+    return {
+      total: rows.reduce((s, t) => s + t.xp, 0),
+      earned: rows.filter((t) => cat.done.has(t.id)).reduce((s, t) => s + t.xp, 0),
+    };
+  };
+  // 48,077 ores at one XP per 5,000 is nine; 38 sharks is short of the first fifty.
+  assert.deepEqual(xp("event_mining_fiesta_"), { total: 200, earned: 9 });
+  assert.deepEqual(xp("event_fishing_festival_"), { total: 100, earned: 0 });
+  assert.deepEqual(xp("event_chocolate_prestige_"), { total: 125, earned: 25 });
+
+  // A profile reporting none of it earns none of it, and is still offered all of it.
+  const fresh = catalogFor({});
+  const rows = fresh.tasks.filter((t) => t.id.startsWith("event_"));
+  assert.equal(rows.reduce((s, t) => s + t.xp, 0), 425);
+  assert.equal(rows.filter((t) => fresh.done.has(t.id)).length, 0);
+});

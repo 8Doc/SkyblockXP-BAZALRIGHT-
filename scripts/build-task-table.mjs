@@ -46,6 +46,26 @@ const perkXp = (id) => {
 
 /** Trophy fish pay per grade, doubling each step. */
 const TROPHY = { BRONZE: 4, SILVER: 8, GOLD: 16, DIAMOND: 32 };
+// Frogs are a separate task from fish and pay less: the wiki's own row is "Fish 12 Trophy Frogs"
+// at 3/6/12/24 against the fish row's "Fish 18 Trophy Fish" at 4/8/16/32. Paying frogs the fish
+// rate put the category at 1,800 against a real 1,620.
+const TROPHY_FROG = { BRONZE: 3, SILVER: 6, GOLD: 12, DIAMOND: 24 };
+// The twelve, named rather than pattern-matched: a Puddle Jumper and a Reality Hopper are frogs
+// and say so nowhere in their ids.
+const FROGS = new Set([
+  "BLESSED_FROG",
+  "BULLFROG",
+  "CAVE_FROG",
+  "COMMON_FROG",
+  "EXPLODING_FROG",
+  "HIGHLANDS_FROG",
+  "LEAP_FROG",
+  "PUDDLE_JUMPER",
+  "REALITY_HOPPER",
+  "SEA_FROG",
+  "TREE_FROG",
+  "WETLANDS_FROG",
+]);
 const BANK = { GOLD: 20, DELUXE: 25, SUPER_DELUXE: 30, PREMIER: 35, LUXURIOUS: 40, PALATIAL: 50 };
 const PERSONAL_BANK = { ONE: 25, TWO: 35, THREE: 50 };
 const DOJO = { WHITE: 20, YELLOW: 30, GREEN: 50, BLUE: 75, BROWN: 100, BLACK: 150 };
@@ -92,7 +112,17 @@ const RULES = [
   { name: "personal bank", category: "bank", match: /^PERSONAL_BANK_/, xp: (id) => PERSONAL_BANK[id.replace("PERSONAL_BANK_", "")] ?? null, source: "wiki Miscellaneous — 25/35/50, total 110" },
   { name: "dojo belts", category: "misc", match: /^DOJO_BELT_/, xp: (id) => DOJO[id.replace("DOJO_BELT_", "")] ?? null, source: "wiki Miscellaneous — total 425" },
   { name: "reputation", category: "misc", match: /^(MAGES|BARBARIANS?)_/, xp: (id) => REPUTATION[id.split("_").slice(1).join("_")] ?? null, source: "wiki Miscellaneous — 5/10/20/40 per faction" },
-  { name: "trophy fish", category: "misc", match: /^TROPHY_/, xp: (id) => TROPHY[id.split("_").pop()] ?? null, source: "wiki Skill Related — 4/8/16/32 per grade" },
+  {
+    name: "trophy fish",
+    category: "misc",
+    match: /^TROPHY_/,
+    xp: (id) => {
+      const grade = id.split("_").pop();
+      const creature = id.replace(/^TROPHY_/, "").replace(/_(BRONZE|SILVER|GOLD|DIAMOND)$/, "");
+      return (FROGS.has(creature) ? TROPHY_FROG : TROPHY)[grade] ?? null;
+    },
+    source: "wiki SkyBlock Levels/Tasks — 18 fish at 4/8/16/32 (1,080) and 12 frogs at 3/6/12/24 (540)",
+  },
   { name: "festival brackets", category: "events", match: /^SPOOKY_FESTIVAL_(WOOD|STONE|IRON|GOLD|DIAMOND|EMERALD)$/, xp: (id) => BRACKET[id.split("_").pop()] ?? null, source: "wiki Event — Spooky Festival brackets, total 225" },
 
   // ----------------------------------------------------------------- dungeons

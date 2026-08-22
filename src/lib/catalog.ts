@@ -104,6 +104,11 @@ export type Catalog = {
 
 export const UNMODELLED: { category: Category; note: string; totalXp?: number }[] = [
   {
+    category: "events",
+    note: "The game states this category at 1,439 XP and 1,174 of it is modelled. Two tasks are not, for want of anywhere to read them from: the Mythic and Divine Chocolate Rabbits, worth 160, which would need a list of which rabbits carry those rarities to count the ones a profile has found; and Harvest Feast Seasoning, worth 100, which no field on any profile inspected reports at all. Mining Fiesta, the Fishing Festival and the Chocolate Factory's prestiges are counted off the profile's own running totals rather than from completed_tasks, which is why they were missing until now.",
+    totalXp: 1439,
+  },
+  {
     category: "pets",
     note: "Pet score already earned is exact — the profile reports it outright. The catalogue is now fixed at 85 pets rather than read off the auction house, so a pet nobody is selling is a row with no price instead of a row that does not exist. What is still missing is the +1 a pet awards for reaching its maximum level: 85 points across the catalogue, which would need the pet level curve to know whether you have it.",
   },
@@ -888,7 +893,9 @@ export function buildCatalog(
     tasks.push({
       id: `recombobulate_${acc.id}`,
       category: "accessory_bag",
-      name: `Recombobulate ${acc.name}`,
+      // One row, two purchases — so it is named for what you end up holding rather than for the
+      // second half of the job. "Recombobulate Vaccine Artifact" read as though you had one.
+      name: `${acc.name} + Recomb`,
       xp: power - alreadyHave,
       exclusiveGroup: `accessory:${family}`,
       groupLevel: power,
@@ -1176,6 +1183,78 @@ export function buildCatalog(
     });
     if (collected >= souls) done.add(id);
     previousSoul = id;
+  }
+
+  /* -------------------------------------------------------- counted events */
+
+  /**
+   * Three event tasks the game counts rather than ticking off.
+   *
+   * Everything else in this category is a completed_tasks id, which is why these were missing
+   * entirely: the profile records them as running totals — ores mined, sharks killed, factory
+   * prestiges — and no id ever appears for them. Between them they are 425 XP of a category the
+   * game states at 1,439 and this app was showing 749 of.
+   *
+   * Each is a ladder of one-XP-per-step rungs so that partial progress reads as partial, the way
+   * fairy souls and bestiary tiers do.
+   */
+  const countedEvents: {
+    id: string;
+    name: string;
+    per: number;
+    xpPerStep: number;
+    maxXp: number;
+    have: number;
+    unit: string;
+  }[] = [
+    {
+      id: "mining_fiesta",
+      name: "Mining Fiesta",
+      per: 5_000,
+      xpPerStep: 1,
+      maxXp: 200,
+      have: member.leveling?.mining_fiesta_ores_mined ?? 0,
+      unit: "ores mined",
+    },
+    {
+      id: "fishing_festival",
+      name: "Fishing Festival",
+      per: 50,
+      xpPerStep: 1,
+      maxXp: 100,
+      have: member.leveling?.fishing_festival_sharks_killed ?? 0,
+      unit: "sharks killed",
+    },
+    {
+      id: "chocolate_prestige",
+      name: "Chocolate Factory prestige",
+      per: 1,
+      xpPerStep: 25,
+      maxXp: 125,
+      have: member.events?.easter?.rabbits?.prestige ?? 0,
+      unit: "prestiges",
+    },
+  ];
+
+  for (const event of countedEvents) {
+    const steps = event.maxXp / event.xpPerStep;
+    let previous: string | null = null;
+    for (let step = 1; step <= steps; step++) {
+      const id = `event_${event.id}_${step}`;
+      const needed = step * event.per;
+      tasks.push({
+        id,
+        category: "events",
+        name: `${event.name} — ${num(needed)} ${event.unit}`,
+        xp: event.xpPerStep,
+        requires: previous ? [previous] : [],
+        cost: { kind: "none" },
+        repeatable: false,
+        note: `${num(event.have)} of ${num(needed)} ${event.unit}`,
+      });
+      if (event.have >= needed) done.add(id);
+      previous = id;
+    }
   }
 
   // Grind tasks have no price to rank on, so they carry an observed effort score instead.

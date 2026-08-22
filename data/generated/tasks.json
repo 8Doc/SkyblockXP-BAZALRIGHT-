@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-08-21T18:57:19.211Z",
+ "generatedAt": "2026-08-22T01:51:47.384Z",
  "sources": {
   "ids": "data/generated/task_ids.json (harvested from live profiles)",
   "xp": "data/generated/wiki_tasks.json (Hypixel Wiki, SkyBlock Levels/Tasks)"
@@ -7,11 +7,11 @@
  "playersScanned": 140,
  "totals": {
   "tasks": 1043,
-  "xp": 9339,
+  "xp": 9159,
   "byCategory": {
    "abiphone": 840,
    "bank": 310,
-   "misc": 3180,
+   "misc": 3000,
    "dungeons": 540,
    "essence_shop": 2074,
    "slayer": 1050,
@@ -5667,28 +5667,28 @@
   {
    "id": "TROPHY_BLESSED_FROG_BRONZE",
    "category": "misc",
-   "xp": 4,
+   "xp": 3,
    "rule": "trophy fish",
    "players": 21
   },
   {
    "id": "TROPHY_BLESSED_FROG_DIAMOND",
    "category": "misc",
-   "xp": 32,
+   "xp": 24,
    "rule": "trophy fish",
    "players": 4
   },
   {
    "id": "TROPHY_BLESSED_FROG_GOLD",
    "category": "misc",
-   "xp": 16,
+   "xp": 12,
    "rule": "trophy fish",
    "players": 16
   },
   {
    "id": "TROPHY_BLESSED_FROG_SILVER",
    "category": "misc",
-   "xp": 8,
+   "xp": 6,
    "rule": "trophy fish",
    "players": 19
   },
@@ -5723,112 +5723,112 @@
   {
    "id": "TROPHY_BULLFROG_BRONZE",
    "category": "misc",
-   "xp": 4,
+   "xp": 3,
    "rule": "trophy fish",
    "players": 24
   },
   {
    "id": "TROPHY_BULLFROG_DIAMOND",
    "category": "misc",
-   "xp": 32,
+   "xp": 24,
    "rule": "trophy fish",
    "players": 5
   },
   {
    "id": "TROPHY_BULLFROG_GOLD",
    "category": "misc",
-   "xp": 16,
+   "xp": 12,
    "rule": "trophy fish",
    "players": 16
   },
   {
    "id": "TROPHY_BULLFROG_SILVER",
    "category": "misc",
-   "xp": 8,
+   "xp": 6,
    "rule": "trophy fish",
    "players": 20
   },
   {
    "id": "TROPHY_CAVE_FROG_BRONZE",
    "category": "misc",
-   "xp": 4,
+   "xp": 3,
    "rule": "trophy fish",
    "players": 21
   },
   {
    "id": "TROPHY_CAVE_FROG_DIAMOND",
    "category": "misc",
-   "xp": 32,
+   "xp": 24,
    "rule": "trophy fish",
    "players": 4
   },
   {
    "id": "TROPHY_CAVE_FROG_GOLD",
    "category": "misc",
-   "xp": 16,
+   "xp": 12,
    "rule": "trophy fish",
    "players": 11
   },
   {
    "id": "TROPHY_CAVE_FROG_SILVER",
    "category": "misc",
-   "xp": 8,
+   "xp": 6,
    "rule": "trophy fish",
    "players": 20
   },
   {
    "id": "TROPHY_COMMON_FROG_BRONZE",
    "category": "misc",
-   "xp": 4,
+   "xp": 3,
    "rule": "trophy fish",
    "players": 37
   },
   {
    "id": "TROPHY_COMMON_FROG_DIAMOND",
    "category": "misc",
-   "xp": 32,
+   "xp": 24,
    "rule": "trophy fish",
    "players": 16
   },
   {
    "id": "TROPHY_COMMON_FROG_GOLD",
    "category": "misc",
-   "xp": 16,
+   "xp": 12,
    "rule": "trophy fish",
    "players": 23
   },
   {
    "id": "TROPHY_COMMON_FROG_SILVER",
    "category": "misc",
-   "xp": 8,
+   "xp": 6,
    "rule": "trophy fish",
    "players": 34
   },
   {
    "id": "TROPHY_EXPLODING_FROG_BRONZE",
    "category": "misc",
-   "xp": 4,
+   "xp": 3,
    "rule": "trophy fish",
    "players": 32
   },
   {
    "id": "TROPHY_EXPLODING_FROG_DIAMOND",
    "category": "misc",
-   "xp": 32,
+   "xp": 24,
    "rule": "trophy fish",
    "players": 6
   },
   {
    "id": "TROPHY_EXPLODING_FROG_GOLD",
    "category": "misc",
-   "xp": 16,
+   "xp": 12,
    "rule": "trophy fish",
    "players": 14
   },
   {
    "id": "TROPHY_EXPLODING_FROG_SILVER",
    "category": "misc",
-   "xp": 8,
+   "xp": 6,
    "rule": "trophy fish",
    "players": 28
   },
@@ -5919,28 +5919,28 @@
   {
    "id": "TROPHY_HIGHLANDS_FROG_BRONZE",
    "category": "misc",
-   "xp": 4,
+   "xp": 3,
    "rule": "trophy fish",
    "players": 21
   },
   {
    "id": "TROPHY_HIGHLANDS_FROG_DIAMOND",
    "category": "misc",
-   "xp": 32,
+   "xp": 24,
    "rule": "trophy fish",
    "players": 6
   },
   {
    "id": "TROPHY_HIGHLANDS_FROG_GOLD",
    "category": "misc",
-   "xp": 16,
+   "xp": 12,
    "rule": "trophy fish",
    "players": 12
   },
   {
    "id": "TROPHY_HIGHLANDS_FROG_SILVER",
    "category": "misc",
-   "xp": 8,
+   "xp": 6,
    "rule": "trophy fish",
    "players": 19
   },
@@ -6003,28 +6003,28 @@
   {
    "id": "TROPHY_LEAP_FROG_BRONZE",
    "category": "misc",
-   "xp": 4,
+   "xp": 3,
    "rule": "trophy fish",
    "players": 22
   },
   {
    "id": "TROPHY_LEAP_FROG_DIAMOND",
    "category": "misc",
-   "xp": 32,
+   "xp": 24,
    "rule": "trophy fish",
    "players": 6
   },
   {
    "id": "TROPHY_LEAP_FROG_GOLD",
    "category": "misc",
-   "xp": 16,
+   "xp": 12,
    "rule": "trophy fish",
    "players": 12
   },
   {
    "id": "TROPHY_LEAP_FROG_SILVER",
    "category": "misc",
-   "xp": 8,
+   "xp": 6,
    "rule": "trophy fish",
    "players": 19
   },
@@ -6171,84 +6171,84 @@
   {
    "id": "TROPHY_PUDDLE_JUMPER_BRONZE",
    "category": "misc",
-   "xp": 4,
+   "xp": 3,
    "rule": "trophy fish",
    "players": 32
   },
   {
    "id": "TROPHY_PUDDLE_JUMPER_DIAMOND",
    "category": "misc",
-   "xp": 32,
+   "xp": 24,
    "rule": "trophy fish",
    "players": 6
   },
   {
    "id": "TROPHY_PUDDLE_JUMPER_GOLD",
    "category": "misc",
-   "xp": 16,
+   "xp": 12,
    "rule": "trophy fish",
    "players": 13
   },
   {
    "id": "TROPHY_PUDDLE_JUMPER_SILVER",
    "category": "misc",
-   "xp": 8,
+   "xp": 6,
    "rule": "trophy fish",
    "players": 24
   },
   {
    "id": "TROPHY_REALITY_HOPPER_BRONZE",
    "category": "misc",
-   "xp": 4,
+   "xp": 3,
    "rule": "trophy fish",
    "players": 28
   },
   {
    "id": "TROPHY_REALITY_HOPPER_DIAMOND",
    "category": "misc",
-   "xp": 32,
+   "xp": 24,
    "rule": "trophy fish",
    "players": 6
   },
   {
    "id": "TROPHY_REALITY_HOPPER_GOLD",
    "category": "misc",
-   "xp": 16,
+   "xp": 12,
    "rule": "trophy fish",
    "players": 16
   },
   {
    "id": "TROPHY_REALITY_HOPPER_SILVER",
    "category": "misc",
-   "xp": 8,
+   "xp": 6,
    "rule": "trophy fish",
    "players": 22
   },
   {
    "id": "TROPHY_SEA_FROG_BRONZE",
    "category": "misc",
-   "xp": 4,
+   "xp": 3,
    "rule": "trophy fish",
    "players": 24
   },
   {
    "id": "TROPHY_SEA_FROG_DIAMOND",
    "category": "misc",
-   "xp": 32,
+   "xp": 24,
    "rule": "trophy fish",
    "players": 6
   },
   {
    "id": "TROPHY_SEA_FROG_GOLD",
    "category": "misc",
-   "xp": 16,
+   "xp": 12,
    "rule": "trophy fish",
    "players": 14
   },
   {
    "id": "TROPHY_SEA_FROG_SILVER",
    "category": "misc",
-   "xp": 8,
+   "xp": 6,
    "rule": "trophy fish",
    "players": 21
   },
@@ -6395,28 +6395,28 @@
   {
    "id": "TROPHY_TREE_FROG_BRONZE",
    "category": "misc",
-   "xp": 4,
+   "xp": 3,
    "rule": "trophy fish",
    "players": 21
   },
   {
    "id": "TROPHY_TREE_FROG_DIAMOND",
    "category": "misc",
-   "xp": 32,
+   "xp": 24,
    "rule": "trophy fish",
    "players": 5
   },
   {
    "id": "TROPHY_TREE_FROG_GOLD",
    "category": "misc",
-   "xp": 16,
+   "xp": 12,
    "rule": "trophy fish",
    "players": 11
   },
   {
    "id": "TROPHY_TREE_FROG_SILVER",
    "category": "misc",
-   "xp": 8,
+   "xp": 6,
    "rule": "trophy fish",
    "players": 20
   },
@@ -6479,28 +6479,28 @@
   {
    "id": "TROPHY_WETLANDS_FROG_BRONZE",
    "category": "misc",
-   "xp": 4,
+   "xp": 3,
    "rule": "trophy fish",
    "players": 31
   },
   {
    "id": "TROPHY_WETLANDS_FROG_DIAMOND",
    "category": "misc",
-   "xp": 32,
+   "xp": 24,
    "rule": "trophy fish",
    "players": 6
   },
   {
    "id": "TROPHY_WETLANDS_FROG_GOLD",
    "category": "misc",
-   "xp": 16,
+   "xp": 12,
    "rule": "trophy fish",
    "players": 18
   },
   {
    "id": "TROPHY_WETLANDS_FROG_SILVER",
    "category": "misc",
-   "xp": 8,
+   "xp": 6,
    "rule": "trophy fish",
    "players": 29
   },

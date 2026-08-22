@@ -10,7 +10,12 @@ export type ProfileMember = {
     experience?: number;
     completed_tasks?: string[];
     highest_pet_score?: number;
+    /** Two event tasks the game counts up rather than ticking off. */
+    mining_fiesta_ores_mined?: number;
+    fishing_festival_sharks_killed?: number;
   };
+  /** Seasonal events. Prestiging the Chocolate Factory is an XP task in its own right. */
+  events?: { easter?: { rabbits?: { prestige?: number } } };
   /** Item id -> how much this member has personally contributed to the co-op's collection. */
   collection?: Record<string, number>;
   player_data?: {
