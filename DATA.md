@@ -452,13 +452,31 @@ On an 847-id maxed profile the scrape took unplaced ids from 94 stems / 174,628 
 74,986, and families reading as never touched from 41 to 27 — worth +151 XP credited and 110
 fewer rows offered that the player had in fact already done. Every profile measured improved.
 
-What is left is the **family list**, not the join. Moogma (32,949 kills on one profile), The Sea
-Emperor and Pigman are families SkyCrypt knows and ours has no entry for; Pyroclastic Worm we
-list with no tier cap; and 123 id stems are unknown to both sources, most of them the Hunting
-shard creatures — our table holds 37 of those and no Galatea families at all. That gap is
-bounded and measurable: the in-game menu states the category at 5,660 XP against the 5,090 our
-table sums to (see `data/curated/bestiary_known_max.json`), so roughly 570 XP is missing families
-rather than a broken join.
+What is left is mostly the **family list**, not the join, and it is bounded and measurable: the
+in-game menu states the category at 5,660 XP against the 5,060 our table now sums to (see
+`data/curated/bestiary_known_max.json`). The Sea Emperor, Pigman and Watcher are families
+SkyCrypt knows and ours has no entry for; 123 id stems are unknown to both sources, most of them
+the Hunting shard creatures — our table holds 37 of those and no Galatea families at all.
+
+**Moogma and Pyroclastic Worm were not missing families — they were a parser bug.** Fandom's row
+for each reads a flavour-text sentence before the real numbers: "Produces **100%** fresh magma
+daily", "Travels up to **10** miles downhill". The old extraction stripped every non-digit
+character out of *every* cell and read whichever numbers came out first, so those sentences
+donated a phantom 100 and 10 that landed ahead of the real tier and kill count. Moogma's phantom
+tier (100) failed the `<= 25` sanity check and vanished with no trace at all — not even into
+`undocumented`, so a maxed profile's 32,949 real kills had nowhere to go. A cell now counts as a
+number only if a digit *leads* it (`/^[\d,]/`), which excludes both sentences without breaking
+Dragonfly's tier cell, which carries a caption glued onto the digits ("15earth").
+
+Recovering Moogma exposed a second problem: the wiki's own number for it is wrong. Fandom states
+4,000 on bracket 3; a real profile's in-game Bestiary screen showed it maxed at exactly 1,000
+kills on bracket 4 ("Moogma XV", 1,672 kills, "100% (MAX!)", 1,000/1k). Both 4,000 and 1,000 land
+on a real ladder value, so nothing structural catches the wrong one — only a screenshot did. That
+is `data/curated/bestiary_corrections.json`: individual wiki figures overridden against a
+verified in-game reading, applied before a family is placed on a ladder rather than after, so the
+correction actually changes which bracket it lands on rather than leaving the wrong one in place
+with a patched kill count. Pyroclastic Worm needed no such entry — once read correctly, the
+wiki's own numbers (15, 1,000, bracket 4) were right all along.
 
 **Duplicates across the two wikis.** The wikis spell some families differently — Fandom writes
 "Endstone Protector", "Angry Archeologist" and "Gravel Skeleton" where the community wiki writes

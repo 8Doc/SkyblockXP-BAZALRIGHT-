@@ -1,0 +1,13 @@
+{
+  "note": "Family stats the wiki states that a real in-game reading contradicts. The wiki is the primary source everywhere else, so these are the exceptions rather than the rule, and each is kept to a single verified profile rather than assumed to generalise.",
+  "corrections": [
+    {
+      "id": "moogma",
+      "wikiMaxTier": 15,
+      "wikiMaxKills": 4000,
+      "correctMaxKills": 1000,
+      "source": "In-game Bestiary screen, samlaval's profile, 2026-08-22: 'Moogma XV', Kills 1,672, Overall Progress 100% (MAX!), 1,000/1k.",
+      "verified": true
+    }
+  ]
+}

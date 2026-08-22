@@ -6,6 +6,7 @@ import { gameData } from "./gameDataFixture";
 import bestiary from "../data/generated/bestiary.json";
 import bestiaryMobs from "../data/curated/bestiary_mobs.json";
 import bestiaryMobIds from "../data/generated/bestiary_mob_ids.json";
+import bestiaryCorrections from "../data/curated/bestiary_corrections.json";
 
 const data = { bestiary, bestiaryMobs, bestiaryMobIds } as never;
 /** The whole table, for the tests that need to build a catalog rather than read the join. */
@@ -304,4 +305,42 @@ test("the scraped file carries no tier maths of its own", () => {
   const keys = new Set(Object.keys(bestiaryMobIds));
   assert.ok(!keys.has("brackets"), "brackets stay with the wiki scrape");
   for (const value of Object.values(bestiaryMobIds.aliases)) assert.equal(typeof value, "string");
+});
+
+/**
+ * Fandom's own row reads "Produces 100% fresh magma..., 15, 4,000, 3" — a flavour-text sentence
+ * ahead of the real numbers. Stripping every non-digit character out of *every* cell turned that
+ * "100%" into a phantom 100 ahead of the real tier and kill count, which read as tier 100, failed
+ * the tier <= 25 sanity check, and dropped the row with no trace — not even into `undocumented`.
+ * A maxed profile with 1,672 real kills had nowhere to credit them. A cell only counts as a number
+ * now if a digit leads it, which still tolerates a caption glued onto Dragonfly's tier cell
+ * ("15earth") without letting prose text donate a number from partway through a sentence.
+ */
+test("a description sentence with a number in it doesn't shift the real numbers", () => {
+  const moogma = bestiary.families.find((f) => f.id === "moogma");
+  assert.ok(moogma, "Moogma was silently dropped before this fix, not even into 'undocumented'");
+  assert.equal(moogma!.maxTier, 15);
+
+  // Pyroclastic Worm had the same failure for the same reason — "Travels up to 10 miles
+  // downhill" donated a phantom 10 — and needed no correction once read correctly: the wiki's
+  // own numbers (15, 1,000, bracket 4) were right all along.
+  const worm = bestiary.families.find((f) => f.id === "pyroclastic_worm");
+  assert.ok(worm, "Pyroclastic Worm was the other silent casualty of the same bug");
+  assert.deepEqual([worm!.maxTier, worm!.maxKills, worm!.bracket], [15, 1000, 4]);
+});
+
+/**
+ * The wiki is the primary source everywhere else in the bestiary, which is exactly why a place
+ * that overrides it needs its own guard. Fandom states Moogma's cap at 4,000 on bracket 3; a real
+ * profile's Bestiary screen showed it maxed at 1,000/1k on bracket 4. Both numbers land on a real
+ * ladder value, so nothing structural would have caught the wrong one — only the screenshot did.
+ */
+test("a correction is actually applied, and points at a family that exists", () => {
+  const ids = new Set(bestiary.families.map((f) => f.id));
+  for (const c of bestiaryCorrections.corrections) {
+    assert.ok(ids.has(c.id), `${c.id} has a correction but is not a family`);
+    const family = bestiary.families.find((f) => f.id === c.id)!;
+    assert.equal(family.maxKills, c.correctMaxKills, `${c.id} should read the corrected figure, not the wiki's`);
+    assert.notEqual(c.correctMaxKills, c.wikiMaxKills, `${c.id}'s correction should differ from the wiki, or it isn't one`);
+  }
 });

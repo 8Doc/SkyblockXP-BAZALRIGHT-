@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-08-22T10:40:06.330Z",
+ "generatedAt": "2026-08-22T11:06:51.539Z",
  "source": "hypixelskyblock.minecraft.wiki Bestiary and Bestiary/List, plus the sections only hypixel-skyblock.fandom.com still carries",
  "note": "A family is placed on a ladder by the identity ladder[maxTier-1] === maxKills rather than by the bracket its page states. Critters and hunting mobs have their own five brackets, keyed to shard rarity.",
  "brackets": {
@@ -1005,6 +1005,15 @@
   },
   {
    "island": "Families",
+   "name": "Moogma",
+   "id": "moogma",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Families",
    "name": "Night Squid",
    "id": "night_squid",
    "maxTier": 15,
@@ -1079,6 +1088,15 @@
    "island": "Families",
    "name": "Poisoned Water Worm",
    "id": "poisoned_water_worm",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Pyroclastic Worm",
+   "id": "pyroclastic_worm",
    "maxTier": 15,
    "maxKills": 1000,
    "bracket": 4,
@@ -3133,20 +3151,17 @@
   "Endstone Protector": "end_stone_protector",
   "Gravel Skeleton": "flint_skeleton"
  },
- "undocumented": [
-  {
-   "island": "Families",
-   "name": "Pyroclastic Worm",
-   "id": "pyroclastic_worm"
-  }
+ "corrected": [
+  "moogma"
  ],
+ "undocumented": [],
  "totals": {
-  "families": 316,
+  "families": 318,
   "islands": 20,
-  "tiers": 4570,
-  "xp": 4570,
-  "milestoneXp": 450,
-  "statedTotal": 5020,
+  "tiers": 4600,
+  "xp": 4600,
+  "milestoneXp": 460,
+  "statedTotal": 5060,
   "statedTotalSource": "1 XP a tier, plus 10 XP per ten milestones where a milestone is ten tiers — wiki Bestiary, Leveling and Milestone Rewards"
  }
 }

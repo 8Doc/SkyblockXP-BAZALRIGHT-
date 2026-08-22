@@ -8,9 +8,14 @@
  * carries.
  *
  * Two sources, because neither is complete. The community wiki the editors moved to carries the
- * newer islands — Moonglade Marsh, Torrhus Canyon, the Lotus Atoll — and 74 families the Fandom
- * wiki never got; the Fandom wiki still carries the fishing sections the community one has no
- * page for. Between them, 323 families against the 249 this used to read.
+ * newer islands — Moonglade Marsh, Torrhus Canyon, the Lotus Atoll — and dozens of families the
+ * Fandom wiki never got; the Fandom wiki still carries the fishing sections the community one
+ * has no page for.
+ *
+ * Read against the game rather than assumed correct. Fandom states Moogma's cap at 4,000 on
+ * bracket 3; a real profile's Bestiary screen shows it maxed at 1,000. `bestiary_corrections.json`
+ * overrides individual figures like that one, each pinned to a verified in-game reading rather
+ * than a second wiki page, since both wikis can carry the same wrong number.
  *
  * Two bracket tables as well. The main one runs eight brackets over 25 tiers; critters and
  * hunting mobs use their own five, keyed to shard rarity, which cap at 125 kills rather than a
@@ -20,11 +25,14 @@
  *
  *   node scripts/fetch-bestiary.mjs
  */
-import { writeFile, mkdir } from "node:fs/promises";
+import { writeFile, mkdir, readFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
+const corrections = JSON.parse(
+  await readFile(join(ROOT, "data", "curated", "bestiary_corrections.json"), "utf8"),
+).corrections;
 const OUT = join(ROOT, "data", "generated", "bestiary.json");
 const COMMUNITY = "https://hypixelskyblock.minecraft.wiki/api.php";
 const FANDOM = "https://hypixel-skyblock.fandom.com/api.php";
@@ -132,7 +140,13 @@ const fandom = [];
       );
       if (cells.length < 4) continue;
       const name = cells.find((c) => /^[A-Za-z][A-Za-z' -]{2,}$/.test(c));
-      const numbers = cells.map((c) => Number(c.replace(/[^0-9]/g, ""))).filter((n) => n > 0);
+      // A cell counts as one of the numbers only if it *starts* with digits — Moogma's own
+      // description reads "Produces 100% fresh magma...", and stripping every non-digit
+      // character out of the whole cell turned that into a phantom 100 ahead of the real tier
+      // and kill numbers, which read as tier 100 and failed the sanity check below. Requiring
+      // the digits to lead still tolerates the trailing icon caption merged onto Dragonfly's
+      // tier cell ("15earth"), which a stricter whole-cell-must-be-numeric rule would break.
+      const numbers = cells.filter((c) => /^[\d,]/.test(c)).map((c) => Number(c.match(/^[\d,]+/)[0].replace(/,/g, "")));
       if (!name || numbers.length < 2) continue;
       const [maxTier, maxKills] = numbers;
       if (maxTier <= 25 && maxKills > 0) fandom.push({ island, name, maxTier, maxKills });
@@ -236,7 +250,12 @@ for (const fold of [...new Set(folded)]) console.log(`    folded by the wikis' o
 const families = [];
 const undocumented = [];
 for (const family of merged.values()) {
-  const placed = placeOnLadder(family);
+  // A correction overrides what the wiki states before placement, not after — Moogma's wiki
+  // figure (4,000) happens to land exactly on bracket 3's own tier-15 value, so placing first and
+  // patching the result would silently keep the wrong bracket alongside the right kill count.
+  const correction = corrections.find((c) => c.id === family.id);
+  const effective = correction ? { ...family, maxKills: correction.correctMaxKills } : family;
+  const placed = placeOnLadder(effective);
   if (!placed) {
     undocumented.push({ island: family.island, name: family.name, id: family.id });
     continue;
@@ -245,13 +264,18 @@ for (const family of merged.values()) {
     island: family.island,
     name: family.name,
     id: family.id,
-    maxTier: family.maxTier,
-    maxKills: family.maxKills,
+    maxTier: effective.maxTier,
+    maxKills: effective.maxKills,
     bracket: placed.bracket,
     table: placed.table,
   });
 }
 families.sort((a, b) => a.island.localeCompare(b.island) || a.name.localeCompare(b.name));
+
+for (const c of corrections) {
+  if (!families.some((f) => f.id === c.id))
+    console.log(`  correction for ${c.id} has nothing to apply to — the wiki row it targets is gone`);
+}
 
 const tiers = families.reduce((sum, f) => sum + f.maxTier, 0);
 // Every tier pays 1 XP. A milestone is ten tiers, and every ten milestones pay 10 XP — so the
@@ -277,6 +301,8 @@ await writeFile(
       renames: Object.fromEntries(
         [...canonical].map(([from, to]) => [from, slug(to)]).sort(([a], [b]) => a.localeCompare(b)),
       ),
+      /** Corrections actually applied this run — see data/curated/bestiary_corrections.json. */
+      corrected: corrections.filter((c) => families.some((f) => f.id === c.id)).map((c) => c.id),
       undocumented,
       totals: {
         families: families.length,

@@ -115,7 +115,7 @@ export const UNMODELLED: { category: Category; note: string; totalXp?: number }[
   },
   {
     category: "bestiary",
-    note: "Bestiary tiers are offered where the next one is under 5,000 kills away; past that a tier is a week of one mob and there is no honest way to rank it against a purchase. What remains is the family list rather than the join: Pyroclastic Worm is listed with no tier cap, Moogma and The Sea Emperor have kills but no family to credit them to, and Galatea's hunting mobs have no entries at all yet — so the ceiling below is a floor.",
+    note: "Bestiary tiers are offered where the next one is under 5,000 kills away; past that a tier is a week of one mob and there is no honest way to rank it against a purchase. What remains is the family list rather than the join: The Sea Emperor and Pigman have kills but no family to credit them to, and Galatea's hunting mobs have no entries at all yet — so the ceiling below is a floor.",
   },
   {
     category: "misc",

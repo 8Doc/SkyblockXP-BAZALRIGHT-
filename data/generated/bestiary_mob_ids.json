@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-08-22T10:40:06.902Z",
+  "generatedAt": "2026-08-22T11:06:58.513Z",
   "source": "https://raw.githubusercontent.com/SkyCryptWebsite/SkyCrypt/master/src/constants/bestiary.js",
   "note": "Internal mob id (level suffix stripped) -> the family id in bestiary.json it feeds. Taken from SkyCrypt's bestiary constants, which publish the grouping because rendering the page needs it. Only the mobs[] arrays are used: SkyCrypt's own caps and brackets are older than the wiki's and disagree with them on 92 families, so the tier maths stays with fetch-bestiary.mjs. Curated entries in bestiary_mobs.json are applied first and override anything here.",
   "totals": {
     "skyCryptFamilies": 208,
     "mapped": 127,
-    "unmatched": 5
+    "unmatched": 3
   },
   "unmatched": [
     {
@@ -28,20 +28,6 @@
       "ids": [
         "skeleton_emperor_150",
         "guardian_emperor_150"
-      ]
-    },
-    {
-      "name": "Moogma",
-      "island": "Lava",
-      "ids": [
-        "moogma_210"
-      ]
-    },
-    {
-      "name": "Pyroclastic Worm",
-      "island": "Lava",
-      "ids": [
-        "pyroclastic_worm_240"
       ]
     }
   ],
