@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { bestiaryFamilyOf, bestiaryTierOf } from "../src/lib/gameData";
+import { bestiaryFamilyOf, bestiaryLadder, bestiaryTierOf } from "../src/lib/gameData";
 import { buildCatalog } from "../src/lib/catalog";
 import { gameData } from "./gameDataFixture";
 import bestiary from "../data/generated/bestiary.json";
@@ -20,7 +20,9 @@ const full = gameData();
  */
 test("every family's max kills is its bracket's value at its tier cap", () => {
   for (const family of bestiary.families) {
-    const ladder = bestiary.brackets[String(family.bracket) as keyof typeof bestiary.brackets];
+    // Whichever of the two tables it belongs to: critters and hunting mobs cap at 125 kills
+    // where the main brackets run to a million, and the identity is what places them.
+    const ladder = bestiaryLadder(bestiary as never, family as never);
     assert.equal(
       ladder[family.maxTier - 1],
       family.maxKills,
@@ -29,11 +31,16 @@ test("every family's max kills is its bracket's value at its tier cap", () => {
   }
 });
 
-test("brackets are 25 tiers long and strictly increasing", () => {
-  for (const [id, ladder] of Object.entries(bestiary.brackets)) {
-    assert.equal(ladder.length, 25, `bracket ${id}`);
-    for (let i = 1; i < ladder.length; i++)
-      assert.ok(ladder[i] > ladder[i - 1], `bracket ${id} stalls at tier ${i + 1}`);
+test("brackets are strictly increasing, and as long as their table runs", () => {
+  for (const [table, depth, columns] of [
+    ["brackets", 25, bestiary.brackets],
+    ["huntingBrackets", 10, bestiary.huntingBrackets],
+  ] as const) {
+    for (const [id, ladder] of Object.entries(columns as Record<string, number[]>)) {
+      assert.equal(ladder.length, depth, `${table} ${id}`);
+      for (let i = 1; i < ladder.length; i++)
+        assert.ok(ladder[i]! > ladder[i - 1]!, `${table} ${id} stalls at tier ${i + 1}`);
+    }
   }
 });
 
@@ -47,12 +54,17 @@ test("a tier is worth one XP, and the milestones are the remainder", () => {
   const tiers = bestiary.families.reduce((sum, f) => sum + f.maxTier, 0);
   assert.equal(bestiary.totals.tiers, tiers);
   assert.equal(bestiary.totals.xp, tiers, "the tiers pay one apiece");
-  assert.equal(bestiary.totals.statedTotal, 4_370, "what the task table says the category holds");
+  // A milestone is ten tiers and every ten milestones pay 10 XP, so the milestone half is not a
+  // separate grind — it is a tenth of the tier count, awarded in lumps of ten.
+  assert.equal(bestiary.totals.milestoneXp, Math.floor(tiers / 100) * 10, "milestones follow the tiers");
   assert.equal(
     bestiary.totals.xp + bestiary.totals.milestoneXp,
     bestiary.totals.statedTotal,
     "the tiers and the milestones together are the whole category",
   );
+  // The game states 5,660. What is short of it is families neither wiki lists.
+  assert.ok(bestiary.totals.statedTotal <= 5_660, "we cannot hold more than the game does");
+  assert.ok(bestiary.totals.statedTotal > 5_000, `only ${bestiary.totals.statedTotal} of the game's 5,660`);
 });
 
 /**
@@ -65,7 +77,7 @@ test("a family is not offered when the profile is carrying kills we cannot place
   const withGap = buildCatalog(
     {
       bestiary: {
-        kills: { zombie_1: 100, some_mob_we_cannot_place_99: 5_000 },
+        kills: { zombie_1: 4, some_mob_we_cannot_place_99: 5_000 },
         milestone: { last_claimed_milestone: 0 },
       },
     } as never,
@@ -74,6 +86,7 @@ test("a family is not offered when the profile is carrying kills we cannot place
   );
   const offered = withGap.tasks.filter((t) => t.category === "bestiary" && !withGap.done.has(t.id));
   const families = new Set(offered.map((t) => /^bestiary_(.*)_\d+$/.exec(t.id)?.[1]));
+  // Four kills is short of the first rung, so the family is seen but not yet maxed.
   assert.ok(families.has("zombie"), "a family we did see kills for is still offered");
   assert.ok(!families.has("golden_ghoul"), "one we saw nothing for, while blind, is not");
 });
@@ -125,12 +138,12 @@ test("no mob id is both aliased and declared family-less", () => {
 /** Tier is the last threshold passed, so the boundary itself counts and one kill short doesn't. */
 test("a tier is reached exactly at its cumulative kill count", () => {
   const family = bestiary.families.find((f) => f.id === "crypt_ghoul")!;
-  const ladder = bestiary.brackets[String(family.bracket) as keyof typeof bestiary.brackets];
-  assert.equal(bestiaryTierOf(family, bestiary.brackets, 0), 0);
-  assert.equal(bestiaryTierOf(family, bestiary.brackets, ladder[0]), 1);
-  assert.equal(bestiaryTierOf(family, bestiary.brackets, ladder[0] - 1), 0);
+  const ladder = bestiaryLadder(bestiary as never, family as never);
+  assert.equal(bestiaryTierOf(family as never, ladder, 0), 0);
+  assert.equal(bestiaryTierOf(family as never, ladder, ladder[0]!), 1);
+  assert.equal(bestiaryTierOf(family as never, ladder, ladder[0]! - 1), 0);
   assert.equal(
-    bestiaryTierOf(family, bestiary.brackets, family.maxKills * 10),
+    bestiaryTierOf(family as never, ladder, family.maxKills * 10),
     family.maxTier,
     "a maxed family stops at its cap rather than running off the ladder",
   );

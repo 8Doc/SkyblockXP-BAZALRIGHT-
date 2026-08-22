@@ -7,6 +7,7 @@ import {
   accessoryPower,
   bagUpgradeCost,
   bestiaryFamilyOf,
+  bestiaryLadder,
   bestiaryTierOf,
   bumpRarity,
   effortOf,
@@ -1106,11 +1107,11 @@ export function buildCatalog(
 
   for (const family of data.bestiary.families) {
     const kills = bestiaryKills.get(family.id) ?? 0;
-    const tier = bestiaryTierOf(family, data.bestiary.brackets, kills);
+    const ladder = bestiaryLadder(data.bestiary, family);
+    const tier = bestiaryTierOf(family, ladder, kills);
     bestiaryTiers += tier;
     if (suspect.has(family.id)) continue;
 
-    const ladder = data.bestiary.brackets[String(family.bracket)] ?? [];
     let previousTier: string | null = null;
     for (let next = tier + 1; next <= family.maxTier; next++) {
       const needed = (ladder[next - 1] ?? Infinity) - kills;

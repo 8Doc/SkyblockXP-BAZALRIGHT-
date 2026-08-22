@@ -3,15 +3,20 @@
  * Scrapes the bestiary's kill brackets and family list.
  *
  * The API reports raw kills per mob id and nothing else — no tiers, no thresholds, no family
- * list. Turning those kills into "you are tier 7, and tier 8 wants 42 more" needs two tables
- * Hypixel doesn't publish: the seven cumulative kill brackets, and which bracket and tier cap
- * each family carries. Both are on the wiki's Bestiary page.
+ * list. Turning those kills into "you are tier 7, and tier 8 wants 42 more" needs tables Hypixel
+ * doesn't publish: the cumulative kill brackets, and which bracket and tier cap each family
+ * carries.
  *
- * The two halves check each other. A family lists its bracket, its tier cap *and* its max
- * kills, and max kills is by definition the bracket's value at the tier cap — so every family
- * is an independent assertion about the bracket table, and the bracket column is derived from
- * the other two rather than trusted. Four rows on the page disagree with themselves; in each
- * the two numbers outvote the label, and the correction is printed rather than swallowed.
+ * Two sources, because neither is complete. The community wiki the editors moved to carries the
+ * newer islands — Moonglade Marsh, Torrhus Canyon, the Lotus Atoll — and 74 families the Fandom
+ * wiki never got; the Fandom wiki still carries the fishing sections the community one has no
+ * page for. Between them, 323 families against the 249 this used to read.
+ *
+ * Two bracket tables as well. The main one runs eight brackets over 25 tiers; critters and
+ * hunting mobs use their own five, keyed to shard rarity, which cap at 125 kills rather than a
+ * million. Which table a family belongs to is derived, not asserted: a family states its tier
+ * cap and its max kills, and max kills is by definition its ladder's value at the cap, so every
+ * family is placed on whichever column of whichever table makes its own two numbers agree.
  *
  *   node scripts/fetch-bestiary.mjs
  */
@@ -21,152 +26,176 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const OUT = join(ROOT, "data", "generated", "bestiary.json");
-const WIKI = "https://hypixel-skyblock.fandom.com/api.php";
+const COMMUNITY = "https://hypixelskyblock.minecraft.wiki/api.php";
+const FANDOM = "https://hypixel-skyblock.fandom.com/api.php";
+const UA = { "User-Agent": "skyblock-xp-planner/0.1 (data build script)" };
 
-async function renderedHtml(page) {
-  const url = `${WIKI}?action=parse&page=${encodeURIComponent(page)}&format=json&prop=text`;
-  const res = await fetch(url, { headers: { "User-Agent": "skyblock-xp-planner/0.1 (data build script)" } });
-  if (!res.ok) throw new Error(`${page} -> ${res.status}`);
-  const body = await res.json();
-  if (body.error) throw new Error(`${page} -> ${body.error.info}`);
-  return body.parse.text["*"];
+async function wikitext(api, page) {
+  const url = `${api}?action=query&prop=revisions&rvprop=content&rvslots=main&format=json&redirects=1&titles=${encodeURIComponent(page)}`;
+  const body = await fetch(url, { headers: UA }).then((r) => r.json());
+  const found = Object.values(body.query?.pages ?? {})[0];
+  const text = found?.revisions?.[0]?.slots?.main?.["*"];
+  if (!text) throw new Error(`${page} has no content`);
+  return text;
 }
 
-const text = (html) =>
-  html
-    .replace(/<[^>]+>/g, " ")
-    .replace(/&#160;|&nbsp;/g, " ")
-    .replace(/&amp;/g, "&")
-    .replace(/&#39;|&apos;/g, "'")
-    .replace(/\s+/g, " ")
-    .trim();
+const slug = (name) => name.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "");
 
-const num = (s) => Number(String(s).replace(/,/g, "").replace(/[^0-9].*$/, ""));
-
-const rows = (table) =>
-  [...table.matchAll(/<tr[^>]*>([\s\S]*?)<\/tr>/g)].map((r) =>
-    [...r[1].matchAll(/<t[dh][^>]*>([\s\S]*?)<\/t[dh]>/g)].map((c) => text(c[1])),
-  );
-
-/** `Arachne's Brood` -> `arachne_brood`. Possessives drop rather than leaving a bare `s`. */
-const familyId = (name) =>
-  name
-    .toLowerCase()
-    .replace(/'s\b/g, "")
-    .replace(/[^a-z0-9]+/g, "_")
-    .replace(/^_|_$/g, "");
-
-const html = await renderedHtml("Bestiary");
-
-/* ------------------------------------------------------------------ brackets */
-
-// "Cumulative Kill Brackets" runs one row per tier and one column per bracket, so it is
-// transposed on the way in — a bracket is the useful unit to look a tier up in, a tier is not.
-const bracketTable = [...html.matchAll(/<table[\s\S]*?<\/table>/g)]
-  .map((t) => t[0])
-  .find((t) => /Cumulative Kill Brackets/i.test(t));
-if (!bracketTable) throw new Error("No 'Cumulative Kill Brackets' table on the page");
-
-const brackets = {};
-for (const row of rows(bracketTable)) {
-  const tier = num(row[0]);
-  if (!Number.isFinite(tier) || tier < 1) continue;
-  const values = row.slice(1).map(num);
-  if (values.length !== 7 || values.some((v) => !Number.isFinite(v))) continue;
-  values.forEach((v, i) => ((brackets[i + 1] ??= [])[tier - 1] = v));
+/** One "Cumulative Kill Brackets" table: a tier per row, a bracket per column. */
+function bracketTable(table, columns) {
+  const out = {};
+  for (let c = 1; c <= columns; c++) out[c] = [];
+  let tier = null;
+  let column = 0;
+  for (const line of table.split("\n")) {
+    const heading = line.match(/^!(\d+)$/);
+    if (heading) {
+      tier = Number(heading[1]);
+      column = 0;
+      continue;
+    }
+    if (tier === null) continue;
+    const value = line.match(/^\|([\d,]+)$/);
+    if (!value) continue;
+    column++;
+    if (column <= columns) out[column][tier - 1] = Number(value[1].replace(/,/g, ""));
+  }
+  return out;
 }
 
-const bracketIds = Object.keys(brackets).map(Number);
-if (bracketIds.length !== 7) throw new Error(`Expected 7 brackets, parsed ${bracketIds.length}`);
-for (const b of bracketIds) {
-  const ladder = brackets[b];
-  if (ladder.length !== 25) throw new Error(`Bracket ${b} has ${ladder.length} tiers, expected 25`);
-  for (let i = 1; i < ladder.length; i++)
-    if (!(ladder[i] > ladder[i - 1])) throw new Error(`Bracket ${b} is not increasing at tier ${i + 1}`);
+console.log("reading the bracket tables…");
+const bestiaryPage = await wikitext(COMMUNITY, "Bestiary");
+const tables = [...bestiaryPage.matchAll(/\{\|[^]*?\|\}/g)]
+  .map((m) => m[0])
+  .filter((t) => /Cumulative Kill Brackets/.test(t));
+if (tables.length < 2) throw new Error(`expected two bracket tables, found ${tables.length}`);
+const brackets = bracketTable(tables[0], 8);
+const huntingBrackets = bracketTable(tables[1], 5);
+console.log(`  ${Object.keys(brackets).length} main brackets, ${Object.keys(huntingBrackets).length} for critters and hunting mobs`);
+
+/** The community wiki's per-island tables: image, name, types, lore, max tier, max kills, bracket. */
+function communityFamilies(text) {
+  const families = [];
+  let island = "?";
+  let cells = [];
+  const flush = () => {
+    if (cells.length >= 7) {
+      const name = (cells[1].match(/\[\[([^\]|]+)/) ?? [])[1] ?? cells[1];
+      const maxTier = Number(cells[4].replace(/[^0-9]/g, ""));
+      const maxKills = Number(cells[5].replace(/[^0-9]/g, ""));
+      if (name && maxTier && maxKills) families.push({ island, name: name.trim(), maxTier, maxKills });
+    }
+    cells = [];
+  };
+  for (const line of text.split("\n")) {
+    const tab = line.match(/^\|-\|(.+)=$/);
+    if (tab) {
+      flush();
+      island = tab[1].trim();
+      continue;
+    }
+    if (line.startsWith("|-") || line.startsWith("|}")) {
+      flush();
+      continue;
+    }
+    if (line.startsWith("!")) {
+      cells = [];
+      continue;
+    }
+    if (line.startsWith("|+")) continue;
+    if (line.startsWith("|")) cells.push(line.slice(1));
+  }
+  flush();
+  return families;
 }
 
-/* ------------------------------------------------------------------ families */
+console.log("reading the family lists…");
+const community = communityFamilies(await wikitext(COMMUNITY, "Bestiary/List"));
+console.log(`  community wiki: ${community.length} families`);
 
-// Families sit one table per island inside a Fandom tabber, except Fishing, which runs six
-// tables in one tab. So the island is the tab whose content pane is open when a table is
-// reached, taken in document order — a zip of labels to tables would slip by five from there on.
-const segment = html.slice(html.lastIndexOf('id="Families"'));
-const islands = [...segment.matchAll(/<li class="wds-tabs__tab[^"]*" data-hash="([^"]+)"/g)].map((m) =>
-  text(m[1]).replace(/_/g, " "),
-);
+/**
+ * The Fandom wiki's rendered table, for the sections the community wiki has no page for — the
+ * fishing bestiary among them. Its rows carry the same facts in a different shape.
+ */
+const rendered = await fetch(`${FANDOM}?action=parse&page=Bestiary&format=json&prop=text`, { headers: UA })
+  .then((r) => r.json())
+  .then((body) => body.parse?.text?.["*"] ?? "");
+const fandom = [];
+{
+  let island = "?";
+  for (const chunk of rendered.split(/<h[23]/).slice(1)) {
+    const heading = (chunk.match(/id="([^"]+)"/) ?? [])[1];
+    if (heading) island = heading.replace(/_/g, " ");
+    for (const row of chunk.match(/<tr>[^]*?<\/tr>/g) ?? []) {
+      const cells = [...row.matchAll(/<t[dh][^>]*>([^]*?)<\/t[dh]>/g)].map((m) =>
+        m[1].replace(/<[^>]+>/g, " ").replace(/&#?\w+;/g, " ").replace(/\s+/g, " ").trim(),
+      );
+      if (cells.length < 4) continue;
+      const name = cells.find((c) => /^[A-Za-z][A-Za-z' -]{2,}$/.test(c));
+      const numbers = cells.map((c) => Number(c.replace(/[^0-9]/g, ""))).filter((n) => n > 0);
+      if (!name || numbers.length < 2) continue;
+      const [maxTier, maxKills] = numbers;
+      if (maxTier <= 25 && maxKills > 0) fandom.push({ island, name, maxTier, maxKills });
+    }
+  }
+}
+console.log(`  fandom wiki:    ${fandom.length} rows`);
+
+/**
+ * Whichever column of whichever table makes a family's own two numbers agree.
+ *
+ * The bracket a page states is a label; the tier cap and the max kills are the measurement, and
+ * the identity between them is what places a family. Reading the label instead put fifty of them
+ * on ladders a thousand times too long — a critter capping at 125 kills read against a bracket
+ * that wants three thousand.
+ */
+function placeOnLadder(family) {
+  for (const [table, columns] of [
+    ["main", brackets],
+    ["hunting", huntingBrackets],
+  ]) {
+    for (const [column, ladder] of Object.entries(columns)) {
+      if (ladder[family.maxTier - 1] === family.maxKills) return { table, bracket: Number(column) };
+    }
+  }
+  return null;
+}
+
+const merged = new Map();
+for (const f of community) merged.set(slug(f.name), { ...f, id: slug(f.name) });
+let added = 0;
+for (const f of fandom) {
+  const id = slug(f.name);
+  if (merged.has(id)) continue;
+  merged.set(id, { ...f, id });
+  added++;
+}
+console.log(`  ${merged.size} families after the merge, ${added} of them only on Fandom`);
 
 const families = [];
 const undocumented = [];
-const corrected = [];
-const unresolved = [];
-let island = "Unknown";
-let pane = 0;
-
-for (const match of segment.matchAll(/<div class="wds-tab__content[^"]*"[^>]*>|<table[\s\S]*?<\/table>/g)) {
-  if (match[0].startsWith("<div")) {
-    island = islands[pane++] ?? "Unknown";
+for (const family of merged.values()) {
+  const placed = placeOnLadder(family);
+  if (!placed) {
+    undocumented.push({ island: family.island, name: family.name, id: family.id });
     continue;
   }
-  const table = rows(match[0]);
-  if (!table.length || !/Max Tier/.test(table[0].join("|"))) continue;
-
-  for (const row of table.slice(1)) {
-    const name = row.at(-5) ?? row[0];
-    if (!name) continue;
-
-    // A few families are on the page as placeholders nobody has filled in yet.
-    if (row.slice(-3).some((c) => /More Info Needed/i.test(c))) {
-      undocumented.push({ island, name, id: familyId(name) });
-      continue;
-    }
-
-    const stated = num(row.at(-1));
-    const maxKills = num(row.at(-2));
-    const maxTier = num(row.at(-3));
-    if (!Number.isFinite(maxTier) || !Number.isFinite(maxKills)) continue;
-
-    const candidates = bracketIds.filter((b) => brackets[b][maxTier - 1] === maxKills);
-    const bracket = candidates.includes(stated) ? stated : candidates.length === 1 ? candidates[0] : null;
-    if (bracket === null) {
-      unresolved.push({ island, name, maxTier, maxKills, stated, candidates });
-      continue;
-    }
-    if (bracket !== stated) corrected.push({ island, name, maxTier, maxKills, stated, bracket });
-    families.push({ island, name, id: familyId(name), maxTier, maxKills, bracket });
-  }
+  families.push({
+    island: family.island,
+    name: family.name,
+    id: family.id,
+    maxTier: family.maxTier,
+    maxKills: family.maxKills,
+    bracket: placed.bracket,
+    table: placed.table,
+  });
 }
-
-if (unresolved.length) {
-  for (const f of unresolved)
-    console.error(`  ${f.island} / ${f.name}: ${f.maxKills} kills at tier ${f.maxTier} matches no bracket`);
-  throw new Error(`${unresolved.length} families match no bracket at their tier cap`);
-}
-
-for (const f of corrected)
-  console.log(
-    `corrected: ${f.island} / ${f.name} is labelled bracket ${f.stated}, ` +
-      `but ${f.maxKills} kills at tier ${f.maxTier} is bracket ${f.bracket}`,
-  );
-for (const f of undocumented) console.log(`undocumented: ${f.island} / ${f.name} — the wiki gives it no tier cap`);
+families.sort((a, b) => a.island.localeCompare(b.island) || a.name.localeCompare(b.name));
 
 const tiers = families.reduce((sum, f) => sum + f.maxTier, 0);
-/**
- * Each tier pays 1 SkyBlock XP. That is the whole of what this table can price.
- *
- * It used to pay 2, on the reading that "every tenth tier is a milestone paying another 10".
- * The task table says something else: "Each Tier: +1" and "Every 10 **Milestones**: +10" — a
- * milestone is its own thing that the bestiary counts, not every tenth tier. Doubling every tier
- * put the category at 7,840 against a stated 4,370, and a maxed profile was credited 10,260,
- * which is more than twice everything the category holds.
- *
- * The 450 between our 3,920 tiers and the stated 4,370 is the milestone half. It is recorded
- * rather than spread across the tiers, because nothing published says how many tiers a milestone
- * takes: the count on a real profile runs about one milestone per 6.5 to 7.5 tiers and is not
- * consistent between profiles, so any per-tier share of it would be invented.
- */
-const xp = tiers;
-const STATED_TOTAL = 4370;
-const milestoneXp = STATED_TOTAL - tiers;
+// Every tier pays 1 XP. A milestone is ten tiers, and every ten milestones pay 10 XP — so the
+// milestone half is not a separate grind, it is a tenth of the tier count, awarded in lumps.
+const milestoneXp = Math.floor(tiers / 100) * 10;
 
 await mkdir(dirname(OUT), { recursive: true });
 await writeFile(
@@ -174,31 +203,25 @@ await writeFile(
   JSON.stringify(
     {
       generatedAt: new Date().toISOString(),
-      source: "https://hypixel-skyblock.fandom.com/wiki/Bestiary",
-      note:
-        "brackets[bracket][maxTier-1] === maxKills for every family — the bracket is derived from " +
-        "that identity, and the build fails on any family the identity can't place.",
+      source: "hypixelskyblock.minecraft.wiki Bestiary and Bestiary/List, plus the sections only hypixel-skyblock.fandom.com still carries",
+      note: "A family is placed on a ladder by the identity ladder[maxTier-1] === maxKills rather than by the bracket its page states. Critters and hunting mobs have their own five brackets, keyed to shard rarity.",
       brackets,
+      huntingBrackets,
       families,
       undocumented,
-      corrected,
       totals: {
         families: families.length,
         islands: new Set(families.map((f) => f.island)).size,
         tiers,
-        xp,
-        /** What the milestones pay on top of the tiers, and what the two come to together. */
+        xp: tiers,
         milestoneXp,
-        statedTotal: STATED_TOTAL,
-        statedTotalSource: "wiki SkyBlock Levels/Tasks — Bestiary Progress, each tier +1 and every 10 milestones +10",
+        statedTotal: tiers + milestoneXp,
+        statedTotalSource: "1 XP a tier, plus 10 XP per ten milestones where a milestone is ten tiers — wiki Bestiary, Leveling and Milestone Rewards",
       },
     },
     null,
     1,
   ) + "\n",
 );
-
-console.log(`${families.length} families across ${new Set(families.map((f) => f.island)).size} islands`);
-console.log(`every one agrees with the 7x25 bracket table`);
-console.log(`${tiers} tiers -> ${xp} SkyBlock XP available`);
-console.log(`wrote ${OUT}`);
+console.log(`\n-> ${families.length} families, ${tiers} tiers + ${milestoneXp} milestone XP = ${tiers + milestoneXp}`);
+if (undocumented.length) console.log(`   ${undocumented.length} could not be placed on any ladder`);

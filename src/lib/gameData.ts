@@ -231,7 +231,18 @@ export type BestiaryData = {
   generatedAt: string;
   source: string;
   brackets: Record<string, number[]>;
-  families: { island: string; name: string; id: string; maxTier: number; maxKills: number; bracket: number }[];
+  /** Critters and hunting mobs run their own five, keyed to shard rarity. */
+  huntingBrackets?: Record<string, number[]>;
+  families: {
+    island: string;
+    name: string;
+    id: string;
+    maxTier: number;
+    maxKills: number;
+    bracket: number;
+    /** Which of the two tables the bracket indexes into. */
+    table?: "main" | "hunting";
+  }[];
   /** Families the wiki lists without a tier cap, so nothing can be offered for them. */
   undocumented: { island: string; name: string; id: string }[];
   totals: {
@@ -714,8 +725,18 @@ export function bestiaryFamilies(data: GameData): Map<string, BestiaryData["fami
 }
 
 /** The highest tier `kills` has reached in this family. Tier 0 means the first tier is unmet. */
-export function bestiaryTierOf(family: BestiaryData["families"][number], brackets: BestiaryData["brackets"], kills: number): number {
-  const ladder = brackets[String(family.bracket)] ?? [];
+/** The kill ladder a family climbs — from whichever of the two bracket tables it belongs to. */
+export function bestiaryLadder(data: BestiaryData, family: BestiaryData["families"][number]): number[] {
+  const table = family.table === "hunting" ? (data.huntingBrackets ?? {}) : data.brackets;
+  return table[String(family.bracket)] ?? [];
+}
+
+export function bestiaryTierOf(
+  family: BestiaryData["families"][number],
+  brackets: BestiaryData["brackets"] | number[],
+  kills: number,
+): number {
+  const ladder = Array.isArray(brackets) ? brackets : (brackets[String(family.bracket)] ?? []);
   let tier = 0;
   for (let i = 0; i < family.maxTier && i < ladder.length; i++) if (kills >= ladder[i]) tier = i + 1;
   return tier;

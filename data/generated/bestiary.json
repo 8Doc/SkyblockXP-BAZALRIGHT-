@@ -1,7 +1,7 @@
 {
- "generatedAt": "2026-08-21T19:13:15.185Z",
- "source": "https://hypixel-skyblock.fandom.com/wiki/Bestiary",
- "note": "brackets[bracket][maxTier-1] === maxKills for every family — the bracket is derived from that identity, and the build fails on any family the identity can't place.",
+ "generatedAt": "2026-08-22T04:10:39.738Z",
+ "source": "hypixelskyblock.minecraft.wiki Bestiary and Bestiary/List, plus the sections only hypixel-skyblock.fandom.com still carries",
+ "note": "A family is placed on a ladder by the identity ladder[maxTier-1] === maxKills rather than by the bracket its page states. Critters and hunting mobs have their own five brackets, keyed to shard rarity.",
  "brackets": {
   "1": [
    20,
@@ -145,9 +145,9 @@
    5,
    7,
    9,
-   14,
-   17,
-   21,
+   12,
+   16,
+   20,
    25,
    50,
    80,
@@ -191,504 +191,133 @@
    2000,
    2500,
    3000
+  ],
+  "8": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   8,
+   11,
+   14,
+   17,
+   20,
+   25,
+   30,
+   35,
+   40,
+   50,
+   60,
+   70,
+   80,
+   90,
+   100,
+   120,
+   140,
+   160,
+   180,
+   200
+  ]
+ },
+ "huntingBrackets": {
+  "1": [
+   1,
+   5,
+   10,
+   20,
+   35,
+   50,
+   65,
+   85,
+   105,
+   125
+  ],
+  "2": [
+   1,
+   5,
+   10,
+   15,
+   25,
+   40,
+   55,
+   70,
+   85,
+   100
+  ],
+  "3": [
+   1,
+   5,
+   10,
+   15,
+   20,
+   25,
+   35,
+   45,
+   60,
+   75
+  ],
+  "4": [
+   1,
+   3,
+   6,
+   10,
+   15,
+   20,
+   25,
+   30,
+   40,
+   50
+  ],
+  "5": [
+   1,
+   2,
+   3,
+   4,
+   6,
+   8,
+   10,
+   15,
+   20,
+   25
   ]
  },
  "families": [
   {
-   "island": "Private Island",
-   "name": "Bat",
-   "id": "bat",
-   "maxTier": 5,
-   "maxKills": 200,
-   "bracket": 1
-  },
-  {
-   "island": "Private Island",
-   "name": "Creeper",
-   "id": "creeper",
-   "maxTier": 5,
-   "maxKills": 200,
-   "bracket": 1
-  },
-  {
-   "island": "Private Island",
-   "name": "Enderman",
-   "id": "enderman",
-   "maxTier": 5,
-   "maxKills": 200,
-   "bracket": 1
-  },
-  {
-   "island": "Private Island",
-   "name": "Skeleton",
-   "id": "skeleton",
-   "maxTier": 5,
-   "maxKills": 200,
-   "bracket": 1
-  },
-  {
-   "island": "Private Island",
-   "name": "Slime",
-   "id": "slime",
-   "maxTier": 5,
-   "maxKills": 200,
-   "bracket": 1
-  },
-  {
-   "island": "Private Island",
-   "name": "Spider",
-   "id": "spider",
-   "maxTier": 5,
-   "maxKills": 200,
-   "bracket": 1
-  },
-  {
-   "island": "Private Island",
-   "name": "Witch",
-   "id": "witch",
-   "maxTier": 5,
-   "maxKills": 200,
-   "bracket": 1
-  },
-  {
-   "island": "Private Island",
-   "name": "Zombie",
-   "id": "zombie",
-   "maxTier": 5,
-   "maxKills": 200,
-   "bracket": 1
-  },
-  {
-   "island": "Hub",
-   "name": "Crypt Ghoul",
-   "id": "crypt_ghoul",
-   "maxTier": 15,
-   "maxKills": 40000,
-   "bracket": 1
-  },
-  {
-   "island": "Hub",
-   "name": "Golden Ghoul",
-   "id": "golden_ghoul",
-   "maxTier": 15,
-   "maxKills": 4000,
-   "bracket": 3
-  },
-  {
-   "island": "Hub",
-   "name": "Graveyard Zombie",
-   "id": "graveyard_zombie",
-   "maxTier": 5,
-   "maxKills": 200,
-   "bracket": 1
-  },
-  {
-   "island": "Hub",
-   "name": "Old Wolf",
-   "id": "old_wolf",
-   "maxTier": 15,
-   "maxKills": 4000,
-   "bracket": 3
-  },
-  {
-   "island": "Hub",
-   "name": "Shiny Pig",
-   "id": "shiny_pig",
-   "maxTier": 15,
-   "maxKills": 400,
-   "bracket": 5
-  },
-  {
-   "island": "Hub",
-   "name": "Wolf",
-   "id": "wolf",
-   "maxTier": 15,
-   "maxKills": 40000,
-   "bracket": 1
-  },
-  {
-   "island": "Hub",
-   "name": "Zombie Villager",
-   "id": "zombie_villager",
-   "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
-  },
-  {
-   "island": "The Farming Islands",
-   "name": "Chicken",
-   "id": "chicken",
-   "maxTier": 5,
-   "maxKills": 200,
-   "bracket": 1
-  },
-  {
-   "island": "The Farming Islands",
-   "name": "Cow",
-   "id": "cow",
-   "maxTier": 5,
-   "maxKills": 200,
-   "bracket": 1
-  },
-  {
-   "island": "The Farming Islands",
-   "name": "Mushroom Cow",
-   "id": "mushroom_cow",
-   "maxTier": 5,
-   "maxKills": 200,
-   "bracket": 1
-  },
-  {
-   "island": "The Farming Islands",
-   "name": "Pig",
-   "id": "pig",
-   "maxTier": 5,
-   "maxKills": 200,
-   "bracket": 1
-  },
-  {
-   "island": "The Farming Islands",
-   "name": "Rabbit",
-   "id": "rabbit",
-   "maxTier": 5,
-   "maxKills": 200,
-   "bracket": 1
-  },
-  {
-   "island": "The Farming Islands",
-   "name": "Sheep",
-   "id": "sheep",
-   "maxTier": 5,
-   "maxKills": 200,
-   "bracket": 1
-  },
-  {
-   "island": "Garden",
-   "name": "Beetle",
-   "id": "beetle",
-   "maxTier": 15,
-   "maxKills": 250,
-   "bracket": 6
-  },
-  {
-   "island": "Garden",
-   "name": "Cricket",
-   "id": "cricket",
-   "maxTier": 15,
-   "maxKills": 250,
-   "bracket": 6
-  },
-  {
-   "island": "Garden",
-   "name": "Dragonfly",
-   "id": "dragonfly",
-   "maxTier": 15,
-   "maxKills": 250,
-   "bracket": 6
-  },
-  {
-   "island": "Garden",
-   "name": "Earthworm",
-   "id": "earthworm",
-   "maxTier": 15,
-   "maxKills": 250,
-   "bracket": 6
-  },
-  {
-   "island": "Garden",
-   "name": "Field Mouse",
-   "id": "field_mouse",
-   "maxTier": 15,
-   "maxKills": 100,
-   "bracket": 7
-  },
-  {
-   "island": "Garden",
-   "name": "Firefly",
-   "id": "firefly",
-   "maxTier": 15,
-   "maxKills": 250,
-   "bracket": 6
-  },
-  {
-   "island": "Garden",
-   "name": "Fly",
-   "id": "fly",
-   "maxTier": 15,
-   "maxKills": 250,
-   "bracket": 6
-  },
-  {
-   "island": "Garden",
-   "name": "Locust",
-   "id": "locust",
-   "maxTier": 15,
-   "maxKills": 250,
-   "bracket": 6
-  },
-  {
-   "island": "Garden",
-   "name": "Mite",
-   "id": "mite",
-   "maxTier": 15,
-   "maxKills": 250,
-   "bracket": 6
-  },
-  {
-   "island": "Garden",
-   "name": "Mosquito",
-   "id": "mosquito",
-   "maxTier": 15,
-   "maxKills": 250,
-   "bracket": 6
-  },
-  {
-   "island": "Garden",
-   "name": "Moth",
-   "id": "moth",
-   "maxTier": 15,
-   "maxKills": 250,
-   "bracket": 6
-  },
-  {
-   "island": "Garden",
-   "name": "Praying Mantis",
-   "id": "praying_mantis",
-   "maxTier": 15,
-   "maxKills": 250,
-   "bracket": 6
-  },
-  {
-   "island": "Garden",
-   "name": "Rat",
-   "id": "rat",
-   "maxTier": 15,
-   "maxKills": 250,
-   "bracket": 6
-  },
-  {
-   "island": "Garden",
-   "name": "Slug",
-   "id": "slug",
-   "maxTier": 15,
-   "maxKills": 250,
-   "bracket": 6
-  },
-  {
-   "island": "Garden",
-   "name": "Timestalk Clone",
-   "id": "timestalk_clone",
-   "maxTier": 10,
-   "maxKills": 20,
-   "bracket": 7
-  },
-  {
-   "island": "Garden",
-   "name": "Zombuddy",
-   "id": "zombuddy",
-   "maxTier": 15,
-   "maxKills": 250,
-   "bracket": 6
-  },
-  {
-   "island": "Spider's Den",
-   "name": "Arachne",
-   "id": "arachne",
-   "maxTier": 20,
-   "maxKills": 500,
-   "bracket": 7
-  },
-  {
-   "island": "Spider's Den",
-   "name": "Arachne's Brood",
-   "id": "arachne_brood",
-   "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
-  },
-  {
-   "island": "Spider's Den",
-   "name": "Arachne's Keeper",
-   "id": "arachne_keeper",
-   "maxTier": 15,
-   "maxKills": 400,
-   "bracket": 5
-  },
-  {
-   "island": "Spider's Den",
-   "name": "Broodmother",
-   "id": "broodmother",
-   "maxTier": 15,
-   "maxKills": 400,
-   "bracket": 5
-  },
-  {
-   "island": "Spider's Den",
-   "name": "Dasher Spider",
-   "id": "dasher_spider",
-   "maxTier": 15,
-   "maxKills": 10000,
-   "bracket": 2
-  },
-  {
-   "island": "Spider's Den",
-   "name": "Gravel Skeleton",
-   "id": "gravel_skeleton",
-   "maxTier": 15,
-   "maxKills": 4000,
-   "bracket": 3
-  },
-  {
-   "island": "Spider's Den",
-   "name": "Rain Slime",
-   "id": "rain_slime",
-   "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
-  },
-  {
-   "island": "Spider's Den",
-   "name": "Silverfish",
-   "id": "silverfish",
-   "maxTier": 15,
-   "maxKills": 10000,
-   "bracket": 2
-  },
-  {
-   "island": "Spider's Den",
-   "name": "Spider Jockey",
-   "id": "spider_jockey",
-   "maxTier": 15,
-   "maxKills": 4000,
-   "bracket": 3
-  },
-  {
-   "island": "Spider's Den",
-   "name": "Splitter Spider",
-   "id": "splitter_spider",
-   "maxTier": 15,
-   "maxKills": 10000,
-   "bracket": 2
-  },
-  {
-   "island": "Spider's Den",
-   "name": "Voracious Spider",
-   "id": "voracious_spider",
-   "maxTier": 15,
-   "maxKills": 10000,
-   "bracket": 2
-  },
-  {
-   "island": "Spider's Den",
-   "name": "Weaver Spider",
-   "id": "weaver_spider",
-   "maxTier": 15,
-   "maxKills": 10000,
-   "bracket": 2
-  },
-  {
-   "island": "The End",
-   "name": "Dragon",
-   "id": "dragon",
-   "maxTier": 20,
-   "maxKills": 1000,
-   "bracket": 5
-  },
-  {
-   "island": "The End",
-   "name": "Endstone Protector",
-   "id": "endstone_protector",
-   "maxTier": 20,
-   "maxKills": 500,
-   "bracket": 7
-  },
-  {
-   "island": "The End",
-   "name": "Enderman",
-   "id": "enderman",
-   "maxTier": 25,
-   "maxKills": 25000,
-   "bracket": 4
-  },
-  {
-   "island": "The End",
-   "name": "Endermite",
-   "id": "endermite",
-   "maxTier": 25,
-   "maxKills": 10000,
-   "bracket": 5
-  },
-  {
-   "island": "The End",
-   "name": "Obsidian Defender",
-   "id": "obsidian_defender",
-   "maxTier": 25,
-   "maxKills": 10000,
-   "bracket": 5
-  },
-  {
-   "island": "The End",
-   "name": "Seer",
-   "id": "seer",
-   "maxTier": 25,
-   "maxKills": 10000,
-   "bracket": 5
-  },
-  {
-   "island": "The End",
-   "name": "Voidling Extremist",
-   "id": "voidling_extremist",
-   "maxTier": 15,
-   "maxKills": 4000,
-   "bracket": 3
-  },
-  {
-   "island": "The End",
-   "name": "Voidling Fanatic",
-   "id": "voidling_fanatic",
-   "maxTier": 25,
-   "maxKills": 25000,
-   "bracket": 4
-  },
-  {
-   "island": "The End",
-   "name": "Zealot",
-   "id": "zealot",
-   "maxTier": 25,
-   "maxKills": 25000,
-   "bracket": 4
-  },
-  {
    "island": "Crimson Isle",
    "name": "Ashfang",
    "id": "ashfang",
-   "maxTier": 20,
-   "maxKills": 500,
-   "bracket": 7
+   "maxTier": 15,
+   "maxKills": 100,
+   "bracket": 7,
+   "table": "main"
   },
   {
    "island": "Crimson Isle",
    "name": "Barbarian Duke X",
    "id": "barbarian_duke_x",
-   "maxTier": 20,
-   "maxKills": 500,
-   "bracket": 7
+   "maxTier": 15,
+   "maxKills": 100,
+   "bracket": 7,
+   "table": "main"
   },
   {
    "island": "Crimson Isle",
    "name": "Bladesoul",
    "id": "bladesoul",
-   "maxTier": 20,
-   "maxKills": 500,
-   "bracket": 7
+   "maxTier": 15,
+   "maxKills": 100,
+   "bracket": 7,
+   "table": "main"
   },
   {
    "island": "Crimson Isle",
    "name": "Blaze",
    "id": "blaze",
-   "maxTier": 20,
-   "maxKills": 3000,
-   "bracket": 4
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
   },
   {
    "island": "Crimson Isle",
@@ -696,7 +325,8 @@
    "id": "flaming_spider",
    "maxTier": 20,
    "maxKills": 10000,
-   "bracket": 3
+   "bracket": 3,
+   "table": "main"
   },
   {
    "island": "Crimson Isle",
@@ -704,15 +334,17 @@
    "id": "flare",
    "maxTier": 20,
    "maxKills": 10000,
-   "bracket": 3
+   "bracket": 3,
+   "table": "main"
   },
   {
    "island": "Crimson Isle",
    "name": "Ghast",
    "id": "ghast",
    "maxTier": 20,
-   "maxKills": 3000,
-   "bracket": 4
+   "maxKills": 1000,
+   "bracket": 5,
+   "table": "main"
   },
   {
    "island": "Crimson Isle",
@@ -720,31 +352,35 @@
    "id": "kada_knight",
    "maxTier": 20,
    "maxKills": 3000,
-   "bracket": 4
+   "bracket": 4,
+   "table": "main"
   },
   {
    "island": "Crimson Isle",
    "name": "Mage Outlaw",
    "id": "mage_outlaw",
-   "maxTier": 20,
-   "maxKills": 500,
-   "bracket": 7
+   "maxTier": 15,
+   "maxKills": 100,
+   "bracket": 7,
+   "table": "main"
   },
   {
    "island": "Crimson Isle",
    "name": "Magma Boss",
    "id": "magma_boss",
-   "maxTier": 20,
-   "maxKills": 500,
-   "bracket": 7
+   "maxTier": 15,
+   "maxKills": 100,
+   "bracket": 7,
+   "table": "main"
   },
   {
    "island": "Crimson Isle",
    "name": "Magma Cube",
    "id": "magma_cube",
    "maxTier": 20,
-   "maxKills": 10000,
-   "bracket": 3
+   "maxKills": 3000,
+   "bracket": 4,
+   "table": "main"
   },
   {
    "island": "Crimson Isle",
@@ -752,231 +388,89 @@
    "id": "magma_cube_rider",
    "maxTier": 20,
    "maxKills": 3000,
-   "bracket": 4
+   "bracket": 4,
+   "table": "main"
   },
   {
    "island": "Crimson Isle",
    "name": "Matcho",
    "id": "matcho",
    "maxTier": 15,
-   "maxKills": 400,
-   "bracket": 5
+   "maxKills": 250,
+   "bracket": 6,
+   "table": "main"
   },
   {
    "island": "Crimson Isle",
    "name": "Millennia-Aged Blaze",
    "id": "millennia_aged_blaze",
    "maxTier": 15,
-   "maxKills": 4000,
-   "bracket": 3
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
   },
   {
    "island": "Crimson Isle",
    "name": "Mushroom Bull",
    "id": "mushroom_bull",
    "maxTier": 20,
-   "maxKills": 10000,
-   "bracket": 3
+   "maxKills": 3000,
+   "bracket": 4,
+   "table": "main"
   },
   {
    "island": "Crimson Isle",
    "name": "Smoldering Blaze",
    "id": "smoldering_blaze",
    "maxTier": 20,
-   "maxKills": 25000,
-   "bracket": 2
+   "maxKills": 10000,
+   "bracket": 3,
+   "table": "main"
   },
   {
    "island": "Crimson Isle",
    "name": "Tentacle",
    "id": "tentacle",
-   "maxTier": 20,
-   "maxKills": 1000,
-   "bracket": 5
+   "maxTier": 15,
+   "maxKills": 250,
+   "bracket": 6,
+   "table": "main"
   },
   {
    "island": "Crimson Isle",
    "name": "Vanquisher",
    "id": "vanquisher",
-   "maxTier": 20,
-   "maxKills": 1000,
-   "bracket": 5
+   "maxTier": 15,
+   "maxKills": 250,
+   "bracket": 6,
+   "table": "main"
   },
   {
    "island": "Crimson Isle",
    "name": "Wither Skeleton",
    "id": "wither_skeleton",
    "maxTier": 20,
-   "maxKills": 10000,
-   "bracket": 3
+   "maxKills": 1000,
+   "bracket": 5,
+   "table": "main"
   },
   {
    "island": "Crimson Isle",
    "name": "Wither Spectre",
    "id": "wither_spectre",
    "maxTier": 20,
-   "maxKills": 10000,
-   "bracket": 3
-  },
-  {
-   "island": "Deep Caverns",
-   "name": "Emerald Slime",
-   "id": "emerald_slime",
-   "maxTier": 10,
    "maxKills": 3000,
-   "bracket": 1
-  },
-  {
-   "island": "Deep Caverns",
-   "name": "Lapis Zombie",
-   "id": "lapis_zombie",
-   "maxTier": 10,
-   "maxKills": 3000,
-   "bracket": 1
-  },
-  {
-   "island": "Deep Caverns",
-   "name": "Miner Skeleton",
-   "id": "miner_skeleton",
-   "maxTier": 10,
-   "maxKills": 3000,
-   "bracket": 1
-  },
-  {
-   "island": "Deep Caverns",
-   "name": "Miner Zombie",
-   "id": "miner_zombie",
-   "maxTier": 10,
-   "maxKills": 3000,
-   "bracket": 1
-  },
-  {
-   "island": "Deep Caverns",
-   "name": "Redstone Pigman",
-   "id": "redstone_pigman",
-   "maxTier": 10,
-   "maxKills": 3000,
-   "bracket": 1
-  },
-  {
-   "island": "Deep Caverns",
-   "name": "Sneaky Creeper",
-   "id": "sneaky_creeper",
-   "maxTier": 10,
-   "maxKills": 300,
-   "bracket": 3
-  },
-  {
-   "island": "Dwarven Mines",
-   "name": "Diamond Goblin",
-   "id": "diamond_goblin",
-   "maxTier": 15,
-   "maxKills": 100,
-   "bracket": 7
-  },
-  {
-   "island": "Dwarven Mines",
-   "name": "Ghost",
-   "id": "ghost",
-   "maxTier": 15,
-   "maxKills": 40000,
-   "bracket": 1
-  },
-  {
-   "island": "Dwarven Mines",
-   "name": "Glacite Bowman",
-   "id": "glacite_bowman",
-   "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
-  },
-  {
-   "island": "Dwarven Mines",
-   "name": "Glacite Caver",
-   "id": "glacite_caver",
-   "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
-  },
-  {
-   "island": "Dwarven Mines",
-   "name": "Glacite Mage",
-   "id": "glacite_mage",
-   "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
-  },
-  {
-   "island": "Dwarven Mines",
-   "name": "Glacite Mutt",
-   "id": "glacite_mutt",
-   "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
-  },
-  {
-   "island": "Dwarven Mines",
-   "name": "Glacite Walker",
-   "id": "glacite_walker",
-   "maxTier": 15,
-   "maxKills": 10000,
-   "bracket": 2
-  },
-  {
-   "island": "Dwarven Mines",
-   "name": "Goblin",
-   "id": "goblin",
-   "maxTier": 20,
-   "maxKills": 25000,
-   "bracket": 2
-  },
-  {
-   "island": "Dwarven Mines",
-   "name": "Goblin Raiders",
-   "id": "goblin_raiders",
-   "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
-  },
-  {
-   "island": "Dwarven Mines",
-   "name": "Golden Goblin",
-   "id": "golden_goblin",
-   "maxTier": 15,
-   "maxKills": 400,
-   "bracket": 5
-  },
-  {
-   "island": "Dwarven Mines",
-   "name": "Powder Ghast",
-   "id": "powder_ghast",
-   "maxTier": 5,
-   "maxKills": 200,
-   "bracket": 1
-  },
-  {
-   "island": "Dwarven Mines",
-   "name": "Star Sentry",
-   "id": "star_sentry",
-   "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
-  },
-  {
-   "island": "Dwarven Mines",
-   "name": "Treasure Hoarder",
-   "id": "treasure_hoarder",
-   "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
+   "bracket": 4,
+   "table": "main"
   },
   {
    "island": "Crystal Hollows",
    "name": "Automaton",
    "id": "automaton",
-   "maxTier": 15,
-   "maxKills": 10000,
-   "bracket": 2
+   "maxTier": 10,
+   "maxKills": 3000,
+   "bracket": 1,
+   "table": "main"
   },
   {
    "island": "Crystal Hollows",
@@ -984,7 +478,8 @@
    "id": "bal",
    "maxTier": 15,
    "maxKills": 250,
-   "bracket": 6
+   "bracket": 6,
+   "table": "main"
   },
   {
    "island": "Crystal Hollows",
@@ -992,1063 +487,1043 @@
    "id": "boss_corleone",
    "maxTier": 15,
    "maxKills": 100,
-   "bracket": 7
+   "bracket": 7,
+   "table": "main"
   },
   {
    "island": "Crystal Hollows",
    "name": "Butterfly",
    "id": "butterfly",
    "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
+   "maxKills": 100,
+   "bracket": 7,
+   "table": "main"
   },
   {
    "island": "Crystal Hollows",
    "name": "Grunt",
    "id": "grunt",
-   "maxTier": 15,
-   "maxKills": 4000,
-   "bracket": 3
+   "maxTier": 10,
+   "maxKills": 3000,
+   "bracket": 1,
+   "table": "main"
   },
   {
    "island": "Crystal Hollows",
    "name": "Key Guardian",
    "id": "key_guardian",
    "maxTier": 15,
-   "maxKills": 250,
-   "bracket": 6
+   "maxKills": 100,
+   "bracket": 7,
+   "table": "main"
   },
   {
    "island": "Crystal Hollows",
    "name": "Sludge",
    "id": "sludge",
+   "maxTier": 10,
+   "maxKills": 3000,
+   "bracket": 1,
+   "table": "main"
+  },
+  {
+   "island": "Crystal Hollows",
+   "name": "Stoneworm",
+   "id": "stoneworm",
    "maxTier": 15,
-   "maxKills": 10000,
-   "bracket": 2
+   "maxKills": 250,
+   "bracket": 6,
+   "table": "main"
   },
   {
    "island": "Crystal Hollows",
    "name": "Thyst",
    "id": "thyst",
    "maxTier": 15,
-   "maxKills": 4000,
-   "bracket": 3
-  },
-  {
-   "island": "Crystal Hollows",
-   "name": "Worm",
-   "id": "worm",
-   "maxTier": 15,
    "maxKills": 400,
-   "bracket": 5
+   "bracket": 5,
+   "table": "main"
   },
   {
    "island": "Crystal Hollows",
    "name": "Yog",
    "id": "yog",
-   "maxTier": 15,
-   "maxKills": 4000,
-   "bracket": 3
+   "maxTier": 10,
+   "maxKills": 3000,
+   "bracket": 1,
+   "table": "main"
   },
   {
-   "island": "The Park",
-   "name": "Howling Spirit",
-   "id": "howling_spirit",
-   "maxTier": 15,
-   "maxKills": 10000,
-   "bracket": 2
+   "island": "Deep Caverns",
+   "name": "Emerald Slime",
+   "id": "emerald_slime",
+   "maxTier": 5,
+   "maxKills": 200,
+   "bracket": 1,
+   "table": "main"
   },
   {
-   "island": "The Park",
-   "name": "Pack Spirit",
-   "id": "pack_spirit",
-   "maxTier": 15,
-   "maxKills": 10000,
-   "bracket": 2
+   "island": "Deep Caverns",
+   "name": "Lapis Zombie",
+   "id": "lapis_zombie",
+   "maxTier": 5,
+   "maxKills": 200,
+   "bracket": 1,
+   "table": "main"
   },
   {
-   "island": "The Park",
-   "name": "Soul of the Alpha",
-   "id": "soul_of_the_alpha",
+   "island": "Deep Caverns",
+   "name": "Miner Skeleton",
+   "id": "miner_skeleton",
+   "maxTier": 5,
+   "maxKills": 200,
+   "bracket": 1,
+   "table": "main"
+  },
+  {
+   "island": "Deep Caverns",
+   "name": "Miner Zombie",
+   "id": "miner_zombie",
+   "maxTier": 5,
+   "maxKills": 200,
+   "bracket": 1,
+   "table": "main"
+  },
+  {
+   "island": "Deep Caverns",
+   "name": "Redstone Pigman",
+   "id": "redstone_pigman",
+   "maxTier": 5,
+   "maxKills": 200,
+   "bracket": 1,
+   "table": "main"
+  },
+  {
+   "island": "Deep Caverns",
+   "name": "Sneaky Creeper",
+   "id": "sneaky_creeper",
+   "maxTier": 5,
+   "maxKills": 50,
+   "bracket": 2,
+   "table": "main"
+  },
+  {
+   "island": "Dwarven Mines",
+   "name": "Diamond Goblin",
+   "id": "diamond_goblin",
+   "maxTier": 15,
+   "maxKills": 50,
+   "bracket": 8,
+   "table": "main"
+  },
+  {
+   "island": "Dwarven Mines",
+   "name": "Ghost",
+   "id": "ghost",
+   "maxTier": 20,
+   "maxKills": 25000,
+   "bracket": 2,
+   "table": "main"
+  },
+  {
+   "island": "Dwarven Mines",
+   "name": "Glacite Bowman",
+   "id": "glacite_bowman",
    "maxTier": 15,
    "maxKills": 1000,
-   "bracket": 4
+   "bracket": 4,
+   "table": "main"
   },
   {
-   "island": "Galatea",
-   "name": "Bogged",
-   "id": "bogged",
+   "island": "Dwarven Mines",
+   "name": "Glacite Caver",
+   "id": "glacite_caver",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Dwarven Mines",
+   "name": "Glacite Mage",
+   "id": "glacite_mage",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Dwarven Mines",
+   "name": "Glacite Mutt",
+   "id": "glacite_mutt",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Dwarven Mines",
+   "name": "Glacite Walker",
+   "id": "glacite_walker",
+   "maxTier": 10,
+   "maxKills": 3000,
+   "bracket": 1,
+   "table": "main"
+  },
+  {
+   "island": "Dwarven Mines",
+   "name": "Goblin",
+   "id": "goblin",
    "maxTier": 20,
    "maxKills": 3000,
-   "bracket": 4
+   "bracket": 4,
+   "table": "main"
   },
   {
-   "island": "Galatea",
-   "name": "Chill",
-   "id": "chill",
+   "island": "Dwarven Mines",
+   "name": "Goblin Raiders",
+   "id": "goblin_raiders",
    "maxTier": 15,
    "maxKills": 1000,
-   "bracket": 4
+   "bracket": 4,
+   "table": "main"
   },
   {
-   "island": "Galatea",
-   "name": "Ent",
-   "id": "ent",
+   "island": "Dwarven Mines",
+   "name": "Golden Goblin",
+   "id": "golden_goblin",
+   "maxTier": 15,
+   "maxKills": 250,
+   "bracket": 6,
+   "table": "main"
+  },
+  {
+   "island": "Dwarven Mines",
+   "name": "Littlefoot",
+   "id": "littlefoot",
+   "maxTier": 5,
+   "maxKills": 50,
+   "bracket": 2,
+   "table": "main"
+  },
+  {
+   "island": "Dwarven Mines",
+   "name": "Powder Ghast",
+   "id": "powder_ghast",
+   "maxTier": 15,
+   "maxKills": 50,
+   "bracket": 8,
+   "table": "main"
+  },
+  {
+   "island": "Dwarven Mines",
+   "name": "Star Sentry",
+   "id": "star_sentry",
+   "maxTier": 15,
+   "maxKills": 250,
+   "bracket": 6,
+   "table": "main"
+  },
+  {
+   "island": "Dwarven Mines",
+   "name": "Treasure Hoarder",
+   "id": "treasure_hoarder",
    "maxTier": 15,
    "maxKills": 1000,
-   "bracket": 4
+   "bracket": 4,
+   "table": "main"
   },
   {
-   "island": "Galatea",
-   "name": "Stridersurfer",
-   "id": "stridersurfer",
-   "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
-  },
-  {
-   "island": "Galatea",
-   "name": "Tadgang",
-   "id": "tadgang",
-   "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
-  },
-  {
-   "island": "Galatea",
-   "name": "The Loch Emperor",
-   "id": "the_loch_emperor",
-   "maxTier": 15,
-   "maxKills": 400,
-   "bracket": 5
-  },
-  {
-   "island": "Galatea",
-   "name": "Tidetot",
-   "id": "tidetot",
-   "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
-  },
-  {
-   "island": "Spooky Festival",
-   "name": "Crazy Witch",
-   "id": "crazy_witch",
-   "maxTier": 10,
-   "maxKills": 750,
-   "bracket": 2
-  },
-  {
-   "island": "Spooky Festival",
-   "name": "Headless Horseman",
-   "id": "headless_horseman",
-   "maxTier": 20,
-   "maxKills": 500,
-   "bracket": 7
-  },
-  {
-   "island": "Spooky Festival",
-   "name": "Phantom Spirit",
-   "id": "phantom_spirit",
-   "maxTier": 10,
-   "maxKills": 750,
-   "bracket": 2
-  },
-  {
-   "island": "Spooky Festival",
-   "name": "Scary Jerry",
-   "id": "scary_jerry",
-   "maxTier": 10,
-   "maxKills": 750,
-   "bracket": 2
-  },
-  {
-   "island": "Spooky Festival",
-   "name": "Trick or Treater",
-   "id": "trick_or_treater",
-   "maxTier": 10,
-   "maxKills": 750,
-   "bracket": 2
-  },
-  {
-   "island": "Spooky Festival",
-   "name": "Wither Gourd",
-   "id": "wither_gourd",
-   "maxTier": 10,
-   "maxKills": 750,
-   "bracket": 2
-  },
-  {
-   "island": "Spooky Festival",
-   "name": "Wraith",
-   "id": "wraith",
-   "maxTier": 10,
-   "maxKills": 750,
-   "bracket": 2
-  },
-  {
-   "island": "The Catacombs",
-   "name": "Angry Archeologist",
-   "id": "angry_archeologist",
-   "maxTier": 25,
-   "maxKills": 3000,
-   "bracket": 7
-  },
-  {
-   "island": "The Catacombs",
-   "name": "Bat",
-   "id": "bat",
-   "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
-  },
-  {
-   "island": "The Catacombs",
-   "name": "Cellar Spider",
-   "id": "cellar_spider",
-   "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
-  },
-  {
-   "island": "The Catacombs",
-   "name": "Crypt Dreadlord",
-   "id": "crypt_dreadlord",
-   "maxTier": 25,
-   "maxKills": 25000,
-   "bracket": 4
-  },
-  {
-   "island": "The Catacombs",
-   "name": "Crypt Lurker",
-   "id": "crypt_lurker",
-   "maxTier": 25,
-   "maxKills": 25000,
-   "bracket": 4
-  },
-  {
-   "island": "The Catacombs",
-   "name": "Crypt Souleater",
-   "id": "crypt_souleater",
-   "maxTier": 25,
-   "maxKills": 25000,
-   "bracket": 4
-  },
-  {
-   "island": "The Catacombs",
-   "name": "Fels",
-   "id": "fels",
-   "maxTier": 25,
-   "maxKills": 25000,
-   "bracket": 4
-  },
-  {
-   "island": "The Catacombs",
-   "name": "Golem",
-   "id": "golem",
-   "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
-  },
-  {
-   "island": "The Catacombs",
-   "name": "King Midas",
-   "id": "king_midas",
-   "maxTier": 20,
-   "maxKills": 750,
-   "bracket": 6
-  },
-  {
-   "island": "The Catacombs",
-   "name": "Lonely Spider",
-   "id": "lonely_spider",
-   "maxTier": 25,
-   "maxKills": 25000,
-   "bracket": 4
-  },
-  {
-   "island": "The Catacombs",
-   "name": "Lost Adventurer",
-   "id": "lost_adventurer",
-   "maxTier": 25,
-   "maxKills": 3000,
-   "bracket": 7
-  },
-  {
-   "island": "The Catacombs",
-   "name": "Mimic",
-   "id": "mimic",
-   "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
-  },
-  {
-   "island": "The Catacombs",
-   "name": "Scared Skeleton",
-   "id": "scared_skeleton",
-   "maxTier": 15,
-   "maxKills": 4000,
-   "bracket": 3
-  },
-  {
-   "island": "The Catacombs",
-   "name": "Shadow Assassin",
-   "id": "shadow_assassin",
-   "maxTier": 25,
-   "maxKills": 3000,
-   "bracket": 7
-  },
-  {
-   "island": "The Catacombs",
-   "name": "Skeleton Grunt",
-   "id": "skeleton_grunt",
-   "maxTier": 15,
-   "maxKills": 4000,
-   "bracket": 3
-  },
-  {
-   "island": "The Catacombs",
-   "name": "Skeleton Lord",
-   "id": "skeleton_lord",
-   "maxTier": 20,
-   "maxKills": 1000,
-   "bracket": 5
-  },
-  {
-   "island": "The Catacombs",
-   "name": "Skeleton Master",
-   "id": "skeleton_master",
-   "maxTier": 25,
-   "maxKills": 25000,
-   "bracket": 4
-  },
-  {
-   "island": "The Catacombs",
-   "name": "Skeleton Soldier",
-   "id": "skeleton_soldier",
-   "maxTier": 15,
-   "maxKills": 40000,
-   "bracket": 1
-  },
-  {
-   "island": "The Catacombs",
-   "name": "Skeletor",
-   "id": "skeletor",
-   "maxTier": 25,
-   "maxKills": 10000,
-   "bracket": 5
-  },
-  {
-   "island": "The Catacombs",
-   "name": "Sniper",
-   "id": "sniper",
-   "maxTier": 15,
-   "maxKills": 4000,
-   "bracket": 3
-  },
-  {
-   "island": "The Catacombs",
-   "name": "Super Archer",
-   "id": "super_archer",
-   "maxTier": 25,
-   "maxKills": 10000,
-   "bracket": 5
-  },
-  {
-   "island": "The Catacombs",
-   "name": "Super Tank Zombie",
-   "id": "super_tank_zombie",
-   "maxTier": 25,
-   "maxKills": 25000,
-   "bracket": 4
-  },
-  {
-   "island": "The Catacombs",
-   "name": "Tank Zombie",
-   "id": "tank_zombie",
-   "maxTier": 15,
-   "maxKills": 4000,
-   "bracket": 3
-  },
-  {
-   "island": "The Catacombs",
-   "name": "Terracotta",
-   "id": "terracotta",
-   "maxTier": 15,
-   "maxKills": 40000,
-   "bracket": 1
-  },
-  {
-   "island": "The Catacombs",
-   "name": "Undead",
-   "id": "undead",
-   "maxTier": 15,
-   "maxKills": 10000,
-   "bracket": 2
-  },
-  {
-   "island": "The Catacombs",
-   "name": "Undead Skeleton",
-   "id": "undead_skeleton",
-   "maxTier": 25,
-   "maxKills": 25000,
-   "bracket": 4
-  },
-  {
-   "island": "The Catacombs",
-   "name": "Wither Guard",
-   "id": "wither_guard",
-   "maxTier": 25,
-   "maxKills": 10000,
-   "bracket": 5
-  },
-  {
-   "island": "The Catacombs",
-   "name": "Wither Husk",
-   "id": "wither_husk",
-   "maxTier": 25,
-   "maxKills": 10000,
-   "bracket": 5
-  },
-  {
-   "island": "The Catacombs",
-   "name": "Wither Miner",
-   "id": "wither_miner",
-   "maxTier": 25,
-   "maxKills": 25000,
-   "bracket": 4
-  },
-  {
-   "island": "The Catacombs",
-   "name": "Withermancer",
-   "id": "withermancer",
-   "maxTier": 25,
-   "maxKills": 25000,
-   "bracket": 4
-  },
-  {
-   "island": "The Catacombs",
-   "name": "Zombie Commander",
-   "id": "zombie_commander",
-   "maxTier": 20,
-   "maxKills": 3000,
-   "bracket": 4
-  },
-  {
-   "island": "The Catacombs",
-   "name": "Zombie Grunt",
-   "id": "zombie_grunt",
-   "maxTier": 15,
-   "maxKills": 4000,
-   "bracket": 3
-  },
-  {
-   "island": "The Catacombs",
-   "name": "Zombie Knight",
-   "id": "zombie_knight",
-   "maxTier": 25,
-   "maxKills": 10000,
-   "bracket": 5
-  },
-  {
-   "island": "The Catacombs",
-   "name": "Zombie Lord",
-   "id": "zombie_lord",
-   "maxTier": 20,
-   "maxKills": 1000,
-   "bracket": 5
-  },
-  {
-   "island": "The Catacombs",
-   "name": "Zombie Soldier",
-   "id": "zombie_soldier",
-   "maxTier": 15,
-   "maxKills": 40000,
-   "bracket": 1
-  },
-  {
-   "island": "Fishing",
+   "island": "Families",
    "name": "Abyssal Miner",
    "id": "abyssal_miner",
    "maxTier": 15,
    "maxKills": 250,
-   "bracket": 6
+   "bracket": 6,
+   "table": "main"
   },
   {
-   "island": "Fishing",
+   "island": "Families",
    "name": "Agarimoo",
    "id": "agarimoo",
    "maxTier": 15,
    "maxKills": 4000,
-   "bracket": 3
+   "bracket": 3,
+   "table": "main"
   },
   {
-   "island": "Fishing",
-   "name": "Blue Ringed Octopus",
-   "id": "blue_ringed_octopus",
-   "maxTier": 15,
-   "maxKills": 400,
-   "bracket": 5
-  },
-  {
-   "island": "Fishing",
-   "name": "Carrot King",
-   "id": "carrot_king",
-   "maxTier": 15,
-   "maxKills": 400,
-   "bracket": 5
-  },
-  {
-   "island": "Fishing",
-   "name": "Catfish",
-   "id": "catfish",
-   "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
-  },
-  {
-   "island": "Fishing",
-   "name": "Deep Sea Protector",
-   "id": "deep_sea_protector",
-   "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
-  },
-  {
-   "island": "Fishing",
-   "name": "Frog Man",
-   "id": "frog_man",
-   "maxTier": 20,
-   "maxKills": 3000,
-   "bracket": 4
-  },
-  {
-   "island": "Fishing",
-   "name": "Guardian Defender",
-   "id": "guardian_defender",
-   "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
-  },
-  {
-   "island": "Fishing",
-   "name": "Mithril Grubber",
-   "id": "mithril_grubber",
-   "maxTier": 10,
-   "maxKills": 300,
-   "bracket": 3
-  },
-  {
-   "island": "Fishing",
-   "name": "Night Squid",
-   "id": "night_squid",
-   "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
-  },
-  {
-   "island": "Fishing",
-   "name": "Oasis Rabbit",
-   "id": "oasis_rabbit",
-   "maxTier": 10,
-   "maxKills": 300,
-   "bracket": 3
-  },
-  {
-   "island": "Fishing",
-   "name": "Oasis Sheep",
-   "id": "oasis_sheep",
-   "maxTier": 10,
-   "maxKills": 300,
-   "bracket": 3
-  },
-  {
-   "island": "Fishing",
-   "name": "Poisoned Water Worm",
-   "id": "poisoned_water_worm",
-   "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
-  },
-  {
-   "island": "Fishing",
-   "name": "Rider of the Deep",
-   "id": "rider_of_the_deep",
-   "maxTier": 15,
-   "maxKills": 4000,
-   "bracket": 3
-  },
-  {
-   "island": "Fishing",
-   "name": "Sea Archer",
-   "id": "sea_archer",
-   "maxTier": 15,
-   "maxKills": 4000,
-   "bracket": 3
-  },
-  {
-   "island": "Fishing",
-   "name": "Sea Guardian",
-   "id": "sea_guardian",
-   "maxTier": 15,
-   "maxKills": 4000,
-   "bracket": 3
-  },
-  {
-   "island": "Fishing",
-   "name": "Sea Leech",
-   "id": "sea_leech",
-   "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
-  },
-  {
-   "island": "Fishing",
-   "name": "Sea Walker",
-   "id": "sea_walker",
-   "maxTier": 15,
-   "maxKills": 4000,
-   "bracket": 3
-  },
-  {
-   "island": "Fishing",
-   "name": "Sea Witch",
-   "id": "sea_witch",
-   "maxTier": 15,
-   "maxKills": 4000,
-   "bracket": 3
-  },
-  {
-   "island": "Fishing",
-   "name": "Snapping Turtle",
-   "id": "snapping_turtle",
-   "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
-  },
-  {
-   "island": "Fishing",
-   "name": "Squid",
-   "id": "squid",
-   "maxTier": 15,
-   "maxKills": 10000,
-   "bracket": 2
-  },
-  {
-   "island": "Fishing",
-   "name": "Water Hydra",
-   "id": "water_hydra",
-   "maxTier": 15,
-   "maxKills": 400,
-   "bracket": 5
-  },
-  {
-   "island": "Fishing",
-   "name": "Water Worm",
-   "id": "water_worm",
-   "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
-  },
-  {
-   "island": "Fishing",
-   "name": "Wetwing",
-   "id": "wetwing",
-   "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
-  },
-  {
-   "island": "Fishing",
-   "name": "Wiki Tiki",
-   "id": "wiki_tiki",
-   "maxTier": 15,
-   "maxKills": 100,
-   "bracket": 7
-  },
-  {
-   "island": "Fishing",
-   "name": "Fiery Scuttler",
-   "id": "fiery_scuttler",
-   "maxTier": 15,
-   "maxKills": 400,
-   "bracket": 5
-  },
-  {
-   "island": "Fishing",
-   "name": "Fire Eel",
-   "id": "fire_eel",
-   "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
-  },
-  {
-   "island": "Fishing",
-   "name": "Fireproof Witch",
-   "id": "fireproof_witch",
-   "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
-  },
-  {
-   "island": "Fishing",
-   "name": "Flaming Worm",
-   "id": "flaming_worm",
-   "maxTier": 15,
-   "maxKills": 4000,
-   "bracket": 3
-  },
-  {
-   "island": "Fishing",
-   "name": "Fried Chicken",
-   "id": "fried_chicken",
-   "maxTier": 20,
-   "maxKills": 3000,
-   "bracket": 4
-  },
-  {
-   "island": "Fishing",
-   "name": "Lava Blaze",
-   "id": "lava_blaze",
-   "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
-  },
-  {
-   "island": "Fishing",
-   "name": "Lava Flame",
-   "id": "lava_flame",
-   "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
-  },
-  {
-   "island": "Fishing",
-   "name": "Lava Leech",
-   "id": "lava_leech",
-   "maxTier": 15,
-   "maxKills": 4000,
-   "bracket": 3
-  },
-  {
-   "island": "Fishing",
-   "name": "Lava Pigman",
-   "id": "lava_pigman",
-   "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
-  },
-  {
-   "island": "Fishing",
-   "name": "Lord Jawbus",
-   "id": "lord_jawbus",
-   "maxTier": 15,
-   "maxKills": 100,
-   "bracket": 7
-  },
-  {
-   "island": "Fishing",
-   "name": "Magma Slug",
-   "id": "magma_slug",
-   "maxTier": 15,
-   "maxKills": 10000,
-   "bracket": 2
-  },
-  {
-   "island": "Fishing",
-   "name": "Moogma",
-   "id": "moogma",
-   "maxTier": 15,
-   "maxKills": 4000,
-   "bracket": 3
-  },
-  {
-   "island": "Fishing",
-   "name": "Plhlegblast",
-   "id": "plhlegblast",
-   "maxTier": 5,
-   "maxKills": 7,
-   "bracket": 7
-  },
-  {
-   "island": "Fishing",
-   "name": "Pyroclastic Worm",
-   "id": "pyroclastic_worm",
-   "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
-  },
-  {
-   "island": "Fishing",
-   "name": "Ragnarok",
-   "id": "ragnarok",
-   "maxTier": 15,
-   "maxKills": 100,
-   "bracket": 7
-  },
-  {
-   "island": "Fishing",
-   "name": "Taurus",
-   "id": "taurus",
-   "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
-  },
-  {
-   "island": "Fishing",
-   "name": "Thunder",
-   "id": "thunder",
-   "maxTier": 15,
-   "maxKills": 400,
-   "bracket": 5
-  },
-  {
-   "island": "Fishing",
-   "name": "Grim Reaper",
-   "id": "grim_reaper",
-   "maxTier": 15,
-   "maxKills": 100,
-   "bracket": 7
-  },
-  {
-   "island": "Fishing",
-   "name": "Nightmare",
-   "id": "nightmare",
-   "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
-  },
-  {
-   "island": "Fishing",
-   "name": "Phantom Fisher",
-   "id": "phantom_fisher",
-   "maxTier": 15,
-   "maxKills": 250,
-   "bracket": 6
-  },
-  {
-   "island": "Fishing",
-   "name": "Scarecrow",
-   "id": "scarecrow",
-   "maxTier": 15,
-   "maxKills": 4000,
-   "bracket": 3
-  },
-  {
-   "island": "Fishing",
-   "name": "Werewolf",
-   "id": "werewolf",
-   "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
-  },
-  {
-   "island": "Fishing",
-   "name": "Blue Shark",
-   "id": "blue_shark",
-   "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
-  },
-  {
-   "island": "Fishing",
-   "name": "Great White Shark",
-   "id": "great_white_shark",
-   "maxTier": 15,
-   "maxKills": 400,
-   "bracket": 5
-  },
-  {
-   "island": "Fishing",
-   "name": "Nurse Shark",
-   "id": "nurse_shark",
-   "maxTier": 15,
-   "maxKills": 4000,
-   "bracket": 3
-  },
-  {
-   "island": "Fishing",
-   "name": "Tiger Shark",
-   "id": "tiger_shark",
-   "maxTier": 15,
-   "maxKills": 1000,
-   "bracket": 4
-  },
-  {
-   "island": "Fishing",
-   "name": "Frosty",
-   "id": "frosty",
-   "maxTier": 15,
-   "maxKills": 4000,
-   "bracket": 3
-  },
-  {
-   "island": "Fishing",
-   "name": "Frozen Steve",
-   "id": "frozen_steve",
-   "maxTier": 15,
-   "maxKills": 4000,
-   "bracket": 3
-  },
-  {
-   "island": "Fishing",
-   "name": "Grinch",
-   "id": "grinch",
-   "maxTier": 15,
-   "maxKills": 250,
-   "bracket": 6
-  },
-  {
-   "island": "Fishing",
-   "name": "Nutcracker",
-   "id": "nutcracker",
-   "maxTier": 15,
-   "maxKills": 400,
-   "bracket": 5
-  },
-  {
-   "island": "Fishing",
-   "name": "Reindrake",
-   "id": "reindrake",
-   "maxTier": 15,
-   "maxKills": 100,
-   "bracket": 7
-  },
-  {
-   "island": "Fishing",
-   "name": "Yeti",
-   "id": "yeti",
-   "maxTier": 15,
-   "maxKills": 250,
-   "bracket": 6
-  },
-  {
-   "island": "Fishing",
+   "island": "Families",
    "name": "Alligator",
    "id": "alligator",
    "maxTier": 15,
    "maxKills": 400,
-   "bracket": 5
+   "bracket": 5,
+   "table": "main"
   },
   {
-   "island": "Fishing",
+   "island": "Families",
+   "name": "Angry Archeologist",
+   "id": "angry_archeologist",
+   "maxTier": 25,
+   "maxKills": 3000,
+   "bracket": 7,
+   "table": "main"
+  },
+  {
+   "island": "Families",
    "name": "Banshee",
    "id": "banshee",
    "maxTier": 15,
    "maxKills": 1000,
-   "bracket": 4
+   "bracket": 4,
+   "table": "main"
   },
   {
-   "island": "Fishing",
+   "island": "Families",
    "name": "Bayou Sludge",
    "id": "bayou_sludge",
    "maxTier": 15,
    "maxKills": 1000,
-   "bracket": 4
+   "bracket": 4,
+   "table": "main"
   },
   {
-   "island": "Fishing",
+   "island": "Families",
+   "name": "Blue Ringed Octopus",
+   "id": "blue_ringed_octopus",
+   "maxTier": 15,
+   "maxKills": 400,
+   "bracket": 5,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Blue Shark",
+   "id": "blue_shark",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Carrot King",
+   "id": "carrot_king",
+   "maxTier": 15,
+   "maxKills": 400,
+   "bracket": 5,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Catfish",
+   "id": "catfish",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Deep Sea Protector",
+   "id": "deep_sea_protector",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Families",
    "name": "Dumpster Diver",
    "id": "dumpster_diver",
    "maxTier": 15,
    "maxKills": 1000,
-   "bracket": 4
+   "bracket": 4,
+   "table": "main"
   },
   {
-   "island": "Fishing",
+   "island": "Families",
+   "name": "Endstone Protector",
+   "id": "endstone_protector",
+   "maxTier": 20,
+   "maxKills": 500,
+   "bracket": 7,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Fiery Scuttler",
+   "id": "fiery_scuttler",
+   "maxTier": 15,
+   "maxKills": 400,
+   "bracket": 5,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Fire Eel",
+   "id": "fire_eel",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Fireproof Witch",
+   "id": "fireproof_witch",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Flaming Worm",
+   "id": "flaming_worm",
+   "maxTier": 15,
+   "maxKills": 4000,
+   "bracket": 3,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Fried Chicken",
+   "id": "fried_chicken",
+   "maxTier": 20,
+   "maxKills": 3000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Frog Man",
+   "id": "frog_man",
+   "maxTier": 20,
+   "maxKills": 3000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Frosty",
+   "id": "frosty",
+   "maxTier": 15,
+   "maxKills": 4000,
+   "bracket": 3,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Frozen Steve",
+   "id": "frozen_steve",
+   "maxTier": 15,
+   "maxKills": 4000,
+   "bracket": 3,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Gravel Skeleton",
+   "id": "gravel_skeleton",
+   "maxTier": 15,
+   "maxKills": 4000,
+   "bracket": 3,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Great White Shark",
+   "id": "great_white_shark",
+   "maxTier": 15,
+   "maxKills": 400,
+   "bracket": 5,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Grim Reaper",
+   "id": "grim_reaper",
+   "maxTier": 15,
+   "maxKills": 100,
+   "bracket": 7,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Grinch",
+   "id": "grinch",
+   "maxTier": 15,
+   "maxKills": 250,
+   "bracket": 6,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Guardian Defender",
+   "id": "guardian_defender",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Lava Blaze",
+   "id": "lava_blaze",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Lava Flame",
+   "id": "lava_flame",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Lava Leech",
+   "id": "lava_leech",
+   "maxTier": 15,
+   "maxKills": 4000,
+   "bracket": 3,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Lava Pigman",
+   "id": "lava_pigman",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Lord Jawbus",
+   "id": "lord_jawbus",
+   "maxTier": 15,
+   "maxKills": 100,
+   "bracket": 7,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Magma Slug",
+   "id": "magma_slug",
+   "maxTier": 15,
+   "maxKills": 10000,
+   "bracket": 2,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Mithril Grubber",
+   "id": "mithril_grubber",
+   "maxTier": 10,
+   "maxKills": 300,
+   "bracket": 3,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Night Squid",
+   "id": "night_squid",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Nightmare",
+   "id": "nightmare",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Nurse Shark",
+   "id": "nurse_shark",
+   "maxTier": 15,
+   "maxKills": 4000,
+   "bracket": 3,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Nutcracker",
+   "id": "nutcracker",
+   "maxTier": 15,
+   "maxKills": 400,
+   "bracket": 5,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Oasis Rabbit",
+   "id": "oasis_rabbit",
+   "maxTier": 10,
+   "maxKills": 300,
+   "bracket": 3,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Oasis Sheep",
+   "id": "oasis_sheep",
+   "maxTier": 10,
+   "maxKills": 300,
+   "bracket": 3,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Phantom Fisher",
+   "id": "phantom_fisher",
+   "maxTier": 15,
+   "maxKills": 250,
+   "bracket": 6,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Plhlegblast",
+   "id": "plhlegblast",
+   "maxTier": 5,
+   "maxKills": 7,
+   "bracket": 5,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Poisoned Water Worm",
+   "id": "poisoned_water_worm",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Ragnarok",
+   "id": "ragnarok",
+   "maxTier": 15,
+   "maxKills": 100,
+   "bracket": 7,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Reindrake",
+   "id": "reindrake",
+   "maxTier": 15,
+   "maxKills": 100,
+   "bracket": 7,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Rider of the Deep",
+   "id": "rider_of_the_deep",
+   "maxTier": 15,
+   "maxKills": 4000,
+   "bracket": 3,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Scarecrow",
+   "id": "scarecrow",
+   "maxTier": 15,
+   "maxKills": 4000,
+   "bracket": 3,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Sea Archer",
+   "id": "sea_archer",
+   "maxTier": 15,
+   "maxKills": 4000,
+   "bracket": 3,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Sea Guardian",
+   "id": "sea_guardian",
+   "maxTier": 15,
+   "maxKills": 4000,
+   "bracket": 3,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Sea Leech",
+   "id": "sea_leech",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Sea Walker",
+   "id": "sea_walker",
+   "maxTier": 15,
+   "maxKills": 4000,
+   "bracket": 3,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Sea Witch",
+   "id": "sea_witch",
+   "maxTier": 15,
+   "maxKills": 4000,
+   "bracket": 3,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Snapping Turtle",
+   "id": "snapping_turtle",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Squid",
+   "id": "squid",
+   "maxTier": 15,
+   "maxKills": 10000,
+   "bracket": 2,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Taurus",
+   "id": "taurus",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Thunder",
+   "id": "thunder",
+   "maxTier": 15,
+   "maxKills": 400,
+   "bracket": 5,
+   "table": "main"
+  },
+  {
+   "island": "Families",
+   "name": "Tiger Shark",
+   "id": "tiger_shark",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Families",
    "name": "Titanoboa",
    "id": "titanoboa",
    "maxTier": 15,
    "maxKills": 100,
-   "bracket": 7
+   "bracket": 7,
+   "table": "main"
   },
   {
-   "island": "Fishing",
+   "island": "Families",
    "name": "Trash Gobbler",
    "id": "trash_gobbler",
    "maxTier": 15,
    "maxKills": 1000,
-   "bracket": 4
+   "bracket": 4,
+   "table": "main"
   },
   {
-   "island": "Mythological",
-   "name": "Cretan Bull",
-   "id": "cretan_bull",
-   "maxTier": 20,
-   "maxKills": 3000,
-   "bracket": 4
+   "island": "Families",
+   "name": "Water Hydra",
+   "id": "water_hydra",
+   "maxTier": 15,
+   "maxKills": 400,
+   "bracket": 5,
+   "table": "main"
   },
   {
-   "island": "Mythological",
-   "name": "Gaia Construct",
-   "id": "gaia_construct",
-   "maxTier": 20,
-   "maxKills": 3000,
-   "bracket": 4
-  },
-  {
-   "island": "Mythological",
-   "name": "Harpy",
-   "id": "harpy",
-   "maxTier": 20,
-   "maxKills": 3000,
-   "bracket": 4
-  },
-  {
-   "island": "Mythological",
-   "name": "Minos Champion",
-   "id": "minos_champion",
-   "maxTier": 20,
+   "island": "Families",
+   "name": "Water Worm",
+   "id": "water_worm",
+   "maxTier": 15,
    "maxKills": 1000,
-   "bracket": 5
+   "bracket": 4,
+   "table": "main"
   },
   {
-   "island": "Mythological",
-   "name": "Minos Hunter",
-   "id": "minos_hunter",
-   "maxTier": 20,
-   "maxKills": 3000,
-   "bracket": 4
+   "island": "Families",
+   "name": "Werewolf",
+   "id": "werewolf",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
   },
   {
-   "island": "Mythological",
-   "name": "Minos Inquisitor",
-   "id": "minos_inquisitor",
-   "maxTier": 20,
-   "maxKills": 500,
-   "bracket": 7
+   "island": "Families",
+   "name": "Wiki Tiki",
+   "id": "wiki_tiki",
+   "maxTier": 15,
+   "maxKills": 100,
+   "bracket": 7,
+   "table": "main"
   },
   {
-   "island": "Mythological",
-   "name": "Minotaur",
-   "id": "minotaur",
-   "maxTier": 20,
-   "maxKills": 3000,
-   "bracket": 4
+   "island": "Families",
+   "name": "Worm",
+   "id": "worm",
+   "maxTier": 15,
+   "maxKills": 400,
+   "bracket": 5,
+   "table": "main"
   },
   {
-   "island": "Mythological",
-   "name": "Siamese Lynx",
-   "id": "siamese_lynx",
-   "maxTier": 20,
-   "maxKills": 3000,
-   "bracket": 4
+   "island": "Families",
+   "name": "Yeti",
+   "id": "yeti",
+   "maxTier": 15,
+   "maxKills": 250,
+   "bracket": 6,
+   "table": "main"
   },
   {
-   "island": "Mythological",
-   "name": "Sphinx",
-   "id": "sphinx",
-   "maxTier": 20,
-   "maxKills": 500,
-   "bracket": 7
+   "island": "Garden",
+   "name": "Beetle",
+   "id": "beetle",
+   "maxTier": 15,
+   "maxKills": 250,
+   "bracket": 6,
+   "table": "main"
   },
   {
-   "island": "Mythological",
-   "name": "Stranded Nymph",
-   "id": "stranded_nymph",
+   "island": "Garden",
+   "name": "Cricket",
+   "id": "cricket",
+   "maxTier": 15,
+   "maxKills": 250,
+   "bracket": 6,
+   "table": "main"
+  },
+  {
+   "island": "Garden",
+   "name": "Dragonfly",
+   "id": "dragonfly",
+   "maxTier": 15,
+   "maxKills": 250,
+   "bracket": 6,
+   "table": "main"
+  },
+  {
+   "island": "Garden",
+   "name": "Earthworm",
+   "id": "earthworm",
+   "maxTier": 15,
+   "maxKills": 250,
+   "bracket": 6,
+   "table": "main"
+  },
+  {
+   "island": "Garden",
+   "name": "Field Mouse",
+   "id": "field_mouse",
+   "maxTier": 15,
+   "maxKills": 100,
+   "bracket": 7,
+   "table": "main"
+  },
+  {
+   "island": "Garden",
+   "name": "Firefly",
+   "id": "firefly",
+   "maxTier": 15,
+   "maxKills": 250,
+   "bracket": 6,
+   "table": "main"
+  },
+  {
+   "island": "Garden",
+   "name": "Fly",
+   "id": "fly",
+   "maxTier": 15,
+   "maxKills": 250,
+   "bracket": 6,
+   "table": "main"
+  },
+  {
+   "island": "Garden",
+   "name": "Locust",
+   "id": "locust",
+   "maxTier": 15,
+   "maxKills": 250,
+   "bracket": 6,
+   "table": "main"
+  },
+  {
+   "island": "Garden",
+   "name": "Lunar Moth",
+   "id": "lunar_moth",
+   "maxTier": 15,
+   "maxKills": 100,
+   "bracket": 7,
+   "table": "main"
+  },
+  {
+   "island": "Garden",
+   "name": "Mite",
+   "id": "mite",
+   "maxTier": 15,
+   "maxKills": 250,
+   "bracket": 6,
+   "table": "main"
+  },
+  {
+   "island": "Garden",
+   "name": "Mosquito",
+   "id": "mosquito",
+   "maxTier": 15,
+   "maxKills": 250,
+   "bracket": 6,
+   "table": "main"
+  },
+  {
+   "island": "Garden",
+   "name": "Moth",
+   "id": "moth",
+   "maxTier": 15,
+   "maxKills": 250,
+   "bracket": 6,
+   "table": "main"
+  },
+  {
+   "island": "Garden",
+   "name": "Praying Mantis",
+   "id": "praying_mantis",
+   "maxTier": 15,
+   "maxKills": 250,
+   "bracket": 6,
+   "table": "main"
+  },
+  {
+   "island": "Garden",
+   "name": "Rat",
+   "id": "rat",
+   "maxTier": 15,
+   "maxKills": 250,
+   "bracket": 6,
+   "table": "main"
+  },
+  {
+   "island": "Garden",
+   "name": "Slug",
+   "id": "slug",
+   "maxTier": 15,
+   "maxKills": 250,
+   "bracket": 6,
+   "table": "main"
+  },
+  {
+   "island": "Garden",
+   "name": "Timestalk Clone",
+   "id": "timestalk_clone",
+   "maxTier": 10,
+   "maxKills": 20,
+   "bracket": 7,
+   "table": "main"
+  },
+  {
+   "island": "Garden",
+   "name": "Zombuddy",
+   "id": "zombuddy",
+   "maxTier": 15,
+   "maxKills": 100,
+   "bracket": 7,
+   "table": "main"
+  },
+  {
+   "island": "Hub",
+   "name": "Crypt Ghoul",
+   "id": "crypt_ghoul",
    "maxTier": 20,
-   "maxKills": 3000,
-   "bracket": 4
+   "maxKills": 25000,
+   "bracket": 2,
+   "table": "main"
+  },
+  {
+   "island": "Hub",
+   "name": "Golden Ghoul",
+   "id": "golden_ghoul",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Hub",
+   "name": "Graveyard Zombie",
+   "id": "graveyard_zombie",
+   "maxTier": 5,
+   "maxKills": 200,
+   "bracket": 1,
+   "table": "main"
+  },
+  {
+   "island": "Hub",
+   "name": "Old Wolf",
+   "id": "old_wolf",
+   "maxTier": 15,
+   "maxKills": 400,
+   "bracket": 5,
+   "table": "main"
+  },
+  {
+   "island": "Hub",
+   "name": "Shiny Pig",
+   "id": "shiny_pig",
+   "maxTier": 15,
+   "maxKills": 400,
+   "bracket": 5,
+   "table": "main"
+  },
+  {
+   "island": "Hub",
+   "name": "Wolf",
+   "id": "wolf",
+   "maxTier": 15,
+   "maxKills": 4000,
+   "bracket": 3,
+   "table": "main"
+  },
+  {
+   "island": "Hub",
+   "name": "Zombie Villager",
+   "id": "zombie_villager",
+   "maxTier": 5,
+   "maxKills": 200,
+   "bracket": 1,
+   "table": "main"
   },
   {
    "island": "Jerry",
@@ -2056,7 +1531,8 @@
    "id": "blue_jerry",
    "maxTier": 10,
    "maxKills": 30,
-   "bracket": 5
+   "bracket": 5,
+   "table": "main"
   },
   {
    "island": "Jerry",
@@ -2064,7 +1540,8 @@
    "id": "golden_jerry",
    "maxTier": 10,
    "maxKills": 20,
-   "bracket": 7
+   "bracket": 7,
+   "table": "main"
   },
   {
    "island": "Jerry",
@@ -2072,7 +1549,8 @@
    "id": "green_jerry",
    "maxTier": 10,
    "maxKills": 75,
-   "bracket": 4
+   "bracket": 4,
+   "table": "main"
   },
   {
    "island": "Jerry",
@@ -2080,15 +1558,17 @@
    "id": "purple_jerry",
    "maxTier": 10,
    "maxKills": 25,
-   "bracket": 6
+   "bracket": 6,
+   "table": "main"
   },
   {
    "island": "Kuudra",
    "name": "Blazing Golem",
    "id": "blazing_golem",
    "maxTier": 10,
-   "maxKills": 300,
-   "bracket": 3
+   "maxKills": 25,
+   "bracket": 6,
+   "table": "main"
   },
   {
    "island": "Kuudra",
@@ -2096,23 +1576,26 @@
    "id": "blight",
    "maxTier": 20,
    "maxKills": 10000,
-   "bracket": 3
+   "bracket": 3,
+   "table": "main"
   },
   {
    "island": "Kuudra",
    "name": "Dropship",
    "id": "dropship",
    "maxTier": 10,
-   "maxKills": 300,
-   "bracket": 3
+   "maxKills": 25,
+   "bracket": 6,
+   "table": "main"
   },
   {
    "island": "Kuudra",
    "name": "Explosive Imp",
    "id": "explosive_imp",
    "maxTier": 20,
-   "maxKills": 10000,
-   "bracket": 3
+   "maxKills": 3000,
+   "bracket": 4,
+   "table": "main"
   },
   {
    "island": "Kuudra",
@@ -2120,7 +1603,8 @@
    "id": "inferno_magma_cube",
    "maxTier": 20,
    "maxKills": 10000,
-   "bracket": 3
+   "bracket": 3,
+   "table": "main"
   },
   {
    "island": "Kuudra",
@@ -2128,7 +1612,8 @@
    "id": "kuudra_berserker",
    "maxTier": 20,
    "maxKills": 10000,
-   "bracket": 3
+   "bracket": 3,
+   "table": "main"
   },
   {
    "island": "Kuudra",
@@ -2136,7 +1621,8 @@
    "id": "kuudra_follower",
    "maxTier": 20,
    "maxKills": 25000,
-   "bracket": 2
+   "bracket": 2,
+   "table": "main"
   },
   {
    "island": "Kuudra",
@@ -2144,7 +1630,8 @@
    "id": "kuudra_knocker",
    "maxTier": 20,
    "maxKills": 10000,
-   "bracket": 3
+   "bracket": 3,
+   "table": "main"
   },
   {
    "island": "Kuudra",
@@ -2152,23 +1639,26 @@
    "id": "kuudra_landmine",
    "maxTier": 20,
    "maxKills": 10000,
-   "bracket": 3
+   "bracket": 3,
+   "table": "main"
   },
   {
    "island": "Kuudra",
    "name": "Kuudra Slasher",
    "id": "kuudra_slasher",
    "maxTier": 10,
-   "maxKills": 30,
-   "bracket": 5
+   "maxKills": 25,
+   "bracket": 6,
+   "table": "main"
   },
   {
    "island": "Kuudra",
    "name": "Magma Follower",
    "id": "magma_follower",
    "maxTier": 10,
-   "maxKills": 30,
-   "bracket": 5
+   "maxKills": 25,
+   "bracket": 6,
+   "table": "main"
   },
   {
    "island": "Kuudra",
@@ -2176,54 +1666,1509 @@
    "id": "wandering_blaze",
    "maxTier": 20,
    "maxKills": 3000,
-   "bracket": 4
+   "bracket": 4,
+   "table": "main"
   },
   {
    "island": "Kuudra",
    "name": "Wither Sentry",
    "id": "wither_sentry",
    "maxTier": 10,
+   "maxKills": 25,
+   "bracket": 6,
+   "table": "main"
+  },
+  {
+   "island": "Lotus Atoll",
+   "name": "Atoll Croaker",
+   "id": "atoll_croaker",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Lotus Atoll",
+   "name": "Drowned Captain",
+   "id": "drowned_captain",
+   "maxTier": 20,
+   "maxKills": 500,
+   "bracket": 7,
+   "table": "main"
+  },
+  {
+   "island": "Lotus Atoll",
+   "name": "Flipflopper",
+   "id": "flipflopper",
+   "maxTier": 15,
+   "maxKills": 100,
+   "bracket": 7,
+   "table": "main"
+  },
+  {
+   "island": "Lotus Atoll",
+   "name": "Frog Prince",
+   "id": "frog_prince",
+   "maxTier": 15,
+   "maxKills": 50,
+   "bracket": 8,
+   "table": "main"
+  },
+  {
+   "island": "Lotus Atoll",
+   "name": "gorF",
+   "id": "gorf",
+   "maxTier": 20,
+   "maxKills": 750,
+   "bracket": 6,
+   "table": "main"
+  },
+  {
+   "island": "Lotus Atoll",
+   "name": "Lotum",
+   "id": "lotum",
+   "maxTier": 15,
+   "maxKills": 100,
+   "bracket": 7,
+   "table": "main"
+  },
+  {
+   "island": "Lotus Atoll",
+   "name": "Lotus Guardian",
+   "id": "lotus_guardian",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Lotus Atoll",
+   "name": "Lotusfish",
+   "id": "lotusfish",
+   "maxTier": 10,
+   "maxKills": 125,
+   "bracket": 1,
+   "table": "hunting"
+  },
+  {
+   "island": "Lotus Atoll",
+   "name": "Puddle Jumper",
+   "id": "puddle_jumper",
+   "maxTier": 15,
+   "maxKills": 250,
+   "bracket": 6,
+   "table": "main"
+  },
+  {
+   "island": "Lotus Atoll",
+   "name": "Seashine",
+   "id": "seashine",
+   "maxTier": 5,
+   "maxKills": 50,
+   "bracket": 2,
+   "table": "main"
+  },
+  {
+   "island": "Lotus Atoll",
+   "name": "Tewtil",
+   "id": "tewtil",
+   "maxTier": 5,
+   "maxKills": 50,
+   "bracket": 2,
+   "table": "main"
+  },
+  {
+   "island": "Moonglade Marsh",
+   "name": "Azure",
+   "id": "azure",
+   "maxTier": 10,
+   "maxKills": 125,
+   "bracket": 1,
+   "table": "hunting"
+  },
+  {
+   "island": "Moonglade Marsh",
+   "name": "Bambuleaf",
+   "id": "bambuleaf",
+   "maxTier": 10,
+   "maxKills": 100,
+   "bracket": 2,
+   "table": "hunting"
+  },
+  {
+   "island": "Moonglade Marsh",
+   "name": "Birries",
+   "id": "birries",
+   "maxTier": 10,
+   "maxKills": 125,
+   "bracket": 1,
+   "table": "hunting"
+  },
+  {
+   "island": "Moonglade Marsh",
+   "name": "Bogged",
+   "id": "bogged",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Moonglade Marsh",
+   "name": "Chill",
+   "id": "chill",
+   "maxTier": 10,
+   "maxKills": 100,
+   "bracket": 2,
+   "table": "hunting"
+  },
+  {
+   "island": "Moonglade Marsh",
+   "name": "Cod",
+   "id": "cod",
+   "maxTier": 10,
+   "maxKills": 125,
+   "bracket": 1,
+   "table": "hunting"
+  },
+  {
+   "island": "Moonglade Marsh",
+   "name": "Coralot",
+   "id": "coralot",
+   "maxTier": 10,
+   "maxKills": 125,
+   "bracket": 1,
+   "table": "hunting"
+  },
+  {
+   "island": "Moonglade Marsh",
+   "name": "Dreadwing",
+   "id": "dreadwing",
+   "maxTier": 10,
    "maxKills": 75,
-   "bracket": 4
-  }
- ],
- "undocumented": [
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Moonglade Marsh",
+   "name": "Ent",
+   "id": "ent",
+   "maxTier": 20,
+   "maxKills": 500,
+   "bracket": 7,
+   "table": "main"
+  },
+  {
+   "island": "Moonglade Marsh",
+   "name": "Hewver",
+   "id": "hewver",
+   "maxTier": 10,
+   "maxKills": 50,
+   "bracket": 4,
+   "table": "hunting"
+  },
+  {
+   "island": "Moonglade Marsh",
+   "name": "Hideonleaf",
+   "id": "hideonleaf",
+   "maxTier": 10,
+   "maxKills": 125,
+   "bracket": 1,
+   "table": "hunting"
+  },
+  {
+   "island": "Moonglade Marsh",
+   "name": "Honeyhog",
+   "id": "honeyhog",
+   "maxTier": 10,
+   "maxKills": 100,
+   "bracket": 2,
+   "table": "hunting"
+  },
+  {
+   "island": "Moonglade Marsh",
+   "name": "Honeymite",
+   "id": "honeymite",
+   "maxTier": 10,
+   "maxKills": 75,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Moonglade Marsh",
+   "name": "Invisibug",
+   "id": "invisibug",
+   "maxTier": 10,
+   "maxKills": 75,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Moonglade Marsh",
+   "name": "Joydive",
+   "id": "joydive",
+   "maxTier": 10,
+   "maxKills": 75,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Moonglade Marsh",
+   "name": "Lumisquid",
+   "id": "lumisquid",
+   "maxTier": 10,
+   "maxKills": 75,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Moonglade Marsh",
+   "name": "Mochibear",
+   "id": "mochibear",
+   "maxTier": 10,
+   "maxKills": 100,
+   "bracket": 2,
+   "table": "hunting"
+  },
+  {
+   "island": "Moonglade Marsh",
+   "name": "Mossybit",
+   "id": "mossybit",
+   "maxTier": 10,
+   "maxKills": 100,
+   "bracket": 2,
+   "table": "hunting"
+  },
+  {
+   "island": "Moonglade Marsh",
+   "name": "Murkbat",
+   "id": "murkbat",
+   "maxTier": 10,
+   "maxKills": 50,
+   "bracket": 4,
+   "table": "hunting"
+  },
+  {
+   "island": "Moonglade Marsh",
+   "name": "Nessie",
+   "id": "nessie",
+   "maxTier": 15,
+   "maxKills": 50,
+   "bracket": 8,
+   "table": "main"
+  },
+  {
+   "island": "Moonglade Marsh",
+   "name": "Phanflare",
+   "id": "phanflare",
+   "maxTier": 10,
+   "maxKills": 125,
+   "bracket": 1,
+   "table": "hunting"
+  },
+  {
+   "island": "Moonglade Marsh",
+   "name": "Phanpyre",
+   "id": "phanpyre",
+   "maxTier": 10,
+   "maxKills": 125,
+   "bracket": 1,
+   "table": "hunting"
+  },
+  {
+   "island": "Moonglade Marsh",
+   "name": "Salmon",
+   "id": "salmon",
+   "maxTier": 10,
+   "maxKills": 100,
+   "bracket": 2,
+   "table": "hunting"
+  },
+  {
+   "island": "Moonglade Marsh",
+   "name": "Shellwise",
+   "id": "shellwise",
+   "maxTier": 10,
+   "maxKills": 50,
+   "bracket": 4,
+   "table": "hunting"
+  },
+  {
+   "island": "Moonglade Marsh",
+   "name": "Spike",
+   "id": "spike",
+   "maxTier": 10,
+   "maxKills": 25,
+   "bracket": 6,
+   "table": "main"
+  },
+  {
+   "island": "Moonglade Marsh",
+   "name": "Stag Beetle",
+   "id": "stag_beetle",
+   "maxTier": 10,
+   "maxKills": 100,
+   "bracket": 2,
+   "table": "hunting"
+  },
+  {
+   "island": "Moonglade Marsh",
+   "name": "Stridersurfer",
+   "id": "stridersurfer",
+   "maxTier": 20,
+   "maxKills": 750,
+   "bracket": 6,
+   "table": "main"
+  },
+  {
+   "island": "Moonglade Marsh",
+   "name": "Tadgang",
+   "id": "tadgang",
+   "maxTier": 20,
+   "maxKills": 750,
+   "bracket": 6,
+   "table": "main"
+  },
+  {
+   "island": "Moonglade Marsh",
+   "name": "The Loch Emperor",
+   "id": "the_loch_emperor",
+   "maxTier": 15,
+   "maxKills": 250,
+   "bracket": 6,
+   "table": "main"
+  },
+  {
+   "island": "Moonglade Marsh",
+   "name": "Tidetot",
+   "id": "tidetot",
+   "maxTier": 10,
+   "maxKills": 50,
+   "bracket": 4,
+   "table": "hunting"
+  },
+  {
+   "island": "Moonglade Marsh",
+   "name": "Verdant",
+   "id": "verdant",
+   "maxTier": 10,
+   "maxKills": 125,
+   "bracket": 1,
+   "table": "hunting"
+  },
+  {
+   "island": "Moonglade Marsh",
+   "name": "Wetwing",
+   "id": "wetwing",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Moonglade Marsh",
+   "name": "Woodlouse",
+   "id": "woodlouse",
+   "maxTier": 10,
+   "maxKills": 75,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Mythological",
+   "name": "Cretan Bull",
+   "id": "cretan_bull",
+   "maxTier": 20,
+   "maxKills": 1000,
+   "bracket": 5,
+   "table": "main"
+  },
+  {
+   "island": "Mythological",
+   "name": "Gaia Construct",
+   "id": "gaia_construct",
+   "maxTier": 20,
+   "maxKills": 750,
+   "bracket": 6,
+   "table": "main"
+  },
+  {
+   "island": "Mythological",
+   "name": "Harpy",
+   "id": "harpy",
+   "maxTier": 20,
+   "maxKills": 750,
+   "bracket": 6,
+   "table": "main"
+  },
   {
    "island": "Mythological",
    "name": "King Minos",
-   "id": "king_minos"
+   "id": "king_minos",
+   "maxTier": 15,
+   "maxKills": 50,
+   "bracket": 8,
+   "table": "main"
   },
   {
    "island": "Mythological",
    "name": "Manticore",
-   "id": "manticore"
-  }
- ],
- "corrected": [
-  {
-   "island": "Dwarven Mines",
-   "name": "Ghost",
+   "id": "manticore",
    "maxTier": 15,
-   "maxKills": 40000,
-   "stated": 2,
-   "bracket": 1
+   "maxKills": 50,
+   "bracket": 8,
+   "table": "main"
   },
   {
-   "island": "Crystal Hollows",
-   "name": "Grunt",
+   "island": "Mythological",
+   "name": "Minos Champion",
+   "id": "minos_champion",
+   "maxTier": 20,
+   "maxKills": 500,
+   "bracket": 7,
+   "table": "main"
+  },
+  {
+   "island": "Mythological",
+   "name": "Minos Hunter",
+   "id": "minos_hunter",
+   "maxTier": 20,
+   "maxKills": 1000,
+   "bracket": 5,
+   "table": "main"
+  },
+  {
+   "island": "Mythological",
+   "name": "Minos Inquisitor",
+   "id": "minos_inquisitor",
+   "maxTier": 20,
+   "maxKills": 500,
+   "bracket": 7,
+   "table": "main"
+  },
+  {
+   "island": "Mythological",
+   "name": "Minotaur",
+   "id": "minotaur",
+   "maxTier": 20,
+   "maxKills": 500,
+   "bracket": 7,
+   "table": "main"
+  },
+  {
+   "island": "Mythological",
+   "name": "Siamese Lynx",
+   "id": "siamese_lynx",
+   "maxTier": 20,
+   "maxKills": 1000,
+   "bracket": 5,
+   "table": "main"
+  },
+  {
+   "island": "Mythological",
+   "name": "Sphinx",
+   "id": "sphinx",
+   "maxTier": 20,
+   "maxKills": 500,
+   "bracket": 7,
+   "table": "main"
+  },
+  {
+   "island": "Mythological",
+   "name": "Stranded Nymph",
+   "id": "stranded_nymph",
+   "maxTier": 20,
+   "maxKills": 1000,
+   "bracket": 5,
+   "table": "main"
+  },
+  {
+   "island": "Private Island",
+   "name": "Creeper",
+   "id": "creeper",
+   "maxTier": 5,
+   "maxKills": 50,
+   "bracket": 2,
+   "table": "main"
+  },
+  {
+   "island": "Private Island",
+   "name": "Skeleton",
+   "id": "skeleton",
+   "maxTier": 5,
+   "maxKills": 50,
+   "bracket": 2,
+   "table": "main"
+  },
+  {
+   "island": "Private Island",
+   "name": "Slime",
+   "id": "slime",
+   "maxTier": 5,
+   "maxKills": 50,
+   "bracket": 2,
+   "table": "main"
+  },
+  {
+   "island": "Private Island",
+   "name": "Spider",
+   "id": "spider",
+   "maxTier": 5,
+   "maxKills": 50,
+   "bracket": 2,
+   "table": "main"
+  },
+  {
+   "island": "Private Island",
+   "name": "Witch",
+   "id": "witch",
+   "maxTier": 5,
+   "maxKills": 50,
+   "bracket": 2,
+   "table": "main"
+  },
+  {
+   "island": "Private Island",
+   "name": "Zombie",
+   "id": "zombie",
+   "maxTier": 5,
+   "maxKills": 50,
+   "bracket": 2,
+   "table": "main"
+  },
+  {
+   "island": "Spider's Den",
+   "name": "Arachne",
+   "id": "arachne",
+   "maxTier": 15,
+   "maxKills": 100,
+   "bracket": 7,
+   "table": "main"
+  },
+  {
+   "island": "Spider's Den",
+   "name": "Arachne's Brood",
+   "id": "arachne_s_brood",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Spider's Den",
+   "name": "Arachne's Keeper",
+   "id": "arachne_s_keeper",
+   "maxTier": 15,
+   "maxKills": 250,
+   "bracket": 6,
+   "table": "main"
+  },
+  {
+   "island": "Spider's Den",
+   "name": "Broodmother",
+   "id": "broodmother",
+   "maxTier": 15,
+   "maxKills": 100,
+   "bracket": 7,
+   "table": "main"
+  },
+  {
+   "island": "Spider's Den",
+   "name": "Dasher Spider",
+   "id": "dasher_spider",
+   "maxTier": 15,
+   "maxKills": 10000,
+   "bracket": 2,
+   "table": "main"
+  },
+  {
+   "island": "Spider's Den",
+   "name": "Flint Skeleton",
+   "id": "flint_skeleton",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Spider's Den",
+   "name": "Rain Slime",
+   "id": "rain_slime",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Spider's Den",
+   "name": "Silverfish",
+   "id": "silverfish",
+   "maxTier": 15,
+   "maxKills": 10000,
+   "bracket": 2,
+   "table": "main"
+  },
+  {
+   "island": "Spider's Den",
+   "name": "Spider Jockey",
+   "id": "spider_jockey",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Spider's Den",
+   "name": "Splitter Spider",
+   "id": "splitter_spider",
+   "maxTier": 20,
+   "maxKills": 3000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Spider's Den",
+   "name": "Voracious Spider",
+   "id": "voracious_spider",
+   "maxTier": 20,
+   "maxKills": 3000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Spider's Den",
+   "name": "Weaver Spider",
+   "id": "weaver_spider",
+   "maxTier": 20,
+   "maxKills": 3000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Spooky Festival",
+   "name": "Crazy Witch",
+   "id": "crazy_witch",
+   "maxTier": 15,
+   "maxKills": 250,
+   "bracket": 6,
+   "table": "main"
+  },
+  {
+   "island": "Spooky Festival",
+   "name": "Headless Horseman",
+   "id": "headless_horseman",
+   "maxTier": 15,
+   "maxKills": 100,
+   "bracket": 7,
+   "table": "main"
+  },
+  {
+   "island": "Spooky Festival",
+   "name": "Phantom Spirit",
+   "id": "phantom_spirit",
+   "maxTier": 15,
+   "maxKills": 250,
+   "bracket": 6,
+   "table": "main"
+  },
+  {
+   "island": "Spooky Festival",
+   "name": "Scary Jerry",
+   "id": "scary_jerry",
+   "maxTier": 15,
+   "maxKills": 250,
+   "bracket": 6,
+   "table": "main"
+  },
+  {
+   "island": "Spooky Festival",
+   "name": "Trick or Treater",
+   "id": "trick_or_treater",
+   "maxTier": 15,
+   "maxKills": 250,
+   "bracket": 6,
+   "table": "main"
+  },
+  {
+   "island": "Spooky Festival",
+   "name": "Wither Gourd",
+   "id": "wither_gourd",
+   "maxTier": 15,
+   "maxKills": 250,
+   "bracket": 6,
+   "table": "main"
+  },
+  {
+   "island": "Spooky Festival",
+   "name": "Wraith",
+   "id": "wraith",
+   "maxTier": 15,
+   "maxKills": 250,
+   "bracket": 6,
+   "table": "main"
+  },
+  {
+   "island": "The Catacombs",
+   "name": "Angry Archaeologist",
+   "id": "angry_archaeologist",
+   "maxTier": 20,
+   "maxKills": 1000,
+   "bracket": 5,
+   "table": "main"
+  },
+  {
+   "island": "The Catacombs",
+   "name": "Bat",
+   "id": "bat",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "The Catacombs",
+   "name": "Cellar Spider",
+   "id": "cellar_spider",
+   "maxTier": 15,
+   "maxKills": 400,
+   "bracket": 5,
+   "table": "main"
+  },
+  {
+   "island": "The Catacombs",
+   "name": "Crypt Dreadlord",
+   "id": "crypt_dreadlord",
+   "maxTier": 25,
+   "maxKills": 10000,
+   "bracket": 5,
+   "table": "main"
+  },
+  {
+   "island": "The Catacombs",
+   "name": "Crypt Lurker",
+   "id": "crypt_lurker",
+   "maxTier": 15,
+   "maxKills": 10000,
+   "bracket": 2,
+   "table": "main"
+  },
+  {
+   "island": "The Catacombs",
+   "name": "Crypt Souleater",
+   "id": "crypt_souleater",
+   "maxTier": 25,
+   "maxKills": 10000,
+   "bracket": 5,
+   "table": "main"
+  },
+  {
+   "island": "The Catacombs",
+   "name": "Fels",
+   "id": "fels",
    "maxTier": 15,
    "maxKills": 4000,
-   "stated": 5,
-   "bracket": 3
+   "bracket": 3,
+   "table": "main"
+  },
+  {
+   "island": "The Catacombs",
+   "name": "Golem",
+   "id": "golem",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "The Catacombs",
+   "name": "King Midas",
+   "id": "king_midas",
+   "maxTier": 20,
+   "maxKills": 500,
+   "bracket": 7,
+   "table": "main"
+  },
+  {
+   "island": "The Catacombs",
+   "name": "Lonely Spider",
+   "id": "lonely_spider",
+   "maxTier": 15,
+   "maxKills": 4000,
+   "bracket": 3,
+   "table": "main"
+  },
+  {
+   "island": "The Catacombs",
+   "name": "Lost Adventurer",
+   "id": "lost_adventurer",
+   "maxTier": 25,
+   "maxKills": 3000,
+   "bracket": 7,
+   "table": "main"
+  },
+  {
+   "island": "The Catacombs",
+   "name": "Mimic",
+   "id": "mimic",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "The Catacombs",
+   "name": "Scared Skeleton",
+   "id": "scared_skeleton",
+   "maxTier": 20,
+   "maxKills": 1000,
+   "bracket": 5,
+   "table": "main"
+  },
+  {
+   "island": "The Catacombs",
+   "name": "Shadow Assassin",
+   "id": "shadow_assassin",
+   "maxTier": 25,
+   "maxKills": 3000,
+   "bracket": 7,
+   "table": "main"
+  },
+  {
+   "island": "The Catacombs",
+   "name": "Skeleton Grunt",
+   "id": "skeleton_grunt",
+   "maxTier": 15,
+   "maxKills": 4000,
+   "bracket": 3,
+   "table": "main"
+  },
+  {
+   "island": "The Catacombs",
+   "name": "Skeleton Lord",
+   "id": "skeleton_lord",
+   "maxTier": 20,
+   "maxKills": 1000,
+   "bracket": 5,
+   "table": "main"
+  },
+  {
+   "island": "The Catacombs",
+   "name": "Skeleton Master",
+   "id": "skeleton_master",
+   "maxTier": 25,
+   "maxKills": 10000,
+   "bracket": 5,
+   "table": "main"
+  },
+  {
+   "island": "The Catacombs",
+   "name": "Skeleton Soldier",
+   "id": "skeleton_soldier",
+   "maxTier": 20,
+   "maxKills": 10000,
+   "bracket": 3,
+   "table": "main"
+  },
+  {
+   "island": "The Catacombs",
+   "name": "Skeletor",
+   "id": "skeletor",
+   "maxTier": 15,
+   "maxKills": 4000,
+   "bracket": 3,
+   "table": "main"
+  },
+  {
+   "island": "The Catacombs",
+   "name": "Sniper",
+   "id": "sniper",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "The Catacombs",
+   "name": "Super Archer",
+   "id": "super_archer",
+   "maxTier": 15,
+   "maxKills": 4000,
+   "bracket": 3,
+   "table": "main"
+  },
+  {
+   "island": "The Catacombs",
+   "name": "Super Tank Zombie",
+   "id": "super_tank_zombie",
+   "maxTier": 15,
+   "maxKills": 10000,
+   "bracket": 2,
+   "table": "main"
+  },
+  {
+   "island": "The Catacombs",
+   "name": "Tank Zombie",
+   "id": "tank_zombie",
+   "maxTier": 15,
+   "maxKills": 4000,
+   "bracket": 3,
+   "table": "main"
+  },
+  {
+   "island": "The Catacombs",
+   "name": "Terracotta",
+   "id": "terracotta",
+   "maxTier": 15,
+   "maxKills": 10000,
+   "bracket": 2,
+   "table": "main"
+  },
+  {
+   "island": "The Catacombs",
+   "name": "Undead",
+   "id": "undead",
+   "maxTier": 15,
+   "maxKills": 10000,
+   "bracket": 2,
+   "table": "main"
+  },
+  {
+   "island": "The Catacombs",
+   "name": "Undead Skeleton",
+   "id": "undead_skeleton",
+   "maxTier": 25,
+   "maxKills": 10000,
+   "bracket": 5,
+   "table": "main"
+  },
+  {
+   "island": "The Catacombs",
+   "name": "Wither Guard",
+   "id": "wither_guard",
+   "maxTier": 25,
+   "maxKills": 10000,
+   "bracket": 5,
+   "table": "main"
+  },
+  {
+   "island": "The Catacombs",
+   "name": "Wither Husk",
+   "id": "wither_husk",
+   "maxTier": 25,
+   "maxKills": 10000,
+   "bracket": 5,
+   "table": "main"
+  },
+  {
+   "island": "The Catacombs",
+   "name": "Wither Miner",
+   "id": "wither_miner",
+   "maxTier": 25,
+   "maxKills": 25000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "The Catacombs",
+   "name": "Withermancer",
+   "id": "withermancer",
+   "maxTier": 25,
+   "maxKills": 10000,
+   "bracket": 5,
+   "table": "main"
+  },
+  {
+   "island": "The Catacombs",
+   "name": "Zombie Commander",
+   "id": "zombie_commander",
+   "maxTier": 20,
+   "maxKills": 3000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "The Catacombs",
+   "name": "Zombie Grunt",
+   "id": "zombie_grunt",
+   "maxTier": 15,
+   "maxKills": 4000,
+   "bracket": 3,
+   "table": "main"
+  },
+  {
+   "island": "The Catacombs",
+   "name": "Zombie Knight",
+   "id": "zombie_knight",
+   "maxTier": 15,
+   "maxKills": 4000,
+   "bracket": 3,
+   "table": "main"
+  },
+  {
+   "island": "The Catacombs",
+   "name": "Zombie Lord",
+   "id": "zombie_lord",
+   "maxTier": 20,
+   "maxKills": 1000,
+   "bracket": 5,
+   "table": "main"
+  },
+  {
+   "island": "The Catacombs",
+   "name": "Zombie Soldier",
+   "id": "zombie_soldier",
+   "maxTier": 20,
+   "maxKills": 10000,
+   "bracket": 3,
+   "table": "main"
+  },
+  {
+   "island": "The End",
+   "name": "Dragon",
+   "id": "dragon",
+   "maxTier": 15,
+   "maxKills": 250,
+   "bracket": 6,
+   "table": "main"
+  },
+  {
+   "island": "The End",
+   "name": "End Stone Protector",
+   "id": "end_stone_protector",
+   "maxTier": 20,
+   "maxKills": 100,
+   "bracket": 8,
+   "table": "main"
+  },
+  {
+   "island": "The End",
+   "name": "Enderman",
+   "id": "enderman",
+   "maxTier": 25,
+   "maxKills": 3000,
+   "bracket": 7,
+   "table": "main"
+  },
+  {
+   "island": "The End",
+   "name": "Endermite",
+   "id": "endermite",
+   "maxTier": 25,
+   "maxKills": 3000,
+   "bracket": 7,
+   "table": "main"
+  },
+  {
+   "island": "The End",
+   "name": "Obsidian Defender",
+   "id": "obsidian_defender",
+   "maxTier": 25,
+   "maxKills": 3000,
+   "bracket": 7,
+   "table": "main"
+  },
+  {
+   "island": "The End",
+   "name": "Seer",
+   "id": "seer",
+   "maxTier": 25,
+   "maxKills": 3000,
+   "bracket": 7,
+   "table": "main"
+  },
+  {
+   "island": "The End",
+   "name": "Voidling Extremist",
+   "id": "voidling_extremist",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "The End",
+   "name": "Voidling Fanatic",
+   "id": "voidling_fanatic",
+   "maxTier": 25,
+   "maxKills": 10000,
+   "bracket": 5,
+   "table": "main"
+  },
+  {
+   "island": "The End",
+   "name": "Zealot",
+   "id": "zealot",
+   "maxTier": 25,
+   "maxKills": 10000,
+   "bracket": 5,
+   "table": "main"
+  },
+  {
+   "island": "The Farming Islands",
+   "name": "Chicken",
+   "id": "chicken",
+   "maxTier": 5,
+   "maxKills": 200,
+   "bracket": 1,
+   "table": "main"
+  },
+  {
+   "island": "The Farming Islands",
+   "name": "Cow",
+   "id": "cow",
+   "maxTier": 5,
+   "maxKills": 200,
+   "bracket": 1,
+   "table": "main"
+  },
+  {
+   "island": "The Farming Islands",
+   "name": "Mushroom Cow",
+   "id": "mushroom_cow",
+   "maxTier": 5,
+   "maxKills": 200,
+   "bracket": 1,
+   "table": "main"
+  },
+  {
+   "island": "The Farming Islands",
+   "name": "Pig",
+   "id": "pig",
+   "maxTier": 5,
+   "maxKills": 200,
+   "bracket": 1,
+   "table": "main"
+  },
+  {
+   "island": "The Farming Islands",
+   "name": "Rabbit",
+   "id": "rabbit",
+   "maxTier": 5,
+   "maxKills": 200,
+   "bracket": 1,
+   "table": "main"
+  },
+  {
+   "island": "The Farming Islands",
+   "name": "Sheep",
+   "id": "sheep",
+   "maxTier": 5,
+   "maxKills": 200,
+   "bracket": 1,
+   "table": "main"
+  },
+  {
+   "island": "The Park",
+   "name": "Howling Spirit",
+   "id": "howling_spirit",
+   "maxTier": 15,
+   "maxKills": 4000,
+   "bracket": 3,
+   "table": "main"
+  },
+  {
+   "island": "The Park",
+   "name": "Pack Spirit",
+   "id": "pack_spirit",
+   "maxTier": 15,
+   "maxKills": 4000,
+   "bracket": 3,
+   "table": "main"
+  },
+  {
+   "island": "The Park",
+   "name": "Soul of the Alpha",
+   "id": "soul_of_the_alpha",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Torrhus Canyon",
+   "name": "Ant",
+   "id": "ant",
+   "maxTier": 10,
+   "maxKills": 125,
+   "bracket": 1,
+   "table": "hunting"
+  },
+  {
+   "island": "Torrhus Canyon",
+   "name": "Beeheemoth",
+   "id": "beeheemoth",
+   "maxTier": 10,
+   "maxKills": 50,
+   "bracket": 4,
+   "table": "hunting"
+  },
+  {
+   "island": "Torrhus Canyon",
+   "name": "Blue Jay",
+   "id": "blue_jay",
+   "maxTier": 10,
+   "maxKills": 125,
+   "bracket": 1,
+   "table": "hunting"
+  },
+  {
+   "island": "Torrhus Canyon",
+   "name": "Brineling",
+   "id": "brineling",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Torrhus Canyon",
+   "name": "Bunbun",
+   "id": "bunbun",
+   "maxTier": 10,
+   "maxKills": 125,
+   "bracket": 1,
+   "table": "hunting"
+  },
+  {
+   "island": "Torrhus Canyon",
+   "name": "Drybark",
+   "id": "drybark",
+   "maxTier": 10,
+   "maxKills": 75,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Torrhus Canyon",
+   "name": "Dustybit",
+   "id": "dustybit",
+   "maxTier": 10,
+   "maxKills": 100,
+   "bracket": 2,
+   "table": "hunting"
+  },
+  {
+   "island": "Torrhus Canyon",
+   "name": "Ember",
+   "id": "ember",
+   "maxTier": 10,
+   "maxKills": 100,
+   "bracket": 2,
+   "table": "hunting"
+  },
+  {
+   "island": "Torrhus Canyon",
+   "name": "Firefox",
+   "id": "firefox",
+   "maxTier": 10,
+   "maxKills": 125,
+   "bracket": 1,
+   "table": "hunting"
+  },
+  {
+   "island": "Torrhus Canyon",
+   "name": "Giant Isopod",
+   "id": "giant_isopod",
+   "maxTier": 15,
+   "maxKills": 50,
+   "bracket": 8,
+   "table": "main"
+  },
+  {
+   "island": "Torrhus Canyon",
+   "name": "Grizzly Bear",
+   "id": "grizzly_bear",
+   "maxTier": 10,
+   "maxKills": 25,
+   "bracket": 6,
+   "table": "main"
+  },
+  {
+   "island": "Torrhus Canyon",
+   "name": "Groundhog",
+   "id": "groundhog",
+   "maxTier": 10,
+   "maxKills": 125,
+   "bracket": 1,
+   "table": "hunting"
+  },
+  {
+   "island": "Torrhus Canyon",
+   "name": "Haggard",
+   "id": "haggard",
+   "maxTier": 15,
+   "maxKills": 1000,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Torrhus Canyon",
+   "name": "Hideonsun",
+   "id": "hideonsun",
+   "maxTier": 10,
+   "maxKills": 125,
+   "bracket": 1,
+   "table": "hunting"
+  },
+  {
+   "island": "Torrhus Canyon",
+   "name": "Hivethief",
+   "id": "hivethief",
+   "maxTier": 10,
+   "maxKills": 75,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Torrhus Canyon",
+   "name": "Honeybuzz",
+   "id": "honeybuzz",
+   "maxTier": 10,
+   "maxKills": 100,
+   "bracket": 2,
+   "table": "hunting"
+  },
+  {
+   "island": "Torrhus Canyon",
+   "name": "Mountain Goat",
+   "id": "mountain_goat",
+   "maxTier": 10,
+   "maxKills": 50,
+   "bracket": 4,
+   "table": "hunting"
+  },
+  {
+   "island": "Torrhus Canyon",
+   "name": "Pangolin",
+   "id": "pangolin",
+   "maxTier": 10,
+   "maxKills": 75,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Torrhus Canyon",
+   "name": "Parched",
+   "id": "parched",
+   "maxTier": 10,
+   "maxKills": 75,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Torrhus Canyon",
+   "name": "Pollendart",
+   "id": "pollendart",
+   "maxTier": 10,
+   "maxKills": 125,
+   "bracket": 1,
+   "table": "hunting"
+  },
+  {
+   "island": "Torrhus Canyon",
+   "name": "Puck",
+   "id": "puck",
+   "maxTier": 10,
+   "maxKills": 75,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Torrhus Canyon",
+   "name": "Queen Ant",
+   "id": "queen_ant",
+   "maxTier": 5,
+   "maxKills": 50,
+   "bracket": 2,
+   "table": "main"
+  },
+  {
+   "island": "Torrhus Canyon",
+   "name": "Sepialot",
+   "id": "sepialot",
+   "maxTier": 10,
+   "maxKills": 100,
+   "bracket": 2,
+   "table": "hunting"
+  },
+  {
+   "island": "Torrhus Canyon",
+   "name": "Silkbreeze",
+   "id": "silkbreeze",
+   "maxTier": 15,
+   "maxKills": 250,
+   "bracket": 6,
+   "table": "main"
+  },
+  {
+   "island": "Torrhus Canyon",
+   "name": "Solar",
+   "id": "solar",
+   "maxTier": 10,
+   "maxKills": 100,
+   "bracket": 2,
+   "table": "hunting"
+  },
+  {
+   "island": "Torrhus Canyon",
+   "name": "Sprawl",
+   "id": "sprawl",
+   "maxTier": 20,
+   "maxKills": 750,
+   "bracket": 6,
+   "table": "main"
+  },
+  {
+   "island": "Torrhus Canyon",
+   "name": "Tiki",
+   "id": "tiki",
+   "maxTier": 10,
+   "maxKills": 100,
+   "bracket": 2,
+   "table": "hunting"
+  },
+  {
+   "island": "Torrhus Canyon",
+   "name": "Timil",
+   "id": "timil",
+   "maxTier": 10,
+   "maxKills": 125,
+   "bracket": 1,
+   "table": "hunting"
+  },
+  {
+   "island": "Torrhus Canyon",
+   "name": "Torrid",
+   "id": "torrid",
+   "maxTier": 20,
+   "maxKills": 500,
+   "bracket": 7,
+   "table": "main"
+  },
+  {
+   "island": "Torrhus Canyon",
+   "name": "Water Snake",
+   "id": "water_snake",
+   "maxTier": 10,
+   "maxKills": 100,
+   "bracket": 2,
+   "table": "hunting"
+  }
+ ],
+ "undocumented": [
+  {
+   "island": "Families",
+   "name": "Pyroclastic Worm",
+   "id": "pyroclastic_worm"
   }
  ],
  "totals": {
-  "families": 249,
-  "islands": 18,
-  "tiers": 3920,
-  "xp": 3920,
-  "milestoneXp": 450,
-  "statedTotal": 4370,
-  "statedTotalSource": "wiki SkyBlock Levels/Tasks — Bestiary Progress, each tier +1 and every 10 milestones +10"
+  "families": 319,
+  "islands": 20,
+  "tiers": 4630,
+  "xp": 4630,
+  "milestoneXp": 460,
+  "statedTotal": 5090,
+  "statedTotalSource": "1 XP a tier, plus 10 XP per ten milestones where a milestone is ten tiers — wiki Bestiary, Leveling and Milestone Rewards"
  }
 }
