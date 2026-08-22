@@ -115,7 +115,7 @@ export const UNMODELLED: { category: Category; note: string; totalXp?: number }[
   },
   {
     category: "bestiary",
-    note: "Bestiary tiers are offered where the next one is under 5,000 kills away; past that a tier is a week of one mob and there is no honest way to rank it against a purchase. Two further gaps are the wiki's rather than the API's: King Minos and Manticore are listed with no tier cap, and Galatea's mobs have no family entries at all yet, so the ceiling below is a floor.",
+    note: "Bestiary tiers are offered where the next one is under 5,000 kills away; past that a tier is a week of one mob and there is no honest way to rank it against a purchase. Two further gaps are the wiki's rather than the API's: Pyroclastic Worm is listed with no tier cap, and Galatea's mobs have no family entries at all yet, so the ceiling below is a floor.",
   },
   {
     category: "misc",
@@ -1347,7 +1347,7 @@ export function buildCatalog(
             ...u,
             totalXp: data.bestiary.totals.statedTotal ?? data.bestiary.totals.xp,
             earnedXp: bestiaryXp(data, member, bestiaryTiers),
-            note: `${u.note} ${bestiaryCoverage}`,
+            note: `${u.note} ${bestiaryCoverage} The in-game menu states this category caps at ${num(data.bestiaryKnownMax.xp)} XP; the family table above currently adds up to ${num(data.bestiary.totals.statedTotal ?? data.bestiary.totals.xp)}, which is what our own list adds to rather than an independent check of it.`,
           }
         :
       u.category === "attributes" && unplaceable > 0

@@ -1,0 +1,6 @@
+{
+  "note": "The bestiary category's real ceiling, read off the in-game SkyBlock Menu rather than derived from our own family table. The family table's own total (data.bestiary.totals.statedTotal) is self-referential — it is one XP a tier plus a milestone bonus, summed over whichever families we currently hold — so it moves whenever the table changes and cannot, by itself, say whether the table is complete. This number can.",
+  "source": "Reported in-game from the SkyBlock Menu's Bestiary category screen, on a profile at the category cap.",
+  "verified": true,
+  "xp": 5660
+}

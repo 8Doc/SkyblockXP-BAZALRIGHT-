@@ -19,7 +19,7 @@ export function gameData(): GameData {
     travelScrolls: d("generated/travel_scrolls.json"), costs: d("generated/costs.json"),
     petScore: d("curated/pet_score.json"), pets: d("generated/pets.json"), petApiKeys: d("curated/pet_api_keys.json"), difficulty: d("generated/difficulty.json"),
     attributeShards: d("generated/attributes.json"),
-    bestiary: d("generated/bestiary.json"), bestiaryMobs: d("curated/bestiary_mobs.json"), abiphone: d("generated/abiphone.json"), bagUpgrades: d("curated/accessory_bag_upgrades.json"),
+    bestiary: d("generated/bestiary.json"), bestiaryKnownMax: d("curated/bestiary_known_max.json"), bestiaryMobs: d("curated/bestiary_mobs.json"), abiphone: d("generated/abiphone.json"), bagUpgrades: d("curated/accessory_bag_upgrades.json"),
     attributeLevels: d("curated/attribute_levels.json"), attributeApiKeys: d("curated/attribute_api_keys.json"),
     npcs: d("generated/npcs.json"),
     powerStones: d("generated/power_stones.json"),

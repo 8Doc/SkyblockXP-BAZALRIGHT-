@@ -58,6 +58,7 @@ const gameData = {
   difficulty: await loadJson("generated/difficulty.json"),
   attributeShards: await loadJson("generated/attributes.json"),
   bestiary: await loadJson("generated/bestiary.json"),
+  bestiaryKnownMax: await loadJson("curated/bestiary_known_max.json"),
   bestiaryMobs: await loadJson("curated/bestiary_mobs.json"),
   abiphone: await loadJson("generated/abiphone.json"),
   bagUpgrades: await loadJson("curated/accessory_bag_upgrades.json"),

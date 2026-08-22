@@ -257,6 +257,19 @@ export type BestiaryData = {
   };
 };
 
+/**
+ * The category's real ceiling, read off the in-game menu rather than derived from our own table.
+ * `BestiaryData.totals.statedTotal` is a sum of whatever families we currently hold, so it can
+ * only ever tell you what our table adds up to — this is the independent figure that says
+ * whether the table is complete.
+ */
+export type BestiaryKnownMaxData = {
+  note: string;
+  source: string;
+  verified: boolean;
+  xp: number;
+};
+
 /** Internal mob id -> family id, for the ids no rule can derive. */
 export type BestiaryMobsData = {
   source: string;
@@ -312,6 +325,7 @@ export type GameData = {
   difficulty: DifficultyData;
   attributeShards: AttributesData;
   bestiary: BestiaryData;
+  bestiaryKnownMax: BestiaryKnownMaxData;
   bestiaryMobs: BestiaryMobsData;
   abiphone: AbiphoneData;
   bagUpgrades: BagUpgradesData;
