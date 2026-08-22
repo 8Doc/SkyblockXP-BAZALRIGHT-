@@ -276,26 +276,44 @@ and it can tell a thin row with a huge margin from a thin row with a small one.
 
 ### It reports the market's ceiling, not yours
 
-The bigger omission. Coins-per-hour asks how fast the *market* turns over and never asks how fast
-*your coins* do, and those are different constraints with different winners.
+The bigger omission. Coins-per-hour asks how fast the *market* turns over and never asks how much
+of your money has to sit still for that to happen.
 
-By Little's Law you never hold more than two units in flight: what you hold is the throughput
-times how long each unit sits with you, and a unit sits from the moment the buy order goes in
-(waiting `1/hourlySold` for someone to sell to it) until the sell order clears (waiting
-`1/hourlyBought` for someone to buy from it). Two units when the legs are balanced, fewer when they
-are not, never more. So a flip's capital requirement is a property of its price, not of your
-appetite — and it is computable for every row.
+**The bazaar takes the whole order up front.** Place a buy order for a hundred and it holds a
+hundred lots of coins from that moment, filled or not, until you cancel. So the coins a flip costs
+is the size of the order, which makes order size the real decision — and it has a floor and a
+ceiling. Too small and it empties while you are elsewhere and you stop being top of book. Too large
+and the tail just sits in a queue that will not reach it for hours, when it could be earning
+somewhere else.
 
-Shadow Warp ties up **329M** and returns about 10% an hour on it. Enchanted Quartz Block ties up
-250k and returns 15,808%. Cap the rate at `budget × returnOnCapital` and the list stops pretending:
+**Twenty minutes of flow** is the size that fills in twenty minutes: long enough to leave alone,
+short enough that nothing idles. A 10k item taking sixty instasells an hour is twenty items in
+twenty minutes, so 200k goes in and no more.
 
-| budget | Shadow Warp's rank | what it actually pays |
+Two details that matter as much as the window does:
+
+- **Size on round trips, not on the buy side.** Buying faster than you can sell is not throughput,
+  it is inventory. An item taking 280 instasells an hour and giving back 36 instabuys will hand you
+  ninety-four items in twenty minutes and then take three hours to let go of them.
+- **Never below one item.** You cannot order a fifth of a Shadow Warp. Three and a half round trips
+  an hour is 1.2 items in twenty minutes, so the smallest legal order is already most of an hour's
+  flow — and it costs 181M. That the floor is doing the work *is* the warning.
+
+Sized this way, `coinsPerHour / capital` comes out near three times the after-tax margin percentage
+on anything that moves — an order filling in twenty minutes turns your coins over three times an
+hour whatever the item is. Where it diverges is the thin case above, which is the case worth seeing.
+
+The budget column then reads "buy as many as you can afford, up to the window":
+
+| | allocate | with 50M |
 |---|---|---|
-| 50M | **#263** | 5.0M/hr |
-| 500M | #8 | 33M/hr |
-| 5B | #8 | 33M/hr |
+| Growth 6 | 18M · 6 items | 163M/hr |
+| Enchanted Quartz Block | 35M · 265 items | 39M/hr |
+| Perfect Jade Gemstone | 65M · 5 items | 28M/hr — three of the five |
+| Shadow Warp | **181M · 1 item** | **nothing** |
 
-No threshold and nothing tuned. With 50M you cannot run that flip, so the number says 5.0M.
+That last row is the point, and it is why the count is discrete rather than interpolated. Someone
+holding 50M does not earn a quarter of a 181M flip; they cannot place the order at all.
 
 ### What we did not use
 
@@ -307,14 +325,14 @@ the thin expensive rows. It is a real signal and it is not this one.
 
 ### On screen
 
-The Flips table carries **Capital** and **Bad hour** as columns beside **Coins/hr**, and a
+The Flips table carries **Allocate** and **Bad hour** as columns beside **Coins/hr**, and a
 *Coins on hand* field adds a **With 50M** column when it is filled in. The default sort is left on
 coins-per-hour: these are a second opinion on the ranking, not a replacement for it, and every
 column sorts on click. The Shadow Warp row now reads its own warning across:
 
 ```
-Shadow Warp   181M  195M  14M  9.4M  7.1%  4  4  4   329M   19M   33M   5.0M
-                                          capital ^  bad ^  mean ^  yours ^
+Shadow Warp   181M  195M  13M  8.7M  6.7%  4  4  4   181M · 1   17M   31M    0
+                                             allocate ^  bad ^  mean ^  yours ^
 ```
 
 ---
@@ -420,13 +438,13 @@ Two things it does that skyblock.bz's does not:
 
 ## What this repo has, and what it still needs
 
-Implemented and tested (`tests/bazaar.test.ts` and `tests/recipes.test.ts`, 31 cases):
+Implemented and tested (`tests/bazaar.test.ts` and `tests/recipes.test.ts`, 35 cases):
 
 
 - [`bazaarTypes.ts`](src/lib/bazaarTypes.ts) — the raw and relabelled shapes, and the history row.
 - [`bazaar.ts`](src/lib/bazaar.ts) — `normalise`, the book walk, the tax and rate constants.
-- [`bazaarViews.ts`](src/lib/bazaarViews.ts) — all seven derivations, plus the capital, bad-hour
-  and budget-cap figures a flip list needs and skyblock.bz's does not carry.
+- [`bazaarViews.ts`](src/lib/bazaarViews.ts) — all seven derivations, plus the order-sizing,
+  bad-hour and budget figures a flip list needs and skyblock.bz's does not carry.
 - [`bazaarHistory.ts`](src/lib/bazaarHistory.ts) — delta codec, rolling window, daily rollup,
   proximity-to-average, despike.
 - [`scripts/fetch-bazaar-data.mjs`](scripts/fetch-bazaar-data.mjs) — the recipe table and a name

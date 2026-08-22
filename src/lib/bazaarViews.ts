@@ -50,16 +50,39 @@ export type Flip = {
   coinsPerHour: number;
 
   /**
-   * Coins tied up keeping this flip running at the market's own pace.
+   * What to put into this flip: twenty minutes of the market's flow, and no more.
    *
-   * Little's Law: what you hold is the throughput times how long each unit sits with you, and a
-   * unit sits from the moment you place the buy order until the sell order fills — `1/hourlySold`
-   * waiting to be sold to, then `1/hourlyBought` waiting to be bought from. On a balanced item
-   * that works out to two units in flight and never more, which is why a flip's capital is a
-   * property of its *price*, not of how much you are willing to spend.
+   * The bazaar takes the whole order up front. Place a buy order for a hundred and it holds a
+   * hundred lots of coins from that moment, filled or not, until you cancel — so the coins a flip
+   * costs you are the coins in the order, not the couple of units you are holding at any instant.
+   *
+   * That makes order size the real decision, and it has a floor and a ceiling. Too small and the
+   * order empties while you are elsewhere and you stop being top of book. Too large and the tail
+   * of it just sits there: coins committed to a queue that will not reach them for hours, when
+   * they could be earning somewhere else. Twenty minutes of flow is the size that fills in twenty
+   * minutes — long enough to leave alone, short enough that nothing is idling.
+   *
+   * The rate is the round-trip rate rather than the buy side alone. Buying faster than you can
+   * sell is not throughput, it is inventory: an item that takes 280 instasells an hour and gives
+   * back 36 instabuys will hand you ninety-four items in twenty minutes and then take three hours
+   * to let go of them.
    */
   capital: number;
-  /** `coinsPerHour / capital`. How hard the coins work, per hour. */
+  /**
+   * Items to order. A whole number, and never less than one — you cannot place a buy order for
+   * a fifth of an item, and on something that moves three times an hour the smallest order you
+   * are allowed to place is already most of an hour's flow.
+   */
+  orderSize: number;
+  /**
+   * `coinsPerHour / capital`.
+   *
+   * Once the order runs to more than a handful of items this is close to three times the
+   * after-tax margin percentage — an order that fills in twenty minutes turns your coins over
+   * three times an hour whatever the item is, so the *rate* stops depending on volume. Where it
+   * diverges is the interesting case: an item so thin that one unit is already more than twenty
+   * minutes of flow cannot be sized down any further, and the number says so.
+   */
   returnOnCapital: number;
 
   /** Round trips a quarter-bad hour delivers. */
@@ -77,6 +100,15 @@ export type Flip = {
    */
   badHourCoins: number;
 };
+
+/**
+ * How long an order should take to fill.
+ *
+ * Twenty minutes: long enough that you are not re-placing orders every few minutes, short enough
+ * that no part of the order is sitting in a queue it will not reach today. Sizing to it is what
+ * stops one flip quietly swallowing a budget that four flips could have shared.
+ */
+export const ORDER_WINDOW_HOURS = 20 / 60;
 
 /**
  * The 25th percentile of a Poisson count — a bad-but-not-freak hour.
@@ -110,10 +142,21 @@ const Z25 = 0.674489750196;
  * turn over so fast — which is the distinction plain coins-per-hour throws away. A 180M-a-unit
  * flip doing three round trips an hour is a fine trade with 500M behind it and unavailable with
  * 50M, and the same number is quoted for both until you divide by the capital.
+ *
+ * With the order sized to a window, this is "buy as many as you can afford, up to the window, and
+ * see what comes back": below the flip's own allocation your coins are the ceiling and you earn
+ * in proportion; at or above it the market is, and the rest of your coins belong in another row.
  */
 export function affordableCoinsPerHour(f: Flip, budget: number | null): number {
   if (budget === null) return f.coinsPerHour;
-  return Math.min(f.coinsPerHour, budget * f.returnOnCapital);
+
+  // Orders come in whole items, and that is not a rounding detail — it is the difference between
+  // "this pays you 8.4M an hour" and "you cannot place this order". A 181M item is simply not
+  // available to someone holding 50M, and interpolating a fifth of a trade pretends otherwise.
+  const affordable = Math.min(f.orderSize, Math.floor(budget / f.buyAt));
+  if (affordable <= 0) return 0;
+
+  return (f.coinsPerHour * affordable) / f.orderSize;
 }
 
 export function flip(p: ProductSnapshot): Flip | null {
@@ -134,10 +177,10 @@ export function flip(p: ProductSnapshot): Flip | null {
   // order simply never fills and the coins-per-hour is fiction.
   const hourlyFills = Math.min(bought, sold);
 
-  // A unit is yours from the moment the buy order goes in until the sell order clears: it waits
-  // for someone to instasell to it, then for someone to instabuy from it.
-  const inFlight = hourlyFills * (1 / sold + 1 / bought);
-  const capital = p.instasell * inFlight;
+  // Whole items, so the coins and the count on screen agree, and at least one because that is
+  // the smallest order the bazaar will take.
+  const orderSize = Math.max(1, Math.round(hourlyFills * ORDER_WINDOW_HOURS));
+  const capital = p.instasell * orderSize;
   const coinsPerHour = netMargin * hourlyFills;
 
   const badHourFills = Math.min(badHourCount(bought), badHourCount(sold));
@@ -154,6 +197,7 @@ export function flip(p: ProductSnapshot): Flip | null {
     hourlyFills,
     coinsPerHour,
     capital,
+    orderSize,
     returnOnCapital: capital > 0 ? coinsPerHour / capital : 0,
     badHourFills,
     badHourCoins: netMargin * badHourFills,

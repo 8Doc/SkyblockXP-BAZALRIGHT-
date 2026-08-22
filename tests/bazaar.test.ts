@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { NET_OF_TAX, costToBuy, hourlySold, normalise, proceedsFromSelling, walk } from "../src/lib/bazaar";
-import { affordableCoinsPerHour, badHourCount, crash, craft, flip, manipulation } from "../src/lib/bazaarViews";
+import { ORDER_WINDOW_HOURS, affordableCoinsPerHour, badHourCount, crash, craft, flip, manipulation } from "../src/lib/bazaarViews";
 import { daily, decode, despike, encode, proximityToAverage, sample, trim } from "../src/lib/bazaarHistory";
 import type { HistoryRow, ProductSnapshot, RawBazaarProduct } from "../src/lib/bazaarTypes";
 
@@ -197,29 +197,102 @@ test("a busy flip's bad hour is barely below its mean", () => {
   assert.ok(f.badHourCoins > f.coinsPerHour * 0.95, "a busy item's bad hour is not much of a hour");
 });
 
-test("capital is what the flip ties up, not what you are willing to spend", () => {
+test("capital is the order to place, sized to twenty minutes of flow", () => {
+  // The worked example: a 10k item taking sixty instasells an hour is twenty items in twenty
+  // minutes, so 200k goes in and no more. Anything beyond that is coins queued behind coins.
+  const steady = normalise("EXAMPLE", {
+    buy_summary: [{ amount: 100, pricePerUnit: 11_000, orders: 1 }],
+    sell_summary: [{ amount: 100, pricePerUnit: 10_000, orders: 1 }],
+    quick_status: {
+      buyPrice: 11_000,
+      buyVolume: 100,
+      buyMovingWeek: 60 * 168,
+      buyOrders: 4,
+      sellPrice: 10_000,
+      sellVolume: 100,
+      sellMovingWeek: 60 * 168,
+      sellOrders: 4,
+    },
+  });
+  assert.ok(steady);
+
+  const f = flip(steady);
+  assert.ok(f);
+  assert.equal(f.hourlyFills, 60);
+  assert.equal(f.orderSize, 20, "twenty minutes of sixty an hour");
+  assert.equal(f.capital, 200_000);
+});
+
+test("an order is sized on round trips, not on how fast you could buy", () => {
+  // 280 instasells an hour against 36 instabuys: buying at the pace you can buy hands you
+  // ninety-four items in twenty minutes and then three hours of inventory. Size on the slower leg.
+  const lopsided = normalise("LOPSIDED", {
+    buy_summary: [{ amount: 100, pricePerUnit: 1100, orders: 1 }],
+    sell_summary: [{ amount: 100, pricePerUnit: 1000, orders: 1 }],
+    quick_status: {
+      buyPrice: 1100,
+      buyVolume: 100,
+      buyMovingWeek: 36 * 168,
+      buyOrders: 4,
+      sellPrice: 1000,
+      sellVolume: 100,
+      sellMovingWeek: 280 * 168,
+      sellOrders: 4,
+    },
+  });
+  assert.ok(lopsided);
+
+  const f = flip(lopsided);
+  assert.ok(f);
+  assert.equal(round(f.orderSize), round(36 * ORDER_WINDOW_HOURS), "twelve, not ninety-four");
+});
+
+test("sizing to the window makes the return a margin question", () => {
+  // Order size very nearly cancels out of coinsPerHour / capital, leaving three turns an hour of
+  // the after-tax margin. Volume has not stopped mattering — it sets coinsPerHour, the other
+  // ceiling — but the rate your coins earn at is a margin question once the sizing is right.
+  const f = flip(cactus());
+  assert.ok(f);
+  const threeTurns = (f.netMargin / f.buyAt) / ORDER_WINDOW_HOURS;
+  assert.ok(Math.abs(f.returnOnCapital / threeTurns - 1) < 0.01, "within a percent on a busy item");
+});
+
+test("an item too thin to size down says so in its capital", () => {
   const f = flip(thin());
   assert.ok(f);
 
-  // Little's Law: throughput times time-in-system, and a unit waits to be sold to and then to be
-  // bought from. Balanced legs put two units in flight and never more.
-  const expected = f.buyAt * f.hourlyFills * (1 / f.hourlySold + 1 / f.hourlyBought);
-  assert.equal(round(f.capital), round(expected));
-  assert.ok(f.capital > f.buyAt && f.capital <= f.buyAt * 2, "between one and two units of it");
+  // Three and a half round trips an hour is 1.2 items in twenty minutes, and you cannot order
+  // 1.2 items. One unit of a 181M item is the floor, and it is most of an hour's flow.
+  assert.equal(f.orderSize, 1);
+  assert.equal(f.capital, f.buyAt);
+  assert.ok(f.orderSize > f.hourlyFills * ORDER_WINDOW_HOURS * 0.5, "the floor is doing the work");
 });
 
 test("a budget caps what a flip can pay you, and no budget means no cap", () => {
-  const f = flip(thin());
+  const f = flip(cactus());
   assert.ok(f);
 
   assert.equal(affordableCoinsPerHour(f, null), f.coinsPerHour, "unasked is unlimited");
 
-  // With the capital it needs, the market's own rate is the binding ceiling.
+  // Enough for the whole window: the market's own rate is the binding ceiling.
   assert.equal(round(affordableCoinsPerHour(f, f.capital * 10)), round(f.coinsPerHour));
 
-  // With a tenth of it, your coins are. This is the number that moves Shadow Warp down the list.
+  // Enough for a tenth of the order: a tenth of the rate.
   const tenth = affordableCoinsPerHour(f, f.capital / 10);
-  assert.ok(tenth < f.coinsPerHour / 9, `a tenth of the capital earns about a tenth, got ${tenth}`);
+  assert.ok(
+    Math.abs(tenth / (f.coinsPerHour / 10) - 1) < 0.05,
+    `a tenth of the order earns about a tenth, got ${tenth} against ${f.coinsPerHour / 10}`,
+  );
+});
+
+test("a flip you cannot afford one of pays nothing, not a fraction", () => {
+  const f = flip(thin());
+  assert.ok(f);
+
+  // 181M an item. Someone holding 50M does not earn a quarter of it; they cannot place the order.
+  assert.equal(affordableCoinsPerHour(f, 50_000_000), 0);
+  assert.equal(affordableCoinsPerHour(f, f.buyAt - 1), 0, "one coin short is short");
+  assert.equal(round(affordableCoinsPerHour(f, f.buyAt)), round(f.coinsPerHour), "and one is the whole order");
 });
 
 /**

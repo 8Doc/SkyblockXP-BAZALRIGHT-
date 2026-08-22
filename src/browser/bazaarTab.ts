@@ -92,7 +92,18 @@ const BASE_FLIP_COLUMNS: Column<Flip>[] = [
   { id: "hourlyBought", label: "Instabuys/hr", value: (r) => r.hourlyBought, render: (r) => num(Math.round(r.hourlyBought)), title: "Items instabought per hour, averaged over the moving week. How fast your sell order fills." },
   { id: "hourlySold", label: "Instasells/hr", value: (r) => r.hourlySold, render: (r) => num(Math.round(r.hourlySold)), title: "Items instasold per hour. How fast your buy order fills." },
   { id: "hourlyFills", label: "Round trips/hr", value: (r) => r.hourlyFills, render: (r) => num(Math.round(r.hourlyFills)), title: "The slower of the two sides. Both legs have to fill for the flip to close." },
-  { id: "capital", label: "Capital", value: (r) => r.capital, render: (r) => coins(r.capital), title: "Coins tied up keeping this running at the market's own pace — about two units in flight, never more." },
+  {
+    id: "capital",
+    label: "Allocate",
+    value: (r) => r.capital,
+    render: (r) => `${coins(r.capital)} <span class="dim">· ${num(r.orderSize)}</span>`,
+    title:
+      "What to put in, and how many to order. Twenty minutes of the market's flow — the order " +
+      "fills in twenty minutes, so it is big enough to leave alone and small enough that no part " +
+      "of it is idling in a queue. The bazaar holds the whole order up front, so this is real " +
+      "money committed, not a notional position. Never below one item: on something this thin " +
+      "the smallest order allowed is already more than twenty minutes of flow.",
+  },
   { id: "badHourCoins", label: "Bad hour", value: (r) => r.badHourCoins, render: (r) => coins(r.badHourCoins), title: "What a quarter of your hours are worse than. Coins per hour is a mean, and a mean is a poor summary of four trades — zero here means a quarter of the time this pays nothing at all." },
   { id: "coinsPerHour", label: "Coins/hr", value: (r) => r.coinsPerHour, render: (r) => coins(r.coinsPerHour), title: "After-tax margin times the round-trip rate. This is the ranking figure." },
 ];
