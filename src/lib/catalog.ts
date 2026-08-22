@@ -1084,24 +1084,27 @@ export function buildCatalog(
     }
   }
 
-  // A family with no kills against it is only at tier 0 if we could have seen its kills. When
-  // the profile is carrying mob ids we cannot place — 163 of them and 201,000 kills on one maxed
-  // bag — "no kills" means we did not look in the right place, not that the player never fought
-  // it. That profile has never once killed a Golden Ghoul according to this map, and was being
-  // told to go and get tier 1.
+  // A family with no kills was once held back whenever *any* mob id went unplaced, on the
+  // grounds that the kills might be hiding in one of them. With 249 families and a third of a
+  // maxed profile's ids unreadable that was the safer reading; with 319 families it hid 1,470
+  // XP on one profile — two thirds of everything left in the category — because most of what
+  // it caught were families the player has simply never fought.
   //
-  // The ids and the families are the same list seen from two ends: the game names mobs
-  // internally (`old_blaze_110`) and the bestiary names families by display name
-  // (Millennia-Aged Blaze), and nothing published joins them — no items resource, no bestiary
-  // endpoint, and no id on any wiki page. Until that map is complete, a family we have no
-  // evidence about is unknown rather than empty, and unknown is not something to sell.
-  if (unaccounted.size > 0) {
-    for (const family of data.bestiary.families) {
-      if (!bestiaryKills.has(family.id)) suspect.add(family.id);
-    }
-  }
+  // The targeted rule above still stands, and it is the one carrying the actual risk: a family
+  // whose every word appears in an id we could not place is a family whose kills we are
+  // probably misreading. Everything else is offered, and the count of ids we cannot place is
+  // reported on the category rather than being spent on silence.
 
-  const BESTIARY_REACH = 5_000;
+  // The scale a tier's cost is read against: a share of that family's own ladder, not a flat
+  // number of kills. A flat 5,000 was bracket-blind — it admitted five thousand kills of a family
+  // whose ladder runs to a million, half a percent of it, while shutting out a critter needing
+  // six thousand, fifty times its whole ladder. A share treats a boss and a trash mob the way the
+  // game's own brackets already do.
+  //
+  // It scales the ranking; it no longer cuts the list. Cutting it was a way of keeping the list
+  // readable before there was an ordering worth trusting, and it cost 969 XP on one profile —
+  // work the player really does have left, absent from the category's own total.
+  const BESTIARY_REACH = 0.35;
   let bestiaryTiers = 0;
   let bestiaryOffered = 0;
 
@@ -1112,11 +1115,11 @@ export function buildCatalog(
     bestiaryTiers += tier;
     if (suspect.has(family.id)) continue;
 
+    const familyLadder = ladder[family.maxTier - 1] || 1;
     let previousTier: string | null = null;
     for (let next = tier + 1; next <= family.maxTier; next++) {
       const needed = (ladder[next - 1] ?? Infinity) - kills;
-      // Brackets only ever climb, so the first tier out of reach ends the family.
-      if (needed >= BESTIARY_REACH) break;
+      const share = needed / familyLadder;
       const id = `bestiary_${family.id}_${next}`;
       tasks.push({
         id,
@@ -1132,11 +1135,51 @@ export function buildCatalog(
         // Grind tasks normally rank on how many players have finished them. The bestiary has
         // something better: the exact number of kills left. It is the same 0-to-1 scale, but
         // measured rather than sampled, so it replaces the proxy for this category alone.
-        effort: Math.min(needed / BESTIARY_REACH, 1),
-        effortBand: needed <= 50 ? "quick" : needed <= 500 ? "short" : needed <= 2_000 ? "long" : "marathon",
+        // Ranked on the same share, so a boss two kills from a tier and a zombie two hundred
+        // from one sort by how much work each really is rather than by which has smaller numbers.
+        effort: Math.min(share / BESTIARY_REACH, 1),
+        effortBand: share <= 0.01 ? "quick" : share <= 0.05 ? "short" : share <= 0.15 ? "long" : "marathon",
       });
       previousTier = id;
       bestiaryOffered++;
+    }
+  }
+
+  /**
+   * The milestones, which pay a tenth of the category and were modelled as nothing at all.
+   *
+   * A milestone is ten family tiers, and every ten milestones pay 10 XP — so this is not a
+   * separate grind but the tier count read again in lumps of a hundred. What was earned has
+   * always been credited from the profile's own claimed count; what is left was simply absent,
+   * 230 XP of it on one profile.
+   *
+   * Counted off the profile rather than off our tier total, because the two disagree: the claim
+   * count is what the game paid out, and our tiers are what we could place. Using ours would
+   * hand back XP the player already has.
+   */
+  {
+    const claimed = member.bestiary?.milestone?.last_claimed_milestone ?? 0;
+    const rungs = Math.floor((data.bestiary.totals.milestoneXp ?? 0) / 10);
+    let previousMilestone: string | null = null;
+    for (let rung = 1; rung <= rungs; rung++) {
+      const id = `bestiary_milestone_${rung}`;
+      const tiersNeeded = rung * 100;
+      tasks.push({
+        id,
+        category: "bestiary",
+        name: `Bestiary milestone ${rung * 10}`,
+        xp: 10,
+        requires: previousMilestone ? [previousMilestone] : [],
+        cost: { kind: "none" },
+        repeatable: false,
+        note: `${num(tiersNeeded)} family tiers in all — paid every ten milestones`,
+        // Ranked behind a single tier: ten tiers of anything is what buys one milestone, so it
+        // is never the cheapest thing on the list, and it comes free with the tiers below it.
+        effort: 0.9,
+        effortBand: "marathon",
+      });
+      if (claimed >= rung * 10) done.add(id);
+      previousMilestone = id;
     }
   }
 

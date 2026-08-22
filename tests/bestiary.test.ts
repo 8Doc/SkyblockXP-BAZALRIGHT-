@@ -67,14 +67,42 @@ test("a tier is worth one XP, and the milestones are the remainder", () => {
   assert.ok(bestiary.totals.statedTotal > 5_000, `only ${bestiary.totals.statedTotal} of the game's 5,660`);
 });
 
+/** Is this family being offered a tier? Matched on the id's own shape rather than a name. */
+const offersTier = (catalog: { tasks: { id: string }[]; done: Set<string> }, family: string): boolean =>
+  catalog.tasks.some((t) => {
+    const prefix = `bestiary_${family}_`;
+    if (!t.id.startsWith(prefix) || catalog.done.has(t.id)) return false;
+    const rest = t.id.slice(prefix.length);
+    return rest.length > 0 && [...rest].every((c) => c >= "0" && c <= "9");
+  });
+
 /**
- * A family with no kills against it is only at tier 0 if its kills could have been seen. When
- * the profile carries mob ids the map cannot place, "no kills" means we looked in the wrong
- * place. A maxed profile had 163 such ids and 201,000 unplaced kills, and was being told to go
- * and get tier 1 of a Golden Ghoul it had certainly killed.
+ * A family whose every word appears in a mob id we could not place is a family whose kills we
+ * are probably misreading, so it is held back rather than offered at tier 0.
+ *
+ * This used to be far wider: any unplaced id at all held back *every* family with no kills. With
+ * 249 families and a third of a maxed profile's ids unreadable that was the safer reading; with
+ * 319 it hid 1,470 XP on one profile, two thirds of everything the category had left, because
+ * most of what it caught were families the player had simply never fought.
  */
-test("a family is not offered when the profile is carrying kills we cannot place", () => {
-  const withGap = buildCatalog(
+test("a family whose name clashes with an unplaceable id is held back", () => {
+  const clash = buildCatalog(
+    {
+      bestiary: {
+        kills: { zombie_1: 4, golden_ghoul_variant_99: 5_000 },
+        milestone: { last_claimed_milestone: 0 },
+      },
+    } as never,
+    full,
+    { items: null, capacity: 0 },
+  );
+  assert.ok(!offersTier(clash, "golden_ghoul"), "its kills may be hiding in the id we could not read");
+  assert.ok(offersTier(clash, "zombie"), "a family we did see kills for is still offered");
+});
+
+/** But a family that clashes with nothing is offered, even while other ids go unplaced. */
+test("an untouched family is offered even when some ids cannot be placed", () => {
+  const blind = buildCatalog(
     {
       bestiary: {
         kills: { zombie_1: 4, some_mob_we_cannot_place_99: 5_000 },
@@ -84,11 +112,7 @@ test("a family is not offered when the profile is carrying kills we cannot place
     full,
     { items: null, capacity: 0 },
   );
-  const offered = withGap.tasks.filter((t) => t.category === "bestiary" && !withGap.done.has(t.id));
-  const families = new Set(offered.map((t) => /^bestiary_(.*)_\d+$/.exec(t.id)?.[1]));
-  // Four kills is short of the first rung, so the family is seen but not yet maxed.
-  assert.ok(families.has("zombie"), "a family we did see kills for is still offered");
-  assert.ok(!families.has("golden_ghoul"), "one we saw nothing for, while blind, is not");
+  assert.ok(offersTier(blind, "golden_ghoul"), "nothing about that id suggests it fed the Golden Ghoul");
 });
 
 test("with nothing unplaced, a family with no kills is genuinely at tier zero", () => {
@@ -147,4 +171,48 @@ test("a tier is reached exactly at its cumulative kill count", () => {
     family.maxTier,
     "a maxed family stops at its cap rather than running off the ladder",
   );
+});
+
+/**
+ * The milestones pay a tenth of the category and were modelled as nothing at all. A milestone is
+ * ten family tiers and every ten milestones pay 10 XP, so this is the tier count read again in
+ * lumps of a hundred — not a separate grind, but not nothing either. What a profile had earned
+ * was always credited; what it had left was simply absent, 230 XP of it on one real profile.
+ */
+test("the milestones are offered, not just credited", () => {
+  const fresh = buildCatalog({} as never, full, { items: null, capacity: 0 });
+  const rungs = fresh.tasks.filter((t) => t.id.startsWith("bestiary_milestone_"));
+  assert.equal(rungs.length, Math.floor((bestiary.totals.milestoneXp ?? 0) / 10), "one rung per ten milestones");
+  assert.equal(rungs.reduce((s, t) => s + t.xp, 0), bestiary.totals.milestoneXp, "worth what the table says");
+  assert.equal(rungs.filter((t) => fresh.done.has(t.id)).length, 0, "a fresh profile has claimed none");
+
+  // Counted off the profile's own claim rather than off our tier total: the two disagree, and
+  // using ours would hand back XP the game has already paid.
+  const partway = buildCatalog(
+    { bestiary: { kills: {}, milestone: { last_claimed_milestone: 237 } } } as never,
+    full,
+    { items: null, capacity: 0 },
+  );
+  const claimed = partway.tasks.filter((t) => t.id.startsWith("bestiary_milestone_") && partway.done.has(t.id));
+  assert.equal(claimed.reduce((s, t) => s + t.xp, 0), 230, "237 claimed milestones is 23 lots of ten");
+});
+
+/**
+ * A tier's cost is a share of its own family's ladder, so a boss two kills from a tier and a
+ * zombie two hundred from one are ranked by how much work each really is. Maxing the cheapest
+ * family takes 7 kills and the dearest 40,000 — sorting on raw kills sorts on bracket.
+ */
+test("tiers are ranked on a share of their family's ladder", () => {
+  const cat = buildCatalog({ bestiary: { kills: { zombie_1: 4 }, milestone: {} } } as never, full, {
+    items: null,
+    capacity: 0,
+  });
+  const rows = cat.tasks.filter((t) => t.category === "bestiary" && t.effort !== undefined);
+  assert.ok(rows.length > 100);
+  for (const row of rows) {
+    assert.ok(row.effort! >= 0 && row.effort! <= 1, `${row.name} scores ${row.effort}`);
+  }
+  // Nothing is cut for being far off: the category's total is what the player really has left.
+  const families = new Set(cat.tasks.filter((t) => t.category === "bestiary").map((t) => t.id.split("_").slice(1, -1).join("_")));
+  assert.ok(families.size > 300, `only ${families.size} families reach the list`);
 });
