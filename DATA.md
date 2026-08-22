@@ -500,7 +500,32 @@ were deleted rather than left as overrides, because curated wins by design and a
 invisible.
 
 Together those took families reading as never-touched across six profiles from **22 to 10**, and
-kills credited to a family from 94.4% to **98.4%**.
+kills credited to a family from 94.4% to **98.4%**. Two more of the ten resolved from a real
+profile's kill counts: `guardian_emperor` and `skeleton_emperor` sum to 29 against The Loch
+Emperor's 29, and both wikis' redirects confirm The Sea Emperor and Watcher are renames of it and
+of Seer — worth 8,268 and 11,785 kills on two profiles that a curated exclusion had been hiding as
+"dungeon boss".
+
+**Critter Safari had no row on either wiki's summary table at all.** Not misnamed, not
+mis-bracketed — entirely absent from `Bestiary/List` and from Fandom's rendered `Bestiary` page,
+which is why nothing in the scrape above ever touched it. But every one of its mobs states its own
+bracket and tier cap on its own page (`bestiary_bracket`, `bestiary_max_tier` — the same infobox
+field 244 pages across the wiki carry), so `fetch-bestiary.mjs` now reads those 37 pages directly,
+identified by `spawn_location = [[Critter Safari]]` so an ordinary farm critter sharing the same
+template (Sheep, Cow) is not swept in by accident. A profile checked in game confirmed the count
+exactly — 37 — before this ran; Gemzie's bracket is commented out on the wiki itself
+(`<!--9-->`, and bracket 9 does not exist), so it is left out rather than guessed at, landing 36.
+
+That surfaced a second bug in `placeOnLadder` itself: brackets 7 and 8 both read 20 kills at tier
+10, and its identity search returns whichever comes first rather than checking what a source
+actually stated. A dozen critters the wiki states as bracket 8 were silently relabelled 7. It cost
+no XP — none of these families has a tier past 10 to be wrong about — but the recorded bracket was
+a number nobody had stated. Critter Safari families now carry their own page's bracket directly
+(`knownBracket`), verified against the ladder rather than re-derived from it.
+
+354 families, tier total 4,960, category total **5,450** against the 5,660 the menu states —
+99.2% of kills across six profiles now land on a family, up from 94.4% before any of this section's
+fixes.
 
 **Duplicates across the two wikis.** The wikis spell some families differently — Fandom writes
 "Endstone Protector", "Angry Archeologist" and "Gravel Skeleton" where the community wiki writes

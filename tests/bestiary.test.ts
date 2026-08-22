@@ -384,3 +384,31 @@ test("a correction is actually applied, and points at a family that exists", () 
     assert.notEqual(c.correctMaxKills, c.wikiMaxKills, `${c.id}'s correction should differ from the wiki, or it isn't one`);
   }
 });
+
+/**
+ * Critter Safari never got a row on either wiki's summary table, but every one of its 37 mobs
+ * states its own bracket and tier cap on its own page — confirmed against an in-game reading of
+ * exactly 37 families, one of which (Gemzie) the wiki itself marks unconfirmed and is left out.
+ *
+ * Bracket 7 and bracket 8 both read 20 kills at tier 10, and the generic placement search picks
+ * whichever comes first rather than checking what the page actually said — so a dozen critters
+ * the wiki states as bracket 8 would silently read as bracket 7 without the page's own figure
+ * overriding that search. It costs nothing in XP, since none of these families has a tier past
+ * 10 to be wrong about, but the recorded bracket would still be a number nobody stated.
+ */
+test("critter safari families keep the bracket their own page states", () => {
+  const critters = bestiary.families.filter((f) => f.island === "Critter Safari");
+  assert.equal(critters.length, 36, "37 in game, minus Gemzie, which the wiki itself leaves unconfirmed");
+  assert.ok(!critters.some((f) => f.id === "gemzie"), "left out rather than guessed at");
+  for (const [id, bracket] of [
+    ["driftling", 8],
+    ["bloodbat", 8],
+    ["cavernfish", 3],
+    ["billygoat", 4],
+    ["macaw", 6],
+  ] as const) {
+    const family = critters.find((f) => f.id === id);
+    assert.ok(family, id);
+    assert.equal(family!.bracket, bracket, `${id}: the collision between bracket 7 and 8 at tier 10 must not relabel it`);
+  }
+});

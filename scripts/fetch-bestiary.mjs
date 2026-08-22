@@ -7,10 +7,16 @@
  * doesn't publish: the cumulative kill brackets, and which bracket and tier cap each family
  * carries.
  *
- * Two sources, because neither is complete. The community wiki the editors moved to carries the
- * newer islands — Moonglade Marsh, Torrhus Canyon, the Lotus Atoll — and dozens of families the
- * Fandom wiki never got; the Fandom wiki still carries the fishing sections the community one
- * has no page for.
+ * Two sources for the summary table, because neither is complete. The community wiki the editors
+ * moved to carries the newer islands — Moonglade Marsh, Torrhus Canyon, the Lotus Atoll — and
+ * dozens of families the Fandom wiki never got; the Fandom wiki still carries the fishing
+ * sections the community one has no page for.
+ *
+ * A third source for what the summary table doesn't carry at all. Critter Safari has no row on
+ * either wiki's `Bestiary/List` or `Bestiary` page — the whole minigame is simply absent from
+ * both. But every one of its 37 mobs states its own bracket and tier cap on its own page, in the
+ * same infobox field 244 pages across the wiki carry, so those are read directly rather than
+ * given up on. An in-game reading confirmed the count exactly before this ran.
  *
  * Read against the game rather than assumed correct. Fandom states Moogma's cap at 4,000 on
  * bracket 3; a real profile's Bestiary screen shows it maxed at 1,000. `bestiary_corrections.json`
@@ -247,15 +253,74 @@ for (const f of fandom) {
 console.log(`  ${merged.size} families after the merge, ${added} of them only on Fandom`);
 for (const fold of [...new Set(folded)]) console.log(`    folded by the wikis' own redirect: ${fold}`);
 
+/**
+ * Critter Safari never got a "Bestiary/List" row for any of its 37 families — the whole minigame
+ * is absent from the table both wikis' summary pages carry. But every mob's own page states its
+ * bestiary bracket and tier cap in an infobox field, because 244 pages across the wiki do that,
+ * critters among them; it just isn't collected anywhere else. A profile checked in game confirmed
+ * the family count exactly (37) before this ran, which is what "isolate the critter safari" below
+ * means — the same technique would surface other minigames' families if any exist, but nothing
+ * else was found or claimed missing this way, so nothing else is added on the strength of a guess.
+ */
+console.log("reading Critter Safari's families off their own pages…");
+const critterPages = await (
+  await fetch(`${COMMUNITY}?action=query&list=embeddedin&eititle=Template:Infobox/Critter&eilimit=100&format=json`, { headers: UA })
+).json();
+const critterNames = critterPages.query.embeddedin.map((p) => p.title);
+let crittersAdded = 0;
+const critterUndocumented = [];
+for (let i = 0; i < critterNames.length; i += 20) {
+  const batch = critterNames.slice(i, i + 20);
+  const url = `${COMMUNITY}?action=query&prop=revisions&rvprop=content&rvslots=main&format=json&redirects=1&titles=${batch.map(encodeURIComponent).join("|")}`;
+  const body = await fetch(url, { headers: UA }).then((r) => r.json());
+  for (const page of Object.values(body.query?.pages ?? {})) {
+    const text = page.revisions?.[0]?.slots?.main?.["*"];
+    if (!text) continue;
+    const id = slug(page.title);
+    if (merged.has(id)) continue; // the ordinary farm critters (Sheep, Cow…) already came in above
+    // Critter Safari is stated as the spawn location on its own mobs' pages, which is what
+    // separates them from an ordinary critter like a Cow that happens to share the template.
+    if (!/critter safari/i.test(text.slice(0, 400)) && !/spawn_location\s*=\s*\[\[Critter Safari/i.test(text)) continue;
+    const bracket = Number((text.match(/bestiary_bracket\s*=\s*(\d+)/) ?? [])[1]);
+    const maxTier = Number((text.match(/bestiary_max_tier\s*=\s*(\d+)/) ?? [])[1]);
+    // A blank or commented-out bracket ("<!--9-->") is the wiki's own editors flagging it as
+    // unconfirmed, and the regex above only matches a bare digit — so this catches exactly that.
+    if (!bracket || !maxTier) {
+      critterUndocumented.push({ island: "Critter Safari", name: page.title, id });
+      continue;
+    }
+    // The page states the bracket directly rather than a max-kills figure to derive it from, so
+    // it is looked up rather than asserted here — but `knownBracket` carries it past the placement
+    // step below, because that step's identity search picks whichever bracket matches *first* and
+    // brackets 7 and 8 both read 20 at tier 10. A dozen critters the wiki states as bracket 8
+    // would silently land on 7 without this: the tier maths comes out identical since none of
+    // these families has a tier past 10 to be wrong about, but the recorded bracket would still
+    // be a number the wiki never stated.
+    const maxKills = brackets[bracket]?.[maxTier - 1];
+    if (!maxKills) continue;
+    merged.set(id, { island: "Critter Safari", name: page.title, id, maxTier, maxKills, knownBracket: bracket });
+    crittersAdded++;
+  }
+}
+console.log(`  ${crittersAdded} Critter Safari families read from their own pages`);
+
 const families = [];
-const undocumented = [];
+const undocumented = [...critterUndocumented];
 for (const family of merged.values()) {
   // A correction overrides what the wiki states before placement, not after — Moogma's wiki
   // figure (4,000) happens to land exactly on bracket 3's own tier-15 value, so placing first and
   // patching the result would silently keep the wrong bracket alongside the right kill count.
   const correction = corrections.find((c) => c.id === family.id);
   const effective = correction ? { ...family, maxKills: correction.correctMaxKills } : family;
-  const placed = placeOnLadder(effective);
+  // Critter Safari states its own bracket, so the ambiguous search is skipped for it — see
+  // `knownBracket` above. Verified rather than trusted outright: if a correction ever touched a
+  // critter, the stated bracket might no longer hold its kill count and this catches that instead
+  // of silently keeping a bracket that no longer matches.
+  const placed = effective.knownBracket
+    ? brackets[effective.knownBracket]?.[effective.maxTier - 1] === effective.maxKills
+      ? { table: "main", bracket: effective.knownBracket }
+      : null
+    : placeOnLadder(effective);
   if (!placed) {
     undocumented.push({ island: family.island, name: family.name, id: family.id });
     continue;

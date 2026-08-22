@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-22T11:52:07.077Z",
+  "generatedAt": "2026-08-22T12:09:23.050Z",
   "source": "https://raw.githubusercontent.com/SkyCryptWebsite/SkyCrypt/master/src/constants/bestiary.js",
   "note": "Internal mob id -> the family id in bestiary.json it feeds. Taken from SkyCrypt's bestiary constants, which publish the grouping because rendering the page needs it. `aliases` is keyed by the id with its level stripped, which is how the bestiary counts almost every family. `levelAliases` is keyed by the whole id, for the handful where the level is the only thing telling two families apart — unburried_zombie_30 is a Crypt Ghoul and unburried_zombie_60 is a Golden Ghoul. Only the mobs[] arrays are used: SkyCrypt's own caps and brackets are older than the wiki's and disagree with them on 92 families, so the tier maths stays with fetch-bestiary.mjs.",
   "totals": {

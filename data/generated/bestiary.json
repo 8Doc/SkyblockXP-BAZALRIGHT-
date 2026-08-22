@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-08-22T11:06:51.539Z",
+ "generatedAt": "2026-08-22T12:09:16.059Z",
  "source": "hypixelskyblock.minecraft.wiki Bestiary and Bestiary/List, plus the sections only hypixel-skyblock.fandom.com still carries",
  "note": "A family is placed on a ladder by the identity ladder[maxTier-1] === maxKills rather than by the bracket its page states. Critters and hunting mobs have their own five brackets, keyed to shard rarity.",
  "brackets": {
@@ -461,6 +461,330 @@
    "maxTier": 20,
    "maxKills": 3000,
    "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Critter Safari",
+   "name": "Areita",
+   "id": "areita",
+   "maxTier": 10,
+   "maxKills": 20,
+   "bracket": 8,
+   "table": "main"
+  },
+  {
+   "island": "Critter Safari",
+   "name": "Billygoat",
+   "id": "billygoat",
+   "maxTier": 10,
+   "maxKills": 75,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Critter Safari",
+   "name": "Bloodbat",
+   "id": "bloodbat",
+   "maxTier": 10,
+   "maxKills": 20,
+   "bracket": 8,
+   "table": "main"
+  },
+  {
+   "island": "Critter Safari",
+   "name": "Bluebird",
+   "id": "bluebird",
+   "maxTier": 10,
+   "maxKills": 300,
+   "bracket": 3,
+   "table": "main"
+  },
+  {
+   "island": "Critter Safari",
+   "name": "Cavernfish",
+   "id": "cavernfish",
+   "maxTier": 10,
+   "maxKills": 300,
+   "bracket": 3,
+   "table": "main"
+  },
+  {
+   "island": "Critter Safari",
+   "name": "Chuckwalla",
+   "id": "chuckwalla",
+   "maxTier": 10,
+   "maxKills": 75,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Critter Safari",
+   "name": "Doomspiral",
+   "id": "doomspiral",
+   "maxTier": 10,
+   "maxKills": 75,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Critter Safari",
+   "name": "Driftling",
+   "id": "driftling",
+   "maxTier": 10,
+   "maxKills": 20,
+   "bracket": 8,
+   "table": "main"
+  },
+  {
+   "island": "Critter Safari",
+   "name": "Duplico",
+   "id": "duplico",
+   "maxTier": 10,
+   "maxKills": 20,
+   "bracket": 8,
+   "table": "main"
+  },
+  {
+   "island": "Critter Safari",
+   "name": "Flitter",
+   "id": "flitter",
+   "maxTier": 10,
+   "maxKills": 300,
+   "bracket": 3,
+   "table": "main"
+  },
+  {
+   "island": "Critter Safari",
+   "name": "Fluffling",
+   "id": "fluffling",
+   "maxTier": 10,
+   "maxKills": 75,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Critter Safari",
+   "name": "Foxtrot",
+   "id": "foxtrot",
+   "maxTier": 10,
+   "maxKills": 300,
+   "bracket": 3,
+   "table": "main"
+  },
+  {
+   "island": "Critter Safari",
+   "name": "Gazer",
+   "id": "gazer",
+   "maxTier": 10,
+   "maxKills": 20,
+   "bracket": 8,
+   "table": "main"
+  },
+  {
+   "island": "Critter Safari",
+   "name": "Gimmiegold",
+   "id": "gimmiegold",
+   "maxTier": 10,
+   "maxKills": 75,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Critter Safari",
+   "name": "Hideonfloor",
+   "id": "hideonfloor",
+   "maxTier": 10,
+   "maxKills": 75,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Critter Safari",
+   "name": "Hideonwall",
+   "id": "hideonwall",
+   "maxTier": 10,
+   "maxKills": 75,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Critter Safari",
+   "name": "Hideyho",
+   "id": "hideyho",
+   "maxTier": 10,
+   "maxKills": 75,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Critter Safari",
+   "name": "Honeybug",
+   "id": "honeybug",
+   "maxTier": 10,
+   "maxKills": 20,
+   "bracket": 8,
+   "table": "main"
+  },
+  {
+   "island": "Critter Safari",
+   "name": "Litterbug",
+   "id": "litterbug",
+   "maxTier": 10,
+   "maxKills": 20,
+   "bracket": 8,
+   "table": "main"
+  },
+  {
+   "island": "Critter Safari",
+   "name": "Macaw",
+   "id": "macaw",
+   "maxTier": 10,
+   "maxKills": 25,
+   "bracket": 6,
+   "table": "main"
+  },
+  {
+   "island": "Critter Safari",
+   "name": "Mantis Shrimp",
+   "id": "mantis_shrimp",
+   "maxTier": 10,
+   "maxKills": 75,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Critter Safari",
+   "name": "Nozzlenose",
+   "id": "nozzlenose",
+   "maxTier": 10,
+   "maxKills": 75,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Critter Safari",
+   "name": "Parakeet",
+   "id": "parakeet",
+   "maxTier": 10,
+   "maxKills": 75,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Critter Safari",
+   "name": "Polaris",
+   "id": "polaris",
+   "maxTier": 10,
+   "maxKills": 20,
+   "bracket": 8,
+   "table": "main"
+  },
+  {
+   "island": "Critter Safari",
+   "name": "Rockmite",
+   "id": "rockmite",
+   "maxTier": 10,
+   "maxKills": 75,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Critter Safari",
+   "name": "Scrappy",
+   "id": "scrappy",
+   "maxTier": 10,
+   "maxKills": 75,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Critter Safari",
+   "name": "Shuddersquid",
+   "id": "shuddersquid",
+   "maxTier": 10,
+   "maxKills": 20,
+   "bracket": 8,
+   "table": "main"
+  },
+  {
+   "island": "Critter Safari",
+   "name": "Shyworm",
+   "id": "shyworm",
+   "maxTier": 10,
+   "maxKills": 300,
+   "bracket": 3,
+   "table": "main"
+  },
+  {
+   "island": "Critter Safari",
+   "name": "Snoozle",
+   "id": "snoozle",
+   "maxTier": 10,
+   "maxKills": 75,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Critter Safari",
+   "name": "Solsnatcher",
+   "id": "solsnatcher",
+   "maxTier": 10,
+   "maxKills": 20,
+   "bracket": 8,
+   "table": "main"
+  },
+  {
+   "island": "Critter Safari",
+   "name": "Strongarm",
+   "id": "strongarm",
+   "maxTier": 10,
+   "maxKills": 300,
+   "bracket": 3,
+   "table": "main"
+  },
+  {
+   "island": "Critter Safari",
+   "name": "Tepid",
+   "id": "tepid",
+   "maxTier": 10,
+   "maxKills": 300,
+   "bracket": 3,
+   "table": "main"
+  },
+  {
+   "island": "Critter Safari",
+   "name": "Treefrog",
+   "id": "treefrog",
+   "maxTier": 10,
+   "maxKills": 20,
+   "bracket": 8,
+   "table": "main"
+  },
+  {
+   "island": "Critter Safari",
+   "name": "Troodon",
+   "id": "troodon",
+   "maxTier": 10,
+   "maxKills": 75,
+   "bracket": 4,
+   "table": "main"
+  },
+  {
+   "island": "Critter Safari",
+   "name": "Woodchucker",
+   "id": "woodchucker",
+   "maxTier": 10,
+   "maxKills": 20,
+   "bracket": 8,
+   "table": "main"
+  },
+  {
+   "island": "Critter Safari",
+   "name": "Wumpa",
+   "id": "wumpa",
+   "maxTier": 10,
+   "maxKills": 25,
+   "bracket": 6,
    "table": "main"
   },
   {
@@ -3154,14 +3478,20 @@
  "corrected": [
   "moogma"
  ],
- "undocumented": [],
+ "undocumented": [
+  {
+   "island": "Critter Safari",
+   "name": "Gemzie",
+   "id": "gemzie"
+  }
+ ],
  "totals": {
-  "families": 318,
-  "islands": 20,
-  "tiers": 4600,
-  "xp": 4600,
-  "milestoneXp": 460,
-  "statedTotal": 5060,
+  "families": 354,
+  "islands": 21,
+  "tiers": 4960,
+  "xp": 4960,
+  "milestoneXp": 490,
+  "statedTotal": 5450,
   "statedTotalSource": "1 XP a tier, plus 10 XP per ten milestones where a milestone is ten tiers — wiki Bestiary, Leveling and Milestone Rewards"
  }
 }
