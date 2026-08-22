@@ -18,6 +18,27 @@ import { VOLUME_LADDER, ladderIndex, volumeNote } from "../lib/volumeFloor";
 const BAZAAR = "https://api.hypixel.net/v2/skyblock/bazaar";
 
 /**
+ * Item art, from Coflnet's public icon service.
+ *
+ * The only thing on this page that comes from anywhere other than Hypixel, and the only reason
+ * it is worth the exception is that a table of two thousand SkyBlock ids is genuinely hard to
+ * read without it. Everything degrades if the service is gone or the file is opened offline: the
+ * images fail, the space they were in stays reserved, and every number is exactly as it was.
+ *
+ * Note the missing `/vanilla` on the end. skyblock.bz asks for that variant and it is a much
+ * poorer set — a sample of 120 products came back 43% blank, Enchanted Obsidian and every
+ * enchanted book among them. The plain path answered all 150 we tried.
+ *
+ * The ten ids carrying a vanilla damage suffix — `INK_SACK:4`, `LOG:2` and the like — have no
+ * icon under any spelling we could find, so they show nothing. That is the better failure: the
+ * un-suffixed id does resolve, but it would put an oak log against Birch Log and a black ink sack
+ * against Lapis Lazuli, which is worse than an empty square.
+ */
+function iconUrl(id: string): string {
+  return `https://sky.coflnet.com/static/icon/${encodeURIComponent(id)}`;
+}
+
+/**
  * Hypixel refreshes the bazaar every 20.017 seconds, dead regular, and stamps each payload with
  * `lastUpdated`. Polling on a blind 20-second timer therefore lands, on average, ten seconds into
  * a stale window; waking just after the stamp says the next one is due halves that for free.
@@ -280,6 +301,19 @@ export function mountBazaar(container: HTMLElement, tables: BazaarData): void {
     if (target.closest("#bzrefresh")) void refresh();
   });
 
+  // Error events do not bubble, so this listens on the way down. A missing icon is hidden rather
+  // than removed, which keeps the names in a column instead of letting them jog left and right.
+  container.addEventListener(
+    "error",
+    (event) => {
+      const target = event.target;
+      if (target instanceof HTMLImageElement && target.classList.contains("bz-icon")) {
+        target.style.visibility = "hidden";
+      }
+    },
+    true,
+  );
+
   container.addEventListener("input", (event) => {
     const el = event.target as HTMLInputElement;
     if (el.id === "bzsearch") {
@@ -410,7 +444,14 @@ function table<T extends Flip | Craft>(rows: T[], belowFloor: number, columns: C
   const body = shown
     .map((row) => {
       const cells = columns.map((c) => `<td class="num">${c.render(row)}</td>`).join("");
-      return `<tr><td>${escapeHtml(nameOf(row.id))}${limitNote(row)}</td>${cells}</tr>`;
+      const name = escapeHtml(nameOf(row.id));
+      // Decorative: the name is right beside it, so an empty alt keeps it out of a screen reader
+      // rather than having every row read twice.
+      // Lazy because only a screenful is ever on show, async-decoded because the table is rebuilt
+      // every twenty seconds and a decode should never hold up the repaint. The service caches for
+      // a year, so the rebuild costs nothing on the wire either.
+      const icon = `<img class="bz-icon" src="${iconUrl(row.id)}" alt="" width="20" height="20" loading="lazy" decoding="async">`;
+      return `<tr><td>${icon}${name}${limitNote(row)}</td>${cells}</tr>`;
     })
     .join("");
 

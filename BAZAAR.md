@@ -434,6 +434,15 @@ than a rate ("20/hr · one every 3 min"), because the wait is the thing being ch
 count underneath says how many the floor is holding back. It persists, and it applies to round
 trips on flips and to items an hour on crafts.
 
+Rows carry the item's art, from `sky.coflnet.com/static/icon/{id}` — the only thing on the page
+that comes from anywhere but Hypixel, and worth the exception because two thousand SkyBlock ids
+are hard to read without it. Note the **missing `/vanilla` suffix**: that is the variant
+skyblock.bz asks for and it is a much poorer set, 43% blank across a 120-product sample with
+Enchanted Obsidian and every enchanted book among the gaps. The plain path answered all 150 we
+tried, caches for a year, and degrades to an empty square when it cannot — which is what the ten
+ids carrying a vanilla damage suffix (`INK_SACK:4`, `LOG:2`) get, since the un-suffixed id
+resolves but would put an oak log against Birch Log.
+
 Two things it does that skyblock.bz's does not:
 
 - **Craft figures are per item, not per craft.** Hotspot Bait comes thirty-two to a craft, so a
