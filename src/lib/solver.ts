@@ -33,7 +33,85 @@ export type SolveOptions = {
   budget: number | null;
   categories: Set<Category>;
   strategy: "greedy" | "exact";
+  /**
+   * Room in the accessory bag, and what one Jacobus upgrade adds to it.
+   *
+   * A plan that buys forty accessories into a bag with nowhere to put them is not a plan
+   * anyone can follow, so a fill buys the slots as it goes and pays for them out of the same
+   * budget — see slotsFor. Omit it and the plan is built as it was before, with no slots in it:
+   * that is the honest answer when the talisman bag can't be read, since capacity comes back
+   * as zero and a bag we can't see is not a bag we know is full.
+   */
+  bag?: BagRoom;
 };
+
+/** Slots free in the accessory bag when a plan starts, and what one upgrade adds. */
+export type BagRoom = { freeSlots: number; slotsPerUpgrade: number };
+
+const BAG_UPGRADE = "bag_upgrade_";
+
+/** Jacobus sells his 99 in order, and the ids are numbered to match. */
+const upgradeNumber = (id: string): number => Number(id.slice(BAG_UPGRADE.length));
+
+/**
+ * An accessory that needs somewhere to sit: one whose family the bag holds nothing of yet.
+ *
+ * The same rule the browser places slots by. Upgrading a family already in there takes no new
+ * room — the artifact goes where the ring was — and recombobulating takes none at all.
+ */
+function needsSlot(task: ResolvedTask): boolean {
+  return task.id.startsWith("accessory_") && (task.groupBase ?? 0) <= 0;
+}
+
+/** What occupies the slot: the family, so two tiers of one don't take two. */
+const familyKey = (task: ResolvedTask): string => task.exclusiveGroup ?? task.id;
+
+/**
+ * Jacobus's next unsold upgrades, cheapest number first.
+ *
+ * Taken in order because each one requires the one below it, so buying them in sequence
+ * satisfies the chain without the bundle machinery having to drag it in.
+ */
+function slotQueue(pool: ResolvedTask[], completed: Set<string>): ResolvedTask[] {
+  return pool
+    .filter((task) => task.id.startsWith(BAG_UPGRADE) && !completed.has(task.id) && task.coins !== null)
+    .sort((a, b) => upgradeNumber(a.id) - upgradeNumber(b.id));
+}
+
+/**
+ * Slots one pick would leave the bag short by — the new families in its bundle, less the room
+ * already there. Counted per family rather than per row, because a bundle that climbs from the
+ * ring to the artifact of one family still only puts one thing in the bag.
+ */
+function slotsWanted(task: ResolvedTask, byId: Map<string, ResolvedTask>, state: FillState): number {
+  const families = new Set<string>();
+  for (const id of [...task.bundle, task.id]) {
+    const step = byId.get(id);
+    if (!step || !needsSlot(step) || state.housed.has(familyKey(step))) continue;
+    families.add(familyKey(step));
+  }
+  return Math.max(families.size - state.freeSlots, 0);
+}
+
+/**
+ * The upgrades that cover a shortfall of `deficit` slots, and what they cost.
+ *
+ * Whole upgrades, never a fraction of one: Jacobus sells +2 at a time whether you needed one
+ * slot or two. Comes up short only when the 99 have run out, at which point the bag holds what
+ * it holds and there is nothing more to buy.
+ */
+function slotsFor(queue: ResolvedTask[], deficit: number, slotsPerUpgrade: number): { take: ResolvedTask[]; coins: number } {
+  const take: ResolvedTask[] = [];
+  let coins = 0;
+  let gained = 0;
+  for (const upgrade of queue) {
+    if (gained >= deficit) break;
+    take.push(upgrade);
+    coins += upgrade.coins ?? 0;
+    gained += slotsPerUpgrade;
+  }
+  return { take, coins };
+}
 
 /** What a task is worth right now, given what has already been bought in its group. */
 function effectiveXp(task: ResolvedTask, groupLevels: Map<string, number>): number {
@@ -81,7 +159,28 @@ type FillState = {
    * good value. Kept plan-wide so the comparison holds across packages too.
    */
   picks: Map<string, { id: string; coins: number; xp: number }>;
+  /**
+   * Slots left in the accessory bag. Goes down as the fill finds families to house and up as it
+   * buys Jacobus upgrades, so successive packages inherit the room the last one paid for.
+   */
+  freeSlots: number;
+  /**
+   * Families this fill has already found room for. A family takes one slot however many of its
+   * tiers the plan climbs through, so the ring and the artifact of one don't buy two.
+   */
+  housed: Set<string>;
 };
+
+/** A fresh board for a plan that has bought nothing yet. */
+function newFillState(done: Set<string>, bag: BagRoom | undefined): FillState {
+  return {
+    completed: new Set(done),
+    groupLevels: new Map(),
+    picks: new Map(),
+    freeSlots: bag?.freeSlots ?? 0,
+    housed: new Set(),
+  };
+}
 
 /**
  * Buy the cheapest XP available until a stop condition hits — an XP target, a coin budget, or
@@ -105,6 +204,9 @@ function greedyFill(
   // Hard stop: every iteration must retire at least one task, so this can't outrun the pool.
   for (let guard = 0; guard < tasks.length && xp < limits.targetXp; guard++) {
     const { tasks: resolved, byId } = resolveTasks(tasks, state.completed, book, isCandidate);
+    // Rebuilt each pass rather than carried: the greedy may buy an upgrade on its own merits,
+    // and state.completed is where that shows up.
+    const queue = opts.bag ? slotQueue(resolved, state.completed) : [];
 
     let best: ResolvedTask | null = null;
     let bestXp = 0;
@@ -126,7 +228,14 @@ function greedyFill(
       const prior = task.exclusiveGroup ? state.picks.get(task.exclusiveGroup) : undefined;
       const marginalCoins = task.bundleCoins! - (prior?.coins ?? 0);
       const outlay = prior && chosen.has(prior.id) ? task.bundleCoins! - prior.coins : task.bundleCoins!;
-      if (limits.budget !== null && spent + outlay > limits.budget) continue;
+
+      // A new family with nowhere to go drags a Jacobus upgrade in behind it, and that comes out
+      // of the same budget. It is charged here and nowhere else: the slot is a shared cost — one
+      // upgrade houses two accessories — so adding it to the *rate* would bill whichever
+      // accessory happened to sort first for room the rest of them use. Affordability is a
+      // different question from value, and only this one is the slot's business.
+      const slots = opts.bag ? slotsFor(queue, slotsWanted(task, byId, state), opts.bag.slotsPerUpgrade) : null;
+      if (limits.budget !== null && spent + outlay + (slots?.coins ?? 0) > limits.budget) continue;
 
       const bundleRate = marginalCoins / gain;
       // Cheapest coins per XP, then the bigger chunk — fewer trips for the same money.
@@ -171,7 +280,32 @@ function greedyFill(
       chosen.set(id, { ...step, xp: gain });
       xp += gain;
       spent += step.coins ?? 0;
+
+      // Room in the bag, spent and bought. An upgrade the greedy picked for its own 2 XP still
+      // adds its slots, so the next accessory to want one may find it already paid for.
+      if (opts.bag) {
+        if (step.id.startsWith(BAG_UPGRADE)) state.freeSlots += opts.bag.slotsPerUpgrade;
+        else if (needsSlot(step) && !state.housed.has(familyKey(step))) {
+          state.housed.add(familyKey(step));
+          state.freeSlots--;
+        }
+      }
     }
+
+    // Whatever the pick left homeless, buy the room for it now. Priced into the budget check
+    // above, so this can only be spending the fill already knew it was committing to.
+    if (opts.bag && state.freeSlots < 0) {
+      for (const upgrade of slotsFor(queue, -state.freeSlots, opts.bag.slotsPerUpgrade).take) {
+        state.completed.add(upgrade.id);
+        chosen.set(upgrade.id, upgrade);
+        state.freeSlots += opts.bag.slotsPerUpgrade;
+        spent += upgrade.coins ?? 0;
+        xp += upgrade.xp;
+      }
+      // Jacobus stops at 99. Past that the bag holds what it holds, and the shortfall stands.
+      state.freeSlots = Math.max(state.freeSlots, 0);
+    }
+
     // One point per pick, not per task: a bundle is bought as a unit.
     trace?.push({ coins: spent, xp });
   }
@@ -198,7 +332,7 @@ function idealFrontier(
   opts: SolveOptions,
   budget: number,
 ): { coins: number; xp: number }[] {
-  const state: FillState = { completed: new Set(done), groupLevels: new Map(), picks: new Map() };
+  const state = newFillState(done, opts.bag);
   const trace: { coins: number; xp: number }[] = [];
   greedyFill(tasks, state, book, { ...opts, minXp: 0 }, { targetXp: Number.POSITIVE_INFINITY, budget }, trace);
   return trace;
@@ -231,9 +365,9 @@ function idealXpAt(frontier: { coins: number; xp: number }[], coins: number): nu
 }
 
 function solveGreedy(tasks: Task[], done: Set<string>, book: PriceBook, opts: SolveOptions): ResolvedTask[] {
-  const state: FillState = { completed: new Set(done), groupLevels: new Map(), picks: new Map() };
+  const state = newFillState(done, opts.bag);
   const chosen = greedyFill(tasks, state, book, opts, { targetXp: opts.targetXp, budget: opts.budget });
-  return prune(chosen, opts.targetXp);
+  return prune(chosen, opts.targetXp, opts.bag);
 }
 
 /**
@@ -241,7 +375,7 @@ function solveGreedy(tasks: Task[], done: Set<string>, book: PriceBook, opts: So
  * earlier, chunkier pick can make a cheaper one redundant. Drop anything the plan no longer
  * needs, worst value first, keeping prerequisites of survivors intact.
  */
-function prune(chosen: ResolvedTask[], targetXp: number): ResolvedTask[] {
+function prune(chosen: ResolvedTask[], targetXp: number, bag?: BagRoom): ResolvedTask[] {
   const keep = new Map(chosen.map((t) => [t.id, t]));
   let total = chosen.reduce((s, t) => s + t.xp, 0);
   if (total < targetXp) return chosen;
@@ -254,9 +388,28 @@ function prune(chosen: ResolvedTask[], targetXp: number): ResolvedTask[] {
     // Dropping a lower family member would make a surviving one worth more, never less, so
     // the recomputed plan can only beat this total — safe to leave the arithmetic alone.
     keep.delete(task.id);
+    // A Jacobus upgrade is 20M for 2 XP, so it leads this list every time — and dropping one
+    // still holding an accessory would leave the plan telling you to buy something with
+    // nowhere to put it. Put it back. Once the accessories go, so does the reason to keep it,
+    // and the same pass drops it on a later turn.
+    if (bag && !slotsSuffice(keep, bag)) {
+      keep.set(task.id, task);
+      continue;
+    }
     total -= task.xp;
   }
   return [...keep.values()];
+}
+
+/** True when a set has bought room for every new family in it. */
+function slotsSuffice(keep: Map<string, ResolvedTask>, bag: BagRoom): boolean {
+  const families = new Set<string>();
+  let slots = bag.freeSlots;
+  for (const task of keep.values()) {
+    if (task.id.startsWith(BAG_UPGRADE)) slots += bag.slotsPerUpgrade;
+    else if (needsSlot(task)) families.add(familyKey(task));
+  }
+  return slots >= families.size;
 }
 
 /* ------------------------------------------------------- knapsack machinery */
@@ -329,6 +482,33 @@ function reconstruct(from: (Option | null)[][], byId: Map<string, ResolvedTask>,
 
 /* ------------------------------------------------------------------- exact */
 
+/**
+ * Room for a set the knapsack chose.
+ *
+ * The DP ranks options on coins per XP and has no way to say "and somewhere to put it", so the
+ * slots go on afterwards: the same arithmetic the greedy does inline — one upgrade per two new
+ * families, taken in Jacobus's order — just applied to a finished set rather than as it grows.
+ */
+function houseChosen(
+  chosen: ResolvedTask[],
+  pool: ResolvedTask[],
+  completed: Set<string>,
+  bag: BagRoom,
+): { chosen: ResolvedTask[]; coins: number } {
+  const families = new Set<string>();
+  let slots = bag.freeSlots;
+  for (const task of chosen) {
+    if (task.id.startsWith(BAG_UPGRADE)) slots += bag.slotsPerUpgrade;
+    else if (needsSlot(task)) families.add(familyKey(task));
+  }
+  if (families.size <= slots) return { chosen, coins: 0 };
+
+  const already = new Set(chosen.map((task) => task.id));
+  const queue = slotQueue(pool, completed).filter((task) => !already.has(task.id));
+  const { take, coins } = slotsFor(queue, families.size - slots, bag.slotsPerUpgrade);
+  return { chosen: [...chosen, ...take], coins };
+}
+
 function solveExact(tasks: Task[], done: Set<string>, book: PriceBook, opts: SolveOptions): ResolvedTask[] {
   const { tasks: resolved, byId } = resolveTasks(tasks, done, book, candidate(opts));
   const empty = new Map<string, number>();
@@ -342,7 +522,8 @@ function solveExact(tasks: Task[], done: Set<string>, book: PriceBook, opts: Sol
   // Unreachable exactly — fall back and get as close as the pool allows.
   if (dp[target] === Number.POSITIVE_INFINITY) return solveGreedy(tasks, done, book, opts);
 
-  return reconstruct(from, byId, target);
+  const chosen = reconstruct(from, byId, target);
+  return opts.bag ? houseChosen(chosen, resolved, done, opts.bag).chosen : chosen;
 }
 
 /* ---------------------------------------------------------------- packages */
@@ -366,7 +547,7 @@ const MAX_PACKAGE_XP = 20_000;
  * strand bundles across boundaries; solving never does.
  */
 export function solvePackages(tasks: Task[], done: Set<string>, book: PriceBook, opts: PackageOptions): PackagePlan {
-  const state: FillState = { completed: new Set(done), groupLevels: new Map(), picks: new Map() };
+  const state = newFillState(done, opts.bag);
   const packages: PackageEntry[] = [];
   let cumulativeCoins = 0;
   let cumulativeXp = 0;
@@ -486,25 +667,55 @@ function exactWithinBudget(
   );
   if (cap <= 0) return [];
 
-  const { dp, from } = knapsack(groups, cap, budget);
+  /** The most XP a table can reach for a given spend, and the set that reaches it. */
+  const bestWithin = (table: ReturnType<typeof knapsack>, spend: number): ResolvedTask[] => {
+    if (spend <= 0) return [];
+    for (let x = cap; x > 0; x--) if (table.dp[x] <= spend) return reconstruct(table.from, byId, x);
+    return [];
+  };
 
-  let best = 0;
-  for (let x = cap; x > 0; x--) {
-    if (dp[x] <= budget) {
-      best = x;
-      break;
+  const table = knapsack(groups, cap, budget);
+  let chosen = bestWithin(table, budget);
+  if (!chosen.length) return [];
+
+  // Slots come out of the same package as the accessories that need them, so what they cost is
+  // budget the picks above were never entitled to. Reserve it and choose again. Two passes and
+  // no loop: the reserve only ever shrinks the pool, so the second answer can want no more room
+  // than the first, and a third pass would find the same set.
+  if (opts.bag) {
+    const reserve = houseChosen(chosen, resolved, state.completed, opts.bag).coins;
+    if (reserve > 0) {
+      chosen = bestWithin(table, budget - reserve);
+      // A package too small to buy even one upgrade can still buy plenty that isn't an
+      // accessory, so an empty answer here means "not with these", not "nothing left". Solve
+      // again over a pool with the homeless accessories taken out rather than calling the whole
+      // package sequence exhausted over one 20M slot.
+      if (!chosen.length) {
+        const grounded = pool.filter((task) => !needsSlot(task));
+        chosen = grounded.length
+          ? bestWithin(knapsack(optionGroups(grounded, state.groupLevels), cap, budget), budget)
+          : [];
+      }
     }
+    if (!chosen.length) return [];
+    chosen = houseChosen(chosen, resolved, state.completed, opts.bag).chosen;
   }
-  if (!best) return [];
 
-  const chosen = reconstruct(from, byId, best);
   // Commit the picks to the running board so the next package starts from here.
   for (const task of chosen) {
     state.completed.add(task.id);
+    if (opts.bag) {
+      if (task.id.startsWith(BAG_UPGRADE)) state.freeSlots += opts.bag.slotsPerUpgrade;
+      else if (needsSlot(task) && !state.housed.has(familyKey(task))) {
+        state.housed.add(familyKey(task));
+        state.freeSlots--;
+      }
+    }
     if (!task.exclusiveGroup) continue;
     state.groupLevels.set(task.exclusiveGroup, task.groupLevel ?? 0);
     state.picks.set(task.exclusiveGroup, { id: task.id, coins: task.coins ?? 0, xp: task.xp });
   }
+  if (opts.bag) state.freeSlots = Math.max(state.freeSlots, 0);
   return chosen;
 }
 
@@ -524,7 +735,14 @@ function groupByCategory(chosen: ResolvedTask[]): PlanGroup[] {
       category,
       xp: list.reduce((s, t) => s + t.xp, 0),
       coins: list.reduce((s, t) => s + (t.coins ?? 0), 0),
-      tasks: list.sort((a, b) => (a.efficiency ?? 0) - (b.efficiency ?? 0)),
+      // Slots lead their group. They are the worst rate in it by a mile, so ranking on price
+      // would bury them at the bottom of the one list whose other rows have nowhere to go until
+      // they are bought — which is exactly what the row itself says to do.
+      tasks: list.sort(
+        (a, b) =>
+          Number(b.id.startsWith(BAG_UPGRADE)) - Number(a.id.startsWith(BAG_UPGRADE)) ||
+          (a.efficiency ?? 0) - (b.efficiency ?? 0),
+      ),
     }))
     .sort((a, b) => b.xp - a.xp);
 }

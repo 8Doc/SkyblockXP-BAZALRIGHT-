@@ -242,6 +242,12 @@ Hypixel resources API when the game changes; the wiki-derived and curated tables
 - **Query B** — category browser, every remaining task sorted by coins/XP, grind-only tasks
   tagged rather than hidden.
 - **Query C** — the plan regrouped by category, ordered by XP in the batch.
+- **Bag slots in the buy lists.** An accessory needs somewhere to sit, so a plan that buys
+  accessories into a full bag buys Jacobus's upgrades to hold them — one per two new families,
+  paid for out of the same budget, and listed at the head of the accessory bag group because
+  nothing else in it can be bought first. The browser has always placed them where the room runs
+  out; the plan and the packages now do the same. `DATA.md` has the rule and the two wrong
+  models that preceded it.
 - The XP floor, coin budget and category toggles re-solve live — see the note on solve cost below.
 
 ## Modelled categories
@@ -345,8 +351,9 @@ Three, all deliberate:
 
 ## Known limitations
 
-- The accessory bag has a slot limit tied to bag upgrades; the planner doesn't model it, so a
-  long accessory plan may exceed what the player can actually carry.
+- The accessory bag's slot limit is modelled everywhere except where the bag can't be read: an
+  unreadable talisman bag reports zero capacity, which looks exactly like a full one, so the
+  plan leaves slots out rather than spending 20M a time on room the player may already have.
 - The XP floor filters on a bundle's total XP, not per click. A five-tier minion bundle worth
   5 XP passes a floor of 5 while being five actions.
 - Accessory family coverage is best-effort; see `DATA.md`. Families now come from the wiki's

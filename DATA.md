@@ -630,11 +630,34 @@ That is 198 XP for 1,761,500,000 coins all-in — which matches the wiki's own s
 of ~1.8B, and is why they rank near-last on value at ~750k coins per XP. They are in the plan
 because they're real, not because they're efficient.
 
-**The slot surcharge is conditional.** When the bag has room, an accessory costs what it costs.
-When it's full, `CostSpec.auction` carries a surcharge of half an upgrade — one upgrade buys two
-slots, so one accessory owes half of one — and that lands on every accessory in the category.
-Computing it rather than always applying it matters: charging a slot to a player with 133 free
-ones would inflate every accessory by 10M for no reason.
+**A slot is charged to no accessory.** Two earlier models are worth recording because both are
+wrong in instructive ways. Half an upgrade added to every accessory's price quoted a Large Fish
+Bowl listing at 9.8M as 19.8M, and billed the slot twice over — once in the markup and once in
+the upgrade task that was already in the category. Making the upgrade a *prerequisite* of an
+accessory was worse: one upgrade houses two accessories, so whichever one happened to sort
+first carried 20M of a cost the rest of them shared, and every accessory below it looked cheap
+by comparison.
+
+So the slot stays what it is — its own purchase, at its own price, needed once per two
+accessories that go into a bag with no room. Three views place it, all by the same rule, and
+none of them touches an accessory's price:
+
+- **The category browser** walks its ranking in the order shown, spends a slot on each
+  accessory that needs one, and drops the next upgrade in at the point the count hits zero
+  (`bagSlotsWhereNeeded` in `report.ts`).
+- **The batch plan and the packages** buy the room as the fill goes, out of the same budget
+  (`slotsWanted` / `slotsFor` in `solver.ts`). A package that can't afford the upgrade can't
+  afford the accessory either, so it buys neither — which is the honest answer, and the reason
+  the slots are checked against the budget rather than added on top of it. They lead their
+  group, because nothing else in it can be bought until they are.
+
+Only a **new family** takes a slot. Upgrading one already in the bag puts the artifact where the
+ring was, and recombobulating takes no room at all — so the count is per family, not per row.
+
+**A bag we can't read buys nothing.** An unreadable talisman bag reports a capacity of zero,
+which is indistinguishable from a bag with no room in it. The plan would then spend 20M a time
+on room the player may already have — the test profile has 133 free slots — so the solvers are
+handed the bag only when `readable` and a non-zero capacity agree that we know its size.
 
 ## Ordering the grind
 

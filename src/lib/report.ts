@@ -96,12 +96,28 @@ const CHEAPEST_LIMIT = 300;
 const GROUPABLE = new Set<Category>(["attributes", "essence_shop"]);
 
 export function buildReport(catalog: Catalog, book: PriceBook, options: ReportOptions): Report {
-  const plan = solve(catalog.tasks, catalog.done, book, options);
+  // Room in the bag, handed to the solvers so a plan that buys accessories also buys the slots
+  // to put them in — the same rule bagSlotsWhereNeeded places them by in the browser below.
+  //
+  // Withheld when the bag reports no capacity at all, which is what an unreadable talisman bag
+  // looks like: capacity and used both come back zero, so a bag we cannot see would read as a
+  // bag we know is full, and the plan would spend twenty million on room the player may
+  // already have.
+  const bag =
+    catalog.bag.readable && catalog.bag.capacity > 0
+      ? {
+          freeSlots: Math.max(catalog.bag.capacity - catalog.bag.used, 0),
+          slotsPerUpgrade: catalog.bag.slotsPerUpgrade ?? 2,
+        }
+      : undefined;
+
+  const plan = solve(catalog.tasks, catalog.done, book, { ...options, bag });
   // The package view answers a different question, so it gets its own solve rather than a
   // post-hoc slicing of the plan above: slicing by cost would strand prerequisite bundles
   // across package boundaries.
   const packages = solvePackages(catalog.tasks, catalog.done, book, {
     ...options,
+    bag,
     targetXp: Number.POSITIVE_INFINITY,
     budget: null,
     packageSize: options.packageSize,
