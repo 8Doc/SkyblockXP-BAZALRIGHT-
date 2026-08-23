@@ -16,7 +16,8 @@ import {
 } from "../lib/types";
 import { ApiError, cacheAge, fetchAccessoryBins, fetchBazaar, fetchReferencePrices, fetchGarden, fetchMuseum, fetchProfiles, readBag, readOwnedItems, resolveUuid } from "./api";
 import { mountBazaar, unmountBazaar } from "./bazaarTab";
-import type { Recipe } from "../lib/bazaarViews";
+import type { NpcPrice, Recipe } from "../lib/bazaarViews";
+import type { AnvilRules } from "../lib/bazaarChains";
 
 /**
  * The standalone build. Same domain logic as the Next app — it imports the very same solver
@@ -34,7 +35,14 @@ declare global {
      * page answer different questions off different data, and nothing good comes of one being
      * able to reach into the other's tables.
      */
-    __BAZAAR_DATA__: { recipes: Recipe[]; names: Record<string, string> };
+    __BAZAAR_DATA__: {
+      recipes: Recipe[];
+      /** Steps making something the bazaar does not sell, for the chain finder only. */
+      intermediates: Recipe[];
+      npcPrices: Record<string, NpcPrice>;
+      anvil: AnvilRules;
+      names: Record<string, string>;
+    };
   }
 }
 

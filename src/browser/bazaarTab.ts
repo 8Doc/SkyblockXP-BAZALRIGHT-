@@ -1,5 +1,25 @@
-import { normalise } from "../lib/bazaar";
-import { affordableCoinsPerHour, craft, flip, type Craft, type Flip, type Recipe } from "../lib/bazaarViews";
+import { hourlyBought, hourlySold, normalise } from "../lib/bazaar";
+import {
+  affordableCoinsPerHour,
+  crash,
+  craft,
+  flip,
+  manipulation,
+  npcFlip,
+  reverseNpcFlip,
+  type Craft,
+  type CrashPlan,
+  type Flip,
+  type Manipulation,
+  type NpcFlip,
+  type NpcPrice,
+  type Recipe,
+  type ReverseNpcFlip,
+} from "../lib/bazaarViews";
+import { findCraftChains, unorthodoxChains, type AnvilRules, type Chain } from "../lib/bazaarChains";
+import { observe, observedFor, relativeTo, type Baseline } from "../lib/bazaarHistory";
+import { rankOpportunities, type Opportunity, type OpportunitySource } from "../lib/bazaarRanking";
+import { price as priceSubmissionRow, type PricedSubmission, type Submission } from "../lib/bazaarSubmissions";
 import type { ProductSnapshot, RawBazaarProduct } from "../lib/bazaarTypes";
 import { coins, num, parseBudget } from "../lib/format";
 import { DEPTH_LADDER, VOLUME_LADDER, depthIndex, depthNote, ladderIndex, volumeNote } from "../lib/filters";
@@ -52,13 +72,30 @@ const GRACE_MS = 500;
 
 type BazaarData = {
   recipes: Recipe[];
+  intermediates: Recipe[];
+  npcPrices: Record<string, NpcPrice>;
+  anvil: AnvilRules;
   names: Record<string, string>;
 };
 
 type Sort = { column: string; descending: boolean };
 
+/**
+ * Every view's row, for the machinery they share.
+ *
+ * The four differ in shape — a flip is flat, a manipulation nests two buyouts — so the table
+ * takes the accessors it needs (`volumeOf`, `tooThin`) rather than reaching into fields that
+ * only some of them have.
+ */
+type BazaarRow = Flip | Craft | Manipulation | CrashPlan | NpcFlip | ReverseNpcFlip | Chain | Opportunity | PricedRow;
+
+/** A submission and its live verdict, flattened enough to sit in the shared table. */
+type PricedRow = { id: string; priced: PricedSubmission; margin: number; coinsPerHour: number };
+
+type ViewId = "best" | "flips" | "crafts" | "chains" | "npc" | "reversenpc" | "manipulate" | "crash" | "mine";
+
 type BazaarState = {
-  view: "flips" | "crafts";
+  view: ViewId;
   search: string;
   /** Hide rows whose round-trip rate makes the coins-per-hour meaningless. */
   minFills: number;
@@ -71,7 +108,7 @@ type BazaarState = {
   fetchedAt: number | null;
   status: string;
   error: string | null;
-  sorts: Record<"flips" | "crafts", Sort>;
+  sorts: Record<ViewId, Sort>;
 };
 
 const state: BazaarState = {
@@ -86,12 +123,105 @@ const state: BazaarState = {
   status: "",
   error: null,
   sorts: {
+    best: { column: "returnOnCapital", descending: true },
+    mine: { column: "coinsPerHour", descending: true },
     flips: { column: "coinsPerHour", descending: true },
     crafts: { column: "coinsPerHour", descending: true },
+    chains: { column: "coinsPerHour", descending: true },
+    npc: { column: "coinsPerHour", descending: true },
+    reversenpc: { column: "orderProfit", descending: true },
+    // Risk ascending, because the interesting end of a buyout list is the negative one: a book
+    // whose recovery exceeds its cost is one you are paid to corner.
+    manipulate: { column: "partialRisk", descending: false },
+    crash: { column: "estimatedProfit", descending: true },
   },
 };
 
-let data: BazaarData = { recipes: [], names: {} };
+/**
+ * What each item's margin has averaged while this browser has been watching.
+ *
+ * Kept per item and persisted, so the comparison survives a reload and keeps getting better the
+ * longer the tab is used. Four numbers an item rather than a series — see `Baseline` — which is
+ * what makes it small enough to store for two thousand products at all.
+ */
+const BASELINE_KEY = "sbxp:bzbaselines";
+let baselines: Record<string, Baseline> = readBaselines();
+
+function readBaselines(): Record<string, Baseline> {
+  try {
+    return JSON.parse(localStorage.getItem(BASELINE_KEY) ?? "{}") as Record<string, Baseline>;
+  } catch {
+    // A corrupt or truncated store is not worth a broken tab; starting over costs only the
+    // history this browser had accumulated, and it starts accumulating again immediately.
+    return {};
+  }
+}
+
+/**
+ * Fold the newest read into every item's average.
+ *
+ * The margin, not the price: a price that doubles because the whole market moved is not the
+ * thing worth flagging, and a spread that doubles is. Only items with both sides quoted take
+ * part, for the same reason `flip()` refuses them — an empty book is not a margin of zero.
+ */
+function observeMargins(): void {
+  for (const p of state.market.values()) {
+    if (p.instabuy <= 0 || p.instasell <= 0) continue;
+    baselines[p.id] = observe(baselines[p.id], p.instabuy - p.instasell, p.at);
+  }
+  try {
+    localStorage.setItem(BASELINE_KEY, JSON.stringify(baselines));
+  } catch {
+    // Storage full or blocked. The averages stay live in memory for this session; losing them on
+    // reload is a smaller failure than dropping the read that filled the quota.
+  }
+}
+
+/**
+ * A margin against its own average, and how long "average" has been watching.
+ *
+ * The window is on the row rather than in a footnote because it is the thing that decides whether
+ * the number means anything: +180% after four minutes is noise, and after four days it is a
+ * spike worth understanding before buying into it.
+ */
+function baselineCell(id: string, current: number): string {
+  const baseline = baselines[id];
+  const relative = relativeTo(current, baseline);
+  if (relative === null) {
+    return `<span class="dim" title="Not enough reads yet. This browser builds the average as it polls — it needs a second read of this item before there is anything to compare against.">—</span>`;
+  }
+  const window = depthNote(observedFor(baseline) / 60_000);
+  const sign = relative >= 0 ? "+" : "";
+  const loud = Math.abs(relative) >= 50 ? " gold" : "";
+  return `<span class="${loud.trim()}" title="Against the mean margin over the ${window} this browser has been watching this item, across ${num(
+    baseline.samples,
+  )} reads. Not a thirty-day figure: skyblock.bz's history endpoint now refuses outside callers, so this is measured here rather than fetched.">${sign}${relative.toFixed(0)}% <span class="dim">${window}</span></span>`;
+}
+
+/** The column, shared by every view whose row has a margin to compare. */
+function baselineColumn<T extends { id: string; margin: number }>(): Column<T> {
+  return {
+    id: "vsBaseline",
+    label: "vs usual",
+    value: (r) => relativeTo(r.margin, baselines[r.id]) ?? -Infinity,
+    render: (r) => baselineCell(r.id, r.margin),
+    title:
+      "How this margin compares with what the same item has averaged while this browser has been " +
+      "watching it. A margin that is wildly above its own usual is more often a manipulation tail " +
+      "or a stale book than an opportunity — the spread widens because one side emptied, not " +
+      "because the trade got better.",
+  };
+}
+
+let data: BazaarData = {
+  recipes: [],
+  intermediates: [],
+  npcPrices: {},
+  // Replaced at mount; the zeroes only matter if a table is drawn before the data arrives, and a
+  // cap of zero offers no combines rather than offering them for free.
+  anvil: { feeCoins: 0, inputsRequired: 2, maxCombinableLevel: 0 },
+  names: {},
+};
 let host: HTMLElement | null = null;
 let timer: number | undefined;
 /** Listeners are delegated on the container and bind once; only the polling starts and stops. */
@@ -152,10 +282,11 @@ const BASE_FLIP_COLUMNS: Column<Flip>[] = [
  */
 function flipColumns(): Column<Flip>[] {
   const budget = parseBudget(state.budget);
-  if (budget === null) return BASE_FLIP_COLUMNS;
+  if (budget === null) return [...BASE_FLIP_COLUMNS, baselineColumn<Flip>()];
 
   return [
     ...BASE_FLIP_COLUMNS,
+    baselineColumn<Flip>(),
     {
       id: "affordable",
       label: `With ${coins(budget)}`,
@@ -177,6 +308,199 @@ const CRAFT_COLUMNS: Column<Craft>[] = [
   { id: "bottleneck", label: "Items/hr", value: (r) => r.bottleneck, render: (r) => num(Math.round(r.bottleneck)), title: "The binding one of the two. Production is a queue question, not a price question." },
   { id: "coinsPerHour", label: "Coins/hr", value: (r) => r.coinsPerHour, render: (r) => coins(r.coinsPerHour), title: "Margin times the bottleneck. This is the ranking figure." },
   { id: "instaCoinsPerHour", label: "Impatient", value: (r) => r.instaCoinsPerHour, render: (r) => coins(r.instaCoinsPerHour), title: "The same trade with no waiting: instabuy the ingredients, instasell the output. The gap is what patience is worth." },
+];
+
+/** Which tab a combined row came from, and where clicking it goes. */
+const SOURCE_VIEW: Record<OpportunitySource, ViewId> = {
+  flip: "flips",
+  craft: "crafts",
+  chain: "chains",
+  npc: "npc",
+};
+
+const SOURCE_LABEL: Record<OpportunitySource, string> = {
+  flip: "Flip",
+  craft: "Craft",
+  chain: "Chain",
+  npc: "NPC",
+};
+
+/**
+ * Return on capital, which is the only figure the four kinds of trade share a meaning on.
+ *
+ * Coins per hour is still here and still worth reading, but it is the second column rather than
+ * the ranking one: it makes a big slow trade beat a small fast one, and the small fast one is the
+ * better answer for anyone whose coins are the binding constraint.
+ */
+const BEST_COLUMNS: Column<Opportunity>[] = [
+  {
+    id: "returnOnCapital",
+    label: "Return/hr",
+    value: (r) => r.returnOnCapital,
+    render: (r) => `${(r.returnOnCapital * 100).toFixed(0)}%`,
+    title:
+      "Coins per hour for every coin tied up. This is the ranking figure, and the only one the " +
+      "four kinds of row mean the same thing by — a craft turning 400M into 40M an hour and a " +
+      "flip turning 4M into 12M an hour are not comparable on coins per hour, and the craft wins " +
+      "that comparison while being the worse trade for anyone without 400M spare.",
+  },
+  {
+    id: "capital",
+    label: "Capital",
+    value: (r) => r.capital,
+    render: (r) => coins(r.capital),
+    title:
+      "Coins committed, sized the same way for every kind of row: twenty minutes of what the " +
+      "trade can actually move. For a flip that is the buy order the bazaar holds up front; for " +
+      "a craft or a chain it is twenty minutes of production at what producing one costs.",
+  },
+  { id: "coinsPerHour", label: "Coins/hr", value: (r) => r.coinsPerHour, render: (r) => coins(r.coinsPerHour), title: "What it pays per hour with enough coins behind it. Read against the capital beside it." },
+  { id: "margin", label: "Margin", value: (r) => r.margin, render: (r) => coins(r.margin), title: "Per item, or per round trip on a flip. After tax." },
+  { id: "perHour", label: "Per hour", value: (r) => r.perHour, render: (r) => num(Math.round(r.perHour)), title: "Items an hour, or round trips an hour on a flip." },
+];
+
+/**
+ * A submission's row leads with whether it still works.
+ *
+ * The verdict is the column a reader came for: the whole point of keeping somebody's route is to
+ * find out that it has stopped paying, and a row that only showed coins per hour would answer
+ * that with a small number rather than a reason.
+ */
+const MINE_COLUMNS: Column<PricedRow>[] = [
+  {
+    id: "coinsPerHour",
+    label: "Coins/hr now",
+    value: (r) => r.coinsPerHour,
+    render: (r) => (r.priced.problem ? `<span class="gold">—</span>` : coins(r.coinsPerHour)),
+    title: "Priced against the live market this second, never from the figure that was submitted.",
+  },
+  { id: "margin", label: "Margin", value: (r) => r.margin, render: (r) => coins(r.margin), title: "What one finished item makes after tax, less what the whole route costs today." },
+  {
+    id: "bottleneck",
+    label: "Items/hr",
+    value: (r) => r.priced.chain?.bottleneck ?? 0,
+    render: (r) => (r.priced.chain ? num(Math.round(r.priced.chain.bottleneck)) : `<span class="dim">—</span>`),
+    title: "The tightest step in the submitted route, or the sale — whichever runs out first.",
+  },
+  {
+    id: "drift",
+    label: "vs claimed",
+    value: (r) => r.priced.driftPercent ?? -Infinity,
+    render: (r) =>
+      r.priced.driftPercent === null
+        ? `<span class="dim" title="No figure was submitted to compare against.">—</span>`
+        : `<span class="${Math.abs(r.priced.driftPercent) >= 50 ? "gold" : ""}">${r.priced.driftPercent >= 0 ? "+" : ""}${r.priced.driftPercent.toFixed(0)}%</span>`,
+    title:
+      "How far the live figure has drifted from what the submission claimed. A route that was " +
+      "true when it was written down is not automatically true now, and this is the column that " +
+      "says so rather than quietly repeating the old number.",
+  },
+];
+
+const NPC_COLUMNS: Column<NpcFlip>[] = [
+  { id: "buyAt", label: "Buy order", value: (r) => r.buyAt, render: (r) => coins(r.buyAt), title: "What buyers are already bidding — put your buy order here." },
+  { id: "npcPrice", label: "Shop pays", value: (r) => r.npcPrice, render: (r) => coins(r.npcPrice), title: "What a shopkeeper gives you for one. From Hypixel's own item resource, and untaxed — which is most of why this beats a bazaar flip on cheap high-volume goods." },
+  { id: "margin", label: "Margin", value: (r) => r.margin, render: (r) => coins(r.margin) },
+  { id: "coinsPerHour", label: "Coins/hr", value: (r) => r.coinsPerHour, render: (r) => coins(r.coinsPerHour), title: "Margin times how fast people sell you the item. This is the ranking figure." },
+  {
+    id: "maxProfit",
+    label: "Daily cap",
+    value: (r) => r.maxProfit,
+    render: (r) => coins(r.maxProfit),
+    title: "Shopkeepers stop paying after 500M coins a day, so this is all the coins this row can make you before it closes for the night, however fast the bazaar supplies it.",
+  },
+  {
+    id: "hoursBeforeLimited",
+    label: "Hits cap in",
+    value: (r) => r.hoursBeforeLimited,
+    render: (r) => (Number.isFinite(r.hoursBeforeLimited) ? depthNote(r.hoursBeforeLimited * 60) : `<span class="dim">never</span>`),
+    title: "How long the bazaar takes to supply the daily cap. Under a day means the shopkeeper stops before the market does.",
+  },
+];
+
+const REVERSE_NPC_COLUMNS: Column<ReverseNpcFlip>[] = [
+  { id: "npcPrice", label: "Shop asks", value: (r) => r.npcPrice, render: (r) => coins(r.npcPrice), title: "What the shopkeeper charges for one, off the wiki's shop pages, divided through by the bundle size." },
+  { id: "stock", label: "Stock", value: (r) => r.stock, render: (r) => num(r.stock), title: "How many the shop will sell before it runs dry. Only rows where a shop states one appear here — a shop with no published limit is not the same as one with no limit, so it is left out rather than guessed at." },
+  { id: "orderProfit", label: "Patient", value: (r) => r.orderProfit, render: (r) => coins(r.orderProfit), title: "Buying the whole stock and selling it at the top of the sell book, after tax." },
+  { id: "instaProfit", label: "Impatient", value: (r) => r.instaProfit, render: (r) => coins(r.instaProfit), title: "The same stock dumped straight into the buy book. The gap is what patience is worth." },
+];
+
+/**
+ * A chain is a path rather than a row, so the path itself is the first column and the numbers
+ * come after it. Everything is per terminal item, the same as the craft table beside it.
+ */
+const CHAIN_COLUMNS: Column<Chain>[] = [
+  { id: "depth", label: "Hops", value: (r) => r.depth, render: (r) => `${r.depth}${r.combines ? ` <span class="dim">+anvil</span>` : ""}`, title: "Steps between the bazaar goods you buy and the thing you sell. One-hop crafts are on the Crafts tab; everything here needs at least two, or an anvil." },
+  { id: "craftCost", label: "Chain cost", value: (r) => r.craftCost, render: (r) => coins(r.craftCost), title: "What one finished item costs to make, every step's ingredients bought through buy orders and every step divided through by its own yield." },
+  { id: "sellAt", label: "Sell order", value: (r) => r.sellAt, render: (r) => coins(r.sellAt) },
+  { id: "margin", label: "Margin", value: (r) => r.margin, render: (r) => coins(r.margin), title: "Revenue after the 2.25% tax, less what the whole chain costs." },
+  { id: "bottleneck", label: "Items/hr", value: (r) => r.bottleneck, render: (r) => num(Math.round(r.bottleneck)), title: "The tightest hop in the chain, or the terminal's own demand — whichever runs out first. A long chain is usually limited by one leaf a long way down it." },
+  { id: "coinsPerHour", label: "Coins/hr", value: (r) => r.coinsPerHour, render: (r) => coins(r.coinsPerHour), title: "Margin times the bottleneck. This is the ranking figure." },
+];
+
+/**
+ * Two buyouts a row, so each figure says which one it belongs to.
+ *
+ * Partial stops in front of the first price jump and full takes the visible book; on a thin
+ * book they are often the same number, and where they are not, the gap between them is the
+ * whole decision. Risk leads because it is the only column that can be negative, and negative
+ * is the case worth finding.
+ */
+const MANIPULATION_COLUMNS: Column<Manipulation>[] = [
+  {
+    id: "partialRisk",
+    label: "Risk",
+    value: (r) => r.partial.risk,
+    render: (r) => coins(r.partial.risk),
+    title:
+      "The most cornering the cheap part of the book can lose you: what you pay for it, less " +
+      "what you would get back dumping the lot — the better of instaselling it (taxed) or " +
+      "selling it to a shopkeeper (not). Negative means the books are crossed and the buyout " +
+      "pays for itself, which is why this sorts ascending.",
+  },
+  { id: "partialItems", label: "Items", value: (r) => r.partial.items, render: (r) => num(r.partial.items), title: "Items on the sell book below the first price jump." },
+  { id: "partialCost", label: "Cost", value: (r) => r.partial.cost, render: (r) => coins(r.partial.cost), title: "Coins to take them all off the book." },
+  { id: "partialAverage", label: "Avg paid", value: (r) => r.partial.average, render: (r) => coins(r.partial.average) },
+  {
+    id: "partialAfter",
+    label: "Price after",
+    value: (r) => r.partial.priceAfter,
+    render: (r) => (r.partial.priceAfter > 0 ? coins(r.partial.priceAfter) : `<span class="dim">book emptied</span>`),
+    title: "What one costs to buy once the buyout is done. Zero means the visible book ran out — which at 30 published levels is the end of what we can see, not the end of the market.",
+  },
+  { id: "fullItems", label: "Whole book", value: (r) => r.full.items, render: (r) => num(r.full.items), title: "Every item on the visible sell book." },
+  { id: "fullCost", label: "Whole cost", value: (r) => r.full.cost, render: (r) => coins(r.full.cost) },
+  { id: "fullRisk", label: "Whole risk", value: (r) => r.full.risk, render: (r) => coins(r.full.risk), title: "The same exposure for taking the entire visible book rather than stopping at the jump." },
+];
+
+/**
+ * `full` is nullable here and nowhere else: a crash we could not price — because the sell book
+ * ran out before we had the items to dump — is reported as unknown rather than as a number with
+ * a guessed tail on it. Those columns read "—" rather than sorting as zero.
+ */
+const CRASH_COLUMNS: Column<CrashPlan>[] = [
+  {
+    id: "estimatedProfit",
+    label: "Est. profit",
+    value: (r) => r.partial.estimatedProfit,
+    render: (r) => coins(r.partial.estimatedProfit),
+    title:
+      "What clearing the top buy order makes if the bet comes off: sit under the hole, catch a " +
+      "third of half an hour of instasells at the depressed price, sell them into the recovered " +
+      "one. The third and the half hour are guesses — skyblock.bz's, kept because at least they " +
+      "are stated — so read this as a shape rather than a forecast.",
+  },
+  { id: "items", label: "Items", value: (r) => r.partial.items, render: (r) => num(r.partial.items), title: "Items in the top buy order — what you have to buy and dump to clear it." },
+  { id: "cost", label: "Cost to crash", value: (r) => r.partial.cost, render: (r) => coins(r.partial.cost), title: "Buy them, dump them, eat the difference. This is what executing the crash costs before anything comes back." },
+  { id: "priceBefore", label: "Bid before", value: (r) => r.partial.priceBefore, render: (r) => coins(r.partial.priceBefore) },
+  { id: "priceAfter", label: "Bid after", value: (r) => r.partial.priceAfter, render: (r) => coins(r.partial.priceAfter), title: "Where the buy book's best price lands once the top order is gone. The gap is what you are trying to catch people falling through." },
+  {
+    id: "fullCost",
+    label: "Whole book",
+    value: (r) => r.full?.cost ?? Infinity,
+    render: (r) => (r.full ? coins(r.full.cost) : `<span class="dim" title="The sell book ran out before we had the items, so this cannot be priced from the visible book.">—</span>`),
+    title: "What crashing the entire visible buy book would cost, where we can see far enough to say.",
+  },
 ];
 
 /* --------------------------------------------------------------- fetching */
@@ -201,6 +525,7 @@ async function refresh(): Promise<void> {
     state.lastUpdated = body.lastUpdated;
     state.fetchedAt = Date.now();
     state.status = "";
+    observeMargins();
   } catch (error) {
     // A failed refresh leaves the last good read on screen rather than blanking the table; stale
     // prices with a visible age on them beat an empty page.
@@ -247,28 +572,181 @@ function craftRows(): Craft[] {
 }
 
 /**
+ * Every kind of row on one axis.
+ *
+ * Built from the same functions the individual tabs use rather than from a second implementation,
+ * so a number here and the number on its own tab cannot drift apart.
+ */
+function bestRows(): { rows: Opportunity[]; hidden: { volume: number; depth: number } } {
+  // Each source is filtered *before* it is ranked, not after.
+  //
+  // An Opportunity carries a return and not a book, so the depth floor cannot see it — and
+  // dividing by capital is exactly where a fictional spread does its worst damage. A 69k ask
+  // standing against a 2-coin bid is a 3-million-percent return on two coins, and it lands at the
+  // top of the one table a reader is most likely to trust. Filtering here means the combined view
+  // shows the rows the individual tabs would show, re-ranked, rather than a different set.
+  const flips = flipRows();
+  const crafts = craftRows();
+  const chains = chainRows();
+  const npcFlips = npcRows();
+  return {
+    rows: rankOpportunities({
+      flips: filtered(flips),
+      crafts: filtered(crafts),
+      chains: filtered(chains),
+      npcFlips: filtered(npcFlips),
+    }),
+    // Counted across the sources rather than the ranking, since that is where the floors bit.
+    hidden: [flips, crafts, chains, npcFlips]
+      .map((rows) => hiddenCounts(rows))
+      .reduce((a, b) => ({ volume: a.volume + b.volume, depth: a.depth + b.depth }), { volume: 0, depth: 0 }),
+  };
+}
+
+/* -------------------------------------------------------------- submissions */
+
+const SUBMISSIONS_KEY = "sbxp:bzsubmissions";
+
+function readSubmissions(): Submission[] {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(SUBMISSIONS_KEY) ?? "[]");
+    return Array.isArray(parsed) ? (parsed as Submission[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+let submissions: Submission[] = readSubmissions();
+
+function saveSubmissions(): void {
+  try {
+    localStorage.setItem(SUBMISSIONS_KEY, JSON.stringify(submissions));
+  } catch {
+    // Nothing to do but keep them for this session; the table is still correct either way.
+  }
+}
+
+/** Priced from scratch on every read, which is the whole point — see `bazaarSubmissions.ts`. */
+function submissionRows(): PricedRow[] {
+  const options = {
+    recipes: [...data.recipes, ...data.intermediates],
+    npcPrices: data.npcPrices,
+    anvil: data.anvil,
+  };
+  return submissions.map((submission) => {
+    const priced = priceSubmissionRow(submission, state.market, options);
+    return {
+      id: submission.sells,
+      priced,
+      margin: priced.chain?.margin ?? 0,
+      coinsPerHour: priced.problem ? 0 : (priced.chain?.coinsPerHour ?? 0),
+    };
+  });
+}
+
+function npcRows(): NpcFlip[] {
+  const rows: NpcFlip[] = [];
+  for (const product of state.market.values()) {
+    const price = data.npcPrices[product.id];
+    if (!price) continue;
+    const f = npcFlip(product, price);
+    if (f) rows.push(f);
+  }
+  return rows;
+}
+
+function reverseNpcRows(): ReverseNpcFlip[] {
+  const rows: ReverseNpcFlip[] = [];
+  for (const product of state.market.values()) {
+    const price = data.npcPrices[product.id];
+    if (!price) continue;
+    const f = reverseNpcFlip(product, price);
+    if (f) rows.push(f);
+  }
+  return rows;
+}
+
+/**
+ * Recomputed per read rather than cached.
+ *
+ * The whole point of the finder is that "cheapest path" is a price question, and prices move
+ * every twenty seconds — a cached graph would be answering yesterday's question. It costs about
+ * twelve milliseconds over four hundred recipes, which is nothing against the fetch it follows.
+ */
+function chainRows(): Chain[] {
+  const chains = findCraftChains(state.market, {
+    recipes: [...data.recipes, ...data.intermediates],
+    npcPrices: data.npcPrices,
+    anvil: data.anvil,
+    maxDepth: 4,
+  });
+  return unorthodoxChains(chains).filter((c) => c.margin > 0);
+}
+
+function manipulationRows(): Manipulation[] {
+  const rows: Manipulation[] = [];
+  for (const product of state.market.values()) {
+    const m = manipulation(product);
+    if (m && m.partial.items > 0) rows.push(m);
+  }
+  return rows;
+}
+
+function crashRows(): CrashPlan[] {
+  const rows: CrashPlan[] = [];
+  for (const product of state.market.values()) {
+    const c = crash(product);
+    if (c && c.partial.items > 0) rows.push(c);
+  }
+  return rows;
+}
+
+/**
  * What each floor is holding back, counted on its own.
  *
  * Separately, and not as "everything the search left out", or typing a word would look like the
  * floors had suddenly swallowed a thousand rows.
  */
-function hiddenCounts(rows: (Flip | Craft)[]): { volume: number; depth: number } {
+function hiddenCounts(rows: BazaarRow[]): { volume: number; depth: number } {
   return {
     volume: rows.reduce((n, row) => n + (volumeOf(row) < state.minFills ? 1 : 0), 0),
     depth: rows.reduce((n, row) => n + (tooThin(row) ? 1 : 0), 0),
   };
 }
 
-/** How much of this row moves in an hour — round trips for a flip, items for a craft. */
-function volumeOf(row: Flip | Craft): number {
-  return "hourlyFills" in row ? row.hourlyFills : row.bottleneck;
+/**
+ * How much of this row moves in an hour.
+ *
+ * Round trips for a flip, items for a craft, and for the two book plays the side of the flow
+ * the play actually depends on: cornering a book is only worth doing if people come along to
+ * buy it off you, and a crash pays out of the instasells you catch on the way down. Both of
+ * those live on the snapshot rather than on the row, so they are looked back up.
+ */
+function volumeOf(row: BazaarRow): number {
+  // A submission is never hidden by a floor: it was kept on purpose, and "your route is too thin
+  // to bother with" is a thing the row should say rather than a reason to make it disappear.
+  if ("priced" in row) return Infinity;
+  if ("perHour" in row) return row.perHour;
+  if ("hourlyFills" in row) return row.hourlyFills;
+  if ("bottleneck" in row) return row.bottleneck;
+  const product = state.market.get(row.id);
+  if (!product) return 0;
+  // An NPC flip is fed by how fast people sell you the item; a reverse one is bounded by the
+  // shop's stock rather than by the bazaar, so it is the sale side that has to keep up.
+  if ("npcPrice" in row) return "stock" in row ? hourlyBought(product) : hourlySold(product);
+  return isCrash(row as Manipulation | CrashPlan) ? hourlySold(product) : hourlyBought(product);
+}
+
+/** `CrashPlan.full` is nullable and `Manipulation.full` is not, which is what tells them apart. */
+function isCrash(row: Manipulation | CrashPlan): row is CrashPlan {
+  return "estimatedProfit" in row.partial;
 }
 
 function nameOf(id: string): string {
   return data.names[id] ?? id;
 }
 
-function filtered<T extends Flip | Craft>(rows: T[]): T[] {
+function filtered<T extends BazaarRow>(rows: T[]): T[] {
   const needle = state.search.trim().toLowerCase();
   return rows.filter((row) => {
     if (volumeOf(row) < state.minFills) return false;
@@ -285,11 +763,11 @@ function filtered<T extends Flip | Craft>(rows: T[]): T[] {
  * of a book, so the same failure does not arise, and the bottleneck already says how fast it can
  * really go.
  */
-function tooThin(row: Flip | Craft): boolean {
+function tooThin(row: BazaarRow): boolean {
   return "bookHours" in row && row.bookHours * 60 < state.minDepth;
 }
 
-function sorted<T extends Flip | Craft>(rows: T[], columns: Column<T>[], sort: Sort): T[] {
+function sorted<T extends BazaarRow>(rows: T[], columns: Column<T>[], sort: Sort): T[] {
   const column = columns.find((c) => c.id === sort.column);
   if (!column) return rows;
   const direction = sort.descending ? -1 : 1;
@@ -330,6 +808,30 @@ export function mountBazaar(container: HTMLElement, tables: BazaarData): void {
       if (sort.column === id) sort.descending = !sort.descending;
       else state.sorts[state.view] = { column: id, descending: true };
       renderTable();
+      return;
+    }
+
+    // A combined row knows which view it came from, so opening it lands on the tab that has the
+    // detail — the book depth for a flip, the full path for a chain — rather than flattening
+    // everything into one shape that has neither.
+    const open = target.closest<HTMLElement>("[data-bzopen]");
+    if (open) {
+      state.view = SOURCE_VIEW[open.dataset.bzopen as OpportunitySource];
+      state.search = open.dataset.bzid ?? "";
+      render();
+      return;
+    }
+
+    const forget = target.closest<HTMLElement>("[data-bzforget]");
+    if (forget) {
+      submissions = submissions.filter((s) => s.id !== forget.dataset.bzforget);
+      saveSubmissions();
+      renderTable();
+      return;
+    }
+
+    if (target.closest("#bzsubadd")) {
+      addSubmission();
       return;
     }
 
@@ -385,6 +887,61 @@ export function mountBazaar(container: HTMLElement, tables: BazaarData): void {
   void refresh();
 }
 
+/**
+ * Read the form and keep the route.
+ *
+ * Validation is deliberately thin: the id has to be something the bazaar trades, because a route
+ * ending in an item nobody sells cannot be priced at all and saving it would only produce a row
+ * that says so forever. Everything past that is left to the pricer, which will report an
+ * unreachable route in the table rather than refusing it at the door — a route that is broken
+ * *today* is exactly the thing worth keeping and watching.
+ */
+function addSubmission(): void {
+  const value = (id: string) => (document.getElementById(id) as HTMLInputElement | null)?.value.trim() ?? "";
+  const error = document.getElementById("bzsuberror");
+  const fail = (message: string) => {
+    if (error) error.textContent = message;
+  };
+
+  const sells = value("bzsubsells").toUpperCase();
+  if (!sells) return fail("Name the item the route ends in.");
+  if (!state.market.has(sells)) return fail(`The bazaar does not trade ${sells}. Ids look like ENCHANTED_CACTUS.`);
+
+  const buys = value("bzsubbuys")
+    .split(",")
+    .map((part) => part.trim())
+    .filter(Boolean)
+    .map((part) => {
+      const m = /^(\S+)(?:\s*[x*]\s*(\d+))?$/i.exec(part);
+      return m ? { id: m[1].toUpperCase(), qty: Number(m[2] ?? 1) } : null;
+    })
+    .filter((b): b is { id: string; qty: number } => b !== null);
+
+  const steps = value("bzsubsteps")
+    .split(",")
+    .map((part) => part.trim())
+    .filter(Boolean)
+    .map((part) => {
+      const [kind, ...rest] = part.split(/\s+/);
+      const id = rest.join("_").toUpperCase();
+      return /anvil|combine/i.test(kind) ? ({ kind: "combine", to: id } as const) : ({ kind: "craft", output: id } as const);
+    });
+
+  const claimed = Number(value("bzsubclaim").replace(/[^0-9.]/g, ""));
+
+  submissions.push({
+    id: `${sells}-${Date.now()}`,
+    sells,
+    buys: buys.length ? buys : [{ id: sells, qty: 1 }],
+    steps,
+    submittedAt: Date.now(),
+    claimedCoinsPerHour: Number.isFinite(claimed) && claimed > 0 ? claimed : undefined,
+  });
+  saveSubmissions();
+  fail("");
+  renderTable();
+}
+
 export function unmountBazaar(): void {
   clearTimeout(timer);
   timer = undefined;
@@ -398,8 +955,9 @@ function render(): void {
     <div class="meta" id="bzmeta">${metaHtml()}</div>
 
     <div class="tabs">
-      <button class="chip${state.view === "flips" ? " on" : ""}" data-bzview="flips">Flips</button>
-      <button class="chip${state.view === "crafts" ? " on" : ""}" data-bzview="crafts">Crafts</button>
+      ${VIEW_TABS.map(
+        ([id, label]) => `<button class="chip${state.view === id ? " on" : ""}" data-bzview="${id}">${label}</button>`,
+      ).join("")}
     </div>
 
     <div class="panel pad controls">
@@ -446,16 +1004,50 @@ function renderMeta(): void {
   if (meta) meta.innerHTML = metaHtml();
 }
 
+const VIEW_TABS: [ViewId, string][] = [
+  ["best", "Best returns"],
+  ["flips", "Flips"],
+  ["crafts", "Crafts"],
+  ["chains", "Unorthodox crafts"],
+  ["npc", "NPC"],
+  ["reversenpc", "Reverse NPC"],
+  ["manipulate", "Manipulate"],
+  ["crash", "Crash"],
+  ["mine", "My flips"],
+];
+
 function renderTable(): void {
   const target = document.getElementById("bztable");
   if (!target) return;
 
-  if (state.view === "flips") {
+  if (state.view === "best") {
+    // Already filtered at source — see `bestRows` — so it is not filtered again here.
+    const { rows, hidden } = bestRows();
+    target.innerHTML = table(rows, hidden, BEST_COLUMNS, state.sorts.best, BEST_NOTE);
+  } else if (state.view === "mine") {
+    const all = submissionRows();
+    target.innerHTML = submissionForm() + table(filtered(all), hiddenCounts(all), MINE_COLUMNS, state.sorts.mine, MINE_NOTE);
+  } else if (state.view === "flips") {
     const all = flipRows();
     target.innerHTML = table(filtered(all), hiddenCounts(all), flipColumns(), state.sorts.flips, FLIPS_NOTE);
-  } else {
+  } else if (state.view === "crafts") {
     const all = craftRows();
-    target.innerHTML = table(filtered(all), hiddenCounts(all), CRAFT_COLUMNS, state.sorts.crafts, CRAFTS_NOTE);
+    target.innerHTML = table(filtered(all), hiddenCounts(all), [...CRAFT_COLUMNS, baselineColumn<Craft>()], state.sorts.crafts, CRAFTS_NOTE);
+  } else if (state.view === "chains") {
+    const all = chainRows();
+    target.innerHTML = table(filtered(all), hiddenCounts(all), [...CHAIN_COLUMNS, baselineColumn<Chain>()], state.sorts.chains, CHAINS_NOTE);
+  } else if (state.view === "npc") {
+    const all = npcRows();
+    target.innerHTML = table(filtered(all), hiddenCounts(all), NPC_COLUMNS, state.sorts.npc, NPC_NOTE);
+  } else if (state.view === "reversenpc") {
+    const all = reverseNpcRows();
+    target.innerHTML = table(filtered(all), hiddenCounts(all), REVERSE_NPC_COLUMNS, state.sorts.reversenpc, REVERSE_NPC_NOTE);
+  } else if (state.view === "manipulate") {
+    const all = manipulationRows();
+    target.innerHTML = table(filtered(all), hiddenCounts(all), MANIPULATION_COLUMNS, state.sorts.manipulate, MANIPULATE_NOTE);
+  } else {
+    const all = crashRows();
+    target.innerHTML = table(filtered(all), hiddenCounts(all), CRASH_COLUMNS, state.sorts.crash, CRASH_NOTE);
   }
 }
 
@@ -470,7 +1062,61 @@ const CRAFTS_NOTE =
   "per hour, which is the margin times whichever runs out first — the output's demand or the " +
   "scarcest ingredient's supply.";
 
-function table<T extends Flip | Craft>(
+const BEST_NOTE =
+  "Every flip, craft, chain and NPC trade on one axis: coins per hour for each coin tied up. " +
+  "Coins per hour alone cannot rank them against each other — it makes a big slow trade beat a " +
+  "small fast one, and the small fast one is the better answer for anyone whose coins are the " +
+  "binding constraint. Capital is sized the same way for all four, twenty minutes of what the " +
+  "trade can actually move, so the ratio compares the trades rather than the rules. Click a row " +
+  "to open it on its own tab, where the book depth or the full path is. " +
+  "Read the return against the capital beside it rather than on its own: a return in the millions " +
+  "of percent is real arithmetic on a book whose top bid is a fraction of a coin — some enchanted " +
+  "books are bid at 0.2 against a 71,000 ask — and the honest reading of it is not that the trade " +
+  "is enormous but that it takes almost no coins, so almost no coins are what it will pay out on. " +
+  "Put a figure in Coins on hand to see what each row can actually give you rather than what it " +
+  "would give someone able to deploy an unlimited amount into a two-coin order.";
+
+const MINE_NOTE =
+  "Routes you have written down, priced against the live market every twenty seconds. The figure " +
+  "you submitted is never used for anything except the drift column — a route that was true when " +
+  "you wrote it down is not automatically true now, and a table that repeated your number would " +
+  "look checked without being. A route that has stopped working stays on the list and says why.";
+
+const CHAINS_NOTE =
+  "Crafts that take more than one step, and book ladders combined up at an anvil. Only paths a " +
+  "single craft cannot already find are here — two hops or more, or one containing a combine — " +
+  "because anything shorter is already a row on the Crafts tab. Every step is costed the same " +
+  "way a craft is, ingredients through buy orders and each hop divided through by its own yield, " +
+  "and the items-per-hour is the tightest hop in the whole path rather than the last one. " +
+  "Combining two enchanted books is free and instant: the wiki says so twice, so a combine never " +
+  "adds a fee and never binds the rate beyond how fast its own input can be bought.";
+
+const NPC_NOTE =
+  "Buy through a buy order, sell to a shopkeeper. The shop's price comes from Hypixel's own item " +
+  "resource and carries no tax, which is most of why this beats a bazaar flip on cheap goods that " +
+  "move fast. Shopkeepers stop paying after 500M coins a day, so read coins per hour against the " +
+  "daily cap beside it — a row that hits the cap in two hours is a two-hour job, not an hourly wage.";
+
+const REVERSE_NPC_NOTE =
+  "Buy from a shopkeeper at a fixed price, sell it on the bazaar. Only shops that publish a stock " +
+  "limit appear: the profit is the whole stock sold at once, so without a stock figure there is no " +
+  "row to quote — and a shop with no published limit is not the same thing as one with no limit, " +
+  "so it is left out rather than guessed at.";
+
+const MANIPULATE_NOTE =
+  "Items thin enough that one player can own the whole sell side — fewer than 30 sell orders, " +
+  "which is also the point past which Hypixel stops publishing the book and you would be buying " +
+  "blind. Ranked on risk ascending: risk is what the buyout costs less the most you could get " +
+  "back for it, so a negative one is a book you are paid to corner. Partial stops in front of " +
+  "the first price jump, since a thin book is usually cheap all the way up and then triples.";
+
+const CRASH_NOTE =
+  "Buy the top buy order out and dump it straight back, and the bid drops to whatever was " +
+  "standing behind it. The bet is that people instasell without looking at where the price went. " +
+  "Cost is what executing it loses you; estimated profit assumes you catch a third of half an " +
+  "hour of instasells in the hole before it fills back in — a stated guess, not a forecast.";
+
+function table<T extends BazaarRow>(
   rows: T[],
   hidden: { volume: number; depth: number },
   columns: Column<T>[],
@@ -506,7 +1152,11 @@ function table<T extends Flip | Craft>(
       // every twenty seconds and a decode should never hold up the repaint. The service caches for
       // a year, so the rebuild costs nothing on the wire either.
       const icon = `<img class="bz-icon" src="${iconUrl(row.id)}" alt="" width="20" height="20" loading="lazy" decoding="async">`;
-      return `<tr><td>${icon}${name}${limitNote(row)}</td>${cells}</tr>`;
+      const detail = rowDetail(row);
+      // A combined row carries where it came from, so clicking it can open that view rather than
+      // leaving the reader to find the same item again by hand.
+      const open = "source" in row ? ` class="bz-open" data-bzopen="${(row as Opportunity).source}" data-bzid="${escapeHtml(row.id)}"` : "";
+      return `<tr${open}><td>${icon}${name}${detail}</td>${cells}</tr>`;
     })
     .join("");
 
@@ -533,6 +1183,109 @@ function limitNote(row: { id: string } & Partial<Craft>): string {
   return ` <span class="dim" title="This craft is capped by how fast people sell you this ingredient, not by what it sells for.">· held up by ${escapeHtml(
     nameOf(row.limitedBy),
   )}</span>`;
+}
+
+/** What goes under the name: a chain's path, a submission's verdict, a craft's binding input. */
+function rowDetail(row: BazaarRow): string {
+  if ("priced" in row) return submissionDetail(row as PricedRow);
+  if ("source" in row) {
+    const source = (row as Opportunity).source;
+    return ` <span class="dim" title="Which kind of trade this is. Click the row to open it on that tab, where the depth or the full path lives.">· ${SOURCE_LABEL[source]}</span>`;
+  }
+  if ("hops" in row) return pathNote(row as Chain);
+  return limitNote(row as { id: string } & Partial<Craft>);
+}
+
+/**
+ * A submission's own line: the route as written, and the verdict on it.
+ *
+ * The problem, where there is one, is the point of the row — so it is stated in words rather than
+ * left to be inferred from a zero in a column.
+ */
+function submissionDetail(row: PricedRow): string {
+  const { submission, chain, problem } = row.priced;
+  const label = submission.label ? ` <span class="dim">· ${escapeHtml(submission.label)}</span>` : "";
+  const route = chain && chain.hops.length > 0 ? pathNote(chain) : "";
+  const verdict = problem
+    ? `<div class="gold" title="Priced against the live market, not against the figure submitted.">${escapeHtml(problem)}</div>`
+    : "";
+  return `${label}${route}${verdict}<button type="button" class="chip bz-forget" data-bzforget="${escapeHtml(submission.id)}" title="Remove this route from the list.">forget</button>`;
+}
+
+/**
+ * The form, deliberately plain.
+ *
+ * Item ids rather than names, because an id is what every other table here is keyed by and a
+ * name-matcher that silently picks the wrong Enchanted Book is worse than one that asks for the
+ * id. The steps are optional: the route is re-derived from the live market anyway, so what is
+ * really being stored is "watch this item, made rather than bought".
+ */
+function submissionForm(): string {
+  return `
+    <div class="panel pad">
+      <div class="row">
+        <label>Item sold <input id="bzsubsells" placeholder="ENCHANTED_CACTUS" autocomplete="off"></label>
+        <label>Bought <input id="bzsubbuys" placeholder="ENCHANTED_CACTUS_GREEN x32" autocomplete="off"
+          title="What you buy to start, as ID x QUANTITY, separated by commas. Quantities are per finished item."></label>
+        <label>Steps <input id="bzsubsteps" placeholder="craft PAPER, anvil ENCHANTMENT_X_3" autocomplete="off"
+          title="Optional, and only for your own reference — the route is re-derived from the live market either way. 'craft ID' or 'anvil ID'."></label>
+        <label title="What you think it pays. Never used to price anything; it only feeds the drift column, so you can see how far it has moved since.">Claimed coins/hr
+          <input id="bzsubclaim" placeholder="optional" autocomplete="off"></label>
+        <button type="button" class="chip" id="bzsubadd">Add route</button>
+      </div>
+      <p class="dim" id="bzsuberror"></p>
+    </div>
+  `;
+}
+
+/**
+ * The whole path, written out.
+ *
+ * A chain's identity is the route rather than the destination — two rows can both end at an
+ * Enchanted Eye of Ender and be entirely different trades — so the path is the row's name, not a
+ * detail hidden behind it. Leaves are quantified because "640 Fine Topaz" is the part that tells
+ * you whether the trade is affordable, and each craft hop shows the yield when it makes more than
+ * one, since that is where a per-item figure stops being obvious.
+ */
+function pathNote(chain: Chain): string {
+  const parts: string[] = [];
+  const first = chain.hops[0];
+  if (first?.kind === "craft") {
+    parts.push(first.ingredients.map((i) => `${num(i.qty)} ${nameOf(i.id)}`).join(" + "));
+  } else if (first?.kind === "combine") {
+    parts.push(`${first.step.inputsRequired} ${nameOf(first.step.inputId)}`);
+  }
+
+  // Consecutive combines up one ladder read as one rung at a time otherwise, which is noise on a
+  // four-step climb: "Book·1 →(anvil x4)→ Book·5" is the same fact in one clause.
+  let i = 0;
+  while (i < chain.hops.length) {
+    const hop = chain.hops[i];
+    if (hop.kind === "craft") {
+      parts.push(`${nameOf(hop.output)}${hop.yield > 1 ? ` <span class="dim">×${hop.yield}</span>` : ""}`);
+      i++;
+      continue;
+    }
+    let runs = 0;
+    let last = hop.step.outputId;
+    while (i < chain.hops.length && chain.hops[i].kind === "combine") {
+      last = (chain.hops[i] as { kind: "combine"; step: { outputId: string } }).step.outputId;
+      runs++;
+      i++;
+    }
+    parts.push(`<span class="dim">(anvil${runs > 1 ? ` ×${runs}` : ""})</span> ${nameOf(last)}`);
+  }
+
+  const held = chain.limitedBy
+    ? ` <span class="dim" title="The tightest step in the chain. Every hop above it is waiting on this one, not on what the finished item sells for.">· held up by ${escapeHtml(nameOf(chain.limitedBy))}</span>`
+    : "";
+  const unknown = chain.unknownSupply.length
+    ? ` <span class="gold" title="Bought from a shopkeeper that publishes no stock limit, so how fast this chain can really be fed is not something we can measure. The items-per-hour beside it is an upper bound rather than a reading.">· unmeasured supply: ${escapeHtml(
+        chain.unknownSupply.map(nameOf).join(", "),
+      )}</span>`
+    : "";
+
+  return `<div class="dim bz-path">${parts.join(" → ")}</div>${held}${unknown}`;
 }
 
 function ageNote(): string {

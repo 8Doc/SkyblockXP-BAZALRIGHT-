@@ -140,6 +140,57 @@ export function proximityToAverage(current: number, history: Series[], name: His
   return (100 * current) / mean - 100;
 }
 
+/* -------------------------------------------------------------- baselines */
+
+/**
+ * A running average of one number, kept without keeping the samples.
+ *
+ * The intended source for this was skyblock.bz's `/api/product/init/{id}`, a six-and-a-half-year
+ * daily series that `decode` above exists to read. That endpoint now answers 403 to any caller
+ * outside their own site, with or without a referer, so there is no thirty-day average to be had
+ * from it and inventing one would be worse than having none: a made-up baseline makes every
+ * margin look explicable.
+ *
+ * What is left is what we can measure ourselves. The tab already reads the whole bazaar every
+ * twenty seconds, so folding each read into a running mean costs one addition an item and needs
+ * no history kept at all — four numbers rather than a series. `firstAt` is carried so the figure
+ * can say how long it has actually been watching, because "12% above average" means something
+ * different after four minutes than after four days, and a reader who is not told cannot tell.
+ */
+export type Baseline = { mean: number; samples: number; firstAt: number; lastAt: number };
+
+/** Fold one reading in. A sample at a time it has already seen is ignored rather than doubled. */
+export function observe(prior: Baseline | undefined, value: number, at: number): Baseline {
+  if (!Number.isFinite(value)) return prior ?? { mean: 0, samples: 0, firstAt: at, lastAt: at };
+  if (!prior || prior.samples === 0) return { mean: value, samples: 1, firstAt: at, lastAt: at };
+  if (at <= prior.lastAt) return prior;
+  const samples = prior.samples + 1;
+  return {
+    // Incremental rather than a running total: a sum of a hundred thousand reads of a
+    // hundred-million-coin margin loses precision where the mean does not.
+    mean: prior.mean + (value - prior.mean) / samples,
+    samples,
+    firstAt: prior.firstAt,
+    lastAt: at,
+  };
+}
+
+/**
+ * Where a number sits against its own average, as a percentage.
+ *
+ * Zero means ordinary, +100 means twice its usual, −50 means half. Null while there is nothing
+ * to compare against — one sample is not an average, and a mean of zero has no percentage.
+ */
+export function relativeTo(current: number, baseline: Baseline | undefined, minSamples = 2): number | null {
+  if (!baseline || baseline.samples < minSamples || baseline.mean === 0) return null;
+  return (100 * current) / baseline.mean - 100;
+}
+
+/** How long this baseline has actually been watching, in ms. */
+export function observedFor(baseline: Baseline): number {
+  return Math.max(0, baseline.lastAt - baseline.firstAt);
+}
+
 /**
  * Flatten the spikes out of a daily price series before plotting it.
  *

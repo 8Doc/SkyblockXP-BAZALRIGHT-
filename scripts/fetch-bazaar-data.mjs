@@ -151,6 +151,18 @@ async function main() {
   const recipes = [];
   const neuNames = new Map();
   const offBazaar = new Map();
+  /**
+   * Every grid by output, tradeable or not.
+   *
+   * The list below keeps only recipes whose output the bazaar sells, which is right for a craft
+   * table — you cannot sell a Paper on the bazaar. But Paper is three Sugar Cane, Sugar Cane is
+   * on the bazaar, and Hot Potato Books are made of Paper: dropping the step means the whole
+   * chain above it reads as unpriceable. Wiki-checked, and it is not a shop good either — its
+   * page has no shop section at all, only a crafting one — so no NPC table can rescue it.
+   * Those steps are emitted separately as `intermediates`, for the chain finder rather than for
+   * the craft table.
+   */
+  const gridsByOutput = new Map();
   let files = 0;
   let noGrid = 0;
   let notTradeable = 0;
@@ -176,6 +188,15 @@ async function main() {
 
     for (const grid of grids) {
       const output = grid.overrideOutputId ?? item.internalname;
+
+      {
+        const ingredients = ingredientsFrom(grid);
+        if (ingredients.length > 0) {
+          if (!gridsByOutput.has(output)) gridsByOutput.set(output, []);
+          gridsByOutput.get(output).push({ output, yield: Number(grid.count ?? 1) || 1, ingredients });
+        }
+      }
+
       if (!tradeable.has(output)) {
         notTradeable++;
         continue;
@@ -200,6 +221,35 @@ async function main() {
 
   recipes.sort((a, b) => a.output.localeCompare(b.output) || a.ingredients[0].id.localeCompare(b.ingredients[0].id));
 
+  /**
+   * The steps under the craft table: recipes for things the bazaar does not sell but the table's
+   * recipes are made of, and whatever those are made of in turn.
+   *
+   * Closed transitively, because the chain rarely stops at one hop — an ingredient's ingredient
+   * can be off-bazaar too. Bounded by the work list emptying rather than by a depth number: an
+   * item already seen is not queued again, so a recipe loop cannot spin here.
+   */
+  const intermediates = [];
+  const wanted = [...offBazaar.keys()];
+  const seenIntermediate = new Set();
+  while (wanted.length > 0) {
+    const id = wanted.pop();
+    if (seenIntermediate.has(id) || tradeable.has(id)) continue;
+    seenIntermediate.add(id);
+    for (const grid of gridsByOutput.get(id) ?? []) {
+      intermediates.push(grid);
+      for (const ingredient of grid.ingredients) {
+        if (!tradeable.has(ingredient.id) && !seenIntermediate.has(ingredient.id)) wanted.push(ingredient.id);
+      }
+    }
+  }
+  intermediates.sort((a, b) => a.output.localeCompare(b.output) || a.ingredients[0].id.localeCompare(b.ingredients[0].id));
+
+  // What is still unreachable: no bazaar price, no shop line, and no recipe to make it from.
+  const stillUnpriced = [...offBazaar.keys()].filter(
+    (id) => !intermediates.some((r) => r.output === id),
+  );
+
   const priceable = recipes.filter((r) => !r.offBazaar);
   const payload = {
     generatedAt: new Date().toISOString(),
@@ -210,6 +260,15 @@ async function main() {
       "which need a shop price before that recipe can be costed. Forge and fusion are not carried.",
     /** Ingredients no bazaar price exists for, and how many recipes are waiting on each. */
     offBazaarIngredients: Object.fromEntries([...offBazaar].sort((a, b) => b[1] - a[1])),
+    intermediatesNote:
+      "Recipes making something the bazaar does not sell, kept because the recipes above are " +
+      "made of them. Paper is the plain case: three Sugar Cane make three Paper, Sugar Cane is " +
+      "a bazaar good, and Hot Potato Books are made of Paper — but Paper itself cannot be sold " +
+      "there, so it is not a craft, only a step. Its wiki page has no shop section at all, which " +
+      "is why an NPC price table does not reach these either. Closed transitively.",
+    intermediates,
+    /** Off-bazaar ingredients with no recipe either — a shop price is the only way to reach these. */
+    stillUnpriced,
     recipes,
   };
 
@@ -221,6 +280,7 @@ async function main() {
   console.log(`${priceable.length} price from the bazaar alone; ${recipes.length - priceable.length} need a shop price.`);
   console.log(`${noGrid} items have no crafting grid; ${notTradeable} grids make something the bazaar doesn't trade.`);
   console.log(`${offBazaar.size} distinct ingredients need shop prices.`);
+  console.log(`${intermediates.length} intermediate steps kept for the chain finder; ${stillUnpriced.length} ingredients have no recipe either.`);
 }
 
 

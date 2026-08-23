@@ -75,8 +75,14 @@ const gameData = {
  * question off different data, and keeping them apart means neither can quietly grow a
  * dependency on the other.
  */
+const recipeFile = await loadJson("generated/recipes.json");
 const bazaarData = {
-  recipes: (await loadJson("generated/recipes.json")).recipes,
+  // The craft table's recipes and the steps underneath them travel together: the chain finder
+  // treats them as one graph, and an intermediate is only ever reached through a real recipe.
+  recipes: recipeFile.recipes,
+  intermediates: recipeFile.intermediates ?? [],
+  npcPrices: (await loadJson("generated/npc-prices.json")).prices,
+  anvil: await loadJson("curated/anvil_combines.json"),
   names: (await loadJson("generated/bazaar_items.json")).names,
 };
 

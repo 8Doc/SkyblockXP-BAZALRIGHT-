@@ -279,3 +279,13 @@ table.bz td:last-child { color: var(--gold); }
   vertical-align: -5px;
   margin-right: 8px;
 }
+
+/* A combined row opens its own view, so it has to look like it does something. */
+.bz-open { cursor: pointer; }
+.bz-open:hover { background: rgba(255, 255, 255, 0.04); }
+
+/* A chain's path is its identity, so it gets its own line under the name rather than
+   competing with it for the same one. */
+.bz-path { margin-top: 2px; font-size: 0.85em; line-height: 1.4; }
+
+.bz-forget { margin-left: 6px; font-size: 0.8em; padding: 0 6px; }

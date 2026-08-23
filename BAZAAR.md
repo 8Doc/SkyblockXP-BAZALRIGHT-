@@ -465,8 +465,15 @@ API key, a username and a profile, and the bazaar needs none of them, so it sits
 than inside. `src/browser/bazaarTab.ts` keeps its own state and its own polling, and switching
 away unmounts it — a page nobody is looking at should not be making a request a minute.
 
-It ships **Flips** and **Crafts**. Every column is sortable and both default to coins per hour
-descending. Flips carries the allocate, bad-hour and budget columns above.
+It ships nine views: **Best returns**, **Flips**, **Crafts**, **Unorthodox crafts**, **NPC**,
+**Reverse NPC**, **Manipulate**, **Crash** and **My flips**. Every column is sortable. Most
+default to coins per hour descending; Best returns defaults to return on capital, and Manipulate
+sorts risk *ascending*, because the interesting end of a buyout list is the negative one — a book
+whose recovery exceeds its cost is one you are paid to corner. Flips carries the allocate,
+bad-hour and budget columns above.
+
+A row on Best returns knows which view produced it and opens there when clicked, rather than
+flattening a flip's book depth and a chain's path into one shape that has neither.
 
 Both carry a **volume floor**, and flips also carry a **depth floor**, because no amount of
 cleverness in the ranking removes the reader's need to say "not that slow" and "not that fake". Its slider was a linear 0–200, which was useless: bazaar volumes run
@@ -515,13 +522,111 @@ Implemented and tested (`tests/bazaar.test.ts` and `tests/recipes.test.ts`, 42 c
   for every product, both out of one download. `npm run gen:bazaar`.
 - [`src/browser/bazaarTab.ts`](src/browser/bazaarTab.ts) — the tab: fetching, polling, sorting, drawing.
 
-All seven derivations exist in the library; two of them are on screen. What is left:
+All seven derivations are on screen, alongside two views skyblock.bz does not have: multi-hop
+chains, and one table ranking every kind of trade against the others.
 
-- **`manipulate` and `crash`** are written and tested but have no tab yet. They need nothing new.
-- **`npc` and `reverse_npc`** need a shopkeeper price and stock table, which nothing in this repo
-  has — `data/generated/npcs.json` is quest NPCs and their coordinates, the wrong table entirely.
-  The same table would finish the 63 recipes whose ingredients are shop goods rather than bazaar
-  goods, taking crafts from 312 of 375 to all of them.
-- **History is decoded but not yet fetched.** `bazaarHistory.ts` reads skyblock.bz's
-  `/api/product/init` format, and nothing calls it, so `proximityToAverage` has no baseline to
-  work against and there is no per-item page to show a chart on.
+### Shop prices — `scripts/fetch-npc-prices.mjs`
+
+Two sources, because each half lives somewhere different.
+
+**What a shopkeeper pays** is first-party after all: Hypixel's item resource carries
+`npc_sell_price` on 2,434 items. The direction was checked rather than assumed, this project
+having been caught by Hypixel's naming once already — Enchanted Diamond reads 1,280 against
+Diamond's 8, Enchanted Coal 160 against Coal's 1, and an enchanted item is 160 of the plain one.
+That ratio only holds if the figure is what the shop *pays*. 84 items state a zero, which is a
+refusal rather than a price, and are dropped for the same reason `craft()` refuses an unbid
+ingredient.
+
+**What a shopkeeper charges** is in no API, so it comes off the wiki: every shop keeps its
+inventory on a `/UI` subpage as a `{{Shop UI}}` call, one line a slot, carrying the bundle size
+and the asking price. Three Wheat for thirty coins is ten coins an item — the bundle is the whole
+reason the price cannot be read off the cost. 282 items, 13 of which publish a stock limit. Only
+coin prices are taken; a shop asking Bits or Motes is selling for a currency this table cannot
+compare.
+
+They cross-check each other, which is why both are worth taking: a shopkeeper buys low and sells
+high, so `sell < buy` wherever both are known, and the one row that read backwards was a parse
+error rather than an arbitrage.
+
+### The 45 unpriceable ingredients — mostly not a shop problem
+
+The expectation was that a shop table would finish the 63 recipes whose ingredients are shop
+goods. It does not, and the reason is worth recording: **Paper is not sold by anyone.** Its wiki
+page has no shop section at all, only a crafting one — three Sugar Cane make three Paper, and
+Sugar Cane is a bazaar good. Bowl is the same, and so are the metal blocks.
+
+So the fix was a recipe fix. `fetch-bazaar-data.mjs` now also emits `intermediates`: recipes
+making something the bazaar does not sell, kept because the recipes above them are made of them,
+closed transitively. Of the 45, **20 are reachable by an intermediate recipe and 1 by a shop
+price**; the remaining 24 are mob drops and quest items with no source at all and stay flagged.
+
+### Chains — `src/lib/bazaarChains.ts`
+
+`craft()` answers one hop. The output of one recipe is the ingredient of another, so *buy Sugar
+Cane, make Paper, make a Hot Potato Book* had no row anywhere: Paper is not a bazaar good, so the
+Paper step is not a craft, and the Book step read as unpriceable.
+
+Same arithmetic over a graph. Two edge kinds — a recipe, and an anvil combine — traversed
+interchangeably. Everything is per terminal item and divides through at *every* hop rather than
+at the end, or a high-yield step in the middle misprices everything above it. Cheapest path is
+chosen against the live market on each call, because which of NEU's alternatives is cheaper is a
+price question that changes through the day. 403 chains over 396 recipes in 12ms.
+
+Buying the thing is a path like any other, and often the cheapest one — a finder that always
+preferred the combine would quote a chain costing twice what the item sells for.
+
+### The anvil fee that does not exist
+
+The plan was to source the anvil's fee schedule from the wiki. There is no schedule, because
+there is no fee: the Anvil page says combining books "costs no additional Experience levels", and
+the Enchanting page states flatly that "It costs nothing to combine Enchanted Books in an Anvil."
+`anvilFeeCoins` is carried as a zero anyway rather than dropped, because *we checked and it is
+free* and *we forgot to model a cost* look identical once the field is gone.
+
+The ladder is read off the bazaar's own product ids rather than a table, so it cannot go stale.
+The cap is curated: the wiki says levels past the fifth generally come from Dungeons and
+Experiments, and gives the case where combining two of the level above produces a **lower** book
+— two Luck VI make a Luck V. So a sixth level is not one step up from a fifth, and the exceptions
+the wiki hedges about are left out rather than guessed either way.
+
+### Baselines, and the endpoint that closed
+
+`bazaarHistory.ts` decodes skyblock.bz's `/api/product/init/{id}` and nothing ever called it.
+Wiring it up is no longer possible: **that endpoint now answers 403 to any caller**, with or
+without a referer. So there is no thirty-day average to fetch, and a fabricated one would be
+worse than none — it would make every margin look explicable.
+
+What is left is measuring it here. The tab already reads the whole bazaar every twenty seconds,
+so each read folds into a running mean per item: four numbers rather than a series, which is what
+makes it small enough to keep for two thousand products. The "vs usual" column carries the window
+it has actually been watching, because +180% after four minutes and after four days are different
+claims and a reader who is not told cannot tell them apart.
+
+### One axis over everything — `src/lib/bazaarRanking.ts`
+
+Coins per hour cannot rank a craft against a flip: it makes a big slow trade beat a small fast
+one, and the small fast one is the better answer for anyone whose coins are the binding
+constraint. Return on capital can, and `flip()` already computed it that way. The work was
+defining capital identically for the other three — twenty minutes of what the trade can actually
+move, which is the rule the flip's own order size comes from.
+
+**A caveat the axis exposes.** Some enchanted books are bid at 0.2 coins against a 71,000 ask
+with 163 items of demand standing behind the bid. That clears the depth floor legitimately — the
+book is deep in *quantity*; the price is what is absurd — and returns a real six-figure percentage
+on two coins of capital. The arithmetic is right and the reading is not "this trade is enormous"
+but "this trade takes almost no coins, so almost no coins are what it pays out on". The note on
+the tab says so, and a budget in *Coins on hand* is what turns it back into a number you can act
+on.
+
+### Submitted routes — `src/lib/bazaarSubmissions.ts`
+
+A submission is a claim about a *route*, and the route is the only part worth keeping, because it
+is the part that stays true when the price moves. Everything else is re-derived live. A route that
+was true when somebody wrote it down is not automatically true now, and a table repeating their
+figure would look checked without being — so a submission that has stopped paying keeps its row
+and says why, with a drift column against the claim.
+
+Pricing a submission is the one caller that asks the finder for a route it must *make* rather than
+buy (`mustProduce`). Left to itself the finder answers "buying one is cheaper" the moment a trade
+goes underwater — true, and exactly the case the row exists to report, so it would vanish at the
+moment it became worth reading.

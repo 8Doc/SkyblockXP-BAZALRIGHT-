@@ -1,0 +1,7643 @@
+{
+  "generatedAt": "2026-08-23T14:08:54.969Z",
+  "source": {
+    "sell": "https://api.hypixel.net/v2/resources/skyblock/items (npc_sell_price)",
+    "buy": "hypixelskyblock.minecraft.wiki, every page transcluding Template:Shop UI"
+  },
+  "note": "sell is what a shopkeeper pays you for one, from Hypixel's own item resource. buy is what it charges you for one, off the wiki's shop pages, divided through by the bundle size — a shop selling three Wheat for thirty coins is ten coins an item. stock is the daily limit where a shop states one. Only coin prices are taken: a shop asking Bits or Motes is selling for a currency this table cannot compare, and is skipped rather than converted.",
+  "crossCheck": "A shopkeeper buys low and sells high, so sell < buy wherever both are known. Anything crossed is a parse error rather than an arbitrage and its buy price is dropped.",
+  "totals": {
+    "items": 2414,
+    "withSell": 2350,
+    "withBuy": 282,
+    "withStock": 13,
+    "crossed": 1,
+    "refusedByShops": 84
+  },
+  "crossed": [
+    {
+      "id": "ATOMINIZER",
+      "pays": 250000,
+      "ask": 100000
+    }
+  ],
+  "unresolved": {
+    "2": 7,
+    "3": 7,
+    "4": 7,
+    "5": 7,
+    "Dungeon I Potion": 8,
+    "Dungeon II Potion": 7,
+    "Dungeon III Potion": 6,
+    "Dungeon IV Potion": 5,
+    "Dungeon V Potion": 4,
+    "Dungeon VI Potion": 3,
+    "Dungeon VII Potion": 2,
+    "Enchanted Iron Helmet": 2,
+    "Enchanted Iron Chestplate": 2,
+    "Enchanted Iron Leggings": 2,
+    "Enchanted Iron Boots": 2,
+    "Kuudra Key": 2,
+    "Hot Kuudra Key": 2,
+    "Burning Kuudra Key": 2,
+    "Fiery Kuudra Key": 2,
+    "Infernal Kuudra Key": 2,
+    "Viper Shard": 2,
+    "Crocodile Shard": 2,
+    "Eel Shard": 2,
+    "Gecko Shard": 2,
+    "Enchanted Book (Sugar Rush I)": 1,
+    "Enchanted Book (Life Steal IV)": 1,
+    "Bitter Ice Tea": 1,
+    "Mining Exp Boost (Uncommon)": 1,
+    "Farming Exp Boost (Rare)": 1,
+    "Redstone": 1,
+    "Mining Pumpkin": 1,
+    "Regeneration IX Potion": 1,
+    "Speed V Potion": 1,
+    "Enchanted Book (Experience IV)": 1,
+    "Bee Pet": 1,
+    "Enchanted Book (True Protection I)": 1,
+    "Enchanted Diamond Sword": 1,
+    "Enchanted Book (Sharpness I)": 1,
+    "Enchanted Book (Scavenger I)": 1,
+    "Enchanted Book (Protection I)": 1,
+    "Enchanted Book (Fire Protection I)": 1,
+    "Enchanted Book (Projectile Protection I)": 1,
+    "Enchanted Book (Bane of Arthropods I)": 1,
+    "Enchanted Book (Smite I)": 1,
+    "Enchanted Book (Efficiency I)": 1,
+    "Farming Exp Boost (Epic)": 1,
+    "Enchanted Book (Sharpness VI)": 1,
+    "Enchanted Book (Scavenger V)": 1,
+    "Enchanted Book (Protection VI)": 1,
+    "Rare Elephant Pet": 1,
+    "Uncommon Lion Pet": 1,
+    "Legendary Monkey Pet": 1,
+    "Enchanted Book (Respiration IV)": 1,
+    "Red Panda Shard": 1,
+    "Osedax Shard": 1,
+    "Black Widow Shard": 1,
+    "Badger Shard": 1,
+    "Wolverine Shard": 1
+  },
+  "ambiguous": {
+    "Combat Exp Boost": [
+      "PET_ITEM_COMBAT_SKILL_BOOST_COMMON",
+      "PET_ITEM_COMBAT_SKILL_BOOST_EPIC",
+      "PET_ITEM_COMBAT_SKILL_BOOST_UNCOMMON",
+      "PET_ITEM_COMBAT_SKILL_BOOST_RARE",
+      "PET_ITEM_COMBAT_SKILL_BOOST_LEGENDARY"
+    ],
+    "Foraging Exp Boost": [
+      "PET_ITEM_FORAGING_SKILL_BOOST_UNCOMMON",
+      "PET_ITEM_FORAGING_SKILL_BOOST_EPIC",
+      "PET_ITEM_FORAGING_SKILL_BOOST_COMMON",
+      "PET_ITEM_FORAGING_SKILL_BOOST_RARE",
+      "PET_ITEM_FORAGING_SKILL_BOOST_LEGENDARY"
+    ],
+    "Mining Exp Boost": [
+      "PET_ITEM_MINING_SKILL_BOOST_UNCOMMON",
+      "PET_ITEM_MINING_SKILL_BOOST_LEGENDARY",
+      "PET_ITEM_MINING_SKILL_BOOST_EPIC",
+      "PET_ITEM_MINING_SKILL_BOOST_RARE",
+      "PET_ITEM_MINING_SKILL_BOOST_COMMON"
+    ],
+    "Farming Exp Boost": [
+      "PET_ITEM_FARMING_SKILL_BOOST_LEGENDARY",
+      "PET_ITEM_FARMING_SKILL_BOOST_COMMON",
+      "PET_ITEM_FARMING_SKILL_BOOST_RARE",
+      "PET_ITEM_FARMING_SKILL_BOOST_UNCOMMON",
+      "PET_ITEM_FARMING_SKILL_BOOST_EPIC"
+    ],
+    "Fishing Exp Boost": [
+      "PET_ITEM_FISHING_SKILL_BOOST_UNCOMMON",
+      "PET_ITEM_FISHING_SKILL_BOOST_COMMON",
+      "PET_ITEM_FISHING_SKILL_BOOST_EPIC",
+      "PET_ITEM_FISHING_SKILL_BOOST_RARE",
+      "PET_ITEM_FISHING_SKILL_BOOST_LEGENDARY"
+    ],
+    "All Skills Exp Boost": [
+      "PET_ITEM_ALL_SKILLS_BOOST_EPIC",
+      "PET_ITEM_ALL_SKILLS_BOOST_LEGENDARY",
+      "PET_ITEM_ALL_SKILLS_BOOST_RARE",
+      "PET_ITEM_ALL_SKILLS_BOOST_COMMON",
+      "PET_ITEM_ALL_SKILLS_BOOST_UNCOMMON"
+    ],
+    "Big Teeth": [
+      "PET_ITEM_BIG_TEETH_UNCOMMON",
+      "PET_ITEM_BIG_TEETH_RARE",
+      "PET_ITEM_BIG_TEETH_COMMON",
+      "PET_ITEM_BIG_TEETH_EPIC",
+      "PET_ITEM_BIG_TEETH_LEGENDARY"
+    ],
+    "Iron Claws": [
+      "PET_ITEM_IRON_CLAWS_EPIC",
+      "PET_ITEM_IRON_CLAWS_UNCOMMON",
+      "PET_ITEM_IRON_CLAWS_COMMON",
+      "PET_ITEM_IRON_CLAWS_LEGENDARY",
+      "PET_ITEM_IRON_CLAWS_RARE"
+    ],
+    "Hardened Scales": [
+      "PET_ITEM_HARDENED_SCALES_UNCOMMON",
+      "PET_ITEM_HARDENED_SCALES_COMMON",
+      "PET_ITEM_HARDENED_SCALES_RARE",
+      "PET_ITEM_HARDENED_SCALES_EPIC",
+      "PET_ITEM_HARDENED_SCALES_LEGENDARY"
+    ],
+    "Sharpened Claws": [
+      "PET_ITEM_SHARPENED_CLAWS_LEGENDARY",
+      "PET_ITEM_SHARPENED_CLAWS_RARE",
+      "PET_ITEM_SHARPENED_CLAWS_COMMON",
+      "PET_ITEM_SHARPENED_CLAWS_UNCOMMON",
+      "PET_ITEM_SHARPENED_CLAWS_EPIC"
+    ],
+    "Brown Mushroom": [
+      "BROWN_MUSHROOM",
+      "BUILDER_BROWN_MUSHROOM"
+    ],
+    "Cactus": [
+      "CACTUS",
+      "BUILDER_CACTUS"
+    ],
+    "Revive Stone": [
+      "REVIVE_STONE",
+      "REVIVE_STONE_ORB"
+    ]
+  },
+  "prices": {
+    "ABSOLUTE_ENDER_PEARL": {
+      "sell": 11200
+    },
+    "ABYSSAL_BOOTS": {
+      "sell": 10000
+    },
+    "ABYSSAL_CHESTPLATE": {
+      "sell": 20000
+    },
+    "ABYSSAL_HELMET": {
+      "sell": 10000
+    },
+    "ABYSSAL_LEGGINGS": {
+      "sell": 15000
+    },
+    "ACACIA_BIRDHOUSE": {
+      "sell": 1
+    },
+    "ACACIA_DOOR_ITEM": {
+      "sell": 1
+    },
+    "ACACIA_FENCE": {
+      "sell": 1
+    },
+    "ACACIA_FENCE_GATE": {
+      "sell": 1
+    },
+    "ACACIA_STAIRS": {
+      "sell": 0.5
+    },
+    "ACTIVATOR_RAIL": {
+      "sell": 2
+    },
+    "ADAPTIVE_BOOTS": {
+      "sell": 20000
+    },
+    "ADAPTIVE_CHESTPLATE": {
+      "sell": 20000
+    },
+    "ADAPTIVE_HELMET": {
+      "sell": 20000
+    },
+    "ADAPTIVE_LEGGINGS": {
+      "sell": 20000
+    },
+    "ADVANCED_GARDENING_AXE": {
+      "sell": 100
+    },
+    "ADVANCED_GARDENING_HOE": {
+      "sell": 100
+    },
+    "AGARIMOO_TONGUE": {
+      "sell": 5000
+    },
+    "AGATHA_COUPON": {
+      "sell": 10000
+    },
+    "AGGOURDIAN": {
+      "sell": 50000
+    },
+    "AIMING_BOW": {
+      "sell": 340
+    },
+    "ALCHEMISTS_STAFF": {
+      "sell": 2000
+    },
+    "ALLIGATOR_SKIN": {
+      "sell": 5000
+    },
+    "AMBER_MATERIAL": {
+      "sell": 1
+    },
+    "AMBER_POLISHED_DRILL_ENGINE": {
+      "sell": 103000
+    },
+    "ANCIENT_CLAW": {
+      "sell": 200
+    },
+    "ANCIENT_CLOAK": {
+      "sell": 93750
+    },
+    "ANGLER_BELT": {
+      "sell": 50,
+      "buy": 100
+    },
+    "ANGLER_BOOTS": {
+      "sell": 12,
+      "buy": 100
+    },
+    "ANGLER_BRACELET": {
+      "sell": 50,
+      "buy": 100
+    },
+    "ANGLER_CHESTPLATE": {
+      "sell": 24,
+      "buy": 100
+    },
+    "ANGLER_CLOAK": {
+      "sell": 50,
+      "buy": 100
+    },
+    "ANGLER_HELMET": {
+      "sell": 15,
+      "buy": 100
+    },
+    "ANGLER_LEGGINGS": {
+      "sell": 21,
+      "buy": 100
+    },
+    "ANGLER_NECKLACE": {
+      "sell": 50,
+      "buy": 100
+    },
+    "ANTIQUE_REMEDIES": {
+      "sell": 250000
+    },
+    "ANUBIS": {
+      "sell": 1000000
+    },
+    "ANVIL": {
+      "sell": 45
+    },
+    "AOTE_STONE": {
+      "sell": 1
+    },
+    "APPLE": {
+      "sell": 5
+    },
+    "ARACHNE_BELT": {
+      "sell": 2000
+    },
+    "ARACHNE_BOOTS": {
+      "sell": 2000
+    },
+    "ARACHNE_CHESTPLATE": {
+      "sell": 2000
+    },
+    "ARACHNE_CLOAK": {
+      "sell": 2000
+    },
+    "ARACHNE_CRYSTAL": {
+      "sell": 1000
+    },
+    "ARACHNE_FANG": {
+      "sell": 500
+    },
+    "ARACHNE_FRAGMENT": {
+      "sell": 500
+    },
+    "ARACHNE_GLOVES": {
+      "sell": 2000
+    },
+    "ARACHNE_HELMET": {
+      "sell": 2000
+    },
+    "ARACHNE_KEEPER_FRAGMENT": {
+      "sell": 400
+    },
+    "ARACHNE_LEGGINGS": {
+      "sell": 2000
+    },
+    "ARACHNE_NECKLACE": {
+      "sell": 2000
+    },
+    "ARACK": {
+      "sell": 5000
+    },
+    "ARCHAEOLOGIST_COMPASS": {
+      "sell": 1000
+    },
+    "ARCHER_DUNGEON_ABILITY_1": {
+      "sell": 1
+    },
+    "ARCHER_DUNGEON_ABILITY_2": {
+      "sell": 1
+    },
+    "ARCHER_DUNGEON_ABILITY_3": {
+      "sell": 1
+    },
+    "ARCHER_ULTIMATE_ABILITY": {
+      "sell": 1
+    },
+    "ARMOR_OF_MAGMA_BOOTS": {
+      "sell": 30000
+    },
+    "ARMOR_OF_MAGMA_CHESTPLATE": {
+      "sell": 61000
+    },
+    "ARMOR_OF_MAGMA_HELMET": {
+      "sell": 38000
+    },
+    "ARMOR_OF_MAGMA_LEGGINGS": {
+      "sell": 53000
+    },
+    "ARMOR_OF_THE_RESISTANCE_BOOTS": {
+      "sell": 8
+    },
+    "ARMOR_OF_THE_RESISTANCE_CHESTPLATE": {
+      "sell": 16
+    },
+    "ARMOR_OF_THE_RESISTANCE_HELMET": {
+      "sell": 10
+    },
+    "ARMOR_OF_THE_RESISTANCE_LEGGINGS": {
+      "sell": 14
+    },
+    "ARMOR_OF_YOG_BOOTS": {
+      "sell": 38000
+    },
+    "ARMOR_OF_YOG_CHESTPLATE": {
+      "sell": 38000
+    },
+    "ARMOR_OF_YOG_HELMET": {
+      "sell": 38000
+    },
+    "ARMOR_OF_YOG_LEGGINGS": {
+      "sell": 38000
+    },
+    "ARMOR_STAND": {
+      "sell": 1
+    },
+    "ARMORSHRED_ARROW": {
+      "sell": 1
+    },
+    "ARROW": {
+      "sell": 2,
+      "buy": 3
+    },
+    "ARROW_BUNDLE_MAGMA": {
+      "sell": 50000
+    },
+    "ARROW_SWAPPER": {
+      "buy": 1000
+    },
+    "ARTIFACT_POTION_AFFINITY": {
+      "sell": 64000
+    },
+    "ARTISANAL_SHORTBOW": {
+      "sell": 200,
+      "buy": 600
+    },
+    "ASCENSION_ROPE": {
+      "sell": 1
+    },
+    "ASPECT_OF_THE_DRAGON": {
+      "sell": 100000
+    },
+    "ASPECT_OF_THE_END": {
+      "sell": 56000
+    },
+    "ASPECT_OF_THE_VOID": {
+      "sell": 56000
+    },
+    "ASPIRING_LEAP": {
+      "sell": 16000
+    },
+    "ATMOSPHERIC_FILTER": {
+      "sell": 100000
+    },
+    "ATOMINIZER": {
+      "sell": 250000
+    },
+    "AUTO_RECOMBOBULATOR": {
+      "sell": 1000
+    },
+    "AUTO_SMELTER": {
+      "sell": 32
+    },
+    "BACHELOR_ROSE": {
+      "sell": 512000
+    },
+    "BAG_OF_CASH": {
+      "sell": 1000000
+    },
+    "BAG_OF_GOLD": {
+      "sell": 250000
+    },
+    "BAIT_RING": {
+      "sell": 23000
+    },
+    "BAKED_POTATO": {
+      "sell": 3
+    },
+    "BAMBOO": {
+      "sell": 5
+    },
+    "BANDAGED_MITHRIL_PICKAXE": {
+      "sell": 500
+    },
+    "BASIC_CHICKEN_AXE": {
+      "buy": 100
+    },
+    "BASIC_COW_AXE": {
+      "buy": 100
+    },
+    "BASIC_GARDENING_AXE": {
+      "sell": 100
+    },
+    "BASIC_GARDENING_HOE": {
+      "sell": 100
+    },
+    "BASIC_MUSHROOM_COW_AXE": {
+      "buy": 100
+    },
+    "BASIC_PIG_AXE": {
+      "buy": 100
+    },
+    "BASIC_RABBIT_AXE": {
+      "buy": 100
+    },
+    "BASIC_SHEEP_AXE": {
+      "buy": 100
+    },
+    "BATTLE_DISC": {
+      "sell": 1
+    },
+    "BEACON_1": {
+      "sell": 1540
+    },
+    "BEACON_2": {
+      "sell": 7100
+    },
+    "BEACON_3": {
+      "sell": 16300
+    },
+    "BEACON_4": {
+      "sell": 33700
+    },
+    "BEACON_5": {
+      "sell": 68000
+    },
+    "BEADY_EYES": {
+      "sell": 25000
+    },
+    "BEATING_HEART": {
+      "sell": 1
+    },
+    "BED": {
+      "sell": 5
+    },
+    "BEGINNER_AGRONOMY_SACK": {
+      "buy": 250
+    },
+    "BEGINNER_COMBAT_SACK": {
+      "buy": 250
+    },
+    "BEGINNER_FISHING_SACK": {
+      "buy": 250
+    },
+    "BEGINNER_HUSBANDRY_SACK": {
+      "buy": 250
+    },
+    "BEHEADED_HORROR": {
+      "sell": 15000
+    },
+    "BEJEWELED_HANDLE": {
+      "sell": 100
+    },
+    "BERRY_THE_FISH": {
+      "sell": 50000
+    },
+    "BERSERKER_BOOTS": {
+      "sell": 129000
+    },
+    "BERSERKER_CHESTPLATE": {
+      "sell": 322250
+    },
+    "BERSERKER_HELMET": {
+      "sell": 130250
+    },
+    "BERSERKER_LEGGINGS": {
+      "sell": 258250
+    },
+    "BEZOS": {
+      "sell": 200
+    },
+    "BIG_SPRING_BOOTS": {
+      "sell": 1
+    },
+    "BIGGER_SPRING_BOOTS": {
+      "sell": 1
+    },
+    "BIOFUEL": {
+      "sell": 10000,
+      "buy": 20000
+    },
+    "BIRCH_DOOR_ITEM": {
+      "sell": 1
+    },
+    "BIRCH_FENCE": {
+      "sell": 1
+    },
+    "BIRCH_FENCE_GATE": {
+      "sell": 1
+    },
+    "BIRCH_FOREST_BIOME_STICK": {
+      "sell": 32
+    },
+    "BIRCH_WOOD_STAIRS": {
+      "sell": 0.5
+    },
+    "BLACK_COFFEE": {
+      "sell": 50,
+      "buy": 50000
+    },
+    "BLADE_OF_THE_VOLCANO": {
+      "sell": 50000
+    },
+    "BLAZE_ASHES": {
+      "sell": 50
+    },
+    "BLAZE_BELT": {
+      "sell": 9265
+    },
+    "BLAZE_BOOTS": {
+      "sell": 460800
+    },
+    "BLAZE_CHESTPLATE": {
+      "sell": 921600
+    },
+    "BLAZE_HAT": {
+      "sell": 20
+    },
+    "BLAZE_HELMET": {
+      "sell": 576000
+    },
+    "BLAZE_LEGGINGS": {
+      "sell": 806400
+    },
+    "BLAZE_POWDER": {
+      "sell": 4,
+      "buy": 12,
+      "stock": 640
+    },
+    "BLAZE_ROD": {
+      "sell": 9,
+      "buy": 50
+    },
+    "BLAZE_ROD_DISTILLATE": {
+      "sell": 5000
+    },
+    "BLAZE_WAX": {
+      "sell": 58600
+    },
+    "BLESSED_BAIT": {
+      "sell": 42
+    },
+    "BLESSED_FRUIT": {
+      "sell": 1,
+      "buy": 1000000
+    },
+    "BLOBFISH_HAT": {
+      "sell": 25
+    },
+    "BLOOD_DONOR_ARTIFACT": {
+      "sell": 10000
+    },
+    "BLOOD_DONOR_RING": {
+      "sell": 2000
+    },
+    "BLOOD_DONOR_TALISMAN": {
+      "sell": 800
+    },
+    "BLOSSOM_BELT": {
+      "sell": 10000
+    },
+    "BLOSSOM_BRACELET": {
+      "sell": 10000
+    },
+    "BLOSSOM_CLOAK": {
+      "sell": 10000
+    },
+    "BLOSSOM_NECKLACE": {
+      "sell": 10000
+    },
+    "BLUE_ICE_HUNK": {
+      "sell": 25000
+    },
+    "BLUE_RING": {
+      "sell": 25000
+    },
+    "BLUE_SHARK_TOOTH": {
+      "sell": 5000
+    },
+    "BOAT": {
+      "sell": 1
+    },
+    "BOB_OMB": {
+      "sell": 1000
+    },
+    "BOBBIN_SCRIPTURES": {
+      "sell": 250000
+    },
+    "BONE": {
+      "sell": 2,
+      "buy": 8,
+      "stock": 640
+    },
+    "BONE_MEAL": {
+      "sell": 0.5
+    },
+    "BONZO_FRAGMENT": {
+      "sell": 10000
+    },
+    "BOOK": {
+      "sell": 12,
+      "buy": 20
+    },
+    "BOOK_AND_QUILL": {
+      "sell": 9
+    },
+    "BOOKSHELF": {
+      "sell": 20
+    },
+    "BOOKWORM_BOOK": {
+      "sell": 10000
+    },
+    "BOSS": {
+      "sell": 1000000
+    },
+    "BOTROOT": {
+      "sell": 50000
+    },
+    "BOTTLE_OF_JYRRE": {
+      "sell": 100
+    },
+    "BOTTLED_MISCHIEF": {
+      "sell": 25000
+    },
+    "BOUNCY_ARROW": {
+      "sell": 1
+    },
+    "BOUNCY_BOOTS": {
+      "sell": 1
+    },
+    "BOUNCY_CHESTPLATE": {
+      "sell": 1
+    },
+    "BOUNCY_HELMET": {
+      "sell": 1
+    },
+    "BOUNCY_LEGGINGS": {
+      "sell": 1
+    },
+    "BOUQUET_OF_LIES": {
+      "sell": 100000
+    },
+    "BOW": {
+      "sell": 9,
+      "buy": 25
+    },
+    "BOWL": {
+      "sell": 0.5
+    },
+    "BOX_OF_SEEDS": {
+      "sell": 76800
+    },
+    "BRAIDED_GRIFFIN_FEATHER": {
+      "sell": 1000000
+    },
+    "BRAIN_FOOD": {
+      "sell": 1000000
+    },
+    "BREAD": {
+      "sell": 3
+    },
+    "BREWING_STAND_ITEM": {
+      "sell": 12,
+      "buy": 30
+    },
+    "BRICK": {
+      "sell": 3
+    },
+    "BRICK_STAIRS": {
+      "sell": 2
+    },
+    "BRIDGE_EGG": {
+      "sell": 10
+    },
+    "BRIMSTONE_HANDLE": {
+      "sell": 25000
+    },
+    "BRITTLE_POWDER": {
+      "sell": 5
+    },
+    "BROKEN_PIGGY_BANK": {
+      "sell": 16000
+    },
+    "BROKEN_RADAR": {
+      "sell": 25000
+    },
+    "BRONZE_BOWL": {
+      "sell": 5000
+    },
+    "BROWN_MUSHROOM": {
+      "sell": 10
+    },
+    "BUBBA_BLISTER": {
+      "sell": 10000
+    },
+    "BUBBLES_OF_AIR": {
+      "sell": 1000
+    },
+    "BUCKET": {
+      "sell": 4
+    },
+    "BUDGET_HOPPER": {
+      "sell": 1200
+    },
+    "BUILDER_ANCIENT_FRUIT": {
+      "sell": 10
+    },
+    "BUILDER_APPALLED_PUMPKIN": {
+      "sell": 10
+    },
+    "BUILDER_APPLE": {
+      "sell": 10
+    },
+    "BUILDER_BANANA_BUNCH": {
+      "sell": 10
+    },
+    "BUILDER_BEETROOT": {
+      "sell": 10
+    },
+    "BUILDER_BERRY": {
+      "sell": 10
+    },
+    "BUILDER_BERRY_BUSH": {
+      "sell": 10
+    },
+    "BUILDER_BLUE_CORN": {
+      "sell": 10
+    },
+    "BUILDER_BROWN_MUSHROOM": {
+      "sell": 10
+    },
+    "BUILDER_BUSH": {
+      "sell": 10
+    },
+    "BUILDER_CACTUS": {
+      "sell": 10
+    },
+    "BUILDER_CHESTO_BERRY": {
+      "sell": 10
+    },
+    "BUILDER_CORN": {
+      "sell": 10
+    },
+    "BUILDER_KIWI": {
+      "sell": 10
+    },
+    "BUILDER_LEMON": {
+      "sell": 10
+    },
+    "BUILDER_LETTUCE": {
+      "sell": 10
+    },
+    "BUILDER_LILAC_FRUIT": {
+      "sell": 10
+    },
+    "BUILDER_MELON": {
+      "sell": 10
+    },
+    "BUILDER_ONION": {
+      "sell": 10
+    },
+    "BUILDER_ORANGE": {
+      "sell": 10
+    },
+    "BUILDER_PINK_BERRY": {
+      "sell": 10
+    },
+    "BULKY_STONE": {
+      "sell": 1
+    },
+    "BURNING_EYE": {
+      "sell": 1000
+    },
+    "BURNING_KUUDRA_CORE": {
+      "sell": 1
+    },
+    "BURNT_TEXTS": {
+      "sell": 1000000
+    },
+    "BURROWING_SPORES": {
+      "sell": 1
+    },
+    "BUSTED_BELT_BUCKLE": {
+      "sell": 10000
+    },
+    "CACTUS": {
+      "sell": 4
+    },
+    "CACTUS_BOOTS": {
+      "sell": 2
+    },
+    "CACTUS_CHESTPLATE": {
+      "sell": 4
+    },
+    "CACTUS_FLOWER": {
+      "sell": 50000
+    },
+    "CACTUS_HELMET": {
+      "sell": 3
+    },
+    "CACTUS_LEGGINGS": {
+      "sell": 3
+    },
+    "CAGED_WISP": {
+      "sell": 5000000
+    },
+    "CAKE": {
+      "sell": 10
+    },
+    "CALCIFIED_HEART": {
+      "sell": 5000
+    },
+    "CAN_OF_WORMS": {
+      "sell": 500
+    },
+    "CANDY_CORN": {
+      "sell": 770
+    },
+    "CANDYCOMB": {
+      "sell": 100
+    },
+    "CANE_KNOT": {
+      "sell": 50000
+    },
+    "CANOPY_BOOTS": {
+      "sell": 10000,
+      "buy": 110000
+    },
+    "CANOPY_CHESTPLATE": {
+      "sell": 10000,
+      "buy": 140000
+    },
+    "CANOPY_HELMET": {
+      "sell": 10000,
+      "buy": 120000
+    },
+    "CANOPY_LEGGINGS": {
+      "sell": 10000,
+      "buy": 130000
+    },
+    "CARPET": {
+      "sell": 1.5
+    },
+    "CARPET:1": {
+      "sell": 1
+    },
+    "CARPET:10": {
+      "sell": 1
+    },
+    "CARPET:11": {
+      "sell": 1
+    },
+    "CARPET:12": {
+      "sell": 1
+    },
+    "CARPET:13": {
+      "sell": 1
+    },
+    "CARPET:14": {
+      "sell": 1
+    },
+    "CARPET:15": {
+      "sell": 1
+    },
+    "CARPET:2": {
+      "sell": 1
+    },
+    "CARPET:3": {
+      "sell": 1
+    },
+    "CARPET:4": {
+      "sell": 1
+    },
+    "CARPET:5": {
+      "sell": 1
+    },
+    "CARPET:6": {
+      "sell": 1
+    },
+    "CARPET:7": {
+      "sell": 1
+    },
+    "CARPET:8": {
+      "sell": 1
+    },
+    "CARPET:9": {
+      "sell": 1
+    },
+    "CARROT_BAIT": {
+      "sell": 7
+    },
+    "CARROT_ITEM": {
+      "sell": 3,
+      "buy": 10
+    },
+    "CARROT_STICK": {
+      "sell": 3
+    },
+    "CARROT_ZEST": {
+      "sell": 50000
+    },
+    "CASTLE_OF_STONE": {
+      "sell": 1
+    },
+    "CAT_TALISMAN": {
+      "sell": 1000
+    },
+    "CATALYST": {
+      "sell": 500
+    },
+    "CAULDRON_ITEM": {
+      "sell": 10
+    },
+    "CELESTE_BOOTS": {
+      "sell": 2000,
+      "buy": 4000
+    },
+    "CELESTE_CHESTPLATE": {
+      "sell": 4000,
+      "buy": 8000
+    },
+    "CELESTE_HELMET": {
+      "sell": 2500,
+      "buy": 5000
+    },
+    "CELESTE_LEGGINGS": {
+      "sell": 3500,
+      "buy": 7000
+    },
+    "CELESTE_WAND": {
+      "sell": 2500,
+      "buy": 5000
+    },
+    "CHAIN_END_TIMES": {
+      "sell": 1000000
+    },
+    "CHAINMAIL_BOOTS": {
+      "sell": 6,
+      "buy": 50
+    },
+    "CHAINMAIL_CHESTPLATE": {
+      "sell": 12,
+      "buy": 100
+    },
+    "CHAINMAIL_HELMET": {
+      "sell": 7,
+      "buy": 50
+    },
+    "CHAINMAIL_LEGGINGS": {
+      "sell": 10,
+      "buy": 75
+    },
+    "CHALLENGE_ROD": {
+      "sell": 5000
+    },
+    "CHAMP_ROD": {
+      "sell": 17800
+    },
+    "CHARCOAL": {
+      "sell": 1
+    },
+    "CHARMINIZER": {
+      "sell": 60000,
+      "buy": 100000
+    },
+    "CHEAP_COFFEE": {
+      "buy": 1000
+    },
+    "CHEESE_FUEL": {
+      "sell": 500
+    },
+    "CHEETAH_TALISMAN": {
+      "sell": 1000
+    },
+    "CHEST": {
+      "sell": 2
+    },
+    "CHICKEN_HEAD": {
+      "sell": 8
+    },
+    "CHILI_PEPPER": {
+      "sell": 5000
+    },
+    "CHILLED_PRISTINE_POTATO": {
+      "buy": 250000
+    },
+    "CHIRPING_STEREO": {
+      "sell": 100000
+    },
+    "CHISEL": {
+      "sell": 1000
+    },
+    "CHOCOLATE_CHIP": {
+      "sell": 10000
+    },
+    "CHUM": {
+      "sell": 5
+    },
+    "CHUM_ROD": {
+      "sell": 750
+    },
+    "CHUM_SINKER": {
+      "sell": 10000
+    },
+    "CHYME": {
+      "sell": 1
+    },
+    "CLAW_FOSSIL": {
+      "sell": 10000
+    },
+    "CLAY": {
+      "sell": 12
+    },
+    "CLAY_BALL": {
+      "sell": 3
+    },
+    "CLAY_BRICK": {
+      "sell": 2
+    },
+    "CLEAVER": {
+      "sell": 8
+    },
+    "CLIPPED_WINGS": {
+      "sell": 25000
+    },
+    "CLOWNFISH_HAT": {
+      "sell": 140
+    },
+    "CLUBBED_FOSSIL": {
+      "sell": 50000
+    },
+    "COAL": {
+      "sell": 1,
+      "buy": 4
+    },
+    "COAL_BLOCK": {
+      "sell": 9
+    },
+    "COAL_ORE": {
+      "sell": 2
+    },
+    "COBBLE_WALL": {
+      "sell": 1
+    },
+    "COBBLESTONE": {
+      "sell": 1,
+      "buy": 3
+    },
+    "COBBLESTONE_STAIRS": {
+      "sell": 1
+    },
+    "COIN_TALISMAN": {
+      "sell": 70
+    },
+    "COLOSSAL_EXP_BOTTLE": {
+      "sell": 5000
+    },
+    "COMPACT_OOZE": {
+      "sell": 500
+    },
+    "COMPACTED_MOONFLOWER": {
+      "sell": 102400
+    },
+    "COMPACTED_SUNFLOWER": {
+      "sell": 102400
+    },
+    "COMPACTED_WILD_ROSE": {
+      "sell": 102400
+    },
+    "COMPACTOR": {
+      "sell": 640
+    },
+    "COMPASS": {
+      "sell": 12
+    },
+    "COMPASS_TALISMAN": {
+      "sell": 85
+    },
+    "COMPOST": {
+      "sell": 4
+    },
+    "CONCENTRATED_STONE": {
+      "sell": 200000
+    },
+    "CONDENSED_FERMENTO": {
+      "sell": 2250000
+    },
+    "CONDENSED_HELIANTHUS": {
+      "sell": 2475000
+    },
+    "CONDENSED_WATER_LILY": {
+      "sell": 256000
+    },
+    "CONJURING_SWORD": {
+      "sell": 2000
+    },
+    "CONNECT_FOUR": {
+      "buy": 2500
+    },
+    "CONSOLE_PANEL": {
+      "sell": 5
+    },
+    "CONTROL_SWITCH": {
+      "sell": 50000
+    },
+    "COOKED_BEEF": {
+      "sell": 4
+    },
+    "COOKED_CHICKEN": {
+      "sell": 4
+    },
+    "COOKED_FISH": {
+      "sell": 8
+    },
+    "COOKED_FISH:1": {
+      "sell": 10
+    },
+    "COOKED_MUTTON": {
+      "sell": 5
+    },
+    "COOKED_RABBIT": {
+      "sell": 4
+    },
+    "COOKIE": {
+      "sell": 0.3
+    },
+    "COPPER": {
+      "sell": 10
+    },
+    "CORLEONITE": {
+      "sell": 50000
+    },
+    "CORNUCOPIA": {
+      "sell": 50000
+    },
+    "CORRUPT_SOIL": {
+      "sell": 69000
+    },
+    "CORRUPTED_BAIT": {
+      "sell": 1
+    },
+    "CORRUPTED_FRAGMENT": {
+      "sell": 1
+    },
+    "CORRUPTED_NETHER_STAR": {
+      "sell": 10000
+    },
+    "COW_HEAD": {
+      "sell": 16
+    },
+    "CRACKED_PIGGY_BANK": {
+      "sell": 16000
+    },
+    "CREEPER_HAT": {
+      "sell": 16
+    },
+    "CREEPER_LEGGINGS": {
+      "sell": 71000
+    },
+    "CRETAN_URN": {
+      "sell": 250000
+    },
+    "CRITTER_BALL": {
+      "sell": 100
+    },
+    "CROCHET_TIGER_PLUSHIE": {
+      "sell": 250000
+    },
+    "CROPIE": {
+      "sell": 25000
+    },
+    "CROPSHOT_GARDEN_CHIP": {
+      "sell": 250000
+    },
+    "CROWN_OF_AVARICE": {
+      "sell": 1000000
+    },
+    "CROWN_OF_AVARICE_CELEBRATION": {
+      "sell": 1000000
+    },
+    "CROWN_OF_GREED": {
+      "sell": 1000000
+    },
+    "CRUDE_GABAGOOL": {
+      "sell": 1
+    },
+    "CRUDE_GABAGOOL_DISTILLATE": {
+      "sell": 5000
+    },
+    "CRUNCHY_BUG": {
+      "sell": 5
+    },
+    "CRYPT_BOW": {
+      "sell": 1
+    },
+    "CRYPT_DREADLORD_SWORD": {
+      "sell": 200
+    },
+    "CRYPT_WITHERLORD_BOOTS": {
+      "sell": 1
+    },
+    "CRYPT_WITHERLORD_CHESTPLATE": {
+      "sell": 1
+    },
+    "CRYPT_WITHERLORD_HELMET": {
+      "sell": 1
+    },
+    "CRYPT_WITHERLORD_LEGGINGS": {
+      "sell": 1
+    },
+    "CRYPT_WITHERLORD_SWORD": {
+      "sell": 500
+    },
+    "CRYSTAL_BOOTS": {
+      "sell": 2000
+    },
+    "CRYSTAL_CHESTPLATE": {
+      "sell": 4000
+    },
+    "CRYSTAL_FRAGMENT": {
+      "sell": 500
+    },
+    "CRYSTAL_HELMET": {
+      "sell": 2500
+    },
+    "CRYSTAL_LEGGINGS": {
+      "sell": 3500
+    },
+    "CRYSTALIZED_MOONLIGHT": {
+      "sell": 50000
+    },
+    "CUP_OF_BLOOD": {
+      "sell": 200
+    },
+    "CUTLASS": {
+      "sell": 1
+    },
+    "DAEDALUS_STICK": {
+      "sell": 1000000
+    },
+    "DANGER_3_PORTAL": {
+      "sell": 100
+    },
+    "DANGER_3_TRAVEL_SCROLL": {
+      "sell": 100
+    },
+    "DARK_BAIT": {
+      "sell": 8
+    },
+    "DARK_GOGGLES": {
+      "sell": 1,
+      "buy": 80000
+    },
+    "DARK_OAK_DOOR_ITEM": {
+      "sell": 1
+    },
+    "DARK_OAK_FENCE": {
+      "sell": 1
+    },
+    "DARK_OAK_FENCE_GATE": {
+      "sell": 1
+    },
+    "DARK_OAK_STAIRS": {
+      "sell": 0.5
+    },
+    "DARK_ORB": {
+      "sell": 1
+    },
+    "DARK_QUEENS_SOUL_DROP": {
+      "sell": 5000
+    },
+    "DASHING_BOOTS": {
+      "sell": 1000
+    },
+    "DAY_CRYSTAL": {
+      "sell": 52000
+    },
+    "DAY_SAVER": {
+      "sell": 35
+    },
+    "DAYLIGHT_DETECTOR": {
+      "sell": 9,
+      "buy": 18
+    },
+    "DAYSWITCH": {
+      "sell": 20480
+    },
+    "DEAD_BUSH": {
+      "sell": 2
+    },
+    "DEAD_PLANT": {
+      "sell": 500
+    },
+    "DEATH_BOW": {
+      "sell": 1000,
+      "buy": 5000000
+    },
+    "DECAYED_BAT": {
+      "sell": 1
+    },
+    "DECENT_AXE": {
+      "buy": 1000000
+    },
+    "DECENT_BOW": {
+      "sell": 99,
+      "buy": 500
+    },
+    "DECENT_COFFEE": {
+      "buy": 5000
+    },
+    "DEEP_OCEAN_BIOME_STICK": {
+      "sell": 150
+    },
+    "DEEP_ROOT": {
+      "sell": 200
+    },
+    "DEEP_SEA_ORB": {
+      "sell": 1
+    },
+    "DEEPFRIES": {
+      "sell": 50000
+    },
+    "DEFUSE_KIT": {
+      "sell": 1
+    },
+    "DELIRIUM_NECKLACE": {
+      "sell": 52000
+    },
+    "DESERT_BIOME_STICK": {
+      "sell": 64
+    },
+    "DESIGNER_COFFEE_BEANS": {
+      "sell": 50000
+    },
+    "DETECTIVE_WALLET": {
+      "sell": 500000
+    },
+    "DETECTOR_RAIL": {
+      "sell": 2
+    },
+    "DIAMOND": {
+      "sell": 8
+    },
+    "DIAMOND_ATOM": {
+      "sell": 1
+    },
+    "DIAMOND_AXE": {
+      "sell": 12
+    },
+    "DIAMOND_BARDING": {
+      "sell": 1000
+    },
+    "DIAMOND_BLOCK": {
+      "sell": 72
+    },
+    "DIAMOND_BOOTS": {
+      "sell": 16,
+      "buy": 320
+    },
+    "DIAMOND_CHESTPLATE": {
+      "sell": 32,
+      "buy": 440
+    },
+    "DIAMOND_HELMET": {
+      "sell": 20,
+      "buy": 350
+    },
+    "DIAMOND_HOE": {
+      "sell": 8
+    },
+    "DIAMOND_LEGGINGS": {
+      "sell": 28,
+      "buy": 400
+    },
+    "DIAMOND_ORE": {
+      "sell": 10
+    },
+    "DIAMOND_PICKAXE": {
+      "sell": 12
+    },
+    "DIAMOND_REFINERY": {
+      "sell": 1300
+    },
+    "DIAMOND_SPADE": {
+      "sell": 4
+    },
+    "DIAMOND_SPREADING": {
+      "sell": 640
+    },
+    "DIAMOND_SWORD": {
+      "sell": 8,
+      "buy": 60
+    },
+    "DIAMONITE": {
+      "sell": 64000
+    },
+    "DIGESTED_MUSHROOMS": {
+      "sell": 50
+    },
+    "DIODE": {
+      "sell": 3,
+      "buy": 6
+    },
+    "DIRT": {
+      "sell": 1
+    },
+    "DIRT_BOTTLE": {
+      "sell": 1,
+      "buy": 100000
+    },
+    "DIRT:1": {
+      "sell": 1
+    },
+    "DIRT:2": {
+      "sell": 5,
+      "buy": 10
+    },
+    "DIRTY_FINGERNAILS": {
+      "sell": 5
+    },
+    "DISPENSER": {
+      "sell": 8
+    },
+    "DISTANT_ECHO": {
+      "sell": 1000000
+    },
+    "DIVAN_FRAGMENT": {
+      "sell": 200000
+    },
+    "DIVER_BOOTS": {
+      "sell": 10000
+    },
+    "DIVER_CHESTPLATE": {
+      "sell": 20000
+    },
+    "DIVER_FRAGMENT": {
+      "sell": 50000
+    },
+    "DIVER_HELMET": {
+      "sell": 10000
+    },
+    "DIVER_LEGGINGS": {
+      "sell": 15000
+    },
+    "DOUBLE_PLANT": {
+      "sell": 4
+    },
+    "DOUBLE_PLANT:1": {
+      "sell": 1
+    },
+    "DOUBLE_PLANT:2": {
+      "sell": 1
+    },
+    "DOUBLE_PLANT:3": {
+      "sell": 1
+    },
+    "DOUBLE_PLANT:4": {
+      "sell": 1
+    },
+    "DOUBLE_PLANT:5": {
+      "sell": 1
+    },
+    "DR_PAPER": {
+      "buy": 4000
+    },
+    "DRACONIC_BLADE": {
+      "sell": 100000
+    },
+    "DRAGON_CLAW": {
+      "sell": 1
+    },
+    "DRAGON_HORN": {
+      "sell": 1
+    },
+    "DRAGON_SCALE": {
+      "sell": 1
+    },
+    "DRAGONFADE_CLOAK": {
+      "sell": 5000
+    },
+    "DRAGONFUSE_GLOVE": {
+      "sell": 5000
+    },
+    "DRILL_ENGINE": {
+      "sell": 5884
+    },
+    "DROPPER": {
+      "sell": 4
+    },
+    "DUNG": {
+      "sell": 100
+    },
+    "DUNGEON_BOSS_KEY": {
+      "sell": 1
+    },
+    "DUNGEON_CHEST_KEY": {
+      "sell": 5000
+    },
+    "DUNGEON_DECOY": {
+      "sell": 500
+    },
+    "DUNGEON_DISC_1": {
+      "sell": 1
+    },
+    "DUNGEON_DISC_2": {
+      "sell": 1
+    },
+    "DUNGEON_DISC_3": {
+      "sell": 1
+    },
+    "DUNGEON_DISC_4": {
+      "sell": 1
+    },
+    "DUNGEON_DISC_5": {
+      "sell": 1
+    },
+    "DUNGEON_GOLDEN_KEY": {
+      "sell": 1
+    },
+    "DUNGEON_HAMMER": {
+      "sell": 1
+    },
+    "DUNGEON_LORE_DIARY": {
+      "sell": 1
+    },
+    "DUNGEON_LORE_PAPER": {
+      "sell": 1
+    },
+    "DUNGEON_NORMAL_KEY": {
+      "sell": 1
+    },
+    "DUNGEON_RED_SUPPORT_ORB": {
+      "sell": 1
+    },
+    "DUNGEON_TRAP": {
+      "sell": 500
+    },
+    "DWARF_TURTLE_SHELMET": {
+      "sell": 250000
+    },
+    "DWARVEN_COMPACTOR": {
+      "sell": 100000
+    },
+    "DWARVEN_HANDWARMERS": {
+      "sell": 2500
+    },
+    "DWARVEN_TANKARD": {
+      "sell": 10
+    },
+    "EARTH_SHARD": {
+      "sell": 123
+    },
+    "ECCENTRIC_PAINTING": {
+      "sell": 1
+    },
+    "ECCENTRIC_PAINTING_BUNDLE": {
+      "sell": 9
+    },
+    "ECTOPLASM": {
+      "sell": 10000
+    },
+    "EDIBLE_SEAWEED": {
+      "sell": 50000
+    },
+    "EFFICIENT_AXE": {
+      "sell": 25,
+      "buy": 100
+    },
+    "EGG": {
+      "sell": 3,
+      "buy": 10
+    },
+    "EGG_HUNT": {
+      "buy": 500
+    },
+    "ELECTRIC_WAND_ITEM": {
+      "sell": 1
+    },
+    "ELECTRON_TRANSMITTER": {
+      "sell": 50000
+    },
+    "EMBER_BOOTS": {
+      "sell": 1000
+    },
+    "EMBER_CHESTPLATE": {
+      "sell": 1000
+    },
+    "EMBER_HELMET": {
+      "sell": 1000
+    },
+    "EMBER_LEGGINGS": {
+      "sell": 1000
+    },
+    "EMBER_ROD": {
+      "sell": 1000
+    },
+    "EMERALD": {
+      "sell": 4
+    },
+    "EMERALD_ARMOR_BOOTS": {
+      "sell": 310000
+    },
+    "EMERALD_ARMOR_CHESTPLATE": {
+      "sell": 615000
+    },
+    "EMERALD_ARMOR_HELMET": {
+      "sell": 384000
+    },
+    "EMERALD_ARMOR_LEGGINGS": {
+      "sell": 540000
+    },
+    "EMERALD_ARTIFACT": {
+      "sell": 7600
+    },
+    "EMERALD_BLADE": {
+      "sell": 153000
+    },
+    "EMERALD_BLOCK": {
+      "sell": 36
+    },
+    "EMERALD_ORE": {
+      "sell": 8
+    },
+    "EMERALD_RING": {
+      "sell": 7600
+    },
+    "EMERALD_TIPPED_ARROW": {
+      "sell": 1
+    },
+    "EMPEROR_ARTIFACT": {
+      "sell": 8100
+    },
+    "EMPEROR_RING": {
+      "sell": 900
+    },
+    "EMPEROR_TALISMAN": {
+      "sell": 100
+    },
+    "EMPTY_CHUM_BUCKET": {
+      "buy": 2000
+    },
+    "EMPTY_MAP": {
+      "sell": 25
+    },
+    "ENCHANTED_ACACIA_LOG": {
+      "sell": 320
+    },
+    "ENCHANTED_ANCIENT_CLAW": {
+      "sell": 32000
+    },
+    "ENCHANTED_BAKED_POTATO": {
+      "sell": 76800
+    },
+    "ENCHANTED_BIRCH_LOG": {
+      "sell": 320
+    },
+    "ENCHANTED_BLAZE_POWDER": {
+      "sell": 1440
+    },
+    "ENCHANTED_BLAZE_ROD": {
+      "sell": 230400
+    },
+    "ENCHANTED_BONE": {
+      "sell": 320
+    },
+    "ENCHANTED_BONE_BLOCK": {
+      "sell": 51200
+    },
+    "ENCHANTED_BONE_MEAL": {
+      "sell": 1,
+      "buy": 2
+    },
+    "ENCHANTED_BOOK_BUNDLE_CHIMERA": {
+      "sell": 10000
+    },
+    "ENCHANTED_BOOK_BUNDLE_POWER": {
+      "sell": 10000
+    },
+    "ENCHANTED_BOOK_BUNDLE_PRISMATIC": {
+      "sell": 10000
+    },
+    "ENCHANTED_BOOK_BUNDLE_QUANTUM": {
+      "sell": 15000
+    },
+    "ENCHANTED_BOOK_BUNDLE_RAINBOW": {
+      "sell": 10000
+    },
+    "ENCHANTED_BOOK_BUNDLE_SMALL_BRAIN": {
+      "sell": 10000
+    },
+    "ENCHANTED_BOOK_BUNDLE_THE_ONE": {
+      "sell": 90000
+    },
+    "ENCHANTED_BOOK_BUNDLE_TRANSYLVANIAN": {
+      "sell": 1000
+    },
+    "ENCHANTED_BOOKSHELF": {
+      "sell": 2700
+    },
+    "ENCHANTED_BREAD": {
+      "sell": 60
+    },
+    "ENCHANTED_BROWN_MUSHROOM": {
+      "sell": 1600
+    },
+    "ENCHANTED_CACTUS": {
+      "sell": 102400
+    },
+    "ENCHANTED_CACTUS_GREEN": {
+      "sell": 640
+    },
+    "ENCHANTED_CAKE": {
+      "sell": 2700
+    },
+    "ENCHANTED_CARROT": {
+      "sell": 480
+    },
+    "ENCHANTED_CARROT_ON_A_STICK": {
+      "sell": 10300
+    },
+    "ENCHANTED_CARROT_STICK": {
+      "sell": 10240
+    },
+    "ENCHANTED_CHARCOAL": {
+      "sell": 192
+    },
+    "ENCHANTED_CLAY_BALL": {
+      "sell": 480
+    },
+    "ENCHANTED_CLAY_BLOCK": {
+      "sell": 76800
+    },
+    "ENCHANTED_CLOCK": {
+      "sell": 205000
+    },
+    "ENCHANTED_CLOWNFISH": {
+      "sell": 3200
+    },
+    "ENCHANTED_COAL": {
+      "sell": 160
+    },
+    "ENCHANTED_COAL_BLOCK": {
+      "sell": 25600
+    },
+    "ENCHANTED_COBBLESTONE": {
+      "sell": 160
+    },
+    "ENCHANTED_COCOA": {
+      "sell": 480
+    },
+    "ENCHANTED_COMPOST": {
+      "sell": 10
+    },
+    "ENCHANTED_COOKED_BEEF": {
+      "sell": 102400
+    },
+    "ENCHANTED_COOKED_FISH": {
+      "sell": 150000
+    },
+    "ENCHANTED_COOKED_MUTTON": {
+      "sell": 128000
+    },
+    "ENCHANTED_COOKED_RABBIT": {
+      "sell": 102400
+    },
+    "ENCHANTED_COOKED_SALMON": {
+      "sell": 256000
+    },
+    "ENCHANTED_COOKIE": {
+      "sell": 76800
+    },
+    "ENCHANTED_DANDELION": {
+      "sell": 160
+    },
+    "ENCHANTED_DARK_OAK_LOG": {
+      "sell": 320
+    },
+    "ENCHANTED_DIAMOND": {
+      "sell": 1280
+    },
+    "ENCHANTED_DIAMOND_BLOCK": {
+      "sell": 204800
+    },
+    "ENCHANTED_EGG": {
+      "sell": 432
+    },
+    "ENCHANTED_EMERALD": {
+      "sell": 640
+    },
+    "ENCHANTED_EMERALD_BLOCK": {
+      "sell": 102400
+    },
+    "ENCHANTED_ENDER_PEARL": {
+      "sell": 140
+    },
+    "ENCHANTED_ENDSTONE": {
+      "sell": 320
+    },
+    "ENCHANTED_EYE_OF_ENDER": {
+      "sell": 3520
+    },
+    "ENCHANTED_FEATHER": {
+      "sell": 480
+    },
+    "ENCHANTED_FERMENTED_SPIDER_EYE": {
+      "sell": 31000
+    },
+    "ENCHANTED_FIG_LOG": {
+      "sell": 1280
+    },
+    "ENCHANTED_FIREWORK_ROCKET": {
+      "sell": 41000
+    },
+    "ENCHANTED_FISH:2": {
+      "sell": 3200
+    },
+    "ENCHANTED_FLINT": {
+      "sell": 640
+    },
+    "ENCHANTED_GHAST_TEAR": {
+      "sell": 80
+    },
+    "ENCHANTED_GLACITE": {
+      "sell": 1920
+    },
+    "ENCHANTED_GLISTERING_MELON": {
+      "sell": 1000
+    },
+    "ENCHANTED_GLOWSTONE": {
+      "sell": 51200
+    },
+    "ENCHANTED_GLOWSTONE_DUST": {
+      "sell": 320
+    },
+    "ENCHANTED_GOLD": {
+      "sell": 480
+    },
+    "ENCHANTED_GOLD_BLOCK": {
+      "sell": 76800
+    },
+    "ENCHANTED_GOLDEN_CARROT": {
+      "sell": 76800
+    },
+    "ENCHANTED_GRILLED_PORK": {
+      "sell": 128000
+    },
+    "ENCHANTED_GUNPOWDER": {
+      "sell": 640
+    },
+    "ENCHANTED_HARD_STONE": {
+      "sell": 576
+    },
+    "ENCHANTED_HAY_BALE": {
+      "sell": 153600
+    },
+    "ENCHANTED_HELIX_LOG": {
+      "sell": 3200
+    },
+    "ENCHANTED_HONEYCOMB": {
+      "sell": 16000
+    },
+    "ENCHANTED_HONEYCOMB_BLOCK": {
+      "sell": 512000
+    },
+    "ENCHANTED_HOPPER": {
+      "sell": 192000
+    },
+    "ENCHANTED_HUGE_MUSHROOM_1": {
+      "sell": 256000
+    },
+    "ENCHANTED_HUGE_MUSHROOM_2": {
+      "sell": 256000
+    },
+    "ENCHANTED_ICE": {
+      "sell": 80
+    },
+    "ENCHANTED_INK_SACK": {
+      "sell": 160
+    },
+    "ENCHANTED_IRON": {
+      "sell": 320
+    },
+    "ENCHANTED_IRON_BLOCK": {
+      "sell": 51200
+    },
+    "ENCHANTED_JACK_O_LANTERN": {
+      "sell": 82000
+    },
+    "ENCHANTED_JUNGLE_LOG": {
+      "sell": 320
+    },
+    "ENCHANTED_LAPIS_LAZULI": {
+      "sell": 160
+    },
+    "ENCHANTED_LAPIS_LAZULI_BLOCK": {
+      "sell": 25600
+    },
+    "ENCHANTED_LAVA_BUCKET": {
+      "sell": 50000
+    },
+    "ENCHANTED_LEATHER": {
+      "sell": 480
+    },
+    "ENCHANTED_LUSH_BERBERIS": {
+      "sell": 480
+    },
+    "ENCHANTED_MAGMA_CREAM": {
+      "sell": 1280
+    },
+    "ENCHANTED_MANGROVE_LOG": {
+      "sell": 2240
+    },
+    "ENCHANTED_MELON": {
+      "sell": 320
+    },
+    "ENCHANTED_MELON_BLOCK": {
+      "sell": 51200
+    },
+    "ENCHANTED_MITHRIL": {
+      "sell": 1280
+    },
+    "ENCHANTED_MOONFLOWER": {
+      "sell": 640
+    },
+    "ENCHANTED_MUSHROOM_SOUP": {
+      "sell": 82000
+    },
+    "ENCHANTED_MUTTON": {
+      "sell": 800
+    },
+    "ENCHANTED_MYCELIUM": {
+      "sell": 800
+    },
+    "ENCHANTED_MYCELIUM_CUBE": {
+      "sell": 128000
+    },
+    "ENCHANTED_NETHER_STALK": {
+      "sell": 640
+    },
+    "ENCHANTED_NETHERRACK": {
+      "sell": 160
+    },
+    "ENCHANTED_OAK_LOG": {
+      "sell": 320
+    },
+    "ENCHANTED_OBSIDIAN": {
+      "sell": 1440
+    },
+    "ENCHANTED_PACKED_ICE": {
+      "sell": 12800
+    },
+    "ENCHANTED_PAPER": {
+      "sell": 384
+    },
+    "ENCHANTED_POISONOUS_POTATO": {
+      "sell": 1600
+    },
+    "ENCHANTED_POPPY": {
+      "sell": 576
+    },
+    "ENCHANTED_PORK": {
+      "sell": 800
+    },
+    "ENCHANTED_POTATO": {
+      "sell": 480
+    },
+    "ENCHANTED_PRISMARINE_CRYSTALS": {
+      "sell": 400
+    },
+    "ENCHANTED_PRISMARINE_SHARD": {
+      "sell": 400
+    },
+    "ENCHANTED_PUFFERFISH": {
+      "sell": 2400
+    },
+    "ENCHANTED_PUMPKIN": {
+      "sell": 1600
+    },
+    "ENCHANTED_QUARTZ": {
+      "sell": 640
+    },
+    "ENCHANTED_QUARTZ_BLOCK": {
+      "sell": 102400
+    },
+    "ENCHANTED_RABBIT": {
+      "sell": 640
+    },
+    "ENCHANTED_RABBIT_FOOT": {
+      "sell": 800
+    },
+    "ENCHANTED_RABBIT_HIDE": {
+      "sell": 800
+    },
+    "ENCHANTED_RAW_BEEF": {
+      "sell": 640
+    },
+    "ENCHANTED_RAW_CHICKEN": {
+      "sell": 640
+    },
+    "ENCHANTED_RAW_FISH": {
+      "sell": 960
+    },
+    "ENCHANTED_RAW_SALMON": {
+      "sell": 1600
+    },
+    "ENCHANTED_RED_MUSHROOM": {
+      "sell": 1600
+    },
+    "ENCHANTED_RED_SAND": {
+      "sell": 800
+    },
+    "ENCHANTED_RED_SAND_CUBE": {
+      "sell": 128000
+    },
+    "ENCHANTED_REDSTONE": {
+      "sell": 160
+    },
+    "ENCHANTED_REDSTONE_BLOCK": {
+      "sell": 25600
+    },
+    "ENCHANTED_REDSTONE_LAMP": {
+      "sell": 30720
+    },
+    "ENCHANTED_ROTTEN_FLESH": {
+      "sell": 320
+    },
+    "ENCHANTED_RUBY_VEILSHROOM": {
+      "sell": 800
+    },
+    "ENCHANTED_SAND": {
+      "sell": 320
+    },
+    "ENCHANTED_SEA_LUMIES": {
+      "sell": 480
+    },
+    "ENCHANTED_SEEDS": {
+      "sell": 480
+    },
+    "ENCHANTED_SHARK_FIN": {
+      "sell": 32000
+    },
+    "ENCHANTED_SLIME_BALL": {
+      "sell": 800
+    },
+    "ENCHANTED_SLIME_BLOCK": {
+      "sell": 128000
+    },
+    "ENCHANTED_SNOW_BLOCK": {
+      "sell": 600
+    },
+    "ENCHANTED_SPIDER_EYE": {
+      "sell": 480
+    },
+    "ENCHANTED_SPONGE": {
+      "sell": 2000
+    },
+    "ENCHANTED_SPRUCE_LOG": {
+      "sell": 320
+    },
+    "ENCHANTED_STRING": {
+      "sell": 576
+    },
+    "ENCHANTED_SUGAR": {
+      "sell": 640
+    },
+    "ENCHANTED_SUGAR_CANE": {
+      "sell": 102400
+    },
+    "ENCHANTED_SULPHUR": {
+      "sell": 1600
+    },
+    "ENCHANTED_SULPHUR_CUBE": {
+      "sell": 256000
+    },
+    "ENCHANTED_SUNFLOWER": {
+      "sell": 640
+    },
+    "ENCHANTED_TENDER_WOOD": {
+      "sell": 32000
+    },
+    "ENCHANTED_TITANIUM": {
+      "sell": 3200
+    },
+    "ENCHANTED_TUNGSTEN": {
+      "sell": 1600
+    },
+    "ENCHANTED_UMBER": {
+      "sell": 1600
+    },
+    "ENCHANTED_VINESAP": {
+      "sell": 32000
+    },
+    "ENCHANTED_WATER_LILY": {
+      "sell": 1600
+    },
+    "ENCHANTED_WET_SPONGE": {
+      "sell": 80000
+    },
+    "ENCHANTED_WHEAT": {
+      "sell": 960
+    },
+    "ENCHANTED_WILD_ROSE": {
+      "sell": 640
+    },
+    "ENCHANTED_WOOL": {
+      "sell": 320
+    },
+    "ENCHANTMENT_TABLE": {
+      "sell": 40
+    },
+    "END_BIOME_STICK": {
+      "sell": 64
+    },
+    "END_BOOTS": {
+      "sell": 10000
+    },
+    "END_CHESTPLATE": {
+      "sell": 10000
+    },
+    "END_HELMET": {
+      "sell": 10000
+    },
+    "END_LEGGINGS": {
+      "sell": 10000
+    },
+    "END_PORTAL_FUMES_MIXIN": {
+      "buy": 150000
+    },
+    "END_STONE_BOW": {
+      "sell": 2500
+    },
+    "END_STONE_SHULKER": {
+      "sell": 1
+    },
+    "END_STONE_SWORD": {
+      "sell": 20480
+    },
+    "END_SWORD": {
+      "sell": 10,
+      "buy": 150
+    },
+    "ENDER_BELT": {
+      "sell": 10000
+    },
+    "ENDER_BOW": {
+      "sell": 1100
+    },
+    "ENDER_CHEST": {
+      "sell": 55
+    },
+    "ENDER_CLOAK": {
+      "sell": 10000
+    },
+    "ENDER_GAUNTLET": {
+      "sell": 10000
+    },
+    "ENDER_MONOCLE": {
+      "sell": 1
+    },
+    "ENDER_NECKLACE": {
+      "sell": 10000
+    },
+    "ENDER_PEARL": {
+      "sell": 7
+    },
+    "ENDER_STONE": {
+      "sell": 2
+    },
+    "ENDERMAN_CORTEX_REWRITER": {
+      "sell": 80000
+    },
+    "ENDERMAN_HAT": {
+      "sell": 50
+    },
+    "ENDERMAN_MASK": {
+      "sell": 10
+    },
+    "ENDSTONE_GEODE": {
+      "sell": 1
+    },
+    "ENDSTONE_IDOL": {
+      "sell": 1000000
+    },
+    "ENDSTONE_ROSE": {
+      "sell": 3000
+    },
+    "ENRAGER": {
+      "sell": 100000
+    },
+    "ENSNARED_SNAIL": {
+      "sell": 1000000
+    },
+    "ETERNAL_CRYSTAL": {
+      "sell": 105000
+    },
+    "ETERNAL_FLAME_RING": {
+      "sell": 10000
+    },
+    "ETHEREAL_VINE": {
+      "sell": 20000
+    },
+    "ETHERWARP_MERGER": {
+      "sell": 100000
+    },
+    "EVERBURNING_FLAME": {
+      "sell": 159855
+    },
+    "EVERGREEN_GARDEN_CHIP": {
+      "sell": 150000
+    },
+    "EXALTED_LUSHLILAC_BONBON": {
+      "sell": 1280
+    },
+    "EXP_BOTTLE": {
+      "sell": 5,
+      "buy": 30
+    },
+    "EXPERIENCE_ARTIFACT": {
+      "sell": 115000
+    },
+    "EXPLOSIVE_ARROW": {
+      "sell": 1
+    },
+    "EXPLOSIVE_BOW": {
+      "sell": 62000
+    },
+    "EXPLOSIVE_MINECART": {
+      "sell": 22
+    },
+    "EXPLOSIVE_SHOT_ABILITY": {
+      "sell": 1
+    },
+    "EXPORTABLE_CARROTS": {
+      "sell": 20
+    },
+    "EXTREMELY_MILD_ADHESIVE": {
+      "sell": 25000
+    },
+    "EYE_OF_ENDER": {
+      "sell": 15
+    },
+    "FAIRY_BOOTS": {
+      "sell": 420
+    },
+    "FAIRY_CHESTPLATE": {
+      "sell": 420
+    },
+    "FAIRY_HELMET": {
+      "sell": 420
+    },
+    "FAIRY_LEGGINGS": {
+      "sell": 420
+    },
+    "FAKE_HEALTH_POT": {
+      "sell": 1
+    },
+    "FALLEN_STAR_BOOTS": {
+      "sell": 500
+    },
+    "FALLEN_STAR_CHESTPLATE": {
+      "sell": 1000
+    },
+    "FALLEN_STAR_HAT": {
+      "sell": 500
+    },
+    "FALLEN_STAR_LEGGINGS": {
+      "sell": 1000
+    },
+    "FAMILY_DOUBLOON": {
+      "sell": 100000
+    },
+    "FANCY_SWORD": {
+      "sell": 50,
+      "buy": 80
+    },
+    "FARM_ARMOR_BOOTS": {
+      "sell": 2500
+    },
+    "FARM_ARMOR_CHESTPLATE": {
+      "sell": 5200
+    },
+    "FARM_ARMOR_HELMET": {
+      "sell": 3200
+    },
+    "FARM_ARMOR_LEGGINGS": {
+      "sell": 4500
+    },
+    "FARM_SUIT_BOOTS": {
+      "sell": 20
+    },
+    "FARM_SUIT_CHESTPLATE": {
+      "sell": 40
+    },
+    "FARM_SUIT_HELMET": {
+      "sell": 25
+    },
+    "FARM_SUIT_LEGGINGS": {
+      "sell": 32
+    },
+    "FARMER_BOOTS": {
+      "sell": 163840
+    },
+    "FARMER_ORB": {
+      "sell": 480
+    },
+    "FARMER_ROD": {
+      "sell": 1050
+    },
+    "FARMING_TALISMAN": {
+      "sell": 25
+    },
+    "FATEFUL_STINGER": {
+      "sell": 1000000
+    },
+    "FEASTFUNGUS": {
+      "sell": 50000
+    },
+    "FEATHER": {
+      "sell": 3,
+      "buy": 10
+    },
+    "FEATHER_ARTIFACT": {
+      "sell": 32000
+    },
+    "FEATHER_RING": {
+      "sell": 1800
+    },
+    "FEATHER_TALISMAN": {
+      "sell": 160
+    },
+    "FEL_PEARL": {
+      "sell": 10000
+    },
+    "FEL_SWORD": {
+      "sell": 20000
+    },
+    "FENCE": {
+      "sell": 1
+    },
+    "FENCE_GATE": {
+      "sell": 1
+    },
+    "FERMENTED_SPIDER_EYE": {
+      "sell": 10
+    },
+    "FERMENTO": {
+      "sell": 250000
+    },
+    "FERTILIZER": {
+      "sell": 4
+    },
+    "FESTERING_FLY": {
+      "sell": 5
+    },
+    "FESTERING_MAGGOT": {
+      "sell": 250000
+    },
+    "FESTIVE_SINKER": {
+      "buy": 50000
+    },
+    "FIERY_KUUDRA_CORE": {
+      "sell": 1
+    },
+    "FIG_BOOTS": {
+      "sell": 4480
+    },
+    "FIG_CHESTPLATE": {
+      "sell": 8960
+    },
+    "FIG_HELMET": {
+      "sell": 5600
+    },
+    "FIG_LEGGINGS": {
+      "sell": 7840
+    },
+    "FIG_LOG": {
+      "sell": 8
+    },
+    "FIGSTONE": {
+      "sell": 204800
+    },
+    "FIGSTONE_AXE": {
+      "sell": 480
+    },
+    "FILET_O_FORTUNE": {
+      "buy": 100000
+    },
+    "FILLED_ROSEWATER_FLASK": {
+      "sell": 400000
+    },
+    "FINE_AMBER_GEM": {
+      "sell": 19200
+    },
+    "FINE_AMETHYST_GEM": {
+      "sell": 19200
+    },
+    "FINE_AQUAMARINE_GEM": {
+      "sell": 25600
+    },
+    "FINE_CITRINE_GEM": {
+      "sell": 25600
+    },
+    "FINE_FLOUR": {
+      "sell": 500
+    },
+    "FINE_JADE_GEM": {
+      "sell": 19200
+    },
+    "FINE_JASPER_GEM": {
+      "sell": 25600
+    },
+    "FINE_ONYX_GEM": {
+      "sell": 25600
+    },
+    "FINE_OPAL_GEM": {
+      "sell": 19200
+    },
+    "FINE_PERIDOT_GEM": {
+      "sell": 25600
+    },
+    "FINE_RUBY_GEM": {
+      "sell": 19200
+    },
+    "FINE_SAPPHIRE_GEM": {
+      "sell": 19200
+    },
+    "FINE_TOPAZ_GEM": {
+      "sell": 19200
+    },
+    "FINWAVE_BELT": {
+      "sell": 9000
+    },
+    "FINWAVE_CLOAK": {
+      "sell": 9000
+    },
+    "FINWAVE_GLOVES": {
+      "sell": 9000
+    },
+    "FIRE_FLOWER_TOOL": {
+      "sell": 50
+    },
+    "FIRE_FREEZE_STAFF": {
+      "sell": 1750
+    },
+    "FIRE_FURY_STAFF": {
+      "sell": 250000
+    },
+    "FIRE_IN_A_BOTTLE": {
+      "sell": 100000
+    },
+    "FIRE_STONE": {
+      "sell": 2000
+    },
+    "FIRE_TALISMAN": {
+      "sell": 6480
+    },
+    "FIRE_VEIL_WAND": {
+      "sell": 5000
+    },
+    "FIREWORK": {
+      "sell": 2
+    },
+    "FIREWORK_CHARGE": {
+      "sell": 3
+    },
+    "FIREWORK_ROCKET": {
+      "sell": 2
+    },
+    "FISH_AFFINITY_TALISMAN": {
+      "sell": 1000
+    },
+    "FISH_BAIT": {
+      "sell": 20
+    },
+    "FISH_FOOD": {
+      "sell": 1
+    },
+    "FISH_HAT": {
+      "sell": 24
+    },
+    "FISH_THE_FISH": {
+      "sell": 50000
+    },
+    "FISHING_ROD": {
+      "sell": 2,
+      "buy": 50
+    },
+    "FISHY_TREAT": {
+      "sell": 500
+    },
+    "FLAMES": {
+      "sell": 200
+    },
+    "FLAMING_CHESTPLATE": {
+      "sell": 25000
+    },
+    "FLAMING_FIST": {
+      "sell": 12750
+    },
+    "FLAMING_HEART": {
+      "sell": 200
+    },
+    "FLAMING_SWORD": {
+      "sell": 20
+    },
+    "FLAWED_AMBER_GEM": {
+      "sell": 240
+    },
+    "FLAWED_AMETHYST_GEM": {
+      "sell": 240
+    },
+    "FLAWED_AQUAMARINE_GEM": {
+      "sell": 320
+    },
+    "FLAWED_CITRINE_GEM": {
+      "sell": 320
+    },
+    "FLAWED_JADE_GEM": {
+      "sell": 240
+    },
+    "FLAWED_JASPER_GEM": {
+      "sell": 320
+    },
+    "FLAWED_ONYX_GEM": {
+      "sell": 320
+    },
+    "FLAWED_OPAL_GEM": {
+      "sell": 240
+    },
+    "FLAWED_PERIDOT_GEM": {
+      "sell": 320
+    },
+    "FLAWED_RUBY_GEM": {
+      "sell": 240
+    },
+    "FLAWED_SAPPHIRE_GEM": {
+      "sell": 240
+    },
+    "FLAWED_TOPAZ_GEM": {
+      "sell": 240
+    },
+    "FLINT": {
+      "sell": 4,
+      "buy": 6
+    },
+    "FLINT_AND_STEEL": {
+      "sell": 7
+    },
+    "FLINT_SHOVEL": {
+      "sell": 20
+    },
+    "FLORAL_GELATIN": {
+      "sell": 50000
+    },
+    "FLOWER_OF_TRUTH": {
+      "sell": 100000
+    },
+    "FLOWERING_BOUQUET": {
+      "sell": 1
+    },
+    "FLY_SWATTER": {
+      "sell": 500000
+    },
+    "FOOTPRINT_FOSSIL": {
+      "sell": 50000
+    },
+    "FORAGING_WISDOM_BOOSTER": {
+      "sell": 25000
+    },
+    "FORAGING_WISDOM_BOOSTER_UNCOMMON": {
+      "sell": 25000
+    },
+    "FOREST_BIOME_STICK": {
+      "sell": 32
+    },
+    "FOUL_FLESH": {
+      "sell": 25000
+    },
+    "FRACTURED_MITHRIL_PICKAXE": {
+      "sell": 500,
+      "buy": 10000
+    },
+    "FREE_WILL": {
+      "sell": 10000
+    },
+    "FRIED_FEATHER": {
+      "sell": 1000
+    },
+    "FROG_LEGS": {
+      "sell": 5
+    },
+    "FROZEN_AMULET": {
+      "sell": 5000
+    },
+    "FROZEN_BAIT": {
+      "sell": 10
+    },
+    "FROZEN_BAUBLE": {
+      "sell": 1
+    },
+    "FROZEN_BLAZE_BOOTS": {
+      "sell": 460800
+    },
+    "FROZEN_BLAZE_CHESTPLATE": {
+      "sell": 921600
+    },
+    "FROZEN_BLAZE_HELMET": {
+      "sell": 576000
+    },
+    "FROZEN_BLAZE_LEGGINGS": {
+      "sell": 806400
+    },
+    "FROZEN_CHICKEN": {
+      "sell": 1
+    },
+    "FROZEN_SCUTE": {
+      "sell": 5000000
+    },
+    "FROZEN_SCYTHE": {
+      "sell": 100
+    },
+    "FTX_3070": {
+      "sell": 50000
+    },
+    "FUEL_GABAGOOL": {
+      "sell": 1
+    },
+    "FUEL_TANK": {
+      "sell": 510
+    },
+    "FUNNY_BONE": {
+      "sell": 5
+    },
+    "FURBALL": {
+      "sell": 1
+    },
+    "FURNACE": {
+      "sell": 8
+    },
+    "GABAGOEY_MIXIN": {
+      "buy": 150000
+    },
+    "GARDEN_SCYTHE": {
+      "sell": 100
+    },
+    "GAUNTLET_OF_CONTAGION": {
+      "sell": 201000
+    },
+    "GAZING_PEARL": {
+      "sell": 200
+    },
+    "GELATINOUS_GLOOP": {
+      "sell": 5
+    },
+    "GEMSTONE_DRILL_1": {
+      "sell": 253000
+    },
+    "GEMSTONE_DRILL_2": {
+      "sell": 253000
+    },
+    "GEMSTONE_DRILL_3": {
+      "sell": 253000
+    },
+    "GEMSTONE_DRILL_4": {
+      "sell": 253000
+    },
+    "GEMSTONE_FUEL_TANK": {
+      "sell": 103000
+    },
+    "GENERALS_ARMOR_OF_THE_RESISTANCE_BOOTS": {
+      "sell": 8
+    },
+    "GENERALS_ARMOR_OF_THE_RESISTANCE_CHESTPLATE": {
+      "sell": 16
+    },
+    "GENERALS_ARMOR_OF_THE_RESISTANCE_HELMET": {
+      "sell": 10
+    },
+    "GENERALS_ARMOR_OF_THE_RESISTANCE_LEGGINGS": {
+      "sell": 14
+    },
+    "GEOMETRIC_ODDITY": {
+      "sell": 1
+    },
+    "GHAST_CHESTPLATE": {
+      "sell": 3200
+    },
+    "GHAST_CLOAK": {
+      "sell": 8680
+    },
+    "GHAST_HEAD": {
+      "sell": 64
+    },
+    "GHAST_LEGGINGS": {
+      "sell": 2800
+    },
+    "GHAST_TEAR": {
+      "sell": 16,
+      "buy": 200,
+      "stock": 640
+    },
+    "GHOST_BOOTS": {
+      "sell": 77777
+    },
+    "GHOST_THROWING_AXE": {
+      "sell": 1
+    },
+    "GIANT_CLEAVER": {
+      "sell": 1,
+      "buy": 5000000
+    },
+    "GIANT_FRAGMENT_BIGFOOT": {
+      "sell": 50000
+    },
+    "GIANT_FRAGMENT_BOULDER": {
+      "sell": 50000
+    },
+    "GIANT_FRAGMENT_DIAMOND": {
+      "sell": 50000
+    },
+    "GIANT_FRAGMENT_LASER": {
+      "sell": 50000
+    },
+    "GIANT_FROG_TREAT": {
+      "sell": 100000
+    },
+    "GIANT_HONEY_DIPPER": {
+      "buy": 500000
+    },
+    "GIANT_SLOTH_CLAW": {
+      "sell": 100000
+    },
+    "GIANT_TOOTH": {
+      "sell": 1
+    },
+    "GIANTS_EYE_SWORD": {
+      "sell": 1000
+    },
+    "GIANTS_SWORD": {
+      "sell": 1000
+    },
+    "GIFT_COMPASS": {
+      "sell": 1
+    },
+    "GIFT_OF_LEARNING": {
+      "sell": 1000
+    },
+    "GILL_MEMBRANE": {
+      "sell": 70
+    },
+    "GILLSPLASH_BELT": {
+      "sell": 9000
+    },
+    "GILLSPLASH_CLOAK": {
+      "sell": 9000
+    },
+    "GILLSPLASH_GLOVES": {
+      "sell": 9000
+    },
+    "GLACIAL_FRAGMENT": {
+      "sell": 200
+    },
+    "GLACIAL_SCYTHE": {
+      "sell": 500
+    },
+    "GLACIATED_BRAINS": {
+      "sell": 5
+    },
+    "GLACITE": {
+      "sell": 12
+    },
+    "GLACITE_BOOTS": {
+      "sell": 1750
+    },
+    "GLACITE_CHESTPLATE": {
+      "sell": 1750
+    },
+    "GLACITE_CHISEL": {
+      "sell": 1000
+    },
+    "GLACITE_HELMET": {
+      "sell": 1750
+    },
+    "GLACITE_JEWEL": {
+      "sell": 2000
+    },
+    "GLACITE_LEGGINGS": {
+      "sell": 1750
+    },
+    "GLACITE_SHARD": {
+      "sell": 1
+    },
+    "GLASS": {
+      "sell": 2
+    },
+    "GLASS_BOTTLE": {
+      "sell": 2,
+      "buy": 6
+    },
+    "GLEAMING_CRYSTAL": {
+      "sell": 1
+    },
+    "GLOSSY_GEMSTONE": {
+      "sell": 200000
+    },
+    "GLOWSTONE": {
+      "sell": 8
+    },
+    "GLOWSTONE_DUST": {
+      "sell": 2
+    },
+    "GLOWSTONE_DUST_DISTILLATE": {
+      "sell": 5000
+    },
+    "GLOWSTONE_GAUNTLET": {
+      "sell": 8160
+    },
+    "GLOWY_CHUM_BAIT": {
+      "sell": 25
+    },
+    "GLUE_ARROW": {
+      "sell": 1
+    },
+    "GOBLIN_BOOTS": {
+      "sell": 1500
+    },
+    "GOBLIN_CHESTPLATE": {
+      "sell": 1500
+    },
+    "GOBLIN_EGG": {
+      "sell": 421
+    },
+    "GOBLIN_EGG_BLUE": {
+      "sell": 100000
+    },
+    "GOBLIN_EGG_GREEN": {
+      "sell": 1000
+    },
+    "GOBLIN_EGG_RED": {
+      "sell": 25000
+    },
+    "GOBLIN_EGG_YELLOW": {
+      "sell": 10000
+    },
+    "GOBLIN_HELMET": {
+      "sell": 1500
+    },
+    "GOBLIN_LEGGINGS": {
+      "sell": 1500
+    },
+    "GOBLIN_OMELETTE": {
+      "sell": 20840
+    },
+    "GOBLIN_OMELETTE_BLUE_CHEESE": {
+      "sell": 20840
+    },
+    "GOBLIN_OMELETTE_PESTO": {
+      "sell": 20840
+    },
+    "GOBLIN_OMELETTE_SPICY": {
+      "sell": 20840
+    },
+    "GOBLIN_OMELETTE_SUNNY_SIDE": {
+      "sell": 20840
+    },
+    "GOLD_AXE": {
+      "sell": 6,
+      "buy": 10
+    },
+    "GOLD_BARDING": {
+      "sell": 750
+    },
+    "GOLD_BLOCK": {
+      "sell": 27
+    },
+    "GOLD_BOOTS": {
+      "sell": 8,
+      "buy": 18
+    },
+    "GOLD_BOTTLE_CAP": {
+      "sell": 1000000
+    },
+    "GOLD_CHESTPLATE": {
+      "sell": 16,
+      "buy": 32
+    },
+    "GOLD_HELMET": {
+      "sell": 10,
+      "buy": 20
+    },
+    "GOLD_HOE": {
+      "sell": 4
+    },
+    "GOLD_INGOT": {
+      "sell": 3,
+      "buy": 5.5
+    },
+    "GOLD_LEGGINGS": {
+      "sell": 14,
+      "buy": 28
+    },
+    "GOLD_NUGGET": {
+      "sell": 0.3
+    },
+    "GOLD_ORE": {
+      "sell": 3
+    },
+    "GOLD_PICKAXE": {
+      "sell": 6,
+      "buy": 10
+    },
+    "GOLD_PLATE": {
+      "sell": 6,
+      "buy": 16
+    },
+    "GOLD_RECORD": {
+      "sell": 20
+    },
+    "GOLD_SPADE": {
+      "sell": 3,
+      "buy": 10
+    },
+    "GOLD_SWORD": {
+      "sell": 4
+    },
+    "GOLD_TIPPED_ARROW": {
+      "sell": 1
+    },
+    "GOLDEN_APPLE": {
+      "sell": 8
+    },
+    "GOLDEN_APPLE:1": {
+      "sell": 125
+    },
+    "GOLDEN_BAIT": {
+      "sell": 100
+    },
+    "GOLDEN_BALL": {
+      "sell": 1
+    },
+    "GOLDEN_BOUNTY": {
+      "sell": 1000000
+    },
+    "GOLDEN_CARROT": {
+      "sell": 4,
+      "buy": 15
+    },
+    "GOLDEN_PLATE": {
+      "sell": 3068
+    },
+    "GOLDEN_TOOTH": {
+      "sell": 128
+    },
+    "GOLDOR_THE_FISH": {
+      "sell": 50000
+    },
+    "GOLEM_ARMOR_BOOTS": {
+      "sell": 9600
+    },
+    "GOLEM_ARMOR_CHESTPLATE": {
+      "sell": 19200
+    },
+    "GOLEM_ARMOR_HELMET": {
+      "sell": 12000
+    },
+    "GOLEM_ARMOR_LEGGINGS": {
+      "sell": 16800
+    },
+    "GOLEM_HAT": {
+      "sell": 100
+    },
+    "GOLEM_SWORD": {
+      "sell": 77000
+    },
+    "GORF_THE_FISH": {
+      "sell": 50000
+    },
+    "GRAND_EXP_BOTTLE": {
+      "sell": 480,
+      "buy": 5000
+    },
+    "GRAPPLING_HOOK": {
+      "sell": 1200
+    },
+    "GRASS": {
+      "sell": 1
+    },
+    "GRAVEL": {
+      "sell": 3,
+      "buy": 4.333333333333333
+    },
+    "GRAVITY_TALISMAN": {
+      "sell": 864
+    },
+    "GREAT_CARROT_CANDY": {
+      "sell": 1
+    },
+    "GREAT_WHITE_SHARK_TOOTH": {
+      "sell": 500000
+    },
+    "GREAT_WHITE_TOOTH_MEAL": {
+      "sell": 12000
+    },
+    "GREEN_CANDY": {
+      "sell": 500
+    },
+    "GREEN_RECORD": {
+      "sell": 20
+    },
+    "GRIFFIN_FEATHER": {
+      "sell": 5000
+    },
+    "GRILLED_PORK": {
+      "sell": 5
+    },
+    "GROWTH_BOOTS": {
+      "sell": 40000
+    },
+    "GROWTH_CHESTPLATE": {
+      "sell": 80000
+    },
+    "GROWTH_HELMET": {
+      "sell": 50000
+    },
+    "GROWTH_LEGGINGS": {
+      "sell": 70000
+    },
+    "GUARDIAN_CHESTPLATE": {
+      "sell": 1200
+    },
+    "GUARDIAN_LUCKY_BLOCK": {
+      "sell": 30000
+    },
+    "HALF_EATEN_MUSHROOM": {
+      "sell": 500
+    },
+    "HALLOWED_SKULL": {
+      "sell": 500
+    },
+    "HAMSTER_WHEEL": {
+      "sell": 20000
+    },
+    "HARD_CLAY": {
+      "sell": 2
+    },
+    "HARD_GLASS": {
+      "sell": 20
+    },
+    "HARD_STONE": {
+      "sell": 1
+    },
+    "HARDENED_DIAMOND_BOOTS": {
+      "sell": 2560
+    },
+    "HARDENED_DIAMOND_CHESTPLATE": {
+      "sell": 5120
+    },
+    "HARDENED_DIAMOND_HELMET": {
+      "sell": 3200
+    },
+    "HARDENED_DIAMOND_LEGGINGS": {
+      "sell": 4480
+    },
+    "HARDENED_WOOD": {
+      "sell": 1
+    },
+    "HARPOON_LAUNCHER": {
+      "sell": 1
+    },
+    "HARVESTING_SWORD": {
+      "sell": 1
+    },
+    "HARVESTING_UPGRADE": {
+      "sell": 2600
+    },
+    "HASTE_BLOCK": {
+      "sell": 160
+    },
+    "HASTE_RING": {
+      "sell": 20500
+    },
+    "HAUNT_ABILITY": {
+      "sell": 1
+    },
+    "HAY_BLOCK": {
+      "sell": 54
+    },
+    "HAZMAT_ENDERMAN": {
+      "sell": 1
+    },
+    "HEALER_DUNGEON_ABILITY_1": {
+      "sell": 1
+    },
+    "HEALER_DUNGEON_ABILITY_2": {
+      "sell": 1
+    },
+    "HEALER_DUNGEON_ABILITY_3": {
+      "sell": 1
+    },
+    "HEALING_CIRCLE_ITEM": {
+      "sell": 1
+    },
+    "HEALING_RING": {
+      "sell": 17000
+    },
+    "HEALING_TALISMAN": {
+      "sell": 1440
+    },
+    "HEALING_TISSUE": {
+      "sell": 5000
+    },
+    "HEAVY_BOOTS": {
+      "sell": 1
+    },
+    "HEAVY_CHESTPLATE": {
+      "sell": 1
+    },
+    "HEAVY_GABAGOOL": {
+      "sell": 1
+    },
+    "HEAVY_HELMET": {
+      "sell": 1
+    },
+    "HEAVY_LEGGINGS": {
+      "sell": 1
+    },
+    "HELIANTHUS": {
+      "sell": 275000
+    },
+    "HELIX": {
+      "sell": 10000
+    },
+    "HELIX_ARMOR_BOOTS": {
+      "sell": 4480
+    },
+    "HELIX_ARMOR_CHESTPLATE": {
+      "sell": 8960
+    },
+    "HELIX_ARMOR_HELMET": {
+      "sell": 5600
+    },
+    "HELIX_ARMOR_LEGGINGS": {
+      "sell": 7840
+    },
+    "HELIX_CHOPPER": {
+      "sell": 2000
+    },
+    "HELIX_LOG": {
+      "sell": 20
+    },
+    "HELIXIS": {
+      "sell": 512000
+    },
+    "HELLFIRE_ROD": {
+      "sell": 5634000
+    },
+    "HELLSTORM_STAFF": {
+      "sell": 100000
+    },
+    "HEMOBOMB": {
+      "sell": 240000
+    },
+    "HEMOGLASS": {
+      "sell": 16000
+    },
+    "HEMOVIBE": {
+      "sell": 100
+    },
+    "HILT_OF_REVELATIONS": {
+      "sell": 150000
+    },
+    "HILT_OF_TRUE_ICE": {
+      "sell": 100000
+    },
+    "HOLLOW_WAND": {
+      "sell": 10000
+    },
+    "HOLY_DRAGON_BOOTS": {
+      "sell": 100000
+    },
+    "HOLY_DRAGON_CHESTPLATE": {
+      "sell": 100000
+    },
+    "HOLY_DRAGON_HELMET": {
+      "sell": 100000
+    },
+    "HOLY_DRAGON_LEGGINGS": {
+      "sell": 100000
+    },
+    "HOLY_FRAGMENT": {
+      "sell": 2500
+    },
+    "HONEY_JAR": {
+      "sell": 100
+    },
+    "HONEYCOMB": {
+      "sell": 100
+    },
+    "HOPPER": {
+      "sell": 15,
+      "buy": 50
+    },
+    "HOPPER_MINECART": {
+      "sell": 22
+    },
+    "HORN_OF_TAURUS": {
+      "sell": 500
+    },
+    "HORNS_OF_TORMENT": {
+      "sell": 1
+    },
+    "HOSTAGE_COMPASS": {
+      "sell": 1
+    },
+    "HOT_BAIT": {
+      "sell": 30
+    },
+    "HOT_CHOCOLATE": {
+      "sell": 50,
+      "buy": 70000
+    },
+    "HOT_POTATO_BOOK": {
+      "sell": 38400
+    },
+    "HOTSPOT_BAIT": {
+      "sell": 5000
+    },
+    "HUB_PORTAL": {
+      "sell": 1
+    },
+    "HUGE_MUSHROOM_1": {
+      "sell": 10
+    },
+    "HUGE_MUSHROOM_2": {
+      "sell": 10
+    },
+    "HURRICANE_BOW": {
+      "sell": 15500
+    },
+    "HURRICANE_IN_A_BOTTLE": {
+      "sell": 5000
+    },
+    "HURRICANE_IN_A_BOTTLE_EMPTY": {
+      "sell": 5000
+    },
+    "HYDRA1_BOOTS": {
+      "sell": 50
+    },
+    "HYDRA1_CHESTPLATE": {
+      "sell": 50
+    },
+    "HYDRA1_LEGGINGS": {
+      "sell": 50
+    },
+    "HYPER_CATALYST": {
+      "sell": 500
+    },
+    "HYPER_CATALYST_UPGRADE": {
+      "sell": 500
+    },
+    "HYPER_CLEAVER": {
+      "sell": 1,
+      "buy": 800000
+    },
+    "HYPERCHARGE_GARDEN_CHIP": {
+      "sell": 25000
+    },
+    "HYPERGOLIC_GABAGOOL": {
+      "sell": 1
+    },
+    "ICE": {
+      "sell": 0.5
+    },
+    "ICE_BAIT": {
+      "sell": 3,
+      "buy": 12
+    },
+    "ICE_HUNK": {
+      "sell": 500
+    },
+    "ICE_ROD": {
+      "sell": 20000
+    },
+    "ICE_SPRAY_WAND": {
+      "sell": 10000
+    },
+    "ICHTHYIC_BELT": {
+      "sell": 4500
+    },
+    "ICHTHYIC_CLOAK": {
+      "sell": 4500
+    },
+    "ICHTHYIC_GLOVES": {
+      "sell": 4500
+    },
+    "ICY_ARROW": {
+      "sell": 1
+    },
+    "ICY_SINKER": {
+      "sell": 10000
+    },
+    "IMPLOSION_BELT": {
+      "sell": 512640
+    },
+    "IMPLOSION_SCROLL": {
+      "sell": 1
+    },
+    "INFERNAL_KUUDRA_CORE": {
+      "sell": 1
+    },
+    "INFERNO_ROD": {
+      "sell": 1028000
+    },
+    "INFINI_TORCH": {
+      "buy": 100000
+    },
+    "INFINITE_SPIRIT_LEAP": {
+      "sell": 1000
+    },
+    "INFLATABLE_JERRY": {
+      "sell": 500
+    },
+    "INK_SACK": {
+      "sell": 2
+    },
+    "INK_SACK:1": {
+      "sell": 1
+    },
+    "INK_SACK:10": {
+      "sell": 1
+    },
+    "INK_SACK:11": {
+      "sell": 1
+    },
+    "INK_SACK:12": {
+      "sell": 1
+    },
+    "INK_SACK:13": {
+      "sell": 1
+    },
+    "INK_SACK:14": {
+      "sell": 1
+    },
+    "INK_SACK:2": {
+      "sell": 4
+    },
+    "INK_SACK:3": {
+      "sell": 3,
+      "buy": 5
+    },
+    "INK_SACK:4": {
+      "sell": 1
+    },
+    "INK_SACK:5": {
+      "sell": 1
+    },
+    "INK_SACK:6": {
+      "sell": 1
+    },
+    "INK_SACK:7": {
+      "sell": 1
+    },
+    "INK_SACK:8": {
+      "sell": 1
+    },
+    "INK_SACK:9": {
+      "sell": 1
+    },
+    "INK_SPLAT": {
+      "sell": 25000
+    },
+    "INK_WAND": {
+      "sell": 10000
+    },
+    "INTIMIDATION_TALISMAN": {
+      "sell": 200,
+      "buy": 10000
+    },
+    "IRON_ALLOY": {
+      "sell": 1
+    },
+    "IRON_AXE": {
+      "sell": 4
+    },
+    "IRON_BARDING": {
+      "sell": 500
+    },
+    "IRON_BLOCK": {
+      "sell": 18
+    },
+    "IRON_BOOTS": {
+      "sell": 6,
+      "buy": 20
+    },
+    "IRON_CHESTPLATE": {
+      "sell": 12,
+      "buy": 25
+    },
+    "IRON_DOOR": {
+      "sell": 12
+    },
+    "IRON_FENCE": {
+      "sell": 1
+    },
+    "IRON_HELMET": {
+      "sell": 7,
+      "buy": 15
+    },
+    "IRON_HOE": {
+      "sell": 3
+    },
+    "IRON_INGOT": {
+      "sell": 2,
+      "buy": 5
+    },
+    "IRON_LEGGINGS": {
+      "sell": 10,
+      "buy": 30
+    },
+    "IRON_ORE": {
+      "sell": 3
+    },
+    "IRON_PICKAXE": {
+      "sell": 4,
+      "buy": 60
+    },
+    "IRON_PLATE": {
+      "sell": 4,
+      "buy": 12
+    },
+    "IRON_SPADE": {
+      "sell": 2
+    },
+    "IRON_SWORD": {
+      "sell": 3
+    },
+    "IRON_TRAPDOOR": {
+      "sell": 8
+    },
+    "ISLAND_NPC": {
+      "buy": 50000
+    },
+    "ISOPOD_HUSK": {
+      "sell": 250000
+    },
+    "ITEM_FRAME": {
+      "sell": 5
+    },
+    "JACK_O_LANTERN": {
+      "sell": 4
+    },
+    "JACOBS_TICKET": {
+      "sell": 10000
+    },
+    "JADERALD": {
+      "sell": 1000000
+    },
+    "JALAPENO_BOOK": {
+      "sell": 56000
+    },
+    "JAWBREAKER": {
+      "sell": 5
+    },
+    "JELLY": {
+      "sell": 100
+    },
+    "JERRY_STONE": {
+      "sell": 1
+    },
+    "JINGLE_BELLS": {
+      "sell": 100
+    },
+    "JUKEBOX": {
+      "sell": 12
+    },
+    "JUNGLE_AXE": {
+      "sell": 480
+    },
+    "JUNGLE_BIOME_STICK": {
+      "sell": 32
+    },
+    "JUNGLE_DOOR_ITEM": {
+      "sell": 1
+    },
+    "JUNGLE_FENCE": {
+      "sell": 1
+    },
+    "JUNGLE_FENCE_GATE": {
+      "sell": 1
+    },
+    "JUNGLE_HEART": {
+      "sell": 100000
+    },
+    "JUNGLE_WOOD_STAIRS": {
+      "sell": 0.5
+    },
+    "JUNK_SINKER": {
+      "buy": 10000
+    },
+    "KADA_LEAD": {
+      "sell": 50
+    },
+    "KAT_BOUQUET": {
+      "sell": 1
+    },
+    "KAT_FLOWER": {
+      "sell": 1
+    },
+    "KELVIN_INVERTER": {
+      "sell": 100000
+    },
+    "KINDRED": {
+      "sell": 1000000
+    },
+    "KING_TALISMAN": {
+      "sell": 2000
+    },
+    "KNOCKOFF_COLA": {
+      "buy": 1500
+    },
+    "KRAMPUS_HELMET": {
+      "sell": 500000
+    },
+    "KUUDRA_FOLLOWER_ARTIFACT": {
+      "buy": 100000000
+    },
+    "KUUDRA_MANDIBLE": {
+      "sell": 1
+    },
+    "KUUDRA_TEETH": {
+      "sell": 500
+    },
+    "KUUDRA_WASHING_MACHINE": {
+      "sell": 1
+    },
+    "LADDER": {
+      "sell": 0.5
+    },
+    "LAMP_BLACK": {
+      "sell": 500,
+      "buy": 150000
+    },
+    "LAMP_BLUE": {
+      "sell": 500,
+      "buy": 150000
+    },
+    "LAMP_BROWN": {
+      "sell": 500,
+      "buy": 150000
+    },
+    "LAMP_CYAN": {
+      "sell": 500,
+      "buy": 150000
+    },
+    "LAMP_GRAY": {
+      "sell": 500,
+      "buy": 150000
+    },
+    "LAMP_GREEN": {
+      "sell": 500,
+      "buy": 150000
+    },
+    "LAMP_LIGHT_BLUE": {
+      "sell": 500,
+      "buy": 150000
+    },
+    "LAMP_LIGHT_GRAY": {
+      "sell": 500,
+      "buy": 150000
+    },
+    "LAMP_LILAC": {
+      "sell": 500,
+      "buy": 150000
+    },
+    "LAMP_LIME": {
+      "sell": 500,
+      "buy": 150000
+    },
+    "LAMP_MAGENTA": {
+      "sell": 500,
+      "buy": 150000
+    },
+    "LAMP_ORANGE": {
+      "sell": 500,
+      "buy": 150000
+    },
+    "LAMP_PINK": {
+      "sell": 500,
+      "buy": 150000
+    },
+    "LAMP_PURPLE": {
+      "sell": 500,
+      "buy": 150000
+    },
+    "LAMP_RAINBOW": {
+      "sell": 500,
+      "buy": 250000
+    },
+    "LAMP_RED": {
+      "sell": 500,
+      "buy": 150000
+    },
+    "LAMP_WHITE": {
+      "sell": 500,
+      "buy": 150000
+    },
+    "LAMP_YELLOW": {
+      "sell": 500,
+      "buy": 150000
+    },
+    "LANTERN": {
+      "buy": 10000
+    },
+    "LAPIS_ARMOR_BOOTS": {
+      "sell": 1000
+    },
+    "LAPIS_ARMOR_CHESTPLATE": {
+      "sell": 2000
+    },
+    "LAPIS_ARMOR_HELMET": {
+      "sell": 1000
+    },
+    "LAPIS_ARMOR_LEGGINGS": {
+      "sell": 1750
+    },
+    "LAPIS_BLOCK": {
+      "sell": 9
+    },
+    "LAPIS_CRYSTAL": {
+      "sell": 50
+    },
+    "LAPIS_ORE": {
+      "sell": 5
+    },
+    "LAPIS_PICKAXE": {
+      "sell": 256
+    },
+    "LARGE_ENCHANTED_CHEST": {
+      "sell": 40000
+    },
+    "LARGE_FISH_BOWL": {
+      "sell": 1000
+    },
+    "LARGE_FROG_TREAT": {
+      "sell": 75000
+    },
+    "LARGE_HONEY_DIPPER": {
+      "buy": 50000
+    },
+    "LARGE_LAVA_FISHING_SACK": {
+      "sell": 256000
+    },
+    "LARGE_NETHER_SACK": {
+      "sell": 640200
+    },
+    "LARGE_SCAFFOLDING": {
+      "sell": 3000
+    },
+    "LARGE_SLOTH_CLAW": {
+      "sell": 75000
+    },
+    "LARGE_WALNUT": {
+      "sell": 1
+    },
+    "LARGE_WINTER_SACK": {
+      "buy": 250000
+    },
+    "LAUNCH_PAD": {
+      "sell": 3200
+    },
+    "LAVA_BUCKET": {
+      "sell": 8
+    },
+    "LAVA_SHELL": {
+      "sell": 3000
+    },
+    "LAVA_SHELL_NECKLACE": {
+      "sell": 12500
+    },
+    "LAVA_TALISMAN": {
+      "sell": 5800
+    },
+    "LAVA_WATER_ORB": {
+      "sell": 5000
+    },
+    "LEAFLET_BOOTS": {
+      "sell": 2
+    },
+    "LEAFLET_CHESTPLATE": {
+      "sell": 4
+    },
+    "LEAFLET_HELMET": {
+      "sell": 2
+    },
+    "LEAFLET_LEGGINGS": {
+      "sell": 3
+    },
+    "LEAPING_SWORD": {
+      "sell": 375000
+    },
+    "LEASH": {
+      "sell": 8
+    },
+    "LEATHER": {
+      "sell": 3,
+      "buy": 10
+    },
+    "LEATHER_BOOTS": {
+      "sell": 6,
+      "buy": 10
+    },
+    "LEATHER_CHESTPLATE": {
+      "sell": 12,
+      "buy": 14
+    },
+    "LEATHER_CLOTH": {
+      "sell": 500
+    },
+    "LEATHER_HELMET": {
+      "sell": 7,
+      "buy": 8
+    },
+    "LEATHER_LEGGINGS": {
+      "sell": 10,
+      "buy": 16
+    },
+    "LEAVES": {
+      "sell": 2
+    },
+    "LEAVES_2": {
+      "sell": 2
+    },
+    "LEAVES_2:1": {
+      "sell": 2
+    },
+    "LEAVES:1": {
+      "sell": 2
+    },
+    "LEAVES:2": {
+      "sell": 2
+    },
+    "LEAVES:3": {
+      "sell": 2
+    },
+    "LEGEND_ROD": {
+      "sell": 111000
+    },
+    "LEVER": {
+      "sell": 1,
+      "buy": 2
+    },
+    "LIGHT_BAIT": {
+      "sell": 16
+    },
+    "LITTLEFOOT_FLUFF": {
+      "sell": 1000000
+    },
+    "LIVID_DAGGER": {
+      "sell": 500000
+    },
+    "LIVID_FRAGMENT": {
+      "sell": 10000
+    },
+    "LOG": {
+      "sell": 2,
+      "buy": 5
+    },
+    "LOG_2": {
+      "sell": 2,
+      "buy": 5
+    },
+    "LOG_2:1": {
+      "sell": 2,
+      "buy": 5
+    },
+    "LOG:1": {
+      "sell": 2,
+      "buy": 5
+    },
+    "LOG:2": {
+      "sell": 2,
+      "buy": 5
+    },
+    "LOG:3": {
+      "sell": 2,
+      "buy": 5
+    },
+    "LONG_GRASS:1": {
+      "sell": 2
+    },
+    "LONG_GRASS:2": {
+      "sell": 2
+    },
+    "LOTUS": {
+      "sell": 15
+    },
+    "LOTUS_BELT": {
+      "sell": 100
+    },
+    "LOTUS_BRACELET": {
+      "sell": 100
+    },
+    "LOTUS_CLOAK": {
+      "sell": 100
+    },
+    "LOTUS_GOLD": {
+      "sell": 96000
+    },
+    "LOTUS_NECKLACE": {
+      "sell": 100
+    },
+    "LOTUS_SILVER": {
+      "sell": 1200
+    },
+    "LOTUS_SINKER": {
+      "sell": 10000
+    },
+    "LUCK_TALISMAN": {
+      "sell": 3333
+    },
+    "LUCKY_DICE": {
+      "sell": 1
+    },
+    "LUCKY_HOOF": {
+      "sell": 50000
+    },
+    "LUMINO_FIBER": {
+      "sell": 500
+    },
+    "LUMP_OF_MAGMA": {
+      "sell": 50
+    },
+    "LUSH_BERBERIS": {
+      "sell": 3
+    },
+    "LUSHLILAC": {
+      "sell": 10
+    },
+    "LUSHLILAC_BONBON": {
+      "sell": 26
+    },
+    "LUXURIOUS_SPOOL": {
+      "sell": 1
+    },
+    "LYNX_TALISMAN": {
+      "sell": 1000
+    },
+    "MACHINE_GUN_BOW": {
+      "sell": 1
+    },
+    "MAGE_DUNGEON_ABILITY_1": {
+      "sell": 1
+    },
+    "MAGE_DUNGEON_ABILITY_2": {
+      "sell": 1
+    },
+    "MAGE_DUNGEON_ABILITY_3": {
+      "sell": 1
+    },
+    "MAGIC_FOR_PETS": {
+      "sell": 2700
+    },
+    "MAGIC_MUSHROOM_SOUP": {
+      "sell": 4
+    },
+    "MAGICAL_LAVA_BUCKET": {
+      "sell": 30
+    },
+    "MAGICAL_STAFF": {
+      "sell": 27
+    },
+    "MAGICAL_WATER_BUCKET": {
+      "sell": 40
+    },
+    "MAGMA_ARROW": {
+      "sell": 1
+    },
+    "MAGMA_BOW": {
+      "sell": 61000
+    },
+    "MAGMA_BUCKET": {
+      "sell": 50000
+    },
+    "MAGMA_CHUNK": {
+      "sell": 50
+    },
+    "MAGMA_CORE": {
+      "sell": 200000
+    },
+    "MAGMA_CREAM": {
+      "sell": 8,
+      "buy": 20,
+      "stock": 640
+    },
+    "MAGMA_CREAM_DISTILLATE": {
+      "sell": 5000
+    },
+    "MAGMA_CUBE_HEAD": {
+      "sell": 32
+    },
+    "MAGMA_FISH": {
+      "sell": 20
+    },
+    "MAGMA_FISH_GOLD": {
+      "sell": 128000
+    },
+    "MAGMA_FISH_HAT": {
+      "sell": 80
+    },
+    "MAGMA_FISH_SILVER": {
+      "sell": 1600
+    },
+    "MAGMA_LORD_BOOTS": {
+      "sell": 350000
+    },
+    "MAGMA_LORD_CHESTPLATE": {
+      "sell": 350000
+    },
+    "MAGMA_LORD_FRAGMENT": {
+      "sell": 200000
+    },
+    "MAGMA_LORD_GAUNTLET": {
+      "sell": 93750
+    },
+    "MAGMA_LORD_HELMET": {
+      "sell": 250000
+    },
+    "MAGMA_LORD_LEGGINGS": {
+      "sell": 350000
+    },
+    "MAGMA_NECKLACE": {
+      "sell": 8180
+    },
+    "MAGMA_ROD": {
+      "sell": 8000
+    },
+    "MAGMA_URCHIN": {
+      "sell": 1
+    },
+    "MAGMAG": {
+      "sell": 50
+    },
+    "MAGNETIC_TALISMAN": {
+      "sell": 400
+    },
+    "MANA_DISINTEGRATOR": {
+      "sell": 1000
+    },
+    "MANDRAA": {
+      "sell": 1
+    },
+    "MANGCORE": {
+      "sell": 358400
+    },
+    "MANGROVE_GEM": {
+      "sell": 1000
+    },
+    "MANGROVE_GRIPPERS": {
+      "sell": 614840
+    },
+    "MANGROVE_LOCKET": {
+      "sell": 12848
+    },
+    "MANGROVE_LOG": {
+      "sell": 14
+    },
+    "MANGROVE_VINE": {
+      "sell": 51440
+    },
+    "MANTI_CORE": {
+      "sell": 5000000
+    },
+    "MANTID_CLAW": {
+      "sell": 75000
+    },
+    "MATCH_STICKS": {
+      "sell": 10
+    },
+    "MAXOR_THE_FISH": {
+      "sell": 50000
+    },
+    "MECHAMIND_GARDEN_CHIP": {
+      "sell": 100000
+    },
+    "MEDIUM_ENCHANTED_CHEST": {
+      "sell": 1200
+    },
+    "MEDIUM_FISH_BOWL": {
+      "sell": 500
+    },
+    "MEDIUM_FROG_TREAT": {
+      "sell": 50000
+    },
+    "MEDIUM_HONEY_DIPPER": {
+      "buy": 5000
+    },
+    "MEDIUM_LAVA_FISHING_SACK": {
+      "sell": 128000
+    },
+    "MEDIUM_NETHER_SACK": {
+      "sell": 131200
+    },
+    "MEDIUM_POCKET_BLACK_HOLE": {
+      "sell": 500000
+    },
+    "MEDIUM_SCAFFOLDING": {
+      "sell": 1000
+    },
+    "MEDIUM_SLOTH_CLAW": {
+      "sell": 50000
+    },
+    "MELON": {
+      "sell": 2,
+      "buy": 4
+    },
+    "MELON_BLOCK": {
+      "sell": 18
+    },
+    "MELON_JUICE": {
+      "sell": 50000
+    },
+    "MELON_JUICE_MIXIN": {
+      "sell": 8000
+    },
+    "MELON_SEEDS": {
+      "sell": 1
+    },
+    "MENDER_CROWN": {
+      "buy": 5000000
+    },
+    "MENDER_FEDORA": {
+      "buy": 800000
+    },
+    "MENDER_HELMET": {
+      "sell": 1,
+      "buy": 80000
+    },
+    "MERCENARY_AXE": {
+      "sell": 15000,
+      "buy": 30000
+    },
+    "MERCENARY_BOOTS": {
+      "sell": 5000,
+      "buy": 30000
+    },
+    "MERCENARY_CHESTPLATE": {
+      "sell": 20000,
+      "buy": 70000
+    },
+    "MERCENARY_HELMET": {
+      "sell": 10000,
+      "buy": 35000
+    },
+    "MERCENARY_LEGGINGS": {
+      "sell": 15000,
+      "buy": 45000
+    },
+    "MESA_BIOME_STICK": {
+      "sell": 400
+    },
+    "METAL_CHESTPLATE": {
+      "sell": 1,
+      "buy": 800000
+    },
+    "METEOR_SHARD": {
+      "sell": 41150
+    },
+    "MIDAS_JEWEL": {
+      "sell": 1
+    },
+    "MILK_BUCKET": {
+      "sell": 4
+    },
+    "MILLENIA_OLD_BLAZE_ASHES": {
+      "sell": 1000
+    },
+    "MIMIC_FRAGMENT": {
+      "sell": 1000
+    },
+    "MINE_TALISMAN": {
+      "sell": 200,
+      "buy": 2500
+    },
+    "MINECART": {
+      "sell": 8
+    },
+    "MINER_OUTFIT_BOOTS": {
+      "sell": 320
+    },
+    "MINER_OUTFIT_CHESTPLATE": {
+      "sell": 640
+    },
+    "MINER_OUTFIT_HELMET": {
+      "sell": 400
+    },
+    "MINER_OUTFIT_LEGGINGS": {
+      "sell": 560
+    },
+    "MINING_PUMPKIN": {
+      "buy": 50000
+    },
+    "MINION_EXPANDER": {
+      "sell": 4000
+    },
+    "MINNOW_BAIT": {
+      "sell": 12,
+      "buy": 15
+    },
+    "MINOS_HUNTER_BOOTS": {
+      "sell": 50
+    },
+    "MINOS_HUNTER_CHESTPLATE": {
+      "sell": 50
+    },
+    "MINOS_HUNTER_HELMET": {
+      "sell": 50
+    },
+    "MINOS_HUNTER_LEGGINGS": {
+      "sell": 50
+    },
+    "MINOS_RELIC": {
+      "sell": 5000000
+    },
+    "MIRIA_COUPON": {
+      "sell": 15000
+    },
+    "MIRIA_PRIZE": {
+      "sell": 50000
+    },
+    "MITE_GEL": {
+      "sell": 2000
+    },
+    "MITHRIL_COAT": {
+      "sell": 25000
+    },
+    "MITHRIL_DRILL_1": {
+      "sell": 7000
+    },
+    "MITHRIL_DRILL_2": {
+      "sell": 29000
+    },
+    "MITHRIL_DRILL_ENGINE": {
+      "sell": 45500
+    },
+    "MITHRIL_FUEL_TANK": {
+      "sell": 35300
+    },
+    "MITHRIL_INFUSION": {
+      "sell": 4346
+    },
+    "MITHRIL_ORE": {
+      "sell": 8
+    },
+    "MITHRIL_PICKAXE": {
+      "sell": 400
+    },
+    "MITHRIL_PLATE": {
+      "sell": 10108
+    },
+    "MITHRIL_TECH": {
+      "sell": 1
+    },
+    "MIXED_MITE_GEL": {
+      "sell": 15000
+    },
+    "MOB_THE_FISH": {
+      "sell": 50000
+    },
+    "MOBY_DUCK": {
+      "sell": 1000000
+    },
+    "MOBY_DUCK_COLLECTOR_EDITION": {
+      "sell": 1000000
+    },
+    "MOIL_LOG": {
+      "sell": 1,
+      "buy": 50000
+    },
+    "MOLTEN_BELT": {
+      "sell": 93750
+    },
+    "MOLTEN_BRACELET": {
+      "sell": 93750
+    },
+    "MOLTEN_CLOAK": {
+      "sell": 93750
+    },
+    "MOLTEN_CUBE": {
+      "sell": 1
+    },
+    "MOLTEN_NECKLACE": {
+      "sell": 93750
+    },
+    "MOOGMA_LEGGINGS": {
+      "sell": 10000
+    },
+    "MOOGMA_PELT": {
+      "sell": 50
+    },
+    "MOONFLOWER": {
+      "sell": 4
+    },
+    "MOONGLADE_ARTIFACT": {
+      "sell": 3000
+    },
+    "MOONGLADE_JEWEL": {
+      "sell": 1000
+    },
+    "MOONGLADE_RING": {
+      "sell": 2000
+    },
+    "MOONGLADE_TALISMAN": {
+      "sell": 1000
+    },
+    "MOONLIGHT_CRYSTAL": {
+      "sell": 1500000
+    },
+    "MOONSTONE": {
+      "sell": 1
+    },
+    "MORNING_DEW": {
+      "sell": 100000
+    },
+    "MOSSY_COBBLESTONE": {
+      "sell": 6
+    },
+    "MOUND_OF_SEAGRASS": {
+      "sell": 250000
+    },
+    "MUSHROOM_BIOME_STICK": {
+      "sell": 400
+    },
+    "MUSHROOM_BOOTS": {
+      "sell": 8
+    },
+    "MUSHROOM_CHESTPLATE": {
+      "sell": 16
+    },
+    "MUSHROOM_COLLECTION": {
+      "sell": 5
+    },
+    "MUSHROOM_HELMET": {
+      "sell": 10
+    },
+    "MUSHROOM_LEGGINGS": {
+      "sell": 14
+    },
+    "MUSHROOM_SOUP": {
+      "sell": 5
+    },
+    "MUSHROOM_SPORE": {
+      "sell": 20
+    },
+    "MUSIC_PANTS": {
+      "sell": 1000
+    },
+    "MUTANT_NETHER_STALK": {
+      "sell": 102400
+    },
+    "MUTATED_BLAZE_ASHES": {
+      "sell": 200
+    },
+    "MUTTON": {
+      "sell": 5,
+      "buy": 10
+    },
+    "MYCEL": {
+      "sell": 5,
+      "buy": 20
+    },
+    "MYCELIUM_DUST": {
+      "sell": 15
+    },
+    "MYSTERIOUS_CROP": {
+      "sell": 1
+    },
+    "MYTH_THE_FISH": {
+      "sell": 100000
+    },
+    "MYTHOS_FRAGMENT": {
+      "sell": 25000
+    },
+    "NAME_TAG": {
+      "sell": 50
+    },
+    "NANSORB_ARROW": {
+      "sell": 1
+    },
+    "NECROMANCER_BROOCH": {
+      "sell": 1
+    },
+    "NECROMANCER_LORD_BOOTS": {
+      "sell": 5000
+    },
+    "NECROMANCER_LORD_CHESTPLATE": {
+      "sell": 5000
+    },
+    "NECROMANCER_LORD_HELMET": {
+      "sell": 5000
+    },
+    "NECROMANCER_LORD_LEGGINGS": {
+      "sell": 5000
+    },
+    "NECROMANCER_SWORD": {
+      "sell": 1000
+    },
+    "NETHER_ARTIFACT": {
+      "sell": 2000
+    },
+    "NETHER_BIOME_STICK": {
+      "sell": 512
+    },
+    "NETHER_BRICK": {
+      "sell": 2
+    },
+    "NETHER_BRICK_ITEM": {
+      "sell": 1
+    },
+    "NETHER_BRICK_STAIRS": {
+      "sell": 2
+    },
+    "NETHER_FENCE": {
+      "sell": 2
+    },
+    "NETHER_STALK": {
+      "sell": 4,
+      "buy": 10,
+      "stock": 640
+    },
+    "NETHER_STALK_DISTILLATE": {
+      "sell": 5000
+    },
+    "NETHER_STAR": {
+      "sell": 1
+    },
+    "NETHERRACK": {
+      "sell": 1
+    },
+    "NETHERRACK_LOOKING_SUNSHADE": {
+      "sell": 10000
+    },
+    "NEVER_MELT_ICE": {
+      "sell": 5
+    },
+    "NEW_BOTTLE_OF_JYRRE": {
+      "sell": 1000
+    },
+    "NEW_YEAR_CAKE": {
+      "sell": 100
+    },
+    "NEW_YEAR_CAKE_BAG": {
+      "buy": 250000
+    },
+    "NIGHT_CRYSTAL": {
+      "sell": 52000
+    },
+    "NIGHT_SAVER": {
+      "sell": 35
+    },
+    "NIGHT_VISION_CHARM": {
+      "sell": 2500
+    },
+    "NIGHTMARE_NULLIFIER": {
+      "sell": 1
+    },
+    "NIGHTSWITCH": {
+      "sell": 20480
+    },
+    "NOTE_BLOCK": {
+      "sell": 3
+    },
+    "NULL_ATOM": {
+      "sell": 33333
+    },
+    "NURSE_SHARK_TOOTH": {
+      "sell": 500
+    },
+    "NUTCRACKER_BOOTS": {
+      "sell": 1000
+    },
+    "NUTCRACKER_CHESTPLATE": {
+      "sell": 1000
+    },
+    "NUTCRACKER_HELMET": {
+      "sell": 1000
+    },
+    "NUTCRACKER_LEGGINGS": {
+      "sell": 1000
+    },
+    "OBSIDIAN": {
+      "sell": 7
+    },
+    "OBSIDIAN_CHESTPLATE": {
+      "sell": 2500
+    },
+    "OBSIDIAN_TABLET": {
+      "sell": 1
+    },
+    "OCEANDY": {
+      "sell": 200
+    },
+    "OCTOPUS_TENDRIL": {
+      "sell": 1000000
+    },
+    "OIL_BARREL": {
+      "sell": 1000
+    },
+    "OLD_DRAGON_BOOTS": {
+      "sell": 100000
+    },
+    "OLD_DRAGON_CHESTPLATE": {
+      "sell": 100000
+    },
+    "OLD_DRAGON_HELMET": {
+      "sell": 100000
+    },
+    "OLD_DRAGON_LEGGINGS": {
+      "sell": 100000
+    },
+    "OLD_FRAGMENT": {
+      "sell": 2500
+    },
+    "OLD_LEATHER_BOOT": {
+      "sell": 100000
+    },
+    "ONYX": {
+      "sell": 1,
+      "buy": 100
+    },
+    "OPTICAL_LENS": {
+      "sell": 1
+    },
+    "ORB_OF_ENERGY": {
+      "sell": 200
+    },
+    "ORGAN_DONOR_ARTIFACT": {
+      "sell": 10000
+    },
+    "ORGAN_DONOR_RING": {
+      "sell": 2000
+    },
+    "ORGAN_DONOR_TALISMAN": {
+      "sell": 800
+    },
+    "ORGANIC_BROWN_MUSHROOM": {
+      "sell": 4
+    },
+    "ORGANIC_CACTUS": {
+      "sell": 1
+    },
+    "ORGANIC_CARROT_ITEM": {
+      "sell": 1
+    },
+    "ORGANIC_COCOA_BEANS": {
+      "sell": 3
+    },
+    "ORGANIC_EGG": {
+      "sell": 3
+    },
+    "ORGANIC_MELON": {
+      "sell": 0.5
+    },
+    "ORGANIC_MILK": {
+      "sell": 3
+    },
+    "ORGANIC_MUSHROOM": {
+      "sell": 4
+    },
+    "ORGANIC_NETHER_STALK": {
+      "sell": 2
+    },
+    "ORGANIC_POTATO_ITEM": {
+      "sell": 1
+    },
+    "ORGANIC_PUMPKIN": {
+      "sell": 4
+    },
+    "ORGANIC_RED_MUSHROOM": {
+      "sell": 4
+    },
+    "ORGANIC_SUGAR_CANE": {
+      "sell": 2
+    },
+    "ORGANIC_WHEAT": {
+      "sell": 1
+    },
+    "ORGANIC_WOOL": {
+      "sell": 3
+    },
+    "OVERCLOCKER_3000": {
+      "sell": 250000
+    },
+    "OVERDRIVE_GARDEN_CHIP": {
+      "sell": 150000
+    },
+    "OVERFLOWING_TRASH_CAN": {
+      "sell": 10000
+    },
+    "OVERGROWN_GRASS": {
+      "sell": 1
+    },
+    "PACKED_ICE": {
+      "sell": 4.5,
+      "buy": 9,
+      "stock": 640
+    },
+    "PAINT_CARTRIDGE": {
+      "sell": 10000
+    },
+    "PAINTING": {
+      "sell": 1
+    },
+    "PAPER": {
+      "sell": 2
+    },
+    "PARK_JUNGLE_TRAVEL_SCROLL": {
+      "buy": 70000
+    },
+    "PARKOUR_CONTROLLER": {
+      "buy": 500
+    },
+    "PARKOUR_POINT": {
+      "buy": 1000
+    },
+    "PARKOUR_TIMES": {
+      "buy": 2000
+    },
+    "PERFECT_BOOTS_1": {
+      "sell": 409600
+    },
+    "PERFECT_BOOTS_10": {
+      "sell": 4096000
+    },
+    "PERFECT_BOOTS_11": {
+      "sell": 4505600
+    },
+    "PERFECT_BOOTS_12": {
+      "sell": 4915200
+    },
+    "PERFECT_BOOTS_13": {
+      "sell": 4915200
+    },
+    "PERFECT_BOOTS_2": {
+      "sell": 819200
+    },
+    "PERFECT_BOOTS_3": {
+      "sell": 1228800
+    },
+    "PERFECT_BOOTS_4": {
+      "sell": 1638400
+    },
+    "PERFECT_BOOTS_5": {
+      "sell": 2048000
+    },
+    "PERFECT_BOOTS_6": {
+      "sell": 2457600
+    },
+    "PERFECT_BOOTS_7": {
+      "sell": 2867200
+    },
+    "PERFECT_BOOTS_8": {
+      "sell": 3276800
+    },
+    "PERFECT_BOOTS_9": {
+      "sell": 3686400
+    },
+    "PERFECT_CHESTPLATE_1": {
+      "sell": 819200
+    },
+    "PERFECT_CHESTPLATE_10": {
+      "sell": 4505600
+    },
+    "PERFECT_CHESTPLATE_11": {
+      "sell": 4915200
+    },
+    "PERFECT_CHESTPLATE_12": {
+      "sell": 5324800
+    },
+    "PERFECT_CHESTPLATE_13": {
+      "sell": 5324800
+    },
+    "PERFECT_CHESTPLATE_2": {
+      "sell": 1228800
+    },
+    "PERFECT_CHESTPLATE_3": {
+      "sell": 1638400
+    },
+    "PERFECT_CHESTPLATE_4": {
+      "sell": 2048000
+    },
+    "PERFECT_CHESTPLATE_5": {
+      "sell": 2457600
+    },
+    "PERFECT_CHESTPLATE_6": {
+      "sell": 2867200
+    },
+    "PERFECT_CHESTPLATE_7": {
+      "sell": 3276800
+    },
+    "PERFECT_CHESTPLATE_8": {
+      "sell": 3686400
+    },
+    "PERFECT_CHESTPLATE_9": {
+      "sell": 4096000
+    },
+    "PERFECT_CHISEL": {
+      "sell": 1000
+    },
+    "PERFECT_HELMET_1": {
+      "sell": 512000
+    },
+    "PERFECT_HELMET_10": {
+      "sell": 4198400
+    },
+    "PERFECT_HELMET_11": {
+      "sell": 4608000
+    },
+    "PERFECT_HELMET_12": {
+      "sell": 5017600
+    },
+    "PERFECT_HELMET_13": {
+      "sell": 5017600
+    },
+    "PERFECT_HELMET_2": {
+      "sell": 921600
+    },
+    "PERFECT_HELMET_3": {
+      "sell": 1331200
+    },
+    "PERFECT_HELMET_4": {
+      "sell": 1740800
+    },
+    "PERFECT_HELMET_5": {
+      "sell": 2150400
+    },
+    "PERFECT_HELMET_6": {
+      "sell": 2560000
+    },
+    "PERFECT_HELMET_7": {
+      "sell": 2969600
+    },
+    "PERFECT_HELMET_8": {
+      "sell": 3379200
+    },
+    "PERFECT_HELMET_9": {
+      "sell": 3788800
+    },
+    "PERFECT_HOPPER": {
+      "sell": 500000
+    },
+    "PERFECT_LEGGINGS_1": {
+      "sell": 716800
+    },
+    "PERFECT_LEGGINGS_10": {
+      "sell": 4403200
+    },
+    "PERFECT_LEGGINGS_11": {
+      "sell": 4812800
+    },
+    "PERFECT_LEGGINGS_12": {
+      "sell": 5222400
+    },
+    "PERFECT_LEGGINGS_13": {
+      "sell": 5222400
+    },
+    "PERFECT_LEGGINGS_2": {
+      "sell": 1126400
+    },
+    "PERFECT_LEGGINGS_3": {
+      "sell": 1536000
+    },
+    "PERFECT_LEGGINGS_4": {
+      "sell": 1945600
+    },
+    "PERFECT_LEGGINGS_5": {
+      "sell": 2355200
+    },
+    "PERFECT_LEGGINGS_6": {
+      "sell": 2764800
+    },
+    "PERFECT_LEGGINGS_7": {
+      "sell": 3174400
+    },
+    "PERFECT_LEGGINGS_8": {
+      "sell": 3584000
+    },
+    "PERFECT_LEGGINGS_9": {
+      "sell": 3993600
+    },
+    "PESTHUNTERS_BELT": {
+      "sell": 5000
+    },
+    "PESTHUNTERS_CLOAK": {
+      "sell": 5000
+    },
+    "PESTHUNTERS_GLOVES": {
+      "sell": 5000
+    },
+    "PESTHUNTERS_NECKLACE": {
+      "sell": 5000
+    },
+    "PESTHUNTING_GUIDE": {
+      "sell": 1000000
+    },
+    "PET_CAKE": {
+      "sell": 10
+    },
+    "PET_ITEM_BUBBLEGUM": {
+      "buy": 5000000
+    },
+    "PET_ITEM_EXP_SHARE_DROP": {
+      "sell": 50000
+    },
+    "PET_ITEM_FORAGING_SKILL_BOOST_RARE": {
+      "sell": 50000
+    },
+    "PET_ITEM_FORAGING_SKILL_BOOST_UNCOMMON": {
+      "sell": 25000
+    },
+    "PET_ITEM_QUICK_CLAW": {
+      "sell": 5000000
+    },
+    "PET_ITEM_VAMPIRE_FANG": {
+      "sell": 500000
+    },
+    "PETRIFIED_STARFALL": {
+      "sell": 48000
+    },
+    "PHANTOM_HOOK": {
+      "sell": 250000
+    },
+    "PHANTOM_ROD": {
+      "sell": 1000
+    },
+    "PICKONIMBUS": {
+      "sell": 12
+    },
+    "PIGGY_BANK": {
+      "sell": 16000
+    },
+    "PIGMAN_SWORD": {
+      "sell": 3100000
+    },
+    "PIGS_FOOT": {
+      "sell": 1000
+    },
+    "PILE_OF_CASH": {
+      "sell": 1000000000
+    },
+    "PISTON_BASE": {
+      "sell": 8
+    },
+    "PISTON_STICKY_BASE": {
+      "sell": 12
+    },
+    "PITCHIN_KOI": {
+      "sell": 22222
+    },
+    "PIXIE_DUST": {
+      "sell": 5
+    },
+    "PLANT_MATTER": {
+      "sell": 100
+    },
+    "PLASMA": {
+      "sell": 20000
+    },
+    "PLASMA_BUCKET": {
+      "sell": 50000
+    },
+    "PLOT_ERASER": {
+      "sell": 10240
+    },
+    "PLUMBER_SPONGE": {
+      "buy": 50
+    },
+    "POCKET_ICEBERG": {
+      "sell": 1
+    },
+    "POISON_SAMPLE": {
+      "sell": 500
+    },
+    "POISONED_CANDY": {
+      "sell": 1
+    },
+    "POISONOUS_POTATO": {
+      "sell": 10
+    },
+    "POLISHED_PUMPKIN": {
+      "sell": 256000
+    },
+    "POLYMORPH_WAND": {
+      "sell": 64000
+    },
+    "PORK": {
+      "sell": 5,
+      "buy": 10
+    },
+    "PORTABLE_CAMPFIRE": {
+      "sell": 200
+    },
+    "POSTCARD": {
+      "sell": 1000
+    },
+    "POTATO_ITEM": {
+      "sell": 3,
+      "buy": 10
+    },
+    "POTION": {
+      "sell": 2,
+      "buy": 6
+    },
+    "POTION_AFFINITY_TALISMAN": {
+      "sell": 192
+    },
+    "POWER_CRYSTAL": {
+      "sell": 1920
+    },
+    "POWER_WITHER_BOOTS": {
+      "sell": 5000
+    },
+    "POWER_WITHER_CHESTPLATE": {
+      "sell": 5000
+    },
+    "POWER_WITHER_HELMET": {
+      "sell": 5000
+    },
+    "POWER_WITHER_LEGGINGS": {
+      "sell": 5000
+    },
+    "POWERED_MINECART": {
+      "sell": 12
+    },
+    "POWERED_RAIL": {
+      "sell": 3
+    },
+    "PRECIOUS_PEARL": {
+      "sell": 500000
+    },
+    "PRECURSOR_EYE": {
+      "sell": 1000
+    },
+    "PRECURSOR_GEAR": {
+      "sell": 1
+    },
+    "PREHISTORIC_EGG": {
+      "sell": 1000
+    },
+    "PREMIUM_FLESH": {
+      "sell": 1
+    },
+    "PRESSURE_ARTIFACT": {
+      "sell": 1000
+    },
+    "PRESSURE_RING": {
+      "sell": 1000
+    },
+    "PRESSURE_TALISMAN": {
+      "sell": 1000
+    },
+    "PRICKLY_CREEPER": {
+      "sell": 1000000
+    },
+    "PRICKLY_KISS": {
+      "sell": 50
+    },
+    "PRIME_LUSHLILAC_BONBON": {
+      "sell": 156
+    },
+    "PRINCE_CROWN_JEWEL": {
+      "sell": 1000000
+    },
+    "PRISMARINE": {
+      "sell": 5
+    },
+    "PRISMARINE_BLADE": {
+      "sell": 160
+    },
+    "PRISMARINE_BOW": {
+      "sell": 120
+    },
+    "PRISMARINE_CRYSTALS": {
+      "sell": 5
+    },
+    "PRISMARINE_ROD": {
+      "sell": 10
+    },
+    "PRISMARINE_SHARD": {
+      "sell": 5
+    },
+    "PRISMARINE:1": {
+      "sell": 5
+    },
+    "PRISMARINE:2": {
+      "sell": 5
+    },
+    "PROMISING_AXE": {
+      "sell": 20,
+      "buy": 35
+    },
+    "PROMISING_HOE": {
+      "sell": 10
+    },
+    "PROMISING_PICKAXE": {
+      "sell": 10,
+      "buy": 35
+    },
+    "PROMISING_SPADE": {
+      "sell": 10
+    },
+    "PROTECTOR_DRAGON_BOOTS": {
+      "sell": 100000
+    },
+    "PROTECTOR_DRAGON_CHESTPLATE": {
+      "sell": 100000
+    },
+    "PROTECTOR_DRAGON_HELMET": {
+      "sell": 100000
+    },
+    "PROTECTOR_DRAGON_LEGGINGS": {
+      "sell": 100000
+    },
+    "PROTECTOR_FRAGMENT": {
+      "sell": 2500
+    },
+    "PUFFERFISH_HAT": {
+      "sell": 60
+    },
+    "PULPOUS_ORANGE_JUICE": {
+      "buy": 1000
+    },
+    "PULSE_RING": {
+      "sell": 8000
+    },
+    "PUMPKIN": {
+      "sell": 10,
+      "buy": 25
+    },
+    "PUMPKIN_BOMB": {
+      "sell": 530
+    },
+    "PUMPKIN_GUTS": {
+      "sell": 10000
+    },
+    "PUMPKIN_PIE": {
+      "sell": 9
+    },
+    "PUMPKIN_SEEDS": {
+      "sell": 1
+    },
+    "PURE_MITHRIL": {
+      "sell": 29000
+    },
+    "PURPLE_CANDY": {
+      "sell": 5000
+    },
+    "PYROCLASTIC_SCALE": {
+      "sell": 50
+    },
+    "QUARTZ": {
+      "sell": 4,
+      "buy": 50
+    },
+    "QUARTZ_BLOCK": {
+      "sell": 16
+    },
+    "QUARTZ_ORE": {
+      "sell": 6
+    },
+    "QUARTZ_STAIRS": {
+      "sell": 2
+    },
+    "QUICKDRAW_GARDEN_CHIP": {
+      "sell": 25000
+    },
+    "RABBIT": {
+      "sell": 4,
+      "buy": 10
+    },
+    "RABBIT_FOOT": {
+      "sell": 5,
+      "buy": 10,
+      "stock": 640
+    },
+    "RABBIT_HAT": {
+      "sell": 10
+    },
+    "RABBIT_HIDE": {
+      "sell": 5,
+      "buy": 10
+    },
+    "RABBIT_STEW": {
+      "sell": 12
+    },
+    "RADIOACTIVE_VIAL": {
+      "sell": 5000000
+    },
+    "RAGNAROCK_AXE": {
+      "sell": 5000
+    },
+    "RAGNAROK_ABILITY": {
+      "sell": 1
+    },
+    "RAIDER_AXE": {
+      "buy": 130000
+    },
+    "RAILS": {
+      "sell": 1
+    },
+    "RAINBOW_FEATHER": {
+      "sell": 100000
+    },
+    "RAMPART_BOOTS": {
+      "sell": 1000
+    },
+    "RAMPART_CHESTPLATE": {
+      "sell": 1000
+    },
+    "RAMPART_HELMET": {
+      "sell": 1000
+    },
+    "RAMPART_LEGGINGS": {
+      "sell": 1000
+    },
+    "RANDOM_FIREWORK": {
+      "sell": 5200
+    },
+    "RARE_DIAMOND": {
+      "sell": 1
+    },
+    "RAREFINDER_GARDEN_CHIP": {
+      "sell": 1000000
+    },
+    "RAW_BEEF": {
+      "sell": 4,
+      "buy": 10
+    },
+    "RAW_CHICKEN": {
+      "sell": 4,
+      "buy": 10
+    },
+    "RAW_FISH": {
+      "sell": 6,
+      "buy": 10
+    },
+    "RAW_FISH:1": {
+      "sell": 10
+    },
+    "RAW_FISH:2": {
+      "sell": 20
+    },
+    "RAW_FISH:3": {
+      "sell": 15
+    },
+    "RECORD_10": {
+      "sell": 20
+    },
+    "RECORD_11": {
+      "sell": 20
+    },
+    "RECORD_12": {
+      "sell": 20
+    },
+    "RECORD_3": {
+      "sell": 20
+    },
+    "RECORD_4": {
+      "sell": 20
+    },
+    "RECORD_5": {
+      "sell": 20
+    },
+    "RECORD_6": {
+      "sell": 20
+    },
+    "RECORD_7": {
+      "sell": 20
+    },
+    "RECORD_8": {
+      "sell": 20
+    },
+    "RECORD_9": {
+      "sell": 20
+    },
+    "RED_MUSHROOM": {
+      "sell": 10,
+      "buy": 25
+    },
+    "RED_NOSE": {
+      "sell": 1
+    },
+    "RED_ROSE": {
+      "sell": 1
+    },
+    "RED_ROSE:1": {
+      "sell": 1
+    },
+    "RED_ROSE:2": {
+      "sell": 1
+    },
+    "RED_ROSE:3": {
+      "sell": 1
+    },
+    "RED_ROSE:4": {
+      "sell": 1
+    },
+    "RED_ROSE:5": {
+      "sell": 1
+    },
+    "RED_ROSE:6": {
+      "sell": 1
+    },
+    "RED_ROSE:7": {
+      "sell": 1
+    },
+    "RED_ROSE:8": {
+      "sell": 1
+    },
+    "RED_SANDSTONE": {
+      "sell": 3
+    },
+    "RED_SANDSTONE_STAIRS": {
+      "sell": 2
+    },
+    "RED_SANDSTONE:1": {
+      "sell": 3
+    },
+    "RED_SANDSTONE:2": {
+      "sell": 3
+    },
+    "RED_SCARF": {
+      "sell": 1
+    },
+    "RED_THORNLEAF": {
+      "sell": 20
+    },
+    "REDSTONE": {
+      "sell": 1
+    },
+    "REDSTONE_BLOCK": {
+      "sell": 9
+    },
+    "REDSTONE_COMPARATOR": {
+      "sell": 5,
+      "buy": 10
+    },
+    "REDSTONE_LAMP_OFF": {
+      "sell": 6
+    },
+    "REDSTONE_ORE": {
+      "sell": 6
+    },
+    "REDSTONE_TIPPED_ARROW": {
+      "sell": 1
+    },
+    "REDSTONE_TORCH_ON": {
+      "sell": 1,
+      "buy": 2
+    },
+    "REFINED_AMBER": {
+      "sell": 1,
+      "buy": 1000000
+    },
+    "REFINED_BOTTLE_OF_JYRRE": {
+      "sell": 30000
+    },
+    "REFINED_DIAMOND": {
+      "sell": 4096
+    },
+    "REFINED_MINERAL": {
+      "sell": 100000
+    },
+    "REFINED_MITHRIL": {
+      "sell": 204800
+    },
+    "REFINED_MITHRIL_PICKAXE": {
+      "sell": 5000
+    },
+    "REFINED_TITANIUM": {
+      "sell": 51200
+    },
+    "REFINED_TITANIUM_PICKAXE": {
+      "sell": 14500
+    },
+    "REFINED_TUNGSTEN": {
+      "sell": 256000
+    },
+    "REFINED_UMBER": {
+      "sell": 256000
+    },
+    "REFORGE_ANVIL": {
+      "sell": 2000000
+    },
+    "REINFORCED_CHISEL": {
+      "sell": 1000
+    },
+    "REINFORCED_IRON_ARROW": {
+      "sell": 1
+    },
+    "REINFORCED_NETTING": {
+      "sell": 1000000
+    },
+    "REKINDLED_EMBER_BOOTS": {
+      "sell": 40000
+    },
+    "REKINDLED_EMBER_CHESTPLATE": {
+      "sell": 80000
+    },
+    "REKINDLED_EMBER_HELMET": {
+      "sell": 50000
+    },
+    "REKINDLED_EMBER_LEGGINGS": {
+      "sell": 70000
+    },
+    "REMNANT_OF_THE_EYE": {
+      "sell": 1
+    },
+    "RESPIRATION_ARTIFACT": {
+      "sell": 3000
+    },
+    "RESPIRATION_RING": {
+      "sell": 2000
+    },
+    "RESPIRATION_TALISMAN": {
+      "sell": 1000
+    },
+    "REVENANT_CATALYST": {
+      "sell": 8000
+    },
+    "REVENANT_FLESH": {
+      "sell": 1
+    },
+    "REVENANT_VISCERA": {
+      "sell": 128
+    },
+    "REVENGE": {
+      "sell": 20
+    },
+    "REVERSE_REFORGE_STONE_CORE": {
+      "sell": 25000
+    },
+    "REVIVE_STONE": {
+      "sell": 1
+    },
+    "REVIVE_STONE_ORB": {
+      "sell": 1
+    },
+    "RING_POTION_AFFINITY": {
+      "sell": 2100
+    },
+    "RITUAL_RESIDUE": {
+      "sell": 10000
+    },
+    "ROBOTRON_REFLECTOR": {
+      "sell": 50000
+    },
+    "ROCK_CANDY": {
+      "sell": 770
+    },
+    "ROCK_GEMSTONE": {
+      "sell": 23000
+    },
+    "ROCK_PAPER_SHEARS": {
+      "buy": 10000
+    },
+    "ROD_OF_THE_SEA": {
+      "sell": 111000
+    },
+    "ROGUE_SWORD": {
+      "sell": 3,
+      "buy": 100
+    },
+    "ROOFED_FOREST_BIOME_STICK": {
+      "sell": 32
+    },
+    "ROOKIE_AXE": {
+      "sell": 6,
+      "buy": 12
+    },
+    "ROOKIE_FARMING_AXE": {
+      "sell": 3,
+      "buy": 10
+    },
+    "ROOKIE_HOE": {
+      "sell": 3,
+      "buy": 10
+    },
+    "ROOKIE_PICKAXE": {
+      "sell": 2,
+      "buy": 12
+    },
+    "ROSETTA_BOOTS": {
+      "sell": 480,
+      "buy": 960
+    },
+    "ROSETTA_CHESTPLATE": {
+      "sell": 660,
+      "buy": 1320
+    },
+    "ROSETTA_HELMET": {
+      "sell": 525,
+      "buy": 1050
+    },
+    "ROSETTA_LEGGINGS": {
+      "sell": 600,
+      "buy": 1200
+    },
+    "ROSEWATER_FLASK": {
+      "sell": 400000
+    },
+    "ROTTED_LEAF": {
+      "sell": 5
+    },
+    "ROTTEN_BOOTS": {
+      "sell": 1
+    },
+    "ROTTEN_CHESTPLATE": {
+      "sell": 1
+    },
+    "ROTTEN_FLESH": {
+      "sell": 2,
+      "buy": 8,
+      "stock": 640
+    },
+    "ROTTEN_HELMET": {
+      "sell": 1
+    },
+    "ROTTEN_LEGGINGS": {
+      "sell": 1
+    },
+    "ROUGH_AMBER_GEM": {
+      "sell": 3
+    },
+    "ROUGH_AMETHYST_GEM": {
+      "sell": 3
+    },
+    "ROUGH_AQUAMARINE_GEM": {
+      "sell": 4
+    },
+    "ROUGH_CITRINE_GEM": {
+      "sell": 4
+    },
+    "ROUGH_JADE_GEM": {
+      "sell": 3
+    },
+    "ROUGH_JASPER_GEM": {
+      "sell": 4
+    },
+    "ROUGH_ONYX_GEM": {
+      "sell": 4
+    },
+    "ROUGH_OPAL_GEM": {
+      "sell": 3
+    },
+    "ROUGH_PERIDOT_GEM": {
+      "sell": 4
+    },
+    "ROUGH_RUBY_GEM": {
+      "sell": 3
+    },
+    "ROUGH_SAPPHIRE_GEM": {
+      "sell": 3
+    },
+    "ROUGH_TOPAZ_GEM": {
+      "sell": 3
+    },
+    "RUBBER_SNORKEL": {
+      "sell": 25000
+    },
+    "RUBY_POLISHED_DRILL_ENGINE": {
+      "sell": 103000
+    },
+    "RUBY_VEILSHROOM": {
+      "sell": 5
+    },
+    "RUFFLED_FEATHER": {
+      "sell": 5
+    },
+    "RUNAANS_BOW": {
+      "sell": 86000
+    },
+    "RUNE": {
+      "sell": 1
+    },
+    "RUNEBLADE_ARTIFACT": {
+      "sell": 8100
+    },
+    "RUNEBLADE_RING": {
+      "sell": 900
+    },
+    "RUNEBLADE_TALISMAN": {
+      "sell": 100
+    },
+    "RUNEBOOK": {
+      "sell": 10000
+    },
+    "RUNIC_STAFF": {
+      "sell": 46875
+    },
+    "RUSTY_ANCHOR": {
+      "sell": 1
+    },
+    "RUSTY_COIN": {
+      "sell": 1000
+    },
+    "RUSTY_TITANIUM_PICKAXE": {
+      "sell": 2500,
+      "buy": 50000
+    },
+    "SADAN_BROOCH": {
+      "sell": 1
+    },
+    "SADDLE": {
+      "sell": 5
+    },
+    "SALMON_BOOTS": {
+      "sell": 100
+    },
+    "SALMON_BOOTS_NEW": {
+      "sell": 100
+    },
+    "SALMON_CHESTPLATE": {
+      "sell": 200
+    },
+    "SALMON_CHESTPLATE_NEW": {
+      "sell": 200
+    },
+    "SALMON_HAT": {
+      "sell": 40
+    },
+    "SALMON_HAT_CELEBRATION": {
+      "sell": 40
+    },
+    "SALMON_HELMET": {
+      "sell": 125
+    },
+    "SALMON_HELMET_NEW": {
+      "sell": 125
+    },
+    "SALMON_LEGGINGS": {
+      "sell": 175
+    },
+    "SALMON_LEGGINGS_NEW": {
+      "sell": 175
+    },
+    "SALMON_OPAL": {
+      "sell": 2000
+    },
+    "SALT_CUBE": {
+      "sell": 1
+    },
+    "SALTED_SUNFLOWER_SEEDS": {
+      "sell": 50000
+    },
+    "SAM_SCYTHE": {
+      "sell": 1
+    },
+    "SAND": {
+      "sell": 2,
+      "buy": 4
+    },
+    "SAND:1": {
+      "sell": 5,
+      "buy": 20
+    },
+    "SANDSTONE": {
+      "sell": 3
+    },
+    "SANDSTONE_STAIRS": {
+      "sell": 2
+    },
+    "SANDSTONE:1": {
+      "sell": 3
+    },
+    "SANDSTONE:2": {
+      "sell": 3
+    },
+    "SAPLING": {
+      "sell": 0.25
+    },
+    "SAPLING:1": {
+      "sell": 0.25
+    },
+    "SAPLING:2": {
+      "sell": 0.25
+    },
+    "SAPLING:3": {
+      "sell": 0.25
+    },
+    "SAPLING:4": {
+      "sell": 0.25
+    },
+    "SAPLING:5": {
+      "sell": 0.25
+    },
+    "SAPPHIRE_POLISHED_DRILL_ENGINE": {
+      "sell": 103000
+    },
+    "SAVANA_BIOME_STICK": {
+      "sell": 32
+    },
+    "SAVANA_BOW": {
+      "sell": 500
+    },
+    "SAVING_GRACE": {
+      "sell": 20000
+    },
+    "SCARE_FRAGMENT": {
+      "sell": 1000
+    },
+    "SCARF_FRAGMENT": {
+      "sell": 10000
+    },
+    "SCARF_GRIMOIRE": {
+      "sell": 1000
+    },
+    "SCARF_STUDIES": {
+      "sell": 1000
+    },
+    "SCARF_THESIS": {
+      "sell": 1000
+    },
+    "SCAVENGER_TALISMAN": {
+      "sell": 200,
+      "buy": 10000
+    },
+    "SCORCHED_BOOKS": {
+      "sell": 1
+    },
+    "SCORCHED_CRAB_STICK": {
+      "sell": 25000
+    },
+    "SCORCHED_POWER_CRYSTAL": {
+      "sell": 350000
+    },
+    "SCORNCLAW_BREW": {
+      "sell": 50,
+      "buy": 2000
+    },
+    "SCOURGE_CLOAK": {
+      "sell": 57000
+    },
+    "SCOVILLE_BELT": {
+      "sell": 55000
+    },
+    "SCULPTORS_AXE": {
+      "sell": 64
+    },
+    "SCUTTLER_SHELL": {
+      "sell": 1000000
+    },
+    "SEA_ARCHER_HELMET": {
+      "sell": 50
+    },
+    "SEA_CREATURE_ARTIFACT": {
+      "sell": 25000
+    },
+    "SEA_CREATURE_RING": {
+      "sell": 1000
+    },
+    "SEA_CREATURE_TALISMAN": {
+      "sell": 180
+    },
+    "SEA_LANTERN": {
+      "sell": 45
+    },
+    "SEA_LUMIES": {
+      "sell": 3
+    },
+    "SEA_WALKER_BOOTS": {
+      "sell": 50
+    },
+    "SEA_WALKER_CHESTPLATE": {
+      "sell": 50
+    },
+    "SEA_WALKER_HELMET": {
+      "sell": 50
+    },
+    "SEA_WALKER_LEGGINGS": {
+      "sell": 50
+    },
+    "SEAL_RING": {
+      "sell": 20000
+    },
+    "SEAL_TALISMAN": {
+      "sell": 10000
+    },
+    "SEARED_ESCARGOT": {
+      "sell": 25000
+    },
+    "SEARING_STONE": {
+      "sell": 35650
+    },
+    "SEEDS": {
+      "sell": 3
+    },
+    "SEISMIC_WAVE_STICK": {
+      "sell": 1
+    },
+    "SERIOUSLY_DAMAGED_AXE": {
+      "buy": 5000
+    },
+    "SEVERED_HAND": {
+      "sell": 1000000
+    },
+    "SEVERED_PINCER": {
+      "sell": 1000000
+    },
+    "SEWER_FISH": {
+      "sell": 1
+    },
+    "SHADOW_ASSASSIN_BOOTS": {
+      "sell": 5000
+    },
+    "SHADOW_ASSASSIN_CHESTPLATE": {
+      "sell": 5000
+    },
+    "SHADOW_ASSASSIN_HELMET": {
+      "sell": 5000
+    },
+    "SHADOW_ASSASSIN_LEGGINGS": {
+      "sell": 5000
+    },
+    "SHADOW_FURY": {
+      "sell": 500000
+    },
+    "SHADOW_GOGGLES": {
+      "buy": 800000
+    },
+    "SHADOW_WARP_SCROLL": {
+      "sell": 1
+    },
+    "SHARK_BAIT": {
+      "sell": 8
+    },
+    "SHARK_FIN": {
+      "sell": 200
+    },
+    "SHARK_SCALE_BOOTS": {
+      "sell": 32000
+    },
+    "SHARK_SCALE_CHESTPLATE": {
+      "sell": 64000
+    },
+    "SHARK_SCALE_HELMET": {
+      "sell": 40000
+    },
+    "SHARK_SCALE_LEGGINGS": {
+      "sell": 56000
+    },
+    "SHARK_WATER_ORB": {
+      "sell": 5000
+    },
+    "SHATTERED_PENDANT": {
+      "sell": 5000000
+    },
+    "SHEARS": {
+      "sell": 3
+    },
+    "SHIELD_DUST": {
+      "sell": 5
+    },
+    "SHIMMERING_LIGHT_HOOD": {
+      "sell": 129500
+    },
+    "SHIMMERING_LIGHT_SLIPPERS": {
+      "sell": 129000
+    },
+    "SHIMMERING_LIGHT_TROUSERS": {
+      "sell": 256950
+    },
+    "SHIMMERING_LIGHT_TUNIC": {
+      "sell": 321050
+    },
+    "SHIMMERING_WOOL": {
+      "sell": 5000000
+    },
+    "SHINIEST": {
+      "sell": 100000
+    },
+    "SHINY_PRISM": {
+      "sell": 13800
+    },
+    "SHOWCASE_BLOCK": {
+      "sell": 1,
+      "buy": 50000
+    },
+    "SHREDDED_LINE": {
+      "sell": 250000
+    },
+    "SHRIVELED_CORNEA": {
+      "sell": 1
+    },
+    "SHRIVELED_WASP": {
+      "sell": 100000
+    },
+    "SIGN": {
+      "sell": 1
+    },
+    "SIGNAL_ENHANCER": {
+      "sell": 5000
+    },
+    "SILENCE_BLOCK": {
+      "sell": 160
+    },
+    "SILENT_DEATH": {
+      "sell": 20000
+    },
+    "SILENT_PEARL": {
+      "sell": 100
+    },
+    "SILK_EDGE_SWORD": {
+      "sell": 375000
+    },
+    "SILVA_DOMINUS": {
+      "buy": 300000
+    },
+    "SILVER_FANG": {
+      "sell": 2000
+    },
+    "SIMPLE_CARROT_CANDY": {
+      "sell": 1
+    },
+    "SINGED_POWDER": {
+      "sell": 1000
+    },
+    "SKELETON_GRUNT_BOOTS": {
+      "sell": 1
+    },
+    "SKELETON_GRUNT_CHESTPLATE": {
+      "sell": 1
+    },
+    "SKELETON_GRUNT_HELMET": {
+      "sell": 1
+    },
+    "SKELETON_GRUNT_LEGGINGS": {
+      "sell": 1
+    },
+    "SKELETON_HAT": {
+      "sell": 8
+    },
+    "SKELETON_HELMET": {
+      "sell": 51000
+    },
+    "SKELETON_KEY": {
+      "sell": 10000
+    },
+    "SKELETON_LORD_BOOTS": {
+      "sell": 1
+    },
+    "SKELETON_LORD_BOW": {
+      "sell": 1
+    },
+    "SKELETON_LORD_CHESTPLATE": {
+      "sell": 1
+    },
+    "SKELETON_LORD_HELMET": {
+      "sell": 1
+    },
+    "SKELETON_LORD_LEGGINGS": {
+      "sell": 1
+    },
+    "SKELETON_MASTER_BOOTS": {
+      "sell": 1
+    },
+    "SKELETON_MASTER_CHESTPLATE": {
+      "sell": 1
+    },
+    "SKELETON_MASTER_HELMET": {
+      "sell": 1
+    },
+    "SKELETON_MASTER_LEGGINGS": {
+      "sell": 1
+    },
+    "SKELETON_SOLDIER_BOOTS": {
+      "sell": 1
+    },
+    "SKELETON_SOLDIER_CHESTPLATE": {
+      "sell": 1
+    },
+    "SKELETON_SOLDIER_HELMET": {
+      "sell": 1
+    },
+    "SKELETON_SOLDIER_LEGGINGS": {
+      "sell": 1
+    },
+    "SKELETON_TALISMAN": {
+      "sell": 50,
+      "buy": 500
+    },
+    "SKELETOR_BOOTS": {
+      "sell": 5000
+    },
+    "SKELETOR_CHESTPLATE": {
+      "sell": 5000
+    },
+    "SKELETOR_HELMET": {
+      "sell": 5000
+    },
+    "SKELETOR_LEGGINGS": {
+      "sell": 5000
+    },
+    "SKULL_ITEM": {
+      "sell": 20
+    },
+    "SKULL_ITEM:1": {
+      "sell": 20
+    },
+    "SKULL_ITEM:2": {
+      "sell": 20
+    },
+    "SKULL_ITEM:3": {
+      "sell": 20
+    },
+    "SKULL_ITEM:4": {
+      "sell": 20
+    },
+    "SKULL_ITEM:5": {
+      "sell": 20
+    },
+    "SKYMART_BROCHURE": {
+      "sell": 1
+    },
+    "SLAYER_ENERGY_DRINK": {
+      "buy": 10000
+    },
+    "SLIME_BALL": {
+      "sell": 5,
+      "buy": 14,
+      "stock": 640
+    },
+    "SLIME_BLOCK": {
+      "sell": 45
+    },
+    "SLIME_BOW": {
+      "sell": 960000
+    },
+    "SLIME_HAT": {
+      "sell": 20
+    },
+    "SLUDGE_JUICE": {
+      "sell": 1000
+    },
+    "SLUG_BOOTS": {
+      "sell": 5000
+    },
+    "SMALL_ENCHANTED_CHEST": {
+      "sell": 65
+    },
+    "SMALL_FISH_BOWL": {
+      "sell": 100
+    },
+    "SMALL_FROG_TREAT": {
+      "sell": 25000
+    },
+    "SMALL_HONEY_DIPPER": {
+      "buy": 500
+    },
+    "SMALL_LAVA_FISHING_SACK": {
+      "sell": 6400
+    },
+    "SMALL_NETHER_SACK": {
+      "sell": 16400
+    },
+    "SMALL_POCKET_BLACK_HOLE": {
+      "sell": 50000
+    },
+    "SMALL_SLOTH_CLAW": {
+      "sell": 25000
+    },
+    "SMOLDERING_EMBERS": {
+      "sell": 5
+    },
+    "SMOOTH_BRICK": {
+      "sell": 1
+    },
+    "SMOOTH_BRICK:1": {
+      "sell": 2
+    },
+    "SMOOTH_BRICK:2": {
+      "sell": 1
+    },
+    "SMOOTH_BRICK:3": {
+      "sell": 1
+    },
+    "SMOOTH_STAIRS": {
+      "sell": 1
+    },
+    "SNAKE_EYES": {
+      "sell": 1000000
+    },
+    "SNIPER_BOW": {
+      "sell": 1
+    },
+    "SNIPER_HELMET": {
+      "sell": 1
+    },
+    "SNORKELING_BOOTS": {
+      "sell": 10000,
+      "buy": 50000
+    },
+    "SNORKELING_CHESTPLATE": {
+      "sell": 20000,
+      "buy": 50000
+    },
+    "SNORKELING_HELMET": {
+      "sell": 10000,
+      "buy": 50000
+    },
+    "SNORKELING_LEGGINGS": {
+      "sell": 15000,
+      "buy": 50000
+    },
+    "SNOW_BALL": {
+      "sell": 1
+    },
+    "SNOW_BLASTER": {
+      "sell": 100,
+      "buy": 75000
+    },
+    "SNOW_BLOCK": {
+      "sell": 4
+    },
+    "SNOW_CANNON": {
+      "sell": 10
+    },
+    "SNOW_HOWITZER": {
+      "sell": 100
+    },
+    "SNOW_SUIT_BOOTS": {
+      "sell": 1000
+    },
+    "SNOW_SUIT_CHESTPLATE": {
+      "sell": 1000
+    },
+    "SNOW_SUIT_HELMET": {
+      "sell": 1000
+    },
+    "SNOW_SUIT_LEGGINGS": {
+      "sell": 1000
+    },
+    "SOCIAL_DISPLAY": {
+      "buy": 10000
+    },
+    "SOLAR_PANEL": {
+      "sell": 10000
+    },
+    "SORROW": {
+      "sell": 50000
+    },
+    "SORROW_BOOTS": {
+      "sell": 60000
+    },
+    "SORROW_CHESTPLATE": {
+      "sell": 120000
+    },
+    "SORROW_HELMET": {
+      "sell": 75000
+    },
+    "SORROW_LEGGINGS": {
+      "sell": 105000
+    },
+    "SOUL_FRAGMENT": {
+      "sell": 200000
+    },
+    "SOUL_SAND": {
+      "sell": 4
+    },
+    "SOUL_STRING": {
+      "sell": 5000
+    },
+    "SOULFLOW": {
+      "sell": 1
+    },
+    "SOULFLOW_PILE": {
+      "sell": 160
+    },
+    "SOULS_REBOUND": {
+      "sell": 1
+    },
+    "SOWLEDGE_GARDEN_CHIP": {
+      "sell": 100000
+    },
+    "SPECKLED_MELON": {
+      "sell": 3.5,
+      "buy": 10
+    },
+    "SPECKLED_TEACUP": {
+      "sell": 100000
+    },
+    "SPECTRE_DUST": {
+      "sell": 50
+    },
+    "SPEED_ARTIFACT": {
+      "sell": 1400000
+    },
+    "SPEED_RELIC": {
+      "sell": 1400000
+    },
+    "SPEED_RING": {
+      "sell": 18000
+    },
+    "SPEED_TALISMAN": {
+      "sell": 110
+    },
+    "SPEED_WITHER_BOOTS": {
+      "sell": 5000
+    },
+    "SPEED_WITHER_CHESTPLATE": {
+      "sell": 5000
+    },
+    "SPEED_WITHER_HELMET": {
+      "sell": 5000
+    },
+    "SPEED_WITHER_LEGGINGS": {
+      "sell": 5000
+    },
+    "SPEEDSTER_BOOTS": {
+      "sell": 2560
+    },
+    "SPEEDSTER_CHESTPLATE": {
+      "sell": 5120
+    },
+    "SPEEDSTER_HELMET": {
+      "sell": 3200
+    },
+    "SPEEDSTER_LEGGINGS": {
+      "sell": 4480
+    },
+    "SPEEDSTER_ROD": {
+      "sell": 1000
+    },
+    "SPELL_BOOK_TEST": {
+      "sell": 1
+    },
+    "SPELL_POWDER": {
+      "sell": 500
+    },
+    "SPELL_SOOT": {
+      "sell": 5
+    },
+    "SPIDER_BOOTS": {
+      "sell": 74000
+    },
+    "SPIDER_CATALYST": {
+      "sell": 2000
+    },
+    "SPIDER_EGG": {
+      "sell": 5
+    },
+    "SPIDER_EGG_MIXIN": {
+      "buy": 150000
+    },
+    "SPIDER_EYE": {
+      "sell": 3,
+      "buy": 12,
+      "stock": 640
+    },
+    "SPIDER_HAT": {
+      "sell": 12
+    },
+    "SPIDER_QUEENS_STINGER": {
+      "sell": 5000
+    },
+    "SPIDER_SWORD": {
+      "sell": 5,
+      "buy": 100
+    },
+    "SPIDER_TALISMAN": {
+      "sell": 50
+    },
+    "SPIKED_BAIT": {
+      "sell": 20
+    },
+    "SPINE_FOSSIL": {
+      "sell": 50000
+    },
+    "SPIRIT_DECOY": {
+      "sell": 1
+    },
+    "SPIRIT_LEAP": {
+      "sell": 100
+    },
+    "SPIRIT_MASK": {
+      "sell": 20000
+    },
+    "SPIRIT_SWORD": {
+      "sell": 1000
+    },
+    "SPONGE": {
+      "sell": 50
+    },
+    "SPONGE_BOOTS": {
+      "sell": 32000
+    },
+    "SPONGE_CHESTPLATE": {
+      "sell": 64000
+    },
+    "SPONGE_HELMET": {
+      "sell": 40000
+    },
+    "SPONGE_LEGGINGS": {
+      "sell": 56000
+    },
+    "SPONGE_ROD": {
+      "sell": 36
+    },
+    "SPONGE_SINKER": {
+      "sell": 560
+    },
+    "SPONGE:1": {
+      "sell": 50
+    },
+    "SPOOKY_BAIT": {
+      "sell": 10
+    },
+    "SPOOKY_DISC": {
+      "sell": 1
+    },
+    "SPOOKY_SHARD": {
+      "sell": 10000
+    },
+    "SPOOKY_WATER_ORB": {
+      "sell": 5000
+    },
+    "SPORE_HARVESTER": {
+      "sell": 50,
+      "buy": 100000
+    },
+    "SPRAY_CAN": {
+      "sell": 5
+    },
+    "SPRUCE_DOOR_ITEM": {
+      "sell": 1
+    },
+    "SPRUCE_FENCE": {
+      "sell": 1
+    },
+    "SPRUCE_FENCE_GATE": {
+      "sell": 1
+    },
+    "SPRUCE_WOOD_STAIRS": {
+      "sell": 0.5
+    },
+    "SQUASH": {
+      "sell": 75000
+    },
+    "SQUEAKY_MOUSEMAT": {
+      "sell": 1000000
+    },
+    "SQUEAKY_TOY": {
+      "sell": 10000
+    },
+    "SQUID_BOOTS": {
+      "sell": 15
+    },
+    "SQUID_HAT": {
+      "sell": 10
+    },
+    "SQUIRE_BOOTS": {
+      "sell": 2000,
+      "buy": 4000
+    },
+    "SQUIRE_CHESTPLATE": {
+      "sell": 4000,
+      "buy": 8000
+    },
+    "SQUIRE_HELMET": {
+      "sell": 2500,
+      "buy": 5000
+    },
+    "SQUIRE_LEGGINGS": {
+      "sell": 3500,
+      "buy": 7000
+    },
+    "SQUIRE_SWORD": {
+      "sell": 2500,
+      "buy": 5000
+    },
+    "STAFF_OF_THE_VOLCANO": {
+      "sell": 5000
+    },
+    "STAINED_CLAY": {
+      "sell": 2
+    },
+    "STAINED_CLAY:1": {
+      "sell": 2
+    },
+    "STAINED_CLAY:10": {
+      "sell": 2
+    },
+    "STAINED_CLAY:11": {
+      "sell": 2
+    },
+    "STAINED_CLAY:12": {
+      "sell": 2
+    },
+    "STAINED_CLAY:13": {
+      "sell": 2
+    },
+    "STAINED_CLAY:14": {
+      "sell": 2
+    },
+    "STAINED_CLAY:15": {
+      "sell": 2
+    },
+    "STAINED_CLAY:2": {
+      "sell": 2
+    },
+    "STAINED_CLAY:3": {
+      "sell": 2
+    },
+    "STAINED_CLAY:4": {
+      "sell": 2
+    },
+    "STAINED_CLAY:5": {
+      "sell": 2
+    },
+    "STAINED_CLAY:6": {
+      "sell": 2
+    },
+    "STAINED_CLAY:7": {
+      "sell": 2
+    },
+    "STAINED_CLAY:8": {
+      "sell": 2
+    },
+    "STAINED_CLAY:9": {
+      "sell": 2
+    },
+    "STAINED_GLASS": {
+      "sell": 2
+    },
+    "STAINED_GLASS_PANE": {
+      "sell": 0.75
+    },
+    "STAINED_GLASS_PANE:1": {
+      "sell": 0.75
+    },
+    "STAINED_GLASS_PANE:10": {
+      "sell": 0.75
+    },
+    "STAINED_GLASS_PANE:11": {
+      "sell": 0.75
+    },
+    "STAINED_GLASS_PANE:12": {
+      "sell": 0.75
+    },
+    "STAINED_GLASS_PANE:13": {
+      "sell": 0.75
+    },
+    "STAINED_GLASS_PANE:14": {
+      "sell": 0.75
+    },
+    "STAINED_GLASS_PANE:15": {
+      "sell": 0.75
+    },
+    "STAINED_GLASS_PANE:2": {
+      "sell": 0.75
+    },
+    "STAINED_GLASS_PANE:3": {
+      "sell": 0.75
+    },
+    "STAINED_GLASS_PANE:4": {
+      "sell": 0.75
+    },
+    "STAINED_GLASS_PANE:5": {
+      "sell": 0.75
+    },
+    "STAINED_GLASS_PANE:6": {
+      "sell": 0.75
+    },
+    "STAINED_GLASS_PANE:7": {
+      "sell": 0.75
+    },
+    "STAINED_GLASS_PANE:8": {
+      "sell": 0.75
+    },
+    "STAINED_GLASS_PANE:9": {
+      "sell": 0.75
+    },
+    "STAINED_GLASS:1": {
+      "sell": 3
+    },
+    "STAINED_GLASS:10": {
+      "sell": 3
+    },
+    "STAINED_GLASS:11": {
+      "sell": 3
+    },
+    "STAINED_GLASS:12": {
+      "sell": 3
+    },
+    "STAINED_GLASS:13": {
+      "sell": 3
+    },
+    "STAINED_GLASS:14": {
+      "sell": 3
+    },
+    "STAINED_GLASS:15": {
+      "sell": 3
+    },
+    "STAINED_GLASS:2": {
+      "sell": 3
+    },
+    "STAINED_GLASS:3": {
+      "sell": 3
+    },
+    "STAINED_GLASS:4": {
+      "sell": 3
+    },
+    "STAINED_GLASS:5": {
+      "sell": 3
+    },
+    "STAINED_GLASS:6": {
+      "sell": 3
+    },
+    "STAINED_GLASS:7": {
+      "sell": 3
+    },
+    "STAINED_GLASS:8": {
+      "sell": 3
+    },
+    "STAINED_GLASS:9": {
+      "sell": 3
+    },
+    "STARFALL": {
+      "sell": 15
+    },
+    "STARLIGHT_BOOTS": {
+      "sell": 15000,
+      "buy": 30000
+    },
+    "STARLIGHT_CHESTPLATE": {
+      "sell": 35000,
+      "buy": 70000
+    },
+    "STARLIGHT_HELMET": {
+      "sell": 17500,
+      "buy": 35000
+    },
+    "STARLIGHT_LEGGINGS": {
+      "sell": 22500,
+      "buy": 45000
+    },
+    "STARLIGHT_WAND": {
+      "sell": 15000,
+      "buy": 30000
+    },
+    "STARLYN_PRIZE": {
+      "sell": 20000
+    },
+    "STARRED_ADAPTIVE_BOOTS": {
+      "sell": 20000
+    },
+    "STARRED_ADAPTIVE_CHESTPLATE": {
+      "sell": 20000
+    },
+    "STARRED_ADAPTIVE_HELMET": {
+      "sell": 20000
+    },
+    "STARRED_ADAPTIVE_LEGGINGS": {
+      "sell": 20000
+    },
+    "STARRED_GLACIAL_SCYTHE": {
+      "sell": 500
+    },
+    "STARRED_ICE_SPRAY_WAND": {
+      "sell": 10000
+    },
+    "STARRED_SHADOW_ASSASSIN_BOOTS": {
+      "sell": 5000
+    },
+    "STARRED_SHADOW_ASSASSIN_CHESTPLATE": {
+      "sell": 5000
+    },
+    "STARRED_SHADOW_ASSASSIN_HELMET": {
+      "sell": 5000
+    },
+    "STARRED_SHADOW_ASSASSIN_LEGGINGS": {
+      "sell": 5000
+    },
+    "STARRED_SHADOW_FURY": {
+      "sell": 500000
+    },
+    "STARRED_SPIDER_QUEENS_STINGER": {
+      "sell": 8000
+    },
+    "STARRED_SPIRIT_MASK": {
+      "sell": 20000
+    },
+    "STARRED_STONE_BLADE": {
+      "sell": 20000
+    },
+    "STARRED_THORNS_BOOTS": {
+      "sell": 100000
+    },
+    "STARRED_VENOMS_TOUCH": {
+      "sell": 8000
+    },
+    "STEEL_CHESTPLATE": {
+      "buy": 5000000
+    },
+    "STEP": {
+      "sell": 0.5
+    },
+    "STEP:1": {
+      "sell": 0.5
+    },
+    "STEP:3": {
+      "sell": 0.5
+    },
+    "STEP:4": {
+      "sell": 0.5
+    },
+    "STEP:5": {
+      "sell": 0.5
+    },
+    "STEP:6": {
+      "sell": 1
+    },
+    "STEP:7": {
+      "sell": 1
+    },
+    "STICK": {
+      "sell": 0.25,
+      "buy": 0.625
+    },
+    "STINGER_BOW": {
+      "sell": 1
+    },
+    "STONE": {
+      "sell": 1,
+      "buy": 2
+    },
+    "STONE_AXE": {
+      "sell": 2
+    },
+    "STONE_BLADE": {
+      "sell": 20000
+    },
+    "STONE_BRIDGE": {
+      "sell": 32
+    },
+    "STONE_BUTTON": {
+      "sell": 1
+    },
+    "STONE_CHESTPLATE": {
+      "sell": 1,
+      "buy": 80000
+    },
+    "STONE_HOE": {
+      "sell": 2
+    },
+    "STONE_PICKAXE": {
+      "sell": 2
+    },
+    "STONE_PLATE": {
+      "sell": 2,
+      "buy": 4
+    },
+    "STONE_SPADE": {
+      "sell": 1
+    },
+    "STONE_SWORD": {
+      "sell": 1
+    },
+    "STONE:1": {
+      "sell": 2
+    },
+    "STONE:2": {
+      "sell": 2
+    },
+    "STONE:3": {
+      "sell": 2
+    },
+    "STONE:4": {
+      "sell": 2
+    },
+    "STONE:5": {
+      "sell": 2
+    },
+    "STONE:6": {
+      "sell": 2
+    },
+    "STONK_PICKAXE": {
+      "sell": 9999
+    },
+    "STORAGE_MINECART": {
+      "sell": 10
+    },
+    "STORM_IN_A_BOTTLE": {
+      "sell": 5000
+    },
+    "STORM_IN_A_BOTTLE_EMPTY": {
+      "sell": 5000
+    },
+    "STORM_THE_FISH": {
+      "sell": 50000
+    },
+    "STRANDED_TREECAPITATOR": {
+      "sell": 10000
+    },
+    "STRETCHING_STICKS": {
+      "sell": 200
+    },
+    "STRING": {
+      "sell": 3,
+      "buy": 10,
+      "stock": 640
+    },
+    "STRONG_DRAGON_BOOTS": {
+      "sell": 100000
+    },
+    "STRONG_DRAGON_CHESTPLATE": {
+      "sell": 100000
+    },
+    "STRONG_DRAGON_HELMET": {
+      "sell": 100000
+    },
+    "STRONG_DRAGON_LEGGINGS": {
+      "sell": 100000
+    },
+    "STRONG_FRAGMENT": {
+      "sell": 2500
+    },
+    "STUFFED_CHILI_PEPPER": {
+      "sell": 200000
+    },
+    "STURDY_BONE": {
+      "sell": 200
+    },
+    "SUBLIME_SILK": {
+      "sell": 50000
+    },
+    "SUGAR": {
+      "sell": 2,
+      "buy": 4,
+      "stock": 640
+    },
+    "SUGAR_CANE": {
+      "sell": 4,
+      "buy": 10
+    },
+    "SULPHUR": {
+      "sell": 4,
+      "buy": 10,
+      "stock": 640
+    },
+    "SULPHUR_BOW": {
+      "sell": 185700
+    },
+    "SULPHUR_ORE": {
+      "sell": 10
+    },
+    "SULPHURIC_COAL": {
+      "sell": 2880
+    },
+    "SUNDIAL": {
+      "sell": 1024000
+    },
+    "SUNFLOWER_OIL": {
+      "sell": 3200
+    },
+    "SUNSHINE_CRYSTAL": {
+      "sell": 1500000
+    },
+    "SUNSTONE": {
+      "sell": 1
+    },
+    "SUPER_CLEAVER": {
+      "sell": 1,
+      "buy": 80000
+    },
+    "SUPER_COMPACTOR_3000": {
+      "sell": 50000
+    },
+    "SUPER_HEAVY_BOOTS": {
+      "sell": 1
+    },
+    "SUPER_HEAVY_CHESTPLATE": {
+      "sell": 1
+    },
+    "SUPER_HEAVY_HELMET": {
+      "sell": 1
+    },
+    "SUPER_HEAVY_LEGGINGS": {
+      "sell": 1
+    },
+    "SUPER_MAGIC_MUSHROOM_SOUP": {
+      "sell": 640
+    },
+    "SUPER_SCRUBBER": {
+      "buy": 25000
+    },
+    "SUPER_UNDEAD_BOW": {
+      "sell": 1000,
+      "buy": 800000
+    },
+    "SUPERB_CARROT_CANDY": {
+      "sell": 1
+    },
+    "SUPERBOOM_TNT": {
+      "sell": 2,
+      "buy": 3000
+    },
+    "SUPERIOR_DRAGON_BOOTS": {
+      "sell": 200000
+    },
+    "SUPERIOR_DRAGON_CHESTPLATE": {
+      "sell": 200000
+    },
+    "SUPERIOR_DRAGON_HELMET": {
+      "sell": 200000
+    },
+    "SUPERIOR_DRAGON_LEGGINGS": {
+      "sell": 200000
+    },
+    "SUPERIOR_FRAGMENT": {
+      "sell": 5000
+    },
+    "SUPERLITE_MOTOR": {
+      "sell": 50000
+    },
+    "SUPREME_CHOCOLATE_BAR": {
+      "sell": 3
+    },
+    "SUSPICIOUS_STEW": {
+      "sell": 50
+    },
+    "SUSPICIOUS_VIAL": {
+      "sell": 1
+    },
+    "SWAMP_THE_FISH": {
+      "sell": 50000
+    },
+    "SWEEP_BOOSTER": {
+      "sell": 25000
+    },
+    "SWEEP_BOOSTER_UNCOMMON": {
+      "sell": 25000
+    },
+    "SWEET_AXE": {
+      "sell": 25,
+      "buy": 100
+    },
+    "SWEET_FLESH": {
+      "sell": 1
+    },
+    "SWORD_OF_BAD_HEALTH": {
+      "sell": 4000
+    },
+    "SYNTHESIS_GARDEN_CHIP": {
+      "sell": 150000
+    },
+    "SYNTHESIZER_V1": {
+      "sell": 3200
+    },
+    "SYNTHESIZER_V2": {
+      "sell": 9280
+    },
+    "SYNTHESIZER_V3": {
+      "sell": 17440
+    },
+    "SYNTHETIC_HEART": {
+      "sell": 50000
+    },
+    "SYPHONER": {
+      "sell": 1
+    },
+    "TAIGA_BIOME_STICK": {
+      "sell": 32
+    },
+    "TALBOTS_THEODOLITE": {
+      "sell": 10
+    },
+    "TANK_DUNGEON_ABILITY_1": {
+      "sell": 1
+    },
+    "TANK_DUNGEON_ABILITY_2": {
+      "sell": 1
+    },
+    "TANK_MINER_BOOTS": {
+      "sell": 2000
+    },
+    "TANK_MINER_CHESTPLATE": {
+      "sell": 4000
+    },
+    "TANK_MINER_HELMET": {
+      "sell": 2000
+    },
+    "TANK_MINER_LEGGINGS": {
+      "sell": 3000
+    },
+    "TANK_WITHER_BOOTS": {
+      "sell": 5000
+    },
+    "TANK_WITHER_CHESTPLATE": {
+      "sell": 5000
+    },
+    "TANK_WITHER_HELMET": {
+      "sell": 5000
+    },
+    "TANK_WITHER_LEGGINGS": {
+      "sell": 5000
+    },
+    "TARANTULA_CATALYST": {
+      "sell": 10000
+    },
+    "TARANTULA_SILK": {
+      "sell": 128
+    },
+    "TARANTULA_WEB": {
+      "sell": 1
+    },
+    "TAURUS_HELMET": {
+      "sell": 50000
+    },
+    "TELEPORT_PAD": {
+      "sell": 1000
+    },
+    "TENDER_WOOD": {
+      "sell": 200
+    },
+    "TENTACLE_MEAT": {
+      "sell": 200
+    },
+    "TEPID_GREEN_TEA": {
+      "buy": 1000
+    },
+    "TERRY_SNOWGLOBE": {
+      "sell": 1
+    },
+    "TESSELLATED_ENDER_PEARL": {
+      "sell": 96000
+    },
+    "THE_SHREDDER": {
+      "sell": 1000
+    },
+    "THIN_GLASS": {
+      "sell": 0.75
+    },
+    "THORN_FRAGMENT": {
+      "sell": 10000
+    },
+    "THORNLEAF_SCYTHE": {
+      "sell": 50,
+      "buy": 85000
+    },
+    "THORNS_BOOTS": {
+      "sell": 100000
+    },
+    "THORNY_VINES": {
+      "sell": 10240
+    },
+    "THROWING_AXE": {
+      "sell": 1
+    },
+    "THUNDER_BOOTS": {
+      "sell": 100000
+    },
+    "THUNDER_CHESTPLATE": {
+      "sell": 200000
+    },
+    "THUNDER_HELMET": {
+      "sell": 125000
+    },
+    "THUNDER_IN_A_BOTTLE": {
+      "sell": 5000
+    },
+    "THUNDER_IN_A_BOTTLE_EMPTY": {
+      "sell": 5000
+    },
+    "THUNDER_LEGGINGS": {
+      "sell": 175000
+    },
+    "THUNDER_SHARDS": {
+      "sell": 50000
+    },
+    "THUNDERBOLT_NECKLACE": {
+      "sell": 75000
+    },
+    "THUNDERSTORM_ABILITY": {
+      "sell": 1
+    },
+    "TIC_TAC_TOE": {
+      "buy": 2500
+    },
+    "TIGER_SHARK_TOOTH": {
+      "sell": 50000
+    },
+    "TIKI_MASK": {
+      "sell": 1000000
+    },
+    "TINY_SCAFFOLDING": {
+      "sell": 300
+    },
+    "TITAN_BOOTS": {
+      "sell": 50000
+    },
+    "TITAN_CHESTPLATE": {
+      "sell": 100000
+    },
+    "TITAN_HELMET": {
+      "sell": 50000
+    },
+    "TITAN_LEGGINGS": {
+      "sell": 75000
+    },
+    "TITANIC_EXP_BOTTLE": {
+      "sell": 5000,
+      "buy": 750000
+    },
+    "TITANIUM_ALLOY": {
+      "sell": 1
+    },
+    "TITANIUM_ARTIFACT": {
+      "sell": 5000
+    },
+    "TITANIUM_DRILL_1": {
+      "sell": 36000
+    },
+    "TITANIUM_DRILL_2": {
+      "sell": 103200
+    },
+    "TITANIUM_DRILL_3": {
+      "sell": 253000
+    },
+    "TITANIUM_DRILL_ENGINE": {
+      "sell": 103000
+    },
+    "TITANIUM_FUEL_TANK": {
+      "sell": 46000
+    },
+    "TITANIUM_ORE": {
+      "sell": 20
+    },
+    "TITANIUM_PICKAXE": {
+      "sell": 5000
+    },
+    "TITANIUM_RELIC": {
+      "sell": 10000
+    },
+    "TITANIUM_RING": {
+      "sell": 2000
+    },
+    "TITANIUM_TALISMAN": {
+      "sell": 51200
+    },
+    "TITANOBOA_SHED": {
+      "sell": 500000
+    },
+    "TNT": {
+      "sell": 15,
+      "buy": 50
+    },
+    "TOIL_LOG": {
+      "sell": 1,
+      "buy": 1000000
+    },
+    "TOKEN_OF_THE_CENTURY": {
+      "sell": 500
+    },
+    "TOOL_EXP_CAPSULE": {
+      "sell": 100000
+    },
+    "TORCH": {
+      "sell": 0.3,
+      "buy": 0.5
+    },
+    "TORMENTOR": {
+      "sell": 100000
+    },
+    "TORN_CLOTH": {
+      "sell": 5000
+    },
+    "TORRHUS_ARTIFACT": {
+      "sell": 30000
+    },
+    "TORRHUS_RING": {
+      "sell": 20000
+    },
+    "TORRHUS_TALISMAN": {
+      "sell": 10000
+    },
+    "TOTEM_OF_CORRUPTION": {
+      "sell": 96000
+    },
+    "TOXIC_ARROW_POISON": {
+      "sell": 2000
+    },
+    "TRAINING_WEIGHTS": {
+      "sell": 1
+    },
+    "TRANSMISSION_TUNER": {
+      "sell": 45000
+    },
+    "TRAP_DOOR": {
+      "sell": 1.5
+    },
+    "TRAPPED_CHEST": {
+      "sell": 4
+    },
+    "TREASURE_ARTIFACT": {
+      "sell": 1000
+    },
+    "TREASURE_BAIT": {
+      "sell": 500
+    },
+    "TREASURE_RING": {
+      "sell": 1000
+    },
+    "TREASURE_TALISMAN": {
+      "sell": 10000
+    },
+    "TREASURITE": {
+      "sell": 5000
+    },
+    "TREE_THE_FISH": {
+      "sell": 50000
+    },
+    "TREECAPITATOR_AXE": {
+      "sell": 10000
+    },
+    "TRIPWIRE_HOOK": {
+      "sell": 2,
+      "buy": 4
+    },
+    "TROUBLED_BUBBLE": {
+      "sell": 1000000
+    },
+    "TRUE_ESSENCE": {
+      "buy": 25000
+    },
+    "TUNGSTEN": {
+      "sell": 10
+    },
+    "TUNING_FORK": {
+      "sell": 100
+    },
+    "TUSK_FOSSIL": {
+      "sell": 50000
+    },
+    "TUTTI_FRUTTI_POISON": {
+      "buy": 1000
+    },
+    "TWILIGHT_ARROW_POISON": {
+      "sell": 650
+    },
+    "UGLY_FOSSIL": {
+      "sell": 50000
+    },
+    "ULTIMATE_CARROT_CANDY": {
+      "sell": 1
+    },
+    "UMBER": {
+      "sell": 10
+    },
+    "UNALLOYED_SPEED": {
+      "sell": 150000
+    },
+    "UNDEAD_BOW": {
+      "sell": 1,
+      "buy": 80000
+    },
+    "UNDEAD_CATALYST": {
+      "sell": 2000
+    },
+    "UNDEAD_SWORD": {
+      "sell": 5,
+      "buy": 100
+    },
+    "UNLUCKY_DOUBLOON": {
+      "sell": 100000
+    },
+    "UNSTABLE_DRAGON_BOOTS": {
+      "sell": 100000
+    },
+    "UNSTABLE_DRAGON_CHESTPLATE": {
+      "sell": 100000
+    },
+    "UNSTABLE_DRAGON_HELMET": {
+      "sell": 100000
+    },
+    "UNSTABLE_DRAGON_LEGGINGS": {
+      "sell": 100000
+    },
+    "UNSTABLE_FRAGMENT": {
+      "sell": 2500
+    },
+    "VACCINE_ARTIFACT": {
+      "sell": 500
+    },
+    "VACCINE_RING": {
+      "sell": 100
+    },
+    "VACCINE_TALISMAN": {
+      "sell": 22
+    },
+    "VAMPIRE_DENTIST_RELIC": {
+      "sell": 80000
+    },
+    "VAMPIRE_MASK": {
+      "sell": 10
+    },
+    "VANQUISHED_BLAZE_BELT": {
+      "sell": 250000
+    },
+    "VANQUISHED_GHAST_CLOAK": {
+      "sell": 275340
+    },
+    "VANQUISHED_GLOWSTONE_GAUNTLET": {
+      "sell": 118720
+    },
+    "VANQUISHED_MAGMA_NECKLACE": {
+      "sell": 243965
+    },
+    "VEILSHROOM_BUNCH": {
+      "sell": 128000
+    },
+    "VENATOR_GENESIS": {
+      "buy": 25000
+    },
+    "VENOMOUS_SWORD": {
+      "sell": 20
+    },
+    "VENOMS_TOUCH": {
+      "sell": 5000
+    },
+    "VERMIN_VAPORIZER_GARDEN_CHIP": {
+      "sell": 100000
+    },
+    "VERY_CRUDE_GABAGOOL": {
+      "sell": 1
+    },
+    "VIAL_OF_SPRING_WATER": {
+      "sell": 150000
+    },
+    "VIAL_OF_VENOM": {
+      "sell": 250000
+    },
+    "VIBRANT_CORAL": {
+      "sell": 1000000
+    },
+    "VIKING_TEAR": {
+      "buy": 15000
+    },
+    "VILLAGE_TALISMAN": {
+      "sell": 200,
+      "buy": 2500
+    },
+    "VINE": {
+      "sell": 5
+    },
+    "VINESAP": {
+      "sell": 200
+    },
+    "VINYL_BEETLE": {
+      "sell": 50000
+    },
+    "VINYL_BUZZIN_BEATS": {
+      "sell": 50000
+    },
+    "VINYL_CICADA_SYMPHONY": {
+      "sell": 50000
+    },
+    "VINYL_CRICKET_CHOIR": {
+      "sell": 50000
+    },
+    "VINYL_DYNAMITES": {
+      "sell": 50000
+    },
+    "VINYL_EARTHWORM_ENSEMBLE": {
+      "sell": 50000
+    },
+    "VINYL_FIREFLY": {
+      "sell": 50000
+    },
+    "VINYL_IMAGINE_DRAGONFLIES": {
+      "sell": 50000
+    },
+    "VINYL_PRAY_FOR_ME": {
+      "sell": 50000
+    },
+    "VINYL_PRETTY_FLY": {
+      "sell": 50000
+    },
+    "VINYL_RODENT_REVOLUTION": {
+      "sell": 50000
+    },
+    "VINYL_SLOW_AND_GROOVY": {
+      "sell": 50000
+    },
+    "VINYL_WINGS_OF_HARMONY": {
+      "sell": 50000
+    },
+    "VITAMIN_DEATH": {
+      "sell": 1
+    },
+    "VOID_OOZE": {
+      "sell": 5
+    },
+    "VOLCANIC_ROCK": {
+      "sell": 1000
+    },
+    "VOLTA": {
+      "sell": 1111
+    },
+    "VOODOO": {
+      "sell": 1000000
+    },
+    "VOTER_BADGE": {
+      "sell": 1000
+    },
+    "VOTER_BADGE_ELITE": {
+      "sell": 3000
+    },
+    "VOTER_BADGE_SUPREME": {
+      "sell": 5000
+    },
+    "VOTER_BADGE_VIP": {
+      "sell": 2000
+    },
+    "WALNUT": {
+      "sell": 10000
+    },
+    "WAND_OF_STRENGTH": {
+      "sell": 10000
+    },
+    "WARMED_FLAKES": {
+      "sell": 5
+    },
+    "WARRIOR_DUNGEON_ABILITY_1": {
+      "sell": 1
+    },
+    "WARTY": {
+      "sell": 500
+    },
+    "WASHED_UP_SOUVENIR": {
+      "sell": 250000
+    },
+    "WATCH": {
+      "sell": 8
+    },
+    "WATCHER_EYE": {
+      "sell": 1
+    },
+    "WATER_BUCKET": {
+      "sell": 4
+    },
+    "WATER_HYACINTH": {
+      "sell": 1000000
+    },
+    "WATER_HYDRA_HEAD": {
+      "sell": 500
+    },
+    "WATER_LILY": {
+      "sell": 10
+    },
+    "WATER_ORB": {
+      "sell": 3000
+    },
+    "WATERBORNE_LICE": {
+      "sell": 5
+    },
+    "WEATHER_STICK": {
+      "sell": 160
+    },
+    "WEB": {
+      "sell": 10
+    },
+    "WEBBED_FOSSIL": {
+      "sell": 50000
+    },
+    "WEREWOLF_BOOTS": {
+      "sell": 1000
+    },
+    "WEREWOLF_CHESTPLATE": {
+      "sell": 1000
+    },
+    "WEREWOLF_HELMET": {
+      "sell": 1000
+    },
+    "WEREWOLF_LEGGINGS": {
+      "sell": 1000
+    },
+    "WET_BOOK": {
+      "sell": 38400
+    },
+    "WET_PUMPKIN": {
+      "sell": 1
+    },
+    "WET_WATER": {
+      "sell": 50
+    },
+    "WHALE_BAIT": {
+      "sell": 44
+    },
+    "WHEAT": {
+      "sell": 6,
+      "buy": 10
+    },
+    "WHIPPED_MAGMA_CREAM": {
+      "sell": 204800
+    },
+    "WILD_ROSE": {
+      "sell": 4
+    },
+    "WINDING_IVY": {
+      "sell": 100000
+    },
+    "WINTER_DISC": {
+      "sell": 1
+    },
+    "WINTER_FRAGMENT": {
+      "sell": 500
+    },
+    "WINTER_ROD": {
+      "sell": 20000
+    },
+    "WINTER_WATER_ORB": {
+      "sell": 5000
+    },
+    "WISE_DRAGON_BOOTS": {
+      "sell": 100000
+    },
+    "WISE_DRAGON_CHESTPLATE": {
+      "sell": 100000
+    },
+    "WISE_DRAGON_HELMET": {
+      "sell": 100000
+    },
+    "WISE_DRAGON_LEGGINGS": {
+      "sell": 100000
+    },
+    "WISE_FRAGMENT": {
+      "sell": 2500
+    },
+    "WISE_WITHER_BOOTS": {
+      "sell": 5000
+    },
+    "WISE_WITHER_CHESTPLATE": {
+      "sell": 5000
+    },
+    "WISE_WITHER_HELMET": {
+      "sell": 5000
+    },
+    "WISE_WITHER_LEGGINGS": {
+      "sell": 5000
+    },
+    "WISH_ULTIMATE": {
+      "sell": 1
+    },
+    "WISHING_COMPASS": {
+      "sell": 1
+    },
+    "WITHER_ARTIFACT": {
+      "sell": 1000
+    },
+    "WITHER_BLOOD": {
+      "sell": 1
+    },
+    "WITHER_BOOTS": {
+      "sell": 5000
+    },
+    "WITHER_BOW": {
+      "sell": 1,
+      "buy": 250
+    },
+    "WITHER_CHESTPLATE": {
+      "sell": 5000
+    },
+    "WITHER_CLOAK": {
+      "sell": 1000
+    },
+    "WITHER_GOGGLES": {
+      "buy": 5000000
+    },
+    "WITHER_HELMET": {
+      "sell": 5000
+    },
+    "WITHER_LEGGINGS": {
+      "sell": 5000
+    },
+    "WITHER_RELIC": {
+      "sell": 1000
+    },
+    "WITHER_SHIELD_SCROLL": {
+      "sell": 1
+    },
+    "WITHER_SOUL": {
+      "sell": 50
+    },
+    "WOLF_FUR_MIXIN": {
+      "buy": 150000
+    },
+    "WOLF_RING": {
+      "sell": 100
+    },
+    "WOLF_TALISMAN": {
+      "sell": 10000
+    },
+    "WOLF_TOOTH": {
+      "sell": 1
+    },
+    "WOOD": {
+      "sell": 0.5
+    },
+    "WOOD_AXE": {
+      "sell": 1,
+      "buy": 5
+    },
+    "WOOD_BUTTON": {
+      "sell": 0.5
+    },
+    "WOOD_DOOR": {
+      "sell": 1
+    },
+    "WOOD_HOE": {
+      "sell": 1,
+      "buy": 5
+    },
+    "WOOD_PICKAXE": {
+      "sell": 1,
+      "buy": 5
+    },
+    "WOOD_PLATE": {
+      "sell": 1,
+      "buy": 2
+    },
+    "WOOD_SPADE": {
+      "sell": 1,
+      "buy": 5
+    },
+    "WOOD_STAIRS": {
+      "sell": 0.5
+    },
+    "WOOD_STEP": {
+      "sell": 0.5
+    },
+    "WOOD_STEP:1": {
+      "sell": 0.5
+    },
+    "WOOD_STEP:2": {
+      "sell": 0.5
+    },
+    "WOOD_STEP:3": {
+      "sell": 0.5
+    },
+    "WOOD_STEP:4": {
+      "sell": 0.5
+    },
+    "WOOD_STEP:5": {
+      "sell": 0.5
+    },
+    "WOOD_SWORD": {
+      "sell": 1,
+      "buy": 5
+    },
+    "WOOD_TALISMAN": {
+      "sell": 160
+    },
+    "WOOD:1": {
+      "sell": 0.5
+    },
+    "WOOD:2": {
+      "sell": 0.5
+    },
+    "WOOD:3": {
+      "sell": 0.5
+    },
+    "WOOD:4": {
+      "sell": 0.5
+    },
+    "WOOD:5": {
+      "sell": 0.5
+    },
+    "WOODEN_BAIT": {
+      "sell": 100
+    },
+    "WOOL": {
+      "sell": 2,
+      "buy": 10
+    },
+    "WOOL:1": {
+      "sell": 2
+    },
+    "WOOL:10": {
+      "sell": 2
+    },
+    "WOOL:11": {
+      "sell": 2
+    },
+    "WOOL:12": {
+      "sell": 2
+    },
+    "WOOL:13": {
+      "sell": 2
+    },
+    "WOOL:14": {
+      "sell": 2
+    },
+    "WOOL:15": {
+      "sell": 2
+    },
+    "WOOL:2": {
+      "sell": 2
+    },
+    "WOOL:3": {
+      "sell": 2
+    },
+    "WOOL:4": {
+      "sell": 2
+    },
+    "WOOL:5": {
+      "sell": 2
+    },
+    "WOOL:6": {
+      "sell": 2
+    },
+    "WOOL:7": {
+      "sell": 2
+    },
+    "WOOL:8": {
+      "sell": 2
+    },
+    "WOOL:9": {
+      "sell": 2
+    },
+    "WORKBENCH": {
+      "sell": 1
+    },
+    "WORM_BAIT": {
+      "sell": 25
+    },
+    "WORM_MEMBRANE": {
+      "sell": 15000
+    },
+    "WRIGGLING_LARVA": {
+      "sell": 250000
+    },
+    "X": {
+      "sell": 20
+    },
+    "XLARGE_ENCHANTED_CHEST": {
+      "sell": 40000
+    },
+    "XXLARGE_ENCHANTED_CHEST": {
+      "sell": 40000
+    },
+    "Y": {
+      "sell": 30
+    },
+    "YELLOW_FLOWER": {
+      "sell": 1
+    },
+    "YETI_ROD": {
+      "sell": 150000
+    },
+    "YOGGIE": {
+      "sell": 100
+    },
+    "YOUNG_DRAGON_BOOTS": {
+      "sell": 100000
+    },
+    "YOUNG_DRAGON_CHESTPLATE": {
+      "sell": 100000
+    },
+    "YOUNG_DRAGON_HELMET": {
+      "sell": 100000
+    },
+    "YOUNG_DRAGON_LEGGINGS": {
+      "sell": 100000
+    },
+    "YOUNG_FRAGMENT": {
+      "sell": 2500
+    },
+    "Z": {
+      "sell": 50
+    },
+    "ZOMBIE_BOOTS": {
+      "sell": 120000
+    },
+    "ZOMBIE_BRAIN_MIXIN": {
+      "buy": 150000
+    },
+    "ZOMBIE_CHESTPLATE": {
+      "sell": 250000
+    },
+    "ZOMBIE_COMMANDER_BOOTS": {
+      "sell": 1
+    },
+    "ZOMBIE_COMMANDER_CHESTPLATE": {
+      "sell": 1
+    },
+    "ZOMBIE_COMMANDER_HELMET": {
+      "sell": 1
+    },
+    "ZOMBIE_COMMANDER_LEGGINGS": {
+      "sell": 1
+    },
+    "ZOMBIE_COMMANDER_WHIP": {
+      "sell": 1
+    },
+    "ZOMBIE_HAT": {
+      "sell": 8
+    },
+    "ZOMBIE_HEART": {
+      "sell": 123000
+    },
+    "ZOMBIE_KNIGHT_BOOTS": {
+      "sell": 1
+    },
+    "ZOMBIE_KNIGHT_CHESTPLATE": {
+      "sell": 1
+    },
+    "ZOMBIE_KNIGHT_HELMET": {
+      "sell": 1
+    },
+    "ZOMBIE_KNIGHT_LEGGINGS": {
+      "sell": 1
+    },
+    "ZOMBIE_KNIGHT_SWORD": {
+      "sell": 1
+    },
+    "ZOMBIE_LEGGINGS": {
+      "sell": 185000
+    },
+    "ZOMBIE_LORD_BOOTS": {
+      "sell": 1
+    },
+    "ZOMBIE_LORD_CHESTPLATE": {
+      "sell": 1
+    },
+    "ZOMBIE_LORD_HELMET": {
+      "sell": 1
+    },
+    "ZOMBIE_LORD_LEGGINGS": {
+      "sell": 1
+    },
+    "ZOMBIE_PICKAXE": {
+      "sell": 3
+    },
+    "ZOMBIE_SOLDIER_BOOTS": {
+      "sell": 1
+    },
+    "ZOMBIE_SOLDIER_CHESTPLATE": {
+      "sell": 1
+    },
+    "ZOMBIE_SOLDIER_CUTLASS": {
+      "sell": 1000
+    },
+    "ZOMBIE_SOLDIER_HELMET": {
+      "sell": 1
+    },
+    "ZOMBIE_SOLDIER_LEGGINGS": {
+      "sell": 1
+    },
+    "ZOMBIE_SWORD": {
+      "sell": 300000
+    },
+    "ZOMBIE_TALISMAN": {
+      "sell": 50,
+      "buy": 500
+    },
+    "ZOOM_PICKAXE": {
+      "sell": 5000
+    }
+  }
+}

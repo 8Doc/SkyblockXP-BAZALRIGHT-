@@ -1,0 +1,17 @@
+{
+  "note": "The rules for combining enchanted books at an anvil. Only the rules are curated; which books exist at which level is read off the live bazaar's own product ids, so the ladder cannot go stale against a table kept here.",
+  "source": "hypixelskyblock.minecraft.wiki, Anvil and Enchanted Book and Enchanting",
+  "verified": true,
+  "feeCoins": 0,
+  "feeSource": "Stated twice, on two pages, in the wiki's own words: the Anvil page says combining books 'costs no additional Experience levels to do so, and as a result, gives no Enchanting experience', and the Enchanting page states flatly that 'It costs nothing to combine Enchanted Books in an Anvil.' There is no fee schedule to source because there is no fee. A guessed one would have shown up as a fixed drag on every chain and been invisible against a margin.",
+  "inputsRequired": 2,
+  "inputsSource": "Enchanted Book: 'Two enchanted books of the same enchantment and enchantment level (such as Protection III) can be combined together using an anvil in order to create a single enchanted book of the same enchantment but with a one-level increase.'",
+  "maxCombinableLevel": 5,
+  "maxLevelSource": "The Anvil page says the higher levels are not made this way at all — 'many high-level enchantments (usually level VI or higher) are obtained from Dungeons, Experiments, or the Dark Auction' — and the Enchanted Book page gives the worked case: 'Combining two Luck VI books will result in a Luck V (since players cannot craft a higher level Luck book than 5, it resets to 5).' So a sixth level is not one level up from a fifth; it is a different item with a different source.",
+  "consequence": "Set too high and the chain finder offers a combine that silently downgrades — two Luck V read as a Luck VI worth several times the pair, which would sit at the top of the ranking and never fill. Set too low and some genuinely combinable sixth levels are missed, which costs opportunities rather than inventing them.",
+  "knownGaps": [
+    "The wiki says 'usually' level VI or higher, and does not publish which enchantments are the exception. Levels above the cap are left out rather than guessed either way; a chain that would have needed one is simply not offered.",
+    "155 enchantment families trade on the bazaar and their top levels run 1, 2, 3, 4, 5, 6, 7, 9, 10 and 20 — the ladder is per-enchantment, so it is taken from the bazaar's own ids rather than assumed uniform.",
+    "Combining is instant, so a combine step never binds a chain's throughput beyond how fast its own input can be bought."
+  ]
+}

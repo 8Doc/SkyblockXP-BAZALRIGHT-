@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-22T22:16:22.763Z",
+  "generatedAt": "2026-08-23T13:42:21.396Z",
   "source": "https://github.com/NotEnoughUpdates/NotEnoughUpdates-REPO",
   "note": "Crafting-grid recipes whose output trades on the bazaar. Alternatives are all kept; the price layer picks the cheapest. `offBazaar` names ingredients the bazaar does not sell, which need a shop price before that recipe can be costed. Forge and fusion are not carried.",
   "offBazaarIngredients": {
@@ -49,6 +49,262 @@
     "ULTIMATE_CARROT_CANDY_UPGRADE": 1,
     "INK_SACK:15": 1
   },
+  "intermediatesNote": "Recipes making something the bazaar does not sell, kept because the recipes above are made of them. Paper is the plain case: three Sugar Cane make three Paper, Sugar Cane is a bazaar good, and Hot Potato Books are made of Paper — but Paper itself cannot be sold there, so it is not a craft, only a step. Its wiki page has no shop section at all, which is why an NPC price table does not reach these either. Closed transitively.",
+  "intermediates": [
+    {
+      "output": "BASE_GRIFFIN_UPGRADE_STONE",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "GRIFFIN_FEATHER",
+          "qty": 8
+        },
+        {
+          "id": "ENCHANTED_GOLD",
+          "qty": 16
+        },
+        {
+          "id": "ENCHANTED_COBBLESTONE",
+          "qty": 8
+        }
+      ]
+    },
+    {
+      "output": "BLAZE_POWDER",
+      "yield": 2,
+      "ingredients": [
+        {
+          "id": "BLAZE_ROD",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "BOWL",
+      "yield": 4,
+      "ingredients": [
+        {
+          "id": "WOOD",
+          "qty": 3
+        }
+      ]
+    },
+    {
+      "output": "CHEST",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "WOOD",
+          "qty": 8
+        }
+      ]
+    },
+    {
+      "output": "COAL_BLOCK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "COAL",
+          "qty": 9
+        }
+      ]
+    },
+    {
+      "output": "DIAMOND_BLOCK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "DIAMOND",
+          "qty": 9
+        }
+      ]
+    },
+    {
+      "output": "EMERALD_BLOCK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "EMERALD",
+          "qty": 9
+        }
+      ]
+    },
+    {
+      "output": "GLASS_BOTTLE",
+      "yield": 3,
+      "ingredients": [
+        {
+          "id": "GLASS",
+          "qty": 3
+        }
+      ]
+    },
+    {
+      "output": "GOLD_BLOCK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "GOLD_INGOT",
+          "qty": 9
+        }
+      ]
+    },
+    {
+      "output": "GOLD_NUGGET",
+      "yield": 9,
+      "ingredients": [
+        {
+          "id": "GOLD_INGOT",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "IRON_BLOCK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "IRON_INGOT",
+          "qty": 9
+        }
+      ]
+    },
+    {
+      "output": "LAPIS_BLOCK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "INK_SACK:4",
+          "qty": 9
+        }
+      ]
+    },
+    {
+      "output": "LEVER",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "STICK",
+          "qty": 1
+        },
+        {
+          "id": "COBBLESTONE",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "NEARLY_WHOLE_CARROT",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "HALF_EATEN_CARROT",
+          "qty": 80
+        }
+      ]
+    },
+    {
+      "output": "PAPER",
+      "yield": 3,
+      "ingredients": [
+        {
+          "id": "SUGAR_CANE",
+          "qty": 3
+        }
+      ]
+    },
+    {
+      "output": "REDSTONE_BLOCK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "REDSTONE",
+          "qty": 9
+        }
+      ]
+    },
+    {
+      "output": "SLIME_BLOCK",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "SLIME_BALL",
+          "qty": 9
+        }
+      ]
+    },
+    {
+      "output": "SPECKLED_MELON",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "GOLD_NUGGET",
+          "qty": 8
+        },
+        {
+          "id": "MELON",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "STICK",
+      "yield": 4,
+      "ingredients": [
+        {
+          "id": "WOOD",
+          "qty": 2
+        }
+      ]
+    },
+    {
+      "output": "SUGAR",
+      "yield": 1,
+      "ingredients": [
+        {
+          "id": "SUGAR_CANE",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "output": "WOOD",
+      "yield": 4,
+      "ingredients": [
+        {
+          "id": "LOG",
+          "qty": 1
+        }
+      ]
+    }
+  ],
+  "stillUnpriced": [
+    "ALL_IN_ALOE_FRAGMENT",
+    "WILTED_BERBERIS",
+    "HILT_OF_TRUE_ICE",
+    "WATER_HYDRA_HEAD",
+    "COLOSSAL_EXP_BOTTLE_UPGRADE",
+    "VINE",
+    "INK_SACK:2",
+    "MILK_BUCKET",
+    "VOLT_CRUX",
+    "HALF_EATEN_CARROT",
+    "SCRIBE_CRUX",
+    "YOUNGITE",
+    "TIMITE",
+    "OBSOLITE",
+    "HYPER_CATALYST_UPGRADE",
+    "HEAT_CORE",
+    "PLUMBER_SPONGE",
+    "LITTLEFOOT_FLUFF",
+    "FROSTY_CRUX",
+    "METAL_HEART",
+    "SHRIVELED_WASP",
+    "GLASS",
+    "ULTIMATE_CARROT_CANDY_UPGRADE",
+    "INK_SACK:15",
+    "MINION_STORAGE_EXPANDER"
+  ],
   "recipes": [
     {
       "output": "ABSOLUTE_ENDER_PEARL",

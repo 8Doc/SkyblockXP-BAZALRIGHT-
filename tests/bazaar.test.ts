@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { NET_OF_TAX, costToBuy, hourlySold, normalise, proceedsFromSelling, walk } from "../src/lib/bazaar";
 import { ORDER_WINDOW_HOURS, affordableCoinsPerHour, badHourCount, crash, craft, flip, manipulation } from "../src/lib/bazaarViews";
-import { daily, decode, despike, encode, proximityToAverage, sample, trim } from "../src/lib/bazaarHistory";
+import { daily, decode, despike, encode, observe, observedFor, proximityToAverage, relativeTo, sample, trim } from "../src/lib/bazaarHistory";
 import type { HistoryRow, ProductSnapshot, RawBazaarProduct } from "../src/lib/bazaarTypes";
 
 /**
@@ -495,3 +495,51 @@ function values(n: number) {
 function round(n: number): number {
   return Math.round(n * 100) / 100;
 }
+
+/* ------------------------------------------------------------- baselines */
+
+/**
+ * The intended source for a baseline was skyblock.bz's `/api/product/init/{id}`, which `decode`
+ * above exists to read. It now answers 403 to any caller outside their own site, so there is no
+ * thirty-day average to fetch and a fabricated one would be worse than none — it would make
+ * every margin look explicable. What is left is measuring it here, one poll at a time.
+ */
+test("a baseline is a running mean that survives without keeping the samples", () => {
+  let b = observe(undefined, 100, 1_000);
+  assert.equal(b.mean, 100);
+  assert.equal(b.samples, 1);
+
+  b = observe(b, 200, 2_000);
+  assert.equal(b.mean, 150, "the mean of 100 and 200");
+  assert.equal(b.samples, 2);
+  assert.equal(b.firstAt, 1_000, "it remembers when it started watching");
+  assert.equal(b.lastAt, 2_000);
+
+  b = observe(b, 300, 3_000);
+  assert.equal(b.mean, 200);
+});
+
+/** The tab re-reads every twenty seconds and a failed fetch leaves the last payload in place. */
+test("the same reading twice does not count twice", () => {
+  const first = observe(undefined, 100, 1_000);
+  const again = observe(first, 500, 1_000);
+  assert.deepEqual(again, first, "a sample at a time already seen is ignored");
+  assert.deepEqual(observe(first, 500, 999), first, "and so is one from before it");
+});
+
+test("a margin reads against its own average, or says it cannot yet", () => {
+  const b = observe(observe(undefined, 100, 1), 100, 2);
+  assert.equal(relativeTo(200, b), 100, "twice the usual margin");
+  assert.equal(relativeTo(50, b), -50, "half of it");
+  assert.equal(relativeTo(100, b), 0, "ordinary");
+
+  assert.equal(relativeTo(200, observe(undefined, 100, 1)), null, "one reading is not an average");
+  assert.equal(relativeTo(200, undefined), null, "and neither is none");
+  assert.equal(relativeTo(200, observe(observe(undefined, 0, 1), 0, 2)), null, "a mean of zero has no percentage");
+});
+
+/** How long it has been watching is what decides whether the percentage means anything. */
+test("a baseline reports the window it actually covers", () => {
+  const b = observe(observe(undefined, 10, 1_000), 20, 601_000);
+  assert.equal(observedFor(b), 600_000, "ten minutes, not a claim about thirty days");
+});
