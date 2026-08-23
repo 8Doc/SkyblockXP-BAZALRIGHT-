@@ -242,7 +242,10 @@ table.bz {
   font-size: 13px;
   font-variant-numeric: tabular-nums;
 }
-table.bz th, table.bz td { padding: 7px 12px; text-align: left; white-space: nowrap; }
+table.bz th, table.bz td { padding: 7px 9px; text-align: left; white-space: nowrap; }
+
+/* The name column is the only elastic one; everything else is a number that must not wrap. */
+table.bz td:first-child, table.bz th:first-child { max-width: 240px; overflow: hidden; text-overflow: ellipsis; }
 table.bz td.num, table.bz th.num { text-align: right; }
 
 table.bz thead th {
@@ -252,7 +255,7 @@ table.bz thead th {
   border-bottom: 1px solid var(--line);
   font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   color: var(--muted);
   font-weight: 500;
 }

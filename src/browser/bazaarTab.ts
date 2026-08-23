@@ -112,11 +112,10 @@ const BASE_FLIP_COLUMNS: Column<Flip>[] = [
   { id: "buyAt", label: "Buy order", value: (r) => r.buyAt, render: (r) => coins(r.buyAt), title: "What buyers are already bidding — put your buy order here." },
   { id: "sellAt", label: "Sell order", value: (r) => r.sellAt, render: (r) => coins(r.sellAt), title: "What sellers are already asking — put your sell order here." },
   { id: "margin", label: "Margin", value: (r) => r.margin, render: (r) => coins(r.margin), title: "The gross spread between the two order books." },
-  { id: "netMargin", label: "After tax", value: (r) => r.netMargin, render: (r) => coins(r.netMargin), title: "The spread once the bazaar has taken its 2.25% of the sale." },
   { id: "marginPercent", label: "Margin %", value: (r) => r.marginPercent, render: (r) => `${(r.marginPercent * 100).toFixed(1)}%` },
-  { id: "hourlyBought", label: "Instabuys/hr", value: (r) => r.hourlyBought, render: (r) => num(Math.round(r.hourlyBought)), title: "Items instabought per hour, averaged over the moving week. How fast your sell order fills." },
-  { id: "hourlySold", label: "Instasells/hr", value: (r) => r.hourlySold, render: (r) => num(Math.round(r.hourlySold)), title: "Items instasold per hour. How fast your buy order fills." },
-  { id: "hourlyFills", label: "Round trips/hr", value: (r) => r.hourlyFills, render: (r) => num(Math.round(r.hourlyFills)), title: "The slower of the two sides. Both legs have to fill for the flip to close." },
+  { id: "hourlyBought", label: "Buys/hr", value: (r) => r.hourlyBought, render: (r) => num(Math.round(r.hourlyBought)), title: "Instabuys per hour, averaged over the moving week. This is how fast your sell order fills." },
+  { id: "hourlySold", label: "Sells/hr", value: (r) => r.hourlySold, render: (r) => num(Math.round(r.hourlySold)), title: "Instasells per hour. This is how fast your buy order fills." },
+  { id: "hourlyFills", label: "Trips/hr", value: (r) => r.hourlyFills, render: (r) => num(Math.round(r.hourlyFills)), title: "Round trips per hour — the slower of the two sides, since both legs have to fill for the flip to close." },
   {
     id: "capital",
     label: "Allocate",
@@ -143,7 +142,6 @@ const BASE_FLIP_COLUMNS: Column<Flip>[] = [
       "straggler rather than a market — which is how a 457k ask stands against a 72k bid on an " +
       "item nobody is trading at either price.",
   },
-  { id: "badHourCoins", label: "Bad hour", value: (r) => r.badHourCoins, render: (r) => coins(r.badHourCoins), title: "What a quarter of your hours are worse than. Coins per hour is a mean, and a mean is a poor summary of four trades — zero here means a quarter of the time this pays nothing at all." },
   { id: "coinsPerHour", label: "Coins/hr", value: (r) => r.coinsPerHour, render: (r) => coins(r.coinsPerHour), title: "After-tax margin times the round-trip rate. This is the ranking figure." },
 ];
 
