@@ -18,6 +18,8 @@ matter most are Hypixel staff posting in Discord, quoted on the wiki with citati
 | Base crop yields, growth formula, water loss | `Greenhouse` page |
 | Ethereal Vine odds by rarity | `Ethereal Vine` page |
 | Item ids | Hypixel's own item resource |
+| The 13 crop fortunes and what each lifts | `Crop Fortune` page |
+| Overdrive Chip (+140, contest only) | `Overdrive Chip` page |
 | Prices | the live bazaar, plus the shop table from `npc-prices.json` |
 
 **The drop figures have a date on them.** On **2026-08-20** every base crop's drop changed — Nether
@@ -63,19 +65,42 @@ cells each. The wiki works this out in footnotes for the six cases where it bite
 parsed verbatim; `ceil(cells / cellsPerPlant)` agrees with all six, and a test asserts that it does,
 so a wiki edit that contradicts the rule fails the build rather than quietly changing an answer.
 
-### Fortune scales everything and ranks nothing
+### Fortune is two stats, and only one is harmless to get wrong
 
-Farming Fortune multiplies every mutation's drops by the same factor, so it changes what a row pays
-and never which row is best. That is worth knowing before agonising over the number: **a wrong
-fortune makes every figure wrong by the same proportion and leaves the answer to "which one" exactly
-where it was.** There is a test for it.
+**Farming Fortune** lifts every crop, so it multiplies every mutation by the same factor. A wrong
+figure scales all the coins and leaves the *order* untouched — there is a test for that invariant.
 
-Which is fortunate, because nothing here can read it. The tab takes no API key and asks for no
-username, so the fortune is a text box with a stated placeholder rather than a lookup — and the
-placeholder says on screen that it is one. The formula used is the documented `1 + fortune/100`;
-flagged because the wiki's own Farming Fortune page currently carries an `{{Outdated}}` banner
-saying it has not caught up with the Greenhouse update, which makes it the piece of this model most
-likely to be wrong.
+**Crop Fortune** does not behave that way. There are thirteen of them, one per crop, and Wheat
+Fortune lifts wheat and nothing else. So a mutation dropping wheat and one dropping cocoa beans move
+apart under the same player's gear, which makes crop fortune **the one input on this page that can
+change which mutation wins**. There is a test for that too.
+
+They meet by addition, which the Crop Fortune page states outright:
+
+> their farming fortune is first added to their Crop Fortune stat corresponding to the crop they
+> are breaking
+
+Underneath it is a lottery — each point is a 1% chance of 100% more, and every whole hundred is a
+guaranteed 100% more. The wiki's worked example is Cactus Fortune 233 giving "300% drops and a 33%
+chance for 400%", which averages to `1 + fortune/100`. That is what the model uses, so a single
+harvest lands above or below it.
+
+Because it is per-drop, revenue is computed a drop at a time rather than by scaling a mutation's
+total, and each row names the crop fortunes that actually lifted it.
+
+**The Overdrive Chip is the figure most likely to be entered wrongly.** It grants up to **+140 Crop
+Fortune** to the active crop — but only during a Jacob's Farming Contest. Typed in as a standing
+stat it overstates every mutation dropping that crop for the other twenty-three hours of the day, so
+the panel says so where it is entered. Other sources are the farming tool being held, Anita's shop
+and Carrolyn.
+
+None of this can be read off a profile: the tab takes no API key and asks for no username, so every
+fortune is a text box. The general one has a stated placeholder (1,500) and says on screen that it
+is a placeholder; the per-crop boxes default to empty, because a guessed crop fortune would move the
+ranking rather than just the totals.
+
+Flagged: the wiki's Farming Fortune page carries an `{{Outdated}}` banner saying it has not caught up
+with the Greenhouse update, which makes this the piece of the model most likely to be wrong.
 
 ## What is flagged rather than guessed
 

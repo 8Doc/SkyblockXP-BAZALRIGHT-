@@ -11,11 +11,21 @@ import type { NpcPrice } from "./bazaarViews";
  * many more before it can be harvested — and *space*, because the plants that spread it occupy
  * the ring around it and have to be bought.
  *
- * **Fortune scales everything and ranks nothing.** Farming Fortune multiplies every mutation's
- * drops by the same factor, so it changes what a row pays and never which row is best. That is
- * worth knowing before agonising over the number: a wrong fortune makes every figure wrong by
- * the same proportion and leaves the answer to "which one" untouched. What does move the ranking
- * is setup cost and cycle time, which are per-mutation.
+ * **Fortune is two stats, and only one of them is harmless to get wrong.** Farming Fortune lifts
+ * every crop, so it multiplies every mutation by the same factor: a wrong figure scales all the
+ * coins and leaves the *order* untouched. The thirteen Crop Fortunes do not behave that way. Wheat
+ * Fortune lifts wheat and nothing else, so a mutation dropping wheat and one dropping cocoa beans
+ * move apart — which makes crop fortune the one input here that can change which mutation is best.
+ *
+ * They meet by addition before the yield is worked out, which the Crop Fortune page states
+ * outright: "their farming fortune is first added to their Crop Fortune stat corresponding to the
+ * crop they are breaking". So the number that matters is per-drop, not per-player, and this module
+ * computes revenue a drop at a time rather than scaling a mutation's total.
+ *
+ * The sources are worth knowing because they are lopsided: a farming tool carries crop fortune for
+ * its own crop, and the Overdrive Chip adds up to +140 more — but only for the active crop during a
+ * Jacob's Farming Contest. That is a contest-day figure rather than a standing one, and entering it
+ * as though it were permanent overstates every mutation dropping that crop.
  *
  * **The wiki's own numbers have a date on them.** Every base crop's drop changed on 2026-08-20,
  * some by more than half, so this is only as current as the scrape under it — see the note in
@@ -31,6 +41,8 @@ export type GreenhouseData = {
   maxPlots: number;
   etherealVineByRarity: Record<string, number>;
   baseCrops: { id: string; name: string; baseYield: number; growthCycles: number }[];
+  /** The thirteen crop-specific fortunes and the item ids each one lifts. */
+  cropFortunes?: { stat: string; crop: string; ids: string[] }[];
   mutations: Mutation[];
 };
 
@@ -213,6 +225,8 @@ export type MutationProfit = {
   hoursPerStage: number;
   /** Drops the market cannot price, named rather than counted as zero. */
   unpriced: string[];
+  /** Crop fortunes that actually applied to this row, so the figure can be traced. */
+  cropsLifted: string[];
   /** Why this row cannot be ranked, when it cannot. */
   problem: string | null;
 };
@@ -221,36 +235,78 @@ export type ProfitOptions = {
   market: Map<string, ProductSnapshot>;
   npcPrices?: Record<string, NpcPrice>;
   growth: GrowthParams;
-  /** Farming Fortune. Scales every row identically, so it moves the figures and not the order. */
+  /** Farming Fortune, which lifts every crop. Scales every row identically and reorders nothing. */
   farmingFortune: number;
+  /**
+   * Crop Fortune, keyed by the crop name the wiki uses — "Wheat", "Cocoa Beans", "Mushroom".
+   *
+   * Unlike the above, this *does* move the ranking: it applies only to the crop it names, so a
+   * mutation dropping wheat and one dropping cocoa beans are lifted by different amounts. Sources
+   * are the tool being held, Anita's shop, Carrolyn, and the Overdrive Chip — which grants up to
+   * +140 for the active crop but only during a Jacob's Farming Contest, so it is a contest-day
+   * figure rather than a standing one.
+   */
+  cropFortune?: Record<string, number>;
   /** Multiplied on top of fortune: plant yield upgrade, evergreen chips, adjacency buffs. */
   yieldMultiplier?: number;
   plots?: number;
+  /** Prebuilt by , so ranking forty rows does not rebuild it forty times. */
+  cropFortuneIndex?: Map<string, string>;
 };
 
 /**
- * The standard farming yield: every hundred Farming Fortune is one more of everything.
+ * The expected yield multiplier for one crop, at one player's fortune.
  *
- * The Greenhouse page says mutation drops take "the normal farming yield formula" and then the
- * yield multipliers on top, which is what this is. Worth flagging that the wiki's Farming Fortune
- * page carries an `{{Outdated}}` banner saying it has not caught up with the Greenhouse update —
- * so this is the documented formula rather than a re-measured one, and it is the piece of this
- * model most likely to be wrong.
+ * Fortune is not one number. Farming Fortune lifts every crop; the thirteen Crop Fortunes lift one
+ * crop each, and the Crop Fortune page is explicit about how they meet — "their farming fortune is
+ * first added to their Crop Fortune stat corresponding to the crop they are breaking". So the
+ * figure that matters is a *sum*, and it differs from drop to drop.
+ *
+ * That is the whole reason this takes a crop id rather than a single number. A mutation dropping
+ * Wheat and one dropping Cocoa Beans see different multipliers from the same player, so crop
+ * fortune is the one kind of fortune that can change which mutation is best — where general
+ * Farming Fortune scales every row identically and cannot.
+ *
+ * The mechanic underneath is a lottery: each point is a 1% chance of 100% more, and every whole
+ * hundred is a guaranteed 100% more. The wiki's worked example is Cactus Fortune 233 giving 300%
+ * drops with a 33% chance of 400%. Averaged, that is `1 + fortune / 100`, which is what this
+ * returns — an expectation, so a single harvest will land above or below it.
+ *
+ * Flagged: the wiki's Farming Fortune page carries an `{{Outdated}}` banner saying it has not
+ * caught up with the Greenhouse update, so this is the documented formula rather than a
+ * re-measured one, and it is the piece of this model most likely to be wrong.
  */
-export function fortuneMultiplier(farmingFortune: number): number {
-  return 1 + Math.max(0, farmingFortune) / 100;
+export function fortuneMultiplier(farmingFortune: number, cropFortune = 0): number {
+  return 1 + Math.max(0, farmingFortune + cropFortune) / 100;
+}
+
+/** Which crop fortune, if any, lifts a given drop. Built once per data set. */
+export function cropFortuneIndex(data: GreenhouseData): Map<string, string> {
+  const index = new Map<string, string>();
+  for (const entry of data.cropFortunes ?? []) for (const id of entry.ids) index.set(id, entry.crop);
+  return index;
 }
 
 export function profitOf(m: Mutation, byId: Map<string, Mutation>, data: GreenhouseData, o: ProfitOptions): MutationProfit {
   const npcPrices = o.npcPrices ?? {};
-  const multiplier = fortuneMultiplier(o.farmingFortune) * (o.yieldMultiplier ?? 1);
+  const yieldBuffs = o.yieldMultiplier ?? 1;
+  const fortuneByCrop = o.cropFortuneIndex ?? cropFortuneIndex(data);
 
+  // Per drop, not per mutation: each one carries its own crop fortune on top of the general one,
+  // so a mutation dropping two different crops is lifted by two different amounts.
   let revenue = 0;
   const unpriced: string[] = [];
+  const cropsLifted: string[] = [];
   for (const drop of m.drops) {
     const price = unitPrice(drop.id, o.market, npcPrices);
-    if (price === null) unpriced.push(drop.name);
-    else revenue += price * drop.amount * multiplier;
+    if (price === null) {
+      unpriced.push(drop.name);
+      continue;
+    }
+    const crop = fortuneByCrop.get(drop.id);
+    const extra = crop ? (o.cropFortune?.[crop] ?? 0) : 0;
+    if (crop && extra > 0) cropsLifted.push(crop);
+    revenue += price * drop.amount * fortuneMultiplier(o.farmingFortune, extra) * yieldBuffs;
   }
 
   // An Ethereal Vine on harvest, at odds that rise with rarity. It is the only way to enlarge the
@@ -296,6 +352,7 @@ export function profitOf(m: Mutation, byId: Map<string, Mutation>, data: Greenho
     coinsPerDay: problem || hoursPerHarvest === null || hoursPerHarvest <= 0 ? null : (total / hoursPerHarvest) * 24 * plots,
     hoursPerStage,
     unpriced,
+    cropsLifted: [...new Set(cropsLifted)],
     problem,
   };
 }
@@ -303,7 +360,8 @@ export function profitOf(m: Mutation, byId: Map<string, Mutation>, data: Greenho
 /** Every mutation, best first. Rows that cannot be ranked sort last but are never dropped. */
 export function rankMutations(data: GreenhouseData, o: ProfitOptions): MutationProfit[] {
   const byId = new Map(data.mutations.map((m) => [m.id, m]));
+  const index = o.cropFortuneIndex ?? cropFortuneIndex(data);
   return data.mutations
-    .map((m) => profitOf(m, byId, data, o))
+    .map((m) => profitOf(m, byId, data, { ...o, cropFortuneIndex: index }))
     .sort((a, b) => (b.coinsPerHour ?? -1) - (a.coinsPerHour ?? -1));
 }

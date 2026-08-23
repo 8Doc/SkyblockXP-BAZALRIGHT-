@@ -5,6 +5,7 @@ import { nameKey, parseChance, parseItemList, parsePlantNotes, parseSpreading } 
 import {
   buyPrice,
   cheapestSetup,
+  cropFortuneIndex,
   fortuneMultiplier,
   plantsFor,
   profitOf,
@@ -190,12 +191,12 @@ test("a free requirement costs nothing rather than going unpriced", () => {
 const GROWTH = { uniqueCrops: 12, cropGrowth: 210, speedAttribute: 10, growthSpeedUpgrade: 9 };
 
 /**
- * The most useful thing to know before arguing about your own Farming Fortune: it multiplies
- * every mutation's drops by the same factor, so it changes what a row pays and never which row is
- * best. A wrong fortune makes every figure wrong by the same proportion and leaves the answer to
- * "which one should I grow" exactly where it was.
+ * True of *general* Farming Fortune and of nothing else. It lifts every crop, so it multiplies
+ * every mutation by the same factor: a wrong figure scales the coins and leaves the order alone.
+ * The per-crop fortunes below do not behave this way, which is the whole reason they are a
+ * separate input.
  */
-test("fortune scales every row and reorders none of them", () => {
+test("general farming fortune scales every row and reorders none of them", () => {
   const market = new Map<string, ProductSnapshot>();
   for (const m of data.mutations) for (const d of m.drops) market.set(d.id, product(d.id, 100, 120));
   market.set("ETHEREAL_VINE", product("ETHEREAL_VINE", 1_000, 1_200));
@@ -217,6 +218,76 @@ test("fortune is a hundred per extra drop", () => {
   assert.equal(fortuneMultiplier(0), 1);
   assert.equal(fortuneMultiplier(100), 2);
   assert.equal(fortuneMultiplier(1_500), 16);
+});
+
+/**
+ * Crop Fortune is added to Farming Fortune before the yield is worked out — the Crop Fortune page
+ * says so outright — so the pair is a sum and the wiki's own worked example checks it: Cactus
+ * Fortune 233 gives "300% drops and a 33% chance for 400%", which averages to 3.33x.
+ */
+test("crop fortune adds to farming fortune before the yield is worked out", () => {
+  assert.equal(fortuneMultiplier(100, 100), 3, "two hundred between them");
+  assert.equal(fortuneMultiplier(0, 233), 3.33, "the wiki's Cactus example, in expectation");
+  assert.equal(fortuneMultiplier(1_000, 0), fortuneMultiplier(0, 1_000), "the sum is all that matters");
+});
+
+/**
+ * The correction that matters. Crop fortune lifts one crop, so two mutations dropping different
+ * crops move apart — which makes it the one input on this page that can change *which* mutation
+ * is best. A model treating fortune as a single number gets this wrong and looks right doing it.
+ */
+test("crop fortune moves the ranking, unlike the general kind", () => {
+  const wheat = data.mutations.find((m) => m.drops.some((d) => d.id === "WHEAT"))!;
+  const other = data.mutations.find(
+    (m) => m.chance !== null && !m.spreading.prose && !m.drops.some((d) => d.id === "WHEAT") && m.drops.length > 0,
+  )!;
+  assert.ok(wheat && other, "two mutations dropping different crops");
+
+  const market = new Map<string, ProductSnapshot>();
+  for (const m of data.mutations) for (const d of m.drops) market.set(d.id, product(d.id, 100, 120));
+  const byId = new Map(data.mutations.map((m) => [m.id, m]));
+
+  const plain = (m: typeof wheat, cropFortune: Record<string, number> = {}) =>
+    profitOf(m, byId, data, { market, growth: GROWTH, farmingFortune: 100, cropFortune }).revenue;
+
+  const before = plain(wheat) / plain(other);
+  const after = plain(wheat, { Wheat: 1_000 }) / plain(other, { Wheat: 1_000 });
+  assert.ok(after > before, "wheat fortune lifts the wheat row and not the other one");
+});
+
+/** The row has to say which crop fortune it used, or the figure cannot be traced back. */
+test("a row names the crop fortune that lifted it", () => {
+  const wheat = data.mutations.find((m) => m.drops.some((d) => d.id === "WHEAT"))!;
+  const byId = new Map(data.mutations.map((m) => [m.id, m]));
+  const market = new Map([["WHEAT", product("WHEAT", 100, 120)]]);
+
+  const lifted = profitOf(wheat, byId, data, { market, growth: GROWTH, farmingFortune: 0, cropFortune: { Wheat: 500 } });
+  assert.deepEqual(lifted.cropsLifted, ["Wheat"]);
+
+  const plain = profitOf(wheat, byId, data, { market, growth: GROWTH, farmingFortune: 0 });
+  assert.deepEqual(plain.cropsLifted, [], "and says nothing when none applied");
+});
+
+/**
+ * Thirteen of them, and the ids have to be the ones that actually drop. "Mushroom Fortune" is the
+ * trap: the item resource resolves the bare name to `MUSHROOM_COLLECTION`, which is a collection
+ * key and never drops, so a mushroom mutation would silently miss the one fortune that applies.
+ */
+test("every crop fortune points at ids that really drop", () => {
+  const fortunes = data.cropFortunes ?? [];
+  assert.equal(fortunes.length, 13);
+
+  const dropped = new Set(data.mutations.flatMap((m) => m.drops.map((d) => d.id)));
+  for (const f of fortunes) {
+    assert.ok(f.ids.length > 0, `${f.stat} has no item id`);
+    assert.ok(!f.ids.includes("MUSHROOM_COLLECTION"), "a collection key is not a drop");
+  }
+  const mushroom = fortunes.find((f) => f.crop === "Mushroom")!;
+  assert.deepEqual(mushroom.ids, ["RED_MUSHROOM", "BROWN_MUSHROOM"], "the bazaar splits it in two");
+  // And the index really reaches the drops it is meant to.
+  const index = cropFortuneIndex(data);
+  assert.ok([...dropped].some((id) => index.has(id)), "at least some drops are covered");
+  assert.equal(index.get("NETHER_STALK"), "Nether Wart", "the legacy id, not the wiki's spelling");
 });
 
 test("three greenhouses pay three times one", () => {

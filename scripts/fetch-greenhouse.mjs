@@ -317,8 +317,45 @@ async function main() {
   console.log(`  ${byName.size} names in the resource; ${unresolvedNames.size} wiki names had no match`);
   if (unresolvedNames.size) console.log(`    ${[...unresolvedNames].join(", ")}`);
 
+  /* ------------------------------------------------------- crop fortune */
+
+  // Thirteen separate stats, one per crop, and they are the reason fortune is not one number.
+  // Farming Fortune lifts every crop; Wheat Fortune lifts wheat. A mutation dropping wheat and one
+  // dropping cocoa beans are therefore affected differently by the same player's gear, which is
+  // what makes crop fortune the only fortune that can change the *order* of this list.
+  console.log("reading the Crop Fortune types…");
+  const fortunePage = await wikitext("Crop Fortune");
+  const cropFortunes = [];
+  if (fortunePage) {
+    const types = fortunePage.text.slice(fortunePage.text.indexOf("== Types =="), fortunePage.text.indexOf("== Increasing"));
+    for (const m of types.matchAll(/\{\{stat\|([^|}]+) Fortune\}\}\s*\n\|(.+)/g)) {
+      const crop = m[1].trim();
+      // The affected-crop cell is an Item or an RL template; either way the first name is the crop.
+      const affected = /\{\{(?:Item|RL)\|([^|}]+)/.exec(m[2])?.[1]?.trim() ?? crop;
+      const id = byName.get(nameKey(affected));
+      cropFortunes.push({ stat: `${crop} Fortune`, crop, ids: id ? [id] : [] });
+    }
+  }
+  // "Mushroom Fortune" covers a crop the bazaar splits in two, and the only thing the item
+  // resource offers for the bare name is `MUSHROOM_COLLECTION` — a collection key rather than
+  // anything that drops. Overridden outright rather than only when the lookup fails, because the
+  // lookup does not fail; it succeeds with the wrong kind of id, and a mushroom mutation would
+  // silently miss the one crop fortune that applies to it.
+  const mushroom = cropFortunes.find((f) => f.crop === "Mushroom");
+  if (mushroom) mushroom.ids = ["RED_MUSHROOM", "BROWN_MUSHROOM"];
+  console.log(`  ${cropFortunes.length} crop fortunes, ${cropFortunes.filter((f) => f.ids.length === 0).length} with no item id`);
+
   const payload = {
     generatedAt: new Date().toISOString(),
+    /**
+     * The thirteen crop-specific fortunes, and which item ids each one lifts.
+     *
+     * Kept as data rather than code because the list grows: Sunflower, Moonflower and Wild Rose
+     * were added with the Greenhouse itself in December.
+     */
+    cropFortunes,
+    cropFortuneNote:
+      "Crop Fortune is added to Farming Fortune before the yield is worked out, per the Crop Fortune page: 'their farming fortune is first added to their Crop Fortune stat corresponding to the crop they are breaking'. Each point is a 1% chance of 100% more, and every whole 100 is a guaranteed 100% more — so the expected multiplier is 1 + (farming + crop) / 100. The wiki's own worked example is Cactus Fortune 233 giving 300% drops and a 33% chance of 400%. Sources include the farming tool held, Anita's shop, Carrolyn, and the Overdrive Chip, which grants up to +140 Crop Fortune for the active crop but only during a Jacob's Farming Contest.",
     /** Names the item resource has never heard of — priced as unknown rather than guessed at. */
     unresolvedNames: [...unresolvedNames],
     source: {

@@ -302,3 +302,8 @@ table.bz td:last-child { color: var(--gold); }
 }
 .gh-cell.gh-empty { opacity: 0.3; }
 .gh-cell.gh-target { border-color: var(--gold, #fc0); font-weight: 600; }
+
+/* Thirteen crop-fortune boxes wrap rather than scroll; each is narrow because the numbers are. */
+.gh-crops { flex-wrap: wrap; gap: 6px 10px; }
+.gh-crops label { font-size: 0.82em; }
+.gh-crops input.gh-crop { width: 68px; }

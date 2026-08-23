@@ -1,5 +1,100 @@
 {
-  "generatedAt": "2026-08-23T20:01:36.563Z",
+  "generatedAt": "2026-08-23T20:21:56.324Z",
+  "cropFortunes": [
+    {
+      "stat": "Wheat Fortune",
+      "crop": "Wheat",
+      "ids": [
+        "WHEAT"
+      ]
+    },
+    {
+      "stat": "Carrot Fortune",
+      "crop": "Carrot",
+      "ids": [
+        "CARROT_ITEM"
+      ]
+    },
+    {
+      "stat": "Potato Fortune",
+      "crop": "Potato",
+      "ids": [
+        "POTATO_ITEM"
+      ]
+    },
+    {
+      "stat": "Pumpkin Fortune",
+      "crop": "Pumpkin",
+      "ids": [
+        "PUMPKIN"
+      ]
+    },
+    {
+      "stat": "Sugar Cane Fortune",
+      "crop": "Sugar Cane",
+      "ids": [
+        "SUGAR_CANE"
+      ]
+    },
+    {
+      "stat": "Melon Slice Fortune",
+      "crop": "Melon Slice",
+      "ids": [
+        "MELON"
+      ]
+    },
+    {
+      "stat": "Cactus Fortune",
+      "crop": "Cactus",
+      "ids": [
+        "CACTUS"
+      ]
+    },
+    {
+      "stat": "Cocoa Beans Fortune",
+      "crop": "Cocoa Beans",
+      "ids": [
+        "INK_SACK:3"
+      ]
+    },
+    {
+      "stat": "Mushroom Fortune",
+      "crop": "Mushroom",
+      "ids": [
+        "RED_MUSHROOM",
+        "BROWN_MUSHROOM"
+      ]
+    },
+    {
+      "stat": "Nether Wart Fortune",
+      "crop": "Nether Wart",
+      "ids": [
+        "NETHER_STALK"
+      ]
+    },
+    {
+      "stat": "Sunflower Fortune",
+      "crop": "Sunflower",
+      "ids": [
+        "DOUBLE_PLANT"
+      ]
+    },
+    {
+      "stat": "Moonflower Fortune",
+      "crop": "Moonflower",
+      "ids": [
+        "MOONFLOWER"
+      ]
+    },
+    {
+      "stat": "Wild Rose Fortune",
+      "crop": "Wild Rose",
+      "ids": [
+        "WILD_ROSE"
+      ]
+    }
+  ],
+  "cropFortuneNote": "Crop Fortune is added to Farming Fortune before the yield is worked out, per the Crop Fortune page: 'their farming fortune is first added to their Crop Fortune stat corresponding to the crop they are breaking'. Each point is a 1% chance of 100% more, and every whole 100 is a guaranteed 100% more — so the expected multiplier is 1 + (farming + crop) / 100. The wiki's own worked example is Cactus Fortune 233 giving 300% drops and a 33% chance of 400%. Sources include the farming tool held, Anita's shop, Carrolyn, and the Overdrive Chip, which grants up to +140 Crop Fortune for the active crop but only during a Jacob's Farming Contest.",
   "unresolvedNames": [
     "Fire"
   ],

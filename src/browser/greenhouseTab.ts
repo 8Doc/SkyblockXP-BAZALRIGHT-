@@ -40,6 +40,15 @@ type State = {
   plots: number;
   /** As typed. Empty means "use the estimate". */
   fortune: string;
+  /**
+   * Crop Fortune per crop, as typed, keyed by the wiki's crop name.
+   *
+   * Separate from the box above because it behaves differently: it lifts one crop rather than all
+   * of them, so it is the only figure here that can change which mutation comes out on top.
+   */
+  cropFortune: Record<string, string>;
+  /** Whether the per-crop boxes are on screen; they are a dozen inputs nobody always wants. */
+  showCrops: boolean;
   growth: GrowthParams;
   /** Which row's layout is open, if any. */
   open: string | null;
@@ -60,13 +69,35 @@ const DEFAULT_GROWTH: GrowthParams = {
 };
 
 /**
- * The fortune the figures use when the box is empty.
+ * The general Farming Fortune the figures use when the box is empty.
  *
- * 1,500 is a mid-to-late farming setup and it is a *placeholder*, not a reading — nothing here
- * can see your gear. It matters less than it looks: fortune multiplies every mutation's drops by
- * the same factor, so getting it wrong scales every row identically and leaves the ranking alone.
+ * 1,500 is a mid-to-late farming setup and it is a *placeholder*, not a reading — nothing here can
+ * see your gear. Getting this one wrong is comparatively cheap: it lifts every crop equally, so it
+ * scales every row by the same factor and leaves the order alone. The per-crop boxes below are the
+ * ones worth filling in, because those do move the ranking.
  */
 const ASSUMED_FORTUNE = 1_500;
+
+const CROP_KEY = "sbxp:ghcropfortune";
+
+function readCropFortune(): Record<string, string> {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(CROP_KEY) ?? "{}");
+    return parsed && typeof parsed === "object" ? (parsed as Record<string, string>) : {};
+  } catch {
+    return {};
+  }
+}
+
+/** The typed boxes as numbers, dropping anything blank or unparseable. */
+function cropFortuneValues(): Record<string, number> {
+  const out: Record<string, number> = {};
+  for (const [crop, raw] of Object.entries(state.cropFortune)) {
+    const n = Number(String(raw).replace(/[^0-9.]/g, ""));
+    if (String(raw).trim() !== "" && Number.isFinite(n) && n > 0) out[crop] = n;
+  }
+  return out;
+}
 
 const state: State = {
   market: new Map(),
@@ -77,6 +108,8 @@ const state: State = {
   search: "",
   plots: Number(localStorage.getItem("sbxp:ghplots") ?? 1),
   fortune: localStorage.getItem("sbxp:ghfortune") ?? "",
+  cropFortune: readCropFortune(),
+  showCrops: localStorage.getItem("sbxp:ghshowcrops") === "1",
   growth: {
     uniqueCrops: Number(localStorage.getItem("sbxp:ghunique") ?? DEFAULT_GROWTH.uniqueCrops),
     cropGrowth: Number(localStorage.getItem("sbxp:ghgrowth") ?? DEFAULT_GROWTH.cropGrowth),
@@ -201,6 +234,7 @@ function rows(): MutationProfit[] {
     npcPrices: tables.npcPrices,
     growth: state.growth,
     farmingFortune: fortuneValue(),
+    cropFortune: cropFortuneValues(),
     plots: state.plots,
   });
 }
@@ -259,6 +293,13 @@ export function mountGreenhouse(container: HTMLElement, data: GreenhouseTables):
       return;
     }
 
+    if (target.closest("#ghcroptoggle")) {
+      state.showCrops = !state.showCrops;
+      localStorage.setItem("sbxp:ghshowcrops", state.showCrops ? "1" : "0");
+      render();
+      return;
+    }
+
     if (target.closest("#ghrefresh")) void refresh();
   });
 
@@ -282,6 +323,14 @@ export function mountGreenhouse(container: HTMLElement, data: GreenhouseTables):
 
     if (el.id === "ghsearch") {
       state.search = el.value;
+      renderTable();
+      return;
+    }
+    // A per-crop box. Only the table repaints, so the cursor stays where it is being typed.
+    const crop = el.dataset.ghcrop;
+    if (crop !== undefined) {
+      state.cropFortune = { ...state.cropFortune, [crop]: el.value };
+      localStorage.setItem(CROP_KEY, JSON.stringify(state.cropFortune));
       renderTable();
       return;
     }
@@ -339,6 +388,53 @@ function fortuneNote(): string {
   );
 }
 
+/**
+ * A box per crop, because crop fortune is per crop.
+ *
+ * Folded away by default: thirteen inputs is a lot to meet on arrival, and the page says something
+ * sensible without them. Opened, it is the only control here that changes the *order* of the
+ * table rather than the size of its numbers, which the heading says.
+ *
+ * The Overdrive Chip is called out because it is the easiest figure to enter wrongly — it is worth
+ * up to +140 to one crop and it only exists during a Jacob's Contest, so typing it in as a
+ * standing stat overstates every mutation dropping that crop for the other twenty-three hours.
+ */
+function cropFortunePanel(): string {
+  const crops = tables.greenhouse.cropFortunes ?? [];
+  if (crops.length === 0) return "";
+
+  const summary = `<button type="button" class="chip" id="ghcroptoggle">${state.showCrops ? "Hide" : "Add"} crop fortune</button>`;
+  if (!state.showCrops) {
+    const filled = Object.keys(cropFortuneValues()).length;
+    return `<p class="sub">${summary} <span class="dim">${
+      filled > 0
+        ? `${filled} crop${filled > 1 ? "s" : ""} set — these change the order, not just the totals.`
+        : "Wheat Fortune, Carrot Fortune and the rest. Unlike the box above, these lift one crop each, so they change which mutation wins."
+    }</span></p>`;
+  }
+
+  const boxes = crops
+    .map(
+      (c) =>
+        `<label title="${escapeHtml(c.stat)} — lifts ${escapeHtml(c.crop)} only.">${escapeHtml(c.crop)}
+          <input class="gh-crop" data-ghcrop="${escapeHtml(c.crop)}" value="${escapeHtml(state.cropFortune[c.crop] ?? "")}" placeholder="0" autocomplete="off">
+        </label>`,
+    )
+    .join("");
+
+  return `
+    <p class="sub">${summary}</p>
+    <div class="row gh-crops">${boxes}</div>
+    <p class="sub dim">
+      Added to Farming Fortune for that crop only, before the yield is worked out — the wiki's rule,
+      not ours. Sources are the tool you are holding, Anita's shop and Carrolyn. The
+      <strong>Overdrive Chip</strong> adds up to <strong>+140</strong> more, but only to the active
+      crop during a Jacob's Farming Contest — so put it in when you are asking about a contest, and
+      leave it out when you are asking about a normal day.
+    </p>
+  `;
+}
+
 function render(): void {
   if (!host) return;
 
@@ -356,6 +452,8 @@ function render(): void {
         </span>
       </div>
       <p class="sub" id="ghfortunenote">${fortuneNote()}</p>
+
+      ${cropFortunePanel()}
 
       <div class="row">
         <label title="Unique non-mutated crops growing in any plot. Twelve is the documented maximum and each one speeds every plot up.">Unique crops
@@ -430,8 +528,16 @@ function renderTable(): void {
           }</div>`
         : "";
       const rarity = row.rarity ? ` <span class="dim">${escapeHtml(row.rarity)}</span>` : "";
+      // Which crop fortune lifted this row, when one did. Named rather than folded silently into
+      // the total, because it is the input most likely to be a contest-day figure entered as a
+      // standing one — and this is where that would show up.
+      const lifted = row.cropsLifted.length
+        ? ` <span class="dim" title="This row is lifted by the crop fortune you entered for these, on top of your general Farming Fortune.">· ${escapeHtml(
+            row.cropsLifted.join(", "),
+          )} fortune applied</span>`
+        : "";
       const open = state.open === row.id ? layoutHtml(row) : "";
-      return `<tr class="bz-open" data-ghopen="${escapeHtml(row.id)}"><td>${icon}${escapeHtml(row.name)}${rarity}${setup}${problem}${open}</td>${cells}</tr>`;
+      return `<tr class="bz-open" data-ghopen="${escapeHtml(row.id)}"><td>${icon}${escapeHtml(row.name)}${rarity}${lifted}${setup}${problem}${open}</td>${cells}</tr>`;
     })
     .join("");
 
