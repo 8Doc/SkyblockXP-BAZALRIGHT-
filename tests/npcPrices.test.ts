@@ -2,7 +2,11 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 // @ts-expect-error - a plain build script, imported for its pure parsers only.
 import { nameKey, parseShopPage, parseShopSlot, wikiNumber } from "../scripts/fetch-npc-prices.mjs";
-import npcPrices from "../data/generated/npc-prices.json";
+import npcPricesJson from "../data/generated/npc-prices.json";
+
+// The JSON import infers a union of two-and-a-half-thousand literal shapes, which is accurate and
+// unusable; the file is a plain map of the type the app reads it as.
+const npcPrices = npcPricesJson as unknown as { prices: Record<string, { sell?: number; buy?: number; stock?: number }> };
 
 /**
  * The shop scraper's parsing. Every line below is a real `{{Shop UI}}` slot off the wiki, kept

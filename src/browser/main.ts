@@ -16,6 +16,8 @@ import {
 } from "../lib/types";
 import { ApiError, cacheAge, fetchAccessoryBins, fetchBazaar, fetchReferencePrices, fetchGarden, fetchMuseum, fetchProfiles, readBag, readOwnedItems, resolveUuid } from "./api";
 import { mountBazaar, unmountBazaar } from "./bazaarTab";
+import { mountGreenhouse, unmountGreenhouse } from "./greenhouseTab";
+import type { GreenhouseData } from "../lib/greenhouse";
 import type { NpcPrice, Recipe } from "../lib/bazaarViews";
 import type { AnvilRules } from "../lib/bazaarChains";
 
@@ -43,6 +45,11 @@ declare global {
       anvil: AnvilRules;
       names: Record<string, string>;
     };
+    /**
+     * The greenhouse tab's tables, separate again for the same reason: it answers a question
+     * about growing things off a wiki scrape, and shares only the shop prices with the bazaar.
+     */
+    __GREENHOUSE_DATA__: { greenhouse: GreenhouseData; npcPrices: Record<string, NpcPrice> };
   }
 }
 
@@ -84,7 +91,7 @@ type State = {
    * Which half of the site is on screen. The planner needs a key, a name and a profile; the
    * bazaar needs none of them, so it is a section rather than another tab inside the report.
    */
-  section: "planner" | "bazaar";
+  section: "planner" | "bazaar" | "greenhouse";
   tab: "plan" | "packages" | "cheapest" | "grind" | "browser";
   status: { kind: "idle" | "busy" | "error"; message: string };
   report: Report | null;
@@ -115,7 +122,7 @@ const state: State = {
   packageCount: 5,
   categories: new Set(CATEGORIES),
   strategy: "greedy",
-  section: (localStorage.getItem("sbxp:section") as "planner" | "bazaar") ?? "planner",
+  section: (localStorage.getItem("sbxp:section") as State["section"]) ?? "planner",
   tab: "plan",
   status: { kind: "idle", message: "" },
   report: null,
@@ -763,6 +770,7 @@ function renderShell(): void {
       <div class="tabs sections">
         <button class="chip" data-section="planner">XP Planner</button>
         <button class="chip" data-section="bazaar">Bazaar</button>
+        <button class="chip" data-section="greenhouse">Greenhouse</button>
       </div>
     </header>
     <div id="planner">
@@ -771,6 +779,7 @@ function renderShell(): void {
       <div id="results"></div>
     </div>
     <div id="bazaar" hidden></div>
+    <div id="greenhouse" hidden></div>
   `;
 
   // Delegated once on the container, so nothing needs re-binding after a repaint.
@@ -1119,24 +1128,45 @@ function markPending(pending: boolean): void {
  * behind the planner would be a request a minute for a page nobody is looking at. Switching
  * away unmounts it; switching back starts it again with a fresh read.
  */
+const SECTION_TITLES: Record<State["section"], [string, string]> = {
+  planner: [
+    "XP Planner",
+    "The cheapest set of tasks that reaches your XP target — grouped by where you have to go, with the 1 XP filler filtered out.",
+  ],
+  bazaar: [
+    "Bazaar",
+    "Flips and crafts off a live read of the bazaar, ranked on coins per hour rather than on the spread.",
+  ],
+  greenhouse: [
+    "Greenhouse",
+    "Which mutation is worth growing, priced off the bazaar and ranked on what it pays for being left alone.",
+  ],
+};
+
 function renderSection(): void {
-  const bazaar = state.section === "bazaar";
+  const showing = state.section;
 
-  document.getElementById("planner")!.hidden = bazaar;
+  document.getElementById("planner")!.hidden = showing !== "planner";
   const bazaarHost = document.getElementById("bazaar")!;
-  bazaarHost.hidden = !bazaar;
+  const greenhouseHost = document.getElementById("greenhouse")!;
+  bazaarHost.hidden = showing !== "bazaar";
+  greenhouseHost.hidden = showing !== "greenhouse";
 
-  document.getElementById("sectiontitle")!.textContent = bazaar ? "Bazaar" : "XP Planner";
-  document.getElementById("sectionsub")!.textContent = bazaar
-    ? "Flips and crafts off a live read of the bazaar, ranked on coins per hour rather than on the spread."
-    : "The cheapest set of tasks that reaches your XP target — grouped by where you have to go, with the 1 XP filler filtered out.";
+  const [title, sub] = SECTION_TITLES[showing];
+  document.getElementById("sectiontitle")!.textContent = title;
+  document.getElementById("sectionsub")!.textContent = sub;
 
   for (const chip of root.querySelectorAll<HTMLElement>("[data-section]")) {
     chip.classList.toggle("on", chip.dataset.section === state.section);
   }
 
-  if (bazaar) mountBazaar(bazaarHost, window.__BAZAAR_DATA__);
+  // Both live sections poll Hypixel every twenty seconds while they are on screen, so whichever
+  // is not showing gets unmounted rather than left running behind the other.
+  if (showing === "bazaar") mountBazaar(bazaarHost, window.__BAZAAR_DATA__);
   else unmountBazaar();
+
+  if (showing === "greenhouse") mountGreenhouse(greenhouseHost, window.__GREENHOUSE_DATA__);
+  else unmountGreenhouse();
 }
 
 function render(): void {

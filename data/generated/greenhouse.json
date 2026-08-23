@@ -1,0 +1,2782 @@
+{
+  "generatedAt": "2026-08-23T20:01:36.563Z",
+  "unresolvedNames": [
+    "Fire"
+  ],
+  "source": {
+    "mutations": "hypixelskyblock.minecraft.wiki/wiki/Mutations",
+    "greenhouse": "hypixelskyblock.minecraft.wiki/wiki/Greenhouse",
+    "weights": "Hypixel staff (mrkeith) posted in Discord, quoted on the Mutations page",
+    "bounty": "Hypixel staff (mrkeith) posted in Discord, quoted on the Greenhouse page"
+  },
+  "editedAt": {
+    "mutations": "2026-08-23T06:30:18Z",
+    "greenhouse": "2026-08-20T17:11:53Z"
+  },
+  "note": "Base crop drops changed wholesale on 2026-08-20 — Nether Wart 240 to 108, Carrot 280 to 175, Sunflower 160 to 232 — so a figure computed before that date is wrong by up to a factor of two. A null weight or chance is a cell the wiki leaves blank, meaning the mutation needs a special condition rather than a roll; it is not a chance of zero. Layouts are the 3x3 ring the mutation spreads into the middle of, and a spreading condition counts ring cells rather than plants, which is why a 2x2 mutation satisfies two cells at once.",
+  "growth": {
+    "baseStageSeconds": 14400,
+    "fastestStageSeconds": 6063,
+    "formula": "T = 14400 / (1 + 0.025*uniqueCrops + 0.0025*cropGrowth + 0.005*speedAttribute + upgradeBonus)",
+    "upgradeBonus": "0.05 per tier for tiers 0-8; 0.50 at tier 9",
+    "source": "Greenhouse#Growth Stage"
+  },
+  "water": {
+    "lossPerStageMin": 2,
+    "lossPerStageMax": 3,
+    "retain": 0.5,
+    "improvedRetain": 1,
+    "drain": -0.3
+  },
+  "maxPlots": 3,
+  "yieldBuffs": {
+    "plantYieldUpgrade": [
+      0.02,
+      0.2
+    ],
+    "evergreenChip": [
+      0.02,
+      0.6
+    ],
+    "harvestBoost": 0.2,
+    "improvedHarvestBoost": 0.3,
+    "perUniqueCrop": 0.03,
+    "allTwelveUnique": 0.36
+  },
+  "etherealVineByRarity": {
+    "common": 0.15,
+    "uncommon": 0.2,
+    "rare": 0.25,
+    "epic": 0.3,
+    "legendary": 0.4
+  },
+  "harvestBounty": [
+    {
+      "id": "BURROWING_SPORES",
+      "chance": 0.002
+    },
+    {
+      "id": "ETHEREAL_VINE",
+      "chance": 0.05
+    },
+    {
+      "id": "OVERCLOCKER_3000",
+      "chance": 0.0005
+    },
+    {
+      "id": "OVERGROWN_GRASS",
+      "chance": 0.001
+    },
+    {
+      "id": "SYNTHESIS_GARDEN_CHIP",
+      "chance": 0.03
+    },
+    {
+      "id": "EVERGREEN_GARDEN_CHIP",
+      "chance": 0.03
+    },
+    {
+      "id": "IRIDIUM",
+      "chance": 0.002
+    }
+  ],
+  "baseCrops": [
+    {
+      "id": "WHEAT",
+      "name": "Wheat",
+      "baseYield": 72,
+      "growthCycles": 8,
+      "unconfirmed": false
+    },
+    {
+      "id": "CARROT_ITEM",
+      "name": "Carrot",
+      "baseYield": 175,
+      "growthCycles": 8,
+      "unconfirmed": false
+    },
+    {
+      "id": "POTATO_ITEM",
+      "name": "Potato",
+      "baseYield": 150,
+      "growthCycles": 8,
+      "unconfirmed": false
+    },
+    {
+      "id": "PUMPKIN",
+      "name": "Pumpkin",
+      "baseYield": 68,
+      "growthCycles": 11,
+      "unconfirmed": false
+    },
+    {
+      "id": "SUGAR_CANE",
+      "name": "Sugar Cane",
+      "baseYield": 136,
+      "growthCycles": 8,
+      "unconfirmed": false
+    },
+    {
+      "id": "MELON",
+      "name": "Melon Slice",
+      "baseYield": 320,
+      "growthCycles": 11,
+      "unconfirmed": false
+    },
+    {
+      "id": "CACTUS",
+      "name": "Cactus",
+      "baseYield": 132,
+      "growthCycles": 8,
+      "unconfirmed": false
+    },
+    {
+      "id": "INK_SACK:3",
+      "name": "Cocoa Beans",
+      "baseYield": 120,
+      "growthCycles": 6,
+      "unconfirmed": false
+    },
+    {
+      "id": "RED_MUSHROOM",
+      "name": "Red Mushroom",
+      "baseYield": 30,
+      "growthCycles": 6,
+      "unconfirmed": true
+    },
+    {
+      "id": "BROWN_MUSHROOM",
+      "name": "Brown Mushroom",
+      "baseYield": 30,
+      "growthCycles": 6,
+      "unconfirmed": true
+    },
+    {
+      "id": "NETHER_STALK",
+      "name": "Nether Wart",
+      "baseYield": 108,
+      "growthCycles": 8,
+      "unconfirmed": false
+    },
+    {
+      "id": "DOUBLE_PLANT",
+      "name": "Sunflower",
+      "baseYield": 232,
+      "growthCycles": 15,
+      "unconfirmed": false
+    },
+    {
+      "id": "MOONFLOWER",
+      "name": "Moonflower",
+      "baseYield": 232,
+      "growthCycles": 15,
+      "unconfirmed": false
+    },
+    {
+      "id": "WILD_ROSE",
+      "name": "Wild Rose",
+      "baseYield": 200,
+      "growthCycles": 15,
+      "unconfirmed": false
+    }
+  ],
+  "mutations": [
+    {
+      "id": "ASHWREATH",
+      "name": "Ashwreath",
+      "rarity": "Common",
+      "size": 1,
+      "cellsPerPlant": 1,
+      "surface": "Soul Sand",
+      "weight": 30,
+      "chance": 0.15,
+      "growthStages": 0,
+      "spreading": {
+        "raw": "{{Item|Nether Wart|amount=2}} / {{Item|Fire|amount=2}}",
+        "options": [
+          {
+            "id": "NETHER_STALK",
+            "name": "Nether Wart",
+            "cells": 2
+          },
+          {
+            "id": "FIRE",
+            "name": "Fire",
+            "cells": 2,
+            "free": true
+          }
+        ],
+        "prose": false
+      },
+      "plantNotes": {},
+      "effects": [
+        "Improved Harvest Boost",
+        "XP Loss"
+      ],
+      "drops": [
+        {
+          "id": "NETHER_STALK",
+          "name": "Nether Wart",
+          "amount": 180
+        }
+      ],
+      "farmingXp": null,
+      "hasLayout": true,
+      "layout": [
+        [
+          null,
+          "Flint and Steel",
+          null
+        ],
+        [
+          "Nether Wart",
+          "Ashwreath",
+          "Nether Wart"
+        ],
+        [
+          null,
+          "Flint and Steel",
+          null
+        ]
+      ]
+    },
+    {
+      "id": "CHOCONUT",
+      "name": "Choconut",
+      "rarity": "Common",
+      "size": 1,
+      "cellsPerPlant": 1,
+      "surface": "Farmland",
+      "weight": 30,
+      "chance": 0.3,
+      "growthStages": 0,
+      "spreading": {
+        "raw": "{{Item|Cocoa Beans|amount=2}}",
+        "options": [
+          {
+            "id": "INK_SACK:3",
+            "name": "Cocoa Beans",
+            "cells": 2
+          }
+        ],
+        "prose": false
+      },
+      "plantNotes": {},
+      "effects": [
+        "Immunity"
+      ],
+      "drops": [
+        {
+          "id": "INK_SACK:3",
+          "name": "Cocoa Beans",
+          "amount": 200
+        }
+      ],
+      "farmingXp": null,
+      "hasLayout": true,
+      "layout": [
+        [
+          null,
+          null,
+          null
+        ],
+        [
+          "Cocoa Beans",
+          "Choconut",
+          "Cocoa Beans"
+        ],
+        [
+          null,
+          null,
+          null
+        ]
+      ]
+    },
+    {
+      "id": "DUSTGRAIN",
+      "name": "Dustgrain",
+      "rarity": "Common",
+      "size": 1,
+      "cellsPerPlant": 1,
+      "surface": "Farmland",
+      "weight": 30,
+      "chance": 0.3,
+      "growthStages": 0,
+      "spreading": {
+        "raw": "{{Item|Wheat|amount=2}}",
+        "options": [
+          {
+            "id": "WHEAT",
+            "name": "Wheat",
+            "cells": 2
+          }
+        ],
+        "prose": false
+      },
+      "plantNotes": {},
+      "effects": [
+        "Harvest Boost"
+      ],
+      "drops": [
+        {
+          "id": "WHEAT",
+          "name": "Wheat",
+          "amount": 100
+        }
+      ],
+      "farmingXp": 400,
+      "hasLayout": true,
+      "layout": [
+        [
+          null,
+          null,
+          null
+        ],
+        [
+          "Wheat",
+          "Dustgrain",
+          "Wheat"
+        ],
+        [
+          null,
+          null,
+          null
+        ]
+      ]
+    },
+    {
+      "id": "GLOOMGOURD",
+      "name": "Gloomgourd",
+      "rarity": "Common",
+      "size": 1,
+      "cellsPerPlant": 1,
+      "surface": "Farmland",
+      "weight": 30,
+      "chance": 0.3,
+      "growthStages": 0,
+      "spreading": {
+        "raw": "{{Item|Pumpkin|amount=1}} / {{Item|Melon|amount=1}}",
+        "options": [
+          {
+            "id": "PUMPKIN",
+            "name": "Pumpkin",
+            "cells": 1
+          },
+          {
+            "id": "BUILDER_MELON",
+            "name": "Melon",
+            "cells": 1
+          }
+        ],
+        "prose": false
+      },
+      "plantNotes": {},
+      "effects": [
+        "Water Retain",
+        "Bonus Drops"
+      ],
+      "drops": [
+        {
+          "id": "PUMPKIN",
+          "name": "Pumpkin",
+          "amount": 34
+        },
+        {
+          "id": "MELON",
+          "name": "Melon Slice",
+          "amount": 160
+        }
+      ],
+      "farmingXp": null,
+      "hasLayout": true,
+      "layout": [
+        [
+          null,
+          null,
+          null
+        ],
+        [
+          "Pumpkin",
+          "Gloomgourd",
+          "Melon Slice"
+        ],
+        [
+          null,
+          null,
+          null
+        ]
+      ]
+    },
+    {
+      "id": "LONELILY",
+      "name": "Lonelily",
+      "rarity": "Common",
+      "size": 1,
+      "cellsPerPlant": 1,
+      "surface": "Farmland, Dirt",
+      "weight": 6,
+      "chance": 0.06,
+      "growthStages": 0,
+      "spreading": {
+        "raw": "0 adjacent crops",
+        "options": [],
+        "prose": true
+      },
+      "plantNotes": {},
+      "effects": [
+        "Bonus Drops"
+      ],
+      "drops": [
+        {
+          "id": "POTATO_ITEM",
+          "name": "Potato",
+          "amount": 525
+        },
+        {
+          "id": "CARROT_ITEM",
+          "name": "Carrot",
+          "amount": 613
+        },
+        {
+          "id": "PUMPKIN",
+          "name": "Pumpkin",
+          "amount": 298
+        }
+      ],
+      "farmingXp": null,
+      "hasLayout": true,
+      "layout": [
+        [
+          null,
+          null,
+          null
+        ],
+        [
+          null,
+          "Lonelily",
+          null
+        ],
+        [
+          null,
+          null,
+          null
+        ]
+      ]
+    },
+    {
+      "id": "SCOURROOT",
+      "name": "Scourroot",
+      "rarity": "Common",
+      "size": 1,
+      "cellsPerPlant": 1,
+      "surface": "Farmland",
+      "weight": 30,
+      "chance": 0.3,
+      "growthStages": 0,
+      "spreading": {
+        "raw": "{{Item|Potato|amount=1}} / {{Item|Carrot|amount=1}}",
+        "options": [
+          {
+            "id": "POTATO_ITEM",
+            "name": "Potato",
+            "cells": 1
+          },
+          {
+            "id": "CARROT_ITEM",
+            "name": "Carrot",
+            "cells": 1
+          }
+        ],
+        "prose": false
+      },
+      "plantNotes": {},
+      "effects": [
+        "Immunity",
+        "XP Boost"
+      ],
+      "drops": [
+        {
+          "id": "POTATO_ITEM",
+          "name": "Potato",
+          "amount": 102
+        },
+        {
+          "id": "CARROT_ITEM",
+          "name": "Carrot",
+          "amount": 119
+        }
+      ],
+      "farmingXp": 360,
+      "hasLayout": true,
+      "layout": [
+        [
+          null,
+          null,
+          null
+        ],
+        [
+          "Potato",
+          "Scourroot",
+          "Carrot"
+        ],
+        [
+          null,
+          null,
+          null
+        ]
+      ]
+    },
+    {
+      "id": "SHADEVINE",
+      "name": "Shadevine",
+      "rarity": "Common",
+      "size": 1,
+      "cellsPerPlant": 1,
+      "surface": "Farmland",
+      "weight": 30,
+      "chance": 0.3,
+      "growthStages": 0,
+      "spreading": {
+        "raw": "{{Item|Cactus|amount=1}} / {{Item|Sugar Cane|amount=1}}",
+        "options": [
+          {
+            "id": "CACTUS",
+            "name": "Cactus",
+            "cells": 1
+          },
+          {
+            "id": "SUGAR_CANE",
+            "name": "Sugar Cane",
+            "cells": 1
+          }
+        ],
+        "prose": false
+      },
+      "plantNotes": {},
+      "effects": [
+        "Improved Water Retain",
+        "Improved XP Boost",
+        "Harvest Loss"
+      ],
+      "drops": [
+        {
+          "id": "CACTUS",
+          "name": "Cactus",
+          "amount": 78
+        },
+        {
+          "id": "SUGAR_CANE",
+          "name": "Sugar Cane",
+          "amount": 104
+        }
+      ],
+      "farmingXp": null,
+      "hasLayout": true,
+      "layout": [
+        [
+          null,
+          null,
+          null
+        ],
+        [
+          "Cactus",
+          "Shadevine",
+          "Sugar Cane"
+        ],
+        [
+          null,
+          null,
+          null
+        ]
+      ]
+    },
+    {
+      "id": "VEILSHROOM",
+      "name": "Veilshroom",
+      "rarity": "Common",
+      "size": 1,
+      "cellsPerPlant": 1,
+      "surface": "Mycelium",
+      "weight": 30,
+      "chance": 0.3,
+      "growthStages": 0,
+      "spreading": {
+        "raw": "{{Item|Red Mushroom|amount=1}} / {{Item|Brown Mushroom|amount=1}}",
+        "options": [
+          {
+            "id": "RED_MUSHROOM",
+            "name": "Red Mushroom",
+            "cells": 1
+          },
+          {
+            "id": "BROWN_MUSHROOM",
+            "name": "Brown Mushroom",
+            "cells": 1
+          }
+        ],
+        "prose": false
+      },
+      "plantNotes": {},
+      "effects": [
+        "Improved Harvest Boost",
+        "Water Drain"
+      ],
+      "drops": [
+        {
+          "id": "BROWN_MUSHROOM",
+          "name": "Brown Mushroom",
+          "amount": 28
+        },
+        {
+          "id": "RED_MUSHROOM",
+          "name": "Red Mushroom",
+          "amount": 28
+        }
+      ],
+      "farmingXp": null,
+      "hasLayout": true,
+      "layout": [
+        [
+          null,
+          null,
+          null
+        ],
+        [
+          "Red Mushroom",
+          "Veilshroom",
+          "Brown Mushroom"
+        ],
+        [
+          null,
+          null,
+          null
+        ]
+      ]
+    },
+    {
+      "id": "WITHERBLOOM",
+      "name": "Witherbloom",
+      "rarity": "Common",
+      "size": 1,
+      "cellsPerPlant": 1,
+      "surface": "Soul Sand",
+      "weight": 30,
+      "chance": 0.3,
+      "growthStages": 0,
+      "spreading": {
+        "raw": "{{Item|Dead Plant|amount=4}}",
+        "options": [
+          {
+            "id": "DEAD_PLANT",
+            "name": "Dead Plant",
+            "cells": 4,
+            "free": true
+          }
+        ],
+        "prose": false
+      },
+      "plantNotes": {},
+      "effects": [
+        "Effect Spread"
+      ],
+      "drops": [
+        {
+          "id": "WILD_ROSE",
+          "name": "Wild Rose",
+          "amount": 184
+        }
+      ],
+      "farmingXp": 600,
+      "hasLayout": true,
+      "layout": [
+        [
+          null,
+          "Dead Plant",
+          null
+        ],
+        [
+          "Dead Plant",
+          "Witherbloom",
+          "Dead Plant"
+        ],
+        [
+          null,
+          "Dead Plant",
+          null
+        ]
+      ]
+    },
+    {
+      "id": "CHOCOBERRY",
+      "name": "Chocoberry",
+      "rarity": "Uncommon",
+      "size": 1,
+      "cellsPerPlant": 1,
+      "surface": "Farmland",
+      "weight": 25,
+      "chance": 0.25,
+      "growthStages": 6,
+      "spreading": {
+        "raw": "{{Item|Choconut|amount=6}} / {{Item|Gloomgourd|amount=2}}",
+        "options": [
+          {
+            "id": "CHOCONUT",
+            "name": "Choconut",
+            "cells": 6
+          },
+          {
+            "id": "GLOOMGOURD",
+            "name": "Gloomgourd",
+            "cells": 2
+          }
+        ],
+        "prose": false
+      },
+      "plantNotes": {},
+      "effects": [
+        "Water Retain"
+      ],
+      "drops": [
+        {
+          "id": "INK_SACK:3",
+          "name": "Cocoa Beans",
+          "amount": 440
+        },
+        {
+          "id": "PUMPKIN",
+          "name": "Pumpkin",
+          "amount": 187
+        },
+        {
+          "id": "MELON",
+          "name": "Melon Slice",
+          "amount": 1760
+        }
+      ],
+      "farmingXp": null,
+      "hasLayout": true,
+      "layout": [
+        [
+          "Choconut",
+          "Choconut",
+          "Choconut"
+        ],
+        [
+          "Gloomgourd",
+          "Chocoberry",
+          "Choconut"
+        ],
+        [
+          "Gloomgourd",
+          "Choconut",
+          "Choconut"
+        ]
+      ]
+    },
+    {
+      "id": "CINDERSHADE",
+      "name": "Cindershade",
+      "rarity": "Uncommon",
+      "size": 1,
+      "cellsPerPlant": 1,
+      "surface": "Soul Sand",
+      "weight": 25,
+      "chance": 0.25,
+      "growthStages": 8,
+      "spreading": {
+        "raw": "{{Item|Ashwreath|amount=4}} / 4x [[Witherbloom|Witherbloom]]",
+        "options": [
+          {
+            "id": "ASHWREATH",
+            "name": "Ashwreath",
+            "cells": 4
+          },
+          {
+            "id": "WITHERBLOOM",
+            "name": "Witherbloom",
+            "cells": 4
+          }
+        ],
+        "prose": false
+      },
+      "plantNotes": {},
+      "effects": [
+        "Effect Spread",
+        "Improved Harvest Boost",
+        "XP Loss"
+      ],
+      "drops": [
+        {
+          "id": "NETHER_STALK",
+          "name": "Nether Wart",
+          "amount": 1020
+        },
+        {
+          "id": "WILD_ROSE",
+          "name": "Wild Rose",
+          "amount": 680
+        }
+      ],
+      "farmingXp": null,
+      "hasLayout": true,
+      "layout": [
+        [
+          "Ashwreath",
+          "Ashwreath",
+          "Ashwreath"
+        ],
+        [
+          "Witherbloom",
+          "Cindershade",
+          "Ashwreath"
+        ],
+        [
+          "Witherbloom",
+          "Witherbloom",
+          "Witherbloom"
+        ]
+      ]
+    },
+    {
+      "id": "COALROOT",
+      "name": "Coalroot",
+      "rarity": "Uncommon",
+      "size": 1,
+      "cellsPerPlant": 1,
+      "surface": "Farmland",
+      "weight": 25,
+      "chance": 0.25,
+      "growthStages": 8,
+      "spreading": {
+        "raw": "{{Item|Ashwreath|amount=5}} / {{Item|Scourroot|amount=3}}",
+        "options": [
+          {
+            "id": "ASHWREATH",
+            "name": "Ashwreath",
+            "cells": 5
+          },
+          {
+            "id": "SCOURROOT",
+            "name": "Scourroot",
+            "cells": 3
+          }
+        ],
+        "prose": false
+      },
+      "plantNotes": {},
+      "effects": [
+        "XP Boost"
+      ],
+      "drops": [
+        {
+          "id": "POTATO_ITEM",
+          "name": "Potato",
+          "amount": 510
+        },
+        {
+          "id": "CARROT_ITEM",
+          "name": "Carrot",
+          "amount": 1190
+        },
+        {
+          "id": "NETHER_STALK",
+          "name": "Nether Wart",
+          "amount": 510
+        }
+      ],
+      "farmingXp": 460,
+      "hasLayout": true,
+      "layout": [
+        [
+          "Ashwreath",
+          "Ashwreath",
+          "Ashwreath"
+        ],
+        [
+          "Scourroot",
+          "Coalroot",
+          "Ashwreath"
+        ],
+        [
+          "Scourroot",
+          "Scourroot",
+          "Ashwreath"
+        ]
+      ]
+    },
+    {
+      "id": "CREAMBLOOM",
+      "name": "Creambloom",
+      "rarity": "Uncommon",
+      "size": 1,
+      "cellsPerPlant": 1,
+      "surface": "Farmland",
+      "weight": 25,
+      "chance": 0.25,
+      "growthStages": 6,
+      "spreading": {
+        "raw": "{{Item|Choconut|amount=8}}",
+        "options": [
+          {
+            "id": "CHOCONUT",
+            "name": "Choconut",
+            "cells": 8
+          }
+        ],
+        "prose": false
+      },
+      "plantNotes": {},
+      "effects": [
+        "Immunity"
+      ],
+      "drops": [
+        {
+          "id": "INK_SACK:3",
+          "name": "Cocoa Beans",
+          "amount": 2240
+        }
+      ],
+      "farmingXp": null,
+      "hasLayout": true,
+      "layout": [
+        [
+          "Choconut",
+          "Choconut",
+          "Choconut"
+        ],
+        [
+          "Choconut",
+          "Creambloom",
+          "Choconut"
+        ],
+        [
+          "Choconut",
+          "Choconut",
+          "Choconut"
+        ]
+      ]
+    },
+    {
+      "id": "DUSKBLOOM",
+      "name": "Duskbloom",
+      "rarity": "Uncommon",
+      "size": 1,
+      "cellsPerPlant": 1,
+      "surface": "Farmland",
+      "weight": 25,
+      "chance": 0.25,
+      "growthStages": 8,
+      "spreading": {
+        "raw": "{{Item|Moonflower|amount=2}} / {{Item|Shadevine|amount=2}} / {{Item|Sunflower|amount=2}} / {{Item|Dustgrain|amount=2}}",
+        "options": [
+          {
+            "id": "MOONFLOWER",
+            "name": "Moonflower",
+            "cells": 2
+          },
+          {
+            "id": "SHADEVINE",
+            "name": "Shadevine",
+            "cells": 2
+          },
+          {
+            "id": "DOUBLE_PLANT",
+            "name": "Sunflower",
+            "cells": 2
+          },
+          {
+            "id": "DUSTGRAIN",
+            "name": "Dustgrain",
+            "cells": 2
+          }
+        ],
+        "prose": false
+      },
+      "plantNotes": {},
+      "effects": [
+        "Bonus Drops"
+      ],
+      "drops": [
+        {
+          "id": "MOONFLOWER",
+          "name": "Moonflower",
+          "amount": 720
+        },
+        {
+          "id": "DOUBLE_PLANT",
+          "name": "Sunflower",
+          "amount": 720
+        },
+        {
+          "id": "WHEAT",
+          "name": "Wheat",
+          "amount": 360
+        }
+      ],
+      "farmingXp": null,
+      "hasLayout": true,
+      "layout": [
+        [
+          "Moonflower",
+          "Moonflower",
+          "Shadevine"
+        ],
+        [
+          "Dustgrain",
+          "Duskbloom",
+          "Shadevine"
+        ],
+        [
+          "Dustgrain",
+          "Sunflower",
+          "Sunflower"
+        ]
+      ]
+    },
+    {
+      "id": "THORNSHADE",
+      "name": "Thornshade",
+      "rarity": "Uncommon",
+      "size": 1,
+      "cellsPerPlant": 1,
+      "surface": "Farmland",
+      "weight": 25,
+      "chance": 0.25,
+      "growthStages": 8,
+      "spreading": {
+        "raw": "{{Item|Wild Rose|amount=4}} / {{Item|Veilshroom|amount=4}}",
+        "options": [
+          {
+            "id": "WILD_ROSE",
+            "name": "Wild Rose",
+            "cells": 4
+          },
+          {
+            "id": "VEILSHROOM",
+            "name": "Veilshroom",
+            "cells": 4
+          }
+        ],
+        "prose": false
+      },
+      "plantNotes": {},
+      "effects": [
+        "Effect Spread"
+      ],
+      "drops": [
+        {
+          "id": "BROWN_MUSHROOM",
+          "name": "Brown Mushroom",
+          "amount": 190
+        },
+        {
+          "id": "RED_MUSHROOM",
+          "name": "Red Mushroom",
+          "amount": 190
+        },
+        {
+          "id": "WILD_ROSE",
+          "name": "Wild Rose",
+          "amount": 800
+        }
+      ],
+      "farmingXp": null,
+      "hasLayout": true,
+      "layout": [
+        [
+          "Wild Rose",
+          "Wild Rose",
+          "Wild Rose"
+        ],
+        [
+          "Veilshroom",
+          "Thornshade",
+          "Wild Rose"
+        ],
+        [
+          "Veilshroom",
+          "Veilshroom",
+          "Veilshroom"
+        ]
+      ]
+    },
+    {
+      "id": "BLASTBERRY",
+      "name": "Blastberry",
+      "rarity": "Rare",
+      "size": 1,
+      "cellsPerPlant": 1,
+      "surface": "Sand",
+      "weight": 25,
+      "chance": 0.25,
+      "growthStages": 6,
+      "spreading": {
+        "raw": "{{Item|Chocoberry|amount=5}} / {{Item|Ashwreath|amount=3}}",
+        "options": [
+          {
+            "id": "CHOCOBERRY",
+            "name": "Chocoberry",
+            "cells": 5
+          },
+          {
+            "id": "ASHWREATH",
+            "name": "Ashwreath",
+            "cells": 3
+          }
+        ],
+        "prose": false
+      },
+      "plantNotes": {},
+      "effects": [
+        "Immunity",
+        "Improved Harvest Boost",
+        "XP Loss"
+      ],
+      "drops": [
+        {
+          "id": "INK_SACK:3",
+          "name": "Cocoa Beans",
+          "amount": 800
+        },
+        {
+          "id": "NETHER_STALK",
+          "name": "Nether Wart",
+          "amount": 1200
+        }
+      ],
+      "farmingXp": null,
+      "hasLayout": true,
+      "layout": [
+        [
+          "Chocoberry",
+          "Chocoberry",
+          "Chocoberry"
+        ],
+        [
+          "Ashwreath",
+          "Blastberry",
+          "Chocoberry"
+        ],
+        [
+          "Ashwreath",
+          "Ashwreath",
+          "Chocoberry"
+        ]
+      ]
+    },
+    {
+      "id": "CHEESEBITE",
+      "name": "Cheesebite",
+      "rarity": "Rare",
+      "size": 1,
+      "cellsPerPlant": 1,
+      "surface": "Farmland",
+      "weight": 25,
+      "chance": 0.25,
+      "growthStages": 10,
+      "spreading": {
+        "raw": "{{Item|Creambloom|amount=4}} / {{Item|Fermento|amount=4}}",
+        "options": [
+          {
+            "id": "CREAMBLOOM",
+            "name": "Creambloom",
+            "cells": 4
+          },
+          {
+            "id": "FERMENTO",
+            "name": "Fermento",
+            "cells": 4
+          }
+        ],
+        "prose": false
+      },
+      "plantNotes": {},
+      "effects": [
+        "Improved Water Retain"
+      ],
+      "drops": [
+        {
+          "id": "BROWN_MUSHROOM",
+          "name": "Brown Mushroom",
+          "amount": 253
+        },
+        {
+          "id": "CACTUS",
+          "name": "Cactus",
+          "amount": 800
+        },
+        {
+          "id": "SUGAR_CANE",
+          "name": "Sugar Cane",
+          "amount": 1067
+        },
+        {
+          "id": "RED_MUSHROOM",
+          "name": "Red Mushroom",
+          "amount": 253
+        }
+      ],
+      "farmingXp": null,
+      "hasLayout": true,
+      "layout": [
+        [
+          "Creambloom",
+          "Creambloom",
+          "Creambloom"
+        ],
+        [
+          "Fermento",
+          "Cheesebite",
+          "Creambloom"
+        ],
+        [
+          "Fermento",
+          "Fermento",
+          "Fermento"
+        ]
+      ]
+    },
+    {
+      "id": "CHLORONITE",
+      "name": "Chloronite",
+      "rarity": "Rare",
+      "size": 1,
+      "cellsPerPlant": 1,
+      "surface": "Farmland",
+      "weight": 25,
+      "chance": 0.25,
+      "growthStages": 10,
+      "spreading": {
+        "raw": "{{Item|Coalroot|amount=6}} / {{Item|Thornshade|amount=2}}",
+        "options": [
+          {
+            "id": "COALROOT",
+            "name": "Coalroot",
+            "cells": 6
+          },
+          {
+            "id": "THORNSHADE",
+            "name": "Thornshade",
+            "cells": 2
+          }
+        ],
+        "prose": false
+      },
+      "plantNotes": {},
+      "effects": [
+        "Immunity"
+      ],
+      "drops": [
+        {
+          "id": "BROWN_MUSHROOM",
+          "name": "Brown Mushroom",
+          "amount": 128
+        },
+        {
+          "id": "POTATO_ITEM",
+          "name": "Potato",
+          "amount": 810
+        },
+        {
+          "id": "CARROT_ITEM",
+          "name": "Carrot",
+          "amount": 945
+        },
+        {
+          "id": "RED_MUSHROOM",
+          "name": "Red Mushroom",
+          "amount": 128
+        },
+        {
+          "id": "WILD_ROSE",
+          "name": "Wild Rose",
+          "amount": 540
+        }
+      ],
+      "farmingXp": null,
+      "hasLayout": true,
+      "layout": [
+        [
+          "Coalroot",
+          "Coalroot",
+          "Coalroot"
+        ],
+        [
+          "Thornshade",
+          "Chloronite",
+          "Coalroot"
+        ],
+        [
+          "Thornshade",
+          "Coalroot",
+          "Coalroot"
+        ]
+      ]
+    },
+    {
+      "id": "DO_NOT_EAT_SHROOM",
+      "name": "Do-not-eat-shroom",
+      "rarity": "Rare",
+      "size": 1,
+      "cellsPerPlant": 1,
+      "surface": "Farmland",
+      "weight": 25,
+      "chance": 0.25,
+      "growthStages": 8,
+      "spreading": {
+        "raw": "{{Item|Veilshroom|amount=4}} / {{Item|Scourroot|amount=4}}",
+        "options": [
+          {
+            "id": "VEILSHROOM",
+            "name": "Veilshroom",
+            "cells": 4
+          },
+          {
+            "id": "SCOURROOT",
+            "name": "Scourroot",
+            "cells": 4
+          }
+        ],
+        "prose": false
+      },
+      "plantNotes": {},
+      "effects": [
+        "Improved Harvest Boost",
+        "Water Drain"
+      ],
+      "drops": [
+        {
+          "id": "BROWN_MUSHROOM",
+          "name": "Brown Mushroom",
+          "amount": 200
+        },
+        {
+          "id": "POTATO_ITEM",
+          "name": "Potato",
+          "amount": 630
+        },
+        {
+          "id": "CARROT_ITEM",
+          "name": "Carrot",
+          "amount": 735
+        },
+        {
+          "id": "RED_MUSHROOM",
+          "name": "Red Mushroom",
+          "amount": 200
+        }
+      ],
+      "farmingXp": null,
+      "hasLayout": true,
+      "layout": [
+        [
+          "Veilshroom",
+          "Veilshroom",
+          "Veilshroom"
+        ],
+        [
+          "Scourroot",
+          "Do-not-eat-shroom",
+          "Veilshroom"
+        ],
+        [
+          "Scourroot",
+          "Scourroot",
+          "Scourroot"
+        ]
+      ]
+    },
+    {
+      "id": "FLESHTRAP",
+      "name": "Fleshtrap",
+      "rarity": "Rare",
+      "size": 1,
+      "cellsPerPlant": 1,
+      "surface": "Farmland",
+      "weight": 25,
+      "chance": 0.25,
+      "growthStages": 14,
+      "spreading": {
+        "raw": "{{Item|Cindershade|amount=4}} / {{Item|Lonelily|amount=4}}",
+        "options": [
+          {
+            "id": "CINDERSHADE",
+            "name": "Cindershade",
+            "cells": 4
+          },
+          {
+            "id": "LONELILY",
+            "name": "Lonelily",
+            "cells": 4
+          }
+        ],
+        "prose": false
+      },
+      "plantNotes": {},
+      "effects": [
+        "Bonus Drops"
+      ],
+      "drops": [
+        {
+          "id": "POTATO_ITEM",
+          "name": "Potato",
+          "amount": 510
+        },
+        {
+          "id": "CARROT_ITEM",
+          "name": "Carrot",
+          "amount": 595
+        },
+        {
+          "id": "PUMPKIN",
+          "name": "Pumpkin",
+          "amount": 289
+        }
+      ],
+      "farmingXp": null,
+      "hasLayout": true,
+      "layout": [
+        [
+          "Cindershade",
+          "Cindershade",
+          "Cindershade"
+        ],
+        [
+          "Lonelily",
+          "Fleshtrap",
+          "Cindershade"
+        ],
+        [
+          "Lonelily",
+          "Lonelily",
+          "Lonelily"
+        ]
+      ]
+    },
+    {
+      "id": "MAGIC_JELLYBEAN",
+      "name": "Magic Jellybean",
+      "rarity": "Rare",
+      "size": 1,
+      "cellsPerPlant": 1,
+      "surface": "Sand",
+      "weight": 25,
+      "chance": 0.25,
+      "growthStages": 120,
+      "spreading": {
+        "raw": "{{Item|Sugar Cane|amount=5}} / {{Item|Duskbloom|amount=3}}",
+        "options": [
+          {
+            "id": "SUGAR_CANE",
+            "name": "Sugar Cane",
+            "cells": 5
+          },
+          {
+            "id": "DUSKBLOOM",
+            "name": "Duskbloom",
+            "cells": 3
+          }
+        ],
+        "prose": false
+      },
+      "plantNotes": {},
+      "effects": [
+        "Improved XP Boost",
+        "Harvest Loss"
+      ],
+      "drops": [
+        {
+          "id": "MOONFLOWER",
+          "name": "Moonflower",
+          "amount": 600
+        },
+        {
+          "id": "DOUBLE_PLANT",
+          "name": "Sunflower",
+          "amount": 600
+        },
+        {
+          "id": "SUGAR_CANE",
+          "name": "Sugar Cane",
+          "amount": 1200
+        }
+      ],
+      "farmingXp": null,
+      "hasLayout": true,
+      "layout": [
+        [
+          "Sugar Cane",
+          "Sugar Cane",
+          "Sugar Cane"
+        ],
+        [
+          "Duskbloom",
+          "Magic Jellybean",
+          "Sugar Cane"
+        ],
+        [
+          "Duskbloom",
+          "Duskbloom",
+          "Sugar Cane"
+        ]
+      ]
+    },
+    {
+      "id": "NOCTILUME",
+      "name": "Noctilume",
+      "rarity": "Rare",
+      "size": 2,
+      "cellsPerPlant": 2,
+      "surface": "Farmland",
+      "weight": 25,
+      "chance": 0.25,
+      "growthStages": 4,
+      "spreading": {
+        "raw": "{{Item|Duskbloom|amount=6}} / {{Item|Lonelily|amount=6}}",
+        "options": [
+          {
+            "id": "DUSKBLOOM",
+            "name": "Duskbloom",
+            "cells": 6
+          },
+          {
+            "id": "LONELILY",
+            "name": "Lonelily",
+            "cells": 6
+          }
+        ],
+        "prose": false
+      },
+      "plantNotes": {},
+      "effects": [
+        "Effect Spread",
+        "Improved Water Retain",
+        "Harvest Loss"
+      ],
+      "drops": [
+        {
+          "id": "CACTUS",
+          "name": "Cactus",
+          "amount": 1590
+        },
+        {
+          "id": "WILD_ROSE",
+          "name": "Wild Rose",
+          "amount": 2120
+        }
+      ],
+      "farmingXp": null,
+      "hasLayout": true,
+      "layout": [
+        [
+          "Duskbloom",
+          "Duskbloom",
+          "Duskbloom"
+        ],
+        [
+          "Lonelily",
+          "Noctilume",
+          "Noctilume"
+        ],
+        [
+          "Lonelily",
+          "Noctilume",
+          "Noctilume"
+        ]
+      ]
+    },
+    {
+      "id": "SNOOZLING",
+      "name": "Snoozling",
+      "rarity": "Rare",
+      "size": 3,
+      "cellsPerPlant": 3,
+      "surface": "Farmland",
+      "weight": 25,
+      "chance": 0.25,
+      "growthStages": 20,
+      "spreading": {
+        "raw": "{{Item|Creambloom|amount=4}} / {{Item|Dustgrain|amount=3}} / {{Item|Witherbloom|amount=3}} / {{Item|Duskbloom|amount=3}} / {{Item|Thornshade|amount=3}}",
+        "options": [
+          {
+            "id": "CREAMBLOOM",
+            "name": "Creambloom",
+            "cells": 4
+          },
+          {
+            "id": "DUSTGRAIN",
+            "name": "Dustgrain",
+            "cells": 3
+          },
+          {
+            "id": "WITHERBLOOM",
+            "name": "Witherbloom",
+            "cells": 3
+          },
+          {
+            "id": "DUSKBLOOM",
+            "name": "Duskbloom",
+            "cells": 3
+          },
+          {
+            "id": "THORNSHADE",
+            "name": "Thornshade",
+            "cells": 3
+          }
+        ],
+        "prose": false
+      },
+      "plantNotes": {},
+      "effects": [
+        "Bonus Drops"
+      ],
+      "drops": [
+        {
+          "id": "MOONFLOWER",
+          "name": "Moonflower",
+          "amount": 4200
+        },
+        {
+          "id": "DOUBLE_PLANT",
+          "name": "Sunflower",
+          "amount": 4200
+        },
+        {
+          "id": "CACTUS",
+          "name": "Cactus",
+          "amount": 3150
+        },
+        {
+          "id": "SUGAR_CANE",
+          "name": "Sugar Cane",
+          "amount": 4200
+        }
+      ],
+      "farmingXp": null,
+      "hasLayout": true,
+      "layout": [
+        [
+          "Creambloom",
+          "Creambloom",
+          "Creambloom"
+        ],
+        [
+          "Thornshade",
+          "Snoozling",
+          "Snoozling"
+        ],
+        [
+          "Thornshade",
+          "Snoozling",
+          "Snoozling"
+        ]
+      ]
+    },
+    {
+      "id": "SOGGYBUD",
+      "name": "Soggybud",
+      "rarity": "Rare",
+      "size": 1,
+      "cellsPerPlant": 1,
+      "surface": "Farmland",
+      "weight": 25,
+      "chance": 0.25,
+      "growthStages": 10,
+      "spreading": {
+        "raw": "{{Item|Melon|amount=2}} / {{Item|Gloomgourd|amount=2}}",
+        "options": [
+          {
+            "id": "BUILDER_MELON",
+            "name": "Melon",
+            "cells": 2
+          },
+          {
+            "id": "GLOOMGOURD",
+            "name": "Gloomgourd",
+            "cells": 2
+          }
+        ],
+        "prose": false
+      },
+      "plantNotes": {},
+      "effects": [
+        "Water Retain"
+      ],
+      "drops": [
+        {
+          "id": "MELON",
+          "name": "Melon Slice",
+          "amount": 1920
+        }
+      ],
+      "farmingXp": null,
+      "hasLayout": true,
+      "layout": [
+        [
+          null,
+          "Gloomgourd",
+          null
+        ],
+        [
+          "Melon Slice",
+          "Soggybud",
+          "Melon Slice"
+        ],
+        [
+          null,
+          "Gloomgourd",
+          null
+        ]
+      ]
+    },
+    {
+      "id": "TURTLELLINI",
+      "name": "Turtlellini",
+      "rarity": "Rare",
+      "size": 1,
+      "cellsPerPlant": 1,
+      "surface": "Farmland",
+      "weight": 25,
+      "chance": 0.25,
+      "growthStages": 0,
+      "spreading": {
+        "raw": "{{Item|Soggybud|amount=4}} / {{Item|Choconut|amount=4}}",
+        "options": [
+          {
+            "id": "SOGGYBUD",
+            "name": "Soggybud",
+            "cells": 4
+          },
+          {
+            "id": "CHOCONUT",
+            "name": "Choconut",
+            "cells": 4
+          }
+        ],
+        "prose": false
+      },
+      "plantNotes": {},
+      "effects": [
+        "Water Retain",
+        "Immunity"
+      ],
+      "drops": [
+        {
+          "id": "MELON",
+          "name": "Melon Slice",
+          "amount": 800
+        }
+      ],
+      "farmingXp": null,
+      "hasLayout": true,
+      "layout": [
+        [
+          "Soggybud",
+          "Soggybud",
+          "Soggybud"
+        ],
+        [
+          "Choconut",
+          "Turtlellini",
+          "Soggybud"
+        ],
+        [
+          "Choconut",
+          "Choconut",
+          "Choconut"
+        ]
+      ]
+    },
+    {
+      "id": "CHORUS_FRUIT",
+      "name": "Chorus Fruit",
+      "rarity": "Epic",
+      "size": 1,
+      "cellsPerPlant": 1,
+      "surface": "End Stone",
+      "weight": 25,
+      "chance": 0.25,
+      "growthStages": 12,
+      "spreading": {
+        "raw": "{{Item|Chloronite|amount=5}} / {{Item|Magic Jellybean|amount=3}}",
+        "options": [
+          {
+            "id": "CHLORONITE",
+            "name": "Chloronite",
+            "cells": 5
+          },
+          {
+            "id": "MAGIC_JELLYBEAN",
+            "name": "Magic Jellybean",
+            "cells": 3
+          }
+        ],
+        "prose": false
+      },
+      "plantNotes": {},
+      "effects": [
+        "Improved XP Boost",
+        "Harvest Loss"
+      ],
+      "drops": [
+        {
+          "id": "POTATO_ITEM",
+          "name": "Potato",
+          "amount": 1050
+        },
+        {
+          "id": "CARROT_ITEM",
+          "name": "Carrot",
+          "amount": 1225
+        },
+        {
+          "id": "SUGAR_CANE",
+          "name": "Sugar Cane",
+          "amount": 1400
+        }
+      ],
+      "farmingXp": null,
+      "hasLayout": true,
+      "layout": [
+        [
+          "Chloronite",
+          "Chloronite",
+          "Chloronite"
+        ],
+        [
+          "Magic Jellybean",
+          "Chorus Fruit",
+          "Chloronite"
+        ],
+        [
+          "Magic Jellybean",
+          "Magic Jellybean",
+          "Chloronite"
+        ]
+      ]
+    },
+    {
+      "id": "PLANTBOY_ADVANCE",
+      "name": "PlantBoy Advance",
+      "rarity": "Epic",
+      "size": 2,
+      "cellsPerPlant": 2,
+      "surface": "Farmland",
+      "weight": 25,
+      "chance": 0.25,
+      "growthStages": 12,
+      "spreading": {
+        "raw": "{{Item|Snoozling|amount=6}} / {{Item|Thunderling|amount=6}}",
+        "options": [
+          {
+            "id": "SNOOZLING",
+            "name": "Snoozling",
+            "cells": 6
+          },
+          {
+            "id": "THUNDERLING",
+            "name": "Thunderling",
+            "cells": 6
+          }
+        ],
+        "prose": false
+      },
+      "plantNotes": {
+        "SNOOZLING": {
+          "cells": 6,
+          "plants": 2
+        }
+      },
+      "effects": [
+        "Harvest Boost"
+      ],
+      "drops": [
+        {
+          "id": "MOONFLOWER",
+          "name": "Moonflower",
+          "amount": 4600
+        },
+        {
+          "id": "DOUBLE_PLANT",
+          "name": "Sunflower",
+          "amount": 4600
+        },
+        {
+          "id": "WHEAT",
+          "name": "Wheat",
+          "amount": 4600
+        }
+      ],
+      "farmingXp": null,
+      "hasLayout": true,
+      "layout": [
+        [
+          "Snoozling",
+          "Snoozling",
+          "Snoozling"
+        ],
+        [
+          "Thunderling",
+          "PlantBoy Advance",
+          "PlantBoy Advance"
+        ],
+        [
+          "Thunderling",
+          "PlantBoy Advance",
+          "PlantBoy Advance"
+        ]
+      ]
+    },
+    {
+      "id": "PUFFERCLOUD",
+      "name": "Puffercloud",
+      "rarity": "Epic",
+      "size": 1,
+      "cellsPerPlant": 1,
+      "surface": "Farmland",
+      "weight": 25,
+      "chance": 0.25,
+      "growthStages": 14,
+      "spreading": {
+        "raw": "{{Item|Snoozling|amount=2}} / 6x [[Do-not-eat-shroom]]",
+        "options": [
+          {
+            "id": "SNOOZLING",
+            "name": "Snoozling",
+            "cells": 2
+          },
+          {
+            "id": "DO_NOT_EAT_SHROOM",
+            "name": "Do-not-eat-shroom",
+            "cells": 6
+          }
+        ],
+        "prose": false
+      },
+      "plantNotes": {
+        "SNOOZLING": {
+          "cells": 2,
+          "plants": 1
+        }
+      },
+      "effects": [
+        "Improved Harvest Boost",
+        "Water Drain"
+      ],
+      "drops": [
+        {
+          "id": "BROWN_MUSHROOM",
+          "name": "Brown Mushroom",
+          "amount": 570
+        },
+        {
+          "id": "MOONFLOWER",
+          "name": "Moonflower",
+          "amount": 1200
+        },
+        {
+          "id": "DOUBLE_PLANT",
+          "name": "Sunflower",
+          "amount": 1200
+        },
+        {
+          "id": "RED_MUSHROOM",
+          "name": "Red Mushroom",
+          "amount": 570
+        }
+      ],
+      "farmingXp": null,
+      "hasLayout": true,
+      "layout": [
+        [
+          "Snoozling",
+          "Snoozling",
+          "Do-not-eat-shroom"
+        ],
+        [
+          "Do-not-eat-shroom",
+          "Puffercloud",
+          "Do-not-eat-shroom"
+        ],
+        [
+          "Do-not-eat-shroom",
+          "Do-not-eat-shroom",
+          "Do-not-eat-shroom"
+        ]
+      ]
+    },
+    {
+      "id": "SHELLFRUIT",
+      "name": "Shellfruit",
+      "rarity": "Epic",
+      "size": 1,
+      "cellsPerPlant": 1,
+      "surface": "Farmland",
+      "weight": 0,
+      "chance": null,
+      "growthStages": 0,
+      "spreading": {
+        "raw": "Explode a [[Turtlellini]] with a [[Blastberry]].",
+        "options": [],
+        "prose": true
+      },
+      "plantNotes": {},
+      "effects": [
+        "Water Retain",
+        "Immunity"
+      ],
+      "drops": [
+        {
+          "id": "INK_SACK:3",
+          "name": "Cocoa Beans",
+          "amount": 400
+        },
+        {
+          "id": "MELON",
+          "name": "Melon Slice",
+          "amount": 800
+        }
+      ],
+      "farmingXp": null,
+      "hasLayout": false
+    },
+    {
+      "id": "STARTLEVINE",
+      "name": "Startlevine",
+      "rarity": "Epic",
+      "size": 1,
+      "cellsPerPlant": 1,
+      "surface": "Farmland",
+      "weight": 25,
+      "chance": 0.25,
+      "growthStages": 12,
+      "spreading": {
+        "raw": "{{Item|Blastberry|amount=4}} / {{Item|Cheesebite|amount=4}}",
+        "options": [
+          {
+            "id": "BLASTBERRY",
+            "name": "Blastberry",
+            "cells": 4
+          },
+          {
+            "id": "CHEESEBITE",
+            "name": "Cheesebite",
+            "cells": 4
+          }
+        ],
+        "prose": false
+      },
+      "plantNotes": {},
+      "effects": [
+        "Improved Water Retain",
+        "Improved XP Boost",
+        "Harvest Loss"
+      ],
+      "drops": [
+        {
+          "id": "CACTUS",
+          "name": "Cactus",
+          "amount": 2250
+        },
+        {
+          "id": "SUGAR_CANE",
+          "name": "Sugar Cane",
+          "amount": 3000
+        }
+      ],
+      "farmingXp": null,
+      "hasLayout": true,
+      "layout": [
+        [
+          "Blastberry",
+          "Blastberry",
+          "Blastberry"
+        ],
+        [
+          "Cheesebite",
+          "Startlevine",
+          "Blastberry"
+        ],
+        [
+          "Cheesebite",
+          "Cheesebite",
+          "Cheesebite"
+        ]
+      ]
+    },
+    {
+      "id": "STOPLIGHT_PETAL",
+      "name": "Stoplight Petal",
+      "rarity": "Epic",
+      "size": 1,
+      "cellsPerPlant": 1,
+      "surface": "Farmland",
+      "weight": 25,
+      "chance": 0.25,
+      "growthStages": 12,
+      "spreading": {
+        "raw": "{{Item|Snoozling|amount=4}} / {{Item|Noctilume|amount=4}}",
+        "options": [
+          {
+            "id": "SNOOZLING",
+            "name": "Snoozling",
+            "cells": 4
+          },
+          {
+            "id": "NOCTILUME",
+            "name": "Noctilume",
+            "cells": 4
+          }
+        ],
+        "prose": false
+      },
+      "plantNotes": {
+        "SNOOZLING": {
+          "cells": 4,
+          "plants": 2
+        },
+        "NOCTILUME": {
+          "cells": 4,
+          "plants": 2
+        }
+      },
+      "effects": [
+        "Effect Spread",
+        "Improved Water Retain",
+        "Harvest Loss"
+      ],
+      "drops": [
+        {
+          "id": "CACTUS",
+          "name": "Cactus",
+          "amount": 7500
+        },
+        {
+          "id": "WILD_ROSE",
+          "name": "Wild Rose",
+          "amount": 10000
+        }
+      ],
+      "farmingXp": null,
+      "hasLayout": true,
+      "layout": [
+        [
+          "Noctilume",
+          "Noctilume",
+          "Snoozling"
+        ],
+        [
+          "Snoozling",
+          "Stoplight Petal",
+          "Snoozling"
+        ],
+        [
+          "Snoozling",
+          "Noctilume",
+          "Noctilume"
+        ]
+      ]
+    },
+    {
+      "id": "THUNDERLING",
+      "name": "Thunderling",
+      "rarity": "Epic",
+      "size": 1,
+      "cellsPerPlant": 1,
+      "surface": "Farmland",
+      "weight": 25,
+      "chance": 0.25,
+      "growthStages": 16,
+      "spreading": {
+        "raw": "{{Item|Soggybud|amount=5}} / {{Item|Noctilume|amount=3}}",
+        "options": [
+          {
+            "id": "SOGGYBUD",
+            "name": "Soggybud",
+            "cells": 5
+          },
+          {
+            "id": "NOCTILUME",
+            "name": "Noctilume",
+            "cells": 3
+          }
+        ],
+        "prose": false
+      },
+      "plantNotes": {
+        "NOCTILUME": {
+          "cells": 3,
+          "plants": 2
+        }
+      },
+      "effects": [
+        "Effect Spread"
+      ],
+      "drops": [
+        {
+          "id": "CACTUS",
+          "name": "Cactus",
+          "amount": 1650
+        },
+        {
+          "id": "MELON",
+          "name": "Melon Slice",
+          "amount": 4400
+        },
+        {
+          "id": "WILD_ROSE",
+          "name": "Wild Rose",
+          "amount": 4400
+        }
+      ],
+      "farmingXp": null,
+      "hasLayout": true,
+      "layout": [
+        [
+          "Noctilume",
+          "Noctilume",
+          "Noctilume"
+        ],
+        [
+          "Soggybud",
+          "Thunderling",
+          "Soggybud"
+        ],
+        [
+          "Soggybud",
+          "Soggybud",
+          "Soggybud"
+        ]
+      ]
+    },
+    {
+      "id": "ZOMBUD",
+      "name": "Zombud",
+      "rarity": "Epic",
+      "size": 1,
+      "cellsPerPlant": 1,
+      "surface": "Soul Sand",
+      "weight": 25,
+      "chance": 0.25,
+      "growthStages": 16,
+      "spreading": {
+        "raw": "{{Item|Dead Plant|amount=4}} / {{Item|Cindershade|amount=2}} / {{Item|Fleshtrap|amount=2}}",
+        "options": [
+          {
+            "id": "DEAD_PLANT",
+            "name": "Dead Plant",
+            "cells": 4,
+            "free": true
+          },
+          {
+            "id": "CINDERSHADE",
+            "name": "Cindershade",
+            "cells": 2
+          },
+          {
+            "id": "FLESHTRAP",
+            "name": "Fleshtrap",
+            "cells": 2
+          }
+        ],
+        "prose": false
+      },
+      "plantNotes": {},
+      "effects": [
+        "Effect Spread",
+        "Bonus Drops"
+      ],
+      "drops": [
+        {
+          "id": "PUMPKIN",
+          "name": "Pumpkin",
+          "amount": 765
+        },
+        {
+          "id": "WILD_ROSE",
+          "name": "Wild Rose",
+          "amount": 1800
+        }
+      ],
+      "farmingXp": null,
+      "hasLayout": true,
+      "layout": [
+        [
+          "Dead Plant",
+          "Dead Plant",
+          "Dead Plant"
+        ],
+        [
+          "Fleshtrap",
+          "Zombud",
+          "Dead Plant"
+        ],
+        [
+          "Fleshtrap",
+          "Cindershade",
+          "Cindershade"
+        ]
+      ]
+    },
+    {
+      "id": "ALL_IN_ALOE",
+      "name": "All-in Aloe",
+      "rarity": "Legendary",
+      "size": 1,
+      "cellsPerPlant": 1,
+      "surface": "Sand",
+      "weight": 25,
+      "chance": 0.25,
+      "growthStages": 27,
+      "spreading": {
+        "raw": "{{Item|Magic Jellybean|amount=6}} / {{Item|PlantBoy Advance|amount=2}}",
+        "options": [
+          {
+            "id": "MAGIC_JELLYBEAN",
+            "name": "Magic Jellybean",
+            "cells": 6
+          },
+          {
+            "id": "PLANTBOY_ADVANCE",
+            "name": "PlantBoy Advance",
+            "cells": 2
+          }
+        ],
+        "prose": false
+      },
+      "plantNotes": {
+        "PLANTBOY_ADVANCE": {
+          "cells": 2,
+          "plants": 1
+        }
+      },
+      "effects": [
+        "Harvest Boost"
+      ],
+      "drops": [
+        {
+          "id": "MOONFLOWER",
+          "name": "Moonflower",
+          "amount": 140
+        },
+        {
+          "id": "DOUBLE_PLANT",
+          "name": "Sunflower",
+          "amount": 140
+        },
+        {
+          "id": "WHEAT",
+          "name": "Wheat",
+          "amount": 140
+        }
+      ],
+      "farmingXp": null,
+      "hasLayout": true,
+      "layout": [
+        [
+          "PlantBoy Advance",
+          "PlantBoy Advance",
+          "Magic Jellybean"
+        ],
+        [
+          "Magic Jellybean",
+          "All-in Aloe",
+          "Magic Jellybean"
+        ],
+        [
+          "Magic Jellybean",
+          "Magic Jellybean",
+          "Magic Jellybean"
+        ]
+      ]
+    },
+    {
+      "id": "DEVOURER",
+      "name": "Devourer",
+      "rarity": "Legendary",
+      "size": 1,
+      "cellsPerPlant": 1,
+      "surface": "Farmland",
+      "weight": 20,
+      "chance": 0.2,
+      "growthStages": 16,
+      "spreading": {
+        "raw": "{{Item|Puffercloud|amount=4}} / {{Item|Zombud|amount=4}}",
+        "options": [
+          {
+            "id": "PUFFERCLOUD",
+            "name": "Puffercloud",
+            "cells": 4
+          },
+          {
+            "id": "ZOMBUD",
+            "name": "Zombud",
+            "cells": 4
+          }
+        ],
+        "prose": false
+      },
+      "plantNotes": {},
+      "effects": [
+        "Bonus Drops",
+        "Improved Harvest Boost",
+        "Water Drain"
+      ],
+      "drops": [
+        {
+          "id": "BROWN_MUSHROOM",
+          "name": "Brown Mushroom",
+          "amount": 1805
+        },
+        {
+          "id": "PUMPKIN",
+          "name": "Pumpkin",
+          "amount": 3230
+        },
+        {
+          "id": "RED_MUSHROOM",
+          "name": "Red Mushroom",
+          "amount": 1805
+        }
+      ],
+      "farmingXp": null,
+      "hasLayout": true,
+      "layout": [
+        [
+          "Puffercloud",
+          "Puffercloud",
+          "Puffercloud"
+        ],
+        [
+          "Zombud",
+          "Devourer",
+          "Puffercloud"
+        ],
+        [
+          "Zombud",
+          "Zombud",
+          "Zombud"
+        ]
+      ]
+    },
+    {
+      "id": "GLASSCORN",
+      "name": "Glasscorn",
+      "rarity": "Legendary",
+      "size": 2,
+      "cellsPerPlant": 2,
+      "surface": "Sand",
+      "weight": 20,
+      "chance": 0.2,
+      "growthStages": 9,
+      "spreading": {
+        "raw": "{{Item|Startlevine|amount=6}} / {{Item|Chloronite|amount=6}}",
+        "options": [
+          {
+            "id": "STARTLEVINE",
+            "name": "Startlevine",
+            "cells": 6
+          },
+          {
+            "id": "CHLORONITE",
+            "name": "Chloronite",
+            "cells": 6
+          }
+        ],
+        "prose": false
+      },
+      "plantNotes": {},
+      "effects": [
+        "Immunity",
+        "Improved Water Retain",
+        "Harvest Loss"
+      ],
+      "drops": [
+        {
+          "id": "POTATO_ITEM",
+          "name": "Potato",
+          "amount": 4800
+        },
+        {
+          "id": "CACTUS",
+          "name": "Cactus",
+          "amount": 7200
+        }
+      ],
+      "farmingXp": null,
+      "hasLayout": true,
+      "layout": [
+        [
+          "Startlevine",
+          "Startlevine",
+          "Startlevine"
+        ],
+        [
+          "Chloronite",
+          "Glasscorn",
+          "Glasscorn"
+        ],
+        [
+          "Chloronite",
+          "Glasscorn",
+          "Glasscorn"
+        ]
+      ]
+    },
+    {
+      "id": "GODSEED",
+      "name": "Godseed",
+      "rarity": "Legendary",
+      "size": 3,
+      "cellsPerPlant": 3,
+      "surface": "Farmland",
+      "weight": 5,
+      "chance": 0.05,
+      "growthStages": 40,
+      "spreading": {
+        "raw": "All {{Green|positive}} crop effects",
+        "options": [],
+        "prose": true
+      },
+      "plantNotes": {},
+      "effects": [
+        "Improved Harvest Boost",
+        "Improved Water Retain",
+        "Improved XP Boost",
+        "Immunity",
+        "Bonus Drops",
+        "Effect Spread"
+      ],
+      "drops": [
+        {
+          "id": "BROWN_MUSHROOM",
+          "name": "Brown Mushroom",
+          "amount": 117
+        },
+        {
+          "id": "INK_SACK:3",
+          "name": "Cocoa Beans",
+          "amount": 492
+        },
+        {
+          "id": "MOONFLOWER",
+          "name": "Moonflower",
+          "amount": 492
+        },
+        {
+          "id": "CARROT_ITEM",
+          "name": "Carrot",
+          "amount": 862
+        },
+        {
+          "id": "DOUBLE_PLANT",
+          "name": "Sunflower",
+          "amount": 492
+        },
+        {
+          "id": "CACTUS",
+          "name": "Cactus",
+          "amount": 369
+        },
+        {
+          "id": "SUGAR_CANE",
+          "name": "Sugar Cane",
+          "amount": 492
+        },
+        {
+          "id": "PUMPKIN",
+          "name": "Pumpkin",
+          "amount": 209
+        },
+        {
+          "id": "WHEAT",
+          "name": "Wheat",
+          "amount": 246
+        },
+        {
+          "id": "MELON",
+          "name": "Melon Slice",
+          "amount": 985
+        },
+        {
+          "id": "POTATO_ITEM",
+          "name": "Potato",
+          "amount": 738
+        },
+        {
+          "id": "NETHER_STALK",
+          "name": "Nether Wart",
+          "amount": 738
+        },
+        {
+          "id": "RED_MUSHROOM",
+          "name": "Red Mushroom",
+          "amount": 117
+        },
+        {
+          "id": "WILD_ROSE",
+          "name": "Wild Rose",
+          "amount": 492
+        }
+      ],
+      "farmingXp": null,
+      "hasLayout": false
+    },
+    {
+      "id": "JERRYFLOWER",
+      "name": "Jerryflower",
+      "rarity": "Legendary",
+      "size": 1,
+      "cellsPerPlant": 1,
+      "surface": "Farmland",
+      "weight": 0,
+      "chance": null,
+      "growthStages": 10,
+      "spreading": {
+        "raw": "Grow the [[Fertilized Jerryseed|Jerryseed]]",
+        "options": [],
+        "prose": true
+      },
+      "plantNotes": {},
+      "effects": [
+        "None"
+      ],
+      "drops": [],
+      "farmingXp": null,
+      "hasLayout": false
+    },
+    {
+      "id": "PHANTOMLEAF",
+      "name": "Phantomleaf",
+      "rarity": "Legendary",
+      "size": 1,
+      "cellsPerPlant": 1,
+      "surface": "Soul Sand",
+      "weight": 20,
+      "chance": 0.2,
+      "growthStages": 15,
+      "spreading": {
+        "raw": "{{Item|Chorus Fruit|amount=4}} / {{Item|Shellfruit|amount=4}}",
+        "options": [
+          {
+            "id": "CHORUS_FRUIT",
+            "name": "Chorus Fruit",
+            "cells": 4
+          },
+          {
+            "id": "SHELLFRUIT",
+            "name": "Shellfruit",
+            "cells": 4
+          }
+        ],
+        "prose": false
+      },
+      "plantNotes": {},
+      "effects": [
+        "XP Boost",
+        "Immunity"
+      ],
+      "drops": [
+        {
+          "id": "POTATO_ITEM",
+          "name": "Potato",
+          "amount": 3000
+        },
+        {
+          "id": "CARROT_ITEM",
+          "name": "Carrot",
+          "amount": 3500
+        }
+      ],
+      "farmingXp": null,
+      "hasLayout": true,
+      "layout": [
+        [
+          "Chorus Fruit",
+          "Chorus Fruit",
+          "Chorus Fruit"
+        ],
+        [
+          "Shellfruit",
+          "Phantomleaf",
+          "Chorus Fruit"
+        ],
+        [
+          "Shellfruit",
+          "Shellfruit",
+          "Shellfruit"
+        ]
+      ]
+    },
+    {
+      "id": "TIMESTALK",
+      "name": "Timestalk",
+      "rarity": "Common",
+      "size": 1,
+      "cellsPerPlant": 1,
+      "surface": "End Stone",
+      "weight": 20,
+      "chance": 0.2,
+      "growthStages": 14,
+      "spreading": {
+        "raw": "{{Item|Stoplight Petal|amount=4}} / {{Item|Chorus Fruit|amount=2}} / {{Item|Shellfruit|amount=2}}",
+        "options": [
+          {
+            "id": "STOPLIGHT_PETAL",
+            "name": "Stoplight Petal",
+            "cells": 4
+          },
+          {
+            "id": "CHORUS_FRUIT",
+            "name": "Chorus Fruit",
+            "cells": 2
+          },
+          {
+            "id": "SHELLFRUIT",
+            "name": "Shellfruit",
+            "cells": 2
+          }
+        ],
+        "prose": false
+      },
+      "plantNotes": {},
+      "effects": [
+        "Improved Water Retain",
+        "Improved XP Boost",
+        "Harvest Loss"
+      ],
+      "drops": [
+        {
+          "id": "CACTUS",
+          "name": "Cactus",
+          "amount": 2700
+        },
+        {
+          "id": "SUGAR_CANE",
+          "name": "Sugar Cane",
+          "amount": 3600
+        }
+      ],
+      "farmingXp": null,
+      "hasLayout": true,
+      "layout": [
+        [
+          "Stoplight Petal",
+          "Stoplight Petal",
+          "Stoplight Petal"
+        ],
+        [
+          "Shellfruit",
+          "Timestalk",
+          "Stoplight Petal"
+        ],
+        [
+          "Shellfruit",
+          "Chorus Fruit",
+          "Chorus Fruit"
+        ]
+      ]
+    }
+  ],
+  "unresolved": []
+}

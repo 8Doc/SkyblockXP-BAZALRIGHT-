@@ -86,6 +86,15 @@ const bazaarData = {
   names: (await loadJson("generated/bazaar_items.json")).names,
 };
 
+/**
+ * The greenhouse tab's tables, separate again. It shares only the shop prices with the bazaar —
+ * everything else about it is a wiki scrape of a feature the API does not describe.
+ */
+const greenhouseData = {
+  greenhouse: await loadJson("generated/greenhouse.json"),
+  npcPrices: (await loadJson("generated/npc-prices.json")).prices,
+};
+
 const bundle = await build({
   entryPoints: [join(ROOT, "src", "browser", "main.ts")],
   bundle: true,
@@ -103,6 +112,7 @@ const css = await readFile(join(ROOT, "src", "browser", "app.css"), "utf8");
 // </script> inside inlined JSON would close the tag early.
 const dataJson = JSON.stringify(gameData).replace(/</g, "\\u003c");
 const bazaarJson = JSON.stringify(bazaarData).replace(/</g, "\\u003c");
+const greenhouseJson = JSON.stringify(greenhouseData).replace(/</g, "\\u003c");
 
 const html = `<!doctype html>
 <html lang="en">
@@ -118,6 +128,7 @@ ${css}
 <div id="app"></div>
 <script>window.__GAME_DATA__ = ${dataJson};</script>
 <script>window.__BAZAAR_DATA__ = ${bazaarJson};</script>
+<script>window.__GREENHOUSE_DATA__ = ${greenhouseJson};</script>
 <script>
 ${script}
 </script>
@@ -131,6 +142,7 @@ await writeFile(OUT, html);
 const kb = (n) => `${(n / 1024).toFixed(0)} KB`;
 console.log(`  data    ${kb(dataJson.length)}`);
 console.log(`  bazaar  ${kb(bazaarJson.length)}`);
+console.log(`  greenhouse ${kb(greenhouseJson.length)}`);
 console.log(`  script  ${kb(script.length)}`);
 console.log(`  css     ${kb(css.length)}`);
 console.log(`  -> dist/skyblock-xp-planner.html  ${kb(html.length)}`);

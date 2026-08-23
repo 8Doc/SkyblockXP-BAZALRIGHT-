@@ -289,3 +289,16 @@ table.bz td:last-child { color: var(--gold); }
 .bz-path { margin-top: 2px; font-size: 0.85em; line-height: 1.4; }
 
 .bz-forget { margin-left: 6px; font-size: 0.8em; padding: 0 6px; }
+
+/* The 3x3 a mutation spreads into the middle of. Fixed cells so the grid reads as a grid
+   rather than as three lines of text of different lengths. */
+.gh-layout { margin: 8px 0 4px; }
+.gh-row { display: flex; gap: 3px; margin-bottom: 3px; }
+.gh-cell {
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  width: 104px; min-height: 34px; padding: 3px 4px;
+  font-size: 0.72em; line-height: 1.15;
+  border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 4px;
+}
+.gh-cell.gh-empty { opacity: 0.3; }
+.gh-cell.gh-target { border-color: var(--gold, #fc0); font-weight: 600; }
