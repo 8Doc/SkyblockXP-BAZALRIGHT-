@@ -21,6 +21,7 @@ matter most are Hypixel staff posting in Discord, quoted on the wiki with citati
 | The 13 crop fortunes and what each lifts | `Crop Fortune` page |
 | Overdrive Chip (+140, contest only) | `Overdrive Chip` page |
 | Prices | the live bazaar, plus the shop table from `npc-prices.json` |
+| A week of price history, for "vs usual" | Coflnet, `sky.coflnet.com/api/bazaar/<id>/history/week` |
 
 **The drop figures have a date on them.** On **2026-08-20** every base crop's drop changed — Nether
 Wart 240 → 108, Carrot 280 → 175, Potato 240 → 150, Sunflower 160 → 232 — so any figure computed
@@ -66,22 +67,28 @@ exposed to fortune.
 These are never added into one number, because they are not the same kind of number. The ring is
 bought once and the plants stand there feeding harvest after harvest; the income repeats. So:
 
-- **Coins/hr** and **Coins/day** are gross — what the harvest sells for.
+- **Coins/day** is gross — what the harvest sells for. (The ranking is still computed on coins an
+  hour, but that column is not printed: it is the daily figure over 24 and never disagreed with it,
+  so it cost a column's width to say the same thing in smaller units.)
 - **Net day 1** is coins/day minus the whole bill. It is often negative, which means the ring costs
   more than a day of harvests brings back — not that the mutation loses money.
-- **Payback** is the bill divided by coins/hr: how long you leave it alone before it has paid for
-  itself. This is the figure that puts a one-off and a repeating income in the same unit, and it is
-  the honest way to compare a 38-coin setup against a 54M one.
+- **Payback** is the bill divided by coins an hour: how long you leave it alone before it has paid
+  for itself. This is the figure that puts a one-off and a repeating income in the same unit, and it
+  is the honest way to compare a 38-coin setup against a 54M one.
 - **Profit/harvest** sits next to **Per harvest** on purpose: this much, that often. The pair is
   what says whether a method is worth checking in for, and a test asserts the two multiply out to
   coins/day so the columns cannot disagree with each other.
 
+The bill scales with the number of greenhouses, because three plots is three rings to plant. Quoting
+a one-plot setup beside a three-plot income would flatter exactly the mutations with the most
+expensive rings — the ones the figure exists for.
+
 ### A price now is not the price at harvest
 
-The **vs usual** column compares each mutation's own ask against the mean this browser has watched
-it at. Only the mutations are tracked, and that restriction is the point: a crop trades in the
-hundreds of thousands a day and barely moves, while a mutation book is thin enough that one player
-clearing it doubles the quoted ask for a morning.
+The **vs usual** column compares each mutation's own ask against what it has actually been going
+for over the last week. Only the mutations are tracked, and that restriction is the point: a crop
+trades in the hundreds of thousands a day and barely moves, while a mutation book is thin enough
+that one player clearing it doubles the quoted ask for a morning.
 
 It matters more here than on a flip. A flip is instant, so a spike is a real opportunity. A
 greenhouse pays out *hours* later — thirteen for a Noctilume, thirty-five for a Devourer — so a row
@@ -89,14 +96,32 @@ that looks enormous on a spike has settled back to normal long before there is a
 A mutation well above its own usual is almost always a book that emptied, not a mutation that got
 better.
 
-The window ("+180% · 2 min") is printed beside the figure because it decides whether the number
-means anything: the average is built by polling, so it is worth nothing on arrival and more the
-longer the tab has been open. It is measured rather than fetched — skyblock.bz's history endpoint
-refuses outside callers, and an invented thirty-day average would make every spike look explicable.
+**The average is fetched, not waited for.** The first cut folded one live read at a time, which is
+honest and useless — it needs the tab left open for a day before it says anything, and nobody
+leaves a planner open for a day to decide what to plant. skyblock.bz's history endpoint does refuse
+outside callers, which is what the bazaar tab's comment records, but **Coflnet's does not**:
 
-The bill scales with the number of greenhouses, because three plots is three rings to plant. Quoting
-a one-plot setup beside a three-plot income would flatter exactly the mutations with the most
-expensive rings — the ones the figure exists for.
+```
+https://sky.coflnet.com/api/bazaar/<ID>/history/week
+```
+
+It answers cross-origin, and the tab already loads its item icons from that host. A week arrives at
+2-hour resolution — 81 real readings — for 39 of the 40 mutations, the exception being Jerryflower,
+which has no bazaar book at all. Three requests at a time, cached for six hours, and the browser's
+own HTTP cache makes a repeat open free. Six at a time earns a 429, because every row is already
+loading an icon from the same host.
+
+Polling is kept underneath as the fallback, marked with a star on the window so the two are never
+confused. A figure that degrades to "measured here over 4 min" is better than a column that empties.
+
+The window ("+32% · 6.7 days") is printed beside the figure because it decides whether the number
+means anything at all.
+
+What it turns up is not decoration. At the time of writing Chocoberry was **+32%** on its week and
+Devourer, Noctilume and Stoplight Petal were all around **−30%** — and Noctilume's ask has run
+between 550k and 3.1M inside three months, on a mutation whose own item is two thirds of its
+income. Reading that page on the wrong morning and reading it on the right one are different
+answers.
 
 ## The four things that decide the ranking
 

@@ -211,3 +211,59 @@ export function despike(series: Series[], name: HistorySeries): Series[] {
   }
   return out;
 }
+
+/* --------------------------------------------------- a baseline you did not wait for */
+
+/**
+ * One point of Coflnet's bazaar history, as their API returns it.
+ *
+ * `buy` is what one costs — the ask — matching Hypixel's own `quick_status.buyPrice` and this
+ * codebase's `instabuy`. `sell` is the bid. Getting those the wrong way round would compare a
+ * seller's price against a buyer's average and quietly report every item as half its usual.
+ */
+export type CoflnetPoint = { buy?: number; sell?: number; timestamp?: string };
+
+/**
+ * Turn a fetched price history into the same `Baseline` a poll would have built.
+ *
+ * This is the difference between a figure that means something on arrival and one that needs the
+ * tab left open for a day first. `observe` folds one live read at a time and is honest but slow to
+ * become useful; a history endpoint has already done the folding, and the shape it produces is
+ * identical — a mean, a count, and the span it covers — so everything downstream is unchanged.
+ *
+ * Zero and missing prices are dropped rather than averaged in. A bazaar item with no ask is not an
+ * item worth nothing; it is an item nobody is selling, and counting it as zero would drag the mean
+ * down and report the live price as a spike.
+ *
+ * Returns null when there is nothing usable, which the caller reads as "fall back to polling"
+ * rather than as "this item is free".
+ */
+export function baselineFrom(points: CoflnetPoint[], field: "buy" | "sell" = "buy"): Baseline | null {
+  let sum = 0;
+  let samples = 0;
+  let firstAt = Infinity;
+  let lastAt = -Infinity;
+
+  for (const point of points) {
+    const value = point[field];
+    if (typeof value !== "number" || !Number.isFinite(value) || value <= 0) continue;
+    // Coflnet stamps these without a zone. They are UTC; parsing them as local time would shift
+    // the window by hours, which matters only for the "over the last N" label but is free to fix.
+    const at = point.timestamp ? Date.parse(point.timestamp.endsWith("Z") ? point.timestamp : `${point.timestamp}Z`) : NaN;
+    sum += value;
+    samples += 1;
+    if (Number.isFinite(at)) {
+      firstAt = Math.min(firstAt, at);
+      lastAt = Math.max(lastAt, at);
+    }
+  }
+
+  if (samples === 0) return null;
+  const now = Date.now();
+  return {
+    mean: sum / samples,
+    samples,
+    firstAt: Number.isFinite(firstAt) ? firstAt : now,
+    lastAt: Number.isFinite(lastAt) ? lastAt : now,
+  };
+}

@@ -1,5 +1,5 @@
 import { normalise } from "../lib/bazaar";
-import { observe, observedFor, relativeTo, type Baseline } from "../lib/bazaarHistory";
+import { baselineFrom, observe, observedFor, relativeTo, type Baseline, type CoflnetPoint } from "../lib/bazaarHistory";
 import type { NpcPrice } from "../lib/bazaarViews";
 import type { ProductSnapshot, RawBazaarProduct } from "../lib/bazaarTypes";
 import { depthNote } from "../lib/filters";
@@ -24,6 +24,11 @@ import {
  * The ranking is coins an hour, which for an AFK method is really coins per growth stage divided
  * by how long a stage takes. Both halves are set by the player: the stage timer comes off the
  * upgrades, and how many stages a mutation needs comes off its spawn chance and its growth time.
+ * It is ranked on but no longer printed — an hourly figure is the daily one over 24 and never
+ * disagreed with it, so it was a column's width spent saying the same thing in smaller units.
+ *
+ * One thing does come from outside Hypixel: Coflnet's bazaar history, for the "vs usual" column.
+ * See the block above `fetchHistory` for why a fetched average beats a measured one here.
  */
 
 const BAZAAR = "https://api.hypixel.net/v2/skyblock/bazaar";
@@ -113,7 +118,7 @@ const state: State = {
   lastUpdated: null,
   status: "",
   error: null,
-  sort: { column: "coinsPerHour", descending: true },
+  sort: { column: "coinsPerDay", descending: true },
   search: "",
   plots: Number(localStorage.getItem("sbxp:ghplots") ?? 1),
   fortune: localStorage.getItem("sbxp:ghfortune") ?? "",
@@ -136,96 +141,201 @@ let bound = false;
 /* ------------------------------------------------------- is this price usual? */
 
 /**
- * A mutation's own sale price against what it has been averaging.
+ * A mutation's own ask against what it has actually been going for.
  *
  * The single biggest way to be wrong about this page is to read it at the wrong moment. A
- * greenhouse pays out *later* — a Noctilume ordered now is harvested in thirteen hours — so the
- * price that matters is the one at harvest, and the page can only quote the one right now.
+ * greenhouse pays out *later* — a Noctilume planted now is harvested in thirteen hours, a Devourer
+ * in thirty-five — so the price that matters is the one at harvest, and the page can only ever
+ * quote the one right now. A row that looks enormous on a spike will have settled back to normal
+ * before there is anything to sell.
  *
- * Mutations are where that bites and crops are not, which is why only mutations are watched here.
- * Pumpkins move a few percent because a hundred thousand of them trade a day; a Snoozling book is
- * thin enough that one player clearing it doubles the quoted ask for a morning. A mutation showing
- * +300% against its own average is not a mutation that got better — it is a book that emptied, and
- * by the time the harvest lands it will have refilled.
+ * Mutations are where that bites and crops are not, which is why only the forty are tracked.
+ * Pumpkins move a few percent because a hundred thousand trade a day; a Noctilume's ask has run
+ * between 550k and 3.1M inside three months. A mutation well above its own usual is normally a
+ * book that emptied, not a mutation that got better.
  *
- * Measured here rather than fetched: skyblock.bz's history endpoint refuses outside callers, and
- * an invented thirty-day average would make every spike look explicable. This is a running mean
- * folded one read at a time, so it starts empty and is worth more the longer the tab has been
- * open — which is why the window is printed next to the figure rather than hidden in a footnote.
- *
- * Kept apart from the bazaar tab's store: that one averages *margins* for a flipper, and this one
- * averages the *sale price* for a seller. Forty items rather than two thousand, so it is small.
+ * **The average is fetched, not waited for.** An earlier cut folded one live read at a time, which
+ * is honest and useless: it needs the tab left open for a day before it says anything, and nobody
+ * leaves a planner open for a day to find out what to plant. Coflnet publishes the history and
+ * allows cross-origin reads, so a week of real prices arrives on load. Polling is kept underneath
+ * as the fallback for when that fetch fails, because a figure that degrades to "measured here" is
+ * better than a column that empties.
  */
 const BASELINE_KEY = "sbxp:ghpricebaselines";
-let baselines: Record<string, Baseline> = readBaselines();
+const HISTORY_KEY = "sbxp:ghpricehistory";
 
-function readBaselines(): Record<string, Baseline> {
+/**
+ * How stale a fetched history may get before it is worth re-fetching.
+ *
+ * Six hours: long enough that opening the tab repeatedly in an evening costs one round of
+ * requests, short enough that a genuine multi-day move is reflected the next time you look.
+ */
+const HISTORY_TTL_MS = 6 * 60 * 60 * 1000;
+
+/**
+ * Coflnet's per-item history. One request each, fired a few at a time.
+ *
+ * Three wide rather than six, and it is Coflnet's icons that set that limit rather than these:
+ * every row loads its icon from the same host, so a full table is already forty requests in flight
+ * before this starts. Six alongside that earns a 429, which costs a mutation its figure for six
+ * hours. Three is slower and lands.
+ */
+const HISTORY_URL = (id: string) => `https://sky.coflnet.com/api/bazaar/${encodeURIComponent(id)}/history/week`;
+const HISTORY_FETCH_WIDTH = 3;
+/** One retry, after a pause, for the rate-limited case. Anything else is not worth hammering. */
+const HISTORY_RETRY_MS = 1_500;
+
+type HistoryStore = { fetchedAt: number; baselines: Record<string, Baseline> };
+
+/** Averages this browser measured itself, one poll at a time. The fallback. */
+let polled: Record<string, Baseline> = readStore(BASELINE_KEY);
+/** Averages fetched from Coflnet's published history. Preferred wherever present. */
+let fetched: Record<string, Baseline> = readHistory();
+
+function readStore(key: string): Record<string, Baseline> {
   try {
-    return JSON.parse(localStorage.getItem(BASELINE_KEY) ?? "{}") as Record<string, Baseline>;
+    return JSON.parse(localStorage.getItem(key) ?? "{}") as Record<string, Baseline>;
   } catch {
     return {};
   }
 }
 
-/** Fold the newest read into every mutation's average. Only the forty, and only the sale side. */
+function readHistory(): Record<string, Baseline> {
+  try {
+    const store = JSON.parse(localStorage.getItem(HISTORY_KEY) ?? "null") as HistoryStore | null;
+    // A cached history is still worth using while the refresh is in flight — stale by a few hours
+    // beats blank, and the row prints the window it covers either way.
+    return store && typeof store === "object" && store.baselines ? store.baselines : {};
+  } catch {
+    return {};
+  }
+}
+
+function historyIsFresh(): boolean {
+  try {
+    const store = JSON.parse(localStorage.getItem(HISTORY_KEY) ?? "null") as HistoryStore | null;
+    return !!store && Date.now() - store.fetchedAt < HISTORY_TTL_MS && Object.keys(store.baselines ?? {}).length > 0;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Pull a week of real prices for every mutation.
+ *
+ * Forty requests, six at a time — Coflnet answers each in about half a second, so the whole set
+ * lands in a few seconds, once every six hours. A failure anywhere is swallowed per item rather
+ * than per batch: one mutation Coflnet has never heard of should cost that mutation its figure and
+ * nothing else.
+ */
+async function fetchHistory(): Promise<void> {
+  const mutations = tables.greenhouse.mutations ?? [];
+  if (mutations.length === 0 || historyIsFresh()) return;
+
+  const next: Record<string, Baseline> = {};
+  for (let i = 0; i < mutations.length; i += HISTORY_FETCH_WIDTH) {
+    await Promise.all(
+      mutations.slice(i, i + HISTORY_FETCH_WIDTH).map(async (m) => {
+        for (let attempt = 0; attempt < 2; attempt++) {
+          try {
+            const response = await fetch(HISTORY_URL(m.id));
+            // 429 is the only status worth trying again: a 404 means Coflnet has never seen this
+            // item and asking twice will not change that.
+            if (response.status === 429 && attempt === 0) {
+              await new Promise((done) => setTimeout(done, HISTORY_RETRY_MS));
+              continue;
+            }
+            if (!response.ok) return;
+            const baseline = baselineFrom((await response.json()) as CoflnetPoint[]);
+            if (baseline) next[m.id] = baseline;
+            return;
+          } catch {
+            // Offline or blocked. The polled average still covers this one.
+            return;
+          }
+        }
+      }),
+    );
+  }
+
+  if (Object.keys(next).length === 0) return;
+  fetched = next;
+  try {
+    localStorage.setItem(HISTORY_KEY, JSON.stringify({ fetchedAt: Date.now(), baselines: next } satisfies HistoryStore));
+  } catch {
+    // Storage blocked or full: the averages stay live for this session, which is the part that
+    // matters. Losing them on reload costs one round of requests, not correctness.
+  }
+  renderTable();
+}
+
+/** Fold the newest read into the fallback average. Only the forty, and only the ask. */
 function observePrices(): void {
   for (const m of tables.greenhouse.mutations ?? []) {
     const product = state.market.get(m.id);
     if (!product || product.instabuy <= 0) continue;
-    baselines[m.id] = observe(baselines[m.id], product.instabuy, product.at);
+    polled[m.id] = observe(polled[m.id], product.instabuy, product.at);
   }
   try {
-    localStorage.setItem(BASELINE_KEY, JSON.stringify(baselines));
+    localStorage.setItem(BASELINE_KEY, JSON.stringify(polled));
   } catch {
-    // Storage blocked or full. The averages stay live for this session, which is the part that
-    // matters; losing them on reload costs only the history this browser had accumulated.
+    // As above: in-memory is enough for this session.
   }
+}
+
+/** The fetched week where there is one, otherwise whatever this browser has measured. */
+function baselineFor(id: string): { baseline: Baseline; measured: boolean } | null {
+  const history = fetched[id];
+  if (history) return { baseline: history, measured: false };
+  const own = polled[id];
+  return own ? { baseline: own, measured: true } : null;
 }
 
 /**
  * The cell: how far today's ask sits from this mutation's own usual, and over how long.
  *
- * The window is on the row because it decides whether the number means anything at all. +180%
- * after four minutes is noise; after four days it is a spike worth waiting out.
+ * The window is on the row because it decides whether the number means anything. A week of real
+ * history is worth acting on; four minutes of self-polling is not, and a reader who is not told
+ * which one they are looking at cannot tell them apart.
  */
 function baselineCell(row: MutationProfit): string {
   const product = state.market.get(row.id);
-  const baseline = baselines[row.id];
-  if (!product || product.instabuy <= 0 || !baseline) {
-    return `<span class="dim" title="Nothing to compare against yet — this browser builds the average as it polls, and needs a second read of this mutation first.">—</span>`;
-  }
-  const relative = relativeTo(product.instabuy, baseline);
-  if (relative === null) {
-    return `<span class="dim" title="Nothing to compare against yet — this browser builds the average as it polls, and needs a second read of this mutation first.">—</span>`;
+  const found = baselineFor(row.id);
+  const relative = product && product.instabuy > 0 && found ? relativeTo(product.instabuy, found.baseline) : null;
+  if (!product || !found || relative === null) {
+    return `<span class="dim" title="No price history for this one. Coflnet publishes a week for most mutations; where it does not, this tab falls back to averaging its own reads and needs a second one first.">—</span>`;
   }
 
+  const { baseline, measured } = found;
   const window = depthNote(observedFor(baseline) / 60_000);
   // Sign off the rounded figure, not the raw one: -0.4% rounds to zero and printing it as "-0%"
   // reads like a fault rather than "sitting exactly on its average".
   const shown = Math.round(relative);
   const sign = shown > 0 ? "+" : "";
   // Loud in both directions, and the reason differs. Well above its usual is a thin book that
-  // emptied and will refill before the harvest lands; well below is the harvest being worth less
-  // than the page says. Both are reasons not to trust the row at face value.
+  // emptied and will refill before the harvest lands; well below means the harvest is worth less
+  // than the row says. Both are reasons not to take the number at face value.
   const loud = Math.abs(relative) >= 30 ? " gold" : "";
+  const source = measured
+    ? `measured by this tab over the ${window} it has been open, across ${num(baseline.samples)} reads — Coflnet had no history for it`
+    : `Coflnet's published history: ${num(baseline.samples)} readings over the last ${window}`;
+
   return `<span class="${loud.trim()}" title="${escapeHtml(row.name)} is asking ${coins(
     product.instabuy,
-  )} against a mean of ${coins(baseline.mean)} over the ${window} this browser has been watching it, across ${num(
-    baseline.samples,
-  )} reads. A mutation well above its own usual is normally a book that emptied rather than a mutation that got better — and a greenhouse pays out hours later, by which time it has refilled.">${sign}${shown}% <span class="dim">${window}</span></span>`;
+  )} against a mean of ${coins(
+    baseline.mean,
+  )} — ${source}. A mutation well above its own usual is normally a book that emptied rather than a mutation that got better, and a greenhouse pays out hours later, by which time it has refilled.">${sign}${shown}% <span class="dim">${
+    measured ? `${window}*` : window
+  }</span></span>`;
 }
 /* ------------------------------------------------------------------ columns */
 
 type Column = { id: string; label: string; value: (r: MutationProfit) => number; render: (r: MutationProfit) => string; title?: string };
 
+// Coins/hr was the first column and is gone: it is coins/day divided by 24 and never disagreed
+// with it about anything, so it cost a column's width to say the same thing in smaller units.
+// The ranking is still computed on it — see `rankMutations` — it just is not printed twice.
 const COLUMNS: Column[] = [
-  {
-    id: "coinsPerHour",
-    label: "Coins/hr",
-    value: (r) => r.coinsPerHour ?? -1,
-    render: (r) => (r.coinsPerHour === null ? `<span class="dim">—</span>` : coins(r.coinsPerHour)),
-    title: "What one harvest brings in, divided by how long a harvest takes. This is the ranking figure.",
-  },
   {
     id: "coinsPerDay",
     label: "Coins/day",
@@ -297,17 +407,20 @@ const COLUMNS: Column[] = [
     label: "vs usual",
     value: (r) => {
       const product = state.market.get(r.id);
-      if (!product || product.instabuy <= 0) return -Infinity;
-      return relativeTo(product.instabuy, baselines[r.id]) ?? -Infinity;
+      const found = baselineFor(r.id);
+      if (!product || product.instabuy <= 0 || !found) return -Infinity;
+      return relativeTo(product.instabuy, found.baseline) ?? -Infinity;
     },
     render: (r) => baselineCell(r),
     title:
-      "Where this mutation's own price sits against what it has averaged while this tab has been " +
-      "watching. Only the mutations are tracked, because only the mutations move: crops trade in " +
-      "the hundreds of thousands and barely budge, while a mutation book is thin enough that one " +
-      "player clearing it doubles the ask for a morning. That matters here more than on a flip — " +
-      "a greenhouse pays out hours later, so a row that looks huge on a spike will have settled " +
-      "back to normal by the time you actually harvest it.",
+      "Where this mutation's own price sits against its average over the last week, from Coflnet's " +
+      "published history — so it says something the moment the page opens rather than after a day " +
+      "of watching. Only the mutations are tracked, because only the mutations move: crops trade " +
+      "in the hundreds of thousands and barely budge, while a mutation book is thin enough that " +
+      "one player clearing it doubles the ask for a morning. That matters here more than on a " +
+      "flip — a greenhouse pays out hours later, so a row that looks huge on a spike will have " +
+      "settled back to normal by the time you actually harvest it. A star means Coflnet had no " +
+      "history and the figure is this tab's own reads instead.",
   },
   {
     id: "setup",
@@ -423,6 +536,7 @@ export function mountGreenhouse(container: HTMLElement, data: GreenhouseTables):
   if (bound) {
     render();
     void refresh();
+    void fetchHistory();
     return;
   }
   bound = true;
@@ -516,6 +630,9 @@ export function mountGreenhouse(container: HTMLElement, data: GreenhouseTables):
 
   render();
   void refresh();
+  // Not awaited: the table is useful the moment the bazaar lands, and the week of history only
+  // fills one column. It repaints itself when it arrives.
+  void fetchHistory();
 }
 
 export function unmountGreenhouse(): void {

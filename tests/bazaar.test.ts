@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { NET_OF_TAX, costToBuy, hourlySold, normalise, proceedsFromSelling, walk } from "../src/lib/bazaar";
 import { ORDER_WINDOW_HOURS, affordableCoinsPerHour, badHourCount, crash, craft, flip, manipulation } from "../src/lib/bazaarViews";
-import { daily, decode, despike, encode, observe, observedFor, proximityToAverage, relativeTo, sample, trim } from "../src/lib/bazaarHistory";
+import { baselineFrom, daily, decode, despike, encode, observe, observedFor, proximityToAverage, relativeTo, sample, trim } from "../src/lib/bazaarHistory";
 import type { HistoryRow, ProductSnapshot, RawBazaarProduct } from "../src/lib/bazaarTypes";
 
 /**
@@ -500,9 +500,10 @@ function round(n: number): number {
 
 /**
  * The intended source for a baseline was skyblock.bz's `/api/product/init/{id}`, which `decode`
- * above exists to read. It now answers 403 to any caller outside their own site, so there is no
- * thirty-day average to fetch and a fabricated one would be worse than none — it would make
- * every margin look explicable. What is left is measuring it here, one poll at a time.
+ * above exists to read. It now answers 403 to any caller outside their own site. Coflnet's
+ * `/api/bazaar/{id}/history/week` does serve one, cross-origin included — see `baselineFrom` — so
+ * the greenhouse tab fetches its averages. This measured-here path remains the fallback for when
+ * that fetch fails, and is what the bazaar tab's margin averages still use.
  */
 test("a baseline is a running mean that survives without keeping the samples", () => {
   let b = observe(undefined, 100, 1_000);
@@ -525,6 +526,54 @@ test("the same reading twice does not count twice", () => {
   const again = observe(first, 500, 1_000);
   assert.deepEqual(again, first, "a sample at a time already seen is ignored");
   assert.deepEqual(observe(first, 500, 999), first, "and so is one from before it");
+});
+
+/**
+ * A fetched history has to produce the same shape a poll would, or nothing downstream can treat
+ * the two interchangeably — which is the whole point of having a fallback.
+ */
+test("a fetched history becomes the same baseline a poll would have built", () => {
+  const built = baselineFrom([
+    { buy: 100, timestamp: "2026-08-17T00:00:00" },
+    { buy: 200, timestamp: "2026-08-18T00:00:00" },
+    { buy: 300, timestamp: "2026-08-19T00:00:00" },
+  ])!;
+
+  let polled = observe(undefined, 100, Date.parse("2026-08-17T00:00:00Z"));
+  polled = observe(polled, 200, Date.parse("2026-08-18T00:00:00Z"));
+  polled = observe(polled, 300, Date.parse("2026-08-19T00:00:00Z"));
+
+  assert.deepEqual(built, polled, "same mean, same count, same span");
+  assert.equal(observedFor(built), 2 * 86_400_000, "two days between first and last");
+});
+
+/**
+ * Coflnet stamps its timestamps without a zone and they are UTC. Read as local time the window
+ * shifts by hours, which only mislabels "over the last N" — but it is free to get right.
+ */
+test("a history timestamp is read as UTC, zone marker or not", () => {
+  const bare = baselineFrom([{ buy: 1, timestamp: "2026-08-17T00:00:00" }])!;
+  const zoned = baselineFrom([{ buy: 1, timestamp: "2026-08-17T00:00:00Z" }])!;
+  assert.equal(bare.firstAt, zoned.firstAt);
+  assert.equal(bare.firstAt, Date.parse("2026-08-17T00:00:00Z"));
+});
+
+/**
+ * An item with no ask is not an item worth nothing — it is one nobody is selling. Averaging the
+ * zero in drags the mean down and reports the live price as a spike, which is the opposite of what
+ * this column is for.
+ */
+test("a history with no usable price is null, not a mean of zero", () => {
+  assert.equal(baselineFrom([]), null);
+  assert.equal(baselineFrom([{ buy: 0 }, { buy: undefined }, { sell: 500 }]), null);
+
+  const mixed = baselineFrom([{ buy: 0 }, { buy: 100 }, { buy: 300 }])!;
+  assert.equal(mixed.mean, 200, "the zero is dropped, not averaged in");
+  assert.equal(mixed.samples, 2);
+
+  // And it reads the ask by default, since a greenhouse sells into the book it is priced against.
+  assert.equal(baselineFrom([{ buy: 100, sell: 50 }])!.mean, 100);
+  assert.equal(baselineFrom([{ buy: 100, sell: 50 }], "sell")!.mean, 50);
 });
 
 test("a margin reads against its own average, or says it cannot yet", () => {
