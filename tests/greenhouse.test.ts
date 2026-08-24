@@ -13,14 +13,18 @@ import {
   rankMutations,
   stageSeconds,
   stagesPerHarvest,
+  setupLifeHours,
   unitPrice,
 } from "../src/lib/greenhouse";
-import type { GreenhouseData, Mutation } from "../src/lib/greenhouse";
+import type { DecayData, GreenhouseData, Mutation } from "../src/lib/greenhouse";
 import { NET_OF_TAX } from "../src/lib/bazaar";
 import type { ProductSnapshot } from "../src/lib/bazaarTypes";
 import greenhouseJson from "../data/generated/greenhouse.json";
+import decayJson from "../data/curated/greenhouse_decay.json";
 
 const data = greenhouseJson as unknown as GreenhouseData;
+// The curated decay file, as the build inlines it. Its provenance is in the file itself.
+const DECAY = decayJson as unknown as DecayData;
 
 function product(id: string, instasell: number, instabuy: number): ProductSnapshot {
   return {
@@ -582,4 +586,115 @@ test("a condition never asks for more ring than the mutation has", () => {
     const asked = m.spreading.requires.reduce((sum, r) => sum + r.cells, 0);
     assert.ok(asked <= ring, `${m.name} (${m.size}x${m.size}) asks for ${asked} of a ${ring}-cell ring`);
   }
+});
+
+/* ------------------------------------------------------------------ decay */
+
+/**
+ * The 2026-08-20 change that turned setup from a one-off into a running cost.
+ *
+ * Hypixel's own designer note says why they did it: before, a ring of plain crops stood forever, so
+ * a greenhouse only ever needed the mutation harvesting and never a replant. Now base crops rot in
+ * 72 hours and the ring has to be bought again — which makes "how many harvests does one planting
+ * buy" the question the whole page turns on, and it is not visible in a coins-per-day figure at all.
+ */
+test("a ring of base crops lasts the 72 hours the changelog states", () => {
+  const byId = new Map(data.mutations.map((m) => [m.id, m]));
+  const life = setupLifeHours([{ id: "INK_SACK:3" }, { id: "WHEAT" }], byId, DECAY);
+  assert.equal(life.hours, 72, "the figure from Changelog/2026/August 20");
+  assert.equal(life.exact, true, "stated outright, not inferred");
+});
+
+/**
+ * A ring dies with its shortest-lived plant. One dead cell breaks the spreading condition, so the
+ * whole arrangement is only as durable as its weakest member — which is why this is a minimum and
+ * never an average.
+ */
+test("a ring is only as durable as its shortest-lived plant", () => {
+  const byId = new Map(data.mutations.map((m) => [m.id, m]));
+  // Noctilume is the one mutation with a published timer: six days.
+  assert.equal(setupLifeHours([{ id: "NOCTILUME" }], byId, DECAY).hours, 144);
+  // Beside a base crop, the base crop goes first and takes the setup with it.
+  const mixed = setupLifeHours([{ id: "NOCTILUME" }, { id: "WHEAT" }], byId, DECAY);
+  assert.equal(mixed.hours, 72, "the weakest member sets the life");
+  assert.equal(mixed.exact, true, "both timers are published, so this is a fact");
+});
+
+/**
+ * The honesty check, and the one worth having. Thirty-six of the forty mutations have a decay timer
+ * that exists only in the in-game Diagnostics Tool. All that is published about them is that the
+ * shortest is three days, so they are pinned to three days and the answer is reported as a floor.
+ * A bound presented as a measurement is the kind of wrong nobody can spot afterwards.
+ */
+test("an unpublished decay timer yields a floor, flagged as one", () => {
+  const byId = new Map(data.mutations.map((m) => [m.id, m]));
+  const guessed = setupLifeHours([{ id: "PUFFERCLOUD" }], byId, DECAY);
+  assert.equal(guessed.hours, 72, "pinned to the published three-day floor");
+  assert.equal(guessed.exact, false, "and never claimed as the real timer");
+
+  // The arithmetic is identical to a base crop's; only the claim differs. That is the point.
+  assert.equal(setupLifeHours([{ id: "WHEAT" }], byId, DECAY).hours, guessed.hours);
+  assert.notEqual(setupLifeHours([{ id: "WHEAT" }], byId, DECAY).exact, guessed.exact);
+});
+
+/** Three plants never rot at all, and a ring built only from those is planted once and left. */
+test("a ring that never rots has no lifetime rather than a lifetime of zero", () => {
+  const byId = new Map(data.mutations.map((m) => [m.id, m]));
+  const forever = setupLifeHours([{ id: "FLESHTRAP" }, { id: "MAGIC_JELLYBEAN" }], byId, DECAY);
+  assert.equal(forever.hours, null, "null is 'never', which is not the same as 'immediately'");
+  assert.equal(forever.exact, true);
+
+  // Fire and Dead Plant are conditions rather than plants: a Dead Plant is what decay produces, so
+  // it cannot rot further, and neither costs anything to renew.
+  assert.equal(setupLifeHours([{ id: "FIRE", free: true }], byId, DECAY).hours, null);
+});
+
+/**
+ * The whole point, in one assertion: a cheaper ring that cycles faster beats an expensive one that
+ * cycles slowly, and coins-per-day cannot see the difference.
+ */
+test("harvests per planting is what separates two mutations with the same daily figure", () => {
+  const market = new Map<string, ProductSnapshot>();
+  for (const m of data.mutations) market.set(m.id, product(m.id, 900, 1_000));
+  for (const c of data.baseCrops) market.set(c.id, product(c.id, 4, 5));
+  const withDecay = { ...data, decay: DECAY };
+
+  const rows = rankMutations(withDecay, { market, growth: GROWTH, farmingFortune: 1_500 });
+  for (const r of rows) {
+    if (r.harvestsPerSetup === null || r.hoursPerHarvest === null || r.setupLife.hours === null) continue;
+    // Floored, because half a harvest is no harvest: a mutation still growing when the ring dies
+    // is lost, not banked.
+    assert.equal(r.harvestsPerSetup, Math.floor(r.setupLife.hours / r.hoursPerHarvest));
+    assert.ok(Number.isInteger(r.harvestsPerSetup));
+
+    if (r.netPerSetup !== null && r.setupTotal !== null) {
+      assert.ok(
+        Math.abs(r.netPerSetup - (r.harvestsPerSetup * r.perHarvest - r.setupTotal)) < 1e-6,
+        `${r.name}: per-setup does not reconcile`,
+      );
+    }
+  }
+
+  // A mutation slower than its own ring's life never completes one, and that is reported as zero
+  // rather than as a fraction quietly rounded up into a profit.
+  const stalled = rows.filter((r) => r.harvestsPerSetup === 0);
+  for (const r of stalled) assert.ok(r.hoursPerHarvest! > r.setupLife.hours!, `${r.name} should not be stalled`);
+});
+
+/** A negative per-setup is a real answer — the planting never earns back what it cost. */
+test("a setup that cannot repay itself reports a loss rather than a daily profit", () => {
+  const market = new Map<string, ProductSnapshot>();
+  for (const m of data.mutations) market.set(m.id, product(m.id, 1, 2));
+  for (const c of data.baseCrops) market.set(c.id, product(c.id, 1, 2));
+  // An expensive ring against near-worthless drops: every planting should lose money, and the
+  // daily gross figure should still be positive — which is exactly the trap the column exists for.
+  market.set("PUFFERCLOUD", product("PUFFERCLOUD", 5_000_000, 6_000_000));
+
+  const byId = new Map(data.mutations.map((m) => [m.id, m]));
+  const devourer = data.mutations.find((m) => m.id === "DEVOURER")!;
+  const row = profitOf(devourer, byId, { ...data, decay: DECAY }, { market, growth: GROWTH, farmingFortune: 0 });
+
+  assert.ok(row.coinsPerDay! > 0, "it still looks like it makes money by the day");
+  assert.ok(row.netPerSetup! < 0, "and still loses money on every planting");
+  assert.ok(row.sustainedPerDay! < 0, "which the sustained figure agrees with");
 });

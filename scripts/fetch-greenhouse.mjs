@@ -72,12 +72,16 @@ export const slugId = (name) =>
     .replace(/^_|_$/g, "");
 
 /**
- * Things a mutation needs or drops that are not bought: Fire is lit with a flint and steel and a
- * Dead Plant is what a crop leaves behind, so both are real requirements with no price rather
- * than items to look up. Kept in the condition — Ashwreath's whole published chance turns on its
- * two Fire cells not counting as crops — and marked so the pricing layer does not hunt for them.
+ * Fire is lit with a flint and steel rather than bought, so it is a real requirement with no price
+ * rather than an item to look up. It stays in the condition — Ashwreath's whole published chance
+ * turns on its two Fire cells not counting as crops — and is marked so pricing does not hunt for it.
+ *
+ * Dead Plant used to be listed here too and should not have been: it trades on the bazaar as
+ * `DEAD_PLANT` at several hundred coins, so Witherbloom's ring of four is a real bill and calling
+ * it free understated the only cost that mutation has. It does still never *rot*, being what
+ * rotting produces — but that belongs in the decay table, not here.
  */
-const NOT_PURCHASABLE = /^(Fire|Dead Plant)$/i;
+const NOT_PURCHASABLE = /^Fire$/i;
 /** Blocks a mutation grows *on*, which appear in the analysis cell and are not ingredients. */
 const SURFACES = /^(Farmland|Dirt|Soul Sand)$/i;
 

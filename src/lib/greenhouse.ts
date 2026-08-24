@@ -55,7 +55,33 @@ export type GreenhouseData = {
   baseCrops: { id: string; name: string; baseYield: number; growthCycles: number }[];
   /** The thirteen crop-specific fortunes and the item ids each one lifts. */
   cropFortunes?: { stat: string; crop: string; ids: string[] }[];
+  /** What is written down anywhere about how fast plants rot. See `data/curated`. */
+  decay?: DecayData;
   mutations: Mutation[];
+};
+
+/**
+ * How long a plant lasts before it becomes a Dead Plant.
+ *
+ * The rule the whole setup cost hangs on, and it changed on 2026-08-20: base crops now rot too.
+ * Hypixel's own designer note says why — before it, a ring of plain crops stood forever and a
+ * greenhouse was set-and-forget. It is not any more, so the ring is a *recurring* cost and the
+ * question worth asking of a mutation is how many harvests one planting buys.
+ *
+ * Almost none of it is published. `Dead Plant` states the mechanic and the floor, two changelogs
+ * give base crops and Noctilume, three pages say their plant never rots, and everything else is
+ * readable only from the in-game Plant Diagnostics Tool. So the unknown ones are pinned to the
+ * floor and the answer is reported as a guaranteed minimum — see `setupLifeHours`.
+ */
+export type DecayData = {
+  /** 72, from the changelog that added it. */
+  baseCropHours: number;
+  /** 72 again: `Dead Plant` says the shortest mutation timer is three days. */
+  floorHours: number;
+  /** Timers actually written down. Noctilume is the only one. */
+  knownHours: Record<string, number>;
+  /** Plants that never rot at all. */
+  neverDecays: string[];
 };
 
 /** One clause of a spreading condition. Every clause is required — the slash means "and". */
@@ -254,6 +280,51 @@ export function setupFor(
 }
 
 /**
+ * How long one planting of the ring stands before it has to be redone.
+ *
+ * The ring dies with its shortest-lived plant: one dead cell means the condition is no longer met
+ * and nothing spawns in that spot again, so the whole arrangement is only as durable as its
+ * weakest member. That is what turns setup from a one-off into a recurring cost, and it is the
+ * figure the "per setup" answer divides by.
+ *
+ * `exact` is the part that matters for honesty. A base crop is 72 hours and Noctilume is 144, both
+ * stated in changelogs; every other mutation has a timer nobody has written down, known only to be
+ * at least three days. Those are pinned to the floor, which makes the result a **guaranteed
+ * minimum** — the real lifetime can be longer and can never be shorter — and `exact` false is what
+ * tells the caller to say so rather than presenting a bound as a measurement.
+ *
+ * Returns null lifetime for a ring that genuinely never rots, which is a real case: All-in Aloe,
+ * Magic Jellybean and Fleshtrap stand forever, so a ring built only from those is planted once.
+ */
+export type SetupLife = { hours: number | null; exact: boolean };
+
+export function setupLifeHours(items: { id: string; free?: boolean }[], byId: Map<string, Mutation>, decay?: DecayData): SetupLife {
+  if (!decay) return { hours: null, exact: false };
+
+  let shortest = Infinity;
+  let exact = true;
+  for (const item of items) {
+    // Fire and Dead Plant are conditions rather than plants — a Dead Plant is what decay produces,
+    // so it cannot rot further, and neither costs anything to renew.
+    if (item.free) continue;
+    if (decay.neverDecays.includes(item.id)) continue;
+
+    const known = decay.knownHours[item.id];
+    if (typeof known === "number") {
+      shortest = Math.min(shortest, known);
+      continue;
+    }
+    // A base crop's 72 hours is stated outright. An unlisted mutation is only known to be at least
+    // three days, which is the same number — so the arithmetic is identical and only the claim
+    // changes: one is a measurement, the other a floor.
+    if (byId.has(item.id)) exact = false;
+    shortest = Math.min(shortest, byId.has(item.id) ? decay.floorHours : decay.baseCropHours);
+  }
+
+  return shortest === Infinity ? { hours: null, exact: true } : { hours: shortest, exact };
+}
+
+/**
  * The greenhouse to lay out on.
  *
  * Ten by ten, which is not on the wiki — it is read off a real profile's `greenhouse_slots`, where
@@ -347,12 +418,28 @@ export type MutationProfit = {
   coinsPerDay: number | null;
   /**
    * The first day's take with the ring paid for, which is where a mutation with an expensive setup
-   * looks different from one without. Every day after is the gross figure, because the ring is
-   * bought once and the crops around it keep standing.
+   * looks different from one without.
    */
   netFirstDay: number | null;
   /** Hours of being left alone before the setup has paid for itself. */
   paybackHours: number | null;
+  /** How long one planting stands before the ring rots, and whether that is stated or a floor. */
+  setupLife: SetupLife;
+  /**
+   * Harvests one planting yields before the ring has to be replaced.
+   *
+   * The figure the whole "is this worth it" question turns on, and the one a coins-per-day number
+   * hides completely. A Devourer at 35 hours a harvest against a 72-hour ring gets **two**, so its
+   * enormous setup is paid off twice and then paid again. Null where the ring never rots.
+   */
+  harvestsPerSetup: number | null;
+  /** What one planting nets: everything it yields over its life, less what it cost to plant. */
+  netPerSetup: number | null;
+  /**
+   * The honest daily rate once replanting is counted — gross a day, less the setup spread across
+   * the days it survives. This is what `coinsPerDay` would be if the ring were free, and is not.
+   */
+  sustainedPerDay: number | null;
   /** Water falls 2-3 a stage, so this is how often a stage comes round. */
   hoursPerStage: number;
   /** Drops the market cannot price, named rather than counted as zero. */
@@ -499,6 +586,19 @@ export function profitOf(m: Mutation, byId: Map<string, Mutation>, data: Greenho
   const coinsPerHour = rankable ? (total / hoursPerHarvest!) * plots : null;
   const coinsPerDay = coinsPerHour === null ? null : coinsPerHour * 24;
 
+  // How many harvests one planting is actually worth. Floored, because half a harvest is no
+  // harvest — the ring rots on its own schedule and a mutation half-grown when it dies is lost.
+  const setupLife: SetupLife = setup ? setupLifeHours(setup.items, byId, data.decay) : { hours: null, exact: false };
+  const harvestsPerSetup =
+    !rankable || setupLife.hours === null ? null : Math.floor(setupLife.hours / hoursPerHarvest!);
+  const perHarvestAll = total * plots;
+  const netPerSetup =
+    harvestsPerSetup === null || setupTotal === null ? null : harvestsPerSetup * perHarvestAll - setupTotal;
+  const sustainedPerDay =
+    coinsPerDay === null || setupTotal === null || setupLife.hours === null || setupLife.hours <= 0
+      ? coinsPerDay
+      : coinsPerDay - setupTotal / (setupLife.hours / 24);
+
   return {
     id: m.id,
     name: m.name,
@@ -524,6 +624,10 @@ export function profitOf(m: Mutation, byId: Map<string, Mutation>, data: Greenho
     // as one figure it reads like a running cost and understates everything with a big ring.
     netFirstDay: coinsPerDay === null || setupTotal === null ? null : coinsPerDay - setupTotal,
     paybackHours: coinsPerHour === null || coinsPerHour <= 0 || setupTotal === null ? null : setupTotal / coinsPerHour,
+    setupLife,
+    harvestsPerSetup,
+    netPerSetup,
+    sustainedPerDay,
     hoursPerStage,
     unpriced,
     cropsLifted: [...new Set(cropsLifted)],

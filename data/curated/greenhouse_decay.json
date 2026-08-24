@@ -1,0 +1,24 @@
+{
+  "note": "Plants in the Greenhouse rot. A fully grown plant turns into a Dead Plant after its decay timer, even if fully hydrated and even if the player placed it there rather than growing it, so buying a mutation off the bazaar does not exempt it. This is what stops a Greenhouse being set-and-forget, and it is the figure that decides how many harvests one planting is worth: the ring has to be replaced when its shortest-lived plant dies. Hypixel publishes decay per plant only through the in-game Plant Diagnostics Tool, so the four facts below are everything that is written down anywhere. The rest is deliberately absent rather than estimated - a guessed decay timer would multiply straight into a coins-per-setup figure and there would be no way to see it had been invented.",
+  "source": "Hypixel Wiki: Dead Plant (the mechanic and the 3-day floor); Changelog/2026/August 20 (base crops, 72h); Changelog/2026/February 2 (Noctilume 5 -> 6 days); All-in Aloe, Magic Jellybean and Fleshtrap trivia (never decay)",
+  "verified": true,
+  "checkedAt": "2026-08-24",
+  "mechanic": "A fully grown plant becomes a Dead Plant after its decay timer elapses, hydrated or not, placed or grown. Different mutations have different timers; the shortest is 3 days and some mutations have none at all. Readable in game with the Plant Diagnostics Tool.",
+  "baseCropHours": 72,
+  "baseCropSource": "Changelog/2026/August 20: \"Added decay to base crops (72h)\". The designer note is explicit about why - to stop setups that only ever need the mutation harvesting and never a replant.",
+  "floorHours": 72,
+  "floorSource": "Dead Plant: \"Different mutations can have different decay timers. The lowest is 3 days\". Three days is also exactly the base-crop figure, so 72h is a floor for every plant that decays at all.",
+  "knownHours": {
+    "NOCTILUME": 144
+  },
+  "knownSource": "Changelog/2026/February 2: \"Increased Noctilume's decay period from 5 to 6 days\". The only mutation whose timer is stated in writing.",
+  "neverDecays": [
+    "ALL_IN_ALOE",
+    "MAGIC_JELLYBEAN",
+    "FLESHTRAP",
+    "DEAD_PLANT"
+  ],
+  "neverDecaysSource": "Trivia on each page: All-in Aloe \"does not decay while growing or after being placed by the player\"; Magic Jellybeans \"do not decay\"; Fleshtraps \"do not decay when fully grown or placed by the player\". DEAD_PLANT is on the list for a different reason: it is what decay produces, so it cannot rot further. It is not free, though - it trades on the bazaar, and Witherbloom needs four.",
+  "unknownIsFloor": true,
+  "unknownNote": "Every mutation not listed above decays on a timer nobody has written down, known only to be at least 3 days. Those are treated as exactly the floor, which makes the harvests-per-setup figure a guaranteed minimum rather than an estimate: the real number can be higher and can never be lower. Rows resting on that assumption say so."
+}

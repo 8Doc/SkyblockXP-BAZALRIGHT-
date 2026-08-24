@@ -91,7 +91,13 @@ const bazaarData = {
  * everything else about it is a wiki scrape of a feature the API does not describe.
  */
 const greenhouseData = {
-  greenhouse: await loadJson("generated/greenhouse.json"),
+  greenhouse: {
+    ...(await loadJson("generated/greenhouse.json")),
+    // Decay is not on the Mutations table and not on the Greenhouse page — Hypixel publishes it
+    // per plant only through the in-game Diagnostics Tool. What is written down lives here, with
+    // its sources, and the gaps stay gaps.
+    decay: await loadJson("curated/greenhouse_decay.json"),
+  },
   npcPrices: (await loadJson("generated/npc-prices.json")).prices,
 };
 

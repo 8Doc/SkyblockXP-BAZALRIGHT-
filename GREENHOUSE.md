@@ -22,10 +22,12 @@ matter most are Hypixel staff posting in Discord, quoted on the wiki with citati
 | Overdrive Chip (+140, contest only) | `Overdrive Chip` page |
 | Prices | the live bazaar, plus the shop table from `npc-prices.json` |
 | A week of price history, for "vs usual" | Coflnet, `sky.coflnet.com/api/bazaar/<id>/history/week` |
+| Decay timers | `data/curated/greenhouse_decay.json` — the wiki tabulates none of it; see below |
 
-**The drop figures have a date on them.** On **2026-08-20** every base crop's drop changed — Nether
-Wart 240 → 108, Carrot 280 → 175, Potato 240 → 150, Sunflower 160 → 232 — so any figure computed
-before that date is wrong by up to a factor of two, in both directions. The scrape records
+**Two things have a date on them, and it is the same date.** On **2026-08-20** every base crop's
+drop changed — Nether Wart 240 → 108, Carrot 280 → 175, Potato 240 → 150, Sunflower 160 → 232 — and
+the same update gave base crops a decay timer. So any figure computed before that date is wrong
+twice over: by up to a factor of two on the drops, and by treating the ring as permanent. The scrape records
 `generatedAt` and both pages' `editedAt` so the data can be checked against the page's own History.
 
 ## What a harvest is worth
@@ -62,22 +64,76 @@ The tab shows the three apart in the expanded row, because they answer different
 mutation carried by its own item price is exposed to that item's market, and one carried by crops is
 exposed to fortune.
 
-### Coins a day is gross, and the setup is a one-off
+### The setup is not a one-off any more, and that reorders everything
 
-These are never added into one number, because they are not the same kind of number. The ring is
-bought once and the plants stand there feeding harvest after harvest; the income repeats. So:
+**Plants rot.** The same 2026-08-20 update that changed every drop figure also added decay to base
+crops, and Hypixel's designer note says exactly why:
 
-- **Coins/day** is gross — what the harvest sells for. (The ranking is still computed on coins an
-  hour, but that column is not printed: it is the daily figure over 24 and never disagreed with it,
-  so it cost a column's width to say the same thing in smaller units.)
-- **Net day 1** is coins/day minus the whole bill. It is often negative, which means the ring costs
-  more than a day of harvests brings back — not that the mutation loses money.
-- **Payback** is the bill divided by coins an hour: how long you leave it alone before it has paid
-  for itself. This is the figure that puts a one-off and a repeating income in the same unit, and it
-  is the honest way to compare a 38-coin setup against a 54M one.
-- **Profit/harvest** sits next to **Per harvest** on purpose: this much, that often. The pair is
-  what says whether a method is worth checking in for, and a test asserts the two multiply out to
-  coins/day so the columns cannot disagree with each other.
+> Currently, there are quite a few "set and forget" setups … effectively only ever needing to
+> harvest the mutations without ever having to replant your Greenhouse. … By adding a decay value
+> we can expect people having to replant their setups every once in a while.
+
+So the ring is a **running cost**, and the question worth asking of a mutation is not what it makes
+in a day but **how many harvests one planting buys**. A ring dies with its shortest-lived plant —
+one dead cell breaks the spreading condition and nothing spawns there again — so:
+
+```
+harvests per planting = floor(ring life / hours per harvest)
+```
+
+That single division reorders the table, because it has nothing to do with how much a harvest is
+worth:
+
+| | per harvest | harvests | setup | net per planting |
+|---|---|---|---|---|
+| **Noctilume** | 13.5 hr | **5** | 6.0M | **+59M** |
+| Startlevine | 26.9 hr | 2 | 41M | +28M |
+| **Timestalk** | 32.0 hr | 2 | 53M | **−26M** |
+| Magic Jellybean | 8.7 days | **0** | 4.9M | −4.9M |
+
+Timestalk reads 9.9M a day gross and **loses 26M on every planting**. Magic Jellybean takes longer
+to harvest than its ring survives, so it never completes one at all. Neither is visible in a
+coins-per-day figure, which is why `Net/day` — gross less the ring spread over the days it lasts —
+is what the table now ranks on.
+
+#### What is known about decay, and what is not
+
+Almost nothing is published. `data/curated/greenhouse_decay.json` holds all of it:
+
+| | | source |
+|---|---|---|
+| Base crops | **72h** | Changelog 2026-08-20, "Added decay to base crops (72h)" |
+| Noctilume | **6 days** | Changelog 2026-02-02, "from 5 to 6 days" |
+| All-in Aloe, Magic Jellybean, Fleshtrap | **never** | trivia on each page |
+| Dead Plant | **never** | it is what decay produces, so it cannot rot further |
+| every other mutation | **≥ 3 days** | `Dead Plant`: "The lowest is 3 days" |
+
+The last row is the honest part. Thirty-six timers exist only in the in-game Plant Diagnostics
+Tool, so they are pinned to the published three-day floor and the result is reported as a
+**guaranteed minimum** — marked `5+` rather than `5`, because the real figure can only be higher.
+A bound presented as a measurement is the kind of wrong nobody can spot afterwards, and a guessed
+decay timer would multiply straight into the coins-per-planting figure.
+
+### Gross and net
+
+The ring and the income are not the same kind of number, so they are never added:
+
+- **Net/day** is the ranking: gross less the ring spread across the days that ring survives. It goes
+  negative for a setup that costs more to keep replacing than its harvests bring in.
+- **Gross/day** is what the harvests sell for with nothing taken off. Read against Net/day beside
+  it: where the two are close the ring is nearly free, where they are far apart most of what you
+  grow is paying for the plants around it.
+- **Profit/harvest** sits next to **Per harvest** on purpose: this much, that often. A test asserts
+  the two multiply out to gross/day so the columns cannot disagree with each other.
+- **Per setup** is what one planting nets, start to finish — the column that says whether a setup is
+  worth buying at all, and the one that does not follow from the daily figure.
+
+Two columns were removed rather than kept, because decay made them *wrong* rather than redundant.
+**Net day 1** claimed the ring was bought once and every day after was pure gross; it is bought
+again every 72 hours. **Payback** measured how long until the ring repaid itself, which stops
+meaning anything once the ring can die before it gets there — `Per setup` going negative says the
+same thing and says it in coins. **Each** and **Size** also left the table, for the ordinary reason
+that they are true but not what you sort by; both are still in the expanded row.
 
 The bill scales with the number of greenhouses, because three plots is three rings to plant. Quoting
 a one-plot setup beside a three-plot income would flatter exactly the mutations with the most

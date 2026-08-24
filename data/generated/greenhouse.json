@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-24T09:37:31.910Z",
+  "generatedAt": "2026-08-24T16:32:21.246Z",
   "cropFortunes": [
     {
       "stat": "Wheat Fortune",
@@ -105,7 +105,7 @@
     "bounty": "Hypixel staff (mrkeith) posted in Discord, quoted on the Greenhouse page"
   },
   "editedAt": {
-    "mutations": "2026-08-23T06:30:18Z",
+    "mutations": "2026-08-24T14:27:35Z",
     "greenhouse": "2026-08-20T17:11:53Z"
   },
   "note": "Base crop drops changed wholesale on 2026-08-20 — Nether Wart 240 to 108, Carrot 280 to 175, Sunflower 160 to 232 — so a figure computed before that date is wrong by up to a factor of two. A null weight or chance is a cell the wiki leaves blank, meaning the mutation needs a special condition rather than a roll; it is not a chance of zero. Layouts are the 3x3 ring the mutation spreads into the middle of, and a spreading condition counts ring cells rather than plants, which is why a 2x2 mutation satisfies two cells at once.",
@@ -800,8 +800,7 @@
           {
             "id": "DEAD_PLANT",
             "name": "Dead Plant",
-            "cells": 4,
-            "free": true
+            "cells": 4
           }
         ],
         "prose": false
@@ -2302,11 +2301,6 @@
           "id": "INK_SACK:3",
           "name": "Cocoa Beans",
           "amount": 400
-        },
-        {
-          "id": "MELON",
-          "name": "Melon Slice",
-          "amount": 800
         }
       ],
       "farmingXp": null,
@@ -2552,8 +2546,7 @@
           {
             "id": "DEAD_PLANT",
             "name": "Dead Plant",
-            "cells": 4,
-            "free": true
+            "cells": 4
           },
           {
             "id": "CINDERSHADE",

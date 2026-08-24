@@ -118,7 +118,7 @@ const state: State = {
   lastUpdated: null,
   status: "",
   error: null,
-  sort: { column: "coinsPerDay", descending: true },
+  sort: { column: "sustainedPerDay", descending: true },
   search: "",
   plots: Number(localStorage.getItem("sbxp:ghplots") ?? 1),
   fortune: localStorage.getItem("sbxp:ghfortune") ?? "",
@@ -332,44 +332,46 @@ function baselineCell(row: MutationProfit): string {
 
 type Column = { id: string; label: string; value: (r: MutationProfit) => number; render: (r: MutationProfit) => string; title?: string };
 
-// Coins/hr was the first column and is gone: it is coins/day divided by 24 and never disagreed
-// with it about anything, so it cost a column's width to say the same thing in smaller units.
-// The ranking is still computed on it — see `rankMutations` — it just is not printed twice.
+/**
+ * The table, after decay.
+ *
+ * Two columns are gone because the 2026-08-20 update made them wrong rather than merely redundant.
+ * **Net day 1** said the ring was bought once and every day after was pure gross; base crops now rot
+ * in 72 hours, so it is bought again and again, and the honest daily figure spreads it across the
+ * days it survives — that is `Net/day` below. **Payback** measured how long until the ring repaid
+ * itself, which stops meaning anything once the ring can die before it gets there; `Per setup`
+ * going negative says the same thing and says it in coins.
+ *
+ * Two more are gone because they are true and not decision-relevant, which is a different reason:
+ * **Each** (one mutation, one harvest) and **Size**. Both are still in the expanded row, where
+ * there is room for the things you look at once rather than the things you sort by.
+ */
 const COLUMNS: Column[] = [
   {
+    id: "sustainedPerDay",
+    label: "Net/day",
+    value: (r) => r.sustainedPerDay ?? -Infinity,
+    render: (r) =>
+      r.sustainedPerDay === null
+        ? `<span class="dim">—</span>`
+        : r.sustainedPerDay < 0
+          ? `<span class="gold">-${coins(-r.sustainedPerDay)}</span>`
+          : coins(r.sustainedPerDay),
+    title:
+      "What it actually pays a day, keeping it running: gross takings less the ring spread across " +
+      "the days that ring survives. This is the ranking figure, and it is the one that changed " +
+      "when base crops started rotting — a setup you replace every three days is a running cost, " +
+      "not a one-off. Negative means replanting costs more than the harvests bring in.",
+  },
+  {
     id: "coinsPerDay",
-    label: "Coins/day",
+    label: "Gross/day",
     value: (r) => r.coinsPerDay ?? -1,
     render: (r) => (r.coinsPerDay === null ? `<span class="dim">—</span>` : coins(r.coinsPerDay)),
     title:
-      "The same figure over a day left alone, which is what an AFK method is really sold on. " +
-      "Gross: this is what the crops sell for, with nothing taken off for the ring you bought. " +
-      "The next two columns are where that comes off.",
-  },
-  {
-    id: "netFirstDay",
-    label: "Net day 1",
-    value: (r) => r.netFirstDay ?? -Infinity,
-    render: (r) =>
-      r.netFirstDay === null
-        ? `<span class="dim">—</span>`
-        : r.netFirstDay < 0
-          ? `<span class="gold">-${coins(-r.netFirstDay)}</span>`
-          : coins(r.netFirstDay),
-    title:
-      "Coins/day with the whole setup taken off — the first day only. The ring is bought once and " +
-      "then stands, so every day after this one is the gross figure again. A negative number means " +
-      "the ring costs more than a day of harvests brings back, not that the mutation loses money.",
-  },
-  {
-    id: "paybackHours",
-    label: "Payback",
-    value: (r) => r.paybackHours ?? Infinity,
-    render: (r) => (r.paybackHours === null ? `<span class="dim">—</span>` : hours(r.paybackHours)),
-    title:
-      "How long you leave it alone before the ring has paid for itself. This is the honest way to " +
-      "compare a cheap setup against an expensive one, because it puts the one-off cost and the " +
-      "repeating income in the same unit.",
+      "What the harvests sell for in a day, with nothing taken off for the ring. Read it against " +
+      "Net/day beside it: where the two are close the setup is nearly free, and where they are far " +
+      "apart most of what you grow is paying for the plants around it.",
   },
   {
     id: "hoursPerHarvest",
@@ -379,7 +381,8 @@ const COLUMNS: Column[] = [
     title:
       "How long from planting the ring to harvesting the mutation: the expected wait for it to " +
       "spawn, which is one over its chance, plus its own growth stages. For most commons the " +
-      "first half is nearly all of it.",
+      "first half is nearly all of it. Against a ring that rots in 72 hours, this is what decides " +
+      "how many harvests you get out of one planting.",
   },
   {
     id: "perHarvest",
@@ -388,19 +391,58 @@ const COLUMNS: Column[] = [
     render: (r) => (r.problem || r.perHarvest <= 0 ? `<span class="dim">—</span>` : coins(r.perHarvest)),
     title:
       "What lands in one go: every mutation in every greenhouse, harvested together, crops and " +
-      "items and vines. Read it against the column beside it — this much, that often — which is " +
-      "the pair that says whether a method is worth checking in for.",
+      "items and vines. Read it against the column beside it — this much, that often.",
   },
   {
-    id: "revenue",
-    label: "Each",
-    value: (r) => r.revenue,
-    render: (r) => coins(r.revenue + r.vineRevenue),
+    id: "harvestsPerSetup",
+    label: "Harvests",
+    value: (r) => r.harvestsPerSetup ?? Infinity,
+    render: (r) => harvestsCell(r),
     title:
-      "Coins one harvest of one mutation is worth at your fortune. Three things go into it: the " +
-      "crops it drops, the mutation itself — you pick up one every harvest and most of them trade " +
-      "on the bazaar — and the Ethereal Vine chance. Click the row to see the split; on the " +
-      "expensive mutations the item is most of it.",
+      "How many harvests one planting is worth before the ring rots and has to be bought again. " +
+      "This is the column the 2026-08-20 update created: base crops now decay after 72 hours, so a " +
+      "mutation taking 35 hours a harvest gets two goes out of a ring and one taking 13 hours gets " +
+      "five. A ring is only as durable as its shortest-lived plant. Where a mutation's own decay " +
+      "timer has never been published the floor of three days is used, so the figure is a " +
+      "guaranteed minimum and is marked with a +.",
+  },
+  {
+    id: "setup",
+    label: "Setup",
+    value: (r) => r.setupTotal ?? Infinity,
+    render: (r) =>
+      !r.setup
+        ? `<span class="dim">—</span>`
+        : r.setupTotal === null
+          ? `<span class="gold" title="Nothing is selling what this needs.">unpriced</span>`
+          : coins(r.setupTotal),
+    title:
+      "What the ring costs to buy, across every greenhouse you have selected — three plots is " +
+      "three rings. It is no longer a one-off: the plants rot, so this is what you pay every time " +
+      "the Harvests column runs out. A mutation that needs other mutations is priced at what those " +
+      "cost on the bazaar, which is the shortcut — growing them yourself is cheaper and slower.",
+  },
+  {
+    id: "netPerSetup",
+    label: "Per setup",
+    // A ring that never rots has no finite per-setup figure, and it is the *best* case rather than
+    // the worst: you plant it once and it keeps paying. Sorting it as null would bury it at the
+    // bottom next to the rows nothing can price, which is the opposite of true.
+    value: (r) => (r.netPerSetup !== null ? r.netPerSetup : r.setupLife.hours === null && r.setup ? Infinity : -Infinity),
+    render: (r) =>
+      r.netPerSetup === null
+        ? r.setupLife.hours === null && r.setup
+          ? `<span title="Nothing in this ring rots, so one planting keeps paying and there is no per-setup total to quote. Net/day is the whole answer.">∞</span>`
+          : `<span class="dim">—</span>`
+        : r.netPerSetup < 0
+          ? `<span class="gold">-${coins(-r.netPerSetup)}</span>`
+          : coins(r.netPerSetup),
+    title:
+      "What one planting nets you: everything it yields before the ring rots, less what the ring " +
+      "cost. This is the figure that says whether a setup is worth buying at all, and it does not " +
+      "follow from the daily one — Startlevine takes 40M and gets two harvests, Noctilume takes 6M " +
+      "and gets five. A negative number means the planting never earns back what it cost, however " +
+      "good its coins-a-day looks.",
   },
   {
     id: "vsUsual",
@@ -422,33 +464,38 @@ const COLUMNS: Column[] = [
       "settled back to normal by the time you actually harvest it. A star means Coflnet had no " +
       "history and the figure is this tab's own reads instead.",
   },
-  {
-    id: "setup",
-    label: "Setup",
-    value: (r) => r.setupTotal ?? Infinity,
-    render: (r) =>
-      !r.setup
-        ? `<span class="dim">—</span>`
-        : r.setupTotal === null
-          ? `<span class="gold" title="Nothing is selling what this needs.">unpriced</span>`
-          : coins(r.setupTotal),
-    title:
-      "What the ring costs to buy, once, across every greenhouse you have selected — three plots " +
-      "is three rings. It is a one-off: the plants stand there and keep feeding harvest after " +
-      "harvest, which is why it comes off the first day and no other. A mutation that needs other " +
-      "mutations is priced at what those cost on the bazaar, which is the shortcut — growing them " +
-      "yourself is cheaper and slower.",
-  },
-  {
-    id: "size",
-    label: "Size",
-    value: (r) => r.size,
-    render: (r) => `${r.size}×${r.size}`,
-    title:
-      "The square it occupies. It is also how many ring cells one of these fills when something " +
-      "else needs it: a 2×2 counts twice, so a condition asking for three of them is met by two.",
-  },
 ];
+
+/**
+ * Harvests per planting, with the difference between a fact and a floor kept visible.
+ *
+ * Base crops rot in exactly 72 hours and Noctilume in exactly 144, both from changelogs. Every
+ * other mutation's timer is readable only from the in-game Diagnostics Tool, and all that is
+ * published about it is that the shortest is three days — so those are pinned to three days and
+ * marked, because a bound presented as a measurement is the kind of wrong nobody can spot later.
+ */
+function harvestsCell(row: MutationProfit): string {
+  if (row.harvestsPerSetup === null) {
+    if (row.setupLife.hours === null && row.setup) {
+      return `<span title="Nothing in this ring rots — All-in Aloe, Magic Jellybean and Fleshtrap are the three plants with no decay timer at all. Planted once and left.">∞</span>`;
+    }
+    return `<span class="dim">—</span>`;
+  }
+  if (row.harvestsPerSetup === 0) {
+    return `<span class="gold" title="The ring rots before the mutation is ready. At ${hours(
+      row.hoursPerHarvest ?? 0,
+    )} a harvest against a ring lasting ${hours(
+      row.setupLife.hours ?? 0,
+    )}, one planting never finishes — you would be replacing the crops around it before anything grows.">0</span>`;
+  }
+  const life = hours(row.setupLife.hours ?? 0);
+  const note = row.setupLife.exact
+    ? `The ring lasts ${life}, which is published: base crops decay at 72h and Noctilume at 6 days.`
+    : `At least ${row.harvestsPerSetup}. The ring holds a mutation whose decay timer Hypixel has never published — only that the shortest is three days — so ${life} is a floor and the real figure can only be higher.`;
+  return `<span title="${escapeHtml(note)}">${num(row.harvestsPerSetup)}${
+    row.setupLife.exact ? "" : `<span class="dim">+</span>`
+  }</span>`;
+}
 
 /** "3.4 hr", "2.1 days" — a wait, since that is what the number is. */
 function hours(h: number): string {
@@ -775,10 +822,11 @@ function renderMeta(): void {
  * drop table has a date on it that makes every older guide wrong.
  */
 const NOTE =
-  "Ranked on coins an hour left alone. Money figures are gross — Setup is a one-off and comes off " +
-  "Net day 1 only. Hover any heading for what it means; click a row for the plot, the split and " +
-  "the bill. Drop figures are the wiki's and every base crop's changed on 2026-08-20, so anything " +
-  "quoted before that is for a different game.";
+  "Ranked on what it nets a day once you count replanting. Plants rot: base crops last 72 hours, " +
+  "so the ring is a running cost and the question is how many harvests one planting buys — a " +
+  "mutation at 35 hours a harvest gets two, one at 13 hours gets five. Hover any heading for what " +
+  "it means; click a row for the plot, the split and the bill. Both changes landed on 2026-08-20, " +
+  "so anything quoted before that is for a different game.";
 
 function renderTable(): void {
   const target = document.getElementById("ghtable");
@@ -988,7 +1036,11 @@ function incomeHtml(row: MutationProfit, mutation: Mutation): string {
     <h4 class="gh-h">Where the coins come from</h4>
     <p class="dim">A day's worth: <strong>${num(row.perPlot * row.plots)}</strong> growing, harvested <strong>${escapeHtml(
       cadence,
-    )}</strong>.</p>
+    )}</strong> · <span title="One mutation, one harvest — crops, the item itself and the vine chance.">${coins(
+      row.revenue + row.vineRevenue,
+    )} each</span> · <span title="The square it occupies, and how many ring cells one of these fills when something else needs it.">${
+      row.size
+    }×${row.size}</span>.</p>
     <table class="gh-break">
       <tbody>
         ${cropLines}
@@ -1038,8 +1090,12 @@ function costHtml(row: MutationProfit, mutation: Mutation): string {
     })
     .join("");
 
+  // The old version of this table said "every day after" and quoted the gross figure, which was
+  // true until base crops started rotting and is now the opposite of true: the ring comes back
+  // every 72 hours. What replaces it is the life of one planting, start to finish.
+  const life = row.setupLife.hours;
   const net =
-    row.coinsPerDay === null || row.setupTotal === null
+    row.netPerSetup === null || row.setupTotal === null || row.harvestsPerSetup === null
       ? setup.coins === null
         ? `<p class="gold">Part of this has no price, so there is no total.</p>`
         : ""
@@ -1047,12 +1103,24 @@ function costHtml(row: MutationProfit, mutation: Mutation): string {
       <table class="gh-break">
         <tbody>
           <tr class="gh-total"><td>Setup, once</td><td class="num gold">-${coins(row.setupTotal)}</td></tr>
-          <tr><td>Net, first day</td><td class="num"><strong>${
-            row.netFirstDay! < 0 ? `<span class="gold">-${coins(-row.netFirstDay!)}</span>` : coins(row.netFirstDay!)
+          <tr><td>${num(row.harvestsPerSetup)} harvest${row.harvestsPerSetup === 1 ? "" : "s"} × ${coins(
+            row.perHarvest,
+          )}</td><td class="num">${coins(row.harvestsPerSetup * row.perHarvest)}</td></tr>
+          <tr><td><strong>Net, one planting</strong></td><td class="num"><strong>${
+            row.netPerSetup < 0 ? `<span class="gold">-${coins(-row.netPerSetup)}</span>` : coins(row.netPerSetup)
           }</strong></td></tr>
-          <tr><td class="dim">Every day after</td><td class="num dim">${coins(row.coinsPerDay)}</td></tr>
+          <tr><td class="dim">then replant</td><td class="num dim">${life === null ? "never" : `every ${hours(life)}`}</td></tr>
         </tbody>
-      </table>`;
+      </table>
+      <p class="dim">${
+        row.netPerSetup < 0
+          ? `<span class="gold">One planting does not earn back what it costs</span>, however good the daily figure looks — the ring rots before enough harvests land.`
+          : `The ring is gone in ${life === null ? "no time at all" : hours(life)}, so this is what a planting is worth start to finish.`
+      }${
+        row.setupLife.exact
+          ? ""
+          : " That life is a floor: this ring holds a mutation whose decay timer has never been published, only that the shortest is three days."
+      }</p>`;
 
   return `
     <h4 class="gh-h" title="Every plant is needed at the same time — the wiki writes the condition with slashes, but it is an &quot;and&quot;. The number after each name is how many ring cells it fills.">What it costs${
