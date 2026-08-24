@@ -432,6 +432,35 @@ test("the daily breakdown adds up to coins per day", () => {
   }
 });
 
+/**
+ * Profit/harvest and Per harvest sit next to each other in the table, and that placement is a
+ * promise: this much, that often. If the two do not multiply out to the daily figure a third
+ * column away, the pair is worse than useless — it invites arithmetic that silently disagrees with
+ * the page. The same failure once shipped as a "1 x 1.0M" line beside a 49M total.
+ */
+test("profit per harvest times harvests a day is the daily figure", () => {
+  const market = new Map<string, ProductSnapshot>();
+  for (const m of data.mutations) market.set(m.id, product(m.id, 900, 1_000));
+  for (const c of data.baseCrops) market.set(c.id, product(c.id, 4, 5));
+  market.set("ETHEREAL_VINE", product("ETHEREAL_VINE", 1_000, 1_200));
+
+  for (const plots of [1, 3]) {
+    const rows = rankMutations(data, { market, growth: GROWTH, farmingFortune: 1_200, plots }).filter(
+      (r) => r.coinsPerDay !== null,
+    );
+    assert.ok(rows.length > 20);
+    for (const r of rows) {
+      const day = r.perHarvest * r.harvestsPerDay!;
+      assert.ok(
+        Math.abs(day - r.coinsPerDay!) < Math.max(1, r.coinsPerDay! * 1e-9),
+        `${r.name} at ${plots} plots: ${r.perHarvest} x ${r.harvestsPerDay} is not ${r.coinsPerDay}`,
+      );
+      // And it is the whole operation, not one plant: three greenhouses harvest three times as much.
+      assert.ok(r.perHarvest >= r.revenue, "a harvest is every mutation at once, not one of them");
+    }
+  }
+});
+
 /** A mutation needing a special act is kept and explained, never ranked as though it were free. */
 test("a special-condition mutation is explained rather than ranked", () => {
   const rows = rankMutations(data, { market: new Map(), growth: GROWTH, farmingFortune: 0 });

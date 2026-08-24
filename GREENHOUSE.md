@@ -72,6 +72,27 @@ bought once and the plants stand there feeding harvest after harvest; the income
 - **Payback** is the bill divided by coins/hr: how long you leave it alone before it has paid for
   itself. This is the figure that puts a one-off and a repeating income in the same unit, and it is
   the honest way to compare a 38-coin setup against a 54M one.
+- **Profit/harvest** sits next to **Per harvest** on purpose: this much, that often. The pair is
+  what says whether a method is worth checking in for, and a test asserts the two multiply out to
+  coins/day so the columns cannot disagree with each other.
+
+### A price now is not the price at harvest
+
+The **vs usual** column compares each mutation's own ask against the mean this browser has watched
+it at. Only the mutations are tracked, and that restriction is the point: a crop trades in the
+hundreds of thousands a day and barely moves, while a mutation book is thin enough that one player
+clearing it doubles the quoted ask for a morning.
+
+It matters more here than on a flip. A flip is instant, so a spike is a real opportunity. A
+greenhouse pays out *hours* later — thirteen for a Noctilume, thirty-five for a Devourer — so a row
+that looks enormous on a spike has settled back to normal long before there is anything to sell.
+A mutation well above its own usual is almost always a book that emptied, not a mutation that got
+better.
+
+The window ("+180% · 2 min") is printed beside the figure because it decides whether the number
+means anything: the average is built by polling, so it is worth nothing on arrival and more the
+longer the tab has been open. It is measured rather than fetched — skyblock.bz's history endpoint
+refuses outside callers, and an invented thirty-day average would make every spike look explicable.
 
 The bill scales with the number of greenhouses, because three plots is three rings to plant. Quoting
 a one-plot setup beside a three-plot income would flatter exactly the mutations with the most
