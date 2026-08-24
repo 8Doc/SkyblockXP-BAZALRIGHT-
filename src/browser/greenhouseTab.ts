@@ -2,7 +2,14 @@ import { normalise } from "../lib/bazaar";
 import type { NpcPrice } from "../lib/bazaarViews";
 import type { ProductSnapshot, RawBazaarProduct } from "../lib/bazaarTypes";
 import { coins, num } from "../lib/format";
-import { rankMutations, stageSeconds, type GreenhouseData, type GrowthParams, type MutationProfit } from "../lib/greenhouse";
+import {
+  rankMutations,
+  stageSeconds,
+  type GreenhouseData,
+  type GrowthParams,
+  type Mutation,
+  type MutationProfit,
+} from "../lib/greenhouse";
 
 /**
  * The Greenhouse tab: which mutation is worth growing, and what it takes to grow it.
@@ -141,7 +148,35 @@ const COLUMNS: Column[] = [
     label: "Coins/day",
     value: (r) => r.coinsPerDay ?? -1,
     render: (r) => (r.coinsPerDay === null ? `<span class="dim">—</span>` : coins(r.coinsPerDay)),
-    title: "The same figure over a day left alone, which is what an AFK method is really sold on.",
+    title:
+      "The same figure over a day left alone, which is what an AFK method is really sold on. " +
+      "Gross: this is what the crops sell for, with nothing taken off for the ring you bought. " +
+      "The next two columns are where that comes off.",
+  },
+  {
+    id: "netFirstDay",
+    label: "Net day 1",
+    value: (r) => r.netFirstDay ?? -Infinity,
+    render: (r) =>
+      r.netFirstDay === null
+        ? `<span class="dim">—</span>`
+        : r.netFirstDay < 0
+          ? `<span class="gold">-${coins(-r.netFirstDay)}</span>`
+          : coins(r.netFirstDay),
+    title:
+      "Coins/day with the whole setup taken off — the first day only. The ring is bought once and " +
+      "then stands, so every day after this one is the gross figure again. A negative number means " +
+      "the ring costs more than a day of harvests brings back, not that the mutation loses money.",
+  },
+  {
+    id: "paybackHours",
+    label: "Payback",
+    value: (r) => r.paybackHours ?? Infinity,
+    render: (r) => (r.paybackHours === null ? `<span class="dim">—</span>` : hours(r.paybackHours)),
+    title:
+      "How long you leave it alone before the ring has paid for itself. This is the honest way to " +
+      "compare a cheap setup against an expensive one, because it puts the one-off cost and the " +
+      "repeating income in the same unit.",
   },
   {
     id: "hoursPerHarvest",
@@ -164,20 +199,33 @@ const COLUMNS: Column[] = [
       "its neighbours, so a condition needing two adjacent crops fits seventy in a 10×10 while " +
       "one needing all eight fits sixteen. Dividing the plot by nine gets both badly wrong.",
   },
-  { id: "revenue", label: "Each", value: (r) => r.revenue, render: (r) => coins(r.revenue + r.vineRevenue), title: "Coins one harvest of one mutation is worth at your fortune, the Ethereal Vine chance included. Multiply by the per-plot count for what the greenhouse actually yields." },
+  {
+    id: "revenue",
+    label: "Each",
+    value: (r) => r.revenue,
+    render: (r) => coins(r.revenue + r.vineRevenue),
+    title:
+      "Coins one harvest of one mutation is worth at your fortune. Three things go into it: the " +
+      "crops it drops, the mutation itself — you pick up one every harvest and most of them trade " +
+      "on the bazaar — and the Ethereal Vine chance. Click the row to see the split; on the " +
+      "expensive mutations the item is most of it.",
+  },
   {
     id: "setup",
     label: "Setup",
-    value: (r) => r.setup?.coins ?? Infinity,
+    value: (r) => r.setupTotal ?? Infinity,
     render: (r) =>
       !r.setup
         ? `<span class="dim">—</span>`
-        : r.setup.coins === null
+        : r.setupTotal === null
           ? `<span class="gold" title="Nothing is selling what this needs.">unpriced</span>`
-          : coins(r.setup.coins),
+          : coins(r.setupTotal),
     title:
-      "What the ring costs to buy once. A mutation that needs other mutations is priced at what " +
-      "those cost on the bazaar, which is the shortcut — growing them yourself is cheaper and slower.",
+      "What the ring costs to buy, once, across every greenhouse you have selected — three plots " +
+      "is three rings. It is a one-off: the plants stand there and keep feeding harvest after " +
+      "harvest, which is why it comes off the first day and no other. A mutation that needs other " +
+      "mutations is priced at what those cost on the bazaar, which is the shortcut — growing them " +
+      "yourself is cheaper and slower.",
   },
   {
     id: "size",
@@ -192,6 +240,9 @@ const COLUMNS: Column[] = [
 
 /** "3.4 hr", "2.1 days" — a wait, since that is what the number is. */
 function hours(h: number): string {
+  // Choconut's whole ring is 44 coins against 768k an hour, which rounds to "0 min" and reads like
+  // a missing figure rather than the answer. It is the answer: the setup is free in practice.
+  if (h * 60 < 0.5) return "instant";
   if (h < 1) return `${Math.round(h * 60)} min`;
   if (h < 48) return `${h.toFixed(1)} hr`;
   return `${(h / 24).toFixed(1)} days`;
@@ -506,9 +557,12 @@ const NOTE =
   "Every Greenhouse mutation, ranked on what it pays per hour left alone. A harvest is two waits " +
   "— the expected time for the mutation to spawn, which is one over its chance, and then its own " +
   "growth stages — so a rare mutation with a huge drop can still lose to a common one that keeps " +
-  "coming back. Setup is what the ring around it costs to buy once. Click a row for its layout. " +
-  "Drop figures are the wiki's, and every base crop's changed on 2026-08-20, so a number quoted " +
-  "anywhere older than that is for a different game.";
+  "coming back. Each harvest pays three ways: the crops, the mutation itself (one a harvest, " +
+  "and on the expensive rows that is most of the money), and a chance at an Ethereal Vine. " +
+  "Coins/hr and Coins/day are gross; Setup is a one-off, so it comes off Net day 1 and no other " +
+  "day. Click a row for the plot, the split, and the itemised bill. Drop figures are the wiki's, " +
+  "and every base crop's changed on 2026-08-20, so a number quoted anywhere older than that is " +
+  "for a different game.";
 
 function renderTable(): void {
   const target = document.getElementById("ghtable");
@@ -555,8 +609,12 @@ function renderTable(): void {
             row.cropsLifted.join(", "),
           )} fortune applied</span>`
         : "";
-      const open = state.open === row.id ? layoutHtml(row) : "";
-      return `<tr class="bz-open" data-ghopen="${escapeHtml(row.id)}"><td>${icon}${escapeHtml(row.name)}${rarity}${lifted}${setup}${problem}${open}</td>${cells}</tr>`;
+      // The detail is its own row spanning every column rather than a block inside the name cell,
+      // so it gets the whole width instead of the narrowest column on the page. It carries no
+      // data-ghopen: clicking inside it should let you read and select, not slam it shut.
+      const detail =
+        state.open === row.id ? `<tr class="gh-detail"><td colspan="${COLUMNS.length + 1}">${detailHtml(row)}</td></tr>` : "";
+      return `<tr class="bz-open" data-ghopen="${escapeHtml(row.id)}"><td>${icon}${escapeHtml(row.name)}${rarity}${lifted}${setup}${problem}</td>${cells}</tr>${detail}`;
     })
     .join("");
 
@@ -571,30 +629,45 @@ function renderTable(): void {
     <p class="dim pad">${num(all.length)} mutations · ${escapeHtml(stageNote())} · ${state.plots} greenhouse${state.plots > 1 ? "s" : ""}</p>
   `;
 }
-
 /**
- * The 3x3 the mutation spreads into the middle of.
+ * The expanded row: the plot on the left, where the coins come from in the middle, what it costs on
+ * the right.
  *
- * This is the layout as the wiki draws it, which is one mutation in isolation. A real greenhouse
- * overlaps them — the ring of one is the ring of its neighbour — so this is the pattern to copy
- * rather than a plan for a whole plot.
+ * Three questions the table cannot answer in a cell. *Where does the money come from* — because a
+ * single coins/day hides that one mutation is carrying its own item price and another is carrying a
+ * pile of pumpkins. *What exactly am I buying* — because the expensive plant is usually the whole
+ * bill and a total does not name it. And *is that figure net* — because it is not, and the only
+ * honest place to say so is beside the number it qualifies.
  */
-function layoutHtml(row: MutationProfit): string {
+function detailHtml(row: MutationProfit): string {
   const mutation = tables.greenhouse.mutations.find((m) => m.id === row.id);
   const packing = row.packing;
   if (!mutation || !packing || packing.targets === 0 || !row.setup) {
     return `<div class="gh-layout dim">No arrangement of this plot grows one of these.</div>`;
   }
 
-  const items = row.setup.items;
+  return `<div class="gh-expand">
+    <div class="gh-expand-col">${plotHtml(row, mutation, packing)}</div>
+    <div class="gh-expand-col">${incomeHtml(row, mutation)}</div>
+    <div class="gh-expand-col">${costHtml(row, mutation)}</div>
+  </div>`;
+}
+
+/**
+ * The whole plot, not the wiki's single 3x3.
+ *
+ * The wiki draws one mutation in isolation, which is a pattern to copy rather than a plan. A real
+ * greenhouse overlaps them — the ring of one is the ring of its neighbour — and the overlap is
+ * where the yield comes from.
+ */
+function plotHtml(row: MutationProfit, mutation: Mutation, packing: NonNullable<MutationProfit["packing"]>): string {
+  const items = row.setup!.items;
   const swatch = (i: number) => `<span class="gh-key gh-c${i % 5}"></span>`;
   const legend =
     items.map((i, at) => `${swatch(at)} ${escapeHtml(i.name)}`).join(" ") +
     ` <span class="gh-key gh-k-target"></span> ${escapeHtml(mutation.name)}` +
     ` <span class="gh-key gh-k-empty"></span> spare`;
 
-  // The whole plot, not the wiki's single 3x3. The wiki draws one mutation in isolation; a real
-  // greenhouse overlaps them, and the overlap is where the yield comes from.
   const grid = packing.grid
     .map(
       (line) =>
@@ -610,28 +683,6 @@ function layoutHtml(row: MutationProfit): string {
     )
     .join("");
 
-  /**
-   * The bill, itemised. Which plant is the expensive one is the thing a single total hides, and it
-   * is usually the whole answer: a condition wanting four of a legendary mutation and four of a
-   * common one costs almost exactly the legendary.
-   */
-  const bill = items
-    .map((i) => {
-      const cost =
-        i.free
-          ? `<span class="dim">free — lit rather than bought</span>`
-          : i.each === null
-            ? `<span class="gold">nothing is selling it</span>`
-            : `${coins(i.each)} each · <strong>${coins(i.coins ?? 0)}</strong>`;
-      const share =
-        row.setup!.coins && i.coins ? ` <span class="dim">${Math.round((100 * i.coins) / row.setup!.coins)}% of the bill</span>` : "";
-      return `<li>${num(i.plants)} × ${escapeHtml(i.name)} — ${cost}${share}
-        <span class="dim">· ${i.cells} ring cell${i.cells === 1 ? "" : "s"} at each ${escapeHtml(mutation.name)}${
-          i.grown ? ", and itself a mutation you have to grow or buy" : ""
-        }</span></li>`;
-    })
-    .join("");
-
   const atCeiling = packing.targets >= packing.ceiling;
   const sizeNote =
     mutation.size > 1
@@ -641,25 +692,179 @@ function layoutHtml(row: MutationProfit): string {
       : "";
 
   return `
-    <div class="gh-layout">
-      <div class="gh-plotgrid">${grid}</div>
-      <p class="dim">${legend}</p>
+    <h4 class="gh-h">One greenhouse</h4>
+    <div class="gh-plotgrid">${grid}</div>
+    <p class="dim">${legend}</p>
+    <p class="dim">
+      <strong>${num(packing.targets)}</strong> grow at once, from <strong>${num(row.setup!.plants)}</strong>
+      plants in all, tiling a ${packing.period.rows}×${packing.period.cols} pattern.
+      ${
+        atCeiling
+          ? "That is the most any arrangement could manage — every support cell is feeding as many rings as it can."
+          : `The counting bound says no arrangement beats ${num(packing.ceiling)}, so this may leave a little on the table: the search covers repeating patterns, not every irregular one.`
+      }${sizeNote}
+    </p>
+    ${mutation.effects.length ? `<p class="dim">${escapeHtml(mutation.effects.join(" · "))}</p>` : ""}
+  `;
+}
+
+/**
+ * Where coins/day actually comes from.
+ *
+ * Three kinds of income and they are not interchangeable. The **crops** are the wiki's drop table:
+ * they arrive in thousands and fortune multiplies them. The **mutation itself** is one item a
+ * harvest, fortune does not touch it, and on the expensive rows it is most of the money — which is
+ * exactly what a single total hides. The **Ethereal Vine** is a chance, so it is quoted as one.
+ */
+function incomeHtml(row: MutationProfit, mutation: Mutation): string {
+  const gross = row.coinsPerDay;
+  if (gross === null || row.harvestsPerDay === null) {
+    return `<h4 class="gh-h">Where the coins come from</h4><p class="dim">${escapeHtml(
+      row.problem ?? "No cycle time, so no daily figure.",
+    )}</p>`;
+  }
+
+  // Every figure below is one mutation, one harvest, so this is what turns it into a day of the
+  // whole greenhouse — stated once here rather than folded silently into each line.
+  const perDay = (each: number) => each * row.perPlot * row.plots * row.harvestsPerDay!;
+  const line = (label: string, detail: string, each: number) => {
+    const day = perDay(each);
+    const share = gross > 0 ? `${Math.round((100 * day) / gross)}%` : "";
+    return `<tr><td>${label}</td><td class="num dim">${detail}</td><td class="num"><strong>${coins(
+      day,
+    )}</strong></td><td class="num dim">${share}</td></tr>`;
+  };
+
+  const cropLines = row.drops
+    .map((d) =>
+      d.each === null
+        ? `<tr><td>${escapeHtml(d.name)}</td><td class="gold" colspan="3">nothing is bidding on it</td></tr>`
+        : line(escapeHtml(d.name), `${num(Math.round(d.amount * d.multiplier))} × ${coins(d.each)}`, d.coins),
+    )
+    .join("");
+
+  const selfLine = row.self
+    ? line(
+        `<strong>${escapeHtml(mutation.name)}</strong> <span class="dim">itself</span>`,
+        `1 × ${coins(row.self.each ?? 0)}`,
+        row.self.coins,
+      )
+    : `<tr><td>${escapeHtml(mutation.name)} itself</td><td class="gold" colspan="3">not on the bazaar</td></tr>`;
+
+  const chance = tables.greenhouse.etherealVineByRarity?.[(row.rarity ?? "").toLowerCase()] ?? 0;
+  const vineLine = row.vineRevenue > 0 ? line("Ethereal Vine", `${Math.round(chance * 100)}% a harvest`, row.vineRevenue) : "";
+
+  const cropTotal = row.drops.reduce((sum, d) => sum + d.coins, 0);
+  const whole = cropTotal + (row.self?.coins ?? 0) + row.vineRevenue;
+  const split =
+    whole > 0 && row.self
+      ? `Crops are <strong>${Math.round((100 * cropTotal) / whole)}%</strong> of it and the ${escapeHtml(
+          mutation.name,
+        )} you pick up is <strong>${Math.round((100 * row.self.coins) / whole)}%</strong>. `
+      : "";
+  const fortune = row.drops.length
+    ? `Fortune multiplied the crops by <strong>${row.drops[0].multiplier.toFixed(1)}×</strong>${
+        row.cropsLifted.length ? ` (${escapeHtml(row.cropsLifted.join(", "))} fortune included)` : ""
+      } and left the mutation itself alone — that is one item, not a stack.`
+    : "";
+
+  const cadence =
+    row.harvestsPerDay >= 1
+      ? `${row.harvestsPerDay.toFixed(1)} harvests a day`
+      : `a harvest every ${hours(row.hoursPerHarvest ?? 0)}`;
+
+  return `
+    <h4 class="gh-h">Where the coins come from</h4>
+    <table class="gh-break">
+      <tbody>
+        ${cropLines}
+        ${selfLine}
+        ${vineLine}
+        <tr class="gh-total">
+          <td>Gross a day</td>
+          <td class="num dim">${num(row.perPlot * row.plots)} growing · ${escapeHtml(cadence)}</td>
+          <td class="num"><strong>${coins(gross)}</strong></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="dim">${split}${fortune}</p>
+  `;
+}
+
+/**
+ * What it costs, itemised — and whether the coins/day beside it is net of that.
+ *
+ * It is not, and this is where that gets said. The ring is a one-off: you buy it once and the
+ * plants stand there, so it comes off the first day and off no other. Folding it into a running
+ * cost would understate every expensive setup permanently; ignoring it flatters them on day one.
+ * Payback time is the figure that puts a one-off and a repeating income in the same unit.
+ */
+function costHtml(row: MutationProfit, mutation: Mutation): string {
+  const setup = row.setup!;
+  const bill = setup.items
+    .map((i) => {
+      const cost = i.free
+        ? `<span class="dim">free — lit, not bought</span>`
+        : i.each === null
+          ? `<span class="gold">nothing is selling it</span>`
+          : `${coins(i.each)} each · <strong>${coins((i.coins ?? 0) * row.plots)}</strong>`;
+      const share = setup.coins && i.coins ? ` <span class="dim">${Math.round((100 * i.coins) / setup.coins)}%</span>` : "";
+      const grown = i.grown
+        ? `<span class="dim" title="Itself a mutation, so you can grow it instead of buying it.">*</span>`
+        : "";
+      return `<tr>
+        <td>${num(i.plants * row.plots)} × ${escapeHtml(i.name)}${grown}
+          <div class="dim gh-sub">${i.cells} ring cell${i.cells === 1 ? "" : "s"} at each ${escapeHtml(mutation.name)}</div>
+        </td>
+        <td class="num">${cost}${share}</td>
+      </tr>`;
+    })
+    .join("");
+
+  const total =
+    setup.coins === null
+      ? `<span class="gold">Part of this has no price, so there is no total.</span>`
+      : `<strong>${coins(row.setupTotal ?? 0)}</strong> to plant ${row.plots > 1 ? `all ${row.plots} greenhouses` : "the greenhouse"}, once.`;
+
+  const grown = setup.items.filter((i) => i.grown);
+  const grownNote = grown.length
+    ? `<p class="dim">${grown.map((g) => escapeHtml(g.name)).join(" and ")} ${
+        grown.length > 1 ? "are themselves mutations" : "is itself a mutation"
+      }, priced here at what the bazaar asks. Growing ${grown.length > 1 ? "them" : "it"} in another plot is the cheap route and the slow one.</p>`
+    : "";
+
+  const net =
+    row.coinsPerDay === null || row.setupTotal === null
+      ? ""
+      : `
+      <table class="gh-break">
+        <tbody>
+          <tr><td>Gross a day</td><td class="num">${coins(row.coinsPerDay)}</td></tr>
+          <tr><td>Setup, paid once</td><td class="num gold">-${coins(row.setupTotal)}</td></tr>
+          <tr class="gh-total"><td>Net, first day</td><td class="num"><strong>${
+            row.netFirstDay! < 0 ? `<span class="gold">-${coins(-row.netFirstDay!)}</span>` : coins(row.netFirstDay!)
+          }</strong></td></tr>
+          <tr><td class="dim">Every day after</td><td class="num dim">${coins(row.coinsPerDay)}</td></tr>
+        </tbody>
+      </table>
       <p class="dim">
-        <strong>${num(packing.targets)}</strong> grow at once, from <strong>${num(row.setup.plants)}</strong>
-        plants in all, tiling a ${packing.period.rows}×${packing.period.cols} pattern.
-        ${
-          atCeiling
-            ? "That is the most any arrangement could manage — every support cell is feeding as many rings as it can."
-            : `The counting bound says no arrangement beats ${num(packing.ceiling)}, so this may leave a little on the table: the search covers repeating patterns, not every irregular one.`
-        }${sizeNote}
-      </p>
-      <p class="dim">Everything below is needed <em>at the same time</em> — the wiki writes the condition with slashes, but it is an "and".</p>
-      <ul class="gh-bill">${bill}</ul>
-      <p class="dim">
-        ${row.setup.coins === null ? `<span class="gold">Part of this has no price, so there is no total.</span>` : `<strong>${coins(row.setup.coins)}</strong> to set the whole plot up once.`}
-        ${escapeHtml(mutation.effects.join(" · "))}
-      </p>
-    </div>
+        <strong>Coins/hr</strong> and <strong>Coins/day</strong> in the table are <em>gross</em> — what the
+        harvest sells for, with nothing taken off. The ring is bought once and then stands, so it comes off
+        the first day and off no other.${
+          row.paybackHours === null
+            ? ""
+            : ` At this rate it pays for itself after <strong>${hours(row.paybackHours)}</strong> of being left alone.`
+        }
+      </p>`;
+
+  return `
+    <h4 class="gh-h">What it costs</h4>
+    <p class="dim">Every plant below is needed <em>at the same time</em> — the wiki writes the condition with slashes, but it is an "and".</p>
+    <table class="gh-break"><tbody>${bill}</tbody></table>
+    <p class="dim">${total}</p>
+    ${grownNote}
+    ${net}
   `;
 }
 

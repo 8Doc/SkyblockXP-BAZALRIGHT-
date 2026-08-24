@@ -27,6 +27,56 @@ Wart 240 → 108, Carrot 280 → 175, Potato 240 → 150, Sunflower 160 → 232 
 before that date is wrong by up to a factor of two, in both directions. The scrape records
 `generatedAt` and both pages' `editedAt` so the data can be checked against the page's own History.
 
+## What a harvest is worth
+
+### A harvest pays three ways, and the wiki only writes down one of them
+
+The drop table lists crops. It is not the whole income:
+
+| where the coins come from | how much | does fortune lift it? |
+|---|---|---|
+| **Crops** — the wiki's drop table | thousands per harvest | yes |
+| **The mutation itself** — one per harvest | one item, 100 coins to 3.3M | no, it is one item |
+| **Ethereal Vine** — a chance on harvest | 15% common to 40% legendary | no |
+
+The middle row is not in the wiki's table and it is often most of the money. The evidence that it
+drops is circumstantial and conclusive: **39 of the 40 mutations have a live bazaar book** — the
+exception is Jerryflower, which needs a Jerryseed rather than a roll — and there is no craft, no
+NPC and no drop table anywhere else that yields one. Harvesting is the only source, so harvesting
+gives you one.
+
+Pricing only the crops ranks the page on the smaller half of the income for exactly the mutations
+where the item is the point. Measured at Farming Fortune 1,500, the item's share of one harvest:
+
+| | share that is the item |
+|---|---|
+| Turtlellini, Puffercloud, Chocoberry, Blastberry | 74-85% |
+| median mutation | 36% |
+| Phantomleaf, Zombud, Fleshtrap | 0-1% |
+
+So it is not a correction of a few percent that leaves the order alone — it is most of the money at
+the top of the table and none of it at the bottom, which reorders the page.
+
+The tab shows the three apart in the expanded row, because they answer different questions — a
+mutation carried by its own item price is exposed to that item's market, and one carried by crops is
+exposed to fortune.
+
+### Coins a day is gross, and the setup is a one-off
+
+These are never added into one number, because they are not the same kind of number. The ring is
+bought once and the plants stand there feeding harvest after harvest; the income repeats. So:
+
+- **Coins/hr** and **Coins/day** are gross — what the harvest sells for.
+- **Net day 1** is coins/day minus the whole bill. It is often negative, which means the ring costs
+  more than a day of harvests brings back — not that the mutation loses money.
+- **Payback** is the bill divided by coins/hr: how long you leave it alone before it has paid for
+  itself. This is the figure that puts a one-off and a repeating income in the same unit, and it is
+  the honest way to compare a 38-coin setup against a 54M one.
+
+The bill scales with the number of greenhouses, because three plots is three rings to plant. Quoting
+a one-plot setup beside a three-plot income would flatter exactly the mutations with the most
+expensive rings — the ones the figure exists for.
+
 ## The four things that decide the ranking
 
 ### A harvest is two waits, and usually the first one dominates
@@ -147,6 +197,10 @@ guaranteed 100% more. The wiki's worked example is Cactus Fortune 233 giving "30
 chance for 400%", which averages to `1 + fortune/100`. That is what the model uses, so a single
 harvest lands above or below it.
 
+Neither kind touches the mutation item itself: fortune multiplies crop drops, and the item is one
+item. So a fortune figure typed in wrongly moves the crop half of a row and leaves the other half
+where it was — which on Puffercloud is 78% of the income.
+
 Because it is per-drop, revenue is computed a drop at a time rather than by scaling a mutation's
 total, and each row names the crop fortunes that actually lifted it.
 
@@ -192,3 +246,13 @@ with the Greenhouse update, which makes this the piece of the model most likely 
 - **Watering is described, not scheduled.** Water falls 2-3 a stage and the retain effects slow it,
   but the wiki states no water *capacity*, so "you must water every N hours" cannot be derived. The
   stage timer is on screen instead, which is the half that is knowable.
+- **No market depth on the mutation items.** They are priced at one unit off the top of the book,
+  the same as every other item here, and that was a fair approximation while the crops were the
+  whole income. It is a weaker one now: Devourer harvests 16 a day into a book that is thin at the
+  top, and selling them would walk the price down. The crop side is unaffected — the bazaar for
+  pumpkins is deep enough not to notice.
+- **The Harvest Bounty pool is scraped but not valued.** The staff odds are in
+  `greenhouse.json` — Synthesis and Evergreen chips at 3% each, Iridium and Burrowing Spores at
+  0.2%, an Overclocker 3000 at 0.05% — and none of it is added to any row, because the pool is not
+  documented as a per-mutation-harvest roll and guessing at its trigger would put invented coins in
+  the ranking. The Ethereal Vine, which *is* documented per harvest and by rarity, is counted.

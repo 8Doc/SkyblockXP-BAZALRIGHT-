@@ -6,11 +6,22 @@ import type { NpcPrice } from "./bazaarViews";
 /**
  * Which Greenhouse mutation is worth growing.
  *
- * A mutation is an AFK trade with three costs and one revenue, and the ranking turns on the two
- * costs nobody quotes. The revenue is easy: a mutation drops a pile of one or two crops and the
- * bazaar prices them. The costs are *time* — how many growth stages before it spawns, and how
- * many more before it can be harvested — and *space*, because the plants that spread it occupy
- * the ring around it and have to be bought.
+ * A mutation is an AFK trade with three costs and three revenues, and the ranking turns on the
+ * parts nobody quotes. The costs are *time* — how many growth stages before it spawns, and how many
+ * more before it can be harvested — and *space*, because the plants that spread it occupy the ring
+ * around it and have to be bought.
+ *
+ * The revenue has three parts and they behave differently enough that the tab shows them apart.
+ * The **crops** are the wiki's drop table, thousands at a time, and fortune multiplies them. The
+ * **mutation itself** is one item per harvest — the wiki's drop table does not mention it, but 39
+ * of the 40 trade on the bazaar and harvesting is the only way anyone gets one, so it drops. That
+ * one is not a rounding error: a Snoozling's crops are ordinary and the Snoozling asks millions,
+ * so pricing only the crops ranks the page on the smaller half of the income for exactly the
+ * mutations where the item is the point. The **Ethereal Vine** is a chance on top.
+ *
+ * The setup is a *one-off* and the income repeats, so the two are never added. Coins an hour and
+ * coins a day are gross; the bill comes off the first day and off no other, and payback time is
+ * what puts the two in the same unit.
  *
  * **Fortune is two stats, and only one of them is harmless to get wrong.** Farming Fortune lifts
  * every crop, so it multiplies every mutation by the same factor: a wrong figure scales all the
@@ -274,6 +285,34 @@ function packFor(plot: PlotShape, requires: { cells: number; size: number }[], t
 
 /* ------------------------------------------------------------- the ranking */
 
+/**
+ * One drop of one mutation, priced — the line the breakdown is built from.
+ *
+ * There are three kinds and they behave differently. **Crops** are what the wiki's drop table
+ * lists, they come in thousands, and fortune multiplies them. **The mutation itself** is one item
+ * per harvest, fortune does not touch it, and the wiki's table does not mention it at all — but 39
+ * of the 40 trade on the bazaar and harvesting is the only way anyone gets one, which is the
+ * evidence that it drops. **The Ethereal Vine** is a chance rather than a certainty.
+ *
+ * Keeping them apart matters because they rank differently: a mutation whose crops are worth little
+ * can still be the best row on the page if the item itself sells for millions, and the reverse is
+ * just as common. Snoozling's own item is worth more than most mutations' entire crop haul.
+ */
+export type DropRevenue = {
+  id: string;
+  name: string;
+  /** What the wiki says one harvest drops, before any fortune. */
+  amount: number;
+  /** What one sells for, taxed. Null when nothing is bidding. */
+  each: number | null;
+  /** The crop fortune that lifts this drop, when the player entered one. */
+  crop: string | null;
+  /** 1 + (farming + crop)/100, times any yield buffs — what fortune actually multiplied by. */
+  multiplier: number;
+  /** Coins this drop is worth in one harvest of one mutation. */
+  coins: number;
+};
+
 export type MutationProfit = {
   id: string;
   name: string;
@@ -287,13 +326,33 @@ export type MutationProfit = {
   packing: Packing | null;
   stagesPerHarvest: number | null;
   hoursPerHarvest: number | null;
-  /** Coins one harvest brings in, after tax, at the given fortune. */
+  /** Coins one harvest brings in, after tax, at the given fortune. Crops, the item, and the vine. */
   revenue: number;
+  /** The crop half of that, split by drop, so the total can be traced to what it came from. */
+  drops: DropRevenue[];
+  /** The mutation's own item, one per harvest. Null when nothing on the bazaar is bidding on it. */
+  self: DropRevenue | null;
   /** Ethereal Vines are a second revenue stream and scale with rarity. */
   vineRevenue: number;
+  /** How many greenhouses these figures cover. Setup is paid per greenhouse. */
+  plots: number;
+  /** Coins every mutation in every plot brings in, one harvest — the gross figure per cycle. */
+  perHarvest: number;
+  /** How many times that lands in a day. */
+  harvestsPerDay: number | null;
   setup: Setup | null;
+  /** The whole bill across every plot, which is the one-off `setup.coins` times `plots`. */
+  setupTotal: number | null;
   coinsPerHour: number | null;
   coinsPerDay: number | null;
+  /**
+   * The first day's take with the ring paid for, which is where a mutation with an expensive setup
+   * looks different from one without. Every day after is the gross figure, because the ring is
+   * bought once and the crops around it keep standing.
+   */
+  netFirstDay: number | null;
+  /** Hours of being left alone before the setup has paid for itself. */
+  paybackHours: number | null;
   /** Water falls 2-3 a stage, so this is how often a stage comes round. */
   hoursPerStage: number;
   /** Drops the market cannot price, named rather than counted as zero. */
@@ -372,17 +431,35 @@ export function profitOf(m: Mutation, byId: Map<string, Mutation>, data: Greenho
   let revenue = 0;
   const unpriced: string[] = [];
   const cropsLifted: string[] = [];
+  const drops: DropRevenue[] = [];
   for (const drop of m.drops) {
     const price = unitPrice(drop.id, o.market, npcPrices);
+    const crop = fortuneByCrop.get(drop.id) ?? null;
+    const extra = crop ? (o.cropFortune?.[crop] ?? 0) : 0;
+    const multiplier = fortuneMultiplier(o.farmingFortune, extra) * yieldBuffs;
     if (price === null) {
       unpriced.push(drop.name);
+      drops.push({ id: drop.id, name: drop.name, amount: drop.amount, each: null, crop, multiplier, coins: 0 });
       continue;
     }
-    const crop = fortuneByCrop.get(drop.id);
-    const extra = crop ? (o.cropFortune?.[crop] ?? 0) : 0;
     if (crop && extra > 0) cropsLifted.push(crop);
-    revenue += price * drop.amount * fortuneMultiplier(o.farmingFortune, extra) * yieldBuffs;
+    const coins = price * drop.amount * multiplier;
+    revenue += coins;
+    drops.push({ id: drop.id, name: drop.name, amount: drop.amount, each: price, crop, multiplier, coins });
   }
+
+  // The mutation itself, one per harvest. The wiki's drop table does not list it — the evidence is
+  // that 39 of the 40 have a bazaar entry with a live book and there is no other way to obtain one.
+  // Fortune is deliberately not applied: it multiplies crop drops, and this is a single item.
+  //
+  // It is not a footnote. Snoozling's crops are ordinary and its item asks millions, so leaving it
+  // out ranks the whole page on the smaller half of the income for exactly the mutations where the
+  // item is the point.
+  const selfPrice = unitPrice(m.id, o.market, npcPrices);
+  const self: DropRevenue | null =
+    selfPrice === null ? null : { id: m.id, name: m.name, amount: 1, each: selfPrice, crop: null, multiplier: 1, coins: selfPrice };
+  if (self) revenue += self.coins;
+  else unpriced.push(`${m.name} itself`);
 
   // An Ethereal Vine on harvest, at odds that rise with rarity. It is the only way to enlarge the
   // greenhouse and it trades on the bazaar, so it is real income rather than a curiosity.
@@ -403,6 +480,10 @@ export function profitOf(m: Mutation, byId: Map<string, Mutation>, data: Greenho
   const cellsUsed = (setup?.packing.cells.reduce((a, b) => a + b, 0) ?? 0) + perPlot * m.size * m.size;
 
   const total = (revenue + vineRevenue) * perPlot;
+  // The bill is per greenhouse — three plots is three rings to buy — where the takings are already
+  // multiplied by the same three. Quoting a one-plot setup beside a three-plot income would flatter
+  // exactly the mutations with the most expensive rings, which are the ones the figure is for.
+  const setupTotal = setup?.coins === null || setup === null ? null : setup.coins * plots;
   const problem =
     m.spreading.prose
       ? `Needs a special act rather than a roll: ${m.spreading.raw}`
@@ -410,9 +491,13 @@ export function profitOf(m: Mutation, byId: Map<string, Mutation>, data: Greenho
         ? "No arrangement of this plot feeds even one of these."
         : stages === null
         ? "The wiki publishes no spawn chance for this one, so there is no cycle time to divide by."
-        : unpriced.length === m.drops.length && m.drops.length > 0
+        : revenue <= 0 && unpriced.length > 0
           ? `Nothing is bidding on ${unpriced.join(", ")}.`
           : null;
+
+  const rankable = !problem && hoursPerHarvest !== null && hoursPerHarvest > 0;
+  const coinsPerHour = rankable ? (total / hoursPerHarvest!) * plots : null;
+  const coinsPerDay = coinsPerHour === null ? null : coinsPerHour * 24;
 
   return {
     id: m.id,
@@ -425,10 +510,20 @@ export function profitOf(m: Mutation, byId: Map<string, Mutation>, data: Greenho
     stagesPerHarvest: stages,
     hoursPerHarvest,
     revenue,
+    drops,
+    self,
     vineRevenue,
+    plots,
+    perHarvest: total * plots,
+    harvestsPerDay: hoursPerHarvest === null || hoursPerHarvest <= 0 ? null : 24 / hoursPerHarvest,
     setup,
-    coinsPerHour: problem || hoursPerHarvest === null || hoursPerHarvest <= 0 ? null : (total / hoursPerHarvest) * plots,
-    coinsPerDay: problem || hoursPerHarvest === null || hoursPerHarvest <= 0 ? null : (total / hoursPerHarvest) * 24 * plots,
+    setupTotal,
+    coinsPerHour,
+    coinsPerDay,
+    // A one-off against a repeating income, so it belongs to the first day and to no other. Left
+    // as one figure it reads like a running cost and understates everything with a big ring.
+    netFirstDay: coinsPerDay === null || setupTotal === null ? null : coinsPerDay - setupTotal,
+    paybackHours: coinsPerHour === null || coinsPerHour <= 0 || setupTotal === null ? null : setupTotal / coinsPerHour,
     hoursPerStage,
     unpriced,
     cropsLifted: [...new Set(cropsLifted)],

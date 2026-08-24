@@ -325,3 +325,31 @@ table.bz td:last-child { color: var(--gold); }
 .gh-c3 { background: #8c6f3f; }
 .gh-c4 { background: #6f3f8c; }
 .gh-bill { margin: 4px 0 6px 18px; font-size: 0.85em; line-height: 1.5; }
+
+/* The expanded row spans every column, so the plot, the income and the bill sit side by side
+   instead of stacking in the narrowest cell on the page. Below 1100px they stack, which is the
+   only sensible thing three columns of numbers can do. */
+/* The table keeps its cells on one line so columns of numbers stay columns. The detail cell is
+   prose, so it has to opt back out — left inherited, every paragraph is one long line running off
+   the side of the panel, which looks like nothing is wrong until you notice the sentences end
+   nowhere. The figures inside it opt back in, cell by cell.
+
+   Written as `table.bz tr.gh-detail > td` because `table.bz td` is two elements and a class, and
+   a plainer selector here loses to it on specificity and silently changes nothing. */
+table.bz tr.gh-detail > td { padding: 10px 12px 14px; background: rgba(255,255,255,0.02); white-space: normal; }
+/* Two things bite here and they look the same on screen. `1fr` carries a min-content floor, so the
+   text columns measure at max-content and spill out of the cell — hence minmax(0,1fr). And an
+   `auto` first track is grown to *its* max-content before any fr track gets a pixel, so the plot
+   column swallowed the row and left the other two at zero width. A definite width for the plot
+   column fixes that: it is always ten cells across, so there is nothing to measure. */
+.gh-expand { display: grid; grid-template-columns: 210px minmax(0, 1fr) minmax(0, 1fr); gap: 8px 28px; align-items: start; }
+.gh-expand-col { min-width: 0; }
+@media (max-width: 1100px) { .gh-expand { grid-template-columns: 1fr; } }
+.gh-expand-col p { margin: 6px 0; }
+.gh-h { margin: 0 0 8px; font-size: 0.82em; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.65; font-weight: 600; }
+.gh-break { width: 100%; border-collapse: collapse; font-size: 0.88em; }
+.gh-break td { padding: 3px 0 3px 10px; vertical-align: top; }
+.gh-break td:first-child { padding-left: 0; }
+.gh-break td.num { white-space: nowrap; text-align: right; }
+.gh-break tr.gh-total td { border-top: 1px solid rgba(255,255,255,0.14); padding-top: 5px; }
+.gh-sub { font-size: 0.85em; }

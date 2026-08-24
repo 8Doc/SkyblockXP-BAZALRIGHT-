@@ -334,9 +334,102 @@ test("an unpriced drop is reported rather than valued at zero", () => {
   const m = data.mutations.find((x) => x.id === "DUSTGRAIN")!;
   const byId = new Map(data.mutations.map((x) => [x.id, x]));
   const row = profitOf(m, byId, data, { market: new Map(), growth: GROWTH, farmingFortune: 0 });
-  assert.deepEqual(row.unpriced, m.drops.map((d) => d.name));
+  // The mutation's own item is a drop like any other, so an empty market leaves it unpriced too.
+  assert.deepEqual(row.unpriced, [...m.drops.map((d) => d.name), `${m.name} itself`]);
   assert.equal(row.revenue, 0);
+  assert.equal(row.self, null);
   assert.match(row.problem ?? "", /Nothing is bidding/);
+});
+
+/**
+ * Harvesting hands you one of the mutation, and for most of the list that is where the money is.
+ *
+ * The wiki's drop table lists crops and stops. The evidence that the item drops as well is that 39
+ * of the 40 have a live bazaar book and there is no other way to obtain one — you cannot craft a
+ * Snoozling. Pricing only the crops ranks the page on the smaller half of the income for exactly
+ * the mutations whose item is worth millions, which is the expensive way to be wrong.
+ *
+ * Fortune is deliberately not applied to it: fortune multiplies crop drops, and this is one item.
+ */
+test("the mutation itself is revenue, and fortune does not multiply it", () => {
+  const m = data.mutations.find((x) => x.id === "DUSTGRAIN")!;
+  const byId = new Map(data.mutations.map((x) => [x.id, x]));
+  const market = new Map([
+    ["WHEAT", product("WHEAT", 1, 1)],
+    ["DUSTGRAIN", product("DUSTGRAIN", 900, 1_000)],
+  ]);
+
+  const plain = profitOf(m, byId, data, { market, growth: GROWTH, farmingFortune: 0 });
+  assert.equal(plain.self?.id, "DUSTGRAIN");
+  assert.equal(plain.self?.amount, 1, "one a harvest");
+  assert.equal(plain.self?.coins, 1_000 * NET_OF_TAX, "the ask, taxed — the same rule as any drop");
+  assert.equal(plain.self?.multiplier, 1, "fortune multiplies crops, not the item");
+
+  // Fortune lifts the crop lines and leaves the item where it was.
+  const rich = profitOf(m, byId, data, { market, growth: GROWTH, farmingFortune: 900 });
+  assert.equal(rich.self?.coins, plain.self?.coins);
+  assert.ok(rich.revenue > plain.revenue, "the crops moved");
+  const cropsPlain = plain.drops.reduce((s, d) => s + d.coins, 0);
+  const cropsRich = rich.drops.reduce((s, d) => s + d.coins, 0);
+  assert.equal(Math.round(cropsRich / cropsPlain), 10, "fortune 900 is a ten-times multiplier");
+
+  // And the parts add up to the whole, which is what lets the breakdown be trusted.
+  assert.ok(Math.abs(plain.revenue - (cropsPlain + plain.self!.coins)) < 1e-6);
+});
+
+/** Every mutation the bazaar prices should show up as its own revenue line, not just 39 of them. */
+test("nearly every mutation has a price for itself", () => {
+  const market = new Map(data.mutations.map((m) => [m.id, product(m.id, 100, 200)] as const));
+  const byId = new Map(data.mutations.map((x) => [x.id, x]));
+  const priced = data.mutations.filter((m) => profitOf(m, byId, data, { market, growth: GROWTH, farmingFortune: 0 }).self !== null);
+  assert.equal(priced.length, data.mutations.length, "a mutation with a book is a mutation with income");
+});
+
+/**
+ * The setup is a one-off and the income repeats, so they are never added into one figure.
+ *
+ * Coins a day is gross. The bill comes off the first day and off no other, because the ring stands
+ * there feeding harvest after harvest once it is planted. Three greenhouses is three rings, so the
+ * bill scales with the plots exactly as the takings do — quoting a one-plot setup beside a
+ * three-plot income would flatter the mutations with the most expensive rings, which are the ones
+ * the figure exists for.
+ */
+test("setup is a one-off, scales with plots, and only touches the first day", () => {
+  const m = data.mutations.find((x) => x.id === "CHOCONUT")!;
+  const byId = new Map(data.mutations.map((x) => [x.id, x]));
+  const market = new Map([
+    ["INK_SACK:3", product("INK_SACK:3", 5, 6)],
+    ["CHOCONUT", product("CHOCONUT", 3_000, 3_500)],
+  ]);
+
+  const one = profitOf(m, byId, data, { market, growth: GROWTH, farmingFortune: 0, plots: 1 });
+  const three = profitOf(m, byId, data, { market, growth: GROWTH, farmingFortune: 0, plots: 3 });
+
+  assert.equal(one.setupTotal, one.setup!.coins, "one plot buys one ring");
+  assert.equal(three.setupTotal, one.setup!.coins! * 3, "three plots buy three");
+  assert.equal(three.coinsPerDay, one.coinsPerDay! * 3, "and take three times as much");
+
+  assert.equal(one.netFirstDay, one.coinsPerDay! - one.setupTotal!);
+  assert.equal(three.netFirstDay, three.coinsPerDay! - three.setupTotal!);
+  // Payback puts the one-off and the repeating income in the same unit, so it is plot-independent.
+  assert.ok(Math.abs(one.paybackHours! - three.paybackHours!) < 1e-9, "buying three rings pays back at the same rate");
+  assert.equal(Math.round(one.paybackHours!), Math.round(one.setupTotal! / one.coinsPerHour!));
+});
+
+/** The breakdown has to reconstruct the headline, or it is decoration rather than an explanation. */
+test("the daily breakdown adds up to coins per day", () => {
+  const market = new Map<string, ProductSnapshot>();
+  for (const m of data.mutations) market.set(m.id, product(m.id, 900, 1_000));
+  for (const c of data.baseCrops) market.set(c.id, product(c.id, 4, 5));
+  market.set("ETHEREAL_VINE", product("ETHEREAL_VINE", 1_000, 1_200));
+
+  const rows = rankMutations(data, { market, growth: GROWTH, farmingFortune: 800 }).filter((r) => r.coinsPerDay !== null);
+  assert.ok(rows.length > 20, "a fake market should price most of the list");
+  for (const r of rows) {
+    const perHarvest = r.drops.reduce((s, d) => s + d.coins, 0) + (r.self?.coins ?? 0) + r.vineRevenue;
+    const day = perHarvest * r.perPlot * r.plots * r.harvestsPerDay!;
+    assert.ok(Math.abs(day - r.coinsPerDay!) < Math.max(1, r.coinsPerDay! * 1e-9), `${r.name} does not reconcile`);
+  }
 });
 
 /** A mutation needing a special act is kept and explained, never ranked as though it were free. */
@@ -437,7 +530,7 @@ test("the parsed requirements match the arrangement the wiki draws", () => {
     if (!m.layoutCounts || m.spreading.prose) continue;
     for (const req of m.spreading.requires) {
       // The drawing is keyed by display name; the mutation itself also appears in its own grid.
-      const drawn = m.layoutCounts[req.name];
+      const drawn: number | undefined = m.layoutCounts[req.name];
       if (drawn === undefined) continue;
       assert.equal(drawn, req.cells, `${m.name} asks for ${req.cells} ${req.name} and its layout draws ${drawn}`);
       checked++;
