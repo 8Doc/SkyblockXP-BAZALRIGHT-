@@ -27,7 +27,7 @@ Wart 240 → 108, Carrot 280 → 175, Potato 240 → 150, Sunflower 160 → 232 
 before that date is wrong by up to a factor of two, in both directions. The scrape records
 `generatedAt` and both pages' `editedAt` so the data can be checked against the page's own History.
 
-## The three things that decide the ranking
+## The four things that decide the ranking
 
 ### A harvest is two waits, and usually the first one dominates
 
@@ -51,8 +51,8 @@ eight below it, which the reciprocal shape of the formula makes plainly false.
 
 ### A spreading condition counts ring cells, not plants
 
-Layouts are a 3×3 with the mutation appearing in the middle, and the condition counts cells of the
-eight-cell ring. A plant bigger than one cell fills more than one of them:
+The wiki's layouts are a 3×3 with the mutation appearing in the middle, and the condition counts
+cells of the eight-cell ring. A plant bigger than one cell fills more than one of them:
 
 | plant | ring cells it fills |
 |---|---|
@@ -64,6 +64,45 @@ So **a condition asking for three Noctilumes is met by buying two**, because the
 cells each. The wiki works this out in footnotes for the six cases where it bites and those are
 parsed verbatim; `ceil(cells / cellsPerPlant)` agrees with all six, and a test asserts that it does,
 so a wiki edit that contradicts the rule fails the build rather than quietly changing an answer.
+
+### The layout is the whole plot, and the rings are shared
+
+This is what decides the money, and it is the thing a 3×3 diagram hides. **Rings overlap.** Two
+empty cells beside each other are fed by one run of support crop, so the plot is a packing problem
+rather than a stamp repeated in a grid — `src/lib/greenhouseLayout.ts`:
+
+> maximise the empty cells whose ring holds ≥ N of the support crop,
+> subject to the support crop occupying cells of its own
+
+The difference is not marginal. On a 10×10:
+
+| the condition asks for | stamping a 3×3 | packed |
+|---|---|---|
+| 1 ring cell | 11 | **84** |
+| 2 ring cells | 11 | **70** |
+| 4 ring cells | 11 | **45** |
+| 8 ring cells | 11 | **16** |
+
+The shapes fall out of the arithmetic: a support cell sits in at most eight rings, so a requirement
+of N needs at least `N/8` support cells per target. A two-crop condition can afford to be mostly
+empty; an eight-crop one needs every neighbour filled and collapses to a scattered lattice. That
+bound is computed as `ceiling` and reported beside every answer.
+
+It reorders the table outright. **Timestalk** was 21k/hr as a lone 3×3 and is **1.78M/hr** once 70
+of them fit, while Stoplight Petal — which pays far more each — only fits 32.
+
+**Best found, not proven optimal.** The search is exhaustive over *periodic* patterns up to a
+twelve-cell tile, evaluated exactly on the real grid with its edges, and it beats every pattern
+worked out by hand (checkerboard, row stripes, spaced lattice) on every requirement tried — those
+hand figures are in the tests as the floor it must clear. It could still miss an irregular
+arrangement worth a few percent, so the ceiling is shown next to the result and the caption says
+which of the two it is.
+
+Setup cost is a whole-plot figure for the same reason: the ring is bought once and shared, so it is
+the packing's plant count rather than one mutation's condition. And which spreading alternative is
+"cheapest" is decided on how well each one *packs*, not on the price of one ring — an option that
+fits more mutations wins even if its crop costs more, because the ring is a one-off and the harvest
+repeats.
 
 ### Fortune is two stats, and only one is harmless to get wrong
 
@@ -121,9 +160,9 @@ with the Greenhouse update, which makes this the piece of the model most likely 
 
 ## What it does not do yet
 
-- **No packing.** Each row prices one mutation and its own ring standing alone. A real greenhouse
-  overlaps them — one mutation's ring is its neighbour's — so the layout shown is the pattern to
-  copy rather than a plan for a whole plot, and `cellsUsed` is an upper bound rather than a packing.
+- **The packing is best-found, not proven optimal.** The search covers repeating patterns up to a
+  twelve-cell tile; an irregular arrangement could beat it by a few percent. Every row shows the
+  counting ceiling beside its answer so the gap is visible rather than implied.
 - **No profile read.** `greenhouse_slots`, `garden_upgrades.GROWTH_SPEED` and `crop_upgrade_levels`
   all exist on the garden endpoint and would fill in the growth boxes from a username. The boxes are
   manual for now, which is why they default to a maxed setup and say so.

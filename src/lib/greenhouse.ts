@@ -1,4 +1,5 @@
 import { NET_OF_TAX } from "./bazaar";
+import { packGreenhouse, type Packing } from "./greenhouseLayout";
 import type { ProductSnapshot } from "./bazaarTypes";
 import type { NpcPrice } from "./bazaarViews";
 
@@ -166,13 +167,16 @@ export function plantsFor(option: SpreadOption, required: Mutation | undefined, 
 }
 
 export type Setup = {
-  /** The alternative actually costed — the cheapest one that can be priced. */
+  /** The alternative actually costed — the one that pays best across a whole plot. */
   option: SpreadOption;
+  /** Support plants for the whole greenhouse, not for one mutation. */
   plants: number;
   /** Null when the thing it needs has no price anywhere. */
   coins: number | null;
   /** True when the ingredient is itself a mutation, so it has to be grown before it is planted. */
   grown: boolean;
+  /** How the plot was laid out to reach that, and how many mutations it feeds. */
+  packing: Packing;
 };
 
 /**
@@ -187,20 +191,64 @@ export function cheapestSetup(
   byId: Map<string, Mutation>,
   market: Map<string, ProductSnapshot>,
   npcPrices: Record<string, NpcPrice>,
+  plot: PlotShape,
 ): Setup | null {
   let best: Setup | null = null;
   for (const option of m.spreading.options) {
     const required = byId.get(option.id);
-    const plants = plantsFor(option, required, m.plantNotes);
+    // The whole plot, not one mutation: the ring around each target is shared with its
+    // neighbours, so the plants and the mutations they feed come out of the same packing.
+    const packing = packFor(plot, option.cells, required?.size ?? 1, m.size);
     const each = option.free ? 0 : buyPrice(option.id, market, npcPrices);
-    const coins = each === null ? null : each * plants;
-    const setup: Setup = { option, plants, coins, grown: required !== undefined };
-    // A priced option always beats an unpriced one; between two priced ones, the cheaper wins.
+    const coins = each === null ? null : each * packing.supportPlants;
+    const setup: Setup = { option, plants: packing.supportPlants, coins, grown: required !== undefined, packing };
+
+    // More mutations growing at once beats a cheaper ring, because the ring is bought once and
+    // the harvest repeats. Between two that grow the same number, the cheaper one wins.
     if (!best) best = setup;
-    else if (best.coins === null && coins !== null) best = setup;
-    else if (coins !== null && best.coins !== null && coins < best.coins) best = setup;
+    else if (packing.targets > best.packing.targets) best = setup;
+    else if (packing.targets === best.packing.targets) {
+      if (best.coins === null && coins !== null) best = setup;
+      else if (coins !== null && best.coins !== null && coins < best.coins) best = setup;
+    }
   }
   return best;
+}
+
+/**
+ * The greenhouse to lay out on.
+ *
+ * Ten by ten, which is not on the wiki — it is read off a real profile's `greenhouse_slots`, where
+ * the coordinates run 0..9 in both directions. `locked` is the cells that profile had not opened;
+ * left empty, the packing assumes a fully unlocked plot.
+ */
+export type PlotShape = { width: number; height: number; locked?: Set<string> };
+
+export const FULL_PLOT: PlotShape = { width: 10, height: 10 };
+
+/**
+ * Packings are memoised, because the answer depends on the plot and three small integers and not
+ * at all on prices — so it survives the twenty-second repricing that redraws everything else.
+ * Sixteen distinct shapes cover all forty mutations, at about forty milliseconds apiece.
+ */
+const packings = new Map<string, Packing>();
+
+function packFor(plot: PlotShape, requiredCells: number, supportSize: number, targetSize: number): Packing {
+  const lockedKey = plot.locked && plot.locked.size > 0 ? [...plot.locked].sort().join("|") : "";
+  const cacheKey = `${plot.width}x${plot.height}:${lockedKey}:${requiredCells}:${supportSize}:${targetSize}`;
+  const cached = packings.get(cacheKey);
+  if (cached) return cached;
+
+  const packing = packGreenhouse({
+    width: plot.width,
+    height: plot.height,
+    locked: plot.locked,
+    requiredCells,
+    supportSize,
+    targetSize,
+  });
+  packings.set(cacheKey, packing);
+  return packing;
 }
 
 /* ------------------------------------------------------------- the ranking */
@@ -210,8 +258,12 @@ export type MutationProfit = {
   name: string;
   rarity: string | null;
   size: number;
-  /** Cells of the 10x10 plot one of these occupies, ring plants included. */
+  /** Cells of the plot the whole arrangement occupies, support and mutations together. */
   cellsUsed: number;
+  /** How many of this mutation grow at once in one greenhouse. */
+  perPlot: number;
+  /** The best arrangement found, and the ceiling it was measured against. */
+  packing: Packing | null;
   stagesPerHarvest: number | null;
   hoursPerHarvest: number | null;
   /** Coins one harvest brings in, after tax, at the given fortune. */
@@ -250,6 +302,8 @@ export type ProfitOptions = {
   /** Multiplied on top of fortune: plant yield upgrade, evergreen chips, adjacency buffs. */
   yieldMultiplier?: number;
   plots?: number;
+  /** The greenhouse to lay out on. Defaults to a fully unlocked 10x10. */
+  plot?: PlotShape;
   /** Prebuilt by , so ranking forty rows does not rebuild it forty times. */
   cropFortuneIndex?: Map<string, string>;
 };
@@ -319,19 +373,21 @@ export function profitOf(m: Mutation, byId: Map<string, Mutation>, data: Greenho
   const hoursPerStage = stageSeconds(data, o.growth) / 3600;
   const hoursPerHarvest = stages === null ? null : stages * hoursPerStage;
 
-  const setup = cheapestSetup(m, byId, o.market, npcPrices);
+  const setup = cheapestSetup(m, byId, o.market, npcPrices, o.plot ?? FULL_PLOT);
   const plots = o.plots ?? 1;
 
-  // One mutation plus the ring that spreads it. The ring is eight cells and the plants filling it
-  // are shared between neighbouring mutations in a real layout, so this is the standalone cost of
-  // one — an upper bound on space rather than a packing.
-  const cellsUsed = m.size * m.size + (setup?.plants ?? 0) * (byId.get(setup?.option.id ?? "")?.size ?? 1) ** 2;
+  // How many grow at once, which is the figure the whole ranking turns on. A mutation paying twice
+  // as much per harvest is still the worse row if half as many fit.
+  const perPlot = setup?.packing.targets ?? 0;
+  const cellsUsed = (setup?.packing.supportCells ?? 0) + perPlot * m.size * m.size;
 
-  const total = revenue + vineRevenue;
+  const total = (revenue + vineRevenue) * perPlot;
   const problem =
     m.spreading.prose
       ? `Needs a special act rather than a roll: ${m.spreading.raw}`
-      : stages === null
+      : perPlot <= 0
+        ? "No arrangement of this plot feeds even one of these."
+        : stages === null
         ? "The wiki publishes no spawn chance for this one, so there is no cycle time to divide by."
         : unpriced.length === m.drops.length && m.drops.length > 0
           ? `Nothing is bidding on ${unpriced.join(", ")}.`
@@ -343,6 +399,8 @@ export function profitOf(m: Mutation, byId: Map<string, Mutation>, data: Greenho
     rarity: m.rarity,
     size: m.size,
     cellsUsed,
+    perPlot,
+    packing: setup?.packing ?? null,
     stagesPerHarvest: stages,
     hoursPerHarvest,
     revenue,

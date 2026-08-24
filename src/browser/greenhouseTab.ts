@@ -153,7 +153,18 @@ const COLUMNS: Column[] = [
       "spawn, which is one over its chance, plus its own growth stages. For most commons the " +
       "first half is nearly all of it.",
   },
-  { id: "revenue", label: "Per harvest", value: (r) => r.revenue, render: (r) => coins(r.revenue + r.vineRevenue), title: "Coins one harvest is worth at your fortune, the Ethereal Vine chance included." },
+  {
+    id: "perPlot",
+    label: "Per plot",
+    value: (r) => r.perPlot,
+    render: (r) => (r.perPlot > 0 ? num(r.perPlot) : `<span class="dim">—</span>`),
+    title:
+      "How many of these grow at once in one greenhouse, at the best layout found. This is the " +
+      "figure that decides the ranking: the ring of support crops around each one is shared with " +
+      "its neighbours, so a condition needing two adjacent crops fits seventy in a 10×10 while " +
+      "one needing all eight fits sixteen. Dividing the plot by nine gets both badly wrong.",
+  },
+  { id: "revenue", label: "Each", value: (r) => r.revenue, render: (r) => coins(r.revenue + r.vineRevenue), title: "Coins one harvest of one mutation is worth at your fortune, the Ethereal Vine chance included. Multiply by the per-plot count for what the greenhouse actually yields." },
   {
     id: "setup",
     label: "Setup",
@@ -523,7 +534,7 @@ function renderTable(): void {
         ? `<div class="gold bz-path" title="Kept on the list rather than hidden: a mutation nobody can price is still one worth knowing about.">${escapeHtml(row.problem)}</div>`
         : "";
       const setup = row.setup && !row.problem
-        ? `<div class="dim bz-path">${num(row.setup.plants)} × ${escapeHtml(row.setup.option.name)}${row.setup.option.free ? " <span class=\"dim\">(free)</span>" : ""}${
+        ? `<div class="dim bz-path">${num(row.setup.plants)} × ${escapeHtml(row.setup.option.name)} <span class="dim">for the whole plot</span>${row.setup.option.free ? " <span class=\"dim\">(free)</span>" : ""}${
             row.setup.grown ? ` <span class="dim" title="This ingredient is itself a mutation, so it has to be grown before it can be planted — or bought.">· a mutation itself</span>` : ""
           }</div>`
         : "";
@@ -562,29 +573,54 @@ function renderTable(): void {
  */
 function layoutHtml(row: MutationProfit): string {
   const mutation = tables.greenhouse.mutations.find((m) => m.id === row.id);
-  if (!mutation?.layout) {
-    return `<div class="gh-layout dim">The wiki draws no layout for this one.</div>`;
+  const packing = row.packing;
+  if (!mutation || !packing || packing.targets === 0) {
+    return `<div class="gh-layout dim">No arrangement of this plot grows one of these.</div>`;
   }
 
-  const grid = mutation.layout
+  const support = row.setup?.option.name ?? "support";
+  const legend = `<span class="gh-key gh-k-support"></span> ${escapeHtml(support)} <span class="gh-key gh-k-target"></span> ${escapeHtml(mutation.name)} <span class="gh-key gh-k-empty"></span> spare`;
+
+  // The whole plot, not the wiki's single 3x3. The wiki draws one mutation in isolation; a real
+  // greenhouse overlaps them, and the overlap is where all the yield comes from.
+  const grid = packing.grid
     .map(
-      (line, r) =>
+      (line) =>
         `<div class="gh-row">${line
-          .map((cell, c) => {
-            if (r === 1 && c === 1) return `<span class="gh-cell gh-target" title="The mutation appears here.">${escapeHtml(mutation.name)}</span>`;
-            if (!cell) return `<span class="gh-cell gh-empty" title="Nothing here.">·</span>`;
-            return `<span class="gh-cell" title="${escapeHtml(cell)}">${escapeHtml(cell)}</span>`;
+          .map((cell) => {
+            if (cell === "locked") return `<span class="gh-plot gh-locked" title="Not unlocked."></span>`;
+            if (cell === "support") return `<span class="gh-plot gh-k-support" title="${escapeHtml(support)}"></span>`;
+            if (cell === "target") return `<span class="gh-plot gh-k-target" title="${escapeHtml(mutation.name)} grows here"></span>`;
+            return `<span class="gh-plot gh-k-empty" title="Empty — its ring is not fed, so nothing grows here."></span>`;
           })
           .join("")}</div>`,
     )
     .join("");
 
+  const atCeiling = packing.targets >= packing.ceiling;
   const sizeNote =
     mutation.size > 1
-      ? `<p class="dim">This one is ${mutation.size}×${mutation.size}, so it fills ${mutation.size} cells of any ring that asks for it — which is why something needing ${mutation.size + 1} of them only takes two.</p>`
+      ? ` It is ${mutation.size}×${mutation.size}, so it needs that much clear room and has a ${
+          mutation.size === 2 ? "twelve" : "sixteen"
+        }-cell ring to fill rather than eight — which is why so few fit.`
       : "";
 
-  return `<div class="gh-layout">${grid}<p class="dim">${escapeHtml(mutation.effects.join(" · "))}</p>${sizeNote}</div>`;
+  return `
+    <div class="gh-layout">
+      <div class="gh-plotgrid">${grid}</div>
+      <p class="dim">${legend}</p>
+      <p class="dim">
+        <strong>${num(packing.targets)}</strong> grow at once from <strong>${num(packing.supportPlants)}</strong>
+        ${escapeHtml(support)}, tiling a ${packing.period.rows}×${packing.period.cols} pattern.
+        ${
+          atCeiling
+            ? "That is the most any arrangement could manage — every support cell is feeding as many rings as it can."
+            : `The counting bound says no arrangement beats ${num(packing.ceiling)}, so this may leave a little on the table: the search covers repeating patterns, not every irregular one.`
+        }${sizeNote}
+      </p>
+      <p class="dim">${escapeHtml(mutation.effects.join(" · "))}</p>
+    </div>
+  `;
 }
 
 function escapeHtml(value: string): string {

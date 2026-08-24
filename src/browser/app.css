@@ -307,3 +307,13 @@ table.bz td:last-child { color: var(--gold); }
 .gh-crops { flex-wrap: wrap; gap: 6px 10px; }
 .gh-crops label { font-size: 0.82em; }
 .gh-crops input.gh-crop { width: 68px; }
+
+/* The whole 10x10 plot. Small squares rather than labels: a hundred names is unreadable, and
+   the shape of the pattern is the thing worth seeing. */
+.gh-plotgrid { display: inline-block; padding: 4px; border: 1px solid rgba(255,255,255,0.12); border-radius: 4px; }
+.gh-plot { display: inline-block; width: 14px; height: 14px; margin: 1px; border-radius: 2px; vertical-align: top; }
+.gh-k-support { background: #4c8c3f; }
+.gh-k-target { background: #d9a520; }
+.gh-k-empty { background: rgba(255,255,255,0.07); }
+.gh-locked { background: rgba(255,255,255,0.02); border: 1px dashed rgba(255,255,255,0.12); }
+.gh-key { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin: 0 3px 0 8px; }

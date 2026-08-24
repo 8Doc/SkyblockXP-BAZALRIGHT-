@@ -6,6 +6,7 @@ import {
   buyPrice,
   cheapestSetup,
   cropFortuneIndex,
+  FULL_PLOT,
   fortuneMultiplier,
   plantsFor,
   profitOf,
@@ -159,6 +160,7 @@ test("buying takes the cheaper of the bazaar and the shop", () => {
  */
 test("the cheaper of two spreading options is the one costed", () => {
   const m = {
+    size: 1,
     spreading: {
       raw: "",
       prose: false,
@@ -173,17 +175,21 @@ test("the cheaper of two spreading options is the one costed", () => {
     ["DEAR", product("DEAR", 1_000, 1_100)],
     ["CHEAP", product("CHEAP", 10, 11)],
   ]);
-  const setup = cheapestSetup(m, new Map(), market, {});
+  const setup = cheapestSetup(m, new Map(), market, {}, FULL_PLOT);
   assert.equal(setup?.option.id, "CHEAP");
-  assert.equal(setup?.coins, 40, "four plants at ten");
+  // A whole plot, not one mutation: the ring is bought once and shared between every target it
+  // touches, so the cost is the packing's plant count rather than the four cells of one condition.
+  assert.ok(setup && setup.packing.targets > 1, "and it is laid out across the plot");
+  assert.equal(setup!.coins, setup!.packing.supportPlants * 10, "every support plant at ten");
 });
 
 test("a free requirement costs nothing rather than going unpriced", () => {
   const m = {
+    size: 1,
     spreading: { raw: "", prose: false, options: [{ id: "FIRE", name: "Fire", cells: 2, free: true }] },
     plantNotes: {},
   } as unknown as Mutation;
-  assert.equal(cheapestSetup(m, new Map(), new Map(), {})?.coins, 0);
+  assert.equal(cheapestSetup(m, new Map(), new Map(), {}, FULL_PLOT)?.coins, 0);
 });
 
 /* ------------------------------------------------------------ the ranking */
