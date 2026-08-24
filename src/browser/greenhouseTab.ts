@@ -724,13 +724,15 @@ function incomeHtml(row: MutationProfit, mutation: Mutation): string {
     )}</p>`;
   }
 
-  // Every figure below is one mutation, one harvest, so this is what turns it into a day of the
-  // whole greenhouse — stated once here rather than folded silently into each line.
-  const perDay = (each: number) => each * row.perPlot * row.plots * row.harvestsPerDay!;
-  const line = (label: string, detail: string, each: number) => {
-    const day = perDay(each);
+  // How many times a day one drop actually happens: one target's harvest, times how many targets
+  // are growing at once across every plot, times how many times a day each one cycles. Every line
+  // below multiplies its own quantity by its own price — no hidden factor between the two columns
+  // a reader can see and the total beside them, which a "1 × price" detail did not do: a single
+  // Noctilume reads as one, but forty-eight of them are actually harvested in a day.
+  const perDayCount = row.perPlot * row.plots * row.harvestsPerDay!;
+  const line = (label: string, qty: string, each: number, day: number) => {
     const share = gross > 0 ? `${Math.round((100 * day) / gross)}%` : "";
-    return `<tr><td>${label}</td><td class="num dim">${detail}</td><td class="num"><strong>${coins(
+    return `<tr><td>${label}</td><td class="num dim">${qty} × ${coins(each)}</td><td class="num"><strong>${coins(
       day,
     )}</strong></td><td class="num dim">${share}</td></tr>`;
   };
@@ -739,20 +741,26 @@ function incomeHtml(row: MutationProfit, mutation: Mutation): string {
     .map((d) =>
       d.each === null
         ? `<tr><td>${escapeHtml(d.name)}</td><td class="gold" colspan="3">nothing is bidding on it</td></tr>`
-        : line(escapeHtml(d.name), `${num(Math.round(d.amount * d.multiplier))} × ${coins(d.each)}`, d.coins),
+        : line(escapeHtml(d.name), num(Math.round(d.amount * d.multiplier * perDayCount)), d.each, d.coins * perDayCount),
     )
     .join("");
 
   const selfLine = row.self
     ? line(
         `<strong>${escapeHtml(mutation.name)}</strong> <span class="dim">itself</span>`,
-        `1 × ${coins(row.self.each ?? 0)}`,
-        row.self.coins,
+        num(Math.round(perDayCount)),
+        row.self.each ?? 0,
+        row.self.coins * perDayCount,
       )
     : `<tr><td>${escapeHtml(mutation.name)} itself</td><td class="gold" colspan="3">not on the bazaar</td></tr>`;
 
   const chance = tables.greenhouse.etherealVineByRarity?.[(row.rarity ?? "").toLowerCase()] ?? 0;
-  const vineLine = row.vineRevenue > 0 ? line("Ethereal Vine", `${Math.round(chance * 100)}% a harvest`, row.vineRevenue) : "";
+  const vineLine =
+    row.vineRevenue > 0
+      ? `<tr><td>Ethereal Vine</td><td class="num dim">${Math.round(chance * 100)}% a harvest</td><td class="num"><strong>${coins(
+          row.vineRevenue * perDayCount,
+        )}</strong></td><td class="num dim">${gross > 0 ? `${Math.round((100 * row.vineRevenue * perDayCount) / gross)}%` : ""}</td></tr>`
+      : "";
 
   const cropTotal = row.drops.reduce((sum, d) => sum + d.coins, 0);
   const whole = cropTotal + (row.self?.coins ?? 0) + row.vineRevenue;
@@ -775,6 +783,12 @@ function incomeHtml(row: MutationProfit, mutation: Mutation): string {
 
   return `
     <h4 class="gh-h">Where the coins come from</h4>
+    <p class="dim">
+      <strong>${num(row.perPlot * row.plots)}</strong> ${escapeHtml(mutation.name)} growing at once
+      across ${row.plots > 1 ? `${row.plots} greenhouses` : "the greenhouse"}, each cycling
+      <strong>${escapeHtml(cadence)}</strong> — the quantities below are already the whole day's
+      worth, not one harvest.
+    </p>
     <table class="gh-break">
       <tbody>
         ${cropLines}
@@ -782,7 +796,7 @@ function incomeHtml(row: MutationProfit, mutation: Mutation): string {
         ${vineLine}
         <tr class="gh-total">
           <td>Gross a day</td>
-          <td class="num dim">${num(row.perPlot * row.plots)} growing · ${escapeHtml(cadence)}</td>
+          <td></td>
           <td class="num"><strong>${coins(gross)}</strong></td>
           <td></td>
         </tr>
