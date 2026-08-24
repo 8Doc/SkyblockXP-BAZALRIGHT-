@@ -20,7 +20,7 @@ matter most are Hypixel staff posting in Discord, quoted on the wiki with citati
 | Item ids | Hypixel's own item resource |
 | The 13 crop fortunes and what each lifts | `Crop Fortune` page |
 | Overdrive Chip (+140, contest only) | `Overdrive Chip` page |
-| Prices | the live bazaar, plus the shop table from `npc-prices.json` |
+| Prices | the live bazaar (both sides of the book — see the order-type toggle), plus the shop table from `npc-prices.json` |
 | A week of price history, for "vs usual" | Coflnet, `sky.coflnet.com/api/bazaar/<id>/history/week` |
 | Decay timers | `data/curated/greenhouse_decay.json` — the wiki tabulates none of it; see below |
 
@@ -138,6 +138,32 @@ that they are true but not what you sort by; both are still in the expanded row.
 The bill scales with the number of greenhouses, because three plots is three rings to plant. Quoting
 a one-plot setup beside a three-plot income would flatter exactly the mutations with the most
 expensive rings — the ones the figure exists for.
+
+### Instant, or leave an order up
+
+A toggle, because the answer differs by more than any other setting on the page. Two ways to trade
+a bazaar item: cross the spread and have it now, or post an order at the far side and wait to be
+filled. On a deep book that is a rounding error. On mutation books it is most of the value —
+**the median mutation's bid sits 54% below its ask, and the widest is 99%.**
+
+| | buying the ring | selling the harvest |
+|---|---|---|
+| **Instant** | take the cheapest sell offer (the ask) | dump into the best buy order (the bid) |
+| **Order** | post a buy order at the bid | post a sell offer at the ask |
+
+It moves the ranking, not just the totals, because a mutation carried by its own item price is
+exposed to the spread twice over while one carried by crops is not exposed at all. Crossing the
+spread drops **Devourer** and **Startlevine** out of the top six entirely — Devourer's own item is
+68% of its income, so the haircut lands squarely on it.
+
+**Crops are always instasold, whichever way the toggle is set.** A harvest is tens of thousands of
+them off books deep enough that the spread is noise, and nobody leaves a sell offer up for
+pumpkins. The toggle exists for the mutations, which is where the spread is the whole story. The
+NPC shop stays in the running in both modes, since it is instant and untaxed and often beats a
+thin bid.
+
+A test asserts that patience can never come out behind on either side — if it ever does, a side of
+the book has been swapped somewhere, which is a mistake that leaves every figure looking plausible.
 
 ### A price now is not the price at harvest
 

@@ -11,6 +11,7 @@ import {
   type GrowthParams,
   type Mutation,
   type MutationProfit,
+  type PriceMode,
 } from "../lib/greenhouse";
 
 /**
@@ -52,6 +53,14 @@ type State = {
   search: string;
   /** One greenhouse or all three. The wiki caps it at three. */
   plots: number;
+  /**
+   * Whether mutations are traded across the spread or by leaving an order up.
+   *
+   * On a deep book this would not deserve a control. On mutation books it is the single widest
+   * uncertainty on the page — wider than fortune, wider than the layout — because the two sides of
+   * a thin book can be a hundredfold apart.
+   */
+  priceMode: PriceMode;
   /** As typed. Empty means "use the estimate". */
   fortune: string;
   /**
@@ -121,6 +130,7 @@ const state: State = {
   sort: { column: "sustainedPerDay", descending: true },
   search: "",
   plots: Number(localStorage.getItem("sbxp:ghplots") ?? 1),
+  priceMode: (localStorage.getItem("sbxp:ghpricemode") as PriceMode) === "instant" ? "instant" : "order",
   fortune: localStorage.getItem("sbxp:ghfortune") ?? "",
   cropFortune: readCropFortune(),
   showCrops: localStorage.getItem("sbxp:ghshowcrops") === "1",
@@ -558,6 +568,7 @@ function rows(): MutationProfit[] {
     farmingFortune: fortuneValue(),
     cropFortune: cropFortuneValues(),
     plots: state.plots,
+    priceMode: state.priceMode,
   });
 }
 
@@ -612,6 +623,14 @@ export function mountGreenhouse(container: HTMLElement, data: GreenhouseTables):
     if (plots) {
       state.plots = Number(plots.dataset.ghplots);
       localStorage.setItem("sbxp:ghplots", String(state.plots));
+      render();
+      return;
+    }
+
+    const priced = target.closest<HTMLElement>("[data-ghmode]");
+    if (priced) {
+      state.priceMode = priced.dataset.ghmode === "instant" ? "instant" : "order";
+      localStorage.setItem("sbxp:ghpricemode", state.priceMode);
       render();
       return;
     }
@@ -702,6 +721,38 @@ function stageNote(): string {
  * figure typed here is the only real one available. Saying so plainly beats presenting the
  * default as though it had been measured.
  */
+/**
+ * What the price toggle is doing, with the cost of it measured rather than asserted.
+ *
+ * The spread on a mutation is not a few percent. Rather than say "it can be large", this counts
+ * the live books and reports the median, because a reader deciding whether to bother leaving
+ * orders up wants the size of the prize and not an adjective.
+ */
+function priceModeNote(): string {
+  const spreads: number[] = [];
+  for (const m of tables.greenhouse.mutations ?? []) {
+    const p = state.market.get(m.id);
+    if (!p || p.instabuy <= 0 || p.instasell <= 0) continue;
+    spreads.push(100 * (1 - p.instasell / p.instabuy));
+  }
+  spreads.sort((a, b) => a - b);
+  const median = spreads.length ? spreads[Math.floor(spreads.length / 2)] : null;
+  const widest = spreads.length ? spreads[spreads.length - 1] : null;
+
+  const measured =
+    median === null
+      ? ""
+      : ` The median mutation's bid sits <strong>${median.toFixed(0)}%</strong> below its ask and the` +
+        ` widest is <strong>${widest!.toFixed(0)}%</strong>, so this is worth more than most of the` +
+        ` other settings on this page.`;
+
+  return state.priceMode === "order"
+    ? `Mutations priced as <strong>orders left up</strong> — bought at the bid, sold at the ask.${measured}` +
+        ` Crops are always instasold whatever this says: a harvest is tens of thousands of them and nobody waits on pumpkins.`
+    : `Mutations priced as <strong>crossing the spread</strong> — bought from the cheapest offer, sold into the best bid.${measured}` +
+        ` Crops are instasold either way.`;
+}
+
 function fortuneNote(): string {
   const typed = state.fortune.trim() !== "" && Number.isFinite(Number(state.fortune.replace(/[^0-9.]/g, "")));
   if (typed) {
@@ -771,8 +822,15 @@ function render(): void {
         <span class="tabs">
           ${[1, 3].map((n) => `<button class="chip${state.plots === n ? " on" : ""}" data-ghplots="${n}">${n} greenhouse${n > 1 ? "s" : ""}</button>`).join("")}
         </span>
+        <span class="tabs">
+          <button class="chip${state.priceMode === "order" ? " on" : ""}" data-ghmode="order"
+            title="Leave orders up: buy the ring with buy orders at the bid, sell the harvest with sell offers at the ask. Costs nothing but the wait, and on a thin mutation book the wait is the whole difference.">Buy / sell order</button>
+          <button class="chip${state.priceMode === "instant" ? " on" : ""}" data-ghmode="instant"
+            title="Cross the spread both ways: instabuy the ring from the cheapest sell offers, instasell the harvest into the best buy orders. Immediate, and on a thin mutation book it can cost most of the value.">Instant buy / sell</button>
+        </span>
       </div>
       <p class="sub" id="ghfortunenote">${fortuneNote()}</p>
+      <p class="sub dim">${priceModeNote()}</p>
 
       ${cropFortunePanel()}
 

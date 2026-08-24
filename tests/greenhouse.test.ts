@@ -698,3 +698,97 @@ test("a setup that cannot repay itself reports a loss rather than a daily profit
   assert.ok(row.netPerSetup! < 0, "and still loses money on every planting");
   assert.ok(row.sustainedPerDay! < 0, "which the sustained figure agrees with");
 });
+
+/* ------------------------------------------------------------ order type */
+
+/**
+ * Which side of the book each direction takes, which is the easiest thing here to get backwards.
+ *
+ * Selling instantly takes the best *buy order* — the bid, `instasell`. Selling patiently posts an
+ * offer at the *ask*, `instabuy`, and waits. Buying is the mirror. Swap either pair and every
+ * figure on the page still looks plausible while being wrong by the width of the spread, which on
+ * a mutation is most of the value.
+ */
+test("instant takes the near side of the book and an order takes the far side", () => {
+  // bid 100, ask 500: a fivefold spread, which is ordinary for a mutation.
+  const market = new Map([["X", product("X", 100, 500)]]);
+
+  assert.equal(unitPrice("X", market, {}, "instant"), 100 * NET_OF_TAX, "dumped into the bid, taxed");
+  assert.equal(unitPrice("X", market, {}, "order"), 500 * NET_OF_TAX, "offered at the ask, taxed");
+  assert.equal(buyPrice("X", market, {}, "instant"), 500, "taken from the cheapest offer");
+  assert.equal(buyPrice("X", market, {}, "order"), 100, "ordered at the bid");
+
+  // Patience is never worse in either direction — that is what makes it patience.
+  assert.ok(unitPrice("X", market, {}, "order")! > unitPrice("X", market, {}, "instant")!);
+  assert.ok(buyPrice("X", market, {}, "order")! < buyPrice("X", market, {}, "instant")!);
+
+  // The default is the patient side, which is what the rest of this file assumes.
+  assert.equal(unitPrice("X", market, {}), unitPrice("X", market, {}, "order"));
+  assert.equal(buyPrice("X", market, {}), buyPrice("X", market, {}, "order"));
+});
+
+/** The shopkeeper is instant and untaxed, so it stays in the running whichever mode is picked. */
+test("an NPC price beats a bad bazaar bid in either mode", () => {
+  const market = new Map([["X", product("X", 1, 500)]]);
+  assert.equal(unitPrice("X", market, { X: { sell: 300 } }, "instant"), 300, "the shop beats a 1-coin bid");
+  assert.equal(unitPrice("X", market, { X: { sell: 300 } }, "order"), 500 * NET_OF_TAX, "the ask still beats the shop");
+});
+
+/**
+ * The toggle governs mutations and leaves crops alone, which is the whole point of it: a harvest is
+ * tens of thousands of crops off a deep book, and one mutation off a thin one.
+ */
+test("crops are instasold whatever the toggle says, and mutations are not", () => {
+  const byId = new Map(data.mutations.map((m) => [m.id, m]));
+  const m = data.mutations.find((x) => x.id === "CHOCONUT")!;
+
+  // Cocoa beans and the Choconut both carry a wide spread, so either could move the total.
+  const market = new Map([
+    ["INK_SACK:3", product("INK_SACK:3", 2, 20)],
+    ["CHOCONUT", product("CHOCONUT", 1_000, 10_000)],
+  ]);
+  const opts = { market, growth: GROWTH, farmingFortune: 0 } as const;
+
+  const instant = profitOf(m, byId, data, { ...opts, priceMode: "instant" });
+  const order = profitOf(m, byId, data, { ...opts, priceMode: "order" });
+
+  // The crop line is identical in both: always the bid.
+  const cocoa = (r: typeof instant) => r.drops.find((d) => d.id === "INK_SACK:3")!;
+  assert.equal(cocoa(instant).each, 2 * NET_OF_TAX, "the bid, not the ask");
+  assert.equal(cocoa(order).each, cocoa(instant).each, "and the toggle does not touch it");
+
+  // The mutation's own item is not: that is what the toggle is for.
+  assert.equal(instant.self!.each, 1_000 * NET_OF_TAX);
+  assert.equal(order.self!.each, 10_000 * NET_OF_TAX);
+  assert.ok(order.revenue > instant.revenue, "waiting pays more");
+
+  // And the ring costs less when ordered rather than taken.
+  assert.ok(order.setupTotal! < instant.setupTotal!, "a buy order at the bid undercuts the ask");
+});
+
+/**
+ * Patience is better on both sides at once, so it can never come out behind. If it ever does, a
+ * side has been swapped somewhere — the failure this asserts against is silent otherwise.
+ */
+test("leaving orders up never nets less than crossing the spread", () => {
+  const market = new Map<string, ProductSnapshot>();
+  for (const x of data.mutations) market.set(x.id, product(x.id, 400_000, 1_200_000));
+  for (const c of data.baseCrops) market.set(c.id, product(c.id, 3, 9));
+  market.set("ETHEREAL_VINE", product("ETHEREAL_VINE", 500, 1_500));
+  const withDecay = { ...data, decay: DECAY };
+
+  const base = { market, growth: GROWTH, farmingFortune: 1_500 } as const;
+  const patient = rankMutations(withDecay, { ...base, priceMode: "order" });
+  const hasty = rankMutations(withDecay, { ...base, priceMode: "instant" });
+
+  const byName = new Map(hasty.map((r) => [r.id, r]));
+  let compared = 0;
+  for (const p of patient) {
+    const h = byName.get(p.id)!;
+    if (p.problem || h.problem || p.netPerSetup === null || h.netPerSetup === null) continue;
+    assert.ok(p.netPerSetup >= h.netPerSetup - 1e-6, `${p.name}: patience should not lose`);
+    assert.ok(p.setupTotal! <= h.setupTotal! + 1e-6, `${p.name}: an order should not cost more`);
+    compared++;
+  }
+  assert.ok(compared > 20, `only ${compared} mutations compared`);
+});

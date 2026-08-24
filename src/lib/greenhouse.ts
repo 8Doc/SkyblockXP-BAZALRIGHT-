@@ -158,18 +158,42 @@ export function stagesPerHarvest(m: Mutation): number | null {
 /* ------------------------------------------------------------------ money */
 
 /** What one of an item fetches, sold patiently into the bazaar and taxed, or to a shop untaxed. */
+/**
+ * Whether you are willing to wait for the book to come to you.
+ *
+ * Two ways to trade a bazaar item and they are not close together on a thin one. Taking the book —
+ * an instant sell into the best buy order, an instant buy from the cheapest sell offer — happens
+ * now and pays the spread. Placing an order at the other side of the spread costs nothing extra
+ * but only fills when somebody crosses it.
+ *
+ * On a deep book the difference is a rounding error; on a mutation it is the whole answer. A
+ * Devourer's ask has sat at a million while its best bid was a single coin, so "what is a Devourer
+ * worth" has two answers three million percent apart, and which one is right depends entirely on
+ * whether you are prepared to leave a sell offer up.
+ *
+ * Crops are exempt and always priced as an instant sell: a harvest is tens of thousands of them,
+ * their books are deep enough that the spread is noise, and nobody sits on a sell offer for
+ * pumpkins. So this governs the mutations, which is where it bites.
+ */
+export type PriceMode = "instant" | "order";
+
 export function unitPrice(
   id: string,
   market: Map<string, ProductSnapshot>,
   npcPrices: Record<string, NpcPrice>,
+  mode: PriceMode = "order",
 ): number | null {
   const product = market.get(id);
-  // The bazaar's bid is what selling into it actually pays, and the tax comes off that. An item
-  // with an empty buy book has no price rather than a price of zero — the rule the rest of this
-  // codebase keeps.
-  const bazaar = product && product.instabuy > 0 ? product.instabuy * NET_OF_TAX : null;
+  // Selling instantly means taking the best *buy order* — `instasell`, the bid. Selling patiently
+  // means posting an offer at the *ask* — `instabuy` — and waiting for someone to take it. Either
+  // way the tax comes off. An item with an empty book has no price rather than a price of zero,
+  // which is the rule the rest of this codebase keeps.
+  const side = mode === "instant" ? product?.instasell : product?.instabuy;
+  const bazaar = side !== undefined && side > 0 ? side * NET_OF_TAX : null;
   const shop = npcPrices[id]?.sell ?? null;
   if (bazaar === null && shop === null) return null;
+  // The shopkeeper is always instant and never taxed, so it stays in the running in both modes —
+  // for the cheap crops it is often the better of the two.
   return Math.max(bazaar ?? 0, shop ?? 0);
 }
 
@@ -178,9 +202,13 @@ export function buyPrice(
   id: string,
   market: Map<string, ProductSnapshot>,
   npcPrices: Record<string, NpcPrice>,
+  mode: PriceMode = "order",
 ): number | null {
   const product = market.get(id);
-  const bazaar = product && product.instasell > 0 ? product.instasell : null;
+  // Buying instantly means taking the cheapest *sell offer* — `instabuy`, the ask. Buying patiently
+  // means posting a buy order at the *bid* — `instasell` — and waiting to be filled.
+  const side = mode === "instant" ? product?.instabuy : product?.instasell;
+  const bazaar = side !== undefined && side > 0 ? side : null;
   const shop = npcPrices[id]?.buy ?? null;
   if (bazaar === null && shop === null) return null;
   return Math.min(bazaar ?? Infinity, shop ?? Infinity);
@@ -251,6 +279,7 @@ export function setupFor(
   market: Map<string, ProductSnapshot>,
   npcPrices: Record<string, NpcPrice>,
   plot: PlotShape,
+  mode: PriceMode = "order",
 ): Setup | null {
   if (m.spreading.requires.length === 0) return null;
 
@@ -259,7 +288,7 @@ export function setupFor(
 
   const items: SetupItem[] = m.spreading.requires.map((r, i) => {
     const grown = byId.has(r.id);
-    const each = r.free ? 0 : buyPrice(r.id, market, npcPrices);
+    const each = r.free ? 0 : buyPrice(r.id, market, npcPrices, mode);
     const plants = packing.plants[i] ?? 0;
     return {
       id: r.id,
@@ -469,6 +498,14 @@ export type ProfitOptions = {
   /** Multiplied on top of fortune: plant yield upgrade, evergreen chips, adjacency buffs. */
   yieldMultiplier?: number;
   plots?: number;
+  /**
+   * Whether mutations are traded across the spread or by leaving an order up.
+   *
+   * Governs both directions at once, because that is how anyone actually plays it: someone patient
+   * enough to leave a sell offer on the harvest is patient enough to leave a buy order on the ring.
+   * Crops ignore it and are always dumped — see the loop in `profitOf`.
+   */
+  priceMode?: PriceMode;
   /** The greenhouse to lay out on. Defaults to a fully unlocked 10x10. */
   plot?: PlotShape;
   /** Prebuilt by , so ranking forty rows does not rebuild it forty times. */
@@ -512,6 +549,7 @@ export function profitOf(m: Mutation, byId: Map<string, Mutation>, data: Greenho
   const npcPrices = o.npcPrices ?? {};
   const yieldBuffs = o.yieldMultiplier ?? 1;
   const fortuneByCrop = o.cropFortuneIndex ?? cropFortuneIndex(data);
+  const mode = o.priceMode ?? "order";
 
   // Per drop, not per mutation: each one carries its own crop fortune on top of the general one,
   // so a mutation dropping two different crops is lifted by two different amounts.
@@ -520,7 +558,11 @@ export function profitOf(m: Mutation, byId: Map<string, Mutation>, data: Greenho
   const cropsLifted: string[] = [];
   const drops: DropRevenue[] = [];
   for (const drop of m.drops) {
-    const price = unitPrice(drop.id, o.market, npcPrices);
+    // Crops are always dumped into the book, whatever the toggle says. A harvest is tens of
+    // thousands of them, their books are deep enough that the spread is noise, and nobody leaves a
+    // sell offer up for pumpkins. The toggle exists for the mutations, where the spread is the
+    // whole story.
+    const price = unitPrice(drop.id, o.market, npcPrices, "instant");
     const crop = fortuneByCrop.get(drop.id) ?? null;
     const extra = crop ? (o.cropFortune?.[crop] ?? 0) : 0;
     const multiplier = fortuneMultiplier(o.farmingFortune, extra) * yieldBuffs;
@@ -542,7 +584,7 @@ export function profitOf(m: Mutation, byId: Map<string, Mutation>, data: Greenho
   // It is not a footnote. Snoozling's crops are ordinary and its item asks millions, so leaving it
   // out ranks the whole page on the smaller half of the income for exactly the mutations where the
   // item is the point.
-  const selfPrice = unitPrice(m.id, o.market, npcPrices);
+  const selfPrice = unitPrice(m.id, o.market, npcPrices, mode);
   const self: DropRevenue | null =
     selfPrice === null ? null : { id: m.id, name: m.name, amount: 1, each: selfPrice, crop: null, multiplier: 1, coins: selfPrice };
   if (self) revenue += self.coins;
@@ -551,14 +593,16 @@ export function profitOf(m: Mutation, byId: Map<string, Mutation>, data: Greenho
   // An Ethereal Vine on harvest, at odds that rise with rarity. It is the only way to enlarge the
   // greenhouse and it trades on the bazaar, so it is real income rather than a curiosity.
   const vineChance = data.etherealVineByRarity[(m.rarity ?? "").toLowerCase()] ?? 0;
-  const vinePrice = unitPrice("ETHEREAL_VINE", o.market, npcPrices) ?? 0;
+  // The vine follows the toggle for the same reason a mutation does: a thin book where the two
+  // sides are far apart, and one you would plausibly leave an offer up for.
+  const vinePrice = unitPrice("ETHEREAL_VINE", o.market, npcPrices, mode) ?? 0;
   const vineRevenue = vineChance * vinePrice;
 
   const stages = stagesPerHarvest(m);
   const hoursPerStage = stageSeconds(data, o.growth) / 3600;
   const hoursPerHarvest = stages === null ? null : stages * hoursPerStage;
 
-  const setup = setupFor(m, byId, o.market, npcPrices, o.plot ?? FULL_PLOT);
+  const setup = setupFor(m, byId, o.market, npcPrices, o.plot ?? FULL_PLOT, mode);
   const plots = o.plots ?? 1;
 
   // How many grow at once, which is the figure the whole ranking turns on. A mutation paying twice
