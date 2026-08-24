@@ -4,7 +4,7 @@ import assert from "node:assert/strict";
 import { nameKey, parseChance, parseItemList, parsePlantNotes, parseSpreading } from "../scripts/fetch-greenhouse.mjs";
 import {
   buyPrice,
-  cheapestSetup,
+  setupFor,
   cropFortuneIndex,
   FULL_PLOT,
   fortuneMultiplier,
@@ -154,17 +154,17 @@ test("buying takes the cheaper of the bazaar and the shop", () => {
 });
 
 /**
- * The slash in "Soggybud x4 / Choconut x4" is an *or*, and which side is cheaper is a live price
- * question rather than a property of the mutation — so it is answered per call, against the
- * market, the same way the bazaar's craft alternatives are.
+ * The slash in "Soggybud x4 / Choconut x4" reads like "or" and means "and" — every crop it names
+ * is needed at the same target, which the wiki's own layouts settle. Pricing only the cheaper one,
+ * as this did at first, halves every bill on the page and hides whichever half is expensive.
  */
-test("the cheaper of two spreading options is the one costed", () => {
+test("every crop a condition names is bought, not just the cheap one", () => {
   const m = {
     size: 1,
     spreading: {
       raw: "",
       prose: false,
-      options: [
+      requires: [
         { id: "DEAR", name: "Dear", cells: 4 },
         { id: "CHEAP", name: "Cheap", cells: 4 },
       ],
@@ -175,21 +175,45 @@ test("the cheaper of two spreading options is the one costed", () => {
     ["DEAR", product("DEAR", 1_000, 1_100)],
     ["CHEAP", product("CHEAP", 10, 11)],
   ]);
-  const setup = cheapestSetup(m, new Map(), market, {}, FULL_PLOT);
-  assert.equal(setup?.option.id, "CHEAP");
+  const setup = setupFor(m, new Map(), market, {}, FULL_PLOT);
+  assert.ok(setup);
+  assert.deepEqual(setup!.items.map((i) => i.id), ["DEAR", "CHEAP"], "both, in the order stated");
+  assert.ok(setup!.items.every((i) => i.plants > 0), "and both really get planted");
+
   // A whole plot, not one mutation: the ring is bought once and shared between every target it
-  // touches, so the cost is the packing's plant count rather than the four cells of one condition.
-  assert.ok(setup && setup.packing.targets > 1, "and it is laid out across the plot");
-  assert.equal(setup!.coins, setup!.packing.supportPlants * 10, "every support plant at ten");
+  // touches, so the bill is the packing's plant counts at each crop's own price.
+  const expected = setup!.items[0].plants * 1_000 + setup!.items[1].plants * 10;
+  assert.equal(setup!.coins, expected, "the dear crop is in the total, not discarded");
+  assert.ok(setup!.coins! > setup!.items[1].coins!, "and it dominates it");
+});
+
+/** One unpriceable crop makes the whole bill unknown rather than quietly cheap. */
+test("a bill with an unpriceable part has no total", () => {
+  const m = {
+    size: 1,
+    spreading: {
+      raw: "",
+      prose: false,
+      requires: [
+        { id: "PRICED", name: "Priced", cells: 2 },
+        { id: "NOBODY_SELLS_IT", name: "Unpriced", cells: 2 },
+      ],
+    },
+    plantNotes: {},
+  } as unknown as Mutation;
+  const market = new Map([["PRICED", product("PRICED", 10, 11)]]);
+  const setup = setupFor(m, new Map(), market, {}, FULL_PLOT);
+  assert.equal(setup?.coins, null);
+  assert.equal(setup?.items[1].coins, null, "and it says which part");
 });
 
 test("a free requirement costs nothing rather than going unpriced", () => {
   const m = {
     size: 1,
-    spreading: { raw: "", prose: false, options: [{ id: "FIRE", name: "Fire", cells: 2, free: true }] },
+    spreading: { raw: "", prose: false, requires: [{ id: "FIRE", name: "Fire", cells: 2, free: true }] },
     plantNotes: {},
   } as unknown as Mutation;
-  assert.equal(cheapestSetup(m, new Map(), new Map(), {}, FULL_PLOT)?.coins, 0);
+  assert.equal(setupFor(m, new Map(), new Map(), {}, FULL_PLOT)?.coins, 0);
 });
 
 /* ------------------------------------------------------------ the ranking */
@@ -372,9 +396,11 @@ test("Fire is a requirement with no price rather than an item to look up", () =>
   assert.equal(fire.free, true);
 });
 
-test("a slash separates alternatives, and prose is flagged as prose", () => {
+test("a slash lists everything required, and prose is flagged as prose", () => {
+  // The layouts settle it: Gloomgourd's 3x3 holds a Pumpkin *and* a Melon Slice, not either one.
   const both = parseSpreading("{{Item|Pumpkin|amount=1}} / {{Item|Melon|amount=1}}");
-  assert.equal(both.options.length, 2);
+  assert.equal(both.requires.length, 2, "both are needed, not one of them");
+  assert.deepEqual(both.requires.map((r: { name: string }) => r.name), ["Pumpkin", "Melon"]);
   assert.equal(both.prose, false);
 
   assert.equal(parseSpreading("0 adjacent crops").prose, true);
@@ -396,4 +422,42 @@ test("a footnote yields both the cells asked for and the plants that cover them"
 test("a name key ignores spacing and punctuation", () => {
   assert.equal(nameKey("Melon Slice"), nameKey("melonslice"));
   assert.equal(nameKey("Do-not-eat-shroom"), "donoteatshroom");
+});
+
+/**
+ * The check that would have caught reading the slash as "or" on the first day.
+ *
+ * The wiki draws every mutation's arrangement as well as writing its condition, and the drawing is
+ * the condition made concrete: Stoplight Petal's grid holds four Noctilume *and* four Snoozling,
+ * exactly what its condition names. If the two ever disagree, one of them has been parsed wrong.
+ */
+test("the parsed requirements match the arrangement the wiki draws", () => {
+  let checked = 0;
+  for (const m of data.mutations as (Mutation & { layoutCounts?: Record<string, number> })[]) {
+    if (!m.layoutCounts || m.spreading.prose) continue;
+    for (const req of m.spreading.requires) {
+      // The drawing is keyed by display name; the mutation itself also appears in its own grid.
+      const drawn = m.layoutCounts[req.name];
+      if (drawn === undefined) continue;
+      assert.equal(drawn, req.cells, `${m.name} asks for ${req.cells} ${req.name} and its layout draws ${drawn}`);
+      checked++;
+    }
+  }
+  assert.ok(checked >= 40, `only ${checked} requirements cross-checked against a drawing`);
+});
+
+/**
+ * A mutation's own square plus its ring is what the drawing covers, so the counts have to fit
+ * inside the ring: eight cells for a 1x1, twelve for a 2x2, sixteen for a 3x3. Several fill it
+ * exactly, which is the other half of the evidence that the clauses are simultaneous rather than
+ * alternative — four plus four is eight, and four plus three plus three plus three plus three is
+ * sixteen.
+ */
+test("a condition never asks for more ring than the mutation has", () => {
+  for (const m of data.mutations) {
+    if (m.spreading.prose) continue;
+    const ring = (m.size + 2) ** 2 - m.size ** 2;
+    const asked = m.spreading.requires.reduce((sum, r) => sum + r.cells, 0);
+    assert.ok(asked <= ring, `${m.name} (${m.size}x${m.size}) asks for ${asked} of a ${ring}-cell ring`);
+  }
 });

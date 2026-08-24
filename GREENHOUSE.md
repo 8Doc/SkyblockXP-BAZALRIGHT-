@@ -49,6 +49,29 @@ in the right places. Note the step at the top: tier 9 is 0.50 where the pattern 
 the last tier is worth *double a normal one* — not, as it is tempting to write, worth more than the
 eight below it, which the reciprocal shape of the formula makes plainly false.
 
+### A condition is a conjunction, not a choice
+
+The wiki writes a spreading condition with slashes — `Soggybud x5 / Noctilume x3` — and it reads
+like a list of alternatives. It is a list of **requirements**: all of them, at the same target, at
+once. The layouts settle it, because the wiki draws each arrangement as well as writing it:
+
+| mutation | condition | what its layout actually holds |
+|---|---|---|
+| Scourroot | Potato 1 / Carrot 1 | 1 Potato **and** 1 Carrot |
+| Thunderling | Soggybud 5 / Noctilume 3 | 5 Soggybud **and** 3 Noctilume |
+| Stoplight Petal | Snoozling 4 / Noctilume 4 | 4 Snoozling **and** 4 Noctilume |
+| Snoozling | five crops, 4+3+3+3+3 | all five, sixteen cells |
+
+The counts are the other half of the proof: they fill the ring exactly. A 1x1 mutation has eight
+cells around it and Stoplight Petal asks for 4 + 4; a 3x3 Snoozling has sixteen and asks for
+4 + 3 + 3 + 3 + 3.
+
+Reading it as a choice — which the first cut did — prices one crop and calls it the cheapest, which
+halves every bill on the page and hides whichever half is expensive. On Devourer that is the whole
+answer: 50 Puffercloud at 1.1M each is **100% of the bill** and the 25 Zombud beside it are 0.1%.
+A test now cross-checks every parsed requirement against the cell counts in the wiki's own drawing,
+so the two can never drift apart again.
+
 ### A spreading condition counts ring cells, not plants
 
 The wiki's layouts are a 3×3 with the mutation appearing in the middle, and the condition counts

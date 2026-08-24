@@ -317,3 +317,11 @@ table.bz td:last-child { color: var(--gold); }
 .gh-k-empty { background: rgba(255,255,255,0.07); }
 .gh-locked { background: rgba(255,255,255,0.02); border: 1px dashed rgba(255,255,255,0.12); }
 .gh-key { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin: 0 3px 0 8px; }
+
+/* Up to five different crops in one layout, so each requirement gets its own swatch. */
+.gh-c0 { background: #4c8c3f; }
+.gh-c1 { background: #3f6f8c; }
+.gh-c2 { background: #8c3f6f; }
+.gh-c3 { background: #8c6f3f; }
+.gh-c4 { background: #6f3f8c; }
+.gh-bill { margin: 4px 0 6px 18px; font-size: 0.85em; line-height: 1.5; }

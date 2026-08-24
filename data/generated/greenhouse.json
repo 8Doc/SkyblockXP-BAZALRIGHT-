@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-23T20:21:56.324Z",
+  "generatedAt": "2026-08-24T09:37:31.910Z",
   "cropFortunes": [
     {
       "stat": "Wheat Fortune",
@@ -288,7 +288,7 @@
       "growthStages": 0,
       "spreading": {
         "raw": "{{Item|Nether Wart|amount=2}} / {{Item|Fire|amount=2}}",
-        "options": [
+        "requires": [
           {
             "id": "NETHER_STALK",
             "name": "Nether Wart",
@@ -333,7 +333,12 @@
           "Flint and Steel",
           null
         ]
-      ]
+      ],
+      "layoutCounts": {
+        "Flint and Steel": 2,
+        "Nether Wart": 2,
+        "Ashwreath": 1
+      }
     },
     {
       "id": "CHOCONUT",
@@ -347,7 +352,7 @@
       "growthStages": 0,
       "spreading": {
         "raw": "{{Item|Cocoa Beans|amount=2}}",
-        "options": [
+        "requires": [
           {
             "id": "INK_SACK:3",
             "name": "Cocoa Beans",
@@ -385,7 +390,11 @@
           null,
           null
         ]
-      ]
+      ],
+      "layoutCounts": {
+        "Cocoa Beans": 2,
+        "Choconut": 1
+      }
     },
     {
       "id": "DUSTGRAIN",
@@ -399,7 +408,7 @@
       "growthStages": 0,
       "spreading": {
         "raw": "{{Item|Wheat|amount=2}}",
-        "options": [
+        "requires": [
           {
             "id": "WHEAT",
             "name": "Wheat",
@@ -437,7 +446,11 @@
           null,
           null
         ]
-      ]
+      ],
+      "layoutCounts": {
+        "Wheat": 2,
+        "Dustgrain": 1
+      }
     },
     {
       "id": "GLOOMGOURD",
@@ -451,7 +464,7 @@
       "growthStages": 0,
       "spreading": {
         "raw": "{{Item|Pumpkin|amount=1}} / {{Item|Melon|amount=1}}",
-        "options": [
+        "requires": [
           {
             "id": "PUMPKIN",
             "name": "Pumpkin",
@@ -500,7 +513,12 @@
           null,
           null
         ]
-      ]
+      ],
+      "layoutCounts": {
+        "Pumpkin": 1,
+        "Gloomgourd": 1,
+        "Melon Slice": 1
+      }
     },
     {
       "id": "LONELILY",
@@ -514,7 +532,7 @@
       "growthStages": 0,
       "spreading": {
         "raw": "0 adjacent crops",
-        "options": [],
+        "requires": [],
         "prose": true
       },
       "plantNotes": {},
@@ -556,7 +574,10 @@
           null,
           null
         ]
-      ]
+      ],
+      "layoutCounts": {
+        "Lonelily": 1
+      }
     },
     {
       "id": "SCOURROOT",
@@ -570,7 +591,7 @@
       "growthStages": 0,
       "spreading": {
         "raw": "{{Item|Potato|amount=1}} / {{Item|Carrot|amount=1}}",
-        "options": [
+        "requires": [
           {
             "id": "POTATO_ITEM",
             "name": "Potato",
@@ -619,7 +640,12 @@
           null,
           null
         ]
-      ]
+      ],
+      "layoutCounts": {
+        "Potato": 1,
+        "Scourroot": 1,
+        "Carrot": 1
+      }
     },
     {
       "id": "SHADEVINE",
@@ -633,7 +659,7 @@
       "growthStages": 0,
       "spreading": {
         "raw": "{{Item|Cactus|amount=1}} / {{Item|Sugar Cane|amount=1}}",
-        "options": [
+        "requires": [
           {
             "id": "CACTUS",
             "name": "Cactus",
@@ -683,7 +709,12 @@
           null,
           null
         ]
-      ]
+      ],
+      "layoutCounts": {
+        "Cactus": 1,
+        "Shadevine": 1,
+        "Sugar Cane": 1
+      }
     },
     {
       "id": "VEILSHROOM",
@@ -697,7 +728,7 @@
       "growthStages": 0,
       "spreading": {
         "raw": "{{Item|Red Mushroom|amount=1}} / {{Item|Brown Mushroom|amount=1}}",
-        "options": [
+        "requires": [
           {
             "id": "RED_MUSHROOM",
             "name": "Red Mushroom",
@@ -746,7 +777,12 @@
           null,
           null
         ]
-      ]
+      ],
+      "layoutCounts": {
+        "Red Mushroom": 1,
+        "Veilshroom": 1,
+        "Brown Mushroom": 1
+      }
     },
     {
       "id": "WITHERBLOOM",
@@ -760,7 +796,7 @@
       "growthStages": 0,
       "spreading": {
         "raw": "{{Item|Dead Plant|amount=4}}",
-        "options": [
+        "requires": [
           {
             "id": "DEAD_PLANT",
             "name": "Dead Plant",
@@ -799,7 +835,11 @@
           "Dead Plant",
           null
         ]
-      ]
+      ],
+      "layoutCounts": {
+        "Dead Plant": 4,
+        "Witherbloom": 1
+      }
     },
     {
       "id": "CHOCOBERRY",
@@ -813,7 +853,7 @@
       "growthStages": 6,
       "spreading": {
         "raw": "{{Item|Choconut|amount=6}} / {{Item|Gloomgourd|amount=2}}",
-        "options": [
+        "requires": [
           {
             "id": "CHOCONUT",
             "name": "Choconut",
@@ -866,7 +906,12 @@
           "Choconut",
           "Choconut"
         ]
-      ]
+      ],
+      "layoutCounts": {
+        "Choconut": 6,
+        "Gloomgourd": 2,
+        "Chocoberry": 1
+      }
     },
     {
       "id": "CINDERSHADE",
@@ -880,7 +925,7 @@
       "growthStages": 8,
       "spreading": {
         "raw": "{{Item|Ashwreath|amount=4}} / 4x [[Witherbloom|Witherbloom]]",
-        "options": [
+        "requires": [
           {
             "id": "ASHWREATH",
             "name": "Ashwreath",
@@ -930,7 +975,12 @@
           "Witherbloom",
           "Witherbloom"
         ]
-      ]
+      ],
+      "layoutCounts": {
+        "Ashwreath": 4,
+        "Witherbloom": 4,
+        "Cindershade": 1
+      }
     },
     {
       "id": "COALROOT",
@@ -944,7 +994,7 @@
       "growthStages": 8,
       "spreading": {
         "raw": "{{Item|Ashwreath|amount=5}} / {{Item|Scourroot|amount=3}}",
-        "options": [
+        "requires": [
           {
             "id": "ASHWREATH",
             "name": "Ashwreath",
@@ -997,7 +1047,12 @@
           "Scourroot",
           "Ashwreath"
         ]
-      ]
+      ],
+      "layoutCounts": {
+        "Ashwreath": 5,
+        "Scourroot": 3,
+        "Coalroot": 1
+      }
     },
     {
       "id": "CREAMBLOOM",
@@ -1011,7 +1066,7 @@
       "growthStages": 6,
       "spreading": {
         "raw": "{{Item|Choconut|amount=8}}",
-        "options": [
+        "requires": [
           {
             "id": "CHOCONUT",
             "name": "Choconut",
@@ -1049,7 +1104,11 @@
           "Choconut",
           "Choconut"
         ]
-      ]
+      ],
+      "layoutCounts": {
+        "Choconut": 8,
+        "Creambloom": 1
+      }
     },
     {
       "id": "DUSKBLOOM",
@@ -1063,7 +1122,7 @@
       "growthStages": 8,
       "spreading": {
         "raw": "{{Item|Moonflower|amount=2}} / {{Item|Shadevine|amount=2}} / {{Item|Sunflower|amount=2}} / {{Item|Dustgrain|amount=2}}",
-        "options": [
+        "requires": [
           {
             "id": "MOONFLOWER",
             "name": "Moonflower",
@@ -1126,7 +1185,14 @@
           "Sunflower",
           "Sunflower"
         ]
-      ]
+      ],
+      "layoutCounts": {
+        "Moonflower": 2,
+        "Shadevine": 2,
+        "Dustgrain": 2,
+        "Duskbloom": 1,
+        "Sunflower": 2
+      }
     },
     {
       "id": "THORNSHADE",
@@ -1140,7 +1206,7 @@
       "growthStages": 8,
       "spreading": {
         "raw": "{{Item|Wild Rose|amount=4}} / {{Item|Veilshroom|amount=4}}",
-        "options": [
+        "requires": [
           {
             "id": "WILD_ROSE",
             "name": "Wild Rose",
@@ -1193,7 +1259,12 @@
           "Veilshroom",
           "Veilshroom"
         ]
-      ]
+      ],
+      "layoutCounts": {
+        "Wild Rose": 4,
+        "Veilshroom": 4,
+        "Thornshade": 1
+      }
     },
     {
       "id": "BLASTBERRY",
@@ -1207,7 +1278,7 @@
       "growthStages": 6,
       "spreading": {
         "raw": "{{Item|Chocoberry|amount=5}} / {{Item|Ashwreath|amount=3}}",
-        "options": [
+        "requires": [
           {
             "id": "CHOCOBERRY",
             "name": "Chocoberry",
@@ -1257,7 +1328,12 @@
           "Ashwreath",
           "Chocoberry"
         ]
-      ]
+      ],
+      "layoutCounts": {
+        "Chocoberry": 5,
+        "Ashwreath": 3,
+        "Blastberry": 1
+      }
     },
     {
       "id": "CHEESEBITE",
@@ -1271,7 +1347,7 @@
       "growthStages": 10,
       "spreading": {
         "raw": "{{Item|Creambloom|amount=4}} / {{Item|Fermento|amount=4}}",
-        "options": [
+        "requires": [
           {
             "id": "CREAMBLOOM",
             "name": "Creambloom",
@@ -1329,7 +1405,12 @@
           "Fermento",
           "Fermento"
         ]
-      ]
+      ],
+      "layoutCounts": {
+        "Creambloom": 4,
+        "Fermento": 4,
+        "Cheesebite": 1
+      }
     },
     {
       "id": "CHLORONITE",
@@ -1343,7 +1424,7 @@
       "growthStages": 10,
       "spreading": {
         "raw": "{{Item|Coalroot|amount=6}} / {{Item|Thornshade|amount=2}}",
-        "options": [
+        "requires": [
           {
             "id": "COALROOT",
             "name": "Coalroot",
@@ -1406,7 +1487,12 @@
           "Coalroot",
           "Coalroot"
         ]
-      ]
+      ],
+      "layoutCounts": {
+        "Coalroot": 6,
+        "Thornshade": 2,
+        "Chloronite": 1
+      }
     },
     {
       "id": "DO_NOT_EAT_SHROOM",
@@ -1420,7 +1506,7 @@
       "growthStages": 8,
       "spreading": {
         "raw": "{{Item|Veilshroom|amount=4}} / {{Item|Scourroot|amount=4}}",
-        "options": [
+        "requires": [
           {
             "id": "VEILSHROOM",
             "name": "Veilshroom",
@@ -1479,7 +1565,12 @@
           "Scourroot",
           "Scourroot"
         ]
-      ]
+      ],
+      "layoutCounts": {
+        "Veilshroom": 4,
+        "Scourroot": 4,
+        "Do-not-eat-shroom": 1
+      }
     },
     {
       "id": "FLESHTRAP",
@@ -1493,7 +1584,7 @@
       "growthStages": 14,
       "spreading": {
         "raw": "{{Item|Cindershade|amount=4}} / {{Item|Lonelily|amount=4}}",
-        "options": [
+        "requires": [
           {
             "id": "CINDERSHADE",
             "name": "Cindershade",
@@ -1546,7 +1637,12 @@
           "Lonelily",
           "Lonelily"
         ]
-      ]
+      ],
+      "layoutCounts": {
+        "Cindershade": 4,
+        "Lonelily": 4,
+        "Fleshtrap": 1
+      }
     },
     {
       "id": "MAGIC_JELLYBEAN",
@@ -1560,7 +1656,7 @@
       "growthStages": 120,
       "spreading": {
         "raw": "{{Item|Sugar Cane|amount=5}} / {{Item|Duskbloom|amount=3}}",
-        "options": [
+        "requires": [
           {
             "id": "SUGAR_CANE",
             "name": "Sugar Cane",
@@ -1614,7 +1710,12 @@
           "Duskbloom",
           "Sugar Cane"
         ]
-      ]
+      ],
+      "layoutCounts": {
+        "Sugar Cane": 5,
+        "Duskbloom": 3,
+        "Magic Jellybean": 1
+      }
     },
     {
       "id": "NOCTILUME",
@@ -1628,7 +1729,7 @@
       "growthStages": 4,
       "spreading": {
         "raw": "{{Item|Duskbloom|amount=6}} / {{Item|Lonelily|amount=6}}",
-        "options": [
+        "requires": [
           {
             "id": "DUSKBLOOM",
             "name": "Duskbloom",
@@ -1666,19 +1767,33 @@
         [
           "Duskbloom",
           "Duskbloom",
+          "Duskbloom",
           "Duskbloom"
         ],
         [
           "Lonelily",
           "Noctilume",
-          "Noctilume"
+          "Noctilume",
+          "Duskbloom"
         ],
         [
           "Lonelily",
           "Noctilume",
-          "Noctilume"
+          "Noctilume",
+          "Duskbloom"
+        ],
+        [
+          "Lonelily",
+          "Lonelily",
+          "Lonelily",
+          "Lonelily"
         ]
-      ]
+      ],
+      "layoutCounts": {
+        "Duskbloom": 6,
+        "Lonelily": 6,
+        "Noctilume": 4
+      }
     },
     {
       "id": "SNOOZLING",
@@ -1692,7 +1807,7 @@
       "growthStages": 20,
       "spreading": {
         "raw": "{{Item|Creambloom|amount=4}} / {{Item|Dustgrain|amount=3}} / {{Item|Witherbloom|amount=3}} / {{Item|Duskbloom|amount=3}} / {{Item|Thornshade|amount=3}}",
-        "options": [
+        "requires": [
           {
             "id": "CREAMBLOOM",
             "name": "Creambloom",
@@ -1753,19 +1868,47 @@
         [
           "Creambloom",
           "Creambloom",
-          "Creambloom"
+          "Creambloom",
+          "Creambloom",
+          "Dustgrain"
         ],
         [
           "Thornshade",
           "Snoozling",
-          "Snoozling"
+          "Snoozling",
+          "Snoozling",
+          "Dustgrain"
         ],
         [
           "Thornshade",
           "Snoozling",
-          "Snoozling"
+          "Snoozling",
+          "Snoozling",
+          "Dustgrain"
+        ],
+        [
+          "Thornshade",
+          "Snoozling",
+          "Snoozling",
+          "Snoozling",
+          "Witherbloom"
+        ],
+        [
+          "Duskbloom",
+          "Duskbloom",
+          "Duskbloom",
+          "Witherbloom",
+          "Witherbloom"
         ]
-      ]
+      ],
+      "layoutCounts": {
+        "Creambloom": 4,
+        "Dustgrain": 3,
+        "Thornshade": 3,
+        "Snoozling": 9,
+        "Witherbloom": 3,
+        "Duskbloom": 3
+      }
     },
     {
       "id": "SOGGYBUD",
@@ -1779,7 +1922,7 @@
       "growthStages": 10,
       "spreading": {
         "raw": "{{Item|Melon|amount=2}} / {{Item|Gloomgourd|amount=2}}",
-        "options": [
+        "requires": [
           {
             "id": "BUILDER_MELON",
             "name": "Melon",
@@ -1822,7 +1965,12 @@
           "Gloomgourd",
           null
         ]
-      ]
+      ],
+      "layoutCounts": {
+        "Gloomgourd": 2,
+        "Melon Slice": 2,
+        "Soggybud": 1
+      }
     },
     {
       "id": "TURTLELLINI",
@@ -1836,7 +1984,7 @@
       "growthStages": 0,
       "spreading": {
         "raw": "{{Item|Soggybud|amount=4}} / {{Item|Choconut|amount=4}}",
-        "options": [
+        "requires": [
           {
             "id": "SOGGYBUD",
             "name": "Soggybud",
@@ -1880,7 +2028,12 @@
           "Choconut",
           "Choconut"
         ]
-      ]
+      ],
+      "layoutCounts": {
+        "Soggybud": 4,
+        "Choconut": 4,
+        "Turtlellini": 1
+      }
     },
     {
       "id": "CHORUS_FRUIT",
@@ -1894,7 +2047,7 @@
       "growthStages": 12,
       "spreading": {
         "raw": "{{Item|Chloronite|amount=5}} / {{Item|Magic Jellybean|amount=3}}",
-        "options": [
+        "requires": [
           {
             "id": "CHLORONITE",
             "name": "Chloronite",
@@ -1948,7 +2101,12 @@
           "Magic Jellybean",
           "Chloronite"
         ]
-      ]
+      ],
+      "layoutCounts": {
+        "Chloronite": 5,
+        "Magic Jellybean": 3,
+        "Chorus Fruit": 1
+      }
     },
     {
       "id": "PLANTBOY_ADVANCE",
@@ -1962,7 +2120,7 @@
       "growthStages": 12,
       "spreading": {
         "raw": "{{Item|Snoozling|amount=6}} / {{Item|Thunderling|amount=6}}",
-        "options": [
+        "requires": [
           {
             "id": "SNOOZLING",
             "name": "Snoozling",
@@ -2008,19 +2166,33 @@
         [
           "Snoozling",
           "Snoozling",
-          "Snoozling"
+          "Snoozling",
+          "Thunderling"
         ],
         [
           "Thunderling",
           "PlantBoy Advance",
-          "PlantBoy Advance"
+          "PlantBoy Advance",
+          "Thunderling"
         ],
         [
           "Thunderling",
           "PlantBoy Advance",
-          "PlantBoy Advance"
+          "PlantBoy Advance",
+          "Thunderling"
+        ],
+        [
+          "Snoozling",
+          "Snoozling",
+          "Snoozling",
+          "Thunderling"
         ]
-      ]
+      ],
+      "layoutCounts": {
+        "Snoozling": 6,
+        "Thunderling": 6,
+        "PlantBoy Advance": 4
+      }
     },
     {
       "id": "PUFFERCLOUD",
@@ -2034,7 +2206,7 @@
       "growthStages": 14,
       "spreading": {
         "raw": "{{Item|Snoozling|amount=2}} / 6x [[Do-not-eat-shroom]]",
-        "options": [
+        "requires": [
           {
             "id": "SNOOZLING",
             "name": "Snoozling",
@@ -2098,7 +2270,12 @@
           "Do-not-eat-shroom",
           "Do-not-eat-shroom"
         ]
-      ]
+      ],
+      "layoutCounts": {
+        "Snoozling": 2,
+        "Do-not-eat-shroom": 6,
+        "Puffercloud": 1
+      }
     },
     {
       "id": "SHELLFRUIT",
@@ -2112,7 +2289,7 @@
       "growthStages": 0,
       "spreading": {
         "raw": "Explode a [[Turtlellini]] with a [[Blastberry]].",
-        "options": [],
+        "requires": [],
         "prose": true
       },
       "plantNotes": {},
@@ -2147,7 +2324,7 @@
       "growthStages": 12,
       "spreading": {
         "raw": "{{Item|Blastberry|amount=4}} / {{Item|Cheesebite|amount=4}}",
-        "options": [
+        "requires": [
           {
             "id": "BLASTBERRY",
             "name": "Blastberry",
@@ -2197,7 +2374,12 @@
           "Cheesebite",
           "Cheesebite"
         ]
-      ]
+      ],
+      "layoutCounts": {
+        "Blastberry": 4,
+        "Cheesebite": 4,
+        "Startlevine": 1
+      }
     },
     {
       "id": "STOPLIGHT_PETAL",
@@ -2211,7 +2393,7 @@
       "growthStages": 12,
       "spreading": {
         "raw": "{{Item|Snoozling|amount=4}} / {{Item|Noctilume|amount=4}}",
-        "options": [
+        "requires": [
           {
             "id": "SNOOZLING",
             "name": "Snoozling",
@@ -2270,7 +2452,12 @@
           "Noctilume",
           "Noctilume"
         ]
-      ]
+      ],
+      "layoutCounts": {
+        "Noctilume": 4,
+        "Snoozling": 4,
+        "Stoplight Petal": 1
+      }
     },
     {
       "id": "THUNDERLING",
@@ -2284,7 +2471,7 @@
       "growthStages": 16,
       "spreading": {
         "raw": "{{Item|Soggybud|amount=5}} / {{Item|Noctilume|amount=3}}",
-        "options": [
+        "requires": [
           {
             "id": "SOGGYBUD",
             "name": "Soggybud",
@@ -2342,7 +2529,12 @@
           "Soggybud",
           "Soggybud"
         ]
-      ]
+      ],
+      "layoutCounts": {
+        "Noctilume": 3,
+        "Soggybud": 5,
+        "Thunderling": 1
+      }
     },
     {
       "id": "ZOMBUD",
@@ -2356,7 +2548,7 @@
       "growthStages": 16,
       "spreading": {
         "raw": "{{Item|Dead Plant|amount=4}} / {{Item|Cindershade|amount=2}} / {{Item|Fleshtrap|amount=2}}",
-        "options": [
+        "requires": [
           {
             "id": "DEAD_PLANT",
             "name": "Dead Plant",
@@ -2411,7 +2603,13 @@
           "Cindershade",
           "Cindershade"
         ]
-      ]
+      ],
+      "layoutCounts": {
+        "Dead Plant": 4,
+        "Fleshtrap": 2,
+        "Zombud": 1,
+        "Cindershade": 2
+      }
     },
     {
       "id": "ALL_IN_ALOE",
@@ -2425,7 +2623,7 @@
       "growthStages": 27,
       "spreading": {
         "raw": "{{Item|Magic Jellybean|amount=6}} / {{Item|PlantBoy Advance|amount=2}}",
-        "options": [
+        "requires": [
           {
             "id": "MAGIC_JELLYBEAN",
             "name": "Magic Jellybean",
@@ -2483,7 +2681,12 @@
           "Magic Jellybean",
           "Magic Jellybean"
         ]
-      ]
+      ],
+      "layoutCounts": {
+        "PlantBoy Advance": 2,
+        "Magic Jellybean": 6,
+        "All-in Aloe": 1
+      }
     },
     {
       "id": "DEVOURER",
@@ -2497,7 +2700,7 @@
       "growthStages": 16,
       "spreading": {
         "raw": "{{Item|Puffercloud|amount=4}} / {{Item|Zombud|amount=4}}",
-        "options": [
+        "requires": [
           {
             "id": "PUFFERCLOUD",
             "name": "Puffercloud",
@@ -2552,7 +2755,12 @@
           "Zombud",
           "Zombud"
         ]
-      ]
+      ],
+      "layoutCounts": {
+        "Puffercloud": 4,
+        "Zombud": 4,
+        "Devourer": 1
+      }
     },
     {
       "id": "GLASSCORN",
@@ -2566,7 +2774,7 @@
       "growthStages": 9,
       "spreading": {
         "raw": "{{Item|Startlevine|amount=6}} / {{Item|Chloronite|amount=6}}",
-        "options": [
+        "requires": [
           {
             "id": "STARTLEVINE",
             "name": "Startlevine",
@@ -2604,19 +2812,33 @@
         [
           "Startlevine",
           "Startlevine",
+          "Startlevine",
           "Startlevine"
         ],
         [
           "Chloronite",
           "Glasscorn",
-          "Glasscorn"
+          "Glasscorn",
+          "Startlevine"
         ],
         [
           "Chloronite",
           "Glasscorn",
-          "Glasscorn"
+          "Glasscorn",
+          "Startlevine"
+        ],
+        [
+          "Chloronite",
+          "Chloronite",
+          "Chloronite",
+          "Chloronite"
         ]
-      ]
+      ],
+      "layoutCounts": {
+        "Startlevine": 6,
+        "Chloronite": 6,
+        "Glasscorn": 4
+      }
     },
     {
       "id": "GODSEED",
@@ -2630,7 +2852,7 @@
       "growthStages": 40,
       "spreading": {
         "raw": "All {{Green|positive}} crop effects",
-        "options": [],
+        "requires": [],
         "prose": true
       },
       "plantNotes": {},
@@ -2729,7 +2951,7 @@
       "growthStages": 10,
       "spreading": {
         "raw": "Grow the [[Fertilized Jerryseed|Jerryseed]]",
-        "options": [],
+        "requires": [],
         "prose": true
       },
       "plantNotes": {},
@@ -2752,7 +2974,7 @@
       "growthStages": 15,
       "spreading": {
         "raw": "{{Item|Chorus Fruit|amount=4}} / {{Item|Shellfruit|amount=4}}",
-        "options": [
+        "requires": [
           {
             "id": "CHORUS_FRUIT",
             "name": "Chorus Fruit",
@@ -2801,7 +3023,12 @@
           "Shellfruit",
           "Shellfruit"
         ]
-      ]
+      ],
+      "layoutCounts": {
+        "Chorus Fruit": 4,
+        "Shellfruit": 4,
+        "Phantomleaf": 1
+      }
     },
     {
       "id": "TIMESTALK",
@@ -2815,7 +3042,7 @@
       "growthStages": 14,
       "spreading": {
         "raw": "{{Item|Stoplight Petal|amount=4}} / {{Item|Chorus Fruit|amount=2}} / {{Item|Shellfruit|amount=2}}",
-        "options": [
+        "requires": [
           {
             "id": "STOPLIGHT_PETAL",
             "name": "Stoplight Petal",
@@ -2870,7 +3097,13 @@
           "Chorus Fruit",
           "Chorus Fruit"
         ]
-      ]
+      ],
+      "layoutCounts": {
+        "Stoplight Petal": 4,
+        "Shellfruit": 2,
+        "Timestalk": 1,
+        "Chorus Fruit": 2
+      }
     }
   ],
   "unresolved": []

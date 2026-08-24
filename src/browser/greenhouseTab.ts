@@ -533,10 +533,18 @@ function renderTable(): void {
       const problem = row.problem
         ? `<div class="gold bz-path" title="Kept on the list rather than hidden: a mutation nobody can price is still one worth knowing about.">${escapeHtml(row.problem)}</div>`
         : "";
+      // Every crop the condition names, because it names all of them at once — the slash on the
+      // wiki reads like "or" and means "and". Listing only one, as this did at first, halves the
+      // bill and hides the expensive half of the setup.
       const setup = row.setup && !row.problem
-        ? `<div class="dim bz-path">${num(row.setup.plants)} × ${escapeHtml(row.setup.option.name)} <span class="dim">for the whole plot</span>${row.setup.option.free ? " <span class=\"dim\">(free)</span>" : ""}${
-            row.setup.grown ? ` <span class="dim" title="This ingredient is itself a mutation, so it has to be grown before it can be planted — or bought.">· a mutation itself</span>` : ""
-          }</div>`
+        ? `<div class="dim bz-path">${row.setup.items
+            .map(
+              (i) =>
+                `${num(i.plants)} × ${escapeHtml(i.name)}${i.free ? ` <span class="dim">(free)</span>` : ""}${
+                  i.grown ? `<span class="dim" title="Itself a mutation, so it has to be grown before it can be planted — or bought outright.">*</span>` : ""
+                }`,
+            )
+            .join(" <span class=\"dim\">+</span> ")} <span class="dim">for the whole plot</span></div>`
         : "";
       const rarity = row.rarity ? ` <span class="dim">${escapeHtml(row.rarity)}</span>` : "";
       // Which crop fortune lifted this row, when one did. Named rather than folded silently into
@@ -574,27 +582,54 @@ function renderTable(): void {
 function layoutHtml(row: MutationProfit): string {
   const mutation = tables.greenhouse.mutations.find((m) => m.id === row.id);
   const packing = row.packing;
-  if (!mutation || !packing || packing.targets === 0) {
+  if (!mutation || !packing || packing.targets === 0 || !row.setup) {
     return `<div class="gh-layout dim">No arrangement of this plot grows one of these.</div>`;
   }
 
-  const support = row.setup?.option.name ?? "support";
-  const legend = `<span class="gh-key gh-k-support"></span> ${escapeHtml(support)} <span class="gh-key gh-k-target"></span> ${escapeHtml(mutation.name)} <span class="gh-key gh-k-empty"></span> spare`;
+  const items = row.setup.items;
+  const swatch = (i: number) => `<span class="gh-key gh-c${i % 5}"></span>`;
+  const legend =
+    items.map((i, at) => `${swatch(at)} ${escapeHtml(i.name)}`).join(" ") +
+    ` <span class="gh-key gh-k-target"></span> ${escapeHtml(mutation.name)}` +
+    ` <span class="gh-key gh-k-empty"></span> spare`;
 
   // The whole plot, not the wiki's single 3x3. The wiki draws one mutation in isolation; a real
-  // greenhouse overlaps them, and the overlap is where all the yield comes from.
+  // greenhouse overlaps them, and the overlap is where the yield comes from.
   const grid = packing.grid
     .map(
       (line) =>
         `<div class="gh-row">${line
           .map((cell) => {
             if (cell === "locked") return `<span class="gh-plot gh-locked" title="Not unlocked."></span>`;
-            if (cell === "support") return `<span class="gh-plot gh-k-support" title="${escapeHtml(support)}"></span>`;
             if (cell === "target") return `<span class="gh-plot gh-k-target" title="${escapeHtml(mutation.name)} grows here"></span>`;
-            return `<span class="gh-plot gh-k-empty" title="Empty — its ring is not fed, so nothing grows here."></span>`;
+            if (cell === "empty") return `<span class="gh-plot gh-k-empty" title="Empty — its ring is not fed, so nothing grows here."></span>`;
+            const item = items[cell as number];
+            return `<span class="gh-plot gh-c${(cell as number) % 5}" title="${escapeHtml(item?.name ?? "support")}"></span>`;
           })
           .join("")}</div>`,
     )
+    .join("");
+
+  /**
+   * The bill, itemised. Which plant is the expensive one is the thing a single total hides, and it
+   * is usually the whole answer: a condition wanting four of a legendary mutation and four of a
+   * common one costs almost exactly the legendary.
+   */
+  const bill = items
+    .map((i) => {
+      const cost =
+        i.free
+          ? `<span class="dim">free — lit rather than bought</span>`
+          : i.each === null
+            ? `<span class="gold">nothing is selling it</span>`
+            : `${coins(i.each)} each · <strong>${coins(i.coins ?? 0)}</strong>`;
+      const share =
+        row.setup!.coins && i.coins ? ` <span class="dim">${Math.round((100 * i.coins) / row.setup!.coins)}% of the bill</span>` : "";
+      return `<li>${num(i.plants)} × ${escapeHtml(i.name)} — ${cost}${share}
+        <span class="dim">· ${i.cells} ring cell${i.cells === 1 ? "" : "s"} at each ${escapeHtml(mutation.name)}${
+          i.grown ? ", and itself a mutation you have to grow or buy" : ""
+        }</span></li>`;
+    })
     .join("");
 
   const atCeiling = packing.targets >= packing.ceiling;
@@ -602,7 +637,7 @@ function layoutHtml(row: MutationProfit): string {
     mutation.size > 1
       ? ` It is ${mutation.size}×${mutation.size}, so it needs that much clear room and has a ${
           mutation.size === 2 ? "twelve" : "sixteen"
-        }-cell ring to fill rather than eight — which is why so few fit.`
+        }-cell ring rather than eight — which is why so few fit.`
       : "";
 
   return `
@@ -610,15 +645,20 @@ function layoutHtml(row: MutationProfit): string {
       <div class="gh-plotgrid">${grid}</div>
       <p class="dim">${legend}</p>
       <p class="dim">
-        <strong>${num(packing.targets)}</strong> grow at once from <strong>${num(packing.supportPlants)}</strong>
-        ${escapeHtml(support)}, tiling a ${packing.period.rows}×${packing.period.cols} pattern.
+        <strong>${num(packing.targets)}</strong> grow at once, from <strong>${num(row.setup.plants)}</strong>
+        plants in all, tiling a ${packing.period.rows}×${packing.period.cols} pattern.
         ${
           atCeiling
             ? "That is the most any arrangement could manage — every support cell is feeding as many rings as it can."
             : `The counting bound says no arrangement beats ${num(packing.ceiling)}, so this may leave a little on the table: the search covers repeating patterns, not every irregular one.`
         }${sizeNote}
       </p>
-      <p class="dim">${escapeHtml(mutation.effects.join(" · "))}</p>
+      <p class="dim">Everything below is needed <em>at the same time</em> — the wiki writes the condition with slashes, but it is an "and".</p>
+      <ul class="gh-bill">${bill}</ul>
+      <p class="dim">
+        ${row.setup.coins === null ? `<span class="gold">Part of this has no price, so there is no total.</span>` : `<strong>${coins(row.setup.coins)}</strong> to set the whole plot up once.`}
+        ${escapeHtml(mutation.effects.join(" · "))}
+      </p>
     </div>
   `;
 }

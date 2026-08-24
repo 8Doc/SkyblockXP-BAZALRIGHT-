@@ -47,7 +47,8 @@ export type GreenhouseData = {
   mutations: Mutation[];
 };
 
-export type SpreadOption = { id: string; name: string; cells: number; free?: boolean };
+/** One clause of a spreading condition. Every clause is required — the slash means "and". */
+export type SpreadRequirement = { id: string; name: string; cells: number; free?: boolean };
 
 export type Mutation = {
   id: string;
@@ -61,7 +62,7 @@ export type Mutation = {
   /** Per-roll spawn chance as the wiki states it. Null when it does not. */
   chance: number | null;
   growthStages: number | null;
-  spreading: { raw: string; options: SpreadOption[]; prose: boolean };
+  spreading: { raw: string; requires: SpreadRequirement[]; prose: boolean };
   /** The wiki's own arithmetic for the awkward multi-cell cases, keyed by required crop. */
   plantNotes: Record<string, { cells: number; plants: number }>;
   effects: string[];
@@ -159,60 +160,86 @@ export function buyPrice(
  * The wiki works this out in a footnote for the six cases where it matters and those are used
  * verbatim. Everything else is `ceil(cells / cellsPerPlant)`, which agrees with all six.
  */
-export function plantsFor(option: SpreadOption, required: Mutation | undefined, notes: Mutation["plantNotes"]): number {
+export function plantsFor(option: SpreadRequirement, required: Mutation | undefined, notes: Mutation["plantNotes"]): number {
   const note = notes[option.id];
   if (note && note.cells === option.cells) return note.plants;
   const perPlant = required?.cellsPerPlant ?? 1;
   return Math.ceil(option.cells / Math.max(1, perPlant));
 }
 
-export type Setup = {
-  /** The alternative actually costed — the one that pays best across a whole plot. */
-  option: SpreadOption;
-  /** Support plants for the whole greenhouse, not for one mutation. */
+/** One crop a mutation needs, priced across the whole plot. */
+export type SetupItem = {
+  id: string;
+  name: string;
+  /** Ring cells of this crop the condition asks for at each target. */
+  cells: number;
+  /** Plants of it the layout puts in the plot. */
   plants: number;
-  /** Null when the thing it needs has no price anywhere. */
+  /** What those plants cost, or null when nothing sells it. */
   coins: number | null;
-  /** True when the ingredient is itself a mutation, so it has to be grown before it is planted. */
+  /** What one costs, for the breakdown line. */
+  each: number | null;
+  /** True when it is itself a mutation, so it has to be grown before it can be planted. */
   grown: boolean;
-  /** How the plot was laid out to reach that, and how many mutations it feeds. */
+  /** True when it is Fire or a Dead Plant: a real requirement that costs nothing. */
+  free: boolean;
+};
+
+export type Setup = {
+  /** Every crop the condition names. All of them are needed — the slash is "and". */
+  items: SetupItem[];
+  /** Plants across every requirement. */
+  plants: number;
+  /** The whole plot's bill, or null when any part of it has no price. */
+  coins: number | null;
+  /** How the plot was laid out, and how many mutations that feeds. */
   packing: Packing;
 };
 
 /**
- * The cheapest way to satisfy a mutation's spreading condition.
+ * What a mutation costs to set up across one greenhouse.
  *
- * The slash in "Soggybud x4 / Choconut x4" is an *or*, so the cheaper side is the one a player
- * would plant, and which is cheaper is a live price question rather than a property of the
- * mutation. Fire and Dead Plant cost nothing and are priced as such.
+ * Every clause of the condition is required — the slash on the wiki reads like "or" and means
+ * "and", which the layouts settle: Stoplight Petal's ring holds four Noctilume *and* four
+ * Snoozling, Scourroot's holds a Potato *and* a Carrot. Pricing one of them and calling it the
+ * cheapest, as this did at first, halves every bill on the page and quietly doubles the ranking of
+ * anything with an expensive second crop.
+ *
+ * Fire and Dead Plant are real requirements that cost nothing, and are priced as such rather than
+ * being dropped or read as unpriceable.
  */
-export function cheapestSetup(
+export function setupFor(
   m: Mutation,
   byId: Map<string, Mutation>,
   market: Map<string, ProductSnapshot>,
   npcPrices: Record<string, NpcPrice>,
   plot: PlotShape,
 ): Setup | null {
-  let best: Setup | null = null;
-  for (const option of m.spreading.options) {
-    const required = byId.get(option.id);
-    // The whole plot, not one mutation: the ring around each target is shared with its
-    // neighbours, so the plants and the mutations they feed come out of the same packing.
-    const packing = packFor(plot, option.cells, required?.size ?? 1, m.size);
-    const each = option.free ? 0 : buyPrice(option.id, market, npcPrices);
-    const coins = each === null ? null : each * packing.supportPlants;
-    const setup: Setup = { option, plants: packing.supportPlants, coins, grown: required !== undefined, packing };
+  if (m.spreading.requires.length === 0) return null;
 
-    // More mutations growing at once beats a cheaper ring, because the ring is bought once and
-    // the harvest repeats. Between two that grow the same number, the cheaper one wins.
-    if (!best) best = setup;
-    else if (packing.targets > best.packing.targets) best = setup;
-    else if (packing.targets === best.packing.targets) {
-      if (best.coins === null && coins !== null) best = setup;
-      else if (coins !== null && best.coins !== null && coins < best.coins) best = setup;
-    }
-  }
-  return best;
+  const requires = m.spreading.requires.map((r) => ({ cells: r.cells, size: byId.get(r.id)?.size ?? 1 }));
+  const packing = packFor(plot, requires, m.size);
+
+  const items: SetupItem[] = m.spreading.requires.map((r, i) => {
+    const grown = byId.has(r.id);
+    const each = r.free ? 0 : buyPrice(r.id, market, npcPrices);
+    const plants = packing.plants[i] ?? 0;
+    return {
+      id: r.id,
+      name: r.name,
+      cells: r.cells,
+      plants,
+      each,
+      coins: each === null ? null : each * plants,
+      grown,
+      free: r.free === true,
+    };
+  });
+
+  // One unpriceable crop makes the whole bill unknown rather than cheap — the rule the rest of
+  // this codebase keeps about a missing price.
+  const coins = items.some((i) => i.coins === null) ? null : items.reduce((sum, i) => sum + (i.coins ?? 0), 0);
+  return { items, plants: items.reduce((sum, i) => sum + i.plants, 0), coins, packing };
 }
 
 /**
@@ -233,20 +260,14 @@ export const FULL_PLOT: PlotShape = { width: 10, height: 10 };
  */
 const packings = new Map<string, Packing>();
 
-function packFor(plot: PlotShape, requiredCells: number, supportSize: number, targetSize: number): Packing {
+function packFor(plot: PlotShape, requires: { cells: number; size: number }[], targetSize: number): Packing {
   const lockedKey = plot.locked && plot.locked.size > 0 ? [...plot.locked].sort().join("|") : "";
-  const cacheKey = `${plot.width}x${plot.height}:${lockedKey}:${requiredCells}:${supportSize}:${targetSize}`;
+  const shape = requires.map((r) => `${r.cells}/${r.size}`).join(",");
+  const cacheKey = `${plot.width}x${plot.height}:${lockedKey}:${shape}:${targetSize}`;
   const cached = packings.get(cacheKey);
   if (cached) return cached;
 
-  const packing = packGreenhouse({
-    width: plot.width,
-    height: plot.height,
-    locked: plot.locked,
-    requiredCells,
-    supportSize,
-    targetSize,
-  });
+  const packing = packGreenhouse({ width: plot.width, height: plot.height, locked: plot.locked, requires, targetSize });
   packings.set(cacheKey, packing);
   return packing;
 }
@@ -373,13 +394,13 @@ export function profitOf(m: Mutation, byId: Map<string, Mutation>, data: Greenho
   const hoursPerStage = stageSeconds(data, o.growth) / 3600;
   const hoursPerHarvest = stages === null ? null : stages * hoursPerStage;
 
-  const setup = cheapestSetup(m, byId, o.market, npcPrices, o.plot ?? FULL_PLOT);
+  const setup = setupFor(m, byId, o.market, npcPrices, o.plot ?? FULL_PLOT);
   const plots = o.plots ?? 1;
 
   // How many grow at once, which is the figure the whole ranking turns on. A mutation paying twice
   // as much per harvest is still the worse row if half as many fit.
   const perPlot = setup?.packing.targets ?? 0;
-  const cellsUsed = (setup?.packing.supportCells ?? 0) + perPlot * m.size * m.size;
+  const cellsUsed = (setup?.packing.cells.reduce((a, b) => a + b, 0) ?? 0) + perPlot * m.size * m.size;
 
   const total = (revenue + vineRevenue) * perPlot;
   const problem =

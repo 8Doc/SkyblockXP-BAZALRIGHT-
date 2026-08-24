@@ -95,26 +95,35 @@ export function parseItemList(cell) {
 }
 
 /**
- * `{{Item|Soggybud|amount=5}} / {{Item|Noctilume|amount=3}}` — a set of *alternatives*, any one
- * of which spreads the mutation, each naming how many ring cells it has to fill.
+ * `{{Item|Soggybud|amount=5}} / {{Item|Noctilume|amount=3}}` — everything a mutation needs beside
+ * it, and how many ring cells each one has to fill.
  *
- * The slash is genuinely "or": Gloomgourd takes a Pumpkin *or* a Melon, and the cheaper of the
- * two is the one a player would actually plant. Where the condition is prose rather than items —
- * "0 adjacent crops", "Explode a Turtlellini with a Blastberry" — it is kept as prose and
- * flagged, because a condition nobody has reduced to a count is not one to guess a count for.
+ * **The slash is "and", not "or".** It reads like a list of alternatives and it is a list of
+ * requirements, which is worth being certain about because getting it wrong halves every setup
+ * cost on the page. The layouts settle it: Thunderling's 3x3 holds three Noctilume *and* five
+ * Soggybud, Scourroot's holds a Potato *and* a Carrot, Stoplight Petal's holds four Noctilume and
+ * four Snoozling. Every slash-separated condition checked has all of its parts drawn at once.
+ *
+ * The counts sum to the ring, which is the other half of the proof: a 1x1 mutation has eight cells
+ * around it and Stoplight Petal asks for 4 + 4; a 3x3 Snoozling has sixteen and asks for
+ * 4 + 3 + 3 + 3 + 3.
+ *
+ * Where the condition is prose rather than items — "0 adjacent crops", "Explode a Turtlellini with
+ * a Blastberry" — it is kept as prose and flagged, because a condition nobody has reduced to a
+ * count is not one to guess a count for.
  */
 export function parseSpreading(raw) {
   const text = raw.replace(/<ref[^>]*>[\s\S]*?<\/ref>/g, "").replace(/<ref[^/]*\/>/g, "").trim();
-  const options = [];
+  const requires = [];
   for (const part of text.split("/")) {
     const items = parseItemList(part);
     // A bare `4x [[Witherbloom]]` appears once, where the editor wrote a link instead of a
-    // template; it is the same statement and dropping it would lose a real alternative.
+    // template; it is the same statement and dropping it would lose a real requirement.
     const link = /(\d+)x\s*\[\[([^\]|]+)/.exec(part);
-    if (items.length > 0) options.push({ id: items[0].id, name: items[0].name, cells: items[0].amount, ...(items[0].free ? { free: true } : {}) });
-    else if (link) options.push({ id: slugId(link[2]), name: link[2].trim(), cells: Number(link[1]) });
+    if (items.length > 0) requires.push({ id: items[0].id, name: items[0].name, cells: items[0].amount, ...(items[0].free ? { free: true } : {}) });
+    else if (link) requires.push({ id: slugId(link[2]), name: link[2].trim(), cells: Number(link[1]) });
   }
-  return { raw: text, options, prose: options.length === 0 };
+  return { raw: text, requires, prose: requires.length === 0 };
 }
 
 /** `{{Chance|15%|1|6.67}}` -> 0.15. */
@@ -227,18 +236,29 @@ async function main() {
     if (!mutation.hasLayout) continue;
     const page = await wikitext(`Mutations/Layout/${mutation.name}`);
     if (!page) continue;
+    // The grid is not always 3x3. A 2x2 mutation is drawn on a 4x4 and a 3x3 one on a 5x5, because
+    // the ring around a bigger block is bigger — twelve cells and sixteen rather than eight.
+    // Reading a fixed 3x3 quietly took the wrong cells for exactly the mutations whose layout
+    // matters most.
+    const rows = Number(/\|rows=(\d+)/.exec(page.text)?.[1] ?? 3);
+    const cols = Number(/\|cols=(\d+)/.exec(page.text)?.[1] ?? 3);
     const grid = [];
-    for (let r = 1; r <= 3; r++) {
+    const cellCounts = {};
+    for (let r = 1; r <= rows; r++) {
       const line = [];
-      for (let c = 1; c <= 3; c++) {
+      for (let c = 1; c <= cols; c++) {
         const m = new RegExp(`\\|${r},${c}=([^,\\n]+)`).exec(page.text);
         const cell = (m?.[1] ?? "").trim();
         // Glass panes are the template's way of drawing "nothing here", not a crop to plant.
-        line.push(/stained glass pane|^none$/i.test(cell) ? null : cell);
+        const empty = /stained glass pane|^none$/i.test(cell) || cell === "";
+        line.push(empty ? null : cell);
+        if (!empty) cellCounts[cell] = (cellCounts[cell] ?? 0) + 1;
       }
       grid.push(line);
     }
     mutation.layout = grid;
+    /** What the drawing actually contains, which cross-checks the parsed requirements. */
+    mutation.layoutCounts = cellCounts;
     layouts++;
   }
   console.log(`  ${layouts} layouts`);
@@ -311,7 +331,7 @@ async function main() {
   };
   for (const m of mutations) {
     m.drops.forEach(resolve);
-    m.spreading.options.forEach(resolve);
+    m.spreading.requires.forEach(resolve);
   }
   baseCrops.forEach(resolve);
   console.log(`  ${byName.size} names in the resource; ${unresolvedNames.size} wiki names had no match`);
