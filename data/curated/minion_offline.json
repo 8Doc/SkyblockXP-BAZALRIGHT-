@@ -1,0 +1,36 @@
+{
+  "note": "Minions behave differently depending on whether anyone is standing on the island, and the calculator models the OFFLINE case because that is when minions are doing the work you are asking about. Offline, Hypixel runs a simulation that accumulates ACTIONS - their own patch note says so, having once capped it at 14,000 of them - and that simulation assumes a place-then-break pair for every harvest. Online, the minion physically places and breaks blocks, so a crop that regrows does not need replanting and the placement action is skipped. That is why a Melon Minion is the one people recommend for AFKing on the island: online it harvests on every action rather than every other one.",
+  "source": "Hypixel Wiki: Minions (Mechanics/Action Speed); Changelog/2022/September 15 quoting Hypixel's own 'Temporary Minion Simulation Patch'; the Bugs sections of the individual minion pages listed below",
+  "verified": true,
+  "checkedAt": "2026-08-25",
+
+  "actionsPerHarvestOffline": 2,
+  "actionsPerHarvestSource": "Minions, Mechanics/Action Speed: 'Minions with a description that includes \"Time Between Actions: Xs\" will generate collectable resources every other action. For example, if a Tier I Cobblestone Minion does an action every 14 seconds, the minion will generate 1 Cobblestone every 28 seconds and not 14 seconds.' Stated as a general mechanic and not scoped to a loaded island. The Pumpkin and Melon pages then describe the offline simulation as 'twice as slow due to the simulation assuming a replant step is necessary after each harvest', which is the same rule seen from the other side - online those two skip the replant, offline nothing does.",
+
+  "capNote": "Offline actions were capped at 14,000 in September 2022 as a temporary patch. The cap was removed on 2022-10-05 - 'Minion simulation has been optimized and there is no longer a cap!' - so nothing here models one.",
+
+  "amountOverrides": {
+    "PUMPKIN": {
+      "offline": 3,
+      "online": 1,
+      "source": "Pumpkin Minion, Bugs: 'While offline, Pumpkin Minions make 3x Pumpkins per harvest instead of 1x.' The infobox quotes the online figure, so the scraped value is the wrong one for an offline rate."
+    },
+    "ACACIA": {
+      "offline": 3,
+      "online": 4,
+      "source": "Acacia Minion, Bugs: 'Acacia Minions only generate 3x Acacia Log instead of 4x Acacia Log per harvest when offline.'"
+    }
+  },
+
+  "fasterOnline": {
+    "PUMPKIN": "Skips the replant action while the island is loaded, so it harvests on every action rather than every other one. With the 3x offline drop this nets an effective 1.5x offline rate against online - the wiki works exactly that out.",
+    "MELON": "Same replant skip. The Minion Upgrades page recommends it as the best minion to AFK beside for this reason."
+  },
+
+  "slowerOnline": {
+    "SUGAR_CANE": "Suffers reduced rates while the island is loaded, because the minion cannot tell whether the cane is fully grown and breaks 1-block-tall alongside 2 and 3. Offline is the proper rate.",
+    "CACTUS": "Same problem: breaks not-fully-grown cactus while loaded. Offline is the proper rate."
+  },
+
+  "unmodelled": "Upgrade side-effects also differ between the two states - a spreading upgrade triggers on different things loaded and unloaded, and an Enchanted Egg makes two eggs a cycle loaded against one unloaded. None of that changes the collection this tab is grinding, so none of it is modelled; it is recorded here so the omission is a decision rather than an oversight."
+}

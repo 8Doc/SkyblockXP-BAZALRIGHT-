@@ -3,8 +3,8 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 // @ts-expect-error - a plain build script, imported for its pure parsers only.
 import { parseCollects, parseCollection, parseCooldowns } from "../scripts/fetch-minion-production.mjs";
-import { actionSeconds, itemsPerHour, planMinions, target } from "../src/lib/minions";
-import type { Collection, Fuel, MinionData, MinionProduction, Modifiers, Upgrade } from "../src/lib/minions";
+import { MILESTONES, actionSeconds, itemsPerHour, offlineAmount, planMinions, target } from "../src/lib/minions";
+import type { Collection, Fuel, MinionData, MinionProduction, Modifiers, OfflineRules, Upgrade } from "../src/lib/minions";
 
 const data = JSON.parse(readFileSync("data/generated/minion-production.json", "utf8")) as MinionData;
 const mods = JSON.parse(readFileSync("data/curated/minion_modifiers.json", "utf8")) as Modifiers;
@@ -157,15 +157,15 @@ const fake: Collection = {
  * the threshold minus what is held, never the sum of the tiers in between.
  */
 test("the next tier is measured from the running total", () => {
-  assert.deepEqual(target(fake, 0, false), { needed: 100, tier: 1, xp: 4, maxing: false });
-  assert.deepEqual(target(fake, 150, false), { needed: 850, tier: 2, xp: 8, maxing: false });
-  assert.equal(target(fake, 10_000, false), null, "nothing left to do");
+  assert.deepEqual(target(fake, 0, "next"), { needed: 100, tier: 1, xp: 4, maxing: false });
+  assert.deepEqual(target(fake, 150, "next"), { needed: 850, tier: 2, xp: 8, maxing: false });
+  assert.equal(target(fake, 10_000, "next"), null, "nothing left to do");
 });
 
 test("maxing out counts every tier still open, and the distance to the last", () => {
-  assert.deepEqual(target(fake, 0, true), { needed: 10_000, tier: 3, xp: 28, maxing: true });
+  assert.deepEqual(target(fake, 0, "max"), { needed: 10_000, tier: 3, xp: 28, maxing: true });
   // 150 collected has tier 1 behind it, so its XP is not on offer any more.
-  assert.deepEqual(target(fake, 150, true), { needed: 9_850, tier: 3, xp: 24, maxing: true });
+  assert.deepEqual(target(fake, 150, "max"), { needed: 9_850, tier: 3, xp: 24, maxing: true });
 });
 
 /* -------------------------------------------------------------- the ranking */
@@ -181,7 +181,7 @@ test("the plan ranks real minions and its arithmetic reconciles", () => {
     fuel: fuel("ENCHANTED_LAVA_BUCKET"),
     upgrades: none,
     count: 31,
-    maxOut: false,
+    goal: "next" as const,
   });
 
   assert.ok(rows.length > 30, `only ${rows.length} minions planned`);
@@ -201,7 +201,7 @@ test("a collection already finished is not offered", () => {
 
   const rows = planMinions({
     data, collections, collected: new Map([[cobble.collectionId!, done]]), ownedTier: new Map(),
-    assumeTier: 12, useOwned: false, fuel: fuel("NONE"), upgrades: none, count: 1, maxOut: true,
+    assumeTier: 12, useOwned: false, fuel: fuel("NONE"), upgrades: none, count: 1, goal: "max" as const,
   });
   assert.equal(rows.find((r) => r.generator === cobble.generator), undefined);
 });
@@ -214,7 +214,7 @@ test("the owned tier is used when asked for, and capped by what the minion has",
   const cobble = data.minions.find((m) => m.family === "Cobblestone Minion")!;
   const base = {
     data, collections, collected: new Map<string, number>(), assumeTier: 12,
-    fuel: fuel("NONE"), upgrades: none, count: 1, maxOut: false,
+    fuel: fuel("NONE"), upgrades: none, count: 1, goal: "next" as const,
   };
 
   const owned = planMinions({ ...base, ownedTier: new Map([[cobble.generator, 4]]), useOwned: true });
@@ -231,4 +231,98 @@ test("the owned tier is used when asked for, and capped by what the minion has",
     const m = data.minions.find((x) => x.generator === r.generator)!;
     assert.ok(r.tier <= m.maxTier, `${r.family} planned at tier ${r.tier} above its max ${m.maxTier}`);
   }
+});
+
+/* --------------------------------------------------------- offline vs online */
+
+const offlineRules = JSON.parse(readFileSync("data/curated/minion_offline.json", "utf8")) as OfflineRules;
+const withOffline: MinionData = { ...data, offline: offlineRules };
+
+/**
+ * The infobox quotes what a minion drops with a player standing there, and for two of them that is
+ * not the offline figure. Pumpkin is the one that bites: the infobox says 1 and the offline
+ * simulation gives 3, so a calculator built on the scrape alone is a third of the real answer for
+ * the minion people actually use.
+ */
+test("the offline amount overrides the infobox where the wiki says they differ", () => {
+  const pumpkin = minion("Pumpkin Minion");
+  const acacia = minion("Acacia Minion");
+
+  assert.equal(pumpkin.collects.amount, 1, "the infobox figure, which is the online one");
+  assert.equal(offlineAmount(pumpkin, withOffline), 3, "Pumpkin Minion, Bugs: 3x per harvest while offline");
+  assert.equal(acacia.collects.amount, 4);
+  assert.equal(offlineAmount(acacia, withOffline), 3, "Acacia Minion, Bugs: 3 instead of 4 when offline");
+
+  // Everything else falls through to the scrape untouched.
+  assert.equal(offlineAmount(minion("Cobblestone Minion"), withOffline), 1);
+  assert.equal(offlineAmount(minion("Clay Minion"), withOffline), 4);
+});
+
+test("the rate uses the offline amount, so Pumpkin trebles and Acacia drops a quarter", () => {
+  const setup = { tier: 12, fuel: fuel("NONE"), upgrades: none, count: 1 } as const;
+  const naive = (family: string) => itemsPerHour(minion(family), data, setup)!;
+  const real = (family: string) => itemsPerHour(minion(family), withOffline, setup)!;
+
+  assert.ok(Math.abs(real("Pumpkin Minion") / naive("Pumpkin Minion") - 3) < 1e-9);
+  assert.ok(Math.abs(real("Acacia Minion") / naive("Acacia Minion") - 0.75) < 1e-9);
+  assert.equal(real("Cobblestone Minion"), naive("Cobblestone Minion"), "untouched where nothing is documented");
+});
+
+/**
+ * The four minions whose loaded behaviour is documented have to be real minions, or the note the
+ * tab prints names something that does not exist.
+ */
+test("every minion named in the offline rules is one we actually have", () => {
+  const generators = new Set(data.minions.map((m) => m.generator));
+  for (const id of [
+    ...Object.keys(offlineRules.amountOverrides),
+    ...Object.keys(offlineRules.fasterOnline),
+    ...Object.keys(offlineRules.slowerOnline),
+  ]) {
+    assert.ok(generators.has(id), `${id} is in the offline rules but not in the scrape`);
+  }
+  // And the two directions are disjoint: nothing can be both faster and slower with a player there.
+  for (const id of Object.keys(offlineRules.fasterOnline)) {
+    assert.equal(offlineRules.slowerOnline[id], undefined, `${id} cannot be both`);
+  }
+});
+
+/**
+ * 100M Gold is a threshold past the last tier of the collection — two hundred times it — and it
+ * pays an in-game buff rather than SkyBlock XP. Quoting XP for it would be inventing some, so the
+ * row carries zero and the mode ranks on the wait instead.
+ */
+test("the 100M Gold milestone is a real distance past the last tier", () => {
+  const gold = collections.find((c) => c.itemId === "GOLD_INGOT")!;
+  const last = gold.tiers[gold.tiers.length - 1].amountRequired;
+  assert.equal(MILESTONES.GOLD_INGOT.amount, 100_000_000);
+  assert.ok(MILESTONES.GOLD_INGOT.amount > last, "a milestone below the last tier would be pointless");
+
+  assert.deepEqual(target(gold, 0, "milestone"), {
+    needed: 100_000_000, tier: null, xp: 0, maxing: true, milestone: "100M Gold",
+  });
+  assert.equal(target(gold, 40_000_000, "milestone")!.needed, 60_000_000, "measured from what you hold");
+  assert.equal(target(gold, 100_000_000, "milestone"), null, "already there");
+
+  // A collection with no milestone is simply not a row in this mode.
+  assert.equal(target(collections.find((c) => c.itemId === "COBBLESTONE")!, 0, "milestone"), null);
+});
+
+test("milestone mode lists only the gold minions, ranked by the shortest wait", () => {
+  const base = {
+    data, collections, collected: new Map<string, number>(), ownedTier: new Map<string, number>(),
+    assumeTier: 12, useOwned: false, fuel: fuel("NONE"), upgrades: none, count: 5,
+  };
+  const rows = planMinions({ ...base, goal: "milestone" });
+  assert.ok(rows.length > 0, "the Gold Minion should be here");
+  for (const r of rows) {
+    assert.equal(r.collectionId, "GOLD_INGOT");
+    assert.equal(r.milestone, "100M Gold");
+    assert.equal(r.xp, 0, "a buff is not XP");
+    assert.equal(r.needed, 100_000_000);
+  }
+  for (let i = 1; i < rows.length; i++) assert.ok(rows[i - 1].hours <= rows[i].hours, "shortest wait first");
+
+  // And the other two modes are unaffected by any of this.
+  assert.ok(planMinions({ ...base, goal: "next" }).length > 30);
 });

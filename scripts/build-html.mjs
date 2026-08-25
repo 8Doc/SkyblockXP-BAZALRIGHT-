@@ -107,7 +107,13 @@ const greenhouseData = {
  * both files for why each is the shape it is.
  */
 const minionData = {
-  production: await loadJson("generated/minion-production.json"),
+  production: {
+    ...(await loadJson("generated/minion-production.json")),
+    // Minions behave differently with a player on the island; this models the offline case, which
+    // is when they are doing the work anyone asks a minion calculator about. The deviations that
+    // are actually documented live here with their sources.
+    offline: await loadJson("curated/minion_offline.json"),
+  },
   modifiers: await loadJson("curated/minion_modifiers.json"),
   collections: (await loadJson("generated/collections.json")).collections,
 };

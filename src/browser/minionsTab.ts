@@ -1,10 +1,12 @@
 import { num } from "../lib/format";
 import {
+  MILESTONES,
   itemsPerHour,
   planMinions,
   type Collection,
   type Fuel,
   type MinionData,
+  type Goal,
   type MinionPlan,
   type Modifiers,
   type Upgrade,
@@ -35,8 +37,8 @@ type State = {
   assumeTier: number;
   fuel: string;
   upgrades: [string, string];
-  /** Aim at the last tier of a collection rather than the next one. */
-  maxOut: boolean;
+  /** What to aim at: the next tier, the last one, or a threshold past it like 100M Gold. */
+  goal: Goal;
   search: string;
   /** Collected totals and crafted tiers, handed over by the planner when a profile is loaded. */
   collected: Map<string, number>;
@@ -62,7 +64,7 @@ const state: State = {
   assumeTier: Number(localStorage.getItem("sbxp:mntier") ?? DEFAULT_TIER),
   fuel: localStorage.getItem("sbxp:mnfuel") ?? "NONE",
   upgrades: [localStorage.getItem("sbxp:mnup0") ?? "NONE", localStorage.getItem("sbxp:mnup1") ?? "NONE"],
-  maxOut: localStorage.getItem("sbxp:mnmax") === "1",
+  goal: (localStorage.getItem("sbxp:mngoal") as Goal) ?? "next",
   search: "",
   collected: new Map(),
   ownedTier: new Map(),
@@ -111,7 +113,7 @@ function rows(): MinionPlan[] {
     fuel: fuelById(state.fuel),
     upgrades: [upgradeById(state.upgrades[0]), upgradeById(state.upgrades[1])],
     count: Math.max(1, Number(state.count.replace(/[^0-9]/g, "")) || 1),
-    maxOut: state.maxOut,
+    goal: state.goal,
   });
 
   const needle = state.search.trim().toLowerCase();
@@ -151,8 +153,8 @@ export function mountMinions(container: HTMLElement, data: Tables): void {
 
       const goal = target.closest<HTMLElement>("[data-mngoal]");
       if (goal) {
-        state.maxOut = goal.dataset.mngoal === "max";
-        localStorage.setItem("sbxp:mnmax", state.maxOut ? "1" : "0");
+        state.goal = (goal.dataset.mngoal as Goal) ?? "next";
+        localStorage.setItem("sbxp:mngoal", state.goal);
         render();
       }
     });
@@ -200,6 +202,12 @@ export function unmountMinions(): void {
  * Flycatcher do completely different things to the same number — so the effect is stated as one
  * sentence rather than left to be inferred from three labels.
  */
+/** The chip's label, from the milestone table rather than typed twice. */
+function milestoneLabel(): string {
+  const labels = Object.values(MILESTONES).map((m) => m.label);
+  return labels.length === 1 ? labels[0] : `${labels.length} buff goals`;
+}
+
 function setupNote(): string {
   const fuel = fuelById(state.fuel);
   const ups = [upgradeById(state.upgrades[0]), upgradeById(state.upgrades[1])];
@@ -270,8 +278,12 @@ function render(): void {
         </label>
 
         <span class="tabs">
-          <button class="chip${!state.maxOut ? " on" : ""}" data-mngoal="next" title="Time to the next tier of each collection.">Next tier</button>
-          <button class="chip${state.maxOut ? " on" : ""}" data-mngoal="max" title="Time to the last tier — the whole collection, from where you are now.">Max it out</button>
+          <button class="chip${state.goal === "next" ? " on" : ""}" data-mngoal="next" title="Time to the next tier of each collection.">Next tier</button>
+          <button class="chip${state.goal === "max" ? " on" : ""}" data-mngoal="max" title="Time to the last tier — the whole collection, from where you are now.">Max it out</button>
+          <button class="chip${state.goal === "milestone" ? " on" : ""}" data-mngoal="milestone"
+            title="A threshold past the last tier that grants an in-game buff rather than SkyBlock XP. 100M Gold is two hundred times the last tier of the Gold Ingot collection, so it is a different scale of grind and worth costing separately.">${escapeHtml(
+              milestoneLabel(),
+            )}</button>
         </span>
       </div>
 
@@ -292,6 +304,7 @@ function render(): void {
       <p class="sub dim">The other two slots are a skin, which does nothing, and whatever keeps the minion
         from filling up — a hopper or a Super Compactor. Neither changes how much is collected, so neither
         is asked about here: compacting 160 cobblestone into an enchanted one still counts as 160.</p>
+      <p class="sub dim">${loadedNote()}</p>
     </div>
 
     <div id="mntable"></div>
@@ -330,7 +343,7 @@ const COLUMNS: { id: string; label: string; title: string; value: (r: MinionPlan
     label: "XP",
     title: "SkyBlock XP for the tier this finishes. In 'max it out' mode, every tier still open.",
     value: (r) => r.xp,
-    render: (r) => num(r.xp),
+    render: (r) => (r.milestone ? `<span class="dim" title="A buff rather than SkyBlock XP — quoting a number here would be inventing one.">buff</span>` : num(r.xp)),
   },
   {
     id: "xpPerHour",
@@ -340,7 +353,7 @@ const COLUMNS: { id: string; label: string; title: string; value: (r: MinionPlan
       "done regardless of what it is worth — a 4 XP tier that lands in an hour is not obviously better than a " +
       "60 XP one that lands in six.",
     value: (r) => r.xpPerHour,
-    render: (r) => (r.xpPerHour >= 1 ? r.xpPerHour.toFixed(1) : r.xpPerHour.toFixed(3)),
+    render: (r) => (r.milestone ? `<span class="dim">—</span>` : r.xpPerHour >= 1 ? r.xpPerHour.toFixed(1) : r.xpPerHour.toFixed(3)),
   },
   {
     id: "needed",
@@ -404,17 +417,52 @@ function renderTable(): void {
       </table>
     </div>
     <p class="dim pad">${num(all.length)} minions${all.length > 80 ? ", showing the first 80" : ""} · ${
-      state.maxOut ? "to the last tier" : "to the next tier"
+      state.goal === "milestone" ? "to the buff threshold" : state.goal === "max" ? "to the last tier" : "to the next tier"
     } · ${escapeHtml(state.count)} placed</p>
   `;
 }
 
 const NOTE =
   "Which minion fills a collection fastest, ranked on what the wait pays rather than on the wait alone. " +
-  "A minion drops on every other action, not every action — a 14-second Cobblestone Minion I is one " +
-  "cobblestone every 28 seconds — so every rate here is half what a cooldown alone would suggest. " +
-  "Rates assume the minion never fills up and never stops, which is what a Super Compactor and a full " +
-  "fuel slot are for.";
+  "Every figure is the rate with nobody on the island, because that is when minions are doing the work. " +
+  "Offline, Hypixel runs a simulation that counts actions and assumes a place-then-break pair for every " +
+  "harvest, so a 14-second Cobblestone Minion I is one cobblestone every 28 seconds rather than every 14. " +
+  "Rates also assume the minion never fills up and never stops, which is what a Super Compactor and a " +
+  "full fuel slot are for.";
+
+/**
+ * What changes if you are actually standing there.
+ *
+ * Worth a line of its own rather than a footnote, because it is not a rounding error and it does not
+ * go the same way for every minion. Online the minion physically places and breaks blocks, so a crop
+ * that regrows skips the placement entirely and runs at roughly double; but a minion that cannot tell
+ * whether a stalk is fully grown breaks it early and runs *slower*. Only four are documented, and no
+ * figure is published for the slower two — which is the reason there is no online mode here rather
+ * than a half-invented one.
+ */
+function loadedNote(): string {
+  const offline = tables.production.offline;
+  if (!offline) return "";
+  const faster = Object.keys(offline.fasterOnline);
+  const slower = Object.keys(offline.slowerOnline);
+  const pretty = (ids: string[]) =>
+    ids.map((id) => escapeHtml(tables.production.minions.find((m) => m.generator === id)?.family ?? id)).join(" and ");
+
+  const overrides = Object.entries(offline.amountOverrides)
+    .map(([id, o]) => {
+      const family = tables.production.minions.find((m) => m.generator === id)?.family ?? id;
+      return `${escapeHtml(family)} <strong>${o.offline}</strong> rather than ${o.online}`;
+    })
+    .join(", ");
+
+  return (
+    `<strong>Standing on the island changes things</strong>, and not the same way for everyone. ` +
+    `${pretty(faster)} skip the replant action while it is loaded and run at roughly <strong>double</strong> ` +
+    `these rates. ${pretty(slower)} go the other way: they break stalks that are not fully grown, so they are ` +
+    `<em>slower</em> loaded — by how much nobody has written down, which is why there is no online mode here ` +
+    `rather than a guessed one. Two also drop a different amount offline, and these figures use it: ${overrides}.`
+  );
+}
 
 function escapeHtml(value: string): string {
   return value.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);

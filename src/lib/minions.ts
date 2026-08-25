@@ -42,7 +42,46 @@ export type MinionData = {
   /** Two: a minion generates on one action and harvests on the next. */
   actionsPerHarvest: number;
   minions: MinionProduction[];
+  /** What differs when nobody is on the island. See `data/curated/minion_offline.json`. */
+  offline?: OfflineRules;
 };
+
+/**
+ * The offline/online split, which is not a detail.
+ *
+ * Offline, Hypixel runs a *simulation* that accumulates actions — their own patch note says so,
+ * having briefly capped it at 14,000 of them — and that simulation assumes a place-then-break pair
+ * for every harvest. Online, the minion physically places and breaks blocks, so a crop that
+ * regrows does not need replanting and the placement action is skipped entirely.
+ *
+ * This calculator models the **offline** case, because that is when minions are doing the work
+ * anyone asks a minion calculator about. Two consequences are worth being explicit about rather
+ * than leaving implicit:
+ *
+ *  - Two minions are roughly **twice as fast online** — Melon and Pumpkin, the regrowing crops.
+ *    The Minion Upgrades page recommends Melon as the one to AFK beside for exactly this reason.
+ *  - Two are **slower online** — Sugar Cane and Cactus break stalks that are not fully grown when
+ *    a player is loading the island, which the offline simulation never does.
+ *
+ * And the per-harvest *amount* differs for two of them, which matters more than it sounds: the
+ * infobox quotes the online figure, so a scraped Pumpkin is 1 where the offline answer is 3.
+ */
+export type OfflineRules = {
+  amountOverrides: Record<string, { offline: number; online: number; source: string }>;
+  fasterOnline: Record<string, string>;
+  slowerOnline: Record<string, string>;
+};
+
+/**
+ * What one harvest yields with nobody on the island.
+ *
+ * The scraped `collects` is the infobox's figure and the infobox quotes the online one, so two
+ * minions need correcting before an offline rate means anything: Pumpkin drops 3 offline against
+ * the 1 it shows, and Acacia drops 3 against the 4 it shows.
+ */
+export function offlineAmount(minion: MinionProduction, data: MinionData): number {
+  return data.offline?.amountOverrides[minion.generator]?.offline ?? minion.collects.amount;
+}
 
 export type Fuel = {
   id: string;
@@ -104,7 +143,9 @@ export function itemsPerHour(minion: MinionProduction, data: MinionData, setup: 
 
   const seconds = actionSeconds(base, setup) * data.actionsPerHarvest;
   const output = setup.upgrades.reduce((m, u) => m * u.output, 1) * setup.fuel.multiplier;
-  return (3600 / seconds) * minion.collects.amount * output * Math.max(0, setup.count);
+  // The offline amount, not the infobox's: the infobox quotes what the minion drops with a player
+  // standing there, and those differ for Pumpkin and Acacia.
+  return (3600 / seconds) * offlineAmount(minion, data) * output * Math.max(0, setup.count);
 }
 
 /* -------------------------------------------------------- the collection */
@@ -121,6 +162,8 @@ export type Target = {
   xp: number;
   /** True when this is the last tier rather than the next one. */
   maxing: boolean;
+  /** Set when the target is a past-the-last-tier threshold, e.g. 100M Gold. */
+  milestone?: string;
 };
 
 /**
@@ -130,11 +173,34 @@ export type Target = {
  * so the distance is the tier's threshold minus what has been collected, and not the sum of the
  * tiers in between.
  */
-export function target(collection: Collection, have: number, maxOut: boolean): Target | null {
+/**
+ * What you are aiming at.
+ *
+ * `next` and `max` are the collection's own tiers. `milestone` is neither: a few collections
+ * carry a threshold past their last tier that grants something in game rather than SkyBlock XP,
+ * and 100M Gold is the one people actually grind for. It is a real target with a real distance,
+ * so it belongs here rather than in a note — it just pays a buff instead of XP.
+ */
+export type Goal = "next" | "max" | "milestone";
+
+/** Thresholds past the last tier that grant an in-game buff. Curated: there is no table for these. */
+export const MILESTONES: Record<string, { amount: number; label: string }> = {
+  GOLD_INGOT: { amount: 100_000_000, label: "100M Gold" },
+};
+export function target(collection: Collection, have: number, goal: Goal): Target | null {
   const tiers = collection.tiers.filter((t) => t.tier > 0).sort((a, b) => a.tier - b.tier);
   if (tiers.length === 0) return null;
 
-  if (maxOut) {
+  if (goal === "milestone") {
+    const milestone = MILESTONES[collection.itemId];
+    // A collection with no milestone is not a row in this mode, rather than a row of zero.
+    if (!milestone || have >= milestone.amount) return null;
+    // No XP: the threshold is past the last tier, so every tier's XP is already banked. The
+    // payoff is the buff, and quoting XP here would be inventing some.
+    return { needed: milestone.amount - have, tier: null, xp: 0, maxing: true, milestone: milestone.label };
+  }
+
+  if (goal === "max") {
     const last = tiers[tiers.length - 1];
     if (have >= last.amountRequired) return null;
     return {
@@ -173,6 +239,8 @@ export type MinionPlan = {
   xpPerHour: number;
   /** Set where the wiki quotes the drop as a range rather than a fixed number. */
   dropRange?: { low: number; high: number };
+  /** Set when the row is aiming at a past-the-last-tier threshold rather than a tier. */
+  milestone?: string;
   /** Anything the caller should say out loud about this row. */
   caveats: string[];
 };
@@ -191,8 +259,8 @@ export type PlanOptions = {
   fuel: Fuel;
   upgrades: [Upgrade, Upgrade];
   count: number;
-  /** Aim at the last tier rather than the next one. */
-  maxOut: boolean;
+  /** What to aim at: the next tier, the last one, or a past-the-last threshold like 100M Gold. */
+  goal: Goal;
 };
 
 /**
@@ -212,7 +280,7 @@ export function planMinions(o: PlanOptions): MinionPlan[] {
     if (!collection) continue;
 
     const have = o.collected.get(minion.collectionId) ?? 0;
-    const goal = target(collection, have, o.maxOut);
+    const goal = target(collection, have, o.goal);
     if (!goal) continue;
 
     // The tier decision, and it is a decision rather than a lookup: someone planning a grind may
@@ -246,6 +314,7 @@ export function planMinions(o: PlanOptions): MinionPlan[] {
       targetTier: goal.tier,
       xp: goal.xp,
       xpPerHour: hours > 0 ? goal.xp / hours : 0,
+      ...(goal.milestone ? { milestone: goal.milestone } : {}),
       ...(minion.collects.low !== undefined && minion.collects.high !== undefined
         ? { dropRange: { low: minion.collects.low, high: minion.collects.high } }
         : {}),
@@ -253,5 +322,8 @@ export function planMinions(o: PlanOptions): MinionPlan[] {
     });
   }
 
+  // Milestone rows pay a buff rather than XP, so there is no XP per hour to rank them on and
+  // the honest ordering is simply the shortest wait.
+  if (o.goal === "milestone") return out.sort((a, b) => a.hours - b.hours);
   return out.sort((a, b) => b.xpPerHour - a.xpPerHour || a.hours - b.hours);
 }
