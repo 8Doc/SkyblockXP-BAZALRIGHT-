@@ -81,6 +81,26 @@ export type Report = {
 const BROWSER_LIMIT = 40;
 
 /**
+ * How close to finished counts as "you may as well finish it" in the grind order.
+ *
+ * Five percent left. The figure is a judgement rather than a measurement, and it is the right
+ * *shape* of judgement: below it the remaining work is small in absolute terms for any collection
+ * worth grinding, and the tier is worth XP the player is effectively already holding.
+ */
+const NEARLY_DONE = 0.95;
+
+/**
+ * Is this a task the player is all but standing on top of?
+ *
+ * Only true where the profile publishes a running count to measure against — collections today.
+ * A task with no `progress` is not nearly done, it is unmeasured, and the two must not collapse
+ * into each other: guessing would float every unmeasured task to the front of the list.
+ */
+function isNearlyDone(t: { progress?: number }): boolean {
+  return t.progress !== undefined && t.progress >= NEARLY_DONE && t.progress < 1;
+}
+
+/**
  * The value ranking is one list rather than seventeen, so it can afford to be longer — but not
  * unbounded: a full profile has thousands of buyable tasks and rendering all of them costs more
  * than anyone gets from row 2,000 of a list sorted worst-last.
@@ -239,7 +259,20 @@ export function buildReport(catalog: Catalog, book: PriceBook, options: ReportOp
         options.categories.has(t.category),
     )
     .filter((t) => t.xp >= options.minXp)
-    .sort((a, b) => (a.effort ?? 1) - (b.effort ?? 1) || b.xp - a.xp)
+    .sort((a, b) => {
+      // Anything already all-but-finished jumps the queue, whatever the effort scale says about
+      // it. Effort is a population statistic — the share of players who have not done this — so
+      // it describes the task from a standing start and cannot see that *this* player is 325
+      // items from the end of it. A tier that close is not a grind, it is a formality, and
+      // burying it under genuinely easier work is how it goes unnoticed for months.
+      const nearlyA = isNearlyDone(a);
+      const nearlyB = isNearlyDone(b);
+      if (nearlyA !== nearlyB) return nearlyA ? -1 : 1;
+      // Within that band, closest to the finish line first. Between two formalities the one you
+      // could finish this evening leads.
+      if (nearlyA) return (b.progress ?? 0) - (a.progress ?? 0) || b.xp - a.xp;
+      return (a.effort ?? 1) - (b.effort ?? 1) || b.xp - a.xp;
+    })
     .slice(0, 60);
 
   // Query D: value ranking across every category at once. Ordered on the same figure the rows

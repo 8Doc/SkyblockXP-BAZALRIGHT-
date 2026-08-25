@@ -137,6 +137,17 @@ export type Task = {
   /** Short provenance / caveat shown in the UI. */
   note?: string;
   /**
+   * How far through this task the player already is, 0 to 1, where that is knowable.
+   *
+   * Only meaningful for tasks measured by a running count the profile publishes — collections
+   * today. Absent means "not known", which is not the same as zero: a profile that publishes no
+   * collection data at all would otherwise look like one that has collected nothing.
+   *
+   * The grind order uses it to float the nearly-finished to the top, because a tier 325 items
+   * away and one forty thousand away are the same task on every other measure this model has.
+   */
+  progress?: number;
+  /**
    * Where to physically go — "Hub · 62, 72, -147". Kept apart from the note so the UI can put it
    * behind the character's name rather than spending a line on it: a contact list is seventy
    * rows long and only the one you are walking to needs an address.

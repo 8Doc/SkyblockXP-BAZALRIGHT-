@@ -220,6 +220,14 @@ export function buildCatalog(
           collectionsKnown && left > 0
             ? `${num(left)} more (${num(have)} of ${num(tier.amountRequired)})`
             : `${num(tier.amountRequired)} collected`,
+        // The same distance as a number, because the note above can only be read. A tier the
+        // player is 99% of the way through is a different kind of job from one they have not
+        // started, however similar the two look on the effort scale, and the grind order sorts
+        // on this. Only set where the profile actually publishes collection data: without it the
+        // distance is unknowable, and a default of zero would claim every tier is untouched.
+        ...(collectionsKnown && tier.amountRequired > 0
+          ? { progress: Math.min(1, have / tier.amountRequired) }
+          : {}),
       });
       if (unlockedTiers.has(`${coll.itemId}_${tier.tier}`) || have >= tier.amountRequired) done.add(id);
       previous = id;

@@ -330,3 +330,55 @@ test("bag slots are named for Jacobus", () => {
   const open = tasks.filter((t) => t.id.startsWith("bag_upgrade_") && !catalog.done.has(t.id)).slice(0, 10);
   assert.equal(groupTaskRuns(open)[0]!.name, "Upgrade Jacobus 10×");
 });
+
+/**
+ * Effort is a population statistic — the share of sampled players who have not finished a task —
+ * so it describes the job from a standing start and is blind to where *this* player is standing.
+ * A collection tier three hundred items from the end still bands as a marathon, and burying it
+ * under genuinely easier work is how it goes unnoticed for months.
+ */
+test("a collection all but finished leads the grind order", () => {
+  const fig = (data as unknown as {
+    collections: { collections: { itemId: string; tiers: { tier: number; amountRequired: number; xp: number }[] }[] };
+  }).collections.collections.find((c) => c.itemId === "FIG_LOG")!;
+
+  // Sit just inside the last tier this fixture offers: 99% of the way there, nothing collected
+  // toward anything else. That tier is a formality; every other grind on the profile is not.
+  const top = fig.tiers.filter((t) => t.tier > 0 && t.xp > 0).pop()!;
+  const member = { collection: { FIG_LOG: Math.floor(top.amountRequired * 0.99) } } as unknown as ProfileMember;
+
+  const { grind } = report(CATEGORIES, member);
+  const nearly = grind.filter((t) => t.progress !== undefined && t.progress >= 0.95 && t.progress < 1);
+  assert.ok(nearly.length > 0, "the 99% tier should be in the grind order at all");
+
+  // Every one of them outranks everything that is not nearly done.
+  const firstOrdinary = grind.findIndex((t) => !(t.progress !== undefined && t.progress >= 0.95 && t.progress < 1));
+  const lastNearly = grind.reduce((at, t, i) => (t.progress !== undefined && t.progress >= 0.95 && t.progress < 1 ? i : at), -1);
+  assert.ok(lastNearly < firstOrdinary, "a nearly-finished tier sits above every ordinary grind");
+
+  // And it does so despite the effort scale disagreeing, which is the whole point.
+  const promoted = grind[lastNearly];
+  const ordinary = grind[firstOrdinary];
+  assert.ok(
+    (promoted.effort ?? 1) >= (ordinary.effort ?? 1),
+    "this test is only meaningful when the promoted row looks harder on the effort scale",
+  );
+});
+
+/**
+ * Absent progress means unmeasured, not untouched. A profile publishing no collection data would
+ * otherwise have every tier read as 0% and none of them promoted — which is right — but the
+ * failure to guard the other way round is worse: a `progress` of exactly 1 is a finished tier,
+ * and floating those would fill the band with things there is nothing left to do.
+ */
+test("only a partly-finished measured task is promoted", () => {
+  const { grind } = report(CATEGORIES, {} as ProfileMember);
+  for (const t of grind) {
+    if (t.progress === undefined) continue;
+    assert.ok(t.progress < 1, `${t.name} is complete and should not be in the grind order`);
+  }
+
+  // With no collection data at all, nothing claims a distance it cannot know.
+  const measured = grind.filter((t) => t.progress !== undefined);
+  assert.equal(measured.length, 0, "an empty profile publishes no collection totals to measure against");
+});

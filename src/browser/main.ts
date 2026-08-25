@@ -481,6 +481,7 @@ function packagesView(report: Report): string {
 
 
 const BAND_LABEL: Record<string, string> = {
+  nearly: "Nearly there",
   quick: "Quick",
   short: "A session",
   long: "A long haul",
@@ -488,11 +489,24 @@ const BAND_LABEL: Record<string, string> = {
 };
 
 const BAND_BLURB: Record<string, string> = {
+  nearly: "Already 95% collected. Finish these before starting anything.",
   quick: "Most players already have these. Usually a few minutes.",
   short: "The typical player has done about half of these.",
   long: "A minority have finished these — expect real time.",
   marathon: "Rare. These are the projects people plan around.",
 };
+
+/**
+ * A task the player is all but standing on top of.
+ *
+ * This has to be its own band rather than only a sort key, because the panels below regroup by
+ * effort — and effort is a population statistic that describes a task from a standing start. A
+ * Cobblestone tier 300 items from the end still bands as a marathon, so sorting it to the front
+ * of the flat list would put it straight back at the bottom of the last panel.
+ */
+function nearlyDone(t: { progress?: number }): boolean {
+  return t.progress !== undefined && t.progress >= 0.95 && t.progress < 1;
+}
 
 /**
  * Free XP, ordered by how much work it looks like — the one ranking that ignores category
@@ -550,11 +564,17 @@ function grindView(report: Report): string {
 
   const intro = `<p class="sub bleed-note">Free XP, easiest first, across every category at once. Difficulty is
     estimated from how many real players have already finished each task — a proxy for effort, not a measurement of
-    it — so it is grouped into bands rather than pretending to a precise ordering. Bestiary tiers are the exception:
-    they are ranked on the kills they actually have left.</p>`;
+    it — so it is grouped into bands rather than pretending to a precise ordering. Two things jump that ordering
+    because it cannot see them: <strong>collections you are already 95% through</strong> lead the list whatever
+    band they would land in, since effort describes a task from a standing start and not from where you are
+    standing; and bestiary tiers are ranked on the kills they actually have left.</p>`;
 
-  const bands = ["quick", "short", "long", "marathon"];
-  const byBand = bands.map((band) => grind.filter((t) => (t.effortBand ?? "marathon") === band));
+  const bands = ["nearly", "quick", "short", "long", "marathon"];
+  const byBand = bands.map((band) =>
+    band === "nearly"
+      ? grind.filter(nearlyDone)
+      : grind.filter((t) => !nearlyDone(t) && (t.effortBand ?? "marathon") === band),
+  );
 
   // The bands are worked through in order, so the running total carries across them: a level
   // earned late in the quick jobs doesn't restart when the short ones begin.
