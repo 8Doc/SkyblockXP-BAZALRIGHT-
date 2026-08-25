@@ -659,6 +659,38 @@ which is indistinguishable from a bag with no room in it. The plan would then sp
 on room the player may already have — the test profile has 133 free slots — so the solvers are
 handed the bag only when `readable` and a non-zero capacity agree that we know its size.
 
+## Collections say the distance, not the threshold
+
+A collection row used to be noted with the tier's own requirement — "50,000 collected" — which
+is what the tier costs from a standing start, and the one figure the player already knows is
+behind them. It made every tier of a given size look like the same job. Spider Eye IX and a
+Cobblestone tier both reading "50,000 collected" says nothing about the fact that one of them is
+325 items away and the other is forty thousand.
+
+So the note is the distance, in the shape the bestiary already used for kills:
+
+```
+Spider Eye 9      325 more (49,675 of 50,000)
+```
+
+The total is read once per collection rather than once per tier, because that is how the game
+counts it: one cumulative figure per item, measured against every tier at once. It is taken from
+the co-op union where there is one — the island collected it, not the member — so a co-op player
+isn't told they are 25,000 short of something their profile finished last month.
+
+**A collection with no data falls back to the threshold.** The profile only lists items the
+player has collected something of, so a *missing key* is a real zero and "1,500 more (0 of
+1,500)" is true. An *empty* `collection` object is a profile that publishes none of it, and
+there the distance is unknowable rather than the whole of it — quoting one would invent a
+number, so the old threshold note stands in.
+
+**A span of tiers is still one distance.** Where the browser trims a row to the tiers it adds —
+"Seeds 4–5" after Seeds 3 was listed above it — the note is the top tier's distance rather than
+a count of the tiers in the span. Collections and the bestiary are running counts, so the seeds
+that reach tier V are the same seeds that passed tier IV; ten attribute levels really are ten
+purchases and their note goes on counting them. `CUMULATIVE` in `grouping.ts` is the list of
+categories that work the first way.
+
 ## Ordering the grind
 
 Grind tasks carry no coin price, so the solver can't rank them and the browser used to list them
