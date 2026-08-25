@@ -936,3 +936,61 @@ own family list is missing islands the game has shipped since.
 So the two halves are still credited from what each can support — tiers from the kills, the
 milestone half from the profile's own count — and capped at the stated total. The cap is doing
 real work: without it the old reading credited 10,260 against a category of 4,370.
+
+## Minion production
+
+Hypixel's item resource carries `generator` and `generator_tier` and nothing else, so it knows
+every minion's tiers and the XP each is worth but not what any of them produce. That comes off the
+community wiki, a page per minion — `scripts/fetch-minion-production.mjs` writes
+`data/generated/minion-production.json`. Two requests each, because the halves live apart: the
+infobox is wikitext (`collects`, `collection`) and the per-tier cooldowns only exist once the stats
+template has been expanded, which needs the rendered HTML.
+
+**A cooldown is not a drop interval.** The stats table quotes the time between *actions*, and a
+minion generates on one action and harvests on the next. The Minions page states it and works the
+example:
+
+> if a Tier I Cobblestone Minion does an action every 14 seconds, the minion will generate 1
+> Cobblestone every 28 seconds and not 14 seconds
+
+Reading the cooldown as the drop interval doubles every rate, and nothing about the result looks
+wrong. `actionsPerHarvest: 2` is in the file so the assumption is stated rather than buried in an
+expression.
+
+The scrape is checked against two independent worked examples the wiki happens to publish, which
+is the reason to trust it: Cobblestone I at **14s** on the Minions page, and Clay XI at **16s** on
+the Minion Fuel page. Both are in the table at exactly those values. A test asserts both, plus that
+every minion has one cooldown per tier, all positive and never rising with tier.
+
+`collects` appears in four shapes and the first parser only handled one, which silently dropped
+some of the better collection minions:
+
+| written as | means |
+|---|---|
+| `4 Acacia Log` | a plain count |
+| `1x Flower` | an "x" suffix |
+| `* 2-5 String` | a bullet and a range — averaged, both ends kept |
+| `*0.4 Nether Quartz` | already an expectation per harvest |
+
+Three minions produce something no collection tracks — Flower, Inferno and Snow — and are kept
+with a null rather than dropped, since a missing row reads as an oversight.
+
+### Fuels and upgrades
+
+`data/curated/minion_modifiers.json`, curated rather than scraped: both wiki tables are one page
+each and mix prose, ranges and per-minion exceptions, so a parser would be more fragile than the
+twenty rows it replaced.
+
+Two things there must never be added together. **Percentage fuels** shorten the action timer, and
+the wiki gives the shape — `time = base / (1 + boost)`, not `base × (1 − boost)`. **Multiplier
+fuels** (×2/×3/×4) leave the timer alone and duplicate the drop. A Hyper Catalyst is four times the
+items at the same speed; Foul Flesh is +90% speed, which is not 1.9× the items.
+
+Boosts from the fuel and both upgrade slots **add before dividing**: two Minion Expanders are +10%
+together rather than 1.05², and a Flycatcher beside a fuel is one division rather than two. Tests
+pin the divide-not-subtract shape against the wiki's own Clay XI calculation, and the add-not-
+compound shape against a case where the two differ by 8%.
+
+Only the effects that change how fast a collection fills are modelled. A Super Compactor changes
+the shape of a drop and not the count — 160 cobblestone compacted still counts as 160 collected —
+so it is offered and modelled as no change, which is the honest answer rather than an omission.

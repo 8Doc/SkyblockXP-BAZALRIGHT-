@@ -1,0 +1,43 @@
+{
+  "note": "What goes in a minion's slots. A minion has five slots but only three are worth asking about for a collection grind: one fuel and two upgrades. The fifth is a skin, which does nothing, and one upgrade slot is usually spent on a Super Compactor or a hopper to keep the minion from filling up - neither of which changes how much the minion collects, because compacting 160 cobblestone into an enchanted one still counts as 160 collected. Curated rather than scraped: both wiki tables are one page each and mix prose, ranges and per-minion exceptions, so a parser would be more fragile than the twenty rows it replaced.",
+  "source": "Hypixel Wiki: Minion Fuel (list and the speed formula), Minion Upgrades (the upgrade table)",
+  "verified": true,
+  "checkedAt": "2026-08-25",
+
+  "speedFormula": "Time Between Actions = base / (1 + speedBoost). Stated on Minion Fuel, with a worked example: a Clay Minion XI has a base of 16s, and Enchanted Coal at +10% gives 16 / 1.10 = 14.55s. The scraped cooldown table gives Clay XI as exactly 16s, so the two agree.",
+  "multiplierNote": "Fuels quoted as x2/x3/x4 do not touch the speed at all - they duplicate every item the minion produces. Kept as a separate field so the two are never added together.",
+
+  "fuels": [
+    { "id": "NONE", "name": "No fuel", "speed": 0, "multiplier": 1, "hours": null },
+    { "id": "COAL", "name": "Coal", "speed": 0.05, "multiplier": 1, "hours": 0.5 },
+    { "id": "COAL_BLOCK", "name": "Block of Coal", "speed": 0.05, "multiplier": 1, "hours": 5 },
+    { "id": "ENCHANTED_BREAD", "name": "Enchanted Bread", "speed": 0.05, "multiplier": 1, "hours": 12 },
+    { "id": "ENCHANTED_COAL", "name": "Enchanted Coal", "speed": 0.1, "multiplier": 1, "hours": 24 },
+    { "id": "ENCHANTED_CHARCOAL", "name": "Enchanted Charcoal", "speed": 0.2, "multiplier": 1, "hours": 36 },
+    { "id": "SOLAR_PANEL", "name": "Solar Panel", "speed": 0.25, "multiplier": 1, "hours": null, "note": "Infinite, but only works while a player is on the island and only in SkyBlock daytime unless paired with a Day Saver." },
+    { "id": "ENCHANTED_LAVA_BUCKET", "name": "Enchanted Lava Bucket", "speed": 0.25, "multiplier": 1, "hours": null },
+    { "id": "MAGMA_BUCKET", "name": "Magma Bucket", "speed": 0.3, "multiplier": 1, "hours": null },
+    { "id": "PLASMA_BUCKET", "name": "Plasma Bucket", "speed": 0.35, "multiplier": 1, "hours": null },
+    { "id": "EVERBURNING_FLAME", "name": "Everburning Flame", "speed": 0.4, "multiplier": 1, "hours": null },
+    { "id": "HAMSTER_WHEEL", "name": "Hamster Wheel", "speed": 0.5, "multiplier": 1, "hours": 24 },
+    { "id": "FOUL_FLESH", "name": "Foul Flesh", "speed": 0.9, "multiplier": 1, "hours": 5 },
+    { "id": "TASTY_CHEESE", "name": "Tasty Cheese", "speed": 0, "multiplier": 2, "hours": 1 },
+    { "id": "CATALYST", "name": "Catalyst", "speed": 0, "multiplier": 3, "hours": 3 },
+    { "id": "HYPER_CATALYST", "name": "Hyper Catalyst", "speed": 0, "multiplier": 4, "hours": 6 }
+  ],
+
+  "upgradeNote": "Only the effects that change how fast a collection fills are modelled. A Compactor or Super Compactor 3000 changes the shape of the drop and not the count, so it is offered and modelled as no change - which is the honest answer, not an omission. Spreading upgrades generate a DIFFERENT item, so they do nothing for the collection you are grinding and are marked as such.",
+
+  "upgrades": [
+    { "id": "NONE", "name": "Empty slot", "speed": 0, "output": 1 },
+    { "id": "MINION_EXPANDER", "name": "Minion Expander", "speed": 0.05, "output": 1, "note": "Also widens the range to 7x7, which matters for mob minions rather than for resource ones. Two stack." },
+    { "id": "FLYCATCHER", "name": "Flycatcher", "speed": 0.2, "output": 1 },
+    { "id": "BERBERIS_FUEL_INJECTOR", "name": "Berberis Fuel Injector", "speed": 0.15, "output": 1, "restrictedTo": "farming", "note": "Farming minions only." },
+    { "id": "COMPACTOR", "name": "Compactor", "speed": 0, "output": 1, "note": "Compacts drops into blocks. Does not change how much is collected - nine iron ingots compacted still count as nine." },
+    { "id": "SUPER_COMPACTOR_3000", "name": "Super Compactor 3000", "speed": 0, "output": 1, "note": "Compacts drops into enchanted forms. Does not change how much is collected, but it is what stops a minion filling up and stalling." },
+    { "id": "DWARVEN_SUPER_COMPACTOR", "name": "Dwarven Super Compactor", "speed": 0, "output": 1, "note": "Smelts and compacts. Same collection count." },
+    { "id": "DIAMOND_SPREADING", "name": "Diamond Spreading", "speed": 0, "output": 1, "note": "10% chance of a Diamond per drop. That feeds the Diamond collection, not the one this minion is grinding." },
+    { "id": "SOULFLOW_ENGINE", "name": "Soulflow Engine", "speed": 0, "output": 0.5, "note": "Halves the minion's output in exchange for Raw Soulflow. Wrong tool for a collection grind, and included so the cost of using it is visible." },
+    { "id": "LESSER_SOULFLOW_ENGINE", "name": "Lesser Soulflow Engine", "speed": 0, "output": 0.5, "note": "Also halves output." }
+  ]
+}

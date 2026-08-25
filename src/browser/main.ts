@@ -17,6 +17,8 @@ import {
 import { ApiError, cacheAge, fetchAccessoryBins, fetchBazaar, fetchReferencePrices, fetchGarden, fetchMuseum, fetchProfiles, readBag, readOwnedItems, resolveUuid } from "./api";
 import { mountBazaar, unmountBazaar } from "./bazaarTab";
 import { mountGreenhouse, unmountGreenhouse } from "./greenhouseTab";
+import { mountMinions, setMinionProfile, unmountMinions } from "./minionsTab";
+import type { Collection, MinionData, Modifiers } from "../lib/minions";
 import type { GreenhouseData } from "../lib/greenhouse";
 import type { NpcPrice, Recipe } from "../lib/bazaarViews";
 import type { AnvilRules } from "../lib/bazaarChains";
@@ -50,6 +52,7 @@ declare global {
      * about growing things off a wiki scrape, and shares only the shop prices with the bazaar.
      */
     __GREENHOUSE_DATA__: { greenhouse: GreenhouseData; npcPrices: Record<string, NpcPrice> };
+    __MINION_DATA__: { production: MinionData; modifiers: Modifiers; collections: Collection[] };
   }
 }
 
@@ -91,7 +94,7 @@ type State = {
    * Which half of the site is on screen. The planner needs a key, a name and a profile; the
    * bazaar needs none of them, so it is a section rather than another tab inside the report.
    */
-  section: "planner" | "bazaar" | "greenhouse";
+  section: "planner" | "bazaar" | "greenhouse" | "minions";
   tab: "plan" | "packages" | "cheapest" | "grind" | "browser";
   status: { kind: "idle" | "busy" | "error"; message: string };
   report: Report | null;
@@ -251,6 +254,34 @@ function rebuildCatalog(): void {
     profile ? coopProgress(profile) : null,
     state.owned,
   );
+
+  // Hand the same reading to the minions tab. It is the island-wide view where there is a co-op,
+  // for the same reason the catalog uses it: a co-op player should not be told they are short of
+  // something the island finished months ago. Doing it here rather than in the tab keeps the
+  // profile fetched once — a second API key box on a tab that otherwise needs none would be a
+  // poor trade for data already in memory.
+  const coop = profile ? coopProgress(profile) : null;
+  const crafted = coop?.craftedGenerators ?? state.member.player_data?.crafted_generators ?? [];
+  const ownedTier = new Map<string, number>();
+  for (const id of crafted) {
+    // "CLAY_GENERATOR_11" — the tier is the trailing number and the generator is the rest.
+    const at = id.lastIndexOf("_");
+    const tier = Number(id.slice(at + 1));
+    const generator = id.slice(0, at).replace(/_GENERATOR$/, "");
+    if (!Number.isFinite(tier)) continue;
+    ownedTier.set(generator, Math.max(ownedTier.get(generator) ?? 0, tier));
+  }
+  setMinionProfile(coop?.collected ?? collectedFrom(state.member), ownedTier, state.playerName);
+}
+
+/**
+ * A member's own collection totals, for the solo case.
+ *
+ * `coopProgress` already unions these across an island; this is the one-member fallback, and it
+ * is separate from the catalog's copy because that one is not exported.
+ */
+function collectedFrom(member: ProfileMember): Map<string, number> {
+  return new Map(Object.entries(member.collection ?? {}).map(([id, n]) => [id, Number(n) || 0]));
 }
 
 /** Re-pull every live feed. The profile is left alone — this is about prices, not progress. */
@@ -791,6 +822,7 @@ function renderShell(): void {
         <button class="chip" data-section="planner">XP Planner</button>
         <button class="chip" data-section="bazaar">Bazaar</button>
         <button class="chip" data-section="greenhouse">Greenhouse</button>
+        <button class="chip" data-section="minions">Minions</button>
       </div>
     </header>
     <div id="planner">
@@ -800,6 +832,7 @@ function renderShell(): void {
     </div>
     <div id="bazaar" hidden></div>
     <div id="greenhouse" hidden></div>
+    <div id="minions" hidden></div>
   `;
 
   // Delegated once on the container, so nothing needs re-binding after a repaint.
@@ -1161,6 +1194,10 @@ const SECTION_TITLES: Record<State["section"], [string, string]> = {
     "Greenhouse",
     "Which mutation is worth growing, priced off the bazaar and ranked on what it pays for being left alone.",
   ],
+  minions: [
+    "Minions",
+    "Which minion fills a collection fastest, for the tier, fuel and upgrades you actually intend to run.",
+  ],
 };
 
 function renderSection(): void {
@@ -1169,8 +1206,10 @@ function renderSection(): void {
   document.getElementById("planner")!.hidden = showing !== "planner";
   const bazaarHost = document.getElementById("bazaar")!;
   const greenhouseHost = document.getElementById("greenhouse")!;
+  const minionHost = document.getElementById("minions")!;
   bazaarHost.hidden = showing !== "bazaar";
   greenhouseHost.hidden = showing !== "greenhouse";
+  minionHost.hidden = showing !== "minions";
 
   const [title, sub] = SECTION_TITLES[showing];
   document.getElementById("sectiontitle")!.textContent = title;
@@ -1187,6 +1226,11 @@ function renderSection(): void {
 
   if (showing === "greenhouse") mountGreenhouse(greenhouseHost, window.__GREENHOUSE_DATA__);
   else unmountGreenhouse();
+
+  // Minions neither poll nor fetch — everything they need is inlined and the profile arrives from
+  // the planner — so unmounting is only about letting go of the host, not about stopping work.
+  if (showing === "minions") mountMinions(minionHost, window.__MINION_DATA__);
+  else unmountMinions();
 }
 
 function render(): void {

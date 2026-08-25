@@ -101,6 +101,17 @@ const greenhouseData = {
   npcPrices: (await loadJson("generated/npc-prices.json")).prices,
 };
 
+/**
+ * The minions tab. Hypixel's item resource knows every minion's tiers and nothing about what they
+ * produce, so the rates are a wiki scrape and the slot contents are curated — see the notes in
+ * both files for why each is the shape it is.
+ */
+const minionData = {
+  production: await loadJson("generated/minion-production.json"),
+  modifiers: await loadJson("curated/minion_modifiers.json"),
+  collections: (await loadJson("generated/collections.json")).collections,
+};
+
 const bundle = await build({
   entryPoints: [join(ROOT, "src", "browser", "main.ts")],
   bundle: true,
@@ -119,6 +130,7 @@ const css = await readFile(join(ROOT, "src", "browser", "app.css"), "utf8");
 const dataJson = JSON.stringify(gameData).replace(/</g, "\\u003c");
 const bazaarJson = JSON.stringify(bazaarData).replace(/</g, "\\u003c");
 const greenhouseJson = JSON.stringify(greenhouseData).replace(/</g, "\\u003c");
+const minionJson = JSON.stringify(minionData).replace(/</g, "\\u003c");
 
 const html = `<!doctype html>
 <html lang="en">
@@ -135,6 +147,7 @@ ${css}
 <script>window.__GAME_DATA__ = ${dataJson};</script>
 <script>window.__BAZAAR_DATA__ = ${bazaarJson};</script>
 <script>window.__GREENHOUSE_DATA__ = ${greenhouseJson};</script>
+<script>window.__MINION_DATA__ = ${minionJson};</script>
 <script>
 ${script}
 </script>
@@ -149,6 +162,7 @@ const kb = (n) => `${(n / 1024).toFixed(0)} KB`;
 console.log(`  data    ${kb(dataJson.length)}`);
 console.log(`  bazaar  ${kb(bazaarJson.length)}`);
 console.log(`  greenhouse ${kb(greenhouseJson.length)}`);
+console.log(`  minions ${kb(minionJson.length)}`);
 console.log(`  script  ${kb(script.length)}`);
 console.log(`  css     ${kb(css.length)}`);
 console.log(`  -> dist/skyblock-xp-planner.html  ${kb(html.length)}`);
