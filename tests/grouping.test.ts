@@ -233,6 +233,50 @@ test("a trimmed row is re-priced over what it actually adds", () => {
   assert.equal(stepped.reduce((s, t) => s + (t.bundleCoins ?? 0), 0), 90);
 });
 
+/** Tiers 3..7 of one collection, each requiring the one below it. Cumulative: one running count. */
+function collectionChain(have: number): Task[] {
+  return [3, 4, 5, 6, 7].map((n) => ({
+    id: `collection_SEEDS_${n}`,
+    category: "collections",
+    name: `Seeds ${n}`,
+    xp: 4,
+    requires: n > 3 ? [`collection_SEEDS_${n - 1}`] : [],
+    cost: { kind: "none" },
+    repeatable: false,
+    note: `${(n * 1_000 - have).toLocaleString("en-US")} more (${have.toLocaleString("en-US")} of ${(n * 1_000).toLocaleString("en-US")})`,
+  }));
+}
+
+/**
+ * A span of attribute levels is N separate purchases and its note counts them. A span of
+ * collection tiers is one running count — collecting 7,000 seeds passes tiers 3 to 6 on the way
+ * — so "4 tiers" replaced the only number on the row worth reading with one the reader can see
+ * in the title.
+ */
+test("a collection span keeps the distance instead of counting its tiers", () => {
+  const { tasks, byId } = resolveTasks(collectionChain(500), new Set(), { bazaar: {}, bins: null });
+  // Tier 4 first, so tier 7 is trimmed to the 5–7 it actually adds — the shape the browser
+  // produces whenever a lower tier of the same collection sorted above a higher one.
+  const stepped = progressive(
+    [tasks.find((t) => t.id === "collection_SEEDS_4")!, tasks.find((t) => t.id === "collection_SEEDS_7")!],
+    byId,
+  );
+
+  // bundleNote is the field a spanning row renders; `note` stays the top tier's own.
+  assert.equal(stepped[1].bundleSpan, "Seeds 5–7");
+  assert.equal(stepped[1].bundleNote, "6,500 more (500 of 7,000)", "the distance to the top of the span");
+});
+
+/** The same trimming over levels still counts them, because those really are separate buys. */
+test("an attribute span still counts its levels", () => {
+  const { tasks, byId } = resolveTasks(chain(), new Set(), { bazaar: {}, bins: null });
+  const stepped = progressive(tasks.filter((t) => t.bundleXp >= 5), byId);
+  const second = progressive([stepped[0], tasks.find((t) => t.id === "attribute_extreme_pressure_9")!], byId);
+
+  assert.equal(second[1].bundleSpan, "Extreme Pressure 7–9");
+  assert.match(second[1].bundleNote ?? "", /^3 levels/, "levels 7, 8 and 9 are three purchases");
+});
+
 test("a row wholly covered further up the list disappears", () => {
   const { tasks, byId } = resolveTasks(chain(), new Set(), { bazaar: {}, bins: null });
   const top = tasks.find((t) => t.id === "attribute_extreme_pressure_10")!;

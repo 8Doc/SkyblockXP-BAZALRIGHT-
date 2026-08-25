@@ -416,6 +416,216 @@ test("with slots to spare there is no surcharge", () => {
   assert.equal(byId.get("ring")!.coins, 500_000);
 });
 
+/**
+ * A slot is charged to no accessory, but somebody still has to buy it.
+ *
+ * The browser puts Jacobus's upgrades in the list at the point the bag runs out of room. A plan
+ * that skipped them was telling you to buy forty accessories with nowhere to put them, so the
+ * fills buy the room as they go — out of the same budget, since that is where the coins come
+ * from in real life.
+ */
+
+/** An accessory that is the first of its family: buying it puts something new in the bag. */
+function accessory(id: string, xp: number, coins: number, groupBase = 0): Task {
+  return {
+    id: `accessory_${id}`,
+    category: "accessory_bag",
+    name: id,
+    xp,
+    requires: [],
+    cost: { kind: "npc", coins },
+    repeatable: false,
+    exclusiveGroup: `family:${id}`,
+    groupLevel: groupBase + xp,
+    groupBase,
+  };
+}
+
+/** Jacobus's ladder: +2 slots and +2 XP apiece, each upgrade requiring the one below it. */
+function jacobus(count: number, coins: number): Task[] {
+  return Array.from({ length: count }, (_, i) => ({
+    ...npc(`bag_upgrade_${i + 1}`, 2, coins, i ? [`bag_upgrade_${i}`] : []),
+    category: "accessory_bag" as const,
+    name: `Jacobus ${i + 1}`,
+  }));
+}
+
+const upgradesIn = (ids: string[]): string[] => ids.filter((id) => id.startsWith("bag_upgrade_"));
+const planIds = (plan: { groups: { tasks: { id: string }[] }[] }): string[] =>
+  plan.groups.flatMap((group) => group.tasks.map((task) => task.id));
+
+test("a plan buys the bag slots for the accessories it buys", () => {
+  const tasks = [...jacobus(4, 1_000), accessory("bat", 10, 100), accessory("cat", 10, 100), accessory("dog", 10, 100)];
+  const plan = solve(
+    tasks,
+    new Set(),
+    EMPTY_BOOK,
+    options({ targetXp: 30, bag: { freeSlots: 0, slotsPerUpgrade: 2 } }),
+  );
+
+  assert.deepEqual(
+    upgradesIn(planIds(plan)),
+    ["bag_upgrade_1", "bag_upgrade_2"],
+    "three new families need two upgrades, taken in Jacobus's order",
+  );
+});
+
+/**
+ * Slots are the worst rate in the game — a thousand coins for two XP here — so the prune pass
+ * that drops what a plan outgrew reaches for them first. Dropping one still holding an accessory
+ * would put the plan straight back to being unfollowable.
+ */
+test("the prune pass keeps a slot an accessory is still standing in", () => {
+  const tasks = [...jacobus(4, 1_000), accessory("bat", 10, 100), accessory("cat", 10, 100), accessory("dog", 10, 100)];
+  // 30 XP of accessories plus 4 of slots overshoots a target of 30, which is what invites prune.
+  const plan = solve(
+    tasks,
+    new Set(),
+    EMPTY_BOOK,
+    options({ targetXp: 30, bag: { freeSlots: 0, slotsPerUpgrade: 2 } }),
+  );
+
+  assert.equal(plan.reachedXp, 34, "the slots pay their own 2 XP each and stay in the plan");
+  assert.equal(plan.coins, 2_300, "three accessories at 100 and two upgrades at 1,000");
+});
+
+test("room the bag already has is filled before any upgrade is bought", () => {
+  const tasks = [...jacobus(4, 1_000), accessory("bat", 10, 100), accessory("cat", 10, 100)];
+  const plan = solve(
+    tasks,
+    new Set(),
+    EMPTY_BOOK,
+    options({ targetXp: 20, bag: { freeSlots: 2, slotsPerUpgrade: 2 } }),
+  );
+
+  assert.deepEqual(upgradesIn(planIds(plan)), [], "two free slots hold two accessories");
+});
+
+/**
+ * Upgrading a family the bag already holds takes no new room — the artifact goes where the ring
+ * was — and a plan that bought a slot for one would be spending on nothing.
+ */
+test("upgrading a family already in the bag needs no new slot", () => {
+  const tasks = [...jacobus(4, 1_000), accessory("bat", 4, 100, 8)];
+  const plan = solve(
+    tasks,
+    new Set(),
+    EMPTY_BOOK,
+    options({ targetXp: 4, bag: { freeSlots: 0, slotsPerUpgrade: 2 } }),
+  );
+
+  assert.deepEqual(upgradesIn(planIds(plan)), []);
+});
+
+/** The whole point of the group order: the rest of it has nowhere to go until these are bought. */
+test("slots lead the accessory bag group", () => {
+  const tasks = [...jacobus(4, 1_000), accessory("bat", 10, 100), accessory("cat", 10, 100), accessory("dog", 10, 100)];
+  const plan = solve(
+    tasks,
+    new Set(),
+    EMPTY_BOOK,
+    options({ targetXp: 30, bag: { freeSlots: 0, slotsPerUpgrade: 2 } }),
+  );
+
+  const group = plan.groups.find((entry) => entry.category === "accessory_bag")!;
+  assert.ok(group.tasks[0].id.startsWith("bag_upgrade_"), `${group.tasks[0].id} sorted above the slots`);
+});
+
+/**
+ * A bag we cannot read reports a capacity of zero, which is indistinguishable from a bag with no
+ * room in it. Buying slots on that reading would spend twenty million a time on room the player
+ * may already have, so the caller withholds the bag entirely and the plan is built as before.
+ */
+test("with no bag reading, no slots are bought", () => {
+  const tasks = [...jacobus(4, 1_000), accessory("bat", 10, 100), accessory("cat", 10, 100), accessory("dog", 10, 100)];
+  const plan = solve(tasks, new Set(), EMPTY_BOOK, options({ targetXp: 30 }));
+
+  assert.deepEqual(upgradesIn(planIds(plan)), []);
+});
+
+/**
+ * The slots come out of the package that needs them, so a package can only buy as many
+ * accessories as it can also buy room for. Spending over the size to fit one more in would break
+ * the one promise the package view makes.
+ */
+test("a package pays for its own slots and still never overruns", () => {
+  const tasks = [
+    ...jacobus(6, 600),
+    accessory("a", 10, 100),
+    accessory("b", 10, 100),
+    accessory("c", 10, 100),
+    accessory("d", 10, 100),
+  ];
+  const plan = solvePackages(
+    tasks,
+    new Set(),
+    EMPTY_BOOK,
+    packageOptions({ packageSize: 1_000, packageCount: 2, bag: { freeSlots: 0, slotsPerUpgrade: 2 } }),
+  );
+
+  for (const pkg of plan.packages) assert.ok(pkg.coins <= 1_000, `package ${pkg.index} spent ${pkg.coins}`);
+  assert.equal(plan.packages[0].coins, 800, "one 600 upgrade and the two accessories its slots hold");
+  assert.deepEqual(upgradesIn(plan.packages[0].groups.flatMap((g) => g.tasks.map((t) => t.id))), ["bag_upgrade_1"]);
+});
+
+/**
+ * An upgrade buys two slots, and the second one is not thrown away because the accessory that
+ * wanted it came later. A package spends the room it is holding before buying more.
+ */
+test("a slot bought for one accessory houses the next as well", () => {
+  const tasks = [...jacobus(6, 600), accessory("a", 10, 100), accessory("b", 10, 100), accessory("c", 10, 100)];
+  const plan = solvePackages(
+    tasks,
+    new Set(),
+    EMPTY_BOOK,
+    packageOptions({ packageSize: 1_000, packageCount: 1, bag: { freeSlots: 1, slotsPerUpgrade: 2 } }),
+  );
+
+  const ids = plan.packages[0].groups.flatMap((group) => group.tasks.map((task) => task.id));
+  assert.deepEqual(upgradesIn(ids), ["bag_upgrade_1"], "one free slot plus one upgrade holds all three");
+  assert.equal(plan.packages[0].coins, 900, "three accessories at 100 and one upgrade at 600");
+});
+
+/**
+ * The knapsack ranks options on coins per XP and has no way to say "and somewhere to put it", so
+ * the exact strategy houses its winners afterwards. It still has to house them.
+ */
+test("the exact solver buys slots for what it picks", () => {
+  const tasks = [...jacobus(4, 1_000), accessory("bat", 10, 100), accessory("cat", 10, 100), accessory("dog", 10, 100)];
+  const plan = solve(
+    tasks,
+    new Set(),
+    EMPTY_BOOK,
+    options({ targetXp: 30, strategy: "exact", bag: { freeSlots: 0, slotsPerUpgrade: 2 } }),
+  );
+
+  assert.deepEqual(upgradesIn(planIds(plan)), ["bag_upgrade_1", "bag_upgrade_2"]);
+});
+
+/**
+ * A package too small to buy even one slot can still buy plenty that isn't an accessory. The
+ * exact solver reserves the slot cost and picks again, and an empty second pass means "not with
+ * these accessories" rather than "nothing left" — calling the whole sequence exhausted over one
+ * unaffordable upgrade would hide every other category from the package view.
+ */
+test("a slot it cannot afford costs the package its accessories, not its contents", () => {
+  const tasks = [...jacobus(4, 5_000), accessory("bat", 10, 100), npc("filler", 5, 100)];
+  const plan = solvePackages(
+    tasks,
+    new Set(),
+    EMPTY_BOOK,
+    packageOptions({
+      packageSize: 200,
+      packageCount: 1,
+      strategy: "exact",
+      bag: { freeSlots: 0, slotsPerUpgrade: 2 },
+    }),
+  );
+
+  const ids = plan.packages[0]?.groups.flatMap((group) => group.tasks.map((task) => task.id)) ?? [];
+  assert.deepEqual(ids, ["filler"], "the accessory and its 5,000-coin slot are both out of reach");
+});
+
 /* -------------------------------------------------------- exclusive groups */
 
 /** A pet family: three tiers of one pet, each replacing the last rather than stacking. */

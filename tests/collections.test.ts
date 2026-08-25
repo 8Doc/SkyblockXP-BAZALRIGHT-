@@ -76,6 +76,70 @@ test("a co-op's collections are the sum of what its members contributed", () => 
   );
 });
 
+/**
+ * A collection row used to state its threshold — "50,000 collected" — which is the tier's cost
+ * from a standing start and the one figure the player already knows is behind them. What ranks
+ * one row against another is the distance still to go, and two tiers of the same size are not
+ * the same job when you are 325 items from one and 40,000 from the other.
+ */
+function noteFor(member: Record<string, unknown>, itemId: string, tier: number): string | undefined {
+  return catalogFor(member).tasks.find((task) => task.id === `collection_${itemId}_${tier}`)?.note;
+}
+
+test("a collection row says how far off the tier is, not what the tier costs", () => {
+  const last = figLog.tiers[figLog.tiers.length - 1];
+  const member = { collection: { FIG_LOG: last.amountRequired - 325 }, player_data: {} };
+
+  assert.equal(
+    noteFor(member, "FIG_LOG", last.tier),
+    `325 more (${(last.amountRequired - 325).toLocaleString("en-US")} of ${last.amountRequired.toLocaleString("en-US")})`,
+  );
+});
+
+/**
+ * The total is cumulative, so it is measured against every tier at once: the tiers a player is
+ * mid-way through and the ones far beyond them are all the same distance minus the same amount.
+ */
+test("every open tier is measured from the same running total", () => {
+  const member = { collection: { FIG_LOG: 1_000 }, player_data: {} };
+  for (const tier of figLog.tiers) {
+    if (tier.tier < 0 || tier.amountRequired <= 1_000) continue;
+    assert.equal(
+      noteFor(member, "FIG_LOG", tier.tier),
+      `${(tier.amountRequired - 1_000).toLocaleString("en-US")} more (1,000 of ${tier.amountRequired.toLocaleString("en-US")})`,
+      `Fig Log ${tier.tier}`,
+    );
+  }
+});
+
+/**
+ * A profile that publishes no collection data at all is not a profile with nothing collected —
+ * quoting a distance there would invent a number. The threshold is still true, so it stands in.
+ */
+test("with no collection data the row falls back to the threshold", () => {
+  const first = figLog.tiers[0];
+  const note = noteFor({ collection: {}, player_data: {} }, "FIG_LOG", first.tier);
+  assert.equal(note, `${first.amountRequired.toLocaleString("en-US")} collected`);
+});
+
+/** A co-op is scored on the shared total, so the distance is measured from it too. */
+test("a co-op's distance is measured from what the island collected", () => {
+  const last = figLog.tiers[figLog.tiers.length - 1];
+  const half = Math.ceil((last.amountRequired - 400) / 2);
+  const profile = {
+    profile_id: "p", cute_name: "Test",
+    members: {
+      a: { collection: { FIG_LOG: half }, player_data: { unlocked_coll_tiers: [] } },
+      b: { collection: { FIG_LOG: last.amountRequired - 400 - half }, player_data: { unlocked_coll_tiers: [] } },
+    },
+  } as unknown as SkyblockProfile;
+
+  const note = catalogFor({ collection: { FIG_LOG: half }, player_data: {} }, profile).tasks.find(
+    (task) => task.id === `collection_FIG_LOG_${last.tier}`,
+  )?.note;
+  assert.match(note ?? "", /^400 more \(/, "the member's own half would read as far further off");
+});
+
 /* ---------------------------------------------------------------- powers */
 
 test("a power already unlocked is not offered again", () => {

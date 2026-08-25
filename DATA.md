@@ -630,11 +630,66 @@ That is 198 XP for 1,761,500,000 coins all-in — which matches the wiki's own s
 of ~1.8B, and is why they rank near-last on value at ~750k coins per XP. They are in the plan
 because they're real, not because they're efficient.
 
-**The slot surcharge is conditional.** When the bag has room, an accessory costs what it costs.
-When it's full, `CostSpec.auction` carries a surcharge of half an upgrade — one upgrade buys two
-slots, so one accessory owes half of one — and that lands on every accessory in the category.
-Computing it rather than always applying it matters: charging a slot to a player with 133 free
-ones would inflate every accessory by 10M for no reason.
+**A slot is charged to no accessory.** Two earlier models are worth recording because both are
+wrong in instructive ways. Half an upgrade added to every accessory's price quoted a Large Fish
+Bowl listing at 9.8M as 19.8M, and billed the slot twice over — once in the markup and once in
+the upgrade task that was already in the category. Making the upgrade a *prerequisite* of an
+accessory was worse: one upgrade houses two accessories, so whichever one happened to sort
+first carried 20M of a cost the rest of them shared, and every accessory below it looked cheap
+by comparison.
+
+So the slot stays what it is — its own purchase, at its own price, needed once per two
+accessories that go into a bag with no room. Three views place it, all by the same rule, and
+none of them touches an accessory's price:
+
+- **The category browser** walks its ranking in the order shown, spends a slot on each
+  accessory that needs one, and drops the next upgrade in at the point the count hits zero
+  (`bagSlotsWhereNeeded` in `report.ts`).
+- **The batch plan and the packages** buy the room as the fill goes, out of the same budget
+  (`slotsWanted` / `slotsFor` in `solver.ts`). A package that can't afford the upgrade can't
+  afford the accessory either, so it buys neither — which is the honest answer, and the reason
+  the slots are checked against the budget rather than added on top of it. They lead their
+  group, because nothing else in it can be bought until they are.
+
+Only a **new family** takes a slot. Upgrading one already in the bag puts the artifact where the
+ring was, and recombobulating takes no room at all — so the count is per family, not per row.
+
+**A bag we can't read buys nothing.** An unreadable talisman bag reports a capacity of zero,
+which is indistinguishable from a bag with no room in it. The plan would then spend 20M a time
+on room the player may already have — the test profile has 133 free slots — so the solvers are
+handed the bag only when `readable` and a non-zero capacity agree that we know its size.
+
+## Collections say the distance, not the threshold
+
+A collection row used to be noted with the tier's own requirement — "50,000 collected" — which
+is what the tier costs from a standing start, and the one figure the player already knows is
+behind them. It made every tier of a given size look like the same job. Spider Eye IX and a
+Cobblestone tier both reading "50,000 collected" says nothing about the fact that one of them is
+325 items away and the other is forty thousand.
+
+So the note is the distance, in the shape the bestiary already used for kills:
+
+```
+Spider Eye 9      325 more (49,675 of 50,000)
+```
+
+The total is read once per collection rather than once per tier, because that is how the game
+counts it: one cumulative figure per item, measured against every tier at once. It is taken from
+the co-op union where there is one — the island collected it, not the member — so a co-op player
+isn't told they are 25,000 short of something their profile finished last month.
+
+**A collection with no data falls back to the threshold.** The profile only lists items the
+player has collected something of, so a *missing key* is a real zero and "1,500 more (0 of
+1,500)" is true. An *empty* `collection` object is a profile that publishes none of it, and
+there the distance is unknowable rather than the whole of it — quoting one would invent a
+number, so the old threshold note stands in.
+
+**A span of tiers is still one distance.** Where the browser trims a row to the tiers it adds —
+"Seeds 4–5" after Seeds 3 was listed above it — the note is the top tier's distance rather than
+a count of the tiers in the span. Collections and the bestiary are running counts, so the seeds
+that reach tier V are the same seeds that passed tier IV; ten attribute levels really are ten
+purchases and their note goes on counting them. `CUMULATIVE` in `grouping.ts` is the list of
+categories that work the first way.
 
 ## Ordering the grind
 

@@ -242,6 +242,56 @@ test("bag slots are listed where the room runs out", () => {
 });
 
 /**
+ * The same rule, in the two views that spend coins rather than list them.
+ *
+ * The browser had it and the plan did not, so a batch plan would happily tell a player with a
+ * full bag to go and buy thirty accessories, and never mention that not one of them had anywhere
+ * to go. Slots are bought in the plan too now, and they lead the group they are in: the rest of
+ * that group is unbuyable until they are paid for.
+ */
+test("a batch plan buys the room the accessories it picks will need", () => {
+  // A real, readable, completely full bag — the case the browser already handled.
+  const held = data.accessories.accessories.slice(0, 26);
+  const items = held.map((a) => ({ id: a.id, rarity: a.tier, rarityUpgrades: 0 }));
+  const reference = Object.fromEntries(data.accessories.accessories.map((a) => [a.id, 200_000]));
+  const member = { accessory_bag_storage: { bag_upgrades_purchased: 13 } } as unknown as ProfileMember;
+
+  const catalog = buildCatalog(member, data, { items, capacity: 26 });
+  assert.equal(catalog.bag.capacity - catalog.bag.used, 0, "the fixture bag should have no room left");
+
+  const built = buildReport(catalog, { bazaar: {}, bins: null, reference }, {
+    categories: new Set<Category>(["accessory_bag"]),
+    minXp: 0,
+    packageSize: 60_000_000,
+    packageCount: 3,
+    targetXp: 300,
+    budget: null,
+    strategy: "greedy",
+  } as never);
+
+  const group = built.plan.groups.find((entry) => entry.category === "accessory_bag")!;
+  const upgrades = group.tasks.filter((task) => task.id.startsWith("bag_upgrade_"));
+  const families = new Set(
+    group.tasks
+      .filter((task) => task.id.startsWith("accessory_") && (task.groupBase ?? 0) <= 0)
+      .map((task) => task.exclusiveGroup ?? task.id),
+  );
+
+  assert.ok(families.size > 0, "expected a plan that buys accessories");
+  assert.equal(upgrades.length, Math.ceil(families.size / 2), "one upgrade per two new families, and no more");
+  assert.ok(group.tasks[0].id.startsWith("bag_upgrade_"), "slots lead the group that cannot be bought without them");
+
+  // Packages have a size to respect, so the slots have to come out of it rather than on top.
+  for (const pkg of built.packages.packages) {
+    assert.ok(pkg.coins <= 60_000_000, `package ${pkg.index} spent ${pkg.coins}`);
+  }
+  const inPackages = built.packages.packages.flatMap((pkg) =>
+    pkg.groups.flatMap((entry) => entry.tasks.filter((task) => task.id.startsWith("bag_upgrade_"))),
+  );
+  assert.ok(inPackages.length > 0, "a package that buys accessories buys somewhere to put them");
+});
+
+/**
  * Bag slots are interchangeable — each is +2 at the going rate — so a run of them is a quantity
  * to buy, not a span of numbered things. A package saying "Accessory bag upgrade 14–23" makes
  * you count them yourself; "Upgrade Jacobus 10×" is the instruction, and buying them first is

@@ -191,11 +191,19 @@ export function buildCatalog(
   // amount doesn't reflect.
   const unlockedTiers = new Set(coop?.unlockedCollectionTiers ?? member.player_data?.unlocked_coll_tiers ?? []);
   const collectedTotals = coop?.collected ?? collectedFrom(member);
+  // The profile only lists items the player has actually collected some of, so a missing key is
+  // a real zero — but an *empty* map is a profile that publishes no collection data at all, and
+  // there the distance to a tier is unknowable rather than the whole of it.
+  const collectionsKnown = collectedTotals.size > 0;
   for (const coll of data.collections.collections) {
     let previous: string | null = null;
+    // Island-wide and cumulative, so it is read once per collection rather than per tier: the
+    // same total is what every tier of this item is measured against.
+    const have = collectedTotals.get(coll.itemId) ?? 0;
     for (const tier of coll.tiers) {
       if (tier.xp <= 0) continue;
       const id = `collection_${coll.itemId}_${tier.tier}`;
+      const left = tier.amountRequired - have;
       tasks.push({
         id,
         category: "collections",
@@ -204,9 +212,15 @@ export function buildCatalog(
         requires: previous ? [previous] : [],
         cost: { kind: "none" },
         repeatable: false,
-        note: `${tier.amountRequired.toLocaleString("en-US")} collected`,
+        // The threshold alone said what the tier costs from a standing start, which is the one
+        // number the player already knows is behind them. What ranks a row against its
+        // neighbours is the distance still to go — 325 more Spider Eyes beats 40,000 more
+        // Cobblestone however similar the two tiers look on the effort scale.
+        note:
+          collectionsKnown && left > 0
+            ? `${num(left)} more (${num(have)} of ${num(tier.amountRequired)})`
+            : `${num(tier.amountRequired)} collected`,
       });
-      const have = collectedTotals.get(coll.itemId) ?? 0;
       if (unlockedTiers.has(`${coll.itemId}_${tier.tier}`) || have >= tier.amountRequired) done.add(id);
       previous = id;
     }

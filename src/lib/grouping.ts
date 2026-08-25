@@ -261,6 +261,16 @@ const TIER_NOUN: Partial<Record<ResolvedTask["category"], string>> = {
   skills: "levels",
 };
 
+/**
+ * Categories whose tiers are one running count rather than a sequence of purchases.
+ *
+ * Collecting 2,500 Seeds passes tiers I-IV on the way to V, and the kills for a bestiary tier
+ * are the same kills that earned the tiers below it — so the distance to the top of a span *is*
+ * the distance for the whole span. Ten attribute levels are ten separate purchases and their
+ * note counts them; a span of these would be counting the same seeds five times over.
+ */
+const CUMULATIVE: ReadonlySet<ResolvedTask["category"]> = new Set(["collections", "bestiary"]);
+
 /** A trailing tier marker: "Mk. III", "III", "7". */
 const NAME_TIER = /\s+(?:Mk\.\s*)?([IVXL]+|\d+)$/;
 const ROMAN: Record<string, number> = {
@@ -412,9 +422,12 @@ function trimTo(task: ResolvedTask, remaining: string[], byId: Map<string, Resol
   const noun = TIER_NOUN[task.category] ?? "tiers";
   const note =
     members.length > 1
-      ? material
-        ? `${members.length} ${noun} · ${material}`
-        : `${members.length} ${noun}`
+      ? // A running count is already the whole span's answer, and it lives on the top tier.
+        CUMULATIVE.has(task.category)
+        ? task.note
+        : material
+          ? `${members.length} ${noun} · ${material}`
+          : `${members.length} ${noun}`
       : members[0].note;
 
   return {
