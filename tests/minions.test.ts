@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 // @ts-expect-error - a plain build script, imported for its pure parsers only.
 import { parseCollects, parseCollection, parseCooldowns } from "../scripts/fetch-minion-production.mjs";
-import { MILESTONES, actionSeconds, itemsPerHour, offlineAmount, planMinions, target } from "../src/lib/minions";
+import { MILESTONES, actionSeconds, itemsPerHour, offlineAmount, planMinions, target, tierSteps } from "../src/lib/minions";
 import type { Collection, Fuel, MinionData, MinionProduction, Modifiers, OfflineRules, Upgrade } from "../src/lib/minions";
 
 const data = JSON.parse(readFileSync("data/generated/minion-production.json", "utf8")) as MinionData;
@@ -325,4 +325,62 @@ test("milestone mode lists only the gold minions, ranked by the shortest wait", 
 
   // And the other two modes are unaffected by any of this.
   assert.ok(planMinions({ ...base, goal: "next" }).length > 30);
+});
+
+/* --------------------------------------------------------- the tier ladder */
+
+/**
+ * The table ranks on one target, which cannot answer the question you ask standing in front of
+ * it: is one more tier here cheaper than the first tier over there? Collection rungs multiply
+ * rather than step evenly, so the answer is often no — and the step figure is where it shows.
+ */
+test("the ladder lists every open tier, measured from where you stand", () => {
+  const cobble = collections.find((c) => c.itemId === "COBBLESTONE")!;
+  const tiers = cobble.tiers.filter((t) => t.tier > 0).sort((a, b) => a.tier - b.tier);
+
+  // 100 an hour makes the arithmetic readable: hours are hundredths of the distance.
+  const steps = tierSteps(cobble, 0, 100);
+  assert.equal(steps.length, tiers.length, "nothing collected, so every tier is open");
+  assert.equal(steps[0].tier, tiers[0].tier);
+  assert.equal(steps[0].needed, tiers[0].amountRequired, "cumulative, so the first is the threshold");
+  assert.equal(steps[0].hours, tiers[0].amountRequired / 100);
+
+  // The rung's own cost is the gap to the one below it, not the whole climb.
+  for (let i = 1; i < steps.length; i++) {
+    assert.equal(steps[i].needed, tiers[i].amountRequired, `tier ${steps[i].tier} is measured from zero`);
+    assert.ok(steps[i].hours > steps[i - 1].hours, "the climb only gets longer");
+    assert.equal(
+      Math.round(steps[i].stepHours * 1e6) / 1e6,
+      Math.round((steps[i].hours - steps[i - 1].hours) * 1e6) / 1e6,
+      `tier ${steps[i].tier}'s step is the gap to the tier below`,
+    );
+  }
+});
+
+test("tiers already behind you are not listed, and the first step is measured from you", () => {
+  const cobble = collections.find((c) => c.itemId === "COBBLESTONE")!;
+  const tiers = cobble.tiers.filter((t) => t.tier > 0).sort((a, b) => a.tier - b.tier);
+  const have = tiers[2].amountRequired; // exactly on tier 3
+
+  const steps = tierSteps(cobble, have, 100);
+  assert.equal(steps[0].tier, tiers[3].tier, "a tier you have reached is done, not open");
+  assert.equal(steps[0].needed, tiers[3].amountRequired - have, "the distance from here, not the threshold");
+  assert.equal(steps[0].stepHours, steps[0].hours, "the first rung's step is the whole wait so far");
+});
+
+/**
+ * The comparison the whole feature exists for: a minion can win on its next tier and lose on the
+ * one after, because the rungs multiply. If that never happened the ladder would be decoration.
+ */
+test("a later rung can cost more than a rival's first, which is the point", () => {
+  const cobble = collections.find((c) => c.itemId === "COBBLESTONE")!;
+  const steps = tierSteps(cobble, 0, 100);
+  const climbs = steps.some((s, i) => i > 0 && s.stepHours > steps[0].hours);
+  assert.ok(climbs, "a later tier should cost more than the first — otherwise there is nothing to compare");
+});
+
+test("a minion that produces nothing has no ladder rather than an infinite one", () => {
+  const cobble = collections.find((c) => c.itemId === "COBBLESTONE")!;
+  assert.deepEqual(tierSteps(cobble, 0, 0), []);
+  assert.deepEqual(tierSteps(cobble, Number.MAX_SAFE_INTEGER, 100), [], "nothing left to climb");
 });

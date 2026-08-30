@@ -336,7 +336,17 @@ table.bz td:last-child { color: var(--gold); }
 
    Written as `table.bz tr.gh-detail > td` because `table.bz td` is two elements and a class, and
    a plainer selector here loses to it on specificity and silently changes nothing. */
-table.bz tr.gh-detail > td { padding: 10px 12px 14px; background: rgba(255,255,255,0.02); white-space: normal; }
+table.bz tr.gh-detail > td, table.bz tr.mn-detail > td { padding: 10px 12px 14px; background: rgba(255,255,255,0.02); white-space: normal; }
+
+/* The minions tab's tier ladder. Five narrow columns of figures, so it is a grid rather than a
+   nested table: `table.bz td` would win on specificity over anything a nested table set, and the
+   cells would inherit the outer table's padding. Capped in width because five short columns
+   stretched across a wide panel are harder to read than the same five columns kept together. */
+.mn-steps { display: flex; flex-direction: column; gap: 1px; width: max-content; max-width: 100%; font-size: 0.9em; }
+.mn-step { display: grid; grid-template-columns: 3em 7em 5.5em 5.5em 4.5em; gap: 0 16px; padding: 2px 0; }
+.mn-step .num { text-align: right; font-variant-numeric: tabular-nums; }
+.mn-step-head { border-bottom: 1px solid var(--line); padding-bottom: 4px; margin-bottom: 3px; opacity: 0.65; font-size: 0.92em; letter-spacing: 0.03em; }
+@media (max-width: 620px) { .mn-step { grid-template-columns: 2.4em 5.4em 4.6em 4.6em 4em; gap: 0 8px; } }
 /* Two things bite here and they look the same on screen. `1fr` carries a min-content floor, so the
    text columns measure at max-content and spill out of the cell — hence minmax(0,1fr). And an
    `auto` first track is grown to *its* max-content before any fr track gets a pixel, so the plot

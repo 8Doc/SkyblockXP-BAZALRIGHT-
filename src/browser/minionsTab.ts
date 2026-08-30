@@ -3,6 +3,7 @@ import {
   MILESTONES,
   itemsPerHour,
   planMinions,
+  tierSteps,
   type Collection,
   type Fuel,
   type MinionData,
@@ -40,6 +41,8 @@ type State = {
   /** What to aim at: the next tier, the last one, or a threshold past it like 100M Gold. */
   goal: Goal;
   search: string;
+  /** Which row's tier breakdown is open, if any. One at a time, like the greenhouse. */
+  open: string | null;
   /** Collected totals and crafted tiers, handed over by the planner when a profile is loaded. */
   collected: Map<string, number>;
   ownedTier: Map<string, number>;
@@ -66,6 +69,7 @@ const state: State = {
   upgrades: [localStorage.getItem("sbxp:mnup0") ?? "NONE", localStorage.getItem("sbxp:mnup1") ?? "NONE"],
   goal: (localStorage.getItem("sbxp:mngoal") as Goal) ?? "next",
   search: "",
+  open: null,
   collected: new Map(),
   ownedTier: new Map(),
   profileName: null,
@@ -156,6 +160,15 @@ export function mountMinions(container: HTMLElement, data: Tables): void {
         state.goal = (goal.dataset.mngoal as Goal) ?? "next";
         localStorage.setItem("sbxp:mngoal", state.goal);
         render();
+        return;
+      }
+
+      // Clicking the open row closes it, so the breakdown is a toggle rather than a trap. Only
+      // the table is repainted: re-rendering the controls would drop focus out of the search box.
+      const row = target.closest<HTMLElement>("[data-mnopen]");
+      if (row) {
+        state.open = state.open === row.dataset.mnopen ? null : row.dataset.mnopen!;
+        renderTable();
       }
     });
 
@@ -400,11 +413,17 @@ function renderTable(): void {
         ? ` <span class="dim" title="The wiki quotes this as a range, so the rate uses the midpoint.">${r.dropRange.low}–${r.dropRange.high} a drop</span>`
         : "";
       const goal = r.targetTier === null ? "" : ` <span class="dim">→ tier ${r.targetTier}</span>`;
-      return `<tr>
+      // The breakdown is its own row spanning every column, and carries no data-mnopen of its
+      // own so that clicking inside it lets you read rather than slamming it shut.
+      const detail =
+        state.open === r.generator
+          ? `<tr class="mn-detail"><td colspan="${COLUMNS.length + 1}">${stepsHtml(r)}</td></tr>`
+          : "";
+      return `<tr class="bz-open" data-mnopen="${escapeHtml(r.generator)}">
         <td>${icon}${escapeHtml(r.family)}
           <div class="dim bz-path">${escapeHtml(r.collectionName)}${goal}${range}</div>
         </td>${cells}
-      </tr>`;
+      </tr>${detail}`;
     })
     .join("");
 
@@ -420,6 +439,61 @@ function renderTable(): void {
       state.goal === "milestone" ? "to the buff threshold" : state.goal === "max" ? "to the last tier" : "to the next tier"
     } · ${escapeHtml(state.count)} placed</p>
   `;
+}
+
+/**
+ * The tier ladder for one minion — every rung still open, and what each costs on its own.
+ *
+ * The table shows one target at a time, which cannot answer the question you ask standing in
+ * front of it: *is one more tier here cheaper than the first tier over there?* Collection rungs
+ * multiply rather than step evenly, so a minion that wins on its next tier can lose badly on the
+ * one after — and the **step** column is where that shows up.
+ *
+ * Deliberately five columns and no chart. This is a reference you glance at mid-decision, not a
+ * second table to read.
+ */
+function stepsHtml(r: MinionPlan): string {
+  const collection = tables.collections.find((c) => c.itemId === r.collectionId);
+  if (!collection) return `<span class="dim">No tier table for this collection.</span>`;
+
+  const have = state.collected.get(r.collectionId) ?? 0;
+  const steps = tierSteps(collection, have, r.itemsPerHour);
+  if (steps.length === 0) return `<span class="dim">Every tier of this collection is already done.</span>`;
+
+  const rows = steps
+    .map(
+      (s) => `<div class="mn-step">
+        <span>${s.tier}</span>
+        <span class="num">${num(Math.ceil(s.needed))}</span>
+        <span class="num">${hours(s.hours)}</span>
+        <span class="num dim">+${hours(s.stepHours)}</span>
+        <span class="num dim">${num(s.xp)} xp</span>
+      </div>`,
+    )
+    .join("");
+
+  // A threshold past the last tier is not a tier, so it is listed after them and labelled for
+  // what it pays — a buff — rather than being given an XP figure it does not have.
+  const milestone = MILESTONES[r.collectionId];
+  const buff =
+    milestone && have < milestone.amount
+      ? `<div class="mn-step">
+          <span class="dim">${escapeHtml(milestone.label)}</span>
+          <span class="num">${num(Math.ceil(milestone.amount - have))}</span>
+          <span class="num">${hours((milestone.amount - have) / r.itemsPerHour)}</span>
+          <span class="num dim">—</span>
+          <span class="num dim">buff</span>
+        </div>`
+      : "";
+
+  return `<div class="mn-steps">
+    <div class="mn-step mn-step-head">
+      <span>Tier</span><span class="num">Still needs</span><span class="num">Reach at</span>
+      <span class="num" title="What this tier adds over the one below it — the figure that makes two minions comparable rung for rung.">This tier</span>
+      <span class="num">XP</span>
+    </div>
+    ${rows}${buff}
+  </div>`;
 }
 
 const NOTE =

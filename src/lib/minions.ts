@@ -217,6 +217,46 @@ export function target(collection: Collection, have: number, goal: Goal): Target
   return { needed: next.amountRequired - have, tier: next.tier, xp: next.xp, maxing: false };
 }
 
+/** One rung still to climb, with the wait to reach it and the wait the rung itself adds. */
+export type TierStep = {
+  tier: number;
+  /** Items still to collect from where the player stands now. Cumulative, like the collection. */
+  needed: number;
+  /** Hours from now to reach this tier. */
+  hours: number;
+  /** Hours this rung adds over the one below it. */
+  stepHours: number;
+  xp: number;
+};
+
+/**
+ * Every tier still open, and what each one costs on its own.
+ *
+ * The table ranks a minion on a single target, which answers "what is the next thing to finish"
+ * and cannot answer the question underneath it: *is one more tier here cheaper than the first
+ * tier somewhere else?* A collection's rungs are not evenly spaced — they usually multiply — so
+ * the second tier of the fastest minion can easily cost more than the first tier of the third
+ * fastest, and ranking on either endpoint hides that.
+ *
+ * `hours` is the wait from now, because collections are cumulative and that is the figure you
+ * actually wait. `stepHours` is what the rung adds, and it is the one that makes two minions
+ * comparable rung for rung.
+ */
+export function tierSteps(collection: Collection, have: number, itemsPerHour: number): TierStep[] {
+  if (!(itemsPerHour > 0)) return [];
+
+  const out: TierStep[] = [];
+  let previous = 0;
+  for (const tier of collection.tiers.filter((t) => t.tier > 0).sort((a, b) => a.tier - b.tier)) {
+    if (tier.amountRequired <= have) continue;
+    const needed = tier.amountRequired - have;
+    const hours = needed / itemsPerHour;
+    out.push({ tier: tier.tier, needed, hours, stepHours: hours - previous, xp: tier.xp });
+    previous = hours;
+  }
+  return out;
+}
+
 /* ------------------------------------------------------------- the ranking */
 
 export type MinionPlan = {
