@@ -342,6 +342,16 @@ export type GameData = {
   curves: CurvesData;
   travelScrolls: TravelScrollsData;
   costs: CostsData;
+  /**
+   * Crimson Isle reputation, and the two minion lines it gates. Checked tier by tier rather
+   * than once at the door: a profile short of the reputation cannot craft that tier yet,
+   * however cheap the ingredients are.
+   */
+  factionReputation: {
+    byTier: Record<string, number>;
+    minions: Record<string, string>;
+    cap: number;
+  };
   petScore: { byRarity: Record<string, number> };
   /**
    * What it takes for a pet to be at its maximum level, which is worth a point of pet score on

@@ -52,6 +52,7 @@ const gameData = {
   curves: await loadJson("generated/curves.json"),
   travelScrolls: await loadJson("generated/travel_scrolls.json"),
   costs: await loadJson("generated/costs.json"),
+  factionReputation: await loadJson("curated/faction_reputation.json"),
   petScore: await loadJson("curated/pet_score.json"),
   petLevels: await loadJson("curated/pet_levels.json"),
   petApiKeys: await loadJson("curated/pet_api_keys.json"),

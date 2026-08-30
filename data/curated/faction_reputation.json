@@ -1,0 +1,32 @@
+{
+  "note": "Crimson Isle faction reputation, and the two minions gated behind it. Every other minion merchant sells to anyone; only the Mycelium and Red Sand lines check what you have earned, and they check it tier by tier rather than once at the door.",
+  "source": "Hypixel SkyBlock Wiki (hypixelskyblock.minecraft.wiki), Mycelium Minion and Red Sand Minion upgrade tables, cross-read against the Factions page. The two ladders are identical, and tier XII sits exactly on the 12,000 cap.",
+  "verified": true,
+  "note_on_membership": "Reputation is the whole requirement — you do not have to be standing in the faction to craft. Since November 2024 the two are tracked independently and gaining one no longer costs you the other, so a profile can hold both and both are read.",
+  "byTier": {
+    "1": 500,
+    "2": 1000,
+    "3": 1500,
+    "4": 2000,
+    "5": 3000,
+    "6": 4000,
+    "7": 5500,
+    "8": 6500,
+    "9": 7500,
+    "10": 9000,
+    "11": 10000,
+    "12": 12000
+  },
+  "minions": {
+    "MYCELIUM": "mages",
+    "RED_SAND": "barbarians"
+  },
+  "named": {
+    "Neutral": 0,
+    "Friendly": 1000,
+    "Trusted": 3000,
+    "Honored": 7000,
+    "Hero": 12000
+  },
+  "cap": 12000
+}

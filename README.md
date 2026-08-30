@@ -263,6 +263,15 @@ Hypixel resources API when the game changes; the wiki-derived and curated tables
   reaches, priced from what you own rather than as an upgrade over a rarity you were never going
   to buy. Mythic where a pet goes mythic, common for the Precursor Drone, which never does: the
   point is to skip the rungs on the way up, not to pick one.
+- **The bestiary has a `Fewest kills` toggle.** Its ranking scales a tier against its own
+  family's ladder, which is the right answer to "what is the least work" and no answer at all to
+  "what am I about to finish" — a short-laddered family reads as a marathon while sitting one
+  kill from the next tier. Same rows, ordered on kills left instead.
+- **Minions the game will not sell you say so.** The Mycelium and Red Sand lines are gated on
+  Crimson Isle reputation, tier by tier, and a row above your standing is tagged `needs 10,000
+  mage rep` and sunk below everything you can actually act on. A gate is not a price: the
+  ingredients are affordable, and the merchant still says no. `DATA.md` has the ladder and two
+  things this deliberately doesn't do.
 - The XP floor, coin budget and category toggles re-solve live — see the note on solve cost below.
 
 ## Solve cost

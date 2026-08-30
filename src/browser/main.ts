@@ -384,6 +384,12 @@ function taskRow(task: ResolvedTask, showBundle: boolean, tag?: string): string 
     <span class="task-name">${tag ? `<span class="tag cat">${escapeHtml(tag)}</span>` : ""}${nameCell}${
       bundled ? `<span class="tag">+${task.bundle.length} prereq</span>` : ""
     }${task.estimated ? `<span class="tag est" title="Nothing is listing this right now — reference price">est</span>` : ""}${
+      task.blocked
+        ? `<span class="tag locked" title="The ingredients are not the obstacle — the merchant will not sell you this yet.">${escapeHtml(
+            task.blocked,
+          )}</span>`
+        : ""
+    }${
       shownNote ? `<span class="note">${escapeHtml(shownNote)}</span>` : ""
     }</span>
     <span class="task-xp">${bundled ? task.bundleXp : task.xp} xp</span>
@@ -726,36 +732,47 @@ function browserView(report: Report): string {
       const topRarityKey = `toprarity:${category}`;
       const onlyTopRarity = entry.topRarity !== undefined && open.has(topRarityKey);
 
+      // The bestiary ranks on how much work a tier is, measured against its own family's ladder.
+      // That buries the tier you are one kill from finishing, so the other order is a click away.
+      const closestKey = `closest:${category}`;
+      const byClosest = entry.closest !== undefined && open.has(closestKey);
+
       // Independent questions — "one row per thing", "only the top rarity", "only what I cannot
       // buy" — so they can be on at once, and each combination is a list of its own rather than
       // one toggle quietly cancelling the other.
-      const chosen = isGrouped
-        ? showUnpriced
-          ? (entry.unpricedMaxed ?? [])
-          : maxed!
-        : onlyTopRarity
+      // Closest-first stands outside that: it is the same rows in another order, and it is only
+      // ever offered on the one category where none of the others are.
+      const chosen = byClosest
+        ? entry.closest!
+        : isGrouped
           ? showUnpriced
-            ? (entry.topRarityUnpriced ?? [])
-            : entry.topRarity!
-          : showUnpriced
-            ? unpriced!
-            : tasks;
+            ? (entry.unpricedMaxed ?? [])
+            : maxed!
+          : onlyTopRarity
+            ? showUnpriced
+              ? (entry.topRarityUnpriced ?? [])
+              : entry.topRarity!
+            : showUnpriced
+              ? unpriced!
+              : tasks;
       const rows = hideJacobus
         ? (chosen as { tasks?: ResolvedTask[]; id?: string }[]).filter((row) =>
             row.id ? !row.id.startsWith("bag_upgrade_") : !row.tasks?.[0]?.id.startsWith("bag_upgrade_"),
           )
         : chosen;
-      const hidden = isGrouped
-        ? showUnpriced
-          ? (entry.unpricedMaxedTruncated ?? 0)
-          : (maxedTruncated ?? 0)
-        : onlyTopRarity
+      const hidden = byClosest
+        ? (entry.closestTruncated ?? 0)
+        : isGrouped
           ? showUnpriced
-            ? (entry.topRarityUnpricedTruncated ?? 0)
-            : (entry.topRarityTruncated ?? 0)
-          : showUnpriced
-            ? (unpricedTruncated ?? 0)
-            : truncated;
+            ? (entry.unpricedMaxedTruncated ?? 0)
+            : (maxedTruncated ?? 0)
+          : onlyTopRarity
+            ? showUnpriced
+              ? (entry.topRarityUnpricedTruncated ?? 0)
+              : (entry.topRarityTruncated ?? 0)
+            : showUnpriced
+              ? (unpricedTruncated ?? 0)
+              : truncated;
 
       const body = open.has(key)
         ? `<div class="group-body">
@@ -789,6 +806,20 @@ function browserView(report: Report): string {
                       hideJacobus
                         ? "bag slots hidden — accessories only"
                         : "bag slots are shown where the bag runs out of room"
+                    }</span>
+                  </p>`
+                : ""
+            }
+            ${
+              entry.closest !== undefined
+                ? `<p class="sub group-toggle">
+                    <button class="chip${
+                      byClosest ? " on" : ""
+                    }" data-toggle="${closestKey}">Fewest kills</button>
+                    <span class="dim">${
+                      byClosest
+                        ? "closest to the next tier first, whatever the family — a rare mob one kill away leads"
+                        : "least work first, each tier measured against its own family's ladder"
                     }</span>
                   </p>`
                 : ""

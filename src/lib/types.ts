@@ -148,6 +148,22 @@ export type Task = {
    */
   progress?: number;
   /**
+   * How many of the thing is still to be done, in the units the profile counts — kills, for a
+   * bestiary tier.
+   *
+   * Deliberately absolute where `effort` is relative. Effort scales a bestiary tier against its
+   * own family's ladder, which is the right way to ask "how much work is this", and the wrong
+   * way to ask "what am I about to finish": a family with a short ladder reads as a marathon
+   * while sitting one kill from the next tier.
+   */
+  remaining?: number;
+  /**
+   * Why this cannot be done yet, when the obstacle is neither the price nor the prerequisites —
+   * "needs 3,000 mage rep". A gate rather than a cost: the ingredients are affordable and the
+   * chain is met, and the game still says no.
+   */
+  blocked?: string;
+  /**
    * Where to physically go — "Hub · 62, 72, -147". Kept apart from the note so the UI can put it
    * behind the character's name rather than spending a line on it: a contact list is seventy
    * rows long and only the one you are walking to needs an address.

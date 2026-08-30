@@ -70,6 +70,12 @@ export type Report = {
      */
     topRarity?: ResolvedTask[];
     topRarityTruncated?: number;
+    /**
+     * The bestiary reordered on kills left rather than on how much work a tier is — what you
+     * are about to finish, as against what is smallest. Same rows, different ranking.
+     */
+    closest?: ResolvedTask[];
+    closestTruncated?: number;
     /** Both at once: the top rarity only, counting only what nobody is selling. */
     topRarityUnpriced?: ResolvedTask[];
     topRarityUnpricedTruncated?: number;
@@ -278,6 +284,11 @@ function buildBrowser(
     const shown = remaining
       .filter((t) => t.bundleXp >= options.minXp)
       .sort((a, b) => {
+        // A row the game will not sell you yet sinks below every row it will, whatever it costs.
+        // Reputation is the case: a Mycelium tier can be the best rate on the board and still be
+        // something you cannot walk up and buy, and ranking it on price alone puts it top of a
+        // shopping list you cannot act on.
+        if (!a.blocked !== !b.blocked) return a.blocked ? 1 : -1;
         if (a.efficiency === null && b.efficiency === null) {
           const effort = (a.effort ?? 1) - (b.effort ?? 1);
           return effort !== 0 ? effort : b.xp - a.xp;
@@ -308,6 +319,18 @@ function buildBrowser(
     // Taken off `shown` rather than off `remaining`, so it inherits the same XP floor and the
     // same coins-per-XP ordering the ungrouped list is built from.
     const topRarity = category === "pets" ? progressive(topRarityOnly(shown), byId) : null;
+
+    // The bestiary the other way up: fewest kills left, not least work. Its ordering scales a
+    // tier against its own family's ladder, which is the honest answer to "what is the smallest
+    // job" and no answer at all to "what am I about to finish" — a family with a short ladder
+    // reads as a marathon while sitting one kill from the next tier. A reorder of the same rows,
+    // so nothing needs repricing; it is the ranking that changes, not the list.
+    const closest =
+      category === "bestiary"
+        ? [...progressive(shown, byId)].sort(
+            (a, b) => (a.remaining ?? Infinity) - (b.remaining ?? Infinity) || b.xp - a.xp,
+          )
+        : null;
 
     // Bag slots come out of the price ranking and go back in where the bag runs out of room.
     if (category === "accessory_bag") {
@@ -352,6 +375,12 @@ function buildBrowser(
         ? {
             topRarity: topRarity.slice(0, BROWSER_LIMIT),
             topRarityTruncated: Math.max(topRarity.length - BROWSER_LIMIT, 0),
+          }
+        : {}),
+      ...(closest
+        ? {
+            closest: closest.slice(0, BROWSER_LIMIT),
+            closestTruncated: Math.max(closest.length - BROWSER_LIMIT, 0),
           }
         : {}),
       ...(topRarityUnpriced
@@ -457,6 +486,10 @@ function buildCheapest(
   const buyable = resolved
     .filter((t) => !t.done && t.xp > 0 && options.categories.has(t.category) && t.cost.kind !== "none")
     .sort((a, b) => {
+      // Same rule the category browser uses, and it matters more here: this is the list that
+      // answers "what is the next cheapest XP anywhere", so a Mycelium bundle the merchant will
+      // not sell you had no business sitting a hundred rows up it looking like the answer.
+      if (!a.blocked !== !b.blocked) return a.blocked ? 1 : -1;
       if (a.efficiency === null) return b.efficiency === null ? 0 : 1;
       if (b.efficiency === null) return -1;
       return a.efficiency - b.efficiency;

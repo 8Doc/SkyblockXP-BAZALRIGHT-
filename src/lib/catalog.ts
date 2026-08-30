@@ -257,7 +257,22 @@ export function buildCatalog(
   // Island-wide: in a co-op one member crafts tiers I-VI and another upgrades to XI, and each
   // only ever records their own half.
   const crafted = new Set(coop?.craftedGenerators ?? member.player_data?.crafted_generators ?? []);
+
+  // Two minion lines are sold against Crimson Isle standing rather than to anyone who turns up,
+  // and they check it tier by tier: 500 for the first, 12,000 — the cap — for the twelfth. The
+  // ingredients can be sitting in the bazaar at a good price and the merchant will still say no,
+  // which is a different kind of "cannot buy this" from having no price at all, so it is said
+  // differently. Both reputations are read whichever faction the player is standing in: they are
+  // tracked apart, and earning one has not cost you the other since November 2024.
+  const reputation: Record<string, number> = {
+    mages: member.nether_island_player_data?.mages_reputation ?? 0,
+    barbarians: member.nether_island_player_data?.barbarians_reputation ?? 0,
+  };
+  const FACTION_LABEL: Record<string, string> = { mages: "mage", barbarians: "barbarian" };
+
   for (const minion of data.minions.minions) {
+    const faction = data.factionReputation.minions[minion.generator];
+    const held = faction === undefined ? 0 : (reputation[faction] ?? 0);
     let previous: string | null = null;
     for (const tier of minion.tiers) {
       const id = `minion_${minion.generator}_${tier.tier}`;
@@ -273,12 +288,16 @@ export function buildCatalog(
       const ingredients = Array.isArray(recipe) ? recipe : recipe?.items;
       const alsoRequires = Array.isArray(recipe) ? [] : (recipe?.requires ?? []);
 
+      const wanted = faction === undefined ? 0 : (data.factionReputation.byTier[String(tier.tier)] ?? 0);
+      const short = wanted > held;
+
       tasks.push({
         id,
         category: "minions",
         name: tier.name,
         xp: tier.xp,
         requires: [...(previous ? [previous] : []), ...alsoRequires],
+        ...(short ? { blocked: `needs ${num(wanted)} ${FACTION_LABEL[faction!] ?? faction} rep` } : {}),
         cost:
           tier.tier === 12
             ? { kind: "bazaar", items: [{ id: stone, qty: 1 }] }
@@ -1185,6 +1204,10 @@ export function buildCatalog(
         cost: { kind: "none" },
         repeatable: false,
         note: `${num(needed)} more kill${needed === 1 ? "" : "s"} (${num(kills)} of ${num(ladder[next - 1] ?? 0)})`,
+        // The same figure the note states, kept as a number so the panel can order on it. The
+        // effort below scales it against the family's own ladder, which answers a different
+        // question and cannot answer this one.
+        remaining: needed,
         // Grind tasks normally rank on how many players have finished them. The bestiary has
         // something better: the exact number of kills left. It is the same 0-to-1 scale, but
         // measured rather than sampled, so it replaces the proxy for this category alone.

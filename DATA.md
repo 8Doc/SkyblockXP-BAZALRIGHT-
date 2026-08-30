@@ -605,6 +605,53 @@ real floor of 655.
 The floor is now **0 by default**. It is still there for anyone who wants it — the tail is real
 — but hiding the best rows is opt-in rather than the shipped behaviour.
 
+## Crimson Isle reputation, and the two minions behind it
+
+Every minion merchant in the game sells to whoever turns up, with two exceptions. The Mycelium
+and Red Sand lines are sold against faction standing, and they check it **tier by tier** rather
+than once at the door — so this is not a lock on the minion, it is a ceiling on how far up it
+you can climb.
+
+| What | Where |
+|---|---|
+| Mage standing | `nether_island_player_data.mages_reputation` |
+| Barbarian standing | `nether_island_player_data.barbarians_reputation` |
+
+Both are read whichever faction the player is standing in. The two have been tracked
+independently since November 2024 — earning one no longer costs you the other — so a profile can
+hold reputation with a faction it left, and that reputation still buys the minion.
+
+`faction_reputation.json` carries the ladder. Both minions want the same numbers, and tier XII
+sits exactly on the 12,000 cap:
+
+| Tier | I | II | III | IV | V | VI | VII | VIII | IX | X | XI | XII |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Reputation | 500 | 1,000 | 1,500 | 2,000 | 3,000 | 4,000 | 5,500 | 6,500 | 7,500 | 9,000 | 10,000 | 12,000 |
+
+Source is the wiki's own upgrade tables for each minion, cross-read against the Factions page
+for the cap and the named bands (Neutral 0, Friendly 1,000, Trusted 3,000, Honored 7,000, Hero
+12,000). Worth noting for anything scraped in future: **the official `wiki.hypixel.net` shut
+down in July 2026** and now redirects to a forum thread. `hypixelskyblock.minecraft.wiki` is the
+maintained successor; the Fandom copy is stale and disagrees.
+
+### A gate is not a price
+
+A blocked row keeps its real cost — the ingredients are on the bazaar and they are affordable.
+What it gains is `blocked`, a short reason the merchant will still say no, and that sinks it
+below every row you *can* act on in both the category browser and the value ranking. It reads
+`needs 10,000 barbarian rep` rather than borrowing the "no price" wording, because the two are
+different problems: one has no number, the other has a number you cannot spend yet.
+
+Two things this deliberately does **not** do, both worth knowing:
+
+- **The solver still picks gated tiers.** A plan can therefore include a Mycelium tier the
+  profile cannot craft. Sinking it in the lists was the ask; leaving it out of the plan changes
+  every total, and reputation is grindable rather than impossible, so it is a prerequisite this
+  model has no task for rather than a thing that can never happen.
+- **A bundled row reports its top tier's requirement.** "Mycelium Minion I–XI · needs 10,000
+  mage rep" is honest about the span it is quoting, but a player sitting on 2,000 can really
+  craft I–IV today and the row does not offer that split.
+
 ## Pet score: two numbers, and only one of them is published
 
 Pet score is the one category where what you hold and what you were paid for come apart.

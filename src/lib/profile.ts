@@ -33,6 +33,13 @@ export type ProfileMember = {
    */
   nether_island_player_data?: {
     abiphone?: { active_contacts?: string[]; contact_data?: Record<string, unknown> };
+    /**
+     * Crimson Isle standing, which gates the Mycelium and Red Sand minion lines a tier at a
+     * time. Both are read: the two are tracked independently and earning one no longer costs
+     * you the other, so a profile can hold reputation with a faction it is not standing in.
+     */
+    mages_reputation?: number;
+    barbarians_reputation?: number;
   };
   /** `access.consumed_prism` says a Rift Prism has been imbued, which is worth 11 magical power. */
   rift?: { access?: { consumed_prism?: boolean } };
