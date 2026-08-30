@@ -111,7 +111,7 @@ test("the ceiling is the whole catalogue, rift-bound pets included", () => {
   assert.ok(expected > 500, `expected a ceiling above 500, got ${expected}`);
 });
 
-/* ------------------------------------------------------- legendary only */
+/* ------------------------------------------------------ top rarity only */
 
 function petRows(pets: { type: string; tier: string; exp?: number }[] = []) {
   const catalog = buildCatalog(member(pets), data, { items: [], capacity: 400 });
@@ -141,59 +141,63 @@ function ownAllExcept(...spare: string[]): { type: string; tier: string }[] {
     .map((pet) => ({ type: pet.key, tier: pet.maxRarity }));
 }
 
-test("the legendary list is one row per pet, and never a mythic", () => {
+test("the top-rarity list is one row per pet", () => {
   const entry = petRows();
-  assert.ok(entry.legendary, "the pets panel offers the toggle");
+  assert.ok(entry.topRarity, "the pets panel offers the toggle");
 
-  const groups = entry.legendary!.map((t) => t.exclusiveGroup ?? t.id);
+  const groups = entry.topRarity!.map((t) => t.exclusiveGroup ?? t.id);
   assert.equal(new Set(groups).size, groups.length, "a pet appears at most once");
-  assert.equal(
-    entry.legendary!.filter((t) => rarityOf(t) === "MYTHIC").length,
-    0,
-    "mythic is a different purchase entirely and is not what 'buy the legendary' means",
+});
+
+test("every row is the best rarity that pet reaches, mythic included", () => {
+  const entry = petRows();
+  const ceiling = new Map(data.pets.pets.map((pet) => [`pet:PET:${pet.key}`, pet.maxRarity]));
+
+  for (const row of entry.topRarity!) {
+    const key = row.exclusiveGroup ?? row.id;
+    assert.equal(rarityOf(row), ceiling.get(key), `${key} is not offered at its ceiling`);
+  }
+  assert.ok(
+    entry.topRarity!.some((t) => rarityOf(t) === "MYTHIC"),
+    "a pet that goes mythic is offered there — the point is to skip the rungs, not to pick one",
   );
 });
 
-test("a pet that never reaches legendary keeps its own ceiling rather than vanishing", () => {
-  // The Precursor Drone stops at common. A strict legendary filter would drop it, and a pet you
-  // cannot see is a pet you will not buy. (The two epic-capped pets, Montezuma and the Rift
-  // Ferret, are rift-bound and never become tasks at all, so this is the only one left to test.)
+test("a pet that stops below legendary keeps its own ceiling rather than vanishing", () => {
+  // The Precursor Drone never goes past common. Filtering to a fixed rarity would drop it, and a
+  // pet you cannot see is a pet you will not buy. (The two epic-capped pets, Montezuma and the
+  // Rift Ferret, are rift-bound and never become tasks at all, so this is the only one to test.)
   const entry = petRows(ownAllExcept("PRECURSOR_DRONE", "BEE"));
-  const byGroup = new Map(entry.legendary!.map((t) => [t.exclusiveGroup ?? t.id, t]));
+  const byGroup = new Map(entry.topRarity!.map((t) => [t.exclusiveGroup ?? t.id, t]));
 
   assert.equal(rarityOf(byGroup.get("pet:PET:PRECURSOR_DRONE")!), "COMMON");
-  // And a pet that does reach legendary is offered there, not at the mythic above it.
-  assert.equal(rarityOf(byGroup.get("pet:PET:BEE")!), "LEGENDARY");
+  assert.equal(rarityOf(byGroup.get("pet:PET:BEE")!), "MYTHIC");
 });
 
-test("the toggle is what stops the list short of mythic", () => {
-  // The whole point of it: left alone, the ranking offers the mythic Bee, because it is worth
-  // the most. Turned on, the list stops at the legendary — which is the purchase being asked for.
+test("the toggle is what takes the rungs out", () => {
+  // Left alone the list walks the ladder, so a pet can show up more than once on the way up.
+  // Turned on it is one row, and that row is the end state.
   const entry = petRows(ownAllExcept("BEE"));
-  const ungrouped = entry.tasks.filter((t) => (t.exclusiveGroup ?? t.id) === "pet:PET:BEE");
-  const legendary = entry.legendary!.filter((t) => (t.exclusiveGroup ?? t.id) === "pet:PET:BEE");
+  const isBee = (t: ResolvedTask) => (t.exclusiveGroup ?? t.id) === "pet:PET:BEE";
 
-  assert.ok(
-    ungrouped.some((t) => rarityOf(t) === "MYTHIC"),
-    "the mythic is still reachable with the toggle off",
-  );
-  assert.deepEqual(legendary.map(rarityOf), ["LEGENDARY"]);
+  assert.ok(entry.tasks.filter(isBee).length >= 1);
+  assert.deepEqual(entry.topRarity!.filter(isBee).map(rarityOf), ["MYTHIC"]);
 });
 
-test("a legendary row is priced from what you own, not from the rarity below it", () => {
-  // The ranking walks the ladder, so a legendary row taken out of it afterwards would be an
-  // upgrade over the epic above it — quoting the gap between two tiers to a player who owns
-  // neither. Filtering has to happen before the sequence is built.
+test("a top-rarity row is priced from what you own, not from the rarity below it", () => {
+  // The ranking walks the ladder, so a row taken out of it afterwards would be an upgrade over
+  // the tier under it — quoting the gap between two of them to a player who owns neither.
+  // Filtering has to happen before the sequence is built.
   const entry = petRows(ownAllExcept("BEE"));
-  const bee = entry.legendary!.find((t) => (t.exclusiveGroup ?? t.id) === "pet:PET:BEE")!;
+  const bee = entry.topRarity!.find((t) => (t.exclusiveGroup ?? t.id) === "pet:PET:BEE")!;
 
-  assert.equal(bee.xp, 15, "five score at three XP each, from a standing start");
+  assert.equal(bee.xp, 18, "six score at three XP each, from a standing start");
   assert.doesNotMatch(bee.note ?? "", /upgrade from/, "not sold as a step up from a tier nobody owns");
 });
 
-test("owning the epic already makes the legendary row worth only the difference", () => {
+test("owning a lower rarity already makes the top row worth only the difference", () => {
   const entry = petRows([...ownAllExcept("BEE"), { type: "BEE", tier: "EPIC" }]);
-  const bee = entry.legendary!.find((t) => (t.exclusiveGroup ?? t.id) === "pet:PET:BEE")!;
+  const bee = entry.topRarity!.find((t) => (t.exclusiveGroup ?? t.id) === "pet:PET:BEE")!;
 
-  assert.equal(bee.xp, 3, "legendary is five, the epic already banked four");
+  assert.equal(bee.xp, 6, "mythic is six, and the epic already banked four");
 });

@@ -691,15 +691,12 @@ function petScoreNote(report: Report): string {
   const { current, highest, max, owned, maxLevel } = report.petScore;
   if (highest === 0 && owned === 0) return "";
 
-  const short = Math.max(max - current, 0);
-  const behind =
-    highest > current
-      ? ` — the XP was settled at ${num(highest)}, which is what you have ever reached, so nothing was taken back`
-      : "";
-
-  return `<p class="sub">Pet score ${num(current)} of ${num(max)}${behind}. ${
-    short > 0 ? `${num(short)} to go, and ` : ""
-  }${num(maxLevel)} of the ${num(owned)} pets you own ${maxLevel === 1 ? "is" : "are"} at max level.</p>`;
+  // Three figures and no argument. Why the highest is the one that paid is worth knowing once
+  // and not worth reading every time the panel opens, so it lives on the tooltip.
+  const pets = owned === 1 ? "pet you own is" : "pets you own are";
+  return `<p class="sub" title="SkyBlock XP is settled on the highest score you have ever reached, so selling a pet drops the score and keeps the XP.">Pet score ${num(
+    current,
+  )} of ${num(max)} · highest ${num(highest)} · ${num(maxLevel)} of the ${num(owned)} ${pets} at max level</p>`;
 }
 
 function browserView(report: Report): string {
@@ -726,20 +723,20 @@ function browserView(report: Report): string {
       // A pet's rarity ladder is most of what this category is, and climbing it a rung at a time
       // is not how anyone buys one — so the ladder comes out and each pet is the one purchase it
       // really is.
-      const legendaryKey = `legendary:${category}`;
-      const onlyLegendary = entry.legendary !== undefined && open.has(legendaryKey);
+      const topRarityKey = `toprarity:${category}`;
+      const onlyTopRarity = entry.topRarity !== undefined && open.has(topRarityKey);
 
-      // Independent questions — "one row per thing", "only the top rung", "only what I cannot
+      // Independent questions — "one row per thing", "only the top rarity", "only what I cannot
       // buy" — so they can be on at once, and each combination is a list of its own rather than
       // one toggle quietly cancelling the other.
       const chosen = isGrouped
         ? showUnpriced
           ? (entry.unpricedMaxed ?? [])
           : maxed!
-        : onlyLegendary
+        : onlyTopRarity
           ? showUnpriced
-            ? (entry.legendaryUnpriced ?? [])
-            : entry.legendary!
+            ? (entry.topRarityUnpriced ?? [])
+            : entry.topRarity!
           : showUnpriced
             ? unpriced!
             : tasks;
@@ -752,10 +749,10 @@ function browserView(report: Report): string {
         ? showUnpriced
           ? (entry.unpricedMaxedTruncated ?? 0)
           : (maxedTruncated ?? 0)
-        : onlyLegendary
+        : onlyTopRarity
           ? showUnpriced
-            ? (entry.legendaryUnpricedTruncated ?? 0)
-            : (entry.legendaryTruncated ?? 0)
+            ? (entry.topRarityUnpricedTruncated ?? 0)
+            : (entry.topRarityTruncated ?? 0)
           : showUnpriced
             ? (unpricedTruncated ?? 0)
             : truncated;
@@ -797,15 +794,15 @@ function browserView(report: Report): string {
                 : ""
             }
             ${
-              entry.legendary !== undefined
+              entry.topRarity !== undefined
                 ? `<p class="sub group-toggle">
                     <button class="chip${
-                      onlyLegendary ? " on" : ""
-                    }" data-toggle="${legendaryKey}">Legendary only</button>
+                      onlyTopRarity ? " on" : ""
+                    }" data-toggle="${topRarityKey}">Top rarity only</button>
                     <span class="dim">${
-                      onlyLegendary
-                        ? "one row per pet, priced from what you own rather than from the rarity below it"
-                        : "the whole ladder, mythic included, so a pet can appear more than once as it climbs"
+                      onlyTopRarity
+                        ? "one row per pet, the best rarity it reaches — priced from what you own rather than from the rarity below it"
+                        : "the whole ladder, so a pet can appear once per rung on the way up"
                     }</span>
                   </p>`
                 : ""

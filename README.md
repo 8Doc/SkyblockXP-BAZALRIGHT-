@@ -258,11 +258,11 @@ Hypixel resources API when the game changes; the wiki-derived and curated tables
   different numbers that the category used to report as one. Only the highest is published;
   what you hold now is worked out from the pets themselves, max-level bonuses included, and the
   panel gives both against the 518 ceiling. `DATA.md` has what the API does and doesn't carry.
-- **Pets have a `Legendary only` toggle.** The rarity ladder is most of what that category is,
-  and nobody climbs it a rung at a time — so one row per pet, the legendary, priced from what
-  you own rather than as an upgrade over a rarity you were never going to buy. Mythic is a
-  different order of purchase and stays behind the toggle; the three pets that never reach
-  legendary keep their own ceiling rather than dropping out of the list.
+- **Pets have a `Top rarity only` toggle.** The rarity ladder is most of what that category is,
+  and nobody climbs it a rung at a time — so one row per pet, at the best rarity that pet
+  reaches, priced from what you own rather than as an upgrade over a rarity you were never going
+  to buy. Mythic where a pet goes mythic, common for the Precursor Drone, which never does: the
+  point is to skip the rungs on the way up, not to pick one.
 - The XP floor, coin budget and category toggles re-solve live — see the note on solve cost below.
 
 ## Solve cost
