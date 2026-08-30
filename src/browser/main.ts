@@ -679,6 +679,29 @@ function grindView(report: Report): string {
   return intro + panels;
 }
 
+/**
+ * Where the pet category stands, in two numbers that are not the same number.
+ *
+ * SkyBlock XP is settled on the highest pet score the profile has ever reached, not on what its
+ * pets are worth today — so selling one drops the score and keeps the XP. Only the highest is
+ * published; what you hold now is worked out from the pets themselves, and the max-level count
+ * comes with it because a pet at its ceiling is worth a point beyond its rarity.
+ */
+function petScoreNote(report: Report): string {
+  const { current, highest, max, owned, maxLevel } = report.petScore;
+  if (highest === 0 && owned === 0) return "";
+
+  const short = Math.max(max - current, 0);
+  const behind =
+    highest > current
+      ? ` — the XP was settled at ${num(highest)}, which is what you have ever reached, so nothing was taken back`
+      : "";
+
+  return `<p class="sub">Pet score ${num(current)} of ${num(max)}${behind}. ${
+    short > 0 ? `${num(short)} to go, and ` : ""
+  }${num(maxLevel)} of the ${num(owned)} pets you own ${maxLevel === 1 ? "is" : "are"} at max level.</p>`;
+}
+
 function browserView(report: Report): string {
   const categories = report.browser
     .map((entry) => {
@@ -700,16 +723,26 @@ function browserView(report: Report): string {
       const jacobusKey = `jacobus:${category}`;
       const hideJacobus = category === "accessory_bag" && open.has(jacobusKey);
 
-      // Two independent questions — "one row per thing" and "only what I cannot buy" — so both
-      // can be on at once, and the fourth combination is a list of its own rather than one
-      // toggle quietly cancelling the other.
+      // A pet's rarity ladder is most of what this category is, and climbing it a rung at a time
+      // is not how anyone buys one — so the ladder comes out and each pet is the one purchase it
+      // really is.
+      const legendaryKey = `legendary:${category}`;
+      const onlyLegendary = entry.legendary !== undefined && open.has(legendaryKey);
+
+      // Independent questions — "one row per thing", "only the top rung", "only what I cannot
+      // buy" — so they can be on at once, and each combination is a list of its own rather than
+      // one toggle quietly cancelling the other.
       const chosen = isGrouped
         ? showUnpriced
           ? (entry.unpricedMaxed ?? [])
           : maxed!
-        : showUnpriced
-          ? unpriced!
-          : tasks;
+        : onlyLegendary
+          ? showUnpriced
+            ? (entry.legendaryUnpriced ?? [])
+            : entry.legendary!
+          : showUnpriced
+            ? unpriced!
+            : tasks;
       const rows = hideJacobus
         ? (chosen as { tasks?: ResolvedTask[]; id?: string }[]).filter((row) =>
             row.id ? !row.id.startsWith("bag_upgrade_") : !row.tasks?.[0]?.id.startsWith("bag_upgrade_"),
@@ -719,9 +752,13 @@ function browserView(report: Report): string {
         ? showUnpriced
           ? (entry.unpricedMaxedTruncated ?? 0)
           : (maxedTruncated ?? 0)
-        : showUnpriced
-          ? (unpricedTruncated ?? 0)
-          : truncated;
+        : onlyLegendary
+          ? showUnpriced
+            ? (entry.legendaryUnpricedTruncated ?? 0)
+            : (entry.legendaryTruncated ?? 0)
+          : showUnpriced
+            ? (unpricedTruncated ?? 0)
+            : truncated;
 
       const body = open.has(key)
         ? `<div class="group-body">
@@ -741,6 +778,13 @@ function browserView(report: Report): string {
                 : ""
             }
             ${
+              // Pet score is the one category where what you hold and what you were paid for
+              // come apart: the XP is settled on the highest score you have ever reached, so a
+              // pet sold on takes the score with it and leaves the XP behind. Both numbers, or
+              // the readout is telling half the story.
+              category === "pets" ? petScoreNote(report) : ""
+            }
+            ${
               category === "accessory_bag"
                 ? `<p class="sub group-toggle">
                     <button class="chip${hideJacobus ? " on" : ""}" data-toggle="${jacobusKey}">Hide Jacobus</button>
@@ -748,6 +792,20 @@ function browserView(report: Report): string {
                       hideJacobus
                         ? "bag slots hidden — accessories only"
                         : "bag slots are shown where the bag runs out of room"
+                    }</span>
+                  </p>`
+                : ""
+            }
+            ${
+              entry.legendary !== undefined
+                ? `<p class="sub group-toggle">
+                    <button class="chip${
+                      onlyLegendary ? " on" : ""
+                    }" data-toggle="${legendaryKey}">Legendary only</button>
+                    <span class="dim">${
+                      onlyLegendary
+                        ? "one row per pet, priced from what you own rather than from the rarity below it"
+                        : "the whole ladder, mythic included, so a pet can appear more than once as it climbs"
                     }</span>
                   </p>`
                 : ""

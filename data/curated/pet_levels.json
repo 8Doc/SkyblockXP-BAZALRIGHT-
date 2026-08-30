@@ -1,0 +1,38 @@
+{
+  "note": "Total pet XP needed to reach a pet's maximum level, by rarity. A pet at its maximum level is worth one extra point of pet score on top of its rarity, and this is the only thing the planner needs a level for — so the thresholds are carried rather than the whole per-level curve.",
+  "source": "Derived from the published pet level curve (PET_LEVELS) and its per-rarity offsets, as carried by SkyCrypt: https://github.com/SkyCryptWebsite/SkyCrypt/blob/master/src/constants/pets.js",
+  "derivation": "A pet of rarity R reaches level L once its exp covers PET_LEVELS[offset[R] .. offset[R] + L - 2]. maxLevelXp[R] is that sum for L = 100. Cross-checked against the figures the community publishes: common 5,624,785 and legendary 25,353,230 both agree.",
+  "rarityOffset": {
+    "COMMON": 0,
+    "UNCOMMON": 6,
+    "RARE": 11,
+    "EPIC": 16,
+    "LEGENDARY": 20,
+    "MYTHIC": 20
+  },
+  "defaultMaxLevel": 100,
+  "maxLevelXp": {
+    "COMMON": 5624785,
+    "UNCOMMON": 8644220,
+    "RARE": 12626665,
+    "EPIC": 18608500,
+    "LEGENDARY": 25353230,
+    "MYTHIC": 25353230
+  },
+  "overrides": {
+    "GOLDEN_DRAGON": {
+      "maxLevel": 200,
+      "maxLevelXp": 210255385,
+      "why": "The one pet that climbs past 100. It hatches at level 100 and tops out at 200, on the legendary stretch of the same curve."
+    },
+    "BINGO": {
+      "maxLevel": 100,
+      "maxLevelXp": 5624785,
+      "why": "Levels on the common stretch of the curve whatever rarity the pet itself is. Not in this app's catalogue, but a player can own one and it still counts towards their score."
+    }
+  },
+  "ignoredInPetScore": [
+    "FRACTURED_MONTEZUMA_SOUL"
+  ],
+  "ignoredWhy": "The game does not count it. It is not in this app's pet catalogue either, but a profile can hold one, so it has to be left out of the score computed from that profile."
+}

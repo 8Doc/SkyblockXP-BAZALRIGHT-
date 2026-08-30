@@ -343,6 +343,17 @@ export type GameData = {
   travelScrolls: TravelScrollsData;
   costs: CostsData;
   petScore: { byRarity: Record<string, number> };
+  /**
+   * What it takes for a pet to be at its maximum level, which is worth a point of pet score on
+   * top of its rarity. Only the threshold is carried, not the whole per-level curve: whether a
+   * pet is maxed is the only thing here that needs a level.
+   */
+  petLevels: {
+    defaultMaxLevel: number;
+    maxLevelXp: Record<string, number>;
+    overrides: Record<string, { maxLevel: number; maxLevelXp: number }>;
+    ignoredInPetScore: string[];
+  };
   /** Every pet and the rarities it can be — a fixed catalogue, not whatever is listed today. */
   pets: {
     maxScore: number;

@@ -52,7 +52,12 @@ export type ProfileMember = {
     player_classes?: Record<string, { experience?: number } | undefined>;
   };
   slayer?: { slayer_bosses?: Record<string, { xp?: number } | undefined> };
-  pets_data?: { pets?: { type?: string; tier?: string }[] };
+  /**
+   * Every pet on the profile. `exp` is what says whether one is at its maximum level, which is
+   * worth a point of pet score in its own right — the API publishes no score for what you hold
+   * now, only `leveling.highest_pet_score` for the best you have ever held.
+   */
+  pets_data?: { pets?: { type?: string; tier?: string; exp?: number }[] };
   /** Perk trees. HOTM and the forest equivalents live here, keyed by node name -> level. */
   skill_tree?: { nodes?: Record<string, Record<string, number | boolean> | undefined> };
   /** Attribute shard counts, keyed by attribute name. Levels are derived from these. */

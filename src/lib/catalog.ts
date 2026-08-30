@@ -86,6 +86,24 @@ export type Catalog = {
    */
   earnedOutsideTasks: { magicalPower: number; petScore: number; bestiary: number };
   /**
+   * Pet score as it stands against pet score as it was.
+   *
+   * These are two different numbers and the difference is the whole point: SkyBlock XP is paid
+   * on the highest score ever reached, so selling a pet drops what you hold without taking any
+   * XP back. Only `highest` is published; `current` is worked out from the pets on the profile.
+   */
+  petScore: {
+    /** Worked out from what the profile holds now. */
+    current: number;
+    /** `leveling.highest_pet_score` — the figure the XP was actually paid on. */
+    highest: number;
+    /** What the whole pet catalogue is worth: best rarity of each, plus one each for maxing. */
+    max: number;
+    /** Distinct pets held, and how many of them have a copy at their maximum level. */
+    owned: number;
+    maxLevel: number;
+  };
+  /**
    * What the profile says you have against what this app could credit you for.
    *
    * Every gap chased in these three categories has been a matching failure rather than a missing
@@ -111,7 +129,7 @@ export const UNMODELLED: { category: Category; note: string; totalXp?: number }[
   },
   {
     category: "pets",
-    note: "Pet score already earned is exact — the profile reports it outright. The catalogue is now fixed at 85 pets rather than read off the auction house, so a pet nobody is selling is a row with no price instead of a row that does not exist. What is still missing is the +1 a pet awards for reaching its maximum level: 85 points across the catalogue, which would need the pet level curve to know whether you have it.",
+    note: "Pet score already earned is exact — the profile reports it outright. The catalogue is now fixed rather than read off the auction house, so a pet nobody is selling is a row with no price instead of a row that does not exist. What is still not a task is the +1 a pet awards for reaching its maximum level: the panel now counts how many of yours are there, since the profile carries each pet's XP, but levelling one is a grind with no price on it rather than something a plan can buy.",
   },
   {
     category: "bestiary",
@@ -621,10 +639,23 @@ export function buildCatalog(
   const petScoreByRarity = data.petScore.byRarity;
   const petAliases = data.petApiKeys?.aliases ?? {};
   const ownedPetScore = new Map<string, number>();
+  // A pet at its maximum level is worth a point on top of its rarity, and the two are counted
+  // separately: the game reads the best rarity you hold of a pet and, independently, whether any
+  // copy of it is maxed. Own a legendary at level 50 and an epic at 100 and you are credited for
+  // both — five for the legendary, one for the max level.
+  const petMaxLevel = new Set<string>();
+  const ignoredPets = new Set(data.petLevels.ignoredInPetScore);
   for (const pet of member.pets_data?.pets ?? []) {
-    if (!pet?.type) continue;
+    if (!pet?.type || ignoredPets.has(pet.type)) continue;
     const key = petKey(petAliases[pet.type] ?? pet.type);
     ownedPetScore.set(key, Math.max(ownedPetScore.get(key) ?? 0, petScoreByRarity[pet.tier ?? ""] ?? 0));
+
+    // Keyed by the game's own id rather than the alias, because the threshold belongs to the pet
+    // as the game levels it: a Golden Dragon climbs to 200 where everything else stops at 100.
+    const override = data.petLevels.overrides[pet.type];
+    const needed = override ? override.maxLevelXp : data.petLevels.maxLevelXp[pet.tier ?? ""];
+    // No threshold means a rarity we have no curve for; that is unknown, not maxed.
+    if (needed !== undefined && (pet.exp ?? 0) >= needed) petMaxLevel.add(key);
   }
 
   for (const pet of data.pets.pets) {
@@ -1345,6 +1376,19 @@ export function buildCatalog(
       // The highest score reached is what the game paid out on, not what the pets are worth now.
       petScore: (member.leveling?.highest_pet_score ?? 0) * 3,
       bestiary: bestiaryXp(data, member, bestiaryTiers),
+    },
+    petScore: {
+      // Every pet the profile holds, best rarity of each, plus one for each that is maxed. The
+      // whole catalogue is counted rather than only the buyable part: a rift-bound pet you have
+      // is worth score whether or not anyone will ever sell you one.
+      current: [...ownedPetScore.values()].reduce((sum, score) => sum + score, 0) + petMaxLevel.size,
+      highest: member.leveling?.highest_pet_score ?? 0,
+      max: data.pets.pets.reduce(
+        (sum, pet) => sum + Math.max(...pet.rarities.map((rarity) => petScoreByRarity[rarity] ?? 0)) + 1,
+        0,
+      ),
+      owned: ownedPetScore.size,
+      maxLevel: petMaxLevel.size,
     },
     reconciliation: [
       { category: "museum" as Category, credited: donatedCount - strandedDonations, reported: donatedCount },

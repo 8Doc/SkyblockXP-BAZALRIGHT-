@@ -63,6 +63,16 @@ export type Report = {
     /** Both at once: one row per thing, counting only what coins cannot finish. */
     unpricedMaxed?: TaskRun[];
     unpricedMaxedTruncated?: number;
+    /**
+     * Pets, with the rarity ladder taken out — one row each, the legendary. Buying a pet
+     * outright is a different decision from climbing to it a rarity at a time, and the ladder
+     * is most of what the list is.
+     */
+    legendary?: ResolvedTask[];
+    legendaryTruncated?: number;
+    /** Both at once: the top rung only, counting only what nobody is selling. */
+    legendaryUnpriced?: ResolvedTask[];
+    legendaryUnpricedTruncated?: number;
   }[];
   /** Every remaining grind, cheapest in effort first, across all categories at once. */
   grind: ResolvedTask[];
@@ -75,6 +85,8 @@ export type Report = {
   unmodelled: { category: Category; note: string; totalXp?: number; earnedXp?: number }[];
   /** Per category: what the profile says you have against what we could credit. */
   reconciliation: { category: Category; credited: number; reported: number }[];
+  /** Pet score as it stands, against the highest ever reached — which is what the XP was paid on. */
+  petScore: Catalog["petScore"];
   bag: {
     computedMp: number;
     reportedMp: number | null;
@@ -216,6 +228,7 @@ export function buildReport(catalog: Catalog, book: PriceBook, raw: ReportOption
       return grind();
     },
     reconciliation: catalog.reconciliation,
+    petScore: catalog.petScore,
     unmodelled: catalog.unmodelled,
     bag: {
       computedMp: catalog.bag.computedMp,
@@ -287,6 +300,14 @@ function buildBrowser(
     // instead of restating the same purchase from the same starting tier.
     let stepped = progressive(shown, byId);
 
+    // Pets with the ladder taken out: one row each, the top rung. Filtered *before* the sequence
+    // is built, not after, and that is the whole trick — trimming afterwards would leave the
+    // legendary priced as an upgrade from a rare the player was never going to buy, quoting the
+    // difference between two tiers instead of what the pet actually costs from where they stand.
+    // Taken off `shown` rather than off `remaining`, so it inherits the same XP floor and the
+    // same coins-per-XP ordering the ungrouped list is built from.
+    const legendary = category === "pets" ? progressive(topRungOnly(shown), byId) : null;
+
     // Bag slots come out of the price ranking and go back in where the bag runs out of room.
     if (category === "accessory_bag") {
       const upgrades = stepped.filter((task) => task.id.startsWith("bag_upgrade_"));
@@ -317,11 +338,27 @@ function buildBrowser(
           )
         : null;
 
+    // "Just the legendary" and "only what nobody is selling" are independent questions too, so
+    // the fourth combination is its own list rather than one toggle quietly cancelling the other.
+    const legendaryUnpriced = legendary && hasBoth ? legendary.filter((task) => task.bundleCoins === null) : null;
+
     browser.push({
       category,
       summary,
       tasks: stepped.slice(0, BROWSER_LIMIT),
       truncated: Math.max(stepped.length - BROWSER_LIMIT, 0),
+      ...(legendary
+        ? {
+            legendary: legendary.slice(0, BROWSER_LIMIT),
+            legendaryTruncated: Math.max(legendary.length - BROWSER_LIMIT, 0),
+          }
+        : {}),
+      ...(legendaryUnpriced
+        ? {
+            legendaryUnpriced: legendaryUnpriced.slice(0, BROWSER_LIMIT),
+            legendaryUnpricedTruncated: Math.max(legendaryUnpriced.length - BROWSER_LIMIT, 0),
+          }
+        : {}),
       ...(maxed
         ? { maxed: maxed.slice(0, BROWSER_LIMIT), maxedTruncated: Math.max(maxed.length - BROWSER_LIMIT, 0) }
         : {}),
@@ -341,6 +378,34 @@ function buildBrowser(
   }
 
   return browser;
+}
+
+/**
+ * How far up a pet's rarity ladder "just buy the legendary" actually goes.
+ *
+ * Mythic is above legendary and is a different order of purchase — Kat's upgrade, or a price
+ * with another digit on it — so it is not what anyone means by skipping the ladder, and the rung
+ * stops at legendary. Three pets never reach legendary at all (Montezuma and the Rift Ferret cap
+ * at epic, the Precursor Drone at common); those keep whatever their own ceiling is rather than
+ * dropping out of the list, because a pet you cannot see is a pet you will not buy.
+ */
+const TOP_RUNG = ["COMMON", "UNCOMMON", "RARE", "EPIC", "LEGENDARY"];
+
+/** One row per pet: the highest rarity offered, capped at legendary. */
+function topRungOnly(tasks: ResolvedTask[]): ResolvedTask[] {
+  const best = new Map<string, ResolvedTask>();
+  const rung = (task: ResolvedTask): number =>
+    TOP_RUNG.indexOf(task.cost.kind === "auction" ? (task.cost.tier ?? "") : "");
+
+  for (const task of tasks) {
+    if (rung(task) < 0) continue; // mythic, or a pet priced some other way
+    const key = task.exclusiveGroup ?? task.id;
+    const held = best.get(key);
+    if (!held || rung(task) > rung(held)) best.set(key, task);
+  }
+  // Back into the order they arrived in, so the coins-per-XP ranking survives the filter.
+  const kept = new Set(best.values());
+  return tasks.filter((task) => kept.has(task));
 }
 
 /**

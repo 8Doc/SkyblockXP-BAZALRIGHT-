@@ -253,6 +253,16 @@ Hypixel resources API when the game changes; the wiki-derived and curated tables
   already has behind them. It now reads `325 more (49,675 of 50,000)`, so two tiers of the same
   size stop looking like the same job. Both the browser and the grind order show it, measured
   from the co-op's shared total where there is one.
+- **Pets say where you stand and where you stood.** SkyBlock XP is settled on the highest pet
+  score the profile has ever reached, so selling a pet drops the score and keeps the XP — two
+  different numbers that the category used to report as one. Only the highest is published;
+  what you hold now is worked out from the pets themselves, max-level bonuses included, and the
+  panel gives both against the 518 ceiling. `DATA.md` has what the API does and doesn't carry.
+- **Pets have a `Legendary only` toggle.** The rarity ladder is most of what that category is,
+  and nobody climbs it a rung at a time — so one row per pet, the legendary, priced from what
+  you own rather than as an upgrade over a rarity you were never going to buy. Mythic is a
+  different order of purchase and stays behind the toggle; the three pets that never reach
+  legendary keep their own ceiling rather than dropping out of the list.
 - The XP floor, coin budget and category toggles re-solve live — see the note on solve cost below.
 
 ## Solve cost

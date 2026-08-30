@@ -605,6 +605,71 @@ real floor of 655.
 The floor is now **0 by default**. It is still there for anyone who wants it — the tail is real
 — but hiding the best rows is opt-in rather than the shipped behaviour.
 
+## Pet score: two numbers, and only one of them is published
+
+Pet score is the one category where what you hold and what you were paid for come apart.
+SkyBlock XP is settled on the **highest score the profile has ever reached**, so selling a pet
+drops the score and leaves the XP behind. The API reflects that split exactly:
+
+| What | Where | Notes |
+|---|---|---|
+| Highest ever reached | `leveling.highest_pet_score` | A single integer. This is what the XP was paid on, and it is the only score the API publishes |
+| What you hold now | **not published** | Computed from `pets_data.pets[]`, which carries `type`, `tier` and `exp` per pet |
+
+There is no current-score field anywhere on the profile. The strongest evidence isn't its
+absence from the docs — it is that SkyCrypt computes it from `pets_data` too, and it would not
+bother if Hypixel published one.
+
+### Working the current score out
+
+Three rules, and the third is the one that needed new data:
+
+1. **Only the best rarity of a pet counts.** Owning the epic as well as the legendary is worth
+   the legendary alone, which is why pets carry `exclusiveGroup` and behave like accessory
+   families.
+2. **The profile's ids are not the catalogue's names.** A T-Rex is a `TYRANNOSAURUS`, and the
+   Wisp has four ids across its rarities — `accessory_families.json`'s pet equivalent,
+   `pet_api_keys.json`, bridges those, and without it one family scored four times over.
+3. **A pet at its maximum level is worth +1 on top of its rarity**, and this is the part the app
+   could not see: it needs a level, and a level needs the pet XP curve.
+
+### `pet_levels.json`
+
+The curve is public and static, but it is **not** in the Hypixel resources API — `/resources/
+skyblock/items` carries no pet table. It is a fixed `PET_LEVELS` array with a per-rarity offset
+into it, so a pet of rarity R reaches level L once its `exp` covers `PET_LEVELS[offset[R] ..
+offset[R] + L - 2]`.
+
+Only the *thresholds* are carried, not the whole 219-entry curve: whether a pet is maxed is the
+only thing here that needs a level at all, so the file holds the sum for L = 100 per rarity.
+They cross-check against the figures the community publishes — common 5,624,785 and legendary
+25,353,230 both agree.
+
+Two pets break the pattern, and both are in the file:
+
+- **Golden Dragon** climbs to 200 rather than 100, on the legendary stretch of the same curve —
+  210,255,385 XP. Reading it against the ordinary legendary threshold would call every hatched
+  dragon maxed at level 100, which is halfway.
+- **Bingo pets** level on the common stretch whatever rarity they are. Not in this catalogue,
+  but a profile can hold one.
+
+One pet is excluded outright: the game does not count `FRACTURED_MONTEZUMA_SOUL` towards pet
+score, so neither does this. It is not in the catalogue either, but a profile can carry one and
+it would otherwise be counted from that profile.
+
+### The ceiling is counted, not quoted
+
+The panel says "of 518", and that figure is summed off the catalogue itself — best rarity of
+each of the 84 pets plus one apiece for maxing it — rather than read from the `maxScore: 521`
+in `pet_score.json`. Counting it keeps the headline honest against the rows underneath it: if a
+pet is added or a rarity is wrong, the ceiling moves with it instead of drifting from a number
+nobody rechecks. The three-point gap against 521 is unexplained and worth chasing; the wiki's
+"444 as of July 2024" is a third figure again, and stale.
+
+All 84 pets are counted, including the four the auction house never carries. A rift-bound pet
+you own scores whether or not anyone will ever sell you one — the buyable filter is about what a
+*plan* can shop for, not about what your score is.
+
 ## Accessory bag slots
 
 An accessory needs somewhere to sit. The bag holds a fixed number of accessories, and more room
