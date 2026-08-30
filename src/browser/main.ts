@@ -133,9 +133,31 @@ const state: State = {
 
 /* ------------------------------------------------------------------ solving */
 
+/**
+ * The price book, kept as one object for as long as the prices in it are the same ones.
+ *
+ * The resolver caches what a task costs against the identity of the book it was priced from, so
+ * handing it a freshly built object with identical contents on every solve threw that cache
+ * away each time. The three feeds are replaced wholesale when they are refreshed, so comparing
+ * the references is enough to know when a new book is owed.
+ */
+let priceBook: PriceBook | null = null;
+
+function bookNow(): PriceBook {
+  if (
+    !priceBook ||
+    priceBook.bazaar !== state.bazaar ||
+    priceBook.bins !== state.bins ||
+    priceBook.reference !== state.reference
+  ) {
+    priceBook = { bazaar: state.bazaar, bins: state.bins, reference: state.reference };
+  }
+  return priceBook;
+}
+
 function solveNow(): void {
   if (!state.member || !state.catalog) return;
-  const book: PriceBook = { bazaar: state.bazaar, bins: state.bins, reference: state.reference };
+  const book = bookNow();
   const targetXp =
     state.targetMode === "level"
       ? Math.max(state.targetLevel * XP_PER_LEVEL - (state.member.leveling?.experience ?? 0), 1)
@@ -187,25 +209,37 @@ async function loadProfile(): Promise<void> {
   }
   state.member = member;
 
-  setStatus("busy", "Reading accessory bag…");
-  state.bagItems = await readBag(member.inventory?.bag_contents?.talisman_bag?.data);
+  // Six independent reads, none of which needs an answer from any of the others: two gzipped
+  // NBT blobs off the profile already in hand, the museum and the garden from Hypixel, and the
+  // two price feeds. Done one after another they were four round trips end to end for no
+  // reason — the museum cannot tell you anything about the garden.
+  setStatus("busy", "Reading profile and prices…");
+  const key = state.apiKey.trim();
+  // Settled rather than awaited here, so a price feed that fails while the profile reads are
+  // still running is a handled rejection rather than an unhandled one.
+  const prices = Promise.all([fetchBazaar(), fetchReferencePrices()]).then(
+    (value) => ({ ok: true, value }) as const,
+    (error: unknown) => ({ ok: false, error }) as const,
+  );
 
-  setStatus("busy", "Reading inventories…");
-  state.owned = await readOwnedItems(member);
+  // These four report their own failures as "not available" rather than throwing.
+  [state.bagItems, state.owned, state.museum, state.garden] = await Promise.all([
+    readBag(member.inventory?.bag_contents?.talisman_bag?.data),
+    readOwnedItems(member),
+    fetchMuseum(state.profileId, state.uuid, key),
+    fetchGarden(state.profileId, key),
+  ]);
 
-  setStatus("busy", "Reading museum donations…");
-  state.museum = await fetchMuseum(state.profileId, state.uuid, state.apiKey.trim());
-
-  setStatus("busy", "Reading garden progress…");
-  state.garden = await fetchGarden(state.profileId, state.apiKey.trim());
-
-  setStatus("busy", "Fetching bazaar prices…");
-  try {
-    // Fetched alongside the bazaar: both are cheap, and the museum reads as half-empty without it.
-    [state.bazaar, state.reference] = await Promise.all([fetchBazaar(), fetchReferencePrices()]);
-  } catch (error) {
-    setStatus("error", error instanceof ApiError ? error.message : String(error));
-    return;
+  {
+    // The reference feed is fetched alongside the bazaar: both are cheap, and the museum reads
+    // as half-empty without it.
+    const priced = await prices;
+    if (!priced.ok) {
+      const error = priced.error;
+      setStatus("error", error instanceof ApiError ? error.message : String(error));
+      return;
+    }
+    [state.bazaar, state.reference] = priced.value;
   }
 
   rebuildCatalog();
@@ -841,9 +875,11 @@ function renderShell(): void {
     void loadPlayer();
   });
 
-  // A solve is ~60-90ms on a full profile: fine once, unusable at the ~60 events a second a
-  // drag produces. Text fields debounce; the slider defers to its release (below), which is the
-  // confirm step without an extra button to press.
+  // A solve is tens of milliseconds for most tabs and the better part of a second for the
+  // packages: fine once, unusable at the ~60 events a second a drag produces. Text fields
+  // debounce; the slider defers to its release (below), which is the confirm step without an
+  // extra button to press; the category chips go through the same debounce, since narrowing a
+  // plan is a run of clicks and not one.
   root.addEventListener("input", (event) => {
     const el = event.target as HTMLInputElement;
     switch (el.id) {
@@ -930,35 +966,49 @@ function renderShell(): void {
     const tab = target.closest<HTMLElement>("[data-tab]");
     if (tab) {
       state.tab = tab.dataset.tab as State["tab"];
-      renderResults();
+      // A report works each view out the first time it is asked for, and they are not the same
+      // size — the packages are six solves. So the tab strip is moved by hand and the body
+      // follows in its own turn, rather than the click sitting on an unpainted page while the
+      // view it asked for is worked out.
+      for (const chip of root.querySelectorAll<HTMLElement>("[data-tab]")) {
+        chip.classList.toggle("on", chip.dataset.tab === state.tab);
+      }
+      markPending(true);
+      setTimeout(() => {
+        renderResults();
+        // A knob moved in the last moment leaves the results dimmed until its own solve lands;
+        // this repaint answered a different question and does not clear that.
+        markPending(solvePending());
+      }, 0);
       return;
     }
 
+    // The chips repaint at once and the solve follows on the same debounce the text fields use.
+    // Narrowing a plan is a run of clicks — off with the museum, off with the dungeons, off with
+    // the rift — and solving each of them in the click handler meant every click after the first
+    // waited behind the last one's answer, which nobody had finished asking for.
     const category = target.closest<HTMLElement>("[data-category]");
     if (category) {
       const key = category.dataset.category as Category;
       if (state.categories.has(key)) state.categories.delete(key);
       else state.categories.add(key);
-      solveNow();
       renderControls();
-      renderResults();
+      scheduleSolve();
       return;
     }
 
     const strategy = target.closest<HTMLElement>("[data-strategy]");
     if (strategy) {
       state.strategy = strategy.dataset.strategy as "greedy" | "exact";
-      solveNow();
       renderControls();
-      renderResults();
+      scheduleSolve();
       return;
     }
 
     if (target.closest("#targetmode")) {
       state.targetMode = state.targetMode === "xp" ? "level" : "xp";
-      solveNow();
       renderControls();
-      renderResults();
+      scheduleSolve();
       return;
     }
 
@@ -1154,6 +1204,7 @@ function scheduleSolve(): void {
   markPending(true);
   clearTimeout(solveTimer);
   solveTimer = window.setTimeout(() => {
+    solveTimer = undefined;
     solveNow();
     markPending(false);
     renderResults();
@@ -1163,10 +1214,14 @@ function scheduleSolve(): void {
 /** Solve right now, cancelling any pending run. */
 function flushSolve(): void {
   clearTimeout(solveTimer);
+  solveTimer = undefined;
   solveNow();
   markPending(false);
   renderResults();
 }
+
+/** True while a knob has been moved and the answer to it has not landed yet. */
+const solvePending = (): boolean => solveTimer !== undefined;
 
 /** Dim the results while they are known to be out of date. */
 function markPending(pending: boolean): void {

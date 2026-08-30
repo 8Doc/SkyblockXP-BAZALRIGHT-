@@ -79,18 +79,48 @@ function slotQueue(pool: ResolvedTask[], completed: Set<string>): ResolvedTask[]
 }
 
 /**
+ * The same queue, for a fill that rebuilds it after every pick.
+ *
+ * Jacobus's rows are a hundred out of several thousand and their order never changes, so the
+ * ids are found and sorted once and each pass only has to ask which of them are still unsold —
+ * a hundred lookups rather than a scan and a sort of the whole pool.
+ */
+function slotQueueIds(pool: ResolvedTask[]): string[] {
+  return pool
+    .filter((task) => task.id.startsWith(BAG_UPGRADE))
+    .map((task) => task.id)
+    .sort((a, b) => upgradeNumber(a) - upgradeNumber(b));
+}
+
+function slotQueueFrom(ids: string[], byId: Map<string, ResolvedTask>, completed: Set<string>): ResolvedTask[] {
+  const out: ResolvedTask[] = [];
+  for (const id of ids) {
+    const task = byId.get(id);
+    if (task && !completed.has(id) && task.coins !== null) out.push(task);
+  }
+  return out;
+}
+
+/**
  * Slots one pick would leave the bag short by — the new families in its bundle, less the room
  * already there. Counted per family rather than per row, because a bundle that climbs from the
  * ring to the artifact of one family still only puts one thing in the bag.
  */
 function slotsWanted(task: ResolvedTask, byId: Map<string, ResolvedTask>, state: FillState): number {
-  const families = new Set<string>();
-  for (const id of [...task.bundle, task.id]) {
+  let families: Set<string> | undefined;
+  const bundle = task.bundle;
+  // Walked by index over the bundle and then the task itself rather than over a joined copy of
+  // the two, and the id is tested before the lookup — only an accessory can ever want a slot,
+  // and most bundles hold none at all. This runs against every candidate on every pick, so the
+  // array and the set it used to allocate each time were most of what a package fill cost.
+  for (let i = 0; i <= bundle.length; i++) {
+    const id = i === bundle.length ? task.id : bundle[i];
+    if (!id.startsWith("accessory_")) continue;
     const step = byId.get(id);
     if (!step || !needsSlot(step) || state.housed.has(familyKey(step))) continue;
-    families.add(familyKey(step));
+    (families ??= new Set()).add(familyKey(step));
   }
-  return Math.max(families.size - state.freeSlots, 0);
+  return Math.max((families?.size ?? 0) - state.freeSlots, 0);
 }
 
 /**
@@ -134,10 +164,21 @@ function eligible(task: ResolvedTask, opts: SolveOptions, xp: number): boolean {
  * Tasks worth resolving at all. Anything grind-only, already done, or in a switched-off
  * category can never be picked, so re-resolving it after every pick is wasted work — and with
  * ~5,000 tasks in a full profile, that waste dominates the solve.
+ *
+ * One filter per options object, kept rather than remade: `resolveTasks` builds a filtered list
+ * once per predicate it is handed, so five packages asking the same question with five freshly
+ * made copies of it would assemble that list five times over.
  */
-function candidate(opts: SolveOptions) {
-  return (task: Task) =>
-    task.cost.kind !== "none" && task.cost.kind !== "unknown" && opts.categories.has(task.category);
+const candidates = new WeakMap<SolveOptions, (task: Task) => boolean>();
+
+function candidate(opts: SolveOptions): (task: Task) => boolean {
+  let filter = candidates.get(opts);
+  if (!filter) {
+    filter = (task: Task) =>
+      task.cost.kind !== "none" && task.cost.kind !== "unknown" && opts.categories.has(task.category);
+    candidates.set(opts, filter);
+  }
+  return filter;
 }
 
 export function solve(tasks: Task[], done: Set<string>, book: PriceBook, opts: SolveOptions): Plan {
@@ -198,15 +239,17 @@ function greedyFill(
 ): ResolvedTask[] {
   const chosen = new Map<string, ResolvedTask>();
   const isCandidate = candidate(opts);
+  let upgradeIds: string[] | null = null;
   let xp = 0;
   let spent = 0;
 
   // Hard stop: every iteration must retire at least one task, so this can't outrun the pool.
   for (let guard = 0; guard < tasks.length && xp < limits.targetXp; guard++) {
     const { tasks: resolved, byId } = resolveTasks(tasks, state.completed, book, isCandidate);
+    if (opts.bag && upgradeIds === null) upgradeIds = slotQueueIds(resolved);
     // Rebuilt each pass rather than carried: the greedy may buy an upgrade on its own merits,
     // and state.completed is where that shows up.
-    const queue = opts.bag ? slotQueue(resolved, state.completed) : [];
+    const queue = upgradeIds ? slotQueueFrom(upgradeIds, byId, state.completed) : [];
 
     let best: ResolvedTask | null = null;
     let bestXp = 0;
@@ -233,9 +276,13 @@ function greedyFill(
       // of the same budget. It is charged here and nowhere else: the slot is a shared cost — one
       // upgrade houses two accessories — so adding it to the *rate* would bill whichever
       // accessory happened to sort first for room the rest of them use. Affordability is a
-      // different question from value, and only this one is the slot's business.
-      const slots = opts.bag ? slotsFor(queue, slotsWanted(task, byId, state), opts.bag.slotsPerUpgrade) : null;
-      if (limits.budget !== null && spent + outlay + (slots?.coins ?? 0) > limits.budget) continue;
+      // different question from value, and only this one is the slot's business — so a fill with
+      // no budget to answer to never works it out at all.
+      if (limits.budget !== null) {
+        const deficit = opts.bag ? slotsWanted(task, byId, state) : 0;
+        const slotCoins = deficit > 0 ? slotsFor(queue, deficit, opts.bag!.slotsPerUpgrade).coins : 0;
+        if (spent + outlay + slotCoins > limits.budget) continue;
+      }
 
       const bundleRate = marginalCoins / gain;
       // Cheapest coins per XP, then the bigger chunk — fewer trips for the same money.
@@ -324,17 +371,66 @@ function greedyFill(
  *
  * Category toggles are *not* dropped — excluding a category is a statement about what you're
  * willing to do, not a convenience the tool imposed.
+ *
+ * Kept between calls, because it is the most expensive thing the package view does and the
+ * knob people actually move cannot change it. It drops the XP floor on purpose and is drawn
+ * with no target and no cap, so the only things it answers to are the pool it is drawn over,
+ * the categories, the bag and the total spend. Move the floor, change the target, set a budget:
+ * the same curve every time.
  */
+type Frontier = { coins: number; xp: number }[];
+
+type FrontierMemo = {
+  done: Set<string>;
+  doneSize: number;
+  book: PriceBook;
+  categories: string;
+  bag: string;
+  cap: number | null;
+  budget: number;
+  trace: Frontier;
+};
+
+const frontiers = new WeakMap<Task[], FrontierMemo>();
+
 function idealFrontier(
   tasks: Task[],
   done: Set<string>,
   book: PriceBook,
   opts: SolveOptions,
   budget: number,
-): { coins: number; xp: number }[] {
+): Frontier {
+  const categories = [...opts.categories].sort().join(",");
+  const bag = opts.bag ? `${opts.bag.freeSlots}/${opts.bag.slotsPerUpgrade}` : "";
+  const held = frontiers.get(tasks);
+  if (
+    held &&
+    held.done === done &&
+    // The set is filled once when the catalog is built and never added to afterwards, but a
+    // reference on its own would not notice if that ever stopped being true.
+    held.doneSize === done.size &&
+    held.book === book &&
+    held.categories === categories &&
+    held.bag === bag &&
+    held.cap === opts.budget &&
+    held.budget === budget
+  ) {
+    return held.trace;
+  }
+
   const state = newFillState(done, opts.bag);
-  const trace: { coins: number; xp: number }[] = [];
+  const trace: Frontier = [];
   greedyFill(tasks, state, book, { ...opts, minXp: 0 }, { targetXp: Number.POSITIVE_INFINITY, budget }, trace);
+  frontiers.set(tasks, {
+    done,
+    doneSize: done.size,
+    book,
+    categories,
+    bag,
+    cap: opts.budget,
+    budget,
+    trace,
+  });
   return trace;
 }
 

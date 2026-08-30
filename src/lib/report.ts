@@ -22,6 +22,14 @@ import {
  * Takes a prebuilt catalog rather than building one. The catalog depends only on the profile,
  * never on the solver knobs, so rebuilding ~5,000 tasks every time a slider moves is pure
  * waste — the caller builds it once per profile and re-solves as often as it likes.
+ *
+ * The five views below are each worked out the first time they are read and remembered from
+ * then on. Only one of them is ever on screen, and they are not the same size: the package
+ * view solves seven fills including the unpackaged baseline, and costs several times what the
+ * other four cost put together. Building all five on every knob change spent most of that on
+ * answers nobody had asked for — so a category toggle now costs whichever tab is showing, and
+ * the expensive one is paid for only by opening it. The figures on the header line — progress,
+ * coverage and the bag — are read every render, so those stay eager.
  */
 
 export type ReportOptions = SolveOptions & {
@@ -115,7 +123,25 @@ const CHEAPEST_LIMIT = 300;
  */
 const GROUPABLE = new Set<Category>(["attributes", "essence_shop"]);
 
-export function buildReport(catalog: Catalog, book: PriceBook, options: ReportOptions): Report {
+/** Worked out on first read and remembered. `undefined` is a legitimate answer, hence the flag. */
+function once<T>(make: () => T): () => T {
+  let value: T;
+  let made = false;
+  return () => {
+    if (!made) {
+      value = make();
+      made = true;
+    }
+    return value;
+  };
+}
+
+export function buildReport(catalog: Catalog, book: PriceBook, raw: ReportOptions): Report {
+  // The category toggles are a live set the UI turns on and off in place, and a view worked out
+  // on first read may be read a good deal later than the report was built. Taken as a copy so
+  // every view answers the question that was asked, and the five of them agree with each other.
+  const options: ReportOptions = { ...raw, categories: new Set(raw.categories) };
+
   // Room in the bag, handed to the solvers so a plan that buys accessories also buys the slots
   // to put them in — the same rule bagSlotsWhereNeeded places them by in the browser below.
   //
@@ -131,22 +157,92 @@ export function buildReport(catalog: Catalog, book: PriceBook, options: ReportOp
         }
       : undefined;
 
-  const plan = solve(catalog.tasks, catalog.done, book, { ...options, bag });
+  const plan = once(() => solve(catalog.tasks, catalog.done, book, { ...options, bag }));
   // The package view answers a different question, so it gets its own solve rather than a
   // post-hoc slicing of the plan above: slicing by cost would strand prerequisite bundles
   // across package boundaries.
-  const packages = solvePackages(catalog.tasks, catalog.done, book, {
-    ...options,
-    bag,
-    targetXp: Number.POSITIVE_INFINITY,
-    budget: null,
-    packageSize: options.packageSize,
-    packageCount: options.packageCount,
-  });
+  const packages = once(() =>
+    solvePackages(catalog.tasks, catalog.done, book, {
+      ...options,
+      bag,
+      targetXp: Number.POSITIVE_INFINITY,
+      budget: null,
+      packageSize: options.packageSize,
+      packageCount: options.packageCount,
+    }),
+  );
   const { tasks: resolved, byId } = resolveTasks(catalog.tasks, catalog.done, book);
 
   /* --------------------------------------------- query B: category browser */
 
+  const browser = once(() => buildBrowser(catalog, resolved, byId, options));
+
+  // The grind order is the one ranking that ignores category walls: if you're going to spend an
+  // evening on something free, this is the list to spend it on, easiest first. XP breaks ties,
+  // so equally-common tasks lead with the ones that actually pay.
+  const grind = once(() => buildGrind(resolved, options));
+
+  // Query D: value ranking across every category at once. Ordered on the same figure the rows
+  // display — bundle coins per bundle XP — so the list reads as monotonic rather than as a sort
+  // by one number and a display of another.
+  const cheapest = once(() => buildCheapest(resolved, byId, options));
+
+  const xp = catalog.currentXp;
+
+  return {
+    progress: {
+      xp,
+      level: Math.floor(xp / XP_PER_LEVEL),
+      modelledEarnedXp:
+        resolved.filter((t) => t.done).reduce((s, t) => s + t.xp, 0) +
+        catalog.earnedOutsideTasks.magicalPower +
+        catalog.earnedOutsideTasks.petScore +
+        catalog.earnedOutsideTasks.bestiary,
+      modelledRemainingXp: achievableXp(resolved.filter((t) => !t.done)),
+    },
+    get plan() {
+      return plan();
+    },
+    get packages() {
+      return packages();
+    },
+    get browser() {
+      return browser();
+    },
+    get cheapest() {
+      return cheapest();
+    },
+    get grind() {
+      return grind();
+    },
+    reconciliation: catalog.reconciliation,
+    unmodelled: catalog.unmodelled,
+    bag: {
+      computedMp: catalog.bag.computedMp,
+      reportedMp: catalog.bag.reportedMp,
+      readable: catalog.bag.readable,
+      capacity: catalog.bag.capacity,
+      used: catalog.bag.used,
+      // Magical power still to gain, which is not the same as the accessory bag category's XP:
+      // the category also holds the bag's slot upgrades, and those are ordinary SkyBlock XP for
+      // buying room from Jacobus rather than magical power. Adding the category to the magical
+      // power you hold therefore overshoots the game's maximum by whatever slots you have left,
+      // which reads exactly like a bug and is not one. Kept apart so the readout can say so.
+      powerLeft: achievableXp(
+        resolved.filter((t) => !t.done && t.category === "accessory_bag" && !t.id.startsWith("bag_upgrade_")),
+      ),
+    },
+  };
+}
+
+/* --------------------------------------------- query B: category browser */
+
+function buildBrowser(
+  catalog: Catalog,
+  resolved: ResolvedTask[],
+  byId: Map<string, ResolvedTask>,
+  options: ReportOptions,
+): Report["browser"] {
   const modelled = new Set(catalog.tasks.map((t) => t.category));
   const browser: Report["browser"] = [];
 
@@ -244,10 +340,16 @@ export function buildReport(catalog: Catalog, book: PriceBook, options: ReportOp
     });
   }
 
-  // The grind order is the one ranking that ignores category walls: if you're going to spend an
-  // evening on something free, this is the list to spend it on, easiest first. XP breaks ties,
-  // so equally-common tasks lead with the ones that actually pay.
-  const grind = resolved
+  return browser;
+}
+
+/**
+ * The grind order: the one ranking that ignores category walls. If you're going to spend an
+ * evening on something free, this is the list to spend it on, easiest first. XP breaks ties, so
+ * equally-common tasks lead with the ones that actually pay.
+ */
+function buildGrind(resolved: ResolvedTask[], options: ReportOptions): ResolvedTask[] {
+  return resolved
     .filter(
       (t) =>
         !t.done &&
@@ -274,10 +376,18 @@ export function buildReport(catalog: Catalog, book: PriceBook, options: ReportOp
       return (a.effort ?? 1) - (b.effort ?? 1) || b.xp - a.xp;
     })
     .slice(0, 60);
+}
 
-  // Query D: value ranking across every category at once. Ordered on the same figure the rows
-  // display — bundle coins per bundle XP — so the list reads as monotonic rather than as a sort
-  // by one number and a display of another.
+/**
+ * Query D: value ranking across every category at once. Ordered on the same figure the rows
+ * display — bundle coins per bundle XP — so the list reads as monotonic rather than as a sort by
+ * one number and a display of another.
+ */
+function buildCheapest(
+  resolved: ResolvedTask[],
+  byId: Map<string, ResolvedTask>,
+  options: ReportOptions,
+): Report["cheapest"] {
   const buyable = resolved
     .filter((t) => !t.done && t.xp > 0 && options.categories.has(t.category) && t.cost.kind !== "none")
     .sort((a, b) => {
@@ -292,48 +402,11 @@ export function buildReport(catalog: Catalog, book: PriceBook, options: ReportOp
   // own. The floor then applies to the folded row.
   const folded = groupToMax(buyable).filter((run) => run.xp >= options.minXp);
 
-  const cheapest = {
+  return {
     tasks: flat.slice(0, CHEAPEST_LIMIT),
     truncated: Math.max(flat.length - CHEAPEST_LIMIT, 0),
     grouped: folded.slice(0, CHEAPEST_LIMIT),
     groupedTruncated: Math.max(folded.length - CHEAPEST_LIMIT, 0),
-  };
-
-  const xp = catalog.currentXp;
-
-  return {
-    progress: {
-      xp,
-      level: Math.floor(xp / XP_PER_LEVEL),
-      modelledEarnedXp:
-        resolved.filter((t) => t.done).reduce((s, t) => s + t.xp, 0) +
-        catalog.earnedOutsideTasks.magicalPower +
-        catalog.earnedOutsideTasks.petScore +
-        catalog.earnedOutsideTasks.bestiary,
-      modelledRemainingXp: achievableXp(resolved.filter((t) => !t.done)),
-    },
-    plan,
-    packages,
-    browser,
-    cheapest,
-    reconciliation: catalog.reconciliation,
-    grind,
-    unmodelled: catalog.unmodelled,
-    bag: {
-      computedMp: catalog.bag.computedMp,
-      reportedMp: catalog.bag.reportedMp,
-      readable: catalog.bag.readable,
-      capacity: catalog.bag.capacity,
-      used: catalog.bag.used,
-      // Magical power still to gain, which is not the same as the accessory bag category's XP:
-      // the category also holds the bag's slot upgrades, and those are ordinary SkyBlock XP for
-      // buying room from Jacobus rather than magical power. Adding the category to the magical
-      // power you hold therefore overshoots the game's maximum by whatever slots you have left,
-      // which reads exactly like a bug and is not one. Kept apart so the readout can say so.
-      powerLeft: achievableXp(
-        resolved.filter((t) => !t.done && t.category === "accessory_bag" && !t.id.startsWith("bag_upgrade_")),
-      ),
-    },
   };
 }
 

@@ -255,6 +255,46 @@ Hypixel resources API when the game changes; the wiki-derived and curated tables
   from the co-op's shared total where there is one.
 - The XP floor, coin budget and category toggles re-solve live — see the note on solve cost below.
 
+## Solve cost
+
+Every knob on the planner re-solves from the profile already in memory, so none of them touch
+the network. What they do cost is arithmetic, and the shape of that is worth knowing.
+
+The expensive part is the greedy fill: it takes the cheapest bundle per XP, applies it, and
+recomputes the whole board before picking again — several thousand picks over a catalogue of
+~13,000 tasks for a package run. Four things keep that affordable, and all four are caches over
+work that provably cannot have changed:
+
+- **A task's price is cached against the price book it came from.** Nothing a solver does can
+  change what a Recombobulator costs; only new prices can, and those arrive as a new book.
+- **Prerequisite closures are invalidated per pick, not rebuilt.** Completing a task can only
+  change the closures that contained it, so a pick re-resolves a handful of rows rather than all
+  of them. `resolve.ts` has the argument for why the dependents index is sufficient on its own.
+- **Each view is worked out the first time it is read.** Only one tab is on screen and they are
+  not the same size — the packages are one greedy fill per package plus one more for the
+  unpackaged baseline, and cost more than the other four views together.
+- **The packages' baseline curve is kept between solves.** It drops the XP floor on purpose and
+  ignores the target and the budget, so the knob people actually move cannot change it.
+
+On a mid-progress profile against a market that prices most of the catalogue, one re-solve of
+five 10M packages costs roughly:
+
+| Tab showing | First solve | Same tab again |
+|---|---|---|
+| Grind order | 6 ms | 4 ms |
+| Cheapest first | 22 ms | 18 ms |
+| Category browser | 44 ms | 35 ms |
+| Batch plan | 171 ms | 50 ms |
+| Packages | 1.1 s | 470 ms |
+
+Packages is the outlier and always will be — six greedy fills for five packages — and the
+recompute-after-every-pick is what keeps overlapping bundles honest. Opening that tab is the
+only place the page still pauses.
+
+The category chips go through the same debounce the text fields use rather than solving in the
+click handler, so turning four categories off is one solve and not four — the chips repaint at
+once and the results dim until the answer catches up.
+
 ## Modelled categories
 
 All 17, ~48,000 XP. `DATA.md` has the provenance for each number.
