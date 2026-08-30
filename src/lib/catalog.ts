@@ -1,7 +1,7 @@
 import type { Category, Task } from "./types";
 import type { GardenState, MuseumState, ProfileMember } from "./profile";
 import { petKey } from "./auctions";
-import { num } from "./format";
+import { coins, num } from "./format";
 import {
   abicaseBonusFor,
   accessoryPower,
@@ -479,7 +479,7 @@ export function buildCatalog(
       requires: rungBelow(task.id),
       cost: discreteCost(task.id, data, scrollFor),
       repeatable: false,
-      note: abiphoneNote(task.id, data) ?? directionsTo(task.id, data) ?? task.rule,
+      note: abiphoneNote(task.id, data) ?? essenceNote(task.id, data) ?? directionsTo(task.id, data) ?? task.rule,
       where: contactLocation(task.id, data),
     });
     if (completed.has(task.id)) done.add(task.id);
@@ -1475,6 +1475,26 @@ function abiphoneNote(id: string, data: GameData): string | undefined {
   return parts.length ? `${contact.npc} — ${parts.join(", ")}` : undefined;
 }
 
+
+/**
+ * What a perk asks for at the shop — "1.2k crimson essence".
+ *
+ * The note here used to be the wiki rule the row was generated from, which said "essence shop
+ * perks" on every one of four hundred rows: provenance rather than information. The amount is
+ * the one thing that differs between two tiers of the same perk, it is already sitting in the
+ * cost, and it is what decides whether the next tier is this evening's job or next month's.
+ *
+ * Compact rather than exact — `coins` is the app's short-form number, not a coin figure here.
+ * A perk costs 1,200 essence and "1.2k" is the useful half of that.
+ */
+function essenceNote(id: string, data: GameData): string | undefined {
+  const match = /^([A-Z]+)_ESSENCE_(.+)_(\d+)$/.exec(id);
+  if (!match) return undefined;
+  const perk = data.costs.essence[`${match[1]}|${match[2]}`];
+  const amount = perk?.tiers[match[3]];
+  if (!perk || !amount) return undefined;
+  return `${coins(amount)} ${perk.essence.replace(/^ESSENCE_/, "").toLowerCase()} essence`;
+}
 
 function discreteCost(id: string, data: GameData, scrollFor: Map<string, { itemId: string }>): Task["cost"] {
   const bank = data.costs.bank[id];

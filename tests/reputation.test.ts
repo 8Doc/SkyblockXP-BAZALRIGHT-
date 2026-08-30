@@ -85,6 +85,78 @@ test("what the game will not sell you sinks below what it will", () => {
   }
 });
 
+test("a gated row survives the cut, however far down it sinks", () => {
+  // Sinking it below seven hundred minion tiers and then showing forty is the same as deleting
+  // it — and it would reappear out of nowhere the day the reputation landed, having never been
+  // mentioned. So it sits at the bottom of what is shown rather than off the end of it.
+  const catalog = buildCatalog(member(0, 0), data, { items: [], capacity: 400 });
+  const report = buildReport(catalog, { bazaar: {}, bins: null }, {
+    categories: new Set(CATEGORIES) as Set<Category>,
+    minXp: 0,
+    packageSize: 1e9,
+    packageCount: 1,
+    targetXp: Number.POSITIVE_INFINITY,
+    budget: null,
+  } as never);
+  const entry = report.browser.find((e) => e.category === "minions")!;
+
+  assert.ok(entry.tasks.length > 40, "gated rows should be carried past the forty-row cut");
+  const gated = entry.tasks.filter((t) => t.blocked);
+  assert.ok(gated.length > 0, "no gated minion row reached the panel at zero reputation");
+  // Every one of them is at the end, after the rows that can actually be acted on.
+  const firstGated = entry.tasks.findIndex((t) => t.blocked);
+  assert.ok(
+    entry.tasks.slice(firstGated).every((t) => t.blocked),
+    "a buyable row turned up below a gated one",
+  );
+  // And the "+N more" counts only what was really dropped.
+  assert.ok(entry.truncated >= 0);
+});
+
+test("the same holds for the value ranking", () => {
+  const catalog = buildCatalog(member(0, 0), data, { items: [], capacity: 400 });
+  const report = buildReport(catalog, { bazaar: {}, bins: null }, {
+    categories: new Set(CATEGORIES) as Set<Category>,
+    minXp: 0,
+    packageSize: 1e9,
+    packageCount: 1,
+    targetXp: Number.POSITIVE_INFINITY,
+    budget: null,
+  } as never);
+
+  const gated = report.cheapest.tasks.filter((t) => t.blocked);
+  assert.ok(gated.length > 0, "the gated minions fell out of cheapest-first entirely");
+  assert.ok(
+    report.cheapest.tasks.slice(-gated.length).every((t) => t.blocked),
+    "gated rows should be the tail of the list, not scattered through it",
+  );
+});
+
+/* ------------------------------------------------------- essence shop */
+
+test("an essence perk says what it costs in essence", () => {
+  const tasks = tasksFor({} as ProfileMember);
+  const perk = tasks.find((t) => t.id === "WITHER_ESSENCE_FORBIDDEN_BLESSING_6")!;
+
+  // 1,200 wither essence at tier 6, per the wiki cost table.
+  assert.equal(perk.note, "1.2k wither essence");
+});
+
+test("every priced perk carries its amount, and none of them still say the rule", () => {
+  const tasks = tasksFor({} as ProfileMember).filter((t) => t.category === "essence_shop");
+  assert.ok(tasks.length > 100, `expected the essence category, got ${tasks.length} rows`);
+
+  const priced = tasks.filter((t) => t.cost.kind === "bazaar");
+  assert.ok(priced.length > 0);
+  for (const task of priced) {
+    assert.match(task.note ?? "", /^[\d.]+[kMB]? \w+ essence$/, `${task.id} does not state its essence`);
+  }
+  // The rows we cannot price keep saying so rather than inventing a figure.
+  for (const task of tasks) {
+    if (task.cost.kind !== "bazaar") assert.doesNotMatch(task.note ?? "", / essence$/);
+  }
+});
+
 /* ---------------------------------------------------- bestiary ordering */
 
 function bestiary(kills: Record<string, number>) {

@@ -107,6 +107,28 @@ export type Report = {
 const BROWSER_LIMIT = 40;
 
 /**
+ * The first `limit` rows, plus every gated row however far down the ranking it fell.
+ *
+ * A blocked row sinks below everything you can actually act on, and on a category of seven
+ * hundred that is the same as deleting it — which loses exactly the row a player most needs:
+ * the one that says "this is the last thing left, and here is what it wants first". Worse, it
+ * would reappear out of nowhere the day they earned the reputation, having never been told it
+ * was waiting.
+ *
+ * So the sink decides the order and the cut spares them. They sit at the bottom, out of the way
+ * and still there, and the "+N more" that follows counts only what was really dropped.
+ */
+function keepGated(rows: ResolvedTask[], limit: number): { shown: ResolvedTask[]; truncated: number } {
+  if (rows.length <= limit) return { shown: rows, truncated: 0 };
+  const head = rows.slice(0, limit);
+  const gated = rows.slice(limit).filter((task) => task.blocked);
+  return {
+    shown: gated.length ? [...head, ...gated] : head,
+    truncated: rows.length - limit - gated.length,
+  };
+}
+
+/**
  * How close to finished counts as "you may as well finish it" in the grind order.
  *
  * Five percent left. The figure is a judgement rather than a measurement, and it is the right
@@ -366,11 +388,14 @@ function buildBrowser(
     // the fourth combination is its own list rather than one toggle quietly cancelling the other.
     const topRarityUnpriced = topRarity && hasBoth ? topRarity.filter((task) => task.bundleCoins === null) : null;
 
+    const listed = keepGated(stepped, BROWSER_LIMIT);
+    const unpricedListed = keepGated(unpricedRows, BROWSER_LIMIT);
+
     browser.push({
       category,
       summary,
-      tasks: stepped.slice(0, BROWSER_LIMIT),
-      truncated: Math.max(stepped.length - BROWSER_LIMIT, 0),
+      tasks: listed.shown,
+      truncated: listed.truncated,
       ...(topRarity
         ? {
             topRarity: topRarity.slice(0, BROWSER_LIMIT),
@@ -393,10 +418,7 @@ function buildBrowser(
         ? { maxed: maxed.slice(0, BROWSER_LIMIT), maxedTruncated: Math.max(maxed.length - BROWSER_LIMIT, 0) }
         : {}),
       ...(hasBoth
-        ? {
-            unpriced: unpricedRows.slice(0, BROWSER_LIMIT),
-            unpricedTruncated: Math.max(unpricedRows.length - BROWSER_LIMIT, 0),
-          }
+        ? { unpriced: unpricedListed.shown, unpricedTruncated: unpricedListed.truncated }
         : {}),
       ...(unpricedMaxed
         ? {
@@ -501,9 +523,14 @@ function buildCheapest(
   // own. The floor then applies to the folded row.
   const folded = groupToMax(buyable).filter((run) => run.xp >= options.minXp);
 
+  // Gated rows survive the cut here too. This is the list that answers "what is the next
+  // cheapest XP anywhere", and a Mycelium line the merchant will not sell you is part of that
+  // answer — just not the top of it.
+  const listed = keepGated(flat, CHEAPEST_LIMIT);
+
   return {
-    tasks: flat.slice(0, CHEAPEST_LIMIT),
-    truncated: Math.max(flat.length - CHEAPEST_LIMIT, 0),
+    tasks: listed.shown,
+    truncated: listed.truncated,
     grouped: folded.slice(0, CHEAPEST_LIMIT),
     groupedTruncated: Math.max(folded.length - CHEAPEST_LIMIT, 0),
   };

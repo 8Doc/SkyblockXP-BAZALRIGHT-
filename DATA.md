@@ -642,15 +642,25 @@ below every row you *can* act on in both the category browser and the value rank
 `needs 10,000 barbarian rep` rather than borrowing the "no price" wording, because the two are
 different problems: one has no number, the other has a number you cannot spend yet.
 
-Two things this deliberately does **not** do, both worth knowing:
+**Sunk, but never cut.** Sinking a row below seven hundred minion tiers and then showing forty
+is the same as deleting it, and deleting it is the one outcome that must not happen: a player
+finishing the category would be told they were done, and then watch a row appear from nowhere
+the day their reputation landed. So the sink sets the order and the truncation spares gated
+rows — they are appended after the cut in both lists, and the "+N more" counts only what was
+really dropped. On a fresh profile the minions panel shows 40 rows plus 4 gated ones, and
+cheapest-first shows 300 plus the same 4.
 
-- **The solver still picks gated tiers.** A plan can therefore include a Mycelium tier the
-  profile cannot craft. Sinking it in the lists was the ask; leaving it out of the plan changes
-  every total, and reputation is grindable rather than impossible, so it is a prerequisite this
-  model has no task for rather than a thing that can never happen.
-- **A bundled row reports its top tier's requirement.** "Mycelium Minion I–XI · needs 10,000
-  mage rep" is honest about the span it is quoting, but a player sitting on 2,000 can really
-  craft I–IV today and the row does not offer that split.
+**The sink splits the chain for free.** Because every craftable tier now ranks above every gated
+one, `progressive` walks the craftable prefix first and the gated row picks up where it stopped:
+a profile on 2,000 mage reputation is offered "Mycelium Minion I–IV" as an ordinary purchase and
+"Mycelium Minion V–XI · needs 10,000 mage rep" as the part it cannot reach yet. That split falls
+out of the ordering rather than being coded for, so it holds at any reputation.
+
+One thing this deliberately does **not** do: **the solver still picks gated tiers**, so a plan
+can include a Mycelium tier the profile cannot craft. Sinking it in the lists was the ask;
+leaving it out of the plan changes every total, and reputation is grindable rather than
+impossible — a prerequisite this model has no task for rather than a thing that can never
+happen.
 
 ## Pet score: two numbers, and only one of them is published
 
@@ -1011,6 +1021,16 @@ to bazaar product ids and perk names to task ids, reporting what failed.
 **Essence is the weak join.** The wiki calls a perk "One Punch" where the game id says
 `FLAT_DAMAGE_VS_ENDER`, and no amount of string munging fixes that — it needs a hand-written
 alias table. Unmatched perks keep `kind: "unknown"` and stay out of the solver.
+
+**A perk row says what it asks for.** The note on these used to be the wiki rule that generated
+the row — "essence shop perks", identically, on all four hundred of them: provenance where
+information should be. It now reads `1.2k wither essence`, taken from the same cost the price is
+computed off, so the row cannot say one thing and be priced as another. The amount is the only
+thing that differs between two tiers of one perk, and it is what decides whether the next tier
+is this evening or next month. Perks with no matched cost table still say nothing rather than
+inventing a figure. One gap left: a *bundled* row — two tiers folded into one because the XP
+floor hid the lower — still reads "2 levels" without a total, because the bundle summing only
+recognises the `30× Shard` form the attributes use.
 
 **Fast travel is deliberately split.** Ten destinations have a scroll on the auction house and
 are priced. The other fourteen unlock by visiting: free in coins, so they are tagged `grind`

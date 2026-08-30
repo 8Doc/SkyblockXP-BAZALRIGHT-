@@ -269,9 +269,14 @@ Hypixel resources API when the game changes; the wiki-derived and curated tables
   kill from the next tier. Same rows, ordered on kills left instead.
 - **Minions the game will not sell you say so.** The Mycelium and Red Sand lines are gated on
   Crimson Isle reputation, tier by tier, and a row above your standing is tagged `needs 10,000
-  mage rep` and sunk below everything you can actually act on. A gate is not a price: the
-  ingredients are affordable, and the merchant still says no. `DATA.md` has the ladder and two
-  things this deliberately doesn't do.
+  mage rep` and sunk below everything you can actually act on — but never cut from the list,
+  because a row that vanishes tells you you're finished when you aren't. A gate is not a price:
+  the ingredients are affordable, and the merchant still says no. Because the gated tiers sort
+  last, the chain splits itself where your reputation runs out: `Mycelium Minion I–IV` to buy
+  now, `V–XI` waiting on 10,000.
+- **Essence perks say what they cost in essence** — `1.2k wither essence` on the row, off the
+  same figure the price is computed from, rather than the wiki rule that used to read "essence
+  shop perks" on all four hundred of them.
 - The XP floor, coin budget and category toggles re-solve live — see the note on solve cost below.
 
 ## Solve cost
