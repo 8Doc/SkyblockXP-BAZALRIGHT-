@@ -1,0 +1,54 @@
+{
+  "note": "How Skill XP becomes Pet XP. Curated rather than scraped because the Pets page states these as a prose list and a two-column table of ranges, and the ranges are the wrong end of the fact: '×1.01-1.60, depends on Taming Level' is a sentence a parser cannot turn into a multiplier, but a reader can. Every entry carries the wording it came from.",
+  "source": "Hypixel Wiki, Pets — 'Leveling / Normal Pets / Skill Experience'; Wisdom — 'Mechanics'; Taming — 'Zoologist'.",
+  "verified": true,
+  "checkedAt": "2026-09-03",
+
+  "order": "Additive factors first, then multiplicative ones. The Pets page states this outright: 'Multiple factors affect the pet experience gained, they stack additively or multiplicatively. Additive factors are applied first.' So Wisdom scales the Skill XP, and everything else scales the Pet XP that Skill XP turns into.",
+
+  "wisdom": {
+    "formula": "skillXp * (1 + wisdom / 100)",
+    "appliesTo": "the Skill XP itself, per skill — there is a separate Wisdom stat for each",
+    "quote": "When gaining Skill XP, the amount gained is multiplied by 1 + Wisdom/100. For example, if the player gains +10 Combat XP and has 10 Combat Wisdom, they will gain +11 Combat XP.",
+    "source": "Wisdom, Mechanics"
+  },
+
+  "taming": {
+    "formula": "petXp * (1 + tamingLevel / 100)",
+    "maxLevel": 60,
+    "range": "x1.01 to x1.60",
+    "quote": "Each level of Zoologist grants +1% Pet XP gained and +1 Pet Luck. Each level of Taming grants one level of Zoologist.",
+    "source": "Taming, Zoologist; the range is the Pets page's own multiplicative table"
+  },
+
+  "skillMultipliers": {
+    "FISHING": 1.5
+  },
+  "skillMultipliersWhy": "Fishing is the one skill that pays a bonus rather than a penalty: 'This skill is 50% more efficient in leveling pets.' No minion produces Fishing XP, so this is carried for completeness rather than because a minion can reach it.",
+
+  "mismatch": {
+    "divisor": 3,
+    "quote": "Different skill than the pet's: /3",
+    "example": "With a summoned Magma Cube Pet (a Combat pet), 100% of Combat experience is granted to that pet, but only 33% of Farming experience."
+  },
+
+  "alchemyEnchantingPenalty": {
+    "divisor": 12,
+    "appliesTo": ["ALCHEMY", "ENCHANTING"],
+    "quote": "Alchemy and Enchanting, unless the pet matches the Skill: /12",
+    "why": "This is the fact that decides the brewing route. One Enchanted Sugar Cane is 15,000 Alchemy XP, which sounds decisive until it reaches a pet that is not an Alchemy pet and arrives as 1,250. The penalty is not the mismatch penalty and does not replace it: a non-Alchemy pet earning Alchemy XP takes the /12, not the /3."
+  },
+
+  "noPetXp": ["CARPENTRY", "TAMING", "DUNGEONEERING", "RUNECRAFTING", "SOCIAL"],
+  "noPetXpQuote": "The Carpentry, Taming, Dungeoneering, Runecrafting and Social skills do not give pet experience.",
+  "noPetXpWhy": "Carpentry being on this list is the reason the crafting route is a skill-levelling answer and not a pet-levelling one. 3% of the NPC value of everything a minion produces is a real amount of Carpentry XP and exactly zero Pet XP, so the two routes cannot be ranked in the same column.",
+
+  "notModelled": {
+    "dianaPetXpBuff": { "multiplier": 1.35, "why": "A mayoral perk, on for a fortnight at a time. Nobody plans a minion setup around the election calendar." },
+    "petItems": { "multiplier": "1.1 to 1.5", "why": "Per pet and usually per skill; there is no single figure to apply." },
+    "beastmasterCrest": { "multiplier": "1.001 to 1.050", "why": "Scales with the player's kill count, which no minion changes." },
+    "reindeerPet": { "multiplier": 2, "why": "The pet being levelled would have to be the Reindeer, which is a different question." },
+    "battleExperience": { "multiplier": 1.1, "why": "Combat XP only, and no minion produces Combat XP the wiki has published a rate for." },
+    "ceiling": "The Pets page puts the highest achievable multiplier at 10.206x with all of the above stacked. The figures here stop at Taming and Wisdom, which are the two a player can state as a number and the two this tab asks for."
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "note": "What decides how long a minion runs before it stops, and what happens to the items when it does. The per-tier storage itself is scraped into minion-production.json from each minion's own page; this file carries the three things that change it — the chest beside the minion, the compactor inside it, and the hopper that empties it.",
+  "source": {
+    "chests": "Hypixel Wiki, Minion Storage — the 'Added Storage' table.",
+    "hoppers": "Hypixel Wiki, Automated Shipping — the percentage of NPC sell price each pays.",
+    "compactors": "Hypixel Wiki, Minion Upgrades — 'Compacting upgrades'."
+  },
+  "verified": true,
+  "checkedAt": "2026-09-03",
+
+  "slotItems": 64,
+  "slotItemsWhy": "A storage slot holds one stack. The minion's own capacity is quoted in items on its page (64, 192, 192, 384, ...) and the chests are quoted in slots, so one of the two has to be converted and this is the constant that does it.",
+
+  "chests": [
+    { "id": "NONE", "name": "No storage chest", "slots": 0 },
+    { "id": "SMALL_STORAGE", "name": "Small Storage", "slots": 3 },
+    { "id": "MEDIUM_STORAGE", "name": "Medium Storage", "slots": 9 },
+    { "id": "LARGE_STORAGE", "name": "Large Storage", "slots": 15 },
+    { "id": "X-LARGE_STORAGE", "name": "X-Large Storage", "slots": 21 },
+    { "id": "XX-LARGE_STORAGE", "name": "XX-Large Storage", "slots": 27 }
+  ],
+  "chestsWhy": "These are not Minion Upgrades and do not take an upgrade slot — the page is explicit: 'They are not Minion Upgrades, but are instead placed next to a minion.' So a chest is free of the two-slot budget the fuel and upgrades compete for, and asking about it separately is not a convenience, it is the rule.",
+
+  "hoppers": [
+    { "id": "NONE", "name": "No hopper", "npcShare": 0 },
+    { "id": "BUDGET_HOPPER", "name": "Budget Hopper", "npcShare": 0.5 },
+    { "id": "ENCHANTED_HOPPER", "name": "Enchanted Hopper", "npcShare": 0.7 }
+  ],
+  "hoppersWhy": "A hopper turns a full minion from a stopped one into a slow coin trickle, but it sells at the shopkeeper's price and takes a cut of even that: 50% for the Budget, 70% for the Enchanted. That is almost always worse than walking over and selling the same items yourself, which is why the tab prices the two side by side rather than treating a hopper as an upgrade.",
+  "perfectHopper": "A Perfect Hopper at 100% exists in the API and is unobtainable, so it is not offered here.",
+
+  "shippingNote": "With a chest placed, a hopper only starts selling once both the minion and the chest are full — 'If Automated Shipping is used, it will only sell after both the Minion's inventory and chest are filled.' The fill time this tab quotes is therefore the time until the hopper starts working, not the time until the minion stops.",
+
+  "compactors": [
+    { "id": "NONE", "name": "No compactor", "kind": "none" },
+    { "id": "COMPACTOR", "name": "Compactor", "kind": "block" },
+    { "id": "SUPER_COMPACTOR_3000", "name": "Super Compactor 3000", "kind": "enchanted" },
+    { "id": "DWARVEN_SUPER_COMPACTOR", "name": "Dwarven Super Compactor", "kind": "enchanted" }
+  ],
+  "compactorsWhy": "A compactor changes nothing about how much a minion collects and everything about how long it runs. 160 cobblestone become one Enchanted Cobblestone, so a slot that held 64 drops now holds 64 enchanted ones — ten thousand cobblestone in the space of sixty-four. The ratio is not assumed: it is read off the item's own crafting recipe in recipes.json, which is where 160 comes from, and it differs per item.",
+  "compactorSlot": "A compactor occupies one of the two upgrade slots, so choosing one is choosing against a Flycatcher. That trade is the whole reason to show fill time next to items an hour rather than only one of them.",
+
+  "unmodelled": {
+    "doubleCompaction": "A Super Compactor will compact a second time where a recipe exists for it — Enchanted Redstone into an Enchanted Redstone Block. Only the first step is modelled, so fill times for those items are conservative.",
+    "autoSmelter": "The Auto Smelter and Flint Shovel replace the drop with a different item entirely, which changes what is being sold rather than how much of it fits. Worth modelling later; ignored here rather than half-modelled."
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "note": "Which item id a minion's drop is priced as. Ordinarily this is worked out rather than listed: the drop's display name is looked up in the bazaar's name table, and failing that the minion's resolved collection id is used. This file is the exceptions — the minions where that lands on nothing, or lands on the wrong thing.",
+  "source": "Hypixel Wiki, one page per minion, cross-read against the item ids in bazaar_items.json and npc-prices.json.",
+  "verified": true,
+  "checkedAt": "2026-09-03",
+
+  "why": "A collection id and a drop id are not the same thing and usually only look like it. The Cow Minion's collection resolves to Leather while the thing it drops is Raw Beef; pricing the drop as leather is not a rounding error, it is pricing the wrong item. Three more resolve to nothing at all, and a minion with no price is a minion missing from a profit table entirely.",
+
+  "overrides": {
+    "COW": {
+      "itemId": "RAW_BEEF",
+      "why": "The wiki's collects line is Raw Beef; the collection line resolved to Leather, which is the other thing a cow drops. Priced as the beef because that is what the minion's own page says it collects.",
+      "alsoDrops": ["LEATHER"]
+    },
+    "SNOW": {
+      "itemId": "SNOW_BALL",
+      "why": "Snowballs feed no collection, so the automatic route had nothing to resolve against. The item exists and trades."
+    },
+    "INFERNO": {
+      "itemId": "CRUDE_GABAGOOL",
+      "why": "Same reason: Crude Gabagool is not a collection. It is a bazaar item and the Inferno Minion's only drop."
+    },
+    "FISHING": {
+      "itemId": "RAW_FISH",
+      "why": "The infobox writes the drop as 'Raw Cod 54%' and the scrape carries the percentage into the name. Raw Cod is the majority drop and is what this prices.",
+      "partial": 0.54,
+      "unmodelled": "The other 46% is salmon, tropical fish, pufferfish and clownfish in unpublished proportions. This row is understated by whatever those are worth."
+    },
+    "MUSHROOM": {
+      "itemId": "RED_MUSHROOM",
+      "why": "Drops red and brown mushrooms at 50% each. They are separate bazaar items at near-identical prices, so one is priced and the split is noted rather than averaged into an item that does not exist.",
+      "alsoDrops": ["BROWN_MUSHROOM"]
+    },
+    "FLOWER": {
+      "itemId": null,
+      "why": "Drops one of eleven different flowers at random. There is no single item to price and no published distribution to weight them by, so this minion carries no profit figure rather than a guessed one. It still appears, with the reason on the row."
+    }
+  },
+
+  "unmodelled": {
+    "mobExtras": "Mob minions drop more than their headline item — a Zombie Minion also drops the occasional Enchanted Rotten Flesh, a Cow Minion drops leather beside the beef. Only the headline drop is priced, so every mob minion's figure is a floor rather than an estimate.",
+    "rareDrops": "Nothing here models the rare drops several minions carry, nor the Diamond Spreading and Corrupt Soil upgrades that add a second item to any minion. Both make the real number higher than the quoted one."
+  }
+}

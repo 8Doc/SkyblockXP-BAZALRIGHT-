@@ -77,7 +77,15 @@ const state: State = {
 
 let tables: Tables = { production: { actionsPerHarvest: 2, minions: [] }, modifiers: { fuels: [], upgrades: [] }, collections: [] };
 let host: HTMLElement | null = null;
-let bound = false;
+/**
+ * The host these listeners are attached to, not merely whether any were attached.
+ *
+ * This tab used to be handed one element that main.ts created once, so a boolean was safe. It is
+ * now a child of the minions section, and a section that ever rebuilds its chrome would hand this
+ * a fresh container with no listeners on it while the flag still said "bound" — every control dead
+ * and nothing in the console to say why. Comparing the host makes the rebind automatic.
+ */
+let boundTo: HTMLElement | null = null;
 
 /* ---------------------------------------------------------------- profile */
 
@@ -141,8 +149,8 @@ export function mountMinions(container: HTMLElement, data: Tables): void {
   host = container;
   tables = data;
 
-  if (!bound) {
-    bound = true;
+  if (boundTo !== container) {
+    boundTo = container;
 
     container.addEventListener("click", (event) => {
       const target = event.target as HTMLElement;

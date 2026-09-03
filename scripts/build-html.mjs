@@ -108,6 +108,9 @@ const greenhouseData = {
  * produce, so the rates are a wiki scrape and the slot contents are curated — see the notes in
  * both files for why each is the shape it is.
  */
+const skillXpFile = await loadJson("generated/skill-xp.json");
+const minionStorage = await loadJson("curated/minion_storage.json");
+
 const minionData = {
   production: {
     ...(await loadJson("generated/minion-production.json")),
@@ -118,6 +121,31 @@ const minionData = {
   },
   modifiers: await loadJson("curated/minion_modifiers.json"),
   collections: (await loadJson("generated/collections.json")).collections,
+
+  // The profits tab. Storage decides how much of a rate you ever collect, the recipes decide how
+  // much a compactor changes that, and the shop prices are the third market a minion's output can
+  // go to — often the best one, for the cheap bulk several minions produce.
+  storage: {
+    slotItems: minionStorage.slotItems,
+    chests: minionStorage.chests,
+    hoppers: minionStorage.hoppers,
+    compactors: minionStorage.compactors,
+  },
+  drops: { overrides: (await loadJson("curated/minion_drops.json")).overrides },
+  recipes: recipeFile.recipes,
+  npcPrices: (await loadJson("generated/npc-prices.json")).prices,
+  names: (await loadJson("generated/bazaar_items.json")).names,
+
+  // The pet tab. Only Farming and Mining publish a per-item minion XP rate, so most of this table
+  // is the absence of one — which is the point: an unpublished rate and a zero rank at opposite
+  // ends and only one of them is a claim the wiki makes.
+  skillXp: {
+    perItem: skillXpFile.perItem,
+    brewing: skillXpFile.brewing,
+    carpentryXpPerNpcCoin: skillXpFile.carpentryXpPerNpcCoin,
+  },
+  petXpRules: await loadJson("curated/pet_xp.json"),
+  petLevels: await loadJson("curated/pet_levels.json"),
 };
 
 const bundle = await build({

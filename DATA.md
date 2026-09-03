@@ -17,6 +17,7 @@ here is hand-typed.
 | `collections.json` | `resources/collections` | Same `unlocks` parse, per tier | Totals **3,160** — matches exactly |
 | `minions.json` | `resources/items` (`generator` / `generator_tier`) | Tier curve from the README table (1×6, 2, 3, 4, 6, 12, 24) | Totals **3,165** vs the README's 3,164. Live data: 48 minions have 12 tiers, 13 stop at 11 |
 | `accessories.json` | `resources/items`, `category: ACCESSORY` | — (magical power is curated) | 385 accessories, 277 tradeable |
+| `skill-xp.json` | Hypixel Wiki: Farming, Mining, Potions/Alchemy Experience — `npm run gen:skillxp` | Skill XP per item, by hand and from a minion | 51 item rows, 45 with a published minion rate; 42 brewing ingredients |
 
 The skills and collections agreement with the README's independently-written totals is the
 strongest signal here that the parse is right.
@@ -1126,3 +1127,167 @@ compound shape against a case where the two differ by 8%.
 Only the effects that change how fast a collection fills are modelled. A Super Compactor changes
 the shape of a drop and not the count — 160 cobblestone compacted still counts as 160 collected —
 so it is offered and modelled as no change, which is the honest answer rather than an omission.
+
+### Storage, and the label the wiki changed
+
+The scrape now also reads **max storage per tier**, off the minetip tooltip the wiki renders beside
+each tier (`Max Storage: &e64`). A rate on its own says how much an hour and cannot say how long a
+minion runs before it fills and stops, which is the figure that decides whether a setup wants
+visiting hourly or weekly. Every minion in the game shares one ladder today — 64, 192, 192, 384,
+384, 576, 576, 768, 768, 960, 960, 960 — and it is scraped per minion anyway, because that is the
+sort of thing an update changes for one family and nothing else.
+
+Reading it turned up that the wiki had **relabelled `Cooldown:` to `Time Between Action:`**, the
+game's own wording. The old parser matched nothing against the live page and would have written a
+table with no rates in it at all — a silent failure, since an empty match list is not an error.
+Both spellings are now read. The re-scrape reproduced all 61 minions' cooldowns identically to the
+committed table, which is the cross-check that the relabelled parser reads the same numbers.
+
+Both parsers match far more tooltips than there are tiers, because the crafting tables further down
+each page show lower-tier minions as ingredients and every one of those carries its own tooltip.
+The tier ladder is the leading run, so the caller trims to the tier count Hypixel already publishes
+rather than trusting the match count.
+
+## What a minion pays
+
+`src/lib/minionProfit.ts`, behind the Minions section's **Raw profits** tab. Three things decide a
+coins-per-hour figure and two of them are usually left out.
+
+**Storage caps the rate.** A Tier XII holds 960 items and makes thousands an hour, so uncompacted it
+is full and idle inside the hour: the uncapped figure describes a minion nobody owns. Compaction is
+what changes that, and by a lot — 160 cobblestone become one Enchanted Cobblestone, so the same 960
+slots hold 153,600. The ratio is read from the compacted item's own single-ingredient recipe in
+`recipes.json` rather than assumed to be 160, because it genuinely differs per item and a wrong one
+is wrong by a factor of hundreds in a fill time. A plain Compactor only reaches block forms, so
+anything above 64:1 is out of its reach.
+
+`minion_storage.json` carries the chests (Small 3 slots, Medium 9, Large 15, X-Large 21, XX-Large
+27) and the hoppers. Chests are **not** Minion Upgrades — the wiki is explicit that they are placed
+*beside* a minion — so they are free of the two-slot budget; compactors are upgrades and do take a
+slot, which is why the tab spends the second slot on one rather than letting the same decision be
+expressed in two controls that can disagree. A hopper is priced as what it is: Budget sells the
+overflow at 50% of the shopkeeper's price and Enchanted at 70%, and with a chest placed it only
+starts once both the minion and the chest are full.
+
+**Which market.** Instaselling pays the top buy order less the bazaar's 2.25%; a sell offer pays the
+ask and takes time; a shopkeeper pays a fixed price and takes nothing — better than both bazaar
+routes for a lot of cheap bulk. All three are offered rather than one being picked and called
+"profit".
+
+**Which drop.** A collection id and a drop id look alike and are not the same thing. The Cow Minion's
+collection resolves to Leather and the thing it drops is Raw Beef, so pricing the collection prices
+the wrong item. `minion_drops.json` pins the six that resolve wrongly or not at all, each with its
+reason; the Flower Minion drops one of eleven flowers at random and carries no price rather than a
+guessed one, staying in the table with the reason on the row.
+
+## The bazaar price that is having a bad day
+
+`src/lib/priceVariance.ts`. The failure this exists for: a thin book empties, the top-of-book quote
+jumps fortyfold, and the minion attached to it climbs to the top of the table. The number is real —
+you genuinely could sell *one* item at it — and the ranking is worthless, because you cannot sell
+nine thousand an hour at it.
+
+A mean does not fix this. An item that usually sits at 400 and is at 460 today is unremarkable; an
+item that usually sits at 400 with a standard deviation of 4 and is at 460 today is a different
+claim. So the figure on the row is the **z-score** — the distance from the month's mean in units of
+how much this item normally moves — and not a percentage, because +15% means nothing without
+knowing whether the item moves 1% a day or 40%.
+
+The window is thirty days and it is **fetched, not measured**. Coflnet's bare
+`/api/bazaar/{id}/history` returns a daily series going back to 2021; the last thirty entries are
+the month. (`/history/week` is two-hourly and too short; there is no `/history/month`.) That means a
+real month on arrival, where averaging our own polls — which is what the greenhouse tab falls back
+to — needs the tab left open for a month before it says anything.
+
+Past two sigma the guarded basis stops believing the quote and uses the month's **median** instead.
+A median rather than a clamp to two sigma: a clamp still lets a manipulated item outrank an honest
+one, just by less, and the complaint is about the ordering. Anything thinner than seven daily points
+comes back as no month at all, because a made-up baseline makes every anomaly look explicable. An
+item whose price never moved has no z-score rather than an infinite one — a perfectly flat price is
+the least suspicious thing on the bazaar, and dividing by a zero deviation would sort it to the top
+of the suspicious list.
+
+Caught on the first live run: gunpowder quoting 45 against a month median of 11 at +2.5σ, which had
+the Creeper Minion third on the page at 29k/hr against a real 7k.
+
+## Minions level pets, and the rate is published
+
+`scripts/fetch-skill-xp.mjs` writes `data/generated/skill-xp.json`; the model is in
+`src/lib/minionXp.ts`, behind the **Pet profits** tab.
+
+This is a documented mechanic rather than a workaround. The Minions page notes that a co-op member
+away at collection time "will receive the Skill XP from them once they go to Private Island", and
+then spells out what people do with it — levelling the same pet several times off one collection. A
+pet that is out levels off that Skill XP like any other.
+
+**Minion XP is its own column and cannot be derived from the one beside it.** The Farming and Mining
+pages carry both, and the ratio wanders in both directions:
+
+| item | by hand | from a minion |
+|---|---|---|
+| Wheat | +4 | +0.3 |
+| Ice | +0.2 | **+0.5** |
+| Nether Wart | +4 | +0 |
+
+Anything scaling one column from the other gets all three wrong. Only those two skills publish the
+column at all, so Foraging, Combat and Fishing minions come back `minionXp: null` and the tab says
+**not published** rather than quoting a zero — an unknown and a zero rank at opposite ends of a
+table and only one is a claim the sources make. The scraper keeps them apart deliberately: the
+wiki's `{{bc}}` blank cell is read as null, and a written `+0` as zero.
+
+The Farming table's Red and Brown Mushroom share one `rowspan="2"` XP cell, so the second row's
+markup is a single item cell. Read without carrying rowspans down, Brown Mushroom silently inherits
+whatever follows it — a wrong number that looks entirely plausible.
+
+### Skill XP into Pet XP
+
+`data/curated/pet_xp.json`, from the Pets page's own list and table. Order matters and the page
+states it: **additive factors first**.
+
+1. Wisdom scales the *Skill XP*: `skillXp × (1 + wisdom/100)`. There is one Wisdom stat per skill.
+2. Taming scales the *Pet XP* that became, through Zoologist at +1% a level to a max of 60 — so
+   `×1.01` to `×1.60`.
+3. Then the divisors. A pet earning XP outside its own skill keeps **a third**. A pet earning
+   Alchemy or Enchanting XP that is not an Alchemy or Enchanting pet keeps **a twelfth** — and the
+   two are alternatives rather than a stack, so a non-Alchemy pet takes the /12 and not the /3 as
+   well. Fishing is the one skill that pays a bonus instead, ×1.5, which no minion can reach.
+4. **Carpentry, Taming, Dungeoneering, Runecrafting and Social grant no Pet XP whatsoever.**
+
+That last line retires an otherwise attractive route. Carpentry XP is 3% of the combined NPC sell
+price of a craft's ingredients — a formula, not a table, and both halves are already in this repo —
+so a minion feeds it generously and it is worth exactly nothing to a pet. The constant is carried in
+`skill-xp.json` with its citation; the tab shows Carpentry on the page at zero rather than leaving
+it off, because being able to see that it is zero is the useful part.
+
+The brewing table is the second route and a different shape: Alchemy XP is per *brew*, so a minion
+reaches it only once its drops are compacted into the enchanted form the table pays for. The chain
+has to be followed rather than assumed — Enchanted Sugar Cane is 160 Enchanted Sugar and Enchanted
+Sugar is 160 Sugar Cane, so one ingredient is **25,600** drops for its 15,000 XP. Assuming a single
+step values it 160× too high and puts sugar cane at the top of every list in the app.
+
+The unflattering result, stated on the tab: at the best published rate a pet takes days to weeks.
+Minion XP is a trickle that costs nothing to run, not a way to level a pet on purpose.
+
+## Pets as a trade
+
+`src/lib/petLevelling.ts`. Buy cheap, level, sell dear — ranked on **coins per Pet XP**, not on the
+margin. Ranked on margin the Golden Dragon wins every time and is the wrong answer for anyone who
+has to generate the 210 million Pet XP it needs; coins per XP is what makes a Rabbit comparable to
+it, and it is the figure the minion half multiplies into coins an hour.
+
+A pet's **level lives inside its display name** — `[Lvl 91] Golden Dragon` — and nowhere else in the
+auction payload. The existing BIN index throws it away, reasonably, because the museum and accessory
+questions it was built for have no levels; but a level 1 and a level 100 of the same pet are two
+completely different purchases, so the pet sweep is its own pass. Only the two ends of each ladder
+are kept, which is why a hundred-megabyte sweep caches as a few kilobytes.
+
+The level table is keyed bare (`GOLDEN_DRAGON`) and the index keys pets `PET:GOLDEN_DRAGON`. The
+prefix is stripped in one place rather than at every call site: a missed strip falls through to the
+default max level of 100, which treats a Golden Dragon as finished at the level it *hatches* at and
+prices the whole trade against the wrong end of its ladder. A test caught exactly that.
+
+Both ends are lowest BIN and only one of them is a promise. The buy side is a listing that exists;
+the sell side is *someone else's* listing, which is what you would have to undercut rather than what
+you would receive — and listing a hundred of them is not the same market as the one listed now. The
+1% auction cut is taken off, being the one deduction that is certain. A pet listed at only one end
+is not a trade and is dropped rather than priced from a reference.

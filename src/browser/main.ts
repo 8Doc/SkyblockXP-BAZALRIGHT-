@@ -17,11 +17,15 @@ import {
 import { ApiError, cacheAge, fetchAccessoryBins, fetchBazaar, fetchReferencePrices, fetchGarden, fetchMuseum, fetchProfiles, readBag, readOwnedItems, resolveUuid } from "./api";
 import { mountBazaar, unmountBazaar } from "./bazaarTab";
 import { mountGreenhouse, unmountGreenhouse } from "./greenhouseTab";
-import { mountMinions, setMinionProfile, unmountMinions } from "./minionsTab";
+import { setMinionProfile } from "./minionsTab";
+import { mountMinionsSection, unmountMinionsSection } from "./minionsSection";
 import type { Collection, MinionData, Modifiers } from "../lib/minions";
 import type { GreenhouseData } from "../lib/greenhouse";
 import type { NpcPrice, Recipe } from "../lib/bazaarViews";
 import type { AnvilRules } from "../lib/bazaarChains";
+import type { DropTable, Recipe as MinionRecipe, StorageTables } from "../lib/minionProfit";
+import type { PetXpRules, SkillXpTables } from "../lib/minionXp";
+import type { PetLevelTable } from "../lib/petLevelling";
 
 /**
  * The standalone build. Same domain logic as the Next app — it imports the very same solver
@@ -52,7 +56,27 @@ declare global {
      * about growing things off a wiki scrape, and shares only the shop prices with the bazaar.
      */
     __GREENHOUSE_DATA__: { greenhouse: GreenhouseData; npcPrices: Record<string, NpcPrice> };
-    __MINION_DATA__: { production: MinionData; modifiers: Modifiers; collections: Collection[] };
+    /**
+     * The minions section's tables, shared by its three child tabs.
+     *
+     * The collection question needs the collections; the profit question needs prices, storage
+     * and recipes; the pet question needs the skill XP rates and the pet curves. They are inlined
+     * together because all three are asking about the same rate, and split into named groups so a
+     * child tab is handed only what it reads.
+     */
+    __MINION_DATA__: {
+      production: MinionData;
+      modifiers: Modifiers;
+      collections: Collection[];
+      storage: StorageTables;
+      drops: DropTable;
+      recipes: MinionRecipe[];
+      npcPrices: Record<string, NpcPrice>;
+      names: Record<string, string>;
+      skillXp: SkillXpTables;
+      petXpRules: PetXpRules;
+      petLevels: PetLevelTable;
+    };
   }
 }
 
@@ -1337,9 +1361,42 @@ const SECTION_TITLES: Record<State["section"], [string, string]> = {
   ],
   minions: [
     "Minions",
-    "Which minion fills a collection fastest, for the tier, fuel and upgrades you actually intend to run.",
+    "One rate, three questions: what a minion fills, what it pays, and what it levels.",
   ],
 };
+
+/**
+ * The one inlined blob, split into the three shapes its child tabs actually read.
+ *
+ * Done here rather than in the build script because the split is a statement about the code —
+ * the collection tab must not be able to reach a price, and the profit tab must not be able to
+ * reach a collection — and a shape enforced at the call site is a shape TypeScript checks.
+ */
+function minionTables() {
+  const d = window.__MINION_DATA__;
+  return {
+    collections: { production: d.production, modifiers: d.modifiers, collections: d.collections },
+    profit: {
+      production: d.production,
+      modifiers: d.modifiers,
+      storage: d.storage,
+      drops: d.drops,
+      recipes: d.recipes,
+      npcPrices: d.npcPrices,
+      names: d.names,
+    },
+    pets: {
+      production: d.production,
+      modifiers: d.modifiers,
+      drops: d.drops,
+      recipes: d.recipes,
+      names: d.names,
+      skillXp: d.skillXp,
+      petXpRules: d.petXpRules,
+      petLevels: d.petLevels,
+    },
+  };
+}
 
 function renderSection(): void {
   const showing = state.section;
@@ -1368,10 +1425,11 @@ function renderSection(): void {
   if (showing === "greenhouse") mountGreenhouse(greenhouseHost, window.__GREENHOUSE_DATA__);
   else unmountGreenhouse();
 
-  // Minions neither poll nor fetch — everything they need is inlined and the profile arrives from
-  // the planner — so unmounting is only about letting go of the host, not about stopping work.
-  if (showing === "minions") mountMinions(minionHost, window.__MINION_DATA__);
-  else unmountMinions();
+  // The minions section carries three child tabs and one of them — raw profits — does poll, so
+  // this unmount stops work as well as letting go of the host. The section decides which child is
+  // live; switching away from the whole section stops all three.
+  if (showing === "minions") mountMinionsSection(minionHost, minionTables());
+  else unmountMinionsSection();
 }
 
 function render(): void {

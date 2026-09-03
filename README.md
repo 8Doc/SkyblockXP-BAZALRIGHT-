@@ -278,6 +278,53 @@ Hypixel resources API when the game changes; the wiki-derived and curated tables
   same figure the price is computed from, rather than the wiki rule that used to read "essence
   shop perks" on all four hundred of them.
 - The XP floor, coin budget and category toggles re-solve live — see the note on solve cost below.
+- **The Minions section has three child tabs**, because a minion is one rate applied to three
+  unrelated questions and a single table carrying all three is a table of columns most readers are
+  ignoring. *Collections* is the original: what fills a collection fastest, ranked on SkyBlock XP.
+  *Raw profits* is what a minion pays an hour in coins. *Pet profits* is what it levels.
+- **Raw profits caps every rate by storage, because a full minion earns nothing.** A Tier XII holds
+  960 items and makes thousands an hour, so uncompacted it is idle inside the hour and the
+  coins-per-hour figure other calculators quote is one you receive for about forty minutes a day.
+  The tab asks how often you actually visit and prices what you collect, not what is produced —
+  and shows the gross beside it so the gap is visible. Storage is scraped per minion per tier off
+  the wiki's own tooltips; the compaction ratio comes from each item's crafting recipe, so 160
+  cobblestone to an Enchanted Cobblestone is read rather than assumed.
+- **Raw profits refuses to be fooled by a thin book.** This is the specific failure it was built
+  against: a bazaar item's top-of-book quote jumps because the orders behind it emptied, and the
+  minion attached to it climbs to the top of the table on a price nobody can actually sell into.
+  Every drop carries a month of its own daily prices from Coflnet, and the row reports how far
+  today sits from that month **in standard deviations** rather than as a percentage — because +15%
+  means nothing without knowing whether the item normally moves 1% a day or 40%. Past two sigma the
+  guarded basis stops believing the quote and uses the month's median instead, and says so. Caught
+  live on the first run: gunpowder quoting 45 against a month median of 11 at +2.5σ, which had put
+  the Creeper Minion third on the page at 29k/hr against a real 7k.
+- **Raw profits prices three markets, not one.** Instaselling pays the top buy order less the
+  bazaar's 2.25%; a sell offer pays the ask and takes time; a shopkeeper pays a fixed price and
+  takes nothing — which for cheap bulk output beats both bazaar routes more often than people
+  expect. A hopper is priced as what it is rather than as an upgrade: it sells the overflow at 50%
+  or 70% of the shop price, which is usually worse than walking over yourself.
+- **Pet profits is a real mechanic, not a workaround.** Collecting a minion grants Skill XP — the
+  Minions page says so, and then says what people do with it — and a pet that is out levels off it.
+  The per-item rates come from the Farming and Mining pages' own **Minion XP** column, which is not
+  a fraction of the XP for doing the thing yourself and cannot be derived from it: Wheat is +4 by
+  hand and +0.3 from a minion, Ice is +0.2 by hand and +0.5 from a minion, and Nether Wart is +4 by
+  hand and flatly +0 from one. Only those two skills publish the column, so every other minion says
+  **not published** rather than claiming a zero — an unknown and a zero rank at opposite ends of a
+  table and only one of them is a claim the sources make.
+- **Pet profits takes Wisdom and Taming as inputs and applies them in the right order.** Wisdom is
+  additive and goes first, scaling the Skill XP; Taming is multiplicative through Zoologist at +1%
+  a level and scales the Pet XP that Skill XP became. Then the divisors, which decide most of the
+  ranking: a pet earning XP outside its own skill keeps a third, and a pet earning Alchemy or
+  Enchanting XP that is not an Alchemy or Enchanting pet keeps a **twelfth**. Carpentry grants no
+  Pet XP at all, which retires the crafting route from this question however much Carpentry XP it
+  is worth — and is shown on the page rather than left off it.
+- **Pet profits ranks pets on coins per Pet XP, not on the margin.** Ranked on margin the Golden
+  Dragon wins every time and is the wrong answer for anyone who has to generate the 210 million Pet
+  XP it needs. Prices come from a full auction sweep that keeps the level — which lives inside the
+  display name and nowhere else in the payload, and which the accessory index throws away, so a
+  level 1 and a level 100 of the same pet are two different purchases. The tab also says the
+  unflattering thing out loud: at the best published minion rate a pet takes days to weeks, so
+  minion XP is a background trickle rather than a way to level a pet on purpose.
 
 ## Solve cost
 

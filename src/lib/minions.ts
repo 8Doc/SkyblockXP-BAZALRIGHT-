@@ -36,6 +36,19 @@ export type MinionProduction = {
   collectionId: string | null;
   /** Seconds between actions, one per tier, in tier order. */
   cooldowns: number[];
+  /**
+   * Items the minion's own inventory holds, one per tier, in tier order.
+   *
+   * The other half of a rate. A rate says how much an hour and cannot say how long the minion
+   * runs before it fills and stops, which is the figure that decides whether a setup wants
+   * visiting hourly or weekly. Every minion shares one ladder today — 64, 192, 192, 384, 384,
+   * 576, 576, 768, 768, 960, 960, 960 — but it is scraped per minion rather than assumed,
+   * because that is the sort of thing an update changes for one family and nothing else.
+   *
+   * Optional: the tables committed before the scraper learned to read it do not carry it, and a
+   * missing storage is a fill time that cannot be quoted rather than a minion that never fills.
+   */
+  storage?: number[];
 };
 
 export type MinionData = {

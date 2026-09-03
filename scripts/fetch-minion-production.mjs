@@ -107,10 +107,43 @@ export function parseCollection(wikitext) {
  * The markup is `Cooldown:&#160;<span class="...">48s</span>`, one per tier row in order, so the
  * nth match is tier n. Fragile in the way all scraping is; the cross-checks in the test guard the
  * shape — twelve tiers, monotonically non-increasing, all positive.
+ *
+ * The wiki has since relabelled this to the game's own wording, `Time Between Action:`, which is
+ * the better name — a cooldown sounds like a wait between drops and it is a wait between actions,
+ * which is the factor of two this whole file is about. Both spellings are read, because the old
+ * one is what the committed table was scraped from and a parser that silently returns nothing is
+ * worse than one that reads two labels.
  */
+const ACTION_LABEL = /(?:Cooldown|Time Between Action):(?:&#160;|&amp;[0-9a-fk-or]|&[0-9a-fk-or]|\s|<[^>]*>|\/)*([\d.]+)\s*s/g;
+
 export function parseCooldowns(html) {
-  return [...html.matchAll(/Cooldown:(?:&#160;|\s|<[^>]*>)*([\d.]+)\s*s/g)].map((m) => Number(m[1]));
+  return [...html.matchAll(ACTION_LABEL)].map((m) => Number(m[1]));
 }
+
+/**
+ * Per-tier storage, out of the same rendered page and in the same order.
+ *
+ * A rate on its own answers "how much an hour" and cannot answer the question a player standing
+ * in front of five minions actually has: *how long can I leave these alone before it stops?*
+ * Storage is the other half of that, and Hypixel's item resource does not carry it either — it
+ * lives in the minetip tooltip the wiki renders beside every tier, as `Max Storage: &e64`.
+ *
+ * The figure is in items, and it is the minion's own inventory before any Minion Storage chest
+ * is stood next to it. Every minion in the game shares one ladder — 64, 192, 192, 384, 384, 576,
+ * 576, 768, 768, 960, 960, 960 — but it is scraped per minion rather than assumed, because that
+ * ladder is the sort of thing an update changes for one family and nothing else.
+ *
+ * Both this and the cooldowns match far more tooltips than there are tiers: the crafting tables
+ * further down the page show lower-tier minions as ingredients, and each of those carries its own
+ * tooltip. The tier ladder is the leading run, so the caller trims to the tier count it already
+ * knows from Hypixel rather than trusting the match count.
+ */
+const STORAGE_LABEL = /Max Storage:(?:&#160;|&amp;[0-9a-fk-or]|&[0-9a-fk-or]|\s|<[^>]*>|\/)*([\d,]+)/g;
+
+export function parseStorage(html) {
+  return [...html.matchAll(STORAGE_LABEL)].map((m) => Number(m[1].replace(/,/g, "")));
+}
+
 
 /* -------------------------------------------------------------------- fetch */
 
@@ -125,6 +158,7 @@ async function forMinion(family) {
     collects: parseCollects(text.parse.wikitext["*"]),
     collection: parseCollection(text.parse.wikitext["*"]),
     cooldowns: parseCooldowns(rendered.parse.text["*"]),
+    storage: parseStorage(rendered.parse.text["*"]),
   };
 }
 
@@ -167,6 +201,9 @@ async function main() {
         // One cooldown per tier, in tier order. Trimmed to the tiers Hypixel actually publishes,
         // since the wiki occasionally lists a tier XII the item resource has not seen.
         cooldowns: r.cooldowns.slice(0, m.maxTier),
+        // Same trim as the cooldowns, and empty where the tooltip did not carry a figure — an
+        // absent storage is a minion whose fill time cannot be quoted, not one that never fills.
+        storage: r.storage.slice(0, m.maxTier),
       });
     });
     process.stdout.write(`\r  ${Math.min(i + WIDTH, minions.length)}/${minions.length}`);
@@ -183,7 +220,9 @@ async function main() {
     JSON.stringify(
       {
         generatedAt: new Date().toISOString(),
-        source: "Hypixel Wiki, one page per minion: the infobox for what it collects, the rendered stats table for per-tier cooldowns.",
+        source:
+          "Hypixel Wiki, one page per minion: the infobox for what it collects, the rendered stats table for " +
+          "per-tier cooldowns, and the minetip tooltip beside each tier for its max storage.",
         note:
           "A cooldown is the time between ACTIONS. A minion generates on one action and harvests on the next, so a drop " +
           "lands every 2 x cooldown. The Minions page states this and works the example: a 14s Cobblestone Minion I " +
