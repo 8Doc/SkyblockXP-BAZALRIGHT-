@@ -1,585 +1,960 @@
 {
- "generatedAt": "2026-09-03T21:25:36.625Z",
+ "generatedAt": "2026-09-03T22:46:08.616Z",
  "source": {
-  "minionXp": "Hypixel Wiki, Farming and Mining — the 'Minion XP' column of each skill's XP table.",
+  "minionXpTables": "Hypixel Wiki, Farming and Mining — the 'Minion XP' column of each skill's XP table.",
+  "minionXpInfoboxes": "Hypixel Wiki, every item page carrying a |minion_xp= infobox field, found with insource:/minion_xp/. The only place Foraging, Fishing, Combat and Alchemy minion rates are published at all.",
   "brewing": "Hypixel Wiki, Potions/Alchemy Experience — XP yield per brew, keyed by first ingredient.",
   "carpentry": "Hypixel Wiki, Carpentry — 'The XP gained is 3% of the combined NPC sell price of the ingredients used to craft the item.'",
   "petXp": "Hypixel Wiki, Minions — collecting a minion grants the Skill XP, and an active pet levels off it."
  },
- "note": "minionXp is per item a minion produces and is NOT a fixed fraction of the XP for doing it by hand: Wheat is +4 by hand and +0.3 from a minion, Ice is +0.2 by hand and +0.5 from a minion, and Nether Wart is +4 by hand and +0 from one. null means the wiki publishes no figure, which is not the same as zero — only Farming and Mining carry the column at all.",
+ "note": "minionXp is per item a minion produces and is NOT a fixed fraction of the XP for doing it by hand: Wheat is +4 by hand and +0.3 from a minion, Ice is +0.2 by hand and +0.5 from a minion, and Nether Wart is +4 by hand and +0 from one. null still means unpublished rather than zero.",
+ "compaction": "Compaction is XP-neutral. An enchanted item's minion XP is its recipe quantity times the base item's, checked against every pair where both are published — including Sponge, whose recipe is 40 rather than 160 and whose XP ratio is 40 to match. So a Super Compactor changes what a minion drops and not what the drop is worth in XP, and the XP model can ignore it.",
  "carpentryXpPerNpcCoin": 0.03,
+ "skillsCovered": [
+  "ALCHEMY",
+  "COMBAT",
+  "FARMING",
+  "FISHING",
+  "FORAGING",
+  "MINING"
+ ],
  "perItem": [
   {
    "item": "Wheat",
    "skill": "FARMING",
    "playerXp": 4,
    "minionXp": 0.3,
-   "itemId": "WHEAT"
+   "itemId": "WHEAT",
+   "source": "table"
   },
   {
    "item": "Potato",
    "skill": "FARMING",
    "playerXp": 4,
    "minionXp": 0.1,
-   "itemId": "POTATO_ITEM"
+   "itemId": "POTATO_ITEM",
+   "source": "table"
   },
   {
    "item": "Carrot",
    "skill": "FARMING",
    "playerXp": 4,
    "minionXp": 0.1,
-   "itemId": "CARROT_ITEM"
+   "itemId": "CARROT_ITEM",
+   "source": "table"
   },
   {
    "item": "Melon",
    "skill": "FARMING",
    "playerXp": 4,
    "minionXp": 0.1,
-   "itemId": "MELON"
+   "itemId": "MELON",
+   "source": "table"
   },
   {
    "item": "Pumpkin",
    "skill": "FARMING",
    "playerXp": 4.5,
    "minionXp": 0.3,
-   "itemId": "PUMPKIN"
+   "itemId": "PUMPKIN",
+   "source": "table"
   },
   {
    "item": "Sugar Cane",
    "skill": "FARMING",
    "playerXp": 2,
    "minionXp": 0.1,
-   "itemId": "SUGAR_CANE"
+   "itemId": "SUGAR_CANE",
+   "source": "table"
   },
   {
    "item": "Cactus",
    "skill": "FARMING",
    "playerXp": 2,
    "minionXp": 0.2,
-   "itemId": "CACTUS"
+   "itemId": "CACTUS",
+   "source": "table"
   },
   {
    "item": "Red Mushroom",
    "skill": "FARMING",
    "playerXp": 6,
    "minionXp": 0.3,
-   "itemId": "RED_MUSHROOM"
+   "itemId": "RED_MUSHROOM",
+   "source": "table"
   },
   {
    "item": "Brown Mushroom",
    "skill": "FARMING",
    "playerXp": 6,
    "minionXp": 0.3,
-   "itemId": "BROWN_MUSHROOM"
+   "itemId": "BROWN_MUSHROOM",
+   "source": "table"
   },
   {
    "item": "Cocoa Beans",
    "skill": "FARMING",
    "playerXp": 4,
    "minionXp": 0.2,
-   "itemId": "INK_SACK:3"
+   "itemId": "INK_SACK:3",
+   "source": "table"
   },
   {
    "item": "Nether Wart",
    "skill": "FARMING",
    "playerXp": 4,
    "minionXp": 0,
-   "itemId": "NETHER_STALK"
+   "itemId": "NETHER_STALK",
+   "source": "table"
   },
   {
    "item": "Mushroom Spore",
    "skill": "FARMING",
    "playerXp": 6,
    "minionXp": null,
-   "itemId": "MUSHROOM_SPORE"
+   "itemId": "MUSHROOM_SPORE",
+   "source": "table"
   },
   {
    "item": "Red Thornleaf",
    "skill": "FARMING",
    "playerXp": 0,
    "minionXp": null,
-   "itemId": "RED_THORNLEAF"
+   "itemId": "RED_THORNLEAF",
+   "source": "table"
   },
   {
    "item": "Glowing Mushroom",
    "skill": "FARMING",
    "playerXp": 6,
    "minionXp": null,
-   "itemId": "GLOWING_MUSHROOM"
+   "itemId": "GLOWING_MUSHROOM",
+   "source": "table"
   },
   {
    "item": "Moonflower",
    "skill": "FARMING",
    "playerXp": 4,
    "minionXp": 0.2,
-   "itemId": "MOONFLOWER"
+   "itemId": "MOONFLOWER",
+   "source": "table"
   },
   {
    "item": "Sunflower",
    "skill": "FARMING",
    "playerXp": 4,
    "minionXp": 0.2,
-   "itemId": "DOUBLE_PLANT"
+   "itemId": "DOUBLE_PLANT",
+   "source": "table"
   },
   {
    "item": "Wild Rose",
    "skill": "FARMING",
    "playerXp": 4,
    "minionXp": 0.2,
-   "itemId": "WILD_ROSE"
+   "itemId": "WILD_ROSE",
+   "source": "table"
   },
   {
    "item": "Raw Porkchop",
    "skill": "FARMING",
    "playerXp": 2,
    "minionXp": 0.2,
-   "itemId": "PORK"
+   "itemId": "PORK",
+   "source": "table"
   },
   {
    "item": "Leather",
    "skill": "FARMING",
    "playerXp": 2,
    "minionXp": 0.2,
-   "itemId": "LEATHER"
+   "itemId": "LEATHER",
+   "source": "table"
   },
   {
    "item": "Raw Beef",
    "skill": "FARMING",
    "playerXp": 1,
    "minionXp": 0.1,
-   "itemId": "RAW_BEEF"
+   "itemId": "RAW_BEEF",
+   "source": "table"
   },
   {
    "item": "Raw Chicken",
    "skill": "FARMING",
    "playerXp": 2,
    "minionXp": 0.1,
-   "itemId": "RAW_CHICKEN"
+   "itemId": "RAW_CHICKEN",
+   "source": "table"
   },
   {
    "item": "Feather",
    "skill": "FARMING",
    "playerXp": 2,
    "minionXp": 0.2,
-   "itemId": "FEATHER"
+   "itemId": "FEATHER",
+   "source": "table"
   },
   {
    "item": "Egg",
    "skill": "FARMING",
    "playerXp": 2,
    "minionXp": 0.2,
-   "itemId": "EGG"
+   "itemId": "EGG",
+   "source": "table"
   },
   {
    "item": "Raw Rabbit",
    "skill": "FARMING",
    "playerXp": 2,
    "minionXp": 0.1,
-   "itemId": "RABBIT"
+   "itemId": "RABBIT",
+   "source": "table"
   },
   {
    "item": "Rabbit Hide",
    "skill": "FARMING",
    "playerXp": 2,
    "minionXp": 0.2,
-   "itemId": "RABBIT_HIDE"
+   "itemId": "RABBIT_HIDE",
+   "source": "table"
   },
   {
    "item": "Rabbit's Foot",
    "skill": "FARMING",
    "playerXp": 2,
    "minionXp": 0.2,
-   "itemId": "RABBIT_FOOT"
+   "itemId": "RABBIT_FOOT",
+   "source": "table"
   },
   {
    "item": "Raw Mutton",
    "skill": "FARMING",
    "playerXp": 2,
    "minionXp": 0.1,
-   "itemId": "MUTTON"
+   "itemId": "MUTTON",
+   "source": "table"
   },
   {
    "item": "Wool",
    "skill": "FARMING",
    "playerXp": 2,
    "minionXp": 0.1,
-   "itemId": "WOOL"
+   "itemId": "WOOL",
+   "source": "table"
   },
   {
    "item": "Cobblestone",
    "skill": "MINING",
    "playerXp": 1,
    "minionXp": 0.1,
-   "itemId": "COBBLESTONE"
+   "itemId": "COBBLESTONE",
+   "source": "table"
   },
   {
    "item": "Snowball",
    "skill": "MINING",
    "playerXp": null,
    "minionXp": 0.1,
-   "itemId": "SNOW_BALL"
+   "itemId": "SNOW_BALL",
+   "source": "table"
   },
   {
    "item": "Ice",
    "skill": "MINING",
    "playerXp": 0.2,
    "minionXp": 0.5,
-   "itemId": "ICE"
+   "itemId": "ICE",
+   "source": "table"
   },
   {
    "item": "Netherrack",
    "skill": "MINING",
    "playerXp": 0.5,
    "minionXp": null,
-   "itemId": "NETHERRACK"
+   "itemId": "NETHERRACK",
+   "source": "table"
   },
   {
    "item": "Sand",
    "skill": "MINING",
    "playerXp": 3,
    "minionXp": 0.2,
-   "itemId": "SAND"
+   "itemId": "SAND",
+   "source": "table"
   },
   {
    "item": "Gravel",
    "skill": "MINING",
    "playerXp": 4,
    "minionXp": 0.2,
-   "itemId": "GRAVEL"
+   "itemId": "GRAVEL",
+   "source": "table"
   },
   {
    "item": "Nether Quartz",
    "skill": "MINING",
    "playerXp": 5,
    "minionXp": 0.3,
-   "itemId": "QUARTZ"
+   "itemId": "QUARTZ",
+   "source": "table"
   },
   {
    "item": "End Stone",
    "skill": "MINING",
    "playerXp": 3,
    "minionXp": 0.4,
-   "itemId": "ENDER_STONE"
+   "itemId": "ENDER_STONE",
+   "source": "table"
   },
   {
    "item": "Coal Ore",
    "skill": "MINING",
    "playerXp": 5,
    "minionXp": 0.3,
-   "itemId": "COAL"
+   "itemId": "COAL",
+   "source": "table"
   },
   {
    "item": "Iron Ore",
    "skill": "MINING",
    "playerXp": 5,
    "minionXp": 0.3,
-   "itemId": "IRON_INGOT"
+   "itemId": "IRON_INGOT",
+   "source": "table"
   },
   {
    "item": "Gold Ore",
    "skill": "MINING",
    "playerXp": 6,
    "minionXp": 0.4,
-   "itemId": "GOLD_INGOT"
+   "itemId": "GOLD_INGOT",
+   "source": "table"
   },
   {
    "item": "Lapis Lazuli Ore",
    "skill": "MINING",
    "playerXp": 7,
    "minionXp": 0.1,
-   "itemId": "INK_SACK:4"
+   "itemId": "INK_SACK:4",
+   "source": "table"
   },
   {
    "item": "Redstone Ore",
    "skill": "MINING",
    "playerXp": 7,
    "minionXp": 0.2,
-   "itemId": "REDSTONE"
+   "itemId": "REDSTONE",
+   "source": "table"
   },
   {
    "item": "Emerald Ore",
    "skill": "MINING",
    "playerXp": 9,
    "minionXp": 0.4,
-   "itemId": "EMERALD"
+   "itemId": "EMERALD",
+   "source": "table"
   },
   {
    "item": "Diamond Ore",
    "skill": "MINING",
    "playerXp": 10,
    "minionXp": 0.4,
-   "itemId": "DIAMOND"
+   "itemId": "DIAMOND",
+   "source": "table"
   },
   {
    "item": "Pure Coal",
    "skill": "MINING",
    "playerXp": 20,
    "minionXp": 2.7,
-   "itemId": "ENCHANTED_COAL_BLOCK"
+   "itemId": null,
+   "source": "table"
   },
   {
    "item": "Block of Gold",
    "skill": "MINING",
    "playerXp": 20,
    "minionXp": 3.6,
-   "itemId": "ENCHANTED_GOLD_BLOCK"
+   "itemId": null,
+   "source": "table"
   },
   {
    "item": "Pure Diamond",
    "skill": "MINING",
    "playerXp": 20,
    "minionXp": 3.6,
-   "itemId": "ENCHANTED_DIAMOND_BLOCK"
+   "itemId": null,
+   "source": "table"
   },
   {
    "item": "Glowstone",
    "skill": "MINING",
    "playerXp": 7,
    "minionXp": 0.2,
-   "itemId": "GLOWSTONE_DUST"
+   "itemId": "GLOWSTONE_DUST",
+   "source": "table"
   },
   {
    "item": "Obsidian",
    "skill": "MINING",
    "playerXp": 20,
    "minionXp": 0.4,
-   "itemId": "OBSIDIAN"
+   "itemId": "OBSIDIAN",
+   "source": "table"
   },
   {
    "item": "Mithril",
    "skill": "MINING",
    "playerXp": 45,
    "minionXp": 0.4,
-   "itemId": "MITHRIL_ORE"
+   "itemId": "MITHRIL_ORE",
+   "source": "table"
   },
   {
    "item": "Titanium",
    "skill": "MINING",
    "playerXp": 100,
    "minionXp": null,
-   "itemId": "TITANIUM_ORE"
+   "itemId": null,
+   "source": "table"
   },
   {
    "item": "Gemstone",
    "skill": "MINING",
    "playerXp": 70,
    "minionXp": null,
-   "itemId": null
+   "itemId": null,
+   "source": "table"
+  },
+  {
+   "item": "Enchanted Quartz Block",
+   "itemId": "ENCHANTED_QUARTZ_BLOCK",
+   "skill": "MINING",
+   "minionXp": 7680,
+   "playerXp": null,
+   "source": "infobox"
+  },
+  {
+   "item": "Enchanted Coal",
+   "itemId": "ENCHANTED_COAL",
+   "skill": "MINING",
+   "minionXp": 48,
+   "playerXp": null,
+   "source": "infobox"
+  },
+  {
+   "item": "Enchanted Nether Quartz",
+   "itemId": "ENCHANTED_QUARTZ",
+   "skill": "MINING",
+   "minionXp": 48,
+   "playerXp": null,
+   "source": "infobox"
+  },
+  {
+   "item": "Raw Cod",
+   "itemId": "RAW_FISH",
+   "skill": "FISHING",
+   "minionXp": 0.5,
+   "playerXp": null,
+   "source": "infobox"
+  },
+  {
+   "item": "Sponge",
+   "itemId": "SPONGE",
+   "skill": "FISHING",
+   "minionXp": 0.6,
+   "playerXp": null,
+   "source": "infobox"
+  },
+  {
+   "item": "Spider Eye",
+   "itemId": "SPIDER_EYE",
+   "skill": "COMBAT",
+   "minionXp": 0.3,
+   "playerXp": null,
+   "source": "infobox"
+  },
+  {
+   "item": "Prismarine Crystals",
+   "itemId": "PRISMARINE_CRYSTALS",
+   "skill": "FISHING",
+   "minionXp": 0.5,
+   "playerXp": null,
+   "source": "infobox"
+  },
+  {
+   "item": "Pufferfish",
+   "itemId": "RAW_FISH:3",
+   "skill": "FISHING",
+   "minionXp": 1,
+   "playerXp": null,
+   "source": "infobox"
+  },
+  {
+   "item": "Prismarine Shard",
+   "itemId": "PRISMARINE_SHARD",
+   "skill": "FISHING",
+   "minionXp": 0.5,
+   "playerXp": null,
+   "source": "infobox"
+  },
+  {
+   "item": "Raw Salmon",
+   "itemId": "RAW_FISH:1",
+   "skill": "FISHING",
+   "minionXp": 0.7,
+   "playerXp": null,
+   "source": "infobox"
+  },
+  {
+   "item": "Jungle Log",
+   "itemId": "LOG:3",
+   "skill": "FORAGING",
+   "minionXp": 0.1,
+   "playerXp": 6,
+   "source": "infobox"
+  },
+  {
+   "item": "Tropical Fish",
+   "itemId": "RAW_FISH:2",
+   "skill": "FISHING",
+   "minionXp": 2,
+   "playerXp": null,
+   "source": "infobox"
+  },
+  {
+   "item": "Enchanted Diamond",
+   "itemId": "ENCHANTED_DIAMOND",
+   "skill": "MINING",
+   "minionXp": 64,
+   "playerXp": null,
+   "source": "infobox"
+  },
+  {
+   "item": "Enchanted Egg",
+   "itemId": "ENCHANTED_EGG",
+   "skill": "FARMING",
+   "minionXp": 115,
+   "playerXp": null,
+   "source": "infobox"
+  },
+  {
+   "item": "Enchanted Sugar",
+   "itemId": "ENCHANTED_SUGAR",
+   "skill": "ALCHEMY",
+   "minionXp": 16,
+   "playerXp": null,
+   "source": "infobox"
+  },
+  {
+   "item": "Enchanted Raw Porkchop",
+   "itemId": "ENCHANTED_PORK",
+   "skill": "FARMING",
+   "minionXp": 32,
+   "playerXp": null,
+   "source": "infobox"
+  },
+  {
+   "item": "Enchanted Coal Block",
+   "itemId": "ENCHANTED_COAL_BLOCK",
+   "skill": "MINING",
+   "minionXp": 7680,
+   "playerXp": null,
+   "source": "infobox"
+  },
+  {
+   "item": "Enchanted Cobblestone",
+   "itemId": "ENCHANTED_COBBLESTONE",
+   "skill": "MINING",
+   "minionXp": 16,
+   "playerXp": null,
+   "source": "infobox"
+  },
+  {
+   "item": "Enchanted Raw Cod",
+   "itemId": "ENCHANTED_RAW_FISH",
+   "skill": "FISHING",
+   "minionXp": 80,
+   "playerXp": null,
+   "source": "infobox"
+  },
+  {
+   "item": "Enchanted Pufferfish",
+   "itemId": "ENCHANTED_PUFFERFISH",
+   "skill": "FISHING",
+   "minionXp": 160,
+   "playerXp": null,
+   "source": "infobox"
+  },
+  {
+   "item": "Enchanted Spider Eye",
+   "itemId": "ENCHANTED_SPIDER_EYE",
+   "skill": "COMBAT",
+   "minionXp": 480,
+   "playerXp": null,
+   "source": "infobox"
+  },
+  {
+   "item": "Enchanted Raw Salmon",
+   "itemId": "ENCHANTED_RAW_SALMON",
+   "skill": "FISHING",
+   "minionXp": 112,
+   "playerXp": null,
+   "source": "infobox"
+  },
+  {
+   "item": "Enchanted Sponge",
+   "itemId": "ENCHANTED_SPONGE",
+   "skill": "FISHING",
+   "minionXp": 24,
+   "playerXp": null,
+   "source": "infobox"
+  },
+  {
+   "item": "Enchanted Lapis Lazuli",
+   "itemId": "ENCHANTED_LAPIS_LAZULI",
+   "skill": "MINING",
+   "minionXp": 16,
+   "playerXp": null,
+   "source": "infobox"
+  },
+  {
+   "item": "Enchanted Raw Chicken",
+   "itemId": "ENCHANTED_RAW_CHICKEN",
+   "skill": "FARMING",
+   "minionXp": 16,
+   "playerXp": null,
+   "source": "infobox"
+  },
+  {
+   "item": "Enchanted Lapis Lazuli Block",
+   "itemId": "ENCHANTED_LAPIS_LAZULI_BLOCK",
+   "skill": "MINING",
+   "minionXp": 2560,
+   "playerXp": null,
+   "source": "infobox"
+  },
+  {
+   "item": "Enchanted Cooked Porkchop",
+   "itemId": "ENCHANTED_GRILLED_PORK",
+   "skill": "FARMING",
+   "minionXp": 5120,
+   "playerXp": null,
+   "source": "infobox"
+  },
+  {
+   "item": "Enchanted Feather",
+   "itemId": "ENCHANTED_FEATHER",
+   "skill": "FARMING",
+   "minionXp": 32,
+   "playerXp": null,
+   "source": "infobox"
+  },
+  {
+   "item": "Enchanted Tropical Fish",
+   "itemId": "ENCHANTED_CLOWNFISH",
+   "skill": "FISHING",
+   "minionXp": 320,
+   "playerXp": null,
+   "source": "infobox"
+  },
+  {
+   "item": "Enchanted Wet Sponge",
+   "itemId": "ENCHANTED_WET_SPONGE",
+   "skill": "FISHING",
+   "minionXp": 960,
+   "playerXp": null,
+   "source": "infobox"
+  },
+  {
+   "item": "Lush Berberis",
+   "itemId": "LUSH_BERBERIS",
+   "skill": "FARMING",
+   "minionXp": 10,
+   "playerXp": null,
+   "source": "infobox"
+  },
+  {
+   "item": "Enchanted Lush Berberis",
+   "itemId": "ENCHANTED_SHARK_FIN",
+   "skill": "FARMING",
+   "minionXp": 1600,
+   "playerXp": null,
+   "source": "infobox"
   }
  ],
  "brewing": [
   {
    "item": "Enchanted Blaze Rod",
    "xp": 23000,
-   "itemId": "ENCHANTED_BLAZE_ROD"
+   "itemId": "ENCHANTED_BLAZE_ROD",
+   "source": "table"
   },
   {
    "item": "Enchanted Sugar Cane",
    "xp": 15000,
-   "itemId": "ENCHANTED_SUGAR_CANE"
+   "itemId": "ENCHANTED_SUGAR_CANE",
+   "source": "table"
   },
   {
    "item": "Enchanted Fermented Spider Eye",
    "xp": 15000,
-   "itemId": "ENCHANTED_FERMENTED_SPIDER_EYE"
+   "itemId": "ENCHANTED_FERMENTED_SPIDER_EYE",
+   "source": "table"
   },
   {
    "item": "Enchanted Gold Block",
    "xp": 15000,
-   "itemId": "ENCHANTED_GOLD_BLOCK"
+   "itemId": "ENCHANTED_GOLD_BLOCK",
+   "source": "table"
   },
   {
    "item": "Enchanted Cooked Mutton",
    "xp": 15000,
-   "itemId": "ENCHANTED_COOKED_MUTTON"
+   "itemId": "ENCHANTED_COOKED_MUTTON",
+   "source": "table"
   },
   {
    "item": "Enchanted Rabbit Foot",
    "xp": 600,
-   "itemId": "ENCHANTED_RABBIT_FOOT"
+   "itemId": "ENCHANTED_RABBIT_FOOT",
+   "source": "table"
   },
   {
    "item": "Enchanted Pufferfish",
    "xp": 600,
-   "itemId": "ENCHANTED_PUFFERFISH"
+   "itemId": "ENCHANTED_PUFFERFISH",
+   "source": "table"
   },
   {
    "item": "Enchanted Glistering Melon Slice",
    "xp": 500,
-   "itemId": "ENCHANTED_GLISTERING_MELON"
+   "itemId": "ENCHANTED_GLISTERING_MELON",
+   "source": "table"
   },
   {
    "item": "Enchanted Blaze Powder",
    "xp": 500,
-   "itemId": "ENCHANTED_BLAZE_POWDER"
+   "itemId": "ENCHANTED_BLAZE_POWDER",
+   "source": "table"
   },
   {
    "item": "Enchanted Spider Eye",
    "xp": 500,
-   "itemId": "ENCHANTED_SPIDER_EYE"
+   "itemId": "ENCHANTED_SPIDER_EYE",
+   "source": "table"
   },
   {
    "item": "Enchanted Cactus",
    "xp": 500,
-   "itemId": "ENCHANTED_CACTUS"
+   "itemId": "ENCHANTED_CACTUS",
+   "source": "table"
   },
   {
    "item": "Enchanted Cake",
    "xp": 400,
-   "itemId": "ENCHANTED_CAKE"
+   "itemId": "ENCHANTED_CAKE",
+   "source": "table"
   },
   {
    "item": "Enchanted Sugar",
    "xp": 300,
-   "itemId": "ENCHANTED_SUGAR"
+   "itemId": "ENCHANTED_SUGAR",
+   "source": "table"
   },
   {
    "item": "Enchanted Gold Ingot",
    "xp": 300,
-   "itemId": "ENCHANTED_GOLD"
+   "itemId": "ENCHANTED_GOLD",
+   "source": "table"
   },
   {
    "item": "Enchanted Raw Mutton",
    "xp": 300,
-   "itemId": "ENCHANTED_MUTTON"
+   "itemId": "ENCHANTED_MUTTON",
+   "source": "table"
   },
   {
    "item": "Enchanted Melon Slice",
    "xp": 250,
-   "itemId": "ENCHANTED_MELON"
+   "itemId": "ENCHANTED_MELON",
+   "source": "table"
   },
   {
    "item": "Enchanted Cactus Green",
    "xp": 250,
-   "itemId": "ENCHANTED_CACTUS_GREEN"
+   "itemId": "ENCHANTED_CACTUS_GREEN",
+   "source": "table"
   },
   {
    "item": "Enchanted Ghast Tear",
    "xp": 120,
-   "itemId": "ENCHANTED_GHAST_TEAR"
+   "itemId": "ENCHANTED_GHAST_TEAR",
+   "source": "table"
   },
   {
    "item": "Ghast Tear",
    "xp": 30,
-   "itemId": "GHAST_TEAR"
+   "itemId": "GHAST_TEAR",
+   "source": "table"
   },
   {
    "item": "Poisonous Potato",
    "xp": 20,
-   "itemId": "POISONOUS_POTATO"
+   "itemId": "POISONOUS_POTATO",
+   "source": "table"
   },
   {
    "item": "Obsidian",
    "xp": 15,
-   "itemId": "OBSIDIAN"
+   "itemId": "OBSIDIAN",
+   "source": "table"
   },
   {
    "item": "Rabbit's Foot",
    "xp": 12,
-   "itemId": "RABBIT_FOOT"
+   "itemId": "RABBIT_FOOT",
+   "source": "table"
   },
   {
    "item": "Pufferfish",
    "xp": 12,
-   "itemId": "RAW_FISH:3"
+   "itemId": "RAW_FISH:3",
+   "source": "table"
   },
   {
    "item": "Golden Carrot",
    "xp": 10,
-   "itemId": "GOLDEN_CARROT"
+   "itemId": "GOLDEN_CARROT",
+   "source": "table"
   },
   {
    "item": "Fermented Spider Eye",
    "xp": 10,
-   "itemId": "FERMENTED_SPIDER_EYE"
+   "itemId": "FERMENTED_SPIDER_EYE",
+   "source": "table"
   },
   {
    "item": "Spider Eye",
    "xp": 10,
-   "itemId": "SPIDER_EYE"
+   "itemId": "SPIDER_EYE",
+   "source": "table"
   },
   {
    "item": "Glistering Melon Slice",
    "xp": 10,
-   "itemId": null
+   "itemId": null,
+   "source": "table"
   },
   {
    "item": "Magma Cream",
    "xp": 10,
-   "itemId": "MAGMA_CREAM"
+   "itemId": "MAGMA_CREAM",
+   "source": "table"
   },
   {
    "item": "Blaze Powder",
    "xp": 10,
-   "itemId": "BLAZE_POWDER"
+   "itemId": "BLAZE_POWDER",
+   "source": "table"
   },
   {
    "item": "Slimeball",
    "xp": 10,
-   "itemId": "SLIME_BALL"
+   "itemId": "SLIME_BALL",
+   "source": "table"
   },
   {
    "item": "Feather",
    "xp": 10,
-   "itemId": "FEATHER"
+   "itemId": "FEATHER",
+   "source": "table"
   },
   {
    "item": "Cactus",
    "xp": 10,
-   "itemId": "CACTUS"
+   "itemId": "CACTUS",
+   "source": "table"
   },
   {
    "item": "Sugar",
    "xp": 5,
-   "itemId": "SUGAR"
+   "itemId": "SUGAR",
+   "source": "table"
   },
   {
    "item": "Lapis Lazuli",
    "xp": 5,
-   "itemId": "INK_SACK:4"
+   "itemId": "INK_SACK:4",
+   "source": "table"
   },
   {
    "item": "Netherrack",
    "xp": 5,
-   "itemId": "NETHERRACK"
+   "itemId": "NETHERRACK",
+   "source": "table"
   },
   {
    "item": "Coal",
    "xp": 5,
-   "itemId": "COAL"
+   "itemId": "COAL",
+   "source": "table"
   },
   {
    "item": "Red Sand",
    "xp": 5,
-   "itemId": "SAND:1"
+   "itemId": "SAND:1",
+   "source": "table"
   },
   {
    "item": "Gold Ingot",
    "xp": 5,
-   "itemId": "GOLD_INGOT"
+   "itemId": "GOLD_INGOT",
+   "source": "table"
   },
   {
    "item": "Raw Salmon",
    "xp": 5,
-   "itemId": "RAW_FISH:1"
+   "itemId": "RAW_FISH:1",
+   "source": "table"
   },
   {
    "item": "Raw Mutton",
    "xp": 5,
-   "itemId": "MUTTON"
+   "itemId": "MUTTON",
+   "source": "table"
   },
   {
    "item": "Ink Sac",
    "xp": 0,
-   "itemId": "INK_SACK"
+   "itemId": "INK_SACK",
+   "source": "table"
   },
   {
    "item": "Enchanted Ink Sac",
    "xp": 0,
-   "itemId": "ENCHANTED_INK_SACK"
+   "itemId": "ENCHANTED_INK_SACK",
+   "source": "table"
   }
  ],
+ "linearityChecks": 20,
+ "nonLinear": [
+  {
+   "from": "SPIDER_EYE",
+   "to": "ENCHANTED_SPIDER_EYE",
+   "perCraft": 160,
+   "expected": 48,
+   "published": 480,
+   "linear": false
+  }
+ ],
+ "disagreements": [],
  "unresolved": [
+  "Pure Coal",
+  "Block of Gold",
+  "Pure Diamond",
+  "Titanium",
   "Gemstone",
   "Glistering Melon Slice"
  ]

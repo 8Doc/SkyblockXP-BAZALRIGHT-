@@ -305,12 +305,24 @@ Hypixel resources API when the game changes; the wiki-derived and curated tables
   or 70% of the shop price, which is usually worse than walking over yourself.
 - **Pet profits is a real mechanic, not a workaround.** Collecting a minion grants Skill XP — the
   Minions page says so, and then says what people do with it — and a pet that is out levels off it.
-  The per-item rates come from the Farming and Mining pages' own **Minion XP** column, which is not
-  a fraction of the XP for doing the thing yourself and cannot be derived from it: Wheat is +4 by
-  hand and +0.3 from a minion, Ice is +0.2 by hand and +0.5 from a minion, and Nether Wart is +4 by
-  hand and flatly +0 from one. Only those two skills publish the column, so every other minion says
-  **not published** rather than claiming a zero — an unknown and a zero rank at opposite ends of a
-  table and only one of them is a claim the sources make.
+  The per-item rates are not a fraction of the XP for doing the thing yourself and cannot be derived
+  from it: Wheat is +4 by hand and +0.3 from a minion, Ice is +0.2 by hand and +0.5 from a minion,
+  and Nether Wart is +4 by hand and flatly +0 from one.
+- **The rates come from two places, and the second one is where most skills live.** The Farming and
+  Mining pages carry a **Minion XP** column and no other skill page does — which made Foraging,
+  Fishing and Combat look unpublished. They are published, one item page at a time, in a
+  `|minion_xp = 0.5 Fishing` infobox field: 42 item pages carry it, between them covering six
+  skills, and each states the item id and the skill outright so nothing has to be guessed from a
+  display name. That took coverage from 45 rated items across 2 skills to **77 across 6**. What is
+  still genuinely unpublished — Enchanting, and 24 of the 61 minions — says **not published**
+  rather than claiming a zero, since an unknown and a zero rank at opposite ends of a table.
+- **Compaction turns out to be XP-neutral, and that is checked rather than assumed.** An enchanted
+  item's minion XP is exactly its recipe quantity times the base item's, across every pair where
+  both are published — including Sponge, whose recipe is 40 rather than 160 and whose XP ratio is
+  40 to match, which is what makes the rule a rule and not a coincidence of everything being 160.
+  So a Super Compactor changes what a minion drops and not what the drop is worth in XP. One pair
+  disagrees (Spider Eye, published at 480 where the rule says 48) and is recorded as a suspected
+  wiki typo rather than silently corrected.
 - **Pet profits takes Wisdom and Taming as inputs and applies them in the right order.** Wisdom is
   additive and goes first, scaling the Skill XP; Taming is multiplicative through Zoologist at +1%
   a level and scales the Pet XP that Skill XP became. Then the divisors, which decide most of the

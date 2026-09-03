@@ -209,12 +209,57 @@ test("a minion with a published rate carries it through to pet XP", () => {
   assert.ok(Math.abs(wheat.petXpPerHour - wheat.skillXpPerHour * 1.6) < 1e-6);
 });
 
-test("the skills with no published column come back empty rather than bottom-ranked", () => {
+test("the item infoboxes cover the skills the two tables never mention", () => {
   const best = bestPerSkill(xpPlan().filter((r) => r.route === "direct"));
+  // Farming and Mining come from the skill pages' Minion XP columns.
   assert.ok(best.get("FARMING"));
   assert.ok(best.get("MINING"));
-  // Foraging minions plainly grant something and nobody has written down what.
-  assert.equal(best.get("FORAGING"), null);
+  // These three come from `|minion_xp=` on individual item pages, which is the only place they are
+  // published at all — the skill pages carry no such column. Before that source was added, all
+  // three read "not published" and a Fishing Minion looked like it granted nothing.
+  assert.ok(best.get("FORAGING"), "Jungle Log publishes 0.1 Foraging");
+  assert.ok(best.get("FISHING"), "Raw Cod publishes 0.5 Fishing");
+  assert.ok(best.get("COMBAT"), "Spider Eye publishes 0.3 Combat");
+  // Enchanting genuinely has no minion route in either source, and still says so.
+  assert.equal(best.get("ENCHANTING") ?? null, null);
+});
+
+test("a rate off an item infobox carries the skill the infobox names", () => {
+  const rows = xpPlan().filter((r) => r.route === "direct");
+  const fishing = rows.find((r) => r.generator === "FISHING")!;
+  assert.equal(fishing.skill, "FISHING");
+  assert.equal(fishing.xpPerItem, 0.5);
+
+  // The skill is read per item rather than inferred from which page the row came off, which is how
+  // a Cave Spider Minion files under Combat without a Combat table existing.
+  const caveSpider = rows.find((r) => r.generator === "CAVESPIDER")!;
+  assert.equal(caveSpider.skill, "COMBAT");
+  assert.equal(caveSpider.xpPerItem, 0.3);
+});
+
+test("compaction is XP-neutral, which is what lets the XP model ignore the compactor", () => {
+  // An enchanted item's published minion XP is its recipe quantity times the base item's, and the
+  // scrape checks every pair where both ends exist. Sponge is the load-bearing one: its recipe is
+  // 40 rather than 160 and its XP ratio is 40 to match, so the rule is real and not a coincidence
+  // of everything being 160.
+  const checked = skillXp as unknown as { linearityChecks: number; nonLinear: { from: string; to: string }[] };
+  assert.ok(checked.linearityChecks >= 15, "expected the scrape to have checked a useful number of pairs");
+  // One known exception, recorded rather than silently corrected: Spider Eye is published at 0.3
+  // with an Enchanted Spider Eye at 480 where the rule says 48. Sixteen exact agreements make a
+  // typo the likeliest reading, but the wiki is not edited from here.
+  assert.deepEqual(
+    checked.nonLinear.map((c) => c.from),
+    ["SPIDER_EYE"],
+  );
+});
+
+test("a Dwarven Mines block does not borrow an enchanted item's id", () => {
+  // Pure Coal, Pure Gold and Pure Diamond are blocks in the Dwarven Mines with no item behind them.
+  // They were briefly aliased onto Enchanted Coal Block and friends because the wiki links them
+  // there, which filed a block's 2.7 under an item whose own page says 7,680. Left unresolved now.
+  const pures = skillXp.perItem.filter((r) => /^(Pure |Block of Gold)/.test(r.item));
+  assert.ok(pures.length > 0, "the Pure rows should still be scraped");
+  for (const row of pures) assert.equal(row.itemId, null, `${row.item} should claim no item id`);
 });
 
 /* ----------------------------------------------------------------- the pets */

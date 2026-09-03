@@ -17,7 +17,7 @@ here is hand-typed.
 | `collections.json` | `resources/collections` | Same `unlocks` parse, per tier | Totals **3,160** — matches exactly |
 | `minions.json` | `resources/items` (`generator` / `generator_tier`) | Tier curve from the README table (1×6, 2, 3, 4, 6, 12, 24) | Totals **3,165** vs the README's 3,164. Live data: 48 minions have 12 tiers, 13 stop at 11 |
 | `accessories.json` | `resources/items`, `category: ACCESSORY` | — (magical power is curated) | 385 accessories, 277 tradeable |
-| `skill-xp.json` | Hypixel Wiki: Farming, Mining, Potions/Alchemy Experience — `npm run gen:skillxp` | Skill XP per item, by hand and from a minion | 51 item rows, 45 with a published minion rate; 42 brewing ingredients |
+| `skill-xp.json` | Hypixel Wiki: the Farming/Mining XP tables, every item page with a `minion_xp` infobox field, and Potions/Alchemy Experience — `npm run gen:skillxp` | Skill XP per item, by hand and from a minion | 83 item rows, 77 with a published minion rate across 6 skills; 20 compaction pairs cross-checked, 1 non-linear |
 
 The skills and collections agreement with the README's independently-written totals is the
 strongest signal here that the parse is right.
@@ -1229,11 +1229,13 @@ pages carry both, and the ratio wanders in both directions:
 | Ice | +0.2 | **+0.5** |
 | Nether Wart | +4 | +0 |
 
-Anything scaling one column from the other gets all three wrong. Only those two skills publish the
-column at all, so Foraging, Combat and Fishing minions come back `minionXp: null` and the tab says
-**not published** rather than quoting a zero — an unknown and a zero rank at opposite ends of a
-table and only one is a claim the sources make. The scraper keeps them apart deliberately: the
-wiki's `{{bc}}` blank cell is read as null, and a written `+0` as zero.
+Anything scaling one column from the other gets all three wrong. Only those two skills carry the
+column — but that is *not* the end of the coverage, and an earlier version of this section wrongly
+said it was. The rest is published in the item infoboxes; see "Where the minion rates actually come
+from" below. What remains genuinely unpublished comes back `minionXp: null` and the tab says **not
+published** rather than quoting a zero — an unknown and a zero rank at opposite ends of a table and
+only one is a claim the sources make. The scraper keeps them apart deliberately: the wiki's
+`{{bc}}` blank cell is read as null, and a written `+0` as zero.
 
 The Farming table's Red and Brown Mushroom share one `rowspan="2"` XP cell, so the second row's
 markup is a single item cell. Read without carrying rowspans down, Brown Mushroom silently inherits
@@ -1267,6 +1269,90 @@ step values it 160× too high and puts sugar cane at the top of every list in th
 
 The unflattering result, stated on the tab: at the best published rate a pet takes days to weeks.
 Minion XP is a trickle that costs nothing to run, not a way to level a pet on purpose.
+
+### Where the minion rates actually come from
+
+Two sources on the same wiki, and the second one is where most of the coverage is.
+
+**The skill tables.** Farming and Mining each carry a `Minion XP` column beside the by-hand one.
+No other skill page does — which is why an earlier pass reported Foraging, Fishing and Combat as
+unpublished. 45 rated items across 2 skills.
+
+**The item infoboxes.** Individual item pages carry a `|minion_xp = 0.5 Fishing` field. Forty-two
+items have it, found by asking the wiki (`insource:/minion_xp/`) rather than from a hand-kept list,
+because the list would go stale exactly when somebody fills the field in on the Oak Log page — the
+absence this scrape most wants to notice. Between them they cover **six** skills, and they give
+three things the tables cannot:
+
+- **The item id, stated.** `|id = INK_SACK:4` is the real id, so nothing is resolved from a display
+  name and the whole class of "Lapis Lazuli is not `LAPIS_LAZULI`" mistakes disappears.
+- **The skill, per item.** A table's skill is whichever page it sat on; here it is written down,
+  which is how a Cave Spider Minion files under Combat with no Combat table existing anywhere.
+- **The enchanted forms**, which is what a minion with a compactor actually produces.
+
+Together: **77 rated items across Alchemy, Combat, Farming, Fishing, Foraging and Mining**, and 37
+of the 61 minions with a rate. The three the infoboxes newly reached are the Jungle Minion (0.1
+Foraging), the Fishing Minion (0.5 Fishing) and the Cave Spider Minion (0.3 Combat) — one each for
+the three skills that previously had no answer at all.
+
+The five other log minions are the obvious remaining gap: Oak, Birch, Spruce, Acacia and Dark Oak
+are all +6 Foraging by hand and all behave identically, so 0.1 is the overwhelmingly likely rate for
+each. None of them carries the field, so none of them gets it. Guessing would be the one thing this
+file is written to avoid.
+
+### Compaction is XP-neutral, and it is checked
+
+The enchanted forms make a cross-check possible that neither source states outright. An Enchanted
+Cobblestone is 160 cobblestone and grants 16 Mining XP against cobblestone's 0.1 — exactly 160
+times, exactly the recipe quantity. That holds for **16 of the 17** pairs where both ends are
+published, and the load-bearing case is Sponge: its recipe is 40 rather than 160, and its XP ratio
+is 40 to match. A rule that survives the one item with a different ratio is a rule; sixteen
+agreements that were all 160 would only have been a coincidence.
+
+So a Super Compactor changes what a minion drops and not what the drop is worth in XP — the
+opposite of what people assume, and it means the XP half of the app can ignore the compactor
+entirely while the profit half cares about it enormously.
+
+The seventeenth pair is Spider Eye: published at 0.3, with an Enchanted Spider Eye at 480 where the
+rule says 48. Sixteen exact agreements make a dropped decimal the likeliest reading by a distance,
+but the scrape records the disagreement in `nonLinear` rather than correcting the wiki from here.
+Nothing downstream is affected — a Cave Spider Minion drops the base item, so the base rate is what
+gets used either way.
+
+### Pure Coal is not an item
+
+Caught by the cross-check above, and worth writing down because it was a real error in the first
+pass. The Mining table has rows for Pure Coal, Pure Gold and Pure Diamond — blocks in the Dwarven
+Mines — and the wiki links them to Enchanted Coal Block and friends. Aliasing them onto those ids
+filed a block's 2.7 under an item whose own page says 7,680: two different things wearing one id.
+There is no `PURE_COAL` in the bazaar's names or at any shopkeeper, because there is no such item.
+
+They are left unresolved now, listed in `unresolved` rather than silently dropped. Nothing is lost:
+no minion drops a Pure anything, so no ranking ever read those rows — they simply stop claiming to
+be an item they are not.
+
+### The Fandom wiki, and why it is not the source
+
+Worth recording since it is the obvious other place to look. `hypixel-skyblock.fandom.com` carries
+the same two skill tables from the same lineage, and is strictly worse for this:
+
+| | Fandom | `hypixelskyblock.minecraft.wiki` |
+|---|---|---|
+| Farming / Mining last edited | 2026-06-07 | 2026-08-11 / 08-12 |
+| Minions page last edited | 2026-04-05 | 2026-08-12 |
+| Pure Coal row | absent | 20 / 2.7 |
+| Dwarven Gold minion XP | blank | 3.6 |
+| Block of Diamond player XP | 15 | 20 |
+| `minion_xp` infoboxes | none | 42 pages |
+| Foraging / Fishing / Combat rates | none | via infoboxes |
+
+Two months staler, missing two of the highest minion XP rates, and with none of the item-page
+infoboxes that are the only published source for four of the six skills. Its per-minion pages are
+1.4KB stubs against the other wiki's fully rendered tier tables. It does independently carry the
+same co-op Skill XP note, which is a useful corroboration of the mechanic and nothing more.
+
+The official `wiki.hypixel.net` is not an option either: it now redirects to a forum thread
+announcing the end of the official Hypixel Wiki, July 2026.
 
 ## Pets as a trade
 
