@@ -3,6 +3,13 @@ import type { Fuel, MinionData, MinionProduction, Modifiers, Upgrade } from "../
 import type { DropTable, Recipe } from "../lib/minionProfit";
 import { monthsForBasis, readMonths } from "./monthStore";
 import {
+  placedCount,
+  readSetup,
+  slotIds,
+  writeSetup,
+  type MinionSetupState,
+} from "./minionSetup";
+import {
   bestPerSkill,
   planMinionXp,
   petXpMultiplier,
@@ -25,7 +32,15 @@ import {
 import type { AuctionRecord } from "../lib/auctions";
 import { NOT_COUNTED, type DetectedWisdom } from "../lib/wisdom";
 import { bestPerMinion, planPetPairs, type PetPlanRow } from "../lib/petPlan";
-import { planProfit, type ExtrasTable, type ItemPrices, type StorageTables } from "../lib/minionProfit";
+import {
+  planProfit,
+  type Compactor,
+  type ExtrasTable,
+  type Hopper,
+  type ItemPrices,
+  type StorageChest,
+  type StorageTables,
+} from "../lib/minionProfit";
 import { normalise } from "../lib/bazaar";
 import type { RawBazaarProduct } from "../lib/bazaarTypes";
 
@@ -78,10 +93,15 @@ type State = {
   wisdom: Record<string, string>;
   taming: string;
   petSkill: SkillKey | "ANY";
-  tier: number;
-  count: string;
-  fuel: string;
-  upgrades: [string, string];
+  /**
+   * The wall, shared with Raw profits rather than kept twice.
+   *
+   * Both tabs describe the same minions, and holding two copies of "tier, count, fuel, upgrades"
+   * meant the tabs silently disagreed the moment one of them was touched — a Tarantula Minion at
+   * tier XII on one and tier XI on the other, with nothing on either page saying so. Re-read on
+   * mount, so switching sub-tabs carries the setup across.
+   */
+  setup: MinionSetupState;
   showRoutes: boolean;
   /** How long a pet may take before the pairing stops counting as a plan. */
   horizon: string;
@@ -110,10 +130,7 @@ const state: State = {
   wisdom: readWisdom(),
   taming: localStorage.getItem("sbxp:pxtaming") ?? "0",
   petSkill: (localStorage.getItem("sbxp:pxpetskill") as SkillKey | "ANY") ?? "ANY",
-  tier: Number(localStorage.getItem("sbxp:pxtier") ?? 12),
-  count: localStorage.getItem("sbxp:pxcount") ?? "5",
-  fuel: localStorage.getItem("sbxp:pxfuel") ?? "NONE",
-  upgrades: [localStorage.getItem("sbxp:pxup0") ?? "NONE", localStorage.getItem("sbxp:pxup1") ?? "NONE"],
+  setup: readSetup(),
   showRoutes: localStorage.getItem("sbxp:pxroutes") === "1",
   horizon: localStorage.getItem("sbxp:pxhorizon") ?? "365",
   noHorizon: localStorage.getItem("sbxp:pxnohorizon") === "1",
@@ -390,6 +407,24 @@ function upgradeById(id: string): Upgrade {
   return tables!.modifiers.upgrades.find((u) => u.id === id) ?? tables!.modifiers.upgrades[0];
 }
 
+/**
+ * The upgrade list minus the compactors, which have their own control.
+ *
+ * A compactor is a Minion Upgrade and genuinely occupies a slot, so it belongs in this list on the
+ * game's own terms — but leaving it here lets the same decision be made in two places, and "Super
+ * Compactor in slot one, no compactor in the compactor box" is a setup nobody meant.
+ */
+function plainUpgrades(): Upgrade[] {
+  const compactors = new Set(tables!.storage.compactors.map((c) => c.id));
+  return tables!.modifiers.upgrades.filter((u) => !compactors.has(u.id));
+}
+
+/** What is actually in the two slots, resolved. The compactor takes the second one when fitted. */
+function slotUpgrades(): [Upgrade, Upgrade] {
+  const [first, second] = slotIds(state.setup, tables!.storage.compactors);
+  return [upgradeById(first), upgradeById(second)];
+}
+
 function player(): Player {
   const wisdom: Partial<Record<SkillKey, number>> = {};
   for (const skill of WISDOM_SKILLS) wisdom[skill] = Math.max(0, Number(state.wisdom[skill]) || 0);
@@ -427,10 +462,10 @@ function xpRows(): MinionXpRow[] {
     rules: tables.petXpRules,
     player: player(),
     setup: {
-      tier: state.tier,
-      fuel: fuelById(state.fuel),
-      upgrades: [upgradeById(state.upgrades[0]), upgradeById(state.upgrades[1])],
-      count: Math.max(1, Number(state.count.replace(/[^0-9]/g, "")) || 1),
+      tier: state.setup.tier,
+      fuel: fuelById(state.setup.fuel),
+      upgrades: slotUpgrades(),
+      count: placedCount(state.setup),
     },
     dropIdFor,
     names: tables.names,
@@ -479,6 +514,8 @@ export function mountMinionPet(container: HTMLElement, data: Tables): void {
   tables = data;
   nameCache = null;
   ladderCache = null;
+  // The other tab may have moved the wall since this one last rendered.
+  state.setup = readSetup();
   if (!state.pets) state.pets = readPetCache();
 
   if (boundTo !== container) {
@@ -539,10 +576,12 @@ export function mountMinionPet(container: HTMLElement, data: Tables): void {
       const el = event.target as HTMLSelectElement;
       const map: Record<string, (v: string) => void> = {
         pxpetskill: (v) => ((state.petSkill = v as SkillKey | "ANY"), localStorage.setItem("sbxp:pxpetskill", v)),
-        pxtier: (v) => ((state.tier = Number(v)), localStorage.setItem("sbxp:pxtier", v)),
-        pxfuel: (v) => ((state.fuel = v), localStorage.setItem("sbxp:pxfuel", v)),
-        pxup0: (v) => ((state.upgrades[0] = v), localStorage.setItem("sbxp:pxup0", v)),
-        pxup1: (v) => ((state.upgrades[1] = v), localStorage.setItem("sbxp:pxup1", v)),
+        pxtier: (v) => ((state.setup.tier = Number(v)), writeSetup("tier", state.setup.tier)),
+        pxfuel: (v) => ((state.setup.fuel = v), writeSetup("fuel", v)),
+        pxup0: (v) => ((state.setup.upgrades[0] = v), writeSetup("upgrades", state.setup.upgrades)),
+        pxcomp: (v) => ((state.setup.compactor = v), writeSetup("compactor", v)),
+        pxchest: (v) => ((state.setup.chest = v), writeSetup("chest", v)),
+        pxhopper: (v) => ((state.setup.hopper = v), writeSetup("hopper", v)),
       };
       const apply = map[el.id];
       if (!apply) return;
@@ -573,8 +612,11 @@ export function mountMinionPet(container: HTMLElement, data: Tables): void {
         state.taming = el.value;
         localStorage.setItem("sbxp:pxtaming", el.value);
       } else if (el.id === "pxcount") {
-        state.count = el.value;
-        localStorage.setItem("sbxp:pxcount", el.value);
+        state.setup.count = el.value;
+        writeSetup("count", el.value);
+      } else if (el.id === "pxclaim") {
+        state.setup.claim = el.value;
+        writeSetup("claim", el.value);
       } else if (el.id === "pxhorizon") {
         state.horizon = el.value;
         localStorage.setItem("sbxp:pxhorizon", el.value);
@@ -642,17 +684,25 @@ const WISDOM_HELP: Record<string, string> = {
  * Alchemy needs `brewing` on: it is reached no other way, and the whole route would vanish.
  */
 const BUDGET = {
-  /** What one phrase of this costs you, for the summary card. */
-  cost: "four collections and up to 200 brews",
-  claimsPerDay: 4,
   maxBrewsPerDay: 200,
 } as const;
+
+/** "four collections a day", "one collection every 3 days" — the visiting half of what a plan costs. */
+function collectionPhrase(): string {
+  const perDay = claimsPerDay();
+  if (perDay >= 1) {
+    const rounded = Math.round(perDay * 10) / 10;
+    return rounded === 1 ? "one collection a day" : `${num(rounded)} collections a day`;
+  }
+  const days = 1 / perDay;
+  return `one collection every ${days < 1.5 ? `${days.toFixed(1)} days` : `${Math.round(days)} days`}`;
+}
 
 function render(): void {
   if (!host || !tables) return;
 
   const tiers = Array.from({ length: 12 }, (_, i) => i + 1)
-    .map((t) => `<option value="${t}"${state.tier === t ? " selected" : ""}>Tier ${t}</option>`)
+    .map((t) => `<option value="${t}"${state.setup.tier === t ? " selected" : ""}>Tier ${t}</option>`)
     .join("");
 
   const petSkills = ["ANY", ...SKILLS]
@@ -685,12 +735,26 @@ function render(): void {
 
       <div class="row">
         <label title="How many of the one minion are placed. Production scales straight off this, so it moves both halves of the profit and it is usually the fastest thing to change.">Minions
-          <input id="pxcount" value="${escapeHtml(state.count)}" inputmode="numeric" autocomplete="off">
+          <input id="pxcount" value="${escapeHtml(state.setup.count)}" inputmode="numeric" autocomplete="off">
         </label>
         <label>Tier <select id="pxtier">${tiers}</select></label>
-        <label>Fuel <select id="pxfuel">${optionList(tables.modifiers.fuels, state.fuel)}</select></label>
-        <label>Upgrade 1 <select id="pxup0">${optionList(tables.modifiers.upgrades, state.upgrades[0])}</select></label>
-        <label>Upgrade 2 <select id="pxup1">${optionList(tables.modifiers.upgrades, state.upgrades[1])}</select></label>
+        <label>Fuel <select id="pxfuel">${optionList(tables.modifiers.fuels, state.setup.fuel)}</select></label>
+        <label>Upgrade <select id="pxup0">${optionList(plainUpgrades(), state.setup.upgrades[0])}</select></label>
+        <label title="A compactor is a Minion Upgrade and takes the second slot. It is the single biggest thing on this row: packing 160 drops into one multiplies the storage by the same amount, which is the difference between a minion that stands full and one that runs all week.">Compactor
+          <select id="pxcomp">${optionList(tables.storage.compactors, state.setup.compactor)}</select>
+        </label>
+      </div>
+
+      <div class="row">
+        <label title="Extra storage placed beside the minion. It does not change what the minion makes, only how long it runs before it stops.">Storage chest
+          <select id="pxchest">${optionList(tables.storage.chests, state.setup.chest)}</select>
+        </label>
+        <label title="A hopper sells the overflow to a shopkeeper once the minion and its chest are both full, at its own share of shop price.">Automated shipping
+          <select id="pxhopper">${optionList(tables.storage.hoppers, state.setup.hopper)}</select>
+        </label>
+        <label title="Hours between visits. This is the other half of the effort budget and the one nobody counts: past the point storage fills, a minion earns nothing until someone empties it. Shared with the Raw profits tab, which is why the two tabs agree on what the minion sells.">Claim every (hours)
+          <input id="pxclaim" value="${escapeHtml(state.setup.claim)}" inputmode="numeric" autocomplete="off">
+        </label>
         <label title="Pairings where one pet would take longer than this are not plans and are left out. Without it the table recommends a pet that finishes in twenty-three thousand days, because the coins from selling the minion's output dwarf the pet margin.">Pet within (days)
           <input id="pxhorizon" value="${
             state.noHorizon ? "no limit" : escapeHtml(state.horizon)
@@ -790,33 +854,54 @@ function horizonDays(): number {
   return state.noHorizon ? Infinity : Math.max(1, Number(state.horizon) || 365);
 }
 
+/** Hours between visits, from the shared setup. A quarter of an hour is the floor, as on that tab. */
+function claimHours(): number {
+  return Math.max(0.25, Number(state.setup.claim) || 8);
+}
+
+/**
+ * Collections a day, which is half of what this tab counts as an action.
+ *
+ * Derived from the claim interval rather than fixed at four. A wall claimed once a day is one
+ * action and a wall claimed every six hours is four, and quoting four either way both overstated
+ * the work for the patient setup and understated it for the attentive one.
+ */
+function claimsPerDay(): number {
+  return 24 / claimHours();
+}
+
+function chestById(id: string): StorageChest {
+  return tables!.storage.chests.find((c) => c.id === id) ?? tables!.storage.chests[0];
+}
+function hopperById(id: string): Hopper {
+  return tables!.storage.hoppers.find((h) => h.id === id) ?? tables!.storage.hoppers[0];
+}
+function compactorById(id: string): Compactor {
+  return tables!.storage.compactors.find((c) => c.id === id) ?? tables!.storage.compactors[0];
+}
+
 function planRows(over: { maxDaysPerPet?: number } = {}): PetPlanRow[] {
   if (!tables || !state.pets) return [];
 
   const prices = priceBook();
   const setup = {
-    tier: state.tier,
-    fuel: fuelById(state.fuel),
-    upgrades: [upgradeById(state.upgrades[0]), upgradeById(state.upgrades[1])] as [Upgrade, Upgrade],
-    count: Math.max(1, Number(state.count.replace(/[^0-9]/g, "")) || 1),
+    tier: state.setup.tier,
+    fuel: fuelById(state.setup.fuel),
+    upgrades: slotUpgrades(),
+    count: placedCount(state.setup),
   };
 
   /**
-   * What each minion earns selling its output, on the same setup the XP is computed for.
+   * What each minion earns selling its output — the same call the Raw profits tab makes.
    *
-   * Priced exactly the way the Raw profits tab prices it by default — instasell, guarded against
-   * the month, no chest, no hopper, a Super Compactor — because "Just selling" is a claim about
-   * the same minion that tab is describing and the two columns are read side by side. It used to
-   * pass an empty month and `trust: "live"`, so the guard was simply off here: a spiking bazaar
-   * quote inflated this figure while the tab beside it declined to believe the same number.
+   * Every input comes from the shared setup, including the four this tab used to hardcode: the
+   * chest, the hopper, the compactor and the claim interval. Hardcoding them is what made "Just
+   * selling" disagree with the tab beside it in ways no control could reconcile, and passing an
+   * empty month with `trust: "live"` meant the anomaly guard was simply off here, so a spiking
+   * bazaar quote inflated this figure while Raw profits declined to believe the same number.
    *
    * The months come from whatever Raw profits last fetched. Nothing here fetches them, so a
-   * session that has never opened that tab guards nothing — which is the state it was always in,
-   * now visible in the caveat rather than silent.
-   *
-   * The one thing that genuinely differs is the claim interval, and it differs on purpose: this
-   * tab is built on a budget of four collections a day, which is a claim every six hours, where
-   * Raw profits lets you type any interval and defaults to eight.
+   * session that has never opened that tab guards nothing — which is what the caveat says.
    */
   const months = readMonths().months;
   const profit = planProfit({
@@ -826,16 +911,16 @@ function planRows(over: { maxDaysPerPet?: number } = {}): PetPlanRow[] {
     extras: tables.extras,
     recipes: tables.recipes,
     prices,
-    variance: monthsForBasis(months, "instasell"),
+    variance: monthsForBasis(months, state.setup.basis),
     names: tables.names,
-    basis: "instasell",
-    trust: "guarded",
+    basis: state.setup.basis,
+    trust: state.setup.trust,
     setup: {
       ...setup,
-      chest: tables.storage.chests[0],
-      hopper: tables.storage.hoppers[0],
-      compactor: tables.storage.compactors.find((c) => c.id === "SUPER_COMPACTOR_3000") ?? tables.storage.compactors[0],
-      claimHours: 24 / BUDGET.claimsPerDay,
+      chest: chestById(state.setup.chest),
+      hopper: hopperById(state.setup.hopper),
+      compactor: compactorById(state.setup.compactor),
+      claimHours: claimHours(),
     },
   });
 
@@ -851,7 +936,7 @@ function planRows(over: { maxDaysPerPet?: number } = {}): PetPlanRow[] {
     itemCoinsPerHour,
     dropValue,
     maxBrewsPerDay: BUDGET.maxBrewsPerDay,
-    claimsPerDay: BUDGET.claimsPerDay,
+    claimsPerDay: claimsPerDay(),
     maxDaysPerPet: over.maxDaysPerPet ?? horizonDays(),
     minProfitPerDay: 0,
   });
@@ -937,7 +1022,7 @@ function emptyReason(): string {
   // Do the arithmetic rather than gesturing at it. Production scales with the minion count, so the
   // count that would bring the quickest pairing inside the horizon is a division — and "you would
   // need about 60 of them" is a far more useful sentence than "raise the minion count".
-  const placed = Math.max(1, Number(state.count.replace(/[^0-9]/g, "")) || 1);
+  const placed = placedCount(state.setup);
   const needed = Math.ceil((placed * best.daysPerPet) / horizon);
 
   return `<div class="warn">Nothing here is a plan at this setup. The quickest pairing is the
@@ -1078,11 +1163,10 @@ const PLAN_COLUMNS: SortColumn<PetPlanRow>[] = [
     id: "selling",
     label: "Just selling",
     title:
-      "From selling what the minion produced — what it would earn with no pet on it at all. Priced the way the Raw " +
-      "profits tab prices it by default: instaselling into the bazaar, guarded against the item's own month, with a " +
-      "Super Compactor and no chest or hopper. The one thing that differs is the interval — this tab assumes four " +
-      "collections a day, where that one defaults to eight hours and lets you type any figure — so set them the same " +
-      "if you want the two columns to agree to the coin.",
+      "From selling what the minion produced — what it would earn with no pet on it at all. This is the Raw profits " +
+      "tab's own figure over a day, on the same setup: the two tabs share one wall, so the tier, count, fuel, " +
+      "upgrade, compactor, chest, hopper, claim interval, market and price guard are all the same on both, and the " +
+      "two numbers agree to the coin.",
     value: (r) => r.sellOnlyPerDay,
     render: (r) => `<span class="dim">${coins(Math.round(r.sellOnlyPerDay))}</span>`,
   },
@@ -1155,7 +1239,7 @@ function renderPlan(): void {
       <div class="stat">
         <div class="stat-label">Put down</div>
         <div class="stat-value gold">${escapeHtml(best.family)}</div>
-        <div class="stat-sub">${escapeHtml(state.count)} of them at tier ${best.tier}</div>
+        <div class="stat-sub">${escapeHtml(state.setup.count)} of them at tier ${best.tier}</div>
       </div>
       <div class="stat">
         <div class="stat-label">Level ${best.partner ? "these pets" : "this pet"}</div>
@@ -1184,7 +1268,7 @@ function renderPlan(): void {
       </div>
       <div class="stat">
         <div class="stat-label">Costs you</div>
-        <div class="stat-value">${escapeHtml(BUDGET.cost.split(" and ")[0])}</div>
+        <div class="stat-value">${escapeHtml(collectionPhrase())}</div>
         <div class="stat-sub">${
           best.brewsPerDay > 0 ? `and ${num(Math.round(best.brewsPerDay))} brews` : "and nothing else"
         }</div>

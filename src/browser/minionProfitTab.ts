@@ -26,6 +26,7 @@ import {
 } from "../lib/priceVariance";
 import type { CoflnetPoint } from "../lib/bazaarHistory";
 import { monthFor, monthsForBasis, readMonths, writeMonths, type Months } from "./monthStore";
+import { placedCount as countOf, readSetup, slotIds, type MinionSetupState } from "./minionSetup";
 
 /**
  * What a minion is worth an hour, and how much of that you will actually collect.
@@ -68,18 +69,7 @@ type Tables = {
 
 /* ----------------------------------------------------------------- state */
 
-type State = {
-  count: string;
-  tier: number;
-  fuel: string;
-  upgrades: [string, string];
-  chest: string;
-  compactor: string;
-  hopper: string;
-  /** Hours between visits, as typed. "8", "24", "168". */
-  claim: string;
-  basis: Basis;
-  trust: Trust;
+type State = MinionSetupState & {
   search: string;
   open: string | null;
   /** Which column orders the table, and which way. */
@@ -93,20 +83,10 @@ type State = {
   historyAt: number;
 };
 
-/** Eight hours: a night, which is when a minion is doing the work you are not. */
-const DEFAULT_CLAIM = "8";
-
 const state: State = {
-  count: localStorage.getItem("sbxp:mpcount") ?? "5",
-  tier: Number(localStorage.getItem("sbxp:mptier") ?? 12),
-  fuel: localStorage.getItem("sbxp:mpfuel") ?? "NONE",
-  upgrades: [localStorage.getItem("sbxp:mpup0") ?? "NONE", localStorage.getItem("sbxp:mpup1") ?? "NONE"],
-  chest: localStorage.getItem("sbxp:mpchest") ?? "NONE",
-  compactor: localStorage.getItem("sbxp:mpcomp") ?? "SUPER_COMPACTOR_3000",
-  hopper: localStorage.getItem("sbxp:mphopper") ?? "NONE",
-  claim: localStorage.getItem("sbxp:mpclaim") ?? DEFAULT_CLAIM,
-  basis: (localStorage.getItem("sbxp:mpbasis") as Basis) ?? "instasell",
-  trust: (localStorage.getItem("sbxp:mptrust") as Trust) ?? "guarded",
+  // The wall itself is shared with Pet profits — see `minionSetup.ts`. Everything below it is this
+  // tab's own, and there is nothing on the other tab that would want it.
+  ...readSetup(),
   search: "",
   open: null,
   sort: readSort(),
@@ -394,9 +374,8 @@ function priceBook(): Map<string, ItemPrices> {
  * Flycatcher it does not have.
  */
 function slots(): [Upgrade, Upgrade] {
-  const empty = tables!.modifiers.upgrades.find((u) => u.id === "NONE")!;
-  const first = upgradeById(state.upgrades[0]);
-  return compactorById(state.compactor).kind === "none" ? [first, upgradeById(state.upgrades[1])] : [first, empty];
+  const [first, second] = slotIds(state, tables!.storage.compactors);
+  return [upgradeById(first), upgradeById(second)];
 }
 
 function rows(): MinionProfitRow[] {
@@ -418,7 +397,7 @@ function rows(): MinionProfitRow[] {
       tier: state.tier,
       fuel: fuelById(state.fuel),
       upgrades: slots(),
-      count: placedCount(),
+      count: countOf(state),
       chest: chestById(state.chest),
       hopper: hopperById(state.hopper),
       compactor: compactorById(state.compactor),
@@ -452,6 +431,8 @@ function rows(): MinionProfitRow[] {
 export function mountMinionProfit(container: HTMLElement, data: Tables): void {
   host = container;
   tables = data;
+  // Pet profits describes the same wall and may have moved it since this tab last rendered.
+  Object.assign(state, readSetup());
   if (state.variance.size === 0) {
     const stored = readMonths();
     state.variance = stored.months;
@@ -1012,11 +993,6 @@ Click to sort by this column; click again to reverse it.`,
   `;
 }
 
-/** How many of the one minion are down. Never zero: a wall of none is a question with no answer. */
-function placedCount(): number {
-  return Math.max(1, Number(state.count.replace(/[^0-9]/g, "")) || 1);
-}
-
 /** The row opened out: where the number came from, and what it is quietly leaving out. */
 function detailHtml(r: MinionProfitRow): string {
   // Same item the sigma column is measured against — the compacted form where one is sold.
@@ -1027,7 +1003,7 @@ function detailHtml(r: MinionProfitRow): string {
   // Per minion, both halves of it. Storage belongs to the minion rather than to the wall — twenty
   // Melon Minions do not share a chest, they each fill at the same time — so quoting the wall's
   // production against one minion's storage would divide a nine-day fill down to nine hours.
-  const placed = placedCount();
+  const placed = countOf(state);
   lines.push(
     `<div class="gh-sub"><strong>${num(Math.round(r.itemsPerHour / placed))}</strong> drops an hour${
       placed > 1 ? " each" : ""
