@@ -85,8 +85,8 @@ type State = {
   maxBrews: string;
   /** How long a pet may take before the pairing stops counting as a plan. */
   horizon: string;
-  /** Which routes the plan is allowed to use. */
-  routes: "all" | "collect" | "brew";
+  /** How much work the plan may ask of you. The tab's primary control. */
+  effort: EffortId;
   /** Hide pairings that make less than simply selling the output. */
   hideLosers: boolean;
   /** A live bazaar read, so the plan can price what the minion sells alongside the pet. */
@@ -115,7 +115,7 @@ const state: State = {
   showRoutes: localStorage.getItem("sbxp:pxroutes") === "1",
   maxBrews: localStorage.getItem("sbxp:pxbrews") ?? "100",
   horizon: localStorage.getItem("sbxp:pxhorizon") ?? "365",
-  routes: (localStorage.getItem("sbxp:pxroutefilter") as State["routes"]) ?? "all",
+  effort: (localStorage.getItem("sbxp:pxeffort") as EffortId) ?? "passive",
   hideLosers: localStorage.getItem("sbxp:pxhideloss") === "1",
   market: new Map(),
   pets: null,
@@ -372,10 +372,10 @@ export function mountMinionPet(container: HTMLElement, data: Tables): void {
         return renderPlan();
       }
 
-      const route = target.closest<HTMLElement>("[data-pxroute]");
-      if (route) {
-        state.routes = route.dataset.pxroute as State["routes"];
-        localStorage.setItem("sbxp:pxroutefilter", state.routes);
+      const effort = target.closest<HTMLElement>("[data-pxeffort]");
+      if (effort) {
+        state.effort = effort.dataset.pxeffort as EffortId;
+        localStorage.setItem("sbxp:pxeffort", state.effort);
         return renderPlan();
       }
 
@@ -481,6 +481,76 @@ const WISDOM_HELP: Record<string, string> = {
   ALCHEMY: "A permanent base from Essence Shop perks, plus pets, accessories and consumables.",
 };
 
+/**
+ * How much you are actually willing to do.
+ *
+ * The tab exists to answer one question — the best money from minion pet-levelling *without doing
+ * anything excessive* — and that is a constrained optimisation whose constraint was previously
+ * spread across two numeric boxes nobody would think to set. Effort is that constraint made into
+ * one control, and it is the first thing on the page.
+ *
+ * Each level fixes three things that have to agree: how often you empty the minions, how many brews
+ * you will stand and do, and whether brewing is on the table at all. They agree because they are
+ * the same decision — someone who visits once a day is not the same person who will do two hundred
+ * brews, and offering those independently produced setups nobody would run.
+ *
+ * `passive` is the default deliberately. It is the question as asked.
+ */
+type EffortId = "passive" | "light" | "grind";
+
+type Effort = {
+  id: EffortId;
+  label: string;
+  /** What it asks of you, in a phrase, for the chip and the row. */
+  cost: string;
+  claimsPerDay: number;
+  maxBrewsPerDay: number;
+  /** False means brewing routes are not even considered. */
+  brewing: boolean;
+  help: string;
+};
+
+const EFFORTS: Effort[] = [
+  {
+    id: "passive",
+    label: "Set and forget",
+    cost: "one collection a day",
+    claimsPerDay: 1,
+    maxBrewsPerDay: 0,
+    brewing: false,
+    help:
+      "Empty the minions once a day and nothing else. No brewing stand, no second trip. This is the " +
+      "honest answer to 'what can I make without doing anything', and it is the default because it is " +
+      "the question most people are actually asking.",
+  },
+  {
+    id: "light",
+    label: "A few minutes a day",
+    cost: "two collections and up to 20 brews",
+    claimsPerDay: 2,
+    maxBrewsPerDay: 20,
+    brewing: true,
+    help:
+      "Two collections and a short spell at a brewing stand. Enough brewing to matter, little enough " +
+      "that it is still a game rather than a shift.",
+  },
+  {
+    id: "grind",
+    label: "I do not mind grinding",
+    cost: "four collections and up to 200 brews",
+    claimsPerDay: 4,
+    maxBrewsPerDay: 200,
+    brewing: true,
+    help:
+      "Everything on the table. Worth looking at to see what you are giving up by not grinding — " +
+      "often much less than it appears, because the drops a stand eats were worth selling.",
+  },
+];
+
+function effortOf(id: EffortId): Effort {
+  return EFFORTS.find((e) => e.id === id) ?? EFFORTS[0];
+}
+
 function render(): void {
   if (!host || !tables) return;
 
@@ -498,52 +568,62 @@ function render(): void {
     .join("");
 
   host.innerHTML = `
-    <div class="panel pad controls">
-      <div class="row">
-        ${WISDOM_SKILLS.map(
-          (skill) => `<label style="flex:1 1 120px" title="${escapeHtml(
-            `${title(skill)} Wisdom. It multiplies ${title(skill)} XP by 1 + Wisdom/100 before anything else touches it. ${
-              WISDOM_HELP[skill] ?? ""
-            }`,
-          )}">${escapeHtml(title(skill))} wisdom
-            <input data-pxwisdom="${skill}" value="${escapeHtml(state.wisdom[skill] ?? "")}" placeholder="0" inputmode="decimal" autocomplete="off">
-          </label>`,
-        ).join("")}
-      </div>
-
-      <p class="sub dim">${WISDOM_NOTE}</p>
-
-      <div class="row">
-        <label title="Your Taming level, 0 to 60. Each level is one level of Zoologist, which is +1% Pet XP — so Taming 60 is a flat x1.60 on everything below.">Taming level
-          <input id="pxtaming" value="${escapeHtml(state.taming)}" inputmode="numeric" autocomplete="off">
-        </label>
-        <label title="The skill the pet you are levelling belongs to. A pet earning XP outside its own skill keeps a third of it; outside its own skill AND in Alchemy or Enchanting, a twelfth. Leaving this on 'whatever matches' answers the best case rather than your case.">Pet's skill
-          <select id="pxpetskill">${petSkills}</select>
-        </label>
-      </div>
-
-      <div class="row">
-        <label title="How many of the one minion are placed.">Minions
-          <input id="pxcount" value="${escapeHtml(state.count)}" inputmode="numeric" autocomplete="off">
-        </label>
-        <label>Tier <select id="pxtier">${tiers}</select></label>
-        <label>Fuel <select id="pxfuel">${optionList(tables.modifiers.fuels, state.fuel)}</select></label>
-        <label>Upgrade 1 <select id="pxup0">${optionList(tables.modifiers.upgrades, state.upgrades[0])}</select></label>
-        <label>Upgrade 2 <select id="pxup1">${optionList(tables.modifiers.upgrades, state.upgrades[1])}</select></label>
-        <label title="Pairings where one pet would take longer than this are not plans and are left out. It matters more than it looks: the coins from selling the minion's output dwarf the pet margin, so without a horizon every minion picks whichever pet has the best coins-per-XP regardless of skill, and the table recommends a pet that finishes in twenty-three thousand days.">Pet must finish within (days)
-          <input id="pxhorizon" value="${escapeHtml(state.horizon)}" inputmode="numeric" autocomplete="off">
-        </label>
-        <label title="The most brews a day worth recommending. Brewing is the one route here that is not a by-product of collecting a minion you were collecting anyway — it costs an evening at a brewing stand and it costs the drops, which is why both are charged. Set it to what you would actually sit through.">Brews a day, at most
-          <input id="pxbrews" value="${escapeHtml(state.maxBrews)}" inputmode="numeric" autocomplete="off">
-        </label>
-      </div>
-
-      <p class="sub dim">${chainNote()}</p>
-    </div>
+    <p class="sub dim">${INTENT}</p>
 
     <div id="pxplan"></div>
-    <div id="pxskills"></div>
-    <div id="pxpets"></div>
+
+    <details class="pxfold">
+      <summary>Your account <span class="dim">— wisdom and taming, which scale every XP figure here</span></summary>
+      <div class="panel pad controls">
+        <div class="row">
+          ${WISDOM_SKILLS.map(
+            (skill) => `<label style="flex:1 1 120px" title="${escapeHtml(
+              `${title(skill)} Wisdom. It multiplies ${title(skill)} XP by 1 + Wisdom/100 before anything else touches it. ${
+                WISDOM_HELP[skill] ?? ""
+              }`,
+            )}">${escapeHtml(title(skill))} wisdom
+              <input data-pxwisdom="${skill}" value="${escapeHtml(state.wisdom[skill] ?? "")}" placeholder="0" inputmode="decimal" autocomplete="off">
+            </label>`,
+          ).join("")}
+          <label style="flex:1 1 120px" title="Your Taming level, 0 to 60. Each level is one level of Zoologist, which is +1% Pet XP — so Taming 60 is a flat x1.60 on everything below.">Taming level
+            <input id="pxtaming" value="${escapeHtml(state.taming)}" placeholder="0" inputmode="numeric" autocomplete="off">
+          </label>
+        </div>
+        <p class="sub dim">${WISDOM_NOTE}</p>
+      </div>
+    </details>
+
+    <details class="pxfold">
+      <summary>The minions <span class="dim">— how many, what tier, what is in the slots</span></summary>
+      <div class="panel pad controls">
+        <div class="row">
+          <label title="How many of the one minion are placed.">Minions
+            <input id="pxcount" value="${escapeHtml(state.count)}" inputmode="numeric" autocomplete="off">
+          </label>
+          <label>Tier <select id="pxtier">${tiers}</select></label>
+          <label>Fuel <select id="pxfuel">${optionList(tables.modifiers.fuels, state.fuel)}</select></label>
+          <label>Upgrade 1 <select id="pxup0">${optionList(tables.modifiers.upgrades, state.upgrades[0])}</select></label>
+          <label>Upgrade 2 <select id="pxup1">${optionList(tables.modifiers.upgrades, state.upgrades[1])}</select></label>
+          <label title="Pairings where one pet would take longer than this are not plans and are left out. Without it the table recommends a pet that finishes in twenty-three thousand days, because the coins from selling the minion's output dwarf the pet margin.">Pet must finish within (days)
+            <input id="pxhorizon" value="${escapeHtml(state.horizon)}" inputmode="numeric" autocomplete="off">
+          </label>
+        </div>
+        <p class="sub dim">${chainNote()}</p>
+      </div>
+    </details>
+
+    <details class="pxfold">
+      <summary>Show the workings <span class="dim">— XP by skill, and every pet on the market</span></summary>
+      <div class="panel pad controls">
+        <div class="row">
+          <label title="The skill the pet you are levelling belongs to. Only affects the cards below — the plan above pairs each minion with its own best pet automatically.">Pet's skill
+            <select id="pxpetskill">${petSkills}</select>
+          </label>
+        </div>
+      </div>
+      <div id="pxskills"></div>
+      <div id="pxpets"></div>
+    </details>
   `;
 
   renderPlan();
@@ -592,6 +672,7 @@ function chainNote(): string {
 function planRows(over: { maxDaysPerPet?: number } = {}): PetPlanRow[] {
   if (!tables || !state.pets) return [];
 
+  const effort = effortOf(state.effort);
   const prices = priceBook();
   const setup = {
     tier: state.tier,
@@ -619,19 +700,17 @@ function planRows(over: { maxDaysPerPet?: number } = {}): PetPlanRow[] {
       chest: tables.storage.chests[0],
       hopper: tables.storage.hoppers[0],
       compactor: tables.storage.compactors.find((c) => c.id === "SUPER_COMPACTOR_3000") ?? tables.storage.compactors[0],
-      claimHours: 24,
+      claimHours: 24 / effort.claimsPerDay,
     },
   });
 
   const itemCoinsPerHour = new Map(profit.map((r) => [r.generator, r.netPerHour]));
   const dropValue = new Map(profit.map((r) => [r.generator, r.unitValue]));
 
-  // The route filter is applied before pairing rather than after, so "collect only" genuinely
-  // re-plans — each minion picks the best pet for the XP it makes by being collected, rather than
-  // showing whatever was left over once the brewing rows were struck out.
-  const allowed = xpRows().filter((r) =>
-    state.routes === "all" ? true : state.routes === "brew" ? r.route === "brewing" : r.route === "direct",
-  );
+  // Effort is applied before pairing rather than after, so a lower setting genuinely re-plans:
+  // each minion picks the best pet for the XP it makes within that budget, rather than showing
+  // whatever was left once the expensive rows were struck out.
+  const allowed = xpRows().filter((r) => effort.brewing || r.route === "direct");
 
   const planned = bestPerMinion(
     planPetPairs({
@@ -642,7 +721,8 @@ function planRows(over: { maxDaysPerPet?: number } = {}): PetPlanRow[] {
       player: player(),
       itemCoinsPerHour,
       dropValue,
-      maxBrewsPerDay: Math.max(0, Number(state.maxBrews) || 0),
+      maxBrewsPerDay: effort.maxBrewsPerDay,
+      claimsPerDay: effort.claimsPerDay,
       maxDaysPerPet: over.maxDaysPerPet ?? Math.max(1, Number(state.horizon) || 365),
       minProfitPerDay: 0,
     }),
@@ -682,13 +762,20 @@ function unplannableNote(planned: PetPlanRow[]): string {
     strategy's money comes from.</div>`;
 }
 
-function routeTabsHtml(): string {
+/**
+ * The effort chips, which are the tab's main control and sit above the answer.
+ *
+ * Labelled by what they cost you rather than by what they enable, because the decision being made
+ * is "how much am I prepared to do", not "which routes should the solver consider".
+ */
+function effortTabsHtml(): string {
   return `<div class="tabs">
-    ${ROUTE_TABS.map(
-      ([id, label, help]) =>
-        `<button class="chip${state.routes === id ? " on" : ""}" data-pxroute="${id}" title="${escapeHtml(
-          help,
-        )}">${escapeHtml(label)}</button>`,
+    <span class="dim" style="align-self:center;font-size:12px;margin-right:4px">Willing to do:</span>
+    ${EFFORTS.map(
+      (e) =>
+        `<button class="chip${state.effort === e.id ? " on" : ""}" data-pxeffort="${e.id}" title="${escapeHtml(
+          `${e.help} Costs you ${e.cost}.`,
+        )}">${escapeHtml(e.label)}</button>`,
     ).join("")}
     <button class="chip${state.hideLosers ? " on" : ""}" id="pxhideloss"
       title="Hide any pairing that makes less than simply running the minion and selling everything. On the brewing routes that is most of them: a stand that eats more in drops than the pet is worth is a worse plan than no plan.">Hide the ones that lose</button>
@@ -729,10 +816,12 @@ function renderPlan(): void {
   if (!target || !tables) return;
 
   if (!state.pets) {
-    target.innerHTML = `<h3 class="gh-h">The plan</h3>
-      <p class="dim pad">${PLAN_NOTE}</p>
-      <div class="warn">This needs pet prices, which means reading the auction house — the button is in
-        <strong>Best pet to level</strong> below. Everything else on this tab works without it.</div>`;
+    target.innerHTML = `${effortTabsHtml()}
+      <div class="panel pad">
+        <p>Pet prices come from the auction house, and nothing here can be answered without them.
+          It is about a hundred megabytes and takes a minute; the result is cached.</p>
+        <div class="tabs"><button class="chip" id="pxscan">Read the auction house</button></div>
+      </div>`;
     return;
   }
 
@@ -740,7 +829,7 @@ function renderPlan(): void {
   if (rows.length === 0) {
     target.innerHTML = `<h3 class="gh-h">The plan</h3>
       <p class="dim pad">${PLAN_NOTE}</p>
-      ${routeTabsHtml()}
+      ${effortTabsHtml()}
       ${emptyReason()}`;
     return;
   }
@@ -764,45 +853,50 @@ function renderPlan(): void {
         <td>${escapeHtml(r.petName)}<div class="dim bz-path">${escapeHtml(title(r.petRarity))}${
           r.matched ? "" : ` · <span class="gold">skill mismatch</span>`
         }</div>${brews}</td>
-        <td class="num">${coins(Math.round(r.totalProfitPerDay))}</td>
-        <td class="num${r.beatsSelling ? "" : " bleed on"}">${
+        <td class="num${r.beatsSelling ? " gold" : " bleed on"}">${
           r.advantagePerDay >= 0 ? "+" : "−"
         }${coins(Math.abs(Math.round(r.advantagePerDay)))}</td>
-        <td class="num">${coins(Math.round(r.petProfitPerDay))}</td>
-        <td class="num">${coins(Math.round(r.itemProfitPerDay))}</td>
-        <td class="num">${num(Math.round(r.petXpPerDay))}</td>
-        <td class="num">${r.daysPerPet < 1 ? `${(r.daysPerPet * 24).toFixed(1)} hr` : `${r.daysPerPet.toFixed(1)} d`}</td>
+        <td class="num">${coins(Math.round(r.totalProfitPerDay))}</td>
+        <td class="num dim">${coins(Math.round(r.sellOnlyPerDay))}</td>
+        <td class="num">${r.daysPerPet < 1 ? `${(r.daysPerPet * 24).toFixed(1)} hr` : `${Math.round(r.daysPerPet)} d`}</td>
+        <td class="num">${num(Math.round(r.actionsPerDay))}</td>
       </tr>${
         state.openPlan === r.generator + ":" + r.petKey + ":" + r.petRarity
-          ? `<tr class="mn-detail"><td colspan="8">${planDetail(r)}</td></tr>`
+          ? `<tr class="mn-detail"><td colspan="7">${planDetail(r)}</td></tr>`
           : ""
       }`;
     })
     .join("");
 
   target.innerHTML = `
-    <h3 class="gh-h">The plan</h3>
-    <p class="dim pad">${PLAN_NOTE}</p>
-    ${routeTabsHtml()}
-    <div class="stats" style="grid-template-columns: repeat(3, 1fr)">
+    ${effortTabsHtml()}
+    <div class="stats" style="grid-template-columns: repeat(4, 1fr)">
       <div class="stat">
         <div class="stat-label">Put down</div>
         <div class="stat-value gold">${escapeHtml(best.family)}</div>
-        <div class="stat-sub">tier ${best.tier} · ${escapeHtml(title(best.skill))} · ${escapeHtml(state.count)} of them</div>
+        <div class="stat-sub">${escapeHtml(state.count)} of them at tier ${best.tier}</div>
       </div>
       <div class="stat">
         <div class="stat-label">Level this pet</div>
         <div class="stat-value gold">${escapeHtml(best.petName)}</div>
-        <div class="stat-sub">${escapeHtml(title(best.petRarity))} · one every ${
-          best.daysPerPet < 1 ? `${(best.daysPerPet * 24).toFixed(1)} hours` : `${best.daysPerPet.toFixed(1)} days`
+        <div class="stat-sub">buy ${escapeHtml(title(best.petRarity))} at ${coins(best.buyPrice)} · one every ${
+          best.daysPerPet < 1 ? `${(best.daysPerPet * 24).toFixed(1)} hours` : `${Math.round(best.daysPerPet)} days`
         }</div>
       </div>
       <div class="stat">
-        <div class="stat-label">Profit a day</div>
-        <div class="stat-value gold">${coins(Math.round(best.totalProfitPerDay))}</div>
-        <div class="stat-sub">${coins(Math.round(best.petProfitPerDay))} pets · ${coins(
-          Math.round(best.itemProfitPerDay),
-        )} items</div>
+        <div class="stat-label">Pets add</div>
+        <div class="stat-value gold">${best.advantagePerDay >= 0 ? "+" : "−"}${coins(
+          Math.abs(Math.round(best.advantagePerDay)),
+        )}<span class="stat-sub">/day</span></div>
+        <div class="stat-sub">on top of ${coins(Math.round(best.sellOnlyPerDay))} from selling the output —
+          ${coins(Math.round(best.totalProfitPerDay))} altogether</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Costs you</div>
+        <div class="stat-value">${escapeHtml(effortOf(state.effort).cost.split(" and ")[0])}</div>
+        <div class="stat-sub">${
+          best.brewsPerDay > 0 ? `and ${num(Math.round(best.brewsPerDay))} brews` : "and nothing else"
+        }</div>
       </div>
     </div>
     ${petShareNote(best)}
@@ -810,12 +904,11 @@ function renderPlan(): void {
       <table class="bz">
         <thead><tr>
           <th>Minion</th><th>Pet</th>
-          <th class="num" title="Everything this setup makes in a day: the pet margin plus whatever items were left to sell.">Profit/day</th>
-          <th class="num" title="What the pet plan is worth OVER simply running the minion and selling the lot. This is what the plan is chosen on. Negative means the drops a brewing stand eats are worth more than the pet they level — the plan is worse than not having one.">vs selling</th>
-          <th class="num" title="From buying the pet cheap, levelling it on this minion's XP, and selling it maxed.">Pets</th>
-          <th class="num" title="From selling what the minion produced while it did it. For most real setups this is the larger half.">Items</th>
-          <th class="num">Pet xp/day</th>
-          <th class="num" title="How long one pet takes from the cheapest listing to max level.">Per pet</th>
+          <th class="num" title="What the pet plan is worth OVER simply running the minion and selling the lot. This is what the table is ranked and chosen on, because it is the only part pet-levelling is responsible for. Negative means the plan is worse than not having one.">Pets add</th>
+          <th class="num" title="Everything this setup makes in a day: the pet margin plus whatever items were left to sell. Mostly the items, on almost every row.">Total/day</th>
+          <th class="num" title="From selling what the minion produced. This is what the minion would earn with no pet on it at all.">Just selling</th>
+          <th class="num" title="How long one pet takes from the cheapest listing to max level, at this minion's rate.">Per pet</th>
+          <th class="num" title="Things you have to actually do in a day: collections plus brews. The constraint this whole tab is built around.">Actions/day</th>
         </tr></thead>
         <tbody>${body}</tbody>
       </table>
@@ -828,22 +921,25 @@ function renderPlan(): void {
 }
 
 /**
- * Which half of the profit is actually doing the work, said out loud when it is lopsided.
+ * The honest headline, when the honest headline is unflattering.
  *
- * For almost every real setup the answer is "the items", by an order of magnitude — the published
- * minion XP rates are fractions of a point per drop, so a pet takes months. A section that printed
- * one profit figure without saying that would read as "level pets off minions for 1.3M a day",
- * which is not what the number means.
+ * With the table ranked on what pet-levelling *adds*, the cards no longer overstate anything — but
+ * they also do not say the thing a reader most needs to hear, which is how small that addition is
+ * next to simply running the minion. At published rates a pet takes months, so the answer to "best
+ * money from minion pet-levelling" is usually "the levelling is a rounding error; the minion is the
+ * money". Saying it once, here, is cheaper than letting somebody work it out after buying a pet.
  */
 function petShareNote(best: PetPlanRow): string {
-  const share = best.totalProfitPerDay > 0 ? best.petProfitPerDay / best.totalProfitPerDay : 0;
+  const share = best.totalProfitPerDay > 0 ? best.advantagePerDay / best.totalProfitPerDay : 0;
   if (share >= 0.25) return "";
-  return `<div class="warn">Almost all of this is the <strong>items</strong>, not the pet:
-    ${coins(Math.round(best.itemProfitPerDay))} a day from selling what the minion makes against
-    ${coins(Math.round(best.petProfitPerDay))} from the pet. Minion XP is a trickle — the published rates are
-    fractions of a point a drop — so the pet is a slow bonus on top of a minion worth running anyway, not the
-    reason to run it. Raising the tier or the minion count moves both halves; only a matching pet moves the
-    pet half much.</div>`;
+  return `<div class="warn">Worth knowing before you buy anything: pet-levelling is
+    <strong>${(share * 100).toFixed(1)}%</strong> of this plan. The minion earns
+    ${coins(Math.round(best.sellOnlyPerDay))} a day selling its output whether or not a pet is out, and the
+    pet adds ${coins(Math.round(best.advantagePerDay))} on top over
+    ${best.daysPerPet < 1 ? "less than a day" : `${num(Math.round(best.daysPerPet))} days`} per pet. The
+    published minion XP rates are fractions of a point a drop, so this is a slow bonus on a minion worth
+    running anyway — not a reason to run one. More minions and a higher tier move both halves; a
+    <em>matching</em> pet is the only thing that moves the pet half much.</div>`;
 }
 
 /** The row opened out: where each half of the day's profit came from. */
@@ -886,30 +982,11 @@ function planDetail(r: PetPlanRow): string {
   return lines.join("");
 }
 
-/**
- * Which routes the plan may use.
- *
- * Brewing wins on raw Pet XP by a wide margin and it wins for a reason worth seeing — an Alchemy
- * pet on a brewed route dodges the /12 that makes Alchemy XP nearly worthless to anything else.
- * But it is also the one route that is work rather than a by-product, so "collect only" is the
- * setting for a plan you can leave alone, and it is a different plan rather than the same table
- * with rows removed.
- */
-const ROUTE_TABS: [State["routes"], string, string][] = [
-  ["all", "All routes", "Every way a minion reaches a skill, brewing included."],
-  [
-    "collect",
-    "Collect only",
-    "No brewing stand. The XP that arrives simply by collecting a minion you were collecting anyway — " +
-      "nothing to stand and do, and nothing given up to get it.",
-  ],
-  [
-    "brew",
-    "Brewing only",
-    "Compact the drops into their enchanted form and brew them. Far more Pet XP per drop, at the cost of the " +
-      "drops themselves and an evening at the stand — both of which are charged here.",
-  ],
-];
+
+const INTENT =
+  "The best money from minion pet-levelling without doing anything excessive. Pick how much you are willing to " +
+  "do and this finds the minion and the pet that pay the most inside that budget — counting both the pet margin " +
+  "and everything the minion sells while it levels. Everything below the answer is optional.";
 
 const WISDOM_NOTE =
   "Wisdom is per skill and the six are nothing like each other — an account deep in Slayers can be at 30 Combat " +

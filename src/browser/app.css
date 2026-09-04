@@ -365,3 +365,20 @@ table.bz tr.gh-detail > td, table.bz tr.mn-detail > td { padding: 10px 12px 14px
 .gh-break td.num { white-space: nowrap; text-align: right; }
 .gh-break tr.gh-total td { border-top: 1px solid rgba(255,255,255,0.14); padding-top: 5px; }
 .gh-sub { font-size: 0.85em; }
+
+/* Collapsible sections on the pet-profits tab.
+   The tab answers one question and everything else is optional detail, so the detail is folded
+   away rather than deleted — a reader who wants to check the arithmetic can still reach it. */
+.pxfold { margin-top: 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
+.pxfold + .pxfold { margin-top: 6px; }
+.pxfold > summary {
+  cursor: pointer; user-select: none; padding: 10px 14px; font-size: 13px;
+  list-style: none; display: flex; gap: 8px; align-items: baseline;
+}
+.pxfold > summary::-webkit-details-marker { display: none; }
+.pxfold > summary::before { content: "+"; width: 10px; color: var(--muted); }
+.pxfold[open] > summary::before { content: "−"; }
+.pxfold > summary:hover { color: var(--aqua); }
+.pxfold[open] > summary { border-bottom: 1px solid var(--line); }
+.pxfold > .panel { border: none; border-radius: 0; }
+.pxfold > .panel.controls { margin-bottom: 0; }

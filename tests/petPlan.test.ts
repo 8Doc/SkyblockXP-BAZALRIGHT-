@@ -147,6 +147,7 @@ const options = (over: Partial<PetPlanOptions> = {}): PetPlanOptions => ({
   itemCoinsPerHour: new Map([["COBBLESTONE", 0]]),
   dropValue: new Map([["COBBLESTONE", 1]]),
   maxBrewsPerDay: 100,
+  claimsPerDay: 1,
   ...over,
 });
 

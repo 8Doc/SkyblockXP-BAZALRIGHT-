@@ -46,6 +46,10 @@ export type PetPlanRow = {
   petKey: string;
   petName: string;
   petRarity: string;
+  /** What the cheap end costs today. The headline is a shopping instruction, so it needs the price. */
+  buyPrice: number;
+  /** The level that cheap end is listed at — 1 unless nobody is selling one that low. */
+  buyLevel: number;
   /** True when the pet's own skill is the one the minion feeds — the difference is a factor of 3. */
   matched: boolean;
 
@@ -69,6 +73,15 @@ export type PetPlanRow = {
   brewingCostPerDay: number;
   /** Brews a day this route asks of you. Zero on every direct route. */
   brewsPerDay: number;
+  /**
+   * Things you have to actually do in a day: collections, plus brews.
+   *
+   * The figure the whole tab is really ranked against. "The best money from minion pet-levelling
+   * without doing any excessive action" is a constrained optimisation, and this is the constraint —
+   * a plan worth 300k a day for one collection is a different proposition from one worth 400k that
+   * wants two hundred trips to a brewing stand, and a table that prints only the coins hides that.
+   */
+  actionsPerDay: number;
 
   /** Coins a day from doing none of this — just running the minion and selling everything. */
   sellOnlyPerDay: number;
@@ -110,6 +123,14 @@ export type PetPlanOptions = {
    * job and the profit figure beside it is a fiction.
    */
   maxBrewsPerDay: number;
+  /**
+   * Collections a day, which is the other half of the effort budget and the one nobody counts.
+   *
+   * Also decides how much of the minion's output survives: past the point storage fills, a minion
+   * earns nothing until someone empties it, so collecting once a day and collecting four times are
+   * different incomes as well as different amounts of work.
+   */
+  claimsPerDay: number;
   /** Drop pairs whose profit is below this, in coins a day. Keeps the table to real plans. */
   minProfitPerDay?: number;
   /**
@@ -238,10 +259,13 @@ export function planPetPairs(o: PetPlanOptions): PetPlanRow[] {
         petKey: pet.key,
         petName: nameOf.get(bare) ?? pet.name,
         petRarity: pet.rarity,
+        buyPrice: pet.buy.price,
+        buyLevel: pet.buy.level,
         matched,
         petXpPerDay,
         daysPerPet,
         petsPerDay,
+        actionsPerDay: o.claimsPerDay + brewsPerDay,
         petProfitPerDay,
         itemProfitPerDay,
         brewingCostPerDay,
@@ -255,7 +279,11 @@ export function planPetPairs(o: PetPlanOptions): PetPlanRow[] {
     }
   }
 
-  return out.sort((a, b) => b.totalProfitPerDay - a.totalProfitPerDay);
+  // Ranked on the ADVANTAGE, not the total. The total is dominated by item income the minion would
+  // earn with no pet on it at all, so ranking on it answers "which minion sells the most" — a
+  // question the Raw profits tab already answers better — and attaches whatever pet happens to be
+  // along for the ride. This tab is about what pet-levelling adds, so that is what it sorts by.
+  return out.sort((a, b) => b.advantagePerDay - a.advantagePerDay);
 }
 
 /**
@@ -277,5 +305,5 @@ export function bestPerMinion(rows: PetPlanRow[]): PetPlanRow[] {
     // is this than just selling the output", which is the question being asked.
     if (!held || row.advantagePerDay > held.advantagePerDay) best.set(row.generator, row);
   }
-  return [...best.values()].sort((a, b) => b.totalProfitPerDay - a.totalProfitPerDay);
+  return [...best.values()].sort((a, b) => b.advantagePerDay - a.advantagePerDay);
 }

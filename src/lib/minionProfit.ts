@@ -230,6 +230,14 @@ export type Stream = {
   price: BasisPrice | null;
   /** True for a stream an upgrade added rather than the minion's own drop. */
   fromUpgrade: string | null;
+  /**
+   * The item this stream is actually sold as.
+   *
+   * The compacted form wherever a compactor is fitted and that form has a market, otherwise the
+   * drop itself. Worth carrying so a row can say "priced as Enchanted Ice" rather than leaving a
+   * reader to wonder why an item with no buy orders has a price.
+   */
+  soldAs?: string | null;
 };
 
 /* -------------------------------------------------------------------- row */
@@ -355,16 +363,35 @@ export function planProfit(o: ProfitOptions): MinionProfitRow[] {
 
     const streams: Stream[] = [];
     const priceStream = (id: string | null, name: string, perHour: number, fromUpgrade: string | null): Stream => {
-      const prices = id ? o.prices.get(id) : undefined;
-      const variance = id ? (o.variance.get(id) ?? null) : null;
-      const value = prices ? unitValue(prices, o.basis, variance, o.trust) : null;
+      const raw = id ? o.prices.get(id) : undefined;
       const packed = id ? compactionOf(id, o.setup.compactor, o.recipes) : { ratio: 1, itemId: "" };
-      // The hopper sells what is in the inventory, and with a compactor in the minion that is the
-      // enchanted item — so it is priced at the enchanted item's shop price divided back down to
-      // the raw drop, not at the raw drop's own.
-      const packedNpc = packed.itemId ? (o.prices.get(packed.itemId)?.npcSell ?? null) : null;
-      const npcPerRaw =
-        packed.ratio > 1 && packedNpc !== null ? packedNpc / packed.ratio : (prices?.npcSell ?? 0);
+
+      /**
+       * Price what you are actually holding.
+       *
+       * With a compactor fitted the minion's inventory contains the enchanted item, not the drop,
+       * so that is what gets collected and that is what gets sold — and the two markets are not the
+       * same market divided by 160. Raw Ice has no buy orders at all on the bazaar while Enchanted
+       * Ice trades at 67; pricing the collected stream as ice values an Ice Minion at nothing and
+       * quietly drops it out of every ranking it should win.
+       *
+       * Falls back to the raw item wherever the compacted form has no price of its own, which is
+       * the right way round: an item nobody trades in bulk is still worth its parts.
+       */
+      const packedPrices = packed.ratio > 1 && packed.itemId ? o.prices.get(packed.itemId) : undefined;
+      const packedVariance = packed.ratio > 1 && packed.itemId ? (o.variance.get(packed.itemId) ?? null) : null;
+      const packedValue = packedPrices ? unitValue(packedPrices, o.basis, packedVariance, o.trust) : null;
+
+      const rawVariance = id ? (o.variance.get(id) ?? null) : null;
+      const rawValue = raw ? unitValue(raw, o.basis, rawVariance, o.trust) : null;
+
+      // Per raw drop either way, so everything downstream keeps counting in drops.
+      const value = packedValue ? { ...packedValue, price: packedValue.price / packed.ratio } : rawValue;
+
+      // A hopper sells out of that same inventory, at the shopkeeper's price and its own cut.
+      const packedNpc = packedPrices?.npcSell ?? null;
+      const npcPerRaw = packedNpc !== null ? packedNpc / packed.ratio : (raw?.npcSell ?? 0);
+
       return {
         itemId: id,
         itemName: name,
@@ -373,6 +400,8 @@ export function planProfit(o: ProfitOptions): MinionProfitRow[] {
         unit: value?.price ?? 0,
         hopperUnit: npcPerRaw * o.setup.hopper.npcShare,
         price: value,
+        /** What the stream is actually sold as, which is the compacted item where there is one. */
+        soldAs: packedValue && packed.itemId ? packed.itemId : id,
         fromUpgrade,
       };
     };

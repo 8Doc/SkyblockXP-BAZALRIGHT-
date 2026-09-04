@@ -1527,3 +1527,44 @@ two. So the six boxes are typed once and remembered, each with a tooltip naming 
 Wisdom actually comes from, and the note says plainly that the profile cannot supply them. The old
 single value is migrated across all six on first load rather than dropped — wrong in detail, much
 closer than zero, and one edit puts it right.
+
+
+## The pet tab, rebuilt around what it is for
+
+The tab exists to answer one question — *the best money from minion pet-levelling without doing
+anything excessive* — and it was not shaped like that question. Twelve inputs came before any
+answer, brewing was on by default, and the constraint in the question ("without excessive action")
+was spread across two numeric boxes nobody would think to set.
+
+**Effort is now the primary control and the first thing on the page.** Three levels, each fixing
+the three things that have to agree — how often you empty the minions, how many brews you will
+stand and do, and whether brewing is considered at all — because they are the same decision.
+Someone who visits once a day is not the person who will do two hundred brews, and offering those
+independently produced setups nobody would run. `Set and forget` is the default: one collection a
+day, no brewing. It is the question as asked. Every row also carries **actions a day**, so the cost
+of a plan is on the row beside its profit.
+
+**Ranking moved from total profit to what pet-levelling adds.** This was the bug the redesign
+exposed. Total profit is dominated by item income the minion earns with no pet on it at all, so
+ranking on it answered "which minion sells the most" — a question Raw profits answers better — and
+attached whatever pet happened to be along for the ride. The result was a headline recommending a
+**191M Mosquito for +7.4k a day**, at ten thousand days per pet. Ranked on the advantage instead,
+the same data recommends an Ice Minion with a Scatha at **+72k a day for one collection**, which is
+a real answer to the real question.
+
+Everything else folds away: `Your account` (the six Wisdom boxes and Taming), `The minions` (count,
+tier, slots, horizon), and `Show the workings` (the per-skill XP cards and the whole pet market).
+The answer is the page; the rest is available to anyone who wants to check it.
+
+### A minion sells what the compactor made, not what it dropped
+
+Found while checking why the Ice Minion was showing nothing. Raw Ice has **no buy orders at all** on
+the bazaar — its instasell is zero — so the minion priced out at nought and fell out of every
+ranking. But a minion with a Super Compactor does not hold ice; it holds Enchanted Ice, which trades
+at 67. The hopper had already been taught this; the ordinary collect-and-sell path had not, and was
+still pricing the raw drop.
+
+The collected stream is now valued as whatever is actually in the inventory, divided back down to
+the drop so everything downstream still counts in drops, falling back to the raw item wherever the
+compacted form has no market of its own. The Ice Minion goes from 0 to 15k a day, and the fix
+applies to every item whose bulk form trades thinly — which is most of them.

@@ -368,6 +368,20 @@ work that provably cannot have changed:
 - **Both halves of the profit are counted**: the pet margin, and everything the minion sold while it
   levelled. For every real setup the items are the larger half by an order of magnitude, and the
   section says so rather than letting one number read as "level pets off minions for 1.3M a day".
+- **The Pet profits tab is shaped around its question**: the best money from minion pet-levelling
+  without doing anything excessive. **Effort** is the first control and the primary one — three
+  levels, each fixing how often you collect, how many brews you will do, and whether brewing counts
+  at all, because those are one decision rather than three. `Set and forget` is the default. Every
+  row carries **actions a day** beside its profit, and everything else folds away behind three
+  collapsed sections.
+- **It ranks on what pet-levelling adds, not on total profit.** Total is dominated by item income
+  the minion earns with no pet on it, so ranking on it recommended a 191M Mosquito for +7.4k a day
+  at ten thousand days per pet. Ranked on the advantage, the same data says Ice Minion + Scatha,
+  **+72k a day for one collection**.
+- **A minion sells what the compactor made.** Raw Ice has no buy orders on the bazaar, so the Ice
+  Minion priced out at zero — but a compactor means you hold Enchanted Ice, which trades at 67. The
+  hopper already knew this; the ordinary collect-and-sell path did not. Ice goes 0 → 15k a day, and
+  it applies to every item whose raw form trades thinly.
 - **Brewing costs an opportunity, not money, and is shown that way.** Drops fed to a stand are
   revenue not made rather than money lost, so instead of subtracting them as a cost every row
   carries **vs selling**: what the plan makes over simply running the minion and selling the lot.
