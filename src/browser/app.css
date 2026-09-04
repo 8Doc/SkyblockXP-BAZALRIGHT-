@@ -388,3 +388,16 @@ table.bz tr.gh-detail > td, table.bz tr.mn-detail > td { padding: 10px 12px 14px
    on a <tr> makes the row `display: flex`, which collapses every cell out of its column. */
 table.bz tbody tr.bz-faded > td { color: var(--muted); }
 table.bz tbody tr.bz-faded > td:first-child { opacity: 0.75; }
+
+/* The pet tab's controls are always on screen rather than folded away, so they have to pack.
+   A <select> sizes itself to its widest option, and the fuel and upgrade lists carry names like
+   "Dwarven Super Compactor" — left alone they force their label past its flex basis and the row
+   wraps onto four lines. Making the control fill its label puts the flex basis back in charge.
+
+   128px is chosen so the six-control row fits on one line at the app's 1000px max width: six of
+   them plus five 12px gaps is 828, and flex-grow spends the remainder. At 150 the sixth wrapped
+   and then grew to the full width on its own, which looked like a mistake because it was one.
+   Scoped to this tab: the planner's own rows are laid out around their natural widths. */
+.px-controls .row > label { flex: 1 1 128px; min-width: 0; }
+.px-controls .row > label > select,
+.px-controls .row > label > input { width: 100%; min-width: 0; box-sizing: border-box; }

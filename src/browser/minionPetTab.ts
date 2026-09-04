@@ -574,56 +574,49 @@ function render(): void {
   host.innerHTML = `
     <p class="sub dim">${INTENT}</p>
 
+    <div class="panel pad controls px-controls">
+      <div class="row">
+        ${WISDOM_SKILLS.map(
+          (skill) => `<label style="flex:1 1 96px" title="${escapeHtml(
+            `${title(skill)} Wisdom. It multiplies ${title(skill)} XP by 1 + Wisdom/100 before anything else touches it. ${
+              WISDOM_HELP[skill] ?? ""
+            }`,
+          )}">${escapeHtml(title(skill))} wisdom
+            <input data-pxwisdom="${skill}" value="${escapeHtml(state.wisdom[skill] ?? "")}" placeholder="0" inputmode="decimal" autocomplete="off">
+          </label>`,
+        ).join("")}
+        <label style="flex:1 1 96px" title="Your Taming level, 0 to 60. Each level is one level of Zoologist, which is +1% Pet XP — so Taming 60 is a flat x1.60 on everything below.">Taming level
+          <input id="pxtaming" value="${escapeHtml(state.taming)}" placeholder="0" inputmode="numeric" autocomplete="off">
+        </label>
+      </div>
+
+      <div class="row">
+        <label title="How many of the one minion are placed. Production scales straight off this, so it moves both halves of the profit and it is usually the fastest thing to change.">Minions
+          <input id="pxcount" value="${escapeHtml(state.count)}" inputmode="numeric" autocomplete="off">
+        </label>
+        <label>Tier <select id="pxtier">${tiers}</select></label>
+        <label>Fuel <select id="pxfuel">${optionList(tables.modifiers.fuels, state.fuel)}</select></label>
+        <label>Upgrade 1 <select id="pxup0">${optionList(tables.modifiers.upgrades, state.upgrades[0])}</select></label>
+        <label>Upgrade 2 <select id="pxup1">${optionList(tables.modifiers.upgrades, state.upgrades[1])}</select></label>
+        <label title="Pairings where one pet would take longer than this are not plans and are left out. Without it the table recommends a pet that finishes in twenty-three thousand days, because the coins from selling the minion's output dwarf the pet margin.">Pet within (days)
+          <input id="pxhorizon" value="${escapeHtml(state.horizon)}" inputmode="numeric" autocomplete="off">
+        </label>
+      </div>
+
+      <p class="sub dim">${WISDOM_NOTE}</p>
+    </div>
+
     <div id="pxplan"></div>
 
     <details class="pxfold">
-      <summary>Your account <span class="dim">— wisdom and taming, which scale every XP figure here</span></summary>
-      <div class="panel pad controls">
-        <div class="row">
-          ${WISDOM_SKILLS.map(
-            (skill) => `<label style="flex:1 1 120px" title="${escapeHtml(
-              `${title(skill)} Wisdom. It multiplies ${title(skill)} XP by 1 + Wisdom/100 before anything else touches it. ${
-                WISDOM_HELP[skill] ?? ""
-              }`,
-            )}">${escapeHtml(title(skill))} wisdom
-              <input data-pxwisdom="${skill}" value="${escapeHtml(state.wisdom[skill] ?? "")}" placeholder="0" inputmode="decimal" autocomplete="off">
-            </label>`,
-          ).join("")}
-          <label style="flex:1 1 120px" title="Your Taming level, 0 to 60. Each level is one level of Zoologist, which is +1% Pet XP — so Taming 60 is a flat x1.60 on everything below.">Taming level
-            <input id="pxtaming" value="${escapeHtml(state.taming)}" placeholder="0" inputmode="numeric" autocomplete="off">
-          </label>
-        </div>
-        <p class="sub dim">${WISDOM_NOTE}</p>
-      </div>
-    </details>
-
-    <details class="pxfold">
-      <summary>The minions <span class="dim">— how many, what tier, what is in the slots</span></summary>
-      <div class="panel pad controls">
-        <div class="row">
-          <label title="How many of the one minion are placed.">Minions
-            <input id="pxcount" value="${escapeHtml(state.count)}" inputmode="numeric" autocomplete="off">
-          </label>
-          <label>Tier <select id="pxtier">${tiers}</select></label>
-          <label>Fuel <select id="pxfuel">${optionList(tables.modifiers.fuels, state.fuel)}</select></label>
-          <label>Upgrade 1 <select id="pxup0">${optionList(tables.modifiers.upgrades, state.upgrades[0])}</select></label>
-          <label>Upgrade 2 <select id="pxup1">${optionList(tables.modifiers.upgrades, state.upgrades[1])}</select></label>
-          <label title="Pairings where one pet would take longer than this are not plans and are left out. Without it the table recommends a pet that finishes in twenty-three thousand days, because the coins from selling the minion's output dwarf the pet margin.">Pet must finish within (days)
-            <input id="pxhorizon" value="${escapeHtml(state.horizon)}" inputmode="numeric" autocomplete="off">
-          </label>
-        </div>
-        <p class="sub dim">${chainNote()}</p>
-      </div>
-    </details>
-
-    <details class="pxfold">
-      <summary>Show the workings <span class="dim">— XP by skill, and every pet on the market</span></summary>
+      <summary>Show the workings <span class="dim">— XP by skill, every pet on the market, and how the chain multiplies</span></summary>
       <div class="panel pad controls">
         <div class="row">
           <label title="The skill the pet you are levelling belongs to. Only affects the cards below — the plan above pairs each minion with its own best pet automatically.">Pet's skill
             <select id="pxpetskill">${petSkills}</select>
           </label>
         </div>
+        <p class="sub dim">${chainNote()}</p>
       </div>
       <div id="pxskills"></div>
       <div id="pxpets"></div>
@@ -1009,14 +1002,13 @@ const INTENT =
   "and everything the minion sells while it levels. Everything below the answer is optional.";
 
 const WISDOM_NOTE =
-  "Wisdom is per skill and the six are nothing like each other — an account deep in Slayers can be at 30 Combat " +
-  "Wisdom and 0 Alchemy. It multiplies the Skill XP before anything else touches it, so it is the single input " +
-  "here most worth getting right. <strong>These cannot be read from your profile.</strong> Wisdom comes from " +
-  "equipped gear, enchantments, attributes, pets, accessories and whatever cookie or potion is running, and " +
-  "Hypixel publishes the components rather than the total — computing it means reproducing the whole stat engine, " +
-  "and a partial answer would understate a geared account by a hundred or more while looking authoritative. " +
-  "Read the real figures off your own stats in the SkyBlock menu, or off SkyCrypt, and type them once; they are " +
-  "remembered.";
+  '<strong>Wisdom multiplies the XP before anything else touches it</strong>, so these six are the inputs most ' +
+  'worth getting right — and they cannot be read from your profile, because Hypixel publishes the components ' +
+  '(gear, enchants, attributes, pets, accessories, cookies) rather than the total. Read them off your own stats ' +
+  'in the SkyBlock menu or off SkyCrypt and type them once; they are remembered. ' +
+  '<span title="A geared account runs 170-240 per skill, and the largest sources are whatever you have equipped. ' +
+  'Reading only the parts this page can see would find about 2 of that while looking authoritative, and would ' +
+  'halve every figure below without saying so." class="gold">Why not automatic?</span>';
 
 const PLAN_NOTE =
   "Ranked on what pet-levelling adds, not on the total — the total is mostly the minion selling its output, " +

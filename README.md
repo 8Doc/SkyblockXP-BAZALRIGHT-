@@ -372,8 +372,9 @@ work that provably cannot have changed:
   without doing anything excessive. **Effort** is the first control and the primary one — three
   levels, each fixing how often you collect, how many brews you will do, and whether brewing counts
   at all, because those are one decision rather than three. `Set and forget` is the default. Every
-  row carries **actions a day** beside its profit, and everything else folds away behind three
-  collapsed sections.
+  row carries **actions a day** beside its profit. The Wisdom boxes and the minion setup stay on
+  screen — they scale every number below them, and folding them away is how a plan ends up computed
+  against six zeroes nobody noticed. Only the workings fold.
 - **Pets nobody is buying are left out.** The sell side was the cheapest max-level listing, which is
   a real number and often not a price anyone will pay: a levelled Common Rock has **one** listing
   behind it against thirty-two for a Golden Dragon. The sweep already reads `start`, so depth and
