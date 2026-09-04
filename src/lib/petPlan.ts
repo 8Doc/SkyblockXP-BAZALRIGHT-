@@ -1,5 +1,5 @@
 import { petXpMultiplier, withWisdom, wisdomFor, type MinionXpRow, type PetXpRules, type Player, type SkillKey } from "./minionXp";
-import type { PetProfitRow } from "./petLevelling";
+import type { Liquidity, PetProfitRow } from "./petLevelling";
 
 /**
  * Which minion to put down, which pet to sit on it, and what the pair makes in a day.
@@ -46,6 +46,8 @@ export type PetPlanRow = {
   petKey: string;
   petName: string;
   petRarity: string;
+  /** How deep the market is behind the pet's sell price. A plan to list an unsellable pet is not one. */
+  petLiquidity: Liquidity;
   /** What the cheap end costs today. The headline is a shopping instruction, so it needs the price. */
   buyPrice: number;
   /** The level that cheap end is listed at — 1 unless nobody is selling one that low. */
@@ -259,6 +261,7 @@ export function planPetPairs(o: PetPlanOptions): PetPlanRow[] {
         petKey: pet.key,
         petName: nameOf.get(bare) ?? pet.name,
         petRarity: pet.rarity,
+        petLiquidity: pet.liquidity,
         buyPrice: pet.buy.price,
         buyLevel: pet.buy.level,
         matched,

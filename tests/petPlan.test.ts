@@ -103,6 +103,9 @@ const petRow = (key: string, profit: number, xpNeeded: number): PetProfitRow => 
   xpNeeded,
   coinsPerXp: profit / xpNeeded,
   approximate: false,
+  listings: 10,
+  meanAgeHours: 12,
+  liquidity: "ok",
   caveats: [],
 });
 

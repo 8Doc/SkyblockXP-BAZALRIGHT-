@@ -1568,3 +1568,41 @@ The collected stream is now valued as whatever is actually in the inventory, div
 the drop so everything downstream still counts in drops, falling back to the raw item wherever the
 compacted form has no market of its own. The Ice Minion goes from 0 to 15k a day, and the fix
 applies to every item whose bulk form trades thinly — which is most of them.
+
+
+## A lowest BIN is not a market
+
+The pet half was ranking on the cheapest max-level listing, which is a real number and frequently
+not a price anyone will pay you. A levelled Common Rock clears a healthy margin on paper; a full
+sweep of the auction house finds **one** of them listed, against thirty-two Golden Dragons. One
+listing is one person's asking price. Recommending it is recommending a pet nobody buys.
+
+Both halves of the signal come free from the sweep already being run, because the auction record
+carries `start`:
+
+- **Depth** — how many copies are listed at max level.
+- **Age** — how long they have sat. `start` is when the listing went up.
+
+Thresholds are measured rather than guessed. Across 134 pet-and-rarity buckets holding a max-level
+listing: median listing age **28 hours**, upper quartile 58, tail past 300. Depth is starker — the
+liquid pets carry twenty to forty listings and the illiquid ones carry one. So fewer than three
+listings is `thin` (not a slow market, an absent one) and a mean age past 72 hours is `slow`.
+
+`thin` pets are dropped from the plan by default and the whole pet table carries a **Market** column
+reading `9 listed · 38h`. Nothing is deleted — `requireMarket: false` brings them back with the
+reason on the row — but a recommendation has to be actionable, and an unsellable pet is not.
+
+Measured on the live auction house, this removes the Rock outright and leaves the plan recommending
+a Mosquito at nine listings and 38 hours.
+
+## The greyed rows were flexbox
+
+Worth writing down because the cause was invisible in the code and obvious on screen. Rows that lose
+to simply selling are de-emphasised, and they were de-emphasised by giving the `<tr>` the planner's
+`task aside` classes — which were the right colour and also `display: flex`. A flex `<tr>` drops
+every cell out of its column, so half the table rendered indented and misaligned while the other
+half was fine.
+
+There is now a `tr.bz-faded` rule that only changes colour, with a comment saying why it is not
+`.task.aside`. The lesson is narrower than "check your CSS": reaching for an existing class because
+it *looks* right is how a layout rule follows a colour rule into a place it does not belong.

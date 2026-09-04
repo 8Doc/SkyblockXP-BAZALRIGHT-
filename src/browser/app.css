@@ -382,3 +382,9 @@ table.bz tr.gh-detail > td, table.bz tr.mn-detail > td { padding: 10px 12px 14px
 .pxfold[open] > summary { border-bottom: 1px solid var(--line); }
 .pxfold > .panel { border: none; border-radius: 0; }
 .pxfold > .panel.controls { margin-bottom: 0; }
+
+/* A table row that is still worth showing and not worth acting on.
+   Emphatically NOT `.task.aside`: that is a flex row for the planner's task lists, and putting it
+   on a <tr> makes the row `display: flex`, which collapses every cell out of its column. */
+table.bz tbody tr.bz-faded > td { color: var(--muted); }
+table.bz tbody tr.bz-faded > td:first-child { opacity: 0.75; }

@@ -20,6 +20,8 @@ export type AuctionRecord = {
   tier?: string;
   item_name?: string;
   starting_bid?: number;
+  /** When the listing went up, in epoch ms. How long a BIN has sat is a liquidity signal. */
+  start?: number;
 };
 
 const DECORATION = /[^\x20-\x7E]/g;

@@ -374,6 +374,13 @@ work that provably cannot have changed:
   at all, because those are one decision rather than three. `Set and forget` is the default. Every
   row carries **actions a day** beside its profit, and everything else folds away behind three
   collapsed sections.
+- **Pets nobody is buying are left out.** The sell side was the cheapest max-level listing, which is
+  a real number and often not a price anyone will pay: a levelled Common Rock has **one** listing
+  behind it against thirty-two for a Golden Dragon. The sweep already reads `start`, so depth and
+  listing age both come free — thresholds measured from a full sweep (median max-level listing is 28
+  hours old; liquid pets carry 20–40 listings, illiquid ones carry one). Under three listings is
+  dropped from the plan by default and the pet table carries a **Market** column. Nothing is deleted;
+  `requireMarket: false` brings them back with the reason attached.
 - **It ranks on what pet-levelling adds, not on total profit.** Total is dominated by item income
   the minion earns with no pet on it, so ranking on it recommended a 191M Mosquito for +7.4k a day
   at ten thousand days per pet. Ranked on the advantage, the same data says Ice Minion + Scatha,

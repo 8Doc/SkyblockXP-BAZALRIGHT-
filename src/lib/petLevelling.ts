@@ -44,7 +44,27 @@ export type PetListing = { level: number; price: number };
  * — usually 1, occasionally not, which is why the level travels with the price instead of being
  * assumed.
  */
-export type PetPrices = { base: PetListing | null; max: PetListing | null };
+export type PetPrices = {
+  base: PetListing | null;
+  max: PetListing | null;
+  /**
+   * How deep each end of the market is, and how long the listings have sat.
+   *
+   * The figure that decides whether the `max` price means anything. A lowest BIN is a number
+   * whatever the market looks like behind it, and for a great many pets there is nothing behind it
+   * at all: a levelled Common Rock has *one* listing, against thirty-two for a Golden Dragon. One
+   * listing is not a price you can sell into, it is a price one person is asking, and a plan built
+   * on it is a plan to list a pet nobody buys.
+   *
+   * Age is the other half. Across the whole auction house a max-level pet's listings sit for a
+   * median of 28 hours; the slow tail runs to a fortnight. A Griffin at 209 hours is not a market
+   * moving slowly, it is a market that has stopped.
+   */
+  maxCount: number;
+  /** Total listing age at the max end, in hours. Divided by `maxCount` for the mean. */
+  maxAgeHours: number;
+  baseCount: number;
+};
 export type PetBinIndex = {
   /** PET:<NAME> to rarity to the two ends. */
   prices: Record<string, Record<string, PetPrices>>;
@@ -99,7 +119,12 @@ export function maxLevelXpOf(key: string, rarity: string, levels: PetLevelTable)
  * pets carry one, and every pet does. Bids are skipped along with everything else that is not a
  * BIN — an auction still running is not a price you can pay.
  */
-export function absorbPetPage(index: PetBinIndex, auctions: AuctionRecord[], levels: PetLevelTable): void {
+export function absorbPetPage(
+  index: PetBinIndex,
+  auctions: AuctionRecord[],
+  levels: PetLevelTable,
+  now: number = Date.now(),
+): void {
   for (const auction of auctions) {
     if (!auction.bin || !auction.item_name || !auction.tier) continue;
     const price = auction.starting_bid ?? 0;
@@ -114,10 +139,18 @@ export function absorbPetPage(index: PetBinIndex, auctions: AuctionRecord[], lev
     index.listings++;
 
     const byRarity = (index.prices[key] ??= {});
-    const ends = (byRarity[auction.tier] ??= { base: null, max: null });
+    const ends = (byRarity[auction.tier] ??= { base: null, max: null, maxCount: 0, maxAgeHours: 0, baseCount: 0 });
+
+    // How long this one has been sitting. `start` is when it was listed; a BIN that has been up for
+    // days is a price nobody is paying.
+    const ageHours = auction.start ? Math.max(0, (now - auction.start) / 3_600_000) : 0;
 
     if (level >= maxLevelOf(key, levels)) {
+      ends.maxCount++;
+      ends.maxAgeHours += ageHours;
       if (!ends.max || price < ends.max.price) ends.max = { level, price };
+    } else {
+      ends.baseCount++;
     }
     // The base end takes the lowest level first and the lowest price second: a level 1 at 12M is
     // a better starting point than a level 4 at 11M, because the four levels are XP you did not
@@ -130,6 +163,29 @@ export function absorbPetPage(index: PetBinIndex, auctions: AuctionRecord[], lev
 }
 
 /* -------------------------------------------------------------------- rows */
+
+/**
+ * Whether the price on the sell side is a market or a single person's hope.
+ *
+ * Thresholds measured rather than guessed, from a full sweep: across 134 pet-and-rarity buckets
+ * with a max-level listing, the median listing age is 28 hours, the upper quartile 58, and the tail
+ * runs past 300. Depth is starker still — the liquid pets carry twenty to forty listings and the
+ * illiquid ones carry one.
+ *
+ * `thin` is the one that matters. It is not a slow market, it is an absent one.
+ */
+export type Liquidity = "thin" | "slow" | "ok";
+
+/** Fewer than this many listings at max level is not a market to sell into. */
+export const THIN_LISTINGS = 3;
+/** Mean listing age past this is a market that has stopped rather than one moving slowly. */
+export const SLOW_HOURS = 72;
+
+export function liquidityOf(listings: number, meanAgeHours: number): Liquidity {
+  if (listings < THIN_LISTINGS) return "thin";
+  if (meanAgeHours > SLOW_HOURS) return "slow";
+  return "ok";
+}
 
 export type PetProfitRow = {
   key: string;
@@ -145,6 +201,10 @@ export type PetProfitRow = {
   coinsPerXp: number;
   /** True when the cheap end is not level 1 and the XP figure is therefore an overstatement. */
   approximate: boolean;
+  /** How many copies are listed at max level, and how long they have been sitting. */
+  listings: number;
+  meanAgeHours: number;
+  liquidity: Liquidity;
   caveats: string[];
 };
 
@@ -155,6 +215,13 @@ export type PetProfitOptions = {
   names?: Record<string, string>;
   /** Hide rows whose two ends are the same listing, which is not a trade. */
   minProfit?: number;
+  /**
+   * Drop pets whose sell side is one or two listings deep.
+   *
+   * On by default, because a levelled Common Rock is genuinely profitable on paper and genuinely
+   * unsellable — and a table that recommends it is worse than one that leaves it out.
+   */
+  requireMarket?: boolean;
 };
 
 /**
@@ -182,6 +249,16 @@ export function planPetProfit(o: PetProfitOptions): PetProfitRow[] {
       if (profit <= floor) continue;
 
       const caveats: string[] = [];
+      const meanAgeHours = ends.maxCount > 0 ? ends.maxAgeHours / ends.maxCount : 0;
+      const liquidity = liquidityOf(ends.maxCount, meanAgeHours);
+      if (liquidity === "thin") {
+        caveats.push(
+          `only ${ends.maxCount} of these is listed at max level — that is one person's asking price, not a market you can sell into`,
+        );
+      } else if (liquidity === "slow") {
+        caveats.push(`the max-level listings have sat for ${Math.round(meanAgeHours)} hours on average, so they are not selling`);
+      }
+
       const approximate = ends.base.level > 1;
       if (approximate) {
         caveats.push(
@@ -193,6 +270,8 @@ export function planPetProfit(o: PetProfitOptions): PetProfitRow[] {
         caveats.push(`this pet levels past 100, to ${maxLevelOf(key, o.levels)}`);
       }
 
+      if ((o.requireMarket ?? true) && liquidity === "thin") continue;
+
       out.push({
         key,
         name: o.names?.[key] ?? key.replace(/^PET:/, "").replace(/_/g, " "),
@@ -203,6 +282,9 @@ export function planPetProfit(o: PetProfitOptions): PetProfitRow[] {
         xpNeeded: total,
         coinsPerXp: profit / total,
         approximate,
+        listings: ends.maxCount,
+        meanAgeHours,
+        liquidity,
         caveats,
       });
     }

@@ -200,9 +200,13 @@ async function scanPets(): Promise<void> {
     const index = createPetBinIndex();
     const first = (await (await fetch("https://api.hypixel.net/v2/skyblock/auctions?page=0")).json()) as {
       totalPages: number;
+      lastUpdated?: number;
       auctions: AuctionRecord[];
     };
-    absorbPetPage(index, first.auctions, tables.petLevels);
+    // Ages are measured against the auction house's own clock rather than this browser's, since
+    // the two can differ by more than the thresholds care about.
+    const readAt = first.lastUpdated ?? Date.now();
+    absorbPetPage(index, first.auctions, tables.petLevels, readAt);
     state.scanTotal = first.totalPages;
     state.scanned = 1;
     renderPets();
@@ -217,7 +221,7 @@ async function scanPets(): Promise<void> {
             .catch(() => ({ auctions: [] as AuctionRecord[] })),
         ),
       );
-      for (const page of pages) absorbPetPage(index, page.auctions, tables.petLevels);
+      for (const page of pages) absorbPetPage(index, page.auctions, tables.petLevels, readAt);
       state.scanned = Math.min(i + 1 + WIDTH, first.totalPages);
       renderPets();
     }
@@ -803,12 +807,28 @@ function emptyReason(): string {
   }
 
   const best = unbounded[0];
-  return `<div class="warn">Every pairing is slower than the <strong>${num(horizon)}-day</strong> horizon, so
-    none of them count as a plan. The quickest is the <strong>${escapeHtml(best.petName)}</strong> on a
-    <strong>${escapeHtml(best.family)}</strong>, at <strong>${num(Math.round(best.daysPerPet))} days</strong> a pet${
-      best.matched ? "" : ", and its skill does not even match"
-    }. Raise the horizon to see it, or raise the tier and minion count to make it faster — this is minion XP
-    being a trickle rather than anything being broken.</div>`;
+
+  // Do the arithmetic rather than gesturing at it. Production scales with the minion count, so the
+  // count that would bring the quickest pairing inside the horizon is a division — and "you would
+  // need about 60 of them" is a far more useful sentence than "raise the minion count".
+  const placed = Math.max(1, Number(state.count.replace(/[^0-9]/g, "")) || 1);
+  const needed = Math.ceil((placed * best.daysPerPet) / horizon);
+
+  return `<div class="warn">Nothing here is a plan at this setup. The quickest pairing is the
+    <strong>${escapeHtml(best.petName)}</strong> on a <strong>${escapeHtml(best.family)}</strong>, and even that
+    takes <strong>${num(Math.round(best.daysPerPet))} days</strong> a pet against your
+    ${num(horizon)}-day horizon${best.matched ? "" : ", and its skill does not even match"}.
+    <br><br>
+    This is minion XP being a trickle rather than anything being broken — the published rates are fractions
+    of a point a drop. Three things move it, in order of how much: you have
+    <strong>${num(placed)}</strong> minion${placed === 1 ? "" : "s"} down and would need about
+    <strong>${num(needed)}</strong> to finish a pet inside the horizon; Wisdom multiplies the XP directly, and
+    ${
+      Object.values(state.wisdom).some((v) => Number(v) > 0)
+        ? "yours is filled in"
+        : "<strong>every Wisdom box is still zero</strong>"
+    }; and a matching pet is worth three times a mismatched one. All three are under
+    <em>Your account</em> and <em>The minions</em> below.</div>`;
 }
 
 function renderPlan(): void {
@@ -841,7 +861,7 @@ function renderPlan(): void {
       const brews = r.brewsPerDay > 0 ? `<div class="dim bz-path">${num(Math.round(r.brewsPerDay))} brews a day</div>` : "";
       // A pairing worth less than simply selling the output is greyed rather than dressed up. It is
       // still shown, because "this minion has no worthwhile pet plan" is an answer.
-      const losing = r.beatsSelling ? "" : " task aside";
+      const losing = r.beatsSelling ? "" : " bz-faded";
       return `<tr class="bz-open${losing}" data-pxplanopen="${escapeHtml(
         r.generator + ":" + r.petKey + ":" + r.petRarity,
       )}"${r.beatsSelling ? "" : ` title="${escapeHtml(
@@ -852,7 +872,7 @@ function renderPlan(): void {
         }</div></td>
         <td>${escapeHtml(r.petName)}<div class="dim bz-path">${escapeHtml(title(r.petRarity))}${
           r.matched ? "" : ` · <span class="gold">skill mismatch</span>`
-        }</div>${brews}</td>
+        }${r.petLiquidity === "slow" ? ` · <span class="gold">slow to sell</span>` : ""}</div>${brews}</td>
         <td class="num${r.beatsSelling ? " gold" : " bleed on"}">${
           r.advantagePerDay >= 0 ? "+" : "−"
         }${coins(Math.abs(Math.round(r.advantagePerDay)))}</td>
@@ -999,11 +1019,9 @@ const WISDOM_NOTE =
   "remembered.";
 
 const PLAN_NOTE =
-  "Which minion to put down and which pet to sit on it, ranked on coins a day. Profit has two halves and " +
-  "both are counted: the margin on pets bought cheap, levelled and resold, and the value of everything the " +
-  "minion sold while it was doing it — which for the setups people actually run is the larger half. Pairings " +
-  "respect the pet's own skill, because a pet keeps all of its skill's XP and a third of anything else, so " +
-  "the best minion under the wrong pet loses to a worse minion under the right one.";
+  "Ranked on what pet-levelling adds, not on the total — the total is mostly the minion selling its output, " +
+  "which it would do with no pet on it. Pairings respect the pet's own skill, and pets nobody is actually " +
+  "buying are left out.";
 
 /* --------------------------------------------------------- the skill half */
 
@@ -1149,6 +1167,7 @@ function renderPets(): void {
         <td class="num">${coins(Math.round(r.profit))}</td>
         <td class="num">${num(Math.round(r.xpNeeded))}</td>
         <td class="num">${r.coinsPerXp.toFixed(2)}</td>
+        <td class="num">${marketCell(r)}</td>
         <td class="num">${Number.isFinite(wait) ? hoursLabel(wait) : `<span class="dim">—</span>`}</td>
       </tr>`;
     })
@@ -1169,6 +1188,7 @@ function renderPets(): void {
           <th class="num" title="The sale less the auction house's 1% cut, less what the pet cost.">Profit</th>
           <th class="num" title="Pet XP between the two ends, from the published per-rarity totals.">Pet XP</th>
           <th class="num" title="Profit per point of Pet XP. The figure that makes a Rabbit comparable to a Golden Dragon, and the one the minion half of this tab multiplies into coins an hour.">Coins/xp</th>
+          <th class="num" title="How many copies are listed at max level and how long they have sat. A lowest BIN is a number whatever is behind it, and for many pets there is one listing behind it — one person's asking price rather than a market. Across the whole auction house the median max-level pet listing is 28 hours old.">Market</th>
           <th class="num" title="How long the best minion route above would take to generate that XP.">At best rate</th>
         </tr></thead>
         <tbody>${body}</tbody>
@@ -1179,6 +1199,18 @@ function renderPets(): void {
       click a row to pair it with the skill cards above</p>
     <div class="tabs"><button class="chip" id="pxscan">Read the auction house again</button></div>
   `;
+}
+
+/** How deep the market is behind a pet's sell price, in a couple of words. */
+function marketCell(r: PetProfitRow): string {
+  const age = r.meanAgeHours >= 48 ? `${Math.round(r.meanAgeHours / 24)}d` : `${Math.round(r.meanAgeHours)}h`;
+  const label = `${num(r.listings)} listed · ${age}`;
+  if (r.liquidity === "ok") return `<span class="dim">${label}</span>`;
+  const why =
+    r.liquidity === "thin"
+      ? "One or two listings is one person's asking price, not a market you can sell into."
+      : "These have sat unsold for days. The price is real and nobody is paying it.";
+  return `<span class="gold" title="${escapeHtml(why)}">${label}</span>`;
 }
 
 const PET_NOTE =

@@ -14,8 +14,11 @@ import {
 import type { PetXpRules, SkillKey, SkillXpTables } from "../src/lib/minionXp";
 import {
   NET_OF_AUCTION_TAX,
+  SLOW_HOURS,
+  THIN_LISTINGS,
   absorbPetPage,
   createPetBinIndex,
+  liquidityOf,
   maxLevelOf,
   planPetProfit,
 } from "../src/lib/petLevelling";
@@ -326,7 +329,7 @@ test("pets rank on coins per XP, not on the margin", () => {
     levels,
   );
 
-  const rows = planPetProfit({ index, levels });
+  const rows = planPetProfit({ index, levels, requireMarket: false });
   assert.equal(rows[0].name, "RABBIT");
   const dragon = rows.find((r) => r.name === "GOLDEN DRAGON")!;
   // Ranked on margin the dragon wins outright and is the wrong answer for anyone who has to
@@ -339,20 +342,69 @@ test("pets rank on coins per XP, not on the margin", () => {
 test("the auction house's cut comes off the sale", () => {
   const index = createPetBinIndex();
   absorbPetPage(index, [listing("[Lvl 1] Bat", "COMMON", 1_000_000), listing("[Lvl 100] Bat", "COMMON", 5_000_000)], levels);
-  const row = planPetProfit({ index, levels })[0];
+  const row = planPetProfit({ index, levels, requireMarket: false })[0];
   assert.equal(row.profit, 5_000_000 * NET_OF_AUCTION_TAX - 1_000_000);
 });
 
 test("a pet listed at only one end is not a trade", () => {
   const index = createPetBinIndex();
   absorbPetPage(index, [listing("[Lvl 1] Bat", "COMMON", 1_000_000)], levels);
-  assert.equal(planPetProfit({ index, levels }).length, 0);
+  assert.equal(planPetProfit({ index, levels, requireMarket: false }).length, 0);
+});
+
+test("a pet nobody is selling is not a pet you can sell", () => {
+  // The failure this exists for. A levelled Common Rock clears a healthy margin on paper and has
+  // exactly one listing behind it on the real auction house — that is one person's asking price,
+  // not a market, and a table that recommends levelling one is recommending an unsellable pet.
+  const thin = createPetBinIndex();
+  absorbPetPage(
+    thin,
+    [listing("[Lvl 1] Rock", "COMMON", 1_000_000), listing("[Lvl 100] Rock", "COMMON", 20_000_000)],
+    levels,
+  );
+  assert.equal(thin.prices["PET:ROCK"].COMMON.maxCount, 1);
+  assert.equal(planPetProfit({ index: thin, levels }).length, 0);
+  // Still reachable for anyone who wants to see it, and it says why.
+  const shown = planPetProfit({ index: thin, levels, requireMarket: false })[0];
+  assert.equal(shown.liquidity, "thin");
+  assert.ok(shown.caveats.some((c) => /not a market/.test(c)));
+});
+
+test("depth and age both count, and are measured rather than guessed", () => {
+  // Three listings is the floor for a market at all; past a mean of 72 hours it has stopped.
+  assert.equal(liquidityOf(1, 1), "thin");
+  assert.equal(liquidityOf(2, 1), "thin");
+  assert.equal(liquidityOf(THIN_LISTINGS, 1), "ok");
+  assert.equal(liquidityOf(30, SLOW_HOURS + 1), "slow");
+  assert.equal(liquidityOf(30, 12), "ok");
+});
+
+test("listing age comes off the auction's own start time", () => {
+  const now = 1_000_000_000_000;
+  const index = createPetBinIndex();
+  absorbPetPage(
+    index,
+    [
+      { ...listing("[Lvl 100] Bat", "COMMON", 5_000_000), start: now - 10 * 3_600_000 },
+      { ...listing("[Lvl 100] Bat", "COMMON", 6_000_000), start: now - 20 * 3_600_000 },
+      { ...listing("[Lvl 100] Bat", "COMMON", 7_000_000), start: now - 30 * 3_600_000 },
+      { ...listing("[Lvl 1] Bat", "COMMON", 1_000_000), start: now },
+    ],
+    levels,
+    now,
+  );
+  const ends = index.prices["PET:BAT"].COMMON;
+  assert.equal(ends.maxCount, 3);
+  assert.equal(ends.baseCount, 1);
+  // 10 + 20 + 30 hours over three listings.
+  assert.equal(ends.maxAgeHours / ends.maxCount, 20);
+  assert.equal(planPetProfit({ index, levels })[0].liquidity, "ok");
 });
 
 test("a cheap end above level 1 is flagged rather than quietly overstated", () => {
   const index = createPetBinIndex();
   absorbPetPage(index, [listing("[Lvl 45] Bat", "COMMON", 1_000_000), listing("[Lvl 100] Bat", "COMMON", 9_000_000)], levels);
-  const row = planPetProfit({ index, levels })[0];
+  const row = planPetProfit({ index, levels, requireMarket: false })[0];
   assert.equal(row.approximate, true);
   assert.ok(row.caveats.some((c) => /level 45/.test(c)));
 });
