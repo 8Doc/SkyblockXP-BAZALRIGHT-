@@ -84,6 +84,8 @@ type State = {
   showRoutes: boolean;
   /** How long a pet may take before the pairing stops counting as a plan. */
   horizon: string;
+  /** Ignore the horizon entirely, however long a pet takes. */
+  noHorizon: boolean;
   /** Hide pairings that make less than simply selling the output. */
   hideLosers: boolean;
   /** A live bazaar read, so the plan can price what the minion sells alongside the pet. */
@@ -113,6 +115,7 @@ const state: State = {
   upgrades: [localStorage.getItem("sbxp:pxup0") ?? "NONE", localStorage.getItem("sbxp:pxup1") ?? "NONE"],
   showRoutes: localStorage.getItem("sbxp:pxroutes") === "1",
   horizon: localStorage.getItem("sbxp:pxhorizon") ?? "365",
+  noHorizon: localStorage.getItem("sbxp:pxnohorizon") === "1",
   hideLosers: localStorage.getItem("sbxp:pxhideloss") === "1",
   market: new Map(),
   detected: null,
@@ -492,6 +495,14 @@ export function mountMinionPet(container: HTMLElement, data: Tables): void {
         return render();
       }
 
+      if (target.closest("#pxnohorizon")) {
+        state.noHorizon = !state.noHorizon;
+        localStorage.setItem("sbxp:pxnohorizon", state.noHorizon ? "1" : "0");
+        // A full render rather than renderPlan, because the days box above is disabled by this and
+        // a chip that greys a control it does not repaint is a control that lies.
+        return render();
+      }
+
       if (target.closest("#pxhideloss")) {
         state.hideLosers = !state.hideLosers;
         localStorage.setItem("sbxp:pxhideloss", state.hideLosers ? "1" : "0");
@@ -680,7 +691,9 @@ function render(): void {
         <label>Upgrade 1 <select id="pxup0">${optionList(tables.modifiers.upgrades, state.upgrades[0])}</select></label>
         <label>Upgrade 2 <select id="pxup1">${optionList(tables.modifiers.upgrades, state.upgrades[1])}</select></label>
         <label title="Pairings where one pet would take longer than this are not plans and are left out. Without it the table recommends a pet that finishes in twenty-three thousand days, because the coins from selling the minion's output dwarf the pet margin.">Pet within (days)
-          <input id="pxhorizon" value="${escapeHtml(state.horizon)}" inputmode="numeric" autocomplete="off">
+          <input id="pxhorizon" value="${
+            state.noHorizon ? "no limit" : escapeHtml(state.horizon)
+          }" inputmode="numeric" autocomplete="off"${state.noHorizon ? " disabled" : ""}>
         </label>
       </div>
 
@@ -760,6 +773,22 @@ function chainNote(): string {
  */
 let lastPairs: PetPlanRow[] = [];
 
+/**
+ * How long a pet may take before the pairing stops counting as a plan.
+ *
+ * The horizon exists because minion XP is a trickle and the item half of the profit dwarfs the pet
+ * half, so without one the table cheerfully recommends a pet that finishes in twenty-three thousand
+ * days. But it hides more than the silly rows: a brewing plan's *second* pet is levelled off the
+ * collection stream, which is far slower than the brewing one, so the horizon routinely deletes the
+ * Alchemy plan's Farming half and leaves the row understating itself. Sugar Cane at five minions is
+ * the worked example — +26k a day with the second pet cut, +49k with it.
+ *
+ * So it is a control rather than a rule, and this is the off switch.
+ */
+function horizonDays(): number {
+  return state.noHorizon ? Infinity : Math.max(1, Number(state.horizon) || 365);
+}
+
 function planRows(over: { maxDaysPerPet?: number } = {}): PetPlanRow[] {
   if (!tables || !state.pets) return [];
 
@@ -807,7 +836,7 @@ function planRows(over: { maxDaysPerPet?: number } = {}): PetPlanRow[] {
     dropValue,
     maxBrewsPerDay: BUDGET.maxBrewsPerDay,
     claimsPerDay: BUDGET.claimsPerDay,
-    maxDaysPerPet: over.maxDaysPerPet ?? Math.max(1, Number(state.horizon) || 365),
+    maxDaysPerPet: over.maxDaysPerPet ?? horizonDays(),
     minProfitPerDay: 0,
   });
   // Only the real plan's pairings are worth keeping — `emptyReason` re-runs this with the horizon
@@ -859,6 +888,8 @@ function unplannableNote(planned: PetPlanRow[]): string {
  */
 function planTabsHtml(): string {
   return `<div class="tabs">
+    <button class="chip${state.noHorizon ? " on" : ""}" id="pxnohorizon"
+      title="Plan every pairing however long a pet takes, ignoring the days box. Worth turning on to see a brewing plan's second pet: it levels off the collection rather than the brewing, which is much slower, so the limit often cuts it and the row then understates what the minion makes.">No time limit on pets</button>
     <button class="chip${state.hideLosers ? " on" : ""}" id="pxhideloss"
       title="Hide any pairing that makes less than simply running the minion and selling everything. On the brewing routes that is most of them: a stand that eats more in drops than the pet is worth is a worse plan than no plan.">Hide the ones that lose</button>
   </div>`;

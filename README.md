@@ -404,6 +404,12 @@ work that provably cannot have changed:
   pay 256,000. Nor is it the rawest, which pays best per drop and asks for eleven thousand brews a
   day. The brew ceiling is the real constraint, so the winner is whichever pays the most XP a day
   once both are capped by it — usually a middle rung, and the one that leaves the most drops unspent.
+- **The pet time limit has an off switch.** The horizon stops the table recommending a pet that
+  finishes in twenty-three thousand days, but it hides more than the silly rows: a brewing plan's
+  *second* pet levels off the collection stream, which is far slower than the brewing one, so the
+  limit routinely deletes the Alchemy plan's Farming half and the row then understates itself.
+  A Sugar Cane Minion at five minions reads **+26k a day** with the second pet cut and **+49k**
+  with it, and the whole table goes from 2 rows to 25. **No time limit on pets** turns it off.
 - **Only the top two rarities of each pet are planned.** Every rarity is its own trade with its own
   two ends, so a six-rung pet contributed six rows and the low rungs are not trades anybody makes: a
   Common needs 5.6M Pet XP against a Legendary's 25.4M, so it can price respectably per point of XP
