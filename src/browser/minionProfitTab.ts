@@ -180,6 +180,10 @@ async function refresh(): Promise<void> {
 
   if (host) {
     const due = state.lastAt ? state.lastAt + POLL_MS - Date.now() : POLL_MS;
+    // Cleared first: mounting schedules a poll too, so switching to this sub-tab and back used to
+    // leave both timers alive and every visit added another. Two pollers is twice the requests and
+    // twice everything they kick off.
+    window.clearTimeout(timer);
     timer = window.setTimeout(refresh, Math.max(due, 2_000));
   }
   void fetchMonths();
@@ -227,9 +231,47 @@ function readMonths(): Map<string, Variance> {
  * should cost that item its guard and nothing else. Items with no month simply rank on the live
  * quote, and the row says so rather than implying it was checked.
  */
-async function fetchMonths(): Promise<void> {
+/**
+ * The run in flight, so there is only ever one.
+ *
+ * This is the whole reason the month column kept reverting to "flat". `refresh` calls this, and
+ * `refresh` reschedules itself against the bazaar's own `lastUpdated` — which is routinely more
+ * than a poll old, so the delay clamps to its two-second floor and the tab polls every two seconds.
+ * Nothing here completed in two seconds, so the guard below never saw a populated map, so every
+ * poll started *another* full sweep on top of the ones already running. Measured in the browser:
+ * 3,551 history requests in thirty seconds, none of them finishing, the host quite reasonably
+ * refusing most of them, and the column falling back to flat.
+ *
+ * It got worse the moment the fetch became correct. At sixty raw ids a sweep occasionally beat the
+ * two-second timer and the column populated — which is exactly the "worked for a second" that was
+ * reported. At a hundred and fifty-five it never wins.
+ */
+let monthsRun: Promise<void> | null = null;
+
+/**
+ * How long to wait before trying again after a run that found nothing.
+ *
+ * Distinct from the six-hour success TTL. A sweep that comes back empty is usually a host having a
+ * bad minute, and retrying that in two seconds is how the thundering herd starts; retrying it in
+ * six hours would strand the tab on a transient failure.
+ */
+const HISTORY_RETRY_AFTER_MS = 60_000;
+let monthsAttemptedAt = 0;
+
+function fetchMonths(): Promise<void> {
+  if (monthsRun) return monthsRun;
+  if (Date.now() - state.historyAt < HISTORY_TTL_MS && state.variance.size > 0) return Promise.resolve();
+  if (Date.now() - monthsAttemptedAt < HISTORY_RETRY_AFTER_MS) return Promise.resolve();
+
+  monthsAttemptedAt = Date.now();
+  monthsRun = runMonths().finally(() => {
+    monthsRun = null;
+  });
+  return monthsRun;
+}
+
+async function runMonths(): Promise<void> {
   if (!tables) return;
-  if (Date.now() - state.historyAt < HISTORY_TTL_MS && state.variance.size > 0) return;
 
   /**
    * The compacted forms too, because those are the prices being judged.
@@ -512,6 +554,9 @@ export function mountMinionProfit(container: HTMLElement, data: Tables): void {
   }
 
   render();
+  // Same reason as in `refresh`: this runs on every visit to the sub-tab, and without clearing
+  // first each visit leaves another poller behind.
+  window.clearTimeout(timer);
   if (state.market.size === 0) void refresh();
   else timer = window.setTimeout(refresh, POLL_MS);
 }
