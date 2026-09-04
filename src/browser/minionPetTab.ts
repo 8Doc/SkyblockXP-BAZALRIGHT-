@@ -9,6 +9,13 @@ import {
   writeSetup,
   type MinionSetupState,
 } from "./minionSetup";
+import type { CraftCost, MinionRecipes } from "../lib/minionCraft";
+import {
+  craftCellHtml,
+  craftFor as craftOf,
+  createCraftCache,
+  type CraftCellContext,
+} from "./craftCell";
 import {
   bestPerSkill,
   planMinionXp,
@@ -75,6 +82,7 @@ type Tables = {
   modifiers: Modifiers;
   drops: DropTable;
   extras: ExtrasTable;
+  craft: MinionRecipes;
   recipes: Recipe[];
   names: Record<string, string>;
   npcPrices: Record<string, { sell?: number; buy?: number }>;
@@ -1178,6 +1186,16 @@ const PLAN_COLUMNS: SortColumn<PetPlanRow>[] = [
     render: (r) => (r.daysPerPet < 1 ? `${(r.daysPerPet * 24).toFixed(1)} hr` : `${Math.round(r.daysPerPet)} d`),
   },
   {
+    id: "craft",
+    label: "Craft cost",
+    title:
+      "What the materials for this wall cost to buy, cumulative from Tier I — every upgrade behind the tier, not " +
+      "just the last one, with a nested minion written out as its own materials. This is what the plan costs before " +
+      "it earns anything, and it is the same figure the Raw profits tab quotes. Hover for the full bill.",
+    value: (r) => craftFor(r)?.coins ?? -1,
+    render: craftCell,
+  },
+  {
     id: "actions",
     label: "Actions/day",
     title: "Things you have to actually do in a day: collections plus brews. The constraint this tab is built around.",
@@ -1186,9 +1204,30 @@ const PLAN_COLUMNS: SortColumn<PetPlanRow>[] = [
   },
 ];
 
+/** This render's craft bills. Prices and the minion count both move under it, so it lives one paint. */
+let craftCache = createCraftCache();
+
+function craftContext(): CraftCellContext {
+  return {
+    recipes: tables!.craft,
+    market: state.market,
+    npcPrices: tables!.npcPrices,
+    placed: placedCount(state.setup),
+  };
+}
+
+function craftFor(r: PetPlanRow): CraftCost | null {
+  return craftOf(craftCache, craftContext(), r.generator, r.tier);
+}
+
+function craftCell(r: PetPlanRow): string {
+  return craftCellHtml(craftFor(r), r.family, placedCount(state.setup));
+}
+
 function renderPlan(): void {
   const target = document.getElementById("pxplan");
   if (!target || !tables) return;
+  craftCache = createCraftCache();
 
   if (!state.pets) {
     target.innerHTML = `${planTabsHtml()}

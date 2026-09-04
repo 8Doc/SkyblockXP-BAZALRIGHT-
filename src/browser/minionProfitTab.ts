@@ -27,6 +27,13 @@ import {
 import type { CoflnetPoint } from "../lib/bazaarHistory";
 import { monthFor, monthsForBasis, readMonths, writeMonths, type Months } from "./monthStore";
 import { placedCount as countOf, readSetup, slotIds, type MinionSetupState } from "./minionSetup";
+import type { CraftCost, MinionRecipes } from "../lib/minionCraft";
+import {
+  craftCellHtml,
+  craftFor as craftOf,
+  createCraftCache,
+  type CraftCellContext,
+} from "./craftCell";
 
 /**
  * What a minion is worth an hour, and how much of that you will actually collect.
@@ -62,6 +69,7 @@ type Tables = {
   storage: StorageTables;
   drops: DropTable;
   extras: ExtrasTable;
+  craft: MinionRecipes;
   recipes: Recipe[];
   npcPrices: Record<string, { sell?: number; buy?: number }>;
   names: Record<string, string>;
@@ -886,6 +894,16 @@ const COLUMNS: {
     render: (r) => (r.itemId === null ? `<span class="dim">—</span>` : coins(r.unitValue)),
   },
   {
+    id: "craft",
+    label: "Craft cost",
+    title:
+      "What the materials cost to buy, cumulative from Tier I — every upgrade behind the tier, not just the last " +
+      "one, with a nested minion written out as its own materials. Priced at what buying costs rather than at what " +
+      "selling fetches, because this is a purchase. Hover a figure for the full bill.",
+    value: (r) => craftFor(r)?.coins ?? -1,
+    render: craftCell,
+  },
+  {
     id: "month",
     label: "Month",
     title:
@@ -895,6 +913,21 @@ const COLUMNS: {
     render: monthCell,
   },
 ];
+
+/** This render's craft bills, keyed by minion and tier. Thrown away with every repaint. */
+let craftCache = createCraftCache();
+
+function craftContext(): CraftCellContext {
+  return { recipes: tables!.craft, market: state.market, npcPrices: tables!.npcPrices, placed: countOf(state) };
+}
+
+function craftFor(r: MinionProfitRow): CraftCost | null {
+  return craftOf(craftCache, craftContext(), r.generator, r.tier);
+}
+
+function craftCell(r: MinionProfitRow): string {
+  return craftCellHtml(craftFor(r), r.family, countOf(state));
+}
 
 /**
  * The cell that decides whether to believe the row.
@@ -947,6 +980,9 @@ function renderTable(): void {
   const target = document.getElementById("mptable");
   if (!target || !tables) return;
 
+  // Prices move on every poll and the count moves on every keystroke, so the bill is only good for
+  // the repaint it was computed in.
+  craftCache = createCraftCache();
   const all = rows();
   if (all.length === 0) {
     return void (target.innerHTML = `<p class="dim pad">Nothing to price yet — the bazaar has not been read.</p>`);

@@ -132,6 +132,12 @@ const minionData = {
     compactors: minionStorage.compactors,
   },
   drops: { overrides: (await loadJson("curated/minion_drops.json")).overrides },
+  // What each tier costs to build, cumulative from Tier I. The other half of every profit figure
+  // on the two tabs: an income with no cost beside it is not a decision.
+  craft: await (async () => {
+    const file = await loadJson("generated/minion-recipes.json");
+    return { minions: file.minions, noRecipe: file.noRecipe };
+  })(),
   // Upgrades that add a second item to the output. Without these the single best-known coin
   // setup in the game — a mob minion with Corrupt Soil selling into an Enchanted Hopper — is
   // invisible in a table that models every other slot.

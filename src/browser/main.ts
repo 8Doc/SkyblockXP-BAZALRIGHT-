@@ -25,6 +25,7 @@ import type { GreenhouseData } from "../lib/greenhouse";
 import type { NpcPrice, Recipe } from "../lib/bazaarViews";
 import type { AnvilRules } from "../lib/bazaarChains";
 import type { DropTable, ExtrasTable, Recipe as MinionRecipe, StorageTables } from "../lib/minionProfit";
+import type { MinionRecipes } from "../lib/minionCraft";
 import type { PetXpRules, SkillKey, SkillXpTables } from "../lib/minionXp";
 import type { PetLevelTable } from "../lib/petLevelling";
 import { detectWisdom, type WisdomSources } from "../lib/wisdom";
@@ -73,6 +74,8 @@ declare global {
       storage: StorageTables;
       drops: DropTable;
       extras: ExtrasTable;
+      /** What each tier costs to build. See src/lib/minionCraft.ts. */
+      craft: MinionRecipes;
       recipes: MinionRecipe[];
       npcPrices: Record<string, NpcPrice>;
       names: Record<string, string>;
@@ -1511,6 +1514,7 @@ function minionTables() {
       storage: d.storage,
       drops: d.drops,
       extras: d.extras,
+      craft: d.craft,
       recipes: d.recipes,
       npcPrices: d.npcPrices,
       names: d.names,
@@ -1520,6 +1524,7 @@ function minionTables() {
       modifiers: d.modifiers,
       drops: d.drops,
       extras: d.extras,
+      craft: d.craft,
       recipes: d.recipes,
       names: d.names,
       npcPrices: d.npcPrices,
