@@ -25,6 +25,7 @@ import {
   type Variance,
 } from "../lib/priceVariance";
 import type { CoflnetPoint } from "../lib/bazaarHistory";
+import { monthFor, monthsForBasis, readMonths, writeMonths, type Months } from "./monthStore";
 
 /**
  * What a minion is worth an hour, and how much of that you will actually collect.
@@ -85,7 +86,7 @@ type State = {
   sort: { column: string; descending: boolean };
 
   market: Map<string, ReturnType<typeof normalise>>;
-  variance: Map<string, Variance>;
+  variance: Map<string, Months>;
   status: string;
   error: string;
   lastAt: number;
@@ -191,33 +192,11 @@ async function refresh(): Promise<void> {
 
 /* ------------------------------------------------------------- the month */
 
-/**
- * Bumped from `mpmonths` when the fetch learned to ask for compacted items.
- *
- * The old entry holds raw drops only, and it is fresh enough to suppress a refetch for six hours —
- * so without a new key everybody who had used the tab would go on seeing an all-"flat" column until
- * it expired, which is precisely the bug. A new key retires the stale shape rather than migrating
- * it; one round of requests is cheaper than a cache that lies.
- */
-const HISTORY_KEY = "sbxp:mpmonths2";
 /** Six hours. A daily series does not change faster than that, and the fetch is sixty requests. */
 const HISTORY_TTL_MS = 6 * 3600_000;
 /** Three at a time. Six earns a 429 from Coflnet, which costs an item its month for six hours. */
 const HISTORY_WIDTH = 3;
 const HISTORY_RETRY_MS = 1_500;
-
-type MonthStore = { fetchedAt: number; variance: Record<string, Variance> };
-
-function readMonths(): Map<string, Variance> {
-  try {
-    const store = JSON.parse(localStorage.getItem(HISTORY_KEY) ?? "null") as MonthStore | null;
-    if (!store?.variance) return new Map();
-    state.historyAt = store.fetchedAt;
-    return new Map(Object.entries(store.variance));
-  } catch {
-    return new Map();
-  }
-}
 
 /**
  * A month of daily prices for every item a minion drops.
@@ -294,7 +273,7 @@ async function runMonths(): Promise<void> {
   const wanted = [...ids].filter(Boolean);
   if (wanted.length === 0) return;
 
-  const next: Record<string, Variance> = {};
+  const next: Record<string, Months> = {};
   for (let i = 0; i < wanted.length; i += HISTORY_WIDTH) {
     await Promise.all(
       wanted.slice(i, i + HISTORY_WIDTH).map(async (id) => {
@@ -306,9 +285,13 @@ async function runMonths(): Promise<void> {
               continue;
             }
             if (!response.ok) return;
-            // The sell side: this tab is about what a minion's output fetches, not what it costs.
-            const variance = varianceFrom((await response.json()) as CoflnetPoint[], "sell");
-            if (variance) next[id] = variance;
+            // Both sides of the same response. `sell` is what one fetches into the buy orders and
+            // `buy` is what a sell offer asks — the two prices the two bases quote, each needing
+            // its own month to be judged against.
+            const points = (await response.json()) as CoflnetPoint[];
+            const sell = varianceFrom(points, "sell");
+            const buy = varianceFrom(points, "buy");
+            if (sell || buy) next[id] = { sell, buy };
             return;
           } catch {
             return;
@@ -323,11 +306,9 @@ async function runMonths(): Promise<void> {
   // months that did arrive.
   state.variance = new Map([...state.variance, ...Object.entries(next)]);
   state.historyAt = Date.now();
-  try {
-    localStorage.setItem(HISTORY_KEY, JSON.stringify({ fetchedAt: state.historyAt, variance: next } satisfies MonthStore));
-  } catch {
-    // In memory is enough for this session; losing it on reload costs one round of requests.
-  }
+  // The whole map rather than this round's additions: Pet profits reads the same cache, and a
+  // partial write would leave it guarding some items and not others.
+  writeMonths({ fetchedAt: state.historyAt, variance: Object.fromEntries(state.variance) });
   renderTable();
   renderMeta();
 }
@@ -429,7 +410,7 @@ function rows(): MinionProfitRow[] {
     extras: tables.extras,
     recipes: tables.recipes,
     prices: priceBook(),
-    variance: state.variance,
+    variance: monthsForBasis(state.variance, state.basis),
     names: tables.names,
     basis: state.basis,
     trust: state.trust,
@@ -471,7 +452,11 @@ function rows(): MinionProfitRow[] {
 export function mountMinionProfit(container: HTMLElement, data: Tables): void {
   host = container;
   tables = data;
-  if (state.variance.size === 0) state.variance = readMonths();
+  if (state.variance.size === 0) {
+    const stored = readMonths();
+    state.variance = stored.months;
+    state.historyAt = stored.fetchedAt;
+  }
 
   if (boundTo !== container) {
     boundTo = container;
@@ -943,7 +928,7 @@ function monthCell(r: MinionProfitRow): string {
   // held and sold. Reading the raw drop's month here described a different item's price than the
   // sigma beside it was measured against.
   const priced = r.streams[0]?.soldAs ?? r.itemId;
-  const variance = state.variance.get(priced);
+  const variance = monthFor(state.variance, priced, state.basis);
   if (!variance) {
     return `<span class="dim" title="Coflnet publishes no daily history for this item, so there is nothing to check today's quote against. This row is ranking on the live price alone.">no history</span>`;
   }
@@ -1036,7 +1021,7 @@ function placedCount(): number {
 function detailHtml(r: MinionProfitRow): string {
   // Same item the sigma column is measured against — the compacted form where one is sold.
   const priced = r.streams[0]?.soldAs ?? r.itemId;
-  const variance = priced ? state.variance.get(priced) : undefined;
+  const variance = monthFor(state.variance, priced ?? null, state.basis);
   const lines: string[] = [];
 
   // Per minion, both halves of it. Storage belongs to the minion rather than to the wall — twenty

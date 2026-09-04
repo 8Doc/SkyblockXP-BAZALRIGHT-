@@ -5,9 +5,11 @@ import { readFileSync } from "node:fs";
 import { parseStorage, parseCooldowns } from "../scripts/fetch-minion-production.mjs";
 import { NET_OF_TAX } from "../src/lib/bazaar";
 import { compactionRatio, dropIdFor, planProfit, unitValue } from "../src/lib/minionProfit";
+import { monthFor, monthsForBasis } from "../src/browser/monthStore";
 import type { Basis, Compactor, DropTable, ExtrasTable, ItemPrices, Recipe, StorageTables } from "../src/lib/minionProfit";
 import type { Fuel, MinionData, Modifiers, Upgrade } from "../src/lib/minions";
 import { varianceFrom, trustedPrice, zScore, confidenceOf } from "../src/lib/priceVariance";
+import type { Variance } from "../src/lib/priceVariance";
 import type { CoflnetPoint } from "../src/lib/bazaarHistory";
 
 const data = JSON.parse(readFileSync("data/generated/minion-production.json", "utf8")) as MinionData;
@@ -334,4 +336,37 @@ test("storage belongs to the minion, so a wall of them fills no faster than one"
   assert.ok(Math.abs(wall.itemsPerHour / one.itemsPerHour - 24) < 1e-6);
   assert.equal(wall.itemsLost, 0);
   assert.ok(Math.abs(wall.itemsPerClaim / one.itemsPerClaim - 24) < 1e-6);
+});
+
+test("a quote is judged against its own side of the book", () => {
+  // Sell offers and instasells read different books, and the spread between them is routinely
+  // wider than a month's own movement — Dark Oak Log sits at a median of 5.8 into the buy orders
+  // and 29.7 on the sell offers. Judging the ask against the month of bids put every item several
+  // sigma out, so the guard fired on all of them and substituted the *bid* median, which is why
+  // "Sell offer" and "Instasell" came back the same number.
+  const month = (median: number): Variance => ({
+    mean: median,
+    deviation: median * 0.05,
+    spread: 0.05,
+    median,
+    samples: 30,
+    firstAt: 0,
+    lastAt: 0,
+  });
+  const months = new Map([["LOG_2", { sell: month(5.8), buy: month(29.7) }]]);
+
+  assert.equal(monthFor(months, "LOG_2", "instasell")?.median, 5.8);
+  assert.equal(monthFor(months, "LOG_2", "order")?.median, 29.7);
+  // The shopkeeper is a fixed price with no book, so it reads the same side instaselling does and
+  // never consults it — `unitValue` returns before the guard.
+  assert.equal(monthFor(months, "LOG_2", "npc")?.median, 5.8);
+  assert.equal(monthFor(months, "MISSING", "order"), null);
+  assert.equal(monthFor(months, null, "order"), null);
+
+  // And the map handed to the planner carries one month an item, on the side being quoted.
+  assert.equal(monthsForBasis(months, "order").get("LOG_2")?.median, 29.7);
+  // An item with a series on only one side appears only on that side, rather than as a zero.
+  const oneSided = new Map([["X", { sell: month(4), buy: null }]]);
+  assert.equal(monthsForBasis(oneSided, "order").size, 0);
+  assert.equal(monthsForBasis(oneSided, "instasell").size, 1);
 });

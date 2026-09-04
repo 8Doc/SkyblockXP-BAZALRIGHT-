@@ -1,6 +1,7 @@
 import { coins, num } from "../lib/format";
 import type { Fuel, MinionData, MinionProduction, Modifiers, Upgrade } from "../lib/minions";
 import type { DropTable, Recipe } from "../lib/minionProfit";
+import { monthsForBasis, readMonths } from "./monthStore";
 import {
   bestPerSkill,
   planMinionXp,
@@ -800,9 +801,24 @@ function planRows(over: { maxDaysPerPet?: number } = {}): PetPlanRow[] {
     count: Math.max(1, Number(state.count.replace(/[^0-9]/g, "")) || 1),
   };
 
-  // What each minion earns selling its output, on the same setup the XP is computed for. Priced at
-  // instasell with a long claim, because a minion being farmed for pet XP is one you are visiting
-  // anyway — the storage cap is not the binding constraint on this tab.
+  /**
+   * What each minion earns selling its output, on the same setup the XP is computed for.
+   *
+   * Priced exactly the way the Raw profits tab prices it by default — instasell, guarded against
+   * the month, no chest, no hopper, a Super Compactor — because "Just selling" is a claim about
+   * the same minion that tab is describing and the two columns are read side by side. It used to
+   * pass an empty month and `trust: "live"`, so the guard was simply off here: a spiking bazaar
+   * quote inflated this figure while the tab beside it declined to believe the same number.
+   *
+   * The months come from whatever Raw profits last fetched. Nothing here fetches them, so a
+   * session that has never opened that tab guards nothing — which is the state it was always in,
+   * now visible in the caveat rather than silent.
+   *
+   * The one thing that genuinely differs is the claim interval, and it differs on purpose: this
+   * tab is built on a budget of four collections a day, which is a claim every six hours, where
+   * Raw profits lets you type any interval and defaults to eight.
+   */
+  const months = readMonths().months;
   const profit = planProfit({
     data: tables.production,
     storage: tables.storage,
@@ -810,10 +826,10 @@ function planRows(over: { maxDaysPerPet?: number } = {}): PetPlanRow[] {
     extras: tables.extras,
     recipes: tables.recipes,
     prices,
-    variance: new Map(),
+    variance: monthsForBasis(months, "instasell"),
     names: tables.names,
     basis: "instasell",
-    trust: "live",
+    trust: "guarded",
     setup: {
       ...setup,
       chest: tables.storage.chests[0],
@@ -1061,7 +1077,12 @@ const PLAN_COLUMNS: SortColumn<PetPlanRow>[] = [
   {
     id: "selling",
     label: "Just selling",
-    title: "From selling what the minion produced. This is what the minion would earn with no pet on it at all.",
+    title:
+      "From selling what the minion produced — what it would earn with no pet on it at all. Priced the way the Raw " +
+      "profits tab prices it by default: instaselling into the bazaar, guarded against the item's own month, with a " +
+      "Super Compactor and no chest or hopper. The one thing that differs is the interval — this tab assumes four " +
+      "collections a day, where that one defaults to eight hours and lets you type any figure — so set them the same " +
+      "if you want the two columns to agree to the coin.",
     value: (r) => r.sellOnlyPerDay,
     render: (r) => `<span class="dim">${coins(Math.round(r.sellOnlyPerDay))}</span>`,
   },
