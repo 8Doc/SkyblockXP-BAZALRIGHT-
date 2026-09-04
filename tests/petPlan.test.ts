@@ -196,22 +196,24 @@ test("a pet that would take longer than the horizon is not a plan", () => {
 
 /* ------------------------------------------------------------- the brewing */
 
-const brewRow = xpRow({
-  generator: "SUGAR_CANE",
-  family: "Sugar Cane Minion",
-  skill: "ALCHEMY" as SkillKey,
-  route: "brewing",
-  itemsPerBrew: 1_000,
-  itemsPerHour: 10_000,
-  baseSkillXpPerHour: 150_000,
-});
+const brewRow = (over: Partial<MinionXpRow> = {}): MinionXpRow =>
+  xpRow({
+    generator: "SUGAR_CANE",
+    family: "Sugar Cane Minion",
+    skill: "ALCHEMY" as SkillKey,
+    route: "brewing",
+    itemsPerBrew: 1_000,
+    itemsPerHour: 10_000,
+    baseSkillXpPerHour: 150_000,
+    ...over,
+  });
 
 test("brewing is capped by what a person will actually sit through", () => {
   // The minion supplies 240 brews a day; the cap says 100, so the XP is cut to match rather than
   // the table quoting a rate nobody would do.
   const capped = planPetPairs(
     options({
-      xpRows: [brewRow],
+      xpRows: [brewRow()],
       pets: [petRow("ROCK", 1_000_000, 100_000)],
       catalogue: [{ key: "ROCK", name: "Rock", skill: "ALCHEMY" }],
       itemCoinsPerHour: new Map([["SUGAR_CANE", 0]]),
@@ -224,7 +226,7 @@ test("brewing is capped by what a person will actually sit through", () => {
 
   const uncapped = planPetPairs(
     options({
-      xpRows: [brewRow],
+      xpRows: [brewRow()],
       pets: [petRow("ROCK", 1_000_000, 100_000)],
       catalogue: [{ key: "ROCK", name: "Rock", skill: "ALCHEMY" }],
       itemCoinsPerHour: new Map([["SUGAR_CANE", 0]]),
@@ -236,10 +238,56 @@ test("brewing is capped by what a person will actually sit through", () => {
   assert.ok(uncapped.petXpPerDay > capped.petXpPerDay);
 });
 
+test("a brewing plan levels two pets off the same drops, and counts both", () => {
+  // The drops do two jobs. Brewing pays Alchemy, and collecting the same drops on the way pays the
+  // minion's own skill — so the plan names an Alchemy pet for the stand and a Farming pet for the
+  // collection, and both margins are income.
+  const both = options({
+    xpRows: [brewRow({ baseSkill: "FARMING" as SkillKey, baseXpPerHour: 150_000 })],
+    pets: [petRow("ROCK", 1_000_000, 100_000), petRow("RABBIT", 2_000_000, 100_000)],
+    catalogue: [
+      { key: "ROCK", name: "Rock", skill: "ALCHEMY" },
+      { key: "RABBIT", name: "Rabbit", skill: "FARMING" },
+    ],
+    itemCoinsPerHour: new Map([["SUGAR_CANE", 0]]),
+    dropValue: new Map([["SUGAR_CANE", 0]]),
+  });
+  const row = planPetPairs(both).find((r) => r.petKey === "PET:ROCK")!;
+
+  assert.equal(row.baseSkill, "FARMING");
+  assert.equal(row.partner?.petKey, "PET:RABBIT");
+  // The partner is a Farming pet on a Farming stream, so it keeps all of it.
+  assert.equal(row.partner?.matched, true);
+  assert.ok((row.partner?.profitPerDay ?? 0) > 0);
+
+  // And it is in the profit rather than in a footnote: the day's pet income is both pets.
+  const alone = planPetPairs({ ...both, xpRows: [brewRow()] }).find((r) => r.petKey === "PET:ROCK")!;
+  assert.equal(alone.partner, undefined);
+  assert.ok(Math.abs(row.petProfitPerDay - (alone.petProfitPerDay + row.partner!.profitPerDay)) < 1e-6);
+  assert.ok(row.advantagePerDay > alone.advantagePerDay);
+});
+
+test("the second pet is held to the same horizon as the first", () => {
+  // A collection stream too slow to finish a pet inside the horizon is not a second plan, and
+  // saying so is the same rule the main pairing follows rather than a special case.
+  const slow = options({
+    xpRows: [brewRow({ baseSkill: "FARMING" as SkillKey, baseXpPerHour: 1 })],
+    pets: [petRow("ROCK", 1_000_000, 100_000), petRow("RABBIT", 2_000_000, 100_000)],
+    catalogue: [
+      { key: "ROCK", name: "Rock", skill: "ALCHEMY" },
+      { key: "RABBIT", name: "Rabbit", skill: "FARMING" },
+    ],
+    itemCoinsPerHour: new Map([["SUGAR_CANE", 0]]),
+    dropValue: new Map([["SUGAR_CANE", 0]]),
+    maxDaysPerPet: 365,
+  });
+  assert.equal(planPetPairs(slow).find((r) => r.petKey === "PET:ROCK")!.partner, undefined);
+});
+
 test("brewing charges the drops it consumes against the day's profit", () => {
   const free = planPetPairs(
     options({
-      xpRows: [brewRow],
+      xpRows: [brewRow()],
       pets: [petRow("ROCK", 1_000_000, 100_000)],
       catalogue: [{ key: "ROCK", name: "Rock", skill: "ALCHEMY" }],
       itemCoinsPerHour: new Map([["SUGAR_CANE", 10_000]]),
@@ -249,7 +297,7 @@ test("brewing charges the drops it consumes against the day's profit", () => {
   )[0];
   const costly = planPetPairs(
     options({
-      xpRows: [brewRow],
+      xpRows: [brewRow()],
       pets: [petRow("ROCK", 1_000_000, 100_000)],
       catalogue: [{ key: "ROCK", name: "Rock", skill: "ALCHEMY" }],
       itemCoinsPerHour: new Map([["SUGAR_CANE", 10_000]]),

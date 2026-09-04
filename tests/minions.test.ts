@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 // @ts-expect-error - a plain build script, imported for its pure parsers only.
-import { parseCollects, parseCollection, parseCooldowns } from "../scripts/fetch-minion-production.mjs";
+import { parseCollects, parseAllCollects, parseCollection, parseCooldowns } from "../scripts/fetch-minion-production.mjs";
 import { MILESTONES, actionSeconds, itemsPerHour, offlineAmount, planMinions, target, tierSteps } from "../src/lib/minions";
 import type { Collection, Fuel, MinionData, MinionProduction, Modifiers, OfflineRules, Upgrade } from "../src/lib/minions";
 
@@ -26,6 +26,55 @@ test("a collects line is read in every shape the wiki writes it", () => {
   assert.deepEqual(parseCollects("|collects = * 2-5 String"), { amount: 3.5, low: 2, high: 5, item: "String" });
   assert.deepEqual(parseCollects("|collects = *0.4 Nether Quartz"), { amount: 0.4, item: "Nether Quartz" });
   assert.equal(parseCollects("|something else = 4"), null);
+});
+
+test("every line of a collects list is read, not only the first", () => {
+  // The Revenant Minion, as its page writes it. Read one line deep it is a rotten flesh minion and
+  // one of the worst on the page; the diamonds are most of why anyone builds a wall of them.
+  const revenant = "|collects = * 2-5 Rotten Flesh\n* 1 Diamond %20%%\n|upgrade_with = * Revenant Flesh";
+  assert.deepEqual(parseAllCollects(revenant), [
+    { amount: 3.5, low: 2, high: 5, item: "Rotten Flesh" },
+    { amount: 1, item: "Diamond", chance: 0.2 },
+  ]);
+  // The single-drop contract is unchanged: the primary is still the first entry.
+  assert.deepEqual(parseCollects(revenant), { amount: 3.5, low: 2, high: 5, item: "Rotten Flesh" });
+});
+
+test("a drop chance is a chance and not part of the item's name", () => {
+  // "Raw Cod %54%%" matches nothing in the bazaar, so the Fishing Minion priced at nothing.
+  assert.deepEqual(parseAllCollects("|collects = Raw Cod %54%%\n|x = 1"), [
+    { amount: 1, item: "Raw Cod", chance: 0.54 },
+  ]);
+});
+
+test("a conditional drop is labelled rather than counted as a chance", () => {
+  // `%Enchanted Egg%` names an upgrade, not a probability. Read as a chance it would be output
+  // every Chicken Minion makes; read as a name it is an item nothing prices.
+  assert.deepEqual(parseAllCollects("|collects = 1 Raw Chicken\n* 1 Egg %Enchanted Egg%\n|x = 1"), [
+    { amount: 1, item: "Raw Chicken" },
+    { amount: 1, item: "Egg", condition: "Enchanted Egg" },
+  ]);
+});
+
+test("the slayer four carry a slayer requirement rather than a collection", () => {
+  // "Zombie Slayer 5" is what it takes to craft one, not what its drops feed. Kept apart so the
+  // collection resolver lands on the drop on purpose rather than by falling through.
+  for (const family of ["Revenant Minion", "Tarantula Minion", "Voidling Minion", "Inferno Minion"]) {
+    const m = minion(family);
+    assert.equal(m.category, "Slayer", `${family} is filed under the wiki's Slayer tab`);
+    assert.equal(m.collection, null, `${family} has no collection name, only a slayer requirement`);
+    assert.match(String(m.unlockRequirement), /Slayer$/);
+  }
+});
+
+test("the minions with a second drop have it, and it is priced-shaped", () => {
+  const revenant = minion("Revenant Minion");
+  assert.deepEqual(revenant.alsoCollects, [{ amount: 1, item: "Diamond", chance: 0.2 }]);
+  // The Voidling's obsidian is the largest of these corrections — it is 2.5 an harvest against a
+  // primary drop of 0.4 nether quartz, so leaving it out understated the minion many times over.
+  assert.ok(minion("Voidling Minion").alsoCollects!.some((d) => d.item === "Obsidian" && d.amount === 2.5));
+  // And a minion with one drop still has none, rather than an empty second stream.
+  assert.deepEqual(minion("Cobblestone Minion").alsoCollects, []);
 });
 
 test("a collection line drops the unlock tier, roman or arabic", () => {

@@ -203,6 +203,32 @@ function xpPlan(over: Partial<Parameters<typeof planMinionXp>[0]> = {}) {
   });
 }
 
+test("only the most compacted brewing form of a drop is planned", () => {
+  const cactus = xpPlan().filter((r) => r.generator === "CACTUS" && r.route === "brewing");
+  // Cactus reaches three entries in the alchemy table — cactus at 10 XP, Enchanted Cactus Green at
+  // 250, Enchanted Cactus at 500 — and they are three descriptions of one decision. The shallow two
+  // pay about the same an hour and ask for hundreds of times the brews to do it, so nobody would
+  // stand and brew them. One row, and it is the deepest chain.
+  assert.equal(cactus.length, 1);
+  assert.equal(cactus[0].itemId, "ENCHANTED_CACTUS");
+  assert.equal(Math.round(cactus[0].itemsPerBrew ?? 0), 25_600);
+});
+
+test("a brewing route carries the skill that collecting the same drops pays", () => {
+  const melon = xpPlan().find((r) => r.generator === "MELON" && r.route === "brewing")!;
+  // The drops do two jobs: collecting the minion pays Farming, brewing what you collected pays
+  // Alchemy. Crediting only the Alchemy half was throwing the larger of the two away.
+  assert.equal(melon.skill, "ALCHEMY");
+  assert.equal(melon.baseSkill, "FARMING");
+  assert.ok((melon.baseXpPerHour ?? 0) > 0);
+  assert.ok(melon.caveats.some((c) => /do two jobs/i.test(c)));
+
+  // A drop with no published direct rate has no second half to claim, and says nothing rather than
+  // claiming a zero — the same rule the direct rows follow.
+  const blaze = xpPlan().find((r) => r.generator === "BLAZE" && r.route === "brewing")!;
+  assert.equal(blaze.baseSkill, undefined);
+});
+
 test("a minion with no published rate scores zero and says why", () => {
   const rows = xpPlan().filter((r) => r.route === "direct");
   const oak = rows.find((r) => r.generator === "OAK")!;

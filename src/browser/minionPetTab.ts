@@ -15,7 +15,6 @@ import {
 import {
   absorbPetPage,
   createPetBinIndex,
-  hoursToLevel,
   planPetProfit,
   type PetBinIndex,
   type PetLevelTable,
@@ -82,12 +81,8 @@ type State = {
   fuel: string;
   upgrades: [string, string];
   showRoutes: boolean;
-  /** Brews a day worth recommending. The chore ceiling, not an economic one. */
-  maxBrews: string;
   /** How long a pet may take before the pairing stops counting as a plan. */
   horizon: string;
-  /** How much work the plan may ask of you. The tab's primary control. */
-  effort: EffortId;
   /** Hide pairings that make less than simply selling the output. */
   hideLosers: boolean;
   /** A live bazaar read, so the plan can price what the minion sells alongside the pet. */
@@ -101,8 +96,6 @@ type State = {
   scanned: number;
   scanTotal: number;
   scanError: string;
-  /** Which pet the coins-an-hour figure is computed against, if any is chosen. */
-  pairedWith: string | null;
   /** Which plan row is opened out. */
   openPlan: string | null;
   /** Column order for each of the tab's three tables, keyed by table. */
@@ -118,9 +111,7 @@ const state: State = {
   fuel: localStorage.getItem("sbxp:pxfuel") ?? "NONE",
   upgrades: [localStorage.getItem("sbxp:pxup0") ?? "NONE", localStorage.getItem("sbxp:pxup1") ?? "NONE"],
   showRoutes: localStorage.getItem("sbxp:pxroutes") === "1",
-  maxBrews: localStorage.getItem("sbxp:pxbrews") ?? "100",
   horizon: localStorage.getItem("sbxp:pxhorizon") ?? "365",
-  effort: (localStorage.getItem("sbxp:pxeffort") as EffortId) ?? "passive",
   hideLosers: localStorage.getItem("sbxp:pxhideloss") === "1",
   market: new Map(),
   detected: null,
@@ -129,7 +120,6 @@ const state: State = {
   scanned: 0,
   scanTotal: 0,
   scanError: "",
-  pairedWith: localStorage.getItem("sbxp:pxpair"),
   openPlan: null,
   sorts: readSorts(),
 };
@@ -145,7 +135,6 @@ const state: State = {
 const DEFAULT_SORTS: Record<string, { column: string; descending: boolean }> = {
   plan: { column: "advantage", descending: true },
   routes: { column: "petxp", descending: true },
-  market: { column: "coinsperxp", descending: true },
 };
 
 function readSorts(): Record<string, { column: string; descending: boolean }> {
@@ -491,15 +480,7 @@ export function mountMinionPet(container: HTMLElement, data: Tables): void {
         } catch {
           // In memory is enough for this session.
         }
-        if (table === "market") return renderPets();
         if (table === "routes") return renderSkills();
-        return renderPlan();
-      }
-
-      const effort = target.closest<HTMLElement>("[data-pxeffort]");
-      if (effort) {
-        state.effort = effort.dataset.pxeffort as EffortId;
-        localStorage.setItem("sbxp:pxeffort", state.effort);
         return renderPlan();
       }
 
@@ -508,15 +489,6 @@ export function mountMinionPet(container: HTMLElement, data: Tables): void {
         const key = planRow.dataset.pxplanopen!;
         state.openPlan = state.openPlan === key ? null : key;
         return renderPlan();
-      }
-
-      const pair = target.closest<HTMLElement>("[data-pxpair]");
-      if (pair) {
-        const key = pair.dataset.pxpair!;
-        state.pairedWith = state.pairedWith === key ? null : key;
-        if (state.pairedWith) localStorage.setItem("sbxp:pxpair", state.pairedWith);
-        else localStorage.removeItem("sbxp:pxpair");
-        return render();
       }
     });
 
@@ -560,9 +532,6 @@ export function mountMinionPet(container: HTMLElement, data: Tables): void {
       } else if (el.id === "pxcount") {
         state.count = el.value;
         localStorage.setItem("sbxp:pxcount", el.value);
-      } else if (el.id === "pxbrews") {
-        state.maxBrews = el.value;
-        localStorage.setItem("sbxp:pxbrews", el.value);
       } else if (el.id === "pxhorizon") {
         state.horizon = el.value;
         localStorage.setItem("sbxp:pxhorizon", el.value);
@@ -614,74 +583,27 @@ const WISDOM_HELP: Record<string, string> = {
 };
 
 /**
- * How much you are actually willing to do.
+ * What the plan is allowed to ask of you.
  *
- * The tab exists to answer one question — the best money from minion pet-levelling *without doing
- * anything excessive* — and that is a constrained optimisation whose constraint was previously
- * spread across two numeric boxes nobody would think to set. Effort is that constraint made into
- * one control, and it is the first thing on the page.
+ * This was three chips — set and forget, a few minutes, grinding — and they were three answers to a
+ * question the tab does not really have. Every one of them re-planned the whole table, so reading
+ * the page meant comparing three tables in your head rather than reading one; and the ranking is on
+ * `advantagePerDay` anyway, which already declines to recommend a plan whose brewing eats more than
+ * the pet is worth. A budget that never binds costs nothing to remove, and the two that did bind
+ * were hiding rows rather than changing which row won.
  *
- * Each level fixes three things that have to agree: how often you empty the minions, how many brews
- * you will stand and do, and whether brewing is on the table at all. They agree because they are
- * the same decision — someone who visits once a day is not the same person who will do two hundred
- * brews, and offering those independently produced setups nobody would run.
+ * So the ceiling is fixed and generous: everything is on the table, and the ranking decides. The
+ * brew cap stays because it is not economic — past a few hundred brews a day the route is a second
+ * job and the coins beside it are a fiction — but it is a guard rail now, not a control.
  *
- * `passive` is the default deliberately. It is the question as asked.
+ * Alchemy needs `brewing` on: it is reached no other way, and the whole route would vanish.
  */
-type EffortId = "passive" | "light" | "grind";
-
-type Effort = {
-  id: EffortId;
-  label: string;
-  /** What it asks of you, in a phrase, for the chip and the row. */
-  cost: string;
-  claimsPerDay: number;
-  maxBrewsPerDay: number;
-  /** False means brewing routes are not even considered. */
-  brewing: boolean;
-  help: string;
-};
-
-const EFFORTS: Effort[] = [
-  {
-    id: "passive",
-    label: "Set and forget",
-    cost: "one collection a day",
-    claimsPerDay: 1,
-    maxBrewsPerDay: 0,
-    brewing: false,
-    help:
-      "Empty the minions once a day and nothing else. No brewing stand, no second trip. This is the " +
-      "honest answer to 'what can I make without doing anything', and it is the default because it is " +
-      "the question most people are actually asking.",
-  },
-  {
-    id: "light",
-    label: "A few minutes a day",
-    cost: "two collections and up to 20 brews",
-    claimsPerDay: 2,
-    maxBrewsPerDay: 20,
-    brewing: true,
-    help:
-      "Two collections and a short spell at a brewing stand. Enough brewing to matter, little enough " +
-      "that it is still a game rather than a shift.",
-  },
-  {
-    id: "grind",
-    label: "I do not mind grinding",
-    cost: "four collections and up to 200 brews",
-    claimsPerDay: 4,
-    maxBrewsPerDay: 200,
-    brewing: true,
-    help:
-      "Everything on the table. Worth looking at to see what you are giving up by not grinding — " +
-      "often much less than it appears, because the drops a stand eats were worth selling.",
-  },
-];
-
-function effortOf(id: EffortId): Effort {
-  return EFFORTS.find((e) => e.id === id) ?? EFFORTS[0];
-}
+const BUDGET = {
+  /** What one phrase of this costs you, for the summary card. */
+  cost: "four collections and up to 200 brews",
+  claimsPerDay: 4,
+  maxBrewsPerDay: 200,
+} as const;
 
 function render(): void {
   if (!host || !tables) return;
@@ -794,10 +716,22 @@ function chainNote(): string {
  * own — a pet keeps the full Skill XP of its own skill and a third of anything else, so the best
  * minion under the wrong pet loses to a worse minion under the right one.
  */
+/**
+ * Every pairing the plan was chosen from, kept so a row can be opened out.
+ *
+ * `planRows` reduces the pairings to one per minion, and that reduction is the whole point of the
+ * table — but it throws away the runners-up, which are exactly what somebody wants when they click
+ * a row and ask "what else could I put on this?". Rather than run the solve a second time to get
+ * them back, the last full list is kept here and read by the row detail.
+ *
+ * Written on every `planRows` call and read only while that same render is on screen, so it cannot
+ * go stale in any way a reader could see: a change to any control re-plans before it repaints.
+ */
+let lastPairs: PetPlanRow[] = [];
+
 function planRows(over: { maxDaysPerPet?: number } = {}): PetPlanRow[] {
   if (!tables || !state.pets) return [];
 
-  const effort = effortOf(state.effort);
   const prices = priceBook();
   const setup = {
     tier: state.tier,
@@ -825,33 +759,31 @@ function planRows(over: { maxDaysPerPet?: number } = {}): PetPlanRow[] {
       chest: tables.storage.chests[0],
       hopper: tables.storage.hoppers[0],
       compactor: tables.storage.compactors.find((c) => c.id === "SUPER_COMPACTOR_3000") ?? tables.storage.compactors[0],
-      claimHours: 24 / effort.claimsPerDay,
+      claimHours: 24 / BUDGET.claimsPerDay,
     },
   });
 
   const itemCoinsPerHour = new Map(profit.map((r) => [r.generator, r.netPerHour]));
   const dropValue = new Map(profit.map((r) => [r.generator, r.unitValue]));
 
-  // Effort is applied before pairing rather than after, so a lower setting genuinely re-plans:
-  // each minion picks the best pet for the XP it makes within that budget, rather than showing
-  // whatever was left once the expensive rows were struck out.
-  const allowed = xpRows().filter((r) => effort.brewing || r.route === "direct");
+  const pairs = planPetPairs({
+    xpRows: xpRows(),
+    pets: petRows(),
+    catalogue: tables.petCatalogue,
+    rules: tables.petXpRules,
+    player: player(),
+    itemCoinsPerHour,
+    dropValue,
+    maxBrewsPerDay: BUDGET.maxBrewsPerDay,
+    claimsPerDay: BUDGET.claimsPerDay,
+    maxDaysPerPet: over.maxDaysPerPet ?? Math.max(1, Number(state.horizon) || 365),
+    minProfitPerDay: 0,
+  });
+  // Only the real plan's pairings are worth keeping — `emptyReason` re-runs this with the horizon
+  // lifted to explain an empty table, and those runners-up describe a plan nobody is being offered.
+  if (over.maxDaysPerPet === undefined) lastPairs = pairs;
 
-  const planned = bestPerMinion(
-    planPetPairs({
-      xpRows: allowed,
-      pets: petRows(),
-      catalogue: tables.petCatalogue,
-      rules: tables.petXpRules,
-      player: player(),
-      itemCoinsPerHour,
-      dropValue,
-      maxBrewsPerDay: effort.maxBrewsPerDay,
-      claimsPerDay: effort.claimsPerDay,
-      maxDaysPerPet: over.maxDaysPerPet ?? Math.max(1, Number(state.horizon) || 365),
-      minProfitPerDay: 0,
-    }),
-  );
+  const planned = bestPerMinion(pairs);
   return state.hideLosers ? planned.filter((r) => r.beatsSelling) : planned;
 }
 
@@ -888,20 +820,14 @@ function unplannableNote(planned: PetPlanRow[]): string {
 }
 
 /**
- * The effort chips, which are the tab's main control and sit above the answer.
+ * What is left of the chip strip once the three effort modes are one.
  *
- * Labelled by what they cost you rather than by what they enable, because the decision being made
- * is "how much am I prepared to do", not "which routes should the solver consider".
+ * Only the loss filter survives, because it is the one chip that was ever a *view* of a single
+ * plan rather than a different plan. It stays on the strip rather than moving into the controls
+ * panel above: it changes what the table shows, and it belongs beside the table it changes.
  */
-function effortTabsHtml(): string {
+function planTabsHtml(): string {
   return `<div class="tabs">
-    <span class="dim" style="align-self:center;font-size:12px;margin-right:4px">Willing to do:</span>
-    ${EFFORTS.map(
-      (e) =>
-        `<button class="chip${state.effort === e.id ? " on" : ""}" data-pxeffort="${e.id}" title="${escapeHtml(
-          `${e.help} Costs you ${e.cost}.`,
-        )}">${escapeHtml(e.label)}</button>`,
-    ).join("")}
     <button class="chip${state.hideLosers ? " on" : ""}" id="pxhideloss"
       title="Hide any pairing that makes less than simply running the minion and selling everything. On the brewing routes that is most of them: a stand that eats more in drops than the pet is worth is a worse plan than no plan.">Hide the ones that lose</button>
   </div>`;
@@ -1031,12 +957,23 @@ const PLAN_COLUMNS: SortColumn<PetPlanRow>[] = [
     label: "Pet",
     text: true,
     value: (r) => r.petName,
+    // Two pets on a brewing row, because the drops pay into two skills and one pet cannot take
+    // both. Shown stacked rather than merged: they are levelled at different rates off different
+    // streams, and a reader has to buy both.
     render: (r) =>
       `${escapeHtml(r.petName)}<div class="dim bz-path">${escapeHtml(title(r.petRarity))}${
         r.matched ? "" : ` · <span class="gold">skill mismatch</span>`
-      }${r.petLiquidity === "slow" ? ` · <span class="gold">slow to sell</span>` : ""}</div>${
-        r.brewsPerDay > 0 ? `<div class="dim bz-path">${num(Math.round(r.brewsPerDay))} brews a day</div>` : ""
-      }`,
+      }${r.petLiquidity === "slow" ? ` · <span class="gold">slow to sell</span>` : ""}${
+        r.partner ? " · while brewing" : ""
+      }</div>${
+        r.partner
+          ? `<div class="px-partner">${escapeHtml(r.partner.petName)}<div class="dim bz-path">${escapeHtml(
+              title(r.partner.petRarity),
+            )}${
+              r.partner.matched ? "" : ` · <span class="gold">skill mismatch</span>`
+            } · while collecting ${escapeHtml(title(r.baseSkill ?? ""))}</div></div>`
+          : ""
+      }${r.brewsPerDay > 0 ? `<div class="dim bz-path">${num(Math.round(r.brewsPerDay))} brews a day</div>` : ""}`,
   },
   {
     id: "advantage",
@@ -1086,7 +1023,7 @@ function renderPlan(): void {
   if (!target || !tables) return;
 
   if (!state.pets) {
-    target.innerHTML = `${effortTabsHtml()}
+    target.innerHTML = `${planTabsHtml()}
       <div class="panel pad">
         <p>Pet prices come from the auction house, and nothing here can be answered without them.
           It is about a hundred megabytes and takes a minute; the result is cached.</p>
@@ -1099,7 +1036,7 @@ function renderPlan(): void {
   if (rows.length === 0) {
     target.innerHTML = `<h3 class="gh-h">The plan</h3>
       <p class="dim pad">${PLAN_NOTE}</p>
-      ${effortTabsHtml()}
+      ${planTabsHtml()}
       ${emptyReason()}`;
     return;
   }
@@ -1129,7 +1066,7 @@ function renderPlan(): void {
     .join("");
 
   target.innerHTML = `
-    ${effortTabsHtml()}
+    ${planTabsHtml()}
     <div class="stats" style="grid-template-columns: repeat(4, 1fr)">
       <div class="stat">
         <div class="stat-label">Put down</div>
@@ -1137,10 +1074,20 @@ function renderPlan(): void {
         <div class="stat-sub">${escapeHtml(state.count)} of them at tier ${best.tier}</div>
       </div>
       <div class="stat">
-        <div class="stat-label">Level this pet</div>
-        <div class="stat-value gold">${escapeHtml(best.petName)}</div>
+        <div class="stat-label">Level ${best.partner ? "these pets" : "this pet"}</div>
+        <div class="stat-value gold">${escapeHtml(best.petName)}${
+          best.partner ? `<span class="stat-sub"> and ${escapeHtml(best.partner.petName)}</span>` : ""
+        }</div>
         <div class="stat-sub">buy ${escapeHtml(title(best.petRarity))} at ${coins(best.buyPrice)} · one every ${
           best.daysPerPet < 1 ? `${(best.daysPerPet * 24).toFixed(1)} hours` : `${Math.round(best.daysPerPet)} days`
+        }${
+          best.partner
+            ? ` · swap to the ${escapeHtml(best.partner.petName)} when you collect, one every ${
+                best.partner.daysPerPet < 1
+                  ? `${(best.partner.daysPerPet * 24).toFixed(1)} hours`
+                  : `${Math.round(best.partner.daysPerPet)} days`
+              }`
+            : ""
         }</div>
       </div>
       <div class="stat">
@@ -1153,7 +1100,7 @@ function renderPlan(): void {
       </div>
       <div class="stat">
         <div class="stat-label">Costs you</div>
-        <div class="stat-value">${escapeHtml(effortOf(state.effort).cost.split(" and ")[0])}</div>
+        <div class="stat-value">${escapeHtml(BUDGET.cost.split(" and ")[0])}</div>
         <div class="stat-sub">${
           best.brewsPerDay > 0 ? `and ${num(Math.round(best.brewsPerDay))} brews` : "and nothing else"
         }</div>
@@ -1212,6 +1159,21 @@ function planDetail(r: PetPlanRow): string {
       Math.round(r.itemProfitPerDay),
     )}</strong> a day.</div>`,
   ];
+  if (r.partner) {
+    lines.push(
+      `<div class="gh-sub">The same drops pay twice. Collecting them is
+      <strong>${escapeHtml(title(r.baseSkill ?? ""))}</strong> XP — <strong>${num(
+        Math.round(r.partner.petXpPerDay),
+      )}</strong> pet XP a day onto a <strong>${escapeHtml(r.partner.petName)}</strong>, one every ${
+        r.partner.daysPerPet < 1
+          ? `${(r.partner.daysPerPet * 24).toFixed(1)} hours`
+          : `${num(Math.round(r.partner.daysPerPet))} days`
+      }, worth <strong>${coins(Math.round(r.partner.profitPerDay))}</strong> a day on top. Only one pet is out at a
+      time, so this is the two swapped — the ${escapeHtml(r.petName)} while you brew, the ${escapeHtml(
+        r.partner.petName,
+      )} while you collect — not two levelled at once.</div>`,
+    );
+  }
   if (r.brewingCostPerDay > 0) {
     lines.push(
       `<div class="gh-sub">Brewing consumes <strong>${coins(
@@ -1232,14 +1194,95 @@ function planDetail(r: PetPlanRow): string {
         )} more</strong> than this plan. Not worth doing.</div>`,
   );
   for (const c of r.caveats.slice(0, 6)) lines.push(`<div class="gh-sub dim">${escapeHtml(c)}</div>`);
-  return lines.join("");
+  return lines.join("") + petChoices(r);
 }
 
+/** How many runners-up an opened row offers. Five is the ask, and a sixth row is a list, not a hint. */
+const PET_CHOICES = 5;
+
+/**
+ * The other pets worth putting on this minion, under the row that recommends one.
+ *
+ * This is what used to be a forty-row market table further down the page, and it was in the wrong
+ * place: that table ranked every pet on the auction house against a rate the reader had to go and
+ * find for themselves, so the pet it put at the top was frequently one this minion cannot level in
+ * a lifetime. Ranked per minion instead, the question it answers is the one actually being asked —
+ * "I am running this minion; what should I sit on it?" — and the answer is already computed,
+ * because the plan chose its winner out of exactly this list.
+ *
+ * Compact on purpose. Everything here is a comparison against the row above, so it carries the
+ * figures that differ between candidates — what the pet adds, how long one takes, whether its skill
+ * matches and whether anybody is buying — and none of the arithmetic the detail above already gave.
+ */
+function petChoices(r: PetPlanRow): string {
+  const skills = relevantSkills(r);
+  const forThisMinion = lastPairs.filter((p) => p.generator === r.generator);
+
+  // One table per skill the minion feeds. Alchemy minions feed two — the brew and the collection —
+  // and a single merged list would silently drop whichever skill had the weaker pets, which is the
+  // exact thing that made the pairing wrong before.
+  const blocks = skills
+    .map((skill) => {
+      const top = forThisMinion
+        .filter((p) => p.skill === skill)
+        .sort((a, b) => b.advantagePerDay - a.advantagePerDay)
+        .slice(0, PET_CHOICES);
+      if (top.length === 0) return "";
+
+      const rows = top
+        .map((p) => {
+          const chosen = p.petKey === r.petKey && p.petRarity === r.petRarity && p.skill === r.skill;
+          return `<tr class="${chosen ? "gold" : ""}${p.beatsSelling ? "" : " bz-faded"}">
+            <td>${escapeHtml(p.petName)}<span class="dim"> ${escapeHtml(title(p.petRarity))}</span>${
+              chosen ? `<span class="tag">chosen</span>` : ""
+            }</td>
+            <td class="num">${coins(p.buyPrice)}</td>
+            <td class="num"><span class="${p.beatsSelling ? "gold" : "bleed on"}">${
+              p.advantagePerDay >= 0 ? "+" : "−"
+            }${coins(Math.abs(Math.round(p.advantagePerDay)))}</span></td>
+            <td class="num">${p.daysPerPet < 1 ? `${(p.daysPerPet * 24).toFixed(1)} hr` : `${Math.round(p.daysPerPet)} d`}</td>
+            <td class="num">${
+              p.matched ? `<span class="dim">matches</span>` : `<span class="gold">mismatch</span>`
+            }${p.petLiquidity === "ok" ? "" : ` <span class="gold" title="Few listings, or listings that have sat for days. The sell price is one person's asking price rather than a market.">thin</span>`}</td>
+          </tr>`;
+        })
+        .join("");
+
+      return `<div class="px-choices">
+        <div class="gh-sub"><strong>${escapeHtml(title(skill))}</strong> — best ${
+          top.length === 1 ? "pet" : `${top.length} pets`
+        } for what this minion feeds${skills.length > 1 ? (skill === "ALCHEMY" ? ", from brewing" : ", from collecting") : ""}</div>
+        <table class="bz compact">
+          <thead><tr>
+            <th>Pet</th><th class="num">Buy at</th><th class="num">Adds</th><th class="num">Per pet</th><th class="num">Skill</th>
+          </tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>`;
+    })
+    .filter(Boolean)
+    .join("");
+
+  if (!blocks) return "";
+  return `<div class="px-choicewrap">${blocks}</div>`;
+}
+
+/**
+ * Which skills a minion's output actually levels a pet in.
+ *
+ * Normally one. An Alchemy row is the exception and the reason this is a list: brewing the drops
+ * pays Alchemy XP, and collecting the minion pays its own skill's XP on the way — the same drops
+ * doing two jobs, which needs two pets rather than one.
+ */
+function relevantSkills(r: PetPlanRow): SkillKey[] {
+  if (r.route !== "brewing" || !r.baseSkill || r.baseSkill === r.skill) return [r.skill];
+  return [r.skill, r.baseSkill];
+}
 
 const INTENT =
-  "The best money from minion pet-levelling without doing anything excessive. Pick how much you are willing to " +
-  "do and this finds the minion and the pet that pay the most inside that budget — counting both the pet margin " +
-  "and everything the minion sells while it levels. Everything below the answer is optional.";
+  "The best money from minion pet-levelling. This finds the minion and the pet that pay the most — counting " +
+  "both the pet margin and everything the minion sells while it levels — and opening a row shows the other " +
+  "pets worth sitting on it. Everything below the answer is optional.";
 
 /**
  * What the profile gave up, and what it could not.
@@ -1303,7 +1346,6 @@ function renderSkills(): void {
   // the direct route would report "not published" for a skill that has a perfectly real answer —
   // it just happens to involve a brewing stand, which is what the row then says.
   const best = bestPerSkill(all);
-  const paired = state.pairedWith ? petRows().find((r) => `${r.key}:${r.rarity}` === state.pairedWith) : undefined;
 
   const cards = SKILLS.map((skill) => {
     const row = best.get(skill) ?? null;
@@ -1320,18 +1362,11 @@ function renderSkills(): void {
         ? "this skill grants no pet XP at all"
         : "no minion rate on the wiki for this skill";
 
-    const earns =
-      known && paired
-        ? `<div class="stat-sub">${coins(Math.round(row!.petXpPerHour * paired.coinsPerXp))}/hr levelling ${escapeHtml(
-            paired.name,
-          )}</div>`
-        : "";
 
     return `<div class="stat">
       <div class="stat-label">${escapeHtml(title(skill))}</div>
       <div class="stat-value${known ? " gold" : ""}">${value}</div>
       <div class="stat-sub">${escapeHtml(sub)}</div>
-      ${earns}
     </div>`;
   }).join("");
 
@@ -1400,196 +1435,51 @@ function routesTable(all: MinionXpRow[]): string {
 /* ----------------------------------------------------------- the pet half */
 
 /**
- * The pet market's columns.
+ * What is left of the pet half once its table moved into the plan.
  *
- * A function rather than a constant because "at best rate" depends on the minion half — the same
- * pet takes a different time to level depending on what is feeding it — so the column has to be
- * built with that rate in hand.
+ * There used to be a forty-row market list here, ranking every pet on the auction house on coins
+ * per point of Pet XP. It was the wrong shape for the question: it ranked pets against a rate the
+ * reader had to go and find in another table, so its top row was routinely a pet no minion on the
+ * page can level this side of a year. Those rankings now sit under the minion they belong to, five
+ * at a time, where the rate is already known — see `petChoices`.
+ *
+ * What genuinely belongs to the whole tab rather than to one row is the sweep itself: whether it
+ * has run, how it is going, and how to run it again. That is all this renders now.
  */
-function marketColumns(bestRate: number): SortColumn<PetProfitRow>[] {
-  return [
-    {
-      id: "pet",
-      label: "Pet",
-      text: true,
-      value: (r) => r.name,
-      render: (r) =>
-        `${escapeHtml(r.name)}<div class="dim bz-path">${escapeHtml(title(r.rarity))}${
-          r.approximate ? ` · cheapest copy is level ${r.buy.level}` : ""
-        }</div>`,
-    },
-    {
-      id: "buy",
-      label: "Buy at",
-      title: "Cheapest BIN at the lowest level anyone is selling — usually 1.",
-      value: (r) => r.buy.price,
-      render: (r) => coins(r.buy.price),
-    },
-    {
-      id: "sell",
-      label: "Sell at",
-      title: "Cheapest BIN at max level. This is what you would have to undercut, not what you are promised.",
-      value: (r) => r.sell.price,
-      render: (r) => coins(r.sell.price),
-    },
-    {
-      id: "profit",
-      label: "Profit",
-      title: "The sale less the auction house's 1% cut, less what the pet cost.",
-      value: (r) => r.profit,
-      render: (r) => coins(Math.round(r.profit)),
-    },
-    {
-      id: "xp",
-      label: "Pet XP",
-      title: "Pet XP between the two ends, from the published per-rarity totals.",
-      value: (r) => r.xpNeeded,
-      render: (r) => num(Math.round(r.xpNeeded)),
-    },
-    {
-      id: "coinsperxp",
-      label: "Coins/xp",
-      title:
-        "Profit per point of Pet XP. The figure that makes a Rabbit comparable to a Golden Dragon, and the one " +
-        "the minion half of this tab multiplies into coins an hour.",
-      value: (r) => r.coinsPerXp,
-      render: (r) => r.coinsPerXp.toFixed(2),
-    },
-    {
-      id: "market",
-      label: "Market",
-      title:
-        "How many copies are listed at max level and how long they have sat. A lowest BIN is a number whatever is " +
-        "behind it, and for many pets there is one listing behind it — one person's asking price rather than a " +
-        "market. Across the whole auction house the median max-level pet listing is 28 hours old.",
-      // Sorted on depth, which is the half that decides whether the price means anything at all.
-      value: (r) => r.listings,
-      render: marketCell,
-    },
-    {
-      id: "wait",
-      label: "At best rate",
-      title: "How long the best minion route above would take to generate that XP.",
-      value: (r) => (bestRate > 0 ? hoursToLevel(bestRate, r) : Infinity),
-      render: (r) => {
-        const wait = bestRate > 0 ? hoursToLevel(bestRate, r) : Infinity;
-        return Number.isFinite(wait) ? hoursLabel(wait) : `<span class="dim">—</span>`;
-      },
-    },
-  ];
-}
-
 function renderPets(): void {
   const target = document.getElementById("pxpets");
-  if (!target || !tables) return;
+  if (!target) return;
 
   if (state.scanning) {
     const pct = state.scanTotal ? Math.round((state.scanned / state.scanTotal) * 100) : 0;
-    target.innerHTML = `<h3 class="gh-h">Best pet to level</h3>
-      <div class="busy">Sweeping the auction house — page ${num(state.scanned)} of ${num(state.scanTotal || 1)} (${pct}%)</div>`;
+    target.innerHTML = `<div class="busy">Sweeping the auction house — page ${num(state.scanned)} of ${num(
+      state.scanTotal || 1,
+    )} (${pct}%)</div>`;
     return;
   }
 
   if (!state.pets) {
-    target.innerHTML = `<h3 class="gh-h">Best pet to level</h3>
-      <p class="dim pad">${PET_NOTE}</p>
+    target.innerHTML = `<p class="dim pad">${PET_NOTE}</p>
       ${state.scanError ? `<div class="error">${escapeHtml(state.scanError)}</div>` : ""}
       <div class="tabs"><button class="chip" id="pxscan">Read the auction house</button></div>`;
     return;
   }
 
-  const all = petRows();
-  if (all.length === 0) {
-    target.innerHTML = `<h3 class="gh-h">Best pet to level</h3>
-      <p class="dim pad">The sweep found no pet listed at both ends of its ladder. That happens: the auction house is
-      a snapshot rather than a catalogue, and a pet needs somebody selling it at level 1 <em>and</em> somebody selling
-      it maxed before there is a trade to price.</p>
-      <div class="tabs"><button class="chip" id="pxscan">Read the auction house again</button></div>`;
-    return;
-  }
-
-  // The best route of any kind, whatever skill it belongs to — the rate the "at best rate" column
-  // runs at. It is the ceiling rather than a plan: the pet being levelled has to be one the winning
-  // skill actually feeds, which the cards above are where you check.
-  const bestRate = Math.max(0, ...xpRows().map((r) => r.petXpPerHour));
-
-  const columns = marketColumns(bestRate);
-  const body = sortRows("market", all, columns)
-    .slice(0, 40)
-    .map((r) => {
-      const key = `${r.key}:${r.rarity}`;
-      const on = state.pairedWith === key;
-      const cells = columns.map((c, i) => `<td class="${i === 0 ? "" : "num"}">${c.render(r)}</td>`).join("");
-      return `<tr class="bz-open${on ? " gold" : ""}" data-pxpair="${escapeHtml(
-        key,
-      )}" title="Pair this pet with the skill cards above to see what an hour of each minion is worth in coins.">${cells}</tr>`;
-    })
-    .join("");
-
+  const priced = petRows().length;
   const scanned = new Date(state.pets.scannedAt).toLocaleTimeString();
-
   target.innerHTML = `
-    <h3 class="gh-h">Best pet to level</h3>
-    <p class="dim pad">${PET_NOTE}</p>
-    ${rateReality(bestRate, all[0])}
-    <div class="panel scroll">
-      <table class="bz">
-        <thead><tr>${headerHtml("market", columns)}</tr></thead>
-        <tbody>${body}</tbody>
-      </table>
-    </div>
-    <p class="dim pad">${num(all.length)} pets priced at both ends${all.length > 40 ? ", showing the first 40" : ""} ·
+    <p class="dim pad">${num(priced)} pets priced at both ends of their ladder ·
       ${num(state.pets.listings)} pet listings read from ${num(state.pets.pages)} pages at ${escapeHtml(scanned)} ·
-      click a row to pair it with the skill cards above</p>
+      open any row in the plan for the best pets to put on that minion</p>
     <div class="tabs"><button class="chip" id="pxscan">Read the auction house again</button></div>
   `;
 }
 
-/** How deep the market is behind a pet's sell price, in a couple of words. */
-function marketCell(r: PetProfitRow): string {
-  const age = r.meanAgeHours >= 48 ? `${Math.round(r.meanAgeHours / 24)}d` : `${Math.round(r.meanAgeHours)}h`;
-  const label = `${num(r.listings)} listed · ${age}`;
-  if (r.liquidity === "ok") return `<span class="dim">${label}</span>`;
-  const why =
-    r.liquidity === "thin"
-      ? "One or two listings is one person's asking price, not a market you can sell into."
-      : "These have sat unsold for days. The price is real and nobody is paying it.";
-  return `<span class="gold" title="${escapeHtml(why)}">${label}</span>`;
-}
-
 const PET_NOTE =
-  "Buy a pet cheap, level it, sell it dear — ranked on coins per point of Pet XP rather than on the margin, " +
-  "because the margin alone always picks the Golden Dragon and the Dragon needs 210 million Pet XP to earn it. " +
-  "Both ends are the cheapest listing right now: the buy side is a price you can pay, the sell side is a price " +
-  "you would have to undercut. Reading the whole auction house is about a hundred megabytes, so it happens on " +
-  "the button rather than on arrival, and the result is cached for ten minutes.";
-
-/**
- * What the two halves multiplied together actually come to, said out loud.
- *
- * This is the least flattering number on the page and the most useful one. The published minion XP
- * rates are small — a tenth of a point an item, mostly — so even the best minion setup measures its
- * pet levelling in months rather than evenings, and a tab that showed a coins-per-hour figure
- * without that context would read as a recommendation. It is not one: minions are a background
- * trickle of Pet XP that costs nothing to run, not a way to level a pet on purpose. Saying so here
- * is cheaper than letting someone work it out after building the island.
- */
-function rateReality(bestRate: number, best: PetProfitRow | undefined): string {
-  if (!(bestRate > 0) || !best) return "";
-  const perHour = bestRate * best.coinsPerXp;
-  return `<div class="warn">At the best minion rate above — <strong>${num(Math.round(bestRate))}</strong> pet XP an hour —
-    the top row here is worth about <strong>${coins(Math.round(perHour))}</strong> an hour, and one pet takes
-    <strong>${hoursLabel(hoursToLevel(bestRate, best))}</strong>. Minion XP is a trickle: the published rates are
-    fractions of a point an item, so this is a thing that happens in the background of an island you built for other
-    reasons, not a way to level a pet on purpose. The Raw profits tab is where a minion pays properly.</div>`;
-}
-
-function hoursLabel(h: number): string {
-  if (h < 48) return `${h.toFixed(0)} hr`;
-  const days = h / 24;
-  if (days < 60) return `${days.toFixed(1)} days`;
-  return `${(days / 30.44).toFixed(1)} months`;
-}
+  "Buy a pet cheap, level it, sell it dear. Both ends are the cheapest listing right now: the buy side is a " +
+  "price you can pay, the sell side is a price you would have to undercut. Reading the whole auction house is " +
+  "about a hundred megabytes, so it happens on the button rather than on arrival, and the result is cached for " +
+  "ten minutes.";
 
 function title(key: string): string {
   return key.charAt(0) + key.slice(1).toLowerCase();

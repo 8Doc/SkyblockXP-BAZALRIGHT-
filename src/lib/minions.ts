@@ -24,12 +24,50 @@
 
 /* ------------------------------------------------------------------ shapes */
 
+/**
+ * One thing a minion drops, as the wiki's `collects` list states it.
+ *
+ * `chance` is a probability rather than a percentage, and it is on the *primary* drop as often as
+ * on a secondary one: a Fishing Minion's cod is 54% and a Mushroom Minion's red mushroom 50%, with
+ * the rest of the distribution in `alsoCollects`. Treating an absent chance as 1 is right — most
+ * minions drop one thing every harvest.
+ *
+ * `condition` is not a chance at all. The Chicken Minion's `1 Egg %Enchanted Egg%` means "only with
+ * that upgrade fitted", and a drop carrying one is not something every minion of this family makes.
+ */
+export type MinionDrop = {
+  amount: number;
+  item: string;
+  low?: number;
+  high?: number;
+  chance?: number;
+  condition?: string;
+};
+
 export type MinionProduction = {
   generator: string;
   family: string;
   maxTier: number;
   /** What one harvest yields. `low`/`high` are set where the wiki quotes a range. */
-  collects: { amount: number; item: string; low?: number; high?: number };
+  collects: MinionDrop;
+  /**
+   * Second and subsequent drops, each as the wiki states it.
+   *
+   * Most minions have none. The ones that do were being priced on their headline drop alone, which
+   * is not a rounding error where the second drop is the valuable one — a Revenant Minion's
+   * diamonds are worth many times its rotten flesh, and a wall of Revenants levelling a Golden
+   * Dragon is a well-known setup that looked like one of the worst minions on the page.
+   */
+  alsoCollects?: MinionDrop[];
+  /** Which tab of the wiki's minion list this is filed under. "Slayer" is the interesting one. */
+  category?: string | null;
+  /**
+   * The slayer level needed to craft it, for the four minions whose `collection` line is one.
+   *
+   * Slayer minion pages put "Zombie Slayer 5" in the collection slot, which is an unlock
+   * requirement and not a collection. Kept apart so neither is mistaken for the other.
+   */
+  unlockRequirement?: string;
   /** The collection's display name as the wiki gives it, before resolution. */
   collection: string | null;
   /** The resolved collection item id, or null when the drop feeds no collection at all. */

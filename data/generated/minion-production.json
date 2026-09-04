@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-03T21:15:30.987Z",
+ "generatedAt": "2026-09-04T09:58:47.685Z",
  "source": "Hypixel Wiki, one page per minion: the infobox for what it collects, the rendered stats table for per-tier cooldowns, and the minetip tooltip beside each tier for its max storage.",
  "note": "A cooldown is the time between ACTIONS. A minion generates on one action and harvests on the next, so a drop lands every 2 x cooldown. The Minions page states this and works the example: a 14s Cobblestone Minion I drops 1 Cobblestone every 28 seconds.",
  "actionsPerHarvest": 2,
@@ -8,10 +8,12 @@
    "generator": "ACACIA",
    "family": "Acacia Minion",
    "maxTier": 12,
+   "category": "Foraging",
    "collects": {
     "amount": 4,
     "item": "Acacia Log"
    },
+   "alsoCollects": [],
    "collection": "Acacia Log",
    "collectionId": "LOG_2",
    "cooldowns": [
@@ -47,10 +49,12 @@
    "generator": "BIRCH",
    "family": "Birch Minion",
    "maxTier": 12,
+   "category": "Foraging",
    "collects": {
     "amount": 4,
     "item": "Birch Log"
    },
+   "alsoCollects": [],
    "collection": "Birch Log",
    "collectionId": "LOG:2",
    "cooldowns": [
@@ -86,10 +90,12 @@
    "generator": "BLAZE",
    "family": "Blaze Minion",
    "maxTier": 12,
+   "category": "Combat",
    "collects": {
     "amount": 1,
     "item": "Blaze Rod"
    },
+   "alsoCollects": [],
    "collection": "Blaze Rod",
    "collectionId": "BLAZE_ROD",
    "cooldowns": [
@@ -125,10 +131,12 @@
    "generator": "CACTUS",
    "family": "Cactus Minion",
    "maxTier": 12,
+   "category": "Farming",
    "collects": {
     "amount": 3,
     "item": "Cactus"
    },
+   "alsoCollects": [],
    "collection": "Cactus",
    "collectionId": "CACTUS",
    "cooldowns": [
@@ -164,12 +172,14 @@
    "generator": "CARROT",
    "family": "Carrot Minion",
    "maxTier": 12,
+   "category": "Farming",
    "collects": {
     "amount": 3,
     "low": 2,
     "high": 4,
     "item": "Carrot"
    },
+   "alsoCollects": [],
    "collection": "Carrot",
    "collectionId": "CARROT_ITEM",
    "cooldowns": [
@@ -205,10 +215,18 @@
    "generator": "CAVESPIDER",
    "family": "Cave Spider Minion",
    "maxTier": 11,
+   "category": "Combat",
    "collects": {
     "amount": 1,
     "item": "Spider Eye"
    },
+   "alsoCollects": [
+    {
+     "amount": 1,
+     "item": "String",
+     "chance": 0.5
+    }
+   ],
    "collection": "Spider Eye",
    "collectionId": "SPIDER_EYE",
    "cooldowns": [
@@ -242,10 +260,22 @@
    "generator": "CHICKEN",
    "family": "Chicken Minion",
    "maxTier": 12,
+   "category": "Farming",
    "collects": {
     "amount": 1,
     "item": "Raw Chicken"
    },
+   "alsoCollects": [
+    {
+     "amount": 1,
+     "item": "Feather"
+    },
+    {
+     "amount": 1,
+     "item": "Egg",
+     "condition": "Enchanted Egg"
+    }
+   ],
    "collection": "Raw Chicken",
    "collectionId": "RAW_CHICKEN",
    "cooldowns": [
@@ -281,10 +311,12 @@
    "generator": "CLAY",
    "family": "Clay Minion",
    "maxTier": 12,
+   "category": "Fishing",
    "collects": {
     "amount": 4,
     "item": "Clay Ball"
    },
+   "alsoCollects": [],
    "collection": "Clay Ball",
    "collectionId": "CLAY_BALL",
    "cooldowns": [
@@ -320,10 +352,12 @@
    "generator": "COAL",
    "family": "Coal Minion",
    "maxTier": 12,
+   "category": "Mining",
    "collects": {
     "amount": 1,
     "item": "Coal"
    },
+   "alsoCollects": [],
    "collection": "Coal",
    "collectionId": "COAL",
    "cooldowns": [
@@ -359,10 +393,12 @@
    "generator": "COBBLESTONE",
    "family": "Cobblestone Minion",
    "maxTier": 12,
+   "category": "Mining",
    "collects": {
     "amount": 1,
     "item": "Cobblestone"
    },
+   "alsoCollects": [],
    "collection": "Cobblestone",
    "collectionId": "COBBLESTONE",
    "cooldowns": [
@@ -398,10 +434,12 @@
    "generator": "COCOA",
    "family": "Cocoa Beans Minion",
    "maxTier": 12,
+   "category": "Farming",
    "collects": {
     "amount": 3,
     "item": "Cocoa Beans"
    },
+   "alsoCollects": [],
    "collection": "Cocoa Beans",
    "collectionId": "INK_SACK:3",
    "cooldowns": [
@@ -437,10 +475,17 @@
    "generator": "COW",
    "family": "Cow Minion",
    "maxTier": 12,
+   "category": "Farming",
    "collects": {
     "amount": 1,
     "item": "Raw Beef"
    },
+   "alsoCollects": [
+    {
+     "amount": 1,
+     "item": "Leather"
+    }
+   ],
    "collection": "Leather",
    "collectionId": "LEATHER",
    "cooldowns": [
@@ -476,10 +521,12 @@
    "generator": "CREEPER",
    "family": "Creeper Minion",
    "maxTier": 11,
+   "category": "Combat",
    "collects": {
     "amount": 1,
     "item": "Gunpowder"
    },
+   "alsoCollects": [],
    "collection": "Gunpowder",
    "collectionId": "SULPHUR",
    "cooldowns": [
@@ -513,10 +560,12 @@
    "generator": "DARK_OAK",
    "family": "Dark Oak Minion",
    "maxTier": 12,
+   "category": "Foraging",
    "collects": {
     "amount": 4,
     "item": "Dark Oak Log"
    },
+   "alsoCollects": [],
    "collection": "Dark Oak Log",
    "collectionId": "LOG_2:1",
    "cooldowns": [
@@ -552,10 +601,12 @@
    "generator": "DIAMOND",
    "family": "Diamond Minion",
    "maxTier": 12,
+   "category": "Mining",
    "collects": {
     "amount": 1,
     "item": "Diamond"
    },
+   "alsoCollects": [],
    "collection": "Diamond",
    "collectionId": "DIAMOND",
    "cooldowns": [
@@ -591,10 +642,12 @@
    "generator": "EMERALD",
    "family": "Emerald Minion",
    "maxTier": 12,
+   "category": "Mining",
    "collects": {
     "amount": 1,
     "item": "Emerald"
    },
+   "alsoCollects": [],
    "collection": "Emerald",
    "collectionId": "EMERALD",
    "cooldowns": [
@@ -630,10 +683,12 @@
    "generator": "ENDER_STONE",
    "family": "End Stone Minion",
    "maxTier": 11,
+   "category": "Mining",
    "collects": {
     "amount": 1,
     "item": "End Stone"
    },
+   "alsoCollects": [],
    "collection": "End Stone",
    "collectionId": "ENDER_STONE",
    "cooldowns": [
@@ -667,10 +722,12 @@
    "generator": "ENDERMAN",
    "family": "Enderman Minion",
    "maxTier": 11,
+   "category": "Combat",
    "collects": {
     "amount": 1,
     "item": "Ender Pearl"
    },
+   "alsoCollects": [],
    "collection": "Ender Pearl",
    "collectionId": "ENDER_PEARL",
    "cooldowns": [
@@ -704,10 +761,44 @@
    "generator": "FISHING",
    "family": "Fishing Minion",
    "maxTier": 12,
+   "category": "Fishing",
    "collects": {
     "amount": 1,
-    "item": "Raw Cod %54%%"
+    "item": "Raw Cod",
+    "chance": 0.54
    },
+   "alsoCollects": [
+    {
+     "amount": 1,
+     "item": "Raw Salmon",
+     "chance": 0.225
+    },
+    {
+     "amount": 1,
+     "item": "Pufferfish",
+     "chance": 0.11699999999999999
+    },
+    {
+     "amount": 1,
+     "item": "Tropical Fish",
+     "chance": 0.036000000000000004
+    },
+    {
+     "amount": 1,
+     "item": "Prismarine Crystals",
+     "chance": 0.02734
+    },
+    {
+     "amount": 1,
+     "item": "Prismarine Shard",
+     "chance": 0.02734
+    },
+    {
+     "amount": 1,
+     "item": "Sponge",
+     "chance": 0.02734
+    }
+   ],
    "collection": "Raw Cod",
    "collectionId": "RAW_FISH",
    "cooldowns": [
@@ -743,10 +834,12 @@
    "generator": "FLOWER",
    "family": "Flower Minion",
    "maxTier": 12,
+   "category": "Foraging",
    "collects": {
     "amount": 1,
     "item": "Flower"
    },
+   "alsoCollects": [],
    "collection": null,
    "collectionId": null,
    "cooldowns": [
@@ -782,10 +875,12 @@
    "generator": "GHAST",
    "family": "Ghast Minion",
    "maxTier": 12,
+   "category": "Combat",
    "collects": {
     "amount": 1,
     "item": "Ghast Tear"
    },
+   "alsoCollects": [],
    "collection": "Ghast Tear",
    "collectionId": "GHAST_TEAR",
    "cooldowns": [
@@ -821,12 +916,14 @@
    "generator": "GLOWSTONE",
    "family": "Glowstone Minion",
    "maxTier": 12,
+   "category": "Mining",
    "collects": {
     "amount": 3,
     "low": 2,
     "high": 4,
     "item": "Glowstone Dust"
    },
+   "alsoCollects": [],
    "collection": "Glowstone Dust",
    "collectionId": "GLOWSTONE_DUST",
    "cooldowns": [
@@ -862,10 +959,12 @@
    "generator": "GOLD",
    "family": "Gold Minion",
    "maxTier": 12,
+   "category": "Mining",
    "collects": {
     "amount": 1,
     "item": "Gold Ore"
    },
+   "alsoCollects": [],
    "collection": "Gold Ingot",
    "collectionId": "GOLD_INGOT",
    "cooldowns": [
@@ -901,10 +1000,12 @@
    "generator": "GRAVEL",
    "family": "Gravel Minion",
    "maxTier": 11,
+   "category": "Mining",
    "collects": {
     "amount": 1,
     "item": "Gravel"
    },
+   "alsoCollects": [],
    "collection": "Gravel",
    "collectionId": "GRAVEL",
    "cooldowns": [
@@ -938,10 +1039,12 @@
    "generator": "HARD_STONE",
    "family": "Hard Stone Minion",
    "maxTier": 12,
+   "category": "Mining",
    "collects": {
     "amount": 2,
     "item": "Hard Stone"
    },
+   "alsoCollects": [],
    "collection": "Hard Stone",
    "collectionId": "HARD_STONE",
    "cooldowns": [
@@ -977,10 +1080,12 @@
    "generator": "ICE",
    "family": "Ice Minion",
    "maxTier": 12,
+   "category": "Mining",
    "collects": {
     "amount": 1,
     "item": "Ice"
    },
+   "alsoCollects": [],
    "collection": "Ice",
    "collectionId": "ICE",
    "cooldowns": [
@@ -1016,11 +1121,14 @@
    "generator": "INFERNO",
    "family": "Inferno Minion",
    "maxTier": 11,
+   "category": "Slayer",
    "collects": {
     "amount": 1,
     "item": "Crude Gabagool"
    },
-   "collection": "Blaze Slayer",
+   "alsoCollects": [],
+   "collection": null,
+   "unlockRequirement": "Blaze Slayer",
    "collectionId": null,
    "cooldowns": [
     1013,
@@ -1053,10 +1161,12 @@
    "generator": "IRON",
    "family": "Iron Minion",
    "maxTier": 12,
+   "category": "Mining",
    "collects": {
     "amount": 1,
     "item": "Iron Ore"
    },
+   "alsoCollects": [],
    "collection": "Iron Ingot",
    "collectionId": "IRON_INGOT",
    "cooldowns": [
@@ -1092,10 +1202,12 @@
    "generator": "JUNGLE",
    "family": "Jungle Minion",
    "maxTier": 12,
+   "category": "Foraging",
    "collects": {
     "amount": 4,
     "item": "Jungle Log"
    },
+   "alsoCollects": [],
    "collection": "Jungle Log",
    "collectionId": "LOG:3",
    "cooldowns": [
@@ -1131,12 +1243,14 @@
    "generator": "LAPIS",
    "family": "Lapis Minion",
    "maxTier": 12,
+   "category": "Mining",
    "collects": {
     "amount": 6,
     "low": 4,
     "high": 8,
     "item": "Lapis Lazuli"
    },
+   "alsoCollects": [],
    "collection": "Lapis Lazuli",
    "collectionId": "INK_SACK:4",
    "cooldowns": [
@@ -1172,10 +1286,12 @@
    "generator": "LILY_PAD",
    "family": "Lily Pad Minion",
    "maxTier": 12,
+   "category": "Fishing",
    "collects": {
     "amount": 1,
     "item": "Lily Pad"
    },
+   "alsoCollects": [],
    "collection": "Lily Pad",
    "collectionId": "WATER_LILY",
    "cooldowns": [
@@ -1211,10 +1327,12 @@
    "generator": "MAGMA_CUBE",
    "family": "Magma Cube Minion",
    "maxTier": 12,
+   "category": "Combat",
    "collects": {
     "amount": 2,
     "item": "Magma Cream"
    },
+   "alsoCollects": [],
    "collection": "Magma Cream",
    "collectionId": "MAGMA_CREAM",
    "cooldowns": [
@@ -1250,12 +1368,14 @@
    "generator": "MELON",
    "family": "Melon Minion",
    "maxTier": 12,
+   "category": "Farming",
    "collects": {
     "amount": 5,
     "low": 3,
     "high": 7,
     "item": "Melon Slice"
    },
+   "alsoCollects": [],
    "collection": "Melon Slice",
    "collectionId": "MELON",
    "cooldowns": [
@@ -1291,10 +1411,12 @@
    "generator": "MITHRIL",
    "family": "Mithril Minion",
    "maxTier": 12,
+   "category": "Mining",
    "collects": {
     "amount": 2,
     "item": "Mithril"
    },
+   "alsoCollects": [],
    "collection": "Mithril",
    "collectionId": "MITHRIL_ORE",
    "cooldowns": [
@@ -1330,10 +1452,19 @@
    "generator": "MUSHROOM",
    "family": "Mushroom Minion",
    "maxTier": 12,
+   "category": "Farming",
    "collects": {
     "amount": 1,
-    "item": "Red Mushroom %50%%"
+    "item": "Red Mushroom",
+    "chance": 0.5
    },
+   "alsoCollects": [
+    {
+     "amount": 1,
+     "item": "Brown Mushroom",
+     "chance": 0.5
+    }
+   ],
    "collection": "Mushroom",
    "collectionId": "MUSHROOM_COLLECTION",
    "cooldowns": [
@@ -1369,10 +1500,12 @@
    "generator": "MYCELIUM",
    "family": "Mycelium Minion",
    "maxTier": 12,
+   "category": "Mining",
    "collects": {
     "amount": 1,
     "item": "Mycelium"
    },
+   "alsoCollects": [],
    "collection": "Mycelium",
    "collectionId": "MYCEL",
    "cooldowns": [
@@ -1408,12 +1541,14 @@
    "generator": "NETHER_WARTS",
    "family": "Nether Wart Minion",
    "maxTier": 12,
+   "category": "Farming",
    "collects": {
     "amount": 2.5,
     "low": 2,
     "high": 3,
     "item": "Nether Wart"
    },
+   "alsoCollects": [],
    "collection": "Nether Wart",
    "collectionId": "NETHER_STALK",
    "cooldowns": [
@@ -1449,10 +1584,12 @@
    "generator": "OAK",
    "family": "Oak Minion",
    "maxTier": 12,
+   "category": "Foraging",
    "collects": {
     "amount": 4,
     "item": "Oak Log"
    },
+   "alsoCollects": [],
    "collection": "Oak Log",
    "collectionId": "LOG",
    "cooldowns": [
@@ -1488,10 +1625,12 @@
    "generator": "OBSIDIAN",
    "family": "Obsidian Minion",
    "maxTier": 12,
+   "category": "Mining",
    "collects": {
     "amount": 1,
     "item": "Obsidian"
    },
+   "alsoCollects": [],
    "collection": "Obsidian",
    "collectionId": "OBSIDIAN",
    "cooldowns": [
@@ -1527,10 +1666,12 @@
    "generator": "PIG",
    "family": "Pig Minion",
    "maxTier": 12,
+   "category": "Farming",
    "collects": {
     "amount": 1,
     "item": "Raw Porkchop"
    },
+   "alsoCollects": [],
    "collection": "Raw Porkchop",
    "collectionId": "PORK",
    "cooldowns": [
@@ -1566,12 +1707,14 @@
    "generator": "POTATO",
    "family": "Potato Minion",
    "maxTier": 12,
+   "category": "Farming",
    "collects": {
     "amount": 3,
     "low": 2,
     "high": 4,
     "item": "Potato"
    },
+   "alsoCollects": [],
    "collection": "Potato",
    "collectionId": "POTATO_ITEM",
    "cooldowns": [
@@ -1607,10 +1750,12 @@
    "generator": "PUMPKIN",
    "family": "Pumpkin Minion",
    "maxTier": 12,
+   "category": "Farming",
    "collects": {
     "amount": 1,
     "item": "Pumpkin"
    },
+   "alsoCollects": [],
    "collection": "Pumpkin",
    "collectionId": "PUMPKIN",
    "cooldowns": [
@@ -1646,10 +1791,12 @@
    "generator": "QUARTZ",
    "family": "Quartz Minion",
    "maxTier": 12,
+   "category": "Mining",
    "collects": {
     "amount": 1,
     "item": "Nether Quartz"
    },
+   "alsoCollects": [],
    "collection": "Nether Quartz",
    "collectionId": "QUARTZ",
    "cooldowns": [
@@ -1685,10 +1832,23 @@
    "generator": "RABBIT",
    "family": "Rabbit Minion",
    "maxTier": 12,
+   "category": "Farming",
    "collects": {
     "amount": 1,
     "item": "Raw Rabbit"
    },
+   "alsoCollects": [
+    {
+     "amount": 1,
+     "item": "Rabbit's Foot",
+     "chance": 0.7
+    },
+    {
+     "amount": 1,
+     "item": "Rabbit Hide",
+     "chance": 0.7
+    }
+   ],
    "collection": "Raw Rabbit",
    "collectionId": "RABBIT",
    "cooldowns": [
@@ -1724,10 +1884,12 @@
    "generator": "RED_SAND",
    "family": "Red Sand Minion",
    "maxTier": 12,
+   "category": "Mining",
    "collects": {
     "amount": 1,
     "item": "Red Sand"
    },
+   "alsoCollects": [],
    "collection": "Red Sand",
    "collectionId": "SAND:1",
    "cooldowns": [
@@ -1763,12 +1925,14 @@
    "generator": "REDSTONE",
    "family": "Redstone Minion",
    "maxTier": 12,
+   "category": "Mining",
    "collects": {
     "amount": 4.5,
     "low": 3,
     "high": 6,
     "item": "Redstone Dust"
    },
+   "alsoCollects": [],
    "collection": "Redstone Dust",
    "collectionId": "REDSTONE",
    "cooldowns": [
@@ -1804,13 +1968,22 @@
    "generator": "REVENANT",
    "family": "Revenant Minion",
    "maxTier": 12,
+   "category": "Slayer",
    "collects": {
     "amount": 3.5,
     "low": 2,
     "high": 5,
     "item": "Rotten Flesh"
    },
-   "collection": "Zombie Slayer",
+   "alsoCollects": [
+    {
+     "amount": 1,
+     "item": "Diamond",
+     "chance": 0.2
+    }
+   ],
+   "collection": null,
+   "unlockRequirement": "Zombie Slayer",
    "collectionId": "ROTTEN_FLESH",
    "cooldowns": [
     29,
@@ -1845,10 +2018,12 @@
    "generator": "SAND",
    "family": "Sand Minion",
    "maxTier": 11,
+   "category": "Mining",
    "collects": {
     "amount": 1,
     "item": "Sand"
    },
+   "alsoCollects": [],
    "collection": "Sand",
    "collectionId": "SAND",
    "cooldowns": [
@@ -1882,10 +2057,17 @@
    "generator": "SHEEP",
    "family": "Sheep Minion",
    "maxTier": 12,
+   "category": "Farming",
    "collects": {
     "amount": 1,
     "item": "Raw Mutton"
    },
+   "alsoCollects": [
+    {
+     "amount": 1,
+     "item": "White Wool"
+    }
+   ],
    "collection": "Raw Mutton",
    "collectionId": "MUTTON",
    "cooldowns": [
@@ -1921,12 +2103,14 @@
    "generator": "SKELETON",
    "family": "Skeleton Minion",
    "maxTier": 11,
+   "category": "Combat",
    "collects": {
     "amount": 1.5,
     "low": 1,
     "high": 2,
     "item": "Bone"
    },
+   "alsoCollects": [],
    "collection": "Bone",
    "collectionId": "BONE",
    "cooldowns": [
@@ -1960,10 +2144,12 @@
    "generator": "SLIME",
    "family": "Slime Minion",
    "maxTier": 11,
+   "category": "Combat",
    "collects": {
     "amount": 2,
     "item": "Slimeball"
    },
+   "alsoCollects": [],
    "collection": "Slimeball",
    "collectionId": "SLIME_BALL",
    "cooldowns": [
@@ -1997,10 +2183,12 @@
    "generator": "SNOW",
    "family": "Snow Minion",
    "maxTier": 12,
+   "category": "Mining",
    "collects": {
     "amount": 4,
     "item": "Snowball"
    },
+   "alsoCollects": [],
    "collection": null,
    "collectionId": null,
    "cooldowns": [
@@ -2036,10 +2224,18 @@
    "generator": "SPIDER",
    "family": "Spider Minion",
    "maxTier": 11,
+   "category": "Combat",
    "collects": {
     "amount": 1,
     "item": "String"
    },
+   "alsoCollects": [
+    {
+     "amount": 1,
+     "item": "Spider Eye",
+     "chance": 0.5
+    }
+   ],
    "collection": "String",
    "collectionId": "STRING",
    "cooldowns": [
@@ -2073,10 +2269,12 @@
    "generator": "SPRUCE",
    "family": "Spruce Minion",
    "maxTier": 12,
+   "category": "Foraging",
    "collects": {
     "amount": 4,
     "item": "Spruce Log"
    },
+   "alsoCollects": [],
    "collection": "Spruce Log",
    "collectionId": "LOG:1",
    "cooldowns": [
@@ -2112,10 +2310,12 @@
    "generator": "SUGAR_CANE",
    "family": "Sugar Cane Minion",
    "maxTier": 12,
+   "category": "Farming",
    "collects": {
     "amount": 3,
     "item": "Sugar Cane"
    },
+   "alsoCollects": [],
    "collection": "Sugar Cane",
    "collectionId": "SUGAR_CANE",
    "cooldowns": [
@@ -2151,10 +2351,17 @@
    "generator": "SUNFLOWER",
    "family": "Sunflower Minion",
    "maxTier": 12,
+   "category": "Farming",
    "collects": {
     "amount": 1,
     "item": "Sunflower"
    },
+   "alsoCollects": [
+    {
+     "amount": 1,
+     "item": "Moonflower"
+    }
+   ],
    "collection": "Sunflower",
    "collectionId": "DOUBLE_PLANT",
    "cooldowns": [
@@ -2190,13 +2397,26 @@
    "generator": "TARANTULA",
    "family": "Tarantula Minion",
    "maxTier": 12,
+   "category": "Slayer",
    "collects": {
     "amount": 3.5,
     "low": 2,
     "high": 5,
     "item": "String"
    },
-   "collection": "Spider Slayer",
+   "alsoCollects": [
+    {
+     "amount": 1,
+     "item": "Spider Eye"
+    },
+    {
+     "amount": 1,
+     "item": "Iron Ingot",
+     "chance": 0.2
+    }
+   ],
+   "collection": null,
+   "unlockRequirement": "Spider Slayer",
    "collectionId": "STRING",
    "cooldowns": [
     29,
@@ -2231,10 +2451,12 @@
    "generator": "VAMPIRE",
    "family": "Vampire Minion",
    "maxTier": 11,
+   "category": "Combat",
    "collects": {
     "amount": 1,
     "item": "Hemovibe"
    },
+   "alsoCollects": [],
    "collection": "Hemovibe",
    "collectionId": "HEMOVIBE",
    "cooldowns": [
@@ -2268,11 +2490,23 @@
    "generator": "VOIDLING",
    "family": "Voidling Minion",
    "maxTier": 11,
+   "category": "Slayer",
    "collects": {
     "amount": 0.4,
     "item": "Nether Quartz"
    },
-   "collection": "Enderman Slayer",
+   "alsoCollects": [
+    {
+     "amount": 2.5,
+     "item": "Obsidian"
+    },
+    {
+     "amount": 0.000625,
+     "item": "Enchanted Ender Pearl"
+    }
+   ],
+   "collection": null,
+   "unlockRequirement": "Enderman Slayer",
    "collectionId": "QUARTZ",
    "cooldowns": [
     45,
@@ -2305,10 +2539,19 @@
    "generator": "WHEAT",
    "family": "Wheat Minion",
    "maxTier": 12,
+   "category": "Farming",
    "collects": {
     "amount": 1,
     "item": "Wheat"
    },
+   "alsoCollects": [
+    {
+     "amount": 1.5,
+     "low": 1,
+     "high": 2,
+     "item": "Seeds"
+    }
+   ],
    "collection": "Wheat",
    "collectionId": "WHEAT",
    "cooldowns": [
@@ -2344,10 +2587,28 @@
    "generator": "ZOMBIE",
    "family": "Zombie Minion",
    "maxTier": 11,
+   "category": "Combat",
    "collects": {
     "amount": 1,
     "item": "Rotten Flesh"
    },
+   "alsoCollects": [
+    {
+     "amount": 1,
+     "item": "Poisonous Potato",
+     "chance": 0.02
+    },
+    {
+     "amount": 1,
+     "item": "Carrot",
+     "chance": 0.01
+    },
+    {
+     "amount": 1,
+     "item": "Potato",
+     "chance": 0.01
+    }
+   ],
    "collection": "Rotten Flesh",
    "collectionId": "ROTTEN_FLESH",
    "cooldowns": [

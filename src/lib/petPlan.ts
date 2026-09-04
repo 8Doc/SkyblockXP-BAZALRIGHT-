@@ -32,6 +32,26 @@ import type { Liquidity, PetProfitRow } from "./petLevelling";
 
 export type PetCatalogueEntry = { key: string; name: string; skill: SkillKey | null };
 
+/**
+ * The second pet on a brewing plan — the one that levels off collecting rather than off brewing.
+ *
+ * Carries its own copy of every figure the main pet has, because the two are levelled from
+ * different XP streams at different rates and averaging them would describe neither.
+ */
+export type PartnerPet = {
+  petKey: string;
+  petName: string;
+  petRarity: string;
+  petLiquidity: Liquidity;
+  buyPrice: number;
+  matched: boolean;
+  petXpPerDay: number;
+  daysPerPet: number;
+  petsPerDay: number;
+  /** Coins a day this pet adds on its own. Already included in the row's pet profit. */
+  profitPerDay: number;
+};
+
 /** Hours in the day every per-day figure here divides by. */
 export const DAY_HOURS = 24;
 
@@ -54,6 +74,19 @@ export type PetPlanRow = {
   buyLevel: number;
   /** True when the pet's own skill is the one the minion feeds — the difference is a factor of 3. */
   matched: boolean;
+
+  /**
+   * The skill collecting pays on a brewing route, and the second pet that levels off it.
+   *
+   * A brewing plan runs two XP streams off one set of drops: collecting the minion pays its own
+   * skill, and brewing what you collected pays Alchemy. Only one pet is out at a time, so this is
+   * two pets swapped rather than two levelled at once — the alchemy pet while you brew, the other
+   * while you collect — which is exactly how the setup is played, and why the plan names both.
+   *
+   * Both absent on a direct route, where there is only one stream and one pet.
+   */
+  baseSkill?: SkillKey;
+  partner?: PartnerPet;
 
   /* ----------------------------------------------------------- the numbers */
   petXpPerDay: number;
@@ -182,6 +215,11 @@ export function planPetPairs(o: PetPlanOptions): PetPlanRow[] {
     const itemCoinsPerHour = o.itemCoinsPerHour.get(row.generator) ?? 0;
     const dropValue = o.dropValue.get(row.generator) ?? 0;
 
+    // The collection half of a brewing plan, settled once per route rather than once per candidate.
+    // It does not depend on which pet is chosen for the brewing half — the two streams are
+    // independent — so working it out inside the pet loop would be the same answer sixty times.
+    const partner = bestPartner(row, o, skillOf, nameOf, horizon);
+
     for (const pet of o.pets) {
       const bare = pet.key.replace(/^PET:/, "");
       const petSkill = skillOf.get(bare) ?? null;
@@ -232,7 +270,9 @@ export function planPetPairs(o: PetPlanOptions): PetPlanRow[] {
       const daysPerPet = petXpPerDay > 0 ? pet.xpNeeded / petXpPerDay : Infinity;
       if (daysPerPet > horizon) continue;
 
-      const petProfitPerDay = petsPerDay * pet.profit;
+      // The partner's margin is real income from the same drops, so it belongs in the profit rather
+      // than in a footnote. It is added once, here, and every total below inherits it.
+      const petProfitPerDay = petsPerDay * pet.profit + (partner?.profitPerDay ?? 0);
       const totalProfitPerDay = petProfitPerDay + itemProfitPerDay;
       const sellOnlyPerDay = itemCoinsPerHour * DAY_HOURS;
       const advantagePerDay = totalProfitPerDay - sellOnlyPerDay;
@@ -265,6 +305,8 @@ export function planPetPairs(o: PetPlanOptions): PetPlanRow[] {
         buyPrice: pet.buy.price,
         buyLevel: pet.buy.level,
         matched,
+        ...(row.baseSkill === undefined ? {} : { baseSkill: row.baseSkill }),
+        ...(partner === null ? {} : { partner }),
         petXpPerDay,
         daysPerPet,
         petsPerDay,
@@ -287,6 +329,64 @@ export function planPetPairs(o: PetPlanOptions): PetPlanRow[] {
   // question the Raw profits tab already answers better — and attaches whatever pet happens to be
   // along for the ride. This tab is about what pet-levelling adds, so that is what it sorts by.
   return out.sort((a, b) => b.advantagePerDay - a.advantagePerDay);
+}
+
+/**
+ * The best pet for the collection half of a brewing plan.
+ *
+ * Only brewing rows have a collection half worth naming — on a direct route the collection *is* the
+ * route, and its pet is the one being chosen in the main loop. Returns null wherever there is no
+ * second stream: a direct row, a brewing row whose drop has no published direct rate, or one where
+ * nothing on the market can level a pet of that skill inside the horizon.
+ *
+ * Chosen on margin a day, which for a fixed XP stream is the same ranking as coins per point of Pet
+ * XP — the figure that makes a Rabbit comparable to a Golden Dragon.
+ */
+function bestPartner(
+  row: MinionXpRow,
+  o: PetPlanOptions,
+  skillOf: Map<string, SkillKey | null>,
+  nameOf: Map<string, string>,
+  horizon: number,
+): PartnerPet | null {
+  const skill = row.baseSkill;
+  const baseXpPerHour = row.baseXpPerHour ?? 0;
+  if (row.route !== "brewing" || !skill || !(baseXpPerHour > 0)) return null;
+
+  // The collection stream as its own route, so the Wisdom and multiplier chain is applied to the
+  // skill that actually pays it rather than to Alchemy.
+  const asCollection: MinionXpRow = { ...row, skill, route: "direct", baseSkillXpPerHour: baseXpPerHour };
+
+  let best: PartnerPet | null = null;
+  for (const pet of o.pets) {
+    const bare = pet.key.replace(/^PET:/, "");
+    const petSkill = skillOf.get(bare) ?? null;
+    if (!petSkill) continue;
+
+    const petXpPerDay = petXpPerHourFor(asCollection, petSkill, o.player, o.rules) * DAY_HOURS;
+    if (!(petXpPerDay > 0) || !(pet.xpNeeded > 0)) continue;
+
+    const daysPerPet = pet.xpNeeded / petXpPerDay;
+    if (daysPerPet > horizon) continue;
+
+    const petsPerDay = petXpPerDay / pet.xpNeeded;
+    const profitPerDay = petsPerDay * pet.profit;
+    if (!(profitPerDay > 0) || (best && profitPerDay <= best.profitPerDay)) continue;
+
+    best = {
+      petKey: pet.key,
+      petName: nameOf.get(bare) ?? pet.name,
+      petRarity: pet.rarity,
+      petLiquidity: pet.liquidity,
+      buyPrice: pet.buy.price,
+      matched: petSkill === skill,
+      petXpPerDay,
+      daysPerPet,
+      petsPerDay,
+      profitPerDay,
+    };
+  }
+  return best;
 }
 
 /**

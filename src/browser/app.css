@@ -159,6 +159,26 @@ button:disabled { opacity: 0.45; cursor: default; }
 .task-cost { width: 90px; text-align: right; font-variant-numeric: tabular-nums; }
 .task-rate { width: 100px; text-align: right; color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
 .tag, .note { margin-left: 6px; font-size: 12px; color: var(--muted); }
+
+/*
+ * The material name inside a note, which is a button because the name is what you go and paste
+ * into the bazaar. Styled as text rather than as a control: it sits mid-sentence in a dim aside,
+ * and a real-looking button there would read as the row's action rather than as its shopping list.
+ * The dotted underline is the only affordance, and it only firms up under the cursor.
+ */
+.note .copy {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  border-bottom: 1px dotted var(--line);
+}
+.note .copy:hover { color: var(--gold); border-bottom-color: var(--gold); }
+.note .copy:focus-visible { outline: 1px solid var(--gold); outline-offset: 2px; }
+.note .copy.copied { color: var(--gold); border-bottom-color: transparent; }
+.note .copy.copyfail { color: var(--gold); border-bottom-color: transparent; font-style: italic; }
 .count {
   margin-left: 6px;
   padding: 0 4px;
@@ -339,6 +359,35 @@ table.bz td:last-child { color: var(--gold); }
    Written as `table.bz tr.gh-detail > td` because `table.bz td` is two elements and a class, and
    a plainer selector here loses to it on specificity and silently changes nothing. */
 table.bz tr.gh-detail > td, table.bz tr.mn-detail > td { padding: 10px 12px 14px; background: rgba(255,255,255,0.02); white-space: normal; }
+
+/* The runners-up under an opened plan row: the five best pets for that minion, per skill it feeds.
+
+   A nested table here, unlike the tier ladder below, because these really are five like rows of
+   five like columns and a grid would be re-implementing a table by hand. The specificity note
+   above is why every rule is written `table.bz .px-choices td` rather than `.px-choices td` — the
+   outer `table.bz td` is two elements and a class, and anything plainer loses to it and does
+   nothing at all on screen.
+
+   Alchemy is the reason this can hold two blocks. Its drops pay twice — Alchemy for the brew and
+   the minion's own skill for the collection — so the row names two pets and this names five for
+   each of them. Every other minion feeds one skill and gets one block. */
+.px-choicewrap { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 18px 28px; }
+.px-choices { flex: 1 1 340px; min-width: 0; }
+.px-choices .gh-sub { margin-bottom: 4px; }
+table.bz .px-choices table.bz { margin-top: 2px; background: none; }
+table.bz .px-choices td, table.bz .px-choices th { padding: 3px 8px 3px 0; font-size: 0.9em; white-space: nowrap; }
+table.bz .px-choices thead th { background: none; border-bottom: 1px solid var(--line); font-size: 0.82em; }
+table.bz .px-choices tbody tr:hover td { background: none; }
+table.bz .px-choices tbody tr + tr td { border-top: 0; }
+/* The outer table paints its last column gold to pick out the rate. In here the last column is
+   "does the skill match", which is not a figure and must not read as one. */
+table.bz .px-choices td:last-child { color: inherit; }
+table.bz .px-choices tr.gold td { color: var(--gold); }
+.px-choices .tag { font-size: 10px; }
+
+/* The second pet on a brewing plan, under the first in the same cell. Indented rather than
+   bulleted: it is the same recommendation continued, not a separate one. */
+.px-partner { margin-top: 5px; padding-left: 9px; border-left: 2px solid var(--line); }
 
 /* The minions tab's tier ladder. Five narrow columns of figures, so it is a grid rather than a
    nested table: `table.bz td` would win on specificity over anything a nested table set, and the

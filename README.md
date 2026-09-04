@@ -37,6 +37,11 @@ This is a **min-cost knapsack**: minimise `sum(cost)` subject to `sum(xp) >= N`.
 ### B. Category browser
 Every category as its own panel: total XP still available, total coin cost, count of remaining tasks, and the tasks themselves sorted by coins/XP. This is the "I'm at the Abiphone anyway, what else can I buy here" view.
 
+**The material on a row is click-to-copy.** Every attribute row reads "30× Voracious Spider Shard",
+and the next thing anyone does with that sentence is type the shard's name into the bazaar's search
+box — by hand, off a screen, with the count and the multiplication sign in the way. Clicking the
+name copies it. The count stays plain text, because nothing is ever searched for by its count.
+
 Attribute shards get a **Group maxed** toggle in the panel. There are 181 attributes of ten levels each, and the per-level rows differ only in how many of the same shard they want, so listed individually they're 1,810 near-identical lines shown forty at a time. Grouped, each attribute is one row — the levels you're missing, the shards they add up to, and the price of the lot — because maxing an attribute is one decision, not ten. The grouping is built from the untruncated set, so it isn't assembled out of whichever forty levels survived the cut, and the XP floor is applied to the grouped row rather than to its levels.
 
 ### D. Cheapest first
@@ -372,13 +377,29 @@ work that provably cannot have changed:
 - **Both halves of the profit are counted**: the pet margin, and everything the minion sold while it
   levelled. For every real setup the items are the larger half by an order of magnitude, and the
   section says so rather than letting one number read as "level pets off minions for 1.3M a day".
-- **The Pet profits tab is shaped around its question**: the best money from minion pet-levelling
-  without doing anything excessive. **Effort** is the first control and the primary one — three
-  levels, each fixing how often you collect, how many brews you will do, and whether brewing counts
-  at all, because those are one decision rather than three. `Set and forget` is the default. Every
-  row carries **actions a day** beside its profit. The Wisdom boxes and the minion setup stay on
-  screen — they scale every number below them, and folding them away is how a plan ends up computed
-  against six zeroes nobody noticed. Only the workings fold.
+- **The Pet profits tab is shaped around its question**: the best money from minion pet-levelling.
+  It runs one plan against one generous budget — four collections a day and up to 200 brews — rather
+  than the three effort modes it used to offer. Those were three answers to a question the tab does
+  not have: each re-planned the whole table, so reading the page meant holding three tables in your
+  head, and the ranking on **what pet-levelling adds** already declines to recommend a plan whose
+  brewing eats more than the pet is worth. Every row still carries **actions a day** beside its
+  profit. The Wisdom boxes and the minion setup stay on screen — they scale every number below them,
+  and folding them away is how a plan ends up computed against six zeroes nobody noticed. Only the
+  workings fold.
+- **The pets live under the minion that feeds them.** Opening a plan row shows the five best pets
+  for that minion, with what each adds, what it costs and how long one takes. This replaced a
+  forty-row market table further down the page, which ranked every pet on the auction house against
+  a rate the reader had to go and find for themselves — so its top row was routinely a pet no minion
+  on the page can level this side of a year. Ranked per minion, the question it answers is the one
+  being asked.
+- **Alchemy drops pay twice, and the plan now says so.** Collecting a minion pays its own skill's
+  XP; brewing what you collected pays Alchemy. The tab counted only the Alchemy half, which threw
+  away the larger of the two. A brewing row now names **two pets** — the Alchemy pet for the stand
+  and the minion's own-skill pet for the collection, swapped, since only one pet is out at a time —
+  counts both margins in the profit, and lists five candidates for each skill. Brewing also plans
+  only the **most compacted** form of a drop: cactus reaches three entries in the alchemy table and
+  they are three descriptions of one decision, of which the shallow two ask for hundreds of times
+  the brews to earn about the same.
 - **Pets nobody is buying are left out.** The sell side was the cheapest max-level listing, which is
   a real number and often not a price anyone will pay: a levelled Common Rock has **one** listing
   behind it against thirty-two for a Golden Dragon. The sweep already reads `start`, so depth and

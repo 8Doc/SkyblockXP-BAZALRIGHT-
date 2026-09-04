@@ -406,7 +406,45 @@ export function planProfit(o: ProfitOptions): MinionProfitRow[] {
       };
     };
 
-    streams.push(priceStream(itemId, itemName, rate, null));
+    /**
+     * The headline drop, scaled by its own chance where the wiki gives one.
+     *
+     * A Fishing Minion is 54% cod and a Mushroom Minion 50% red — the remainder is not nothing, it
+     * is the other entries in `alsoCollects`, and the percentages sum to one harvest between them.
+     * Counting the primary at 100% *and* adding the rest would invent output the minion never made.
+     */
+    const primaryChance = minion.collects.chance ?? 1;
+    const primaryPerHour = rate * primaryChance;
+    if (primaryChance < 1) {
+      caveats.push(
+        `${itemName} is ${(primaryChance * 100).toFixed(1)}% of this minion's harvests — the rest is its other drops`,
+      );
+    }
+
+    streams.push(priceStream(itemId, itemName, primaryPerHour, null));
+
+    /**
+     * The minion's own second and third drops, priced like any other stream.
+     *
+     * Distinct from the upgrade extras below: nothing has to be fitted for these, they are simply
+     * what the minion makes. Leaving them out is what made the Revenant Minion look worthless — its
+     * diamonds are a fifth of its harvests and many times the value of the flesh they come with.
+     *
+     * A conditional drop is skipped rather than counted: it needs an upgrade, and the upgrade that
+     * grants it is modelled in the extras table with the rest of its effects.
+     */
+    for (const also of minion.alsoCollects ?? []) {
+      if (also.condition) {
+        caveats.push(`also drops ${also.item} with ${also.condition} fitted, which is counted under that upgrade`);
+        continue;
+      }
+      const alsoId = byName.get(also.item.toLowerCase()) ?? null;
+      if (!alsoId) {
+        caveats.push(`also drops ${also.item}, which nothing on the bazaar or at a shopkeeper prices`);
+        continue;
+      }
+      streams.push(priceStream(alsoId, also.item, harvests * also.amount * (also.chance ?? 1), null));
+    }
 
     for (const { extra, drop } of extrasFor(minion.generator, o.setup.upgrades, o.extras)) {
       streams.push(
@@ -455,8 +493,11 @@ export function planProfit(o: ProfitOptions): MinionProfitRow[] {
       caveats.push("today's quote is far enough off this item's month that the median was used instead");
     }
     for (const stream of streams.slice(1)) {
+      const worth = `worth ${Math.round(stream.perHour * stream.unit)} coins an hour here`;
       caveats.push(
-        `${stream.fromUpgrade} adds ${stream.itemName}, worth ${Math.round(stream.perHour * stream.unit)} coins an hour here`,
+        stream.fromUpgrade
+          ? `${stream.fromUpgrade} adds ${stream.itemName}, ${worth}`
+          : `also drops ${stream.itemName}, ${worth}`,
       );
     }
     if (itemsLost > 0) {
@@ -469,7 +510,7 @@ export function planProfit(o: ProfitOptions): MinionProfitRow[] {
       tier,
       itemId,
       itemName,
-      itemsPerHour: rate,
+      itemsPerHour: primaryPerHour,
       capacity: capacityStored * (streams[0].ratio || 1),
       hoursToFill,
       itemsPerClaim,

@@ -180,6 +180,22 @@ export type MinionXpRow = {
   xpPerItem: number;
   /** For a brewing row, how many raw drops one brew consumes. */
   itemsPerBrew?: number;
+
+  /**
+   * On a brewing row, the skill collecting the same drops pays — and what it pays an hour.
+   *
+   * The drops do two jobs and were only ever credited with one. You collect a Sugar Cane Minion and
+   * that collection pays Farming XP; you then brew what you collected and *that* pays Alchemy XP.
+   * Modelling the brewing route as Alchemy alone throws the Farming half away, which is not a small
+   * correction — for most minions the direct rate is the larger of the two and it was being counted
+   * as zero the moment a brewing route existed.
+   *
+   * Absent on a direct row, where the skill is simply `skill` and there is no second half.
+   */
+  baseSkill?: SkillKey;
+  /** Skill XP an hour, before Wisdom, that collecting pays into `baseSkill`. */
+  baseXpPerHour?: number;
+
   caveats: string[];
 };
 
@@ -252,17 +268,42 @@ export function planMinionXp(o: MinionXpOptions): MinionXpRow[] {
     }
 
     // The brewing route runs on the enchanted form, so the raw drop has to be worth one first.
+    //
+    // Only the most compacted form survives. A Cactus Minion's drops reach three brewing
+    // ingredients — cactus, Enchanted Cactus Green, Enchanted Cactus Block — and emitting a row for
+    // each offered three versions of one decision, of which two are strictly worse *as a chore*:
+    // they pay about the same XP an hour and ask for hundreds of times as many brews to do it.
+    // Nobody stands at a stand brewing raw cactus when the block is on the same shelf, so the
+    // deepest chain is the only one worth planning, and the rest are noise that crowded the table.
+    let deepest: { id: string; brew: BrewIngredient; perBrew: number } | null = null;
     for (const [ingredientId, brew] of brewBy) {
       const perBrew = dropsPerIngredient(ingredientId, itemId, o.recipes);
       if (perBrew === null) continue;
+      if (!deepest || perBrew > deepest.perBrew) deepest = { id: ingredientId, brew, perBrew };
+    }
+
+    if (deepest) {
+      const { id: ingredientId, brew, perBrew } = deepest;
+      const name = o.names[ingredientId] ?? ingredientId;
       const caveats = [
-        `one brew consumes ${Math.round(perBrew).toLocaleString("en-US")} drops compacted into ${
-          o.names[ingredientId] ?? ingredientId
-        }`,
+        `one brew consumes ${Math.round(perBrew).toLocaleString("en-US")} drops compacted into ${name}`,
       ];
-      out.push(
-        row(minion, tier, "ALCHEMY", "brewing", ingredientId, o.names[ingredientId] ?? ingredientId, rate, brew.xp / perBrew, o, caveats, perBrew),
-      );
+      // The collection half, carried so the planner can put a second pet on it. Only meaningful
+      // where the drop has a published direct rate; without one this stays absent rather than zero,
+      // for the same reason the direct row does.
+      const collects =
+        direct && direct.minionXp !== null && direct.minionXp > 0
+          ? { baseSkill: direct.skill, baseXpPerHour: rate * direct.minionXp }
+          : {};
+      if ("baseSkill" in collects) {
+        caveats.push(
+          `collecting the same drops also pays ${String(collects.baseSkill).toLowerCase()} XP — the drops do two jobs`,
+        );
+      }
+      out.push({
+        ...row(minion, tier, "ALCHEMY", "brewing", ingredientId, name, rate, brew.xp / perBrew, o, caveats, perBrew),
+        ...collects,
+      });
     }
   }
 

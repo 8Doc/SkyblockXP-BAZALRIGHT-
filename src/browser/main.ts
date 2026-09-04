@@ -464,12 +464,78 @@ function taskRow(task: ResolvedTask, showBundle: boolean, tag?: string): string 
           )}</span>`
         : ""
     }${
-      shownNote ? `<span class="note">${escapeHtml(shownNote)}</span>` : ""
+      noteHtml(shownNote)
     }</span>
     <span class="task-xp">${bundled ? task.bundleXp : task.xp} xp</span>
     <span class="task-cost">${priceText}</span>
     <span class="task-rate">${rate(task.efficiency)}</span>
   </li>`;
+}
+
+/**
+ * A material note with the material itself made copyable.
+ *
+ * Every attribute row reads "30× Voracious Spider Shard", and the next thing anyone does with that
+ * sentence is type the shard's name into the bazaar's search box — by hand, off a screen, with the
+ * count and the multiplication sign in the way. Clicking the name copies it, which is the whole
+ * errand. The count stays plain text because nothing is ever searched for by its count.
+ *
+ * Notes that are not "<count>× <material>" are left exactly as they were; there is nothing in a
+ * free-text note worth putting a button around.
+ */
+function noteHtml(note: string | undefined): string {
+  if (!note) return "";
+  const match = /^(\d+\s*[x×]\s*)(.+)$/.exec(note);
+  if (!match) return `<span class="note">${escapeHtml(note)}</span>`;
+  const [, count, material] = match;
+  return `<span class="note">${escapeHtml(count)}<button class="copy" data-copy="${escapeHtml(
+    material,
+  )}" title="Copy &quot;${escapeHtml(material)}&quot; to the clipboard">${escapeHtml(material)}</button></span>`;
+}
+
+/**
+ * Put a material name on the clipboard, and say on the button itself that it worked.
+ *
+ * The confirmation is written straight onto the element rather than going through a re-render,
+ * because a re-render would rebuild the list and throw away the row the reader is looking at —
+ * and because the whole interaction is meant to cost nothing. It restores itself after a second.
+ *
+ * `navigator.clipboard` is the path that runs; the textarea fallback is for a page opened from
+ * disk in a browser that treats file:// as insecure, which is exactly how this build is usually
+ * read. A copy that silently does nothing is worse than no button, so both are tried.
+ */
+async function copyToClipboard(button: HTMLElement): Promise<void> {
+  const text = button.dataset.copy ?? "";
+  if (!text || button.dataset.copied) return;
+
+  let ok = false;
+  try {
+    await navigator.clipboard.writeText(text);
+    ok = true;
+  } catch {
+    const scratch = document.createElement("textarea");
+    scratch.value = text;
+    scratch.setAttribute("readonly", "");
+    scratch.style.cssText = "position:fixed;top:-1000px;opacity:0";
+    document.body.appendChild(scratch);
+    scratch.select();
+    try {
+      ok = document.execCommand("copy");
+    } catch {
+      ok = false;
+    }
+    scratch.remove();
+  }
+
+  const was = button.textContent ?? "";
+  button.dataset.copied = "1";
+  button.textContent = ok ? "copied" : "press ctrl+c";
+  button.classList.add(ok ? "copied" : "copyfail");
+  window.setTimeout(() => {
+    button.textContent = was;
+    button.classList.remove("copied", "copyfail");
+    delete button.dataset.copied;
+  }, 1_000);
 }
 
 /**
@@ -483,7 +549,7 @@ function runRow(run: TaskRun, tag?: string): string {
 
   return `<li class="task${aside ? " aside" : ""}">
     <span class="task-name">${tag ? `<span class="tag cat">${escapeHtml(tag)}</span>` : ""}${escapeHtml(run.name)}${merged ? `<span class="count">×${run.tasks.length}</span>` : ""}${
-      run.note ? `<span class="note">${escapeHtml(run.note)}</span>` : ""
+      noteHtml(run.note)
     }</span>
     <span class="task-xp">${run.xp} xp</span>
     <span class="task-cost">${run.coins === null ? `<span class="dim">no price</span>` : coins(run.coins)}</span>
@@ -1105,6 +1171,16 @@ function renderShell(): void {
 
   root.addEventListener("click", (event) => {
     const target = event.target as HTMLElement;
+
+    // Ahead of the toggle below, because a copy button sits inside rows that open on click and
+    // copying a name is not a request to also collapse the thing you were reading.
+    const copy = target.closest<HTMLElement>("[data-copy]");
+    if (copy) {
+      event.preventDefault();
+      event.stopPropagation();
+      void copyToClipboard(copy);
+      return;
+    }
 
     const toggle = target.closest<HTMLElement>("[data-toggle]");
     if (toggle) {

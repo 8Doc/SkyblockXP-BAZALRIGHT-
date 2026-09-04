@@ -61,30 +61,88 @@ async function wiki(params) {
  * the caller can say so rather than presenting a midpoint as a fact.
  */
 export function parseCollects(wikitext) {
-  const line = /\|\s*collects\s*=\s*([^\n|]+)/.exec(wikitext);
-  if (!line) return null;
-  const raw = line[1]
+  return parseAllCollects(wikitext)[0] ?? null;
+}
+
+/**
+ * Every line of a `collects` block, not just the first — because several minions have more than one.
+ *
+ * The parameter is a bulleted list as often as it is a single figure, and reading only its first
+ * line quietly halved some minions. The Revenant Minion is the case that matters:
+ *
+ *   |collects = * 2-5 Rotten Flesh
+ *   * 1 Diamond %20%%
+ *
+ * A wall of Revenants is one of the better-known coin setups in the game, and the diamonds are a
+ * large part of why. Priced on the rotten flesh alone it looks like one of the worst minions on the
+ * page. The same bug hides the Voidling Minion's obsidian and the Inferno Minion's second drop.
+ *
+ * `%54%%` is the wiki's drop-chance markup and is a *chance*, not part of the name — reading it as
+ * one is why the table has been carrying an item called "Raw Cod %54%%" that matches nothing in the
+ * bazaar. It becomes `chance`, and the item resolves.
+ */
+export function parseAllCollects(wikitext) {
+  // Everything from `|collects =` up to the next parameter, which is the next line beginning with
+  // a pipe. Bounded on a line start rather than on any pipe, because item markup contains pipes.
+  const block = /\|\s*collects\s*=\s*([\s\S]*?)(?=\n\s*\||\n\s*\}\}|$)/.exec(wikitext);
+  if (!block) return [];
+
+  return block[1]
+    .split(/\n/)
+    .map((line) => parseCollectsLine(line))
+    .filter((entry) => entry !== null);
+}
+
+function parseCollectsLine(line) {
+  let raw = line
     .replace(/\{\{Item\|([^}|]+)[^}]*\}\}/g, "$1")
     .replace(/\[\[([^\]|]*)\|?([^\]]*)\]\]/g, (_, a, b) => b || a)
     // A leading bullet is list markup, not part of the figure.
     .replace(/^\s*\*+\s*/, "")
     .trim();
+  if (!raw) return null;
+
+  // `%20%%` — the drop chance, which trails the name and is not part of it.
+  let chance;
+  const pct = /\s*%\s*([\d.]+)\s*%%\s*$/.exec(raw);
+  if (pct) {
+    chance = Number(pct[1]) / 100;
+    raw = raw.slice(0, pct.index).trim();
+  }
+
+  // The same slot also carries a *condition* rather than a chance — the Chicken Minion's
+  // `1 Egg %Enchanted Egg%` means "only with the Enchanted Egg upgrade fitted". Read as part of the
+  // name it produces an item nothing can price; read as a chance it would be a drop everyone gets.
+  // It is neither, so it is labelled and left for the profit model to decide about.
+  let condition;
+  const tag = /\s*%\s*([^%]+?)\s*%\s*$/.exec(raw);
+  if (chance === undefined && tag) {
+    condition = tag[1].trim();
+    raw = raw.slice(0, tag.index).trim();
+  }
+  if (!raw) return null;
+
+  const withChance = (entry) => ({
+    ...entry,
+    ...(chance === undefined ? {} : { chance }),
+    ...(condition === undefined ? {} : { condition }),
+  });
 
   const range = /^([\d.,]+)\s*-\s*([\d.,]+)\s*x?\s+(.+)$/.exec(raw);
   if (range) {
     const low = Number(range[1].replace(/,/g, ""));
     const high = Number(range[2].replace(/,/g, ""));
-    return { amount: (low + high) / 2, low, high, item: range[3].trim() };
+    return withChance({ amount: (low + high) / 2, low, high, item: range[3].trim() });
   }
 
   const counted = /^([\d.,]+)\s*x?\s+(.+)$/.exec(raw);
-  if (counted) return { amount: Number(counted[1].replace(/,/g, "")), item: counted[2].trim() };
+  if (counted) return withChance({ amount: Number(counted[1].replace(/,/g, "")), item: counted[2].trim() });
 
   // "1x Flower" with no space before the name.
   const tight = /^([\d.,]+)x(.+)$/.exec(raw);
-  if (tight) return { amount: Number(tight[1].replace(/,/g, "")), item: tight[2].trim() };
+  if (tight) return withChance({ amount: Number(tight[1].replace(/,/g, "")), item: tight[2].trim() });
 
-  return { amount: 1, item: raw };
+  return withChance({ amount: 1, item: raw });
 }
 
 /**
@@ -154,18 +212,55 @@ async function forMinion(family) {
   ]);
   if (!text.parse || !rendered.parse) return { missing: true };
 
+  const all = parseAllCollects(text.parse.wikitext["*"]);
   return {
-    collects: parseCollects(text.parse.wikitext["*"]),
+    collects: all[0] ?? null,
+    // Everything after the first line of the collects list. The Revenant Minion's diamonds live
+    // here, and so does every other second drop the old single-line read was throwing away.
+    alsoCollects: all.slice(1),
     collection: parseCollection(text.parse.wikitext["*"]),
     cooldowns: parseCooldowns(rendered.parse.text["*"]),
     storage: parseStorage(rendered.parse.text["*"]),
   };
 }
 
+/**
+ * Which category the wiki files each minion under, from the tabbed list on the Minions page.
+ *
+ * Worth one extra request because the minion's own page does not carry it in any form worth
+ * parsing, and because one of those tabs is Slayer — a group of four (Inferno, Revenant, Tarantula,
+ * Voidling) whose pages differ from every other minion's in a way that matters. Their `collection`
+ * parameter is a slayer *unlock requirement*, "Zombie Slayer 5", rather than the collection the
+ * drops feed; without knowing they are slayer minions there is no way to tell that apart from a
+ * collection name, and the resolver only lands on the right answer by falling through to the drop.
+ *
+ * Returns a map of family name to category. Failure is not fatal — the categories are labelling,
+ * and a missing one is better than no table.
+ */
+async function categories() {
+  const page = await wiki({ action: "parse", page: "Minions/Minion List", prop: "wikitext" });
+  const text = page.parse?.wikitext["*"];
+  if (!text) return new Map();
+
+  const out = new Map();
+  // `|-|Slayer=` opens a tab; every `{{MinionPageRow|Revenant}}` under it belongs to that tab.
+  const tabs = text.split(/^\|-\|\s*/m).slice(1);
+  for (const tab of tabs) {
+    const label = /^([^=\n]+)=/.exec(tab);
+    if (!label) continue;
+    const category = label[1].trim();
+    for (const row of tab.matchAll(/\{\{MinionPageRow\|([^}|]+)/g)) {
+      out.set(`${row[1].trim()} Minion`, category);
+    }
+  }
+  return out;
+}
+
 async function main() {
   const minions = JSON.parse(await readFile(join(ROOT, "data", "generated", "minions.json"), "utf8")).minions;
   const collections = JSON.parse(await readFile(join(ROOT, "data", "generated", "collections.json"), "utf8")).collections;
   const collectionByName = new Map(collections.map((c) => [c.name.toLowerCase(), c.itemId]));
+  const categoryOf = await categories().catch(() => new Map());
 
   const out = [];
   const problems = [];
@@ -185,18 +280,32 @@ async function main() {
         return;
       }
 
+      const category = categoryOf.get(m.family) ?? null;
+
+      // A slayer minion's `collection` parameter is its unlock requirement — "Zombie Slayer 5" —
+      // and not a collection at all. Resolving it as one lands on nothing and falls through to the
+      // drop, which happens to be right; saying so outright is what stops the next reader trusting
+      // "Zombie Slayer" as a collection name and what keeps the fallback from being a coincidence.
+      const requirement = category === "Slayer" ? r.collection : null;
+      const collectionName = requirement === null ? r.collection : null;
+
       // The collection the drop feeds, resolved by name against the real collection table. A
       // minion whose drop is not a collection item at all is kept with a null: several produce
       // things nothing collects, and dropping them would quietly shorten the list.
       const collectionId =
-        collectionByName.get((r.collection ?? "").toLowerCase()) ?? collectionByName.get(r.collects.item.toLowerCase()) ?? null;
+        collectionByName.get((collectionName ?? "").toLowerCase()) ?? collectionByName.get(r.collects.item.toLowerCase()) ?? null;
 
       out.push({
         generator: m.generator,
         family: m.family,
         maxTier: m.maxTier,
+        category,
         collects: r.collects,
-        collection: r.collection,
+        // Second and subsequent drops, each with the chance the wiki states for it. Empty for most
+        // minions and the whole point for the slayer four.
+        alsoCollects: r.alsoCollects,
+        collection: collectionName,
+        ...(requirement === null ? {} : { unlockRequirement: requirement }),
         collectionId,
         // One cooldown per tier, in tier order. Trimmed to the tiers Hypixel actually publishes,
         // since the wiki occasionally lists a tier XII the item resource has not seen.

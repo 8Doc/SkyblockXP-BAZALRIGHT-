@@ -1110,6 +1110,32 @@ some of the better collection minions:
 Three minions produce something no collection tracks — Flower, Inferno and Snow — and are kept
 with a null rather than dropped, since a missing row reads as an oversight.
 
+**`collects` is a list, and reading only its first line was hiding money.** The parameter is a
+bulleted list as often as a single figure, and fourteen minions have a second drop that was being
+thrown away. The corrections are not small, because a second drop is frequently the valuable one:
+
+| minion | was | now | what was missing |
+|---|---|---|---|
+| Voidling | 954/hr | 18k/hr | 2.5 Obsidian a harvest, against a primary of 0.4 Nether Quartz |
+| Tarantula | 17k/hr | 26k/hr | a Spider Eye every harvest, and Iron at 20% |
+| Revenant | 9.9k/hr | 12k/hr | a Diamond at 20% |
+
+Two more shapes appear in the same slot and are not counts. `%20%%` is a **drop chance** — read as
+part of the name it produced an item called "Raw Cod %54%%" that matches nothing in the bazaar, so
+the Fishing Minion priced at nothing. It becomes a probability, and where the primary drop carries
+one the primary is scaled by it: a Fishing Minion is 54% cod with the rest of the distribution in
+its other entries, and counting the primary at 100% *and* adding the rest would invent output.
+`%Enchanted Egg%` is a **condition**, not a chance — the Chicken Minion's egg needs that upgrade
+fitted — so it is labelled and left to the extras table, which already models that upgrade.
+
+**The slayer four are filed apart.** Inferno, Revenant, Tarantula and Voidling sit under their own
+tab on `Minions/Minion List`, and their pages differ from every other minion's in one way that
+matters: the `collection` parameter holds a slayer *unlock requirement*, `Zombie Slayer 5`, and not
+a collection. The resolver only ever landed on the right answer by failing to match it and falling
+through to the drop. The category is now scraped from that tabbed list, the requirement is kept in
+`unlockRequirement` where it cannot be mistaken for a collection, and `collection` is null — so the
+fallback is deliberate rather than a coincidence that a wiki edit could quietly break.
+
 ### Fuels and upgrades
 
 `data/curated/minion_modifiers.json`, curated rather than scraped: both wiki tables are one page
@@ -1617,13 +1643,35 @@ anything excessive* — and it was not shaped like that question. Twelve inputs 
 answer, brewing was on by default, and the constraint in the question ("without excessive action")
 was spread across two numeric boxes nobody would think to set.
 
-**Effort is now the primary control and the first thing on the page.** Three levels, each fixing
-the three things that have to agree — how often you empty the minions, how many brews you will
-stand and do, and whether brewing is considered at all — because they are the same decision.
-Someone who visits once a day is not the person who will do two hundred brews, and offering those
-independently produced setups nobody would run. `Set and forget` is the default: one collection a
-day, no brewing. It is the question as asked. Every row also carries **actions a day**, so the cost
-of a plan is on the row beside its profit.
+**Effort was the primary control, and is now a fixed budget.** It ran as three levels — set and
+forget, a few minutes a day, grinding — each fixing how often you empty the minions, how many brews
+you will stand and do, and whether brewing counts at all. The reasoning was that those are one
+decision rather than three, which is true; what was wrong is that the tab needed the decision at
+all. Each level re-planned the entire table, so reading the page meant comparing three tables in
+your head, and the ranking on `advantagePerDay` already refuses a plan whose brewing eats more in
+drops than the pet is worth. A budget that never binds costs nothing to remove, and the two that did
+bind were hiding rows rather than changing which row won.
+
+So the ceiling is fixed and generous — four collections a day, up to 200 brews — and the ranking
+decides. The brew cap stays because it is not economic: past a few hundred a day the route is a
+second job and the coins beside it are a fiction. Brewing stays on because Alchemy is reached no
+other way. Every row still carries **actions a day**, so the cost of a plan is on the row beside its
+profit.
+
+**Alchemy drops do two jobs, and only one was counted.** Collecting a minion pays its own skill's
+XP — the Minions page says so outright — and brewing what you collected pays Alchemy on top. The
+model treated the two as alternative *routes*, so the moment a brewing route existed the direct half
+was scored as zero, which for most minions is the larger of the two. A brewing row now carries
+`baseSkill` and `baseXpPerHour` alongside its Alchemy figures, and the planner pairs a second pet
+against them: the Alchemy pet while you brew, the minion's own-skill pet while you collect. Only one
+pet is out at a time, so this is the two swapped rather than two levelled at once, which is how the
+setup is actually played. Both margins are income and both are in the profit.
+
+**Only the most compacted brewing form is planned.** A Cactus Minion's drops reach three entries in
+the alchemy table — cactus at 10 XP, Enchanted Cactus Green at 250, Enchanted Cactus at 500 — and
+emitting a row for each offered three versions of one decision. They pay about the same an hour and
+the shallow two ask for hundreds of times as many brews to do it; nobody stands at a stand brewing
+raw cactus when the block is on the same shelf. The deepest chain is the only one worth planning.
 
 **Ranking moved from total profit to what pet-levelling adds.** This was the bug the redesign
 exposed. Total profit is dominated by item income the minion earns with no pet on it at all, so
