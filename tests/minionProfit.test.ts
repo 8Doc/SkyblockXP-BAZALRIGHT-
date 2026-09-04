@@ -303,3 +303,35 @@ test("rows come back ranked on what you actually collect", () => {
   const rows = plan();
   for (let i = 1; i < rows.length; i++) assert.ok(rows[i - 1].netPerHour >= rows[i].netPerHour);
 });
+
+test("storage belongs to the minion, so a wall of them fills no faster than one", () => {
+  // One minion's storage was being divided by the whole wall's production, which made a tier XI
+  // Melon Minion with a Super Compactor read as filling in nine hours when it takes nine days —
+  // and got worse the more you placed, which is exactly backwards. Twenty-four Melon Minions do
+  // not share a chest between them.
+  const at = (count: number) =>
+    plan({
+      setup: {
+        tier: 11,
+        fuel: fuel("NONE"),
+        upgrades: none,
+        count,
+        chest: storage.chests[0],
+        hopper: storage.hoppers[0],
+        compactor: compactor("SUPER_COMPACTOR_3000"),
+        claimHours: 24,
+      },
+    }).find((r) => r.generator === "MELON")!;
+
+  const one = at(1);
+  const wall = at(24);
+  assert.ok(Math.abs(one.hoursToFill - wall.hoursToFill) < 1e-6);
+  // Nine days, not nine hours: fifteen slots of Enchanted Melon is 153,600 melons.
+  assert.ok(one.hoursToFill > 200, `expected over 200h, got ${one.hoursToFill.toFixed(1)}`);
+  assert.equal(Math.round(one.capacity), 153_600);
+
+  // The wall still produces twenty-four times as much, and none of it is lost inside a day.
+  assert.ok(Math.abs(wall.itemsPerHour / one.itemsPerHour - 24) < 1e-6);
+  assert.equal(wall.itemsLost, 0);
+  assert.ok(Math.abs(wall.itemsPerClaim / one.itemsPerClaim - 24) < 1e-6);
+});

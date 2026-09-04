@@ -452,13 +452,28 @@ export function planProfit(o: ProfitOptions): MinionProfitRow[] {
       );
     }
 
-    // Storage is shared, and it is counted in *stored* items — so a stream the compactor packs 160
-    // to one takes a hundred and sixtieth of the room per drop. Summing the streams in stored units
-    // is the only way a minion producing three different things at three different ratios gets one
-    // honest fill time.
+    /**
+     * How long one minion runs before it stops — one minion, whatever the wall does.
+     *
+     * Storage belongs to the minion. Twenty-four Melon Minions do not share a chest between them:
+     * each has its own inventory, each fills at its own rate, and they all fill at the same moment.
+     * Dividing one minion's storage by the whole wall's production made a tier XI Melon Minion fill
+     * in nine hours when it actually takes nine days, and it got worse the more of them you placed —
+     * which is exactly backwards, since placing more minions changes nothing about any one of them.
+     *
+     * The claim interval that comes out of this is the same for every minion in the wall, so the
+     * coin totals below stay on the wall's rate and only this figure is per minion.
+     *
+     * Counted in *stored* items, because that is what a slot holds. A compactor packs 160 melons
+     * into one Enchanted Melon and the minion then stores enchanted melons, so the same fifteen
+     * slots hold a hundred and sixty times the melons — the difference between filling in an hour
+     * and filling in a week. Summing the streams in stored units is also the only way a minion
+     * producing three different things at three different ratios gets one honest fill time.
+     */
     const slots = o.storage.chests.find((c) => c.id === o.setup.chest.id)?.slots ?? o.setup.chest.slots;
     const capacityStored = (minion.storage?.[tier - 1] ?? 0) + slots * o.storage.slotItems;
-    const storedPerHour = streams.reduce((sum, s) => sum + s.perHour / s.ratio, 0);
+    const placed = Math.max(1, o.setup.count);
+    const storedPerHour = streams.reduce((sum, s) => sum + s.perHour / s.ratio, 0) / placed;
     const hoursToFill = storedPerHour > 0 && capacityStored > 0 ? capacityStored / storedPerHour : Infinity;
 
     const claim = Math.max(0, o.setup.claimHours);

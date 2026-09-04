@@ -437,7 +437,7 @@ function rows(): MinionProfitRow[] {
       tier: state.tier,
       fuel: fuelById(state.fuel),
       upgrades: slots(),
-      count: Math.max(1, Number(state.count.replace(/[^0-9]/g, "")) || 1),
+      count: placedCount(),
       chest: chestById(state.chest),
       hopper: hopperById(state.hopper),
       compactor: compactorById(state.compactor),
@@ -897,8 +897,11 @@ const COLUMNS: {
     id: "fill",
     label: "Fills in",
     title:
-      "How long from empty to full and idle. With a hopper this is when the shopkeeper starts taking the overflow " +
-      "instead — the wiki is explicit that a hopper only sells once the minion and its chest are both full.",
+      "How long one minion runs from empty to full and idle — storage belongs to the minion, not to the wall, so " +
+      "placing more of them does not fill any of them faster. A compactor multiplies it: the slots then hold the " +
+      "enchanted form, so 160 melons take the room one used to. With a hopper this is when the shopkeeper starts " +
+      "taking the overflow instead — the wiki is explicit that a hopper only sells once the minion and its chest " +
+      "are both full.",
     value: (r) => r.hoursToFill,
     render: (r) => hours(r.hoursToFill),
   },
@@ -1024,6 +1027,11 @@ Click to sort by this column; click again to reverse it.`,
   `;
 }
 
+/** How many of the one minion are down. Never zero: a wall of none is a question with no answer. */
+function placedCount(): number {
+  return Math.max(1, Number(state.count.replace(/[^0-9]/g, "")) || 1);
+}
+
 /** The row opened out: where the number came from, and what it is quietly leaving out. */
 function detailHtml(r: MinionProfitRow): string {
   // Same item the sigma column is measured against — the compacted form where one is sold.
@@ -1031,10 +1039,16 @@ function detailHtml(r: MinionProfitRow): string {
   const variance = priced ? state.variance.get(priced) : undefined;
   const lines: string[] = [];
 
+  // Per minion, both halves of it. Storage belongs to the minion rather than to the wall — twenty
+  // Melon Minions do not share a chest, they each fill at the same time — so quoting the wall's
+  // production against one minion's storage would divide a nine-day fill down to nine hours.
+  const placed = placedCount();
   lines.push(
-    `<div class="gh-sub"><strong>${num(Math.round(r.itemsPerHour))}</strong> drops an hour into <strong>${num(
-      Math.round(r.capacity),
-    )}</strong> drops of storage, so it fills in ${hours(r.hoursToFill)}.</div>`,
+    `<div class="gh-sub"><strong>${num(Math.round(r.itemsPerHour / placed))}</strong> drops an hour${
+      placed > 1 ? " each" : ""
+    } into <strong>${num(Math.round(r.capacity))}</strong> drops of storage, so ${
+      placed > 1 ? "each one fills" : "it fills"
+    } in ${hours(r.hoursToFill)}.</div>`,
   );
 
   if (r.itemsLost > 0) {
