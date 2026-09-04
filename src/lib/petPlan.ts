@@ -1,4 +1,13 @@
-import { petXpMultiplier, withWisdom, wisdomFor, type MinionXpRow, type PetXpRules, type Player, type SkillKey } from "./minionXp";
+import {
+  petXpMultiplier,
+  withWisdom,
+  wisdomFor,
+  type MinionXpRow,
+  type PetXpRules,
+  type Player,
+  type SkillKey,
+  type XpContribution,
+} from "./minionXp";
 import type { Liquidity, PetProfitRow } from "./petLevelling";
 
 /**
@@ -61,6 +70,17 @@ export type PetPlanRow = {
   family: string;
   tier: number;
   skill: SkillKey;
+  /**
+   * Every skill this route's XP arrives in, biggest share first. Usually one; sometimes not.
+   *
+   * A minion drops more than one thing and the things are not all the same skill — a Tarantula
+   * Minion pays Combat for its spider eyes and Mining for its iron, a Voidling Minion pays Mining
+   * for both its obsidian and its quartz, a Revenant Minion pays Mining for diamonds it drops
+   * beside flesh that pays nothing published. One pet is standing there for all of it, taking the
+   * matching share at full rate and the rest at a third, which is why the pairing is worked out
+   * across the whole list rather than against `skill` alone.
+   */
+  feeds: SkillKey[];
   route: MinionXpRow["route"];
 
   petKey: string;
@@ -190,8 +210,29 @@ export type PetPlanOptions = {
  * finished figure keeps Wisdom applied once and in the right place.
  */
 export function petXpPerHourFor(row: MinionXpRow, petSkill: SkillKey | null, player: Player, rules: PetXpRules): number {
-  const skillXp = withWisdom(row.baseSkillXpPerHour, wisdomFor(player, row.skill));
-  return skillXp * petXpMultiplier(row.skill, { ...player, petSkill }, rules);
+  return xpFromContributions(row.contributions, petSkill, player, rules);
+}
+
+/**
+ * One pet standing over a minion that pays into several skills at once.
+ *
+ * The multiplier is per skill, so the sum has to be taken after it and not before: a Mining pet on
+ * a Tarantula Minion keeps all of the iron's Mining XP and a third of the spider eyes' Combat XP,
+ * and a Combat pet keeps the other way round. Summing the skill XP first and applying one
+ * multiplier would give both pets the same answer, and it would be wrong for at least one of them.
+ */
+function xpFromContributions(
+  contributions: XpContribution[],
+  petSkill: SkillKey | null,
+  player: Player,
+  rules: PetXpRules,
+): number {
+  const asked = { ...player, petSkill };
+  let total = 0;
+  for (const c of contributions) {
+    total += withWisdom(c.baseXpPerHour, wisdomFor(player, c.skill)) * petXpMultiplier(c.skill, asked, rules);
+  }
+  return total;
 }
 
 /**
@@ -297,6 +338,7 @@ export function planPetPairs(o: PetPlanOptions): PetPlanRow[] {
         family: row.family,
         tier: row.tier,
         skill: row.skill,
+        feeds: [...new Set(row.contributions.map((c) => c.skill))],
         route: row.route,
         petKey: pet.key,
         petName: nameOf.get(bare) ?? pet.name,
@@ -350,12 +392,8 @@ function bestPartner(
   horizon: number,
 ): PartnerPet | null {
   const skill = row.baseSkill;
-  const baseXpPerHour = row.baseXpPerHour ?? 0;
-  if (row.route !== "brewing" || !skill || !(baseXpPerHour > 0)) return null;
-
-  // The collection stream as its own route, so the Wisdom and multiplier chain is applied to the
-  // skill that actually pays it rather than to Alchemy.
-  const asCollection: MinionXpRow = { ...row, skill, route: "direct", baseSkillXpPerHour: baseXpPerHour };
+  const collection = row.baseContributions ?? [];
+  if (row.route !== "brewing" || !skill || collection.length === 0) return null;
 
   let best: PartnerPet | null = null;
   for (const pet of o.pets) {
@@ -363,7 +401,9 @@ function bestPartner(
     const petSkill = skillOf.get(bare) ?? null;
     if (!petSkill) continue;
 
-    const petXpPerDay = petXpPerHourFor(asCollection, petSkill, o.player, o.rules) * DAY_HOURS;
+    // The collection stream on its own, so the Wisdom and multiplier chain is applied to the skills
+    // that actually pay it rather than to Alchemy.
+    const petXpPerDay = xpFromContributions(collection, petSkill, o.player, o.rules) * DAY_HOURS;
     if (!(petXpPerDay > 0) || !(pet.xpNeeded > 0)) continue;
 
     const daysPerPet = pet.xpNeeded / petXpPerDay;

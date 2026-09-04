@@ -2,10 +2,11 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 // @ts-expect-error - a plain build script, imported for its pure parsers only.
-import { parseBrewing, parseMinionXp, parseXpTable, resolver, xpValue } from "../scripts/fetch-skill-xp.mjs";
+import { itemName, parseBasicBrewing, parseBrewing, parseMinionXp, parseXpTable, resolver, xpValue } from "../scripts/fetch-skill-xp.mjs";
 import {
   bestPerSkill,
   dropsPerIngredient,
+  narrowTo,
   petXpFrom,
   petXpMultiplier,
   planMinionXp,
@@ -503,4 +504,105 @@ test("a cheap end above level 1 is flagged rather than quietly overstated", () =
   const row = planPetProfit({ index, levels, requireMarket: false })[0];
   assert.equal(row.approximate, true);
   assert.ok(row.caveats.some((c) => /level 45/.test(c)));
+});
+
+/* ------------------------------------------------- every drop, not just one */
+
+test("a minion's second drop counts towards its XP", () => {
+  // The four slayer minions are the case this was invisible on. A Revenant Minion's flesh has no
+  // published rate and its diamonds do; a Tarantula Minion's string has none and its spider eyes
+  // and iron do; a Voidling Minion is mostly obsidian by weight and its quartz is the named drop.
+  // Reading `collects` and stopping put all four at exactly zero XP an hour.
+  const rows = xpPlan().filter((r) => r.route === "direct");
+  const at = (generator: string) => rows.find((r) => r.generator === generator)!;
+
+  for (const generator of ["REVENANT", "TARANTULA", "VOIDLING"]) {
+    assert.ok(at(generator).baseSkillXpPerHour > 0, `${generator} should have a rate`);
+  }
+
+  // Named after the drop that earns the most, which for a Voidling is obsidian at two and a half a
+  // harvest rather than the quartz at four tenths it is filed under.
+  assert.equal(at("VOIDLING").itemId, "OBSIDIAN");
+  assert.equal(at("REVENANT").itemId, "DIAMOND");
+
+  // And the ones nobody has measured stay unmeasured rather than becoming zero.
+  assert.ok(at("REVENANT").caveats.some((c) => /Rotten Flesh/.test(c) && /unknown rather than zero/.test(c)));
+  // Inferno drops one thing and nobody has rated it, so it is still not plannable at all.
+  assert.equal(at("INFERNO").baseSkillXpPerHour, 0);
+  assert.equal(at("INFERNO").contributions.length, 0);
+});
+
+test("a minion whose drops are two different skills is two contributions", () => {
+  // A Tarantula Minion pays Combat for its spider eyes and Mining for its iron. Both arrive in one
+  // collection and one pet is standing there for both, so the split has to survive into the row —
+  // summing them into a single figure and applying one multiplier would be wrong for either pet.
+  const row = xpPlan().find((r) => r.generator === "TARANTULA" && r.route === "direct")!;
+  const skills = row.contributions.map((c) => c.skill);
+  assert.deepEqual([...new Set(skills)].sort(), ["COMBAT", "MINING"]);
+
+  // The row's own total is the sum across skills, and the contributions are what it was summed from.
+  const summed = row.contributions.reduce((total, c) => total + c.baseXpPerHour, 0);
+  assert.ok(Math.abs(row.baseSkillXpPerHour - summed) < 1e-9);
+  // Ordered by what they earn, so the row's headline names the drop doing the work.
+  assert.equal(row.contributions[0].skill, "COMBAT");
+  assert.ok(row.contributions[0].baseXpPerHour > row.contributions[1].baseXpPerHour);
+});
+
+test("the best minion for a skill is judged on that skill's share alone", () => {
+  // A card headed "Mining" must quote a Tarantula Minion's iron and not its iron plus its spider
+  // eyes, or the minion wins a skill on XP that skill never receives.
+  const rows = xpPlan();
+  const tarantula = rows.find((r) => r.generator === "TARANTULA" && r.route === "direct")!;
+  const mining = narrowTo(tarantula, "MINING");
+
+  assert.equal(mining.skill, "MINING");
+  assert.equal(mining.itemId, "IRON_INGOT");
+  assert.ok(mining.baseSkillXpPerHour < tarantula.baseSkillXpPerHour);
+  assert.equal(mining.contributions.length, 1);
+
+  // And nothing offered per skill is larger than the whole row it came from.
+  for (const [skill, best] of bestPerSkill(rows)) {
+    if (!best) continue;
+    assert.ok(best.contributions.every((c) => c.skill === skill));
+  }
+});
+
+test("the two brews that come before an Awkward Potion are on the Alchemy page, not the potion table", () => {
+  // `Potions/Alchemy Experience` is keyed by the first ingredient added *to* an Awkward Potion, so
+  // by construction it cannot list the wart that made one. Both wikis carry the same two rows.
+  const table = `{| class="wikitable"
+!Item
+!XP Yield
+!Area
+|-
+|Nether Wart
+| +1
+|[[Crimson Isle]]
+|-
+|Awkward Potion
+| +5
+|[[Private Island]]
+|}`;
+  assert.deepEqual(parseBasicBrewing(table), [
+    { item: "Nether Wart", xp: 1 },
+    { item: "Awkward Potion", xp: 5 },
+  ]);
+
+  // And it reaches the committed table, so a Nether Wart Minion has a brewing route at all — worth
+  // almost nothing, which is a ranking rather than an absence.
+  const wart = skillXp.brewing.find((b) => b.itemId === "NETHER_STALK");
+  assert.equal(wart?.xp, 1);
+});
+
+test("a relabelled wiki cell is the same row it always was", () => {
+  // The Mining table moved from `{{Item|Coal Ore}}` to `{{Item|Coal|text=Coal Ore}}`. Taking the
+  // link target renamed nine rows at once, which cost Iron Ore and Gold Ore their ids and filed
+  // Pure Coal — a Dwarven Mines block — under a real block of coal.
+  assert.equal(itemName("{{Item|Coal|text=Coal Ore}}"), "Coal Ore");
+  assert.equal(itemName("{{Item|Block of Coal|text=Pure Coal}}"), "Pure Coal");
+  assert.equal(itemName("{{Item|Cobblestone}}"), "Cobblestone");
+
+  const byItem = new Map(skillXp.perItem.map((r) => [r.item, r.itemId]));
+  assert.equal(byItem.get("Iron Ore"), "IRON_INGOT");
+  assert.equal(byItem.get("Gold Ore"), "GOLD_INGOT");
 });

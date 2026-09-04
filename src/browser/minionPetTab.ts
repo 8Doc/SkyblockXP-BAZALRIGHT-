@@ -850,14 +850,16 @@ function planRows(over: { maxDaysPerPet?: number } = {}): PetPlanRow[] {
 /**
  * The minions this section cannot plan, and why — because their absence is misleading.
  *
- * A wall of Revenant Minions levelling a Golden Dragon is one of the better-known coin setups in
- * the game, and it does not appear anywhere above. Not because it is bad: because nobody has
- * published a minion XP rate for Rotten Flesh. Only Farming and Mining have a Minion XP column,
- * and the item infoboxes fill in about forty more items; everything else is genuinely unmeasured.
+ * Only Farming and Mining have a Minion XP column, and the item infoboxes fill in about forty more
+ * items; everything else is genuinely unmeasured. A minion whose entire output is unmeasured cannot
+ * be planned at all, and left silent that reads as a verdict on the minion rather than as a gap in
+ * the sources.
  *
- * Left silent, that reads as a verdict on the strategy. Said out loud, it is a gap in the sources —
- * and the Raw profits tab still prices those minions perfectly well for what they sell, which is
- * where most of that setup's money comes from anyway.
+ * The list is much shorter than it was, and the reason is worth knowing: a minion is rated if *any*
+ * of its drops is. A Revenant Minion drops diamonds a fifth of the time beside flesh nobody has
+ * measured, a Tarantula Minion drops iron beside its string, a Voidling Minion is mostly obsidian.
+ * Reading `collects` alone and stopping put all four slayer minions in here at zero; counting every
+ * drop takes them out.
  */
 function unplannableNote(planned: PetPlanRow[]): string {
   if (!tables) return "";
@@ -871,12 +873,11 @@ function unplannableNote(planned: PetPlanRow[]): string {
 
   const shown = missing.slice(0, 12).join(", ");
   return `<div class="warn"><strong>${num(missing.length)} minions cannot be planned here at all</strong>, because
-    no minion XP rate has ever been published for what they drop: ${escapeHtml(shown)}${
+    no minion XP rate has ever been published for anything they drop: ${escapeHtml(shown)}${
       missing.length > 12 ? `, and ${num(missing.length - 12)} more` : ""
-    }. That is a gap in the wiki rather than a verdict — the Revenant Minion is in that list, and a wall of them
-    levelling a Golden Dragon is a well-known setup. What is missing is only the XP half; the
-    <strong>Raw profits</strong> tab prices exactly what those minions sell, which is where most of that
-    strategy's money comes from.</div>`;
+    }. That is a gap in the wiki rather than a verdict. What is missing is only the XP half; the
+    <strong>Raw profits</strong> tab prices exactly what those minions sell, which is where most of a
+    minion wall's money comes from anyway.</div>`;
 }
 
 /**
@@ -1277,8 +1278,8 @@ const PET_CHOICES = 5;
  * matches and whether anybody is buying — and none of the arithmetic the detail above already gave.
  */
 function petChoices(r: PetPlanRow): string {
-  const skills = relevantSkills(r);
   const forThisMinion = lastPairs.filter((p) => p.generator === r.generator);
+  const skills = relevantSkills(r, forThisMinion);
 
   // One table per skill the minion feeds. Alchemy minions feed two — the brew and the collection —
   // and a single merged list would silently drop whichever skill had the weaker pets, which is the
@@ -1310,8 +1311,12 @@ function petChoices(r: PetPlanRow): string {
         })
         .join("");
 
+      // Named after everything the route pays into, not just its largest share: a Tarantula Minion
+      // heading "Combat" while half its XP is Mining reads as a mistake in the table rather than as
+      // the two-skill minion it is.
+      const feeds = top[0].feeds.length > 0 ? top[0].feeds : [skill];
       return `<div class="px-choices">
-        <div class="gh-sub"><strong>${escapeHtml(title(skill))}</strong> — best ${
+        <div class="gh-sub"><strong>${escapeHtml(feeds.map(title).join(" + "))}</strong> — best ${
           top.length === 1 ? "pet" : `${top.length} pets`
         } for what this minion feeds${skills.length > 1 ? (skill === "ALCHEMY" ? ", from brewing" : ", from collecting") : ""}</div>
         <table class="bz compact">
@@ -1330,15 +1335,21 @@ function petChoices(r: PetPlanRow): string {
 }
 
 /**
- * Which skills a minion's output actually levels a pet in.
+ * Which skills a minion's output can level a pet in — every one of them, not only the winner's.
  *
- * Normally one. An Alchemy row is the exception and the reason this is a list: brewing the drops
- * pays Alchemy XP, and collecting the minion pays its own skill's XP on the way — the same drops
- * doing two jobs, which needs two pets rather than one.
+ * This used to read the recommended row alone, and that quietly deleted the minion's other plan.
+ * A Sugar Cane Minion has two: collect it and level a Farming pet, or brew what you collect and
+ * level an Alchemy pet. The direct one usually wins on coins because brewing eats the drops, and
+ * the moment it did, the whole brewing option vanished from the page — the double action was
+ * computed, ranked, and then never rendered. Reading the skills off the pairings that exist for
+ * this minion rather than off the row that won puts both back, in the order they earn.
  */
-function relevantSkills(r: PetPlanRow): SkillKey[] {
-  if (r.route !== "brewing" || !r.baseSkill || r.baseSkill === r.skill) return [r.skill];
-  return [r.skill, r.baseSkill];
+function relevantSkills(r: PetPlanRow, pairs: PetPlanRow[]): SkillKey[] {
+  const best = new Map<SkillKey, number>();
+  for (const p of pairs) best.set(p.skill, Math.max(best.get(p.skill) ?? -Infinity, p.advantagePerDay));
+  if (!best.has(r.skill)) best.set(r.skill, r.advantagePerDay);
+  if (r.route === "brewing" && r.baseSkill && !best.has(r.baseSkill)) best.set(r.baseSkill, -Infinity);
+  return [...best.entries()].sort((a, b) => b[1] - a[1]).map(([skill]) => skill);
 }
 
 const INTENT =
@@ -1457,12 +1468,25 @@ const ROUTE_COLUMNS: SortColumn<MinionXpRow>[] = [
     label: "Minion",
     text: true,
     value: (r) => r.family,
-    render: (r) =>
-      `${escapeHtml(r.family)}<div class="dim bz-path">${escapeHtml(r.itemName)}${
+    render: (r) => {
+      // Every drop that pays, not just the biggest. A Voidling row reading "Obsidian" alone hides
+      // that the quartz counts too, and a Tarantula row reading "Spider Eye" hides half its XP.
+      const drops = r.contributions.length > 1 ? r.contributions.map((c) => c.itemName).join(" + ") : r.itemName;
+      return `${escapeHtml(r.family)}<div class="dim bz-path">${escapeHtml(drops)}${
         r.route === "brewing" ? " · brewed" : ""
-      }</div>`,
+      }</div>`;
+    },
   },
-  { id: "skill", label: "Skill", text: true, value: (r) => r.skill, render: (r) => escapeHtml(title(r.skill)) },
+  {
+    id: "skill",
+    label: "Skill",
+    text: true,
+    title:
+      "The skill the route's XP arrives in. Two of them where the minion's drops are not all the same skill — one " +
+      "pet takes both, the matching share at full rate and the rest at a third.",
+    value: (r) => r.skill,
+    render: (r) => escapeHtml([...new Set(r.contributions.map((c) => c.skill))].map(title).join(" + ") || title(r.skill)),
+  },
   {
     id: "xpperitem",
     label: "XP/item",

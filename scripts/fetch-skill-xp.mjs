@@ -58,7 +58,11 @@ async function wiki(page) {
 
 /** `{{Item|Iron|alt=Iron Ore}}` to "Iron Ore"; `{{Item|Wheat}}` to "Wheat". The alt is the display. */
 export function itemName(cell) {
-  const alt = /\|\s*alt\s*=\s*([^}|]+)/.exec(cell);
+  // `alt=` and `text=` are both "what this cell actually says", and the displayed name is the one
+  // to read: the Mining table was relabelled to `{{Item|Coal|text=Coal Ore}}`, which is the same
+  // row it always was, and taking the link target instead silently renamed nine rows — enough to
+  // lose Iron Ore and Gold Ore to the resolver and to file Pure Coal under a real coal block.
+  const alt = /\|\s*(?:alt|text)\s*=\s*([^}|]+)/.exec(cell);
   if (alt) return alt[1].trim();
   const item = /\{\{(?:Item|ID)\|([^}|!]+)/.exec(cell);
   if (item) return item[1].trim();
@@ -149,6 +153,39 @@ export function parseBrewing(wikitext) {
     if (!found.has(name) || found.get(name) < xp) found.set(name, xp);
   }
   return [...found.entries()].map(([item, xp]) => ({ item, xp })).sort((a, b) => b.xp - a.xp);
+}
+
+/**
+ * The two brews that are not on the potion table at all.
+ *
+ * `Potions/Alchemy Experience` is keyed by the first ingredient added to an Awkward Potion, so the
+ * two brews *before* that step are missing from it by construction: nether wart into water is +1,
+ * and the Awkward Potion that comes out is +5 when it is itself brewed on. Both live in a three
+ * column table at the top of the Alchemy page, on the official wiki and on Fandom identically.
+ *
+ * Only one of them is a minion's output, and it is worth almost nothing — a Nether Wart Minion
+ * brewing its own drops is 1 XP a brew. It is here so the route exists and ranks itself last on
+ * its own merits, rather than the minion looking as though it has no brewing route at all.
+ */
+export function parseBasicBrewing(wikitext) {
+  const start = wikitext.search(/^\{\|[^\n]*(?:wikitable|article-table)/m);
+  if (start < 0) return [];
+  const end = wikitext.indexOf("\n|}", start);
+  const table = wikitext.slice(start, end < 0 ? undefined : end);
+
+  const out = [];
+  for (const block of table.split(/\n\|-/).slice(1)) {
+    const cells = block
+      .split(/\n\|/)
+      .slice(1)
+      .map((c) => c.trim());
+    if (cells.length < 2) continue;
+    const item = cells[0].replace(/\[\[([^\]|]*\|)?([^\]]*)\]\]/g, "$2").trim();
+    const xp = Number(cells[1].replace(/[+,]/g, "").trim());
+    if (!item || !Number.isFinite(xp)) continue;
+    out.push({ item, xp });
+  }
+  return out;
 }
 
 /* ------------------------------------------------------- the item infoboxes */
@@ -298,8 +335,20 @@ export const ALIASES = {
  *
  * Nothing is lost by leaving them out. No minion drops a Pure anything, so no ranking in the app
  * ever reads these rows — they simply stop claiming to be an item they are not.
+ *
+ * The Awkward Potion is here for a different reason: it is a real item and a real brew worth +5,
+ * but it is brewed rather than dropped and no minion produces one, so an id for it would only ever
+ * be a route nothing can take.
  */
-export const NOT_ITEMS = new Set(["pure coal", "pure gold", "pure diamond", "block of gold", "gemstone", "titanium"]);
+export const NOT_ITEMS = new Set([
+  "pure coal",
+  "pure gold",
+  "pure diamond",
+  "block of gold",
+  "gemstone",
+  "titanium",
+  "awkward potion",
+]);
 
 /**
  * Display name to item id, from the bazaar's name table first and the shopkeepers' second.
@@ -339,10 +388,11 @@ async function main() {
   const recipes = JSON.parse(await readFile(join(ROOT, "data", "generated", "recipes.json"), "utf8")).recipes;
   const resolve = resolver(names, npcPrices);
 
-  const [farmingText, miningText, brewingText, pages] = await Promise.all([
+  const [farmingText, miningText, brewingText, alchemyText, pages] = await Promise.all([
     wiki("Farming"),
     wiki("Mining"),
     wiki("Potions/Alchemy Experience"),
+    wiki("Alchemy"),
     infoboxPages(),
   ]);
 
@@ -351,7 +401,12 @@ async function main() {
   const crops = farmingText.indexOf("=== Crops ===");
   const farming = parseMinionXp(crops < 0 ? farmingText : farmingText.slice(crops), "FARMING");
   const mining = parseMinionXp(miningText, "MINING");
+  // The potion table first, because it is the detailed one; the Alchemy page's two rows fill in the
+  // steps that table cannot describe, and never overwrite a yield it already states.
   const brewing = parseBrewing(brewingText);
+  const listed = new Set(brewing.map((b) => b.item));
+  for (const row of parseBasicBrewing(alchemyText)) if (!listed.has(row.item)) brewing.push(row);
+  brewing.sort((a, b) => b.xp - a.xp);
 
   // The item pages, four at a time. Forty-two requests against a volunteer host on a build step.
   const infoboxes = [];
@@ -413,7 +468,9 @@ async function main() {
           minionXpInfoboxes:
             "Hypixel Wiki, every item page carrying a |minion_xp= infobox field, found with insource:/minion_xp/. " +
             "The only place Foraging, Fishing, Combat and Alchemy minion rates are published at all.",
-          brewing: "Hypixel Wiki, Potions/Alchemy Experience — XP yield per brew, keyed by first ingredient.",
+          brewing:
+            "Hypixel Wiki, Potions/Alchemy Experience — XP yield per brew, keyed by first ingredient, " +
+            "plus the Alchemy page's own table for the two brews that come before an Awkward Potion.",
           carpentry:
             "Hypixel Wiki, Carpentry — 'The XP gained is 3% of the combined NPC sell price of the ingredients used to craft the item.'",
           petXp: "Hypixel Wiki, Minions — collecting a minion grants the Skill XP, and an active pet levels off it.",

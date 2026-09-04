@@ -109,22 +109,42 @@ const petRow = (key: string, profit: number, xpNeeded: number): PetProfitRow => 
   caveats: [],
 });
 
-const xpRow = (over: Partial<MinionXpRow> = {}): MinionXpRow => ({
-  generator: "COBBLESTONE",
-  family: "Cobblestone Minion",
-  tier: 12,
-  skill: "MINING" as SkillKey,
-  route: "direct",
-  itemId: "COBBLESTONE",
-  itemName: "Cobblestone",
-  itemsPerHour: 10_000,
-  baseSkillXpPerHour: 1_000,
-  skillXpPerHour: 1_000,
-  petXpPerHour: 1_000,
-  xpPerItem: 0.1,
-  caveats: [],
-  ...over,
-});
+const xpRow = (over: Partial<MinionXpRow> = {}): MinionXpRow => {
+  const row: MinionXpRow = {
+    generator: "COBBLESTONE",
+    family: "Cobblestone Minion",
+    tier: 12,
+    skill: "MINING" as SkillKey,
+    route: "direct",
+    itemId: "COBBLESTONE",
+    itemName: "Cobblestone",
+    itemsPerHour: 10_000,
+    baseSkillXpPerHour: 1_000,
+    skillXpPerHour: 1_000,
+    petXpPerHour: 1_000,
+    xpPerItem: 0.1,
+    contributions: [],
+    caveats: [],
+    ...over,
+  };
+  // A single-drop minion, unless the case says otherwise: the split has to agree with the totals or
+  // the fixture is testing a row the planner could never produce.
+  if (row.contributions.length === 0) {
+    row.contributions = [
+      {
+        skill: row.skill,
+        itemId: row.itemId ?? "COBBLESTONE",
+        itemName: row.itemName,
+        itemsPerHour: row.itemsPerHour,
+        xpPerItem: row.xpPerItem,
+        baseXpPerHour: row.baseSkillXpPerHour,
+        skillXpPerHour: row.skillXpPerHour,
+        petXpPerHour: row.petXpPerHour,
+      },
+    ];
+  }
+  return row;
+};
 
 /**
  * A player, with Wisdom given as one number for brevity and spread across every skill.
@@ -196,8 +216,8 @@ test("a pet that would take longer than the horizon is not a plan", () => {
 
 /* ------------------------------------------------------------- the brewing */
 
-const brewRow = (over: Partial<MinionXpRow> = {}): MinionXpRow =>
-  xpRow({
+const brewRow = (over: Partial<MinionXpRow> = {}): MinionXpRow => {
+  const row = xpRow({
     generator: "SUGAR_CANE",
     family: "Sugar Cane Minion",
     skill: "ALCHEMY" as SkillKey,
@@ -207,6 +227,24 @@ const brewRow = (over: Partial<MinionXpRow> = {}): MinionXpRow =>
     baseSkillXpPerHour: 150_000,
     ...over,
   });
+  // The collection half is a split like any other, so a case that gives it an XP rate has to give
+  // it the split too — the planner never produces one without the other.
+  if (row.baseSkill && row.baseContributions === undefined) {
+    row.baseContributions = [
+      {
+        skill: row.baseSkill,
+        itemId: "SUGAR_CANE",
+        itemName: "Sugar Cane",
+        itemsPerHour: row.itemsPerHour,
+        xpPerItem: (row.baseXpPerHour ?? 0) / Math.max(1, row.itemsPerHour),
+        baseXpPerHour: row.baseXpPerHour ?? 0,
+        skillXpPerHour: row.baseXpPerHour ?? 0,
+        petXpPerHour: row.baseXpPerHour ?? 0,
+      },
+    ];
+  }
+  return row;
+};
 
 test("brewing is capped by what a person will actually sit through", () => {
   // The minion supplies 240 brews a day; the cap says 100, so the XP is cut to match rather than
@@ -348,4 +386,92 @@ test("wisdom and taming reach the per-day figure intact", () => {
     (r) => r.petKey === "PET:ROCK",
   )!;
   assert.ok(Math.abs(row.petXpPerDay - 3_200 * DAY_HOURS) < 1e-6);
+});
+
+test("one pet on a two-skill minion keeps its own share whole and a third of the rest", () => {
+  // A Tarantula Minion pays Combat for its spider eyes and Mining for its iron, in one collection,
+  // to whichever single pet is standing there. The multiplier is per skill, so the sum has to be
+  // taken after it: fold the two skills into one figure first and both pets get the same answer,
+  // which is wrong for at least one of them.
+  const twoSkills = xpRow({
+    generator: "TARANTULA",
+    family: "Tarantula Minion",
+    skill: "COMBAT" as SkillKey,
+    baseSkillXpPerHour: 1_200,
+    contributions: [
+      {
+        skill: "COMBAT" as SkillKey,
+        itemId: "SPIDER_EYE",
+        itemName: "Spider Eye",
+        itemsPerHour: 1_000,
+        xpPerItem: 0.9,
+        baseXpPerHour: 900,
+        skillXpPerHour: 900,
+        petXpPerHour: 900,
+      },
+      {
+        skill: "MINING" as SkillKey,
+        itemId: "IRON_INGOT",
+        itemName: "Iron Ingot",
+        itemsPerHour: 1_000,
+        xpPerItem: 0.3,
+        baseXpPerHour: 300,
+        skillXpPerHour: 300,
+        petXpPerHour: 300,
+      },
+    ],
+  });
+
+  const combat = petXpPerHourFor(twoSkills, "COMBAT", player(), rules);
+  const mining = petXpPerHourFor(twoSkills, "MINING", player(), rules);
+  const either = petXpPerHourFor(twoSkills, null, player(), rules);
+
+  // 900 whole plus a third of 300, and the other way round.
+  assert.ok(Math.abs(combat - (900 + 100)) < 1e-6);
+  assert.ok(Math.abs(mining - (300 + 300)) < 1e-6);
+  // The two pets genuinely differ, which is the thing a single folded figure could not express.
+  assert.ok(combat > mining);
+  // And "whatever matches" is the optimistic reading: everything at full rate.
+  assert.ok(Math.abs(either - 1_200) < 1e-6);
+});
+
+test("a pairing says every skill the minion feeds, not just its largest", () => {
+  const rows = planPetPairs(
+    options({
+      xpRows: [
+        xpRow({
+          generator: "TARANTULA",
+          skill: "COMBAT" as SkillKey,
+          baseSkillXpPerHour: 1_200,
+          contributions: [
+            {
+              skill: "COMBAT" as SkillKey,
+              itemId: "SPIDER_EYE",
+              itemName: "Spider Eye",
+              itemsPerHour: 1_000,
+              xpPerItem: 0.9,
+              baseXpPerHour: 900,
+              skillXpPerHour: 900,
+              petXpPerHour: 900,
+            },
+            {
+              skill: "MINING" as SkillKey,
+              itemId: "IRON_INGOT",
+              itemName: "Iron Ingot",
+              itemsPerHour: 1_000,
+              xpPerItem: 0.3,
+              baseXpPerHour: 300,
+              skillXpPerHour: 300,
+              petXpPerHour: 300,
+            },
+          ],
+        }),
+      ],
+      pets: [petRow("TIGER", 1_000_000, 100_000)],
+      catalogue: [{ key: "TIGER", name: "Tiger", skill: "COMBAT" }],
+      itemCoinsPerHour: new Map([["TARANTULA", 0]]),
+      dropValue: new Map([["TARANTULA", 0]]),
+    }),
+  );
+  assert.deepEqual(rows[0].feeds, ["COMBAT", "MINING"]);
 });

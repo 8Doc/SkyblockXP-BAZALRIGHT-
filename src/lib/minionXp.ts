@@ -1,4 +1,4 @@
-import { itemsPerHour, type MinionData, type MinionProduction, type Setup } from "./minions";
+import { itemsPerHour, offlineAmount, type MinionData, type MinionProduction, type Setup } from "./minions";
 
 /**
  * A minion as a pet-levelling machine.
@@ -170,6 +170,37 @@ export type XpRoute = "direct" | "brewing";
  */
 export const DEFAULT_MAX_BREWS_PER_DAY = 200;
 
+/**
+ * One of a minion's drops, and what that drop alone is worth in XP.
+ *
+ * A minion is not one drop. A Voidling Minion makes obsidian at two and a half a harvest beside its
+ * quartz at four tenths, a Tarantula Minion makes a spider eye and an iron ingot alongside its
+ * string, a Revenant Minion's diamonds are a fifth of its harvests. Every one of those was being
+ * thrown away by a model that read `collects` and stopped, which is why the four slayer minions —
+ * the ones whose secondary drop *is* the point — came back as zero XP an hour.
+ *
+ * They are kept apart rather than summed into one figure because they are not all the same skill.
+ * A Tarantula Minion pays Combat XP for its spider eyes and Mining XP for its iron, and a single
+ * pet standing there takes the two at different multipliers: full rate on the one that matches it
+ * and a third of the other. Summing first and applying one multiplier after is wrong in both
+ * directions depending on which pet is out.
+ */
+export type XpContribution = {
+  skill: SkillKey;
+  itemId: string;
+  itemName: string;
+  /** Drops of this item an hour, after its own chance. */
+  itemsPerHour: number;
+  /** Published minion XP for one of them. */
+  xpPerItem: number;
+  /** Skill XP an hour from this drop alone, before Wisdom. */
+  baseXpPerHour: number;
+  /** After that skill's own Wisdom. */
+  skillXpPerHour: number;
+  /** After the pet multiplier for this drop's skill. */
+  petXpPerHour: number;
+};
+
 export type MinionXpRow = {
   generator: string;
   family: string;
@@ -180,14 +211,28 @@ export type MinionXpRow = {
   itemName: string;
 
   itemsPerHour: number;
-  /** Skill XP an hour before Wisdom. The published figure, times the rate. */
+  /**
+   * Skill XP an hour before Wisdom, summed over every drop of the minion and every skill they pay.
+   *
+   * Across skills, not within one: a Tarantula Minion's number is its spider eyes' Combat XP plus
+   * its iron's Mining XP, because both arrive in the same collection and one pet is standing there
+   * for both. `contributions` is where the split lives.
+   */
   baseSkillXpPerHour: number;
   /** Skill XP an hour after Wisdom. What the skill actually gains. */
   skillXpPerHour: number;
   /** Pet XP an hour after every multiplier and divisor. The ranking figure. */
   petXpPerHour: number;
-  /** What one drop is worth in Skill XP on this route. */
+  /** What one drop is worth in Skill XP on this route, for the drop the row is named after. */
   xpPerItem: number;
+  /**
+   * Every drop that pays XP, one entry each, largest first.
+   *
+   * The row's headline figures are these summed; this is what they were summed from, and it is the
+   * only honest place to answer "which of this minion's drops is actually doing the work" or to
+   * re-rank the minion for one skill in particular.
+   */
+  contributions: XpContribution[];
   /** For a brewing row, how many raw drops one brew consumes. */
   itemsPerBrew?: number;
 
@@ -203,8 +248,10 @@ export type MinionXpRow = {
    * Absent on a direct row, where the skill is simply `skill` and there is no second half.
    */
   baseSkill?: SkillKey;
-  /** Skill XP an hour, before Wisdom, that collecting pays into `baseSkill`. */
+  /** Skill XP an hour, before Wisdom, that collecting pays — every skill of it, not just `baseSkill`. */
   baseXpPerHour?: number;
+  /** The collection half's drops, split by skill, the same way `contributions` splits the route's own. */
+  baseContributions?: XpContribution[];
 
   caveats: string[];
 };
@@ -247,6 +294,15 @@ export function planMinionXp(o: MinionXpOptions): MinionXpRow[] {
   const brewBy = new Map<string, BrewIngredient>();
   for (const row of o.tables.brewing) if (row.itemId) brewBy.set(row.itemId, row);
 
+  // Names to ids, for the secondary drops. The wiki states those by display name only — there is no
+  // `collectionId` behind an `alsoCollects` entry — so without this a Revenant Minion's diamonds
+  // cannot be looked up in the XP table at all.
+  const byName = new Map<string, string>();
+  for (const [id, name] of Object.entries(o.names)) {
+    const key = name.trim().toLowerCase();
+    if (!byName.has(key)) byName.set(key, id);
+  }
+
   const out: MinionXpRow[] = [];
 
   for (const minion of o.data.minions) {
@@ -258,13 +314,61 @@ export function planMinionXp(o: MinionXpOptions): MinionXpRow[] {
     if (!itemId) continue;
     const itemName = o.names[itemId] ?? itemId;
 
-    const direct = directBy.get(itemId);
-    if (direct && direct.minionXp !== null) {
+    /**
+     * Everything the minion drops, in drops an hour, not just the one on the tin.
+     *
+     * The rate is the *primary* drop's rate, so dividing its per-harvest stack back out recovers
+     * the harvest count, which is the unit the secondary drops are quoted in. A conditional drop
+     * needs an upgrade fitted and is not something the minion makes on its own, so it is left out
+     * here the same way the profit side leaves it out.
+     */
+    const perHarvest = Math.max(1e-9, offlineAmount(minion, o.data));
+    const harvests = rate / perHarvest;
+    const drops: { id: string; name: string; perHour: number }[] = [
+      { id: itemId, name: itemName, perHour: rate * (minion.collects.chance ?? 1) },
+    ];
+    const unnamed: string[] = [];
+    for (const also of minion.alsoCollects ?? []) {
+      if (also.condition) continue;
+      const alsoId = byName.get(also.item.trim().toLowerCase());
+      if (!alsoId) {
+        unnamed.push(also.item);
+        continue;
+      }
+      drops.push({
+        id: alsoId,
+        name: o.names[alsoId] ?? also.item,
+        perHour: harvests * also.amount * (also.chance ?? 1),
+      });
+    }
+
+    const contributions = contributionsFor(drops, directBy, o);
+    const unpublished = drops.filter((d) => {
+      const known = directBy.get(d.id);
+      return !known || known.minionXp === null;
+    });
+
+    if (contributions.length > 0) {
+      const lead = contributions[0];
       const caveats: string[] = [];
-      if (direct.minionXp === 0) caveats.push("published as exactly zero — this minion grants no skill XP at all");
-      out.push(
-        row(minion, tier, direct.skill, "direct", itemId, itemName, rate, direct.minionXp, o, caveats),
-      );
+      if (contributions.every((c) => c.xpPerItem === 0)) {
+        caveats.push("published as exactly zero — this minion grants no skill XP at all");
+      }
+      if (contributions.length > 1) {
+        caveats.push(
+          `counts every drop: ${contributions
+            .map((c) => `${c.itemName} at ${round(c.baseXpPerHour)} ${c.skill.toLowerCase()} xp/hr`)
+            .join(", ")}`,
+        );
+      }
+      if (unpublished.length > 0) {
+        caveats.push(
+          `no minion XP rate is published for ${unpublished
+            .map((d) => d.name)
+            .join(" or ")}, so that part of the output counts as unknown rather than zero`,
+        );
+      }
+      out.push(directRow(minion, tier, "direct", lead, rate, contributions, caveats));
     } else {
       out.push({
         generator: minion.generator,
@@ -279,11 +383,17 @@ export function planMinionXp(o: MinionXpOptions): MinionXpRow[] {
         skillXpPerHour: 0,
         petXpPerHour: 0,
         xpPerItem: 0,
+        contributions: [],
         caveats: [
           "no minion XP rate is published for this drop — only the Farming and Mining pages carry the column, " +
             "so this is unknown rather than zero",
         ],
       });
+    }
+    if (unnamed.length > 0) {
+      // Said once, on the row that exists, rather than dropped silently: an unresolvable drop is a
+      // gap in the item table and not a drop the minion does not make.
+      out[out.length - 1].caveats.push(`also drops ${unnamed.join(" and ")}, which nothing here can price or rate`);
     }
 
     // The brewing route runs on the enchanted form, so the raw drop has to be worth one first.
@@ -346,16 +456,20 @@ export function planMinionXp(o: MinionXpOptions): MinionXpRow[] {
         );
       }
       // The collection half, carried so the planner can put a second pet on it. Only meaningful
-      // where the drop has a published direct rate; without one this stays absent rather than zero,
+      // where a drop has a published direct rate; without one this stays absent rather than zero,
       // for the same reason the direct row does.
+      const paid = contributions.filter((c) => c.baseXpPerHour > 0);
       const collects =
-        direct && direct.minionXp !== null && direct.minionXp > 0
-          ? { baseSkill: direct.skill, baseXpPerHour: rate * direct.minionXp }
+        paid.length > 0
+          ? {
+              baseSkill: paid[0].skill,
+              baseXpPerHour: paid.reduce((sum, c) => sum + c.baseXpPerHour, 0),
+              baseContributions: paid,
+            }
           : {};
       if ("baseSkill" in collects) {
-        caveats.push(
-          `collecting the same drops also pays ${String(collects.baseSkill).toLowerCase()} XP — the drops do two jobs`,
-        );
+        const skills = [...new Set(paid.map((c) => String(c.skill).toLowerCase()))];
+        caveats.push(`collecting the same drops also pays ${skills.join(" and ")} XP — the drops do two jobs`);
       }
       out.push({
         ...row(minion, tier, "ALCHEMY", "brewing", ingredientId, name, rate, brew.xp / perBrew, o, caveats, perBrew),
@@ -400,10 +514,81 @@ function row(
     skillXpPerHour,
     petXpPerHour: skillXpPerHour * multiplier,
     xpPerItem,
+    // A brewing route reaches exactly one skill, so its split is the row itself. Kept populated
+    // rather than empty so every consumer can read `contributions` without a special case.
+    contributions: [
+      {
+        skill,
+        itemId,
+        itemName,
+        itemsPerHour: rate,
+        xpPerItem,
+        baseXpPerHour: baseSkillXpPerHour,
+        skillXpPerHour,
+        petXpPerHour: skillXpPerHour * multiplier,
+      },
+    ],
     ...(itemsPerBrew === undefined ? {} : { itemsPerBrew }),
     caveats,
   };
 }
+
+/** One entry per drop that has a published rate, biggest earner first. */
+function contributionsFor(
+  drops: { id: string; name: string; perHour: number }[],
+  directBy: Map<string, ItemXp>,
+  o: MinionXpOptions,
+): XpContribution[] {
+  const out: XpContribution[] = [];
+  for (const drop of drops) {
+    const known = directBy.get(drop.id);
+    if (!known || known.minionXp === null) continue;
+    const baseXpPerHour = drop.perHour * known.minionXp;
+    const skillXpPerHour = withWisdom(baseXpPerHour, wisdomFor(o.player, known.skill));
+    out.push({
+      skill: known.skill,
+      itemId: drop.id,
+      itemName: drop.name,
+      itemsPerHour: drop.perHour,
+      xpPerItem: known.minionXp,
+      baseXpPerHour,
+      skillXpPerHour,
+      petXpPerHour: skillXpPerHour * petXpMultiplier(known.skill, o.player, o.rules),
+    });
+  }
+  return out.sort((a, b) => b.baseXpPerHour - a.baseXpPerHour);
+}
+
+/** A direct row is the sum of its drops, named after whichever of them earns the most. */
+function directRow(
+  minion: MinionProduction,
+  tier: number,
+  route: XpRoute,
+  lead: XpContribution,
+  rate: number,
+  contributions: XpContribution[],
+  caveats: string[],
+): MinionXpRow {
+  const sum = (pick: (c: XpContribution) => number) => contributions.reduce((total, c) => total + pick(c), 0);
+  return {
+    generator: minion.generator,
+    family: minion.family,
+    tier,
+    skill: lead.skill,
+    route,
+    itemId: lead.itemId,
+    itemName: lead.itemName,
+    itemsPerHour: rate,
+    baseSkillXpPerHour: sum((c) => c.baseXpPerHour),
+    skillXpPerHour: sum((c) => c.skillXpPerHour),
+    petXpPerHour: sum((c) => c.petXpPerHour),
+    xpPerItem: lead.xpPerItem,
+    contributions,
+    caveats,
+  };
+}
+
+const round = (n: number) => Math.round(n).toLocaleString("en-US");
 
 /**
  * How many raw drops one brewing ingredient costs, following single-ingredient recipes down.
@@ -483,12 +668,41 @@ export function skillGuess(minion: MinionProduction): SkillKey {
 export function bestPerSkill(rows: MinionXpRow[]): Map<SkillKey, MinionXpRow | null> {
   const best = new Map<SkillKey, MinionXpRow | null>();
   for (const row of rows) {
-    if (row.petXpPerHour <= 0 && row.skillXpPerHour <= 0) {
+    if (row.contributions.length === 0) {
       if (!best.has(row.skill)) best.set(row.skill, null);
       continue;
     }
-    const held = best.get(row.skill);
-    if (!held || row.petXpPerHour > held.petXpPerHour) best.set(row.skill, row);
+    // Per skill, not per row. A minion reaching two skills is a candidate for both, and each card
+    // has to quote that skill's own share — a Tarantula Minion's Mining figure is its iron and not
+    // its iron plus its spider eyes, however the row itself is ranked.
+    for (const skill of new Set(row.contributions.map((c) => c.skill))) {
+      const narrowed = narrowTo(row, skill);
+      if (narrowed.petXpPerHour <= 0 && narrowed.skillXpPerHour <= 0) {
+        if (!best.has(skill)) best.set(skill, null);
+        continue;
+      }
+      const held = best.get(skill);
+      if (!held || narrowed.petXpPerHour > held.petXpPerHour) best.set(skill, narrowed);
+    }
   }
   return best;
+}
+
+/** The same row seen as one skill only: its drops in that skill, and nothing else's XP counted. */
+export function narrowTo(row: MinionXpRow, skill: SkillKey): MinionXpRow {
+  const kept = row.contributions.filter((c) => c.skill === skill);
+  if (kept.length === row.contributions.length) return row;
+  const lead = kept[0] ?? row.contributions[0];
+  const sum = (pick: (c: XpContribution) => number) => kept.reduce((total, c) => total + pick(c), 0);
+  return {
+    ...row,
+    skill,
+    itemId: lead?.itemId ?? row.itemId,
+    itemName: lead?.itemName ?? row.itemName,
+    xpPerItem: lead?.xpPerItem ?? 0,
+    baseSkillXpPerHour: sum((c) => c.baseXpPerHour),
+    skillXpPerHour: sum((c) => c.skillXpPerHour),
+    petXpPerHour: sum((c) => c.petXpPerHour),
+    contributions: kept,
+  };
 }

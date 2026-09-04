@@ -1,9 +1,9 @@
 {
- "generatedAt": "2026-09-03T22:46:08.616Z",
+ "generatedAt": "2026-09-04T16:04:29.079Z",
  "source": {
   "minionXpTables": "Hypixel Wiki, Farming and Mining — the 'Minion XP' column of each skill's XP table.",
   "minionXpInfoboxes": "Hypixel Wiki, every item page carrying a |minion_xp= infobox field, found with insource:/minion_xp/. The only place Foraging, Fishing, Combat and Alchemy minion rates are published at all.",
-  "brewing": "Hypixel Wiki, Potions/Alchemy Experience — XP yield per brew, keyed by first ingredient.",
+  "brewing": "Hypixel Wiki, Potions/Alchemy Experience — XP yield per brew, keyed by first ingredient, plus the Alchemy page's own table for the two brews that come before an Awkward Potion.",
   "carpentry": "Hypixel Wiki, Carpentry — 'The XP gained is 3% of the combined NPC sell price of the ingredients used to craft the item.'",
   "petXp": "Hypixel Wiki, Minions — collecting a minion grants the Skill XP, and an active pet levels off it."
  },
@@ -436,16 +436,16 @@
    "source": "infobox"
   },
   {
-   "item": "Enchanted Coal",
-   "itemId": "ENCHANTED_COAL",
+   "item": "Enchanted Nether Quartz",
+   "itemId": "ENCHANTED_QUARTZ",
    "skill": "MINING",
    "minionXp": 48,
    "playerXp": null,
    "source": "infobox"
   },
   {
-   "item": "Enchanted Nether Quartz",
-   "itemId": "ENCHANTED_QUARTZ",
+   "item": "Enchanted Coal",
+   "itemId": "ENCHANTED_COAL",
    "skill": "MINING",
    "minionXp": 48,
    "playerXp": null,
@@ -926,6 +926,18 @@
    "source": "table"
   },
   {
+   "item": "Awkward Potion",
+   "xp": 5,
+   "itemId": null,
+   "source": "table"
+  },
+  {
+   "item": "Nether Wart",
+   "xp": 1,
+   "itemId": "NETHER_STALK",
+   "source": "table"
+  },
+  {
    "item": "Ink Sac",
    "xp": 0,
    "itemId": "INK_SACK",
@@ -956,6 +968,7 @@
   "Pure Diamond",
   "Titanium",
   "Gemstone",
-  "Glistering Melon Slice"
+  "Glistering Melon Slice",
+  "Awkward Potion"
  ]
 }
