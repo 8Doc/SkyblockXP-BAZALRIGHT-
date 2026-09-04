@@ -187,7 +187,15 @@ async function refresh(): Promise<void> {
 
 /* ------------------------------------------------------------- the month */
 
-const HISTORY_KEY = "sbxp:mpmonths";
+/**
+ * Bumped from `mpmonths` when the fetch learned to ask for compacted items.
+ *
+ * The old entry holds raw drops only, and it is fresh enough to suppress a refetch for six hours —
+ * so without a new key everybody who had used the tab would go on seeing an all-"flat" column until
+ * it expired, which is precisely the bug. A new key retires the stale shape rather than migrating
+ * it; one round of requests is cheaper than a cache that lies.
+ */
+const HISTORY_KEY = "sbxp:mpmonths2";
 /** Six hours. A daily series does not change faster than that, and the fetch is sixty requests. */
 const HISTORY_TTL_MS = 6 * 3600_000;
 /** Three at a time. Six earns a 429 from Coflnet, which costs an item its month for six hours. */
@@ -223,7 +231,25 @@ async function fetchMonths(): Promise<void> {
   if (!tables) return;
   if (Date.now() - state.historyAt < HISTORY_TTL_MS && state.variance.size > 0) return;
 
-  const wanted = [...new Set(dropIds().filter((id): id is string => id !== null))];
+  /**
+   * The compacted forms too, because those are the prices being judged.
+   *
+   * This is what made every row read "flat". With a compactor fitted — and Super Compactor 3000 is
+   * the default — the minion's inventory holds Enchanted Cobblestone rather than cobblestone, so
+   * `planProfit` prices the stream off the enchanted item and takes its z-score from the enchanted
+   * item's month. Fetching only the raw drops left that month permanently absent, which is a null
+   * z, which the cell renders as "flat" — and because the *raw* month was present, it never even
+   * fell through to "no history". A whole column quietly saying nothing while looking like an
+   * answer. The price book already expands the same way; this had simply been missed.
+   */
+  const ids = new Set(dropIds().filter((id): id is string => id !== null));
+  if (tables.storage?.compactors) {
+    for (const compactor of tables.storage.compactors) {
+      if (compactor.kind === "none") continue;
+      for (const id of [...ids]) ids.add(compactionOf(id, compactor, tables.recipes).itemId);
+    }
+  }
+  const wanted = [...ids].filter(Boolean);
   if (wanted.length === 0) return;
 
   const next: Record<string, Variance> = {};
@@ -251,7 +277,9 @@ async function fetchMonths(): Promise<void> {
   }
 
   if (Object.keys(next).length === 0) return;
-  state.variance = new Map(Object.entries(next));
+  // Merged rather than replaced, so a round that loses some items to a 429 does not throw away the
+  // months that did arrive.
+  state.variance = new Map([...state.variance, ...Object.entries(next)]);
   state.historyAt = Date.now();
   try {
     localStorage.setItem(HISTORY_KEY, JSON.stringify({ fetchedAt: state.historyAt, variance: next } satisfies MonthStore));
@@ -863,7 +891,11 @@ const COLUMNS: {
  */
 function monthCell(r: MinionProfitRow): string {
   if (r.itemId === null) return `<span class="dim">—</span>`;
-  const variance = state.variance.get(r.itemId);
+  // The item the price was actually taken from, which is the compacted form wherever one is being
+  // held and sold. Reading the raw drop's month here described a different item's price than the
+  // sigma beside it was measured against.
+  const priced = r.streams[0]?.soldAs ?? r.itemId;
+  const variance = state.variance.get(priced);
   if (!variance) {
     return `<span class="dim" title="Coflnet publishes no daily history for this item, so there is nothing to check today's quote against. This row is ranking on the live price alone.">no history</span>`;
   }
@@ -949,7 +981,9 @@ Click to sort by this column; click again to reverse it.`,
 
 /** The row opened out: where the number came from, and what it is quietly leaving out. */
 function detailHtml(r: MinionProfitRow): string {
-  const variance = r.itemId ? state.variance.get(r.itemId) : undefined;
+  // Same item the sigma column is measured against — the compacted form where one is sold.
+  const priced = r.streams[0]?.soldAs ?? r.itemId;
+  const variance = priced ? state.variance.get(priced) : undefined;
   const lines: string[] = [];
 
   lines.push(
