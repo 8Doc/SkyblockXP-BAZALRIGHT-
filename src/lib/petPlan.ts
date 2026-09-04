@@ -1,4 +1,4 @@
-import { petXpMultiplier, withWisdom, type MinionXpRow, type PetXpRules, type Player, type SkillKey } from "./minionXp";
+import { petXpMultiplier, withWisdom, wisdomFor, type MinionXpRow, type PetXpRules, type Player, type SkillKey } from "./minionXp";
 import type { PetProfitRow } from "./petLevelling";
 
 /**
@@ -17,12 +17,17 @@ import type { PetProfitRow } from "./petLevelling";
  * of them, level Golden Dragons off the Combat XP, and sell the rotten flesh to the bazaar the
  * whole time. Counting only the pet margin describes half of that and calls it the answer.
  *
- * **Brewing is not free XP and is priced accordingly.** Every other route here is a by-product of
- * collecting a minion you were collecting anyway. Brewing is not: the drops go into a brewing stand
- * instead of onto the market, so the Alchemy XP costs exactly what those drops would have sold for,
- * and it costs an evening standing at the stand. Both are charged — the coins as an opportunity
- * cost subtracted from the day's profit, and the labour as a hard cap on brews per day, because
- * "22,500 pet XP an hour" is not an offer anybody will take if it means nine thousand brews.
+ * **Brewing is not free XP, and what it costs is an opportunity rather than a loss.** Every other
+ * route here is a by-product of collecting a minion you were collecting anyway. Brewing is not: the
+ * drops go into a brewing stand instead of onto the market. That is not money lost — it is money
+ * not made, and the only question it raises is whether the pet XP is worth more than the sale would
+ * have been. So the figure that matters is `advantagePerDay`: what this plan makes *over and above
+ * simply selling everything the minion produces*. A brewing route whose advantage is negative is
+ * not a bad plan with a cost attached, it is a worse plan than doing nothing, and the caller is
+ * told so rather than being shown a subtraction.
+ *
+ * The labour is capped separately and bluntly, because it is not economic: "22,500 pet XP an hour"
+ * is not an offer anybody takes if it means nine thousand brews a day.
  */
 
 export type PetCatalogueEntry = { key: string; name: string; skill: SkillKey | null };
@@ -55,12 +60,30 @@ export type PetPlanRow = {
   petProfitPerDay: number;
   /** Coins a day from selling what the minion produced while it did it. */
   itemProfitPerDay: number;
-  /** Coins a day of drops fed into a brewing stand instead of sold. Zero on every direct route. */
+  /**
+   * Coins a day of drops fed into a brewing stand instead of sold. Zero on every direct route.
+   *
+   * An opportunity cost, not a loss: this is revenue forgone, and it is only worth anything as the
+   * thing `advantagePerDay` is measured against.
+   */
   brewingCostPerDay: number;
   /** Brews a day this route asks of you. Zero on every direct route. */
   brewsPerDay: number;
 
-  /** The ranking figure: pets, plus items, less what brewing consumed. */
+  /** Coins a day from doing none of this — just running the minion and selling everything. */
+  sellOnlyPerDay: number;
+  /**
+   * What this plan makes over simply selling the output. The figure the plan is actually chosen on.
+   *
+   * For a direct route it is the pet profit, since the XP arrived free with a collection you were
+   * making anyway. For a brewing route it is the pet profit less the drops the stand ate. Negative
+   * means the plan is worse than not having one.
+   */
+  advantagePerDay: number;
+  /** False when you would make more coins by ignoring pets entirely and selling the lot. */
+  beatsSelling: boolean;
+
+  /** Total coins a day: pets, plus whatever items were left to sell. */
   totalProfitPerDay: number;
 
   caveats: string[];
@@ -111,7 +134,7 @@ export type PetPlanOptions = {
  * finished figure keeps Wisdom applied once and in the right place.
  */
 export function petXpPerHourFor(row: MinionXpRow, petSkill: SkillKey | null, player: Player, rules: PetXpRules): number {
-  const skillXp = withWisdom(row.baseSkillXpPerHour, player.wisdom);
+  const skillXp = withWisdom(row.baseSkillXpPerHour, wisdomFor(player, row.skill));
   return skillXp * petXpMultiplier(row.skill, { ...player, petSkill }, rules);
 }
 
@@ -172,6 +195,8 @@ export function planPetPairs(o: PetPlanOptions): PetPlanRow[] {
         // And the drops that went into the stand did not go onto the market.
         const dropsConsumed = brewsPerDay * perBrew;
         brewingCostPerDay = dropsConsumed * dropValue;
+        // The drops are gone from the market whether or not the brewing was wise, so the item half
+        // genuinely falls. What that costs is judged by `advantagePerDay` below, not here.
         itemProfitPerDay = Math.max(0, itemProfitPerDay - brewingCostPerDay);
 
         if (brewsPerDay >= o.maxBrewsPerDay - 1e-9) {
@@ -186,7 +211,17 @@ export function planPetPairs(o: PetPlanOptions): PetPlanRow[] {
 
       const petProfitPerDay = petsPerDay * pet.profit;
       const totalProfitPerDay = petProfitPerDay + itemProfitPerDay;
+      const sellOnlyPerDay = itemCoinsPerHour * DAY_HOURS;
+      const advantagePerDay = totalProfitPerDay - sellOnlyPerDay;
       if (totalProfitPerDay <= floor) continue;
+
+      if (advantagePerDay <= 0) {
+        caveats.push(
+          `worse than not bothering: selling everything the minion makes is ${Math.round(
+            -advantagePerDay,
+          ).toLocaleString("en-US")} coins a day better`,
+        );
+      }
 
       if (!matched) {
         caveats.push(`a ${petSkill.toLowerCase()} pet on a ${row.skill.toLowerCase()} minion keeps only part of the XP`);
@@ -211,6 +246,9 @@ export function planPetPairs(o: PetPlanOptions): PetPlanRow[] {
         itemProfitPerDay,
         brewingCostPerDay,
         brewsPerDay,
+        sellOnlyPerDay,
+        advantagePerDay,
+        beatsSelling: advantagePerDay > 0,
         totalProfitPerDay,
         caveats,
       });
@@ -231,11 +269,13 @@ export function bestPerMinion(rows: PetPlanRow[]): PetPlanRow[] {
   const best = new Map<string, PetPlanRow>();
   for (const row of rows) {
     const held = best.get(row.generator);
-    // Chosen on the PET half alone, not on the total. The item half is identical for every pet on
-    // a given minion, so including it makes the comparison a tie broken by nothing — which is how
-    // a mismatched pet that keeps a third of the XP ends up recommended over a matched one. The
-    // total is still what the rows are ranked by; it is just not what picks the pet.
-    if (!held || row.petProfitPerDay > held.petProfitPerDay) best.set(row.generator, row);
+    // Chosen on the ADVANTAGE, which is the only figure that means anything here. The total is
+    // dominated by item income that is identical for every pet on a given minion, so choosing on it
+    // makes the comparison a tie broken by nothing — that is how a mismatched pet keeping a third
+    // of the XP got recommended over a matched one. And choosing on the pet half alone would pick a
+    // brewing route that eats more in drops than the pet is worth. What is left is "how much better
+    // is this than just selling the output", which is the question being asked.
+    if (!held || row.advantagePerDay > held.advantagePerDay) best.set(row.generator, row);
   }
   return [...best.values()].sort((a, b) => b.totalProfitPerDay - a.totalProfitPerDay);
 }

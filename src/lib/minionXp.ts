@@ -82,8 +82,18 @@ export type PetXpRules = {
 /* ------------------------------------------------------------- the player */
 
 export type Player = {
-  /** Wisdom for the skill in question. Scales the Skill XP itself, additively. */
-  wisdom: number;
+  /**
+   * Wisdom per skill, because that is what Wisdom is.
+   *
+   * There is a separate Wisdom stat for every skill and they are nothing like each other — a player
+   * deep in Slayers can be at 30 Combat Wisdom and 0 Alchemy. A single figure applied to all six
+   * was a convenience that quietly scaled the wrong skills, and since Wisdom multiplies the Skill XP
+   * before anything else touches it, being wrong here is wrong everywhere downstream.
+   *
+   * A skill absent from the map is zero, which is the correct default: no Wisdom is the state every
+   * account starts in.
+   */
+  wisdom: Partial<Record<SkillKey, number>>;
   /** Taming level, 0–60. Each level is +1% Pet XP through Zoologist. */
   taming: number;
   /**
@@ -102,6 +112,11 @@ export type Player = {
 /** Skill XP after Wisdom, which is the only additive factor and therefore applies first. */
 export function withWisdom(skillXp: number, wisdom: number): number {
   return skillXp * (1 + Math.max(0, wisdom) / 100);
+}
+
+/** This player's Wisdom for one skill. Absent is zero, which is where every account starts. */
+export function wisdomFor(player: Player, skill: SkillKey): number {
+  return player.wisdom[skill] ?? 0;
 }
 
 /**
@@ -130,7 +145,7 @@ export function petXpMultiplier(skill: SkillKey, player: Player, rules: PetXpRul
 
 /** Skill XP through the whole chain into Pet XP. */
 export function petXpFrom(skillXp: number, skill: SkillKey, player: Player, rules: PetXpRules): number {
-  return withWisdom(skillXp, player.wisdom) * petXpMultiplier(skill, player, rules);
+  return withWisdom(skillXp, wisdomFor(player, skill)) * petXpMultiplier(skill, player, rules);
 }
 
 /* --------------------------------------------------------------- the rows */
@@ -268,7 +283,9 @@ function row(
   itemsPerBrew?: number,
 ): MinionXpRow {
   const baseSkillXpPerHour = rate * xpPerItem;
-  const skillXpPerHour = withWisdom(baseSkillXpPerHour, o.player.wisdom);
+  // The skill's own Wisdom, not a global one: a brewed route is Alchemy XP and takes Alchemy
+  // Wisdom even when the minion that fed it is a Farming minion.
+  const skillXpPerHour = withWisdom(baseSkillXpPerHour, wisdomFor(o.player, skill));
   const multiplier = petXpMultiplier(skill, o.player, o.rules);
   if (multiplier === 0) caveats.push(`${skill.toLowerCase()} grants no pet XP at all — this levels the skill and nothing else`);
 

@@ -72,7 +72,8 @@ type Tables = {
 /* ----------------------------------------------------------------- state */
 
 type State = {
-  wisdom: string;
+  /** Wisdom per skill, as typed. Keyed by SkillKey; missing reads as zero. */
+  wisdom: Record<string, string>;
   taming: string;
   petSkill: SkillKey | "ANY";
   tier: number;
@@ -86,6 +87,8 @@ type State = {
   horizon: string;
   /** Which routes the plan is allowed to use. */
   routes: "all" | "collect" | "brew";
+  /** Hide pairings that make less than simply selling the output. */
+  hideLosers: boolean;
   /** A live bazaar read, so the plan can price what the minion sells alongside the pet. */
   market: Map<string, ReturnType<typeof normalise>>;
 
@@ -102,7 +105,7 @@ type State = {
 };
 
 const state: State = {
-  wisdom: localStorage.getItem("sbxp:pxwisdom") ?? "0",
+  wisdom: readWisdom(),
   taming: localStorage.getItem("sbxp:pxtaming") ?? "0",
   petSkill: (localStorage.getItem("sbxp:pxpetskill") as SkillKey | "ANY") ?? "ANY",
   tier: Number(localStorage.getItem("sbxp:pxtier") ?? 12),
@@ -113,6 +116,7 @@ const state: State = {
   maxBrews: localStorage.getItem("sbxp:pxbrews") ?? "100",
   horizon: localStorage.getItem("sbxp:pxhorizon") ?? "365",
   routes: (localStorage.getItem("sbxp:pxroutefilter") as State["routes"]) ?? "all",
+  hideLosers: localStorage.getItem("sbxp:pxhideloss") === "1",
   market: new Map(),
   pets: null,
   scanning: false,
@@ -122,6 +126,26 @@ const state: State = {
   pairedWith: localStorage.getItem("sbxp:pxpair"),
   openPlan: null,
 };
+
+/**
+ * The saved Wisdom figures, one per skill.
+ *
+ * Migrates the single number this tab used to keep: an account that had typed 40 into the old box
+ * meant "40 for whatever I am doing", so it is copied across every skill rather than dropped. Wrong
+ * in detail and much closer than zero, and one edit puts it right.
+ */
+function readWisdom(): Record<string, string> {
+  const out: Record<string, string> = {};
+  try {
+    const saved = localStorage.getItem("sbxp:pxwisdomby");
+    if (saved) return JSON.parse(saved) as Record<string, string>;
+    const old = localStorage.getItem("sbxp:pxwisdom");
+    if (old && old !== "0") for (const skill of WISDOM_SKILLS) out[skill] = old;
+  } catch {
+    // A corrupt entry is not worth a broken tab; zero is a fine place to start from.
+  }
+  return out;
+}
 
 let tables: Tables | null = null;
 let host: HTMLElement | null = null;
@@ -267,8 +291,10 @@ function upgradeById(id: string): Upgrade {
 }
 
 function player(): Player {
+  const wisdom: Partial<Record<SkillKey, number>> = {};
+  for (const skill of WISDOM_SKILLS) wisdom[skill] = Math.max(0, Number(state.wisdom[skill]) || 0);
   return {
-    wisdom: Math.max(0, Number(state.wisdom) || 0),
+    wisdom,
     taming: Math.max(0, Number(state.taming) || 0),
     petSkill: state.petSkill === "ANY" ? null : state.petSkill,
   };
@@ -340,6 +366,12 @@ export function mountMinionPet(container: HTMLElement, data: Tables): void {
         return render();
       }
 
+      if (target.closest("#pxhideloss")) {
+        state.hideLosers = !state.hideLosers;
+        localStorage.setItem("sbxp:pxhideloss", state.hideLosers ? "1" : "0");
+        return renderPlan();
+      }
+
       const route = target.closest<HTMLElement>("[data-pxroute]");
       if (route) {
         state.routes = route.dataset.pxroute as State["routes"];
@@ -381,10 +413,16 @@ export function mountMinionPet(container: HTMLElement, data: Tables): void {
 
     container.addEventListener("input", (event) => {
       const el = event.target as HTMLInputElement;
-      if (el.id === "pxwisdom") {
-        state.wisdom = el.value;
-        localStorage.setItem("sbxp:pxwisdom", el.value);
-      } else if (el.id === "pxtaming") {
+      const wisdomSkill = el.dataset?.pxwisdom;
+      if (wisdomSkill) {
+        state.wisdom[wisdomSkill] = el.value;
+        localStorage.setItem("sbxp:pxwisdomby", JSON.stringify(state.wisdom));
+        renderPlan();
+        renderSkills();
+        renderPets();
+        return;
+      }
+      if (el.id === "pxtaming") {
         state.taming = el.value;
         localStorage.setItem("sbxp:pxtaming", el.value);
       } else if (el.id === "pxcount") {
@@ -423,6 +461,26 @@ export function unmountMinionPet(): void {
  */
 const SKILLS: SkillKey[] = ["FARMING", "MINING", "FORAGING", "COMBAT", "FISHING", "ALCHEMY"];
 
+/** The skills a Wisdom box is offered for — the same six, since those are the ones a minion feeds. */
+const WISDOM_SKILLS = SKILLS;
+
+/**
+ * Where each skill's Wisdom actually comes from, for the box's tooltip.
+ *
+ * Worth naming per skill because the sources are nothing alike, and because the totals are much
+ * larger than people expect — a geared account runs well past a hundred, which doubles every XP
+ * figure on this tab. Somebody typing 0 into all six because they have never heard of the stat is
+ * the failure these tooltips exist to prevent.
+ */
+const WISDOM_HELP: Record<string, string> = {
+  FARMING: "Mostly tools and equipment — a good hoe carries a lot of it — plus pets, accessories and a Booster Cookie.",
+  MINING: "Pets and accessories, plus consumables. Smaller ceilings than Farming or Combat.",
+  FORAGING: "Armour and equipment, plus pets and accessories. The smallest ceiling of the six.",
+  COMBAT: "Has a permanent base from Slayer tiers and Essence Shop perks, on top of weapons, equipment, enchantments and attributes. The largest and most varied of the six.",
+  FISHING: "Rods and their enchantments dominate — Expertise is multiplicative rather than additive — plus pets and accessories.",
+  ALCHEMY: "A permanent base from Essence Shop perks, plus pets, accessories and consumables.",
+};
+
 function render(): void {
   if (!host || !tables) return;
 
@@ -442,9 +500,20 @@ function render(): void {
   host.innerHTML = `
     <div class="panel pad controls">
       <div class="row">
-        <label title="Your Wisdom for the skill in question. Wisdom is additive and applies first: the Skill XP itself is multiplied by 1 + Wisdom/100, and everything else scales the Pet XP that becomes.">Wisdom
-          <input id="pxwisdom" value="${escapeHtml(state.wisdom)}" inputmode="numeric" autocomplete="off">
-        </label>
+        ${WISDOM_SKILLS.map(
+          (skill) => `<label style="flex:1 1 120px" title="${escapeHtml(
+            `${title(skill)} Wisdom. It multiplies ${title(skill)} XP by 1 + Wisdom/100 before anything else touches it. ${
+              WISDOM_HELP[skill] ?? ""
+            }`,
+          )}">${escapeHtml(title(skill))} wisdom
+            <input data-pxwisdom="${skill}" value="${escapeHtml(state.wisdom[skill] ?? "")}" placeholder="0" inputmode="decimal" autocomplete="off">
+          </label>`,
+        ).join("")}
+      </div>
+
+      <p class="sub dim">${WISDOM_NOTE}</p>
+
+      <div class="row">
         <label title="Your Taming level, 0 to 60. Each level is one level of Zoologist, which is +1% Pet XP — so Taming 60 is a flat x1.60 on everything below.">Taming level
           <input id="pxtaming" value="${escapeHtml(state.taming)}" inputmode="numeric" autocomplete="off">
         </label>
@@ -492,14 +561,16 @@ function optionList(list: { id: string; name: string }[], selected: string): str
 function chainNote(): string {
   if (!tables) return "";
   const p = player();
-  const example = withWisdom(100, p.wisdom);
+  // Farming is the worked example because it is the skill most readers arrive with a minion for.
+  const farmingWisdom = p.wisdom.FARMING ?? 0;
+  const example = withWisdom(100, farmingWisdom);
   const matched = petXpMultiplier("FARMING", { ...p, petSkill: "FARMING" }, tables.petXpRules);
   const mismatched = petXpMultiplier("FARMING", { ...p, petSkill: "COMBAT" }, tables.petXpRules);
 
   return (
     `Collecting a minion grants Skill XP, and a pet that is out levels off it. With <strong>${escapeHtml(
-      String(p.wisdom),
-    )}</strong> Wisdom, 100 raw Skill XP becomes <strong>${example.toFixed(0)}</strong>; at Taming ` +
+      String(farmingWisdom),
+    )}</strong> Farming Wisdom, 100 raw Farming XP becomes <strong>${example.toFixed(0)}</strong>; at Taming ` +
     `<strong>${escapeHtml(String(p.taming))}</strong> that reaches a matching pet as <strong>${(example * matched).toFixed(
       0,
     )}</strong> Pet XP and a pet of another skill as <strong>${(example * mismatched).toFixed(0)}</strong>. ` +
@@ -562,7 +633,7 @@ function planRows(over: { maxDaysPerPet?: number } = {}): PetPlanRow[] {
     state.routes === "all" ? true : state.routes === "brew" ? r.route === "brewing" : r.route === "direct",
   );
 
-  return bestPerMinion(
+  const planned = bestPerMinion(
     planPetPairs({
       xpRows: allowed,
       pets: petRows(),
@@ -576,6 +647,7 @@ function planRows(over: { maxDaysPerPet?: number } = {}): PetPlanRow[] {
       minProfitPerDay: 0,
     }),
   );
+  return state.hideLosers ? planned.filter((r) => r.beatsSelling) : planned;
 }
 
 /**
@@ -618,6 +690,8 @@ function routeTabsHtml(): string {
           help,
         )}">${escapeHtml(label)}</button>`,
     ).join("")}
+    <button class="chip${state.hideLosers ? " on" : ""}" id="pxhideloss"
+      title="Hide any pairing that makes less than simply running the minion and selling everything. On the brewing routes that is most of them: a stand that eats more in drops than the pet is worth is a worse plan than no plan.">Hide the ones that lose</button>
   </div>`;
 }
 
@@ -676,7 +750,14 @@ function renderPlan(): void {
     .slice(0, 25)
     .map((r) => {
       const brews = r.brewsPerDay > 0 ? `<div class="dim bz-path">${num(Math.round(r.brewsPerDay))} brews a day</div>` : "";
-      return `<tr class="bz-open" data-pxplanopen="${escapeHtml(r.generator + ":" + r.petKey + ":" + r.petRarity)}">
+      // A pairing worth less than simply selling the output is greyed rather than dressed up. It is
+      // still shown, because "this minion has no worthwhile pet plan" is an answer.
+      const losing = r.beatsSelling ? "" : " task aside";
+      return `<tr class="bz-open${losing}" data-pxplanopen="${escapeHtml(
+        r.generator + ":" + r.petKey + ":" + r.petRarity,
+      )}"${r.beatsSelling ? "" : ` title="${escapeHtml(
+        `Selling everything this minion makes is ${Math.round(-r.advantagePerDay).toLocaleString("en-US")} coins a day better than this plan. The drops the brewing stand eats are worth more than the pet they level.`,
+      )}"`}>
         <td>${escapeHtml(r.family)}<div class="dim bz-path">tier ${r.tier} · ${escapeHtml(title(r.skill))}${
           r.route === "brewing" ? " · brewed" : ""
         }</div></td>
@@ -684,13 +765,16 @@ function renderPlan(): void {
           r.matched ? "" : ` · <span class="gold">skill mismatch</span>`
         }</div>${brews}</td>
         <td class="num">${coins(Math.round(r.totalProfitPerDay))}</td>
+        <td class="num${r.beatsSelling ? "" : " bleed on"}">${
+          r.advantagePerDay >= 0 ? "+" : "−"
+        }${coins(Math.abs(Math.round(r.advantagePerDay)))}</td>
         <td class="num">${coins(Math.round(r.petProfitPerDay))}</td>
         <td class="num">${coins(Math.round(r.itemProfitPerDay))}</td>
         <td class="num">${num(Math.round(r.petXpPerDay))}</td>
         <td class="num">${r.daysPerPet < 1 ? `${(r.daysPerPet * 24).toFixed(1)} hr` : `${r.daysPerPet.toFixed(1)} d`}</td>
       </tr>${
         state.openPlan === r.generator + ":" + r.petKey + ":" + r.petRarity
-          ? `<tr class="mn-detail"><td colspan="7">${planDetail(r)}</td></tr>`
+          ? `<tr class="mn-detail"><td colspan="8">${planDetail(r)}</td></tr>`
           : ""
       }`;
     })
@@ -726,7 +810,8 @@ function renderPlan(): void {
       <table class="bz">
         <thead><tr>
           <th>Minion</th><th>Pet</th>
-          <th class="num" title="Pets and items together, less anything brewing consumed. The ranking figure.">Profit/day</th>
+          <th class="num" title="Everything this setup makes in a day: the pet margin plus whatever items were left to sell.">Profit/day</th>
+          <th class="num" title="What the pet plan is worth OVER simply running the minion and selling the lot. This is what the plan is chosen on. Negative means the drops a brewing stand eats are worth more than the pet they level — the plan is worse than not having one.">vs selling</th>
           <th class="num" title="From buying the pet cheap, levelling it on this minion's XP, and selling it maxed.">Pets</th>
           <th class="num" title="From selling what the minion produced while it did it. For most real setups this is the larger half.">Items</th>
           <th class="num">Pet xp/day</th>
@@ -780,11 +865,23 @@ function planDetail(r: PetPlanRow): string {
   ];
   if (r.brewingCostPerDay > 0) {
     lines.push(
-      `<div class="gh-sub gold">Brewing eats <strong>${coins(
+      `<div class="gh-sub">Brewing consumes <strong>${coins(
         Math.round(r.brewingCostPerDay),
-      )}</strong> a day of drops that would otherwise be sold — already subtracted above.</div>`,
+      )}</strong> a day of drops. That is revenue not made rather than money lost, so the only question it
+      raises is the next line.</div>`,
     );
   }
+  lines.push(
+    r.beatsSelling
+      ? `<div class="gh-sub">Against simply running the minion and selling everything — ${coins(
+          Math.round(r.sellOnlyPerDay),
+        )} a day — this plan is <strong>${coins(Math.round(r.advantagePerDay))} better</strong>.</div>`
+      : `<div class="gh-sub gold">Simply running the minion and selling everything makes ${coins(
+          Math.round(r.sellOnlyPerDay),
+        )} a day, which is <strong>${coins(
+          Math.abs(Math.round(r.advantagePerDay)),
+        )} more</strong> than this plan. Not worth doing.</div>`,
+  );
   for (const c of r.caveats.slice(0, 6)) lines.push(`<div class="gh-sub dim">${escapeHtml(c)}</div>`);
   return lines.join("");
 }
@@ -813,6 +910,16 @@ const ROUTE_TABS: [State["routes"], string, string][] = [
       "drops themselves and an evening at the stand — both of which are charged here.",
   ],
 ];
+
+const WISDOM_NOTE =
+  "Wisdom is per skill and the six are nothing like each other — an account deep in Slayers can be at 30 Combat " +
+  "Wisdom and 0 Alchemy. It multiplies the Skill XP before anything else touches it, so it is the single input " +
+  "here most worth getting right. <strong>These cannot be read from your profile.</strong> Wisdom comes from " +
+  "equipped gear, enchantments, attributes, pets, accessories and whatever cookie or potion is running, and " +
+  "Hypixel publishes the components rather than the total — computing it means reproducing the whole stat engine, " +
+  "and a partial answer would understate a geared account by a hundred or more while looking authoritative. " +
+  "Read the real figures off your own stats in the SkyBlock menu, or off SkyCrypt, and type them once; they are " +
+  "remembered.";
 
 const PLAN_NOTE =
   "Which minion to put down and which pet to sit on it, ranked on coins a day. Profit has two halves and " +

@@ -123,12 +123,27 @@ const xpRow = (over: Partial<MinionXpRow> = {}): MinionXpRow => ({
   ...over,
 });
 
+/**
+ * A player, with Wisdom given as one number for brevity and spread across every skill.
+ *
+ * Wisdom is per skill in the model, but each case here exercises one skill at a time, so taking a
+ * single figure and applying it to all of them keeps the tests readable without weakening them.
+ */
+const player = (over: Partial<{ wisdom: number; taming: number; petSkill: SkillKey | null }> = {}) => {
+  const { wisdom = 0, ...rest } = over;
+  const all: Partial<Record<SkillKey, number>> = {};
+  for (const skill of ["FARMING", "MINING", "COMBAT", "FORAGING", "FISHING", "ALCHEMY"] as SkillKey[]) {
+    all[skill] = wisdom;
+  }
+  return { wisdom: all, taming: 0, petSkill: null as SkillKey | null, ...rest };
+};
+
 const options = (over: Partial<PetPlanOptions> = {}): PetPlanOptions => ({
   xpRows: [xpRow()],
   pets: [petRow("ROCK", 1_000_000, 100_000), petRow("RABBIT", 1_000_000, 100_000)],
   catalogue,
   rules,
-  player: { wisdom: 0, taming: 0, petSkill: null },
+  player: player(),
   itemCoinsPerHour: new Map([["COBBLESTONE", 0]]),
   dropValue: new Map([["COBBLESTONE", 1]]),
   maxBrewsPerDay: 100,
@@ -260,14 +275,24 @@ test("a direct route has no brewing cost and asks for no brews", () => {
 
 /* ------------------------------------------------------------ the arithmetic */
 
+test("wisdom is per skill, and a route takes its own skill's", () => {
+  // The reason this is not one number. A brewed route is Alchemy XP even when the minion feeding it
+  // is a Farming minion, so it takes Alchemy Wisdom — and an account deep in Slayers with 30 Combat
+  // Wisdom and 0 Alchemy would have had all six scaled by whichever figure it happened to type.
+  const only = { wisdom: { MINING: 100 } as Partial<Record<SkillKey, number>>, taming: 0, petSkill: null };
+  assert.equal(petXpPerHourFor(xpRow({ skill: "MINING" }), "MINING", only, rules), 2_000);
+  // The same minion rate under a skill this player has no Wisdom in is unscaled.
+  assert.equal(petXpPerHourFor(xpRow({ skill: "ALCHEMY" }), "ALCHEMY", only, rules), 1_000);
+});
+
 test("wisdom and taming reach the per-day figure intact", () => {
-  const plain = petXpPerHourFor(xpRow(), "MINING", { wisdom: 0, taming: 0, petSkill: null }, rules);
-  const boosted = petXpPerHourFor(xpRow(), "MINING", { wisdom: 100, taming: 60, petSkill: null }, rules);
+  const plain = petXpPerHourFor(xpRow(), "MINING", player(), rules);
+  const boosted = petXpPerHourFor(xpRow(), "MINING", player({ wisdom: 100, taming: 60 }), rules);
   assert.equal(plain, 1_000);
   // 1,000 x 2 (wisdom 100) x 1.6 (taming 60).
   assert.ok(Math.abs(boosted - 3_200) < 1e-9);
 
-  const row = planPetPairs(options({ player: { wisdom: 100, taming: 60, petSkill: null } })).find(
+  const row = planPetPairs(options({ player: player({ wisdom: 100, taming: 60 }) })).find(
     (r) => r.petKey === "PET:ROCK",
   )!;
   assert.ok(Math.abs(row.petXpPerDay - 3_200 * DAY_HOURS) < 1e-6);

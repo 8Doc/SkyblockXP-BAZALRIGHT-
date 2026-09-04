@@ -112,12 +112,20 @@ test("minion XP is not a fixed fraction of the player's, in either direction", (
 
 /* --------------------------------------------------------------- the chain */
 
-const player = (over: Partial<{ wisdom: number; taming: number; petSkill: SkillKey | null }> = {}) => ({
-  wisdom: 0,
-  taming: 0,
-  petSkill: null as SkillKey | null,
-  ...over,
-});
+/**
+ * A player, with Wisdom given as one number for brevity and spread across every skill.
+ *
+ * Wisdom is per skill in the model, but every test here exercises one skill at a time, so taking a
+ * single figure and applying it to all of them keeps the cases readable without weakening them.
+ */
+const player = (over: Partial<{ wisdom: number; taming: number; petSkill: SkillKey | null }> = {}) => {
+  const { wisdom = 0, ...rest } = over;
+  const all: Partial<Record<SkillKey, number>> = {};
+  for (const skill of ["FARMING", "MINING", "COMBAT", "FORAGING", "FISHING", "ALCHEMY", "ENCHANTING", "CARPENTRY", "TAMING"] as SkillKey[]) {
+    all[skill] = wisdom;
+  }
+  return { wisdom: all, taming: 0, petSkill: null as SkillKey | null, ...rest };
+};
 
 test("wisdom scales the skill XP and taming scales the pet XP", () => {
   // The wiki's own worked example: +10 Combat XP at 10 Combat Wisdom is +11.

@@ -368,9 +368,21 @@ work that provably cannot have changed:
 - **Both halves of the profit are counted**: the pet margin, and everything the minion sold while it
   levelled. For every real setup the items are the larger half by an order of magnitude, and the
   section says so rather than letting one number read as "level pets off minions for 1.3M a day".
-- **Brewing is charged for twice.** The drops go into a stand instead of onto the market, so their
-  sale value is subtracted as an opportunity cost; and there is a hard cap on brews a day, which
-  caps the XP with it. A **Collect only** filter re-plans without brewing entirely.
+- **Brewing costs an opportunity, not money, and is shown that way.** Drops fed to a stand are
+  revenue not made rather than money lost, so instead of subtracting them as a cost every row
+  carries **vs selling**: what the plan makes over simply running the minion and selling the lot.
+  Negative rows are greyed — the plan is worse than having no plan — with a toggle to hide them, and
+  the plan is chosen on that figure rather than on a total the item income dominates. Brews a day
+  are capped separately, since that constraint is a chore rather than an economic one, and a
+  **Collect only** filter re-plans without brewing at all.
+- **Wisdom is six fields, one per skill, and is not auto-detected.** A brewed route is Alchemy XP
+  even when a Farming minion feeds it, so each route takes its own skill's Wisdom. They are typed
+  rather than read from the profile because they cannot be read honestly: skill levels grant no
+  Wisdom, and what does — equipped gear, enchantments, attributes, pets, accessories, consumables,
+  Slayer tiers, Essence Shop perks — reaches 170–240 on a geared account. Reading only the parts
+  this app can see would find about 2 of that while looking authoritative and halve every XP figure
+  downstream. Each box names where its skill's Wisdom comes from; the old single value migrates
+  across all six.
 - **The twenty minions with no published XP rate are named rather than omitted.** The Revenant is
   one of them, and a wall of Revenants levelling a Golden Dragon is a well-known setup — so its
   absence would read as a verdict instead of a gap in the wiki.

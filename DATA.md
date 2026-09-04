@@ -1456,17 +1456,29 @@ Two design decisions worth recording, both found by looking at the output:
   unbounded and reports what the quickest pairing *would* have been, so the reader knows which
   control to move rather than facing a blank table.
 
-### Brewing is charged for, twice
+### Brewing costs an opportunity, not money
 
 Every other route here is a by-product of collecting a minion you were collecting anyway. Brewing is
-not, and it is charged accordingly:
+not: the drops go into a brewing stand instead of onto the market.
 
-- **The drops.** They go into a brewing stand instead of onto the market, so the Alchemy XP costs
-  exactly what they would have sold for. That opportunity cost is subtracted from the day's item
-  profit, and for several minions it consumes the entire item half.
-- **The labour.** A hard cap on brews per day, default 100. Capping the brews caps the XP with them,
-  which is the point — "22,500 pet XP an hour" is not an offer anyone takes if it means thousands of
-  brews. A route that hits the cap says so, and says what the minion could have supplied.
+That is **money not made, not money lost**, and the distinction changed how it is presented. An
+earlier version subtracted the drops' value and displayed it as a cost, which reads as a penalty on
+an otherwise good plan. It is not a penalty — it is the entire question. The only thing worth asking
+about a brewing route is whether the pet XP is worth more than the sale would have been, so every
+row now carries **`advantagePerDay`**: what this plan makes over simply running the minion and
+selling everything. For a direct route that is just the pet profit, since the XP arrived free with a
+collection you were making anyway. For a brewing route it is the pet profit less what the stand ate.
+
+Negative means the plan is worse than having no plan. Those rows are **greyed rather than removed**,
+because "this minion has no worthwhile pet plan" is an answer, and a toggle hides them for anyone
+who disagrees. The plan is also *chosen* on the advantage rather than on the total or on the pet
+half alone — choosing on the total makes the comparison a tie broken by nothing, and choosing on the
+pet half picks brewing routes that eat more in drops than the pet is worth.
+
+The labour is capped separately and bluntly, because it is not economic: a hard cap on brews per
+day, default 100. Capping the brews caps the XP with them, which is the point — "22,500 pet XP an
+hour" is not an offer anyone takes if it means thousands of brews. A route that hits the cap says
+so, and says what the minion could have supplied.
 
 A route filter sits above the table for the same reason. Brewing wins on raw Pet XP by a wide
 margin — an Alchemy pet on a brewed route dodges the `/12` that makes Alchemy XP nearly worthless to
@@ -1486,3 +1498,32 @@ any route, and Taming and Carpentry grant no Pet XP at all, so the three were pe
 taking up a third of the tiles. The facts are still in `pet_xp.json` and still enforced — a
 Carpentry route still comes back worth nothing — they simply no longer have a card that never
 changes.
+
+
+## Wisdom is per skill, and cannot be read from a profile
+
+There is a separate Wisdom stat for every skill and they are nothing like each other — an account
+deep in Slayers can sit at 30 Combat Wisdom and 0 Alchemy. Wisdom multiplies the Skill XP *before*
+anything else touches it, so a single figure applied to all six silently scaled the wrong skills;
+`Player.wisdom` is now a map keyed by skill and each route takes its own. A brewed route is Alchemy
+XP even when the minion feeding it is a Farming minion, and it takes Alchemy Wisdom accordingly.
+
+**The tab asks for the six figures rather than detecting them, and that is deliberate.** The obvious
+thing to do is read them off the profile, and it cannot be done honestly:
+
+- Skill levels do not grant Wisdom. Hypixel's own `resources/skills` carries no Wisdom in any level's
+  unlocks — the only mention in the whole resource is an unrelated enchantment.
+- What does grant it, per the six `<Skill> Wisdom` pages: equipped weapons, armour and equipment,
+  enchantments, attributes, pets, accessories, consumables, and permanent bases from Slayer tiers
+  and Essence Shop perks. The totals reach **170–240** on a geared account, and the largest single
+  sources are gear-dependent.
+- Some of it is not additive at all. Fishing's Expertise enchantment multiplies with the rest rather
+  than adding to it.
+
+Computing that means reproducing SkyCrypt's whole stat engine over equipped items, and a partial
+answer would be worse than none: reading only the accessory bag would find perhaps 2 of a real 170
+while looking authoritative, and every XP figure downstream would be quietly wrong by a factor of
+two. So the six boxes are typed once and remembered, each with a tooltip naming where that skill's
+Wisdom actually comes from, and the note says plainly that the profile cannot supply them. The old
+single value is migrated across all six on first load rather than dropped — wrong in detail, much
+closer than zero, and one edit puts it right.
