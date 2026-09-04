@@ -431,6 +431,9 @@ function xpRows(): MinionXpRow[] {
     dropIdFor,
     names: tables.names,
     recipes: tables.recipes,
+    // The same ceiling the planner budgets for, because it is what decides which brewing form of a
+    // drop is worth planning at all — not just how many of them you end up doing.
+    maxBrewsPerDay: BUDGET.maxBrewsPerDay,
   });
 }
 

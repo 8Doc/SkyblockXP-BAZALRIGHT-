@@ -160,6 +160,16 @@ export function petXpFrom(skillXp: number, skill: SkillKey, player: Player, rule
  */
 export type XpRoute = "direct" | "brewing";
 
+/**
+ * Brews a day the route chooser assumes you will do, when no caller says otherwise.
+ *
+ * Not an economic figure: standing at a brewing stand is a chore with a ceiling nobody argues
+ * about. It matters here because the ceiling is what decides *which* brewing ingredient is worth
+ * planning — without one, the answer is always the rawest form and eleven thousand brews a day.
+ * Kept in step with the planner's own budget.
+ */
+export const DEFAULT_MAX_BREWS_PER_DAY = 200;
+
 export type MinionXpRow = {
   generator: string;
   family: string;
@@ -210,6 +220,15 @@ export type MinionXpOptions = {
   names: Record<string, string>;
   /** Recipes, for working out how many drops one enchanted brewing ingredient costs. */
   recipes: { output: string; yield: number; ingredients: { id: string; qty: number }[] }[];
+  /**
+   * Brews a day the chooser may assume, which is what decides which brewing form is planned.
+   *
+   * Compacting trades XP away — an Enchanted Cactus is 25,600 cactus and pays 500 where the same
+   * cactus brewed raw pay 256,000 — so without a ceiling the rawest form always wins and asks for
+   * an absurd number of brews. With one, the question becomes "most XP a day inside the budget",
+   * which is the question actually being asked.
+   */
+  maxBrewsPerDay?: number;
 };
 
 /**
@@ -269,25 +288,63 @@ export function planMinionXp(o: MinionXpOptions): MinionXpRow[] {
 
     // The brewing route runs on the enchanted form, so the raw drop has to be worth one first.
     //
-    // Only the most compacted form survives. A Cactus Minion's drops reach three brewing
-    // ingredients — cactus, Enchanted Cactus Green, Enchanted Cactus Block — and emitting a row for
-    // each offered three versions of one decision, of which two are strictly worse *as a chore*:
-    // they pay about the same XP an hour and ask for hundreds of times as many brews to do it.
-    // Nobody stands at a stand brewing raw cactus when the block is on the same shelf, so the
-    // deepest chain is the only one worth planning, and the rest are noise that crowded the table.
-    let deepest: { id: string; brew: BrewIngredient; perBrew: number } | null = null;
+    /**
+     * One brewing route per minion: the one worth the most XP a day inside the brew budget.
+     *
+     * A minion's drops usually reach several entries in the alchemy table — a Cactus Minion reaches
+     * cactus, Enchanted Cactus Green and Enchanted Cactus — and those are versions of one decision,
+     * so only one belongs in the table. Which one is the whole question.
+     *
+     * Picking the *most compacted* is the obvious answer and it is wrong, badly, on the minions it
+     * matters for. Compacting trades XP away: an Enchanted Cactus is 25,600 cactus and pays 500,
+     * where the same 25,600 cactus brewed raw pay 256,000. Ranking on depth demoted a Cactus Minion
+     * from the top of the Alchemy list to the bottom of it, cost the Sugar Cane Minion a factor of
+     * three, and cost seven of the fourteen brewing minions something.
+     *
+     * Picking the best *XP per drop* is wrong the other way: it asks for eleven thousand brews a
+     * day, which is not a plan anybody executes.
+     *
+     * Neither is the constraint, though, because the brew budget already is. Inside a ceiling of
+     * `maxBrewsPerDay` the honest question is simply which ingredient pays the most XP a day — a
+     * route the minion cannot supply gets capped, a route the minion floods gets capped, and the
+     * winner is whichever is worth more once both are. That also happens to spend the *fewest*
+     * drops for the XP, since a capped shallow route consumes a few hundred drops where the deep
+     * one eats tens of thousands, so the drops it does not eat stay on the market.
+     */
+    const dropsPerDay = rate * 24;
+    const cap = o.maxBrewsPerDay ?? DEFAULT_MAX_BREWS_PER_DAY;
+    let best: { id: string; brew: BrewIngredient; perBrew: number; xpPerDay: number; brews: number } | null = null;
     for (const [ingredientId, brew] of brewBy) {
       const perBrew = dropsPerIngredient(ingredientId, itemId, o.recipes);
-      if (perBrew === null) continue;
-      if (!deepest || perBrew > deepest.perBrew) deepest = { id: ingredientId, brew, perBrew };
+      if (perBrew === null || !(perBrew > 0)) continue;
+      const brews = Math.min(dropsPerDay / perBrew, cap);
+      const xpPerDay = brews * brew.xp;
+      // Ties go to the deeper chain, which is the same XP for fewer trips to the stand.
+      const better =
+        !best || xpPerDay > best.xpPerDay + 1e-9 || (Math.abs(xpPerDay - best.xpPerDay) <= 1e-9 && brews < best.brews);
+      if (better) best = { id: ingredientId, brew, perBrew, xpPerDay, brews };
     }
+    const deepest = best;
 
     if (deepest) {
       const { id: ingredientId, brew, perBrew } = deepest;
       const name = o.names[ingredientId] ?? ingredientId;
-      const caveats = [
-        `one brew consumes ${Math.round(perBrew).toLocaleString("en-US")} drops compacted into ${name}`,
-      ];
+      const caveats =
+        perBrew > 1
+          ? [`one brew consumes ${Math.round(perBrew).toLocaleString("en-US")} drops compacted into ${name}`]
+          : [`brewed as the raw drop rather than compacted first, which is worth far more XP for the same drops`];
+      // Why this form and not one of the others the drops can reach. Worth saying on the row,
+      // because "compact it first" is the intuition and on these minions it is the wrong one.
+      const others = [...brewBy].filter(
+        ([id]) => id !== ingredientId && dropsPerIngredient(id, itemId, o.recipes) !== null,
+      );
+      if (others.length > 0) {
+        caveats.push(
+          `these drops also brew as ${others
+            .map(([id]) => o.names[id] ?? id)
+            .join(" or ")}, which pay less a day at ${Math.round(cap).toLocaleString("en-US")} brews`,
+        );
+      }
       // The collection half, carried so the planner can put a second pet on it. Only meaningful
       // where the drop has a published direct rate; without one this stays absent rather than zero,
       // for the same reason the direct row does.

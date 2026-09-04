@@ -396,10 +396,14 @@ work that provably cannot have changed:
   XP; brewing what you collected pays Alchemy. The tab counted only the Alchemy half, which threw
   away the larger of the two. A brewing row now names **two pets** — the Alchemy pet for the stand
   and the minion's own-skill pet for the collection, swapped, since only one pet is out at a time —
-  counts both margins in the profit, and lists five candidates for each skill. Brewing also plans
-  only the **most compacted** form of a drop: cactus reaches three entries in the alchemy table and
-  they are three descriptions of one decision, of which the shallow two ask for hundreds of times
-  the brews to earn about the same.
+  counts both margins in the profit, and lists five candidates for each skill.
+- **One brewing route a minion, chosen on XP a day inside the brew budget.** A drop usually reaches
+  several entries in the alchemy table — cactus reaches three — and they are versions of one
+  decision, so one belongs in the table. It is not the most compacted one: compacting trades XP
+  away, since an Enchanted Cactus is 25,600 cactus and pays 500 where those same cactus brewed raw
+  pay 256,000. Nor is it the rawest, which pays best per drop and asks for eleven thousand brews a
+  day. The brew ceiling is the real constraint, so the winner is whichever pays the most XP a day
+  once both are capped by it — usually a middle rung, and the one that leaves the most drops unspent.
 - **Only the top two rarities of each pet are planned.** Every rarity is its own trade with its own
   two ends, so a six-rung pet contributed six rows and the low rungs are not trades anybody makes: a
   Common needs 5.6M Pet XP against a Legendary's 25.4M, so it can price respectably per point of XP

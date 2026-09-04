@@ -204,15 +204,38 @@ function xpPlan(over: Partial<Parameters<typeof planMinionXp>[0]> = {}) {
   });
 }
 
-test("only the most compacted brewing form of a drop is planned", () => {
+test("one brewing route a minion, chosen on XP a day inside the brew budget", () => {
+  // Cactus reaches three entries in the alchemy table — cactus at 10 XP a brew, Enchanted Cactus
+  // Green at 250, Enchanted Cactus at 500 — and they are three descriptions of one decision, so
+  // exactly one belongs in the table.
   const cactus = xpPlan().filter((r) => r.generator === "CACTUS" && r.route === "brewing");
-  // Cactus reaches three entries in the alchemy table — cactus at 10 XP, Enchanted Cactus Green at
-  // 250, Enchanted Cactus at 500 — and they are three descriptions of one decision. The shallow two
-  // pay about the same an hour and ask for hundreds of times the brews to do it, so nobody would
-  // stand and brew them. One row, and it is the deepest chain.
   assert.equal(cactus.length, 1);
-  assert.equal(cactus[0].itemId, "ENCHANTED_CACTUS");
-  assert.equal(Math.round(cactus[0].itemsPerBrew ?? 0), 25_600);
+
+  // Not the most compacted one. Compacting trades XP away: an Enchanted Cactus is 25,600 cactus
+  // and pays 500, where those same 25,600 cactus brewed raw pay 256,000. Ranking on depth put a
+  // Cactus Minion last on the Alchemy list at 9 XP an hour.
+  assert.notEqual(cactus[0].itemId, "ENCHANTED_CACTUS");
+  // Nor the rawest one, which pays best per drop and asks for eleven thousand brews a day. The
+  // budget is the constraint, so the winner is whatever pays most a day once both are capped.
+  assert.notEqual(cactus[0].itemId, "CACTUS");
+  assert.equal(cactus[0].itemId, "ENCHANTED_CACTUS_GREEN");
+  assert.ok(cactus[0].caveats.some((c) => /also brew as/.test(c)));
+});
+
+test("the brew budget decides which form is planned, not the depth of the chain", () => {
+  const formFor = (generator: string, maxBrewsPerDay?: number) =>
+    xpPlan(maxBrewsPerDay === undefined ? {} : { maxBrewsPerDay }).find(
+      (r) => r.generator === generator && r.route === "brewing",
+    )!;
+
+  // Sugar cane brews as Enchanted Sugar (160 drops, 300 XP) or Enchanted Sugar Cane (25,600 drops,
+  // 15,000 XP). Per drop the shallow one is more than three times better, and at a budget the
+  // minion cannot saturate it is the one worth doing.
+  assert.equal(formFor("SUGAR_CANE").itemId, "ENCHANTED_SUGAR");
+
+  // Squeeze the budget and the answer flips to the deep chain, because a route you can only brew a
+  // handful of times wants each brew to be worth as much as possible. Same rule, different budget.
+  assert.equal(formFor("SUGAR_CANE", 1).itemId, "ENCHANTED_SUGAR_CANE");
 });
 
 test("a brewing route carries the skill that collecting the same drops pays", () => {

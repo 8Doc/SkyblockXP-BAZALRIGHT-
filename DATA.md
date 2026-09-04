@@ -1667,11 +1667,35 @@ against them: the Alchemy pet while you brew, the minion's own-skill pet while y
 pet is out at a time, so this is the two swapped rather than two levelled at once, which is how the
 setup is actually played. Both margins are income and both are in the profit.
 
-**Only the most compacted brewing form is planned.** A Cactus Minion's drops reach three entries in
-the alchemy table — cactus at 10 XP, Enchanted Cactus Green at 250, Enchanted Cactus at 500 — and
-emitting a row for each offered three versions of one decision. They pay about the same an hour and
-the shallow two ask for hundreds of times as many brews to do it; nobody stands at a stand brewing
-raw cactus when the block is on the same shelf. The deepest chain is the only one worth planning.
+**One brewing route a minion, chosen on XP a day inside the brew budget.** A Cactus Minion's drops
+reach three entries in the alchemy table — cactus at 10 XP a brew, Enchanted Cactus Green at 250,
+Enchanted Cactus at 500 — and emitting a row for each offered three versions of one decision. Which
+one survives took two goes to get right.
+
+Picking the **most compacted** was the first answer and it was badly wrong, because compacting
+trades XP away rather than concentrating it. An Enchanted Cactus is 25,600 cactus and pays 500;
+those same 25,600 cactus brewed raw pay 256,000. Ranking on depth cost seven of the fourteen brewing
+minions something, and the two worst cases were the ones anybody would check first:
+
+| minion | on depth | on budget | |
+|---|---|---|---|
+| Cactus | 9 XP/hr, last on the list | 703 XP/hr | ×78 |
+| Sugar Cane | 352 XP/hr | 1,125 XP/hr | ×3.2 |
+| Gold, Sheep, Blaze | 108–117 XP/hr | 375 XP/hr | ×3.2 |
+
+Picking the best **XP per drop** is wrong the other way: raw cactus wins it and asks for eleven
+thousand brews a day, which is not a plan anybody executes.
+
+Neither is the constraint, though, because `maxBrewsPerDay` already is. Inside that ceiling the
+honest question is just which ingredient pays the most XP a day — a route the minion cannot supply
+gets capped, a route it floods gets capped, and the winner is whichever is worth more once both are.
+The answer is usually a middle rung: Enchanted Cactus Green rather than raw cactus or the block.
+It also spends the *fewest* drops for the XP, since a capped shallow route eats a few hundred drops
+where the deep one eats tens of thousands, so what it does not eat stays on the market.
+
+The choice therefore moves with the budget and with the minion count, which is correct rather than
+unstable: more supply is a reason to compact further, and a budget of one brew a day wants that one
+brew to be worth as much as possible.
 
 **Ranking moved from total profit to what pet-levelling adds.** This was the bug the redesign
 exposed. Total profit is dominated by item income the minion earns with no pet on it at all, so
