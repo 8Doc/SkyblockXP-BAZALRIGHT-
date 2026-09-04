@@ -1536,6 +1536,9 @@ function minionTables() {
         key: p.key,
         name: p.name,
         skill: PLANNABLE_SKILLS.includes(p.skill as SkillKey) ? (p.skill as SkillKey) : null,
+        // The rarity ladder comes along too, so the pet half can plan only the top of it. Each
+        // pet's own ladder rather than a global rule: they are not the same length.
+        rarities: p.rarities ?? [],
       })),
     },
   };

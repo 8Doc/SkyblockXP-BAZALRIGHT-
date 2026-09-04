@@ -222,7 +222,51 @@ export type PetProfitOptions = {
    * unsellable — and a table that recommends it is worse than one that leaves it out.
    */
   requireMarket?: boolean;
+  /**
+   * Each pet's own rarity ladder, keyed by bare pet key, from the pet catalogue.
+   *
+   * Supplying it restricts planning to the top `keepRarities` of each ladder — see `topRarities`.
+   * Absent, every rarity on the market is planned, which is what the museum and the tests want.
+   */
+  ladders?: Record<string, string[]>;
+  /** How many rarities from the top of each ladder to keep. Ignored without `ladders`. */
+  keepRarities?: number;
 };
+
+/**
+ * Rarity, lowest to highest, as the game orders it.
+ *
+ * Written out rather than trusted from the catalogue's own array order: the ladder is scraped, and
+ * "the top two" silently becoming "the last two the scraper happened to emit" is the kind of bug
+ * that produces a plausible table full of wrong pets.
+ */
+export const RARITY_ORDER = ["COMMON", "UNCOMMON", "RARE", "EPIC", "LEGENDARY", "MYTHIC"];
+
+/** How many rarities from the top of a pet's ladder are worth planning. */
+export const KEEP_RARITIES = 2;
+
+/**
+ * The top rarities of one pet's ladder — the only ones worth levelling.
+ *
+ * Every rarity of a pet is a separate trade with its own two ends, so a pet with a six-rung ladder
+ * contributed six rows, and the low rungs are not trades anybody makes. A Common needs 5.6M Pet XP
+ * against a Legendary's 25.4M, so it can price respectably per point of XP — the figure this table
+ * ranks on — while being worth a fraction of the coins and sitting behind a sell side one listing
+ * deep. Nobody levels a Common Armadillo to sell it.
+ *
+ * Two rungs rather than one because the top rung is often the thin one — a Mythic exists in tiny
+ * numbers and its price is one person's opinion — and the rung below it is where the real market
+ * is. So: Mythic and Legendary where a pet reaches Mythic, Legendary and Epic where it stops at
+ * Legendary, and a pet that only ever exists at one rarity keeps its one.
+ */
+export function topRarities(ladder: string[] | undefined, keep = KEEP_RARITIES): Set<string> | null {
+  if (!ladder?.length) return null;
+  const ranked = [...ladder]
+    .filter((r) => RARITY_ORDER.includes(r))
+    .sort((a, b) => RARITY_ORDER.indexOf(a) - RARITY_ORDER.indexOf(b));
+  if (ranked.length === 0) return null;
+  return new Set(ranked.slice(-keep));
+}
 
 /**
  * Every pet worth levelling, best coins per Pet XP first.
@@ -237,7 +281,13 @@ export function planPetProfit(o: PetProfitOptions): PetProfitRow[] {
   const floor = o.minProfit ?? 0;
 
   for (const [key, byRarity] of Object.entries(o.index.prices)) {
+    // The top of this pet's own ladder, not a global rarity floor: a pet that stops at Legendary
+    // keeps Legendary and Epic, and one that reaches Mythic keeps Mythic and Legendary. A pet the
+    // catalogue has never heard of is left alone rather than filtered to nothing.
+    const keep = o.ladders ? topRarities(o.ladders[bare(key)], o.keepRarities) : null;
+
     for (const [rarity, ends] of Object.entries(byRarity)) {
+      if (keep && !keep.has(rarity)) continue;
       if (!ends.base || !ends.max) continue;
       // One listing cannot be both ends of a trade.
       if (ends.base.level >= ends.max.level) continue;

@@ -400,6 +400,13 @@ work that provably cannot have changed:
   only the **most compacted** form of a drop: cactus reaches three entries in the alchemy table and
   they are three descriptions of one decision, of which the shallow two ask for hundreds of times
   the brews to earn about the same.
+- **Only the top two rarities of each pet are planned.** Every rarity is its own trade with its own
+  two ends, so a six-rung pet contributed six rows and the low rungs are not trades anybody makes: a
+  Common needs 5.6M Pet XP against a Legendary's 25.4M, so it can price respectably per point of XP
+  — the figure the table ranks on — while being worth a fraction of the coins behind a sell side one
+  listing deep. Each pet's *own* ladder decides, not a global floor: Mythic and Legendary where a
+  pet reaches Mythic, Legendary and Epic where it stops at Legendary, and a pet that only exists at
+  one rarity keeps its one. Two rungs rather than one because the top rung is often the thin one.
 - **Pets nobody is buying are left out.** The sell side was the cheapest max-level listing, which is
   a real number and often not a price anyone will pay: a levelled Common Rock has **one** listing
   behind it against thirty-two for a Golden Dragon. The sweep already reads `start`, so depth and

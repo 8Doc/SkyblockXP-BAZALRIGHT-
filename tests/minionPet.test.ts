@@ -21,6 +21,7 @@ import {
   liquidityOf,
   maxLevelOf,
   planPetProfit,
+  topRarities,
 } from "../src/lib/petLevelling";
 import type { PetLevelTable } from "../src/lib/petLevelling";
 import type { AuctionRecord } from "../src/lib/auctions";
@@ -363,6 +364,52 @@ test("pets rank on coins per XP, not on the margin", () => {
   assert.ok(dragon.profit > rows[0].profit);
   assert.ok(dragon.coinsPerXp < rows[0].coinsPerXp);
   assert.equal(dragon.xpNeeded, 210_255_385);
+});
+
+test("the top of a ladder is the top of that pet's own ladder", () => {
+  // Six rungs keeps Mythic and Legendary; four keeps Legendary and Epic; one keeps the one it has.
+  assert.deepEqual([...topRarities(["COMMON", "UNCOMMON", "RARE", "EPIC", "LEGENDARY", "MYTHIC"])!].sort(), [
+    "LEGENDARY",
+    "MYTHIC",
+  ]);
+  assert.deepEqual([...topRarities(["COMMON", "UNCOMMON", "RARE", "EPIC", "LEGENDARY"])!].sort(), [
+    "EPIC",
+    "LEGENDARY",
+  ]);
+  assert.deepEqual([...topRarities(["LEGENDARY"])!], ["LEGENDARY"]);
+  // Ordered by the game's ranking rather than by the order the scrape emitted them.
+  assert.deepEqual([...topRarities(["MYTHIC", "COMMON", "LEGENDARY", "RARE"])!].sort(), ["LEGENDARY", "MYTHIC"]);
+  // A pet the catalogue has nothing for is not filtered down to nothing.
+  assert.equal(topRarities([]), null);
+  assert.equal(topRarities(undefined), null);
+});
+
+test("only the top two rarities of a pet are planned", () => {
+  const index = createPetBinIndex();
+  absorbPetPage(
+    index,
+    [
+      // A Common needs 5.6M Pet XP against the Legendary's 25.4M, so it can price respectably per
+      // point while being worth a fraction of the coins. It is not a trade anybody makes.
+      listing("[Lvl 1] Armadillo", "COMMON", 100_000),
+      listing("[Lvl 100] Armadillo", "COMMON", 20_000_000),
+      listing("[Lvl 1] Armadillo", "LEGENDARY", 10_000_000),
+      listing("[Lvl 100] Armadillo", "LEGENDARY", 90_000_000),
+      listing("[Lvl 1] Armadillo", "MYTHIC", 40_000_000),
+      listing("[Lvl 100] Armadillo", "MYTHIC", 200_000_000),
+    ],
+    levels,
+  );
+
+  const ladders = { ARMADILLO: ["COMMON", "UNCOMMON", "RARE", "EPIC", "LEGENDARY", "MYTHIC"] };
+  const kept = planPetProfit({ index, levels, requireMarket: false, ladders });
+  assert.deepEqual(kept.map((r) => r.rarity).sort(), ["LEGENDARY", "MYTHIC"]);
+
+  // The rows are there to be dropped: without the ladders all three rarities are planned, and the
+  // Common is one of them. Its own margin is real and it is still not a pet anyone levels to sell.
+  const all = planPetProfit({ index, levels, requireMarket: false });
+  assert.deepEqual(all.map((r) => r.rarity).sort(), ["COMMON", "LEGENDARY", "MYTHIC"]);
+  assert.ok(all.find((r) => r.rarity === "COMMON")!.profit > 0);
 });
 
 test("the auction house's cut comes off the sale", () => {

@@ -16,6 +16,7 @@ import {
   absorbPetPage,
   createPetBinIndex,
   planPetProfit,
+  KEEP_RARITIES,
   type PetBinIndex,
   type PetLevelTable,
   type PetProfitRow,
@@ -66,7 +67,7 @@ type Tables = {
   petXpRules: PetXpRules;
   petLevels: PetLevelTable;
   /** Which skill each pet levels off — the field the whole pairing turns on. */
-  petCatalogue: { key: string; name: string; skill: SkillKey | null }[];
+  petCatalogue: { key: string; name: string; skill: SkillKey | null; rarities: string[] }[];
 };
 
 /* ----------------------------------------------------------------- state */
@@ -433,9 +434,35 @@ function xpRows(): MinionXpRow[] {
   });
 }
 
+/**
+ * The pets worth levelling, restricted to the top of each one's own rarity ladder.
+ *
+ * Every rarity is its own trade, and the low ones win on coins per point of Pet XP for a reason
+ * that is not a reason to buy them: a Common needs 5.6M Pet XP where a Legendary needs 25.4M, so
+ * the Common always prices better per point while being worth a fraction of the coins and having a
+ * sell side one listing deep. Nobody levels a Common to sell. Keeping the top two rungs — the max
+ * and one below — leaves the trades people actually make, and the second rung matters because the
+ * top one is often the thin one.
+ */
 function petRows(): PetProfitRow[] {
   if (!tables || !state.pets) return [];
-  return planPetProfit({ index: state.pets, levels: tables.petLevels, minProfit: 0 });
+  return planPetProfit({
+    index: state.pets,
+    levels: tables.petLevels,
+    minProfit: 0,
+    ladders: petLadders(),
+    keepRarities: KEEP_RARITIES,
+  });
+}
+
+let ladderCache: Record<string, string[]> | null = null;
+
+function petLadders(): Record<string, string[]> {
+  if (ladderCache) return ladderCache;
+  const out: Record<string, string[]> = {};
+  for (const pet of tables?.petCatalogue ?? []) out[pet.key] = pet.rarities;
+  ladderCache = out;
+  return out;
 }
 
 /* -------------------------------------------------------------- rendering */
@@ -444,6 +471,7 @@ export function mountMinionPet(container: HTMLElement, data: Tables): void {
   host = container;
   tables = data;
   nameCache = null;
+  ladderCache = null;
   if (!state.pets) state.pets = readPetCache();
 
   if (boundTo !== container) {
