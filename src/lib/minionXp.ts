@@ -171,6 +171,31 @@ export type XpRoute = "direct" | "brewing";
 export const DEFAULT_MAX_BREWS_PER_DAY = 200;
 
 /**
+ * The Alchemy XP a brewing ingredient must pay before it is worth a brewing stand at all.
+ *
+ * The alchemy table has forty-five ingredient rows and its values are not a spread — they are two
+ * clusters with nothing between them. Five ingredients pay 15,000 or 23,000; the sixth-best pays
+ * **600**. That gap is the whole shape of the decision, and a threshold anywhere inside it picks
+ * out the same five:
+ *
+ *   23,000  Enchanted Blaze Rod             (Strength)
+ *   15,000  Enchanted Sugar Cane            (Speed)
+ *   15,000  Enchanted Fermented Spider Eye  (Weakness)
+ *   15,000  Enchanted Gold Block            (Absorption)
+ *   15,000  Enchanted Cooked Mutton         (Mana)
+ *
+ * Below the gap, brewing is not a plan. Compacting trades XP away — the same 25,600 cactus are
+ * worth 256,000 Alchemy XP brewed raw and 500 brewed as one Enchanted Cactus — so an ingredient
+ * whose top form pays 500 is asking you to throw away most of the XP *and* stand at a stand for it.
+ * Above the gap the same compaction is worth doing: an Enchanted Sugar Cane costs the same 25,600
+ * drops and pays 15,000, which is thirty times the Enchanted Cactus for the same work.
+ *
+ * So this is not a tuning knob dressed as a constant. It is the cliff, and it is where the routes
+ * people actually brew sit.
+ */
+export const MIN_BREW_XP = 10_000;
+
+/**
  * One of a minion's drops, and what that drop alone is worth in XP.
  *
  * A minion is not one drop. A Voidling Minion makes obsidian at two and a half a harvest beside its
@@ -292,7 +317,7 @@ export function planMinionXp(o: MinionXpOptions): MinionXpRow[] {
     if (row.itemId && row.minionXp !== null && !directBy.has(row.itemId)) directBy.set(row.itemId, row);
   }
   const brewBy = new Map<string, BrewIngredient>();
-  for (const row of o.tables.brewing) if (row.itemId) brewBy.set(row.itemId, row);
+  for (const row of o.tables.brewing) if (row.itemId && row.xp >= MIN_BREW_XP) brewBy.set(row.itemId, row);
 
   // Names to ids, for the secondary drops. The wiki states those by display name only — there is no
   // `collectionId` behind an `alsoCollects` entry — so without this a Revenant Minion's diamonds
@@ -421,38 +446,56 @@ export function planMinionXp(o: MinionXpOptions): MinionXpRow[] {
      * drops for the XP, since a capped shallow route consumes a few hundred drops where the deep
      * one eats tens of thousands, so the drops it does not eat stay on the market.
      */
-    const dropsPerDay = rate * 24;
     const cap = o.maxBrewsPerDay ?? DEFAULT_MAX_BREWS_PER_DAY;
-    let best: { id: string; brew: BrewIngredient; perBrew: number; xpPerDay: number; brews: number } | null = null;
-    for (const [ingredientId, brew] of brewBy) {
-      const perBrew = dropsPerIngredient(ingredientId, itemId, o.recipes);
-      if (perBrew === null || !(perBrew > 0)) continue;
-      const brews = Math.min(dropsPerDay / perBrew, cap);
-      const xpPerDay = brews * brew.xp;
-      // Ties go to the deeper chain, which is the same XP for fewer trips to the stand.
-      const better =
-        !best || xpPerDay > best.xpPerDay + 1e-9 || (Math.abs(xpPerDay - best.xpPerDay) <= 1e-9 && brews < best.brews);
-      if (better) best = { id: ingredientId, brew, perBrew, xpPerDay, brews };
+    let best:
+      | {
+          id: string;
+          brew: BrewIngredient;
+          perBrew: number;
+          xpPerDay: number;
+          brews: number;
+          from: { id: string; name: string; perHour: number };
+          alongside: { id: string; qty: number }[];
+        }
+      | null = null;
+
+    // Every drop the minion makes, not only the one on the tin. A Spider Minion's brewing route
+    // runs on the spider eyes it drops beside its string, and a Tarantula Minion's on the same —
+    // reading the primary drop alone is why neither had an Alchemy route.
+    for (const drop of drops) {
+      const dropsPerDay = drop.perHour * 24;
+      if (!(dropsPerDay > 0)) continue;
+
+      for (const [ingredientId, brew] of brewBy) {
+        const chain = brewChain(ingredientId, drop.id, o.recipes);
+        if (chain === null || !(chain.drops > 0)) continue;
+        const brews = Math.min(dropsPerDay / chain.drops, cap);
+        const xpPerDay = brews * brew.xp;
+        // Ties go to the deeper chain, which is the same XP for fewer trips to the stand.
+        const better =
+          !best || xpPerDay > best.xpPerDay + 1e-9 || (Math.abs(xpPerDay - best.xpPerDay) <= 1e-9 && brews < best.brews);
+        if (better) {
+          best = { id: ingredientId, brew, perBrew: chain.drops, xpPerDay, brews, from: drop, alongside: chain.alongside };
+        }
+      }
     }
     const deepest = best;
 
     if (deepest) {
-      const { id: ingredientId, brew, perBrew } = deepest;
+      const { id: ingredientId, brew, perBrew, from, alongside } = deepest;
       const name = o.names[ingredientId] ?? ingredientId;
-      const caveats =
-        perBrew > 1
-          ? [`one brew consumes ${Math.round(perBrew).toLocaleString("en-US")} drops compacted into ${name}`]
-          : [`brewed as the raw drop rather than compacted first, which is worth far more XP for the same drops`];
-      // Why this form and not one of the others the drops can reach. Worth saying on the row,
-      // because "compact it first" is the intuition and on these minions it is the wrong one.
-      const others = [...brewBy].filter(
-        ([id]) => id !== ingredientId && dropsPerIngredient(id, itemId, o.recipes) !== null,
-      );
-      if (others.length > 0) {
+      const caveats = [
+        `one brew consumes ${Math.round(perBrew).toLocaleString("en-US")} ${from.name} compacted into ${name}, worth ${brew.xp.toLocaleString("en-US")} alchemy XP`,
+      ];
+      // A recipe with more than one ingredient wants things this minion does not make. They are a
+      // real cost and the row says so rather than quoting a brew as though the drops were all of it.
+      if (alongside.length > 0) {
+        const merged = new Map<string, number>();
+        for (const side of alongside) merged.set(side.id, (merged.get(side.id) ?? 0) + side.qty);
         caveats.push(
-          `these drops also brew as ${others
-            .map(([id]) => o.names[id] ?? id)
-            .join(" or ")}, which pay less a day at ${Math.round(cap).toLocaleString("en-US")} brews`,
+          `each one also needs ${[...merged]
+            .map(([id, qty]) => `${Math.round(qty).toLocaleString("en-US")} ${o.names[id] ?? readableId(id)}`)
+            .join(" and ")}, which this minion does not make`,
         );
       }
       // The collection half, carried so the planner can put a second pet on it. Only meaningful
@@ -472,7 +515,9 @@ export function planMinionXp(o: MinionXpOptions): MinionXpRow[] {
         caveats.push(`collecting the same drops also pays ${skills.join(" and ")} XP — the drops do two jobs`);
       }
       out.push({
-        ...row(minion, tier, "ALCHEMY", "brewing", ingredientId, name, rate, brew.xp / perBrew, o, caveats, perBrew),
+        // `from.perHour`, not the minion's headline rate: the chain may run on a secondary drop —
+        // a Spider Minion brews its eyes, not its string — and those arrive at their own rate.
+        ...row(minion, tier, "ALCHEMY", "brewing", ingredientId, name, from.perHour, brew.xp / perBrew, o, caveats, perBrew),
         ...collects,
       });
     }
@@ -608,16 +653,124 @@ export function dropsPerIngredient(
   recipes: { output: string; yield: number; ingredients: { id: string; qty: number }[] }[],
   depth = 0,
 ): number | null {
-  if (ingredientId === dropId) return 1;
+  return brewChain(ingredientId, dropId, recipes, depth)?.drops ?? null;
+}
+
+/**
+ * The drop cost of one brewing ingredient, and what else the recipe wants alongside.
+ *
+ * Following only single-ingredient recipes was enough for four of the five routes and silently
+ * lost the fifth. Enchanted Fermented Spider Eye — the Weakness potion, 15,000 XP — is
+ * `64 Brown Mushroom + 64 Sugar + 64 Enchanted Spider Eye`, and a chain that gives up the moment a
+ * recipe has more than one ingredient never reaches it. So every spider minion in the game came
+ * back with no Alchemy route at all, which is not a judgement about spider minions: it is a
+ * traversal that could not see round a corner.
+ *
+ * The walk now follows whichever ingredient leads to the drop and keeps the rest as `alongside` —
+ * they are a real cost and the caller says so rather than pretending a brew is free. Where several
+ * branches reach the drop the cheapest is taken, since that is the recipe somebody would follow.
+ *
+ * Depth stays capped at four. The point is to see round one corner, not to search the crafting
+ * tree: an unbounded walk finds a path from almost anything to almost anything and every one of
+ * them costs more than it is worth.
+ */
+/**
+ * How many base items one of this id decomposes to, following single-ingredient recipes down.
+ *
+ * The measure of "how much of a recipe is this ingredient". An Enchanted Spider Eye is 160 spider
+ * eyes; a brown mushroom is one mushroom. Counting the compaction is the only way to see that 64
+ * of the first is a hundred and sixty times the 64 of the second, which is what makes one the
+ * substance of the brew and the other the garnish.
+ */
+function baseUnits(
+  id: string,
+  recipes: { output: string; yield: number; ingredients: { id: string; qty: number }[] }[],
+  depth = 0,
+): number {
+  if (depth > 4) return 1;
+  for (const recipe of recipes) {
+    if (recipe.output !== id || recipe.ingredients.length !== 1 || !(recipe.yield > 0)) continue;
+    const only = recipe.ingredients[0];
+    return (only.qty / recipe.yield) * baseUnits(only.id, recipes, depth + 1);
+  }
+  return 1;
+}
+
+/**
+ * "SUGAR" to "Sugar", for the handful of brewing ingredients no bazaar carries.
+ *
+ * The name table is the bazaar's, and vanilla items like sugar and brown mushroom are not traded
+ * on it — so an id falls through with nothing to show. Printing the id raw in a sentence about
+ * shopping is worse than a plain title case of it.
+ */
+function readableId(id: string): string {
+  return id
+    .toLowerCase()
+    .split(/[_:]/)
+    .filter(Boolean)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
+/** The ingredient a recipe is mostly made of, by base items rather than by count. */
+function dominantIngredient(
+  recipe: { yield: number; ingredients: { id: string; qty: number }[] },
+  recipes: { output: string; yield: number; ingredients: { id: string; qty: number }[] }[],
+): { id: string; qty: number } | undefined {
+  let best: { id: string; qty: number } | undefined;
+  let bestWeight = -Infinity;
+  for (const ingredient of recipe.ingredients) {
+    const weight = ingredient.qty * baseUnits(ingredient.id, recipes);
+    if (weight > bestWeight) {
+      bestWeight = weight;
+      best = ingredient;
+    }
+  }
+  return best;
+}
+
+export function brewChain(
+  ingredientId: string,
+  dropId: string,
+  recipes: { output: string; yield: number; ingredients: { id: string; qty: number }[] }[],
+  depth = 0,
+): { drops: number; alongside: { id: string; qty: number }[] } | null {
+  if (ingredientId === dropId) return { drops: 1, alongside: [] };
   if (depth > 4) return null;
 
+  let best: { drops: number; alongside: { id: string; qty: number }[] } | null = null;
+
   for (const recipe of recipes) {
-    if (recipe.output !== ingredientId || recipe.ingredients.length !== 1 || !(recipe.yield > 0)) continue;
-    const only = recipe.ingredients[0];
-    const below = dropsPerIngredient(only.id, dropId, recipes, depth + 1);
-    if (below !== null) return (only.qty / recipe.yield) * below;
+    if (recipe.output !== ingredientId || !(recipe.yield > 0)) continue;
+
+    // Only the ingredient the recipe is mostly *made of* may be followed.
+    //
+    // Without this a Mushroom Minion claims the Weakness route and tops the Alchemy table, because
+    // the recipe wants 64 brown mushrooms beside 64 Enchanted Spider Eye and the mushrooms are the
+    // cheapest way in. They are also a garnish: the spider eyes are 10,240 base items against the
+    // mushrooms' 64. Feeding a sixtieth of a brew is not feeding it, and a minion that supplies the
+    // small half should not outrank the one supplying the large one.
+    const principal = dominantIngredient(recipe, recipes);
+
+    for (const ingredient of recipe.ingredients) {
+      if (recipe.ingredients.length > 1 && ingredient !== principal) continue;
+      const below = brewChain(ingredient.id, dropId, recipes, depth + 1);
+      if (below === null) continue;
+
+      const drops = (ingredient.qty / recipe.yield) * below.drops;
+      // Everything the recipe wants that is not on the path to the drop. Scaled by the yield for
+      // the same reason the path is, so the figures describe one finished ingredient.
+      const alongside = [
+        ...recipe.ingredients
+          .filter((other) => other !== ingredient)
+          .map((other) => ({ id: other.id, qty: other.qty / recipe.yield })),
+        ...below.alongside,
+      ];
+      if (!best || drops < best.drops) best = { drops, alongside };
+    }
   }
-  return null;
+
+  return best;
 }
 
 /**

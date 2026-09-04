@@ -6,6 +6,7 @@ import { itemName, parseBasicBrewing, parseBrewing, parseMinionXp, parseXpTable,
 import {
   bestPerSkill,
   dropsPerIngredient,
+  MIN_BREW_XP,
   narrowTo,
   petXpFrom,
   petXpMultiplier,
@@ -205,51 +206,60 @@ function xpPlan(over: Partial<Parameters<typeof planMinionXp>[0]> = {}) {
   });
 }
 
-test("one brewing route a minion, chosen on XP a day inside the brew budget", () => {
-  // Cactus reaches three entries in the alchemy table — cactus at 10 XP a brew, Enchanted Cactus
-  // Green at 250, Enchanted Cactus at 500 — and they are three descriptions of one decision, so
-  // exactly one belongs in the table.
-  const cactus = xpPlan().filter((r) => r.generator === "CACTUS" && r.route === "brewing");
-  assert.equal(cactus.length, 1);
+test("only the five ingredients worth a brewing stand are planned", () => {
+  // The alchemy table's forty-five rows are two clusters with a cliff between them: five
+  // ingredients pay 15,000 or 23,000 and the sixth-best pays 600. Below the cliff, compacting has
+  // thrown away most of the XP and you are still standing at a stand for it.
+  const kept = skillXp.brewing.filter((b) => b.itemId && b.xp >= MIN_BREW_XP).map((b) => b.itemId);
+  assert.deepEqual(new Set(kept), new Set([
+    "ENCHANTED_BLAZE_ROD",
+    "ENCHANTED_SUGAR_CANE",
+    "ENCHANTED_FERMENTED_SPIDER_EYE",
+    "ENCHANTED_GOLD_BLOCK",
+    "ENCHANTED_COOKED_MUTTON",
+  ]));
 
-  // Not the most compacted one. Compacting trades XP away: an Enchanted Cactus is 25,600 cactus
-  // and pays 500, where those same 25,600 cactus brewed raw pay 256,000. Ranking on depth put a
-  // Cactus Minion last on the Alchemy list at 9 XP an hour.
-  assert.notEqual(cactus[0].itemId, "ENCHANTED_CACTUS");
-  // Nor the rawest one, which pays best per drop and asks for eleven thousand brews a day. The
-  // budget is the constraint, so the winner is whatever pays most a day once both are capped.
-  assert.notEqual(cactus[0].itemId, "CACTUS");
-  assert.equal(cactus[0].itemId, "ENCHANTED_CACTUS_GREEN");
-  assert.ok(cactus[0].caveats.some((c) => /also brew as/.test(c)));
+  // So a Cactus Minion has no Alchemy route at all: its best brewing form is an Enchanted Cactus at
+  // 500 XP for 25,600 cactus, which is the case the cliff exists to exclude.
+  assert.equal(xpPlan().filter((r) => r.generator === "CACTUS" && r.route === "brewing").length, 0);
+
+  // And every route that survives is one of the five, once per minion.
+  for (const row of xpPlan().filter((r) => r.route === "brewing")) {
+    assert.ok(kept.includes(row.itemId), `${row.family} brews ${row.itemName}, which is under the cliff`);
+  }
 });
 
-test("the brew budget decides which form is planned, not the depth of the chain", () => {
-  const formFor = (generator: string, maxBrewsPerDay?: number) =>
-    xpPlan(maxBrewsPerDay === undefined ? {} : { maxBrewsPerDay }).find(
-      (r) => r.generator === generator && r.route === "brewing",
-    )!;
+test("a brew whose recipe wants more than one thing is still reachable", () => {
+  // Enchanted Fermented Spider Eye is 64 Brown Mushroom + 64 Sugar + 64 Enchanted Spider Eye, and a
+  // walk that gave up on multi-ingredient recipes never reached it — so every spider minion came
+  // back with no Alchemy route, which was a limit of the traversal and not a fact about spiders.
+  const spider = xpPlan().find((r) => r.generator === "SPIDER" && r.route === "brewing")!;
+  assert.equal(spider.itemId, "ENCHANTED_FERMENTED_SPIDER_EYE");
+  // 64 of an Enchanted Spider Eye, each 160 spider eyes.
+  assert.equal(Math.round(spider.itemsPerBrew ?? 0), 10_240);
+  // The things it does not make are named rather than quietly treated as free.
+  assert.ok(spider.caveats.some((c) => /also needs .*Brown Mushroom/.test(c)));
+});
 
-  // Sugar cane brews as Enchanted Sugar (160 drops, 300 XP) or Enchanted Sugar Cane (25,600 drops,
-  // 15,000 XP). Per drop the shallow one is more than three times better, and at a budget the
-  // minion cannot saturate it is the one worth doing.
-  assert.equal(formFor("SUGAR_CANE").itemId, "ENCHANTED_SUGAR");
-
-  // Squeeze the budget and the answer flips to the deep chain, because a route you can only brew a
-  // handful of times wants each brew to be worth as much as possible. Same rule, different budget.
-  assert.equal(formFor("SUGAR_CANE", 1).itemId, "ENCHANTED_SUGAR_CANE");
+test("a minion that only supplies the garnish does not claim the brew", () => {
+  // The same recipe wants 64 brown mushrooms, so a Mushroom Minion can reach it in one step and,
+  // ranked on its own drops, looked like the best Alchemy minion in the game at 17.5k XP an hour.
+  // It is supplying a sixtieth of the brew: 64 mushrooms against 10,240 spider eyes.
+  assert.equal(xpPlan().filter((r) => r.generator === "MUSHROOM" && r.route === "brewing").length, 0);
 });
 
 test("a brewing route carries the skill that collecting the same drops pays", () => {
-  const melon = xpPlan().find((r) => r.generator === "MELON" && r.route === "brewing")!;
+  const cane = xpPlan().find((r) => r.generator === "SUGAR_CANE" && r.route === "brewing")!;
   // The drops do two jobs: collecting the minion pays Farming, brewing what you collected pays
   // Alchemy. Crediting only the Alchemy half was throwing the larger of the two away.
-  assert.equal(melon.skill, "ALCHEMY");
-  assert.equal(melon.baseSkill, "FARMING");
-  assert.ok((melon.baseXpPerHour ?? 0) > 0);
-  assert.ok(melon.caveats.some((c) => /do two jobs/i.test(c)));
+  assert.equal(cane.skill, "ALCHEMY");
+  assert.equal(cane.baseSkill, "FARMING");
+  assert.ok((cane.baseXpPerHour ?? 0) > 0);
+  assert.ok(cane.caveats.some((c) => /do two jobs/i.test(c)));
 
   // A drop with no published direct rate has no second half to claim, and says nothing rather than
-  // claiming a zero — the same rule the direct rows follow.
+  // claiming a zero — the same rule the direct rows follow. Blaze Rod is a Combat drop and Combat
+  // does not publish the column.
   const blaze = xpPlan().find((r) => r.generator === "BLAZE" && r.route === "brewing")!;
   assert.equal(blaze.baseSkill, undefined);
 });

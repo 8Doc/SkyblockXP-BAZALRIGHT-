@@ -1667,6 +1667,41 @@ against them: the Alchemy pet while you brew, the minion's own-skill pet while y
 pet is out at a time, so this is the two swapped rather than two levelled at once, which is how the
 setup is actually played. Both margins are income and both are in the profit.
 
+**Only five brewing ingredients are worth a stand, and the page says which.** `Potions/Alchemy
+Experience` has forty-five ingredient rows, and its XP values are not a spread — they are two
+clusters with a cliff between them. Five ingredients pay 15,000 or 23,000; the sixth-best pays
+**600**. Any threshold inside that gap picks the same five, so `MIN_BREW_XP` is 10,000:
+
+| XP | Ingredient | Potion | Minions that feed it |
+|---|---|---|---|
+| 23,000 | Enchanted Blaze Rod | Strength | Blaze |
+| 15,000 | Enchanted Sugar Cane | Speed | Sugar Cane |
+| 15,000 | Enchanted Fermented Spider Eye | Weakness | Spider, Cave Spider, Tarantula |
+| 15,000 | Enchanted Gold Block | Absorption | Gold |
+| 15,000 | Enchanted Cooked Mutton | Mana | Sheep |
+
+Below the cliff brewing is not a plan. Compaction trades XP away, so an ingredient whose top form
+pays 500 is asking you to throw away most of the XP *and* stand at a stand for it — the Cactus
+Minion's Enchanted Cactus is 25,600 cactus for 500. Above the cliff the same 25,600 drops pay
+15,000, which is thirty times the work's worth, and that is the whole difference.
+
+**Two traversal bugs were hiding minions from the Alchemy list.** The chain walk followed only
+single-ingredient recipes, and Enchanted Fermented Spider Eye is `64 Brown Mushroom + 64 Sugar + 64
+Enchanted Spider Eye` — so every spider minion in the game came back with no Alchemy route at all.
+That was a limit of the walk, not a fact about spiders. `brewChain` now follows multi-ingredient
+recipes and keeps what it could not source as `alongside`, which the row names rather than treating
+as free.
+
+Opening that up immediately produced the opposite error: a **Mushroom Minion** claimed the Weakness
+route and topped the Alchemy table at 17.5k XP an hour, because the recipe wants 64 brown mushrooms
+and those were the cheapest way in. It supplies a sixtieth of the brew — 64 mushrooms against 10,240
+spider eyes. So only the *dominant* ingredient may be followed, measured in base items after
+compaction, which is the difference between feeding a brew and garnishing it.
+
+Brewing also considers **every** drop a minion makes, not the one on the tin: a Spider Minion brews
+the eyes it drops beside its string, and reading the primary drop alone was the third reason it had
+no route.
+
 **One brewing route a minion, chosen on XP a day inside the brew budget.** A Cactus Minion's drops
 reach three entries in the alchemy table — cactus at 10 XP a brew, Enchanted Cactus Green at 250,
 Enchanted Cactus at 500 — and emitting a row for each offered three versions of one decision. Which
