@@ -354,10 +354,11 @@ async function shareWisdom(): Promise<void> {
   const inventory = state.member.inventory;
   if (!inventory) return;
 
-  const [armour, equipment, talismans] = await Promise.all([
+  const [armour, equipment, talismans, carried] = await Promise.all([
     readLore(inventory.inv_armor?.data),
     readLore(inventory.equipment_contents?.data),
     readLore(inventory.bag_contents?.talisman_bag?.data),
+    readLore(inventory.inv_contents?.data),
   ]);
 
   // The attribute list is keyed by display name here and by api key in the profile, and the join
@@ -365,8 +366,12 @@ async function shareWisdom(): Promise<void> {
   const byName = new Map(data.attributeShards.attributes.map((a) => [a.name, a.apiKey ?? a.key]));
 
   const detected = detectWisdom({
-    gearLore: [armour, equipment],
-    accessoryLore: [talismans],
+    gearLore: [...armour, ...equipment],
+    // One tool at a time: the best single item per skill, not the sum of everything carried.
+    heldLore: carried,
+    accessoryLore: talismans,
+    // A flat +25 on every skill, and the largest single thing a profile can tell you.
+    cookieActive: state.member.profile?.cookie_buff_active === true,
     attributeStacks: state.member.attributes?.stacks ?? {},
     slayerBosses: state.member.slayer?.slayer_bosses ?? {},
     sources: window.__MINION_DATA__.wisdomSources,

@@ -231,6 +231,31 @@ export function bagItemsFrom(root: NbtCompound): BagItem[] {
   return items;
 }
 
+/**
+ * Each item's lore, one string per item, for reading stats the API only states in prose.
+ *
+ * Wisdom is the case this exists for. It is never published as a number anywhere in a profile — it
+ * is written into the item's own lore as `Combat Wisdom: §3+1` — so summing it means reaching the
+ * lore rather than the ids that `bagItemsFrom` returns.
+ *
+ * Per item rather than one blob of text, because the two are not interchangeable. You wear all your
+ * armour at once and its wisdom adds up; you hold one pickaxe at a time and a second one in your
+ * inventory contributes nothing. A caller summing a bag and a caller taking the best single tool
+ * both need the items kept apart.
+ */
+export function loreFrom(root: NbtCompound): string[] {
+  const slots = root.i;
+  if (!Array.isArray(slots)) return [];
+
+  const out: string[] = [];
+  for (const slot of slots) {
+    const lore = asCompound(asCompound(asCompound(slot)?.tag)?.display)?.Lore;
+    if (!Array.isArray(lore)) continue;
+    out.push(lore.map((line) => String(line)).join("\n"));
+  }
+  return out;
+}
+
 /** Every item id in an NBT blob's slot list, ignoring empty slots. */
 export function itemIdsFrom(root: NbtCompound): string[] {
   return bagItemsFrom(root).map((item) => item.id);

@@ -18,9 +18,16 @@ import type { SkillKey } from "./minionXp";
  *  - **Slayers.** Every unique boss tier ever slain grants Combat Wisdom, one for tiers I–III and
  *    two for IV–V. The profile carries the per-tier kill counts.
  *
- * **And what is left out, which the caller must say out loud.** A Booster Cookie and active potions
- * are transient and not in the profile in any usable form. The held item is whatever you happen to
- * be holding. The Ultimate Wisdom enchantment is a separate multiplier on Skill XP rather than a
+ * A **Booster Cookie** is the fifth source and the largest single one: a flat +25 on every skill,
+ * flagged in the profile as `profile.cookie_buff_active`. An earlier version of this file excluded
+ * it on the grounds that it was "transient and not in the profile in any usable form" — asserted
+ * without looking, and wrong. It is why a maxed account shows 25 Carpentry Wisdom with no Carpentry
+ * gear at all.
+ *
+ * **And what is still left out, which the caller must say out loud.** A mayor's perk while that
+ * mayor is elected is the big one — Cole is +50 Mining Wisdom, and a Mining Fiesta another +75.
+ * Heart of the Mountain and Essence Shop perks are smaller but real. Active XP-boost potions are
+ * transient. The Ultimate Wisdom enchantment is a separate multiplier on Skill XP rather than a
  * contribution to the Wisdom stat, and folding it in here would double-count it against itself.
  *
  * So this returns a **floor**, not a total, and says which sources it managed to read. A figure
@@ -44,7 +51,18 @@ export type WisdomSources = {
 };
 
 /** Where a figure came from, so the UI can say so rather than presenting a bare number. */
-export type WisdomSource = "gear" | "accessories" | "attributes" | "slayers";
+export type WisdomSource = "gear" | "held" | "accessories" | "attributes" | "slayers" | "cookie";
+
+/**
+ * What a Booster Cookie is worth, to every skill at once.
+ *
+ * Documented on all six `<Skill> Wisdom` pages at the same figure, and it is the single largest
+ * thing a profile can tell you: a flat +25 on twelve skills, including Carpentry and Runecrafting
+ * which have essentially no other source. An earlier version of this file asserted the cookie was
+ * "transient and not in the profile in any usable form" — that was written without looking, and it
+ * is wrong. `profile.cookie_buff_active` is a boolean sitting right there.
+ */
+export const BOOSTER_COOKIE_WISDOM = 25;
 
 export type DetectedWisdom = {
   /** Per skill, summed across every source that could be read. */
@@ -172,11 +190,44 @@ function add(into: Partial<Record<SkillKey, number>>, from: Partial<Record<Skill
   }
 }
 
+/** For sources where only one item can be active at a time — you hold one tool, not all of them. */
+function best(into: Partial<Record<SkillKey, number>>, from: Partial<Record<SkillKey, number>>): void {
+  for (const [skill, value] of Object.entries(from)) {
+    if (typeof value !== "number") continue;
+    into[skill as SkillKey] = Math.max(into[skill as SkillKey] ?? 0, value);
+  }
+}
+
+/** The skills a Booster Cookie touches, which is all of them. */
+const COOKIE_SKILLS: SkillKey[] = [
+  "FARMING",
+  "MINING",
+  "COMBAT",
+  "FORAGING",
+  "FISHING",
+  "ENCHANTING",
+  "ALCHEMY",
+  "TAMING",
+  "CARPENTRY",
+  "RUNECRAFTING",
+];
+
 export type DetectInput = {
-  /** Lore text of equipped armour and equipment, already decompressed. */
+  /** Lore of each equipped armour and equipment piece. Worn together, so they sum. */
   gearLore: string[];
-  /** Lore text of the accessory bag. */
+  /**
+   * Lore of each item in the main inventory.
+   *
+   * Summed would be wrong: you hold one pickaxe at a time and a spare in your backpack grants
+   * nothing. The best single item per skill is taken instead, which models "the tool you reach for
+   * when you do that skill" — an estimate, and much closer than either ignoring tools entirely or
+   * adding up every one you happen to be carrying.
+   */
+  heldLore: string[];
+  /** Lore of each accessory. All of them count at once, so these sum. */
   accessoryLore: string[];
+  /** Whether a Booster Cookie is running, from `profile.cookie_buff_active`. */
+  cookieActive?: boolean;
   attributeStacks: Record<string, number>;
   slayerBosses: Record<string, SlayerBoss | undefined>;
   sources: WisdomSources;
@@ -192,16 +243,31 @@ export type DetectInput = {
  * multiplier applied to every figure on the page is not obviously true.
  */
 export function detectWisdom(input: DetectInput): DetectedWisdom {
-  const bySource: DetectedWisdom["bySource"] = { gear: {}, accessories: {}, attributes: {}, slayers: {} };
+  const bySource: DetectedWisdom["bySource"] = {
+    gear: {},
+    held: {},
+    accessories: {},
+    attributes: {},
+    slayers: {},
+    cookie: {},
+  };
 
   for (const lore of input.gearLore) add(bySource.gear, wisdomFromLore(lore));
   for (const lore of input.accessoryLore) add(bySource.accessories, wisdomFromLore(lore));
+  // One tool at a time, so the best rather than the sum.
+  for (const lore of input.heldLore) best(bySource.held, wisdomFromLore(lore));
   add(bySource.attributes, wisdomFromAttributes(input.attributeStacks, input.sources, input.perLevelByRarity, input.apiKeyOf));
   add(bySource.slayers, wisdomFromSlayers(input.slayerBosses, input.sources));
 
+  if (input.cookieActive) {
+    // Every skill, including the ones nothing else touches — which is exactly why a profile showing
+    // 25 Carpentry Wisdom and no Carpentry gear is a profile with a cookie running.
+    for (const skill of COOKIE_SKILLS) bySource.cookie[skill] = BOOSTER_COOKIE_WISDOM;
+  }
+
   const total: Partial<Record<SkillKey, number>> = {};
   const found: WisdomSource[] = [];
-  for (const source of ["gear", "accessories", "attributes", "slayers"] as WisdomSource[]) {
+  for (const source of ["gear", "held", "accessories", "attributes", "slayers", "cookie"] as WisdomSource[]) {
     const part = bySource[source];
     if (Object.values(part).some((v) => (v ?? 0) > 0)) found.push(source);
     add(total, part);
@@ -210,8 +276,16 @@ export function detectWisdom(input: DetectInput): DetectedWisdom {
   return { total, bySource, found };
 }
 
+/**
+ * What is still missing, named specifically enough to be useful.
+ *
+ * "Some things are not counted" is not worth printing. What a reader needs is the list of things
+ * that could explain a gap between this and their own stats menu, in rough order of size — because
+ * the largest of them, a mayoral perk worth +50, dwarfs everything this can read.
+ */
 export const NOT_COUNTED =
-  "A Booster Cookie, active potions, whatever you are holding, and the Ultimate Wisdom enchantment are not " +
-  "counted — the first two are not in the profile, the third depends on your hand, and the last is a separate " +
-  "multiplier on Skill XP rather than part of the Wisdom stat. So this is a floor: your real figures are these " +
-  "or higher.";
+  "Still not counted, largest first: a mayor's perk while that mayor is elected (Cole is +50 Mining, and an " +
+  "event can add another +75), Heart of the Mountain and Essence Shop perks, active XP-boost potions, and the " +
+  "Ultimate Wisdom enchantment — which is a separate multiplier on Skill XP rather than part of the Wisdom " +
+  "stat. Tools are counted as the best single one you are carrying per skill, since you only hold one. So this " +
+  "is a floor: your real figures are these or higher, and the stats menu in game is the authority.";

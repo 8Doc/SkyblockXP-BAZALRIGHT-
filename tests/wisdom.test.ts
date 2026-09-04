@@ -146,6 +146,7 @@ test("combat wisdom counts unique slayer tiers, and the counters are zero-indexe
 test("the four sources sum, and say which of them contributed", () => {
   const d = detectWisdom({
     gearLore: ["§7Combat Wisdom: §3+1", "§7Foraging Wisdom: §3+5"],
+    heldLore: [],
     accessoryLore: ["§7Combat Wisdom: §3+6.5"],
     attributeStacks: { veteran: 24, cavern_wisdom: 32 },
     slayerBosses: { zombie: { boss_kills_tier_0: 1 } },
@@ -163,9 +164,75 @@ test("the four sources sum, and say which of them contributed", () => {
   assert.equal(d.bySource.attributes.COMBAT, 10);
 });
 
+test("a cookie is a flat 25 on every skill, and it is in the profile", () => {
+  // The correction. An earlier version excluded the Booster Cookie on the grounds that it was not
+  // in the profile "in any usable form" — that was asserted without looking, and the flag is right
+  // there as `profile.cookie_buff_active`. It is the largest single thing a profile can tell you,
+  // and it is why a maxed account shows 25 Carpentry Wisdom with no Carpentry gear at all.
+  const withCookie = detectWisdom({
+    gearLore: [],
+    heldLore: [],
+    accessoryLore: [],
+    attributeStacks: {},
+    slayerBosses: {},
+    cookieActive: true,
+    sources,
+    perLevelByRarity: perLevel,
+    apiKeyOf,
+  });
+  assert.equal(withCookie.total.CARPENTRY, 25);
+  assert.equal(withCookie.total.COMBAT, 25);
+  assert.equal(withCookie.total.ALCHEMY, 25);
+  assert.deepEqual(withCookie.found, ["cookie"]);
+
+  const without = detectWisdom({
+    gearLore: [],
+    heldLore: [],
+    accessoryLore: [],
+    attributeStacks: {},
+    slayerBosses: {},
+    cookieActive: false,
+    sources,
+    perLevelByRarity: perLevel,
+    apiKeyOf,
+  });
+  assert.deepEqual(without.total, {});
+});
+
+test("tools are the best one carried, not the sum of every one in the bag", () => {
+  // You hold one pickaxe at a time. Summing a backpack full of them would invent wisdom nobody has;
+  // ignoring them entirely misses the largest per-skill source on a geared account.
+  const d = detectWisdom({
+    gearLore: [],
+    heldLore: ["§7Mining Wisdom: §3+20", "§7Mining Wisdom: §3+12", "§7Farming Wisdom: §3+8"],
+    accessoryLore: [],
+    attributeStacks: {},
+    slayerBosses: {},
+    sources,
+    perLevelByRarity: perLevel,
+    apiKeyOf,
+  });
+  assert.equal(d.total.MINING, 20);
+  assert.equal(d.total.FARMING, 8);
+
+  // Worn pieces still sum, because you wear all of them at once.
+  const worn = detectWisdom({
+    gearLore: ["§7Mining Wisdom: §3+3", "§7Mining Wisdom: §3+4"],
+    heldLore: [],
+    accessoryLore: [],
+    attributeStacks: {},
+    slayerBosses: {},
+    sources,
+    perLevelByRarity: perLevel,
+    apiKeyOf,
+  });
+  assert.equal(worn.total.MINING, 7);
+});
+
 test("a profile with nothing readable reports nothing rather than zeroes", () => {
   const d = detectWisdom({
     gearLore: [""],
+    heldLore: [],
     accessoryLore: [""],
     attributeStacks: {},
     slayerBosses: {},

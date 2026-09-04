@@ -398,12 +398,16 @@ work that provably cannot have changed:
   are capped separately, since that constraint is a chore rather than an economic one, and a
   **Collect only** filter re-plans without brewing at all.
 - **Wisdom fills itself in from a loaded profile.** Hypixel publishes no Wisdom total, but it does
-  publish the parts, and four are recoverable: the lore of equipped armour and equipment (which this
-  app already decodes the NBT for), the accessory bag, attribute shards, and Slayer tiers. On a real
-  account that fills Combat 53.5, Foraging 10, Fishing 7, Mining 5, Farming 2.5 where all six had
-  been zero. It is a **floor** — a Booster Cookie, potions, whatever is in your hand and the Ultimate
-  Wisdom enchantment are not counted, and the note says so — and anything you type wins and is never
-  overwritten.
+  publish the parts, and five are recoverable: a **Booster Cookie** (a flat +25 on every skill, and
+  the largest single one), the lore of worn armour, equipment and accessories, the **best tool you
+  are carrying** per skill — worn things sum, held things do not — attribute shards, and Slayer
+  tiers. On a real account that fills **Combat 78.5, Foraging 47.2, Fishing 32, Mining 30, Farming
+  27.5, Alchemy 25** where all six had been zero.
+- It is still a **floor**, and the note says what is missing, largest first: a mayor's perk while
+  elected (Cole is +50 Mining, a Mining Fiesta another +75), Heart of the Mountain and Essence Shop
+  perks, potions, and the Ultimate Wisdom enchantment. Anything you type wins and is never
+  overwritten — and the tab records which boxes it filled itself, so improving the detection
+  upgrades its own past output without touching yours.
 - **Wisdom is six fields, one per skill.** A brewed route is Alchemy XP even when a Farming minion
   feeds it, so each route takes its own skill's Wisdom. Skill levels grant none of it — Hypixel's
   own skills resource carries no Wisdom in any level's unlocks — and the sources that do reach

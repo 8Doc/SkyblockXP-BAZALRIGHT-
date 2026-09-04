@@ -1,6 +1,6 @@
 import type { BazaarProduct, BinIndex, GardenState, MuseumState, ProfileMember, SkyblockProfile } from "../lib/profile";
 import { absorbAuctionPage, createBinIndex, type AuctionRecord } from "../lib/auctions";
-import { bagCapacityFrom, bagItemsFrom, itemIdsFrom, readNbt } from "../lib/nbt";
+import { bagCapacityFrom, bagItemsFrom, itemIdsFrom, loreFrom, readNbt } from "../lib/nbt";
 import type { BagItem } from "../lib/gameData";
 
 /**
@@ -254,26 +254,25 @@ function base64ToBytes(base64: string): Uint8Array<ArrayBuffer> {
 }
 
 /**
- * The raw lore text of a gzipped inventory blob.
+ * One lore string per item in a gzipped inventory blob.
  *
  * Wisdom is stated in item lore and nowhere else in a profile, so reading it means reaching the
- * strings rather than the item ids. Walking the NBT properly would mean threading a lore accessor
- * through `bagItemsFrom`; the decompressed blob is already a UTF-8 string containing every lore
- * line, and a scan over it finds exactly the same lines. That is enough for summing a stat, and it
- * costs one function instead of a new shape through three.
+ * strings rather than the item ids `bagItemsFrom` returns.
  *
- * The one thing it must get right is the encoding: these are UTF-8 bytes carrying section signs,
- * and decoding them as latin1 turns `§3+1` into mojibake that no pattern matches.
+ * Per item rather than one blob of text, because the two are not interchangeable. Armour is all
+ * worn at once and its wisdom adds up; tools are held one at a time and a spare pickaxe in your
+ * inventory grants nothing. Keeping the items apart is what lets the caller sum one and take the
+ * best of the other.
  */
-export async function readLore(data: string | undefined): Promise<string> {
-  if (!data) return "";
+export async function readLore(data: string | undefined): Promise<string[]> {
+  if (!data) return [];
   try {
     const stream = new Blob([base64ToBytes(data)]).stream().pipeThrough(new DecompressionStream("gzip"));
     const bytes = new Uint8Array(await new Response(stream).arrayBuffer());
-    return new TextDecoder("utf-8").decode(bytes);
+    return loreFrom(readNbt(bytes));
   } catch {
     // An unreadable blob costs that blob's wisdom and nothing else.
-    return "";
+    return [];
   }
 }
 

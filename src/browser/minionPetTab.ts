@@ -171,32 +171,62 @@ let boundTo: HTMLElement | null = null;
  * are handed over rather than re-requested: the planner already asked for the profile, and a second
  * API key box on this tab would be a poor trade for data sitting in memory.
  *
- * Boxes the player has typed into are left alone. A detected figure is a floor — gear, attributes
- * and slayers, but no cookie, no potions, nothing in your hand — so somebody who has looked up
- * their real number knows better than this does, and having it overwritten on the next profile
- * load would be maddening.
+ * Boxes the player has typed into are left alone. A detected figure is a floor — it counts worn
+ * gear, the best tool carried per skill, accessories, attributes, slayer tiers and a Booster
+ * Cookie, but not a mayor's perk, Heart of the Mountain, Essence Shop perks or potions — so
+ * somebody who has read their real number off the stats menu knows better than this does, and
+ * having it overwritten on the next profile load would be maddening.
  */
 export function setDetectedWisdom(detected: DetectedWisdom): void {
   state.detected = detected;
 
-  let filled = false;
+  const auto = readAutofilled();
+  let changed = false;
+
   for (const skill of WISDOM_SKILLS) {
     const value = detected.total[skill];
     if (!(value !== undefined && value > 0)) continue;
-    const typed = state.wisdom[skill];
-    if (typed !== undefined && typed !== "" && Number(typed) > 0) continue;
-    state.wisdom[skill] = trimNumber(value);
-    filled = true;
+
+    // Overwrite a box that is empty, or one a previous detection filled. Leave a box the player
+    // typed into. Distinguishing the two matters more than it looks: the detection has already
+    // been improved once — a cookie is +25 on every skill and was being missed — and without this,
+    // everyone who had loaded a profile under the old version would keep the old numbers forever,
+    // because their own tab could not tell its own past output from their considered opinion.
+    const current = state.wisdom[skill];
+    const isTyped = current !== undefined && current !== "" && Number(current) > 0 && !auto.has(skill);
+    if (isTyped) continue;
+
+    const next = trimNumber(value);
+    if (current !== next) changed = true;
+    state.wisdom[skill] = next;
+    auto.add(skill);
   }
 
-  if (filled) {
+  if (changed) {
     try {
       localStorage.setItem("sbxp:pxwisdomby", JSON.stringify(state.wisdom));
+      localStorage.setItem(AUTOFILLED_KEY, JSON.stringify([...auto]));
     } catch {
       // In memory is enough for this session.
     }
   }
   if (host) render();
+}
+
+/** Which boxes this tab filled in itself, as opposed to which the player typed. */
+const AUTOFILLED_KEY = "sbxp:pxwisdomauto";
+
+function readAutofilled(): Set<string> {
+  try {
+    const raw = localStorage.getItem(AUTOFILLED_KEY);
+    if (raw) return new Set(JSON.parse(raw) as string[]);
+    // No record means the values on hand predate this bookkeeping. They came from the first version
+    // of the detection rather than from a person, so they are treated as replaceable — the
+    // alternative is stranding every early user on numbers that were known to be short.
+    return new Set(WISDOM_SKILLS);
+  } catch {
+    return new Set(WISDOM_SKILLS);
+  }
 }
 
 /** "17.24" rather than "17.240000000000002", and "5" rather than "5.0". */
@@ -467,6 +497,14 @@ export function mountMinionPet(container: HTMLElement, data: Tables): void {
       if (wisdomSkill) {
         state.wisdom[wisdomSkill] = el.value;
         localStorage.setItem("sbxp:pxwisdomby", JSON.stringify(state.wisdom));
+        // Typing into a box makes it yours, and a later profile load will not touch it again.
+        try {
+          const auto = readAutofilled();
+          auto.delete(wisdomSkill);
+          localStorage.setItem(AUTOFILLED_KEY, JSON.stringify([...auto]));
+        } catch {
+          // Storage blocked: the edit still stands for this session.
+        }
         renderPlan();
         renderSkills();
         renderPets();
@@ -1069,9 +1107,11 @@ function detectedNote(): string {
 
   const where: Record<string, string> = {
     gear: "equipped armour and equipment",
+    held: "the best tool you are carrying for each skill",
     accessories: "your accessory bag",
     attributes: "attribute shards",
     slayers: "slayer tiers",
+    cookie: "a Booster Cookie (+25 to every skill)",
   };
   const parts = shown.map((s) => `<strong>${escapeHtml(title(s))} ${trimNumber(d.total[s] ?? 0)}</strong>`).join(", ");
 

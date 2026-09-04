@@ -75,6 +75,11 @@ export type ProfileMember = {
   skill_tree?: { nodes?: Record<string, Record<string, number | boolean> | undefined> };
   /** Attribute shard counts, keyed by attribute name. Levels are derived from these. */
   attributes?: { stacks?: Record<string, number> };
+  /**
+   * Per-member profile flags. `cookie_buff_active` is the one that matters here: a Booster Cookie
+   * grants +25 Wisdom to every skill, and it is the largest single figure a profile can tell you.
+   */
+  profile?: { cookie_buff_active?: boolean };
 };
 
 /**

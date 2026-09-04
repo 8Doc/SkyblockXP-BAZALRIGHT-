@@ -1536,8 +1536,15 @@ wrong in detail, much closer than zero, and one edit puts it right.
 `scripts/fetch-wisdom-sources.mjs` and `src/lib/wisdom.ts`, filled in on the pet tab whenever the
 planner loads a profile.
 
-Hypixel publishes no Wisdom total anywhere. It publishes the parts, and four of them are
+Hypixel publishes no Wisdom total anywhere. It publishes the parts, and five of them are
 recoverable:
+
+- **A Booster Cookie.** A flat **+25 to every skill**, and the largest single thing a profile can
+  tell you. `profile.cookie_buff_active` is a boolean sitting right there. An earlier version of
+  this file excluded it on the grounds that it was "transient and not in the profile in any usable
+  form" — asserted without looking, and wrong. It is why a maxed account shows 25 Carpentry Wisdom
+  with no Carpentry gear at all, and it was the single biggest reason the detected figures came back
+  far short of what the in-game stats menu shows.
 
 - **Item lore.** Armour, equipment and accessories state it outright — a line reading
   `Combat Wisdom: <colour>+1`. This app already gunzips and walks that NBT for other reasons, so the
@@ -1557,25 +1564,50 @@ recoverable:
   counters are zero-indexed (`boss_kills_tier_0` is tier I), which is the sort of off-by-one that
   would credit tier V to someone who has only done IV.
 
+**Worn things sum; held things do not.** You wear all your armour at once and its Wisdom adds up,
+but you hold one pickaxe at a time and a spare in your backpack grants nothing. So armour,
+equipment and accessories are summed, and the main inventory contributes the **best single item per
+skill** — which models "the tool you reach for when you do that skill". That needed a per-item lore
+accessor (`loreFrom` in `nbt.ts`) rather than a scan over the decompressed blob, because one blob of
+text cannot tell the two rules apart.
+
 The rarity ladder matters and is easy to get wrong. A legendary attribute maxes at 24 shards where a
 common needs 96, so applying the common table to `Veteran` reads a maxed attribute as level 5 and
 halves the Combat Wisdom it grants. `attribute_levels.json` already carried the per-rarity steps.
 
-**Verified against a live profile.** Gear 1 Combat / 5 Foraging, accessories 6.5 Combat, attributes
-10 Combat / 5 Mining / 5 Foraging / 5 Fishing, slayers 36 Combat — filling the boxes with Combat
-53.5, Foraging 10, Fishing 7, Mining 5, Farming 2.5 where they had all been zero.
+**Verified against a live profile.** Worn gear 7.5 Combat / 5 Foraging / 2 Farming / 2 Fishing, best
+held tool 12.24 Foraging, attributes 10 Combat / 5 each of Mining, Foraging, Fishing and Taming,
+slayers 36 Combat, cookie +25 everywhere — filling the boxes with **Combat 78.5, Foraging 47.2,
+Fishing 32, Mining 30, Farming 27.5, Alchemy 25**. Before the cookie and the tools were counted the
+same profile read Combat 53.5, Foraging 10, Fishing 7, Mining 5, Farming 2.5, Alchemy 0.5.
 
 That 36 is worth a note. The Combat Wisdom page's prose says the base caps at 34, and its own table
 enumerates 36 — Wolf, Enderman and Blaze have no tier V, so the maximum is 7+7+5+5+7+5. The API
 agrees with the table: it omits `boss_kills_tier_4` for exactly those three bosses. Where the prose
 and the table disagree, the table is the one that can be checked, and it is the one this follows.
 
-**What is not counted, and why the result is called a floor.** A Booster Cookie and active potions
-are transient and not in the profile in any usable form. The held item depends on what you happen to
-be holding. The Ultimate Wisdom enchantment is a separate multiplier on Skill XP rather than a
-contribution to the Wisdom stat, and folding it in here would double-count it against itself. So the
-boxes are filled with a lower bound, the note says which sources were read, and anything typed by
-hand wins and is never overwritten by a later profile load.
+**What is still not counted, and why the result is called a floor.** Largest first: a mayor's perk
+while that mayor is elected — Cole is **+50 Mining Wisdom** and a Mining Fiesta another **+75**,
+either of which dwarfs everything above. Then Heart of the Mountain perks (Seasoned Mineman is
++6 to +15.1 Mining) and Essence Shop perks, then active XP-boost potions, then the Ultimate Wisdom
+enchantment — which is a separate multiplier on Skill XP rather than part of the Wisdom stat, so
+folding it in here would double-count it against itself.
+
+So the boxes are filled with a lower bound and the note names what was read and what was not. The
+stats menu in game is the authority, and a figure typed by hand always wins.
+
+### Telling the tab's own output apart from the player's
+
+A subtlety that only appears the second time the detection changes. "Anything typed by hand wins"
+needs the tab to know which boxes were typed — and it did not, so a box it had filled itself looked
+exactly like a considered opinion. When the cookie and the held-tool sources were added, every
+account that had already loaded a profile would have kept the old, known-short numbers forever.
+
+`sbxp:pxwisdomauto` records which skills the tab filled. A detection overwrites an empty box or one
+it filled before, and leaves a box the player edited; typing into a box removes it from that record.
+An account with values but no record predates the bookkeeping, so those values came from the first
+version of the detection rather than from a person, and are treated as replaceable — the alternative
+is stranding early users on numbers that were known to be wrong.
 
 
 ## The pet tab, rebuilt around what it is for
