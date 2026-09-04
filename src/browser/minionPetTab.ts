@@ -22,6 +22,7 @@ import {
   type PetProfitRow,
 } from "../lib/petLevelling";
 import type { AuctionRecord } from "../lib/auctions";
+import { NOT_COUNTED, type DetectedWisdom } from "../lib/wisdom";
 import { bestPerMinion, planPetPairs, type PetPlanRow } from "../lib/petPlan";
 import { planProfit, type ExtrasTable, type ItemPrices, type StorageTables } from "../lib/minionProfit";
 import { normalise } from "../lib/bazaar";
@@ -91,6 +92,8 @@ type State = {
   hideLosers: boolean;
   /** A live bazaar read, so the plan can price what the minion sells alongside the pet. */
   market: Map<string, ReturnType<typeof normalise>>;
+  /** What the loaded profile could be made to admit about its Wisdom, if one has been loaded. */
+  detected: DetectedWisdom | null;
 
   /** The pet half, which costs a full auction sweep and is therefore opt-in. */
   pets: PetBinIndex | null;
@@ -118,6 +121,7 @@ const state: State = {
   effort: (localStorage.getItem("sbxp:pxeffort") as EffortId) ?? "passive",
   hideLosers: localStorage.getItem("sbxp:pxhideloss") === "1",
   market: new Map(),
+  detected: null,
   pets: null,
   scanning: false,
   scanned: 0,
@@ -157,6 +161,48 @@ let host: HTMLElement | null = null;
  * Comparing the host makes the rebind automatic and the failure impossible.
  */
 let boundTo: HTMLElement | null = null;
+
+/* ------------------------------------------------------------ the profile */
+
+/**
+ * Take the Wisdom the planner managed to read off a loaded profile.
+ *
+ * Called on every profile load rather than fetched here, for the same reason the collection totals
+ * are handed over rather than re-requested: the planner already asked for the profile, and a second
+ * API key box on this tab would be a poor trade for data sitting in memory.
+ *
+ * Boxes the player has typed into are left alone. A detected figure is a floor — gear, attributes
+ * and slayers, but no cookie, no potions, nothing in your hand — so somebody who has looked up
+ * their real number knows better than this does, and having it overwritten on the next profile
+ * load would be maddening.
+ */
+export function setDetectedWisdom(detected: DetectedWisdom): void {
+  state.detected = detected;
+
+  let filled = false;
+  for (const skill of WISDOM_SKILLS) {
+    const value = detected.total[skill];
+    if (!(value !== undefined && value > 0)) continue;
+    const typed = state.wisdom[skill];
+    if (typed !== undefined && typed !== "" && Number(typed) > 0) continue;
+    state.wisdom[skill] = trimNumber(value);
+    filled = true;
+  }
+
+  if (filled) {
+    try {
+      localStorage.setItem("sbxp:pxwisdomby", JSON.stringify(state.wisdom));
+    } catch {
+      // In memory is enough for this session.
+    }
+  }
+  if (host) render();
+}
+
+/** "17.24" rather than "17.240000000000002", and "5" rather than "5.0". */
+function trimNumber(value: number): string {
+  return String(Math.round(value * 100) / 100);
+}
 
 /* -------------------------------------------------------------- the pets */
 
@@ -603,7 +649,7 @@ function render(): void {
         </label>
       </div>
 
-      <p class="sub dim">${WISDOM_NOTE}</p>
+      <p class="sub dim">${detectedNote()}</p>
     </div>
 
     <div id="pxplan"></div>
@@ -820,8 +866,7 @@ function emptyReason(): string {
       Object.values(state.wisdom).some((v) => Number(v) > 0)
         ? "yours is filled in"
         : "<strong>every Wisdom box is still zero</strong>"
-    }; and a matching pet is worth three times a mismatched one. All three are under
-    <em>Your account</em> and <em>The minions</em> below.</div>`;
+    }; and a matching pet is worth three times a mismatched one. All three are in the boxes above.</div>`;
 }
 
 function renderPlan(): void {
@@ -1000,6 +1045,41 @@ const INTENT =
   "The best money from minion pet-levelling without doing anything excessive. Pick how much you are willing to " +
   "do and this finds the minion and the pet that pay the most inside that budget — counting both the pet margin " +
   "and everything the minion sells while it levels. Everything below the answer is optional.";
+
+/**
+ * What the profile gave up, and what it could not.
+ *
+ * Replaces the flat "these cannot be read" note once a profile is loaded, because that sentence
+ * stopped being true — most of a geared account's Wisdom *is* readable. What stays true is that it
+ * is a floor, so the wording moves from "cannot" to "here is what was found and here is what was
+ * not", which is the honest version of the same warning.
+ */
+function detectedNote(): string {
+  const d = state.detected;
+  if (!d) return WISDOM_NOTE;
+
+  const shown = WISDOM_SKILLS.filter((s) => (d.total[s] ?? 0) > 0);
+  if (shown.length === 0) {
+    return (
+      `<strong>Your profile is loaded and carries no Wisdom this page can read.</strong> ` +
+      `That is possible on a fresh account. ${NOT_COUNTED} ` +
+      `Read your real figures off the SkyBlock menu or SkyCrypt and type them in.`
+    );
+  }
+
+  const where: Record<string, string> = {
+    gear: "equipped armour and equipment",
+    accessories: "your accessory bag",
+    attributes: "attribute shards",
+    slayers: "slayer tiers",
+  };
+  const parts = shown.map((s) => `<strong>${escapeHtml(title(s))} ${trimNumber(d.total[s] ?? 0)}</strong>`).join(", ");
+
+  return (
+    `Filled in from your profile — ${parts} — read from ${d.found.map((f) => where[f]).join(", ")}. ` +
+    `${NOT_COUNTED} Anything you type wins and is kept.`
+  );
+}
 
 const WISDOM_NOTE =
   '<strong>Wisdom multiplies the XP before anything else touches it</strong>, so these six are the inputs most ' +

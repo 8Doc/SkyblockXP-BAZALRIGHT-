@@ -1,0 +1,93 @@
+{
+ "generatedAt": "2026-09-04T02:27:23.972Z",
+ "source": {
+  "attributes": "Hypixel Wiki, Attributes/List/<rarity> — the `effect` field of each {{Attribute Table Entry}}.",
+  "slayers": "Hypixel Wiki, Combat Wisdom — 'Each unique tier of Slayer bosses grants Combat Wisdom. Tiers I-III grant 1 each and tiers IV and V grant 2 each.'",
+  "lore": "The items themselves. Armour, equipment and accessories state their Wisdom in lore, which this app already decodes."
+ },
+ "note": "Wisdom is never published as a total, only as its parts. These are the parts that can be read from a profile without guessing. What is NOT here, and cannot be: a Booster Cookie, active potions, the held item (which depends on what you happen to be holding), and the Ultimate Wisdom enchantment, which is a separate multiplier on Skill XP rather than a contribution to the Wisdom stat.",
+ "attributes": [
+  {
+   "attribute": "Foraging Wisdom",
+   "rarity": "EPIC",
+   "skill": "FORAGING",
+   "atLevel1": 0.5,
+   "atLevel10": 5
+  },
+  {
+   "attribute": "Sea Wisdom",
+   "rarity": "EPIC",
+   "skill": "FISHING",
+   "atLevel1": 0.5,
+   "atLevel10": 5
+  },
+  {
+   "attribute": "Hunt Wisdom",
+   "rarity": "EPIC",
+   "skill": "HUNTING",
+   "atLevel1": 0.5,
+   "atLevel10": 5
+  },
+  {
+   "attribute": "Cavern Wisdom",
+   "rarity": "EPIC",
+   "skill": "MINING",
+   "atLevel1": 0.5,
+   "atLevel10": 5
+  },
+  {
+   "attribute": "Garden Wisdom",
+   "rarity": "EPIC",
+   "skill": "FARMING",
+   "atLevel1": 0.5,
+   "atLevel10": 5
+  },
+  {
+   "attribute": "Social Wisdom",
+   "rarity": "EPIC",
+   "skill": "SOCIAL",
+   "atLevel1": 0.5,
+   "atLevel10": 5
+  },
+  {
+   "attribute": "Book Wisdom",
+   "rarity": "LEGENDARY",
+   "skill": "ENCHANTING",
+   "atLevel1": 0.5,
+   "atLevel10": 5
+  },
+  {
+   "attribute": "Pet Wisdom",
+   "rarity": "LEGENDARY",
+   "skill": "TAMING",
+   "atLevel1": 0.5,
+   "atLevel10": 5
+  },
+  {
+   "attribute": "Veteran",
+   "rarity": "LEGENDARY",
+   "skill": "COMBAT",
+   "atLevel1": 1,
+   "atLevel10": 10
+  }
+ ],
+ "multiplierAttributes": [
+  {
+   "attribute": "Echo of Wisdom",
+   "rarity": "LEGENDARY",
+   "multiplier": true,
+   "effect": "Your Wisdom Attributes are – stronger"
+  }
+ ],
+ "slayer": {
+  "perTier": {
+   "1": 1,
+   "2": 1,
+   "3": 1,
+   "4": 2,
+   "5": 2
+  },
+  "skill": "COMBAT",
+  "why": "Counted on unique tiers ever slain rather than on kills, so one boss of each tier is the whole of it."
+ }
+}

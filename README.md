@@ -397,14 +397,19 @@ work that provably cannot have changed:
   the plan is chosen on that figure rather than on a total the item income dominates. Brews a day
   are capped separately, since that constraint is a chore rather than an economic one, and a
   **Collect only** filter re-plans without brewing at all.
-- **Wisdom is six fields, one per skill, and is not auto-detected.** A brewed route is Alchemy XP
-  even when a Farming minion feeds it, so each route takes its own skill's Wisdom. They are typed
-  rather than read from the profile because they cannot be read honestly: skill levels grant no
-  Wisdom, and what does — equipped gear, enchantments, attributes, pets, accessories, consumables,
-  Slayer tiers, Essence Shop perks — reaches 170–240 on a geared account. Reading only the parts
-  this app can see would find about 2 of that while looking authoritative and halve every XP figure
-  downstream. Each box names where its skill's Wisdom comes from; the old single value migrates
-  across all six.
+- **Wisdom fills itself in from a loaded profile.** Hypixel publishes no Wisdom total, but it does
+  publish the parts, and four are recoverable: the lore of equipped armour and equipment (which this
+  app already decodes the NBT for), the accessory bag, attribute shards, and Slayer tiers. On a real
+  account that fills Combat 53.5, Foraging 10, Fishing 7, Mining 5, Farming 2.5 where all six had
+  been zero. It is a **floor** — a Booster Cookie, potions, whatever is in your hand and the Ultimate
+  Wisdom enchantment are not counted, and the note says so — and anything you type wins and is never
+  overwritten.
+- **Wisdom is six fields, one per skill.** A brewed route is Alchemy XP even when a Farming minion
+  feeds it, so each route takes its own skill's Wisdom. Skill levels grant none of it — Hypixel's
+  own skills resource carries no Wisdom in any level's unlocks — and the sources that do reach
+  170–240 on a geared account, which is why the detected figure is presented as a floor rather than
+  a total. Each box names where its skill's Wisdom comes from; the old single value migrates across
+  all six.
 - **The twenty minions with no published XP rate are named rather than omitted.** The Revenant is
   one of them, and a wall of Revenants levelling a Golden Dragon is a well-known setup — so its
   absence would read as a verdict instead of a gap in the wiki.

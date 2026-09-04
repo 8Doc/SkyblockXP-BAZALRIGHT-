@@ -58,7 +58,13 @@ export type ProfileMember = {
     dungeon_types?: { catacombs?: { experience?: number } };
     player_classes?: Record<string, { experience?: number } | undefined>;
   };
-  slayer?: { slayer_bosses?: Record<string, { xp?: number } | undefined> };
+  /**
+   * Slayer progress. `boss_kills_tier_N` is zero-indexed — tier 0 is tier I — and is what Combat
+   * Wisdom is counted from: unique tiers ever slain, rather than kills.
+   */
+  slayer?: {
+    slayer_bosses?: Record<string, ({ xp?: number } & Record<string, number | undefined>) | undefined>;
+  };
   /**
    * Every pet on the profile. `exp` is what says whether one is at its maximum level, which is
    * worth a point of pet score in its own right — the API publishes no score for what you hold

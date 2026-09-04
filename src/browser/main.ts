@@ -14,10 +14,11 @@ import {
   type PackageEntry,
   type ResolvedTask,
 } from "../lib/types";
-import { ApiError, cacheAge, fetchAccessoryBins, fetchBazaar, fetchReferencePrices, fetchGarden, fetchMuseum, fetchProfiles, readBag, readOwnedItems, resolveUuid } from "./api";
+import { ApiError, cacheAge, fetchAccessoryBins, fetchBazaar, fetchReferencePrices, fetchGarden, fetchMuseum, fetchProfiles, readBag, readLore, readOwnedItems, resolveUuid } from "./api";
 import { mountBazaar, unmountBazaar } from "./bazaarTab";
 import { mountGreenhouse, unmountGreenhouse } from "./greenhouseTab";
 import { setMinionProfile } from "./minionsTab";
+import { setDetectedWisdom } from "./minionPetTab";
 import { mountMinionsSection, unmountMinionsSection } from "./minionsSection";
 import type { Collection, MinionData, Modifiers } from "../lib/minions";
 import type { GreenhouseData } from "../lib/greenhouse";
@@ -26,6 +27,7 @@ import type { AnvilRules } from "../lib/bazaarChains";
 import type { DropTable, ExtrasTable, Recipe as MinionRecipe, StorageTables } from "../lib/minionProfit";
 import type { PetXpRules, SkillKey, SkillXpTables } from "../lib/minionXp";
 import type { PetLevelTable } from "../lib/petLevelling";
+import { detectWisdom, type WisdomSources } from "../lib/wisdom";
 
 /**
  * The standalone build. Same domain logic as the Next app — it imports the very same solver
@@ -77,6 +79,8 @@ declare global {
       skillXp: SkillXpTables;
       petXpRules: PetXpRules;
       petLevels: PetLevelTable;
+      /** Which attributes grant Wisdom, and the Slayer rule. See src/lib/wisdom.ts. */
+      wisdomSources: WisdomSources;
     };
   }
 }
@@ -331,6 +335,46 @@ function rebuildCatalog(): void {
     ownedTier.set(generator, Math.max(ownedTier.get(generator) ?? 0, tier));
   }
   setMinionProfile(coop?.collected ?? collectedFrom(state.member), ownedTier, state.playerName);
+  void shareWisdom();
+}
+
+/**
+ * Read what Wisdom the profile can be made to admit to, and hand it to the pet tab.
+ *
+ * Hypixel publishes no Wisdom total anywhere — only the parts, in three different shapes — so this
+ * gathers them: the lore of equipped armour, equipment and accessories, the attribute shards, and
+ * the Slayer tiers. See `src/lib/wisdom.ts` for what is deliberately left out and why the result is
+ * a floor rather than a total.
+ *
+ * Fired off rather than awaited. It costs three gzip decodes and nothing else on the page is
+ * waiting for it, so a slow one should not hold up the plan the user actually asked for.
+ */
+async function shareWisdom(): Promise<void> {
+  if (!state.member) return;
+  const inventory = state.member.inventory;
+  if (!inventory) return;
+
+  const [armour, equipment, talismans] = await Promise.all([
+    readLore(inventory.inv_armor?.data),
+    readLore(inventory.equipment_contents?.data),
+    readLore(inventory.bag_contents?.talisman_bag?.data),
+  ]);
+
+  // The attribute list is keyed by display name here and by api key in the profile, and the join
+  // between the two is already in the game data.
+  const byName = new Map(data.attributeShards.attributes.map((a) => [a.name, a.apiKey ?? a.key]));
+
+  const detected = detectWisdom({
+    gearLore: [armour, equipment],
+    accessoryLore: [talismans],
+    attributeStacks: state.member.attributes?.stacks ?? {},
+    slayerBosses: state.member.slayer?.slayer_bosses ?? {},
+    sources: window.__MINION_DATA__.wisdomSources,
+    perLevelByRarity: data.attributeLevels.perLevel,
+    apiKeyOf: (attribute) => byName.get(attribute) ?? null,
+  });
+
+  setDetectedWisdom(detected);
 }
 
 /**

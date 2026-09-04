@@ -150,6 +150,12 @@ const minionData = {
   },
   petXpRules: await loadJson("curated/pet_xp.json"),
   petLevels: await loadJson("curated/pet_levels.json"),
+  // Which attributes grant Wisdom and what the Slayer tiers are worth, so a loaded profile can
+  // fill the six Wisdom boxes in rather than leaving every figure computed against zero.
+  wisdomSources: await (async () => {
+    const f = await loadJson("generated/wisdom-sources.json");
+    return { attributes: f.attributes, slayer: f.slayer };
+  })(),
 };
 
 const bundle = await build({

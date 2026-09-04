@@ -254,6 +254,30 @@ function base64ToBytes(base64: string): Uint8Array<ArrayBuffer> {
 }
 
 /**
+ * The raw lore text of a gzipped inventory blob.
+ *
+ * Wisdom is stated in item lore and nowhere else in a profile, so reading it means reaching the
+ * strings rather than the item ids. Walking the NBT properly would mean threading a lore accessor
+ * through `bagItemsFrom`; the decompressed blob is already a UTF-8 string containing every lore
+ * line, and a scan over it finds exactly the same lines. That is enough for summing a stat, and it
+ * costs one function instead of a new shape through three.
+ *
+ * The one thing it must get right is the encoding: these are UTF-8 bytes carrying section signs,
+ * and decoding them as latin1 turns `§3+1` into mojibake that no pattern matches.
+ */
+export async function readLore(data: string | undefined): Promise<string> {
+  if (!data) return "";
+  try {
+    const stream = new Blob([base64ToBytes(data)]).stream().pipeThrough(new DecompressionStream("gzip"));
+    const bytes = new Uint8Array(await new Response(stream).arrayBuffer());
+    return new TextDecoder("utf-8").decode(bytes);
+  } catch {
+    // An unreadable blob costs that blob's wisdom and nothing else.
+    return "";
+  }
+}
+
+/**
  * Decode the talisman bag. Gzip is the only step Node and the browser do differently — the
  * browser has DecompressionStream, Node has zlib, and the NBT walk after it is shared.
  */

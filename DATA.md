@@ -19,6 +19,7 @@ here is hand-typed.
 | `accessories.json` | `resources/items`, `category: ACCESSORY` | — (magical power is curated) | 385 accessories, 277 tradeable |
 | `skill-xp.json` | Hypixel Wiki: the Farming/Mining XP tables, every item page with a `minion_xp` infobox field, and Potions/Alchemy Experience — `npm run gen:skillxp` | Skill XP per item, by hand and from a minion | 83 item rows, 77 with a published minion rate across 6 skills; 20 compaction pairs cross-checked, 1 non-linear |
 | `pets.json` | `Category:Pets`, `Infobox/Pet` — `node scripts/fetch-pets.mjs` | — | 85 pets; 82 carry the skill they level off, which is what the pet/minion pairing turns on |
+| `wisdom-sources.json` | Hypixel Wiki: `Attributes/List/<rarity>` and Combat Wisdom — `npm run gen:wisdom` | — | 9 wisdom attributes across 9 skills, plus the Slayer rule; `Echo of Wisdom` recorded as a multiplier and deliberately not summed |
 
 The skills and collections agreement with the README's independently-written totals is the
 strongest signal here that the parse is right.
@@ -1508,8 +1509,14 @@ anything else touches it, so a single figure applied to all six silently scaled 
 `Player.wisdom` is now a map keyed by skill and each route takes its own. A brewed route is Alchemy
 XP even when the minion feeding it is a Farming minion, and it takes Alchemy Wisdom accordingly.
 
-**The tab asks for the six figures rather than detecting them, and that is deliberate.** The obvious
-thing to do is read them off the profile, and it cannot be done honestly:
+**Most of it can now be read off the profile.** An earlier version of this section said it could
+not be, and that was written without ever having seen a real payload — the stored API key was
+rejected, so the conclusion rested on the wiki's list of sources rather than on the data. With a
+working key the profile turns out to carry 63 mentions of wisdom. What it does *not* carry is a
+total; see "Reading Wisdom off a profile" below for what is recoverable and what genuinely is not.
+The rest of this section stands: Wisdom is per skill, and the parts are all there is.
+
+Where Wisdom comes from, per the six `<Skill> Wisdom` pages:
 
 - Skill levels do not grant Wisdom. Hypixel's own `resources/skills` carries no Wisdom in any level's
   unlocks — the only mention in the whole resource is an unrelated enchantment.
@@ -1520,13 +1527,55 @@ thing to do is read them off the profile, and it cannot be done honestly:
 - Some of it is not additive at all. Fishing's Expertise enchantment multiplies with the rest rather
   than adding to it.
 
-Computing that means reproducing SkyCrypt's whole stat engine over equipped items, and a partial
-answer would be worse than none: reading only the accessory bag would find perhaps 2 of a real 170
-while looking authoritative, and every XP figure downstream would be quietly wrong by a factor of
-two. So the six boxes are typed once and remembered, each with a tooltip naming where that skill's
-Wisdom actually comes from, and the note says plainly that the profile cannot supply them. The old
-single value is migrated across all six on first load rather than dropped — wrong in detail, much
-closer than zero, and one edit puts it right.
+The six boxes stay editable and remembered, each with a tooltip naming where that skill's Wisdom
+comes from. The old single value is migrated across all six on first load rather than dropped —
+wrong in detail, much closer than zero, and one edit puts it right.
+
+## Reading Wisdom off a profile
+
+`scripts/fetch-wisdom-sources.mjs` and `src/lib/wisdom.ts`, filled in on the pet tab whenever the
+planner loads a profile.
+
+Hypixel publishes no Wisdom total anywhere. It publishes the parts, and four of them are
+recoverable:
+
+- **Item lore.** Armour, equipment and accessories state it outright — a line reading
+  `Combat Wisdom: <colour>+1`. This app already gunzips and walks that NBT for other reasons, so the
+  only new work is a regular expression. The trap is the colour code: a pattern expecting the number
+  to follow the colon directly matches nothing, silently, and returns zero rather than failing. The
+  second trap is the encoding — these are UTF-8 bytes carrying section signs, and decoding them as
+  latin1 turns the value into mojibake no pattern matches.
+- **Attributes.** Nine attributes grant Wisdom and one, `Echo of Wisdom`, multiplies the others
+  rather than granting any — so it is scraped, recorded, and deliberately not summed. Each states a
+  value at level 1 and at level 10; the levels between are spaced evenly, which for every wisdom
+  attribute is exact because the two ends are always a tenfold step. **`Veteran` is the one to
+  notice**: it has no "Wisdom" in its name, grants +1-10 Combat Wisdom, and is the largest single
+  attribute source, so a scrape keyed on the attribute's name rather than its effect would miss
+  exactly the one that matters most.
+- **Slayer tiers.** Every unique tier ever slain grants Combat Wisdom — one for tiers I-III, two for
+  IV-V. Counted on tiers rather than kills, so one boss of each is the whole of it. Hypixel's
+  counters are zero-indexed (`boss_kills_tier_0` is tier I), which is the sort of off-by-one that
+  would credit tier V to someone who has only done IV.
+
+The rarity ladder matters and is easy to get wrong. A legendary attribute maxes at 24 shards where a
+common needs 96, so applying the common table to `Veteran` reads a maxed attribute as level 5 and
+halves the Combat Wisdom it grants. `attribute_levels.json` already carried the per-rarity steps.
+
+**Verified against a live profile.** Gear 1 Combat / 5 Foraging, accessories 6.5 Combat, attributes
+10 Combat / 5 Mining / 5 Foraging / 5 Fishing, slayers 36 Combat — filling the boxes with Combat
+53.5, Foraging 10, Fishing 7, Mining 5, Farming 2.5 where they had all been zero.
+
+That 36 is worth a note. The Combat Wisdom page's prose says the base caps at 34, and its own table
+enumerates 36 — Wolf, Enderman and Blaze have no tier V, so the maximum is 7+7+5+5+7+5. The API
+agrees with the table: it omits `boss_kills_tier_4` for exactly those three bosses. Where the prose
+and the table disagree, the table is the one that can be checked, and it is the one this follows.
+
+**What is not counted, and why the result is called a floor.** A Booster Cookie and active potions
+are transient and not in the profile in any usable form. The held item depends on what you happen to
+be holding. The Ultimate Wisdom enchantment is a separate multiplier on Skill XP rather than a
+contribution to the Wisdom stat, and folding it in here would double-count it against itself. So the
+boxes are filled with a lower bound, the note says which sources were read, and anything typed by
+hand wins and is never overwritten by a later profile load.
 
 
 ## The pet tab, rebuilt around what it is for
