@@ -348,6 +348,32 @@ recomputes the whole board before picking again — several thousand picks over 
 ~13,000 tasks for a package run. Four things keep that affordable, and all four are caches over
 work that provably cannot have changed:
 
+- **Every column in Raw profits sorts.** Each carries a sort value separate from its rendered cell,
+  because sorting "9.7k" against "48k" as text puts the wrong one on top, and "never fills" is a
+  real answer that has to go to one end rather than poisoning the comparison.
+- **Corrupt Soil is modelled, and it changes the table.** An upgrade can multiply what a minion
+  already makes, change how much of it fits, or add a second item it did not make at all — and the
+  third kind was missing. Corrupt Soil adds 1 Sulphur and 1 Corrupted Fragment per harvest to any
+  mob minion, and on a cheap one the extras beat the drop: a slimeball fetches 5 at a shopkeeper,
+  the Sulphur alone 10. With it counted the Slime Minion moves from 12th to 5th, the Tarantula
+  roughly doubles, and the Revenant enters the top three. A one-click **Automated shipping** preset
+  sets the whole thing up — Corrupt Soil, a Super Compactor, an Enchanted Hopper and a claim
+  interval that says "never" — because it needs three exact slots and looks mediocre if any is
+  wrong. (Sulphur is `SULPHUR_ORE`; `SULPHUR` is Gunpowder. There is a test pinning both.)
+- **The Pet profits tab opens with a plan**: which minion to put down, which pet to sit on it, and
+  what the pair makes in a day. Pairing is the hard part — a pet keeps all of its own skill's XP and
+  a third of anything else — so `fetch-pets.mjs` now scrapes each pet's skill from its infobox, and
+  the pet is chosen on the pet half of the profit rather than the total, or the item income (which
+  is identical across pets) makes the choice a tie broken by nothing.
+- **Both halves of the profit are counted**: the pet margin, and everything the minion sold while it
+  levelled. For every real setup the items are the larger half by an order of magnitude, and the
+  section says so rather than letting one number read as "level pets off minions for 1.3M a day".
+- **Brewing is charged for twice.** The drops go into a stand instead of onto the market, so their
+  sale value is subtracted as an opportunity cost; and there is a hard cap on brews a day, which
+  caps the XP with it. A **Collect only** filter re-plans without brewing entirely.
+- **The twenty minions with no published XP rate are named rather than omitted.** The Revenant is
+  one of them, and a wall of Revenants levelling a Golden Dragon is a well-known setup — so its
+  absence would read as a verdict instead of a gap in the wiki.
 - **A task's price is cached against the price book it came from.** Nothing a solver does can
   change what a Recombobulator costs; only new prices can, and those arrive as a new book.
 - **Prerequisite closures are invalidated per pick, not rebuilt.** Completing a task can only

@@ -18,6 +18,7 @@ here is hand-typed.
 | `minions.json` | `resources/items` (`generator` / `generator_tier`) | Tier curve from the README table (1×6, 2, 3, 4, 6, 12, 24) | Totals **3,165** vs the README's 3,164. Live data: 48 minions have 12 tiers, 13 stop at 11 |
 | `accessories.json` | `resources/items`, `category: ACCESSORY` | — (magical power is curated) | 385 accessories, 277 tradeable |
 | `skill-xp.json` | Hypixel Wiki: the Farming/Mining XP tables, every item page with a `minion_xp` infobox field, and Potions/Alchemy Experience — `npm run gen:skillxp` | Skill XP per item, by hand and from a minion | 83 item rows, 77 with a published minion rate across 6 skills; 20 compaction pairs cross-checked, 1 non-linear |
+| `pets.json` | `Category:Pets`, `Infobox/Pet` — `node scripts/fetch-pets.mjs` | — | 85 pets; 82 carry the skill they level off, which is what the pet/minion pairing turns on |
 
 The skills and collections agreement with the README's independently-written totals is the
 strongest signal here that the parse is right.
@@ -1377,3 +1378,111 @@ the sell side is *someone else's* listing, which is what you would have to under
 you would receive — and listing a hundred of them is not the same market as the one listed now. The
 1% auction cut is taken off, being the one deduction that is certain. A pet listed at only one end
 is not a trade and is dropped rather than priced from a reference.
+
+## The upgrades that add items, and the setup that was invisible without them
+
+`data/curated/minion_extras.json`, modelled in `minionProfit.ts` as *streams*.
+
+An upgrade can change three different things and this app previously modelled two. A Flycatcher
+multiplies a number the minion already had; a compactor changes how much of it fits; and Corrupt
+Soil adds a **second item the minion did not produce at all**. Folding that third kind into the
+`output` multiplier would be arithmetically wrong — the extra item is not the drop and is not worth
+the same — so each output is now a stream of its own, and storage, compaction, the hopper and the
+claim interval treat a sulphur exactly as they treat a slimeball.
+
+The consequence is not marginal. Corrupt Soil adds **1 Sulphur and 1 Corrupted Fragment per
+harvest** to any mob-spawning minion, and on a cheap mob minion the extras are worth more than the
+drop: a slimeball sells to a shopkeeper for 5, the Sulphur alone for 10. With it modelled, the Slime
+Minion moves from 12th to 5th on the table, the Tarantula Minion roughly doubles, and the Revenant
+Minion appears in the top three — which is what people actually build.
+
+**Sulphur is `SULPHUR_ORE`. `SULPHUR` is Gunpowder.** The two names are swapped relative to any
+reasonable guess, and the Creeper Minion drops the latter. Pricing Corrupt Soil against `SULPHUR`
+values its sulphur at 4 instead of 10 and quietly halves the strategy. There is a test pinning both
+names for exactly this reason.
+
+### The hopper sells what the compactor made
+
+A second bug the streams rewrite fixed. `compactionRatio` returned only a number, so the overflow a
+hopper sells was priced as the *raw* drop — but the minion's inventory holds Enchanted Cobblestone,
+not cobblestone, and the shop pays for what is in the inventory. `compactionOf` now returns the
+item id as well, and the hopper is priced at the compacted item's shop price divided back down.
+
+For most items this is a small correction, because the shop price of an enchanted item is usually
+exactly its recipe quantity times the raw one. It is not always: Enchanted String is 576 against
+480 for the 160 strings in it.
+
+### Presets
+
+Three of them, and the automated shipping one is why they exist. A mob minion with Corrupt Soil and
+a Super Compactor selling into an Enchanted Hopper needs three specific slots filled and a claim
+interval that effectively says "never", and getting any one wrong makes it look mediocre. The table
+could always model it; the preset is what makes it findable.
+
+## Sorting
+
+Every column in Raw profits sorts, and each carries a `value` separate from its `render`. The
+rendered cell is a string with a suffix on it and sorting that lexically puts "9.7k" above "48k".
+Infinity is a real answer in the fill column — "never fills" — and is pushed to one end rather than
+being allowed to poison the comparison. Ties break on the minion's name so the table does not
+reshuffle under the cursor every time the bazaar ticks.
+
+## Which pet, on which minion
+
+`src/lib/petPlan.ts`, and the first section of the Pet profits tab.
+
+The two lists that were already there — best minion per skill, best pet to level — required the
+reader to multiply them in their head, and the multiplication is not the hard part. **The pairing
+is.** A pet keeps the full Skill XP of its own skill and a third of anything else, so the best
+minion under the wrong pet loses to a worse minion under the right one. Pairing needs to know each
+pet's skill, which nothing in this repo had: `fetch-pets.mjs` now scrapes it from the pet infobox's
+`type` line, written three different ways across the pages, and 82 of 85 pets resolve. A pet with no
+skill — the Wisp is fed Gabagool rather than levelled — stays null and is not planned for, because
+guessing is a factor of three either way.
+
+**Profit has two halves and both are counted.** A minion levelling a pet is still a minion: it goes
+on producing items to sell the whole time, and for every real setup that is the larger half by an
+order of magnitude. The section says so out loud whenever the pet half is under a quarter of the
+total, which is almost always — printing one number without that would read as "level pets off
+minions for 1.3M a day", which is not what the number means.
+
+Two design decisions worth recording, both found by looking at the output:
+
+- **The pet is chosen on the pet half, not the total.** Item income is identical across every pet on
+  a given minion, so including it makes the comparison a tie broken by nothing — and the table
+  cheerfully recommended a mismatched Enderman on every single row.
+- **There is a completion horizon**, default 365 days. Without one the plan recommends a pet that
+  finishes in twenty-three thousand days. When nothing fits, the empty state re-runs the plan
+  unbounded and reports what the quickest pairing *would* have been, so the reader knows which
+  control to move rather than facing a blank table.
+
+### Brewing is charged for, twice
+
+Every other route here is a by-product of collecting a minion you were collecting anyway. Brewing is
+not, and it is charged accordingly:
+
+- **The drops.** They go into a brewing stand instead of onto the market, so the Alchemy XP costs
+  exactly what they would have sold for. That opportunity cost is subtracted from the day's item
+  profit, and for several minions it consumes the entire item half.
+- **The labour.** A hard cap on brews per day, default 100. Capping the brews caps the XP with them,
+  which is the point — "22,500 pet XP an hour" is not an offer anyone takes if it means thousands of
+  brews. A route that hits the cap says so, and says what the minion could have supplied.
+
+A route filter sits above the table for the same reason. Brewing wins on raw Pet XP by a wide
+margin — an Alchemy pet on a brewed route dodges the `/12` that makes Alchemy XP nearly worthless to
+anything else — so **Collect only** is a genuinely different plan rather than the same table with
+rows struck out, and it is re-planned from scratch.
+
+### What the plan cannot answer, said out loud
+
+Twenty minions cannot be planned at all, because no minion XP rate has ever been published for what
+they drop. The Revenant Minion is one of them, and a wall of Revenants levelling a Golden Dragon is
+a well-known setup — so its absence from the table would read as a verdict rather than as a gap.
+The section lists them and points at Raw profits, which prices exactly what those minions sell, and
+which is where most of that strategy's money comes from anyway.
+
+Enchanting, Taming and Carpentry are gone from the skill grid. No minion produces Enchanting XP by
+any route, and Taming and Carpentry grant no Pet XP at all, so the three were permanent zeroes
+taking up a third of the tiles. The facts are still in `pet_xp.json` and still enforced — a
+Carpentry route still comes back worth nothing — they simply no longer have a card that never
+changes.

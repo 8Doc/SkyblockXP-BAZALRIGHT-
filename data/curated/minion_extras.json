@@ -1,0 +1,62 @@
+{
+  "note": "Upgrades that add a second item to what a minion produces, rather than changing its speed or its packing. These are the difference between a minion's headline drop and its actual output, and leaving them out is why the single best-known coin setup in the game — a mob minion with Corrupt Soil selling into an Enchanted Hopper — was invisible in a profit table that modelled every other slot.",
+  "source": "Hypixel Wiki: Corrupt Soil, Minion Upgrades (spreading and other upgrades), Automated Shipping.",
+  "verified": true,
+  "checkedAt": "2026-09-04",
+
+  "offlineOnly": "Every amount here is the OFFLINE figure, matching the rest of this app. Corrupt Soil and the Enchanted Egg both behave differently with a player on the island — the wiki files the multi-drop behaviour under Bugs — and the loaded case is not modelled anywhere in this project.",
+
+  "extras": [
+    {
+      "upgrade": "CORRUPT_SOIL",
+      "name": "Corrupt Soil",
+      "drops": [
+        { "itemId": "SULPHUR_ORE", "perHarvest": 1 },
+        { "itemId": "CORRUPTED_FRAGMENT", "perHarvest": 1 }
+      ],
+      "quote": "When placed in a minion, Corrupt Soil Corrupts all mobs spawned by the minion. This makes the mobs drop 1 Sulphur and 1 Corrupted Fragment.",
+      "why": "Two extra items on every harvest, and on a cheap mob minion they are worth more than the mob's own drop. A Slime Minion's slimeball sells to a shopkeeper for 5; the Sulphur alone is 10. That is the whole reason the setup exists, and a table without it ranks the strategy below minions nobody uses.",
+      "idWarning": "Sulphur is SULPHUR_ORE, not SULPHUR. SULPHUR is Gunpowder — the Creeper Minion's drop — and the two names are swapped relative to what anyone would guess. Pricing this against SULPHUR values it at 4 instead of 10 and quietly halves the strategy.",
+      "restrictedTo": [
+        "ZOMBIE", "REVENANT", "VOIDLING", "INFERNO", "VAMPIRE", "SKELETON", "CREEPER", "SPIDER",
+        "TARANTULA", "CAVESPIDER", "BLAZE", "MAGMA_CUBE", "ENDERMAN", "GHAST", "SLIME",
+        "COW", "PIG", "CHICKEN", "SHEEP", "RABBIT"
+      ],
+      "restrictedWhy": "Mob-spawning minions only — the upgrade corrupts a mob, so a minion that spawns none has nothing to corrupt.",
+      "loadedNote": "While the island is loaded this triggers per loot-table entry, so Revenant, Voidling, Skeleton, Tarantula, Magma Cube and Slime minions can produce several of each. The wiki files that under Bugs and publishes no rate for it; this models the offline one."
+    },
+    {
+      "upgrade": "DIAMOND_SPREADING",
+      "name": "Diamond Spreading",
+      "drops": [{ "itemId": "DIAMOND", "perHarvest": 0.1 }],
+      "quote": "10% chance per drop of generating a Diamond.",
+      "why": "A tenth of a diamond a harvest is small but it is not nothing, and it is the same shape of fact as Corrupt Soil — an upgrade slot that pays in items rather than in speed.",
+      "restrictedTo": null
+    },
+    {
+      "upgrade": "ENCHANTED_EGG",
+      "name": "Enchanted Egg",
+      "drops": [{ "itemId": "EGG", "perHarvest": 1 }],
+      "quote": "While the island is unloaded, only one Egg will be made per cycle.",
+      "why": "The wiki gives the loaded figure as two and the unloaded as one, and states both. This is the unloaded one.",
+      "restrictedTo": ["CHICKEN"]
+    },
+    {
+      "upgrade": "ENCHANTED_SHEARS",
+      "name": "Enchanted Shears",
+      "drops": [{ "itemId": "WOOL", "perHarvest": 2 }],
+      "quote": "Shears the sheep after they spawn, which gives 1-3 Wool, averaging to 2 Wool per sheep.",
+      "why": "The wiki gives the average outright, so no midpoint has to be invented.",
+      "restrictedTo": ["SHEEP"]
+    }
+  ],
+
+  "notModelled": {
+    "potatoSpreading": "5% Potato, but limited to one of any minion, so it is not a setup that scales.",
+    "sleepyHollow": "0.015% Purple Candy, and only during the Great Spook.",
+    "krampusHelmet": "0.0045% Red Gift. Both of these are rounding error on any timescale.",
+    "soulflowEngines": "Produce Raw Soulflow on a cooldown rather than per harvest, and halve the minion's own output doing it. The output halving IS modelled, in minion_modifiers.json; the soulflow itself is not.",
+    "berberisInjector": "Lush Berberis on a five-minute cooldown, which is a rate per hour rather than per harvest and does not fit this table's shape.",
+    "superJacob": "One Jacob's Ticket every three hours, same reason."
+  }
+}

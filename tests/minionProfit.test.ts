@@ -5,7 +5,7 @@ import { readFileSync } from "node:fs";
 import { parseStorage, parseCooldowns } from "../scripts/fetch-minion-production.mjs";
 import { NET_OF_TAX } from "../src/lib/bazaar";
 import { compactionRatio, dropIdFor, planProfit, unitValue } from "../src/lib/minionProfit";
-import type { Basis, Compactor, DropTable, ItemPrices, Recipe, StorageTables } from "../src/lib/minionProfit";
+import type { Basis, Compactor, DropTable, ExtrasTable, ItemPrices, Recipe, StorageTables } from "../src/lib/minionProfit";
 import type { Fuel, MinionData, Modifiers, Upgrade } from "../src/lib/minions";
 import { varianceFrom, trustedPrice, zScore, confidenceOf } from "../src/lib/priceVariance";
 import type { CoflnetPoint } from "../src/lib/bazaarHistory";
@@ -14,6 +14,7 @@ const data = JSON.parse(readFileSync("data/generated/minion-production.json", "u
 const mods = JSON.parse(readFileSync("data/curated/minion_modifiers.json", "utf8")) as Modifiers;
 const storageFile = JSON.parse(readFileSync("data/curated/minion_storage.json", "utf8"));
 const dropsFile = JSON.parse(readFileSync("data/curated/minion_drops.json", "utf8")) as DropTable;
+const extrasFile = JSON.parse(readFileSync("data/curated/minion_extras.json", "utf8")) as ExtrasTable;
 const recipes = JSON.parse(readFileSync("data/generated/recipes.json", "utf8")).recipes as Recipe[];
 const names = JSON.parse(readFileSync("data/generated/bazaar_items.json", "utf8")).names as Record<string, string>;
 const npc = JSON.parse(readFileSync("data/generated/npc-prices.json", "utf8")).prices as Record<string, { sell?: number }>;
@@ -196,6 +197,7 @@ function plan(over: Partial<Parameters<typeof planProfit>[0]> = {}) {
     data,
     storage,
     drops: dropsFile,
+    extras: extrasFile,
     recipes,
     prices: prices(),
     variance: new Map(),

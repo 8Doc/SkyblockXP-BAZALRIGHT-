@@ -22,6 +22,10 @@ import {
   type PetProfitRow,
 } from "../lib/petLevelling";
 import type { AuctionRecord } from "../lib/auctions";
+import { bestPerMinion, planPetPairs, type PetPlanRow } from "../lib/petPlan";
+import { planProfit, type ExtrasTable, type ItemPrices, type StorageTables } from "../lib/minionProfit";
+import { normalise } from "../lib/bazaar";
+import type { RawBazaarProduct } from "../lib/bazaarTypes";
 
 /**
  * Minions as pet levelling, and pets as a trade.
@@ -53,11 +57,16 @@ type Tables = {
   production: MinionData;
   modifiers: Modifiers;
   drops: DropTable;
+  extras: ExtrasTable;
   recipes: Recipe[];
   names: Record<string, string>;
+  npcPrices: Record<string, { sell?: number; buy?: number }>;
+  storage: StorageTables;
   skillXp: SkillXpTables;
   petXpRules: PetXpRules;
   petLevels: PetLevelTable;
+  /** Which skill each pet levels off — the field the whole pairing turns on. */
+  petCatalogue: { key: string; name: string; skill: SkillKey | null }[];
 };
 
 /* ----------------------------------------------------------------- state */
@@ -71,6 +80,14 @@ type State = {
   fuel: string;
   upgrades: [string, string];
   showRoutes: boolean;
+  /** Brews a day worth recommending. The chore ceiling, not an economic one. */
+  maxBrews: string;
+  /** How long a pet may take before the pairing stops counting as a plan. */
+  horizon: string;
+  /** Which routes the plan is allowed to use. */
+  routes: "all" | "collect" | "brew";
+  /** A live bazaar read, so the plan can price what the minion sells alongside the pet. */
+  market: Map<string, ReturnType<typeof normalise>>;
 
   /** The pet half, which costs a full auction sweep and is therefore opt-in. */
   pets: PetBinIndex | null;
@@ -80,6 +97,8 @@ type State = {
   scanError: string;
   /** Which pet the coins-an-hour figure is computed against, if any is chosen. */
   pairedWith: string | null;
+  /** Which plan row is opened out. */
+  openPlan: string | null;
 };
 
 const state: State = {
@@ -91,12 +110,17 @@ const state: State = {
   fuel: localStorage.getItem("sbxp:pxfuel") ?? "NONE",
   upgrades: [localStorage.getItem("sbxp:pxup0") ?? "NONE", localStorage.getItem("sbxp:pxup1") ?? "NONE"],
   showRoutes: localStorage.getItem("sbxp:pxroutes") === "1",
+  maxBrews: localStorage.getItem("sbxp:pxbrews") ?? "100",
+  horizon: localStorage.getItem("sbxp:pxhorizon") ?? "365",
+  routes: (localStorage.getItem("sbxp:pxroutefilter") as State["routes"]) ?? "all",
+  market: new Map(),
   pets: null,
   scanning: false,
   scanned: 0,
   scanTotal: 0,
   scanError: "",
   pairedWith: localStorage.getItem("sbxp:pxpair"),
+  openPlan: null,
 };
 
 let tables: Tables | null = null;
@@ -186,6 +210,51 @@ async function scanPets(): Promise<void> {
 
   state.scanning = false;
   renderPets();
+  renderPlan();
+}
+
+/* ----------------------------------------------------------- the bazaar */
+
+/**
+ * A price read, so the plan can count what the minion sells as well as what the pet earns.
+ *
+ * The skill half of this tab needs no prices at all and did not have any. The plan does: a
+ * Revenant Minion levelling a Golden Dragon makes most of its money selling rotten flesh, and a
+ * planner that counted only the pet margin would describe half the strategy and call it the
+ * answer. One read on mount, refreshed with the tab, no poll — nothing here moves fast enough to
+ * need twenty-second updates and the profits tab next door is already doing that job.
+ */
+async function readBazaar(): Promise<void> {
+  try {
+    const response = await fetch("https://api.hypixel.net/v2/skyblock/bazaar");
+    if (!response.ok) return;
+    const body = (await response.json()) as { lastUpdated?: number; products: Record<string, RawBazaarProduct> };
+    const market = new Map<string, ReturnType<typeof normalise>>();
+    for (const [id, raw] of Object.entries(body.products)) {
+      const snapshot = normalise(id, raw, body.lastUpdated ?? Date.now());
+      if (snapshot) market.set(id, snapshot);
+    }
+    state.market = market;
+    renderPlan();
+  } catch {
+    // No prices is a plan without its item half, which the section says rather than hides.
+  }
+}
+
+function priceBook(): Map<string, ItemPrices> {
+  const book = new Map<string, ItemPrices>();
+  if (!tables) return book;
+  const ids = new Set<string>(Object.keys(tables.npcPrices));
+  for (const [id] of state.market) ids.add(id);
+  for (const id of ids) {
+    const product = state.market.get(id);
+    book.set(id, {
+      instasell: product && product.instasell > 0 ? product.instasell : null,
+      instabuy: product && product.instabuy > 0 ? product.instabuy : null,
+      npcSell: tables.npcPrices[id]?.sell ?? null,
+    });
+  }
+  return book;
 }
 
 /* ------------------------------------------------------------------ rows */
@@ -271,6 +340,20 @@ export function mountMinionPet(container: HTMLElement, data: Tables): void {
         return render();
       }
 
+      const route = target.closest<HTMLElement>("[data-pxroute]");
+      if (route) {
+        state.routes = route.dataset.pxroute as State["routes"];
+        localStorage.setItem("sbxp:pxroutefilter", state.routes);
+        return renderPlan();
+      }
+
+      const planRow = target.closest<HTMLElement>("[data-pxplanopen]");
+      if (planRow) {
+        const key = planRow.dataset.pxplanopen!;
+        state.openPlan = state.openPlan === key ? null : key;
+        return renderPlan();
+      }
+
       const pair = target.closest<HTMLElement>("[data-pxpair]");
       if (pair) {
         const key = pair.dataset.pxpair!;
@@ -307,21 +390,38 @@ export function mountMinionPet(container: HTMLElement, data: Tables): void {
       } else if (el.id === "pxcount") {
         state.count = el.value;
         localStorage.setItem("sbxp:pxcount", el.value);
+      } else if (el.id === "pxbrews") {
+        state.maxBrews = el.value;
+        localStorage.setItem("sbxp:pxbrews", el.value);
+      } else if (el.id === "pxhorizon") {
+        state.horizon = el.value;
+        localStorage.setItem("sbxp:pxhorizon", el.value);
       } else return;
       // Repaint the results only: rebuilding the field being typed into would drop the caret.
+      renderPlan();
       renderSkills();
       renderPets();
     });
   }
 
   render();
+  if (state.market.size === 0) void readBazaar();
 }
 
 export function unmountMinionPet(): void {
   host = null;
 }
 
-const SKILLS: SkillKey[] = ["FARMING", "MINING", "FORAGING", "COMBAT", "FISHING", "ALCHEMY", "ENCHANTING", "TAMING", "CARPENTRY"];
+/**
+ * The skills a minion can actually reach.
+ *
+ * Enchanting, Taming and Carpentry are gone from this list deliberately. No minion produces
+ * Enchanting XP by any route; Taming and Carpentry grant no Pet XP at all, so their cards were
+ * three permanent zeroes taking up a third of the grid. The facts are still in `pet_xp.json` and
+ * still enforced by `petXpMultiplier` — a Carpentry route would still come back worth nothing —
+ * they are simply no longer given a tile that never changes.
+ */
+const SKILLS: SkillKey[] = ["FARMING", "MINING", "FORAGING", "COMBAT", "FISHING", "ALCHEMY"];
 
 function render(): void {
   if (!host || !tables) return;
@@ -361,15 +461,23 @@ function render(): void {
         <label>Fuel <select id="pxfuel">${optionList(tables.modifiers.fuels, state.fuel)}</select></label>
         <label>Upgrade 1 <select id="pxup0">${optionList(tables.modifiers.upgrades, state.upgrades[0])}</select></label>
         <label>Upgrade 2 <select id="pxup1">${optionList(tables.modifiers.upgrades, state.upgrades[1])}</select></label>
+        <label title="Pairings where one pet would take longer than this are not plans and are left out. It matters more than it looks: the coins from selling the minion's output dwarf the pet margin, so without a horizon every minion picks whichever pet has the best coins-per-XP regardless of skill, and the table recommends a pet that finishes in twenty-three thousand days.">Pet must finish within (days)
+          <input id="pxhorizon" value="${escapeHtml(state.horizon)}" inputmode="numeric" autocomplete="off">
+        </label>
+        <label title="The most brews a day worth recommending. Brewing is the one route here that is not a by-product of collecting a minion you were collecting anyway — it costs an evening at a brewing stand and it costs the drops, which is why both are charged. Set it to what you would actually sit through.">Brews a day, at most
+          <input id="pxbrews" value="${escapeHtml(state.maxBrews)}" inputmode="numeric" autocomplete="off">
+        </label>
       </div>
 
       <p class="sub dim">${chainNote()}</p>
     </div>
 
+    <div id="pxplan"></div>
     <div id="pxskills"></div>
     <div id="pxpets"></div>
   `;
 
+  renderPlan();
   renderSkills();
   renderPets();
 }
@@ -399,6 +507,319 @@ function chainNote(): string {
     `says "not published" rather than claiming a zero.`
   );
 }
+
+/* ----------------------------------------------------------- the plan */
+
+/**
+ * What the minion half and the pet half come to when they are multiplied together.
+ *
+ * Everything the two sections below say separately, said once as a plan: put this minion down, sit
+ * that pet on it, make this many coins a day. The pairing is the part neither list can do on its
+ * own — a pet keeps the full Skill XP of its own skill and a third of anything else, so the best
+ * minion under the wrong pet loses to a worse minion under the right one.
+ */
+function planRows(over: { maxDaysPerPet?: number } = {}): PetPlanRow[] {
+  if (!tables || !state.pets) return [];
+
+  const prices = priceBook();
+  const setup = {
+    tier: state.tier,
+    fuel: fuelById(state.fuel),
+    upgrades: [upgradeById(state.upgrades[0]), upgradeById(state.upgrades[1])] as [Upgrade, Upgrade],
+    count: Math.max(1, Number(state.count.replace(/[^0-9]/g, "")) || 1),
+  };
+
+  // What each minion earns selling its output, on the same setup the XP is computed for. Priced at
+  // instasell with a long claim, because a minion being farmed for pet XP is one you are visiting
+  // anyway — the storage cap is not the binding constraint on this tab.
+  const profit = planProfit({
+    data: tables.production,
+    storage: tables.storage,
+    drops: tables.drops,
+    extras: tables.extras,
+    recipes: tables.recipes,
+    prices,
+    variance: new Map(),
+    names: tables.names,
+    basis: "instasell",
+    trust: "live",
+    setup: {
+      ...setup,
+      chest: tables.storage.chests[0],
+      hopper: tables.storage.hoppers[0],
+      compactor: tables.storage.compactors.find((c) => c.id === "SUPER_COMPACTOR_3000") ?? tables.storage.compactors[0],
+      claimHours: 24,
+    },
+  });
+
+  const itemCoinsPerHour = new Map(profit.map((r) => [r.generator, r.netPerHour]));
+  const dropValue = new Map(profit.map((r) => [r.generator, r.unitValue]));
+
+  // The route filter is applied before pairing rather than after, so "collect only" genuinely
+  // re-plans — each minion picks the best pet for the XP it makes by being collected, rather than
+  // showing whatever was left over once the brewing rows were struck out.
+  const allowed = xpRows().filter((r) =>
+    state.routes === "all" ? true : state.routes === "brew" ? r.route === "brewing" : r.route === "direct",
+  );
+
+  return bestPerMinion(
+    planPetPairs({
+      xpRows: allowed,
+      pets: petRows(),
+      catalogue: tables.petCatalogue,
+      rules: tables.petXpRules,
+      player: player(),
+      itemCoinsPerHour,
+      dropValue,
+      maxBrewsPerDay: Math.max(0, Number(state.maxBrews) || 0),
+      maxDaysPerPet: over.maxDaysPerPet ?? Math.max(1, Number(state.horizon) || 365),
+      minProfitPerDay: 0,
+    }),
+  );
+}
+
+/**
+ * The minions this section cannot plan, and why — because their absence is misleading.
+ *
+ * A wall of Revenant Minions levelling a Golden Dragon is one of the better-known coin setups in
+ * the game, and it does not appear anywhere above. Not because it is bad: because nobody has
+ * published a minion XP rate for Rotten Flesh. Only Farming and Mining have a Minion XP column,
+ * and the item infoboxes fill in about forty more items; everything else is genuinely unmeasured.
+ *
+ * Left silent, that reads as a verdict on the strategy. Said out loud, it is a gap in the sources —
+ * and the Raw profits tab still prices those minions perfectly well for what they sell, which is
+ * where most of that setup's money comes from anyway.
+ */
+function unplannableNote(planned: PetPlanRow[]): string {
+  if (!tables) return "";
+  const have = new Set(planned.map((r) => r.generator));
+  const rated = new Set(xpRows().filter((r) => r.baseSkillXpPerHour > 0).map((r) => r.generator));
+
+  const missing = tables.production.minions
+    .filter((m) => !have.has(m.generator) && !rated.has(m.generator))
+    .map((m) => m.family.replace(/ Minion$/, ""));
+  if (missing.length === 0) return "";
+
+  const shown = missing.slice(0, 12).join(", ");
+  return `<div class="warn"><strong>${num(missing.length)} minions cannot be planned here at all</strong>, because
+    no minion XP rate has ever been published for what they drop: ${escapeHtml(shown)}${
+      missing.length > 12 ? `, and ${num(missing.length - 12)} more` : ""
+    }. That is a gap in the wiki rather than a verdict — the Revenant Minion is in that list, and a wall of them
+    levelling a Golden Dragon is a well-known setup. What is missing is only the XP half; the
+    <strong>Raw profits</strong> tab prices exactly what those minions sell, which is where most of that
+    strategy's money comes from.</div>`;
+}
+
+function routeTabsHtml(): string {
+  return `<div class="tabs">
+    ${ROUTE_TABS.map(
+      ([id, label, help]) =>
+        `<button class="chip${state.routes === id ? " on" : ""}" data-pxroute="${id}" title="${escapeHtml(
+          help,
+        )}">${escapeHtml(label)}</button>`,
+    ).join("")}
+  </div>`;
+}
+
+/**
+ * Why the plan is empty, and which control to move.
+ *
+ * "No pairing comes out ahead" is true and useless. There are only a few reasons the table can be
+ * empty and they call for different actions, so this re-runs the plan with the horizon lifted and
+ * reports what the best pairing *would* have been — which turns a dead end into "raise this number
+ * to 400, or pick a matching pet". Almost always the answer is the horizon, because minion XP is a
+ * trickle and a pet is millions of XP.
+ */
+function emptyReason(): string {
+  if (!tables || !state.pets) return "";
+  const horizon = Math.max(1, Number(state.horizon) || 365);
+  const unbounded = planRows({ maxDaysPerPet: Infinity });
+
+  if (unbounded.length === 0) {
+    return `<p class="dim pad">Nothing to plan here. Either no pet is listed at both ends of its ladder right
+      now — the auction house is a snapshot, not a catalogue — or no minion on this route produces XP for a
+      skill any listed pet levels off.</p>`;
+  }
+
+  const best = unbounded[0];
+  return `<div class="warn">Every pairing is slower than the <strong>${num(horizon)}-day</strong> horizon, so
+    none of them count as a plan. The quickest is the <strong>${escapeHtml(best.petName)}</strong> on a
+    <strong>${escapeHtml(best.family)}</strong>, at <strong>${num(Math.round(best.daysPerPet))} days</strong> a pet${
+      best.matched ? "" : ", and its skill does not even match"
+    }. Raise the horizon to see it, or raise the tier and minion count to make it faster — this is minion XP
+    being a trickle rather than anything being broken.</div>`;
+}
+
+function renderPlan(): void {
+  const target = document.getElementById("pxplan");
+  if (!target || !tables) return;
+
+  if (!state.pets) {
+    target.innerHTML = `<h3 class="gh-h">The plan</h3>
+      <p class="dim pad">${PLAN_NOTE}</p>
+      <div class="warn">This needs pet prices, which means reading the auction house — the button is in
+        <strong>Best pet to level</strong> below. Everything else on this tab works without it.</div>`;
+    return;
+  }
+
+  const rows = planRows();
+  if (rows.length === 0) {
+    target.innerHTML = `<h3 class="gh-h">The plan</h3>
+      <p class="dim pad">${PLAN_NOTE}</p>
+      ${routeTabsHtml()}
+      ${emptyReason()}`;
+    return;
+  }
+
+  const best = rows[0];
+  const body = rows
+    .slice(0, 25)
+    .map((r) => {
+      const brews = r.brewsPerDay > 0 ? `<div class="dim bz-path">${num(Math.round(r.brewsPerDay))} brews a day</div>` : "";
+      return `<tr class="bz-open" data-pxplanopen="${escapeHtml(r.generator + ":" + r.petKey + ":" + r.petRarity)}">
+        <td>${escapeHtml(r.family)}<div class="dim bz-path">tier ${r.tier} · ${escapeHtml(title(r.skill))}${
+          r.route === "brewing" ? " · brewed" : ""
+        }</div></td>
+        <td>${escapeHtml(r.petName)}<div class="dim bz-path">${escapeHtml(title(r.petRarity))}${
+          r.matched ? "" : ` · <span class="gold">skill mismatch</span>`
+        }</div>${brews}</td>
+        <td class="num">${coins(Math.round(r.totalProfitPerDay))}</td>
+        <td class="num">${coins(Math.round(r.petProfitPerDay))}</td>
+        <td class="num">${coins(Math.round(r.itemProfitPerDay))}</td>
+        <td class="num">${num(Math.round(r.petXpPerDay))}</td>
+        <td class="num">${r.daysPerPet < 1 ? `${(r.daysPerPet * 24).toFixed(1)} hr` : `${r.daysPerPet.toFixed(1)} d`}</td>
+      </tr>${
+        state.openPlan === r.generator + ":" + r.petKey + ":" + r.petRarity
+          ? `<tr class="mn-detail"><td colspan="7">${planDetail(r)}</td></tr>`
+          : ""
+      }`;
+    })
+    .join("");
+
+  target.innerHTML = `
+    <h3 class="gh-h">The plan</h3>
+    <p class="dim pad">${PLAN_NOTE}</p>
+    ${routeTabsHtml()}
+    <div class="stats" style="grid-template-columns: repeat(3, 1fr)">
+      <div class="stat">
+        <div class="stat-label">Put down</div>
+        <div class="stat-value gold">${escapeHtml(best.family)}</div>
+        <div class="stat-sub">tier ${best.tier} · ${escapeHtml(title(best.skill))} · ${escapeHtml(state.count)} of them</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Level this pet</div>
+        <div class="stat-value gold">${escapeHtml(best.petName)}</div>
+        <div class="stat-sub">${escapeHtml(title(best.petRarity))} · one every ${
+          best.daysPerPet < 1 ? `${(best.daysPerPet * 24).toFixed(1)} hours` : `${best.daysPerPet.toFixed(1)} days`
+        }</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Profit a day</div>
+        <div class="stat-value gold">${coins(Math.round(best.totalProfitPerDay))}</div>
+        <div class="stat-sub">${coins(Math.round(best.petProfitPerDay))} pets · ${coins(
+          Math.round(best.itemProfitPerDay),
+        )} items</div>
+      </div>
+    </div>
+    ${petShareNote(best)}
+    <div class="panel scroll" style="margin-top:8px">
+      <table class="bz">
+        <thead><tr>
+          <th>Minion</th><th>Pet</th>
+          <th class="num" title="Pets and items together, less anything brewing consumed. The ranking figure.">Profit/day</th>
+          <th class="num" title="From buying the pet cheap, levelling it on this minion's XP, and selling it maxed.">Pets</th>
+          <th class="num" title="From selling what the minion produced while it did it. For most real setups this is the larger half.">Items</th>
+          <th class="num">Pet xp/day</th>
+          <th class="num" title="How long one pet takes from the cheapest listing to max level.">Per pet</th>
+        </tr></thead>
+        <tbody>${body}</tbody>
+      </table>
+    </div>
+    <p class="dim pad">Best pairing per minion, ${num(rows.length)} minions${
+      rows.length > 25 ? ", showing the first 25" : ""
+    } · click a row for the arithmetic</p>
+    ${unplannableNote(rows)}
+  `;
+}
+
+/**
+ * Which half of the profit is actually doing the work, said out loud when it is lopsided.
+ *
+ * For almost every real setup the answer is "the items", by an order of magnitude — the published
+ * minion XP rates are fractions of a point per drop, so a pet takes months. A section that printed
+ * one profit figure without saying that would read as "level pets off minions for 1.3M a day",
+ * which is not what the number means.
+ */
+function petShareNote(best: PetPlanRow): string {
+  const share = best.totalProfitPerDay > 0 ? best.petProfitPerDay / best.totalProfitPerDay : 0;
+  if (share >= 0.25) return "";
+  return `<div class="warn">Almost all of this is the <strong>items</strong>, not the pet:
+    ${coins(Math.round(best.itemProfitPerDay))} a day from selling what the minion makes against
+    ${coins(Math.round(best.petProfitPerDay))} from the pet. Minion XP is a trickle — the published rates are
+    fractions of a point a drop — so the pet is a slow bonus on top of a minion worth running anyway, not the
+    reason to run it. Raising the tier or the minion count moves both halves; only a matching pet moves the
+    pet half much.</div>`;
+}
+
+/** The row opened out: where each half of the day's profit came from. */
+function planDetail(r: PetPlanRow): string {
+  const lines = [
+    `<div class="gh-sub"><strong>${num(Math.round(r.petXpPerDay))}</strong> pet XP a day ${
+      r.matched
+        ? `— the pet's own skill, so all of it counts.`
+        : `— a ${escapeHtml(title(r.petRarity))} ${escapeHtml(r.petName)} is not a ${escapeHtml(
+            title(r.skill),
+          )} pet, so most of the XP is lost to the mismatch divisor.`
+    }</div>`,
+    `<div class="gh-sub">One pet needs its whole ladder, so this finishes <strong>${r.petsPerDay.toFixed(
+      2,
+    )}</strong> pets a day at ${coins(Math.round(r.petProfitPerDay / Math.max(r.petsPerDay, 1e-9)))} margin each.</div>`,
+    `<div class="gh-sub">The minion goes on selling its output the whole time: <strong>${coins(
+      Math.round(r.itemProfitPerDay),
+    )}</strong> a day.</div>`,
+  ];
+  if (r.brewingCostPerDay > 0) {
+    lines.push(
+      `<div class="gh-sub gold">Brewing eats <strong>${coins(
+        Math.round(r.brewingCostPerDay),
+      )}</strong> a day of drops that would otherwise be sold — already subtracted above.</div>`,
+    );
+  }
+  for (const c of r.caveats.slice(0, 6)) lines.push(`<div class="gh-sub dim">${escapeHtml(c)}</div>`);
+  return lines.join("");
+}
+
+/**
+ * Which routes the plan may use.
+ *
+ * Brewing wins on raw Pet XP by a wide margin and it wins for a reason worth seeing — an Alchemy
+ * pet on a brewed route dodges the /12 that makes Alchemy XP nearly worthless to anything else.
+ * But it is also the one route that is work rather than a by-product, so "collect only" is the
+ * setting for a plan you can leave alone, and it is a different plan rather than the same table
+ * with rows removed.
+ */
+const ROUTE_TABS: [State["routes"], string, string][] = [
+  ["all", "All routes", "Every way a minion reaches a skill, brewing included."],
+  [
+    "collect",
+    "Collect only",
+    "No brewing stand. The XP that arrives simply by collecting a minion you were collecting anyway — " +
+      "nothing to stand and do, and nothing given up to get it.",
+  ],
+  [
+    "brew",
+    "Brewing only",
+    "Compact the drops into their enchanted form and brew them. Far more Pet XP per drop, at the cost of the " +
+      "drops themselves and an evening at the stand — both of which are charged here.",
+  ],
+];
+
+const PLAN_NOTE =
+  "Which minion to put down and which pet to sit on it, ranked on coins a day. Profit has two halves and " +
+  "both are counted: the margin on pets bought cheap, levelled and resold, and the value of everything the " +
+  "minion sold while it was doing it — which for the setups people actually run is the larger half. Pairings " +
+  "respect the pet's own skill, because a pet keeps all of its skill's XP and a third of anything else, so " +
+  "the best minion under the wrong pet loses to a worse minion under the right one.";
 
 /* --------------------------------------------------------- the skill half */
 

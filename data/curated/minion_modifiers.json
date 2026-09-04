@@ -6,6 +6,7 @@
 
   "speedFormula": "Time Between Actions = base / (1 + speedBoost). Stated on Minion Fuel, with a worked example: a Clay Minion XI has a base of 16s, and Enchanted Coal at +10% gives 16 / 1.10 = 14.55s. The scraped cooldown table gives Clay XI as exactly 16s, so the two agree.",
   "multiplierNote": "Fuels quoted as x2/x3/x4 do not touch the speed at all - they duplicate every item the minion produces. Kept as a separate field so the two are never added together.",
+  "extrasNote": "Some upgrades change neither speed nor output and instead add a SECOND item to what the minion produces - Corrupt Soil, the Enchanted Egg, the Enchanted Shears, Diamond Spreading. They carry speed 0 and output 1 here because those fields are honest, and what they actually add lives in minion_extras.json. An upgrade with no effect in this file is not an upgrade with no effect.",
 
   "fuels": [
     { "id": "NONE", "name": "No fuel", "speed": 0, "multiplier": 1, "hours": null },
@@ -37,6 +38,9 @@
     { "id": "SUPER_COMPACTOR_3000", "name": "Super Compactor 3000", "speed": 0, "output": 1, "note": "Compacts drops into enchanted forms. Does not change how much is collected, but it is what stops a minion filling up and stalling." },
     { "id": "DWARVEN_SUPER_COMPACTOR", "name": "Dwarven Super Compactor", "speed": 0, "output": 1, "note": "Smelts and compacts. Same collection count." },
     { "id": "DIAMOND_SPREADING", "name": "Diamond Spreading", "speed": 0, "output": 1, "note": "10% chance of a Diamond per drop. That feeds the Diamond collection, not the one this minion is grinding." },
+    { "id": "CORRUPT_SOIL", "name": "Corrupt Soil", "speed": 0, "output": 1, "restrictedTo": "mob-spawning", "note": "Corrupts every mob the minion spawns, adding 1 Sulphur and 1 Corrupted Fragment to each. Changes nothing about speed or the minion's own drop, and on a cheap mob minion the two extras are worth more than the drop itself - see minion_extras.json." },
+    { "id": "ENCHANTED_EGG", "name": "Enchanted Egg", "speed": 0, "output": 1, "restrictedTo": "chicken", "note": "Adds an Egg to each Chicken. Two while the island is loaded, one while it is not; this app models the unloaded case." },
+    { "id": "ENCHANTED_SHEARS", "name": "Enchanted Shears", "speed": 0, "output": 1, "restrictedTo": "sheep", "note": "Shears each sheep for an average of 2 Wool on top of the mutton." },
     { "id": "SOULFLOW_ENGINE", "name": "Soulflow Engine", "speed": 0, "output": 0.5, "note": "Halves the minion's output in exchange for Raw Soulflow. Wrong tool for a collection grind, and included so the cost of using it is visible." },
     { "id": "LESSER_SOULFLOW_ENGINE", "name": "Lesser Soulflow Engine", "speed": 0, "output": 0.5, "note": "Also halves output." }
   ]

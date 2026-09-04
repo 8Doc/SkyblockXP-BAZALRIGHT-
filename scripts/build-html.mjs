@@ -132,6 +132,10 @@ const minionData = {
     compactors: minionStorage.compactors,
   },
   drops: { overrides: (await loadJson("curated/minion_drops.json")).overrides },
+  // Upgrades that add a second item to the output. Without these the single best-known coin
+  // setup in the game — a mob minion with Corrupt Soil selling into an Enchanted Hopper — is
+  // invisible in a table that models every other slot.
+  extras: { extras: (await loadJson("curated/minion_extras.json")).extras },
   recipes: recipeFile.recipes,
   npcPrices: (await loadJson("generated/npc-prices.json")).prices,
   names: (await loadJson("generated/bazaar_items.json")).names,

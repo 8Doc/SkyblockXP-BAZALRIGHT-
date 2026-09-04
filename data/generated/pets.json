@@ -1,8 +1,8 @@
 {
- "generatedAt": "2026-08-20T23:16:53.975Z",
+ "generatedAt": "2026-09-04T00:55:00.662Z",
  "source": "https://hypixelskyblock.minecraft.wiki/api.php — Category:Pets, Infobox/Pet rarity",
- "note": "Every pet and the rarities it can be. Pet score is the best copy's rarity points plus one for reaching max level.",
- "maxScore": 518,
+ "note": "Every pet, the rarities it can be, and the skill it levels off. Pet score is the best copy's rarity points plus one for reaching max level. A null skill is a pet that does not level off a skill at all — the Wisp is fed Gabagool and the Bingo Pet takes every skill — and must not be read as Combat.",
+ "maxScore": 524,
  "pets": [
   {
    "buyable": true,
@@ -11,7 +11,8 @@
    "rarities": [
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "FISHING"
   },
   {
    "buyable": true,
@@ -20,7 +21,8 @@
    "rarities": [
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "COMBAT"
   },
   {
    "buyable": true,
@@ -34,7 +36,8 @@
     "LEGENDARY",
     "MYTHIC"
    ],
-   "maxRarity": "MYTHIC"
+   "maxRarity": "MYTHIC",
+   "skill": "MINING"
   },
   {
    "buyable": true,
@@ -48,7 +51,8 @@
     "LEGENDARY",
     "MYTHIC"
    ],
-   "maxRarity": "MYTHIC"
+   "maxRarity": "MYTHIC",
+   "skill": "FISHING"
   },
   {
    "buyable": true,
@@ -58,7 +62,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "MINING"
   },
   {
    "buyable": true,
@@ -72,7 +77,8 @@
     "LEGENDARY",
     "MYTHIC"
    ],
-   "maxRarity": "MYTHIC"
+   "maxRarity": "MYTHIC",
+   "skill": "MINING"
   },
   {
    "buyable": true,
@@ -86,7 +92,8 @@
     "LEGENDARY",
     "MYTHIC"
    ],
-   "maxRarity": "MYTHIC"
+   "maxRarity": "MYTHIC",
+   "skill": "FARMING"
   },
   {
    "buyable": true,
@@ -96,7 +103,8 @@
     "LEGENDARY",
     "MYTHIC"
    ],
-   "maxRarity": "MYTHIC"
+   "maxRarity": "MYTHIC",
+   "skill": "COMBAT"
   },
   {
    "buyable": true,
@@ -109,7 +117,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "COMBAT"
   },
   {
    "buyable": true,
@@ -122,7 +131,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "FISHING"
   },
   {
    "buyable": true,
@@ -135,7 +145,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "FARMING"
   },
   {
    "buyable": true,
@@ -148,7 +159,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "COMBAT"
   },
   {
    "buyable": true,
@@ -161,7 +173,22 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "FISHING"
+  },
+  {
+   "buyable": true,
+   "name": "Eagle",
+   "key": "EAGLE",
+   "rarities": [
+    "COMMON",
+    "UNCOMMON",
+    "RARE",
+    "EPIC",
+    "LEGENDARY"
+   ],
+   "maxRarity": "LEGENDARY",
+   "skill": "HUNTING"
   },
   {
    "buyable": true,
@@ -175,7 +202,8 @@
     "LEGENDARY",
     "MYTHIC"
    ],
-   "maxRarity": "MYTHIC"
+   "maxRarity": "MYTHIC",
+   "skill": "FARMING"
   },
   {
    "buyable": true,
@@ -185,7 +213,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "COMBAT"
   },
   {
    "buyable": true,
@@ -199,7 +228,8 @@
     "LEGENDARY",
     "MYTHIC"
    ],
-   "maxRarity": "MYTHIC"
+   "maxRarity": "MYTHIC",
+   "skill": "COMBAT"
   },
   {
    "buyable": true,
@@ -213,7 +243,8 @@
     "LEGENDARY",
     "MYTHIC"
    ],
-   "maxRarity": "MYTHIC"
+   "maxRarity": "MYTHIC",
+   "skill": "MINING"
   },
   {
    "buyable": true,
@@ -225,7 +256,8 @@
     "LEGENDARY",
     "MYTHIC"
    ],
-   "maxRarity": "MYTHIC"
+   "maxRarity": "MYTHIC",
+   "skill": "FISHING"
   },
   {
    "buyable": true,
@@ -239,7 +271,8 @@
     "LEGENDARY",
     "MYTHIC"
    ],
-   "maxRarity": "MYTHIC"
+   "maxRarity": "MYTHIC",
+   "skill": "FORAGING"
   },
   {
    "buyable": true,
@@ -249,7 +282,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "COMBAT"
   },
   {
    "buyable": true,
@@ -262,7 +296,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "FORAGING"
   },
   {
    "buyable": true,
@@ -275,7 +310,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "MINING"
   },
   {
    "buyable": true,
@@ -284,7 +320,8 @@
    "rarities": [
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "MINING"
   },
   {
    "buyable": true,
@@ -293,7 +330,8 @@
    "rarities": [
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "COMBAT"
   },
   {
    "buyable": true,
@@ -303,7 +341,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "COMBAT"
   },
   {
    "buyable": false,
@@ -316,7 +355,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "COMBAT"
   },
   {
    "buyable": true,
@@ -330,7 +370,8 @@
     "LEGENDARY",
     "MYTHIC"
    ],
-   "maxRarity": "MYTHIC"
+   "maxRarity": "MYTHIC",
+   "skill": "COMBAT"
   },
   {
    "buyable": true,
@@ -344,7 +385,8 @@
     "LEGENDARY",
     "MYTHIC"
    ],
-   "maxRarity": "MYTHIC"
+   "maxRarity": "MYTHIC",
+   "skill": "ENCHANTING"
   },
   {
    "buyable": true,
@@ -353,7 +395,8 @@
    "rarities": [
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "FARMING"
   },
   {
    "buyable": true,
@@ -367,7 +410,8 @@
     "LEGENDARY",
     "MYTHIC"
    ],
-   "maxRarity": "MYTHIC"
+   "maxRarity": "MYTHIC",
+   "skill": "FISHING"
   },
   {
    "buyable": true,
@@ -380,7 +424,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "COMBAT"
   },
   {
    "buyable": true,
@@ -390,7 +435,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "COMBAT"
   },
   {
    "buyable": true,
@@ -399,7 +445,8 @@
    "rarities": [
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "FORAGING"
   },
   {
    "buyable": true,
@@ -409,7 +456,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "ALCHEMY"
   },
   {
    "buyable": true,
@@ -423,7 +471,8 @@
     "LEGENDARY",
     "MYTHIC"
    ],
-   "maxRarity": "MYTHIC"
+   "maxRarity": "MYTHIC",
+   "skill": "COMBAT"
   },
   {
    "buyable": false,
@@ -436,7 +485,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "COMBAT"
   },
   {
    "buyable": true,
@@ -449,7 +499,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "FORAGING"
   },
   {
    "buyable": true,
@@ -462,7 +513,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "COMBAT"
   },
   {
    "buyable": true,
@@ -471,7 +523,8 @@
    "rarities": [
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "COMBAT"
   },
   {
    "buyable": true,
@@ -481,7 +534,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "FISHING"
   },
   {
    "buyable": true,
@@ -495,7 +549,8 @@
     "LEGENDARY",
     "MYTHIC"
    ],
-   "maxRarity": "MYTHIC"
+   "maxRarity": "MYTHIC",
+   "skill": "MINING"
   },
   {
    "buyable": true,
@@ -504,7 +559,8 @@
    "rarities": [
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "MINING"
   },
   {
    "buyable": true,
@@ -517,7 +573,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": null
   },
   {
    "buyable": false,
@@ -527,7 +584,8 @@
     "RARE",
     "EPIC"
    ],
-   "maxRarity": "EPIC"
+   "maxRarity": "EPIC",
+   "skill": null
   },
   {
    "buyable": true,
@@ -540,7 +598,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "FARMING"
   },
   {
    "buyable": true,
@@ -553,7 +612,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "FARMING"
   },
   {
    "buyable": true,
@@ -566,7 +626,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "FORAGING"
   },
   {
    "buyable": true,
@@ -579,7 +640,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "FARMING"
   },
   {
    "buyable": true,
@@ -588,7 +650,8 @@
    "rarities": [
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "TAMING"
   },
   {
    "buyable": true,
@@ -598,7 +661,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "ALCHEMY"
   },
   {
    "buyable": true,
@@ -607,7 +671,8 @@
    "rarities": [
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "FISHING"
   },
   {
    "buyable": true,
@@ -617,7 +682,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "COMBAT"
   },
   {
    "buyable": true,
@@ -630,7 +696,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "FARMING"
   },
   {
    "buyable": true,
@@ -643,7 +710,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "COMBAT"
   },
   {
    "buyable": true,
@@ -652,7 +720,8 @@
    "rarities": [
     "COMMON"
    ],
-   "maxRarity": "COMMON"
+   "maxRarity": "COMMON",
+   "skill": "COMBAT"
   },
   {
    "buyable": true,
@@ -666,7 +735,8 @@
     "LEGENDARY",
     "MYTHIC"
    ],
-   "maxRarity": "MYTHIC"
+   "maxRarity": "MYTHIC",
+   "skill": "FARMING"
   },
   {
    "buyable": true,
@@ -676,7 +746,8 @@
     "LEGENDARY",
     "MYTHIC"
    ],
-   "maxRarity": "MYTHIC"
+   "maxRarity": "MYTHIC",
+   "skill": "COMBAT"
   },
   {
    "buyable": true,
@@ -685,7 +756,8 @@
    "rarities": [
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "FISHING"
   },
   {
    "buyable": false,
@@ -694,7 +766,8 @@
    "rarities": [
     "EPIC"
    ],
-   "maxRarity": "EPIC"
+   "maxRarity": "EPIC",
+   "skill": "COMBAT"
   },
   {
    "buyable": true,
@@ -707,7 +780,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "MINING"
   },
   {
    "buyable": true,
@@ -716,7 +790,8 @@
    "rarities": [
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "FARMING"
   },
   {
    "buyable": true,
@@ -727,7 +802,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "MINING"
   },
   {
    "buyable": true,
@@ -740,7 +816,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "FISHING"
   },
   {
    "buyable": true,
@@ -753,7 +830,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "ALCHEMY"
   },
   {
    "buyable": true,
@@ -766,7 +844,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "MINING"
   },
   {
    "buyable": true,
@@ -779,7 +858,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "COMBAT"
   },
   {
    "buyable": true,
@@ -788,7 +868,8 @@
    "rarities": [
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "COMBAT"
   },
   {
    "buyable": true,
@@ -801,7 +882,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "FORAGING"
   },
   {
    "buyable": true,
@@ -811,7 +893,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "FARMING"
   },
   {
    "buyable": true,
@@ -824,7 +907,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "MINING"
   },
   {
    "buyable": true,
@@ -834,7 +918,8 @@
     "LEGENDARY",
     "MYTHIC"
    ],
-   "maxRarity": "MYTHIC"
+   "maxRarity": "MYTHIC",
+   "skill": "COMBAT"
   },
   {
    "buyable": true,
@@ -848,7 +933,8 @@
     "LEGENDARY",
     "MYTHIC"
    ],
-   "maxRarity": "MYTHIC"
+   "maxRarity": "MYTHIC",
+   "skill": "COMBAT"
   },
   {
    "buyable": true,
@@ -857,7 +943,8 @@
    "rarities": [
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "FISHING"
   },
   {
    "buyable": true,
@@ -867,7 +954,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "COMBAT"
   },
   {
    "buyable": true,
@@ -880,7 +968,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "FISHING"
   },
   {
    "buyable": true,
@@ -889,7 +978,8 @@
    "rarities": [
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "COMBAT"
   },
   {
    "buyable": true,
@@ -900,7 +990,8 @@
     "LEGENDARY",
     "MYTHIC"
    ],
-   "maxRarity": "MYTHIC"
+   "maxRarity": "MYTHIC",
+   "skill": "COMBAT"
   },
   {
    "buyable": true,
@@ -913,7 +1004,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "COMBAT"
   },
   {
    "buyable": true,
@@ -923,7 +1015,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "COMBAT"
   },
   {
    "buyable": true,
@@ -935,7 +1028,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": null
   },
   {
    "buyable": true,
@@ -948,7 +1042,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "ALCHEMY"
   },
   {
    "buyable": true,
@@ -961,7 +1056,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "MINING"
   },
   {
    "buyable": true,
@@ -974,7 +1070,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "COMBAT"
   },
   {
    "buyable": true,
@@ -987,7 +1084,8 @@
     "EPIC",
     "LEGENDARY"
    ],
-   "maxRarity": "LEGENDARY"
+   "maxRarity": "LEGENDARY",
+   "skill": "COMBAT"
   }
  ]
 }

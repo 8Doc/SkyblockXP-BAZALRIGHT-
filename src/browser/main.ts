@@ -23,8 +23,8 @@ import type { Collection, MinionData, Modifiers } from "../lib/minions";
 import type { GreenhouseData } from "../lib/greenhouse";
 import type { NpcPrice, Recipe } from "../lib/bazaarViews";
 import type { AnvilRules } from "../lib/bazaarChains";
-import type { DropTable, Recipe as MinionRecipe, StorageTables } from "../lib/minionProfit";
-import type { PetXpRules, SkillXpTables } from "../lib/minionXp";
+import type { DropTable, ExtrasTable, Recipe as MinionRecipe, StorageTables } from "../lib/minionProfit";
+import type { PetXpRules, SkillKey, SkillXpTables } from "../lib/minionXp";
 import type { PetLevelTable } from "../lib/petLevelling";
 
 /**
@@ -70,6 +70,7 @@ declare global {
       collections: Collection[];
       storage: StorageTables;
       drops: DropTable;
+      extras: ExtrasTable;
       recipes: MinionRecipe[];
       npcPrices: Record<string, NpcPrice>;
       names: Record<string, string>;
@@ -1372,6 +1373,9 @@ const SECTION_TITLES: Record<State["section"], [string, string]> = {
  * the collection tab must not be able to reach a price, and the profit tab must not be able to
  * reach a collection — and a shape enforced at the call site is a shape TypeScript checks.
  */
+/** The skills a pet can be planned against — the ones this app has a minion route for. */
+const PLANNABLE_SKILLS: SkillKey[] = ["FARMING", "MINING", "FORAGING", "COMBAT", "FISHING", "ALCHEMY", "ENCHANTING", "TAMING"];
+
 function minionTables() {
   const d = window.__MINION_DATA__;
   return {
@@ -1381,6 +1385,7 @@ function minionTables() {
       modifiers: d.modifiers,
       storage: d.storage,
       drops: d.drops,
+      extras: d.extras,
       recipes: d.recipes,
       npcPrices: d.npcPrices,
       names: d.names,
@@ -1389,11 +1394,24 @@ function minionTables() {
       production: d.production,
       modifiers: d.modifiers,
       drops: d.drops,
+      extras: d.extras,
       recipes: d.recipes,
       names: d.names,
+      npcPrices: d.npcPrices,
+      storage: d.storage,
       skillXp: d.skillXp,
       petXpRules: d.petXpRules,
       petLevels: d.petLevels,
+      // The pet catalogue comes off the planner's own game data rather than being inlined twice:
+      // the skill is the only field this tab wants and the list is already there.
+      // A skill the scrape found that this app has no key for — Hunting, so far — is carried as
+      // null rather than cast through. A pet whose skill nothing here models cannot be planned for,
+      // and saying so is better than filing it under whichever key the cast happened to allow.
+      petCatalogue: data.pets.pets.map((p) => ({
+        key: p.key,
+        name: p.name,
+        skill: PLANNABLE_SKILLS.includes(p.skill as SkillKey) ? (p.skill as SkillKey) : null,
+      })),
     },
   };
 }

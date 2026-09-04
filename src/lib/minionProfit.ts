@@ -1,5 +1,5 @@
 import { NET_OF_TAX } from "./bazaar";
-import { itemsPerHour, offlineAmount, type MinionData, type MinionProduction, type Setup } from "./minions";
+import { itemsPerHour, offlineAmount, type MinionData, type MinionProduction, type Setup, type Upgrade } from "./minions";
 import type { BasisPrice, Trust, Variance } from "./priceVariance";
 import { trustedPrice } from "./priceVariance";
 
@@ -119,10 +119,24 @@ export function unitValue(prices: ItemPrices, basis: Basis, variance: Variance |
  */
 export type Recipe = { output: string; yield: number; ingredients: { id: string; qty: number }[] };
 
-export function compactionRatio(itemId: string, compactor: Compactor, recipes: Recipe[]): number {
-  if (compactor.kind === "none") return 1;
+/**
+ * What the compactor turns a drop into, and how many of the drop that takes.
+ *
+ * The id matters as much as the ratio and used not to be returned at all. A minion with a Super
+ * Compactor does not hold cobblestone; it holds Enchanted Cobblestone, and a hopper bolted to it
+ * sells *that* — at the enchanted item's shop price, which is not always 160 times the raw one.
+ * Returning only the ratio meant the overflow was priced as the raw drop, which understates every
+ * item whose enchanted form is worth more than its parts and is exactly the case the automated
+ * shipping strategy lives on.
+ *
+ * `{ ratio: 1, itemId }` for an item nothing compacts, so the caller can apply it unconditionally.
+ */
+export type Compaction = { ratio: number; itemId: string };
 
-  let best = 1;
+export function compactionOf(itemId: string, compactor: Compactor, recipes: Recipe[]): Compaction {
+  if (compactor.kind === "none") return { ratio: 1, itemId };
+
+  let best: Compaction = { ratio: 1, itemId };
   for (const recipe of recipes) {
     if (recipe.ingredients.length !== 1) continue;
     const only = recipe.ingredients[0];
@@ -131,9 +145,14 @@ export function compactionRatio(itemId: string, compactor: Compactor, recipes: R
     // first; a Super Compactor does the enchanted form, which is the bigger of the two.
     const ratio = only.qty / recipe.yield;
     if (compactor.kind === "block" && ratio > 64) continue;
-    if (ratio > best) best = ratio;
+    if (ratio > best.ratio) best = { ratio, itemId: recipe.output };
   }
   return best;
+}
+
+/** The ratio alone, for callers that only care how much longer the minion runs. */
+export function compactionRatio(itemId: string, compactor: Compactor, recipes: Recipe[]): number {
+  return compactionOf(itemId, compactor, recipes).ratio;
 }
 
 /* ------------------------------------------------------------------ setup */
@@ -144,6 +163,73 @@ export type ProfitSetup = Setup & {
   compactor: Compactor;
   /** Hours between visits to the island. The number that turns a rate into an income. */
   claimHours: number;
+};
+
+/* ------------------------------------------------------------------ extras */
+
+/**
+ * An upgrade that adds a second item to what the minion produces.
+ *
+ * Modelled separately from the speed and output fields on `Upgrade` because it is a different kind
+ * of fact: a Flycatcher multiplies a number the minion already had, and Corrupt Soil adds a stream
+ * the minion did not have at all. Folding it into `output` would be arithmetically wrong — the
+ * extra item is not the drop and is not worth the same — and it would hide the one setup this
+ * whole table most needs to surface.
+ */
+export type MinionExtra = {
+  upgrade: string;
+  name: string;
+  drops: { itemId: string; perHarvest: number }[];
+  /** Generators this upgrade can go in, or null for any. */
+  restrictedTo: string[] | null;
+};
+
+export type ExtrasTable = { extras: MinionExtra[] };
+
+/**
+ * The extra drops a setup actually produces, per harvest, for one minion.
+ *
+ * Empty unless an upgrade in one of the two slots adds items *and* is allowed in this minion. Both
+ * halves matter: Corrupt Soil in a Cobblestone Minion is a wasted slot, not free sulphur, because
+ * a minion that spawns no mobs has nothing to corrupt.
+ */
+export function extrasFor(
+  generator: string,
+  upgrades: readonly Upgrade[],
+  table: ExtrasTable,
+): { extra: MinionExtra; drop: { itemId: string; perHarvest: number } }[] {
+  const out: { extra: MinionExtra; drop: { itemId: string; perHarvest: number } }[] = [];
+  for (const upgrade of upgrades) {
+    const extra = table.extras.find((e) => e.upgrade === upgrade.id);
+    if (!extra) continue;
+    if (extra.restrictedTo && !extra.restrictedTo.includes(generator)) continue;
+    for (const drop of extra.drops) out.push({ extra, drop });
+  }
+  return out;
+}
+
+/**
+ * One thing a minion produces, priced.
+ *
+ * The main drop and every extra go through identical machinery from here on, which is the point of
+ * the shape: storage, compaction, the hopper and the claim interval all treat a sulphur exactly as
+ * they treat a slimeball, and nothing downstream has to remember which was the minion's "real"
+ * output.
+ */
+export type Stream = {
+  itemId: string | null;
+  itemName: string;
+  /** Raw items an hour from this stream alone. */
+  perHour: number;
+  /** How many raw items the compactor packs into one stored item. */
+  ratio: number;
+  /** Coins one raw item is worth on the chosen basis, after tax. */
+  unit: number;
+  /** Coins a hopper fetches per raw item — the compacted item's shop price, times its own cut. */
+  hopperUnit: number;
+  price: BasisPrice | null;
+  /** True for a stream an upgrade added rather than the minion's own drop. */
+  fromUpgrade: string | null;
 };
 
 /* -------------------------------------------------------------------- row */
@@ -185,6 +271,9 @@ export type MinionProfitRow = {
   /** What one visit hands you. */
   perClaim: number;
 
+  /** Every item this setup produces, priced. The first is the minion's own drop. */
+  streams: Stream[];
+
   /** Anything a reader should know before believing the row. */
   caveats: string[];
 };
@@ -200,6 +289,8 @@ export type ProfitOptions = {
   variance: Map<string, Variance>;
   /** Display names, for the rows the drop table does not name. */
   names: Record<string, string>;
+  /** Upgrades that add a second item to the output — Corrupt Soil and friends. */
+  extras: ExtrasTable;
   setup: ProfitSetup;
   basis: Basis;
   trust: Trust;
@@ -256,38 +347,88 @@ export function planProfit(o: ProfitOptions): MinionProfitRow[] {
       caveats.push(`the wiki quotes ${minion.collects.low}–${minion.collects.high} a drop, so this uses the midpoint`);
     }
 
-    const prices = itemId ? o.prices.get(itemId) : undefined;
-    const variance = itemId ? (o.variance.get(itemId) ?? null) : null;
-    const value = prices ? unitValue(prices, o.basis, variance, o.trust) : null;
+    // How many harvests an hour, which is the unit every extra is quoted in. The minion's own drop
+    // is `amount` per harvest, so dividing the rate back out recovers the harvest count — and an
+    // extra that says "one per harvest" then means one, whatever the minion's own stack size is.
+    const perHarvest = Math.max(1e-9, offlineAmount(minion, o.data));
+    const harvests = rate / perHarvest;
 
-    const ratio = itemId ? compactionRatio(itemId, o.setup.compactor, o.recipes) : 1;
+    const streams: Stream[] = [];
+    const priceStream = (id: string | null, name: string, perHour: number, fromUpgrade: string | null): Stream => {
+      const prices = id ? o.prices.get(id) : undefined;
+      const variance = id ? (o.variance.get(id) ?? null) : null;
+      const value = prices ? unitValue(prices, o.basis, variance, o.trust) : null;
+      const packed = id ? compactionOf(id, o.setup.compactor, o.recipes) : { ratio: 1, itemId: "" };
+      // The hopper sells what is in the inventory, and with a compactor in the minion that is the
+      // enchanted item — so it is priced at the enchanted item's shop price divided back down to
+      // the raw drop, not at the raw drop's own.
+      const packedNpc = packed.itemId ? (o.prices.get(packed.itemId)?.npcSell ?? null) : null;
+      const npcPerRaw =
+        packed.ratio > 1 && packedNpc !== null ? packedNpc / packed.ratio : (prices?.npcSell ?? 0);
+      return {
+        itemId: id,
+        itemName: name,
+        perHour,
+        ratio: packed.ratio,
+        unit: value?.price ?? 0,
+        hopperUnit: npcPerRaw * o.setup.hopper.npcShare,
+        price: value,
+        fromUpgrade,
+      };
+    };
+
+    streams.push(priceStream(itemId, itemName, rate, null));
+
+    for (const { extra, drop } of extrasFor(minion.generator, o.setup.upgrades, o.extras)) {
+      streams.push(
+        priceStream(drop.itemId, o.names[drop.itemId] ?? drop.itemId, harvests * drop.perHarvest, extra.name),
+      );
+    }
+
+    // Storage is shared, and it is counted in *stored* items — so a stream the compactor packs 160
+    // to one takes a hundred and sixtieth of the room per drop. Summing the streams in stored units
+    // is the only way a minion producing three different things at three different ratios gets one
+    // honest fill time.
     const slots = o.storage.chests.find((c) => c.id === o.setup.chest.id)?.slots ?? o.setup.chest.slots;
-    const own = minion.storage?.[tier - 1] ?? 0;
-    // The chest's slots hold compacted items too, so the whole capacity scales together.
-    const capacity = (own + slots * o.storage.slotItems) * ratio;
+    const capacityStored = (minion.storage?.[tier - 1] ?? 0) + slots * o.storage.slotItems;
+    const storedPerHour = streams.reduce((sum, s) => sum + s.perHour / s.ratio, 0);
+    const hoursToFill = storedPerHour > 0 && capacityStored > 0 ? capacityStored / storedPerHour : Infinity;
 
-    const hoursToFill = capacity > 0 ? capacity / rate : Infinity;
     const claim = Math.max(0, o.setup.claimHours);
+    const bankedHours = Math.min(claim, hoursToFill);
     const overflowHours = Math.max(0, claim - hoursToFill);
+    const shipping = o.setup.hopper.npcShare > 0;
 
-    const itemsPerClaim = Math.min(rate * claim, capacity);
-    const overflowItems = rate * overflowHours;
-    // A hopper does not raise the cap, it drains past it — and at the shopkeeper's price times its
-    // own cut, which is why it is valued separately rather than folded into the rate.
-    const hopperUnit = (prices?.npcSell ?? 0) * o.setup.hopper.npcShare;
-    const hopperPerClaim = o.setup.hopper.npcShare > 0 ? overflowItems * hopperUnit : 0;
-    const itemsLost = o.setup.hopper.npcShare > 0 ? 0 : overflowItems;
+    let perClaim = 0;
+    let hopperPerClaim = 0;
+    let grossPerHour = 0;
+    let itemsPerClaim = 0;
+    let itemsLost = 0;
 
-    const unit = value?.price ?? 0;
-    const perClaim = itemsPerClaim * unit + hopperPerClaim;
+    for (const stream of streams) {
+      const banked = stream.perHour * bankedHours;
+      const overflow = stream.perHour * overflowHours;
+      perClaim += banked * stream.unit;
+      grossPerHour += stream.perHour * stream.unit;
+      itemsPerClaim += banked;
+      if (shipping) hopperPerClaim += overflow * stream.hopperUnit;
+      else itemsLost += overflow;
+    }
+    perClaim += hopperPerClaim;
+
     const coinsPerHour = claim > 0 ? perClaim / claim : 0;
-    const grossPerHour = rate * unit;
-    const fuelPerHour = fuelUnit;
+    const mainPrices = itemId ? o.prices.get(itemId) : undefined;
+    const value = streams[0].price;
 
-    if (!prices) caveats.push("nothing on the bazaar or at a shopkeeper prices this drop");
+    if (!mainPrices) caveats.push("nothing on the bazaar or at a shopkeeper prices this drop");
     else if (!value) caveats.push(`no ${BASIS_LABELS[o.basis].toLowerCase()} price for this item`);
     if (value?.substituted) {
       caveats.push("today's quote is far enough off this item's month that the median was used instead");
+    }
+    for (const stream of streams.slice(1)) {
+      caveats.push(
+        `${stream.fromUpgrade} adds ${stream.itemName}, worth ${Math.round(stream.perHour * stream.unit)} coins an hour here`,
+      );
     }
     if (itemsLost > 0) {
       caveats.push(`fills after ${hoursToFill.toFixed(1)}h and stands idle for the rest of the interval`);
@@ -300,25 +441,25 @@ export function planProfit(o: ProfitOptions): MinionProfitRow[] {
       itemId,
       itemName,
       itemsPerHour: rate,
-      capacity,
+      capacity: capacityStored * (streams[0].ratio || 1),
       hoursToFill,
       itemsPerClaim,
       itemsLost,
-      unitValue: unit,
+      unitValue: streams[0].unit,
       price: value ?? { price: 0, substituted: false, z: null, confidence: "normal" },
       grossPerHour,
       coinsPerHour,
       hopperPerHour: claim > 0 ? hopperPerClaim / claim : 0,
-      fuelPerHour,
-      netPerHour: coinsPerHour - fuelPerHour,
+      fuelPerHour: fuelUnit,
+      netPerHour: coinsPerHour - fuelUnit,
       perClaim,
+      streams,
       caveats,
     });
   }
 
   return out.sort((a, b) => b.netPerHour - a.netPerHour);
 }
-
 /**
  * What the fuel costs to keep burning, per hour, across every minion placed.
  *

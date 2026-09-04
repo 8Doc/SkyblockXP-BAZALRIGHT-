@@ -4,10 +4,12 @@ import type { RawBazaarProduct } from "../lib/bazaarTypes";
 import type { Fuel, MinionData, Modifiers, Upgrade } from "../lib/minions";
 import {
   BASIS_LABELS,
+  compactionOf,
   planProfit,
   type Basis,
   type Compactor,
   type DropTable,
+  type ExtrasTable,
   type Hopper,
   type ItemPrices,
   type MinionProfitRow,
@@ -57,6 +59,7 @@ type Tables = {
   modifiers: Modifiers;
   storage: StorageTables;
   drops: DropTable;
+  extras: ExtrasTable;
   recipes: Recipe[];
   npcPrices: Record<string, { sell?: number; buy?: number }>;
   names: Record<string, string>;
@@ -78,6 +81,8 @@ type State = {
   trust: Trust;
   search: string;
   open: string | null;
+  /** Which column orders the table, and which way. */
+  sort: { column: string; descending: boolean };
 
   market: Map<string, ReturnType<typeof normalise>>;
   variance: Map<string, Variance>;
@@ -103,6 +108,7 @@ const state: State = {
   trust: (localStorage.getItem("sbxp:mptrust") as Trust) ?? "guarded",
   search: "",
   open: null,
+  sort: readSort(),
   market: new Map(),
   variance: new Map(),
   status: "",
@@ -110,6 +116,24 @@ const state: State = {
   lastAt: 0,
   historyAt: 0,
 };
+
+/**
+ * The saved column order, or the default.
+ *
+ * Net per hour descending is the default because it is the question the tab exists to answer.
+ * Every other column is a way of asking a narrower one — "what fills slowest", "what needs the
+ * least attention" — and those are worth reaching for, which is why the choice is remembered.
+ */
+function readSort(): { column: string; descending: boolean } {
+  try {
+    const raw = localStorage.getItem("sbxp:mpsort");
+    if (!raw) return { column: "net", descending: true };
+    const parsed = JSON.parse(raw) as { column: string; descending: boolean };
+    return typeof parsed?.column === "string" ? parsed : { column: "net", descending: true };
+  } catch {
+    return { column: "net", descending: true };
+  }
+}
 
 let tables: Tables | null = null;
 let host: HTMLElement | null = null;
@@ -286,6 +310,17 @@ function priceBook(): Map<string, ItemPrices> {
   for (const id of dropIds()) if (id) ids.add(id);
   // Fuels are bought, not sold, and need a price for the running cost.
   for (const fuel of tables.modifiers.fuels) ids.add(fuel.id);
+  // Everything an upgrade can add to the output — Corrupt Soil's sulphur and fragment, and the
+  // rest. A missing price here does not blank a row, it silently values the extra at nothing.
+  for (const extra of tables.extras.extras) for (const drop of extra.drops) ids.add(drop.itemId);
+
+  // And the compacted form of every one of those, because that is what a hopper actually sells:
+  // the minion's inventory holds Enchanted Cobblestone, not cobblestone, and the shop pays for
+  // what is in the inventory.
+  for (const compactor of tables.storage.compactors) {
+    if (compactor.kind === "none") continue;
+    for (const id of [...ids]) ids.add(compactionOf(id, compactor, tables.recipes).itemId);
+  }
 
   for (const id of ids) {
     const product = state.market.get(id);
@@ -321,6 +356,7 @@ function rows(): MinionProfitRow[] {
     data: tables.production,
     storage: tables.storage,
     drops: tables.drops,
+    extras: tables.extras,
     recipes: tables.recipes,
     prices: priceBook(),
     variance: state.variance,
@@ -340,8 +376,24 @@ function rows(): MinionProfitRow[] {
   });
 
   const needle = state.search.trim().toLowerCase();
-  if (!needle) return all;
-  return all.filter((r) => r.family.toLowerCase().includes(needle) || r.itemName.toLowerCase().includes(needle));
+  const found = needle
+    ? all.filter((r) => r.family.toLowerCase().includes(needle) || r.itemName.toLowerCase().includes(needle))
+    : all;
+
+  const column = COLUMNS.find((c) => c.id === state.sort.column);
+  if (!column) return found;
+  // A stable tiebreak on the name, so two rows worth the same amount do not swap places every
+  // time the bazaar ticks — a table that reshuffles under the cursor is unreadable.
+  const sign = state.sort.descending ? -1 : 1;
+  return [...found].sort((a, b) => {
+    const av = column.value(a);
+    const bv = column.value(b);
+    // Infinity is a real answer in the fill column — "never fills" — and has to sort to one end
+    // rather than poisoning the comparison.
+    const diff = (Number.isFinite(av) ? av : av > 0 ? Number.MAX_VALUE : -Number.MAX_VALUE) -
+      (Number.isFinite(bv) ? bv : bv > 0 ? Number.MAX_VALUE : -Number.MAX_VALUE);
+    return diff !== 0 ? sign * diff : a.family.localeCompare(b.family);
+  });
 }
 
 /* -------------------------------------------------------------- rendering */
@@ -372,6 +424,23 @@ export function mountMinionProfit(container: HTMLElement, data: Tables): void {
       }
 
       if (target.closest("#mprefresh")) return void refresh();
+
+      const preset = target.closest<HTMLElement>("[data-mppreset]");
+      if (preset) {
+        PRESETS.find((p) => p.id === preset.dataset.mppreset)?.apply();
+        saveSetup();
+        return render();
+      }
+
+      const sort = target.closest<HTMLElement>("[data-mpsort]");
+      if (sort) {
+        const id = sort.dataset.mpsort!;
+        // Clicking the column already sorted reverses it; clicking a new one starts descending,
+        // because "most of this" is what someone means by clicking a column of numbers.
+        state.sort = state.sort.column === id ? { column: id, descending: !state.sort.descending } : { column: id, descending: true };
+        localStorage.setItem("sbxp:mpsort", JSON.stringify(state.sort));
+        return renderTable();
+      }
 
       const row = target.closest<HTMLElement>("[data-mpopen]");
       if (row) {
@@ -448,6 +517,75 @@ function options(list: { id: string; name: string }[], selected: string, label?:
     .join("");
 }
 
+/**
+ * Setups worth one click, because nobody finds them by permuting seven dropdowns.
+ *
+ * The automated shipping one is the reason this exists. A mob minion with Corrupt Soil and a Super
+ * Compactor, selling into an Enchanted Hopper, is among the best-known coin setups in the game and
+ * it is invisible in a table of individual controls: it needs three specific slots filled and a
+ * claim interval that says "never", and getting any one of them wrong makes it look mediocre. The
+ * table could always model it — the preset is what makes it findable.
+ */
+type Preset = {
+  id: string;
+  label: string;
+  help: string;
+  apply: () => void;
+};
+
+const PRESETS: Preset[] = [
+  {
+    id: "shipping",
+    label: "Automated shipping",
+    help:
+      "Corrupt Soil for the extra sulphur and fragment, a Super Compactor so the minion packs them, " +
+      "and an Enchanted Hopper to sell the lot at 70% of shop price. Claim set to a week, because " +
+      "the point of this setup is that you never go and collect it. Mob minions only — Corrupt Soil " +
+      "needs a mob to corrupt.",
+    apply: () => {
+      state.upgrades = ["CORRUPT_SOIL", "NONE"];
+      state.compactor = "SUPER_COMPACTOR_3000";
+      state.hopper = "ENCHANTED_HOPPER";
+      state.claim = "168";
+      state.basis = "npc";
+    },
+  },
+  {
+    id: "overnight",
+    label: "Overnight",
+    help: "A Super Compactor and a Flycatcher, claimed after eight hours. The ordinary case: fast, packed, and emptied in the morning.",
+    apply: () => {
+      state.upgrades = ["FLYCATCHER", "NONE"];
+      state.compactor = "SUPER_COMPACTOR_3000";
+      state.hopper = "NONE";
+      state.claim = "8";
+      state.basis = "instasell";
+    },
+  },
+  {
+    id: "bare",
+    label: "Bare minion",
+    help: "Nothing in any slot. What a minion is worth before you spend anything on it, and the number every other row should be read against.",
+    apply: () => {
+      state.upgrades = ["NONE", "NONE"];
+      state.compactor = "NONE";
+      state.hopper = "NONE";
+      state.claim = "8";
+      state.basis = "instasell";
+    },
+  },
+];
+
+/** Persist whatever a preset just set, so it survives a reload like a hand-made setup would. */
+function saveSetup(): void {
+  localStorage.setItem("sbxp:mpup0", state.upgrades[0]);
+  localStorage.setItem("sbxp:mpup1", state.upgrades[1]);
+  localStorage.setItem("sbxp:mpcomp", state.compactor);
+  localStorage.setItem("sbxp:mphopper", state.hopper);
+  localStorage.setItem("sbxp:mpclaim", state.claim);
+  localStorage.setItem("sbxp:mpbasis", state.basis);
+}
+
 function render(): void {
   if (!host || !tables) return;
 
@@ -457,6 +595,13 @@ function render(): void {
 
   host.innerHTML = `
     <div class="meta" id="mpmeta">${metaHtml()}</div>
+
+    <div class="tabs" title="Whole setups, for the ones that are hard to find by permuting dropdowns.">
+      <span class="dim" style="align-self:center;font-size:12px;margin-right:4px">Try:</span>
+      ${PRESETS.map(
+        (p) => `<button class="chip" data-mppreset="${escapeHtml(p.id)}" title="${escapeHtml(p.help)}">${escapeHtml(p.label)}</button>`,
+      ).join("")}
+    </div>
 
     <div class="panel pad controls">
       <div class="row">
@@ -635,48 +780,76 @@ function setupNote(): string {
 
 /* ------------------------------------------------------------------ table */
 
-const COLUMNS: { label: string; title: string; render: (r: MinionProfitRow) => string }[] = [
+/**
+ * The table's columns, each able to sort on itself.
+ *
+ * `value` is the number the column sorts on and it is deliberately separate from `render`: the
+ * rendered cell is a string with a suffix and a colour on it, and sorting that lexically puts
+ * "9.7k" above "48k". Every column here is a number underneath even where it prints as a word, so
+ * every column can be sorted honestly.
+ */
+const COLUMNS: {
+  id: string;
+  label: string;
+  title: string;
+  value: (r: MinionProfitRow) => number;
+  render: (r: MinionProfitRow) => string;
+}[] = [
   {
+    id: "net",
     label: "Net/hr",
     title:
       "Coins an hour actually realised at this claim interval, less fuel. The ranking figure, and lower than the " +
       "gross wherever storage fills before you come back.",
+    value: (r) => r.netPerHour,
     render: (r) => (r.itemId === null ? `<span class="dim">—</span>` : coins(Math.round(r.netPerHour))),
   },
   {
+    id: "claim",
     label: "Per claim",
     title: "What one visit hands you, at the interval above.",
+    value: (r) => r.perClaim,
     render: (r) => (r.itemId === null ? `<span class="dim">—</span>` : coins(Math.round(r.perClaim))),
   },
   {
+    id: "gross",
     label: "Gross/hr",
     title:
       "Coins an hour if storage never filled — the number other calculators quote. The gap between this and Net " +
       "is what the claim interval costs you.",
+    value: (r) => r.grossPerHour,
     render: (r) => (r.itemId === null ? `<span class="dim">—</span>` : `<span class="dim">${coins(Math.round(r.grossPerHour))}</span>`),
   },
   {
+    id: "fill",
     label: "Fills in",
     title:
       "How long from empty to full and idle. With a hopper this is when the shopkeeper starts taking the overflow " +
       "instead — the wiki is explicit that a hopper only sells once the minion and its chest are both full.",
+    value: (r) => r.hoursToFill,
     render: (r) => hours(r.hoursToFill),
   },
   {
+    id: "items",
     label: "Items/hr",
     title: "Raw drops the whole setup produces an hour, before storage caps anything.",
+    value: (r) => r.itemsPerHour,
     render: (r) => num(Math.round(r.itemsPerHour)),
   },
   {
+    id: "each",
     label: "Each",
     title: "What one drop is worth on the chosen basis, after tax.",
+    value: (r) => r.unitValue,
     render: (r) => (r.itemId === null ? `<span class="dim">—</span>` : coins(r.unitValue)),
   },
   {
+    id: "month",
     label: "Month",
     title:
       "How far today's price sits from this item's own last thirty days, counted in standard deviations. Past two, " +
       "the guarded basis stops believing the quote and uses the month's median instead.",
+    value: (r) => (r.price.z === null ? -Infinity : Math.abs(r.price.z)),
     render: monthCell,
   },
 ];
@@ -733,7 +906,15 @@ function renderTable(): void {
     return void (target.innerHTML = `<p class="dim pad">Nothing to price yet — the bazaar has not been read.</p>`);
   }
 
-  const head = COLUMNS.map((c) => `<th class="num" title="${escapeHtml(c.title)}">${escapeHtml(c.label)}</th>`).join("");
+  const head = COLUMNS.map((c) => {
+    const on = state.sort.column === c.id;
+    const arrow = on ? (state.sort.descending ? " ↓" : " ↑") : "";
+    return `<th class="num${on ? " on" : ""}" data-mpsort="${escapeHtml(c.id)}" title="${escapeHtml(
+      `${c.title}
+
+Click to sort by this column; click again to reverse it.`,
+    )}">${escapeHtml(c.label)}${arrow}</th>`;
+  }).join("");
 
   const body = all
     .slice(0, 80)

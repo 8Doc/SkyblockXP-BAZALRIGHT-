@@ -367,7 +367,20 @@ export type GameData = {
   /** Every pet and the rarities it can be — a fixed catalogue, not whatever is listed today. */
   pets: {
     maxScore: number;
-    pets: { name: string; key: string; rarities: string[]; maxRarity: string; buyable?: boolean }[];
+    pets: {
+      name: string;
+      key: string;
+      rarities: string[];
+      maxRarity: string;
+      buyable?: boolean;
+      /**
+       * The skill this pet levels off, or null for the few that level off none.
+       *
+       * Optional because the field is newer than the file. Null is a real answer and not a gap —
+       * the Wisp is fed Gabagool rather than levelled — so a caller must not read it as Combat.
+       */
+      skill?: string | null;
+    }[];
   };
   /** Bridges the wiki's pet titles to the ids the profile actually uses. */
   petApiKeys: { aliases: Record<string, string> };
