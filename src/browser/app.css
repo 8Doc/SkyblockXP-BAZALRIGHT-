@@ -261,8 +261,8 @@ table.bz thead th {
   color: var(--muted);
   font-weight: 500;
 }
-table.bz thead th[data-bzsort], table.bz thead th[data-mpsort] { cursor: pointer; user-select: none; }
-table.bz thead th[data-bzsort]:hover, table.bz thead th[data-mpsort]:hover { color: var(--aqua); }
+table.bz thead th[data-bzsort], table.bz thead th[data-mpsort], table.bz thead th[data-pxsort] { cursor: pointer; user-select: none; }
+table.bz thead th[data-bzsort]:hover, table.bz thead th[data-mpsort]:hover, table.bz thead th[data-pxsort]:hover { color: var(--aqua); }
 table.bz thead th.on { color: var(--aqua); }
 
 table.bz tbody tr + tr td { border-top: 1px solid var(--line); }

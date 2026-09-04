@@ -348,6 +348,10 @@ recomputes the whole board before picking again — several thousand picks over 
 ~13,000 tasks for a package run. Four things keep that affordable, and all four are caches over
 work that provably cannot have changed:
 
+- **Every column on the Pet profits tab sorts too**, across all three of its tables — the plan, the
+  routes, and the pet market. Each keeps its own column order, since one shared setting would mean
+  sorting the pet market by "actions a day"; the headline cards stay on the best *plan* whatever the
+  table is sorted by, because re-sorting to inspect something should not change the recommendation.
 - **Every column in Raw profits sorts.** Each carries a sort value separate from its rendered cell,
   because sorting "9.7k" against "48k" as text puts the wrong one on top, and "never fills" is a
   real answer that has to go to one end rather than poisoning the comparison.
