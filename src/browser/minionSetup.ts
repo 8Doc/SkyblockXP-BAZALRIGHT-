@@ -80,6 +80,36 @@ export function writeSetup<K extends keyof MinionSetupState>(field: K, value: Mi
   }
 }
 
+/**
+ * The things fitted to a minion that you buy once and keep, in the order they are worth reading.
+ *
+ * Derived here rather than in each tab for the same reason the setup itself is: the two tabs must
+ * price the same wall, and `slotIds` already knows the rule that a compactor spends a slot — so
+ * listing the upgrades by hand in either tab would eventually charge for a Flycatcher the setup
+ * does not have.
+ *
+ * The fuel is not here. It burns, so it is not a fitting, and both tabs already charge it by the
+ * hour against the income.
+ */
+export function fittingsOf(
+  setup: MinionSetupState,
+  tables: {
+    modifiers: { upgrades: { id: string; name: string }[] };
+    storage: { compactors: { id: string; name: string; kind: string }[]; hoppers: { id: string; name: string }[]; chests: { id: string; name: string }[] };
+  },
+): { id: string; name: string }[] {
+  const nameOf = (list: { id: string; name: string }[], id: string) => list.find((entry) => entry.id === id)?.name ?? id;
+  const [slot0, slot1] = slotIds(setup, tables.storage.compactors);
+
+  return [
+    { id: setup.compactor, name: nameOf(tables.storage.compactors, setup.compactor) },
+    { id: slot0, name: nameOf(tables.modifiers.upgrades, slot0) },
+    { id: slot1, name: nameOf(tables.modifiers.upgrades, slot1) },
+    { id: setup.hopper, name: nameOf(tables.storage.hoppers, setup.hopper) },
+    { id: setup.chest, name: nameOf(tables.storage.chests, setup.chest) },
+  ];
+}
+
 /** How many of the one minion are down. Never zero: a wall of none is a question with no answer. */
 export function placedCount(setup: MinionSetupState): number {
   return Math.max(1, Number(setup.count.replace(/[^0-9]/g, "")) || 1);

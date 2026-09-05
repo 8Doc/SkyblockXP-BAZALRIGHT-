@@ -101,6 +101,56 @@ export function craftCostOf(
 }
 
 /**
+ * What the slots cost to fill, as opposed to what the minion costs to build.
+ *
+ * Kept apart from the craft cost because it is a different purchase with a different life. The
+ * materials for a Tier XII Melon Minion buy a Melon Minion and nothing else; a Super Compactor and
+ * an Enchanted Hopper are fittings, and they move to whatever you run next. Somebody who already
+ * owns the fittings is looking at a build cost with this subtracted, and somebody outfitting a wall
+ * from scratch is looking at both — neither is served by one merged figure.
+ *
+ * **Fuel is deliberately absent.** It burns, so it is not a fitting and it is not one-off; the
+ * profit model already charges it by the hour, and adding it here would bill the same coal twice.
+ *
+ * Unpriced entries are reported rather than skipped. The storage chests are the whole reason that
+ * matters: no bazaar quotes one, so a total that silently ignored them would say a wall was fully
+ * outfitted for less than it costs.
+ */
+export type SetupCost = {
+  /** Coins to fit one minion with everything priced. */
+  perMinion: number;
+  lines: CraftLine[];
+  unpriced: CraftIngredient[];
+};
+
+export function setupCostOf(
+  fittings: { id: string; name: string }[],
+  priceOf: (itemId: string) => number | null,
+): SetupCost {
+  const lines: CraftLine[] = [];
+  const unpriced: CraftIngredient[] = [];
+  let perMinion = 0;
+
+  for (const fitting of fittings) {
+    // An empty slot is a choice, not a missing price, so it is neither charged nor complained about.
+    if (!fitting.id || fitting.id === "NONE") continue;
+
+    const unit = priceOf(fitting.id);
+    const ingredient: CraftIngredient = { item: fitting.name, itemId: fitting.id, qty: 1 };
+    if (unit === null || !(unit > 0)) {
+      unpriced.push(ingredient);
+      lines.push({ ...ingredient, unit: null, coins: 0 });
+      continue;
+    }
+    perMinion += unit;
+    lines.push({ ...ingredient, unit, coins: unit });
+  }
+
+  lines.sort((a, b) => b.coins - a.coins);
+  return { perMinion, lines, unpriced };
+}
+
+/**
  * How long the minion takes to pay for itself, in days. Infinite where it never does.
  *
  * The one number that turns a cost and an income into a decision. Deliberately not netted against

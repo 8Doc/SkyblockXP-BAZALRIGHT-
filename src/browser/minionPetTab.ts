@@ -3,17 +3,19 @@ import type { Fuel, MinionData, MinionProduction, Modifiers, Upgrade } from "../
 import type { DropTable, Recipe } from "../lib/minionProfit";
 import { monthsForBasis, readMonths } from "./monthStore";
 import {
+  fittingsOf,
   placedCount,
   readSetup,
   slotIds,
   writeSetup,
   type MinionSetupState,
 } from "./minionSetup";
-import type { CraftCost, MinionRecipes } from "../lib/minionCraft";
+import { buyPriceOf, setupCostOf, type CraftCost, type MinionRecipes } from "../lib/minionCraft";
 import {
   craftCellHtml,
   craftFor as craftOf,
   createCraftCache,
+  setupCellHtml,
   type CraftCellContext,
 } from "./craftCell";
 import {
@@ -385,6 +387,10 @@ async function readBazaar(): Promise<void> {
     }
     state.market = market;
     renderPlan();
+    // Blank until prices arrive, so it repaints with them rather than waiting for the next full
+    // render of the controls it sits under.
+    const fittings = document.getElementById("pxfittings");
+    if (fittings) fittings.innerHTML = fittingsNote();
   } catch {
     // No prices is a plan without its item half, which the section says rather than hides.
   }
@@ -771,6 +777,7 @@ function render(): void {
       </div>
 
       <p class="sub dim">${detectedNote()}</p>
+      <p class="sub dim setup-cost" id="pxfittings">${fittingsNote()}</p>
     </div>
 
     <div id="pxplan"></div>
@@ -1509,6 +1516,19 @@ const INTENT =
  * is a floor, so the wording moves from "cannot" to "here is what was found and here is what was
  * not", which is the honest version of the same warning.
  */
+/**
+ * What the fittings cost, beside the controls that choose them.
+ *
+ * The same figure and the same wording as Raw profits, from the same shared cell — these two tabs
+ * describe one wall, and a fittings bill that differed between them would be the old per-tab-setup
+ * problem wearing a new hat.
+ */
+function fittingsNote(): string {
+  if (!tables || state.market.size === 0) return "";
+  const cost = setupCostOf(fittingsOf(state.setup, tables), buyPriceOf(state.market, tables.npcPrices));
+  return setupCellHtml(cost, placedCount(state.setup));
+}
+
 function detectedNote(): string {
   const d = state.detected;
   if (!d) return WISDOM_NOTE;

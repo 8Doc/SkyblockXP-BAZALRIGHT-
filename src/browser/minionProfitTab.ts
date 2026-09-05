@@ -26,12 +26,13 @@ import {
 } from "../lib/priceVariance";
 import type { CoflnetPoint } from "../lib/bazaarHistory";
 import { monthFor, monthsForBasis, readMonths, writeMonths, type Months } from "./monthStore";
-import { placedCount as countOf, readSetup, slotIds, type MinionSetupState } from "./minionSetup";
-import type { CraftCost, MinionRecipes } from "../lib/minionCraft";
+import { fittingsOf, placedCount as countOf, readSetup, slotIds, type MinionSetupState } from "./minionSetup";
+import { buyPriceOf, setupCostOf, type CraftCost, type MinionRecipes } from "../lib/minionCraft";
 import {
   craftCellHtml,
   craftFor as craftOf,
   createCraftCache,
+  setupCellHtml,
   type CraftCellContext,
 } from "./craftCell";
 
@@ -166,6 +167,10 @@ async function refresh(): Promise<void> {
 
   renderMeta();
   renderTable();
+  // The fittings line prices itself off the bazaar, so it is blank until the first poll lands and
+  // has to be repainted when it does — the setup controls above it have not moved, but its numbers
+  // have gone from nothing to something.
+  renderSetupNote();
 
   if (host) {
     const due = state.lastAt ? state.lastAt + POLL_MS - Date.now() : POLL_MS;
@@ -722,6 +727,7 @@ function render(): void {
       </div>
 
       <p class="sub dim" id="mpsetup">${setupNote()}</p>
+      <p class="sub dim setup-cost" id="mpfittings">${fittingsNote()}</p>
     </div>
 
     <div id="mptable"></div>
@@ -782,6 +788,21 @@ function renderMeta(): void {
 function renderSetupNote(): void {
   const target = document.getElementById("mpsetup");
   if (target) target.innerHTML = setupNote();
+  const fittings = document.getElementById("mpfittings");
+  if (fittings) fittings.innerHTML = fittingsNote();
+}
+
+/**
+ * What the fittings cost, beside the controls that choose them.
+ *
+ * Up here rather than in the table because it is one figure for the whole wall, not a per-minion
+ * one: the compactor and the hopper are the same purchase whichever minion you point them at, and
+ * the table's craft column is already answering the per-minion question.
+ */
+function fittingsNote(): string {
+  if (!tables || state.market.size === 0) return "";
+  const cost = setupCostOf(fittingsOf(state, tables), buyPriceOf(state.market, tables.npcPrices));
+  return setupCellHtml(cost, countOf(state));
 }
 
 /**

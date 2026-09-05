@@ -1,5 +1,5 @@
 import { coins, num } from "../lib/format";
-import { buyPriceOf, craftCostOf, type CraftCost, type MinionRecipes } from "../lib/minionCraft";
+import { buyPriceOf, craftCostOf, type CraftCost, type MinionRecipes, type SetupCost } from "../lib/minionCraft";
 
 /**
  * The craft-cost cell, shared by the two tabs that show it.
@@ -80,6 +80,39 @@ export function craftBill(cost: CraftCost, family: string, placed: number): stri
         } not priced anywhere here.`
       : "";
   return [head, ...lines, foot].join("\n") + caveat;
+}
+
+/**
+ * What the fittings cost, for the setup line at the top of both tabs.
+ *
+ * One short phrase, because it sits beside the controls rather than in the table and the table is
+ * where the reading happens. The wall's total leads — every other figure on both tabs is the wall —
+ * and the per-minion price, which is the number you compare against a shop, is on the hover with
+ * the breakdown.
+ *
+ * Empty string when nothing is fitted: a setup with bare slots has no cost to report, and a
+ * "Fittings 0" would be a line of furniture.
+ */
+export function setupCellHtml(cost: SetupCost, placed: number): string {
+  if (cost.lines.length === 0) return "";
+
+  const total = cost.perMinion * placed;
+  const bill = [
+    ...cost.lines.map((line) => `${line.item} — ${line.unit === null ? "nothing prices this" : coins(Math.round(line.coins))}`),
+    placed > 1
+      ? `Total ${coins(Math.round(cost.perMinion))} a minion, ${coins(Math.round(total))} for ${num(placed)}.`
+      : `Total ${coins(Math.round(cost.perMinion))}.`,
+    "Bought once and moved between minions, so it is not part of what a minion costs to build. Fuel is not counted here — it burns, and the table charges it by the hour.",
+    cost.unpriced.length > 0
+      ? `A floor: ${cost.unpriced.map((u) => u.item).join(" and ")} ${cost.unpriced.length === 1 ? "is" : "are"} not priced anywhere here.`
+      : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  return `<span title="${escapeAttr(bill)}">Fittings <strong${cost.unpriced.length ? ' class="gold"' : ""}>${coins(
+    Math.round(total),
+  )}${cost.unpriced.length ? " +" : ""}</strong></span>`;
 }
 
 const ROMAN = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];

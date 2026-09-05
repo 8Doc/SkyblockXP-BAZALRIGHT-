@@ -158,6 +158,12 @@ button:disabled { opacity: 0.45; cursor: default; }
 .task-xp { width: 64px; text-align: right; color: var(--gold); font-variant-numeric: tabular-nums; }
 .task-cost { width: 90px; text-align: right; font-variant-numeric: tabular-nums; }
 .task-rate { width: 100px; text-align: right; color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+/* The fittings total under the setup controls. One short phrase, so it wants separating from the
+   sentence above it rather than styling of its own. */
+.setup-cost { margin-top: 2px; }
+.setup-cost strong { color: var(--text); font-variant-numeric: tabular-nums; }
+.setup-cost strong.gold { color: var(--gold); }
+
 .tag, .note { margin-left: 6px; font-size: 12px; color: var(--muted); }
 
 /*

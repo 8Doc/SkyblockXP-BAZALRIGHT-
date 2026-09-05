@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 // @ts-expect-error - a plain build script, imported for its pure parsers only.
 import { cellItems, parseRecipes } from "../scripts/fetch-minion-recipes.mjs";
-import { buyPriceOf, craftCostOf, paybackDays } from "../src/lib/minionCraft";
+import { buyPriceOf, craftCostOf, paybackDays, setupCostOf } from "../src/lib/minionCraft";
 import type { MinionRecipes } from "../src/lib/minionCraft";
 
 const recipes = JSON.parse(readFileSync("data/generated/minion-recipes.json", "utf8")) as MinionRecipes & {
@@ -149,4 +149,44 @@ test("payback is the cost over the income, and never negative", () => {
   assert.equal(paybackDays(1_000, 100), 10);
   assert.equal(paybackDays(0, 100), 0);
   assert.equal(paybackDays(1_000, 0), Infinity);
+});
+
+/* ------------------------------------------------------------ the fittings */
+
+test("fittings are priced apart from the minion, and fuel is not one", () => {
+  const price = (id: string) => ({ SUPER_COMPACTOR_3000: 1_000, ENCHANTED_HOPPER: 500, MINION_EXPANDER: 200 })[id] ?? null;
+
+  const cost = setupCostOf(
+    [
+      { id: "SUPER_COMPACTOR_3000", name: "Super Compactor 3000" },
+      { id: "MINION_EXPANDER", name: "Minion Expander" },
+      // An empty slot is a choice, not a missing price: neither charged nor complained about.
+      { id: "NONE", name: "Empty slot" },
+      { id: "ENCHANTED_HOPPER", name: "Enchanted Hopper" },
+    ],
+    price,
+  );
+
+  assert.equal(cost.perMinion, 1_700);
+  assert.equal(cost.unpriced.length, 0);
+  // Dearest first, because that is the line anyone reads.
+  assert.equal(cost.lines[0].item, "Super Compactor 3000");
+  assert.equal(cost.lines.length, 3);
+});
+
+test("an unpriced fitting makes the total a floor rather than a fiction", () => {
+  // No bazaar quotes a storage chest, so a total that ignored it would say a wall was outfitted for
+  // less than it costs.
+  const cost = setupCostOf(
+    [
+      { id: "SUPER_COMPACTOR_3000", name: "Super Compactor 3000" },
+      { id: "LARGE_STORAGE", name: "Large Storage" },
+    ],
+    (id) => (id === "SUPER_COMPACTOR_3000" ? 1_000 : null),
+  );
+
+  assert.equal(cost.perMinion, 1_000);
+  assert.deepEqual(cost.unpriced.map((u) => u.item), ["Large Storage"]);
+  // Still listed, so the hover shows what is missing rather than dropping it.
+  assert.equal(cost.lines.length, 2);
 });
