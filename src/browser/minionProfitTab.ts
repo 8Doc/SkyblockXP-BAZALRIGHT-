@@ -556,7 +556,10 @@ export function unmountMinionProfit(): void {
  * once, and showing the slot it consumed, is the arrangement with no wrong state in it.
  */
 function upgradeChoices(): Upgrade[] {
-  const compactors = new Set(tables!.storage.compactors.map((c) => c.id));
+  // "NONE" is in both lists — it is "no compactor" there and "empty slot" here — so filtering
+  // the upgrades by compactor id removed the only way to clear a slot. Both dropdowns lost their
+  // Empty slot option, and an upgrade once chosen could not be taken off.
+  const compactors = new Set(tables!.storage.compactors.map((c) => c.id).filter((id) => id !== "NONE"));
   return tables!.modifiers.upgrades.filter((u) => !compactors.has(u.id));
 }
 
@@ -607,7 +610,7 @@ const PRESETS: Preset[] = [
     label: "Overnight",
     help: "A Super Compactor and a Flycatcher, claimed after eight hours. The ordinary case: fast, packed, and emptied in the morning.",
     apply: () => {
-      state.upgrades = ["FLYCATCHER", "NONE"];
+      state.upgrades = ["FLYCATCHER_UPGRADE", "NONE"];
       state.compactor = "SUPER_COMPACTOR_3000";
       state.hopper = "NONE";
       state.claim = "8";

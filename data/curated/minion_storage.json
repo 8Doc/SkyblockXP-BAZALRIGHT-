@@ -35,7 +35,7 @@
     { "id": "NONE", "name": "No compactor", "kind": "none" },
     { "id": "COMPACTOR", "name": "Compactor", "kind": "block" },
     { "id": "SUPER_COMPACTOR_3000", "name": "Super Compactor 3000", "kind": "enchanted" },
-    { "id": "DWARVEN_SUPER_COMPACTOR", "name": "Dwarven Super Compactor", "kind": "enchanted" }
+    { "id": "DWARVEN_COMPACTOR", "name": "Dwarven Super Compactor", "kind": "enchanted", "idNote": "DWARVEN_COMPACTOR, not DWARVEN_SUPER_COMPACTOR — the display name carries the word, the item id does not." }
   ],
   "compactorsWhy": "A compactor changes nothing about how much a minion collects and everything about how long it runs. 160 cobblestone become one Enchanted Cobblestone, so a slot that held 64 drops now holds 64 enchanted ones — ten thousand cobblestone in the space of sixty-four. The ratio is not assumed: it is read off the item's own crafting recipe in recipes.json, which is where 160 comes from, and it differs per item.",
   "compactorSlot": "A compactor occupies one of the two upgrade slots, so choosing one is choosing against a Flycatcher. That trade is the whole reason to show fill time next to items an hour rather than only one of them.",

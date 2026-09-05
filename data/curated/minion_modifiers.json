@@ -32,11 +32,11 @@
   "upgrades": [
     { "id": "NONE", "name": "Empty slot", "speed": 0, "output": 1 },
     { "id": "MINION_EXPANDER", "name": "Minion Expander", "speed": 0.05, "output": 1, "note": "Also widens the range to 7x7, which matters for mob minions rather than for resource ones. Two stack." },
-    { "id": "FLYCATCHER", "name": "Flycatcher", "speed": 0.2, "output": 1 },
+    { "id": "FLYCATCHER_UPGRADE", "name": "Flycatcher", "speed": 0.2, "output": 1, "idNote": "FLYCATCHER_UPGRADE, not FLYCATCHER. The bazaar lists it under the longer id and nothing here priced it while the short one was used." },
     { "id": "BERBERIS_FUEL_INJECTOR", "name": "Berberis Fuel Injector", "speed": 0.15, "output": 1, "restrictedTo": "farming", "note": "Farming minions only." },
     { "id": "COMPACTOR", "name": "Compactor", "speed": 0, "output": 1, "note": "Compacts drops into blocks. Does not change how much is collected - nine iron ingots compacted still count as nine." },
     { "id": "SUPER_COMPACTOR_3000", "name": "Super Compactor 3000", "speed": 0, "output": 1, "note": "Compacts drops into enchanted forms. Does not change how much is collected, but it is what stops a minion filling up and stalling." },
-    { "id": "DWARVEN_SUPER_COMPACTOR", "name": "Dwarven Super Compactor", "speed": 0, "output": 1, "note": "Smelts and compacts. Same collection count." },
+    { "id": "DWARVEN_COMPACTOR", "name": "Dwarven Super Compactor", "speed": 0, "output": 1, "note": "Smelts and compacts. Same collection count.", "idNote": "DWARVEN_COMPACTOR, not DWARVEN_SUPER_COMPACTOR. The name has the word and the id does not." },
     { "id": "DIAMOND_SPREADING", "name": "Diamond Spreading", "speed": 0, "output": 1, "note": "10% chance of a Diamond per drop. That feeds the Diamond collection, not the one this minion is grinding." },
     { "id": "CORRUPT_SOIL", "name": "Corrupt Soil", "speed": 0, "output": 1, "restrictedTo": "mob-spawning", "note": "Corrupts every mob the minion spawns, adding 1 Sulphur and 1 Corrupted Fragment to each. Changes nothing about speed or the minion's own drop, and on a cheap mob minion the two extras are worth more than the drop itself - see minion_extras.json." },
     { "id": "ENCHANTED_EGG", "name": "Enchanted Egg", "speed": 0, "output": 1, "restrictedTo": "chicken", "note": "Adds an Egg to each Chicken. Two while the island is loaded, one while it is not; this app models the unloaded case." },

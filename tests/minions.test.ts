@@ -148,7 +148,7 @@ test("boosts from fuel and both upgrades add before dividing", () => {
   // Two expanders are +10% together, not 1.05 squared.
   assert.equal(actionSeconds(base, { fuel: fuel("NONE"), upgrades: two }), 20 / 1.1);
   // And a fuel joins the same sum: +40% and +20% is one division by 1.6.
-  const mixed: [Upgrade, Upgrade] = [upgrade("FLYCATCHER"), upgrade("NONE")];
+  const mixed: [Upgrade, Upgrade] = [upgrade("FLYCATCHER_UPGRADE"), upgrade("NONE")];
   assert.equal(actionSeconds(base, { fuel: fuel("EVERBURNING_FLAME"), upgrades: mixed }), 20 / 1.6);
 });
 

@@ -190,3 +190,41 @@ test("an unpriced fitting makes the total a floor rather than a fiction", () => 
   // Still listed, so the hover shows what is missing rather than dropping it.
   assert.equal(cost.lines.length, 2);
 });
+
+test("the fittings that cost money are ones the bazaar can actually price", () => {
+  // Two of these were priced at nothing for a while, and neither was missing from a market — the
+  // ids were simply wrong. The Flycatcher is a +20% upgrade on every minion and the Dwarven
+  // Super Compactor is the mining wall's default, so both were quietly worth zero in the total.
+  const names = JSON.parse(readFileSync("data/generated/bazaar_items.json", "utf8")).names as Record<string, string>;
+  const mods = JSON.parse(readFileSync("data/curated/minion_modifiers.json", "utf8"));
+  const storage = JSON.parse(readFileSync("data/curated/minion_storage.json", "utf8"));
+
+  const id = (list: { id: string; name: string }[], name: string) => list.find((e) => e.name === name)!.id;
+  assert.equal(id(mods.upgrades, "Flycatcher"), "FLYCATCHER_UPGRADE");
+  assert.equal(id(mods.upgrades, "Dwarven Super Compactor"), "DWARVEN_COMPACTOR");
+  assert.equal(id(storage.compactors, "Dwarven Super Compactor"), "DWARVEN_COMPACTOR");
+
+  // And the ids resolve, which is the thing the assertions above are a proxy for.
+  for (const wanted of ["FLYCATCHER_UPGRADE", "DWARVEN_COMPACTOR", "ENCHANTED_LAVA_BUCKET", "MAGMA_BUCKET", "PLASMA_BUCKET"]) {
+    assert.ok(names[wanted], `${wanted} is not a bazaar item id`);
+  }
+});
+
+test("a fuel that never burns is a fitting, and one that burns is not", () => {
+  // The three buckets, the Solar Panel and the Everburning Flame are fitted once and never
+  // replaced. `fuelCostPerHour` already charges them nothing per hour and calls them capital, so
+  // leaving them out of the fittings too priced a Plasma Bucket wall as though the buckets were
+  // free. Coal is the other case: it runs out, and the hourly charge is the honest way to bill it.
+  const mods = JSON.parse(readFileSync("data/curated/minion_modifiers.json", "utf8"));
+  const permanent = mods.fuels.filter((f: { id: string; hours: number | null }) => f.id !== "NONE" && f.hours === null);
+
+  assert.deepEqual(
+    permanent.map((f: { id: string }) => f.id).sort(),
+    ["ENCHANTED_LAVA_BUCKET", "EVERBURNING_FLAME", "MAGMA_BUCKET", "PLASMA_BUCKET", "SOLAR_PANEL"],
+  );
+  // Every consumable carries a positive duration, which is what keeps the two apart.
+  for (const fuel of mods.fuels) {
+    if (fuel.id === "NONE" || fuel.hours === null) continue;
+    assert.ok(fuel.hours > 0, `${fuel.id} has a non-positive duration`);
+  }
+});

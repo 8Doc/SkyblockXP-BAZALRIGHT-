@@ -88,20 +88,31 @@ export function writeSetup<K extends keyof MinionSetupState>(field: K, value: Mi
  * listing the upgrades by hand in either tab would eventually charge for a Flycatcher the setup
  * does not have.
  *
- * The fuel is not here. It burns, so it is not a fitting, and both tabs already charge it by the
- * hour against the income.
+ * **A fuel belongs here exactly when it does not burn.** Five of them do not: the Solar Panel, the
+ * three buckets — Enchanted Lava, Magma, Plasma — and the Everburning Flame. They are fitted once
+ * and never replaced, which makes them a purchase rather than a running cost, and the profit model
+ * already agrees: `fuelCostPerHour` returns zero for a fuel with no duration and calls it a capital
+ * cost. Zero per hour and absent from the fittings meant a Plasma Bucket wall was being quoted as
+ * though the buckets were free.
+ *
+ * A fuel that runs out stays out. It is a genuine subscription, the hourly charge is the honest way
+ * to bill it, and putting it here as well would bill the same coal twice.
  */
 export function fittingsOf(
   setup: MinionSetupState,
   tables: {
-    modifiers: { upgrades: { id: string; name: string }[] };
+    modifiers: { upgrades: { id: string; name: string }[]; fuels: { id: string; name: string; hours: number | null }[] };
     storage: { compactors: { id: string; name: string; kind: string }[]; hoppers: { id: string; name: string }[]; chests: { id: string; name: string }[] };
   },
 ): { id: string; name: string }[] {
   const nameOf = (list: { id: string; name: string }[], id: string) => list.find((entry) => entry.id === id)?.name ?? id;
   const [slot0, slot1] = slotIds(setup, tables.storage.compactors);
 
+  const fuel = tables.modifiers.fuels.find((f) => f.id === setup.fuel);
+  const permanent = fuel && fuel.id !== "NONE" && (fuel.hours === null || !(fuel.hours > 0));
+
   return [
+    ...(permanent ? [{ id: fuel.id, name: fuel.name }] : []),
     { id: setup.compactor, name: nameOf(tables.storage.compactors, setup.compactor) },
     { id: slot0, name: nameOf(tables.modifiers.upgrades, slot0) },
     { id: slot1, name: nameOf(tables.modifiers.upgrades, slot1) },

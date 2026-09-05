@@ -429,7 +429,10 @@ function upgradeById(id: string): Upgrade {
  * Compactor in slot one, no compactor in the compactor box" is a setup nobody meant.
  */
 function plainUpgrades(): Upgrade[] {
-  const compactors = new Set(tables!.storage.compactors.map((c) => c.id));
+  // "NONE" is in both lists — it is "no compactor" there and "empty slot" here — so filtering
+  // the upgrades by compactor id removed the only way to clear a slot. Both dropdowns lost their
+  // Empty slot option, and an upgrade once chosen could not be taken off.
+  const compactors = new Set(tables!.storage.compactors.map((c) => c.id).filter((id) => id !== "NONE"));
   return tables!.modifiers.upgrades.filter((u) => !compactors.has(u.id));
 }
 

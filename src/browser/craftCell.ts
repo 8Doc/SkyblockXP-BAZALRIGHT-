@@ -102,7 +102,7 @@ export function setupCellHtml(cost: SetupCost, placed: number): string {
     placed > 1
       ? `Total ${coins(Math.round(cost.perMinion))} a minion, ${coins(Math.round(total))} for ${num(placed)}.`
       : `Total ${coins(Math.round(cost.perMinion))}.`,
-    "Bought once and moved between minions, so it is not part of what a minion costs to build. Fuel is not counted here — it burns, and the table charges it by the hour.",
+    "Bought once and moved between minions, so it is not part of what a minion costs to build. Fuel that burns is not here — the table charges that by the hour instead.",
     cost.unpriced.length > 0
       ? `A floor: ${cost.unpriced.map((u) => u.item).join(" and ")} ${cost.unpriced.length === 1 ? "is" : "are"} not priced anywhere here.`
       : "",
