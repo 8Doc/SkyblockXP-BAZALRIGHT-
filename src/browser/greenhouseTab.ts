@@ -805,12 +805,33 @@ export function mountGreenhouse(container: HTMLElement, data: GreenhouseTables):
  * one. It cannot see Dedication, Anita's personal bests or Carrolyn without more digging, so a
  * typed box always wins.
  */
-export function setDetectedFortune(input: { cropUpgrades: Record<string, number>; lore: string[] }): void {
+export function setDetectedFortune(input: {
+  cropUpgrades: Record<string, number>;
+  gardenUpgrades: Record<string, number>;
+  lore: string[];
+}): void {
   state.scan = {
     items: input.lore.length,
     upgradeKeys: Object.keys(input.cropUpgrades),
     unresolved: [],
   };
+
+  /**
+   * The two Garden upgrade tiers, which are published and were being guessed at nine.
+   *
+   * `GROWTH_SPEED` and `YIELD` are the boxes below, and the defaults assumed both maxed — which
+   * overstates every figure on the page for anybody who is not. Taken only where the profile has
+   * them, and only into boxes the player has not already set for themselves.
+   */
+  const tiers = input.gardenUpgrades;
+  const growth = tiers.GROWTH_SPEED;
+  const plantYield = tiers.YIELD;
+  if (Number.isFinite(growth) && localStorage.getItem("sbxp:ghupgrade") === null) {
+    state.growth = { ...state.growth, growthSpeedUpgrade: Number(growth) };
+  }
+  if (Number.isFinite(plantYield) && localStorage.getItem("sbxp:ghyield") === null) {
+    state.growth = { ...state.growth, plantYieldUpgrade: Number(plantYield) };
+  }
   const resolve = cropResolver(tables.greenhouse);
 
   const passive: Record<string, number> = {};
@@ -999,7 +1020,22 @@ function scanNote(): string {
       ? ` <span class="gold">Could not place: ${[...new Set(scan.unresolved)].map(escapeHtml).join(", ")}.</span>`
       : "";
 
-  return `<p class="sub dim">From your profile — ${parts.join(" · ")}.${stuck}</p>`;
+  /**
+   * The limit, stated rather than left to look like a bug.
+   *
+   * Hypixel does not publish the Farming Toolkit's contents. Not under a bag, not in
+   * `shared_inventory`, not on the garden endpoint — a sweep of one real profile found 147 NBT
+   * blobs and 670 items with lore, and of every farming tool that account owns exactly one turned
+   * up: the hoe that happened to be loose in the inventory. So a tool in the toolkit is invisible
+   * here, and the box beside its crop stays a box.
+   */
+  const toolkit =
+    tools.length < 3
+      ? ` <span class="gold">Tools kept in the Farming Toolkit are not published by Hypixel, so only loose
+        ones are found — type the rest in.</span>`
+      : "";
+
+  return `<p class="sub dim">From your profile — ${parts.join(" · ")}.${stuck}${toolkit}</p>`;
 }
 
 function render(): void {

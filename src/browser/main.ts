@@ -374,7 +374,11 @@ async function shareFortune(): Promise<void> {
   ].filter((data): data is string => typeof data === "string");
 
   const lore = (await Promise.all(sources.map((data) => readLore(data).catch(() => [])))).flat();
-  setDetectedFortune({ cropUpgrades: upgrades, lore });
+  setDetectedFortune({
+    cropUpgrades: upgrades,
+    gardenUpgrades: state.garden?.gardenUpgrades ?? {},
+    lore,
+  });
 }
 
 /**

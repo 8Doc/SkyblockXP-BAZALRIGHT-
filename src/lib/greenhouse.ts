@@ -632,6 +632,28 @@ export function cropUpgradeFortune(level: number): number {
  */
 const CROP_FORTUNE_LINE = /([A-Za-z' ]+?)\s+Fortune:\s*\+?\s*([\d,.]+)/g;
 
+/**
+ * Fortunes that are not crop fortunes, so a reader can tell noise from a crop it failed to place.
+ *
+ * "Fortune" is a whole family of stats and only thirteen of them are crops. A geared account's lore
+ * is full of the rest — Mining, Foraging, Hunting, Gemstone, the per-tree Foraging fortunes — and
+ * without this list every one of them looks like a crop the page could not identify, which buries
+ * the one case worth reporting: a crop named under a spelling the table does not carry.
+ */
+const NOT_A_CROP = new Set(
+  [
+    "farming", "bonus farming", "mining", "foraging", "fishing", "hunting", "combat",
+    "gemstone", "ore", "block", "dwarven metal", "sweep",
+    // Foraging's per-tree fortunes, which read exactly like crop fortunes and are not.
+    "fig", "mangrove", "helix", "tree",
+  ].map((name) => name.toLowerCase()),
+);
+
+/** True where a "<name> Fortune" line is one of the thirteen crops rather than another stat. */
+export function isCropFortuneStat(name: string): boolean {
+  return !NOT_A_CROP.has(name.trim().toLowerCase());
+}
+
 export function cropFortuneFromLore(items: string[]): Record<string, number> {
   const found: Record<string, number> = {};
   for (const item of items) {
@@ -643,8 +665,8 @@ export function cropFortuneFromLore(items: string[]): Record<string, number> {
     const clean = item.replace(/§./g, "").replace(/&[0-9a-fk-or]/g, "");
     for (const match of clean.matchAll(CROP_FORTUNE_LINE)) {
       const crop = match[1].trim();
-      // The general stat, which belongs in a different box entirely.
-      if (/^farming$/i.test(crop)) continue;
+      // Mining Fortune, Foraging Fortune and the rest of the family, which are not crops.
+      if (!isCropFortuneStat(crop)) continue;
       const value = Number(match[2].replace(/,/g, ""));
       if (!Number.isFinite(value) || value <= 0) continue;
       found[crop] = Math.max(found[crop] ?? 0, value);

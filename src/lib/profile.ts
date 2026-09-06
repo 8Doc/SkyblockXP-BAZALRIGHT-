@@ -141,6 +141,13 @@ export type GardenState = {
   cropUpgrades: Record<string, number>;
   /** composter upgrade name -> tier. */
   composterUpgrades: Record<string, number>;
+  /**
+   * The Garden upgrade tiers, keyed as Hypixel keys them: GROWTH_SPEED, YIELD, PLOT_LIMIT.
+   *
+   * Worth carrying because two of them are inputs the Greenhouse tab was asking to be typed and
+   * defaulting to nine — a maxed setup nobody necessarily has. They are published outright.
+   */
+  gardenUpgrades: Record<string, number>;
 };
 
 export type SkyblockProfile = {

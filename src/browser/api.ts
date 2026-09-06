@@ -171,6 +171,7 @@ export async function fetchGarden(profileId: string, key: string): Promise<Garde
       garden?: {
         unlocked_plots_ids?: string[];
         crop_upgrade_levels?: Record<string, number>;
+        garden_upgrades?: Record<string, number>;
         composter_data?: { upgrades?: Record<string, number> };
       };
     }>(`/skyblock/garden?profile=${profileId}`, key);
@@ -179,6 +180,7 @@ export async function fetchGarden(profileId: string, key: string): Promise<Garde
       unlockedPlots: body.garden.unlocked_plots_ids?.length ?? 0,
       cropUpgrades: body.garden.crop_upgrade_levels ?? {},
       composterUpgrades: body.garden.composter_data?.upgrades ?? {},
+      gardenUpgrades: body.garden.garden_upgrades ?? {},
     };
   } catch {
     return null;

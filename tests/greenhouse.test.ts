@@ -10,6 +10,7 @@ import {
   fortuneMultiplier,
   cropFortuneFromLore,
   cropResolver,
+  isCropFortuneStat,
   cropUpgradeFortune,
   yieldMultiplierOf,
   plantsFor,
@@ -944,4 +945,27 @@ test("a crop answers to its item id, its stat and its name", () => {
   assert.equal(resolve("Cocoa Beans"), "Cocoa Beans");
   assert.equal(resolve("Nether Wart"), "Nether Wart");
   assert.equal(resolve("not a crop"), null);
+});
+
+test("a fortune that is not a crop's is not reported as an unplaceable crop", () => {
+  // "Fortune" is a family of stats and only thirteen are crops. A geared account's lore carries
+  // Mining, Foraging, Hunting, Gemstone and the per-tree Foraging fortunes, and reading those as
+  // crops buries the one case worth reporting: a crop under a spelling the table lacks.
+  const gear = [
+    "§7Mining Fortune: §a+290",
+    "§7Foraging Fortune: §a+129.54",
+    "§7Hunting Fortune: §a+34",
+    "§7Gemstone Fortune: §a+50",
+    "§7Fig Fortune: §a+15",
+    "§7Mangrove Fortune: §a+15",
+    "§7Bonus Farming Fortune: §a+60",
+    // The one that is a crop.
+    "§7Sunflower Fortune: §a+327",
+  ].join("\n");
+
+  assert.deepEqual(cropFortuneFromLore([gear]), { Sunflower: 327 });
+  assert.equal(isCropFortuneStat("Mining"), false);
+  assert.equal(isCropFortuneStat("Bonus Farming"), false);
+  assert.equal(isCropFortuneStat("Sunflower"), true);
+  assert.equal(isCropFortuneStat("Cocoa Beans"), true);
 });
