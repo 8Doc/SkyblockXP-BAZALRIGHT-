@@ -368,7 +368,9 @@ async function shareFortune(): Promise<void> {
     inventory?.equipment_contents?.data,
     inventory?.inv_armor?.data,
     inventory?.ender_chest_contents?.data,
+    inventory?.personal_vault_contents?.data,
     ...Object.values(inventory?.bag_contents ?? {}).map((bag) => bag?.data),
+    ...Object.values(inventory?.backpack_contents ?? {}).map((pack) => pack?.data),
   ].filter((data): data is string => typeof data === "string");
 
   const lore = (await Promise.all(sources.map((data) => readLore(data).catch(() => [])))).flat();

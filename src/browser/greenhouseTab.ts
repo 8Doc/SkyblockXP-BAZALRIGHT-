@@ -7,6 +7,7 @@ import { coins, num } from "../lib/format";
 import {
   OVERDRIVE_CHIP_FORTUNE,
   cropFortuneFromLore,
+  cropResolver,
   cropUpgradeFortune,
   rankMutations,
   stageSeconds,
@@ -796,13 +797,13 @@ export function mountGreenhouse(container: HTMLElement, data: GreenhouseTables):
  * typed box always wins.
  */
 export function setDetectedFortune(input: { cropUpgrades: Record<string, number>; lore: string[] }): void {
-  const byName = new Map((tables.greenhouse.cropFortunes ?? []).map((c) => [c.crop.toLowerCase(), c.crop]));
-  const resolve = (raw: string): string | null => byName.get(raw.trim().toLowerCase()) ?? null;
+  const resolve = cropResolver(tables.greenhouse);
 
   const passive: Record<string, number> = {};
   for (const [key, level] of Object.entries(input.cropUpgrades)) {
-    // "wheat" / "cocoa_beans" in the API against "Wheat" / "Cocoa Beans" on the page.
-    const crop = resolve(key.replace(/_/g, " "));
+    // The Garden keys these by Hypixel's item ids — `CARROT_ITEM`, `INK_SACK:3` — which are not the
+    // names on the page. `cropResolver` knows all three vocabularies.
+    const crop = resolve(key);
     if (crop) passive[crop] = (passive[crop] ?? 0) + cropUpgradeFortune(level);
   }
 

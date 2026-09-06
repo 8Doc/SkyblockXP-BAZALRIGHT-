@@ -630,21 +630,71 @@ export function cropUpgradeFortune(level: number): number {
  *
  * Colour codes are stripped first: SkyBlock lore is full of them and they sit inside the numbers.
  */
-export function cropFortuneFromLore(lines: string[]): Record<string, number> {
+const CROP_FORTUNE_LINE = /([A-Za-z' ]+?)\s+Fortune:\s*\+?\s*([\d,.]+)/g;
+
+export function cropFortuneFromLore(items: string[]): Record<string, number> {
   const found: Record<string, number> = {};
-  for (const line of lines) {
-    const clean = line.replace(/§./g, "").replace(/&[0-9a-fk-or]/g, "");
-    // "Wheat Fortune: +200" — and "Cocoa Beans Fortune", which is two words.
-    const match = /([A-Za-z' ]+?)\s+Fortune:\s*\+?\s*([\d,.]+)/.exec(clean);
-    if (!match) continue;
-    const crop = match[1].trim();
-    // "Farming Fortune" is the general stat and belongs to a different box entirely.
-    if (/^farming$/i.test(crop)) continue;
-    const value = Number(match[2].replace(/,/g, ""));
-    if (!Number.isFinite(value) || value <= 0) continue;
-    found[crop] = Math.max(found[crop] ?? 0, value);
+  for (const item of items) {
+    // Each entry is one item's whole lore, newlines and all — `loreFrom` joins the lines — so this
+    // has to walk every match rather than take the first. Taking the first is what broke it: a
+    // farming tool states `Farming Fortune` before its crop fortune, that first match is the
+    // general stat and gets skipped, and the crop fortune three lines below was never looked at.
+    // Every tool in the game reads that way round, so nothing was ever detected.
+    const clean = item.replace(/§./g, "").replace(/&[0-9a-fk-or]/g, "");
+    for (const match of clean.matchAll(CROP_FORTUNE_LINE)) {
+      const crop = match[1].trim();
+      // The general stat, which belongs in a different box entirely.
+      if (/^farming$/i.test(crop)) continue;
+      const value = Number(match[2].replace(/,/g, ""));
+      if (!Number.isFinite(value) || value <= 0) continue;
+      found[crop] = Math.max(found[crop] ?? 0, value);
+    }
   }
   return found;
+}
+
+/**
+ * Resolve whatever a crop is called — an item id, a stat, a display name — to the page's name.
+ *
+ * Three vocabularies describe the same thirteen crops and none of them agree. The Garden publishes
+ * upgrade levels under Hypixel's item ids, which are their own dialect: `CARROT_ITEM`,
+ * `POTATO_ITEM`, `INK_SACK:3` for cocoa beans, `NETHER_STALK` for nether wart, `DOUBLE_PLANT` for
+ * sunflower. Item lore uses the stat's display name. The page uses the wiki's crop name, which is
+ * "Melon Slice" where every other source says "Melon".
+ *
+ * Matching on a tidied-up key was enough for four of them and silently dropped the rest — which is
+ * exactly what the filled and empty boxes showed: Wheat, Pumpkin, Sugar Cane and Cactus read their
+ * upgrades, and Carrot, Potato, Cocoa Beans, Mushroom, Nether Wart and Melon did not, because those
+ * are the six whose id is not their name.
+ *
+ * So every id the crop table already carries is a key here, and so is the stat, and so is the name.
+ */
+export function cropResolver(data: GreenhouseData): (raw: string) => string | null {
+  const index = new Map<string, string>();
+  const add = (key: string, crop: string) => {
+    const clean = key.trim().toLowerCase();
+    if (clean && !index.has(clean)) index.set(clean, crop);
+  };
+
+  for (const entry of data.cropFortunes ?? []) {
+    add(entry.crop, entry.crop);
+    add(entry.stat.replace(/\s*Fortune\s*$/i, ""), entry.crop);
+    for (const id of entry.ids) {
+      add(id, entry.crop);
+      // `CARROT_ITEM` also as "carrot item", and `INK_SACK:3` without its damage value.
+      add(id.replace(/_/g, " "), entry.crop);
+      add(id.split(":")[0], entry.crop);
+      add(id.replace(/_ITEM$/i, ""), entry.crop);
+    }
+  }
+
+  // The Garden's own keys for the two that match no item id it lifts.
+  add("mushroom collection", "Mushroom");
+  add("mushroom_collection", "Mushroom");
+  // Every other source calls it a melon; only the wiki's crop table says "Melon Slice".
+  add("melon", "Melon Slice");
+
+  return (raw: string) => index.get(raw.trim().toLowerCase()) ?? null;
 }
 
 /** Which crop fortune, if any, lifts a given drop. Built once per data set. */

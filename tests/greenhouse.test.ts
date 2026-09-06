@@ -9,6 +9,7 @@ import {
   FULL_PLOT,
   fortuneMultiplier,
   cropFortuneFromLore,
+  cropResolver,
   cropUpgradeFortune,
   yieldMultiplierOf,
   plantsFor,
@@ -894,4 +895,53 @@ test("crop fortune is read off item lore, and farming fortune is not mistaken fo
   assert.equal(found["Wheat"], 200);
   assert.equal(found["Cocoa Beans"], 35);
   assert.equal(found["Farming"], undefined);
+});
+
+test("a tool's crop fortune survives the farming fortune printed above it", () => {
+  // Every farming tool states the general stat first. Taking the first match in an item's lore
+  // found "Farming", skipped it as the wrong stat, and never looked at the crop fortune below —
+  // so nothing was ever detected from any tool in the game.
+  const sickle = [
+    "§7Gear Score: §d1000",
+    "§7Farming Fortune: §a+120",
+    "§7Wheat Fortune: §a+200",
+    "§7Speed: §a+5",
+  ].join("\n");
+
+  const found = cropFortuneFromLore([sickle]);
+  assert.equal(found["Wheat"], 200);
+  assert.equal(found["Farming"], undefined);
+
+  // And several crop fortunes on one item are all read, not just the first.
+  const artifact = ["§7Wheat Fortune: §a+30", "§7Carrot Fortune: §a+30", "§7Potato Fortune: §a+30"].join("\n");
+  assert.deepEqual(cropFortuneFromLore([artifact]), { Wheat: 30, Carrot: 30, Potato: 30 });
+});
+
+test("a crop answers to its item id, its stat and its name", () => {
+  const resolve = cropResolver(data);
+
+  // The Garden publishes upgrade levels under Hypixel's item ids, and six of the thirteen have an
+  // id that is not their name. Those six were the empty boxes.
+  assert.equal(resolve("CARROT_ITEM"), "Carrot");
+  assert.equal(resolve("POTATO_ITEM"), "Potato");
+  assert.equal(resolve("INK_SACK:3"), "Cocoa Beans");
+  assert.equal(resolve("NETHER_STALK"), "Nether Wart");
+  assert.equal(resolve("DOUBLE_PLANT"), "Sunflower");
+  assert.equal(resolve("MUSHROOM_COLLECTION"), "Mushroom");
+
+  // The four that worked before still work.
+  assert.equal(resolve("WHEAT"), "Wheat");
+  assert.equal(resolve("PUMPKIN"), "Pumpkin");
+  assert.equal(resolve("SUGAR_CANE"), "Sugar Cane");
+  assert.equal(resolve("CACTUS"), "Cactus");
+
+  // Lore says "Melon Fortune"; only the wiki's crop table says "Melon Slice".
+  assert.equal(resolve("Melon"), "Melon Slice");
+  assert.equal(resolve("MELON"), "Melon Slice");
+  assert.equal(resolve("Melon Slice"), "Melon Slice");
+
+  // And a stat name, which is how lore names them.
+  assert.equal(resolve("Cocoa Beans"), "Cocoa Beans");
+  assert.equal(resolve("Nether Wart"), "Nether Wart");
+  assert.equal(resolve("not a crop"), null);
 });
