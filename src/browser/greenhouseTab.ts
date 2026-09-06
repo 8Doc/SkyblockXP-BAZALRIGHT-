@@ -90,6 +90,10 @@ type State = {
   detected: Record<string, number> | null;
   /** The best farming tool found per crop, from item lore. Applies only to the crop you hold it for. */
   tools: Record<string, number> | null;
+  /** How many tools the last read saw, as against how many are remembered. */
+  lastFound: number;
+  /** True while a tool read is in flight, so the button can say so. */
+  loadingTools: boolean;
   /**
    * What the last profile read actually saw.
    *
@@ -138,6 +142,40 @@ function readCropFortune(): Record<string, string> {
   } catch {
     return {};
   }
+}
+
+/**
+ * The tools found so far, remembered across sessions and added to rather than replaced.
+ *
+ * You hold one tool at a time and the Farming Toolkit is not published, so any single read of a
+ * profile sees at most the one tool that happens to be out. Replacing the set on every read would
+ * mean the page could never know about more than one — so each read merges, and the collection
+ * builds up over however many visits it takes. A figure from last week is a fine answer here: a
+ * tool's crop fortune changes when you upgrade the tool, which is rarely, and the box is editable.
+ */
+const TOOLS_KEY = "sbxp:ghtools";
+
+function readTools(): Record<string, number> {
+  try {
+    const raw = localStorage.getItem(TOOLS_KEY);
+    const parsed = raw ? (JSON.parse(raw) as Record<string, number>) : {};
+    return parsed && typeof parsed === "object" ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
+function rememberTools(found: Record<string, number>): Record<string, number> {
+  // The larger of what was known and what was just seen: a better tool replaces a worse one, and a
+  // read that did not see a crop's tool does not forget it.
+  const merged = { ...readTools() };
+  for (const [crop, value] of Object.entries(found)) merged[crop] = Math.max(merged[crop] ?? 0, value);
+  try {
+    localStorage.setItem(TOOLS_KEY, JSON.stringify(merged));
+  } catch {
+    // In memory is enough for this session.
+  }
+  return merged;
 }
 
 const CONTEST_KEY = "sbxp:ghcontest";
@@ -201,7 +239,9 @@ const state: State = {
   showCrops: localStorage.getItem("sbxp:ghshowcrops") === "1",
   contestCrops: readContestCrops(),
   detected: null,
-  tools: null,
+  tools: Object.keys(readTools()).length > 0 ? readTools() : null,
+  lastFound: 0,
+  loadingTools: false,
   scan: null,
   growth: {
     uniqueCrops: Number(localStorage.getItem("sbxp:ghunique") ?? DEFAULT_GROWTH.uniqueCrops),
@@ -718,6 +758,30 @@ export function mountGreenhouse(container: HTMLElement, data: GreenhouseTables):
       return;
     }
 
+    if (target.closest("#ghloadtools")) {
+      if (reloadTools && !state.loadingTools) {
+        state.loadingTools = true;
+        render();
+        void reloadTools()
+          .catch(() => {
+            // A failed read leaves what was already remembered, which is the useful outcome.
+          })
+          .finally(() => {
+            state.loadingTools = false;
+            render();
+          });
+      }
+      return;
+    }
+
+    if (target.closest("#ghforgettools")) {
+      localStorage.removeItem(TOOLS_KEY);
+      state.tools = null;
+      state.lastFound = 0;
+      render();
+      return;
+    }
+
     if (target.closest("#ghrefresh")) void refresh();
   });
 
@@ -805,6 +869,20 @@ export function mountGreenhouse(container: HTMLElement, data: GreenhouseTables):
  * one. It cannot see Dedication, Anita's personal bests or Carrolyn without more digging, so a
  * typed box always wins.
  */
+/**
+ * How the tab asks for a fresh look at the inventory.
+ *
+ * The profile belongs to the planner tab, which owns the key and the fetch, so this is a callback
+ * registered from there rather than a second loader here. Null until a profile has been loaded,
+ * which is also what the button uses to know it has nothing to offer yet.
+ */
+let reloadTools: (() => Promise<void>) | null = null;
+
+export function setToolReloader(fn: () => Promise<void>): void {
+  reloadTools = fn;
+  if (host) render();
+}
+
 export function setDetectedFortune(input: {
   cropUpgrades: Record<string, number>;
   gardenUpgrades: Record<string, number>;
@@ -860,7 +938,9 @@ export function setDetectedFortune(input: {
   }
 
   state.detected = Object.keys(passive).length > 0 ? passive : null;
-  state.tools = Object.keys(tools).length > 0 ? tools : null;
+  const kept = rememberTools(tools);
+  state.tools = Object.keys(kept).length > 0 ? kept : null;
+  state.lastFound = Object.keys(tools).length;
   if (host) render();
 }
 
@@ -943,7 +1023,34 @@ function cropFortunePanel(): string {
   const crops = tables.greenhouse.cropFortunes ?? [];
   if (crops.length === 0) return "";
 
-  const summary = `<button type="button" class="chip" id="ghcroptoggle">${state.showCrops ? "Hide" : "Add"} crop fortune</button>`;
+  /**
+   * One read gets one tool, so this is a button rather than something that happens on load.
+   *
+   * The Farming Toolkit is not published, which leaves only whatever is in your hand — so building
+   * the set means holding a tool, pressing this, swapping, pressing it again. Saying "reads the one
+   * you are holding" up front is what stops that reading as a broken feature.
+   */
+  const kept = Object.keys(state.tools ?? {}).length;
+  // Shown even with no profile loaded, greyed and saying why. A control that appears only once
+  // some other tab has been used is a feature nobody discovers.
+  const ready = reloadTools !== null;
+  const loadTools =
+    `<button type="button" class="chip${state.loadingTools ? " on" : ""}" id="ghloadtools"${
+      state.loadingTools || !ready ? " disabled" : ""
+    } title="${escapeHtml(
+      ready
+        ? "Reads the crop fortune off the farming tool you are holding, and remembers it. Hypixel does not publish the Farming Toolkit, so one press finds one tool — hold the next and press again. Kept between visits."
+        : "Load a profile on the XP Planner tab first; this reads the tool you are holding from it.",
+    )}">${state.loadingTools ? "Reading…" : "Load tools"}</button>` +
+    (kept > 0
+      ? ` <button type="button" class="chip" id="ghforgettools" title="Forget the remembered tools and start again.">${num(
+          kept,
+        )} remembered</button>`
+      : "");
+
+  const summary = `<button type="button" class="chip" id="ghcroptoggle">${
+    state.showCrops ? "Hide" : "Add"
+  } crop fortune</button> ${loadTools}`;
   if (!state.showCrops) {
     const filled = Object.keys(cropFortuneValues()).length;
     return `<p class="sub">${summary} <span class="dim" title="Wheat Fortune, Carrot Fortune and the rest. Unlike the box above, each lifts one crop only — which makes these the one input here that changes which mutation wins, rather than just how big the numbers are.">${
@@ -1006,7 +1113,7 @@ function scanNote(): string {
   const parts = [
     `${num(scan.items)} item${scan.items === 1 ? "" : "s"} read`,
     tools.length > 0
-      ? `<strong>${tools.length}</strong> tool${tools.length === 1 ? "" : "s"} found (${tools
+      ? `<strong>${tools.length}</strong> tool${tools.length === 1 ? "" : "s"} remembered (${tools
           .sort((a, b) => b[1] - a[1])
           .slice(0, 4)
           .map(([crop, value]) => `${escapeHtml(crop)} +${num(value)}`)
@@ -1029,11 +1136,8 @@ function scanNote(): string {
    * up: the hoe that happened to be loose in the inventory. So a tool in the toolkit is invisible
    * here, and the box beside its crop stays a box.
    */
-  const toolkit =
-    tools.length < 3
-      ? ` <span class="gold">Tools kept in the Farming Toolkit are not published by Hypixel, so only loose
-        ones are found — type the rest in.</span>`
-      : "";
+  const toolkit = ` <span class="gold">Hypixel does not publish the Farming Toolkit, so a read finds only the
+    tool in your hand — hold the next one and press <strong>Load tools</strong> again. They are kept.</span>`;
 
   return `<p class="sub dim">From your profile — ${parts.join(" · ")}.${stuck}${toolkit}</p>`;
 }

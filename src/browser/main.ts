@@ -16,7 +16,7 @@ import {
 } from "../lib/types";
 import { ApiError, cacheAge, fetchAccessoryBins, fetchBazaar, fetchReferencePrices, fetchGarden, fetchMuseum, fetchProfiles, readBag, readLore, readOwnedItems, resolveUuid } from "./api";
 import { mountBazaar, unmountBazaar } from "./bazaarTab";
-import { mountGreenhouse, setDetectedFortune, unmountGreenhouse } from "./greenhouseTab";
+import { mountGreenhouse, setDetectedFortune, setToolReloader, unmountGreenhouse } from "./greenhouseTab";
 import { setMinionProfile } from "./minionsTab";
 import { setDetectedWisdom } from "./minionPetTab";
 import { mountMinionsSection, unmountMinionsSection } from "./minionsSection";
@@ -340,6 +340,32 @@ function rebuildCatalog(): void {
   setMinionProfile(coop?.collected ?? collectedFrom(state.member), ownedTier, state.playerName);
   void shareWisdom();
   void shareFortune();
+  // The greenhouse re-reads the inventory on a button, because one read sees one tool. It cannot
+  // fetch on its own — the key and the profile live here — so it is handed the loader.
+  setToolReloader(reloadInventory);
+}
+
+/**
+ * Fetch the profile again, then read the tools out of it.
+ *
+ * `shareFortune` alone would not do: it reads `state.member`, which is the profile as it stood when
+ * it was last fetched. The whole point of the button is that you swap the tool in your hand and
+ * press it again, and against a cached profile every press would return the same tool for as long
+ * as the page stayed open. So this re-fetches first.
+ *
+ * Only the profile is re-fetched — not the museum, the garden or the price feeds. None of them can
+ * have anything to say about which hoe you are holding.
+ */
+async function reloadInventory(): Promise<void> {
+  if (!state.uuid || !state.profileId) return;
+  const key = state.apiKey.trim();
+  if (!key) return;
+
+  state.profiles = await fetchProfiles(state.uuid, key);
+  const profile = state.profiles.find((p) => p.profile_id === state.profileId);
+  const member = profile?.members[state.uuid];
+  if (member) state.member = member;
+  await shareFortune();
 }
 
 /**
