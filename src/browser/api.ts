@@ -1,6 +1,6 @@
 import type { BazaarProduct, BinIndex, GardenState, MuseumState, ProfileMember, SkyblockProfile } from "../lib/profile";
 import { absorbAuctionPage, createBinIndex, type AuctionRecord } from "../lib/auctions";
-import { bagCapacityFrom, bagItemsFrom, itemIdsFrom, loreFrom, readNbt } from "../lib/nbt";
+import { bagCapacityFrom, bagItemsFrom, itemIdsFrom, loreFrom, nestedItemData, readNbt } from "../lib/nbt";
 import type { BagItem } from "../lib/gameData";
 
 /**
@@ -264,16 +264,48 @@ function base64ToBytes(base64: string): Uint8Array<ArrayBuffer> {
  * inventory grants nothing. Keeping the items apart is what lets the caller sum one and take the
  * best of the other.
  */
-export async function readLore(data: string | undefined): Promise<string[]> {
+async function gunzip(bytes: Uint8Array): Promise<Uint8Array> {
+  // Copied into a fresh array first: a byte array read out of NBT is backed by whatever buffer the
+  // reader had, and Blob will only take an ArrayBuffer-backed view.
+  const stream = new Blob([new Uint8Array(bytes)]).stream().pipeThrough(new DecompressionStream("gzip"));
+  return new Uint8Array(await new Response(stream).arrayBuffer());
+}
+
+/**
+ * `depth` guards the recursion into containers, which is otherwise unbounded on hostile data.
+ *
+ * Two is enough for everything the game has: a backpack in your inventory, and the items inside it.
+ * A toolkit inside a backpack would be the third level and does not exist.
+ */
+const MAX_NESTING = 2;
+
+export async function readLore(data: string | undefined, depth = 0): Promise<string[]> {
   if (!data) return [];
   try {
-    const stream = new Blob([base64ToBytes(data)]).stream().pipeThrough(new DecompressionStream("gzip"));
-    const bytes = new Uint8Array(await new Response(stream).arrayBuffer());
-    return loreFrom(readNbt(bytes));
+    return await loreFromBytes(await gunzip(base64ToBytes(data)), depth);
   } catch {
-    // An unreadable blob costs that blob's wisdom and nothing else.
+    // An unreadable blob costs that blob's lore and nothing else.
     return [];
   }
+}
+
+/**
+ * The lore of every item in a blob, and of everything held inside those items.
+ *
+ * A container's own lore says nothing about the tools in it, so a scan that stops at the top level
+ * finds a farming toolkit and reads the toolkit — not the sickle, the shovel and the axe inside.
+ * Each nested inventory is its own gzipped NBT, so this unwraps and recurses.
+ */
+async function loreFromBytes(bytes: Uint8Array, depth: number): Promise<string[]> {
+  const root = readNbt(bytes);
+  const out = loreFrom(root);
+  if (depth >= MAX_NESTING) return out;
+
+  const nested = await Promise.all(
+    nestedItemData(root).map((blob) => loreFromBytes(blob, depth + 1).catch(() => [] as string[])),
+  );
+  for (const lines of nested) out.push(...lines);
+  return out;
 }
 
 /**

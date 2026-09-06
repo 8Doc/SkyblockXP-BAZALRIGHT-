@@ -256,6 +256,33 @@ export function loreFrom(root: NbtCompound): string[] {
   return out;
 }
 
+/**
+ * The gzipped NBT blobs nested inside a container item's slots.
+ *
+ * A backpack, a personal compactor, a farming toolkit — anything that holds items — does not put
+ * them in the slot list beside itself. It stores them as its own gzipped NBT under a key in
+ * `ExtraAttributes`, so a reader that walks slots and stops sees the container's lore and nothing
+ * of what is in it. That is invisible rather than wrong-looking: the tools are simply absent.
+ *
+ * The key differs per container — `backpack_data`, and whatever the toolkit uses — so this returns
+ * every byte array found under `ExtraAttributes` rather than naming one. A byte array there is
+ * always a nested inventory; nothing else in that compound is stored as one.
+ */
+export function nestedItemData(root: NbtCompound): Uint8Array[] {
+  const slots = root.i;
+  if (!Array.isArray(slots)) return [];
+
+  const out: Uint8Array[] = [];
+  for (const slot of slots) {
+    const extra = asCompound(asCompound(asCompound(slot)?.tag)?.ExtraAttributes);
+    if (!extra) continue;
+    for (const value of Object.values(extra)) {
+      if (value instanceof Uint8Array && value.length > 0) out.push(value);
+    }
+  }
+  return out;
+}
+
 /** Every item id in an NBT blob's slot list, ignoring empty slots. */
 export function itemIdsFrom(root: NbtCompound): string[] {
   return bagItemsFrom(root).map((item) => item.id);

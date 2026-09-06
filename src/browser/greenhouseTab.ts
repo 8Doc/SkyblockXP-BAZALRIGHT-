@@ -90,6 +90,14 @@ type State = {
   detected: Record<string, number> | null;
   /** The best farming tool found per crop, from item lore. Applies only to the crop you hold it for. */
   tools: Record<string, number> | null;
+  /**
+   * What the last profile read actually saw.
+   *
+   * On the page rather than in a console, because this read has now been wrong twice in ways that
+   * looked identical from outside — no tools found, and six crops silently unmatched — and neither
+   * was visible without saying out loud what went in and what came back.
+   */
+  scan: { items: number; upgradeKeys: string[]; unresolved: string[] } | null;
   growth: GrowthParams;
   /** Which row's layout is open, if any. */
   open: string | null;
@@ -194,6 +202,7 @@ const state: State = {
   contestCrops: readContestCrops(),
   detected: null,
   tools: null,
+  scan: null,
   growth: {
     uniqueCrops: Number(localStorage.getItem("sbxp:ghunique") ?? DEFAULT_GROWTH.uniqueCrops),
     cropGrowth: Number(localStorage.getItem("sbxp:ghgrowth") ?? DEFAULT_GROWTH.cropGrowth),
@@ -797,6 +806,11 @@ export function mountGreenhouse(container: HTMLElement, data: GreenhouseTables):
  * typed box always wins.
  */
 export function setDetectedFortune(input: { cropUpgrades: Record<string, number>; lore: string[] }): void {
+  state.scan = {
+    items: input.lore.length,
+    upgradeKeys: Object.keys(input.cropUpgrades),
+    unresolved: [],
+  };
   const resolve = cropResolver(tables.greenhouse);
 
   const passive: Record<string, number> = {};
@@ -818,6 +832,10 @@ export function setDetectedFortune(input: { cropUpgrades: Record<string, number>
   for (const [raw, value] of Object.entries(cropFortuneFromLore(input.lore))) {
     const crop = resolve(raw);
     if (crop) tools[crop] = Math.max(tools[crop] ?? 0, value);
+    // A stat this page could not place. Recorded rather than dropped: a crop named in lore under a
+    // spelling the crop table does not carry is the failure this whole read has had twice already,
+    // and it is invisible unless the page says so.
+    else state.scan?.unresolved.push(raw);
   }
 
   state.detected = Object.keys(passive).length > 0 ? passive : null;
@@ -943,7 +961,45 @@ function cropFortunePanel(): string {
       <strong>Overdrive Chip's +${OVERDRIVE_CHIP_FORTUNE}</strong> during a Jacob's Contest. A mutation
       dropping several crops gets that on one of them, not on all.
     </p>
+    ${scanNote()}
   `;
+}
+
+/**
+ * What the profile read found, said out loud.
+ *
+ * Silence is the wrong default here. A read that finds nothing and a read that never ran look
+ * exactly alike from the page — empty boxes — and this one has been wrong twice on that basis. So
+ * it reports the three numbers that distinguish them: how many items it looked at, how many tools
+ * it recognised, and anything it saw and could not place.
+ */
+function scanNote(): string {
+  const scan = state.scan;
+  if (!scan) {
+    return `<p class="sub dim">Load a profile on the XP Planner tab and these fill in from your Garden
+      upgrades and the crop fortune your tools state.</p>`;
+  }
+
+  const tools = Object.entries(state.tools ?? {});
+  const upgrades = Object.keys(state.detected ?? {});
+  const parts = [
+    `${num(scan.items)} item${scan.items === 1 ? "" : "s"} read`,
+    tools.length > 0
+      ? `<strong>${tools.length}</strong> tool${tools.length === 1 ? "" : "s"} found (${tools
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, 4)
+          .map(([crop, value]) => `${escapeHtml(crop)} +${num(value)}`)
+          .join(", ")}${tools.length > 4 ? ", …" : ""})`
+      : `<strong class="gold">no tools found</strong>`,
+    `Garden upgrades on ${upgrades.length} of ${scan.upgradeKeys.length}`,
+  ];
+
+  const stuck =
+    scan.unresolved.length > 0
+      ? ` <span class="gold">Could not place: ${[...new Set(scan.unresolved)].map(escapeHtml).join(", ")}.</span>`
+      : "";
+
+  return `<p class="sub dim">From your profile — ${parts.join(" · ")}.${stuck}</p>`;
 }
 
 function render(): void {

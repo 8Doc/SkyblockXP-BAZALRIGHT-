@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { bagItemsFrom, readNbt } from "../src/lib/nbt";
+import { bagItemsFrom, nestedItemData, readNbt } from "../src/lib/nbt";
 
 /**
  * Byte-level tests for the NBT reader. This used to be prismarine-nbt; it's first-party now so
@@ -265,4 +265,47 @@ test("an item with no lore reports no rarity at all", () => {
   // Reported as an explicit null rather than an absent key, so "the blob did not say" is a
   // value the caller has to handle rather than something it can read past by accident.
   assert.deepEqual(bagItemsFrom(readNbt(bytes)), [{ id: "BAT_RING", rarityUpgrades: 0, rarity: null }]);
+});
+
+test("a container's nested inventory is found wherever it is keyed", () => {
+  // A farming toolkit holds its tools as its own gzipped NBT under ExtraAttributes, not in the slot
+  // list beside itself — so a scan that walks slots and stops reads the toolkit's own lore and none
+  // of the sickles in it. The key differs per container, so every byte array there is returned
+  // rather than one being named.
+  const bytes = document((w) => {
+    w.tag(9, "i").u8(10).i32(2); // list of two compounds
+
+    // Slot one: a container with a nested blob.
+    w.tag(10, "tag");
+    w.tag(10, "ExtraAttributes");
+    w.tag(7, "toolkit_data").i32(3).u8(1).u8(2).u8(3);
+    w.end(); // ExtraAttributes
+    w.end(); // tag
+    w.end(); // slot compound
+
+    // Slot two: an ordinary item, nothing nested.
+    w.tag(10, "tag");
+    w.tag(10, "ExtraAttributes");
+    w.tag(8, "id").str("EUCLIDS_WHEAT_SICKLE");
+    w.end();
+    w.end();
+    w.end();
+  });
+
+  const nested = nestedItemData(readNbt(bytes));
+  assert.equal(nested.length, 1);
+  assert.deepEqual([...nested[0]], [1, 2, 3]);
+});
+
+test("an item with no nested inventory contributes none", () => {
+  const bytes = document((w) => {
+    w.tag(9, "i").u8(10).i32(1);
+    w.tag(10, "tag");
+    w.tag(10, "display");
+    w.tag(8, "Name").str("Cactus Knife");
+    w.end();
+    w.end();
+    w.end();
+  });
+  assert.deepEqual(nestedItemData(readNbt(bytes)), []);
 });
