@@ -515,17 +515,17 @@ const COLUMNS: Column[] = [
       "items and vines. Read it against the column beside it — this much, that often.",
   },
   {
-    id: "harvestsPerSetup",
-    label: "Harvests",
-    value: (r) => r.harvestsPerSetup ?? Infinity,
-    render: (r) => harvestsCell(r),
+    id: "needsWater",
+    label: "Water",
+    // Sorted so the ones that want no attention come first, which is the useful end of it.
+    value: (r) => (r.needsWater === true ? 2 : r.needsWater === false ? 1 : 0),
+    render: (r) => waterCell(r),
     title:
-      "How many harvests one planting is worth before the ring rots and has to be bought again. " +
-      "This is the column the 2026-08-20 update created: base crops now decay after 72 hours, so a " +
-      "mutation taking 35 hours a harvest gets two goes out of a ring and one taking 13 hours gets " +
-      "five. A ring is only as durable as its shortest-lived plant. Where a mutation's own decay " +
-      "timer has never been published the floor of three days is used, so the figure is a " +
-      "guaranteed minimum and is marked with a +.",
+      "Whether the mutation has to be watered while it grows, from its own page. It is not the " +
+      "Water Retain and Water Drain effects in the expanded row — those are what a mutation does to " +
+      "its neighbours, which is a different fact. Nor does it follow from the growth surface: " +
+      "PlantBoy Advance and Jerryflower grow on farmland and need none. A dash is a mutation with " +
+      "no growth stages at all — planted to spread others, never grown, so never watered.",
   },
   {
     id: "setup",
@@ -588,35 +588,23 @@ const COLUMNS: Column[] = [
 ];
 
 /**
- * Harvests per planting, with the difference between a fact and a floor kept visible.
+ * Whether this one has to be watered, in a word.
  *
- * Base crops rot in exactly 72 hours and Noctilume in exactly 144, both from changelogs. Every
- * other mutation's timer is readable only from the in-game Diagnostics Tool, and all that is
- * published about it is that the shortest is three days — so those are pinned to three days and
- * marked, because a bound presented as a measurement is the kind of wrong nobody can spot later.
+ * Three states rather than two, because "no" and "never grows" are different answers and only one
+ * of them is a property of the mutation. The eleven with no growth stages are planted to spread
+ * others and are harvested the moment they appear — there is no growing phase to water, which is
+ * why their pages say nothing about it and why a dash is the honest cell.
  */
-function harvestsCell(row: MutationProfit): string {
-  if (row.harvestsPerSetup === null) {
-    if (row.setupLife.hours === null && row.setup) {
-      return `<span title="Nothing in this ring rots — All-in Aloe, Magic Jellybean and Fleshtrap are the three plants with no decay timer at all. Planted once and left.">∞</span>`;
-    }
-    return `<span class="dim">—</span>`;
+function waterCell(row: MutationProfit): string {
+  if (row.needsWater === true) {
+    return `<span class="gold" title="Has to be watered while it grows. Running dry during a growth stage gives it a chance not to advance.">yes</span>`;
   }
-  if (row.harvestsPerSetup === 0) {
-    return `<span class="gold" title="The ring rots before the mutation is ready. At ${hours(
-      row.hoursPerHarvest ?? 0,
-    )} a harvest against a ring lasting ${hours(
-      row.setupLife.hours ?? 0,
-    )}, one planting never finishes — you would be replacing the crops around it before anything grows.">0</span>`;
+  if (row.needsWater === false) {
+    return `<span title="Grows without water — plant it and leave it.">no</span>`;
   }
-  const life = hours(row.setupLife.hours ?? 0);
-  const note = row.setupLife.exact
-    ? `The ring lasts ${life}, which is published: base crops decay at 72h and Noctilume at 6 days.`
-    : `At least ${row.harvestsPerSetup}. The ring holds a mutation whose decay timer Hypixel has never published — only that the shortest is three days — so ${life} is a floor and the real figure can only be higher.`;
-  return `<span title="${escapeHtml(note)}">${num(row.harvestsPerSetup)}${
-    row.setupLife.exact ? "" : `<span class="dim">+</span>`
-  }</span>`;
+  return `<span class="dim" title="No growth stages: this one is planted to spread others and is taken as soon as it appears, so it is never watered.">—</span>`;
 }
+
 
 /** "3.4 hr", "2.1 days" — a wait, since that is what the number is. */
 function hours(h: number): string {

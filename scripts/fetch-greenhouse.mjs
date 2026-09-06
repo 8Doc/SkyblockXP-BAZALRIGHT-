@@ -267,6 +267,52 @@ async function main() {
   }
   console.log(`  ${layouts} layouts`);
 
+  /* -------------------------------------------------------- needs watering */
+
+  /**
+   * Whether a mutation has to be watered while it grows, from its own item page.
+   *
+   * Not on the Mutations table and not derivable from anything on it. The table's Effects column
+   * carries Water Retain and Water Drain, but those are what a mutation does to its *neighbours* —
+   * a different fact entirely. Each item page states this one outright, in a sentence of a fixed
+   * shape: "While growing, a Soggybud needs water and has 10 Growth Stages."
+   *
+   * Nor does it follow from the growth surface, which was the obvious guess and is wrong: PlantBoy
+   * Advance and Jerryflower grow on farmland and need none, while other soul sand mutations do.
+   *
+   * Null where the page says nothing, which is not a gap — it is every mutation with no growth
+   * stages at all. Those are the ones planted to spread others; they never grow, so there is
+   * nothing to water and the page has no sentence to carry. Kept as null rather than false so a
+   * reader can tell "never grows" from "grows without water".
+   */
+  console.log("reading the watering requirement…");
+  let watered = 0;
+  for (let i = 0; i < mutations.length; i += 4) {
+    await Promise.all(
+      mutations.slice(i, i + 4).map(async (mutation) => {
+        const page = await wikitext(mutation.name).catch(() => null);
+        if (!page) return;
+        // The negative first: "does not need water" contains "need water".
+        if (/does not need water/i.test(page.text)) mutation.needsWater = false;
+        else if (/needs? water/i.test(page.text)) mutation.needsWater = true;
+        else return;
+        watered++;
+      }),
+    );
+  }
+  const needing = mutations.filter((m) => m.needsWater === true).length;
+  console.log(`  ${watered} state it — ${needing} need water, ${watered - needing} do not`);
+
+  const silent = mutations.filter((m) => m.needsWater === undefined);
+  const growing = silent.filter((m) => (m.growthStages ?? 0) > 0);
+  if (growing.length > 0) {
+    // The correlation this relies on, checked rather than assumed: a mutation that grows and says
+    // nothing about water would mean the sentence has changed shape and this scrape has gone quiet.
+    console.log(`  WARNING: ${growing.length} mutations grow but state no watering: ${growing.map((m) => m.name).join(", ")}`);
+  } else {
+    console.log(`  ${silent.length} say nothing, and none of them grows — consistent`);
+  }
+
   /* ------------------------------------------------------- the greenhouse */
 
   console.log("reading the Greenhouse page…");

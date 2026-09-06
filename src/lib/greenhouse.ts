@@ -98,7 +98,17 @@ export type Mutation = {
   weight: number | null;
   /** Per-roll spawn chance as the wiki states it. Null when it does not. */
   chance: number | null;
+  /** What it grows on — Farmland, Soul Sand, Sand, End Stone, Mycelium. Scraped, never inferred from. */
+  surface: string | null;
   growthStages: number | null;
+  /**
+   * Whether it has to be watered while it grows, from its own item page.
+   *
+   * Undefined where the page says nothing, which is exactly the eleven with no growth stages: they
+   * are planted to spread others and taken as soon as they appear, so there is no growing phase to
+   * water. Kept apart from false so "grows without water" and "never grows" stay different answers.
+   */
+  needsWater?: boolean;
   spreading: { raw: string; requires: SpreadRequirement[]; prose: boolean };
   /** The wiki's own arithmetic for the awkward multi-cell cases, keyed by required crop. */
   plantNotes: Record<string, { cells: number; plants: number }>;
@@ -460,6 +470,8 @@ export type MutationProfit = {
   perPlot: number;
   /** The best arrangement found, and the ceiling it was measured against. */
   packing: Packing | null;
+  /** Carried straight through from the mutation, for the column. */
+  needsWater?: boolean;
   stagesPerHarvest: number | null;
   hoursPerHarvest: number | null;
   /** Coins one harvest brings in, after tax, at the given fortune. Crops, the item, and the vine. */
@@ -863,6 +875,7 @@ export function profitOf(m: Mutation, byId: Map<string, Mutation>, data: Greenho
     cellsUsed,
     perPlot,
     packing: setup?.packing ?? null,
+    needsWater: m.needsWater,
     stagesPerHarvest: stages,
     hoursPerHarvest,
     revenue,

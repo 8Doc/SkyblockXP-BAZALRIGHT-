@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-24T16:32:21.246Z",
+  "generatedAt": "2026-09-06T15:10:52.798Z",
   "cropFortunes": [
     {
       "stat": "Wheat Fortune",
@@ -105,7 +105,7 @@
     "bounty": "Hypixel staff (mrkeith) posted in Discord, quoted on the Greenhouse page"
   },
   "editedAt": {
-    "mutations": "2026-08-24T14:27:35Z",
+    "mutations": "2026-09-04T13:14:11Z",
     "greenhouse": "2026-08-20T17:11:53Z"
   },
   "note": "Base crop drops changed wholesale on 2026-08-20 — Nether Wart 240 to 108, Carrot 280 to 175, Sunflower 160 to 232 — so a figure computed before that date is wrong by up to a factor of two. A null weight or chance is a cell the wiki leaves blank, meaning the mutation needs a special condition rather than a roll; it is not a chance of zero. Layouts are the 3x3 ring the mutation spreads into the middle of, and a spreading condition counts ring cells rather than plants, which is why a 2x2 mutation satisfies two cells at once.",
@@ -910,7 +910,8 @@
         "Choconut": 6,
         "Gloomgourd": 2,
         "Chocoberry": 1
-      }
+      },
+      "needsWater": true
     },
     {
       "id": "CINDERSHADE",
@@ -979,7 +980,8 @@
         "Ashwreath": 4,
         "Witherbloom": 4,
         "Cindershade": 1
-      }
+      },
+      "needsWater": false
     },
     {
       "id": "COALROOT",
@@ -1051,7 +1053,8 @@
         "Ashwreath": 5,
         "Scourroot": 3,
         "Coalroot": 1
-      }
+      },
+      "needsWater": true
     },
     {
       "id": "CREAMBLOOM",
@@ -1107,7 +1110,8 @@
       "layoutCounts": {
         "Choconut": 8,
         "Creambloom": 1
-      }
+      },
+      "needsWater": true
     },
     {
       "id": "DUSKBLOOM",
@@ -1191,7 +1195,8 @@
         "Dustgrain": 2,
         "Duskbloom": 1,
         "Sunflower": 2
-      }
+      },
+      "needsWater": true
     },
     {
       "id": "THORNSHADE",
@@ -1263,7 +1268,8 @@
         "Wild Rose": 4,
         "Veilshroom": 4,
         "Thornshade": 1
-      }
+      },
+      "needsWater": true
     },
     {
       "id": "BLASTBERRY",
@@ -1332,7 +1338,8 @@
         "Chocoberry": 5,
         "Ashwreath": 3,
         "Blastberry": 1
-      }
+      },
+      "needsWater": true
     },
     {
       "id": "CHEESEBITE",
@@ -1409,7 +1416,8 @@
         "Creambloom": 4,
         "Fermento": 4,
         "Cheesebite": 1
-      }
+      },
+      "needsWater": true
     },
     {
       "id": "CHLORONITE",
@@ -1491,7 +1499,8 @@
         "Coalroot": 6,
         "Thornshade": 2,
         "Chloronite": 1
-      }
+      },
+      "needsWater": true
     },
     {
       "id": "DO_NOT_EAT_SHROOM",
@@ -1569,7 +1578,8 @@
         "Veilshroom": 4,
         "Scourroot": 4,
         "Do-not-eat-shroom": 1
-      }
+      },
+      "needsWater": true
     },
     {
       "id": "FLESHTRAP",
@@ -1641,7 +1651,8 @@
         "Cindershade": 4,
         "Lonelily": 4,
         "Fleshtrap": 1
-      }
+      },
+      "needsWater": true
     },
     {
       "id": "MAGIC_JELLYBEAN",
@@ -1714,7 +1725,8 @@
         "Sugar Cane": 5,
         "Duskbloom": 3,
         "Magic Jellybean": 1
-      }
+      },
+      "needsWater": true
     },
     {
       "id": "NOCTILUME",
@@ -1792,7 +1804,8 @@
         "Duskbloom": 6,
         "Lonelily": 6,
         "Noctilume": 4
-      }
+      },
+      "needsWater": true
     },
     {
       "id": "SNOOZLING",
@@ -1907,7 +1920,8 @@
         "Snoozling": 9,
         "Witherbloom": 3,
         "Duskbloom": 3
-      }
+      },
+      "needsWater": true
     },
     {
       "id": "SOGGYBUD",
@@ -1969,7 +1983,8 @@
         "Gloomgourd": 2,
         "Melon Slice": 2,
         "Soggybud": 1
-      }
+      },
+      "needsWater": true
     },
     {
       "id": "TURTLELLINI",
@@ -2105,7 +2120,8 @@
         "Chloronite": 5,
         "Magic Jellybean": 3,
         "Chorus Fruit": 1
-      }
+      },
+      "needsWater": false
     },
     {
       "id": "PLANTBOY_ADVANCE",
@@ -2191,7 +2207,8 @@
         "Snoozling": 6,
         "Thunderling": 6,
         "PlantBoy Advance": 4
-      }
+      },
+      "needsWater": false
     },
     {
       "id": "PUFFERCLOUD",
@@ -2274,7 +2291,8 @@
         "Snoozling": 2,
         "Do-not-eat-shroom": 6,
         "Puffercloud": 1
-      }
+      },
+      "needsWater": true
     },
     {
       "id": "SHELLFRUIT",
@@ -2373,7 +2391,8 @@
         "Blastberry": 4,
         "Cheesebite": 4,
         "Startlevine": 1
-      }
+      },
+      "needsWater": true
     },
     {
       "id": "STOPLIGHT_PETAL",
@@ -2451,7 +2470,8 @@
         "Noctilume": 4,
         "Snoozling": 4,
         "Stoplight Petal": 1
-      }
+      },
+      "needsWater": true
     },
     {
       "id": "THUNDERLING",
@@ -2528,7 +2548,8 @@
         "Noctilume": 3,
         "Soggybud": 5,
         "Thunderling": 1
-      }
+      },
+      "needsWater": false
     },
     {
       "id": "ZOMBUD",
@@ -2602,7 +2623,8 @@
         "Fleshtrap": 2,
         "Zombud": 1,
         "Cindershade": 2
-      }
+      },
+      "needsWater": false
     },
     {
       "id": "ALL_IN_ALOE",
@@ -2679,7 +2701,8 @@
         "PlantBoy Advance": 2,
         "Magic Jellybean": 6,
         "All-in Aloe": 1
-      }
+      },
+      "needsWater": false
     },
     {
       "id": "DEVOURER",
@@ -2753,7 +2776,8 @@
         "Puffercloud": 4,
         "Zombud": 4,
         "Devourer": 1
-      }
+      },
+      "needsWater": true
     },
     {
       "id": "GLASSCORN",
@@ -2831,7 +2855,8 @@
         "Startlevine": 6,
         "Chloronite": 6,
         "Glasscorn": 4
-      }
+      },
+      "needsWater": true
     },
     {
       "id": "GODSEED",
@@ -2930,7 +2955,8 @@
         }
       ],
       "farmingXp": null,
-      "hasLayout": false
+      "hasLayout": false,
+      "needsWater": true
     },
     {
       "id": "JERRYFLOWER",
@@ -2953,7 +2979,8 @@
       ],
       "drops": [],
       "farmingXp": null,
-      "hasLayout": false
+      "hasLayout": false,
+      "needsWater": false
     },
     {
       "id": "PHANTOMLEAF",
@@ -3021,7 +3048,8 @@
         "Chorus Fruit": 4,
         "Shellfruit": 4,
         "Phantomleaf": 1
-      }
+      },
+      "needsWater": false
     },
     {
       "id": "TIMESTALK",
@@ -3096,7 +3124,8 @@
         "Shellfruit": 2,
         "Timestalk": 1,
         "Chorus Fruit": 2
-      }
+      },
+      "needsWater": true
     }
   ],
   "unresolved": []

@@ -969,3 +969,36 @@ test("a fortune that is not a crop's is not reported as an unplaceable crop", ()
   assert.equal(isCropFortuneStat("Sunflower"), true);
   assert.equal(isCropFortuneStat("Cocoa Beans"), true);
 });
+
+/* --------------------------------------------------------------- watering */
+
+test("watering is a per-mutation fact, scraped and three-valued", () => {
+  const needs = data.mutations.filter((m) => m.needsWater === true);
+  const dry = data.mutations.filter((m) => m.needsWater === false);
+  const silent = data.mutations.filter((m) => m.needsWater === undefined);
+
+  // It really does differ per mutation — the whole reason it is worth a column.
+  assert.ok(needs.length > 0 && dry.length > 0, "both answers occur");
+  assert.equal(needs.length + dry.length + silent.length, data.mutations.length);
+
+  // The rule the scrape leans on: a mutation says nothing about water exactly when it never grows.
+  // Anything that grows and is silent means the wiki's sentence has changed shape.
+  for (const m of silent) {
+    assert.equal(m.growthStages ?? 0, 0, `${m.name} grows but states no watering`);
+  }
+  for (const m of [...needs, ...dry]) {
+    assert.ok((m.growthStages ?? 0) > 0, `${m.name} states watering but has no growth stages`);
+  }
+
+  // The negative has to beat the positive: "does not need water" contains "need water".
+  assert.equal(data.mutations.find((m) => m.name === "Zombud")?.needsWater, false);
+  assert.equal(data.mutations.find((m) => m.name === "Soggybud")?.needsWater, true);
+});
+
+test("watering does not follow from the growth surface", () => {
+  // The obvious guess, and wrong — which is why it is scraped rather than derived. Farmland holds
+  // mutations on both sides of the answer, so a surface rule would have been confidently incorrect.
+  const farmland = data.mutations.filter((m) => (m.surface ?? "").startsWith("Farmland"));
+  assert.ok(farmland.some((m) => m.needsWater === true));
+  assert.ok(farmland.some((m) => m.needsWater === false));
+});
