@@ -8,6 +8,9 @@ import {
   cropFortuneIndex,
   FULL_PLOT,
   fortuneMultiplier,
+  cropFortuneFromLore,
+  cropUpgradeFortune,
+  yieldMultiplierOf,
   plantsFor,
   profitOf,
   rankMutations,
@@ -791,4 +794,104 @@ test("leaving orders up never nets less than crossing the spread", () => {
     compared++;
   }
   assert.ok(compared > 20, `only ${compared} mutations compared`);
+});
+
+/* --------------------------------------------------------------- the yield */
+
+test("plant yield steps at the last tier, the way growth speed does", () => {
+  const base = { uniqueCrops: 0, cropGrowth: 0, speedAttribute: 0, growthSpeedUpgrade: 0 };
+  // +2% a tier, and the ninth is worth two of them — the tooltip says 20% at 9/9, where the
+  // pattern alone would give 18%.
+  assert.equal(yieldMultiplierOf({ ...base, plantYieldUpgrade: 0 }), 1);
+  assert.ok(Math.abs(yieldMultiplierOf({ ...base, plantYieldUpgrade: 1 }) - 1.02) < 1e-9);
+  assert.ok(Math.abs(yieldMultiplierOf({ ...base, plantYieldUpgrade: 8 }) - 1.16) < 1e-9);
+  assert.ok(Math.abs(yieldMultiplierOf({ ...base, plantYieldUpgrade: 9 }) - 1.2) < 1e-9);
+  // Out of range stays in range rather than inventing a tier ten.
+  assert.ok(Math.abs(yieldMultiplierOf({ ...base, plantYieldUpgrade: 40 }) - 1.2) < 1e-9);
+});
+
+test("the unique crop bonus is a yield buff as well as a speed one", () => {
+  const base = { cropGrowth: 0, speedAttribute: 0, growthSpeedUpgrade: 0, plantYieldUpgrade: 0 };
+  // +3% a unique non-mutated crop, +36% with all twelve. The same twelve already drive the stage
+  // timer, so this was an input the page had and was not spending.
+  assert.ok(Math.abs(yieldMultiplierOf({ ...base, uniqueCrops: 12 }) - 1.36) < 1e-9);
+  // And the three stack additively: 20% + 36% + 60%.
+  assert.ok(
+    Math.abs(yieldMultiplierOf({ ...base, uniqueCrops: 12, plantYieldUpgrade: 9, evergreenChip: 60 }) - 2.16) < 1e-9,
+  );
+});
+
+/* ------------------------------------------------------------ held fortune */
+
+test("a tool lifts one crop of a multi-crop mutation, not all of them", () => {
+  // The thing you can only do once: hold a tool. A mutation dropping two crops gets the tool's
+  // fortune on whichever drop it earns the most on, and the other comes out at its passive rate.
+  const multi = data.mutations.find((m) => new Set(m.drops.map((d) => d.id)).size > 1);
+  if (!multi) return;
+
+  const byId = new Map(data.mutations.map((m) => [m.id, m]));
+  const market = new Map(multi.drops.map((d) => [d.id, product(d.id, 100, 120)]));
+  const crops = cropFortuneIndex(data);
+  const dropped = [...new Set(multi.drops.map((d) => crops.get(d.id)).filter((c): c is string => Boolean(c)))];
+  if (dropped.length < 2) return;
+
+  const held = Object.fromEntries(dropped.map((c) => [c, 1_000]));
+  const options = { market, growth: GROWTH, farmingFortune: 0 };
+
+  const one = profitOf(multi, byId, data, { ...options, heldCropFortune: held, heldCrop: "best" as const });
+  // Against the same bonus applied to every crop at once, which is the setup nobody can have.
+  const all = profitOf(multi, byId, data, { ...options, cropFortune: held });
+  assert.ok(one.revenue < all.revenue, "one tool cannot lift every crop the mutation drops");
+
+  // And it is worth more than holding nothing, so the bonus is genuinely applied to one of them.
+  const none = profitOf(multi, byId, data, options);
+  assert.ok(one.revenue > none.revenue);
+});
+
+test("passive fortune lifts every drop and held fortune lifts one", () => {
+  const wheat = data.mutations.find((m) => m.drops.some((d) => d.id === "WHEAT"))!;
+  const byId = new Map(data.mutations.map((m) => [m.id, m]));
+  const market = new Map([["WHEAT", product("WHEAT", 100, 120)]]);
+  const options = { market, growth: GROWTH, farmingFortune: 0 };
+
+  // On a single-crop mutation the two are interchangeable, which is the check that the held path
+  // applies the same arithmetic rather than a different one.
+  const asPassive = profitOf(wheat, byId, data, { ...options, cropFortune: { Wheat: 500 } });
+  const asHeld = profitOf(wheat, byId, data, {
+    ...options,
+    heldCropFortune: { Wheat: 500 },
+    heldCrop: "best" as const,
+  });
+  assert.ok(Math.abs(asPassive.revenue - asHeld.revenue) < 1e-6);
+
+  // Naming a crop nothing drops leaves the row at its passive rate.
+  const elsewhere = profitOf(wheat, byId, data, {
+    ...options,
+    heldCropFortune: { Wheat: 500 },
+    heldCrop: "Cactus",
+  });
+  const none = profitOf(wheat, byId, data, options);
+  assert.ok(Math.abs(elsewhere.revenue - none.revenue) < 1e-6);
+});
+
+test("the garden's crop upgrades are five a level and stop at nine", () => {
+  assert.equal(cropUpgradeFortune(0), 0);
+  assert.equal(cropUpgradeFortune(1), 5);
+  assert.equal(cropUpgradeFortune(9), 45);
+  // The API could publish anything; the cap is the wiki's.
+  assert.equal(cropUpgradeFortune(40), 45);
+  assert.equal(cropUpgradeFortune(-3), 0);
+});
+
+test("crop fortune is read off item lore, and farming fortune is not mistaken for it", () => {
+  const found = cropFortuneFromLore([
+    "§7Wheat Fortune: §a+200",
+    "§7Cocoa Beans Fortune: §a+35",
+    // The general stat, which belongs in the other box entirely.
+    "§7Farming Fortune: §a+1,200",
+    "§7Gear Score: §d1000",
+  ]);
+  assert.equal(found["Wheat"], 200);
+  assert.equal(found["Cocoa Beans"], 35);
+  assert.equal(found["Farming"], undefined);
 });

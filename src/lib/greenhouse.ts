@@ -119,7 +119,43 @@ export type GrowthParams = {
   speedAttribute: number;
   /** The Growth Speed garden upgrade, 0-9. Tier 9 is worth double tier 8. */
   growthSpeedUpgrade: number;
+  /** The Plant Yield greenhouse upgrade, 0-9. Tier 9 is worth double tier 8, as above. */
+  plantYieldUpgrade?: number;
+  /** The Evergreen Chip's yield bonus as a percentage, 0-60. Absent or 0 for no chip. */
+  evergreenChip?: number;
 };
+
+/**
+ * Everything that multiplies the *base crops* a harvest gives, before fortune touches them.
+ *
+ * A second, separate lever from fortune, and the Greenhouse page keeps them apart deliberately:
+ * "In addition to Farming Fortune, the base crops given when harvesting crops in the Greenhouse are
+ * also affected by various Yield buffs". Three of the four are things this model already had the
+ * inputs for and was not spending:
+ *
+ * **Plant Yield upgrade**, +2% a tier to +20% at nine. The step at the last tier is the same shape
+ * as Growth Speed's — eight tiers of two, then four rather than two — which is worth stating
+ * because the pattern would otherwise give 18%, and the tooltip on the page says 20%.
+ *
+ * **The unique crop bonus**, +3% a unique non-mutated crop, +36% with all twelve. The same twelve
+ * crops already drive the growth-speed term, so this was an input the page had and did not use.
+ *
+ * **The Evergreen Chip**, +2% to +60%.
+ *
+ * Summed rather than compounded. The wiki lists them in one table of "Yield buffs" without a word
+ * about how they combine, and additive is how SkyBlock's percentage buffs of this kind behave; the
+ * two readings differ by about six percent at the top end, which is smaller than the uncertainty in
+ * the fortune formula sitting next to it. Adjacency buffs — Harvest Boost and its improved form —
+ * are deliberately not here: they depend on what is planted beside what, which is a layout question
+ * the caller answers, not a player stat.
+ */
+export function yieldMultiplierOf(p: GrowthParams): number {
+  const tier = Math.max(0, Math.min(9, p.plantYieldUpgrade ?? 0));
+  const plantYield = tier >= 9 ? 0.2 : 0.02 * tier;
+  const unique = 0.03 * Math.max(0, Math.min(12, p.uniqueCrops));
+  const chip = Math.max(0, Math.min(60, p.evergreenChip ?? 0)) / 100;
+  return 1 + plantYield + unique + chip;
+}
 
 /**
  * Seconds in one growth stage.
@@ -495,6 +531,28 @@ export type ProfitOptions = {
    * figure rather than a standing one.
    */
   cropFortune?: Record<string, number>;
+  /**
+   * Crop fortune that only applies to the one crop you are set up for, keyed the same way.
+   *
+   * Kept apart from `cropFortune` because most of a crop fortune is not passive. A farming tool
+   * carries up to +200 for its own crop and you can hold exactly one of them; the Overdrive Chip's
+   * +140 lifts the contest's active crop and no other. So a mutation dropping wheat and cocoa beans
+   * does not get both bonuses at once — you hold the tool for whichever drop is worth more and the
+   * other crop comes out at its passive rate.
+   *
+   * Adding these to `cropFortune` was the quiet error: it gave every drop of a multi-crop mutation
+   * a tool that cannot be held twice, and multi-crop mutations are exactly where the difference
+   * matters. Only `heldCrop` receives this.
+   */
+  heldCropFortune?: Record<string, number>;
+  /**
+   * Which crop the held bonus applies to, or "best" to let each mutation choose.
+   *
+   * "best" is the honest default and what anybody actually does: you look at what the mutation
+   * drops, and you hold the tool for whichever of them the bonus is worth most on. Naming a crop
+   * pins it instead, which is what you want when comparing a contest day against a normal one.
+   */
+  heldCrop?: string | "best" | null;
   /** Multiplied on top of fortune: plant yield upgrade, evergreen chips, adjacency buffs. */
   yieldMultiplier?: number;
   plots?: number;
@@ -538,6 +596,57 @@ export function fortuneMultiplier(farmingFortune: number, cropFortune = 0): numb
   return 1 + Math.max(0, farmingFortune + cropFortune) / 100;
 }
 
+/**
+ * The Overdrive Chip: "up to +140 Crop Fortune for the active crop during Jacob's Farming Contest".
+ *
+ * A toggle rather than a number in the box because it is neither always on nor evenly spread. It
+ * applies to *one* crop — whichever the contest is running — so adding it to every crop at once
+ * would describe a day that cannot happen, and leaving it out entirely hides the only condition
+ * under which one crop pulls far ahead of the rest. Per crop, on a switch, is the shape of the fact.
+ */
+export const OVERDRIVE_CHIP_FORTUNE = 140;
+
+/**
+ * The Garden's Crop Upgrades: +5 Crop Fortune a level, to +45 at level nine.
+ *
+ * Per crop and permanent, and the profile publishes the levels outright under
+ * `garden.crop_upgrade_levels` — so this is one of the few parts of a farming setup that can be
+ * read rather than typed.
+ */
+export const CROP_UPGRADE_FORTUNE_PER_LEVEL = 5;
+export const CROP_UPGRADE_MAX_LEVEL = 9;
+
+export function cropUpgradeFortune(level: number): number {
+  return CROP_UPGRADE_FORTUNE_PER_LEVEL * Math.max(0, Math.min(CROP_UPGRADE_MAX_LEVEL, Math.floor(level)));
+}
+
+/**
+ * The crop fortune an item's own lore states, keyed by the crop it lifts.
+ *
+ * Every source worth reading writes it the same way — "Wheat Fortune: +200" — so the lore is the
+ * honest place to read it from. Deriving it from tool tiers instead would mean modelling Euclid's
+ * Sickle, Gauss's Shovel and the rest, each with three marks and a level, and getting a number the
+ * game already prints on the item.
+ *
+ * Colour codes are stripped first: SkyBlock lore is full of them and they sit inside the numbers.
+ */
+export function cropFortuneFromLore(lines: string[]): Record<string, number> {
+  const found: Record<string, number> = {};
+  for (const line of lines) {
+    const clean = line.replace(/§./g, "").replace(/&[0-9a-fk-or]/g, "");
+    // "Wheat Fortune: +200" — and "Cocoa Beans Fortune", which is two words.
+    const match = /([A-Za-z' ]+?)\s+Fortune:\s*\+?\s*([\d,.]+)/.exec(clean);
+    if (!match) continue;
+    const crop = match[1].trim();
+    // "Farming Fortune" is the general stat and belongs to a different box entirely.
+    if (/^farming$/i.test(crop)) continue;
+    const value = Number(match[2].replace(/,/g, ""));
+    if (!Number.isFinite(value) || value <= 0) continue;
+    found[crop] = Math.max(found[crop] ?? 0, value);
+  }
+  return found;
+}
+
 /** Which crop fortune, if any, lifts a given drop. Built once per data set. */
 export function cropFortuneIndex(data: GreenhouseData): Map<string, string> {
   const index = new Map<string, string>();
@@ -557,6 +666,35 @@ export function profitOf(m: Mutation, byId: Map<string, Mutation>, data: Greenho
   const unpriced: string[] = [];
   const cropsLifted: string[] = [];
   const drops: DropRevenue[] = [];
+
+  /**
+   * The one crop this harvest is set up for — you can hold one tool.
+   *
+   * On "best", worked out per mutation rather than fixed, by asking which of *this* mutation's
+   * drops the held bonus is worth most coins on. That is the choice a person makes standing in
+   * front of it: the bonus goes on whichever drop it earns the most from, not on whichever crop
+   * happens to have the largest fortune number attached.
+   */
+  const held = o.heldCropFortune ?? {};
+  let heldCrop: string | null = null;
+  if (o.heldCrop === "best") {
+    let bestGain = 0;
+    for (const drop of m.drops) {
+      const crop = fortuneByCrop.get(drop.id) ?? null;
+      const bonus = crop ? (held[crop] ?? 0) : 0;
+      if (bonus <= 0) continue;
+      const price = unitPrice(drop.id, o.market, npcPrices, "instant") ?? 0;
+      // What the bonus is worth here: the extra multiplier it buys, times what this drop sells for.
+      const gain = price * drop.amount * (bonus / 100) * yieldBuffs;
+      if (gain > bestGain) {
+        bestGain = gain;
+        heldCrop = crop;
+      }
+    }
+  } else if (o.heldCrop) {
+    heldCrop = o.heldCrop;
+  }
+
   for (const drop of m.drops) {
     // Crops are always dumped into the book, whatever the toggle says. A harvest is tens of
     // thousands of them, their books are deep enough that the spread is noise, and nobody leaves a
@@ -564,7 +702,9 @@ export function profitOf(m: Mutation, byId: Map<string, Mutation>, data: Greenho
     // whole story.
     const price = unitPrice(drop.id, o.market, npcPrices, "instant");
     const crop = fortuneByCrop.get(drop.id) ?? null;
-    const extra = crop ? (o.cropFortune?.[crop] ?? 0) : 0;
+    // Passive fortune on every drop; the held bonus on the one crop the tool is out for.
+    const passive = crop ? (o.cropFortune?.[crop] ?? 0) : 0;
+    const extra = passive + (crop && crop === heldCrop ? (held[crop] ?? 0) : 0);
     const multiplier = fortuneMultiplier(o.farmingFortune, extra) * yieldBuffs;
     if (price === null) {
       unpriced.push(drop.name);

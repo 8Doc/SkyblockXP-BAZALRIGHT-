@@ -336,6 +336,24 @@ table.bz td:last-child { color: var(--gold); }
 .gh-crops label { font-size: 0.82em; }
 .gh-crops input.gh-crop { width: 68px; }
 
+/* The held-fortune tick, beside its crop's box rather than under it. The label is uppercased by
+   the surrounding label rule, which is right for "WHEAT" and shouting for a tick — so this opts
+   back out and keeps the whole thing on one line. */
+.gh-held {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 6px;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.95em;
+  color: var(--gold);
+  white-space: nowrap;
+  cursor: pointer;
+}
+.gh-held input { margin: 0; cursor: pointer; }
+.gh-crops label { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 4px; }
+
 /* The whole 10x10 plot. Small squares rather than labels: a hundred names is unreadable, and
    the shape of the pattern is the thing worth seeing. */
 .gh-plotgrid { display: inline-block; padding: 4px; border: 1px solid rgba(255,255,255,0.12); border-radius: 4px; }

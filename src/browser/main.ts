@@ -16,7 +16,7 @@ import {
 } from "../lib/types";
 import { ApiError, cacheAge, fetchAccessoryBins, fetchBazaar, fetchReferencePrices, fetchGarden, fetchMuseum, fetchProfiles, readBag, readLore, readOwnedItems, resolveUuid } from "./api";
 import { mountBazaar, unmountBazaar } from "./bazaarTab";
-import { mountGreenhouse, unmountGreenhouse } from "./greenhouseTab";
+import { mountGreenhouse, setDetectedFortune, unmountGreenhouse } from "./greenhouseTab";
 import { setMinionProfile } from "./minionsTab";
 import { setDetectedWisdom } from "./minionPetTab";
 import { mountMinionsSection, unmountMinionsSection } from "./minionsSection";
@@ -339,6 +339,40 @@ function rebuildCatalog(): void {
   }
   setMinionProfile(coop?.collected ?? collectedFrom(state.member), ownedTier, state.playerName);
   void shareWisdom();
+  void shareFortune();
+}
+
+/**
+ * Read what crop fortune the profile can be made to admit to, and hand it to the greenhouse.
+ *
+ * The Garden publishes its crop upgrade levels outright, which is +5 fortune a level to +45 and the
+ * one part of a farming setup that needs no guessing. The rest comes off item lore, the same way
+ * Wisdom does — every farming tool prints "Wheat Fortune: +200" on itself, so reading the lore
+ * beats modelling three marks of Euclid's Sickle to arrive at a number the game already states.
+ *
+ * Every bag is scanned rather than a named one. The farming toolkit is a recent addition and this
+ * has no business knowing what key Hypixel filed it under; walking `bag_contents` finds it whatever
+ * it is called, and finds the next one too.
+ *
+ * Fired off rather than awaited, for the same reason as the Wisdom read: it costs a handful of gzip
+ * decodes and nothing on the page is waiting for it.
+ */
+async function shareFortune(): Promise<void> {
+  if (!state.member) return;
+  const inventory = state.member.inventory;
+  const upgrades = state.garden?.cropUpgrades ?? {};
+  if (!inventory && Object.keys(upgrades).length === 0) return;
+
+  const sources = [
+    inventory?.inv_contents?.data,
+    inventory?.equipment_contents?.data,
+    inventory?.inv_armor?.data,
+    inventory?.ender_chest_contents?.data,
+    ...Object.values(inventory?.bag_contents ?? {}).map((bag) => bag?.data),
+  ].filter((data): data is string => typeof data === "string");
+
+  const lore = (await Promise.all(sources.map((data) => readLore(data).catch(() => [])))).flat();
+  setDetectedFortune({ cropUpgrades: upgrades, lore });
 }
 
 /**

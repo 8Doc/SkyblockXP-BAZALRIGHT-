@@ -5,8 +5,12 @@ import type { ProductSnapshot, RawBazaarProduct } from "../lib/bazaarTypes";
 import { depthNote } from "../lib/filters";
 import { coins, num } from "../lib/format";
 import {
+  OVERDRIVE_CHIP_FORTUNE,
+  cropFortuneFromLore,
+  cropUpgradeFortune,
   rankMutations,
   stageSeconds,
+  yieldMultiplierOf,
   type GreenhouseData,
   type GrowthParams,
   type Mutation,
@@ -72,6 +76,19 @@ type State = {
   cropFortune: Record<string, string>;
   /** Whether the per-crop boxes are on screen; they are a dozen inputs nobody always wants. */
   showCrops: boolean;
+  /**
+   * Which crops are being harvested under a Jacob's Contest, for the Overdrive Chip's +140.
+   *
+   * One switch per crop rather than a single "contest day" mode, because the chip lifts the
+   * *active* crop only. A contest runs three crops and nobody farms all three, so a flat +140 on
+   * everything would describe a day that cannot happen — and a flat nothing hides the only
+   * condition under which one crop pulls far ahead of the rest.
+   */
+  contestCrops: Record<string, boolean>;
+  /** Passive crop fortune read off the profile, per crop. Anything typed wins over it. */
+  detected: Record<string, number> | null;
+  /** The best farming tool found per crop, from item lore. Applies only to the crop you hold it for. */
+  tools: Record<string, number> | null;
   growth: GrowthParams;
   /** Which row's layout is open, if any. */
   open: string | null;
@@ -89,6 +106,8 @@ const DEFAULT_GROWTH: GrowthParams = {
   cropGrowth: 210,
   speedAttribute: 10,
   growthSpeedUpgrade: 9,
+  plantYieldUpgrade: 9,
+  evergreenChip: 0,
 };
 
 /**
@@ -112,12 +131,49 @@ function readCropFortune(): Record<string, string> {
   }
 }
 
-/** The typed boxes as numbers, dropping anything blank or unparseable. */
+const CONTEST_KEY = "sbxp:ghcontest";
+
+function readContestCrops(): Record<string, boolean> {
+  try {
+    const raw = localStorage.getItem(CONTEST_KEY);
+    return raw ? (JSON.parse(raw) as Record<string, boolean>) : {};
+  } catch {
+    return {};
+  }
+}
+
+/**
+ * The passive crop fortune per crop — what you have whatever you are holding.
+ *
+ * A typed box wins over anything read off the profile, for the same reason the Wisdom boxes work
+ * that way: somebody who has read their own stat knows better than a floor assembled from the parts
+ * this page can see.
+ */
 function cropFortuneValues(): Record<string, number> {
-  const out: Record<string, number> = {};
+  const out: Record<string, number> = { ...(state.detected ?? {}) };
   for (const [crop, raw] of Object.entries(state.cropFortune)) {
     const n = Number(String(raw).replace(/[^0-9.]/g, ""));
     if (String(raw).trim() !== "" && Number.isFinite(n) && n > 0) out[crop] = n;
+  }
+  return out;
+}
+
+/**
+ * The fortune that rides on what you are holding, per crop.
+ *
+ * The tool's own crop fortune plus, where the box is ticked, the Overdrive Chip. Both are
+ * single-crop by nature — one tool in your hand, one active crop in a contest — so they are handed
+ * to the model separately from the passive figures and applied to one drop rather than to all of
+ * them. See `heldCropFortune` in `greenhouse.ts` for why summing them into the passive map was
+ * wrong for every mutation that drops more than one crop.
+ */
+function heldFortuneValues(): Record<string, number> {
+  const out: Record<string, number> = {};
+  for (const [crop, on] of Object.entries(state.contestCrops)) {
+    if (on) out[crop] = (out[crop] ?? 0) + OVERDRIVE_CHIP_FORTUNE;
+  }
+  for (const [crop, value] of Object.entries(state.tools ?? {})) {
+    if (value > 0) out[crop] = (out[crop] ?? 0) + value;
   }
   return out;
 }
@@ -134,11 +190,16 @@ const state: State = {
   fortune: localStorage.getItem("sbxp:ghfortune") ?? "",
   cropFortune: readCropFortune(),
   showCrops: localStorage.getItem("sbxp:ghshowcrops") === "1",
+  contestCrops: readContestCrops(),
+  detected: null,
+  tools: null,
   growth: {
     uniqueCrops: Number(localStorage.getItem("sbxp:ghunique") ?? DEFAULT_GROWTH.uniqueCrops),
     cropGrowth: Number(localStorage.getItem("sbxp:ghgrowth") ?? DEFAULT_GROWTH.cropGrowth),
     speedAttribute: Number(localStorage.getItem("sbxp:ghspeed") ?? DEFAULT_GROWTH.speedAttribute),
     growthSpeedUpgrade: Number(localStorage.getItem("sbxp:ghupgrade") ?? DEFAULT_GROWTH.growthSpeedUpgrade),
+    plantYieldUpgrade: Number(localStorage.getItem("sbxp:ghyield") ?? DEFAULT_GROWTH.plantYieldUpgrade),
+    evergreenChip: Number(localStorage.getItem("sbxp:ghevergreen") ?? DEFAULT_GROWTH.evergreenChip),
   },
   open: null,
 };
@@ -567,6 +628,11 @@ function rows(): MutationProfit[] {
     growth: state.growth,
     farmingFortune: fortuneValue(),
     cropFortune: cropFortuneValues(),
+    heldCropFortune: heldFortuneValues(),
+    // Each mutation picks the drop its held bonus earns most on, which is what a person does when
+    // they choose which tool to bring to it.
+    heldCrop: "best",
+    yieldMultiplier: yieldMultiplierOf(state.growth),
     plots: state.plots,
     priceMode: state.priceMode,
   });
@@ -661,11 +727,22 @@ export function mountGreenhouse(container: HTMLElement, data: GreenhouseTables):
       ghgrowth: ["cropGrowth", "sbxp:ghgrowth"],
       ghspeed: ["speedAttribute", "sbxp:ghspeed"],
       ghupgrade: ["growthSpeedUpgrade", "sbxp:ghupgrade"],
+      ghyield: ["plantYieldUpgrade", "sbxp:ghyield"],
+      ghevergreen: ["evergreenChip", "sbxp:ghevergreen"],
     };
 
     if (el.id === "ghsearch") {
       state.search = el.value;
       renderTable();
+      return;
+    }
+    // The contest tick. A full panel repaint rather than just the table, because the label beside
+    // the box shows what the tick is worth and has to move with it.
+    const contest = el.dataset.ghcontest;
+    if (contest !== undefined) {
+      state.contestCrops = { ...state.contestCrops, [contest]: el.checked };
+      localStorage.setItem(CONTEST_KEY, JSON.stringify(state.contestCrops));
+      render();
       return;
     }
     // A per-crop box. Only the table repaints, so the cursor stays where it is being typed.
@@ -699,6 +776,52 @@ export function mountGreenhouse(container: HTMLElement, data: GreenhouseTables):
   // Not awaited: the table is useful the moment the bazaar lands, and the week of history only
   // fills one column. It repaints itself when it arrives.
   void fetchHistory();
+}
+
+/**
+ * Take the crop fortune a loaded profile can be made to admit to.
+ *
+ * Two halves, and they are kept apart because they behave differently in the model:
+ *
+ * **Passive**, into the boxes. The Garden's Crop Upgrades are published outright as levels, at +5
+ * fortune each to +45, which makes them the one part of a farming setup that can simply be read.
+ * Accessories go here too — a Fermento Artifact's +30 applies to every crop at once.
+ *
+ * **Held**, behind the tick. A farming tool's crop fortune is worth up to +200 and you can hold one
+ * of them, so it belongs to whichever crop you brought the tool for and to no other.
+ *
+ * Both are floors. This sees the Garden levels and whatever lore is in the inventory, equipment and
+ * bags — which now includes the farming toolkit, since the scan walks every bag rather than naming
+ * one. It cannot see Dedication, Anita's personal bests or Carrolyn without more digging, so a
+ * typed box always wins.
+ */
+export function setDetectedFortune(input: { cropUpgrades: Record<string, number>; lore: string[] }): void {
+  const byName = new Map((tables.greenhouse.cropFortunes ?? []).map((c) => [c.crop.toLowerCase(), c.crop]));
+  const resolve = (raw: string): string | null => byName.get(raw.trim().toLowerCase()) ?? null;
+
+  const passive: Record<string, number> = {};
+  for (const [key, level] of Object.entries(input.cropUpgrades)) {
+    // "wheat" / "cocoa_beans" in the API against "Wheat" / "Cocoa Beans" on the page.
+    const crop = resolve(key.replace(/_/g, " "));
+    if (crop) passive[crop] = (passive[crop] ?? 0) + cropUpgradeFortune(level);
+  }
+
+  // The largest figure found per crop, not the sum: a chest with three sickles in it is still one
+  // sickle in your hand, and the same rule the Wisdom detection uses for held items.
+  //
+  // The lore arrives as loose lines rather than grouped by item, so this cannot tell a tool's +200
+  // from an accessory's +30 and takes the larger. That makes the held figure a good reading of the
+  // tool and makes the accessory's contribution invisible — which is a floor in the passive box, and
+  // why a typed box beats this.
+  const tools: Record<string, number> = {};
+  for (const [raw, value] of Object.entries(cropFortuneFromLore(input.lore))) {
+    const crop = resolve(raw);
+    if (crop) tools[crop] = Math.max(tools[crop] ?? 0, value);
+  }
+
+  state.detected = Object.keys(passive).length > 0 ? passive : null;
+  state.tools = Object.keys(tools).length > 0 ? tools : null;
+  if (host) render();
 }
 
 export function unmountGreenhouse(): void {
@@ -788,21 +911,36 @@ function cropFortunePanel(): string {
     }</span></p>`;
   }
 
+  const held = heldFortuneValues();
   const boxes = crops
-    .map(
-      (c) =>
-        `<label title="${escapeHtml(c.stat)} — lifts ${escapeHtml(c.crop)} only.">${escapeHtml(c.crop)}
-          <input class="gh-crop" data-ghcrop="${escapeHtml(c.crop)}" value="${escapeHtml(state.cropFortune[c.crop] ?? "")}" placeholder="0" autocomplete="off">
-        </label>`,
-    )
+    .map((c) => {
+      const tool = state.tools?.[c.crop] ?? 0;
+      const on = state.contestCrops[c.crop] === true;
+      const bonus = held[c.crop] ?? 0;
+      return `<label title="${escapeHtml(c.stat)} — lifts ${escapeHtml(c.crop)} only.">${escapeHtml(c.crop)}
+          <input class="gh-crop" data-ghcrop="${escapeHtml(c.crop)}" value="${escapeHtml(
+            state.cropFortune[c.crop] ?? (state.detected?.[c.crop] ? String(state.detected[c.crop]) : ""),
+          )}" placeholder="${state.detected?.[c.crop] ?? 0}" autocomplete="off">
+          <span class="gh-held" title="${escapeHtml(
+            `Only the crop you bring the tool for gets this${tool > 0 ? `. Your best ${c.crop} tool carries +${tool}` : ""}${
+              on ? `, and the Overdrive Chip adds +${OVERDRIVE_CHIP_FORTUNE} during a contest` : ""
+            }. A mutation dropping several crops gets it on one of them — whichever it earns the most on.`,
+          )}">
+            <input type="checkbox" data-ghcontest="${escapeHtml(c.crop)}"${on ? " checked" : ""}>
+            ${bonus > 0 ? `+${num(bonus)}` : `<span class="dim">contest</span>`}
+          </span>
+        </label>`;
+    })
     .join("");
 
   return `
     <p class="sub">${summary}</p>
     <div class="row gh-crops">${boxes}</div>
-    <p class="sub dim" title="Added to Farming Fortune for that crop only, before the yield is worked out — the wiki's rule, not ours. Sources are the tool you are holding, Anita's shop and Carrolyn.">
-      From your hoe, Anita and Carrolyn. The <strong>Overdrive Chip</strong> adds up to
-      <strong>+140</strong> — but only during a Jacob's Contest, so leave it out for a normal day.
+    <p class="sub dim" title="Added to Farming Fortune for that crop only, before the yield is worked out — the wiki's rule, not ours.">
+      The box is what you have whatever you hold — Garden crop upgrades, Anita, Carrolyn, accessories.
+      The tick is what rides on the <strong>one tool you can hold</strong>: its crop fortune, plus the
+      <strong>Overdrive Chip's +${OVERDRIVE_CHIP_FORTUNE}</strong> during a Jacob's Contest. A mutation
+      dropping several crops gets that on one of them, not on all.
     </p>
   `;
 }
@@ -843,6 +981,10 @@ function render(): void {
           <input type="number" id="ghspeed" min="0" max="10" value="${state.growth.speedAttribute}"></label>
         <label title="The Growth Speed garden upgrade, 0-9. The ninth tier is worth double a normal one.">Growth upgrade
           <input type="number" id="ghupgrade" min="0" max="9" value="${state.growth.growthSpeedUpgrade}"></label>
+        <label title="The Plant Yield greenhouse upgrade, 0-9. +2% base crops a tier and +4% for the ninth, so +20% at the top — the same double-last-tier step Growth Speed has. Multiplies the crops a harvest gives, on top of fortune.">Plant yield
+          <input type="number" id="ghyield" min="0" max="9" value="${state.growth.plantYieldUpgrade ?? 0}"></label>
+        <label title="The Evergreen Chip's bonus, 0-60%. More base crops in the Greenhouse, stacking with Plant Yield and the unique-crop bonus.">Evergreen chip %
+          <input type="number" id="ghevergreen" min="0" max="60" value="${state.growth.evergreenChip ?? 0}"></label>
         <span class="dim" id="ghstagenote">${stageNote()}</span>
       </div>
     </div>
