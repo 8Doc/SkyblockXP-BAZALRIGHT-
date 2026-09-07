@@ -2,6 +2,7 @@ import { normalise } from "../lib/bazaar";
 import { baselineFrom, observe, observedFor, relativeTo, type Baseline, type CoflnetPoint } from "../lib/bazaarHistory";
 import type { NpcPrice } from "../lib/bazaarViews";
 import type { ProductSnapshot, RawBazaarProduct } from "../lib/bazaarTypes";
+import { parseFilter, type FilterKind, type ParsedFilter } from "../lib/columnFilter";
 import { depthNote } from "../lib/filters";
 import { coins, num } from "../lib/format";
 import {
@@ -55,7 +56,13 @@ type State = {
   status: string;
   error: string | null;
   sort: Sort;
-  search: string;
+  /**
+   * What is typed in each column's box, keyed by column id. Kept as typed rather than as parsed
+   * predicates so a half-finished ">" survives a repaint and reads back exactly as it was left.
+   */
+  filters: Record<string, string>;
+  /** Whether rows that fail a filter are dropped outright rather than sunk and dimmed. */
+  hideFiltered: boolean;
   /** One greenhouse or all three. The wiki caps it at three. */
   plots: number;
   /**
@@ -225,13 +232,29 @@ function heldFortuneValues(): Record<string, number> {
   return out;
 }
 
+const FILTER_KEY = "sbxp:ghfilters";
+const HIDE_KEY = "sbxp:ghhide";
+
+function readFilters(): Record<string, string> {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(FILTER_KEY) ?? "{}");
+    if (!parsed || typeof parsed !== "object") return {};
+    const out: Record<string, string> = {};
+    for (const [id, value] of Object.entries(parsed)) if (typeof value === "string") out[id] = value;
+    return out;
+  } catch {
+    return {};
+  }
+}
+
 const state: State = {
   market: new Map(),
   lastUpdated: null,
   status: "",
   error: null,
   sort: { column: "sustainedPerDay", descending: true },
-  search: "",
+  filters: readFilters(),
+  hideFiltered: localStorage.getItem(HIDE_KEY) === "1",
   plots: Number(localStorage.getItem("sbxp:ghplots") ?? 1),
   priceMode: (localStorage.getItem("sbxp:ghpricemode") as PriceMode) === "instant" ? "instant" : "order",
   fortune: localStorage.getItem("sbxp:ghfortune") ?? "",
@@ -451,7 +474,19 @@ function baselineCell(row: MutationProfit): string {
 }
 /* ------------------------------------------------------------------ columns */
 
-type Column = { id: string; label: string; value: (r: MutationProfit) => number; render: (r: MutationProfit) => string; title?: string };
+type Column = {
+  id: string;
+  label: string;
+  value: (r: MutationProfit) => number;
+  render: (r: MutationProfit) => string;
+  title?: string;
+  /** What its box accepts. Defaults to a plain number, which most of them are. */
+  kind?: FilterKind;
+  /** The cell as words, for the columns a number cannot filter. Only `boolean` and `text` need it. */
+  plain?: (r: MutationProfit) => string;
+  /** What to show in the empty box. Short: these are the narrowest controls on the page. */
+  hint?: string;
+};
 
 /**
  * The table, after decay.
@@ -497,6 +532,8 @@ const COLUMNS: Column[] = [
   {
     id: "hoursPerHarvest",
     label: "Per harvest",
+    kind: "hours",
+    hint: "<12",
     value: (r) => r.hoursPerHarvest ?? Infinity,
     render: (r) => (r.hoursPerHarvest === null ? `<span class="dim">—</span>` : hours(r.hoursPerHarvest)),
     title:
@@ -517,6 +554,9 @@ const COLUMNS: Column[] = [
   {
     id: "needsWater",
     label: "Water",
+    kind: "boolean",
+    hint: "no",
+    plain: (r) => (r.needsWater === true ? "yes" : r.needsWater === false ? "no" : "—"),
     // Sorted so the ones that want no attention come first, which is the useful end of it.
     value: (r) => (r.needsWater === true ? 2 : r.needsWater === false ? 1 : 0),
     render: (r) => waterCell(r),
@@ -524,12 +564,14 @@ const COLUMNS: Column[] = [
       "Whether the mutation has to be watered while it grows, from its own page. It is not the " +
       "Water Retain and Water Drain effects in the expanded row — those are what a mutation does to " +
       "its neighbours, which is a different fact. Nor does it follow from the growth surface: " +
-      "PlantBoy Advance and Jerryflower grow on farmland and need none. A dash is a mutation with " +
-      "no growth stages at all — planted to spread others, never grown, so never watered.",
+      "PlantBoy Advance and Jerryflower grow on farmland and need none. The eleven with no growth " +
+      "stages read as no: they appear the moment their condition is met and are taken on sight, so " +
+      "there is no growing phase to water.",
   },
   {
     id: "setup",
     label: "Setup",
+    hint: "<10m",
     value: (r) => r.setupTotal ?? Infinity,
     render: (r) =>
       !r.setup
@@ -546,6 +588,7 @@ const COLUMNS: Column[] = [
   {
     id: "netPerSetup",
     label: "Per setup",
+    hint: ">10m",
     // A ring that never rots has no finite per-setup figure, and it is the *best* case rather than
     // the worst: you plant it once and it keeps paying. Sorting it as null would bury it at the
     // bottom next to the rows nothing can price, which is the opposite of true.
@@ -588,12 +631,31 @@ const COLUMNS: Column[] = [
 ];
 
 /**
+ * The leftmost column, which the table draws by hand rather than from `COLUMNS` — it carries the
+ * icon, the rarity, the ring and any problem, none of which fits a `render` returning one cell.
+ * It still needs a box, so it is described here and drawn with the others.
+ */
+const NAME_COLUMN: Column = {
+  id: "name",
+  label: "Mutation",
+  kind: "text",
+  hint: "name",
+  value: () => 0,
+  plain: (r) => r.name,
+  render: (r) => escapeHtml(r.name),
+};
+
+const FILTER_COLUMNS: Column[] = [NAME_COLUMN, ...COLUMNS];
+
+/**
  * Whether this one has to be watered, in a word.
  *
- * Three states rather than two, because "no" and "never grows" are different answers and only one
- * of them is a property of the mutation. The eleven with no growth stages are planted to spread
- * others and are harvested the moment they appear — there is no growing phase to water, which is
- * why their pages say nothing about it and why a dash is the honest cell.
+ * Two answers, not three. The eleven mutations whose pages say nothing about water are exactly the
+ * eleven with no growth stages: they appear the moment their condition is met and are harvested on
+ * sight, so there is no growing phase and nothing to water. That is a no, and Skymutations lists it
+ * as one — a dash would have read as "unknown" to anyone sorting or filtering the column, and it is
+ * not unknown. The third branch survives only as a guard: if the wiki ever changes the sentence,
+ * the scraper leaves the answer unset and warns, and a dash here is how that would surface.
  */
 function waterCell(row: MutationProfit): string {
   if (row.needsWater === true) {
@@ -676,10 +738,50 @@ function rows(): MutationProfit[] {
   });
 }
 
-function filtered(all: MutationProfit[]): MutationProfit[] {
-  const needle = state.search.trim().toLowerCase();
-  if (!needle) return all;
-  return all.filter((r) => r.name.toLowerCase().includes(needle));
+/**
+ * Every box that is currently saying something, in column order.
+ *
+ * The name is a column like any other here, which is why the tab's old standalone Search box is
+ * gone: two controls filtering names from two pieces of state can disagree, and the one above the
+ * table did not repaint when the one in the heading was typed into. One box, one filter, and a
+ * name reads back in the same summary line as everything else.
+ */
+function activeFilters(): { column: Column; parsed: ParsedFilter }[] {
+  return FILTER_COLUMNS.map((column) => ({
+    column,
+    parsed: parseFilter(state.filters[column.id] ?? "", column.kind ?? "number"),
+  })).filter((f) => f.parsed.state !== "blank");
+}
+
+/**
+ * Split the table on the filters rather than cutting it down.
+ *
+ * A row that fails sinks to the bottom and greys out instead of vanishing, and that is the whole
+ * design decision here. A filter you cannot see the effect of is a filter you will misread: type
+ * `<10m` in Setup and a disappearing row looks the same whether it cost 40M or whether nothing
+ * could price it at all. Sunk and dimmed, the near misses stay one glance away — and `hide` is
+ * there for when the list is what you want rather than the comparison.
+ *
+ * A box that cannot be read filters nothing, so a half-typed ">" leaves the table alone.
+ */
+function partition(all: MutationProfit[]): { matching: MutationProfit[]; failing: MutationProfit[] } {
+  const active = activeFilters();
+  if (active.length === 0) return { matching: all, failing: [] };
+
+  const matching: MutationProfit[] = [];
+  const failing: MutationProfit[] = [];
+  for (const row of all) {
+    const passes = active.every(({ column, parsed }) =>
+      parsed.state !== "ok" ? true : parsed.test(column.value(row), plainOf(column, row)),
+    );
+    (passes ? matching : failing).push(row);
+  }
+  return { matching, failing };
+}
+
+/** The cell as words. Columns that need it say so; the rest are only ever compared as numbers. */
+function plainOf(column: Column, row: MutationProfit): string {
+  return column.plain ? column.plain(row) : "";
 }
 
 function sorted(all: MutationProfit[]): MutationProfit[] {
@@ -705,6 +807,26 @@ export function mountGreenhouse(container: HTMLElement, data: GreenhouseTables):
 
   container.addEventListener("click", (event) => {
     const target = event.target as HTMLElement;
+
+    const hide = target.closest<HTMLElement>("[data-ghhide]");
+    if (hide) {
+      state.hideFiltered = hide.dataset.ghhide === "1";
+      localStorage.setItem(HIDE_KEY, state.hideFiltered ? "1" : "0");
+      renderTable();
+      return;
+    }
+
+    const clear = target.closest<HTMLElement>("[data-ghclearfilters]");
+    if (clear) {
+      state.filters = {};
+      localStorage.setItem(FILTER_KEY, "{}");
+      renderTable();
+      return;
+    }
+
+    // A click in a box is a click in a box. Without this it would land on the heading's sort or the
+    // row's expander, and typing a filter would reorder the table under the caret.
+    if (target.closest<HTMLElement>("[data-ghfilter]")) return;
 
     const column = target.closest<HTMLElement>("[data-ghsort]");
     if (column) {
@@ -793,8 +915,11 @@ export function mountGreenhouse(container: HTMLElement, data: GreenhouseTables):
       ghevergreen: ["evergreenChip", "sbxp:ghevergreen"],
     };
 
-    if (el.id === "ghsearch") {
-      state.search = el.value;
+    const filterId = el.dataset.ghfilter;
+    if (filterId !== undefined) {
+      state.filters = { ...state.filters, [filterId]: el.value };
+      if (el.value.trim() === "") delete state.filters[filterId];
+      localStorage.setItem(FILTER_KEY, JSON.stringify(state.filters));
       renderTable();
       return;
     }
@@ -1138,7 +1263,6 @@ function render(): void {
 
     <div class="panel pad controls">
       <div class="row">
-        <label>Search <input id="ghsearch" value="${escapeHtml(state.search)}" placeholder="e.g. noctilume" autocomplete="off"></label>
         <label title="Your Farming Fortune. Nothing here can read it off your profile, so it is a box rather than a lookup.">Farming Fortune
           <input id="ghfortune" value="${escapeHtml(state.fortune)}" placeholder="${num(ASSUMED_FORTUNE)}" autocomplete="off">
         </label>
@@ -1222,14 +1346,21 @@ function renderTable(): void {
     return;
   }
 
-  const all = sorted(filtered(rows()));
+  const { matching, failing } = partition(sorted(rows()));
+  const shown = state.hideFiltered ? matching : [...matching, ...failing];
+  const dimmed = new Set(state.hideFiltered ? [] : failing.map((r) => r.id));
+  // Where the matches stop. Fading alone says a row is lesser but not where the line was drawn,
+  // and on a forty-row table you scroll past the boundary without noticing you crossed it.
+  const cut = state.hideFiltered || matching.length === 0 ? null : failing[0]?.id;
   const head = COLUMNS.map((c) => {
     const on = state.sort.column === c.id;
     const arrow = on ? (state.sort.descending ? " ▾" : " ▴") : "";
-    return `<th class="num${on ? " on" : ""}" data-ghsort="${c.id}"${c.title ? ` title="${escapeHtml(c.title)}"` : ""}>${escapeHtml(c.label)}${arrow}</th>`;
+    return `<th class="num${on ? " on" : ""}" data-ghsort="${c.id}"${
+      c.title ? ` title="${escapeHtml(c.title)}"` : ""
+    }><span class="gh-head">${escapeHtml(c.label)}${arrow}</span>${filterBox(c)}</th>`;
   }).join("");
 
-  const body = all
+  const body = shown
     .map((row) => {
       const cells = COLUMNS.map((c) => `<td class="num">${c.render(row)}</td>`).join("");
       const icon = `<img class="bz-icon" src="${iconUrl(row.id)}" alt="" width="20" height="20" loading="lazy" decoding="async">`;
@@ -1263,20 +1394,128 @@ function renderTable(): void {
       // data-ghopen: clicking inside it should let you read and select, not slam it shut.
       const detail =
         state.open === row.id ? `<tr class="gh-detail"><td colspan="${COLUMNS.length + 1}">${detailHtml(row)}</td></tr>` : "";
-      return `<tr class="bz-open" data-ghopen="${escapeHtml(row.id)}"><td>${icon}${escapeHtml(row.name)}${rarity}${lifted}${setup}${problem}</td>${cells}</tr>${detail}`;
+      const off = `${dimmed.has(row.id) ? " bz-faded" : ""}${row.id === cut ? " gh-cut" : ""}`;
+      return `<tr class="bz-open${off}" data-ghopen="${escapeHtml(row.id)}"><td>${icon}${escapeHtml(row.name)}${rarity}${lifted}${setup}${problem}</td>${cells}</tr>${detail}`;
     })
     .join("");
+
+  // Read before the innerHTML below throws the focused input away with everything else.
+  const focused = focusedFilter();
 
   target.innerHTML = `
     <p class="dim pad">${escapeHtml(NOTE)}</p>
     <div class="panel scroll">
       <table class="bz">
-        <thead><tr><th>Mutation</th>${head}</tr></thead>
+        <thead><tr><th><span class="gh-head">Mutation</span>${filterBox(NAME_COLUMN)}</th>${head}</tr></thead>
         <tbody>${body}</tbody>
       </table>
     </div>
-    <p class="dim pad">${num(all.length)} mutations · ${escapeHtml(stageNote())} · ${state.plots} greenhouse${state.plots > 1 ? "s" : ""}</p>
+    <p class="dim pad">${filterNote(matching.length, failing.length)}${escapeHtml(stageNote())} · ${state.plots} greenhouse${
+      state.plots > 1 ? "s" : ""
+    }</p>
   `;
+  restoreFilterFocus(focused);
+}
+
+/**
+ * One column's box, drawn inside its own heading.
+ *
+ * Inside rather than in a second header row, and the reason is sticky positioning: the heading row
+ * is pinned to the top of the scroller, and a second pinned row would need to know the first one's
+ * height in pixels to sit below it. Nested in the same cell, the box is under its label by
+ * construction and stays there at any font size.
+ *
+ * As wide as its column and no wider. Nine of these across a table that already scrolls sideways
+ * means anything roomier costs a column its width, and the strings being typed here are four
+ * characters long.
+ */
+function filterBox(column: Column): string {
+  const typed = state.filters[column.id] ?? "";
+  const parsed = parseFilter(typed, column.kind ?? "number");
+  // A box it cannot read is marked rather than obeyed, so the table never empties mid-keystroke.
+  const bad = parsed.state === "bad" ? " bad" : "";
+  const reading =
+    parsed.state === "ok"
+      ? `Showing ${column.label} ${parsed.label}. ${filterHelp(column)}`
+      : parsed.state === "bad"
+        ? `Cannot read that, so it is filtering nothing. ${filterHelp(column)}`
+        : filterHelp(column);
+  return `<input class="gh-box${bad}" data-ghfilter="${column.id}" value="${escapeHtml(typed)}" placeholder="${escapeHtml(
+    column.hint ?? "",
+  )}" autocomplete="off" spellcheck="false" title="${escapeHtml(reading)}">`;
+}
+
+/** What this particular box takes, said in one line. */
+function filterHelp(column: Column): string {
+  switch (column.kind) {
+    case "text":
+      return "Part of a name. Case does not matter.";
+    case "boolean":
+      return "yes or no. Case does not matter.";
+    case "hours":
+      return "A number of hours, decimals and all: >6.2, <14.8, 6-12. A bare number means that many or more.";
+    default:
+      return "A figure, with k, m or b if you like: >10m, <500k, 1m-5m. A bare number means that much or more.";
+  }
+}
+
+/**
+ * The line under the table: "7 of 40 match — Setup under 10m, Water no · hide the other 33 · clear".
+ *
+ * It says back what it read, in words rather than in the symbols that were typed, because that is
+ * the only place a misread box shows up. `>10` in a column of millions is valid, parses cleanly and
+ * matches everything — and "Setup 10 or more" beside it is what makes that obvious.
+ */
+function filterNote(matching: number, failing: number): string {
+  const active = activeFilters();
+  if (active.length === 0) return `${num(matching)} mutations · `;
+
+  const said = active
+    .flatMap((f) => (f.parsed.state === "ok" ? [`${f.column.label} ${f.parsed.label}`] : []))
+    .join(", ");
+  const unreadable = active.flatMap((f) => (f.parsed.state === "bad" ? [f.column.label] : []));
+  const trouble = unreadable.length
+    ? ` · <span class="gold">${escapeHtml(unreadable.join(", "))} unreadable, so filtering nothing</span>`
+    : "";
+  const toggle =
+    failing > 0 || state.hideFiltered
+      ? ` · <button class="linky" data-ghhide="${state.hideFiltered ? "0" : "1"}">${
+          state.hideFiltered ? "show the rest" : `hide the other ${num(failing)}`
+        }</button>`
+      : "";
+  return `${num(matching)} of ${num(matching + failing)} match${
+    said ? ` — ${escapeHtml(said)}` : ""
+  }${trouble}${toggle} · <button class="linky" data-ghclearfilters="1">clear</button> · `;
+}
+
+/**
+ * Put the caret back where it was.
+ *
+ * The table is rebuilt from scratch on every keystroke, which throws away the focused input along
+ * with everything else. Without this, typing ">10m" gets one character in and then types the rest
+ * somewhere else entirely.
+ *
+ * Asked of the live DOM at the moment of the repaint rather than remembered from the last
+ * keystroke, because a repaint is not always a keystroke: the bazaar poll fires one every twenty
+ * seconds, and a remembered box would have it reach out and take the caret back from wherever the
+ * player had moved on to.
+ */
+type FilterFocus = { id: string; caret: number } | null;
+
+function focusedFilter(): FilterFocus {
+  const active = document.activeElement;
+  if (!(active instanceof HTMLInputElement)) return null;
+  const id = active.dataset.ghfilter;
+  return id === undefined ? null : { id, caret: active.selectionStart ?? active.value.length };
+}
+
+function restoreFilterFocus(focus: FilterFocus): void {
+  if (!focus) return;
+  const box = document.querySelector<HTMLInputElement>(`[data-ghfilter="${CSS.escape(focus.id)}"]`);
+  if (!box) return;
+  box.focus();
+  const caret = Math.min(focus.caret, box.value.length);
+  box.setSelectionRange(caret, caret);
 }
 /**
  * The expanded row: the plot on the left, where the coins come from in the middle, what it costs on

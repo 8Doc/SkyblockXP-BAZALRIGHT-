@@ -280,10 +280,16 @@ async function main() {
    * Nor does it follow from the growth surface, which was the obvious guess and is wrong: PlantBoy
    * Advance and Jerryflower grow on farmland and need none, while other soul sand mutations do.
    *
-   * Null where the page says nothing, which is not a gap — it is every mutation with no growth
-   * stages at all. Those are the ones planted to spread others; they never grow, so there is
-   * nothing to water and the page has no sentence to carry. Kept as null rather than false so a
-   * reader can tell "never grows" from "grows without water".
+   * A page that says nothing is not a gap. The sentence exists exactly when there is a growing
+   * phase to describe: all 29 mutations with growth stages carry it, and all 11 without it have
+   * none. Those eleven appear the moment their condition is met and are harvested on sight, so
+   * there is nothing to water and the answer is a plain no — which is what Skymutations lists for
+   * them too. Recorded as false rather than left blank, because a blank reads as "unknown" to
+   * anyone sorting the column, and this is known.
+   *
+   * The inference is guarded rather than trusted: it applies only to a mutation with zero growth
+   * stages. One that grows and still says nothing means the sentence has changed shape, and is
+   * left unset with a warning rather than quietly called dry.
    */
   console.log("reading the watering requirement…");
   let watered = 0;
@@ -305,12 +311,15 @@ async function main() {
 
   const silent = mutations.filter((m) => m.needsWater === undefined);
   const growing = silent.filter((m) => (m.growthStages ?? 0) > 0);
+  for (const mutation of silent) {
+    if ((mutation.growthStages ?? 0) === 0) mutation.needsWater = false;
+  }
   if (growing.length > 0) {
     // The correlation this relies on, checked rather than assumed: a mutation that grows and says
     // nothing about water would mean the sentence has changed shape and this scrape has gone quiet.
     console.log(`  WARNING: ${growing.length} mutations grow but state no watering: ${growing.map((m) => m.name).join(", ")}`);
   } else {
-    console.log(`  ${silent.length} say nothing, and none of them grows — consistent`);
+    console.log(`  ${silent.length} say nothing, none of them grows, all read as needing no water`);
   }
 
   /* ------------------------------------------------------- the greenhouse */

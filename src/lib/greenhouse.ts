@@ -102,11 +102,15 @@ export type Mutation = {
   surface: string | null;
   growthStages: number | null;
   /**
-   * Whether it has to be watered while it grows, from its own item page.
+   * Whether it has to be watered while it grows.
    *
-   * Undefined where the page says nothing, which is exactly the eleven with no growth stages: they
-   * are planted to spread others and taken as soon as they appear, so there is no growing phase to
-   * water. Kept apart from false so "grows without water" and "never grows" stay different answers.
+   * Scraped from each item page's own sentence for the 29 that grow, and false by construction for
+   * the 11 that do not: those appear the moment their condition is met and are harvested on sight,
+   * so there is no growing phase and nothing to water — which is what their pages say by saying
+   * nothing, and what Skymutations lists for them.
+   *
+   * Optional only as a guard. If the wiki's sentence ever changes shape, a mutation that grows will
+   * come back unset rather than quietly reading as dry, and the scrape warns.
    */
   needsWater?: boolean;
   spreading: { raw: string; requires: SpreadRequirement[]; prose: boolean };

@@ -972,27 +972,38 @@ test("a fortune that is not a crop's is not reported as an unplaceable crop", ()
 
 /* --------------------------------------------------------------- watering */
 
-test("watering is a per-mutation fact, scraped and three-valued", () => {
+test("watering is a yes or a no for every mutation", () => {
   const needs = data.mutations.filter((m) => m.needsWater === true);
   const dry = data.mutations.filter((m) => m.needsWater === false);
   const silent = data.mutations.filter((m) => m.needsWater === undefined);
 
   // It really does differ per mutation — the whole reason it is worth a column.
   assert.ok(needs.length > 0 && dry.length > 0, "both answers occur");
-  assert.equal(needs.length + dry.length + silent.length, data.mutations.length);
+  // No gaps. A blank cell reads as "unknown" to anyone sorting or filtering, and none of them is.
+  assert.equal(silent.length, 0, `unanswered: ${silent.map((m) => m.name).join(", ")}`);
 
-  // The rule the scrape leans on: a mutation says nothing about water exactly when it never grows.
-  // Anything that grows and is silent means the wiki's sentence has changed shape.
-  for (const m of silent) {
-    assert.equal(m.growthStages ?? 0, 0, `${m.name} grows but states no watering`);
-  }
-  for (const m of [...needs, ...dry]) {
-    assert.ok((m.growthStages ?? 0) > 0, `${m.name} states watering but has no growth stages`);
-  }
+  // Where each answer comes from. Everything that grows is scraped from its own page's sentence;
+  // everything that does not is a no by construction — it appears the moment its condition is met
+  // and is harvested on sight, so there is no growing phase and nothing to water.
+  const instant = data.mutations.filter((m) => (m.growthStages ?? 0) === 0);
+  assert.ok(instant.length > 0);
+  for (const m of instant) assert.equal(m.needsWater, false, `${m.name} never grows, so never needs water`);
 
   // The negative has to beat the positive: "does not need water" contains "need water".
   assert.equal(data.mutations.find((m) => m.name === "Zombud")?.needsWater, false);
   assert.equal(data.mutations.find((m) => m.name === "Soggybud")?.needsWater, true);
+});
+
+test("the scraped half and the inferred half are told apart", () => {
+  // The inference is only sound for a mutation with no growing phase, so it is worth pinning that
+  // the two groups stay separable: a mutation that grows and reads as dry came off the wiki
+  // sentence, not off this rule.
+  const growingAndDry = data.mutations.filter((m) => (m.growthStages ?? 0) > 0 && m.needsWater === false);
+  assert.ok(growingAndDry.length > 0, "some mutations grow and still need no water");
+  assert.ok(
+    growingAndDry.some((m) => m.name === "Jerryflower"),
+    "Jerryflower grows for 10 stages and its page says outright that it does not need water",
+  );
 });
 
 test("watering does not follow from the growth surface", () => {

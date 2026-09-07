@@ -474,3 +474,55 @@ table.bz tbody tr.bz-faded > td:first-child { opacity: 0.75; }
 .px-controls .row > label { flex: 1 1 128px; min-width: 0; }
 .px-controls .row > label > select,
 .px-controls .row > label > input { width: 100%; min-width: 0; box-sizing: border-box; }
+
+/* The Greenhouse's per-column filter boxes, one under each heading.
+
+   Inside the heading cell rather than in a row of their own, because the heading row is sticky and
+   a second sticky row would have to be told the first one's height in pixels. Nested, the box is
+   below its label by construction.
+
+   `user-select: text` is not decoration: `table.bz thead th[data-ghsort]` sets `user-select: none`
+   so a double-click on a heading sorts instead of selecting the word, and that inherits straight
+   into the input, where it makes selecting what you have typed impossible. */
+table.bz thead th[data-ghsort] { cursor: pointer; user-select: none; }
+table.bz thead th[data-ghsort]:hover > .gh-head { color: var(--aqua); }
+.gh-head { display: block; }
+.gh-box {
+  display: block;
+  width: 100%;
+  min-width: 44px;
+  margin-top: 4px;
+  padding: 2px 4px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: var(--bg);
+  color: var(--fg);
+  font: inherit;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  text-align: inherit;
+  text-transform: none;
+  letter-spacing: 0;
+  cursor: text;
+  user-select: text;
+}
+.gh-box:focus { outline: none; border-color: var(--aqua); }
+.gh-box::placeholder { color: var(--muted); opacity: 0.55; }
+/* Typed but not readable. Marked rather than obeyed — see `filterBox`. */
+.gh-box.bad { border-color: var(--gold); color: var(--gold); }
+
+/* A button that reads as a link, for the one-line toggles under a table. */
+.linky {
+  border: 0;
+  padding: 0;
+  background: none;
+  color: var(--aqua);
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline dotted;
+}
+.linky:hover { color: var(--fg); }
+
+/* Where the filtered-out rows begin. The fade says a row is lesser; this says which side of the
+   filter it fell on, which is the thing you lose track of scrolling a forty-row table. */
+table.bz tbody tr.gh-cut > td { border-top: 1px solid var(--aqua); }

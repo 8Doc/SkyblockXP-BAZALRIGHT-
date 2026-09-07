@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-06T15:10:52.798Z",
+  "generatedAt": "2026-09-07T15:34:44.194Z",
   "cropFortunes": [
     {
       "stat": "Wheat Fortune",
@@ -338,7 +338,8 @@
         "Flint and Steel": 2,
         "Nether Wart": 2,
         "Ashwreath": 1
-      }
+      },
+      "needsWater": false
     },
     {
       "id": "CHOCONUT",
@@ -394,7 +395,8 @@
       "layoutCounts": {
         "Cocoa Beans": 2,
         "Choconut": 1
-      }
+      },
+      "needsWater": false
     },
     {
       "id": "DUSTGRAIN",
@@ -450,7 +452,8 @@
       "layoutCounts": {
         "Wheat": 2,
         "Dustgrain": 1
-      }
+      },
+      "needsWater": false
     },
     {
       "id": "GLOOMGOURD",
@@ -518,7 +521,8 @@
         "Pumpkin": 1,
         "Gloomgourd": 1,
         "Melon Slice": 1
-      }
+      },
+      "needsWater": false
     },
     {
       "id": "LONELILY",
@@ -577,7 +581,8 @@
       ],
       "layoutCounts": {
         "Lonelily": 1
-      }
+      },
+      "needsWater": false
     },
     {
       "id": "SCOURROOT",
@@ -645,7 +650,8 @@
         "Potato": 1,
         "Scourroot": 1,
         "Carrot": 1
-      }
+      },
+      "needsWater": false
     },
     {
       "id": "SHADEVINE",
@@ -714,7 +720,8 @@
         "Cactus": 1,
         "Shadevine": 1,
         "Sugar Cane": 1
-      }
+      },
+      "needsWater": false
     },
     {
       "id": "VEILSHROOM",
@@ -782,7 +789,8 @@
         "Red Mushroom": 1,
         "Veilshroom": 1,
         "Brown Mushroom": 1
-      }
+      },
+      "needsWater": false
     },
     {
       "id": "WITHERBLOOM",
@@ -838,7 +846,8 @@
       "layoutCounts": {
         "Dead Plant": 4,
         "Witherbloom": 1
-      }
+      },
+      "needsWater": false
     },
     {
       "id": "CHOCOBERRY",
@@ -2047,7 +2056,8 @@
         "Soggybud": 4,
         "Choconut": 4,
         "Turtlellini": 1
-      }
+      },
+      "needsWater": false
     },
     {
       "id": "CHORUS_FRUIT",
@@ -2322,7 +2332,8 @@
         }
       ],
       "farmingXp": null,
-      "hasLayout": false
+      "hasLayout": false,
+      "needsWater": false
     },
     {
       "id": "STARTLEVINE",
