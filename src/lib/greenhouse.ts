@@ -334,11 +334,15 @@ export function setupFor(
   if (m.spreading.requires.length === 0) return null;
 
   const requires = m.spreading.requires.map((r) => ({ cells: r.cells, size: byId.get(r.id)?.size ?? 1 }));
-  const packing = packFor(plot, requires, m.size);
+  // Priced before the plot is laid out, not after. The arrangement is a choice between layouts
+  // that grow the same number of mutations, and which of them is worth building is a question the
+  // bill answers — see `weights` on `PackingOptions`.
+  const prices = m.spreading.requires.map((r) => (r.free ? 0 : buyPrice(r.id, market, npcPrices, mode)));
+  const packing = packFor(plot, requires, m.size, weightsFor(prices));
 
   const items: SetupItem[] = m.spreading.requires.map((r, i) => {
     const grown = byId.has(r.id);
-    const each = r.free ? 0 : buyPrice(r.id, market, npcPrices, mode);
+    const each = prices[i];
     const plants = packing.plants[i] ?? 0;
     return {
       id: r.id,
@@ -415,20 +419,53 @@ export type PlotShape = { width: number; height: number; locked?: Set<string> };
 export const FULL_PLOT: PlotShape = { width: 10, height: 10 };
 
 /**
- * Packings are memoised, because the answer depends on the plot and three small integers and not
- * at all on prices — so it survives the twenty-second repricing that redraws everything else.
- * Sixteen distinct shapes cover all forty mutations, at about forty milliseconds apiece.
+ * Packings are memoised, because the answer depends on the plot, three small integers and the
+ * shape of the bill — not on the prices themselves. Sixteen distinct shapes cover all forty
+ * mutations, at about forty milliseconds apiece.
  */
 const packings = new Map<string, Packing>();
 
-function packFor(plot: PlotShape, requires: { cells: number; size: number }[], targetSize: number): Packing {
+/**
+ * The prices, reduced to something a cache key can hold.
+ *
+ * The packer needs to know which plant it should be sparing with, and that is a question about
+ * ratios: four cells of Puffercloud at 758k beside four of Zombud at 3k is the same problem
+ * whether or not the book moved half a percent since the last poll. So prices are divided by the
+ * dearest and rounded to twentieths, which takes a five per cent move to shift a weight — well
+ * outside the noise of a twenty-second repricing, and still fine-grained enough to tell "much
+ * dearer" from "about the same".
+ *
+ * Without it the memo would miss on every poll and re-pack all forty mutations three times a
+ * minute, which is the reason the packing was price-free to begin with.
+ */
+function weightsFor(prices: (number | null)[]): number[] {
+  const dearest = Math.max(...prices.map((p) => (p === null || !Number.isFinite(p) ? 0 : p)), 0);
+  // Nothing has a price, or everything is free: every arrangement costs the same, so fall back to
+  // the plant count rather than inventing a preference.
+  if (dearest <= 0) return prices.map(() => 1);
+  return prices.map((p) => Math.round(((p === null || !Number.isFinite(p) ? 0 : p) / dearest) * 20) / 20);
+}
+
+function packFor(
+  plot: PlotShape,
+  requires: { cells: number; size: number }[],
+  targetSize: number,
+  weights: number[],
+): Packing {
   const lockedKey = plot.locked && plot.locked.size > 0 ? [...plot.locked].sort().join("|") : "";
   const shape = requires.map((r) => `${r.cells}/${r.size}`).join(",");
-  const cacheKey = `${plot.width}x${plot.height}:${lockedKey}:${shape}:${targetSize}`;
+  const cacheKey = `${plot.width}x${plot.height}:${lockedKey}:${shape}:${targetSize}:${weights.join("/")}`;
   const cached = packings.get(cacheKey);
   if (cached) return cached;
 
-  const packing = packGreenhouse({ width: plot.width, height: plot.height, locked: plot.locked, requires, targetSize });
+  const packing = packGreenhouse({
+    width: plot.width,
+    height: plot.height,
+    locked: plot.locked,
+    requires,
+    targetSize,
+    weights,
+  });
   packings.set(cacheKey, packing);
   return packing;
 }

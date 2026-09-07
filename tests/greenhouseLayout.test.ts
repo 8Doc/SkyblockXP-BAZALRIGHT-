@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { packGreenhouse } from "../src/lib/greenhouseLayout";
+import { packGreenhouse, type CellKind, type Packing, type Requirement } from "../src/lib/greenhouseLayout";
 
 /**
  * The packing is what decides what the Greenhouse pays, and the whole point of it is that rings
@@ -163,4 +163,164 @@ test("a condition too tight to tile still gets an answer", () => {
   });
   assert.equal(p.targets, 4, "four 5x5 blocks tile a 10x10 exactly");
   assert.equal(p.plants.reduce((a, b) => a + b, 0), 64, "sixteen ring cells apiece");
+});
+
+/* ------------------------------------------------- what the ring costs, not just how big it is */
+
+/** Plants of one requirement, rebuilt from the drawn grid: the top-left of each size x size block. */
+function plantsOf(grid: CellKind[][], req: number, size: number): [number, number][] {
+  const seen = new Set<string>();
+  const out: [number, number][] = [];
+  for (let r = 0; r < grid.length; r++) {
+    for (let c = 0; c < grid[0].length; c++) {
+      if (grid[r][c] !== req || seen.has(`${r},${c}`)) continue;
+      let whole = true;
+      for (let rr = r; rr < r + size && whole; rr++)
+        for (let cc = c; cc < c + size && whole; cc++)
+          if (rr >= grid.length || cc >= grid[0].length || grid[rr][cc] !== req || seen.has(`${rr},${cc}`)) whole = false;
+      if (!whole) continue;
+      for (let rr = r; rr < r + size; rr++) for (let cc = c; cc < c + size; cc++) seen.add(`${rr},${cc}`);
+      out.push([r, c]);
+    }
+  }
+  return out;
+}
+
+/** Every cell that is in some target's ring. */
+function ringCells(grid: CellKind[][], m: number): Set<string> {
+  const ring = new Set<string>();
+  for (let r = 0; r < grid.length; r++) {
+    for (let c = 0; c < grid[0].length; c++) {
+      if (grid[r][c] !== "target") continue;
+      for (let rr = r - 1; rr <= r + m; rr++)
+        for (let cc = c - 1; cc <= c + m; cc++) {
+          const inTarget = rr >= r && rr < r + m && cc >= c && cc < c + m;
+          if (!inTarget) ring.add(`${rr},${cc}`);
+        }
+    }
+  }
+  return ring;
+}
+
+test("nothing is planted where no mutation can reach it", () => {
+  // A periodic tile does not divide a 10x10 evenly, and what was left over used to be bought and
+  // priced: 18% of everything planted across the forty, and 71% of Stoplight Petal's ring.
+  const cases: [Requirement[], number][] = [
+    [[{ cells: 4, size: 1 }, { cells: 4, size: 1 }], 1],
+    [[{ cells: 5, size: 1 }, { cells: 3, size: 1 }], 1],
+    [[{ cells: 6, size: 1 }, { cells: 6, size: 1 }], 2],
+    [[{ cells: 4, size: 3 }, { cells: 4, size: 2 }], 1],
+  ];
+  for (const [requires, targetSize] of cases) {
+    const p = packGreenhouse({ ...PLOT, requires, targetSize });
+    const ring = ringCells(p.grid, targetSize);
+    for (let i = 0; i < requires.length; i++) {
+      for (const [r, c] of plantsOf(p.grid, i, requires[i].size)) {
+        let useful = false;
+        for (let rr = r; rr < r + requires[i].size && !useful; rr++)
+          for (let cc = c; cc < c + requires[i].size && !useful; cc++)
+            if (ring.has(`${rr},${cc}`)) useful = true;
+        assert.ok(useful, `a plant at ${r},${c} feeds nothing`);
+      }
+    }
+  }
+});
+
+test("no single plant can be taken out and still leave every mutation fed", () => {
+  // The pruning is greedy, so it is not minimal in general — but it is minimal against removing
+  // one plant at a time, which is the claim worth pinning. A plant it rejected can never become
+  // removable later, because every later removal only lowers what the rings hold.
+  const requires = [{ cells: 4, size: 1 }, { cells: 4, size: 1 }];
+  const p = packGreenhouse({ ...PLOT, requires, targetSize: 1 });
+  const targets: [number, number][] = [];
+  for (let r = 0; r < 10; r++) for (let c = 0; c < 10; c++) if (p.grid[r][c] === "target") targets.push([r, c]);
+  assert.ok(targets.length > 0);
+
+  for (let i = 0; i < requires.length; i++) {
+    for (const [pr, pc] of plantsOf(p.grid, i, 1)) {
+      // Every target that would drop below its clause if this one plant went away.
+      let stillFine = true;
+      for (const [tr, tc] of targets) {
+        let fed = 0;
+        for (let dr = -1; dr <= 1; dr++)
+          for (let dc = -1; dc <= 1; dc++) {
+            if (!dr && !dc) continue;
+            const rr = tr + dr, cc = tc + dc;
+            if (rr < 0 || rr >= 10 || cc < 0 || cc >= 10) continue;
+            if (p.grid[rr][cc] === i && !(rr === pr && cc === pc)) fed++;
+          }
+        const touches = Math.abs(pr - tr) <= 1 && Math.abs(pc - tc) <= 1;
+        if (touches && fed < requires[i].cells) stillFine = false;
+      }
+      assert.equal(stillFine, false, `the plant at ${pr},${pc} is spare and was left in`);
+    }
+  }
+});
+
+test("pruning never costs a mutation", () => {
+  // It only ever removes a plant no target needs, so the count it was measured against has to
+  // survive it. The reported figure is what came out, not what went in.
+  for (const requires of [
+    [{ cells: 4, size: 1 }, { cells: 4, size: 1 }],
+    [{ cells: 6, size: 1 }, { cells: 2, size: 1 }],
+    [{ cells: 3, size: 1 }],
+  ]) {
+    const p = packGreenhouse({ ...PLOT, requires, targetSize: 1 });
+    assert.ok(p.targets > 0);
+    assert.ok(p.pruned >= 0);
+    assert.equal(
+      p.cells.reduce((a, b) => a + b, 0),
+      p.plants.reduce((a, b, i) => a + b * requires[i].size ** 2, 0),
+      "the cell counts match the plants that survived",
+    );
+  }
+});
+
+test("told what a plant costs, it buys fewer of the dear one", () => {
+  // Devourer's shape: four ring cells of a 758k mutation and four of a 3k one. Both arrangements
+  // grow sixteen and both plant seventy-five things, so nothing but the price can separate them —
+  // and the difference between them is a 38M ring and a 19M one.
+  const requires = [{ cells: 4, size: 1 }, { cells: 4, size: 1 }];
+  const flat = packGreenhouse({ ...PLOT, requires, targetSize: 1 });
+  const priced = packGreenhouse({ ...PLOT, requires, targetSize: 1, weights: [1, 0.004] });
+
+  assert.equal(priced.targets, flat.targets, "the same number still grows");
+  assert.ok(priced.plants[0] < flat.plants[0], "fewer of the expensive one");
+  const bill = (p: Packing) => p.plants[0] * 758_000 + p.plants[1] * 3_000;
+  assert.ok(bill(priced) < bill(flat) * 0.8, `${bill(priced)} against ${bill(flat)}`);
+});
+
+test("with the prices the other way round, so is the answer", () => {
+  // The weights are read, not a coincidence of which clause came first.
+  const requires = [{ cells: 4, size: 1 }, { cells: 4, size: 1 }];
+  const dearFirst = packGreenhouse({ ...PLOT, requires, targetSize: 1, weights: [1, 0.05] });
+  const dearSecond = packGreenhouse({ ...PLOT, requires, targetSize: 1, weights: [0.05, 1] });
+  assert.ok(dearFirst.plants[0] < dearFirst.plants[1]);
+  assert.ok(dearSecond.plants[1] < dearSecond.plants[0]);
+});
+
+test("weights change what is bought, never what grows", () => {
+  // The point of the tie-break is that it is a tie-break: it chooses among arrangements that were
+  // already equal on the only thing that pays, and must never trade a mutation away for a discount.
+  for (const requires of [
+    [{ cells: 4, size: 1 }, { cells: 4, size: 1 }],
+    [{ cells: 5, size: 1 }, { cells: 3, size: 1 }],
+    [{ cells: 3, size: 1 }, { cells: 3, size: 1 }, { cells: 2, size: 1 }],
+  ]) {
+    const flat = packGreenhouse({ ...PLOT, requires, targetSize: 1 });
+    for (const weights of [[1, 0.05, 0.5], [0.05, 1, 0.1], [1, 1, 1]]) {
+      const priced = packGreenhouse({ ...PLOT, requires, targetSize: 1, weights: weights.slice(0, requires.length) });
+      assert.equal(priced.targets, flat.targets, `weights ${weights} changed the yield`);
+    }
+  }
+});
+
+test("no prices means the old answer", () => {
+  // All weights equal is the same comparison the tie-break used to make, so a caller with nothing
+  // to price gets what it always got rather than an arbitrary new preference.
+  const requires = [{ cells: 4, size: 1 }, { cells: 4, size: 1 }];
+  const bare = packGreenhouse({ ...PLOT, requires, targetSize: 1 });
+  const flat = packGreenhouse({ ...PLOT, requires, targetSize: 1, weights: [1, 1] });
+  assert.deepEqual(bare.plants, flat.plants);
+  assert.equal(bare.targets, flat.targets);
 });
