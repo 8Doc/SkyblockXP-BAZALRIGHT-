@@ -526,3 +526,21 @@ table.bz thead th[data-ghsort]:hover > .gh-head { color: var(--aqua); }
 /* Where the filtered-out rows begin. The fade says a row is lesser; this says which side of the
    filter it fell on, which is the thing you lose track of scrolling a forty-row table. */
 table.bz tbody tr.gh-cut > td { border-top: 1px solid var(--aqua); }
+
+/* The Optimise button under the plot, and the word beside it saying whether it has been pressed.
+   The tag is deliberately quiet: it is a status, not a control, and the button next to it is the
+   thing to click. */
+.gh-opt { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+.gh-opt .chip { font-size: 11px; padding: 2px 8px; }
+.gh-opt .chip[disabled] { opacity: 0.6; cursor: default; }
+.gh-tag {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 1px 6px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.gh-tag.on { border-color: var(--aqua); color: var(--aqua); }

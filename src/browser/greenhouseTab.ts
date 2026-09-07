@@ -6,11 +6,16 @@ import { parseFilter, type FilterKind, type ParsedFilter } from "../lib/columnFi
 import { depthNote } from "../lib/filters";
 import { coins, num } from "../lib/format";
 import {
+  FULL_PLOT,
   OVERDRIVE_CHIP_FORTUNE,
   cropFortuneFromLore,
   cropResolver,
   cropUpgradeFortune,
+  layoutStateOf,
+  optimiseLayout,
   rankMutations,
+  restoreLayout,
+  settledLayouts,
   stageSeconds,
   yieldMultiplierOf,
   type GreenhouseData,
@@ -19,6 +24,7 @@ import {
   type MutationProfit,
   type PriceMode,
 } from "../lib/greenhouse";
+import type { Packing } from "../lib/greenhouseLayout";
 
 /**
  * The Greenhouse tab: which mutation is worth growing, and what it takes to grow it.
@@ -112,6 +118,10 @@ type State = {
   growth: GrowthParams;
   /** Which row's layout is open, if any. */
   open: string | null;
+  /** The mutation whose layout is being searched right now, if any. */
+  optimising: string | null;
+  /** What the last search bought, by mutation id, so the row can say so once it is done. */
+  optimiseNote: Record<string, string>;
 };
 
 /**
@@ -232,6 +242,44 @@ function heldFortuneValues(): Record<string, number> {
   return out;
 }
 
+/**
+ * Optimised layouts, kept across reloads.
+ *
+ * Worth storing because of what they cost: a second of searching each, asked for one at a time.
+ * Losing them on every refresh would make the button feel like a toy rather than a decision.
+ *
+ * The key already carries everything the answer depends on — the plot, the shape of the condition,
+ * and the price ranks — so a stored layout can only ever be handed back to the question it answers.
+ * A shift in what the plants cost changes the key, and the layout is simply searched again.
+ */
+const LAYOUT_KEY = "sbxp:ghlayouts";
+/** Enough for every mutation several times over; the oldest fall off the end. */
+const LAYOUT_LIMIT = 120;
+
+function readLayouts(): void {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(LAYOUT_KEY) ?? "{}");
+    if (!parsed || typeof parsed !== "object") return;
+    for (const [key, packing] of Object.entries(parsed as Record<string, Packing>)) {
+      // Shape-checked rather than trusted: this is an old string out of a browser, and a
+      // half-written grid would otherwise reach the drawing code as if it were a layout.
+      if (packing && Array.isArray(packing.grid) && Array.isArray(packing.plants)) restoreLayout(key, packing);
+    }
+  } catch {
+    /* a corrupt store is the same as no store */
+  }
+}
+
+function rememberLayouts(): void {
+  try {
+    const out: Record<string, Packing> = {};
+    for (const [key, packing] of settledLayouts().slice(-LAYOUT_LIMIT)) out[key] = packing;
+    localStorage.setItem(LAYOUT_KEY, JSON.stringify(out));
+  } catch {
+    /* out of quota; the layouts still hold for this session */
+  }
+}
+
 const FILTER_KEY = "sbxp:ghfilters";
 const HIDE_KEY = "sbxp:ghhide";
 
@@ -266,6 +314,8 @@ const state: State = {
   lastFound: 0,
   loadingTools: false,
   scan: null,
+  optimising: null,
+  optimiseNote: {},
   growth: {
     uniqueCrops: Number(localStorage.getItem("sbxp:ghunique") ?? DEFAULT_GROWTH.uniqueCrops),
     cropGrowth: Number(localStorage.getItem("sbxp:ghgrowth") ?? DEFAULT_GROWTH.cropGrowth),
@@ -804,6 +854,7 @@ export function mountGreenhouse(container: HTMLElement, data: GreenhouseTables):
     return;
   }
   bound = true;
+  readLayouts();
 
   container.addEventListener("click", (event) => {
     const target = event.target as HTMLElement;
@@ -834,6 +885,12 @@ export function mountGreenhouse(container: HTMLElement, data: GreenhouseTables):
       if (state.sort.column === id) state.sort.descending = !state.sort.descending;
       else state.sort = { column: id, descending: true };
       renderTable();
+      return;
+    }
+
+    const optimising = target.closest<HTMLElement>("[data-ghoptimise]");
+    if (optimising) {
+      runOptimise(optimising.dataset.ghoptimise!);
       return;
     }
 
@@ -1531,7 +1588,12 @@ function detailHtml(row: MutationProfit): string {
   const mutation = tables.greenhouse.mutations.find((m) => m.id === row.id);
   const packing = row.packing;
   if (!mutation || !packing || packing.targets === 0 || !row.setup) {
-    return `<div class="gh-layout dim">No arrangement of this plot grows one of these.</div>`;
+    // A row with nothing growing on it still gets the button, and it is the row that needs it most:
+    // PlantBoy Advance reads as unbuildable only because no repeating tile can express a ring of
+    // six cells of a 3x3 plant. Searched properly, it grows. Bailing out here left the one mutation
+    // the optimiser exists for as the one place it could not be reached.
+    const offer = mutation ? optimiseHtml(row, mutation) : "";
+    return `<div class="gh-layout"><p class="dim">No repeating pattern of this plot grows one of these.</p>${offer}</div>`;
   }
 
   return `<div class="gh-expand">
@@ -1571,23 +1633,106 @@ function plotHtml(row: MutationProfit, mutation: Mutation, packing: NonNullable<
     )
     .join("");
 
-  // The ceiling only earns a line when the search fell short of it. When it matches, the answer is
-  // provably the best and saying so at length adds nothing a reader can act on.
-  const atCeiling = packing.targets >= packing.ceiling;
-  const ceilingNote = atCeiling
-    ? `<span title="Every support cell is feeding as many rings as it can — no arrangement beats this.">provably the most</span>`
-    : `<span title="The search covers repeating patterns, not every irregular one, so it may leave a little on the table.">bound ${num(packing.ceiling)}</span>`;
+  // A period of zero is how an optimised plot announces itself: it was not stamped from a tile, so
+  // there is no tile to quote.
+  const shape =
+    packing.period.rows === 0
+      ? `<span title="Laid out one mutation at a time rather than stamped from a repeating tile, which is why it does not look regular.">irregular</span>`
+      : `${packing.period.rows}×${packing.period.cols} tile`;
 
   return `
     <h4 class="gh-h">One greenhouse</h4>
     <div class="gh-plotgrid">${grid}</div>
     <p class="dim">${legend}</p>
     <p class="dim">
-      <strong>${num(packing.targets)}</strong> at once · <strong>${num(row.setup!.plants)}</strong> plants ·
-      ${packing.period.rows}×${packing.period.cols} tile · ${ceilingNote}
+      <strong>${num(packing.targets)}</strong> at once · <strong>${num(row.setup!.plants)}</strong> plants · ${shape}
     </p>
+    ${optimiseHtml(row, mutation)}
     ${mutation.effects.length ? `<p class="dim">${escapeHtml(mutation.effects.join(" · "))}</p>` : ""}
   `;
+}
+
+/**
+ * The button, and the one word beside it saying whether it has already been pressed.
+ *
+ * Three states rather than two, and the third is the point. Twenty-one of the forty mutations fill
+ * their ring completely, and a full ring means no two can touch and none can sit against the edge —
+ * so the positions are a lattice of known spacing and the count is arithmetic, not search. Those
+ * rows are told outright that nothing can beat what they already have, rather than being offered a
+ * second of waiting that provably cannot pay.
+ *
+ * The rest get the button. It is not on by default because it costs about a second each and buys
+ * nothing at all on most of them; it is worth it on eight, and two of those are dramatic — All-in
+ * Aloe grows eleven where the tile search managed four, and PlantBoy Advance grows at all.
+ */
+function optimiseHtml(row: MutationProfit, mutation: Mutation): string {
+  const layout = layoutStateOf(mutation, mutationIndex(), state.market, tables.npcPrices, FULL_PLOT, state.priceMode);
+  if (!layout) return "";
+
+  if (layout.capped) {
+    return `<p class="dim gh-opt"><span class="gh-tag" title="Every cell of this ring has to hold a plant, so no two of these can touch and none can sit against the plot edge. That fixes where they go and how many fit — it is arithmetic rather than a search, and this is already that number.">provably the most</span></p>`;
+  }
+
+  if (state.optimising === row.id) {
+    return `<p class="dim gh-opt"><button class="chip" disabled>searching…</button> <span class="gh-tag">a second or so</span></p>`;
+  }
+
+  const note = state.optimiseNote[layout.key];
+  const tag = layout.optimised
+    ? `<span class="gh-tag on" title="${escapeHtml(
+        note ?? "This layout came from the expensive search and is kept until the plants change price.",
+      )}">optimised</span>`
+    : `<span class="gh-tag" title="Showing the repeating-tile layout. The expensive search looks at irregular arrangements too, which on some conditions grow considerably more.">not optimised</span>`;
+
+  const label = layout.optimised ? "Search again" : "Optimise";
+  return `<p class="dim gh-opt"><button class="chip" data-ghoptimise="${escapeHtml(row.id)}" title="Lay this plot out one mutation at a time instead of stamping a repeating tile. Takes about a second, and the answer is kept.">${label}</button> ${tag}${
+    note ? ` <span class="dim">${escapeHtml(note)}</span>` : ""
+  }</p>`;
+}
+
+/** The mutations keyed by id, which several of the library calls want. */
+let indexed: Map<string, Mutation> | null = null;
+function mutationIndex(): Map<string, Mutation> {
+  if (!indexed || indexed.size !== tables.greenhouse.mutations.length) {
+    indexed = new Map(tables.greenhouse.mutations.map((m) => [m.id, m]));
+  }
+  return indexed;
+}
+
+/**
+ * Search one mutation's layout, then redraw.
+ *
+ * Handed to a timer rather than run inline so the "searching…" label actually reaches the screen
+ * first — the search is a straight second of arithmetic and would otherwise freeze the page with
+ * the old text still on it, which reads as a click that did nothing.
+ */
+function runOptimise(id: string): void {
+  const mutation = tables.greenhouse.mutations.find((m) => m.id === id);
+  if (!mutation || state.optimising) return;
+  state.optimising = id;
+  renderTable();
+
+  window.setTimeout(() => {
+    try {
+      const result = optimiseLayout(mutation, mutationIndex(), state.market, tables.npcPrices, FULL_PLOT, state.priceMode);
+      if (result) {
+        const layout = layoutStateOf(mutation, mutationIndex(), state.market, tables.npcPrices, FULL_PLOT, state.priceMode);
+        const grew = result.after.targets - result.before.targets;
+        const saved = result.before.cost > 0 ? (result.before.cost - result.after.cost) / result.before.cost : 0;
+        const said =
+          grew > 0
+            ? `${grew} more at once — ${result.before.targets} → ${result.after.targets}`
+            : saved > 0.01
+              ? `same yield, ring ${Math.round(saved * 100)}% cheaper`
+              : "searched every arrangement it could reach; the tile layout was already the best of them";
+        if (layout) state.optimiseNote[layout.key] = said;
+      }
+      rememberLayouts();
+    } finally {
+      state.optimising = null;
+      renderTable();
+    }
+  }, 30);
 }
 
 /**

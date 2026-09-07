@@ -1,5 +1,6 @@
 import { NET_OF_TAX } from "./bazaar";
 import { packGreenhouse, type Packing } from "./greenhouseLayout";
+import { fullRingMaximum, isCapped, optimise, type Optimised } from "./greenhouseOptimise";
 import type { ProductSnapshot } from "./bazaarTypes";
 import type { NpcPrice } from "./bazaarViews";
 
@@ -446,17 +447,38 @@ function weightsFor(prices: (number | null)[]): number[] {
   return prices.map((p) => Math.round(((p === null || !Number.isFinite(p) ? 0 : p) / dearest) * 20) / 20);
 }
 
+/**
+ * Layouts the expensive search has settled, which stand in for the tile answer wherever they exist.
+ *
+ * Held apart from the memo above rather than written into it, because the two are not the same kind
+ * of thing. The memo is a cache: throwing it away costs forty milliseconds and changes nothing. This
+ * is a *result* — a second of searching, asked for by name — and it is the reason a caller can put
+ * one here and have every figure on the page pick it up without a single one of them knowing that
+ * an optimiser exists.
+ */
+const optimisedLayouts = new Map<string, Packing>();
+
+/** The identity of a layout question: the plot, the shape of the condition, and the price ranks. */
+export function layoutKey(
+  plot: PlotShape,
+  requires: { cells: number; size: number }[],
+  targetSize: number,
+  weights: number[],
+): string {
+  const lockedKey = plot.locked && plot.locked.size > 0 ? [...plot.locked].sort().join("|") : "";
+  const shape = requires.map((r) => `${r.cells}/${r.size}`).join(",");
+  return `${plot.width}x${plot.height}:${lockedKey}:${shape}:${targetSize}:${weights.join("/")}`;
+}
+
 function packFor(
   plot: PlotShape,
   requires: { cells: number; size: number }[],
   targetSize: number,
   weights: number[],
 ): Packing {
-  const lockedKey = plot.locked && plot.locked.size > 0 ? [...plot.locked].sort().join("|") : "";
-  const shape = requires.map((r) => `${r.cells}/${r.size}`).join(",");
-  const cacheKey = `${plot.width}x${plot.height}:${lockedKey}:${shape}:${targetSize}:${weights.join("/")}`;
-  const cached = packings.get(cacheKey);
-  if (cached) return cached;
+  const cacheKey = layoutKey(plot, requires, targetSize, weights);
+  const found = optimisedLayouts.get(cacheKey) ?? packings.get(cacheKey);
+  if (found) return found;
 
   const packing = packGreenhouse({
     width: plot.width,
@@ -468,6 +490,87 @@ function packFor(
   });
   packings.set(cacheKey, packing);
   return packing;
+}
+
+/** What state one mutation's layout is in, without doing any of the work to change it. */
+export type LayoutState = {
+  key: string;
+  /** Already the most that can ever grow, from the counting argument. Nothing to search. */
+  capped: boolean;
+  /** An optimised layout is what the figures on this row are being drawn from. */
+  optimised: boolean;
+};
+
+function layoutInputs(
+  m: Mutation,
+  byId: Map<string, Mutation>,
+  market: Map<string, ProductSnapshot>,
+  npcPrices: Record<string, NpcPrice>,
+  plot: PlotShape,
+  mode: PriceMode,
+) {
+  const requires = m.spreading.requires.map((r) => ({ cells: r.cells, size: byId.get(r.id)?.size ?? 1 }));
+  const prices = m.spreading.requires.map((r) => (r.free ? 0 : buyPrice(r.id, market, npcPrices, mode)));
+  const weights = weightsFor(prices);
+  return { requires, weights, key: layoutKey(plot, requires, m.size, weights) };
+}
+
+export function layoutStateOf(
+  m: Mutation,
+  byId: Map<string, Mutation>,
+  market: Map<string, ProductSnapshot>,
+  npcPrices: Record<string, NpcPrice>,
+  plot: PlotShape = FULL_PLOT,
+  mode: PriceMode = "order",
+): LayoutState | null {
+  if (m.spreading.requires.length === 0) return null;
+  const { requires, weights, key } = layoutInputs(m, byId, market, npcPrices, plot, mode);
+  const packing = packFor(plot, requires, m.size, weights);
+  return {
+    key,
+    capped: isCapped(requires, m.size) && packing.targets >= fullRingMaximum(m.size, plot.width, plot.height),
+    optimised: optimisedLayouts.has(key),
+  };
+}
+
+/**
+ * Run the expensive search for one mutation and keep the answer.
+ *
+ * Everything downstream reads it through `packFor` from here on, so the caller's only job is to
+ * redraw. Returns what changed, so a caller can say whether the wait bought anything.
+ */
+export function optimiseLayout(
+  m: Mutation,
+  byId: Map<string, Mutation>,
+  market: Map<string, ProductSnapshot>,
+  npcPrices: Record<string, NpcPrice>,
+  plot: PlotShape = FULL_PLOT,
+  mode: PriceMode = "order",
+): Optimised | null {
+  if (m.spreading.requires.length === 0) return null;
+  const { requires, weights, key } = layoutInputs(m, byId, market, npcPrices, plot, mode);
+  const result = optimise({
+    width: plot.width,
+    height: plot.height,
+    locked: plot.locked,
+    requires,
+    targetSize: m.size,
+    weights,
+  });
+  // Kept even when it found nothing better, because "searched and there was nothing" is an answer
+  // worth remembering — otherwise the button offers the same second of waiting over and over.
+  optimisedLayouts.set(key, result.packing);
+  return result;
+}
+
+/** Layouts already settled, for a caller that wants to remember them across a reload. */
+export function settledLayouts(): [string, Packing][] {
+  return [...optimisedLayouts.entries()];
+}
+
+/** Put back a layout settled in an earlier session. */
+export function restoreLayout(key: string, packing: Packing): void {
+  optimisedLayouts.set(key, packing);
 }
 
 /* ------------------------------------------------------------- the ranking */
