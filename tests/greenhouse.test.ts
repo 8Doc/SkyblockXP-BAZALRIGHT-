@@ -22,6 +22,7 @@ import {
   needsWatering,
   retainAtTargets,
   waterEffectOf,
+  waterModifier,
   waterBudget,
   waterLossPerStage,
   setupLifeHours,
@@ -1064,21 +1065,49 @@ test("what the ring does is most of the answer", () => {
   assert.equal(stagesBeforeDrought(data, 0), 5);
   // One Water Retain neighbour halves the loss.
   assert.equal(stagesBeforeDrought(data, 0.5), 10);
-  // Two of them, or one Improved, and it stops losing water at all — which is a real answer, not
-  // an overflow: a plant losing nothing never runs dry however long it grows.
+  // One Improved Water Retain neighbour stops the loss outright — a real answer, not an overflow:
+  // a plant losing nothing never runs dry however long it grows. It takes an Improved to get here;
+  // two plain retains do not, because the effect is a tick rather than a count.
   assert.equal(stagesBeforeDrought(data, 1), Infinity);
-  assert.equal(stagesBeforeDrought(data, 2), Infinity);
+  assert.equal(waterModifier(["retain", "retain"], data), 0.5, "which two plain ones do not reach");
   // Water Drain cuts the other way.
   assert.ok(stagesBeforeDrought(data, -0.3) < 5);
 });
 
 test("the effect a plant has on its neighbours is read off its own effects", () => {
   const by = (name: string) => data.mutations.find((m) => m.name === name);
-  assert.equal(waterEffectOf(by("Shadevine"), data), 1.0, "Improved Water Retain");
-  assert.equal(waterEffectOf(by("Gloomgourd"), data), 0.5, "Water Retain");
-  assert.equal(waterEffectOf(by("Veilshroom"), data), -0.3, "Water Drain");
-  assert.equal(waterEffectOf(by("Coalroot"), data), 0, "no water effect");
-  assert.equal(waterEffectOf(undefined, data), 0, "a base crop the index does not carry");
+  assert.equal(waterEffectOf(by("Shadevine")), "improved");
+  assert.equal(waterEffectOf(by("Gloomgourd")), "retain");
+  assert.equal(waterEffectOf(by("Veilshroom")), "drain");
+  assert.equal(waterEffectOf(by("Choconut")), "immunity");
+  assert.equal(waterEffectOf(by("Coalroot")), null, "no water effect");
+  assert.equal(waterEffectOf(undefined), null, "a base crop the index does not carry");
+});
+
+test("effects are ticked, not counted", () => {
+  // In game a crop shows the effects on it as a list of ticks. Two neighbours granting Water Retain
+  // is the same tick as one, and modelling it as a sum quietly turned every second retaining
+  // neighbour into a plant that never dries out.
+  assert.equal(waterModifier(["retain"], data), 0.5);
+  assert.equal(waterModifier(["retain", "retain"], data), 0.5, "twice is not twice as much");
+  assert.equal(waterModifier(["retain", "retain", "retain", "retain"], data), 0.5);
+  assert.equal(waterModifier([], data), 0);
+  assert.equal(waterModifier([null, null], data), 0);
+});
+
+test("improved retain replaces the plain one rather than adding to it", () => {
+  // The wiki states the override for exactly one pair — "Improved Harvest Boost ... Overrides
+  // Harvest Boost" — and the buffs are built to one pattern.
+  assert.equal(waterModifier(["improved"], data), 1);
+  assert.equal(waterModifier(["improved", "retain"], data), 1, "not 1.5");
+});
+
+test("immunity cancels a drain, and nothing else does", () => {
+  assert.equal(waterModifier(["drain"], data), -0.3);
+  assert.equal(waterModifier(["drain", "immunity"], data), 0, "immunity is to negative effects");
+  assert.equal(waterModifier(["retain", "drain"], data), 0.2, "without immunity they both apply");
+  assert.equal(waterModifier(["retain", "drain", "immunity"], data), 0.5);
+  assert.equal(waterModifier(["immunity"], data), 0, "on its own it retains nothing");
 });
 
 test("Chocoberry is safe because of what is planted around it", () => {
@@ -1095,7 +1124,10 @@ test("Chocoberry is safe because of what is planted around it", () => {
   const setup = setupFor(chocoberry, byId, market(), {}, FULL_PLOT)!;
   const retains = retainAtTargets(chocoberry, byId, setup.packing, data);
   assert.ok(retains.length > 0);
-  assert.ok(Math.min(...retains) >= 1, `every target is fully retained, got ${retains.join(",")}`);
+  // Gloomgourd's Water Retain, ticked once however many of them are adjacent: +50%, which turns
+  // five stages into ten against the six it needs. Choconut, the other half of the ring, grants
+  // Immunity — which matters only where something is draining, and here nothing is.
+  assert.ok(Math.min(...retains) >= 0.5, `every target is retained, got ${retains.join(",")}`);
   assert.equal(needsWatering(chocoberry, data, retains), false);
 });
 
@@ -1103,11 +1135,9 @@ test("the same mutation in a bare ring does need watering", () => {
   // The point of reading the plot rather than the mutation: the answer is a fact about both.
   const chocoberry = data.mutations.find((m) => m.name === "Chocoberry")!;
   assert.equal(needsWatering(chocoberry, data, [0]), true, "six stages against a bare five");
-  // One Water Retain neighbour is already enough here — it halves the loss, which doubles the five
-  // stages to ten. The margin is what the real ring turns into "never".
+  // One Water Retain neighbour is enough — it halves the loss, which doubles five stages to ten.
   assert.equal(needsWatering(chocoberry, data, [0.5]), false);
-  assert.equal(needsWatering(chocoberry, data, [1]), false);
-  // A drained ring is worse than a bare one, and it is not a hypothetical: three mutations on the
+  // A drained ring is worse than a bare one, and it is not a hypothetical: several mutations on the
   // list sit next to Water Drain.
   assert.equal(needsWatering(chocoberry, data, [-0.3]), true);
 });

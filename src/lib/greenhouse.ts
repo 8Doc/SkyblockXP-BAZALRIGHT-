@@ -236,19 +236,54 @@ export function waterBudget(data: GreenhouseData): number {
   return (data.water.spawnsAt ?? 0) - (data.water.deathAt ?? -100);
 }
 
+/** The crop effects that bear on watering. A plant either grants one or it does not. */
+export type WaterEffect = "improved" | "retain" | "drain" | "immunity" | null;
+
 /**
  * What one plant does to the watering of the plants beside it.
  *
- * Positive retains, negative drains, and it reaches orthogonal neighbours only — the Greenhouse
- * page is explicit that crop effects skip the diagonals, which matters here because it means a
- * 1x1 mutation is affected by four of the eight cells in its ring rather than all of them.
+ * Reaches orthogonal neighbours only — the Greenhouse page is explicit that crop effects skip the
+ * diagonals, which matters here because it means a 1x1 mutation is touched by four of the eight
+ * cells in its ring rather than all of them.
+ *
+ * A plant grants at most one of these. Immunity is in the list because it is what cancels a drain:
+ * "Provides Immunity to negative effects", and several of the crops people plant as ring filler
+ * carry it.
  */
-export function waterEffectOf(m: Mutation | undefined, data: GreenhouseData): number {
+export function waterEffectOf(m: Mutation | undefined): WaterEffect {
   const effects = (m?.effects ?? []).join(" ");
-  if (/Improved Water Retain/i.test(effects)) return data.water.improvedRetain ?? 1;
-  if (/Water Retain/i.test(effects)) return data.water.retain ?? 0.5;
-  if (/Water Drain/i.test(effects)) return data.water.drain ?? -0.3;
-  return 0;
+  if (/Improved Water Retain/i.test(effects)) return "improved";
+  if (/Water Retain/i.test(effects)) return "retain";
+  if (/Water Drain/i.test(effects)) return "drain";
+  if (/Immunity/i.test(effects)) return "immunity";
+  return null;
+}
+
+/**
+ * The net effect on one plant of everything standing beside it.
+ *
+ * **Present or absent, never counted.** In game a crop shows a list of the effects on it, ticked or
+ * not — two neighbours granting Water Retain is the same tick as one, not twice the buff. This was
+ * modelled as a sum at first, which quietly turned every second retaining neighbour into a plant
+ * that never dries out; the effects are flags and this reads them as flags.
+ *
+ * **Improved overrides plain.** The wiki states this outright for exactly one pair — "Improved
+ * Harvest Boost ... Overrides Harvest Boost" — and the buffs are built to one pattern, so the
+ * improved retain is taken to replace the plain one rather than add to it. It makes no difference
+ * to any mutation on the list today, where no ring carries both, but a guessed sum would.
+ *
+ * **Immunity cancels the drain.** It "provides Immunity to negative effects", and a Water Drain is
+ * one, so a ring holding both comes out at the retain alone.
+ */
+export function waterModifier(effects: Iterable<WaterEffect>, data: GreenhouseData): number {
+  const seen = new Set(effects);
+  const retain = seen.has("improved")
+    ? (data.water.improvedRetain ?? 1)
+    : seen.has("retain")
+      ? (data.water.retain ?? 0.5)
+      : 0;
+  const drained = seen.has("drain") && !seen.has("immunity") ? (data.water.drain ?? -0.3) : 0;
+  return retain + drained;
 }
 
 /**
@@ -278,7 +313,7 @@ export function retainAtTargets(m: Mutation, byId: Map<string, Mutation>, packin
   const height = grid.length;
   const width = height > 0 ? grid[0].length : 0;
   const size = Math.max(1, m.size || 1);
-  const effect = m.spreading.requires.map((r) => waterEffectOf(byId.get(r.id), data));
+  const effect = m.spreading.requires.map((r) => waterEffectOf(byId.get(r.id)));
 
   const claimed = new Uint8Array(width * height);
   const out: number[] = [];
@@ -291,23 +326,24 @@ export function retainAtTargets(m: Mutation, byId: Map<string, Mutation>, packin
       if (!whole) continue;
       for (let rr = r; rr < r + size; rr++) for (let cc = c; cc < c + size; cc++) claimed[rr * width + cc] = 1;
 
-      // Orthogonal only: the cells sharing an edge with the block, never the four corners.
-      let sum = 0;
+      // Orthogonal only: the cells sharing an edge with the block, never the four corners. What is
+      // collected is the set of effects present, not a tally — see `waterModifier`.
+      const present = new Set<WaterEffect>();
       for (let rr = r; rr < r + size; rr++) {
         for (const cc of [c - 1, c + size]) {
           if (cc < 0 || cc >= width) continue;
           const cell = grid[rr][cc];
-          if (typeof cell === "number") sum += effect[cell] ?? 0;
+          if (typeof cell === "number") present.add(effect[cell] ?? null);
         }
       }
       for (let cc = c; cc < c + size; cc++) {
         for (const rr of [r - 1, r + size]) {
           if (rr < 0 || rr >= height) continue;
           const cell = grid[rr][cc];
-          if (typeof cell === "number") sum += effect[cell] ?? 0;
+          if (typeof cell === "number") present.add(effect[cell] ?? null);
         }
       }
-      out.push(sum);
+      out.push(waterModifier(present, data));
     }
   }
   return out;
