@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-07T15:34:44.194Z",
+  "generatedAt": "2026-09-08T09:45:17.300Z",
   "cropFortunes": [
     {
       "stat": "Wheat Fortune",
@@ -119,9 +119,11 @@
   "water": {
     "lossPerStageMin": 2,
     "lossPerStageMax": 3,
+    "deathAt": -100,
     "retain": 0.5,
     "improvedRetain": 1,
-    "drain": -0.3
+    "drain": -0.3,
+    "source": "Greenhouse#Water Level for the loss, Dead Plant#Obtaining for the floor"
   },
   "maxPlots": 3,
   "yieldBuffs": {

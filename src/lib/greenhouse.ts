@@ -50,7 +50,7 @@ import type { NpcPrice } from "./bazaarViews";
 export type GreenhouseData = {
   generatedAt: string;
   growth: { baseStageSeconds: number; fastestStageSeconds: number };
-  water: { lossPerStageMin: number; lossPerStageMax: number };
+  water: { lossPerStageMin: number; lossPerStageMax: number; deathAt?: number };
   maxPlots: number;
   etherealVineByRarity: Record<string, number>;
   baseCrops: { id: string; name: string; baseYield: number; growthCycles: number }[];
@@ -204,6 +204,48 @@ export function stageSeconds(data: GreenhouseData, p: GrowthParams): number {
 export function stagesPerHarvest(m: Mutation): number | null {
   if (m.chance === null || m.chance <= 0 || m.growthStages === null) return null;
   return 1 / m.chance + m.growthStages;
+}
+
+/* ------------------------------------------------------------------ water */
+
+/**
+ * How many growth stages a plant survives with no watering at all.
+ *
+ * Water is spent **per growth stage**, not per hour: the Greenhouse page says a crop loses 2-3
+ * Water Level after each stage, and the Dead Plant page says it is replaced when it reaches -100.
+ * Thirty-three stages, then, taking the worst of the 2-3 — a mutation called safe on the average
+ * would still die on a bad roll, and this is the number a player plants a 40M ring against.
+ *
+ * Two things follow from the unit that do not follow from a timer, and both match what you find by
+ * planting a setup and walking away. **A fully grown plant has no stages left to advance through,
+ * so it stops losing water entirely** — it can still decay, which is a separate mechanic on its own
+ * timer, but it cannot dry out. And **growth speed does not change how long the water lasts**: the
+ * same thirty-three stages just arrive sooner. That is the real shape of the folklore about speed
+ * upgrades making crops harder to keep alive — the watering round comes due in fewer real hours,
+ * not in fewer stages.
+ */
+export function stagesBeforeDrought(data: GreenhouseData): number {
+  const floor = Math.abs(data.water.deathAt ?? -100);
+  const worst = Math.max(1, data.water.lossPerStageMax || 3);
+  return Math.floor(floor / worst);
+}
+
+/**
+ * Whether this one ever actually needs the watering can.
+ *
+ * The wiki's yes-or-no is about the plant, and it is not the question a player has. Nineteen of the
+ * twenty-one mutations that "need water" finish growing inside the thirty-three stages their water
+ * covers, so watering them changes nothing you could observe — plant it, leave, harvest. Only
+ * Godseed and Jerryflower grow for longer than their water lasts.
+ *
+ * The spawn wait is deliberately not counted. A mutation loses water while *it* is growing, and
+ * before it appears there is nothing there to lose any: what sits in the plot is the ring, whose
+ * own watering is its own business. Counting the wait would have condemned every rare mutation on
+ * the page for a thirst it never experiences.
+ */
+export function needsWatering(m: Mutation, data: GreenhouseData): boolean {
+  if (m.needsWater !== true) return false;
+  return (m.growthStages ?? 0) > stagesBeforeDrought(data);
 }
 
 /* ------------------------------------------------------------------ money */
@@ -614,8 +656,18 @@ export type MutationProfit = {
   perPlot: number;
   /** The best arrangement found, and the ceiling it was measured against. */
   packing: Packing | null;
-  /** Carried straight through from the mutation, for the column. */
+  /** Whether the plant takes water while it grows, as its own page states it. */
   needsWater?: boolean;
+  /**
+   * Whether you will ever have to pick up a watering can for it.
+   *
+   * Not the same question as `needsWater`, and the difference is most of the list: a mutation that
+   * finishes growing inside the thirty-three stages its water covers can be planted and left. See
+   * `needsWatering`.
+   */
+  wateringNeeded: boolean;
+  /** Growth stages it takes, beside the stages its water lasts — what the answer above is read from. */
+  drought: { stages: number; budget: number };
   stagesPerHarvest: number | null;
   hoursPerHarvest: number | null;
   /** Coins one harvest brings in, after tax, at the given fortune. Crops, the item, and the vine. */
@@ -1020,6 +1072,8 @@ export function profitOf(m: Mutation, byId: Map<string, Mutation>, data: Greenho
     perPlot,
     packing: setup?.packing ?? null,
     needsWater: m.needsWater,
+    wateringNeeded: needsWatering(m, data),
+    drought: { stages: m.growthStages ?? 0, budget: stagesBeforeDrought(data) },
     stagesPerHarvest: stages,
     hoursPerHarvest,
     revenue,

@@ -606,17 +606,18 @@ const COLUMNS: Column[] = [
     label: "Water",
     kind: "boolean",
     hint: "no",
-    plain: (r) => (r.needsWater === true ? "yes" : r.needsWater === false ? "no" : "—"),
+    plain: (r) => (r.wateringNeeded ? "yes" : "no"),
     // Sorted so the ones that want no attention come first, which is the useful end of it.
-    value: (r) => (r.needsWater === true ? 2 : r.needsWater === false ? 1 : 0),
+    value: (r) => (r.wateringNeeded ? 1 : 0),
     render: (r) => waterCell(r),
     title:
-      "Whether the mutation has to be watered while it grows, from its own page. It is not the " +
-      "Water Retain and Water Drain effects in the expanded row — those are what a mutation does to " +
-      "its neighbours, which is a different fact. Nor does it follow from the growth surface: " +
-      "PlantBoy Advance and Jerryflower grow on farmland and need none. The eleven with no growth " +
-      "stages read as no: they appear the moment their condition is met and are taken on sight, so " +
-      "there is no growing phase to water.",
+      "Whether you will ever have to pick up a watering can. Not the same question as whether the " +
+      "plant drinks — water is spent per growth stage and the floor is -100, so thirty-three stages " +
+      "are covered with no watering at all, and a mutation that finishes inside that can be planted " +
+      "and left. Nineteen of the twenty-one that take water do. Once it is fully grown it stops " +
+      "losing water altogether; what kills it after that is decay, which is a separate timer. Also " +
+      "not the Water Retain and Water Drain effects in the expanded row — those are what a mutation " +
+      "does to its neighbours.",
   },
   {
     id: "setup",
@@ -698,23 +699,55 @@ const NAME_COLUMN: Column = {
 const FILTER_COLUMNS: Column[] = [NAME_COLUMN, ...COLUMNS];
 
 /**
- * Whether this one has to be watered, in a word.
+ * The arithmetic behind the Water column, spelled out where there is room for it.
  *
- * Two answers, not three. The eleven mutations whose pages say nothing about water are exactly the
- * eleven with no growth stages: they appear the moment their condition is met and are harvested on
- * sight, so there is no growing phase and nothing to water. That is a no, and Skymutations lists it
- * as one — a dash would have read as "unknown" to anyone sorting or filtering the column, and it is
- * not unknown. The third branch survives only as a guard: if the wiki ever changes the sentence,
- * the scraper leaves the answer unset and warns, and a dash here is how that would surface.
+ * The column has one word and the word is often "no" for a plant whose own wiki page says it needs
+ * water. That is the kind of answer a reader should be able to check rather than take, so the two
+ * numbers it comes from are printed here.
+ */
+function waterLine(row: MutationProfit): string {
+  const { stages, budget } = row.drought;
+  if (row.needsWater !== true) {
+    return `<p class="dim">Takes no water — plant it and leave it.</p>`;
+  }
+  if (row.wateringNeeded) {
+    const over = stages - budget;
+    return `<p class="dim"><span class="gold">Has to be watered.</span> It grows for ${num(stages)} stages and loses 2-3 water
+      a stage from a floor of -100, so it runs dry ${num(over)} stage${over === 1 ? "" : "s"} short of ready.</p>`;
+  }
+  return `<p class="dim">Takes water, but never needs any: ${num(stages)} growth stage${
+    stages === 1 ? "" : "s"
+  } against the ${num(budget)} its water covers. It stops losing water the moment it is fully grown, so what
+    ends it after that is decay rather than thirst.</p>`;
+}
+
+/**
+ * Whether you will ever have to water this one, in a word.
+ *
+ * The column used to print what the wiki says about the plant, and the wiki's answer turns out not
+ * to be the player's. Water goes per growth stage, 2-3 of it, from zero down to a floor of -100 —
+ * thirty-three stages. Nineteen of the twenty-one mutations that drink finish growing well inside
+ * that, so the can never comes out: plant it, walk away, harvest it. Two do not, and those two are
+ * the whole content of this column.
+ *
+ * The narrower fact is still shown, as the reason under the yes or the no, because a reader who
+ * knows the mutation takes water and sees "no" is owed the arithmetic rather than left to wonder
+ * whether the page is wrong.
  */
 function waterCell(row: MutationProfit): string {
+  const { stages, budget } = row.drought;
+  if (row.wateringNeeded) {
+    return `<span class="gold" title="Grows for ${stages} stages, and its water covers ${budget} — so it runs dry partway and has to be topped up. Below zero it has a chance not to advance a stage; at -100 it becomes a Dead Plant.">yes</span>`;
+  }
   if (row.needsWater === true) {
-    return `<span class="gold" title="Has to be watered while it grows. Running dry during a growth stage gives it a chance not to advance.">yes</span>`;
+    // Drinks, but finishes first. Marked rather than printed as a flat no, because it is the answer
+    // most likely to be doubted by someone who has read the mutation's own page.
+    return `<span class="soft" title="It does take water, but it is fully grown after ${stages} stages and its water covers ${budget} — so it cannot run dry before you harvest it. Plant it and leave it.">no</span>`;
   }
   if (row.needsWater === false) {
-    return `<span title="Grows without water — plant it and leave it.">no</span>`;
+    return `<span title="Takes no water at all — plant it and leave it.">no</span>`;
   }
-  return `<span class="dim" title="No growth stages: this one is planted to spread others and is taken as soon as it appears, so it is never watered.">—</span>`;
+  return `<span class="dim" title="The wiki no longer states this one's watering, so it is unknown rather than no.">—</span>`;
 }
 
 
@@ -902,6 +935,16 @@ export function mountGreenhouse(container: HTMLElement, data: GreenhouseTables):
       return;
     }
 
+    const dry = target.closest<HTMLElement>("[data-ghdry]");
+    if (dry) {
+      state.filters = { ...state.filters, needsWater: dry.dataset.ghdry === "1" ? "no" : "" };
+      if (!state.filters.needsWater) delete state.filters.needsWater;
+      localStorage.setItem(FILTER_KEY, JSON.stringify(state.filters));
+      // The whole panel, because the chip itself has to light up with the filter it set.
+      render();
+      return;
+    }
+
     const plots = target.closest<HTMLElement>("[data-ghplots]");
     if (plots) {
       state.plots = Number(plots.dataset.ghplots);
@@ -978,6 +1021,17 @@ export function mountGreenhouse(container: HTMLElement, data: GreenhouseTables):
       if (el.value.trim() === "") delete state.filters[filterId];
       localStorage.setItem(FILTER_KEY, JSON.stringify(state.filters));
       renderTable();
+      // The chip above the table shows the state of the Water box, so typing in that box by hand
+      // has to move it. Repainted on its own rather than through `render`, which would take the
+      // caret out of the box being typed in.
+      if (filterId === "needsWater") {
+        const chip = host?.querySelector<HTMLElement>("[data-ghdry]");
+        if (chip) {
+          const on = el.value.trim().toLowerCase() === "no";
+          chip.classList.toggle("on", on);
+          chip.dataset.ghdry = on ? "0" : "1";
+        }
+      }
       return;
     }
     // The contest tick. A full panel repaint rather than just the table, because the label beside
@@ -1312,6 +1366,26 @@ function scanNote(): string {
   return `<p class="sub dim">From your profile — ${parts.join(" · ")}.${stuck}${toolkit}</p>`;
 }
 
+/**
+ * One click for "only the ones I can plant and walk away from".
+ *
+ * It writes `no` into the Water column's own box rather than filtering behind your back, so the
+ * table's summary line explains itself and the box can be cleared like any other. Pressing it again
+ * clears it.
+ *
+ * It sets the *Water* filter and not an hours cutoff on Per harvest, which is where you might
+ * expect it, and the reason is the unit. Water is spent per growth stage, so what decides whether a
+ * mutation ever runs dry is its stage count against the thirty-three its water covers — a
+ * comparison with no hours in it at all. Per harvest is mostly the wait for the thing to *appear*,
+ * during which it does not exist and cannot be thirsty, so a cutoff there would have condemned
+ * every rare mutation for a drought it never sees.
+ */
+function dryChip(): string {
+  const on = (state.filters.needsWater ?? "").trim().toLowerCase() === "no";
+  return `<span class="tabs"><button class="chip${on ? " on" : ""}" data-ghdry="${on ? "0" : "1"}"
+    title="Show only what never needs the watering can. Water goes 2-3 a growth stage down to a floor of -100, so thirty-three stages are covered unwatered — and all but two mutations finish growing well inside that. Sets the Water column's box to no.">Never needs watering</button></span>`;
+}
+
 function render(): void {
   if (!host) return;
 
@@ -1326,6 +1400,7 @@ function render(): void {
         <span class="tabs">
           ${[1, 3].map((n) => `<button class="chip${state.plots === n ? " on" : ""}" data-ghplots="${n}">${n} greenhouse${n > 1 ? "s" : ""}</button>`).join("")}
         </span>
+        ${dryChip()}
         <span class="tabs">
           <button class="chip${state.priceMode === "order" ? " on" : ""}" data-ghmode="order"
             title="Leave orders up: buy the ring with buy orders at the bid, sell the harvest with sell offers at the ask. Costs nothing but the wait, and on a thin mutation book the wait is the whole difference.">Buy / sell order</button>
@@ -1647,6 +1722,7 @@ function plotHtml(row: MutationProfit, mutation: Mutation, packing: NonNullable<
     <p class="dim">
       <strong>${num(packing.targets)}</strong> at once · <strong>${num(row.setup!.plants)}</strong> plants · ${shape}
     </p>
+    ${waterLine(row)}
     ${optimiseHtml(row, mutation)}
     ${mutation.effects.length ? `<p class="dim">${escapeHtml(mutation.effects.join(" · "))}</p>` : ""}
   `;

@@ -544,3 +544,7 @@ table.bz tbody tr.gh-cut > td { border-top: 1px solid var(--aqua); }
   white-space: nowrap;
 }
 .gh-tag.on { border-color: var(--aqua); color: var(--aqua); }
+
+/* A "no" that had to be worked out rather than read off the page — the mutation does drink, it
+   just finishes growing first. Dotted, so the cell invites the hover that explains it. */
+.soft { border-bottom: 1px dotted var(--muted); cursor: help; }

@@ -328,6 +328,40 @@ async function main() {
   const greenhousePage = await wikitext("Greenhouse");
   const gh = greenhousePage.text;
 
+  /* --------------------------------------------------------- dying of thirst */
+
+  /**
+   * How long a plant lasts unwatered, which turns out to be the whole question.
+   *
+   * Two numbers on two different pages. The Greenhouse page says what is lost — "After each growth
+   * stage, a crop loses between 2-3 Water Level" — and the Dead Plant page says where the floor is:
+   * "A Dead Plant replaces plants in the Greenhouse if they reach -100 water."
+   *
+   * The important half is the unit. Water goes **per growth stage**, not per hour, and it goes only
+   * while there are stages left to advance through. So a mutation that finishes growing inside its
+   * water budget cannot die of thirst however long you leave it, and once it is fully grown it has
+   * stopped losing water altogether — which is exactly what a player finds by planting one and
+   * walking away. It also explains the folklore about growth speed making crops harder to keep
+   * alive: faster stages do not change how many stages the water covers, they just arrive sooner,
+   * so the watering round comes due in fewer real hours.
+   */
+  console.log("reading how long a plant lasts unwatered…");
+  const lossLine = /loses between\s*(\d+)\s*[-–]\s*(\d+)\s*Water Level/i.exec(gh);
+  const deadPage = await wikitext("Dead Plant");
+  // The figure is wrapped in a colour template on the page: "if they reach {{red|-100}} water".
+  const deathLine = /reach\s*(?:\{\{[^|{}]*\|)?\s*(-?\d+)\s*\}?\}?\s*water/i.exec(deadPage?.text ?? "");
+
+  const lossMin = lossLine ? Number(lossLine[1]) : null;
+  const lossMax = lossLine ? Number(lossLine[2]) : null;
+  const deathAt = deathLine ? Number(deathLine[1]) : null;
+  if (lossMin === null || lossMax === null || deathAt === null) {
+    // Loud rather than silently falling back: these two numbers decide, for every mutation on the
+    // page, whether it has to be watered at all.
+    console.log(`  WARNING: could not read the water figures (loss ${lossMin}-${lossMax}, death ${deathAt}) — keeping the last known ones`);
+  } else {
+    console.log(`  loses ${lossMin}-${lossMax} a stage, dies at ${deathAt} — so ${Math.floor(-deathAt / lossMax)} stages of growth are safe unwatered`);
+  }
+
   // The base crop table: crop, base yield, growth cycles, buff.
   const baseCrops = [];
   const cropTable = gh.slice(gh.indexOf("! Crop"), gh.indexOf("Additionally, all base crops"));
@@ -454,8 +488,23 @@ async function main() {
       upgradeBonus: "0.05 per tier for tiers 0-8; 0.50 at tier 9",
       source: "Greenhouse#Growth Stage",
     },
-    /** Every crop's watering falls 2-3 a stage; the retain effects are what hold it up. */
-    water: { lossPerStageMin: 2, lossPerStageMax: 3, retain: 0.5, improvedRetain: 1.0, drain: -0.3 },
+    /**
+     * Watering, per growth stage rather than per hour — see the block above `lossLine`.
+     *
+     * `deathAt` is negative and is where the plant is replaced by a Dead Plant. Dividing it by the
+     * *worst* loss is what says how many stages of growth are safe with no watering at all, and the
+     * worst is the right end of the range to take: a mutation called safe on the average would
+     * still die on a bad roll.
+     */
+    water: {
+      lossPerStageMin: lossMin ?? 2,
+      lossPerStageMax: lossMax ?? 3,
+      deathAt: deathAt ?? -100,
+      retain: 0.5,
+      improvedRetain: 1.0,
+      drain: -0.3,
+      source: "Greenhouse#Water Level for the loss, Dead Plant#Obtaining for the floor",
+    },
     maxPlots: 3,
     yieldBuffs: {
       plantYieldUpgrade: [0.02, 0.2],

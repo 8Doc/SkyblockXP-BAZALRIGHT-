@@ -17,7 +17,9 @@ import {
   profitOf,
   rankMutations,
   stageSeconds,
+  stagesBeforeDrought,
   stagesPerHarvest,
+  needsWatering,
   setupLifeHours,
   unitPrice,
 } from "../src/lib/greenhouse";
@@ -1012,4 +1014,65 @@ test("watering does not follow from the growth surface", () => {
   const farmland = data.mutations.filter((m) => (m.surface ?? "").startsWith("Farmland"));
   assert.ok(farmland.some((m) => m.needsWater === true));
   assert.ok(farmland.some((m) => m.needsWater === false));
+});
+
+/* --------------------------------------------------- dying of thirst, or not */
+
+test("water is spent per growth stage, and the budget is thirty-three of them", () => {
+  // Both numbers are scraped: 2-3 a stage off the Greenhouse page, a floor of -100 off Dead Plant.
+  assert.equal(data.water.lossPerStageMax, 3);
+  assert.equal(data.water.deathAt, -100);
+  // The worst of the 2-3, not the average. A mutation called safe on the average would still die
+  // on a bad roll, and this is the figure someone plants a 40M ring against.
+  assert.equal(stagesBeforeDrought(data), 33);
+});
+
+test("almost nothing that drinks ever actually has to be watered", () => {
+  const drinks = data.mutations.filter((m) => m.needsWater === true);
+  const thirsty = drinks.filter((m) => needsWatering(m, data));
+  assert.equal(drinks.length, 21);
+  assert.deepEqual(
+    thirsty.map((m) => m.name).sort(),
+    ["Godseed", "Magic Jellybean"],
+    "only the two that grow for longer than their water lasts",
+  );
+  // The rest finish inside the budget, so the can never comes out.
+  for (const m of drinks) {
+    if (thirsty.includes(m)) continue;
+    assert.ok((m.growthStages ?? 0) <= 33, `${m.name} grows for ${m.growthStages}`);
+  }
+});
+
+test("a mutation that takes no water never needs watering, whatever its stages", () => {
+  for (const m of data.mutations.filter((x) => x.needsWater !== true)) {
+    assert.equal(needsWatering(m, data), false, m.name);
+  }
+});
+
+test("the spawn wait is not counted against the water", () => {
+  // Godseed rolls at 5%, so twenty stages pass before it appears — but it does not exist for those,
+  // and a plant that is not there cannot be thirsty. Only its own forty growth stages count.
+  const godseed = data.mutations.find((m) => m.name === "Godseed")!;
+  assert.equal(godseed.growthStages, 40);
+  assert.ok(stagesPerHarvest(godseed) === null || stagesPerHarvest(godseed)! > 40, "the wait is the larger figure");
+  assert.equal(needsWatering(godseed, data), true, "and it is over the budget on growth alone");
+
+  // No mutation on the list today has a long enough wait for the two readings to disagree — every
+  // one that drinks rolls often. So the case is built rather than found: a 1% mutation waits a
+  // hundred stages to appear and then grows for ten, and only the ten are its own to be thirsty
+  // through. Reading the wait instead would call it parched.
+  const patient: Mutation = { ...godseed, name: "Patient", chance: 0.01, growthStages: 10 };
+  assert.ok(stagesPerHarvest(patient)! > 100, "a long wait");
+  assert.equal(needsWatering(patient, data), false, "and it still never needs watering");
+});
+
+test("growth speed does not change how long the water lasts", () => {
+  // The folklore says speed upgrades make crops harder to keep alive. What actually changes is how
+  // soon the watering round comes due: the budget is in stages, and stages are what speed moves.
+  const slow = { ...GROWTH, growthSpeedUpgrade: 0 };
+  const fast = { ...GROWTH, growthSpeedUpgrade: 9 };
+  assert.ok(stageSeconds(data, fast) < stageSeconds(data, slow), "a stage really is shorter");
+  // Same budget, same answer, either way round.
+  assert.equal(stagesBeforeDrought(data), 33);
+  for (const m of data.mutations) assert.equal(needsWatering(m, data), needsWatering(m, data));
 });
