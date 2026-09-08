@@ -20,6 +20,10 @@ import {
   stagesBeforeDrought,
   stagesPerHarvest,
   needsWatering,
+  retainAtTargets,
+  waterEffectOf,
+  waterBudget,
+  waterLossPerStage,
   setupLifeHours,
   unitPrice,
 } from "../src/lib/greenhouse";
@@ -28,10 +32,26 @@ import { NET_OF_TAX } from "../src/lib/bazaar";
 import type { ProductSnapshot } from "../src/lib/bazaarTypes";
 import greenhouseJson from "../data/generated/greenhouse.json";
 import decayJson from "../data/curated/greenhouse_decay.json";
+import waterJson from "../data/curated/greenhouse_water.json";
 
-const data = greenhouseJson as unknown as GreenhouseData;
+// The curated water figures stand in for the scraped ones, exactly as the build inlines them. The
+// wiki's own 2-3 a stage is kept in the scrape and is not what anything reads; see the file.
+const data = {
+  ...(greenhouseJson as unknown as GreenhouseData),
+  water: { ...(greenhouseJson as unknown as GreenhouseData).water, ...waterJson },
+} as unknown as GreenhouseData;
 // The curated decay file, as the build inlines it. Its provenance is in the file itself.
 const DECAY = decayJson as unknown as DecayData;
+
+/**
+ * A bazaar with nothing in it, for the tests that only care about the shape of the plot.
+ *
+ * With no prices the packer weights every clause equally, so the layout is the same one the tile
+ * search has always produced — deterministic, and unaffected by whatever the market is doing.
+ */
+function market(): Map<string, ProductSnapshot> {
+  return new Map();
+}
 
 function product(id: string, instasell: number, instabuy: number): ProductSnapshot {
   return {
@@ -1018,61 +1038,135 @@ test("watering does not follow from the growth surface", () => {
 
 /* --------------------------------------------------- dying of thirst, or not */
 
-test("water is spent per growth stage, and the budget is thirty-three of them", () => {
-  // Both numbers are scraped: 2-3 a stage off the Greenhouse page, a floor of -100 off Dead Plant.
-  assert.equal(data.water.lossPerStageMax, 3);
+test("the rate is the players' number, not the wiki's", () => {
+  // The Greenhouse page says 2-3 a stage. Against a 200-wide scale that is eighty stages, most of a
+  // week, and it would mean nothing in a greenhouse ever needs watering — which is not what anyone
+  // who plays it finds. Two independent sources put it near twenty and agree with each other.
+  assert.deepEqual(data.water.wikiSaysPerStage, [2, 3], "the wiki figure is kept, for the record");
+  assert.equal(waterLossPerStage(data), 20, "and is not the one in use");
+
+  // A mutation spawns at 0 rather than full, so it has 100 to spend and not 200.
+  assert.equal(data.water.spawnsAt, 0);
   assert.equal(data.water.deathAt, -100);
-  // The worst of the 2-3, not the average. A mutation called safe on the average would still die
-  // on a bad roll, and this is the figure someone plants a 40M ring against.
-  assert.equal(stagesBeforeDrought(data), 33);
+  assert.equal(waterBudget(data), 100);
+  assert.equal(stagesBeforeDrought(data), 5, "five growth stages with nothing helping it");
 });
 
-test("almost nothing that drinks ever actually has to be watered", () => {
-  const drinks = data.mutations.filter((m) => m.needsWater === true);
-  const thirsty = drinks.filter((m) => needsWatering(m, data));
-  assert.equal(drinks.length, 21);
-  assert.deepEqual(
-    thirsty.map((m) => m.name).sort(),
-    ["Godseed", "Magic Jellybean"],
-    "only the two that grow for longer than their water lasts",
-  );
-  // The rest finish inside the budget, so the can never comes out.
-  for (const m of drinks) {
-    if (thirsty.includes(m)) continue;
-    assert.ok((m.growthStages ?? 0) <= 33, `${m.name} grows for ${m.growthStages}`);
-  }
+test("the cross-check the wiki figure fails", () => {
+  // NamuWiki measures the full 200 at "nearly a full day"; the forums quote ~2h a growth stage.
+  // Twenty a stage puts the whole scale at twenty hours. Two to three puts it at five to seven days.
+  const hours = 2;
+  assert.ok(Math.abs(200 / waterLossPerStage(data) * hours - 24) < 6, "the used figure lands on a day");
+  assert.ok((200 / 3) * hours > 100, "the wiki figure lands nearly a week away");
 });
 
-test("a mutation that takes no water never needs watering, whatever its stages", () => {
+test("what the ring does is most of the answer", () => {
+  assert.equal(stagesBeforeDrought(data, 0), 5);
+  // One Water Retain neighbour halves the loss.
+  assert.equal(stagesBeforeDrought(data, 0.5), 10);
+  // Two of them, or one Improved, and it stops losing water at all — which is a real answer, not
+  // an overflow: a plant losing nothing never runs dry however long it grows.
+  assert.equal(stagesBeforeDrought(data, 1), Infinity);
+  assert.equal(stagesBeforeDrought(data, 2), Infinity);
+  // Water Drain cuts the other way.
+  assert.ok(stagesBeforeDrought(data, -0.3) < 5);
+});
+
+test("the effect a plant has on its neighbours is read off its own effects", () => {
+  const by = (name: string) => data.mutations.find((m) => m.name === name);
+  assert.equal(waterEffectOf(by("Shadevine"), data), 1.0, "Improved Water Retain");
+  assert.equal(waterEffectOf(by("Gloomgourd"), data), 0.5, "Water Retain");
+  assert.equal(waterEffectOf(by("Veilshroom"), data), -0.3, "Water Drain");
+  assert.equal(waterEffectOf(by("Coalroot"), data), 0, "no water effect");
+  assert.equal(waterEffectOf(undefined, data), 0, "a base crop the index does not carry");
+});
+
+test("Chocoberry is safe because of what is planted around it", () => {
+  // The check that started this: planted and left alone, a Chocoberry does not want watering, even
+  // though its own page says it takes water and it grows for six stages against a bare five. Its
+  // ring is Choconut and Gloomgourd, and Gloomgourd retains — two of them on orthogonal sides is
+  // +100%, which stops the loss outright.
+  const chocoberry = data.mutations.find((m) => m.name === "Chocoberry")!;
+  assert.equal(chocoberry.needsWater, true);
+  assert.equal(chocoberry.growthStages, 6);
+  assert.ok(chocoberry.growthStages! > stagesBeforeDrought(data), "it would die in a bare ring");
+
+  const byId = new Map(data.mutations.map((m) => [m.id, m]));
+  const setup = setupFor(chocoberry, byId, market(), {}, FULL_PLOT)!;
+  const retains = retainAtTargets(chocoberry, byId, setup.packing, data);
+  assert.ok(retains.length > 0);
+  assert.ok(Math.min(...retains) >= 1, `every target is fully retained, got ${retains.join(",")}`);
+  assert.equal(needsWatering(chocoberry, data, retains), false);
+});
+
+test("the same mutation in a bare ring does need watering", () => {
+  // The point of reading the plot rather than the mutation: the answer is a fact about both.
+  const chocoberry = data.mutations.find((m) => m.name === "Chocoberry")!;
+  assert.equal(needsWatering(chocoberry, data, [0]), true, "six stages against a bare five");
+  // One Water Retain neighbour is already enough here — it halves the loss, which doubles the five
+  // stages to ten. The margin is what the real ring turns into "never".
+  assert.equal(needsWatering(chocoberry, data, [0.5]), false);
+  assert.equal(needsWatering(chocoberry, data, [1]), false);
+  // A drained ring is worse than a bare one, and it is not a hypothetical: three mutations on the
+  // list sit next to Water Drain.
+  assert.equal(needsWatering(chocoberry, data, [-0.3]), true);
+});
+
+test("one thirsty target in the plot is enough to make it a plot you tend", () => {
+  const chocoberry = data.mutations.find((m) => m.name === "Chocoberry")!;
+  assert.equal(needsWatering(chocoberry, data, [1, 1, 1, 0]), true, "the bare one still dies");
+});
+
+test("a mutation that takes no water never needs watering, whatever its ring", () => {
   for (const m of data.mutations.filter((x) => x.needsWater !== true)) {
-    assert.equal(needsWatering(m, data), false, m.name);
+    assert.equal(needsWatering(m, data, [0]), false, m.name);
+    assert.equal(needsWatering(m, data, [-0.3]), false, m.name);
   }
 });
 
 test("the spawn wait is not counted against the water", () => {
-  // Godseed rolls at 5%, so twenty stages pass before it appears — but it does not exist for those,
-  // and a plant that is not there cannot be thirsty. Only its own forty growth stages count.
+  // A mutation loses water while it is growing. Before it appears there is nothing there to lose
+  // any — what sits in the plot is the ring, whose own watering is its own business. No mutation on
+  // the list today has a wait long enough for the two readings to disagree, so the case is built: a
+  // 1% mutation waits a hundred stages to appear and then grows for four.
   const godseed = data.mutations.find((m) => m.name === "Godseed")!;
-  assert.equal(godseed.growthStages, 40);
-  assert.ok(stagesPerHarvest(godseed) === null || stagesPerHarvest(godseed)! > 40, "the wait is the larger figure");
-  assert.equal(needsWatering(godseed, data), true, "and it is over the budget on growth alone");
-
-  // No mutation on the list today has a long enough wait for the two readings to disagree — every
-  // one that drinks rolls often. So the case is built rather than found: a 1% mutation waits a
-  // hundred stages to appear and then grows for ten, and only the ten are its own to be thirsty
-  // through. Reading the wait instead would call it parched.
-  const patient: Mutation = { ...godseed, name: "Patient", chance: 0.01, growthStages: 10 };
+  const patient: Mutation = { ...godseed, name: "Patient", chance: 0.01, growthStages: 4 };
   assert.ok(stagesPerHarvest(patient)! > 100, "a long wait");
-  assert.equal(needsWatering(patient, data), false, "and it still never needs watering");
+  assert.equal(needsWatering(patient, data, [0]), false, "and it still never needs watering");
 });
 
-test("growth speed does not change how long the water lasts", () => {
-  // The folklore says speed upgrades make crops harder to keep alive. What actually changes is how
-  // soon the watering round comes due: the budget is in stages, and stages are what speed moves.
+test("growth speed buys no survival at all", () => {
+  // The folklore says speed upgrades make crops harder to keep alive, and this is why: the budget
+  // is counted in stages, and speed only changes how soon those stages arrive.
   const slow = { ...GROWTH, growthSpeedUpgrade: 0 };
   const fast = { ...GROWTH, growthSpeedUpgrade: 9 };
   assert.ok(stageSeconds(data, fast) < stageSeconds(data, slow), "a stage really is shorter");
-  // Same budget, same answer, either way round.
-  assert.equal(stagesBeforeDrought(data), 33);
-  for (const m of data.mutations) assert.equal(needsWatering(m, data), needsWatering(m, data));
+  assert.equal(stagesBeforeDrought(data, 0), 5, "and the budget does not move");
+});
+
+test("watering is answered for every row, and the ring is what decides it", () => {
+  const byId = new Map(data.mutations.map((m) => [m.id, m]));
+  const rows = rankMutations(data, {
+    market: market(),
+    growth: GROWTH,
+    farmingFortune: 1500,
+  });
+  const drinkers = rows.filter((r) => r.needsWater === true && r.packing && r.packing.targets > 0);
+  assert.ok(drinkers.length > 10);
+
+  // Both answers occur, which is the whole reason the column is worth having. If every drinker
+  // came out the same way the ring would not be doing anything.
+  assert.ok(drinkers.some((r) => r.wateringNeeded), "some have to be watered");
+  assert.ok(drinkers.some((r) => !r.wateringNeeded), "and some do not");
+
+  for (const r of drinkers) {
+    assert.equal(r.drought.targets, r.packing!.targets, `${r.name} reports one retain per target`);
+    assert.ok(r.drought.safeTargets <= r.drought.targets);
+    assert.equal(r.wateringNeeded, r.drought.safeTargets < r.drought.targets, `${r.name}`);
+    // Sanity on the arithmetic behind the word.
+    if (Number.isFinite(r.drought.survives.best)) {
+      assert.ok(r.drought.survives.best >= r.drought.survives.worst);
+    }
+    assert.ok(byId.has(r.id));
+  }
 });

@@ -99,6 +99,9 @@ const greenhouseData = {
     // per plant only through the in-game Diagnostics Tool. What is written down lives here, with
     // its sources, and the gaps stay gaps.
     decay: await loadJson("curated/greenhouse_decay.json"),
+    // The watering rate is the one figure where the wiki disagrees with everyone who plays the
+    // game. The curated file carries both numbers and says which is being used and why.
+    water: { ...(await loadJson("curated/greenhouse_water.json")) },
   },
   npcPrices: (await loadJson("generated/npc-prices.json")).prices,
 };

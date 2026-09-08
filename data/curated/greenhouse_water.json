@@ -1,0 +1,30 @@
+{
+  "note": "How fast a plant dries out, and it is the one greenhouse figure where the wiki is wrong. The Greenhouse page says a crop 'loses between 2-3 Water Level' after each growth stage. Taken at face value against the -100 floor that is eighty stages, or the better part of a week, and it would mean almost nothing in the greenhouse ever has to be watered - which is not what anyone who plays it reports. Two independent sources agree on roughly seven times that rate, and they agree with each other rather than with the wiki, so the wiki's number is the one treated as wrong. The likely explanation is a unit: the in-game meter is sixteen bars, so about twenty water is two to three bars, and 'loses 2-3 Water Level' looks like a description of the bars moving rather than of the underlying integer.",
+  "source": "NamuWiki, The Garden/Greenhouse: 'The amount of water is expressed as an integer from -100 to 100' and 'It takes nearly a full day for crops to go from 100 water to -100 water'. Hypixel Forums, 'Reduce water usage depending on growth speed for greenhouse' (thread 6046550): 'Crops lose around 20 water per cycle and with cycles being around 2 hours long, this means that a mutation can spawn and immediately die in 12 hour period' and 'when some mutation spawn (at 0 water) and in a couple of hours can get -100 and die'.",
+  "verified": false,
+  "checkedAt": "2026-09-08",
+  "wikiSaysPerStage": [2, 3],
+  "wikiIsWrong": "200 water at 2-3 a stage is 67-80 stages. At the 2h stage the same sources quote, that is five to seven days, against the 'nearly a full day' they measure. The 20 figure gives ten stages and twenty hours, which is the day.",
+
+  "lossPerStage": 20,
+  "lossSource": "Hypixel Forums thread 6046550. Cross-checks against NamuWiki's 'nearly a full day' for the full 200: 200/20 = 10 stages, and at ~2h a stage that is 20 hours.",
+
+  "spawnsAt": 0,
+  "spawnSource": "Hypixel Forums thread 6046550: 'when some mutation spawn (at 0 water)'. It matches what the meter does in game - an unwatered plant starts grey and goes red one bar at a time rather than draining down from blue.",
+
+  "deathAt": -100,
+  "deathSource": "Hypixel Wiki, Dead Plant: 'A Dead Plant replaces plants in the Greenhouse if they reach -100 water.'",
+
+  "maxAt": 100,
+  "maxSource": "NamuWiki: 'The amount of water is expressed as an integer from -100 to 100.'",
+
+  "retain": 0.5,
+  "improvedRetain": 1.0,
+  "drain": -0.3,
+  "effectSource": "Hypixel Wiki, Greenhouse: 'Water Retain - Retains watering status of adjacent crops by +50%', 'Improved Water Retain - ... by +100%', 'Water Drain - Reduces watering status of nearby crops by -30%'. Effects reach orthogonally adjacent planting slots only, not diagonals - stated in the page's Overview.",
+
+  "stacking": "additive",
+  "stackingNote": "Nobody has written down what happens when two neighbours both retain. Adding them is the reading that makes the numbers on the page mean what they say, and it is the assumption this rests on - two Water Retains reaching one plant is taken as +100%, which stops it losing water at all. Capped there: a plant is never modelled as gaining water it was not given. If this is wrong it is wrong in the direction of saying a plant is safe when it is not, so the mutations it matters for are named on screen rather than folded into the total.",
+
+  "unwateredNote": "A mutation spawns at 0 and dies at -100, so it has 100 to spend, not 200. That is five growth stages bare, and unbounded with a ring that retains. What it is NOT is a clock: water is spent per growth stage, so growth speed buys no extra survival, it only makes the same five stages arrive sooner. And a fully grown plant has no stages left to advance through, so it stops losing water entirely - what ends it after that is decay, on its own separate timer."
+}

@@ -50,7 +50,7 @@ import type { NpcPrice } from "./bazaarViews";
 export type GreenhouseData = {
   generatedAt: string;
   growth: { baseStageSeconds: number; fastestStageSeconds: number };
-  water: { lossPerStageMin: number; lossPerStageMax: number; deathAt?: number };
+  water: WaterData;
   maxPlots: number;
   etherealVineByRarity: Record<string, number>;
   baseCrops: { id: string; name: string; baseYield: number; growthCycles: number }[];
@@ -209,43 +209,139 @@ export function stagesPerHarvest(m: Mutation): number | null {
 /* ------------------------------------------------------------------ water */
 
 /**
- * How many growth stages a plant survives with no watering at all.
+ * What a plant loses to thirst in one growth stage, and how the ring around it changes that.
  *
- * Water is spent **per growth stage**, not per hour: the Greenhouse page says a crop loses 2-3
- * Water Level after each stage, and the Dead Plant page says it is replaced when it reaches -100.
- * Thirty-three stages, then, taking the worst of the 2-3 — a mutation called safe on the average
- * would still die on a bad roll, and this is the number a player plants a 40M ring against.
+ * **The rate is not the wiki's.** The Greenhouse page says a crop "loses between 2-3 Water Level"
+ * after each stage, and against the -100 floor that works out at eighty stages — most of a week —
+ * which would mean nothing in a greenhouse ever needs watering. Two independent sources put it near
+ * twenty, and they agree with each other: NamuWiki measures "nearly a full day" for the whole 200,
+ * and a forums thread quotes twenty a cycle at roughly two hours a cycle, which is that same day.
+ * The likely reading is that 2-3 describes the sixteen-bar meter moving rather than the integer
+ * underneath. See `data/curated/greenhouse_water.json` for both numbers and the sources.
  *
- * Two things follow from the unit that do not follow from a timer, and both match what you find by
- * planting a setup and walking away. **A fully grown plant has no stages left to advance through,
- * so it stops losing water entirely** — it can still decay, which is a separate mechanic on its own
- * timer, but it cannot dry out. And **growth speed does not change how long the water lasts**: the
- * same thirty-three stages just arrive sooner. That is the real shape of the folklore about speed
- * upgrades making crops harder to keep alive — the watering round comes due in fewer real hours,
- * not in fewer stages.
+ * **The unit is a growth stage, not an hour**, and two things fall out of that which a timer would
+ * get wrong. A fully grown plant has no stages left to advance through, so it stops losing water
+ * entirely and what ends it after that is decay, on its own separate clock. And growth speed buys
+ * no survival at all — the same five stages simply arrive sooner, which is exactly why players find
+ * that speeding a greenhouse up makes it harder to keep alive.
+ *
+ * **A mutation spawns at 0**, not full, so it has 100 to spend rather than 200: five stages bare.
  */
-export function stagesBeforeDrought(data: GreenhouseData): number {
-  const floor = Math.abs(data.water.deathAt ?? -100);
-  const worst = Math.max(1, data.water.lossPerStageMax || 3);
-  return Math.floor(floor / worst);
+export function waterLossPerStage(data: GreenhouseData): number {
+  return data.water.lossPerStage ?? data.water.lossPerStageMax ?? 3;
+}
+
+/** Water a fresh plant has to spend before it dies: 0 down to -100. */
+export function waterBudget(data: GreenhouseData): number {
+  return (data.water.spawnsAt ?? 0) - (data.water.deathAt ?? -100);
 }
 
 /**
- * Whether this one ever actually needs the watering can.
+ * What one plant does to the watering of the plants beside it.
  *
- * The wiki's yes-or-no is about the plant, and it is not the question a player has. Nineteen of the
- * twenty-one mutations that "need water" finish growing inside the thirty-three stages their water
- * covers, so watering them changes nothing you could observe — plant it, leave, harvest. Only
- * Godseed and Jerryflower grow for longer than their water lasts.
- *
- * The spawn wait is deliberately not counted. A mutation loses water while *it* is growing, and
- * before it appears there is nothing there to lose any: what sits in the plot is the ring, whose
- * own watering is its own business. Counting the wait would have condemned every rare mutation on
- * the page for a thirst it never experiences.
+ * Positive retains, negative drains, and it reaches orthogonal neighbours only — the Greenhouse
+ * page is explicit that crop effects skip the diagonals, which matters here because it means a
+ * 1x1 mutation is affected by four of the eight cells in its ring rather than all of them.
  */
-export function needsWatering(m: Mutation, data: GreenhouseData): boolean {
+export function waterEffectOf(m: Mutation | undefined, data: GreenhouseData): number {
+  const effects = (m?.effects ?? []).join(" ");
+  if (/Improved Water Retain/i.test(effects)) return data.water.improvedRetain ?? 1;
+  if (/Water Retain/i.test(effects)) return data.water.retain ?? 0.5;
+  if (/Water Drain/i.test(effects)) return data.water.drain ?? -0.3;
+  return 0;
+}
+
+/**
+ * How many growth stages a plant lasts with no watering, given what its neighbours are doing.
+ *
+ * `Infinity` when the ring retains everything, which is not a rounding artefact — two Water
+ * Retains reaching one plant is +100%, and a plant losing nothing never runs dry however long it
+ * grows. That case is most of the reason this is worth modelling at all: it is what makes a
+ * Chocoberry ringed with Gloomgourds safe to plant and walk away from, where the same mutation in
+ * a bare ring would be dead in five stages.
+ */
+export function stagesBeforeDrought(data: GreenhouseData, retain = 0): number {
+  const loss = waterLossPerStage(data) * Math.max(0, 1 - retain);
+  if (loss <= 0) return Infinity;
+  return Math.floor(waterBudget(data) / loss);
+}
+
+/**
+ * The retain reaching each of a mutation's targets, read off the plot it is actually planted in.
+ *
+ * One figure per target rather than an average, because they differ: a target against the plot edge
+ * has fewer neighbours than one in the middle, and on some layouts that is the difference between a
+ * mutation that survives and one that does not. The caller decides what to do with the spread.
+ */
+export function retainAtTargets(m: Mutation, byId: Map<string, Mutation>, packing: Packing, data: GreenhouseData): number[] {
+  const grid = packing.grid;
+  const height = grid.length;
+  const width = height > 0 ? grid[0].length : 0;
+  const size = Math.max(1, m.size || 1);
+  const effect = m.spreading.requires.map((r) => waterEffectOf(byId.get(r.id), data));
+
+  const claimed = new Uint8Array(width * height);
+  const out: number[] = [];
+  for (let r = 0; r + size <= height; r++) {
+    for (let c = 0; c + size <= width; c++) {
+      let whole = true;
+      for (let rr = r; rr < r + size && whole; rr++)
+        for (let cc = c; cc < c + size && whole; cc++)
+          if (grid[rr][cc] !== "target" || claimed[rr * width + cc]) whole = false;
+      if (!whole) continue;
+      for (let rr = r; rr < r + size; rr++) for (let cc = c; cc < c + size; cc++) claimed[rr * width + cc] = 1;
+
+      // Orthogonal only: the cells sharing an edge with the block, never the four corners.
+      let sum = 0;
+      for (let rr = r; rr < r + size; rr++) {
+        for (const cc of [c - 1, c + size]) {
+          if (cc < 0 || cc >= width) continue;
+          const cell = grid[rr][cc];
+          if (typeof cell === "number") sum += effect[cell] ?? 0;
+        }
+      }
+      for (let cc = c; cc < c + size; cc++) {
+        for (const rr of [r - 1, r + size]) {
+          if (rr < 0 || rr >= height) continue;
+          const cell = grid[rr][cc];
+          if (typeof cell === "number") sum += effect[cell] ?? 0;
+        }
+      }
+      out.push(sum);
+    }
+  }
+  return out;
+}
+
+/**
+ * Whether you will ever have to pick up a watering can for this one, in this layout.
+ *
+ * Layout-dependent, which is new and is correct: the answer is a fact about the mutation *and* the
+ * ring it is sitting in. Swapping to a cheaper arrangement can take the Gloomgourds off a
+ * Chocoberry's sides and turn a plant-and-leave mutation into one that dies in five stages.
+ *
+ * Yes if *any* of the targets would run dry, because a plot where three of sixteen die is a plot
+ * you have to tend.
+ */
+export function needsWatering(m: Mutation, data: GreenhouseData, retains: number[] = [0]): boolean {
   if (m.needsWater !== true) return false;
-  return (m.growthStages ?? 0) > stagesBeforeDrought(data);
+  const stages = m.growthStages ?? 0;
+  const seen = retains.length > 0 ? retains : [0];
+  return seen.some((retain) => stages > stagesBeforeDrought(data, retain));
+}
+
+/** The drought arithmetic for one mutation in one plot, summarised for the row. */
+function drought(m: Mutation, data: GreenhouseData, retains: number[]): MutationProfit["drought"] {
+  const stages = m.growthStages ?? 0;
+  const seen = retains.length > 0 ? retains : [0];
+  const lives = seen.map((retain) => stagesBeforeDrought(data, retain));
+  return {
+    stages,
+    survives: { worst: Math.min(...lives), best: Math.max(...lives) },
+    retain: { worst: Math.min(...seen), best: Math.max(...seen) },
+    safeTargets: lives.filter((n) => stages <= n).length,
+    targets: seen.length,
+  };
 }
 
 /* ------------------------------------------------------------------ money */
@@ -423,6 +519,27 @@ export function setupFor(
  * Magic Jellybean and Fleshtrap stand forever, so a ring built only from those is planted once.
  */
 export type SetupLife = { hours: number | null; exact: boolean };
+
+/**
+ * What is known about drying out. Scraped figures, overwritten at build time by `curated`.
+ *
+ * `lossPerStageMin`/`Max` are the wiki's 2-3 and are kept only so the disagreement is visible;
+ * `lossPerStage` is the figure actually used. See `data/curated/greenhouse_water.json`.
+ */
+export type WaterData = {
+  lossPerStageMin: number;
+  lossPerStageMax: number;
+  /** The one in use, from players rather than from the wiki. */
+  lossPerStage?: number;
+  spawnsAt?: number;
+  deathAt?: number;
+  maxAt?: number;
+  retain?: number;
+  improvedRetain?: number;
+  drain?: number;
+  wikiSaysPerStage?: [number, number];
+  note?: string;
+};
 
 export function setupLifeHours(items: { id: string; free?: boolean }[], byId: Map<string, Mutation>, decay?: DecayData): SetupLife {
   if (!decay) return { hours: null, exact: false };
@@ -659,15 +776,29 @@ export type MutationProfit = {
   /** Whether the plant takes water while it grows, as its own page states it. */
   needsWater?: boolean;
   /**
-   * Whether you will ever have to pick up a watering can for it.
+   * Whether you will ever have to pick up a watering can for it, in this layout.
    *
-   * Not the same question as `needsWater`, and the difference is most of the list: a mutation that
-   * finishes growing inside the thirty-three stages its water covers can be planted and left. See
+   * Not the same question as `needsWater`, and not a property of the mutation alone: what decides
+   * it is how many growth stages it needs against how many its ring lets it keep. See
    * `needsWatering`.
    */
   wateringNeeded: boolean;
-  /** Growth stages it takes, beside the stages its water lasts — what the answer above is read from. */
-  drought: { stages: number; budget: number };
+  /**
+   * The arithmetic behind that answer.
+   *
+   * `survives` is Infinity where the ring retains everything, which is a real answer and not an
+   * overflow — a plant losing nothing never runs dry. `retain` is the spread across the plot's
+   * targets, which is not always one number: an edge target has fewer neighbours than a middle one.
+   */
+  drought: {
+    stages: number;
+    /** Stages the worst-placed target survives, and the best. */
+    survives: { worst: number; best: number };
+    retain: { worst: number; best: number };
+    /** How many of the plot's targets get through without a drink. */
+    safeTargets: number;
+    targets: number;
+  };
   stagesPerHarvest: number | null;
   hoursPerHarvest: number | null;
   /** Coins one harvest brings in, after tax, at the given fortune. Crops, the item, and the vine. */
@@ -1028,6 +1159,10 @@ export function profitOf(m: Mutation, byId: Map<string, Mutation>, data: Greenho
   // How many grow at once, which is the figure the whole ranking turns on. A mutation paying twice
   // as much per harvest is still the worse row if half as many fit.
   const perPlot = setup?.packing.targets ?? 0;
+
+  // Watering is a fact about the mutation and the ring together, so it is read off the plot that
+  // was actually laid out rather than from the mutation alone. A bare ring is the fallback.
+  const retains = setup ? retainAtTargets(m, byId, setup.packing, data) : [];
   const cellsUsed = (setup?.packing.cells.reduce((a, b) => a + b, 0) ?? 0) + perPlot * m.size * m.size;
 
   const total = (revenue + vineRevenue) * perPlot;
@@ -1072,8 +1207,8 @@ export function profitOf(m: Mutation, byId: Map<string, Mutation>, data: Greenho
     perPlot,
     packing: setup?.packing ?? null,
     needsWater: m.needsWater,
-    wateringNeeded: needsWatering(m, data),
-    drought: { stages: m.growthStages ?? 0, budget: stagesBeforeDrought(data) },
+    wateringNeeded: needsWatering(m, data, retains),
+    drought: drought(m, data, retains),
     stagesPerHarvest: stages,
     hoursPerHarvest,
     revenue,

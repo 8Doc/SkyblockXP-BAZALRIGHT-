@@ -606,18 +606,23 @@ const COLUMNS: Column[] = [
     label: "Water",
     kind: "boolean",
     hint: "no",
+    // Filtered on the actionable answer, which is the two-way one: "some" is a plot you still have
+    // to tend, so it answers yes to "do I need the can".
     plain: (r) => (r.wateringNeeded ? "yes" : "no"),
-    // Sorted so the ones that want no attention come first, which is the useful end of it.
-    value: (r) => (r.wateringNeeded ? 1 : 0),
+    // Sorted three ways, so the partial plots sit between the two clean answers rather than being
+    // buried among the ones that need constant attention.
+    value: (r) => (!r.wateringNeeded ? 0 : r.drought.safeTargets > 0 ? 1 : 2),
     render: (r) => waterCell(r),
     title:
-      "Whether you will ever have to pick up a watering can. Not the same question as whether the " +
-      "plant drinks — water is spent per growth stage and the floor is -100, so thirty-three stages " +
-      "are covered with no watering at all, and a mutation that finishes inside that can be planted " +
-      "and left. Nineteen of the twenty-one that take water do. Once it is fully grown it stops " +
-      "losing water altogether; what kills it after that is decay, which is a separate timer. Also " +
-      "not the Water Retain and Water Drain effects in the expanded row — those are what a mutation " +
-      "does to its neighbours.",
+      "Whether you will ever have to pick up a watering can, in the layout shown. A plant spawns at " +
+      "0 water, loses about 20 a growth stage and dies at -100, so on its own it has five stages — " +
+      "and most mutations grow for longer. What saves them is the ring: an orthogonal neighbour with " +
+      "Water Retain halves the loss and Improved Water Retain stops it, so the same mutation can be " +
+      "plant-and-leave in one arrangement and dead in five stages in another. \"some\" means part of " +
+      "the plot survives and part does not, which is usually the targets against the edge. Once a " +
+      "plant is fully grown it stops losing water altogether; what ends it after that is decay, on " +
+      "its own timer. The rate is the one players measure rather than the 2-3 a stage the wiki " +
+      "prints: against the -100 floor that would be eighty stages, and nothing would ever need a can.",
   },
   {
     id: "setup",
@@ -706,48 +711,64 @@ const FILTER_COLUMNS: Column[] = [NAME_COLUMN, ...COLUMNS];
  * numbers it comes from are printed here.
  */
 function waterLine(row: MutationProfit): string {
-  const { stages, budget } = row.drought;
-  if (row.needsWater !== true) {
-    return `<p class="dim">Takes no water — plant it and leave it.</p>`;
-  }
+  const { stages, survives, retain, safeTargets, targets } = row.drought;
+  if (row.needsWater !== true) return `<p class="dim">Takes no water — plant it and leave it.</p>`;
+
+  const held =
+    retain.worst === retain.best
+      ? retain.worst === 0
+        ? "nothing beside it retains water"
+        : `the ring holds back ${Math.round(retain.worst * 100)}% of what it would lose`
+      : `the ring holds back ${Math.round(retain.worst * 100)}-${Math.round(retain.best * 100)}%, depending on where in the plot it lands`;
+  const lasts = Number.isFinite(survives.worst) ? `${num(survives.worst)} stages` : "indefinitely";
+
   if (row.wateringNeeded) {
-    const over = stages - budget;
-    return `<p class="dim"><span class="gold">Has to be watered.</span> It grows for ${num(stages)} stages and loses 2-3 water
-      a stage from a floor of -100, so it runs dry ${num(over)} stage${over === 1 ? "" : "s"} short of ready.</p>`;
+    const partly = safeTargets > 0 ? ` ${num(safeTargets)} of the ${num(targets)} in this plot are retained enough to make it; the rest are not.` : "";
+    return `<p class="dim"><span class="gold">Has to be watered.</span> It needs ${num(stages)} growth stages and
+      ${escapeHtml(held)}, so it stays wet ${escapeHtml(lasts)} — it spawns at 0 water, loses about 20 a stage and
+      becomes a Dead Plant at -100.${partly}</p>`;
   }
-  return `<p class="dim">Takes water, but never needs any: ${num(stages)} growth stage${
-    stages === 1 ? "" : "s"
-  } against the ${num(budget)} its water covers. It stops losing water the moment it is fully grown, so what
-    ends it after that is decay rather than thirst.</p>`;
+  return `<p class="dim">Takes water, but never needs any: ${escapeHtml(held)}, which covers the
+    ${num(stages)} growth stages it needs. It stops losing water the moment it is fully grown, so what ends it
+    after that is decay rather than thirst.</p>`;
 }
 
 /**
  * Whether you will ever have to water this one, in a word.
  *
- * The column used to print what the wiki says about the plant, and the wiki's answer turns out not
- * to be the player's. Water goes per growth stage, 2-3 of it, from zero down to a floor of -100 —
- * thirty-three stages. Nineteen of the twenty-one mutations that drink finish growing well inside
- * that, so the can never comes out: plant it, walk away, harvest it. Two do not, and those two are
- * the whole content of this column.
+ * The answer is not a property of the mutation. A plant spawns at 0 water, loses about twenty a
+ * growth stage and dies at -100, so bare it has five stages — and almost every mutation grows for
+ * longer than that. What saves them is the ring: Water Retain from an orthogonal neighbour cuts the
+ * loss by half and Improved Water Retain stops it outright, so a Chocoberry with Gloomgourds on two
+ * sides loses nothing at all while the same Chocoberry in a bare ring is dead in five stages.
  *
- * The narrower fact is still shown, as the reason under the yes or the no, because a reader who
- * knows the mutation takes water and sees "no" is owed the arithmetic rather than left to wonder
- * whether the page is wrong.
+ * So the cell reads the plot, and the tooltip says which of the two it is. The third state is the
+ * partial one, which is real and had no reason to exist before this: a layout where the middle
+ * targets are retained and the ones against the plot edge are not.
  */
 function waterCell(row: MutationProfit): string {
-  const { stages, budget } = row.drought;
-  if (row.wateringNeeded) {
-    return `<span class="gold" title="Grows for ${stages} stages, and its water covers ${budget} — so it runs dry partway and has to be topped up. Below zero it has a chance not to advance a stage; at -100 it becomes a Dead Plant.">yes</span>`;
-  }
-  if (row.needsWater === true) {
-    // Drinks, but finishes first. Marked rather than printed as a flat no, because it is the answer
-    // most likely to be doubted by someone who has read the mutation's own page.
-    return `<span class="soft" title="It does take water, but it is fully grown after ${stages} stages and its water covers ${budget} — so it cannot run dry before you harvest it. Plant it and leave it.">no</span>`;
-  }
-  if (row.needsWater === false) {
+  const { stages, survives, safeTargets, targets } = row.drought;
+  const lasts = (n: number) => (Number.isFinite(n) ? `${n} stages` : "indefinitely");
+
+  if (row.needsWater !== true) {
     return `<span title="Takes no water at all — plant it and leave it.">no</span>`;
   }
-  return `<span class="dim" title="The wiki no longer states this one's watering, so it is unknown rather than no.">—</span>`;
+  if (row.wateringNeeded && safeTargets > 0) {
+    // Some live, some do not. Worth its own word: the plot works, it just is not unattended.
+    return `<span class="gold" title="${safeTargets} of the ${targets} in this plot are retained enough to make it — the rest are not, and run dry after ${lasts(
+      survives.worst,
+    )} against the ${stages} they need. Targets against the plot edge have fewer neighbours to retain them.">some</span>`;
+  }
+  if (row.wateringNeeded) {
+    return `<span class="gold" title="Grows for ${stages} stages and its ring only keeps it wet for ${lasts(
+      survives.worst,
+    )}, so it runs dry partway. Below zero it has a chance not to advance a stage; at -100 it becomes a Dead Plant.">yes</span>`;
+  }
+  // Drinks, and does not need to. Marked rather than printed flat, because it is the answer most
+  // likely to be doubted by someone who has read the mutation's own page.
+  return `<span class="soft" title="It does take water, but its ring keeps it wet ${
+    Number.isFinite(survives.worst) ? `for ${survives.worst} stages against the ${stages} it needs` : "indefinitely — the plants around it retain everything it would lose"
+  }. Plant it and leave it.">no</span>`;
 }
 
 
@@ -1383,7 +1404,7 @@ function scanNote(): string {
 function dryChip(): string {
   const on = (state.filters.needsWater ?? "").trim().toLowerCase() === "no";
   return `<span class="tabs"><button class="chip${on ? " on" : ""}" data-ghdry="${on ? "0" : "1"}"
-    title="Show only what never needs the watering can. Water goes 2-3 a growth stage down to a floor of -100, so thirty-three stages are covered unwatered — and all but two mutations finish growing well inside that. Sets the Water column's box to no.">Never needs watering</button></span>`;
+    title="Show only what can be planted and left. A plant spawns at 0 water, loses about 20 a growth stage and dies at -100, so five stages bare — what buys more is the ring, where a neighbour with Water Retain halves the loss and Improved Water Retain stops it. Sets the Water column's box to no.">Never needs watering</button></span>`;
 }
 
 function render(): void {
