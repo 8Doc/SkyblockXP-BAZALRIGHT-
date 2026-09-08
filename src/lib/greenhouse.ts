@@ -350,6 +350,82 @@ export function retainAtTargets(m: Mutation, byId: Map<string, Mutation>, packin
 }
 
 /**
+ * Which of a mutation's required crops are worth seating on its edges rather than its corners.
+ *
+ * A spreading condition counts ring cells and a ring has corners; a crop effect reaches orthogonal
+ * neighbours only. So the cheapest way to satisfy the count is often to put the plant exactly where
+ * its effect cannot reach — a corner cell lies in four rings at once, an edge cell in one, so a
+ * packer economising on a crop will always drift towards the corners.
+ *
+ * Asked for only where it changes something: the mutation has to drink, and it has to be one that
+ * would not survive on its own. Where the answer is the same either way this returns nothing, and
+ * the layout is chosen on price as before — there is no reason to pay for a buff that changes no
+ * outcome, and every reason not to disturb a layout that was already the cheapest.
+ */
+export function seatingFor(m: Mutation, byId: Map<string, Mutation>, data: GreenhouseData): boolean[] | undefined {
+  if (m.needsWater !== true) return undefined;
+  if ((m.growthStages ?? 0) <= stagesBeforeDrought(data, 0)) return undefined;
+  const seat = m.spreading.requires.map((r) => {
+    const effect = waterEffectOf(byId.get(r.id));
+    return effect === "retain" || effect === "improved";
+  });
+  return seat.some(Boolean) ? seat : undefined;
+}
+
+/**
+ * Whether a plant that would retain water is in the ring but sitting where it cannot reach.
+ *
+ * The difference between "nothing here retains water" and "the Gloomgourd is on the corner" is the
+ * difference between a fact about the mutation and a fact about the arrangement, and only one of
+ * them is something a reader can do anything about. Saying the first when the second is true reads
+ * like the app has not noticed the Gloomgourd it is drawing three cells away.
+ */
+export function retainStranded(m: Mutation, byId: Map<string, Mutation>, packing: Packing, data: GreenhouseData): boolean {
+  const retainers = new Set(
+    m.spreading.requires
+      .map((r, i) => [i, waterEffectOf(byId.get(r.id))] as const)
+      .filter(([, effect]) => effect === "retain" || effect === "improved")
+      .map(([i]) => i),
+  );
+  if (retainers.size === 0) return false;
+
+  const modifiers = retainAtTargets(m, byId, packing, data);
+  // Reaching anywhere means it is not stranded; the question is only about the ones it misses.
+  if (modifiers.every((value) => value > 0)) return false;
+
+  const grid = packing.grid;
+  const height = grid.length;
+  const width = height > 0 ? grid[0].length : 0;
+  const size = Math.max(1, m.size || 1);
+  const claimed = new Uint8Array(width * height);
+
+  let at = 0;
+  for (let r = 0; r + size <= height; r++) {
+    for (let c = 0; c + size <= width; c++) {
+      let whole = true;
+      for (let rr = r; rr < r + size && whole; rr++)
+        for (let cc = c; cc < c + size && whole; cc++)
+          if (grid[rr][cc] !== "target" || claimed[rr * width + cc]) whole = false;
+      if (!whole) continue;
+      for (let rr = r; rr < r + size; rr++) for (let cc = c; cc < c + size; cc++) claimed[rr * width + cc] = 1;
+
+      const reaches = modifiers[at++] > 0;
+      if (reaches) continue;
+      // The whole ring this time, corners included — which is what the spreading condition counts.
+      for (let rr = r - 1; rr <= r + size; rr++) {
+        for (let cc = c - 1; cc <= c + size; cc++) {
+          if (rr < 0 || cc < 0 || rr >= height || cc >= width) continue;
+          if (rr >= r && rr < r + size && cc >= c && cc < c + size) continue;
+          const cell = grid[rr][cc];
+          if (typeof cell === "number" && retainers.has(cell)) return true;
+        }
+      }
+    }
+  }
+  return false;
+}
+
+/**
  * Whether you will ever have to pick up a watering can for this one, in this layout.
  *
  * Layout-dependent, which is new and is correct: the answer is a fact about the mutation *and* the
@@ -367,7 +443,7 @@ export function needsWatering(m: Mutation, data: GreenhouseData, retains: number
 }
 
 /** The drought arithmetic for one mutation in one plot, summarised for the row. */
-function drought(m: Mutation, data: GreenhouseData, retains: number[]): MutationProfit["drought"] {
+function drought(m: Mutation, data: GreenhouseData, retains: number[], stranded: boolean): MutationProfit["drought"] {
   const stages = m.growthStages ?? 0;
   const seen = retains.length > 0 ? retains : [0];
   const lives = seen.map((retain) => stagesBeforeDrought(data, retain));
@@ -377,6 +453,7 @@ function drought(m: Mutation, data: GreenhouseData, retains: number[]): Mutation
     retain: { worst: Math.min(...seen), best: Math.max(...seen) },
     safeTargets: lives.filter((n) => stages <= n).length,
     targets: seen.length,
+    stranded,
   };
 }
 
@@ -505,6 +582,7 @@ export function setupFor(
   npcPrices: Record<string, NpcPrice>,
   plot: PlotShape,
   mode: PriceMode = "order",
+  data?: GreenhouseData,
 ): Setup | null {
   if (m.spreading.requires.length === 0) return null;
 
@@ -513,7 +591,10 @@ export function setupFor(
   // that grow the same number of mutations, and which of them is worth building is a question the
   // bill answers — see `weights` on `PackingOptions`.
   const prices = m.spreading.requires.map((r) => (r.free ? 0 : buyPrice(r.id, market, npcPrices, mode)));
-  const packing = packFor(plot, requires, m.size, weightsFor(prices));
+  // A crop whose effect only reaches orthogonally has to be seated on the mutation's edge, not just
+  // dropped anywhere in its ring — see `seatingFor` for when that is worth asking for.
+  const seat = data ? seatingFor(m, byId, data) : undefined;
+  const packing = packFor(plot, requires, m.size, weightsFor(prices), seat);
 
   const items: SetupItem[] = m.spreading.requires.map((r, i) => {
     const grown = byId.has(r.id);
@@ -659,10 +740,12 @@ export function layoutKey(
   requires: { cells: number; size: number }[],
   targetSize: number,
   weights: number[],
+  seat?: boolean[],
 ): string {
   const lockedKey = plot.locked && plot.locked.size > 0 ? [...plot.locked].sort().join("|") : "";
   const shape = requires.map((r) => `${r.cells}/${r.size}`).join(",");
-  return `${plot.width}x${plot.height}:${lockedKey}:${shape}:${targetSize}:${weights.join("/")}`;
+  const seating = seat ? seat.map((on) => (on ? "1" : "0")).join("") : "";
+  return `${plot.width}x${plot.height}:${lockedKey}:${shape}:${targetSize}:${weights.join("/")}:${seating}`;
 }
 
 function packFor(
@@ -670,8 +753,9 @@ function packFor(
   requires: { cells: number; size: number }[],
   targetSize: number,
   weights: number[],
+  seat?: boolean[],
 ): Packing {
-  const cacheKey = layoutKey(plot, requires, targetSize, weights);
+  const cacheKey = layoutKey(plot, requires, targetSize, weights, seat);
   const found = optimisedLayouts.get(cacheKey) ?? packings.get(cacheKey);
   if (found) return found;
 
@@ -682,6 +766,7 @@ function packFor(
     requires,
     targetSize,
     weights,
+    seat,
   });
   packings.set(cacheKey, packing);
   return packing;
@@ -703,11 +788,13 @@ function layoutInputs(
   npcPrices: Record<string, NpcPrice>,
   plot: PlotShape,
   mode: PriceMode,
+  data?: GreenhouseData,
 ) {
   const requires = m.spreading.requires.map((r) => ({ cells: r.cells, size: byId.get(r.id)?.size ?? 1 }));
   const prices = m.spreading.requires.map((r) => (r.free ? 0 : buyPrice(r.id, market, npcPrices, mode)));
   const weights = weightsFor(prices);
-  return { requires, weights, key: layoutKey(plot, requires, m.size, weights) };
+  const seat = data ? seatingFor(m, byId, data) : undefined;
+  return { requires, weights, seat, key: layoutKey(plot, requires, m.size, weights, seat) };
 }
 
 export function layoutStateOf(
@@ -717,10 +804,11 @@ export function layoutStateOf(
   npcPrices: Record<string, NpcPrice>,
   plot: PlotShape = FULL_PLOT,
   mode: PriceMode = "order",
+  data?: GreenhouseData,
 ): LayoutState | null {
   if (m.spreading.requires.length === 0) return null;
-  const { requires, weights, key } = layoutInputs(m, byId, market, npcPrices, plot, mode);
-  const packing = packFor(plot, requires, m.size, weights);
+  const { requires, weights, seat, key } = layoutInputs(m, byId, market, npcPrices, plot, mode, data);
+  const packing = packFor(plot, requires, m.size, weights, seat);
   return {
     key,
     capped: isCapped(requires, m.size) && packing.targets >= fullRingMaximum(m.size, plot.width, plot.height),
@@ -741,9 +829,10 @@ export function optimiseLayout(
   npcPrices: Record<string, NpcPrice>,
   plot: PlotShape = FULL_PLOT,
   mode: PriceMode = "order",
+  data?: GreenhouseData,
 ): Optimised | null {
   if (m.spreading.requires.length === 0) return null;
-  const { requires, weights, key } = layoutInputs(m, byId, market, npcPrices, plot, mode);
+  const { requires, weights, seat, key } = layoutInputs(m, byId, market, npcPrices, plot, mode, data);
   const result = optimise({
     width: plot.width,
     height: plot.height,
@@ -751,6 +840,7 @@ export function optimiseLayout(
     requires,
     targetSize: m.size,
     weights,
+    seat,
   });
   // Kept even when it found nothing better, because "searched and there was nothing" is an answer
   // worth remembering — otherwise the button offers the same second of waiting over and over.
@@ -834,6 +924,13 @@ export type MutationProfit = {
     /** How many of the plot's targets get through without a drink. */
     safeTargets: number;
     targets: number;
+    /**
+     * A retaining crop is in the ring, but on a corner where its effect cannot reach.
+     *
+     * Worth telling apart from a ring with nothing in it: a condition counts ring cells and a crop
+     * effect only reaches orthogonal ones, so the two are satisfiable in different places.
+     */
+    stranded: boolean;
   };
   stagesPerHarvest: number | null;
   hoursPerHarvest: number | null;
@@ -1189,7 +1286,7 @@ export function profitOf(m: Mutation, byId: Map<string, Mutation>, data: Greenho
   const hoursPerStage = stageSeconds(data, o.growth) / 3600;
   const hoursPerHarvest = stages === null ? null : stages * hoursPerStage;
 
-  const setup = setupFor(m, byId, o.market, npcPrices, o.plot ?? FULL_PLOT, mode);
+  const setup = setupFor(m, byId, o.market, npcPrices, o.plot ?? FULL_PLOT, mode, data);
   const plots = o.plots ?? 1;
 
   // How many grow at once, which is the figure the whole ranking turns on. A mutation paying twice
@@ -1244,7 +1341,7 @@ export function profitOf(m: Mutation, byId: Map<string, Mutation>, data: Greenho
     packing: setup?.packing ?? null,
     needsWater: m.needsWater,
     wateringNeeded: needsWatering(m, data, retains),
-    drought: drought(m, data, retains),
+    drought: drought(m, data, retains, setup ? retainStranded(m, byId, setup.packing, data) : false),
     stagesPerHarvest: stages,
     hoursPerHarvest,
     revenue,

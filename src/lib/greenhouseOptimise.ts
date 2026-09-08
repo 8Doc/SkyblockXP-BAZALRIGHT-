@@ -94,7 +94,7 @@ export function optimise(o: OptimiseOptions): Optimised {
     return { packing: tile, before, after: before, capped: true, elapsedMs: Date.now() - started };
   }
 
-  const board = { width, height, m, requires, weights, locked };
+  const board: Board = { width, height, m, requires, weights, seat: requires.map((_, i) => o.seat?.[i] === true), locked };
   const restarts = Math.max(1, o.restarts ?? DEFAULT_RESTARTS);
   const random = generator(o.seed ?? 20260907);
 
@@ -124,6 +124,8 @@ type Board = {
   m: number;
   requires: Requirement[];
   weights: number[];
+  /** Requirements worth putting on a mutation's edge rather than its corner. See `PackingOptions`. */
+  seat: boolean[];
   locked: Set<string>;
 };
 
@@ -278,7 +280,10 @@ function feed(b: Board, targets: number[]): { cell: Int8Array; anchors: number[]
         if (need[t][worstReq] === 0) continue;
         serves += Math.min(need[t][worstReq], covers(b, candidate, wanted, targets[t]));
       }
-      const score = serves * 1000 - b.weights[worstReq] * 10 - candidate / (size * 10);
+      // A plant whose effect only reaches orthogonally is worth putting on an edge even though the
+      // condition would accept a corner — the corner satisfies the count and reaches nothing.
+      const seats = b.seat[worstReq] && onEdge(b, candidate, wanted, targets);
+      const score = serves * 1000 + (seats ? 500 : 0) - b.weights[worstReq] * 10 - candidate / (size * 10);
       if (score > bestScore) {
         bestScore = score;
         bestCell = candidate;
@@ -294,6 +299,24 @@ function feed(b: Board, targets: number[]): { cell: Int8Array; anchors: number[]
   }
 
   return { cell, anchors };
+}
+
+/** Whether a plant here would sit on some mutation's edge rather than only on its corners. */
+function onEdge(b: Board, anchor: number, size: number, targets: number[]): boolean {
+  const pr = rowOf(b, anchor);
+  const pc = colOf(b, anchor);
+  for (const target of targets) {
+    const tr = rowOf(b, target);
+    const tc = colOf(b, target);
+    for (let r = pr; r < pr + size; r++) {
+      for (let c = pc; c < pc + size; c++) {
+        const vertical = c >= tc && c < tc + b.m && (r === tr - 1 || r === tr + b.m);
+        const horizontal = r >= tr && r < tr + b.m && (c === tc - 1 || c === tc + b.m);
+        if (vertical || horizontal) return true;
+      }
+    }
+  }
+  return false;
 }
 
 /** Room for a `size` x `size` plant anchored here, without covering a mutation or a locked cell. */
@@ -363,9 +386,14 @@ function trim(b: Board, s: Solution): void {
     b.requires.map((_r, i) => rings[t].reduce((n, c) => n + (s.cell[c] === i ? 1 : 0), 0)),
   );
 
-  const order: { req: number; anchor: number }[] = [];
-  for (let i = 0; i < s.anchors.length; i++) for (const anchor of s.anchors[i]) order.push({ req: i, anchor });
-  order.sort((a, z) => b.weights[z.req] - b.weights[a.req]);
+  const order: { req: number; anchor: number; seats: boolean }[] = [];
+  for (let i = 0; i < s.anchors.length; i++) {
+    for (const anchor of s.anchors[i]) {
+      order.push({ req: i, anchor, seats: b.seat[i] && onEdge(b, anchor, b.requires[i].size, s.targets) });
+    }
+  }
+  // Dearest first, but a plant that is seating an effect is offered up last whatever it costs.
+  order.sort((a, z) => Number(a.seats) - Number(z.seats) || b.weights[z.req] - b.weights[a.req]);
 
   for (const { req, anchor } of order) {
     const size = b.requires[req].size;
@@ -421,11 +449,15 @@ function render(b: Board, s: Solution, ceiling: number): Packing {
   for (const t of s.targets) for (const cell of bodyOf(b, t)) grid[rowOf(b, cell)][colOf(b, cell)] = "target";
 
   const plants = s.anchors.map((list) => list.length);
+  const seated = s.targets.filter((t) =>
+    s.anchors.some((list, i) => b.seat[i] && list.some((anchor) => onEdge(b, anchor, b.requires[i].size, [t]))),
+  ).length;
   return {
     targets: s.targets.length,
     plants,
     cells: plants.map((n, i) => n * b.requires[i].size ** 2),
     pruned: 0,
+    seated,
     grid,
     // Not a tiling, so there is no period to report. Saying 0x0 is how a reader tells an optimised
     // plot from a stamped one without being told.

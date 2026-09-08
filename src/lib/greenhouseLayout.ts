@@ -52,6 +52,25 @@ export type PackingOptions = {
    * twenty seconds; see `packFor` for how the weights are made stable enough to key a cache on.
    */
   weights?: number[];
+  /**
+   * Requirements whose plants are worth putting *orthogonally* beside the mutation, not merely
+   * somewhere in its ring.
+   *
+   * A spreading condition counts ring cells, and a ring includes its corners. Crop effects do not:
+   * the Greenhouse page is explicit that they reach orthogonally adjacent slots and skip the
+   * diagonals. So the two are satisfiable in different places, and the cheapest answer prefers the
+   * corners — a corner cell sits in four rings at once and an edge cell in one, so economising on a
+   * plant means seating it exactly where its effect cannot reach.
+   *
+   * Chocoberry is what found this. Its ring wants two cells of Gloomgourd, which retains water; at
+   * bazaar-order prices Gloomgourd is the cheaper of its two crops and twenty of them land on the
+   * edges, so the mutation waters itself. Buy the same ring at instant prices, where Gloomgourd
+   * costs more than Choconut, and ten of them land on the corners instead — the same yield, the
+   * same plant count, a slightly cheaper bill, and a plot you now have to water every ten hours.
+   *
+   * Set only where it changes something: see `seatingFor`.
+   */
+  seat?: boolean[];
 };
 
 export type CellKind = "target" | "empty" | "locked" | number;
@@ -65,6 +84,14 @@ export type Packing = {
   cells: number[];
   /** Plants the arrangement placed and the pruning pass took back out. See `prune`. */
   pruned: number;
+  /**
+   * Mutations with at least one `seat` plant orthogonally beside them, out of `targets`.
+   *
+   * Zero with nothing asked for. Short of `targets` means the condition could not be met on the
+   * edges for every one of them, which is a real answer and not a failure — it is what a ring too
+   * small to reach every mutation looks like.
+   */
+  seated: number;
   /** `target`, `empty`, `locked`, or the index of the requirement planted there. */
   grid: CellKind[][];
   period: { rows: number; cols: number };
@@ -122,6 +149,8 @@ export function packGreenhouse(o: PackingOptions): Packing {
   const budget = o.budget ?? DEFAULT_BUDGET;
 
   const weights = requires.map((_, i) => Math.max(0, Number(o.weights?.[i] ?? 1) || 0));
+  const seat = requires.map((_, i) => o.seat?.[i] === true);
+  const seating = seat.some(Boolean);
 
   // `crop[i]` is the map for requirement i: 1 where one of its plants stands.
   const crop = requires.map(() => new Uint8Array(width * height));
@@ -132,6 +161,7 @@ export function packGreenhouse(o: PackingOptions): Packing {
   const anchors = requires.map((): number[] => []);
 
   let bestTargets = -1;
+  let bestSeated = -1;
   let bestPlants: number[] = requires.map(() => 0);
   let bestMask = 0;
   let bestPeriod: [number, number] = [1, 1];
@@ -141,9 +171,21 @@ export function packGreenhouse(o: PackingOptions): Packing {
       const patterns = (k + 1) ** (pr * pc);
       for (let mask = 0; mask < patterns; mask++) {
         const plants = fill(crop, occupied, anchors, mask, pr, pc, width, height, locked, requires, k);
-        const targets = placeTargets(crop, occupied, taken, requires, locked, m, width, height).length;
-        if (targets > bestTargets || (targets === bestTargets && better(plants, bestPlants, weights))) {
+        const placed = placeTargets(crop, occupied, taken, requires, locked, m, width, height);
+        const targets = placed.length;
+        // Seating outranks the bill, and only ever when a caller asked for it — which it does only
+        // where the difference is a plot that waters itself against one that does not. Buying ten
+        // more of a crop to never pick up a watering can is the trade this page exists to make.
+        const seated = seating ? seatedCount(crop, placed, seat, m, width, height) : 0;
+        const bettered =
+          targets !== bestTargets
+            ? targets > bestTargets
+            : seated !== bestSeated
+              ? seated > bestSeated
+              : better(plants, bestPlants, weights);
+        if (bettered) {
           bestTargets = targets;
+          bestSeated = seated;
           bestPlants = plants;
           bestMask = mask;
           bestPeriod = [pr, pc];
@@ -174,7 +216,7 @@ export function packGreenhouse(o: PackingOptions): Packing {
   // mutations go from a thinner grid could land on a different set — so the set that was pruned
   // against is the set that gets drawn.
   const targets = placeTargets(crop, occupied, taken, requires, locked, m, width, height);
-  const pruned = prune(crop, occupied, anchors, targets, requires, weights, m, width, height);
+  const pruned = prune(crop, occupied, anchors, targets, requires, weights, seat, m, width, height);
 
   const plants = anchors.map((list) => list.length);
   const cells = crop.map((map) => map.reduce((n, v) => n + v, 0));
@@ -184,6 +226,7 @@ export function packGreenhouse(o: PackingOptions): Packing {
     plants,
     cells,
     pruned: total(placed) - total(plants),
+    seated: seating ? seatedCount(crop, targets, seat, m, width, height) : 0,
     grid: draw(crop, targets, locked, m, width, height),
     period: { rows: bestPeriod[0], cols: bestPeriod[1] },
     ceiling,
@@ -191,6 +234,46 @@ export function packGreenhouse(o: PackingOptions): Packing {
 }
 
 const total = (plants: number[]) => plants.reduce((a, b) => a + b, 0);
+
+/**
+ * Mutations with a wanted plant on one of their edges rather than only on their corners.
+ *
+ * Orthogonal means sharing an edge with the block: four cells for a 1x1, eight for a 2x2. The four
+ * corners of the ring are excluded, which is the whole point — a condition counts them and a crop
+ * effect does not.
+ */
+function seatedCount(
+  crop: Uint8Array[],
+  targets: number[],
+  seat: boolean[],
+  m: number,
+  width: number,
+  height: number,
+): number {
+  let seated = 0;
+  for (const at of targets) {
+    const r0 = Math.floor(at / width);
+    const c0 = at % width;
+    let found = false;
+    for (let i = 0; i < seat.length && !found; i++) {
+      if (!seat[i]) continue;
+      for (let r = r0; r < r0 + m && !found; r++) {
+        for (const c of [c0 - 1, c0 + m]) {
+          if (c < 0 || c >= width) continue;
+          if (crop[i][r * width + c]) found = true;
+        }
+      }
+      for (let c = c0; c < c0 + m && !found; c++) {
+        for (const r of [r0 - 1, r0 + m]) {
+          if (r < 0 || r >= height) continue;
+          if (crop[i][r * width + c]) found = true;
+        }
+      }
+    }
+    if (found) seated++;
+  }
+  return seated;
+}
 
 /** What the ring costs, in whatever units the weights were given in. */
 const bill = (plants: number[], weights: number[]) =>
@@ -336,6 +419,7 @@ function prune(
   targets: number[],
   requires: Requirement[],
   weights: number[],
+  seat: boolean[],
   m: number,
   width: number,
   height: number,
@@ -356,11 +440,16 @@ function prune(
   // be the same walk thousands of times over; a removal only ever subtracts from this.
   const fed = targets.map((at) => requires.map((_, i) => ringCount(crop[i], at, m, width, height)));
 
-  // Most expensive first, so the greedy spends its freedom where it is worth something. Ties keep
-  // the order the fill produced, which is scan order - stable, and so is the answer.
-  const order: { req: number; at: number }[] = [];
-  for (let i = 0; i < anchors.length; i++) for (const at of anchors[i]) order.push({ req: i, at });
-  order.sort((a, b) => (weights[b.req] ?? 1) - (weights[a.req] ?? 1));
+  // Most expensive first, so the greedy spends its freedom where it is worth something. A plant
+  // that is seating an effect goes last of all, whatever it cost: dropping it saves a few coins and
+  // silently turns a plot that waters itself into one that does not.
+  const order: { req: number; at: number; seats: boolean }[] = [];
+  for (let i = 0; i < anchors.length; i++) {
+    for (const at of anchors[i]) {
+      order.push({ req: i, at, seats: seat[i] === true && touchesEdge(at, requires[i].size, targets, m, width) });
+    }
+  }
+  order.sort((a, b) => Number(a.seats) - Number(b.seats) || (weights[b.req] ?? 1) - (weights[a.req] ?? 1));
 
   let dropped = 0;
   for (const { req, at } of order) {
@@ -381,6 +470,24 @@ function prune(
     dropped++;
   }
   return dropped;
+}
+
+/** Whether a plant sits on some mutation's edge rather than only on its corners. */
+function touchesEdge(at: number, size: number, targets: number[], m: number, width: number): boolean {
+  const pr = Math.floor(at / width);
+  const pc = at % width;
+  for (const target of targets) {
+    const tr = Math.floor(target / width);
+    const tc = target % width;
+    for (let r = pr; r < pr + size; r++) {
+      for (let c = pc; c < pc + size; c++) {
+        const vertical = c >= tc && c < tc + m && (r === tr - 1 || r === tr + m);
+        const horizontal = r >= tr && r < tr + m && (c === tc - 1 || c === tc + m);
+        if (vertical || horizontal) return true;
+      }
+    }
+  }
+  return false;
 }
 
 /** Lift one plant off the plot. */

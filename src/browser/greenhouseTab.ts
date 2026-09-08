@@ -714,10 +714,16 @@ function waterLine(row: MutationProfit): string {
   const { stages, survives, retain, safeTargets, targets } = row.drought;
   if (row.needsWater !== true) return `<p class="dim">Takes no water — plant it and leave it.</p>`;
 
+  // "Nothing retains water" and "the Gloomgourd is on the corner" are different answers, and the
+  // second is the one a reader can act on. A spreading condition counts ring cells, corners
+  // included; a crop effect reaches orthogonal neighbours only.
+  const bare = row.drought.stranded
+    ? "the crop that would retain water sits on its corners, where crop effects do not reach"
+    : "nothing beside it retains water";
   const held =
     retain.worst === retain.best
       ? retain.worst === 0
-        ? "nothing beside it retains water"
+        ? bare
         : `the ring holds back ${Math.round(retain.worst * 100)}% of what it would lose`
       : `the ring holds back ${Math.round(retain.worst * 100)}-${Math.round(retain.best * 100)}%, depending on where in the plot it lands`;
   const lasts = Number.isFinite(survives.worst) ? `${num(survives.worst)} stages` : "indefinitely";
@@ -1763,7 +1769,7 @@ function plotHtml(row: MutationProfit, mutation: Mutation, packing: NonNullable<
  * Aloe grows eleven where the tile search managed four, and PlantBoy Advance grows at all.
  */
 function optimiseHtml(row: MutationProfit, mutation: Mutation): string {
-  const layout = layoutStateOf(mutation, mutationIndex(), state.market, tables.npcPrices, FULL_PLOT, state.priceMode);
+  const layout = layoutStateOf(mutation, mutationIndex(), state.market, tables.npcPrices, FULL_PLOT, state.priceMode, tables.greenhouse);
   if (!layout) return "";
 
   if (layout.capped) {
@@ -1811,9 +1817,9 @@ function runOptimise(id: string): void {
 
   window.setTimeout(() => {
     try {
-      const result = optimiseLayout(mutation, mutationIndex(), state.market, tables.npcPrices, FULL_PLOT, state.priceMode);
+      const result = optimiseLayout(mutation, mutationIndex(), state.market, tables.npcPrices, FULL_PLOT, state.priceMode, tables.greenhouse);
       if (result) {
-        const layout = layoutStateOf(mutation, mutationIndex(), state.market, tables.npcPrices, FULL_PLOT, state.priceMode);
+        const layout = layoutStateOf(mutation, mutationIndex(), state.market, tables.npcPrices, FULL_PLOT, state.priceMode, tables.greenhouse);
         const grew = result.after.targets - result.before.targets;
         const saved = result.before.cost > 0 ? (result.before.cost - result.after.cost) / result.before.cost : 0;
         const said =

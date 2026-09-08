@@ -324,3 +324,86 @@ test("no prices means the old answer", () => {
   assert.deepEqual(bare.plants, flat.plants);
   assert.equal(bare.targets, flat.targets);
 });
+
+/* ------------------------------- a condition counts corners, an effect does not */
+
+/** Mutations with a plant of `req` sharing an edge with them, rather than only a corner. */
+function seatedTargets(grid: CellKind[][], req: number, m: number): { seated: number; total: number } {
+  const H = grid.length;
+  const W = grid[0].length;
+  const seen: boolean[][] = grid.map((line) => line.map(() => false));
+  let seated = 0;
+  let total = 0;
+  for (let r = 0; r + m <= H; r++) {
+    for (let c = 0; c + m <= W; c++) {
+      let whole = true;
+      for (let rr = r; rr < r + m && whole; rr++)
+        for (let cc = c; cc < c + m && whole; cc++) if (grid[rr][cc] !== "target" || seen[rr][cc]) whole = false;
+      if (!whole) continue;
+      for (let rr = r; rr < r + m; rr++) for (let cc = c; cc < c + m; cc++) (seen[rr][cc] = true);
+      total++;
+      let touching = false;
+      for (let rr = r; rr < r + m && !touching; rr++)
+        for (const cc of [c - 1, c + m]) if (cc >= 0 && cc < W && grid[rr][cc] === req) touching = true;
+      for (let cc = c; cc < c + m && !touching; cc++)
+        for (const rr of [r - 1, r + m]) if (rr >= 0 && rr < H && grid[rr][cc] === req) touching = true;
+      if (touching) seated++;
+    }
+  }
+  return { seated, total };
+}
+
+test("the cheapest ring puts the scarce crop on the corners, where an effect cannot reach", () => {
+  // Chocoberry's shape, and the reason this exists. Six cells of one crop and two of another; a
+  // corner cell lies in four rings at once and an edge cell in one, so economising on the second
+  // crop means seating it exactly where a crop effect does not reach.
+  const requires = [{ cells: 6, size: 1 }, { cells: 2, size: 1 }];
+  const dear = packGreenhouse({ ...PLOT, requires, targetSize: 1, weights: [0.75, 1] });
+  const { seated, total } = seatedTargets(dear.grid, 1, 1);
+  assert.ok(total > 0);
+  assert.equal(seated, 0, "left alone it corners the expensive crop — this is the bug being fixed");
+  assert.equal(dear.seated, 0, "and the packing says so");
+});
+
+test("asked to seat one, it puts that crop on the edges instead", () => {
+  const requires = [{ cells: 6, size: 1 }, { cells: 2, size: 1 }];
+  const seatedPack = packGreenhouse({ ...PLOT, requires, targetSize: 1, weights: [0.75, 1], seat: [false, true] });
+  const { seated, total } = seatedTargets(seatedPack.grid, 1, 1);
+  assert.equal(seated, total, "every mutation has one on an edge");
+  assert.equal(seatedPack.seated, total);
+  // And it does not buy that with yield: the tie-break sits under the target count, never over it.
+  assert.equal(seatedPack.targets, packGreenhouse({ ...PLOT, requires, targetSize: 1, weights: [0.75, 1] }).targets);
+});
+
+test("seating is only ever paid for when it is asked for", () => {
+  // Every other row on the page is still laid out on price alone. Asking for nothing has to leave
+  // the old answer exactly as it was, or one mutation's watering quietly reprices the whole table.
+  const requires = [{ cells: 4, size: 1 }, { cells: 4, size: 1 }];
+  const plain = packGreenhouse({ ...PLOT, requires, targetSize: 1, weights: [1, 0.05] });
+  const asked = packGreenhouse({ ...PLOT, requires, targetSize: 1, weights: [1, 0.05], seat: [false, false] });
+  assert.deepEqual(asked.plants, plain.plants);
+  assert.deepEqual(asked.grid, plain.grid);
+  assert.equal(plain.seated, 0, "nothing asked for, nothing counted");
+});
+
+test("the pruning does not strip a plant that is seating an effect", () => {
+  // It drops the dearest spare plant first, and a seated one is worth more than it costs — dropping
+  // it saves a few coins and silently turns a plot that waters itself into one that does not.
+  const requires = [{ cells: 6, size: 1 }, { cells: 2, size: 1 }];
+  const p = packGreenhouse({ ...PLOT, requires, targetSize: 1, weights: [0.1, 1], seat: [false, true] });
+  const { seated, total } = seatedTargets(p.grid, 1, 1);
+  assert.equal(seated, total, "still seated after the prune, despite being the expensive crop");
+});
+
+test("seating never costs a mutation", () => {
+  for (const requires of [
+    [{ cells: 6, size: 1 }, { cells: 2, size: 1 }],
+    [{ cells: 5, size: 1 }, { cells: 3, size: 1 }],
+    [{ cells: 2, size: 1 }, { cells: 2, size: 1 }],
+    [{ cells: 4, size: 1 }, { cells: 4, size: 1 }],
+  ]) {
+    const plain = packGreenhouse({ ...PLOT, requires, targetSize: 1 });
+    const asked = packGreenhouse({ ...PLOT, requires, targetSize: 1, seat: [false, true] });
+    assert.equal(asked.targets, plain.targets, JSON.stringify(requires));
+  }
+});
