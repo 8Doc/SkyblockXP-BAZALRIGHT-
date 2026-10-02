@@ -276,18 +276,28 @@ test("pruning never costs a mutation", () => {
   }
 });
 
-test("told what a plant costs, it buys fewer of the dear one", () => {
-  // Devourer's shape: four ring cells of a 758k mutation and four of a 3k one. Both arrangements
-  // grow sixteen and both plant seventy-five things, so nothing but the price can separate them —
-  // and the difference between them is a 38M ring and a 19M one.
+test("told what a plant costs, it buys as few of the dear one as can be", () => {
+  // Devourer's shape: four ring cells of a 758k mutation and four of a 3k one. Sixteen grow either
+  // way and sixty-five things are planted either way, so the entire bill is which crop goes where.
   const requires = [{ cells: 4, size: 1 }, { cells: 4, size: 1 }];
-  const flat = packGreenhouse({ ...PLOT, requires, targetSize: 1 });
   const priced = packGreenhouse({ ...PLOT, requires, targetSize: 1, weights: [1, 0.004] });
 
-  assert.equal(priced.targets, flat.targets, "the same number still grows");
-  assert.ok(priced.plants[0] < flat.plants[0], "fewer of the expensive one");
-  const bill = (p: Packing) => p.plants[0] * 758_000 + p.plants[1] * 3_000;
-  assert.ok(bill(priced) < bill(flat) * 0.8, `${bill(priced)} against ${bill(flat)}`);
+  assert.equal(priced.targets, 16);
+  assert.ok(priced.assigned, "and it proved the split rather than settling for one");
+  // Twenty-three is the floor and twenty-two is impossible: sixteen rings want four cells each, a
+  // cell can lie in at most four rings, and only nine cells of a 10x10 manage that — nine fours
+  // leave twenty-eight slots to be covered two at a time.
+  assert.equal(priced.plants[0], 23);
+  assert.equal(priced.plants[0] + priced.plants[1], 65, "the cell count is forced; only the split moves");
+});
+
+test("the tile's own split is not the cheapest one, which is the point of assigning", () => {
+  // What the repeating tile reaches on this shape, and what it costs to stop there. Pinned as a
+  // number because it is the regression that started this: the tile wins on yield, is taken as
+  // final, and quietly buys two more of the dear crop per greenhouse — six across three.
+  const requires = [{ cells: 4, size: 1 }, { cells: 4, size: 1 }];
+  const p = packGreenhouse({ ...PLOT, requires, targetSize: 1, weights: [1, 0.004] });
+  assert.ok(p.plants[0] <= 23, `a tile-only answer lands on 25, got ${p.plants[0]}`);
 });
 
 test("with the prices the other way round, so is the answer", () => {

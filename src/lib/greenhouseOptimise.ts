@@ -1,4 +1,13 @@
-import { packGreenhouse, ringSize, type CellKind, type Packing, type PackingOptions, type Requirement } from "./greenhouseLayout";
+import {
+  packGreenhouse,
+  refine,
+  ringSize,
+  targetsOn,
+  type CellKind,
+  type Packing,
+  type PackingOptions,
+  type Requirement,
+} from "./greenhouseLayout";
 
 /**
  * The expensive way to lay out a greenhouse, for when the cheap way might be leaving something.
@@ -88,11 +97,12 @@ export function optimise(o: OptimiseOptions): Optimised {
   const tile = packGreenhouse(o);
   const before = { targets: tile.targets, cost: bill(tile.plants, weights) };
 
-  // Nothing to search: the tile answer is already the most that can grow, and with every ring
-  // exactly full there is no slack in what gets planted either.
-  if (isCapped(requires, m) && tile.targets >= fullRingMaximum(m, width, height)) {
-    return { packing: tile, before, after: before, capped: true, elapsedMs: Date.now() - started };
-  }
+  // A capped mutation grows as many as it ever can, and that used to end the matter — the search
+  // returned here without looking at anything. It was the wrong conclusion from a right premise:
+  // the *yield* is settled, the *bill* is not. Which crop fills which cell is a free choice worth
+  // hundreds of thousands of coins, and on Phantomleaf the tile's own split buys twenty-five Chorus
+  // Fruit where twenty-three is enough. So the search still runs; it just cannot grow any more.
+  const capped = isCapped(requires, m) && tile.targets >= fullRingMaximum(m, width, height);
 
   const board: Board = { width, height, m, requires, weights, seat: requires.map((_, i) => o.seat?.[i] === true), locked };
   const restarts = Math.max(1, o.restarts ?? DEFAULT_RESTARTS);
@@ -105,15 +115,25 @@ export function optimise(o: OptimiseOptions): Optimised {
     if (candidate && betterThan(candidate, best, weights)) best = candidate;
   }
 
-  if (!best) return { packing: tile, before, after: before, capped: false, elapsedMs: Date.now() - started };
+  if (!best) return { packing: tile, before, after: before, capped, elapsedMs: Date.now() - started };
 
-  const packing = render(board, best, tile.ceiling);
+  const packing = refine(
+    render(board, best, tile.ceiling),
+    best.targets,
+    requires,
+    weights,
+    board.seat,
+    m,
+    width,
+    height,
+    o.assignBudget,
+  );
   const after = { targets: packing.targets, cost: bill(packing.plants, weights) };
   // Never hand back something worse than what was already on screen.
   if (after.targets < before.targets || (after.targets === before.targets && after.cost >= before.cost)) {
-    return { packing: tile, before, after: before, capped: false, elapsedMs: Date.now() - started };
+    return { packing: tile, before, after: before, capped, elapsedMs: Date.now() - started };
   }
-  return { packing, before, after, capped: false, elapsedMs: Date.now() - started };
+  return { packing, before, after, capped, elapsedMs: Date.now() - started };
 }
 
 /* ------------------------------------------------------------------ the board */
@@ -457,6 +477,7 @@ function render(b: Board, s: Solution, ceiling: number): Packing {
     plants,
     cells: plants.map((n, i) => n * b.requires[i].size ** 2),
     pruned: 0,
+    assigned: false,
     seated,
     grid,
     // Not a tiling, so there is no period to report. Saying 0x0 is how a reader tells an optimised

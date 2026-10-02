@@ -748,6 +748,16 @@ export function layoutKey(
   return `${plot.width}x${plot.height}:${lockedKey}:${shape}:${targetSize}:${weights.join("/")}:${seating}`;
 }
 
+/**
+ * The packing for one mutation, memoised.
+ *
+ * Keyed on the prices as well as the shape, and that is not an oversight. The tile search uses them
+ * to break ties between arrangements that grow the same number, and dropping them so that forty
+ * mutations could share seventeen searches was tried and reverted: an unweighted tile is a worse
+ * starting point for the exact assignment that follows, and where that assignment runs out of
+ * budget the worse start is what survives. It cost 2.7% of the total ring bill to save three
+ * seconds of the first render, which is the wrong way round.
+ */
 function packFor(
   plot: PlotShape,
   requires: { cells: number; size: number }[],

@@ -1735,12 +1735,16 @@ function plotHtml(row: MutationProfit, mutation: Mutation, packing: NonNullable<
     )
     .join("");
 
-  // A period of zero is how an optimised plot announces itself: it was not stamped from a tile, so
-  // there is no tile to quote.
+  // Two things shape a plot now, not one: a tile decides where the mutations go, and the exact
+  // assignment decides which crop fills every cell around them. Calling a plot "2×2 tile" when its
+  // planting visibly does not repeat reads as a bug in the picture rather than the answer it is.
+  // A period of zero means no tile at all — the optimiser placed the mutations one at a time.
   const shape =
     packing.period.rows === 0
       ? `<span title="Laid out one mutation at a time rather than stamped from a repeating tile, which is why it does not look regular.">irregular</span>`
-      : `${packing.period.rows}×${packing.period.cols} tile`;
+      : packing.assigned
+        ? `<span title="A ${packing.period.rows}×${packing.period.cols} tile decided where the mutations go. Which crop fills each cell around them was then settled exactly — that is why the planting does not repeat, and it is worth real coins: on Phantomleaf it is the difference between twenty-five Chorus Fruit and twenty-three.">${packing.period.rows}×${packing.period.cols} tile, crops solved</span>`
+        : `${packing.period.rows}×${packing.period.cols} tile`;
 
   return `
     <h4 class="gh-h">One greenhouse</h4>
@@ -1758,37 +1762,42 @@ function plotHtml(row: MutationProfit, mutation: Mutation, packing: NonNullable<
 /**
  * The button, and the one word beside it saying whether it has already been pressed.
  *
- * Three states rather than two, and the third is the point. Twenty-one of the forty mutations fill
- * their ring completely, and a full ring means no two can touch and none can sit against the edge —
- * so the positions are a lattice of known spacing and the count is arithmetic, not search. Those
- * rows are told outright that nothing can beat what they already have, rather than being offered a
- * second of waiting that provably cannot pay.
+ * Twenty-one of the forty fill their ring completely, and a full ring means no two mutations can
+ * touch and none can sit against the plot edge — so the positions are a lattice of known spacing
+ * and how many grow is arithmetic rather than search. Those rows say so.
  *
- * The rest get the button. It is not on by default because it costs about a second each and buys
- * nothing at all on most of them; it is worth it on eight, and two of those are dramatic — All-in
- * Aloe grows eleven where the tile search managed four, and PlantBoy Advance grows at all.
+ * They still get the button, and that is a correction. "The most that can grow" was being read as
+ * "nothing left to do", and the two are not the same: the yield is settled, the bill is not. Which
+ * crop fills which cell is a free choice worth hundreds of thousands of coins, and it is now
+ * settled exactly before the table is ever drawn — so on those rows the button is usually
+ * confirming an answer rather than finding one, and says as much when it does.
+ *
+ * The search is not on by default for the rest because it costs about a second each and buys
+ * nothing on most of them; it is worth it on eight, and two of those are dramatic — All-in Aloe
+ * grows eleven where the tile search managed four, and PlantBoy Advance grows at all.
  */
 function optimiseHtml(row: MutationProfit, mutation: Mutation): string {
   const layout = layoutStateOf(mutation, mutationIndex(), state.market, tables.npcPrices, FULL_PLOT, state.priceMode, tables.greenhouse);
   if (!layout) return "";
-
-  if (layout.capped) {
-    return `<p class="dim gh-opt"><span class="gh-tag" title="Every cell of this ring has to hold a plant, so no two of these can touch and none can sit against the plot edge. That fixes where they go and how many fit — it is arithmetic rather than a search, and this is already that number.">provably the most</span></p>`;
-  }
 
   if (state.optimising === row.id) {
     return `<p class="dim gh-opt"><button class="chip" disabled>searching…</button> <span class="gh-tag">a second or so</span></p>`;
   }
 
   const note = state.optimiseNote[layout.key];
+  // The yield cannot move on a capped row, so saying "provably the most" beside the button is the
+  // honest framing: it tells you what is settled without implying the bill is settled too.
+  const capped = layout.capped
+    ? `<span class="gh-tag" title="Every cell of this ring has to hold a plant, so no two of these can touch and none can sit against the plot edge. That fixes where they go and how many fit — it is arithmetic rather than a search. What it does not fix is which crop goes in which cell, which is what the bill is made of.">provably the most</span>`
+    : "";
   const tag = layout.optimised
     ? `<span class="gh-tag on" title="${escapeHtml(
         note ?? "This layout came from the expensive search and is kept until the plants change price.",
       )}">optimised</span>`
-    : `<span class="gh-tag" title="Showing the repeating-tile layout. The expensive search looks at irregular arrangements too, which on some conditions grow considerably more.">not optimised</span>`;
+    : `<span class="gh-tag" title="Showing the repeating-tile layout, with the crop in each cell already settled exactly. The expensive search looks at irregular arrangements too, which on some conditions grow considerably more.">not optimised</span>`;
 
   const label = layout.optimised ? "Search again" : "Optimise";
-  return `<p class="dim gh-opt"><button class="chip" data-ghoptimise="${escapeHtml(row.id)}" title="Lay this plot out one mutation at a time instead of stamping a repeating tile. Takes about a second, and the answer is kept.">${label}</button> ${tag}${
+  return `<p class="dim gh-opt"><button class="chip" data-ghoptimise="${escapeHtml(row.id)}" title="Lay this plot out one mutation at a time instead of stamping a repeating tile. Takes about a second, and the answer is kept.">${label}</button> ${capped}${capped ? " " : ""}${tag}${
     note ? ` <span class="dim">${escapeHtml(note)}</span>` : ""
   }</p>`;
 }
@@ -1827,7 +1836,9 @@ function runOptimise(id: string): void {
             ? `${grew} more at once — ${result.before.targets} → ${result.after.targets}`
             : saved > 0.01
               ? `same yield, ring ${Math.round(saved * 100)}% cheaper`
-              : "searched every arrangement it could reach; the tile layout was already the best of them";
+              : result.capped
+                ? "nothing left: the most that can grow, planted as cheaply as it can be"
+                : "searched every arrangement it could reach; the tile layout was already the best of them";
         if (layout) state.optimiseNote[layout.key] = said;
       }
       rememberLayouts();

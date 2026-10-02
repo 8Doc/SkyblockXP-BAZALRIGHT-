@@ -24,6 +24,8 @@
  * any arrangement could manage, from a counting argument — is reported beside every answer.
  */
 
+import { assignRings } from "./greenhouseAssign";
+
 /** One clause of a spreading condition: this many ring cells of a plant this big. */
 export type Requirement = { cells: number; size: number };
 
@@ -38,6 +40,8 @@ export type PackingOptions = {
   targetSize: number;
   /** Patterns to try per tile before giving up on it. Guards the browser, not correctness. */
   budget?: number;
+  /** Nodes the exact per-cell assignment may spend proving its answer. See `refine`. */
+  assignBudget?: number;
   /**
    * What one plant of each requirement costs, relative to the others. Defaults to all equal.
    *
@@ -85,6 +89,13 @@ export type Packing = {
   /** Plants the arrangement placed and the pruning pass took back out. See `prune`. */
   pruned: number;
   /**
+   * True where the crop in every cell was settled by the exact search rather than by the tile.
+   *
+   * See `refine`. False means the tile's own split was kept — either because a support is bigger
+   * than one cell, or because the search ran out of budget before it could prove anything.
+   */
+  assigned: boolean;
+  /**
    * Mutations with at least one `seat` plant orthogonally beside them, out of `targets`.
    *
    * Zero with nothing asked for. Short of `targets` means the condition could not be met on the
@@ -100,6 +111,24 @@ export type Packing = {
 };
 
 const key = (r: number, c: number) => `${r},${c}`;
+
+/** Where the mutations are on a drawn plot, as top-left indices. */
+export function targetsOn(grid: CellKind[][], m: number, width: number, height: number): number[] {
+  const claimed = new Uint8Array(width * height);
+  const out: number[] = [];
+  for (let r = 0; r + m <= height; r++) {
+    for (let c = 0; c + m <= width; c++) {
+      let whole = true;
+      for (let rr = r; rr < r + m && whole; rr++)
+        for (let cc = c; cc < c + m && whole; cc++)
+          if (grid[rr][cc] !== "target" || claimed[rr * width + cc]) whole = false;
+      if (!whole) continue;
+      for (let rr = r; rr < r + m; rr++) for (let cc = c; cc < c + m; cc++) claimed[rr * width + cc] = 1;
+      out.push(r * width + c);
+    }
+  }
+  return out;
+}
 
 /** The cells around an `m`x`m` block: eight for a single tile, twelve for a 2x2, sixteen for a 3x3. */
 export function ringSize(m: number): number {
@@ -221,15 +250,110 @@ export function packGreenhouse(o: PackingOptions): Packing {
   const plants = anchors.map((list) => list.length);
   const cells = crop.map((map) => map.reduce((n, v) => n + v, 0));
 
-  return {
+  const tiled: Packing = {
     targets: targets.length,
     plants,
     cells,
     pruned: total(placed) - total(plants),
+    assigned: false,
     seated: seating ? seatedCount(crop, targets, seat, m, width, height) : 0,
     grid: draw(crop, targets, locked, m, width, height),
     period: { rows: bestPeriod[0], cols: bestPeriod[1] },
     ceiling,
+  };
+
+  return refine(tiled, targets, requires, weights, seat, m, width, height, o.assignBudget);
+}
+
+/**
+ * Settle what goes in each cell exactly, now that where the mutations go is settled.
+ *
+ * The tile search answers two questions with one pattern — where the mutations sit, and which crop
+ * fills each cell around them — and it is only ever reasoned about as the first. The second comes
+ * out as a side effect of whichever tile won, and on a mutation whose ring is completely full the
+ * first question has a proven answer and the second is the whole remaining decision.
+ *
+ * Phantomleaf: sixteen grow either way, and the tile buys twenty-five Chorus Fruit where
+ * twenty-three is enough and twenty-two is impossible. Two plants, a hundred and forty-five
+ * thousand coins a greenhouse, four hundred and thirty-five thousand across three — for moving the
+ * same number of plants into different cells.
+ *
+ * Only for single-cell supports. A bigger plant is placed at an offset rather than chosen per cell,
+ * which is a different problem and is left to the general search in `greenhouseOptimise`.
+ */
+export function refine(
+  packing: Packing,
+  targets: number[],
+  requires: Requirement[],
+  weights: number[],
+  seat: boolean[],
+  m: number,
+  width: number,
+  height: number,
+  assignBudget?: number,
+): Packing {
+  if (targets.length === 0 || requires.length === 0) return packing;
+  if (requires.some((r) => r.size !== 1)) return packing;
+  // A budget of zero means the caller wants the tile on its own, to price later. See `packFor`.
+  if (assignBudget === 0) return packing;
+
+  // Every cell any mutation could be fed from, and which rings each one belongs to.
+  const index = new Map<number, number>();
+  const rings: number[][] = [];
+  for (const target of targets) {
+    const r0 = Math.floor(target / width);
+    const c0 = target % width;
+    const ring: number[] = [];
+    for (let r = r0 - 1; r <= r0 + m; r++) {
+      for (let c = c0 - 1; c <= c0 + m; c++) {
+        if (r < 0 || c < 0 || r >= height || c >= width) continue;
+        if (r >= r0 && r < r0 + m && c >= c0 && c < c0 + m) continue;
+        const flat = r * width + c;
+        if (!index.has(flat)) index.set(flat, index.size);
+        ring.push(index.get(flat)!);
+      }
+    }
+    rings.push(ring);
+  }
+
+  const seed = new Int8Array(index.size).fill(-1);
+  for (const [flat, at] of index) {
+    const cell = packing.grid[Math.floor(flat / width)][flat % width];
+    seed[at] = typeof cell === "number" ? cell : -1;
+  }
+
+  const found = assignRings({
+    requires: requires.map((r) => r.cells),
+    weights,
+    rings,
+    cells: index.size,
+    seed,
+    budget: assignBudget,
+  });
+  if (!found) return packing;
+
+  const grid = packing.grid.map((row) => row.slice());
+  for (const [flat, at] of index) {
+    const r = Math.floor(flat / width);
+    const c = flat % width;
+    if (grid[r][c] === "locked" || grid[r][c] === "target") continue;
+    grid[r][c] = found.cell[at] >= 0 ? (found.cell[at] as CellKind) : ("empty" as CellKind);
+  }
+
+  // Seating is a separate promise and the assignment does not know about it, so a refinement that
+  // would quietly take a water-retaining crop off a mutation's edge is declined rather than taken.
+  if (seat.some(Boolean)) {
+    const crop = requires.map(() => new Uint8Array(width * height));
+    for (const [flat, at] of index) if (found.cell[at] >= 0) crop[found.cell[at]][flat] = 1;
+    if (seatedCount(crop, targets, seat, m, width, height) < packing.seated) return packing;
+  }
+
+  return {
+    ...packing,
+    plants: found.plants,
+    cells: found.plants.map((n, i) => n * requires[i].size ** 2),
+    assigned: found.proven,
+    grid,
   };
 }
 
