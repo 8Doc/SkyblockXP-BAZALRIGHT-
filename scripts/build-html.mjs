@@ -102,6 +102,10 @@ const greenhouseData = {
     // The watering rate is the one figure where the wiki disagrees with everyone who plays the
     // game. The curated file carries both numbers and says which is being used and why.
     water: { ...(await loadJson("curated/greenhouse_water.json")) },
+    // Rare Crops drop per plant harvested and are scaled by Overbloom. Curated because the rates
+    // live on four item pages rather than on the Greenhouse one, and because which of them you can
+    // get at all depends on the armour you are wearing.
+    rareCrops: await loadJson("curated/greenhouse_rare_crops.json"),
   },
   npcPrices: (await loadJson("generated/npc-prices.json")).prices,
 };

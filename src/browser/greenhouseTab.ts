@@ -82,6 +82,16 @@ type State = {
   /** As typed. Empty means "use the estimate". */
   fortune: string;
   /**
+   * Overbloom, as typed. Empty is zero.
+   *
+   * A box for the same reason Farming Fortune is one: it comes off equipment, reforges,
+   * enchantments and pets, and the API publishes none of it as a stat. It barely moves, so it is
+   * worth typing once and leaving.
+   */
+  overbloom: string;
+  /** Which farming set is worn, which decides which Rare Crops can drop at all. */
+  rareCropSet: string;
+  /**
    * Crop Fortune per crop, as typed, keyed by the wiki's crop name.
    *
    * Separate from the box above because it behaves differently: it lifts one crop rather than all
@@ -306,6 +316,8 @@ const state: State = {
   plots: Number(localStorage.getItem("sbxp:ghplots") ?? 1),
   priceMode: (localStorage.getItem("sbxp:ghpricemode") as PriceMode) === "instant" ? "instant" : "order",
   fortune: localStorage.getItem("sbxp:ghfortune") ?? "",
+  overbloom: localStorage.getItem("sbxp:ghoverbloom") ?? "",
+  rareCropSet: localStorage.getItem("sbxp:ghset") ?? "",
   cropFortune: readCropFortune(),
   showCrops: localStorage.getItem("sbxp:ghshowcrops") === "1",
   contestCrops: readContestCrops(),
@@ -842,6 +854,8 @@ function rows(): MutationProfit[] {
     // Each mutation picks the drop its held bonus earns most on, which is what a person does when
     // they choose which tool to bring to it.
     heldCrop: "best",
+    overbloom: overbloomValue(),
+    rareCropSet: currentSet(),
     yieldMultiplier: yieldMultiplierOf(state.growth),
     plots: state.plots,
     priceMode: state.priceMode,
@@ -972,6 +986,15 @@ export function mountGreenhouse(container: HTMLElement, data: GreenhouseTables):
       return;
     }
 
+    const set = target.closest<HTMLElement>("[data-ghset]");
+    if (set) {
+      state.rareCropSet = set.dataset.ghset!;
+      localStorage.setItem("sbxp:ghset", state.rareCropSet);
+      // The whole panel, because the chips themselves have to light up with the choice.
+      render();
+      return;
+    }
+
     const plots = target.closest<HTMLElement>("[data-ghplots]");
     if (plots) {
       state.plots = Number(plots.dataset.ghplots);
@@ -1075,6 +1098,12 @@ export function mountGreenhouse(container: HTMLElement, data: GreenhouseTables):
     if (crop !== undefined) {
       state.cropFortune = { ...state.cropFortune, [crop]: el.value };
       localStorage.setItem(CROP_KEY, JSON.stringify(state.cropFortune));
+      renderTable();
+      return;
+    }
+    if (el.id === "ghoverbloom") {
+      state.overbloom = el.value;
+      localStorage.setItem("sbxp:ghoverbloom", el.value);
       renderTable();
       return;
     }
@@ -1413,6 +1442,41 @@ function dryChip(): string {
     title="Show only what can be planted and left. A plant spawns at 0 water, loses about 20 a growth stage and dies at -100, so five stages bare — what buys more is the ring, where a neighbour with Water Retain halves the loss and Improved Water Retain stops it. Sets the Water column's box to no.">Never needs watering</button></span>`;
 }
 
+/**
+ * Which farming set you are in, because it decides which Rare Crops can drop at all.
+ *
+ * Not a difficulty setting and not cumulative. The sets are mutually exclusive, and the best one is
+ * not a superset of the others: Cropie needs Tater armour and Squash needs Cropie armour, and both
+ * wiki pages say under Bugs that neither drops in the greenhouse while you are wearing Fermento or
+ * Helianthus. So the choice is real — Tater's Cropie at 20% a plant is worth more per harvest than
+ * Helianthus's Fermento and Helianthus together, which is a thing worth being able to see.
+ */
+function armourChips(): string {
+  const sets = tables.greenhouse.rareCrops?.sets ?? {};
+  const current = currentSet();
+  const chips = Object.entries(sets)
+    .map(([key, set]) => {
+      const odds = set.drops.map((d) => `${d.name} ${(d.chance * 100).toFixed(1)}%`).join(", ");
+      return `<button class="chip${key === current ? " on" : ""}" data-ghset="${escapeHtml(key)}"
+        title="${escapeHtml(`${odds} per plant harvested, before Overbloom.`)}">${escapeHtml(set.label)}</button>`;
+    })
+    .join("");
+  return chips ? `<span class="tabs" title="The armour you farm in. The sets do not stack and the best one does not drop everything.">${chips}</span>` : "";
+}
+
+function currentSet(): string {
+  const sets = tables.greenhouse.rareCrops?.sets ?? {};
+  const chosen = state.rareCropSet;
+  if (chosen && sets[chosen]) return chosen;
+  const fallback = tables.greenhouse.rareCrops?.defaultSet ?? "";
+  return sets[fallback] ? fallback : Object.keys(sets)[0] ?? "";
+}
+
+function overbloomValue(): number {
+  const typed = Number(state.overbloom.replace(/[^0-9.]/g, ""));
+  return state.overbloom.trim() !== "" && Number.isFinite(typed) && typed >= 0 ? typed : 0;
+}
+
 function render(): void {
   if (!host) return;
 
@@ -1424,6 +1488,10 @@ function render(): void {
         <label title="Your Farming Fortune. Nothing here can read it off your profile, so it is a box rather than a lookup.">Farming Fortune
           <input id="ghfortune" value="${escapeHtml(state.fortune)}" placeholder="${num(ASSUMED_FORTUNE)}" autocomplete="off">
         </label>
+        <label title="Overbloom, which multiplies every Rare Crop chance by 1 + Overbloom/100. It comes off equipment, reforges, enchantments and pets, none of which the API publishes, so it is a box — and it barely moves, so it is worth typing once.">Overbloom
+          <input id="ghoverbloom" value="${escapeHtml(state.overbloom)}" placeholder="0" autocomplete="off">
+        </label>
+        ${armourChips()}
         <span class="tabs">
           ${[1, 3].map((n) => `<button class="chip${state.plots === n ? " on" : ""}" data-ghplots="${n}">${n} greenhouse${n > 1 ? "s" : ""}</button>`).join("")}
         </span>
@@ -1857,6 +1925,14 @@ function runOptimise(id: string): void {
  * harvest, fortune does not touch it, and on the expensive rows it is most of the money — which is
  * exactly what a single total hides. The **Ethereal Vine** is a chance, so it is quoted as one.
  */
+/** A crop effect as the wiki writes it, rather than as the slug the model carries it by. */
+function effectName(effect: string): string {
+  return effect
+    .split("-")
+    .map((word) => (word === "xp" ? "XP" : word.charAt(0).toUpperCase() + word.slice(1)))
+    .join(" ");
+}
+
 function incomeHtml(row: MutationProfit, mutation: Mutation): string {
   const gross = row.coinsPerDay;
   if (gross === null || row.harvestsPerDay === null) {
@@ -1903,12 +1979,58 @@ function incomeHtml(row: MutationProfit, mutation: Mutation): string {
         )}</strong></td><td class="num dim">${gross > 0 ? `${Math.round((100 * row.vineRevenue * perDayCount) / gross)}%` : ""}</td></tr>`
       : "";
 
+  /**
+   * Rare Crops and the Harvest Bounty, as one line each rather than as the arithmetic.
+   *
+   * They are odds, not quantities — a 2.8% chance per plant harvested is not a thing you can write
+   * in the "quantity × price" shape the rest of the table uses without it reading as nonsense. So
+   * each gets its average a day and its odds in words, and the itemisation stays on hover. The
+   * bounty is seven items at seven different chances; spelling all of that out would be more rows
+   * than the crops themselves.
+   */
+  const chanceLine = (label: string, title: string, odds: string, perHarvest: number) =>
+    perHarvest <= 0
+      ? ""
+      : `<tr><td title="${escapeHtml(title)}">${label}</td><td class="num dim">${escapeHtml(odds)}</td><td class="num"><strong>${coins(
+          perHarvest * perDayCount,
+        )}</strong></td><td class="num dim">${gross > 0 ? `${Math.round((100 * perHarvest * perDayCount) / gross)}%` : ""}</td></tr>`;
+
+  const rareLine = chanceLine(
+    "Rare crops",
+    row.rareCrops.map((d) => `${d.name} ${(d.chance * 100).toFixed(2)}% × ${coins(d.each)}`).join("\n") +
+      "\n\nPer plant harvested, whatever the plant is, scaled by your Overbloom. Which of them can drop is decided by the armour: Cropie needs Tater and Squash needs Cropie, and neither drops in the greenhouse while you are wearing Fermento or Helianthus.",
+    row.rareCrops.map((d) => `${(d.chance * 100).toFixed(1)}%`).join(" + "),
+    row.rareRevenue,
+  );
+
+  const bountyLine = chanceLine(
+    "Harvest bounty",
+    row.bountyDrops.map((d) => `${d.name} ${(d.chance * 100).toFixed(2)}% × ${coins(d.each)}`).join("\n") +
+      "\n\nAn extra loot pool, rolled only because something in this ring grants Bonus Drops.",
+    "a roll a harvest",
+    row.bountyRevenue,
+  );
+
   // The crop-versus-item split used to be spelled out here. It is the % column, read twice.
   const fortune = row.drops.length
     ? `Crop counts include your <strong>${row.drops[0].multiplier.toFixed(1)}×</strong> fortune${
         row.cropsLifted.length ? ` (${escapeHtml(row.cropsLifted.join(", "))})` : ""
       }; the mutation itself is one item, so fortune does not touch it.`
     : "";
+
+  // What the plants around it are doing to the harvest, which is not a player stat and not
+  // something a reader can see from the plot picture alone.
+  const ringYield =
+    row.ring.yieldMultiplier === 1
+      ? ""
+      : ` The ring ${row.ring.yieldMultiplier > 1 ? "lifts" : "cuts"} the crop counts by <strong>${Math.round(
+          Math.abs(row.ring.yieldMultiplier - 1) * 100,
+        )}%</strong> <span class="dim" title="Harvest Boost is +20% and its improved form +30%; Harvest Loss is -20%, and an Immunity in the same ring cancels it. Only the crops move — the mutation is one item and the vine is a chance.">(${escapeHtml(
+          row.ring.effects
+            .filter((e) => e.includes("harvest") || e === "immunity")
+            .map(effectName)
+            .join(", ") || "adjacency",
+        )})</span>.`;
 
   const cadence =
     row.harvestsPerDay >= 1
@@ -1929,6 +2051,8 @@ function incomeHtml(row: MutationProfit, mutation: Mutation): string {
         ${cropLines}
         ${selfLine}
         ${vineLine}
+        ${rareLine}
+        ${bountyLine}
         <tr class="gh-total">
           <td>Gross a day</td>
           <td></td>
@@ -1937,7 +2061,7 @@ function incomeHtml(row: MutationProfit, mutation: Mutation): string {
         </tr>
       </tbody>
     </table>
-    <p class="dim">${fortune}</p>
+    <p class="dim">${fortune}${ringYield}</p>
   `;
 }
 

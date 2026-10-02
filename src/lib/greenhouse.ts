@@ -1,5 +1,14 @@
 import { NET_OF_TAX } from "./bazaar";
 import { packGreenhouse, type Packing } from "./greenhouseLayout";
+import {
+  effectsAtTargets,
+  effectsOf,
+  inForce,
+  rollsBounty,
+  sharedEffects,
+  yieldModifier,
+  type CropEffect,
+} from "./greenhouseEffects";
 import { fullRingMaximum, isCapped, optimise, type Optimised } from "./greenhouseOptimise";
 import type { ProductSnapshot } from "./bazaarTypes";
 import type { NpcPrice } from "./bazaarViews";
@@ -51,6 +60,27 @@ export type GreenhouseData = {
   generatedAt: string;
   growth: { baseStageSeconds: number; fastestStageSeconds: number };
   water: WaterData;
+  /**
+   * How much the yield buffs are worth. The adjacency pair — Harvest Boost and its improved form —
+   * is applied per mutation from what is planted beside it; the rest are player stats and live in
+   * `yieldMultiplierOf`.
+   */
+  yieldBuffs?: {
+    plantYieldUpgrade?: [number, number];
+    evergreenChip?: [number, number];
+    harvestBoost?: number;
+    improvedHarvestBoost?: number;
+    harvestLoss?: number;
+    xpBoost?: number;
+    improvedXpBoost?: number;
+    xpLoss?: number;
+    perUniqueCrop?: number;
+    allTwelveUnique?: number;
+  };
+  /** The extra loot pool a Bonus Drops neighbour unlocks, from the Greenhouse page. */
+  harvestBounty?: { id: string; chance: number }[];
+  /** Rare Crops that drop per plant harvested, and the stat that scales them. See `data/curated`. */
+  rareCrops?: RareCropData;
   maxPlots: number;
   etherealVineByRarity: Record<string, number>;
   baseCrops: { id: string; name: string; baseYield: number; growthCycles: number }[];
@@ -236,29 +266,6 @@ export function waterBudget(data: GreenhouseData): number {
   return (data.water.spawnsAt ?? 0) - (data.water.deathAt ?? -100);
 }
 
-/** The crop effects that bear on watering. A plant either grants one or it does not. */
-export type WaterEffect = "improved" | "retain" | "drain" | "immunity" | null;
-
-/**
- * What one plant does to the watering of the plants beside it.
- *
- * Reaches orthogonal neighbours only — the Greenhouse page is explicit that crop effects skip the
- * diagonals, which matters here because it means a 1x1 mutation is touched by four of the eight
- * cells in its ring rather than all of them.
- *
- * A plant grants at most one of these. Immunity is in the list because it is what cancels a drain:
- * "Provides Immunity to negative effects", and several of the crops people plant as ring filler
- * carry it.
- */
-export function waterEffectOf(m: Mutation | undefined): WaterEffect {
-  const effects = (m?.effects ?? []).join(" ");
-  if (/Improved Water Retain/i.test(effects)) return "improved";
-  if (/Water Retain/i.test(effects)) return "retain";
-  if (/Water Drain/i.test(effects)) return "drain";
-  if (/Immunity/i.test(effects)) return "immunity";
-  return null;
-}
-
 /**
  * The net effect on one plant of everything standing beside it.
  *
@@ -266,6 +273,10 @@ export function waterEffectOf(m: Mutation | undefined): WaterEffect {
  * not — two neighbours granting Water Retain is the same tick as one, not twice the buff. This was
  * modelled as a sum at first, which quietly turned every second retaining neighbour into a plant
  * that never dries out; the effects are flags and this reads them as flags.
+ *
+ * It also used to read its own effects, one per plant, returning on the first match — so Shellfruit,
+ * which retains water *and* grants immunity, was granting only the water. It now shares the reader
+ * in `greenhouseEffects` with everything else that asks what a ring is doing.
  *
  * **Improved overrides plain.** The wiki states this outright for exactly one pair — "Improved
  * Harvest Boost ... Overrides Harvest Boost" — and the buffs are built to one pattern, so the
@@ -275,14 +286,14 @@ export function waterEffectOf(m: Mutation | undefined): WaterEffect {
  * **Immunity cancels the drain.** It "provides Immunity to negative effects", and a Water Drain is
  * one, so a ring holding both comes out at the retain alone.
  */
-export function waterModifier(effects: Iterable<WaterEffect>, data: GreenhouseData): number {
-  const seen = new Set(effects);
-  const retain = seen.has("improved")
+export function waterModifier(effects: Iterable<CropEffect>, data: GreenhouseData): number {
+  const ring = new Set(effects);
+  const retain = ring.has("improved-water-retain")
     ? (data.water.improvedRetain ?? 1)
-    : seen.has("retain")
+    : ring.has("water-retain")
       ? (data.water.retain ?? 0.5)
       : 0;
-  const drained = seen.has("drain") && !seen.has("immunity") ? (data.water.drain ?? -0.3) : 0;
+  const drained = inForce(ring, "water-drain") ? (data.water.drain ?? -0.3) : 0;
   return retain + drained;
 }
 
@@ -309,44 +320,9 @@ export function stagesBeforeDrought(data: GreenhouseData, retain = 0): number {
  * mutation that survives and one that does not. The caller decides what to do with the spread.
  */
 export function retainAtTargets(m: Mutation, byId: Map<string, Mutation>, packing: Packing, data: GreenhouseData): number[] {
-  const grid = packing.grid;
-  const height = grid.length;
-  const width = height > 0 ? grid[0].length : 0;
-  const size = Math.max(1, m.size || 1);
-  const effect = m.spreading.requires.map((r) => waterEffectOf(byId.get(r.id)));
-
-  const claimed = new Uint8Array(width * height);
-  const out: number[] = [];
-  for (let r = 0; r + size <= height; r++) {
-    for (let c = 0; c + size <= width; c++) {
-      let whole = true;
-      for (let rr = r; rr < r + size && whole; rr++)
-        for (let cc = c; cc < c + size && whole; cc++)
-          if (grid[rr][cc] !== "target" || claimed[rr * width + cc]) whole = false;
-      if (!whole) continue;
-      for (let rr = r; rr < r + size; rr++) for (let cc = c; cc < c + size; cc++) claimed[rr * width + cc] = 1;
-
-      // Orthogonal only: the cells sharing an edge with the block, never the four corners. What is
-      // collected is the set of effects present, not a tally — see `waterModifier`.
-      const present = new Set<WaterEffect>();
-      for (let rr = r; rr < r + size; rr++) {
-        for (const cc of [c - 1, c + size]) {
-          if (cc < 0 || cc >= width) continue;
-          const cell = grid[rr][cc];
-          if (typeof cell === "number") present.add(effect[cell] ?? null);
-        }
-      }
-      for (let cc = c; cc < c + size; cc++) {
-        for (const rr of [r - 1, r + size]) {
-          if (rr < 0 || rr >= height) continue;
-          const cell = grid[rr][cc];
-          if (typeof cell === "number") present.add(effect[cell] ?? null);
-        }
-      }
-      out.push(waterModifier(present, data));
-    }
-  }
-  return out;
+  return effectsAtTargets(m.spreading.requires, (id) => byId.get(id), packing, m.size).map((ring) =>
+    waterModifier(ring, data),
+  );
 }
 
 /**
@@ -366,8 +342,8 @@ export function seatingFor(m: Mutation, byId: Map<string, Mutation>, data: Green
   if (m.needsWater !== true) return undefined;
   if ((m.growthStages ?? 0) <= stagesBeforeDrought(data, 0)) return undefined;
   const seat = m.spreading.requires.map((r) => {
-    const effect = waterEffectOf(byId.get(r.id));
-    return effect === "retain" || effect === "improved";
+    const granted = effectsOf(byId.get(r.id));
+    return granted.has("water-retain") || granted.has("improved-water-retain");
   });
   return seat.some(Boolean) ? seat : undefined;
 }
@@ -383,8 +359,8 @@ export function seatingFor(m: Mutation, byId: Map<string, Mutation>, data: Green
 export function retainStranded(m: Mutation, byId: Map<string, Mutation>, packing: Packing, data: GreenhouseData): boolean {
   const retainers = new Set(
     m.spreading.requires
-      .map((r, i) => [i, waterEffectOf(byId.get(r.id))] as const)
-      .filter(([, effect]) => effect === "retain" || effect === "improved")
+      .map((r, i) => [i, effectsOf(byId.get(r.id))] as const)
+      .filter(([, granted]) => granted.has("water-retain") || granted.has("improved-water-retain"))
       .map(([i]) => i),
   );
   if (retainers.size === 0) return false;
@@ -636,6 +612,46 @@ export function setupFor(
  * Magic Jellybean and Fleshtrap stand forever, so a ring built only from those is planted once.
  */
 export type SetupLife = { hours: number | null; exact: boolean };
+
+/**
+ * A bazaar id as a person would read it. The Harvest Bounty table is scraped as ids alone.
+ *
+ * Title case over the underscores, which is what every one of these happens to be — "Burrowing
+ * Spores", "Overclocker 3000", "Synthesis Garden Chip". Good enough for a line in a breakdown, and
+ * it fails visibly rather than silently if the table ever carries something odder.
+ */
+export function readableItem(id: string): string {
+  return id
+    .toLowerCase()
+    .split("_")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
+/** One drop that arrives as odds rather than as a quantity: a chance, and what it is worth. */
+export type ChanceDrop = {
+  id: string;
+  name: string;
+  /** Per plant harvested, after Overbloom. */
+  chance: number;
+  each: number;
+  /** chance x price — what one harvest of one mutation is worth in this drop on average. */
+  coins: number;
+};
+
+export type RareCropSet = {
+  label: string;
+  drops: { id: string; name: string; chance: number; pieces?: number }[];
+  source?: string;
+};
+
+export type RareCropData = {
+  sets: Record<string, RareCropSet>;
+  defaultSet?: string;
+  defaultOverbloom?: number;
+  note?: string;
+  armourNote?: string;
+};
 
 /**
  * What is known about drying out. Scraped figures, overwritten at build time by `curated`.
@@ -952,6 +968,25 @@ export type MutationProfit = {
   self: DropRevenue | null;
   /** Ethereal Vines are a second revenue stream and scale with rarity. */
   vineRevenue: number;
+  /**
+   * What the ring does to this mutation beyond feeding it.
+   *
+   * `yieldMultiplier` lifts or cuts the crop drops only: Yield is "the base crops given when
+   * harvesting", so the mutation's own item and the vine are untouched by it.
+   */
+  ring: {
+    /** The effects reaching every mutation in the plot, not merely some of them. */
+    effects: CropEffect[];
+    yieldMultiplier: number;
+    /** Whether the ring unlocks the Harvest Bounty roll. */
+    bounty: boolean;
+  };
+  /** Rare Crops, which drop per plant harvested rather than per crop. Averaged, not rolled. */
+  rareCrops: ChanceDrop[];
+  rareRevenue: number;
+  /** The Harvest Bounty pool, which only rolls behind a Bonus Drops neighbour. */
+  bountyDrops: ChanceDrop[];
+  bountyRevenue: number;
   /** How many greenhouses these figures cover. Setup is paid per greenhouse. */
   plots: number;
   /** Coins every mutation in every plot brings in, one harvest — the gross figure per cycle. */
@@ -1037,6 +1072,22 @@ export type ProfitOptions = {
   heldCrop?: string | "best" | null;
   /** Multiplied on top of fortune: plant yield upgrade, evergreen chips, adjacency buffs. */
   yieldMultiplier?: number;
+  /**
+   * The Overbloom stat, which multiplies every Rare Crop chance by `1 + overbloom/100`.
+   *
+   * A box rather than a lookup. It comes off equipment, reforges, enchantments and pets, none of
+   * which the API publishes as a stat — the same shape of problem as Farming Fortune, and the same
+   * answer. It also barely moves, so it is worth typing once.
+   */
+  overbloom?: number;
+  /**
+   * Which farming set is being worn, which decides *which* Rare Crops can drop at all.
+   *
+   * Not a difficulty setting. The sets are mutually exclusive and the best one does not drop
+   * everything: Cropie needs Tater armour and Squash needs Cropie armour, and both pages say
+   * outright that neither drops in the Greenhouse while wearing Fermento or Helianthus.
+   */
+  rareCropSet?: string;
   plots?: number;
   /**
    * Whether mutations are traded across the spread or by leaving an order up.
@@ -1210,9 +1261,20 @@ export function cropFortuneIndex(data: GreenhouseData): Map<string, string> {
 
 export function profitOf(m: Mutation, byId: Map<string, Mutation>, data: GreenhouseData, o: ProfitOptions): MutationProfit {
   const npcPrices = o.npcPrices ?? {};
-  const yieldBuffs = o.yieldMultiplier ?? 1;
   const fortuneByCrop = o.cropFortuneIndex ?? cropFortuneIndex(data);
   const mode = o.priceMode ?? "order";
+
+  // The plot comes first, because what is planted around a mutation changes what its harvest is
+  // worth. Harvest Boost and its improved form lift the crop drops by a fifth or three tenths and
+  // Harvest Loss cuts them by a fifth, and which of those reach the mutation is a fact about the
+  // layout rather than about the player.
+  const setup = setupFor(m, byId, o.market, npcPrices, o.plot ?? FULL_PLOT, mode, data);
+  const ringEffects = setup ? effectsAtTargets(m.spreading.requires, (id) => byId.get(id), setup.packing, m.size) : [];
+  // Shared rather than averaged: a figure quoted for the plot has to hold for every mutation in it,
+  // and an effect only some of them see would flatter the rest.
+  const shared = sharedEffects(ringEffects);
+  const ringYield = yieldModifier(shared, data.yieldBuffs ?? {});
+  const yieldBuffs = (o.yieldMultiplier ?? 1) * ringYield;
 
   // Per drop, not per mutation: each one carries its own crop fortune on top of the general one,
   // so a mutation dropping two different crops is lifted by two different amounts.
@@ -1292,11 +1354,64 @@ export function profitOf(m: Mutation, byId: Map<string, Mutation>, data: Greenho
   const vinePrice = unitPrice("ETHEREAL_VINE", o.market, npcPrices, mode) ?? 0;
   const vineRevenue = vineChance * vinePrice;
 
+  /**
+   * Rare Crops, which are a different kind of income from everything above.
+   *
+   * They do not come off the drop table and they do not scale with fortune. Every page says the
+   * same thing: a flat chance per "crop or mutation with a Harvestable status" broken, whatever
+   * that plant happens to be, multiplied by `1 + Overbloom/100`.
+   *
+   * Which ones can drop at all is decided by the armour, and the sets are mutually exclusive in a
+   * way that is easy to get backwards. The best set is not a superset: Cropie needs Tater armour
+   * and Squash needs Cropie armour, and both pages state under Bugs that neither drops in the
+   * Greenhouse while wearing Fermento or Helianthus. So a maxed farmer gets Fermento and
+   * Helianthus and neither of the other two.
+   *
+   * Counted per mutation harvested. The ring's own base crops are harvestable too and would each
+   * roll again, which is not counted here because the ring is modelled as a cost rather than a
+   * crop — so this is a floor on the rare-crop income, not an estimate of it.
+   */
+  const bloom = 1 + Math.max(0, o.overbloom ?? data.rareCrops?.defaultOverbloom ?? 0) / 100;
+  const setName = o.rareCropSet ?? data.rareCrops?.defaultSet ?? "helianthus";
+  const rareCrops: ChanceDrop[] = [];
+  let rareRevenue = 0;
+  for (const drop of data.rareCrops?.sets?.[setName]?.drops ?? []) {
+    const each = unitPrice(drop.id, o.market, npcPrices, mode);
+    if (each === null) continue;
+    const chance = drop.chance * bloom;
+    const coins = chance * each;
+    rareRevenue += coins;
+    rareCrops.push({ id: drop.id, name: drop.name, chance, each, coins });
+  }
+
+  /**
+   * The Harvest Bounty pool, which is not free income either.
+   *
+   * "Harvesting crops with the Bonus Drops effect in the Greenhouse rolls for Harvest Bounty" —
+   * so it is worth whatever the ring makes it worth, and nothing at all on a ring with no Bonus
+   * Drops in it. Eight mutations grant the effect, which makes it a reason to plant one.
+   *
+   * Overbloom is deliberately not applied. Some of this pool are Rare Crops and would scale, and
+   * nothing anywhere states that the bounty roll is one — so it is left alone rather than lifted
+   * on a guess, and the omission only ever understates.
+   */
+  const bounty = rollsBounty(shared);
+  const bountyDrops: ChanceDrop[] = [];
+  let bountyRevenue = 0;
+  if (bounty) {
+    for (const drop of data.harvestBounty ?? []) {
+      const each = unitPrice(drop.id, o.market, npcPrices, mode);
+      if (each === null) continue;
+      const coins = drop.chance * each;
+      bountyRevenue += coins;
+      bountyDrops.push({ id: drop.id, name: readableItem(drop.id), chance: drop.chance, each, coins });
+    }
+  }
+
   const stages = stagesPerHarvest(m);
   const hoursPerStage = stageSeconds(data, o.growth) / 3600;
   const hoursPerHarvest = stages === null ? null : stages * hoursPerStage;
 
-  const setup = setupFor(m, byId, o.market, npcPrices, o.plot ?? FULL_PLOT, mode, data);
   const plots = o.plots ?? 1;
 
   // How many grow at once, which is the figure the whole ranking turns on. A mutation paying twice
@@ -1308,7 +1423,7 @@ export function profitOf(m: Mutation, byId: Map<string, Mutation>, data: Greenho
   const retains = setup ? retainAtTargets(m, byId, setup.packing, data) : [];
   const cellsUsed = (setup?.packing.cells.reduce((a, b) => a + b, 0) ?? 0) + perPlot * m.size * m.size;
 
-  const total = (revenue + vineRevenue) * perPlot;
+  const total = (revenue + vineRevenue + rareRevenue + bountyRevenue) * perPlot;
   // The bill is per greenhouse — three plots is three rings to buy — where the takings are already
   // multiplied by the same three. Quoting a one-plot setup beside a three-plot income would flatter
   // exactly the mutations with the most expensive rings, which are the ones the figure is for.
@@ -1358,6 +1473,11 @@ export function profitOf(m: Mutation, byId: Map<string, Mutation>, data: Greenho
     drops,
     self,
     vineRevenue,
+    ring: { effects: [...shared], yieldMultiplier: ringYield, bounty },
+    rareCrops,
+    rareRevenue,
+    bountyDrops,
+    bountyRevenue,
     plots,
     perHarvest: total * plots,
     harvestsPerDay: hoursPerHarvest === null || hoursPerHarvest <= 0 ? null : 24 / hoursPerHarvest,

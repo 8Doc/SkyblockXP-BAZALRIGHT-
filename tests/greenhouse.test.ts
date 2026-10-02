@@ -21,7 +21,6 @@ import {
   stagesPerHarvest,
   needsWatering,
   retainAtTargets,
-  waterEffectOf,
   waterModifier,
   waterBudget,
   waterLossPerStage,
@@ -29,6 +28,7 @@ import {
   unitPrice,
 } from "../src/lib/greenhouse";
 import type { DecayData, GreenhouseData, Mutation } from "../src/lib/greenhouse";
+import { effectsOf, type CropEffect } from "../src/lib/greenhouseEffects";
 import { NET_OF_TAX } from "../src/lib/bazaar";
 import type { ProductSnapshot } from "../src/lib/bazaarTypes";
 import greenhouseJson from "../data/generated/greenhouse.json";
@@ -458,7 +458,10 @@ test("the daily breakdown adds up to coins per day", () => {
   const rows = rankMutations(data, { market, growth: GROWTH, farmingFortune: 800 }).filter((r) => r.coinsPerDay !== null);
   assert.ok(rows.length > 20, "a fake market should price most of the list");
   for (const r of rows) {
-    const perHarvest = r.drops.reduce((s, d) => s + d.coins, 0) + (r.self?.coins ?? 0) + r.vineRevenue;
+    // Every stream, or the invariant stops being one: whatever is added to the total has to be
+    // added here too, which is the point of keeping the check at all.
+    const perHarvest =
+      r.drops.reduce((s, d) => s + d.coins, 0) + (r.self?.coins ?? 0) + r.vineRevenue + r.rareRevenue + r.bountyRevenue;
     const day = perHarvest * r.perPlot * r.plots * r.harvestsPerDay!;
     assert.ok(Math.abs(day - r.coinsPerDay!) < Math.max(1, r.coinsPerDay! * 1e-9), `${r.name} does not reconcile`);
   }
@@ -1069,45 +1072,48 @@ test("what the ring does is most of the answer", () => {
   // a plant losing nothing never runs dry however long it grows. It takes an Improved to get here;
   // two plain retains do not, because the effect is a tick rather than a count.
   assert.equal(stagesBeforeDrought(data, 1), Infinity);
-  assert.equal(waterModifier(["retain", "retain"], data), 0.5, "which two plain ones do not reach");
+  assert.equal(waterModifier(["water-retain", "water-retain"] as CropEffect[], data), 0.5, "which two plain ones do not reach");
   // Water Drain cuts the other way.
   assert.ok(stagesBeforeDrought(data, -0.3) < 5);
 });
 
 test("the effect a plant has on its neighbours is read off its own effects", () => {
-  const by = (name: string) => data.mutations.find((m) => m.name === name);
-  assert.equal(waterEffectOf(by("Shadevine")), "improved");
-  assert.equal(waterEffectOf(by("Gloomgourd")), "retain");
-  assert.equal(waterEffectOf(by("Veilshroom")), "drain");
-  assert.equal(waterEffectOf(by("Choconut")), "immunity");
-  assert.equal(waterEffectOf(by("Coalroot")), null, "no water effect");
-  assert.equal(waterEffectOf(undefined), null, "a base crop the index does not carry");
+  const by = (name: string) => effectsOf(data.mutations.find((m) => m.name === name));
+  assert.ok(by("Shadevine").has("improved-water-retain"));
+  assert.ok(by("Gloomgourd").has("water-retain"));
+  assert.ok(by("Veilshroom").has("water-drain"));
+  assert.ok(by("Choconut").has("immunity"));
+  assert.equal(by("Coalroot").has("water-retain"), false, "no water effect");
+  assert.equal(effectsOf(undefined).size, 0, "a base crop the index does not carry");
+  // Shellfruit grants two at once, which the old one-effect reader could not say.
+  const shellfruit = by("Shellfruit");
+  assert.ok(shellfruit.has("water-retain") && shellfruit.has("immunity"));
 });
 
 test("effects are ticked, not counted", () => {
   // In game a crop shows the effects on it as a list of ticks. Two neighbours granting Water Retain
   // is the same tick as one, and modelling it as a sum quietly turned every second retaining
   // neighbour into a plant that never dries out.
-  assert.equal(waterModifier(["retain"], data), 0.5);
-  assert.equal(waterModifier(["retain", "retain"], data), 0.5, "twice is not twice as much");
-  assert.equal(waterModifier(["retain", "retain", "retain", "retain"], data), 0.5);
-  assert.equal(waterModifier([], data), 0);
-  assert.equal(waterModifier([null, null], data), 0);
+  assert.equal(waterModifier(["water-retain"] as CropEffect[], data), 0.5);
+  assert.equal(waterModifier(["water-retain", "water-retain"] as CropEffect[], data), 0.5, "twice is not twice as much");
+  assert.equal(waterModifier(["water-retain", "water-retain", "water-retain", "water-retain"] as CropEffect[], data), 0.5);
+  assert.equal(waterModifier([] as CropEffect[], data), 0);
+  assert.equal(waterModifier([] as CropEffect[], data), 0);
 });
 
 test("improved retain replaces the plain one rather than adding to it", () => {
   // The wiki states the override for exactly one pair — "Improved Harvest Boost ... Overrides
   // Harvest Boost" — and the buffs are built to one pattern.
-  assert.equal(waterModifier(["improved"], data), 1);
-  assert.equal(waterModifier(["improved", "retain"], data), 1, "not 1.5");
+  assert.equal(waterModifier(["improved-water-retain"] as CropEffect[], data), 1);
+  assert.equal(waterModifier(["improved-water-retain", "water-retain"] as CropEffect[], data), 1, "not 1.5");
 });
 
 test("immunity cancels a drain, and nothing else does", () => {
-  assert.equal(waterModifier(["drain"], data), -0.3);
-  assert.equal(waterModifier(["drain", "immunity"], data), 0, "immunity is to negative effects");
-  assert.equal(waterModifier(["retain", "drain"], data), 0.2, "without immunity they both apply");
-  assert.equal(waterModifier(["retain", "drain", "immunity"], data), 0.5);
-  assert.equal(waterModifier(["immunity"], data), 0, "on its own it retains nothing");
+  assert.equal(waterModifier(["water-drain"] as CropEffect[], data), -0.3);
+  assert.equal(waterModifier(["water-drain", "immunity"] as CropEffect[], data), 0, "immunity is to negative effects");
+  assert.equal(waterModifier(["water-retain", "water-drain"] as CropEffect[], data), 0.2, "without immunity they both apply");
+  assert.equal(waterModifier(["water-retain", "water-drain", "immunity"] as CropEffect[], data), 0.5);
+  assert.equal(waterModifier(["immunity"] as CropEffect[], data), 0, "on its own it retains nothing");
 });
 
 test("Chocoberry is safe because of what is planted around it", () => {
