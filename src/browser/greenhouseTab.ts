@@ -1836,7 +1836,7 @@ function incomeHtml(row: MutationProfit, mutation: Mutation): string {
   const chance = row.vineChance;
   const vineLine =
     row.vineRevenue > 0
-      ? `<tr><td>Ethereal Vine</td><td class="num dim">${Math.round(chance * 100)}% a harvest</td><td class="num"><strong>${coins(
+      ? `<tr><td>Ethereal Vine</td><td class="num dim">${chance < 1 ? `${Math.round(chance * 100)}%` : chance.toFixed(2)} a harvest</td><td class="num"><strong>${coins(
           row.vineRevenue * perDayCount,
         )}</strong></td><td class="num dim">${gross > 0 ? `${Math.round((100 * row.vineRevenue * perDayCount) / gross)}%` : ""}</td></tr>`
       : "";

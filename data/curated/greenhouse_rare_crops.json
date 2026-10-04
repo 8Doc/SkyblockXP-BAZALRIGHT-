@@ -56,11 +56,17 @@
   "defaultSetNote": "The set a maxed farmer is actually in. It is also the one with the lower rates - Tater's Cropie at 20% a plant is worth far more per harvest than Fermento's 2.8% - which is a real choice the page can show rather than make.",
   "defaultOverbloom": 0,
   "overbloomNote": "Zero until told otherwise. It comes off equipment, reforges, enchantments and pets rather than anything the API publishes as a stat, so it is a box like Farming Fortune. It rarely changes, so it is worth typing once.",
-  "greenhouseMultiplier": 4.29,
-  "greenhouseMultiplierSource": "One measured harvest, 2026-10-04: 64 Phantomleaf in 4/4 Helianthus armour at 140 Overbloom, sacks confirmed empty of both beforehand. 12 Helianthus and 17 Fermento came out, against 2.46 and 4.30 from the wiki rates with Overbloom applied - 29 against 6.76, so x4.29. The two are pooled rather than corrected separately (x4.9 and x4.0 on their own) because 12 and 17 events are too few to tell their ratio from the wiki’s, so the wiki’s 1.6 : 2.8 split is kept.",
+  "greenhouseMultiplier": 5.72,
+  "greenhouseMultiplierSource": "One measured harvest, 2026-10-04: one harvest of three greenhouses of Phantomleaf, 48 blocks broken, in 4/4 Helianthus armour at 140 Overbloom, sacks confirmed empty of both beforehand. 12 Helianthus and 17 Fermento came out, against 1.84 and 3.23 from the wiki rates with Overbloom applied - 29 against 5.07, so x5.72. The two are pooled rather than corrected separately because 12 and 17 events are too few to tell their ratio from the wiki's, so the wiki's 1.6 : 2.8 split is kept. An earlier version of this figure, x4.29, divided by 64 - the Phantomleaf items sold - which overcounts the blocks broken: one Phantomleaf block can give more than one Phantomleaf item.",
   "greenhouseMultiplierRange": [
-    2.87,
-    6.16
+    3.83,
+    8.22
   ],
-  "greenhouseMultiplierCaveat": "One harvest, one mutation. The 95% Poisson range on 29 drops is x2.9 to x6.2, so the figure is a fair estimate rather than a settled one. It is applied per mutation harvested. A per-plant mechanic - the ring rolling as well, which would be x5.06 for Phantomleaf (81 plants for 16 mutations) - fits this harvest equally well and would vary by mutation; one harvest of a mutation with a different ring size would tell the two apart. Ethereal Vine is not part of this: it reconciled with Overbloom alone."
+  "greenhouseMultiplierCaveat": "One harvest of one mutation. The 95% Poisson range on 29 drops is x3.8 to x8.2. Applied per mutation harvested. Phantomleaf's harvest has a hide-and-seek step that other mutations do not, so a harvest of a different mutation is what would show whether the rate holds elsewhere.",
+  "vineMultiplier": 1.43,
+  "vineMultiplierSource": "The same harvest: 66 Ethereal Vines from 48 Legendary blocks, 1.375 a harvest. The wiki's 40% with Overbloom's x2.4 gives 0.96, so x1.43 on top of Overbloom (95% range x1.11 to x1.82 on 66 drops). It also shows a harvest can give more than one vine, so the chance is not capped at one.",
+  "vineMultiplierRange": [
+    1.11,
+    1.82
+  ]
 }

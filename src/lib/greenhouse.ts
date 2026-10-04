@@ -684,6 +684,8 @@ export type RareCropData = {
   sets: Record<string, RareCropSet>;
   /** Measured against the wiki rates in a real harvest. See the curated file for the evidence. */
   greenhouseMultiplier?: number;
+  /** The same, for the Ethereal Vine on top of Overbloom. */
+  vineMultiplier?: number;
   defaultSet?: string;
   defaultOverbloom?: number;
   note?: string;
@@ -1005,7 +1007,10 @@ export type MutationProfit = {
   self: DropRevenue | null;
   /** Ethereal Vines are a second revenue stream and scale with rarity. */
   vineRevenue: number;
-  /** The chance of a vine a harvest after Overbloom, which is what the revenue above was priced at. */
+  /**
+   * Vines expected a harvest, after Overbloom and the measured correction — what the revenue above
+   * was priced at. Can exceed one: a measured harvest gave 1.375 a block.
+   */
   vineChance: number;
   /**
    * What the ring does to this mutation beyond feeding it.
@@ -1337,11 +1342,14 @@ export function profitOf(m: Mutation, byId: Map<string, Mutation>, data: Greenho
   // An Ethereal Vine on harvest, at odds that rise with rarity. It is the only way to enlarge the
   // greenhouse and it trades on the bazaar, so it is real income rather than a curiosity.
   // Overbloom lifts it, because an Ethereal Vine is a Rare Crop — the wiki lists it as one, and
-  // Overbloom "increases chances of dropping Rare Crops". A measured harvest settled it: 64
-  // Phantomleaf at 140 Overbloom gave 66 vines, against 25.6 at the bare 40% and 61.4 with
-  // Overbloom applied. Capped at one a harvest, which is all the drop table ever offers.
+  // Overbloom "increases chances of dropping Rare Crops". Even then it runs short: a measured
+  // harvest of 48 Legendary blocks at 140 Overbloom gave 66 vines, 1.375 a harvest, where the
+  // wiki's 40% with Overbloom gives 0.96. So it is calibrated on top — see `vineMultiplier` in the
+  // curated rare-crop file — and not capped at one, since that harvest gave more than one a block.
+  // It is an expected count per harvest, not a probability.
   const bloomed = 1 + Math.max(0, o.overbloom ?? data.rareCrops?.defaultOverbloom ?? 0) / 100;
-  const vineChance = Math.min(1, (data.etherealVineByRarity[(m.rarity ?? "").toLowerCase()] ?? 0) * bloomed);
+  const vineChance =
+    (data.etherealVineByRarity[(m.rarity ?? "").toLowerCase()] ?? 0) * bloomed * (data.rareCrops?.vineMultiplier ?? 1);
   // The vine follows the toggle for the same reason a mutation does: a thin book where the two
   // sides are far apart, and one you would plausibly leave an offer up for.
   const vinePrice = unitPrice("ETHEREAL_VINE", o.market, npcPrices, mode) ?? 0;
@@ -1365,7 +1373,7 @@ export function profitOf(m: Mutation, byId: Map<string, Mutation>, data: Greenho
    * crop — so this is a floor on the rare-crop income, not an estimate of it.
    */
   const bloom = bloomed;
-  // The wiki's per-plant rates run about four times short in the Greenhouse; see
+  // The wiki's per-plant rates run several times short in the Greenhouse; see
   // `greenhouseMultiplier` in data/curated/greenhouse_rare_crops.json for the harvest that showed it.
   const calibrated = data.rareCrops?.greenhouseMultiplier ?? 1;
   const setName = o.rareCropSet ?? data.rareCrops?.defaultSet ?? "helianthus";

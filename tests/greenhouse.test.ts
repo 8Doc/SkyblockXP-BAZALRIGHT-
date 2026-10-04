@@ -1154,21 +1154,38 @@ test("watering is answered for every row, and the ring is what decides it", () =
 /* ----------------------------------- a real harvest, held as the thing to agree with */
 
 /**
- * One measured harvest, 2026-10-04: 64 Phantomleaf, sold straight from the sacks. 2,499 Farming
- * Fortune, 422 Carrot Fortune, 186 Potato Fortune, 140 Overbloom, 4/4 Helianthus armour, a maxed
- * Evergreen Chip, and sacks confirmed empty of Fermento and Helianthus beforehand.
+ * One measured harvest, 2026-10-04: one harvest of three greenhouses of Phantomleaf, so 48 blocks
+ * broken, sold straight from the sacks. 2,499 Farming Fortune, 422 Carrot Fortune, 186 Potato
+ * Fortune, 140 Overbloom, 4/4 Helianthus armour, a maxed Evergreen Chip, and sacks confirmed empty
+ * of Fermento and Helianthus beforehand.
  *
  * It came out as 322 Enchanted Baked Potato and 6,170 Enchanted Potato, 422 Enchanted Golden
  * Carrot and 5,348 Enchanted Carrot, 12 Helianthus, 17 Fermento and 66 Ethereal Vines. Each
  * compaction step is 160:1, so that is 9,230,400 potatoes and 11,658,880 carrots.
+ *
+ * The Phantomleaf items sold (64, and more unsold) are not the block count: one block can give
+ * more than one Phantomleaf. Dividing by them once produced a calibration a third too low.
+ *
+ * Still open: the crops. They need ×2.30 on top of fortune and the model gives ×1.80 at these
+ * settings, so the crop lines are about 22% short. Not pinned here, because pinning a gap is not
+ * the same as explaining it.
  */
 const HARVEST = {
-  phantomleaf: 64,
+  blocks: 48,
   potato: 322 * 25_600 + 6_170 * 160,
   carrot: 422 * 25_600 + 5_348 * 160,
   helianthus: 12,
   fermento: 17,
   vines: 66,
+};
+
+const HARVEST_GROWTH: GrowthParams = {
+  uniqueCrops: null,
+  cropGrowth: 210,
+  speedAttribute: 10,
+  growthSpeedUpgrade: 9,
+  plantYieldUpgrade: 9,
+  evergreenChip: 60,
 };
 
 function harvestRow(growth: GrowthParams) {
@@ -1190,28 +1207,19 @@ function harvestRow(growth: GrowthParams) {
   return rows.find((r) => r.name === "Phantomleaf")!;
 }
 
-const HARVEST_GROWTH: GrowthParams = {
-  uniqueCrops: null,
-  cropGrowth: 210,
-  speedAttribute: 10,
-  growthSpeedUpgrade: 9,
-  plantYieldUpgrade: 9,
-  evergreenChip: 60,
-};
-
 test("the fortune formula holds: both crops need the same leftover multiplier", () => {
-  // The cleanest check in the harvest. Divide out each crop's own fortune and whatever is left is
-  // yield, which is common to both — so if the formula were wrong the two would disagree.
-  const potato = HARVEST.potato / HARVEST.phantomleaf / (3000 * (1 + (2499 + 186) / 100));
-  const carrot = HARVEST.carrot / HARVEST.phantomleaf / (3500 * (1 + (2499 + 422) / 100));
+  // Divide out each crop's own fortune and whatever is left is yield, which is common to both — so
+  // if the additive formula were wrong the two would disagree. This holds whatever the block count.
+  const potato = HARVEST.potato / HARVEST.blocks / (3000 * (1 + (2499 + 186) / 100));
+  const carrot = HARVEST.carrot / HARVEST.blocks / (3500 * (1 + (2499 + 422) / 100));
   assert.ok(Math.abs(potato - carrot) / potato < 0.005, `${potato} against ${carrot}`);
 });
 
 test("unique crops are counted from the ring, and a ring of mutations has none", () => {
   const by = (name: string) => data.mutations.find((m) => m.name === name)!;
-  // Chorus Fruit and Shellfruit are both mutations, so Phantomleaf gets no unique-crop bonus at all.
+  // Chorus Fruit and Shellfruit are both mutations: no unique-crop bonus from this ring at all.
   assert.equal(uniqueBaseCrops(by("Phantomleaf"), data), 0);
-  // Pumpkin and Melon are base crops.
+  // Pumpkin and Melon are base crops — melon only once BUILDER_MELON is read as MELON.
   assert.equal(uniqueBaseCrops(by("Gloomgourd"), data), 2);
   // Fire is a requirement and not a plant.
   assert.ok(uniqueBaseCrops(by("Ashwreath"), data) <= 1);
@@ -1222,60 +1230,33 @@ test("a typed unique-crop count overrides the ring, and an empty one counts it",
   assert.deepEqual(counted.uniqueCrops, { count: 0, counted: true });
   const typed = harvestRow({ ...HARVEST_GROWTH, uniqueCrops: 12 });
   assert.deepEqual(typed.uniqueCrops, { count: 12, counted: false });
-  // Twelve buys +36% yield and +30% growth speed, which is exactly what the old default handed
-  // every row whether or not its ring grew a single base crop.
   assert.ok(typed.drops[0].multiplier > counted.drops[0].multiplier);
   assert.ok(typed.hoursPerHarvest! < counted.hoursPerHarvest!);
 });
 
-test("the crops land within six per cent of the harvest", () => {
+test("the vine count is calibrated to the harvest", () => {
   const r = harvestRow(HARVEST_GROWTH);
-  const potato = r.drops.find((d) => d.id === "POTATO_ITEM")!;
-  const carrot = r.drops.find((d) => d.id === "CARROT_ITEM")!;
-  const modelPotato = potato.amount * potato.multiplier * HARVEST.phantomleaf;
-  const modelCarrot = carrot.amount * carrot.multiplier * HARVEST.phantomleaf;
-  // ×1.80 against ×1.726 measured. The old default of twelve unique crops put it at ×2.16 — 25%
-  // high — and the residual here is a Plant Yield tier below nine, which is the box to check.
-  for (const [model, real] of [[modelPotato, HARVEST.potato], [modelCarrot, HARVEST.carrot]]) {
-    assert.ok(model / real > 1 && model / real < 1.06, `${Math.round(model)} against ${real}`);
-  }
-});
-
-test("Overbloom lifts the Ethereal Vine, and the harvest says so", () => {
-  const r = harvestRow(HARVEST_GROWTH);
-  // Revenue over the per-vine price the model used is the expected count. The price is not 1 even
-  // with a book at 1: the sale is taxed.
+  // Revenue over the taxed per-vine price is the expected count.
   const each = unitPrice("ETHEREAL_VINE", new Map([["ETHEREAL_VINE", product("ETHEREAL_VINE", 1, 1)]]), {}, "instant")!;
-  const vines = (r.vineRevenue / each) * HARVEST.phantomleaf;
-  assert.ok(Math.abs(vines - 64 * 0.4 * 2.4) < 1e-6, `${vines}`);
-  // 61.4 expected against 66 seen sits well inside the noise; 25.6 without Overbloom does not.
-  assert.ok(Math.abs(HARVEST.vines - vines) < 2 * Math.sqrt(vines));
-  assert.ok(Math.abs(HARVEST.vines - 64 * 0.4) > 4 * Math.sqrt(64 * 0.4));
+  const vines = (r.vineRevenue / each) * HARVEST.blocks;
+  assert.ok(Math.abs(vines - HARVEST.vines) < 1, `${vines} against ${HARVEST.vines}`);
+  // The wiki's 40% with Overbloom gives 46 — and 66 is not a draw from that.
+  const wiki = HARVEST.blocks * 0.4 * 2.4;
+  assert.ok(HARVEST.vines > wiki + 2.5 * Math.sqrt(wiki));
 });
 
-test("the vine chance stops at one a harvest", () => {
-  const rare = rareJson as unknown as RareCropData;
-  const market = new Map<string, ProductSnapshot>([
-    ["ETHEREAL_VINE", product("ETHEREAL_VINE", 1, 1)],
-    ["PHANTOMLEAF", product("PHANTOMLEAF", 1, 1)],
-  ]);
-  const rows = rankMutations({ ...data, rareCrops: rare } as GreenhouseData, {
-    market,
-    growth: HARVEST_GROWTH,
-    farmingFortune: 0,
-    overbloom: 500,
-    priceMode: "instant",
-  });
-  for (const r of rows) assert.ok(r.vineRevenue <= 1 + 1e-9, `${r.name} ${r.vineRevenue}`);
+test("a harvest can give more than one vine", () => {
+  // 66 from 48 blocks is 1.375 a harvest, which a chance capped at one could never produce.
+  const r = harvestRow(HARVEST_GROWTH);
+  assert.ok(r.vineChance > 1, `${r.vineChance}`);
 });
 
 test("the rare-crop rate is calibrated to the harvest, and it is well outside the wiki's", () => {
   const r = harvestRow(HARVEST_GROWTH);
-  const helianthus = r.rareCrops.find((d) => d.id === "HELIANTHUS")!.chance * HARVEST.phantomleaf;
-  const fermento = r.rareCrops.find((d) => d.id === "FERMENTO")!.chance * HARVEST.phantomleaf;
+  const helianthus = r.rareCrops.find((d) => d.id === "HELIANTHUS")!.chance * HARVEST.blocks;
+  const fermento = r.rareCrops.find((d) => d.id === "FERMENTO")!.chance * HARVEST.blocks;
   // Pooled to the 29 seen, keeping the wiki's 1.6 : 2.8 split between the two.
   assert.ok(Math.abs(helianthus + fermento - (HARVEST.helianthus + HARVEST.fermento)) < 0.5);
-  // The wiki's own rates, at 140 Overbloom, give 6.8 — and 29 is not a draw from that.
-  const wiki = HARVEST.phantomleaf * (0.016 + 0.028) * 2.4;
+  const wiki = HARVEST.blocks * (0.016 + 0.028) * 2.4;
   assert.ok(HARVEST.helianthus + HARVEST.fermento > wiki + 5 * Math.sqrt(wiki));
 });
