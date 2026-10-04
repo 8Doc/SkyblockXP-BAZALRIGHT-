@@ -1832,7 +1832,8 @@ function incomeHtml(row: MutationProfit, mutation: Mutation): string {
       )
     : `<tr><td>${escapeHtml(mutation.name)} itself</td><td class="gold" colspan="3">not on the bazaar</td></tr>`;
 
-  const chance = tables.greenhouse.etherealVineByRarity?.[(row.rarity ?? "").toLowerCase()] ?? 0;
+  // After Overbloom, from the model — the rarity table alone said 40% beside coins priced at 96%.
+  const chance = row.vineChance;
   const vineLine =
     row.vineRevenue > 0
       ? `<tr><td>Ethereal Vine</td><td class="num dim">${Math.round(chance * 100)}% a harvest</td><td class="num"><strong>${coins(

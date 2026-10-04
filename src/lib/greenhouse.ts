@@ -1005,6 +1005,8 @@ export type MutationProfit = {
   self: DropRevenue | null;
   /** Ethereal Vines are a second revenue stream and scale with rarity. */
   vineRevenue: number;
+  /** The chance of a vine a harvest after Overbloom, which is what the revenue above was priced at. */
+  vineChance: number;
   /**
    * What the ring does to this mutation beyond feeding it.
    *
@@ -1467,6 +1469,7 @@ export function profitOf(m: Mutation, byId: Map<string, Mutation>, data: Greenho
     drops,
     self,
     vineRevenue,
+    vineChance,
     ring: { effects: [...shared], yieldMultiplier: ringYield, bounty },
     uniqueCrops: { count: uniqueCrops, counted: o.growth.uniqueCrops === null || o.growth.uniqueCrops === undefined },
     rareCrops,
