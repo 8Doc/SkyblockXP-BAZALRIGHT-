@@ -1042,32 +1042,30 @@ export type ProfitOptions = {
    * Crop Fortune, keyed by the crop name the wiki uses — "Wheat", "Cocoa Beans", "Mushroom".
    *
    * Unlike the above, this *does* move the ranking: it applies only to the crop it names, so a
-   * mutation dropping wheat and one dropping cocoa beans are lifted by different amounts. Sources
-   * are the tool being held, Anita's shop, Carrolyn, and the Overdrive Chip — which grants up to
-   * +140 for the active crop but only during a Jacob's Farming Contest, so it is a contest-day
-   * figure rather than a standing one.
+   * mutation dropping wheat and one dropping cocoa beans are lifted by different amounts.
+   *
+   * The game shows each crop's fortune as a stat of its own and adds Farming Fortune to it when
+   * the crop is broken, so the figure wanted here is the one the game shows, tool and all. It used
+   * to be assembled from parts — a tool read off item lore, added on top of whatever was typed —
+   * which double-counted the tool for anyone who typed the number they could see, and read the
+   * wrong item for anyone carrying a bigger crop line on something else.
    */
   cropFortune?: Record<string, number>;
   /**
-   * Crop fortune that only applies to the one crop you are set up for, keyed the same way.
+   * Crop fortune that applies to one crop at a time, keyed the same way: the Overdrive Chip.
    *
-   * Kept apart from `cropFortune` because most of a crop fortune is not passive. A farming tool
-   * carries up to +200 for its own crop and you can hold exactly one of them; the Overdrive Chip's
-   * +140 lifts the contest's active crop and no other. So a mutation dropping wheat and cocoa beans
-   * does not get both bonuses at once — you hold the tool for whichever drop is worth more and the
-   * other crop comes out at its passive rate.
-   *
-   * Adding these to `cropFortune` was the quiet error: it gave every drop of a multi-crop mutation
-   * a tool that cannot be held twice, and multi-crop mutations are exactly where the difference
-   * matters. Only `heldCrop` receives this.
+   * Kept apart from `cropFortune` because the chip's +140 lifts the contest's *active* crop and no
+   * other. So a mutation dropping wheat and cocoa beans gets it on one of them — whichever it is
+   * worth most on — and the other crop comes out at its ordinary rate. Adding it to `cropFortune`
+   * would hand it to every drop of a multi-crop mutation at once, which no contest does.
    */
   heldCropFortune?: Record<string, number>;
   /**
    * Which crop the held bonus applies to, or "best" to let each mutation choose.
    *
-   * "best" is the honest default and what anybody actually does: you look at what the mutation
-   * drops, and you hold the tool for whichever of them the bonus is worth most on. Naming a crop
-   * pins it instead, which is what you want when comparing a contest day against a normal one.
+   * "best" is the honest default: the bonus goes on whichever of the mutation's drops it earns the
+   * most on. Naming a crop pins it instead, which is what you want when comparing one contest
+   * against another.
    */
   heldCrop?: string | "best" | null;
   /** Multiplied on top of fortune: plant yield upgrade, evergreen chips, adjacency buffs. */
@@ -1151,61 +1149,6 @@ export const CROP_UPGRADE_MAX_LEVEL = 9;
 
 export function cropUpgradeFortune(level: number): number {
   return CROP_UPGRADE_FORTUNE_PER_LEVEL * Math.max(0, Math.min(CROP_UPGRADE_MAX_LEVEL, Math.floor(level)));
-}
-
-/**
- * The crop fortune an item's own lore states, keyed by the crop it lifts.
- *
- * Every source worth reading writes it the same way — "Wheat Fortune: +200" — so the lore is the
- * honest place to read it from. Deriving it from tool tiers instead would mean modelling Euclid's
- * Sickle, Gauss's Shovel and the rest, each with three marks and a level, and getting a number the
- * game already prints on the item.
- *
- * Colour codes are stripped first: SkyBlock lore is full of them and they sit inside the numbers.
- */
-const CROP_FORTUNE_LINE = /([A-Za-z' ]+?)\s+Fortune:\s*\+?\s*([\d,.]+)/g;
-
-/**
- * Fortunes that are not crop fortunes, so a reader can tell noise from a crop it failed to place.
- *
- * "Fortune" is a whole family of stats and only thirteen of them are crops. A geared account's lore
- * is full of the rest — Mining, Foraging, Hunting, Gemstone, the per-tree Foraging fortunes — and
- * without this list every one of them looks like a crop the page could not identify, which buries
- * the one case worth reporting: a crop named under a spelling the table does not carry.
- */
-const NOT_A_CROP = new Set(
-  [
-    "farming", "bonus farming", "mining", "foraging", "fishing", "hunting", "combat",
-    "gemstone", "ore", "block", "dwarven metal", "sweep",
-    // Foraging's per-tree fortunes, which read exactly like crop fortunes and are not.
-    "fig", "mangrove", "helix", "tree",
-  ].map((name) => name.toLowerCase()),
-);
-
-/** True where a "<name> Fortune" line is one of the thirteen crops rather than another stat. */
-export function isCropFortuneStat(name: string): boolean {
-  return !NOT_A_CROP.has(name.trim().toLowerCase());
-}
-
-export function cropFortuneFromLore(items: string[]): Record<string, number> {
-  const found: Record<string, number> = {};
-  for (const item of items) {
-    // Each entry is one item's whole lore, newlines and all — `loreFrom` joins the lines — so this
-    // has to walk every match rather than take the first. Taking the first is what broke it: a
-    // farming tool states `Farming Fortune` before its crop fortune, that first match is the
-    // general stat and gets skipped, and the crop fortune three lines below was never looked at.
-    // Every tool in the game reads that way round, so nothing was ever detected.
-    const clean = item.replace(/§./g, "").replace(/&[0-9a-fk-or]/g, "");
-    for (const match of clean.matchAll(CROP_FORTUNE_LINE)) {
-      const crop = match[1].trim();
-      // Mining Fortune, Foraging Fortune and the rest of the family, which are not crops.
-      if (!isCropFortuneStat(crop)) continue;
-      const value = Number(match[2].replace(/,/g, ""));
-      if (!Number.isFinite(value) || value <= 0) continue;
-      found[crop] = Math.max(found[crop] ?? 0, value);
-    }
-  }
-  return found;
 }
 
 /**

@@ -16,7 +16,7 @@ import {
 } from "../lib/types";
 import { ApiError, cacheAge, fetchAccessoryBins, fetchBazaar, fetchReferencePrices, fetchGarden, fetchMuseum, fetchProfiles, readBag, readLore, readOwnedItems, resolveUuid } from "./api";
 import { mountBazaar, unmountBazaar } from "./bazaarTab";
-import { mountGreenhouse, setDetectedFortune, setToolReloader, unmountGreenhouse } from "./greenhouseTab";
+import { mountGreenhouse, setDetectedFortune, unmountGreenhouse } from "./greenhouseTab";
 import { setMinionProfile } from "./minionsTab";
 import { setDetectedWisdom } from "./minionPetTab";
 import { mountMinionsSection, unmountMinionsSection } from "./minionsSection";
@@ -339,72 +339,21 @@ function rebuildCatalog(): void {
   }
   setMinionProfile(coop?.collected ?? collectedFrom(state.member), ownedTier, state.playerName);
   void shareWisdom();
-  void shareFortune();
-  // The greenhouse re-reads the inventory on a button, because one read sees one tool. It cannot
-  // fetch on its own — the key and the profile live here — so it is handed the loader.
-  setToolReloader(reloadInventory);
+  shareGarden();
 }
 
 /**
- * Fetch the profile again, then read the tools out of it.
+ * Hand the greenhouse what the garden endpoint publishes: crop upgrade levels and upgrade tiers.
  *
- * `shareFortune` alone would not do: it reads `state.member`, which is the profile as it stood when
- * it was last fetched. The whole point of the button is that you swap the tool in your hand and
- * press it again, and against a cached profile every press would return the same tool for as long
- * as the page stayed open. So this re-fetches first.
- *
- * Only the profile is re-fetched — not the museum, the garden or the price feeds. None of them can
- * have anything to say about which hoe you are holding.
+ * Nothing from item lore. Crop fortune was read off the tools once, and it was wrong both ways: it
+ * took the biggest crop line anywhere in the inventory whatever item carried it, and added that on
+ * top of a box people fill with the figure the game already shows. The boxes are typed now.
  */
-async function reloadInventory(): Promise<void> {
-  if (!state.uuid || !state.profileId) return;
-  const key = state.apiKey.trim();
-  if (!key) return;
-
-  state.profiles = await fetchProfiles(state.uuid, key);
-  const profile = state.profiles.find((p) => p.profile_id === state.profileId);
-  const member = profile?.members[state.uuid];
-  if (member) state.member = member;
-  await shareFortune();
-}
-
-/**
- * Read what crop fortune the profile can be made to admit to, and hand it to the greenhouse.
- *
- * The Garden publishes its crop upgrade levels outright, which is +5 fortune a level to +45 and the
- * one part of a farming setup that needs no guessing. The rest comes off item lore, the same way
- * Wisdom does — every farming tool prints "Wheat Fortune: +200" on itself, so reading the lore
- * beats modelling three marks of Euclid's Sickle to arrive at a number the game already states.
- *
- * Every bag is scanned rather than a named one. The farming toolkit is a recent addition and this
- * has no business knowing what key Hypixel filed it under; walking `bag_contents` finds it whatever
- * it is called, and finds the next one too.
- *
- * Fired off rather than awaited, for the same reason as the Wisdom read: it costs a handful of gzip
- * decodes and nothing on the page is waiting for it.
- */
-async function shareFortune(): Promise<void> {
-  if (!state.member) return;
-  const inventory = state.member.inventory;
+function shareGarden(): void {
   const upgrades = state.garden?.cropUpgrades ?? {};
-  if (!inventory && Object.keys(upgrades).length === 0) return;
-
-  const sources = [
-    inventory?.inv_contents?.data,
-    inventory?.equipment_contents?.data,
-    inventory?.inv_armor?.data,
-    inventory?.ender_chest_contents?.data,
-    inventory?.personal_vault_contents?.data,
-    ...Object.values(inventory?.bag_contents ?? {}).map((bag) => bag?.data),
-    ...Object.values(inventory?.backpack_contents ?? {}).map((pack) => pack?.data),
-  ].filter((data): data is string => typeof data === "string");
-
-  const lore = (await Promise.all(sources.map((data) => readLore(data).catch(() => [])))).flat();
-  setDetectedFortune({
-    cropUpgrades: upgrades,
-    gardenUpgrades: state.garden?.gardenUpgrades ?? {},
-    lore,
-  });
+  const tiers = state.garden?.gardenUpgrades ?? {};
+  if (Object.keys(upgrades).length === 0 && Object.keys(tiers).length === 0) return;
+  setDetectedFortune({ cropUpgrades: upgrades, gardenUpgrades: tiers });
 }
 
 /**

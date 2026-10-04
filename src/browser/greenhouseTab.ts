@@ -8,7 +8,6 @@ import { coins, num } from "../lib/format";
 import {
   FULL_PLOT,
   OVERDRIVE_CHIP_FORTUNE,
-  cropFortuneFromLore,
   cropResolver,
   cropUpgradeFortune,
   layoutStateOf,
@@ -109,22 +108,15 @@ type State = {
    * condition under which one crop pulls far ahead of the rest.
    */
   contestCrops: Record<string, boolean>;
-  /** Passive crop fortune read off the profile, per crop. Anything typed wins over it. */
-  detected: Record<string, number> | null;
-  /** The best farming tool found per crop, from item lore. Applies only to the crop you hold it for. */
-  tools: Record<string, number> | null;
-  /** How many tools the last read saw, as against how many are remembered. */
-  lastFound: number;
-  /** True while a tool read is in flight, so the button can say so. */
-  loadingTools: boolean;
   /**
-   * What the last profile read actually saw.
+   * The Garden's crop upgrades, per crop, as the default for a box nobody has typed in.
    *
-   * On the page rather than in a console, because this read has now been wrong twice in ways that
-   * looked identical from outside — no tools found, and six crops silently unmatched — and neither
-   * was visible without saying out loud what went in and what came back.
+   * Published outright by the garden endpoint, so it is a known floor rather than a guess. It is
+   * never added to anything: a typed figure — including a typed zero — replaces it.
    */
-  scan: { items: number; upgradeKeys: string[]; unresolved: string[] } | null;
+  detected: Record<string, number> | null;
+  /** Which crop ids the garden endpoint published, so the page can say how many it placed. */
+  scan: { upgradeKeys: string[] } | null;
   growth: GrowthParams;
   /** Which row's layout is open, if any. */
   open: string | null;
@@ -171,40 +163,6 @@ function readCropFortune(): Record<string, string> {
   }
 }
 
-/**
- * The tools found so far, remembered across sessions and added to rather than replaced.
- *
- * You hold one tool at a time and the Farming Toolkit is not published, so any single read of a
- * profile sees at most the one tool that happens to be out. Replacing the set on every read would
- * mean the page could never know about more than one — so each read merges, and the collection
- * builds up over however many visits it takes. A figure from last week is a fine answer here: a
- * tool's crop fortune changes when you upgrade the tool, which is rarely, and the box is editable.
- */
-const TOOLS_KEY = "sbxp:ghtools";
-
-function readTools(): Record<string, number> {
-  try {
-    const raw = localStorage.getItem(TOOLS_KEY);
-    const parsed = raw ? (JSON.parse(raw) as Record<string, number>) : {};
-    return parsed && typeof parsed === "object" ? parsed : {};
-  } catch {
-    return {};
-  }
-}
-
-function rememberTools(found: Record<string, number>): Record<string, number> {
-  // The larger of what was known and what was just seen: a better tool replaces a worse one, and a
-  // read that did not see a crop's tool does not forget it.
-  const merged = { ...readTools() };
-  for (const [crop, value] of Object.entries(found)) merged[crop] = Math.max(merged[crop] ?? 0, value);
-  try {
-    localStorage.setItem(TOOLS_KEY, JSON.stringify(merged));
-  } catch {
-    // In memory is enough for this session.
-  }
-  return merged;
-}
-
 const CONTEST_KEY = "sbxp:ghcontest";
 
 function readContestCrops(): Record<string, boolean> {
@@ -217,37 +175,36 @@ function readContestCrops(): Record<string, boolean> {
 }
 
 /**
- * The passive crop fortune per crop — what you have whatever you are holding.
+ * The crop fortune per crop, as the game shows it.
  *
- * A typed box wins over anything read off the profile, for the same reason the Wisdom boxes work
- * that way: somebody who has read their own stat knows better than a floor assembled from the parts
- * this page can see.
+ * What you type is the whole figure — tool, armour, upgrades, everything the game has already
+ * added up for that crop — and nothing is added on top of it. The Garden's crop upgrades fill a
+ * box nobody has typed in, because they are published and are a true floor; a typed figure
+ * replaces them, and a typed zero means zero. That last part matters for "Set to zero": a zeroed
+ * box that quietly fell back to +45 would not be zero.
  */
 function cropFortuneValues(): Record<string, number> {
   const out: Record<string, number> = { ...(state.detected ?? {}) };
   for (const [crop, raw] of Object.entries(state.cropFortune)) {
+    if (String(raw).trim() === "") continue;
     const n = Number(String(raw).replace(/[^0-9.]/g, ""));
-    if (String(raw).trim() !== "" && Number.isFinite(n) && n > 0) out[crop] = n;
+    if (Number.isFinite(n) && n >= 0) out[crop] = n;
   }
   return out;
 }
 
 /**
- * The fortune that rides on what you are holding, per crop.
+ * The Overdrive Chip's +140, on the crops ticked as being in a contest.
  *
- * The tool's own crop fortune plus, where the box is ticked, the Overdrive Chip. Both are
- * single-crop by nature — one tool in your hand, one active crop in a contest — so they are handed
- * to the model separately from the passive figures and applied to one drop rather than to all of
- * them. See `heldCropFortune` in `greenhouse.ts` for why summing them into the passive map was
- * wrong for every mutation that drops more than one crop.
+ * The one thing still added on top of a box, because it is the one thing the box does not hold:
+ * it exists only while a Jacob's Contest is running, so a figure read outside a contest leaves it
+ * out. It lifts the contest's active crop only, so it is handed to the model apart from the boxes
+ * and lands on one drop per mutation rather than all of them — see `heldCropFortune`.
  */
-function heldFortuneValues(): Record<string, number> {
+function contestFortuneValues(): Record<string, number> {
   const out: Record<string, number> = {};
   for (const [crop, on] of Object.entries(state.contestCrops)) {
-    if (on) out[crop] = (out[crop] ?? 0) + OVERDRIVE_CHIP_FORTUNE;
-  }
-  for (const [crop, value] of Object.entries(state.tools ?? {})) {
-    if (value > 0) out[crop] = (out[crop] ?? 0) + value;
+    if (on) out[crop] = OVERDRIVE_CHIP_FORTUNE;
   }
   return out;
 }
@@ -322,9 +279,6 @@ const state: State = {
   showCrops: localStorage.getItem("sbxp:ghshowcrops") === "1",
   contestCrops: readContestCrops(),
   detected: null,
-  tools: Object.keys(readTools()).length > 0 ? readTools() : null,
-  lastFound: 0,
-  loadingTools: false,
   scan: null,
   optimising: null,
   optimiseNote: {},
@@ -850,9 +804,9 @@ function rows(): MutationProfit[] {
     growth: state.growth,
     farmingFortune: fortuneValue(),
     cropFortune: cropFortuneValues(),
-    heldCropFortune: heldFortuneValues(),
-    // Each mutation picks the drop its held bonus earns most on, which is what a person does when
-    // they choose which tool to bring to it.
+    heldCropFortune: contestFortuneValues(),
+    // The contest chip lands on whichever of a mutation's drops it earns the most on, since it lifts
+    // the contest's one active crop rather than all of them.
     heldCrop: "best",
     overbloom: overbloomValue(),
     rareCropSet: currentSet(),
@@ -929,6 +883,12 @@ export function mountGreenhouse(container: HTMLElement, data: GreenhouseTables):
   }
   bound = true;
   readLayouts();
+  // The tools this tab used to remember. Nothing reads them any more; no reason to keep them around.
+  try {
+    localStorage.removeItem("sbxp:ghtools");
+  } catch {
+    /* storage unavailable is the same as already gone */
+  }
 
   container.addEventListener("click", (event) => {
     const target = event.target as HTMLElement;
@@ -1018,26 +978,13 @@ export function mountGreenhouse(container: HTMLElement, data: GreenhouseTables):
       return;
     }
 
-    if (target.closest("#ghloadtools")) {
-      if (reloadTools && !state.loadingTools) {
-        state.loadingTools = true;
-        render();
-        void reloadTools()
-          .catch(() => {
-            // A failed read leaves what was already remembered, which is the useful outcome.
-          })
-          .finally(() => {
-            state.loadingTools = false;
-            render();
-          });
-      }
-      return;
-    }
-
-    if (target.closest("#ghforgettools")) {
-      localStorage.removeItem(TOOLS_KEY);
-      state.tools = null;
-      state.lastFound = 0;
+    // Every crop box to zero, so the next mutation can be set up from nothing. Typed zeros rather
+    // than cleared boxes: a cleared box falls back to the Garden upgrades, and the point of the
+    // button is that nothing is left behind from the last one.
+    if (target.closest("#ghzerocrops")) {
+      const crops = tables.greenhouse.cropFortunes ?? [];
+      state.cropFortune = Object.fromEntries(crops.map((c) => [c.crop, "0"]));
+      localStorage.setItem(CROP_KEY, JSON.stringify(state.cropFortune));
       render();
       return;
     }
@@ -1133,46 +1080,19 @@ export function mountGreenhouse(container: HTMLElement, data: GreenhouseTables):
 }
 
 /**
- * Take the crop fortune a loaded profile can be made to admit to.
+ * Take what the garden endpoint publishes about the greenhouse.
  *
- * Two halves, and they are kept apart because they behave differently in the model:
- *
- * **Passive**, into the boxes. The Garden's Crop Upgrades are published outright as levels, at +5
- * fortune each to +45, which makes them the one part of a farming setup that can simply be read.
- * Accessories go here too — a Fermento Artifact's +30 applies to every crop at once.
- *
- * **Held**, behind the tick. A farming tool's crop fortune is worth up to +200 and you can hold one
- * of them, so it belongs to whichever crop you brought the tool for and to no other.
- *
- * Both are floors. This sees the Garden levels and whatever lore is in the inventory, equipment and
- * bags — which now includes the farming toolkit, since the scan walks every bag rather than naming
- * one. It cannot see Dedication, Anita's personal bests or Carrolyn without more digging, so a
- * typed box always wins.
+ * The Garden's crop upgrade levels — +5 fortune a level, to +45 — fill the boxes nobody has typed
+ * in, and the Greenhouse upgrade tiers fill the growth-speed and yield boxes. Nothing here reads
+ * item lore any more. Tools were read off it once, and it was wrong in both directions: the read
+ * took the biggest crop line in the inventory whatever item carried it, and the result was added
+ * on top of a box that most people fill with the figure the game already shows, tool included.
  */
-/**
- * How the tab asks for a fresh look at the inventory.
- *
- * The profile belongs to the planner tab, which owns the key and the fetch, so this is a callback
- * registered from there rather than a second loader here. Null until a profile has been loaded,
- * which is also what the button uses to know it has nothing to offer yet.
- */
-let reloadTools: (() => Promise<void>) | null = null;
-
-export function setToolReloader(fn: () => Promise<void>): void {
-  reloadTools = fn;
-  if (host) render();
-}
-
 export function setDetectedFortune(input: {
   cropUpgrades: Record<string, number>;
   gardenUpgrades: Record<string, number>;
-  lore: string[];
 }): void {
-  state.scan = {
-    items: input.lore.length,
-    upgradeKeys: Object.keys(input.cropUpgrades),
-    unresolved: [],
-  };
+  state.scan = { upgradeKeys: Object.keys(input.cropUpgrades) };
 
   /**
    * The two Garden upgrade tiers, which are published and were being guessed at nine.
@@ -1200,27 +1120,7 @@ export function setDetectedFortune(input: {
     if (crop) passive[crop] = (passive[crop] ?? 0) + cropUpgradeFortune(level);
   }
 
-  // The largest figure found per crop, not the sum: a chest with three sickles in it is still one
-  // sickle in your hand, and the same rule the Wisdom detection uses for held items.
-  //
-  // The lore arrives as loose lines rather than grouped by item, so this cannot tell a tool's +200
-  // from an accessory's +30 and takes the larger. That makes the held figure a good reading of the
-  // tool and makes the accessory's contribution invisible — which is a floor in the passive box, and
-  // why a typed box beats this.
-  const tools: Record<string, number> = {};
-  for (const [raw, value] of Object.entries(cropFortuneFromLore(input.lore))) {
-    const crop = resolve(raw);
-    if (crop) tools[crop] = Math.max(tools[crop] ?? 0, value);
-    // A stat this page could not place. Recorded rather than dropped: a crop named in lore under a
-    // spelling the crop table does not carry is the failure this whole read has had twice already,
-    // and it is invisible unless the page says so.
-    else state.scan?.unresolved.push(raw);
-  }
-
   state.detected = Object.keys(passive).length > 0 ? passive : null;
-  const kept = rememberTools(tools);
-  state.tools = Object.keys(kept).length > 0 ? kept : null;
-  state.lastFound = Object.keys(tools).length;
   if (host) render();
 }
 
@@ -1303,45 +1203,25 @@ function cropFortunePanel(): string {
   const crops = tables.greenhouse.cropFortunes ?? [];
   if (crops.length === 0) return "";
 
-  /**
-   * One read gets one tool, so this is a button rather than something that happens on load.
-   *
-   * The Farming Toolkit is not published, which leaves only whatever is in your hand — so building
-   * the set means holding a tool, pressing this, swapping, pressing it again. Saying "reads the one
-   * you are holding" up front is what stops that reading as a broken feature.
-   */
-  const kept = Object.keys(state.tools ?? {}).length;
-  // Shown even with no profile loaded, greyed and saying why. A control that appears only once
-  // some other tab has been used is a feature nobody discovers.
-  const ready = reloadTools !== null;
-  const loadTools =
-    `<button type="button" class="chip${state.loadingTools ? " on" : ""}" id="ghloadtools"${
-      state.loadingTools || !ready ? " disabled" : ""
-    } title="${escapeHtml(
-      ready
-        ? "Reads the crop fortune off the farming tool you are holding, and remembers it. Hypixel does not publish the Farming Toolkit, so one press finds one tool — hold the next and press again. Kept between visits."
-        : "Load a profile on the XP Planner tab first; this reads the tool you are holding from it.",
-    )}">${state.loadingTools ? "Reading…" : "Load tools"}</button>` +
-    (kept > 0
-      ? ` <button type="button" class="chip" id="ghforgettools" title="Forget the remembered tools and start again.">${num(
-          kept,
-        )} remembered</button>`
-      : "");
-
+  // Only once the boxes are open: zeroing thirteen inputs you cannot see is a button that looks
+  // like it did nothing.
+  const zero = state.showCrops
+    ? ` <button type="button" class="chip" id="ghzerocrops" title="Every crop box to 0, so the next mutation can be set up from nothing — type in only the crops it drops, read off the game with the right tool in hand. Contest ticks are left as they are.">Set to zero</button>`
+    : "";
   const summary = `<button type="button" class="chip" id="ghcroptoggle">${
     state.showCrops ? "Hide" : "Add"
-  } crop fortune</button> ${loadTools}`;
+  } crop fortune</button>${zero}`;
   if (!state.showCrops) {
-    const filled = Object.keys(cropFortuneValues()).length;
+    // Non-zero only: after "Set to zero" every box holds a typed 0, and "13 set" would be a lie.
+    const filled = Object.values(cropFortuneValues()).filter((n) => n > 0).length;
     return `<p class="sub">${summary} <span class="dim" title="Wheat Fortune, Carrot Fortune and the rest. Unlike the box above, each lifts one crop only — which makes these the one input here that changes which mutation wins, rather than just how big the numbers are.">${
       filled > 0 ? `${filled} set` : "per-crop — these change the order"
     }</span></p>`;
   }
 
-  const held = heldFortuneValues();
+  const held = contestFortuneValues();
   const boxes = crops
     .map((c) => {
-      const tool = state.tools?.[c.crop] ?? 0;
       const on = state.contestCrops[c.crop] === true;
       const bonus = held[c.crop] ?? 0;
       return `<label title="${escapeHtml(c.stat)} — lifts ${escapeHtml(c.crop)} only.">${escapeHtml(c.crop)}
@@ -1349,9 +1229,7 @@ function cropFortunePanel(): string {
             state.cropFortune[c.crop] ?? (state.detected?.[c.crop] ? String(state.detected[c.crop]) : ""),
           )}" placeholder="${state.detected?.[c.crop] ?? 0}" autocomplete="off">
           <span class="gh-held" title="${escapeHtml(
-            `Only the crop you bring the tool for gets this${tool > 0 ? `. Your best ${c.crop} tool carries +${tool}` : ""}${
-              on ? `, and the Overdrive Chip adds +${OVERDRIVE_CHIP_FORTUNE} during a contest` : ""
-            }. A mutation dropping several crops gets it on one of them — whichever it earns the most on.`,
+            `Tick while ${c.crop} is the active crop of a Jacob's Contest: the Overdrive Chip adds +${OVERDRIVE_CHIP_FORTUNE} on top of the box. A mutation dropping several crops gets it on one of them — whichever it earns the most on.`,
           )}">
             <input type="checkbox" data-ghcontest="${escapeHtml(c.crop)}"${on ? " checked" : ""}>
             ${bonus > 0 ? `+${num(bonus)}` : `<span class="dim">contest</span>`}
@@ -1364,62 +1242,30 @@ function cropFortunePanel(): string {
     <p class="sub">${summary}</p>
     <div class="row gh-crops">${boxes}</div>
     <p class="sub dim" title="Added to Farming Fortune for that crop only, before the yield is worked out — the wiki's rule, not ours.">
-      The box is what you have whatever you hold — Garden crop upgrades, Anita, Carrolyn, accessories.
-      The tick is what rides on the <strong>one tool you can hold</strong>: its crop fortune, plus the
-      <strong>Overdrive Chip's +${OVERDRIVE_CHIP_FORTUNE}</strong> during a Jacob's Contest. A mutation
-      dropping several crops gets that on one of them, not on all.
+      Type each crop's fortune as the game shows it, with the right tool in hand — nothing is added on
+      top. The tick adds the <strong>Overdrive Chip's +${OVERDRIVE_CHIP_FORTUNE}</strong> during a Jacob's
+      Contest, so leave it off if you read the figure mid-contest. A mutation dropping several crops gets
+      the chip on one of them, not on all.
     </p>
     ${scanNote()}
   `;
 }
 
 /**
- * What the profile read found, said out loud.
+ * What the garden read found, said out loud.
  *
- * Silence is the wrong default here. A read that finds nothing and a read that never ran look
- * exactly alike from the page — empty boxes — and this one has been wrong twice on that basis. So
- * it reports the three numbers that distinguish them: how many items it looked at, how many tools
- * it recognised, and anything it saw and could not place.
+ * Silence is the wrong default: a read that placed nothing and a read that never ran look alike
+ * from the page, as empty boxes. The Garden publishes crop ids in its own dialect — `CARROT_ITEM`,
+ * `INK_SACK:3` — and six of them once went unmatched with nothing to show for it, so this says how
+ * many it placed out of how many it was given.
  */
 function scanNote(): string {
   const scan = state.scan;
   if (!scan) {
-    return `<p class="sub dim">Load a profile on the XP Planner tab and these fill in from your Garden
-      upgrades and the crop fortune your tools state.</p>`;
+    return `<p class="sub dim">Load a profile on the XP Planner tab and empty boxes start from your Garden crop upgrades.</p>`;
   }
-
-  const tools = Object.entries(state.tools ?? {});
-  const upgrades = Object.keys(state.detected ?? {});
-  const parts = [
-    `${num(scan.items)} item${scan.items === 1 ? "" : "s"} read`,
-    tools.length > 0
-      ? `<strong>${tools.length}</strong> tool${tools.length === 1 ? "" : "s"} remembered (${tools
-          .sort((a, b) => b[1] - a[1])
-          .slice(0, 4)
-          .map(([crop, value]) => `${escapeHtml(crop)} +${num(value)}`)
-          .join(", ")}${tools.length > 4 ? ", …" : ""})`
-      : `<strong class="gold">no tools found</strong>`,
-    `Garden upgrades on ${upgrades.length} of ${scan.upgradeKeys.length}`,
-  ];
-
-  const stuck =
-    scan.unresolved.length > 0
-      ? ` <span class="gold">Could not place: ${[...new Set(scan.unresolved)].map(escapeHtml).join(", ")}.</span>`
-      : "";
-
-  /**
-   * The limit, stated rather than left to look like a bug.
-   *
-   * Hypixel does not publish the Farming Toolkit's contents. Not under a bag, not in
-   * `shared_inventory`, not on the garden endpoint — a sweep of one real profile found 147 NBT
-   * blobs and 670 items with lore, and of every farming tool that account owns exactly one turned
-   * up: the hoe that happened to be loose in the inventory. So a tool in the toolkit is invisible
-   * here, and the box beside its crop stays a box.
-   */
-  const toolkit = ` <span class="gold">Hypixel does not publish the Farming Toolkit, so a read finds only the
-    tool in your hand — hold the next one and press <strong>Load tools</strong> again. They are kept.</span>`;
-
-  return `<p class="sub dim">From your profile — ${parts.join(" · ")}.${stuck}${toolkit}</p>`;
+  const placed = Object.keys(state.detected ?? {}).length;
+  return `<p class="sub dim">From your profile — Garden crop upgrades on ${placed} of ${scan.upgradeKeys.length} crops, shown in any box you have not typed in.</p>`;
 }
 
 /**

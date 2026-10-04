@@ -8,9 +8,7 @@ import {
   cropFortuneIndex,
   FULL_PLOT,
   fortuneMultiplier,
-  cropFortuneFromLore,
   cropResolver,
-  isCropFortuneStat,
   cropUpgradeFortune,
   yieldMultiplierOf,
   plantsFor,
@@ -911,39 +909,6 @@ test("the garden's crop upgrades are five a level and stop at nine", () => {
   assert.equal(cropUpgradeFortune(-3), 0);
 });
 
-test("crop fortune is read off item lore, and farming fortune is not mistaken for it", () => {
-  const found = cropFortuneFromLore([
-    "§7Wheat Fortune: §a+200",
-    "§7Cocoa Beans Fortune: §a+35",
-    // The general stat, which belongs in the other box entirely.
-    "§7Farming Fortune: §a+1,200",
-    "§7Gear Score: §d1000",
-  ]);
-  assert.equal(found["Wheat"], 200);
-  assert.equal(found["Cocoa Beans"], 35);
-  assert.equal(found["Farming"], undefined);
-});
-
-test("a tool's crop fortune survives the farming fortune printed above it", () => {
-  // Every farming tool states the general stat first. Taking the first match in an item's lore
-  // found "Farming", skipped it as the wrong stat, and never looked at the crop fortune below —
-  // so nothing was ever detected from any tool in the game.
-  const sickle = [
-    "§7Gear Score: §d1000",
-    "§7Farming Fortune: §a+120",
-    "§7Wheat Fortune: §a+200",
-    "§7Speed: §a+5",
-  ].join("\n");
-
-  const found = cropFortuneFromLore([sickle]);
-  assert.equal(found["Wheat"], 200);
-  assert.equal(found["Farming"], undefined);
-
-  // And several crop fortunes on one item are all read, not just the first.
-  const artifact = ["§7Wheat Fortune: §a+30", "§7Carrot Fortune: §a+30", "§7Potato Fortune: §a+30"].join("\n");
-  assert.deepEqual(cropFortuneFromLore([artifact]), { Wheat: 30, Carrot: 30, Potato: 30 });
-});
-
 test("a crop answers to its item id, its stat and its name", () => {
   const resolve = cropResolver(data);
 
@@ -971,29 +936,6 @@ test("a crop answers to its item id, its stat and its name", () => {
   assert.equal(resolve("Cocoa Beans"), "Cocoa Beans");
   assert.equal(resolve("Nether Wart"), "Nether Wart");
   assert.equal(resolve("not a crop"), null);
-});
-
-test("a fortune that is not a crop's is not reported as an unplaceable crop", () => {
-  // "Fortune" is a family of stats and only thirteen are crops. A geared account's lore carries
-  // Mining, Foraging, Hunting, Gemstone and the per-tree Foraging fortunes, and reading those as
-  // crops buries the one case worth reporting: a crop under a spelling the table lacks.
-  const gear = [
-    "§7Mining Fortune: §a+290",
-    "§7Foraging Fortune: §a+129.54",
-    "§7Hunting Fortune: §a+34",
-    "§7Gemstone Fortune: §a+50",
-    "§7Fig Fortune: §a+15",
-    "§7Mangrove Fortune: §a+15",
-    "§7Bonus Farming Fortune: §a+60",
-    // The one that is a crop.
-    "§7Sunflower Fortune: §a+327",
-  ].join("\n");
-
-  assert.deepEqual(cropFortuneFromLore([gear]), { Sunflower: 327 });
-  assert.equal(isCropFortuneStat("Mining"), false);
-  assert.equal(isCropFortuneStat("Bonus Farming"), false);
-  assert.equal(isCropFortuneStat("Sunflower"), true);
-  assert.equal(isCropFortuneStat("Cocoa Beans"), true);
 });
 
 /* --------------------------------------------------------------- watering */
