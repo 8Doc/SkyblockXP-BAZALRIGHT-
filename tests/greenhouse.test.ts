@@ -17,6 +17,7 @@ import {
   stageSeconds,
   stagesBeforeDrought,
   stagesPerHarvest,
+  uniqueBaseCrops,
   needsWatering,
   retainAtTargets,
   waterModifier,
@@ -25,7 +26,8 @@ import {
   setupLifeHours,
   unitPrice,
 } from "../src/lib/greenhouse";
-import type { DecayData, GreenhouseData, Mutation } from "../src/lib/greenhouse";
+import type { DecayData, GreenhouseData, GrowthParams, Mutation, RareCropData } from "../src/lib/greenhouse";
+import rareJson from "../data/curated/greenhouse_rare_crops.json";
 import { effectsOf, type CropEffect } from "../src/lib/greenhouseEffects";
 import { NET_OF_TAX } from "../src/lib/bazaar";
 import type { ProductSnapshot } from "../src/lib/bazaarTypes";
@@ -1147,4 +1149,133 @@ test("watering is answered for every row, and the ring is what decides it", () =
     }
     assert.ok(byId.has(r.id));
   }
+});
+
+/* ----------------------------------- a real harvest, held as the thing to agree with */
+
+/**
+ * One measured harvest, 2026-10-04: 64 Phantomleaf, sold straight from the sacks. 2,499 Farming
+ * Fortune, 422 Carrot Fortune, 186 Potato Fortune, 140 Overbloom, 4/4 Helianthus armour, a maxed
+ * Evergreen Chip, and sacks confirmed empty of Fermento and Helianthus beforehand.
+ *
+ * It came out as 322 Enchanted Baked Potato and 6,170 Enchanted Potato, 422 Enchanted Golden
+ * Carrot and 5,348 Enchanted Carrot, 12 Helianthus, 17 Fermento and 66 Ethereal Vines. Each
+ * compaction step is 160:1, so that is 9,230,400 potatoes and 11,658,880 carrots.
+ */
+const HARVEST = {
+  phantomleaf: 64,
+  potato: 322 * 25_600 + 6_170 * 160,
+  carrot: 422 * 25_600 + 5_348 * 160,
+  helianthus: 12,
+  fermento: 17,
+  vines: 66,
+};
+
+function harvestRow(growth: GrowthParams) {
+  const rare = rareJson as unknown as RareCropData;
+  const withRare = { ...data, rareCrops: rare } as GreenhouseData;
+  const market = new Map<string, ProductSnapshot>();
+  for (const id of ["POTATO_ITEM", "CARROT_ITEM", "PHANTOMLEAF", "ETHEREAL_VINE", "HELIANTHUS", "FERMENTO"]) {
+    market.set(id, product(id, 1, 1));
+  }
+  const rows = rankMutations(withRare, {
+    market,
+    growth,
+    farmingFortune: 2499,
+    cropFortune: { Carrot: 422, Potato: 186 },
+    overbloom: 140,
+    rareCropSet: "helianthus",
+    priceMode: "instant",
+  });
+  return rows.find((r) => r.name === "Phantomleaf")!;
+}
+
+const HARVEST_GROWTH: GrowthParams = {
+  uniqueCrops: null,
+  cropGrowth: 210,
+  speedAttribute: 10,
+  growthSpeedUpgrade: 9,
+  plantYieldUpgrade: 9,
+  evergreenChip: 60,
+};
+
+test("the fortune formula holds: both crops need the same leftover multiplier", () => {
+  // The cleanest check in the harvest. Divide out each crop's own fortune and whatever is left is
+  // yield, which is common to both — so if the formula were wrong the two would disagree.
+  const potato = HARVEST.potato / HARVEST.phantomleaf / (3000 * (1 + (2499 + 186) / 100));
+  const carrot = HARVEST.carrot / HARVEST.phantomleaf / (3500 * (1 + (2499 + 422) / 100));
+  assert.ok(Math.abs(potato - carrot) / potato < 0.005, `${potato} against ${carrot}`);
+});
+
+test("unique crops are counted from the ring, and a ring of mutations has none", () => {
+  const by = (name: string) => data.mutations.find((m) => m.name === name)!;
+  // Chorus Fruit and Shellfruit are both mutations, so Phantomleaf gets no unique-crop bonus at all.
+  assert.equal(uniqueBaseCrops(by("Phantomleaf"), data), 0);
+  // Pumpkin and Melon are base crops.
+  assert.equal(uniqueBaseCrops(by("Gloomgourd"), data), 2);
+  // Fire is a requirement and not a plant.
+  assert.ok(uniqueBaseCrops(by("Ashwreath"), data) <= 1);
+});
+
+test("a typed unique-crop count overrides the ring, and an empty one counts it", () => {
+  const counted = harvestRow(HARVEST_GROWTH);
+  assert.deepEqual(counted.uniqueCrops, { count: 0, counted: true });
+  const typed = harvestRow({ ...HARVEST_GROWTH, uniqueCrops: 12 });
+  assert.deepEqual(typed.uniqueCrops, { count: 12, counted: false });
+  // Twelve buys +36% yield and +30% growth speed, which is exactly what the old default handed
+  // every row whether or not its ring grew a single base crop.
+  assert.ok(typed.drops[0].multiplier > counted.drops[0].multiplier);
+  assert.ok(typed.hoursPerHarvest! < counted.hoursPerHarvest!);
+});
+
+test("the crops land within six per cent of the harvest", () => {
+  const r = harvestRow(HARVEST_GROWTH);
+  const potato = r.drops.find((d) => d.id === "POTATO_ITEM")!;
+  const carrot = r.drops.find((d) => d.id === "CARROT_ITEM")!;
+  const modelPotato = potato.amount * potato.multiplier * HARVEST.phantomleaf;
+  const modelCarrot = carrot.amount * carrot.multiplier * HARVEST.phantomleaf;
+  // ×1.80 against ×1.726 measured. The old default of twelve unique crops put it at ×2.16 — 25%
+  // high — and the residual here is a Plant Yield tier below nine, which is the box to check.
+  for (const [model, real] of [[modelPotato, HARVEST.potato], [modelCarrot, HARVEST.carrot]]) {
+    assert.ok(model / real > 1 && model / real < 1.06, `${Math.round(model)} against ${real}`);
+  }
+});
+
+test("Overbloom lifts the Ethereal Vine, and the harvest says so", () => {
+  const r = harvestRow(HARVEST_GROWTH);
+  // Revenue over the per-vine price the model used is the expected count. The price is not 1 even
+  // with a book at 1: the sale is taxed.
+  const each = unitPrice("ETHEREAL_VINE", new Map([["ETHEREAL_VINE", product("ETHEREAL_VINE", 1, 1)]]), {}, "instant")!;
+  const vines = (r.vineRevenue / each) * HARVEST.phantomleaf;
+  assert.ok(Math.abs(vines - 64 * 0.4 * 2.4) < 1e-6, `${vines}`);
+  // 61.4 expected against 66 seen sits well inside the noise; 25.6 without Overbloom does not.
+  assert.ok(Math.abs(HARVEST.vines - vines) < 2 * Math.sqrt(vines));
+  assert.ok(Math.abs(HARVEST.vines - 64 * 0.4) > 4 * Math.sqrt(64 * 0.4));
+});
+
+test("the vine chance stops at one a harvest", () => {
+  const rare = rareJson as unknown as RareCropData;
+  const market = new Map<string, ProductSnapshot>([
+    ["ETHEREAL_VINE", product("ETHEREAL_VINE", 1, 1)],
+    ["PHANTOMLEAF", product("PHANTOMLEAF", 1, 1)],
+  ]);
+  const rows = rankMutations({ ...data, rareCrops: rare } as GreenhouseData, {
+    market,
+    growth: HARVEST_GROWTH,
+    farmingFortune: 0,
+    overbloom: 500,
+    priceMode: "instant",
+  });
+  for (const r of rows) assert.ok(r.vineRevenue <= 1 + 1e-9, `${r.name} ${r.vineRevenue}`);
+});
+
+test("the rare-crop rate is calibrated to the harvest, and it is well outside the wiki's", () => {
+  const r = harvestRow(HARVEST_GROWTH);
+  const helianthus = r.rareCrops.find((d) => d.id === "HELIANTHUS")!.chance * HARVEST.phantomleaf;
+  const fermento = r.rareCrops.find((d) => d.id === "FERMENTO")!.chance * HARVEST.phantomleaf;
+  // Pooled to the 29 seen, keeping the wiki's 1.6 : 2.8 split between the two.
+  assert.ok(Math.abs(helianthus + fermento - (HARVEST.helianthus + HARVEST.fermento)) < 0.5);
+  // The wiki's own rates, at 140 Overbloom, give 6.8 — and 29 is not a draw from that.
+  const wiki = HARVEST.phantomleaf * (0.016 + 0.028) * 2.4;
+  assert.ok(HARVEST.helianthus + HARVEST.fermento > wiki + 5 * Math.sqrt(wiki));
 });

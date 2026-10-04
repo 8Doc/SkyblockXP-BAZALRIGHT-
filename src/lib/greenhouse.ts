@@ -156,8 +156,18 @@ export type Mutation = {
 /* ------------------------------------------------------------------- time */
 
 export type GrowthParams = {
-  /** Unique non-mutated crops growing in any plot. Twelve is the documented maximum. */
-  uniqueCrops: number;
+  /**
+   * Unique non-mutated crops growing in any plot. Twelve is the documented maximum.
+   *
+   * Null means "count them from the ring", which is the right default and twelve was not. The bonus
+   * is for *non-mutated* crops, and a greenhouse given over to one mutation grows whatever base
+   * crops that mutation's ring happens to contain — none at all for Phantomleaf, whose ring is
+   * Chorus Fruit and Shellfruit. Defaulting to twelve credited every such row with +36% yield and
+   * +30% growth speed it does not get, and a real harvest showed it: crops came in at ×1.73 on top
+   * of fortune where the model said ×2.16. A typed number still wins, for anyone who grows a corner
+   * of base crops on purpose to collect the bonus.
+   */
+  uniqueCrops: number | null;
   /** The Crop Growth stat, 0-210. */
   cropGrowth: number;
   /** The Greenhouse Speed attribute, 0-10. */
@@ -197,7 +207,7 @@ export type GrowthParams = {
 export function yieldMultiplierOf(p: GrowthParams): number {
   const tier = Math.max(0, Math.min(9, p.plantYieldUpgrade ?? 0));
   const plantYield = tier >= 9 ? 0.2 : 0.02 * tier;
-  const unique = 0.03 * Math.max(0, Math.min(12, p.uniqueCrops));
+  const unique = 0.03 * Math.max(0, Math.min(12, p.uniqueCrops ?? 0));
   const chip = Math.max(0, Math.min(60, p.evergreenChip ?? 0)) / 100;
   return 1 + plantYield + unique + chip;
 }
@@ -213,9 +223,34 @@ export function yieldMultiplierOf(p: GrowthParams): number {
  * Four hours flat becomes 1h 41m with everything maxed, which the wiki states independently and
  * is what this reproduces.
  */
+/**
+ * How many distinct base crops a mutation's own ring grows — the unique-crop count you get from
+ * planting it and nothing else.
+ *
+ * Only crops on the base-crop table count. Mutations do not ("non-mutated" is the page's word), and
+ * neither do the free requirements like Fire, which are not plants at all.
+ */
+export function uniqueBaseCrops(m: Mutation, data: GreenhouseData): number {
+  const base = new Set((data.baseCrops ?? []).map((c) => c.id));
+  const planted = m.spreading.requires
+    .filter((r) => !r.free)
+    .map((r) => PLANTED_AS[r.id] ?? r.id)
+    .filter((id) => base.has(id));
+  return new Set(planted).size;
+}
+
+/**
+ * Where a ring names the planted block and the crop table names the item it drops.
+ *
+ * One case in the whole table: melon is planted as `BUILDER_MELON` and harvested as `MELON`, the
+ * slice. Matching on the raw id dropped melon from every ring that grows it, so Gloomgourd's
+ * Pumpkin-and-Melon ring counted one unique crop instead of two.
+ */
+const PLANTED_AS: Record<string, string> = { BUILDER_MELON: "MELON" };
+
 export function stageSeconds(data: GreenhouseData, p: GrowthParams): number {
   const upgrade = p.growthSpeedUpgrade >= 9 ? 0.5 : 0.05 * Math.max(0, p.growthSpeedUpgrade);
-  const speedup = 1 + 0.025 * p.uniqueCrops + 0.0025 * p.cropGrowth + 0.005 * p.speedAttribute + upgrade;
+  const speedup = 1 + 0.025 * Math.max(0, Math.min(12, p.uniqueCrops ?? 0)) + 0.0025 * p.cropGrowth + 0.005 * p.speedAttribute + upgrade;
   return data.growth.baseStageSeconds / speedup;
 }
 
@@ -647,6 +682,8 @@ export type RareCropSet = {
 
 export type RareCropData = {
   sets: Record<string, RareCropSet>;
+  /** Measured against the wiki rates in a real harvest. See the curated file for the evidence. */
+  greenhouseMultiplier?: number;
   defaultSet?: string;
   defaultOverbloom?: number;
   note?: string;
@@ -981,6 +1018,8 @@ export type MutationProfit = {
     /** Whether the ring unlocks the Harvest Bounty roll. */
     bounty: boolean;
   };
+  /** The unique-crop count this row was worked out with, and whether it was counted or typed. */
+  uniqueCrops: { count: number; counted: boolean };
   /** Rare Crops, which drop per plant harvested rather than per crop. Averaged, not rolled. */
   rareCrops: ChanceDrop[];
   rareRevenue: number;
@@ -1217,7 +1256,11 @@ export function profitOf(m: Mutation, byId: Map<string, Mutation>, data: Greenho
   // and an effect only some of them see would flatter the rest.
   const shared = sharedEffects(ringEffects);
   const ringYield = yieldModifier(shared, data.yieldBuffs ?? {});
-  const yieldBuffs = (o.yieldMultiplier ?? 1) * ringYield;
+  // The unique-crop count belongs to the row, not the page: it is whatever this ring grows unless
+  // the player has said otherwise. It moves the yield and the stage time together.
+  const uniqueCrops = o.growth.uniqueCrops ?? uniqueBaseCrops(m, data);
+  const growth: GrowthParams = { ...o.growth, uniqueCrops };
+  const yieldBuffs = (o.yieldMultiplier ?? yieldMultiplierOf(growth)) * ringYield;
 
   // Per drop, not per mutation: each one carries its own crop fortune on top of the general one,
   // so a mutation dropping two different crops is lifted by two different amounts.
@@ -1291,7 +1334,12 @@ export function profitOf(m: Mutation, byId: Map<string, Mutation>, data: Greenho
 
   // An Ethereal Vine on harvest, at odds that rise with rarity. It is the only way to enlarge the
   // greenhouse and it trades on the bazaar, so it is real income rather than a curiosity.
-  const vineChance = data.etherealVineByRarity[(m.rarity ?? "").toLowerCase()] ?? 0;
+  // Overbloom lifts it, because an Ethereal Vine is a Rare Crop — the wiki lists it as one, and
+  // Overbloom "increases chances of dropping Rare Crops". A measured harvest settled it: 64
+  // Phantomleaf at 140 Overbloom gave 66 vines, against 25.6 at the bare 40% and 61.4 with
+  // Overbloom applied. Capped at one a harvest, which is all the drop table ever offers.
+  const bloomed = 1 + Math.max(0, o.overbloom ?? data.rareCrops?.defaultOverbloom ?? 0) / 100;
+  const vineChance = Math.min(1, (data.etherealVineByRarity[(m.rarity ?? "").toLowerCase()] ?? 0) * bloomed);
   // The vine follows the toggle for the same reason a mutation does: a thin book where the two
   // sides are far apart, and one you would plausibly leave an offer up for.
   const vinePrice = unitPrice("ETHEREAL_VINE", o.market, npcPrices, mode) ?? 0;
@@ -1314,14 +1362,17 @@ export function profitOf(m: Mutation, byId: Map<string, Mutation>, data: Greenho
    * roll again, which is not counted here because the ring is modelled as a cost rather than a
    * crop — so this is a floor on the rare-crop income, not an estimate of it.
    */
-  const bloom = 1 + Math.max(0, o.overbloom ?? data.rareCrops?.defaultOverbloom ?? 0) / 100;
+  const bloom = bloomed;
+  // The wiki's per-plant rates run about four times short in the Greenhouse; see
+  // `greenhouseMultiplier` in data/curated/greenhouse_rare_crops.json for the harvest that showed it.
+  const calibrated = data.rareCrops?.greenhouseMultiplier ?? 1;
   const setName = o.rareCropSet ?? data.rareCrops?.defaultSet ?? "helianthus";
   const rareCrops: ChanceDrop[] = [];
   let rareRevenue = 0;
   for (const drop of data.rareCrops?.sets?.[setName]?.drops ?? []) {
     const each = unitPrice(drop.id, o.market, npcPrices, mode);
     if (each === null) continue;
-    const chance = drop.chance * bloom;
+    const chance = drop.chance * bloom * calibrated;
     const coins = chance * each;
     rareRevenue += coins;
     rareCrops.push({ id: drop.id, name: drop.name, chance, each, coins });
@@ -1352,7 +1403,7 @@ export function profitOf(m: Mutation, byId: Map<string, Mutation>, data: Greenho
   }
 
   const stages = stagesPerHarvest(m);
-  const hoursPerStage = stageSeconds(data, o.growth) / 3600;
+  const hoursPerStage = stageSeconds(data, growth) / 3600;
   const hoursPerHarvest = stages === null ? null : stages * hoursPerStage;
 
   const plots = o.plots ?? 1;
@@ -1417,6 +1468,7 @@ export function profitOf(m: Mutation, byId: Map<string, Mutation>, data: Greenho
     self,
     vineRevenue,
     ring: { effects: [...shared], yieldMultiplier: ringYield, bounty },
+    uniqueCrops: { count: uniqueCrops, counted: o.growth.uniqueCrops === null || o.growth.uniqueCrops === undefined },
     rareCrops,
     rareRevenue,
     bountyDrops,

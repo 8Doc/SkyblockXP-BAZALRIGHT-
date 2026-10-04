@@ -16,7 +16,6 @@ import {
   restoreLayout,
   settledLayouts,
   stageSeconds,
-  yieldMultiplierOf,
   type GreenhouseData,
   type GrowthParams,
   type Mutation,
@@ -133,8 +132,17 @@ type State = {
  * useful before anything is typed. Every one of them is stated on screen and every one is
  * editable, which is the honest way to carry a guess: visible, labelled, and overridable.
  */
+/** A remembered number, or null where nothing (or nothing readable) was stored. */
+function storedCount(key: string): number | null {
+  const raw = localStorage.getItem(key);
+  if (raw === null || raw.trim() === "") return null;
+  const n = Number(raw);
+  return Number.isFinite(n) ? n : null;
+}
+
 const DEFAULT_GROWTH: GrowthParams = {
-  uniqueCrops: 12,
+  // Counted per mutation from its own ring unless typed. See `uniqueCrops` on GrowthParams.
+  uniqueCrops: null,
   cropGrowth: 210,
   speedAttribute: 10,
   growthSpeedUpgrade: 9,
@@ -283,7 +291,7 @@ const state: State = {
   optimising: null,
   optimiseNote: {},
   growth: {
-    uniqueCrops: Number(localStorage.getItem("sbxp:ghunique") ?? DEFAULT_GROWTH.uniqueCrops),
+    uniqueCrops: storedCount("sbxp:ghunique"),
     cropGrowth: Number(localStorage.getItem("sbxp:ghgrowth") ?? DEFAULT_GROWTH.cropGrowth),
     speedAttribute: Number(localStorage.getItem("sbxp:ghspeed") ?? DEFAULT_GROWTH.speedAttribute),
     growthSpeedUpgrade: Number(localStorage.getItem("sbxp:ghupgrade") ?? DEFAULT_GROWTH.growthSpeedUpgrade),
@@ -810,7 +818,6 @@ function rows(): MutationProfit[] {
     heldCrop: "best",
     overbloom: overbloomValue(),
     rareCropSet: currentSet(),
-    yieldMultiplier: yieldMultiplierOf(state.growth),
     plots: state.plots,
     priceMode: state.priceMode,
   });
@@ -1064,8 +1071,12 @@ export function mountGreenhouse(container: HTMLElement, data: GreenhouseTables):
     }
     const field = growthFields[el.id];
     if (field) {
-      state.growth = { ...state.growth, [field[0]]: Number(el.value) || 0 };
-      localStorage.setItem(field[1], el.value);
+      // Unique crops alone may be left empty, which means "count them from each ring".
+      const empty = el.value.trim() === "";
+      const value = el.id === "ghunique" && empty ? null : Number(el.value) || 0;
+      state.growth = { ...state.growth, [field[0]]: value };
+      if (el.id === "ghunique" && empty) localStorage.removeItem(field[1]);
+      else localStorage.setItem(field[1], el.value);
       const label = document.getElementById("ghstagenote");
       if (label) label.textContent = stageNote();
       renderTable();
@@ -1132,9 +1143,13 @@ export function unmountGreenhouse(): void {
 
 /** How long a stage takes at the current settings, which sets every figure on the page. */
 function stageNote(): string {
-  const seconds = stageSeconds(tables.greenhouse, state.growth);
-  const m = Math.round(seconds / 60);
-  return `${Math.floor(m / 60)}h ${String(m % 60).padStart(2, "0")}m a growth stage`;
+  const at = (unique: number) => {
+    const m = Math.round(stageSeconds(tables.greenhouse, { ...state.growth, uniqueCrops: unique }) / 60);
+    return `${Math.floor(m / 60)}h ${String(m % 60).padStart(2, "0")}m`;
+  };
+  // Counted per ring, so it is a range: a ring of mutations alone gets no unique-crop speed-up.
+  if (state.growth.uniqueCrops === null) return `${at(12)}–${at(0)} a growth stage, by ring`;
+  return `${at(state.growth.uniqueCrops)} a growth stage`;
 }
 
 /**
@@ -1355,8 +1370,8 @@ function render(): void {
       ${cropFortunePanel()}
 
       <div class="row">
-        <label title="Unique non-mutated crops growing in any plot. Twelve is the documented maximum and each one speeds every plot up.">Unique crops
-          <input type="number" id="ghunique" min="0" max="12" value="${state.growth.uniqueCrops}"></label>
+        <label title="Unique non-mutated crops growing in any plot: +3% yield and +2.5% growth speed each, up to twelve. Left empty, each mutation is worked out with the base crops its own ring grows — none at all for a ring made of mutations, like Phantomleaf's. Type a number if you grow a corner of base crops on purpose to collect the bonus.">Unique crops
+          <input type="number" id="ghunique" min="0" max="12" placeholder="auto" value="${state.growth.uniqueCrops ?? ""}"></label>
         <label title="The Crop Growth stat, 0-210.">Crop Growth
           <input type="number" id="ghgrowth" min="0" max="210" value="${state.growth.cropGrowth}"></label>
         <label title="The Greenhouse Speed attribute, 0-10.">Speed attribute
